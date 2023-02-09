@@ -15,4 +15,4 @@ jobs:
           cache: 'pip'
           cache-dependency-path: '.github/requirements.txt'
       - run: pip install -r .github/requirements.txt
-      - run: cz check --message "${{ github.event.pull_request.title }}" 2>&1 >> $GITHUB_STEP_SUMMARY
+      - run: cz check --message "${{ github.event.pull_request.title }}" 2> $GITHUB_STEP_SUMMARY
