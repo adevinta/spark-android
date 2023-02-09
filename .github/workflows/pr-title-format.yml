@@ -5,12 +5,14 @@ on:
     types: [ opened, edited ]
 
 jobs:
-  assign-author:
+  commitizen:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
           cache: 'pip'
-      - run: pip install commitizen==2.41.0
+          cache-dependency-path: '.github/requirements.txt'
+      - run: pip install -r .github/requirements.txt
       - run: cz check --message "${{ github.event.pull_request.title }}"
