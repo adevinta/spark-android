@@ -109,3 +109,6 @@ Temporary Items
 
 # IDEA external dependencies
 !.idea/externalDependencies.xml
+
+# IDEA copyright
+!.idea/copyright
