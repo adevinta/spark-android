@@ -1,0 +1,16 @@
+name: 'PR title format'
+
+on:
+  pull_request:
+    types: [ opened, edited ]
+
+jobs:
+  assign-author:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - run: pip install commitizen==2.41.0
+      - run: cz check --message "${{ github.event.pull_request.title }}"
