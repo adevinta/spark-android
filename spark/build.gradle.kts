@@ -55,7 +55,7 @@ dependencyGuard {
 }
 
 dependencies {
-    implementation(libs.accompanist)
+    implementation(libs.accompanist.drawablepainter)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
 }
