@@ -28,15 +28,38 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+
       - name: '👷 Build'
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: assembleRelease
+
       - name: '🧑‍🔬 Test'
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: testReleaseUnitTest
+      - name: '📦 Archive JUnit HTML report'
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-html
+          path: '**/build/reports/tests/testReleaseUnitTest'
+      - name: '📦 Archive JUnit XML report'
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-xml
+          path: '**/build/test-results/testReleaseUnitTest/**.xml'
+
       - name: '🕵️ Lint'
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: lintRelease
+      - name: '📦 Archive Lint HTML report'
+        uses: actions/upload-artifact@v3
+        with:
+          name: lint-html
+          path: '**/build/reports/lint-results-release.html'
+      - name: '📦 Archive Lint XML report'
+        uses: actions/upload-artifact@v3
+        with:
+          name: lint-xml
+          path: '**/build/reports/lint-results-release.xml'
