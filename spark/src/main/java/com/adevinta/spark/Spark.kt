@@ -1,3 +1,3 @@
 package com.adevinta.spark
 
-object Spark
+data object Spark
