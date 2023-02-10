@@ -24,6 +24,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.dependencyGuard)
+    `maven-publish`
 }
 
 kotlin {
@@ -38,6 +39,9 @@ android {
     defaultConfig {
         minSdk = 24
         consumerProguardFile("consumer-rules.pro")
+        aarMetadata {
+            minCompileSdk = 24
+        }
     }
 
     compileOptions {
@@ -48,10 +52,48 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencyGuard {
     configuration("releaseRuntimeClasspath")
+}
+
+publishing {
+    repositories {
+        mavenLocal {
+            name = "Local"
+            url = uri(rootProject.layout.buildDirectory.dir(".m2/repository"))
+        }
+    }
+    publications {
+        register<MavenPublication>("maven") {
+            // AGP creates software components during the afterEvaluate callback step...
+            afterEvaluate {
+                from(components.getByName("release"))
+            }
+            pom {
+                name.set("Spark")
+                description.set("Spark Design System")
+                url.set("https://github.com/adevinta/spark-android")
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+                scm {
+                    url.set("https://github.com/adevinta/spark-android")
+                }
+            }
+        }
+    }
 }
 
 dependencies {

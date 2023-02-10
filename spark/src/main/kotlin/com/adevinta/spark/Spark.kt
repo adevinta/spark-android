@@ -22,4 +22,7 @@
 
 package com.adevinta.spark
 
+/**
+ * Spark
+ */
 object Spark
