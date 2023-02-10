@@ -1,4 +1,4 @@
-name: '👷 Build → 🧑‍🔬 Test → 👮 Report'
+name: '👷 Build → 🧑‍🔬 Test → 🕵️ Lint'
 
 on:
   pull_request:
@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: gradle/wrapper-validation-action@55e685c48d84285a5b0418cd094606e199cca3b6 # v1.0.5
 
-  build_test_report:
+  build_test_lint:
     needs: validation
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -28,15 +28,15 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build
+      - name: '👷 Build'
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: assembleRelease
-      - name: Test
+      - name: '🧑‍🔬 Test'
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: testReleaseUnitTest
-      - name: Lint
+      - name: '🕵️ Lint'
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: lintRelease
