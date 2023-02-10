@@ -1,4 +1,4 @@
-name: 'PR title format'
+name: '🔣 PR title format'
 
 on:
   pull_request:
