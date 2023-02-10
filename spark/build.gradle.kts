@@ -1,5 +1,3 @@
-import com.android.builder.core.BuilderConstants.DEBUG
-
 /*
  * Copyright (c) 2023. Adevinta
  *
@@ -41,12 +39,6 @@ android {
         consumerProguardFile("consumer-rules.pro")
     }
 
-    buildTypes {
-        release {
-            isDefault = true
-        }
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -55,10 +47,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-}
-
-androidComponents {
-    beforeVariants(selector().withBuildType(DEBUG)) { it.enable = false }
 }
 
 dependencies {
