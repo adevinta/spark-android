@@ -23,6 +23,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
+    alias(libs.plugins.dependencyGuard)
 }
 
 kotlin {
@@ -47,6 +48,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+}
+
+dependencyGuard {
+    configuration("releaseRuntimeClasspath")
 }
 
 dependencies {
