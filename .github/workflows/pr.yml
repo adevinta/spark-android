@@ -43,30 +43,36 @@ jobs:
           path: '**/build/outputs/aar'
 
       - name: '🧑‍🔬 Test'
+        id: test
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: testReleaseUnitTest
       - name: '📦 Archive JUnit HTML report'
+        if: ${{ contains(fromJSON('["success", "failure"]', steps.test.outcome }}
         uses: actions/upload-artifact@v3
         with:
           name: junit-html
           path: '**/build/reports/tests/testReleaseUnitTest'
       - name: '📦 Archive JUnit XML report'
+        if: ${{ contains(fromJSON('["success", "failure"]', steps.test.outcome }}
         uses: actions/upload-artifact@v3
         with:
           name: junit-xml
           path: '**/build/test-results/testReleaseUnitTest/**.xml'
 
       - name: '🕵️ Lint'
+        id: lint
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: lintRelease
       - name: '📦 Archive Lint HTML report'
+        if: ${{ contains(fromJSON('["success", "failure"]', steps.lint.outcome }}
         uses: actions/upload-artifact@v3
         with:
           name: lint-html
           path: '**/build/reports/lint-results-release.html'
       - name: '📦 Archive Lint XML report'
+        if: ${{ contains(fromJSON('["success", "failure"]', steps.lint.outcome }}
         uses: actions/upload-artifact@v3
         with:
           name: lint-xml
