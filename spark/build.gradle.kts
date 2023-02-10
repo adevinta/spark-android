@@ -55,6 +55,7 @@ dependencyGuard {
 }
 
 dependencies {
+    implementation(libs.accompanist)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
 }
