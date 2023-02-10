@@ -48,13 +48,13 @@ jobs:
         with:
           arguments: testReleaseUnitTest
       - name: '📦 Archive JUnit HTML report'
-        if: ${{ contains(fromJSON('["success", "failure"]', steps.test.outcome }}
+        if: ${{ contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: actions/upload-artifact@v3
         with:
           name: junit-html
           path: '**/build/reports/tests/testReleaseUnitTest'
       - name: '📦 Archive JUnit XML report'
-        if: ${{ contains(fromJSON('["success", "failure"]', steps.test.outcome }}
+        if: ${{ contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: actions/upload-artifact@v3
         with:
           name: junit-xml
@@ -66,13 +66,13 @@ jobs:
         with:
           arguments: lintRelease
       - name: '📦 Archive Lint HTML report'
-        if: ${{ contains(fromJSON('["success", "failure"]', steps.lint.outcome }}
+        if: ${{ contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: actions/upload-artifact@v3
         with:
           name: lint-html
           path: '**/build/reports/lint-results-release.html'
       - name: '📦 Archive Lint XML report'
-        if: ${{ contains(fromJSON('["success", "failure"]', steps.lint.outcome }}
+        if: ${{ contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: actions/upload-artifact@v3
         with:
           name: lint-xml
