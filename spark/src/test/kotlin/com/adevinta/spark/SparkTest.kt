@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023. Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,36 +20,16 @@
  * SOFTWARE.
  */
 
-plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.android.kotlin)
-}
+package com.adevinta.spark
 
-kotlin {
-    jvmToolchain(11)
-    explicitApi()
-}
+import org.junit.Test
+import kotlin.test.assertNotNull
 
-android {
-    namespace = "com.adevinta.spark"
-    compileSdk = 33
+class SparkTest {
 
-    defaultConfig {
-        minSdk = 24
-        consumerProguardFile("consumer-rules.pro")
+    @Test
+    fun spark() {
+        assertNotNull(Spark)
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-}
-
-dependencies {
-    testImplementation(libs.junit)
-    testImplementation(libs.kotlin.test)
 }
