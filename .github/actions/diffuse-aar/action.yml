@@ -4,6 +4,6 @@ runs:
   using: composite
   steps:
     - shell: bash
-      run: brew install JakeWharton/repo/diffuse
+      run: wget "https://github.com/JakeWharton/diffuse/releases/download/0.1.0/diffuse-0.1.0-binary.jar"
     - shell: bash
-      run: diffuse info --aar spark/build/outputs/aar/spark-release.aar
+      run: java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar
