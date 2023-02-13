@@ -57,7 +57,8 @@ android {
 
     lint {
         warningsAsErrors = true
-     }
+        sarifReport = true
+    }
 
     publishing {
         singleVariant("release") {
