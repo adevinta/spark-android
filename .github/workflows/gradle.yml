@@ -1,0 +1,24 @@
+name: '🐘 Gradle testing workflow'
+
+on:
+  workflow_dispatch:
+    inputs:
+      arguments:
+        description: 'Command line'
+        required: true
+        default: 'projects --quiet'
+        type: string
+
+jobs:
+  gradle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: gradle/wrapper-validation-action@55e685c48d84285a5b0418cd094606e199cca3b6 # v1.0.5
+      - uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
+        with:
+          arguments: ${{ inputs.arguments }}
