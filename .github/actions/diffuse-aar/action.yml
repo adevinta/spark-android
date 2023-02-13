@@ -1,6 +1,9 @@
 name: 'Diffuse AAR'
 description: 'Show diffuse AAR output'
 inputs:
+  github-token:
+    description: 'GitHub token'
+    required: true
   pr-number:
     description: 'PR number'
     required: true
@@ -12,5 +15,5 @@ runs:
     - shell: bash
       run: java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar | gh pr comment "$PR_NUMBER" --body-file -
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
         PR_NUMBER: ${{ inputs.pr-number }}
