@@ -17,3 +17,8 @@ jobs:
       - run: pip install -r .github/requirements.txt
       - name: 'Check title format'
         run: cz check --message "${{ github.event.pull_request.title }}" >> $GITHUB_STEP_SUMMARY 2>&1
+      - if: ${{ failure() }}
+        run: gh pr comment "$PR_NUMBER" --body "$GITHUB_STEP_SUMMARY"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
