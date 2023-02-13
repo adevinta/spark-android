@@ -35,6 +35,7 @@ kotlin {
 android {
     namespace = "com.adevinta.spark"
     compileSdk = 33
+    resourcePrefix = "spark_"
 
     defaultConfig {
         minSdk = 24
