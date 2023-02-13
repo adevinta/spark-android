@@ -1,0 +1,9 @@
+name: 'Diffuse AAR'
+description: 'Show diffuse AAR output'
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: brew install JakeWharton/repo/diffuse
+    - shell: bash
+      run: diffuse info --aar spark/build/outputs/aar/spark-release.aar
