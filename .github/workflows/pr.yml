@@ -29,7 +29,7 @@ jobs:
         with:
           arguments: dependencyGuard --quiet
 
-  build_test_lint:
+  build-test-lint:
     needs: validation
     runs-on: ubuntu-latest
     timeout-minutes: 15
