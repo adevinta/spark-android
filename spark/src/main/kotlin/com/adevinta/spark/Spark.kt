@@ -26,3 +26,6 @@ package com.adevinta.spark
  * Spark
  */
 object Spark
+
+@Suppress("unused")
+val locale: java.util.Locale = java.util.Locale.getDefault()
