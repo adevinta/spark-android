@@ -24,4 +24,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: echo "${{ toJSON(steps.check) }}"
+        run: |
+          gh pr comment "$PR_NUMBER" --body "commit validation: failed!\nplease enter a commit message in the commitizen format.\npattern: \`(?s)(build|ci|docs|feat|fix|perf|refactor|style|test|chore|revert|bump)(\(\S+\))?!?:( [^\n\r]+)((\n\n.*)|(\s*))?$\`"
