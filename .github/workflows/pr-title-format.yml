@@ -25,4 +25,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           PR_TITLE: ${{ github.event.pull_request.title }}
-        run: cz check --message "$PR_TITLE" &> | gh pr comment "$PR_NUMBER" -
+        run: cz check --message "$PR_TITLE" &> > gh pr comment "$PR_NUMBER" -
