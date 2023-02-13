@@ -55,6 +55,10 @@ android {
         allWarningsAsErrors = true
     }
 
+    lint {
+        warningsAsErrors = true
+     }
+
     publishing {
         singleVariant("release") {
             withSourcesJar()
