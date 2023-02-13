@@ -15,7 +15,14 @@ jobs:
           cache: 'pip'
           cache-dependency-path: '.github/requirements.txt'
       - run: pip install -r .github/requirements.txt
-      - name: 'Check title format'
+      - id: check
+        name: 'Check title format'
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: cz check --message "$PR_TITLE" >> $GITHUB_STEP_SUMMARY 2>&1
+      - if: ${{ failure() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: cz check --message "$PR_TITLE" 2>&1 | gh pr comment "$PR_NUMBER" --body-file -
