@@ -10,7 +10,9 @@ kotlin = "1.8.10"
 kotlinx-coroutines = "1.6.4"
 ksp = "1.8.10-1.0.9"
 lint = "30.4.1"
+paparazzi = "1.2.0"
 showkase = "1.0.0-beta17"
+testParameterInjector = "1.10"
 
 [libraries]
 
@@ -41,6 +43,9 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-compose-ui-util = { module = "androidx.compose.ui:ui-util" }
 
+# https://github.com/google/TestParameterInjector
+google-testParameterInjector = { module = "com.google.testparameterinjector:test-parameter-injector", version.ref = "testParameterInjector" }
+
 junit = { module = "junit:junit", version.ref = "junit" }
 
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -60,6 +65,7 @@ android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "android-gradlePlugin" }
 android-lint = { id = "com.android.lint", version.ref = "android-gradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "android-gradlePlugin" }
+cashapp-paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
