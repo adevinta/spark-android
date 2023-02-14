@@ -22,7 +22,7 @@ accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeho
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-testharness = { module = "com.google.accompanist:accompanist-testharness", version.ref = "accompanist" }
 
-airbnb-showkase = { group = "com.airbnb.android", name = "showkase", version.ref = "showkase" }
+airbnb-showkase = { module = "com.airbnb.android:showkase", version.ref = "showkase" }
 airbnb-showkase-processor = { group = "com.airbnb.android", name = "showkase-processor", version.ref = "showkase" }
 
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
