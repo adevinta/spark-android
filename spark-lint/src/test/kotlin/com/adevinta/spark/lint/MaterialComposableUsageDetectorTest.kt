@@ -51,7 +51,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                     CircularProgressIndicator()
                     MaterialTheme()
                 }
-            """.trimIndent()
+            """
             ),
             MaterialComponentsStub,
             Composable,
@@ -196,7 +196,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 fun Test() {
                     Image()
                 }
-            """.trimIndent()
+            """
             ),
             Composable,
             FoundationStub,
@@ -238,7 +238,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                     AsyncImage()
                     SubcomposeAsyncImage()
                 }
-            """.trimIndent()
+            """
             ),
             Composable,
             CoilComponentsStub,
@@ -298,7 +298,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                     LinearProgressIndicator()
                     Snackbar()
                 }
-            """.trimIndent()
+            """
             ),
             SparkComponentsStub,
             Composable,

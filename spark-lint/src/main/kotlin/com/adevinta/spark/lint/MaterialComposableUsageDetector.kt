@@ -52,7 +52,7 @@ public class MaterialComposableUsageDetector : Detector(), SourceCodeScanner {
     internal companion object {
         val ISSUE = Issue.create(
             id = "MaterialComposableUsageDetector",
-            briefDescription = "A Spark replacement is available for this Composable.",
+            briefDescription = "A Spark replacement is available for this Composable",
             explanation = "Material or any other third party Composable should be replaced with a Spark Composable.",
             category = CORRECTNESS,
             priority = 8,
