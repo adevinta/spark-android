@@ -60,16 +60,13 @@ import com.adevinta.spark.tokens.PaletteTokens.Blue80
 import com.adevinta.spark.tokens.PaletteTokens.Blue90
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeBlack
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeBlue
-import com.adevinta.spark.tokens.PaletteTokens.BrikkeBlueDark
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeBlueSurface
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeGreen
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeGreenSurface
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeGrey
-import com.adevinta.spark.tokens.PaletteTokens.BrikkeGreyDark
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeGreyExtraLight
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeGreyLight
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeOrange
-import com.adevinta.spark.tokens.PaletteTokens.BrikkeOrangeDark
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeOrangeSurface
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeRed
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeRedSurface
@@ -118,9 +115,7 @@ fun lightSparkColors(
     onPrimary: Color = if (isPro) Grey100 else Grey100,
     primaryContainer: Color = if (isPro) BrikkeBlueSurface else BrikkeOrangeSurface,
     onPrimaryContainer: Color = if (isPro) Blue10 else Orange10,
-    primaryVariant: Color = if (isPro) BrikkeBlueDark else BrikkeOrangeDark,
     secondary: Color = BrikkeBlack,
-    secondaryVariant: Color = BrikkeGreyDark,
     onSecondary: Color = Grey100,
     secondaryContainer: Color = BrikkeGreyLight,
     onSecondaryContainer: Color = Grey10,
@@ -154,9 +149,7 @@ fun lightSparkColors(
     onPrimary = onPrimary,
     primaryContainer = primaryContainer,
     onPrimaryContainer = onPrimaryContainer,
-    primaryVariant = primaryVariant,
     secondary = secondary,
-    secondaryVariant = secondaryVariant,
     onSecondary = onSecondary,
     secondaryContainer = secondaryContainer,
     onSecondaryContainer = onSecondaryContainer,
@@ -193,9 +186,7 @@ fun darkSparkColors(
     onPrimary: Color = if (isPro) Blue20 else Orange20,
     primaryContainer: Color = if (isPro) Blue30 else Orange30,
     onPrimaryContainer: Color = if (isPro) Blue90 else Orange90,
-    primaryVariant: Color = if (isPro) Blue30 else Orange30,
     secondary: Color = Grey99,
-    secondaryVariant: Color = Grey90,
     onSecondary: Color = Color.Black,
     secondaryContainer: Color = Grey30,
     onSecondaryContainer: Color = Grey90,
@@ -229,9 +220,7 @@ fun darkSparkColors(
     onPrimary = onPrimary,
     primaryContainer = primaryContainer,
     onPrimaryContainer = onPrimaryContainer,
-    primaryVariant = primaryVariant,
     secondary = secondary,
-    secondaryVariant = secondaryVariant,
     onSecondary = onSecondary,
     secondaryContainer = secondaryContainer,
     onSecondaryContainer = onSecondaryContainer,
@@ -330,12 +319,10 @@ class SparkColors(
     onPrimary: Color,
     primaryContainer: Color,
     onPrimaryContainer: Color,
-    primaryVariant: Color,
     secondary: Color,
     onSecondary: Color,
     secondaryContainer: Color,
     onSecondaryContainer: Color,
-    secondaryVariant: Color,
     tertiary: Color,
     onTertiary: Color,
     tertiaryContainer: Color,
@@ -371,17 +358,11 @@ class SparkColors(
     var onPrimaryContainer by mutableStateOf(onPrimaryContainer, structuralEqualityPolicy())
         internal set
 
-    @Deprecated("primaryContainer should be used instead", replaceWith = ReplaceWith("primaryContainer"))
-    var primaryVariant by mutableStateOf(primaryVariant, structuralEqualityPolicy())
-        internal set
     var secondary by mutableStateOf(secondary, structuralEqualityPolicy())
         internal set
     var onSecondary by mutableStateOf(onSecondary, structuralEqualityPolicy())
         internal set
 
-    @Deprecated("secondaryContainer should be used instead", replaceWith = ReplaceWith("secondaryContainer"))
-    var secondaryVariant by mutableStateOf(secondaryVariant, structuralEqualityPolicy())
-        internal set
     var secondaryContainer by mutableStateOf(secondaryContainer, structuralEqualityPolicy())
         internal set
     var onSecondaryContainer by mutableStateOf(onSecondaryContainer, structuralEqualityPolicy())
@@ -445,10 +426,8 @@ class SparkColors(
         onPrimary: Color = this.onPrimary,
         primaryContainer: Color = this.primaryContainer,
         onPrimaryContainer: Color = this.onPrimaryContainer,
-        primaryVariant: Color = this.primaryVariant,
         secondary: Color = this.secondary,
         onSecondary: Color = this.onSecondary,
-        secondaryVariant: Color = this.secondaryVariant,
         secondaryContainer: Color = this.secondaryContainer,
         onSecondaryContainer: Color = this.onSecondaryContainer,
         tertiary: Color = this.tertiary,
@@ -481,10 +460,8 @@ class SparkColors(
         onPrimary = onPrimary,
         primaryContainer = primaryContainer,
         onPrimaryContainer = onPrimaryContainer,
-        primaryVariant = primaryVariant,
         secondary = secondary,
         onSecondary = onSecondary,
-        secondaryVariant = secondaryVariant,
         secondaryContainer = secondaryContainer,
         onSecondaryContainer = onSecondaryContainer,
         tertiary = tertiary,
@@ -521,10 +498,8 @@ class SparkColors(
             append("onPrimary=$onPrimary, ")
             append("primaryContainer=$primaryContainer, ")
             append("onPrimaryContainer=$onPrimaryContainer, ")
-            append("primaryVariant=$primaryVariant, ")
             append("secondary=$secondary, ")
             append("onSecondary=$onSecondary, ")
-            append("secondaryVariant=$secondaryVariant, ")
             append("secondaryContainer=$secondaryContainer, ")
             append("onSecondaryContainer=$onSecondaryContainer, ")
             append("tertiary=$tertiary, ")
@@ -589,10 +564,6 @@ fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
     scrim = scrim,
 )
 
-fun SparkColors.withBrandedSurface() = copy(
-    surface = primary.copy(alpha = 0.08f).compositeOver(this.surface),
-)
-
 /**
  * The Material color system contains pairs of colors that are typically used for the background
  * and content color inside a component. For example, a [Button] typically uses `primary` for its
@@ -614,9 +585,7 @@ fun SparkColors.contentColorFor(backgroundColor: Color): Color {
     return when (backgroundColor) {
         primary -> onPrimary
         primaryContainer -> onPrimaryContainer
-        primaryVariant -> onPrimary
         secondary -> onSecondary
-        secondaryVariant -> onSecondary
         secondaryContainer -> onSecondaryContainer
         tertiary -> onTertiary
         tertiaryContainer -> onTertiaryContainer
@@ -675,10 +644,8 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
     onPrimary = other.onPrimary
     primaryContainer = other.primaryContainer
     onPrimaryContainer = other.onPrimaryContainer
-    primaryVariant = other.primaryVariant
     secondary = other.secondary
     onSecondary = other.onSecondary
-    secondaryVariant = other.secondaryVariant
     secondaryContainer = other.secondaryContainer
     onSecondaryContainer = other.onSecondaryContainer
     tertiary = other.tertiary
@@ -732,9 +699,7 @@ fun debugColors(
     onPrimary = onDebugColor,
     primaryContainer = debugColor,
     onPrimaryContainer = onDebugColor,
-    primaryVariant = debugColor,
     secondary = debugColor,
-    secondaryVariant = debugColor,
     onSecondary = onDebugColor,
     secondaryContainer = debugColor,
     onSecondaryContainer = onDebugColor,
@@ -779,11 +744,9 @@ internal fun ColorPreview(
         Row() {
             ColorItem(SparkTheme.colors.primary, "primary")
             ColorItem(SparkTheme.colors.primaryContainer, "primary Container")
-            ColorItem(SparkTheme.colors.primaryVariant, "primary Variant")
         }
         Row {
             ColorItem(SparkTheme.colors.secondary, "secondary")
-            ColorItem(SparkTheme.colors.secondaryVariant, "secondary Variant")
             ColorItem(SparkTheme.colors.secondaryContainer, "secondary Container")
         }
         Row {
