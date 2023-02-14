@@ -60,9 +60,11 @@ android {
     kotlinOptions {
         jvmTarget = "11"
         allWarningsAsErrors = true
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=com.adevinta.spark.InternalSparkApi"
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=com.adevinta.spark.ExperimentalSparkApi"
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs += listOf(
+            "-opt-in=com.adevinta.spark.InternalSparkApi",
+            "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
+            "-opt-in=kotlin.RequiresOptIn",
+        )
     }
 
     sourceSets.configureEach {
