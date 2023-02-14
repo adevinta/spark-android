@@ -20,10 +20,59 @@
  * SOFTWARE.
  */
 
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.lint) apply false
-    alias(libs.plugins.android.kotlin) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
-}
+package com.adevinta.spark.lint.stubs
+
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
+
+// Simplified Material.kt stubs
+internal val MaterialComponentsStub = kotlin(
+    """
+    package androidx.compose.material3
+    import androidx.compose.runtime.Composable
+    
+    @Composable
+    fun Button() {}
+    
+    @Composable
+    fun OutlinedButton() {}
+    
+    @Composable
+    fun ElevatedButton() {}
+    
+    @Composable
+    fun FilledTonalButton() {}
+    
+    @Composable
+    fun TextButton() {}
+    
+    @Composable
+    fun OutlinedTextField() {}
+    
+    @Composable
+    fun FilledTextField() {}
+    
+    @Composable
+    fun CheckBox() {}
+    
+    @Composable
+    fun TriStateCheckbox() {}
+    
+    @Composable
+    fun RadioButton() {}
+    
+    @Composable
+    fun Switch() {}
+    
+    @Composable
+    fun Snackbar() {}
+    
+    @Composable
+    fun LinearProgressIndicator() {}
+    
+    @Composable
+    fun CircularProgressIndicator() {}
+    
+    @Composable
+    fun MaterialTheme() {}
+""".trimIndent()
+)

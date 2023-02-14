@@ -44,3 +44,4 @@ rootProject.name = "spark-android"
 
 include(":spark")
 include(":sample")
+include(":spark-lint")
