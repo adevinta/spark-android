@@ -35,3 +35,7 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
         PR_NUMBER: ${{ inputs.pr-number }}
+    - shell: bash
+      run: rm -rf "diffuse-$DIFFUSE_VERSION-binary.jar"
+      env:
+        DIFFUSE_VERSION: ${{ inputs.diffuse-version }}
