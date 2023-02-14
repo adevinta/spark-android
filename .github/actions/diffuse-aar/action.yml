@@ -20,7 +20,13 @@ runs:
       env:
         DIFFUSE_VERSION: ${{ inputs.diffuse-version }}
     - shell: bash
-      run: java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar | gh pr comment "$PR_NUMBER" --body-file -
+      run: |
+        ( \
+          echo -e "### Diffuse report" ; \
+          echo -e "\`\`\`" ; \
+          java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar ; \
+          echo -e "\`\`\`" ; \
+        ) | gh pr comment "$PR_NUMBER" --body-file -
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
         PR_NUMBER: ${{ inputs.pr-number }}
