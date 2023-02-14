@@ -23,7 +23,7 @@ accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiper
 accompanist-testharness = { module = "com.google.accompanist:accompanist-testharness", version.ref = "accompanist" }
 
 airbnb-showkase = { module = "com.airbnb.android:showkase", version.ref = "showkase" }
-airbnb-showkase-processor = { group = "com.airbnb.android", name = "showkase-processor", version.ref = "showkase" }
+airbnb-showkase-processor = { module = "com.airbnb.android:showkase-processor", version.ref = "showkase" }
 
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
