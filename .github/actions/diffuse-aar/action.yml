@@ -1,5 +1,5 @@
-name: 'Diffuse AAR'
-description: 'Show diffuse AAR output'
+name: '📢 Diffuse AAR report'
+description: 'Add diffuse AAR report to Pull Requests'
 inputs:
   github-token:
     description: 'GitHub token'
@@ -27,7 +27,7 @@ runs:
     - shell: bash
       run: |
         ( \
-          echo -e "### Diffuse report" ; \
+          echo -e "### 📢 Diffuse report" ; \
           echo -e "\`\`\`" ; \
           java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar ; \
           echo -e "\`\`\`" ; \
