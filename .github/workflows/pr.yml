@@ -59,7 +59,26 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.pull_request.number }}
+      - name: 'Run screenshot tests'
+        id: verifyPaparazziDebug
+        continue-on-error: true
+        run: ./gradlew spark:verifyPaparazziDebug
 
+      - name: 'Error Screenshot tests'
+        if: ${{ hashFiles('spark/out/failures/*.png') != '' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: scrennshot-test-results
+          path: spark/out/failures
+
+#      - name: 'Comment PR'
+#        if: ${{ hashFiles('preview-screenshots/out/failures/*.png') != '' }}
+#        uses: thollander/actions-comment-pull-request@v1
+#        with:
+#          message: |
+#            There are differences in Compose previews. Please check your build and download the diff artifact.
+#            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: '🧑‍🔬 Test'
         id: test
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
