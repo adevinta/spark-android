@@ -25,7 +25,7 @@ package com.adevinta.spark
 /**
  * Marks declarations that are **internal** in Spark API, which means that should not be used outside of
  * `com.adevinta.spark`, because their signatures and semantics will change between future releases without
- * any warnings and without providing any migration aids.
+ * any warnings and without providing any migration guide.
  */
 @Retention(value = AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS, AnnotationTarget.PROPERTY)
