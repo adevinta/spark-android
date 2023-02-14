@@ -20,10 +20,22 @@
  * SOFTWARE.
  */
 
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.kotlin) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.google.ksp) apply false
-}
+package com.adevinta.spark
+
+/**
+ * Marks declarations that are **internal** in Spark API, which means that should not be used outside of
+ * `com.adevinta.spark`, because their signatures and semantics will change between future releases without
+ * any warnings and without providing any migration aids.
+ */
+@Retention(value = AnnotationRetention.BINARY)
+@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS, AnnotationTarget.PROPERTY)
+@RequiresOptIn(
+    level = RequiresOptIn.Level.ERROR,
+    message = "This is an internal com.adevinta.spark API that " +
+            "should not be used from outside of com.adevinta.spark. No compatibility guarantees are " +
+            "provided. It is recommended ask your Product Owner or your designer to modify your interface to respect " +
+            "Spark design system. As a last resort you can report your use-case of internal API to" +
+            " com.adevinta.spark owners, so stable API could be provided instead in a next version " +
+            "of Spark",
+)
+annotation class InternalSparkApi

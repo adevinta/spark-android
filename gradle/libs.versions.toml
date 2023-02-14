@@ -8,7 +8,9 @@ dependencyGuard = "0.4.1"
 junit = "4.13.2"
 kotlin = "1.8.10"
 kotlinx-coroutines = "1.6.4"
+ksp = "1.8.10-1.0.9"
 lint = "30.4.1"
+showkase = "1.0.0-beta17"
 
 [libraries]
 
@@ -19,6 +21,9 @@ accompanist-permissions = { module = "com.google.accompanist:accompanist-permiss
 accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-testharness = { module = "com.google.accompanist:accompanist-testharness", version.ref = "accompanist" }
+
+airbnb-showkase = { group = "com.airbnb.android", name = "showkase", version.ref = "showkase" }
+airbnb-showkase-processor = { group = "com.airbnb.android", name = "showkase-processor", version.ref = "showkase" }
 
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
@@ -56,3 +61,4 @@ android-library = { id = "com.android.library", version.ref = "android-gradlePlu
 android-test = { id = "com.android.test", version.ref = "android-gradlePlugin" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

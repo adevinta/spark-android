@@ -20,10 +20,11 @@
  * SOFTWARE.
  */
 
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.kotlin) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.google.ksp) apply false
-}
+package com.adevinta.spark
+
+@RequiresOptIn(
+    message = "This API is experimental and is likely to change in the future.",
+    level = RequiresOptIn.Level.WARNING,
+)
+@Retention(AnnotationRetention.BINARY)
+annotation class ExperimentalSparkApi
