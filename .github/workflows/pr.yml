@@ -44,6 +44,7 @@ jobs:
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
 
       - name: '👷 Build'
+        id: build
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: assembleRelease
@@ -52,6 +53,12 @@ jobs:
         with:
           name: aar
           path: '**/build/outputs/aar'
+      - name: '📢 Diffuse report'
+        if: ${{ steps.build.outcome == 'success' }}
+        uses: ./.github/actions/diffuse-aar
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-number: ${{ github.event.pull_request.number }}
 
       - name: '🧑‍🔬 Test'
         id: test

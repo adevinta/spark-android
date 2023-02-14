@@ -1,0 +1,41 @@
+name: '📢 Diffuse AAR report'
+description: 'Add diffuse AAR report to Pull Requests'
+inputs:
+  github-token:
+    description: 'GitHub token'
+    required: true
+  pr-number:
+    description: 'PR number'
+    required: true
+  diffuse-version:
+    description: 'Diffuse version'
+    required: true
+    default: '0.1.0'
+runs:
+  using: composite
+  steps:
+    - if: ${{ runner.os != 'linux' }}
+      shell: bash
+      run: |
+        echo "Unsupported runner os ${{ runner.os }}"
+        exit 1
+    - name: 'Downloading diffuse v${{ inputs.diffuse-version }}…'
+      shell: bash
+      run: wget "https://github.com/JakeWharton/diffuse/releases/download/$DIFFUSE_VERSION/diffuse-$DIFFUSE_VERSION-binary.jar"
+      env:
+        DIFFUSE_VERSION: ${{ inputs.diffuse-version }}
+    - shell: bash
+      run: |
+        ( \
+          echo -e "### 📢 Diffuse report" ; \
+          echo -e "\`\`\`" ; \
+          java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar ; \
+          echo -e "\`\`\`" ; \
+        ) | gh pr comment "$PR_NUMBER" --body-file -
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        PR_NUMBER: ${{ inputs.pr-number }}
+    - shell: bash
+      run: rm -rf "diffuse-$DIFFUSE_VERSION-binary.jar"
+      env:
+        DIFFUSE_VERSION: ${{ inputs.diffuse-version }}
