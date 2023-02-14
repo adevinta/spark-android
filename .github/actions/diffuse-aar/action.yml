@@ -14,6 +14,11 @@ inputs:
 runs:
   using: composite
   steps:
+    - if: ${{ runner.os != 'linux' }}
+      shell: bash
+      run: |
+        echo "Unsupported runner os ${{ runner.os }}"
+        exit 1
     - name: 'Downloading diffuse v${{ inputs.diffuse-version }}…'
       shell: bash
       run: wget "https://github.com/JakeWharton/diffuse/releases/download/$DIFFUSE_VERSION/diffuse-$DIFFUSE_VERSION-binary.jar"
