@@ -53,7 +53,8 @@ jobs:
         with:
           name: aar
           path: '**/build/outputs/aar'
-      - if: ${{ steps.build.outcome == 'success' }}
+      - name: '📢 Diffuse report'
+        if: ${{ steps.build.outcome == 'success' }}
         uses: ./.github/actions/diffuse-aar
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
