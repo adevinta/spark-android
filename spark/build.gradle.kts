@@ -27,6 +27,7 @@ plugins {
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.dependencyGuard)
     alias(libs.plugins.google.ksp)
+    alias(libs.plugins.cashapp.paparazzi)
     `maven-publish`
 }
 
@@ -138,4 +139,5 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
+    testImplementation(libs.google.testParameterInjector)
 }
