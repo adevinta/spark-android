@@ -7,11 +7,18 @@ inputs:
   pr-number:
     description: 'PR number'
     required: true
+  diffuse-version:
+    description: 'Diffuse version'
+    required: true
+    default: '0.1.0'
 runs:
   using: composite
   steps:
-    - shell: bash
-      run: wget "https://github.com/JakeWharton/diffuse/releases/download/0.1.0/diffuse-0.1.0-binary.jar"
+    - name: 'Downloading diffuse v${{ inputs.diffuse-version }}…'
+      shell: bash
+      run: wget "https://github.com/JakeWharton/diffuse/releases/download/$DIFFUSE_VERSION/diffuse-$DIFFUSE_VERSION-binary.jar"
+      env:
+        DIFFUSE_VERSION: ${{ inputs.diffuse-version }}
     - shell: bash
       run: java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar | gh pr comment "$PR_NUMBER" --body-file -
       env:
