@@ -139,8 +139,7 @@ internal fun LayoutPreview() {
             ) {
                 items(
                     count = 20,
-                ) { entry ->
-
+                ) {
                     Item()
                 }
             }
