@@ -39,6 +39,11 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+lint {
+    warningsAsErrors = true
+    sarifReport = true
+}
+
 dependencies {
     compileOnly(libs.lint.api)
     compileOnly(libs.lint.checks)
