@@ -61,9 +61,14 @@ android {
     kotlinOptions {
         jvmTarget = "11"
         allWarningsAsErrors = true
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=com.adevinta.spark.InternalSparkApi"
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=com.adevinta.spark.ExperimentalSparkApi"
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs += listOf(
+            "-Xexplicit-api=strict",
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.8.20-Beta",
+            "-opt-in=com.adevinta.spark.InternalSparkApi",
+            "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
+            "-opt-in=kotlin.RequiresOptIn",
+        )
     }
 
     sourceSets.configureEach {
