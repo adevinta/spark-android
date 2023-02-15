@@ -58,7 +58,7 @@ internal fun SparkToggleLabelledContainer(
     ) {
 
         startContent?.let {
-            HorizontalSpace(8.dp)
+//            HorizontalSpace(8.dp)
             it()
             HorizontalSpace(ToggleLabelledPadding)
         }
