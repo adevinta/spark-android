@@ -17,10 +17,10 @@ body:
   - type: dropdown
     attributes:
       label: What version of spark are you using?
-      description: Please search [StackOverflow](https://stackoverflow.com/questions/tagged/android-jetpack) if an issue with an answer already exists for the bug you encountered.
+      description: This will help us identify where & when the bug may have appeared
       options:
         - 1.0.0
-        - other (please specify it)
+        - Other (please specify it)
   - type: textarea
     id: what-happened
     attributes:
@@ -39,7 +39,7 @@ body:
 
   - type: markdown
     attributes:
-      value: "## 📸If applicable, add screenshots to help explain your problem."
+      value: "## 📸 If applicable, add screenshots to help explain your problem."
   - type: checkboxes
     id: terms
     attributes:
