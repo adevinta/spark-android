@@ -1,12 +1,12 @@
 name: Feature request
 description: File a feature request
 title: "[FR]: "
-labels: ["enhancement", "triage me"]
+labels: ["enhancement"]
 body:
 - type: markdown
   attributes:
   value: |
-  Thanks for taking the time to fill out this bug report!
+   Thanks for taking the time to fill out this bug report!
 - type: checkboxes
   attributes:
   label: 🕵️ Is there an existing issue for this?
