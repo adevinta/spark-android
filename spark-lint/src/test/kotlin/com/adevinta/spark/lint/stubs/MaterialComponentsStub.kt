@@ -20,28 +20,59 @@
  * SOFTWARE.
  */
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
+package com.adevinta.spark.lint.stubs
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":sample")
-include(":spark-lint")
+// Simplified Material.kt stubs
+internal val MaterialComponentsStub = kotlin(
+    """
+    package androidx.compose.material3
+    import androidx.compose.runtime.Composable
+    
+    @Composable
+    fun Button() {}
+    
+    @Composable
+    fun OutlinedButton() {}
+    
+    @Composable
+    fun ElevatedButton() {}
+    
+    @Composable
+    fun FilledTonalButton() {}
+    
+    @Composable
+    fun TextButton() {}
+    
+    @Composable
+    fun OutlinedTextField() {}
+    
+    @Composable
+    fun FilledTextField() {}
+    
+    @Composable
+    fun CheckBox() {}
+    
+    @Composable
+    fun TriStateCheckbox() {}
+    
+    @Composable
+    fun RadioButton() {}
+    
+    @Composable
+    fun Switch() {}
+    
+    @Composable
+    fun Snackbar() {}
+    
+    @Composable
+    fun LinearProgressIndicator() {}
+    
+    @Composable
+    fun CircularProgressIndicator() {}
+    
+    @Composable
+    fun MaterialTheme() {}
+""".trimIndent()
+)

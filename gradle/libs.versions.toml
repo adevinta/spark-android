@@ -63,6 +63,7 @@ lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint
 android-application = { id = "com.android.application", version.ref = "android-gradlePlugin" }
 android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "android-gradlePlugin" }
+android-lint = { id = "com.android.lint", version.ref = "android-gradlePlugin" }
 android-test = { id = "com.android.test", version.ref = "android-gradlePlugin" }
 cashapp-paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }

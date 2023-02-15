@@ -20,28 +20,56 @@
  * SOFTWARE.
  */
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
+package com.adevinta.spark.lint.stubs
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":sample")
-include(":spark-lint")
+// Simplified Spark.kt stubs
+internal val SparkComponentsStub = kotlin(
+    """
+    package com.adevinta.spark
+    import androidx.compose.runtime.Composable
+    
+    @Composable
+    fun PrimaryButton() {}
+    
+    @Composable
+    fun SecondaryButton() {}
+    
+    @Composable
+    fun TextButton() {}
+    
+    @Composable
+    fun TextField() {}
+    
+    @Composable
+    fun SelectTextField() {}
+    
+    @Composable
+    fun CheckBox() {}
+    
+    @Composable
+    fun RadioButton() {}
+    
+    @Composable
+    fun Switch() {}
+    
+    @Composable
+    fun Snackbar() {}
+    
+    @Composable
+    fun LinearProgressIndicator() {}
+    
+    @Composable
+    fun CircularProgressIndicator() {}
+    
+    @Composable
+    fun SparkTheme() {}
+    
+    @Composable
+    fun Image() {}
+    
+    @Composable
+    fun Illustration() {}
+""".trimIndent()
+)

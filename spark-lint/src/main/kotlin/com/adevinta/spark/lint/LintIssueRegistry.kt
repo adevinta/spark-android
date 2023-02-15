@@ -20,28 +20,22 @@
  * SOFTWARE.
  */
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+package com.adevinta.spark.lint
+
+import com.android.tools.lint.client.api.IssueRegistry
+import com.android.tools.lint.client.api.Vendor
+import com.android.tools.lint.detector.api.CURRENT_API
+import com.android.tools.lint.detector.api.Issue
+
+public class LintIssueRegistry : IssueRegistry() {
+
+    override val vendor: Vendor = Vendor(
+        vendorName = "spark",
+        identifier = "com.adevinta.spark:spark-lints",
+    )
+
+    override val api: Int = CURRENT_API
+    override val issues: List<Issue> = listOf(
+        MaterialComposableUsageDetector.ISSUE,
+    )
 }
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":sample")
-include(":spark-lint")

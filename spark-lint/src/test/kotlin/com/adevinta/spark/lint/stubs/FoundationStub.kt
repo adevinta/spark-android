@@ -20,28 +20,17 @@
  * SOFTWARE.
  */
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
+package com.adevinta.spark.lint.stubs
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":sample")
-include(":spark-lint")
+// Simplified Foundation.kt stubs
+internal val FoundationStub = kotlin(
+    """
+    package androidx.compose.foundation
+    import androidx.compose.runtime.Composable
+    
+    @Composable
+    fun Image() {}
+""".trimIndent()
+)

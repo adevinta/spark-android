@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 /*
  * Copyright (c) 2023 Adevinta
  *
@@ -20,28 +22,33 @@
  * SOFTWARE.
  */
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
+plugins {
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.android.lint)
+}
+
+kotlin {
+    jvmToolchain(11)
+    explicitApi()
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        allWarningsAsErrors = true
     }
 }
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
+lint {
+    warningsAsErrors = true
+    sarifReport = true
 }
 
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+dependencies {
+    compileOnly(libs.kotlin.stdlib)
+    compileOnly(libs.lint.api)
+    compileOnly(libs.lint.checks)
 
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":sample")
-include(":spark-lint")
+    testImplementation(libs.junit)
+    testImplementation(libs.lint)
+    testImplementation(libs.lint.tests)
+}
