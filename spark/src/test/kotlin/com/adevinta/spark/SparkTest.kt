@@ -25,10 +25,10 @@ package com.adevinta.spark
 import org.junit.Test
 import kotlin.test.assertNotNull
 
-class SparkTest {
+public class SparkTest {
 
     @Test
-    fun spark() {
+    public fun spark() {
         assertNotNull(Spark)
     }
 
