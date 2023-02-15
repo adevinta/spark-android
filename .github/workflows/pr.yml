@@ -121,7 +121,7 @@ jobs:
           name: lint-xml
           path: '**/build/reports/lint-results-release.sarif'
       - name: '📦 Upload Lint SARIF report'
-        if: ${{ always() }}
+        if: ${{ contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: spark/build/reports/lint-results-release.sarif
