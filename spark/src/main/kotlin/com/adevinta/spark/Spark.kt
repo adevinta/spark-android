@@ -25,4 +25,4 @@ package com.adevinta.spark
 /**
  * Spark
  */
-object Spark
+public object Spark
