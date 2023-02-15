@@ -107,6 +107,7 @@ publishing {
 }
 
 dependencies {
+    lintPublish(projects.sparkLint)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
 }
