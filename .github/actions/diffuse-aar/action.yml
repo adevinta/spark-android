@@ -27,10 +27,13 @@ runs:
     - shell: bash
       run: |
         ( \
-          echo -e "### 📢 Diffuse report" ; \
+          echo -e "<details><summary>📢 Diffuse report…</summary>" ; \
+          echo -e "" ; \
           echo -e "\`\`\`" ; \
           java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar ; \
           echo -e "\`\`\`" ; \
+          echo -e "" ; \
+          echo -e "</details>" ; \
         ) | gh pr comment "$PR_NUMBER" --body-file -
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
