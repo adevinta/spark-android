@@ -55,7 +55,7 @@ android {
         allWarningsAsErrors = true
         freeCompilerArgs += listOf(
             "-Xexplicit-api=strict",
-            "-P", "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.8.20-Beta",
+            "-P", "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.8.10",
         )
     }
 
