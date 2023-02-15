@@ -28,6 +28,7 @@ runs:
       run: |
         ( \
           echo -e "<details><summary>📢 Diffuse report…</summary>" ; \
+          echo -e "" ; \
           echo -e "\`\`\`" ; \
           java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar ; \
           echo -e "\`\`\`" ; \
