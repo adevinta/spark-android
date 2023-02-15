@@ -20,10 +20,22 @@
  * SOFTWARE.
  */
 
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.lint) apply false
-    alias(libs.plugins.android.kotlin) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
+package com.adevinta.spark.lint
+
+import com.android.tools.lint.client.api.IssueRegistry
+import com.android.tools.lint.client.api.Vendor
+import com.android.tools.lint.detector.api.CURRENT_API
+import com.android.tools.lint.detector.api.Issue
+
+public class LintIssueRegistry : IssueRegistry() {
+
+    override val vendor: Vendor = Vendor(
+        vendorName = "spark",
+        identifier = "com.adevinta.spark:spark-lints",
+    )
+
+    override val api: Int = CURRENT_API
+    override val issues: List<Issue> = listOf(
+        MaterialComposableUsageDetector.ISSUE,
+    )
 }

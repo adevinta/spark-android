@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 /*
  * Copyright (c) 2023 Adevinta
  *
@@ -21,9 +23,32 @@
  */
 
 plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.lint) apply false
-    alias(libs.plugins.android.kotlin) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.android.lint)
+}
+
+kotlin {
+    jvmToolchain(11)
+    explicitApi()
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        allWarningsAsErrors = true
+    }
+}
+
+lint {
+    warningsAsErrors = true
+    sarifReport = true
+}
+
+dependencies {
+    compileOnly(libs.kotlin.stdlib)
+    compileOnly(libs.lint.api)
+    compileOnly(libs.lint.checks)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.lint)
+    testImplementation(libs.lint.tests)
 }

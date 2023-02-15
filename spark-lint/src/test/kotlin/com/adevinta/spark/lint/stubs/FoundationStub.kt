@@ -20,10 +20,17 @@
  * SOFTWARE.
  */
 
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.lint) apply false
-    alias(libs.plugins.android.kotlin) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
-}
+package com.adevinta.spark.lint.stubs
+
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
+
+// Simplified Foundation.kt stubs
+internal val FoundationStub = kotlin(
+    """
+    package androidx.compose.foundation
+    import androidx.compose.runtime.Composable
+    
+    @Composable
+    fun Image() {}
+""".trimIndent()
+)
