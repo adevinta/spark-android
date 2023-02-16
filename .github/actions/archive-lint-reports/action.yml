@@ -16,19 +16,19 @@ runs:
       if: inputs.html != ''
       uses: actions/upload-artifact@v3
       with:
-        name: lint-html.zip
+        name: lint-html
         path: ${{ inputs.html }}
     - name: 'Archive Lint SARIF report'
       if: inputs.sarif != ''
       uses: actions/upload-artifact@v3
       with:
-        name: lint-sarif.zip
+        name: lint-sarif
         path: ${{ inputs.sarif }}
     - name: 'Archive Lint XML report'
       if: inputs.xml != ''
       uses: actions/upload-artifact@v3
       with:
-        name: lint-xml.zip
+        name: lint-xml
         path: ${{ inputs.xml }}
     - name: 'Analyse Lint SARIF report'
       if: inputs.analysis != ''
