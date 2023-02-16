@@ -82,30 +82,6 @@ private class IgnoreParentHorizontalPaddingModifier(var horizontalPadding: Dp) :
 }
 
 /**
- * Add a dashed border on a Composable
- */
-public fun Modifier.dashedBorder(width: Dp, radius: Dp, color: Color): Modifier = drawBehind {
-    drawIntoCanvas {
-        val paint = Paint()
-            .apply {
-                strokeWidth = width.toPx()
-                this.color = color
-                style = PaintingStyle.Stroke
-                pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
-            }
-        it.drawRoundRect(
-            left = width.toPx(),
-            top = width.toPx(),
-            right = size.width - width.toPx(),
-            bottom = size.height - width.toPx(),
-            radiusX = radius.toPx(),
-            radiusY = radius.toPx(),
-            paint = paint,
-        )
-    }
-}
-
-/**
  * Add autofill support to a given Composable
  *
  * Taken from [Autofill with Jetpack Compose · Bryan Herbst](https://bryanherbst.com/2021/04/13/compose-autofill/)
