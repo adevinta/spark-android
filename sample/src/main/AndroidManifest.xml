@@ -26,17 +26,7 @@
 
     <application
         android:label="Spark"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar"
-        tools:ignore="MissingApplicationIcon">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+        android:theme="@android:style/Theme.DeviceDefault"
+        tools:ignore="MissingApplicationIcon" />
 
 </manifest>

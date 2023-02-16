@@ -32,7 +32,7 @@ jobs:
         with:
           # https://github.com/Kotlin/dokka/issues/1217
           arguments: dokkaHtml --no-configuration-cache
-      - uses: actions/configure-pages@v3.0.2
+      - uses: actions/configure-pages@v3.0.4
       - uses: actions/upload-pages-artifact@v1.0.7
         with:
           path: 'build/dokka'
