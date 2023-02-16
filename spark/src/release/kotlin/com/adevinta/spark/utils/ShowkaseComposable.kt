@@ -25,6 +25,6 @@ package com.adevinta.spark.utils
 
 @Retention(AnnotationRetention.SOURCE)
 @Target(AnnotationTarget.FUNCTION)
-annotation class ShowkaseComposable(
+public annotation class ShowkaseComposable(
     val skip: Boolean = false,
 )
