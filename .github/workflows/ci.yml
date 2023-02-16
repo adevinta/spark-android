@@ -2,11 +2,9 @@ name: '👷 Build → 🧑‍🔬 Test → 🕵️ Lint'
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
   pull_request:
-    branches:
-      - main
+    branches: ["main"]
     paths-ignore:
       - 'docs/**'
       - '*.md'
