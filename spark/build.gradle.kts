@@ -63,7 +63,6 @@ android {
         allWarningsAsErrors = true
         freeCompilerArgs += listOf(
             "-Xexplicit-api=strict",
-            "-P",
             "-opt-in=com.adevinta.spark.InternalSparkApi",
             "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
             "-opt-in=kotlin.RequiresOptIn",
@@ -128,6 +127,7 @@ publishing {
 }
 
 dependencies {
+    lintPublish(projects.sparkLint)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)

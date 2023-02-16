@@ -20,8 +20,11 @@
  * SOFTWARE.
  */
 
+@file:SuppressLint("MaterialComposableUsageDetector")
+
 package com.adevinta.spark.sample
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
