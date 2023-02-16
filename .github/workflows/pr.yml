@@ -80,11 +80,7 @@ jobs:
       - name: '📦 Archive Lint reports'
         uses: ./.github/actions/archive-lint-reports
         with:
+          analysis: '/'
           html: '**/build/reports/lint-results-*.html'
           sarif: '**/build/reports/lint-results-*.sarif'
           xml: '**/build/reports/lint-results-*.xml'
-      - name: '📦 Upload Lint SARIF report'
-        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: spark/build/reports/lint-results-release.sarif
