@@ -78,6 +78,7 @@ jobs:
         with:
           arguments: lintRelease
       - name: '📦 Archive Lint reports'
+        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
         with:
           html: '**/build/reports/lint-results-*.html'
