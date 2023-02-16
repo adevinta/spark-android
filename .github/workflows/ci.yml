@@ -91,5 +91,5 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: gradle-profile-reports.zip
-          path: build/reports/
+          name: gradle-profile-reports
+          path: build/reports/profile/
