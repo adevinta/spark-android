@@ -7,7 +7,6 @@
 
 ## Checklist ✅
 <!--- Feel free to add other steps if needed -->
-- [ ] Check your code additions will fail neither code linting checks.
 - [ ] Link to GitHub issues it solves. `closes #1234`
 - [ ] I have reviewed the submitted code.
 - [ ] I have tested on a phone device/emulator.
