@@ -38,4 +38,4 @@ package com.adevinta.spark
             " com.adevinta.spark owners, so stable API could be provided instead in a next version " +
             "of Spark",
 )
-annotation class InternalSparkApi
+public annotation class InternalSparkApi

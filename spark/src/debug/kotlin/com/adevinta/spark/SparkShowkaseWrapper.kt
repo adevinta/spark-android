@@ -27,7 +27,7 @@ import com.airbnb.android.showkase.annotation.ShowkaseRootModule
 
 /**
  * This class is needed by Showkase to find all composable components.
- * Be careful if you rename it, because it has to be modify too in the intent in :Tools (file tools_preferences)
+ * Be careful if you rename it, because it has to be modified in the intent used to display the demo app
  */
 @ShowkaseRoot
-class SparkShowkaseRootModule : ShowkaseRootModule
+internal class SparkShowkaseRootModule : ShowkaseRootModule

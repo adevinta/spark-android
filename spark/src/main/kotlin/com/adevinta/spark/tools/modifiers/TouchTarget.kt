@@ -40,7 +40,7 @@ import kotlin.math.roundToInt
  * Duplicate of Material minimumTouchTargetSize() since it's internal on their side
  */
 @OptIn(ExperimentalComposeUiApi::class)
-fun Modifier.minimumTouchTargetSize() = this then modifierElementOf(
+public fun Modifier.minimumTouchTargetSize(): Modifier = this then modifierElementOf(
     create = { MinimumTouchTargetModifier() },
     definitions = {
         name = "minimumTouchTargetSize"

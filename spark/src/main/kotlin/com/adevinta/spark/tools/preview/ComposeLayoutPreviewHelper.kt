@@ -62,7 +62,7 @@ import kotlin.coroutines.EmptyCoroutineContext
  *      super.onAttachedToWindow()
  *  }
  */
-fun AbstractComposeView.setupEditMode() {
+public fun AbstractComposeView.setupEditMode() {
     ComposeLayoutPreviewHelper(this).createAndInstallWindowRecomposer()
 }
 

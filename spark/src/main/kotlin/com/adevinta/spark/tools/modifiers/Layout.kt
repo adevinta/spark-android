@@ -53,7 +53,7 @@ import androidx.compose.ui.unit.Dp
  * @param horizontalPadding The horizontal padding to ignore from the parent
  */
 @OptIn(ExperimentalComposeUiApi::class)
-fun Modifier.ignoreParentHorizontalPadding(horizontalPadding: Dp) = this then modifierElementOf(
+public fun Modifier.ignoreParentHorizontalPadding(horizontalPadding: Dp): Modifier = this then modifierElementOf(
     params = horizontalPadding,
     create = { IgnoreParentHorizontalPaddingModifier(horizontalPadding) },
     update = { it.horizontalPadding = horizontalPadding },
@@ -84,7 +84,7 @@ private class IgnoreParentHorizontalPaddingModifier(var horizontalPadding: Dp) :
 /**
  * Add a dashed border on a Composable
  */
-fun Modifier.dashedBorder(width: Dp, radius: Dp, color: Color) = drawBehind {
+public fun Modifier.dashedBorder(width: Dp, radius: Dp, color: Color): Modifier = drawBehind {
     drawIntoCanvas {
         val paint = Paint()
             .apply {
@@ -112,7 +112,7 @@ fun Modifier.dashedBorder(width: Dp, radius: Dp, color: Color) = drawBehind {
  */
 // TODO-scott.rayapoulle.ext (03-51-2023): Replace by official implementation on b/176949051
 @ExperimentalComposeUiApi
-fun Modifier.autofill(
+public fun Modifier.autofill(
     autofillTypes: List<AutofillType>,
     onFill: ((String) -> Unit),
 ): Modifier = composed {

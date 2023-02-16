@@ -27,4 +27,4 @@ package com.adevinta.spark
     level = RequiresOptIn.Level.WARNING,
 )
 @Retention(AnnotationRetention.BINARY)
-annotation class ExperimentalSparkApi
+public annotation class ExperimentalSparkApi

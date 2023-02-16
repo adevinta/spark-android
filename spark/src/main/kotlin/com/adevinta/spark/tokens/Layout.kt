@@ -55,11 +55,11 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tools.preview.ThemesPreviews
 
-object Layout {
+public object Layout {
 
     /// TODO: Use M3 WindowHeightSizeClass instead of our custom size ranges
 
-    val bodyMargin: Dp
+    public val bodyMargin: Dp
         @Composable get() = when (LocalConfiguration.current.screenWidthDp) {
             in 0..599 -> 16.dp
             in 600..904 -> 32.dp
@@ -68,7 +68,7 @@ object Layout {
             else -> 0.dp
         }
 
-    val gutter: Dp
+    public val gutter: Dp
         @Composable get() = when (LocalConfiguration.current.screenWidthDp) {
             in 0..599 -> 8.dp
             in 600..904 -> 16.dp
@@ -77,7 +77,7 @@ object Layout {
             else -> 32.dp
         }
 
-    val bodyMaxWidth: Dp
+    public val bodyMaxWidth: Dp
         @Composable get() = when (LocalConfiguration.current.screenWidthDp) {
             in 0..599 -> Dp.Infinity
             in 600..904 -> Dp.Infinity
@@ -86,7 +86,7 @@ object Layout {
             else -> 1040.dp
         }
 
-    val columns: Int
+    public val columns: Int
         @Composable get() = when (LocalConfiguration.current.screenWidthDp) {
             in 0..599 -> 4
             in 600..904 -> 8
@@ -98,7 +98,7 @@ object Layout {
 /**
  * Support wide screen by making the content width max 840dp, centered horizontally.
  */
-fun Modifier.bodyWidth() = fillMaxWidth()
+public fun Modifier.bodyWidth(): Modifier = fillMaxWidth()
     .wrapContentWidth(align = Alignment.CenterHorizontally)
     .composed {
         val bodyMaxWidth = Layout.bodyMaxWidth

@@ -36,7 +36,7 @@ import androidx.compose.ui.Modifier
  * @param predicate condition to decide if the [builder] is added or not to the modifier chain
  * @param builder the modifier(s) to apply when [predicate] is true
  */
-inline fun Modifier.ifTrue(predicate: Boolean, builder: () -> Modifier): Modifier =
+public inline fun Modifier.ifTrue(predicate: Boolean, builder: () -> Modifier): Modifier =
     then(if (predicate) builder() else Modifier)
 
 /**
@@ -51,5 +51,5 @@ inline fun Modifier.ifTrue(predicate: Boolean, builder: () -> Modifier): Modifie
  * @param value decide if the [builder] is added or not to the modifier chain
  * @param builder the modifier(s) to apply when [value] is not null
  */
-inline fun <T : Any> Modifier.ifNotNull(value: T?, builder: (T) -> Modifier): Modifier =
+public inline fun <T : Any> Modifier.ifNotNull(value: T?, builder: (T) -> Modifier): Modifier =
     then(if (value != null) builder(value) else Modifier)
