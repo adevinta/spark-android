@@ -11,11 +11,11 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.Dp
 import app.cash.paparazzi.Paparazzi
 
-fun Paparazzi.snapshotPlus(
+internal fun Paparazzi.snapshotPlus(
     name: String? = null,
     drawBackground: Boolean = true,
     composable: @Composable () -> Unit,
-) = snapshot(name) {
+): Unit = snapshot(name) {
     // Behave like in Android Studio Preview renderer
     CompositionLocalProvider(LocalInspectionMode provides true) {
         SparkTheme {

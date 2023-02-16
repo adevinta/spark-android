@@ -12,7 +12,7 @@ import org.junit.runner.RunWith
 
 @RunWith(TestParameterInjector::class)
 //@Ignore("Tests fails on CI, ignored until we figure out why it fails") // FIXME
-class PreviewScreenshotTests {
+internal class PreviewScreenshotTests {
 
     enum class BaseDeviceConfig(
         val deviceConfig: DeviceConfig,
