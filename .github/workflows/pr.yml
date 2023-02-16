@@ -67,7 +67,7 @@ jobs:
           arguments: testReleaseUnitTest
       - name: '📦 Archive JUnit reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
-        uses: ./.github/actions/archive-lint-reports
+        uses: ./.github/actions/archive-junit-reports
         with:
           html: '**/build/reports/tests/testReleaseUnitTest'
           xml: '**/build/test-results/testReleaseUnitTest/**.xml'
