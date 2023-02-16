@@ -25,7 +25,7 @@ package com.adevinta.spark.tokens
 import androidx.compose.ui.graphics.Color
 
 internal object PaletteTokens {
-    // Orange colors
+    // region Orange colors
     internal val Orange10 = Color(0xFF351000)
     internal val Orange20 = Color(0xFF571F00)
     internal val Orange30 = Color(0xFF7B2F00)
@@ -35,8 +35,9 @@ internal object PaletteTokens {
     internal val Orange70 = Color(0xFFFF8C53)
     internal val Orange80 = Color(0xFFFFB694)
     internal val Orange90 = Color(0xFFFFDBCC)
+    // endregion
 
-    // Blue colors
+    // region Blue colors
     internal val Blue10 = Color(0xFF001C3B)
     internal val Blue20 = Color(0xFF003060)
     internal val Blue30 = Color(0xFF004787)
@@ -46,8 +47,9 @@ internal object PaletteTokens {
     internal val Blue70 = Color(0xFF74ADFF)
     internal val Blue80 = Color(0xFFA6C8FF)
     internal val Blue90 = Color(0xFFD5E3FF)
+    // endregion
 
-    // Misc. colors
+    // region Misc. colors
     internal val Red10 = Color(0xFF410001)
     internal val Red20 = Color(0xFF690002)
     internal val Red30 = Color(0xFF910909)
@@ -61,9 +63,9 @@ internal object PaletteTokens {
     internal val Green60 = Color(0xFF4E9850)
     internal val Green80 = Color(0xFF8BD989)
     internal val Green90 = Color(0xFFA6F5A2)
+    // endregion
 
-// Black & White colors
-
+    // region Black & White colors
     internal val AlmostWhite = Color(0xFFFAFAFA)
     internal val AlmostBlack = Color(0xC7000000)
     internal val Black = Color(0xFF121212)
@@ -94,8 +96,9 @@ internal object PaletteTokens {
     internal val GreyBlue90 = Color(0xFFd4e4f5)
     internal val GreyBlue95 = Color(0xFFe6f2ff)
     internal val GreyBlue99 = Color(0xFFfcfcff)
+    // endregion
 
-    // Brikke Colors
+    // region Brikke Colors
     internal val BrikkeGreyExtraLight = Color(0xFFF4F6F7) // Information / Disabled Surface
     internal val BrikkeGreyLight = Color(0xFFE6EBEF) // Highlight Surface
     internal val BrikkeGreyMedium = Color(0xFFCAD1D9) // Disabled Content
@@ -118,4 +121,5 @@ internal object PaletteTokens {
     internal val BrikkeOrange = Color(0xFFFF6E14) // Primary Action / Content / Surface
     internal val BrikkeOrangeDark = Color(0xFFCB570F) // Primary Action Dark
     internal val BrikkeOrangeSurface = Color(0xFFFEF0E9) // Primary Action Light
+    // endregion
 }
