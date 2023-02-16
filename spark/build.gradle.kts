@@ -1,3 +1,4 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 /*
  * Copyright (c) 2023 Adevinta
  *
@@ -24,6 +25,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.dependencyGuard)
+    alias(libs.plugins.dokka)
     `maven-publish`
 }
 
@@ -75,6 +77,19 @@ dependencyGuard {
     configuration("releaseRuntimeClasspath")
 }
 
+tasks.dokkaHtml.configure {
+    moduleName.set("Spark")
+    outputDirectory.set(rootProject.buildDir.resolve("dokka"))
+    dokkaSourceSets.configureEach {
+        // List of files or directories containing sample code (referenced with @sample tags)
+        // samples.from("samples/basic.kt", "samples/advanced.kt")
+    }
+}
+
+tasks.withType<DokkaTask> {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
+}
+
 publishing {
     repositories {
         mavenLocal {
@@ -107,6 +122,8 @@ publishing {
 }
 
 dependencies {
+    lintPublish(projects.sparkLint)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
+    dokkaHtmlPlugin(libs.android.documentation.plugin)
 }
