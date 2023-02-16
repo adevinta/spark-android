@@ -21,6 +21,8 @@ body:
       options:
         - 1.0.0
         - Other (please specify it)
+    validations:
+      required: true
   - type: textarea
     id: what-happened
     attributes:
