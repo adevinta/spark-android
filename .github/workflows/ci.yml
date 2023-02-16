@@ -70,7 +70,7 @@ jobs:
         run: ./gradlew spark:mergeFailuresIntoHtml
 
       - name: 'Error Screenshot tests'
-        if: ${{ always() && hashFiles('./spark/build/reports/failures/failure.html') != '' }}
+        if: always() && hashFiles('./spark/build/reports/paparazzi/failures/failure.html') != ''
         uses: actions/upload-artifact@v3
         with:
           name: screenshot-test-results
