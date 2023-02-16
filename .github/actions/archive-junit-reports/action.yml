@@ -12,11 +12,11 @@ runs:
       if: inputs.html != ''
       uses: actions/upload-artifact@v3
       with:
-        name: junit-html.zip
+        name: junit-html
         path: ${{ inputs.html }}
     - name: 'Archive JUnit XML report'
       if: inputs.xml != ''
       uses: actions/upload-artifact@v3
       with:
-        name: junit-xml.zip
+        name: junit-xml
         path: ${{ inputs.xml }}
