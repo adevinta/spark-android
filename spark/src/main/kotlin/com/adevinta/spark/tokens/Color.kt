@@ -490,44 +490,42 @@ public class SparkColors(
         inverseOnSurface = inverseOnSurface,
     )
 
-    override fun toString(): String {
-        return buildString {
-            append("SparkColors(")
-            append("primary=$primary, ")
-            append("onPrimary=$onPrimary, ")
-            append("primaryContainer=$primaryContainer, ")
-            append("onPrimaryContainer=$onPrimaryContainer, ")
-            append("secondary=$secondary, ")
-            append("onSecondary=$onSecondary, ")
-            append("secondaryContainer=$secondaryContainer, ")
-            append("onSecondaryContainer=$onSecondaryContainer, ")
-            append("tertiary=$tertiary, ")
-            append("onTertiary=$onTertiary, ")
-            append("tertiaryContainer=$tertiaryContainer, ")
-            append("onTertiaryContainer=$onTertiaryContainer, ")
-            append("background=$background, ")
-            append("onBackground=$onBackground, ")
-            append("surface=$surface, ")
-            append("onSurface=$onSurface, ")
-            append("surfaceVariant=$surfaceVariant, ")
-            append("onSurfaceVariant=$onSurfaceVariant, ")
-            append("surfaceTint=$surfaceTint, ")
-            append("outline=$outline, ")
-            append("outlineVariant=$outlineVariant, ")
-            append("scrim=$scrim, ")
-            append("error=$error, ")
-            append("onError=$onError, ")
-            append("errorContainer=$errorContainer, ")
-            append("onErrorContainer=$onErrorContainer, ")
-            append("valid=$valid, ")
-            append("onValid=$onValid, ")
-            append("validContainer=$validContainer, ")
-            append("onValidContainer=$onValidContainer, ")
-            append("inversePrimary=$inversePrimary, ")
-            append("inverseSurface=$inverseSurface, ")
-            append("inverseOnSurface=$inverseOnSurface, ")
-            append(")")
-        }
+    override fun toString(): String = buildString {
+        append("SparkColors(")
+        append("primary=$primary, ")
+        append("onPrimary=$onPrimary, ")
+        append("primaryContainer=$primaryContainer, ")
+        append("onPrimaryContainer=$onPrimaryContainer, ")
+        append("secondary=$secondary, ")
+        append("onSecondary=$onSecondary, ")
+        append("secondaryContainer=$secondaryContainer, ")
+        append("onSecondaryContainer=$onSecondaryContainer, ")
+        append("tertiary=$tertiary, ")
+        append("onTertiary=$onTertiary, ")
+        append("tertiaryContainer=$tertiaryContainer, ")
+        append("onTertiaryContainer=$onTertiaryContainer, ")
+        append("background=$background, ")
+        append("onBackground=$onBackground, ")
+        append("surface=$surface, ")
+        append("onSurface=$onSurface, ")
+        append("surfaceVariant=$surfaceVariant, ")
+        append("onSurfaceVariant=$onSurfaceVariant, ")
+        append("surfaceTint=$surfaceTint, ")
+        append("outline=$outline, ")
+        append("outlineVariant=$outlineVariant, ")
+        append("scrim=$scrim, ")
+        append("error=$error, ")
+        append("onError=$onError, ")
+        append("errorContainer=$errorContainer, ")
+        append("onErrorContainer=$onErrorContainer, ")
+        append("valid=$valid, ")
+        append("onValid=$onValid, ")
+        append("validContainer=$validContainer, ")
+        append("onValidContainer=$onValidContainer, ")
+        append("inversePrimary=$inversePrimary, ")
+        append("inverseSurface=$inverseSurface, ")
+        append("inverseOnSurface=$inverseOnSurface, ")
+        append(")")
     }
 }
 
@@ -580,24 +578,22 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
  *
  * @see contentColorFor
  */
-public fun SparkColors.contentColorFor(backgroundColor: Color): Color {
-    return when (backgroundColor) {
-        primary -> onPrimary
-        primaryContainer -> onPrimaryContainer
-        secondary -> onSecondary
-        secondaryContainer -> onSecondaryContainer
-        tertiary -> onTertiary
-        tertiaryContainer -> onTertiaryContainer
-        background -> onBackground
-        surface -> onSurface
-        surfaceVariant -> onSurfaceVariant
-        inverseSurface -> inverseOnSurface
-        error -> onError
-        errorContainer -> onErrorContainer
-        valid -> onValid
-        validContainer -> onValidContainer
-        else -> Color.Unspecified
-    }
+public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (backgroundColor) {
+    primary -> onPrimary
+    primaryContainer -> onPrimaryContainer
+    secondary -> onSecondary
+    secondaryContainer -> onSecondaryContainer
+    tertiary -> onTertiary
+    tertiaryContainer -> onTertiaryContainer
+    background -> onBackground
+    surface -> onSurface
+    surfaceVariant -> onSurfaceVariant
+    inverseSurface -> inverseOnSurface
+    error -> onError
+    errorContainer -> onErrorContainer
+    valid -> onValid
+    validContainer -> onValidContainer
+    else -> Color.Unspecified
 }
 
 /**
