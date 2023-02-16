@@ -11,16 +11,20 @@ import com.adevinta.spark.tools.modifiers.brikkeUsageOverlay
 
 @Suppress("ModifierMissing") // We consider it not needed for spacers
 @Composable
-fun VerticalSpace(space: Dp) = Spacer(
-    modifier = Modifier
-        .height(space)
-        .brikkeUsageOverlay(Color.Green),
-)
+public fun VerticalSpace(space: Dp) {
+    Spacer(
+        modifier = Modifier
+            .height(space)
+            .brikkeUsageOverlay(Color.Green),
+    )
+}
 
 @Suppress("ModifierMissing")
 @Composable
-fun HorizontalSpace(space: Dp) = Spacer(
-    modifier = Modifier
-        .width(space)
-        .brikkeUsageOverlay(Color.Green),
-)
+public fun HorizontalSpace(space: Dp) {
+    Spacer(
+        modifier = Modifier
+            .width(space)
+            .brikkeUsageOverlay(Color.Green),
+    )
+}

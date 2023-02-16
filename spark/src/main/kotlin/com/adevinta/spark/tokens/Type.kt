@@ -130,7 +130,7 @@ internal val buttonType = TextStyle(
     letterSpacing = 1.25.sp,
 )
 
-fun sparkTypography(
+public fun sparkTypography(
     fontFamily: FontFamily = FontFamily.Default,
     title1: TextStyle = tile1Type.copy(fontFamily = fontFamily),
     title2: TextStyle = title2Type.copy(fontFamily = fontFamily),
@@ -144,7 +144,7 @@ fun sparkTypography(
     extraSmallImportant: TextStyle = extraSmallImportantType.copy(fontFamily = fontFamily),
     extraSmall: TextStyle = extraSmallType.copy(fontFamily = fontFamily),
     button: TextStyle = buttonType.copy(fontFamily = fontFamily),
-) = SparkTypography(
+): SparkTypography = SparkTypography(
     title1 = title1,
     title2 = title2,
     title3 = title3,
@@ -160,7 +160,7 @@ fun sparkTypography(
 )
 
 @Immutable
-data class SparkTypography(
+public data class SparkTypography(
     val title1: TextStyle,
     val title2: TextStyle,
     val title3: TextStyle,
@@ -178,7 +178,7 @@ data class SparkTypography(
 @Suppress("CompositionLocalAllowlist") // We need it to get access to our typo like Material
 internal val LocalSparkTypography = staticCompositionLocalOf { sparkTypography() }
 
-fun SparkTypography.asMaterial3Typography(): Typography = Typography(
+public fun SparkTypography.asMaterial3Typography(): Typography = Typography(
     headlineSmall = title1,
     titleLarge = title2,
     titleMedium = large,

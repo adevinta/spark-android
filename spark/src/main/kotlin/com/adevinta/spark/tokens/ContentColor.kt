@@ -42,7 +42,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * is close to Black.
  */
 @Composable
-fun EmphasizeHigh(content: @Composable () -> Unit) {
+public fun EmphasizeHigh(content: @Composable () -> Unit) {
     CompositionLocalProvider(LocalContentColor provides SparkTheme.colors.onSurface, content = content)
 }
 
@@ -52,7 +52,7 @@ fun EmphasizeHigh(content: @Composable () -> Unit) {
  * medium emphasis which is close to Dark Gray.
  */
 @Composable
-fun EmphasizeMedium(content: @Composable () -> Unit) {
+public fun EmphasizeMedium(content: @Composable () -> Unit) {
     CompositionLocalProvider(LocalContentColor provides SparkTheme.colors.onSurfaceVariant, content = content)
 }
 
@@ -62,14 +62,14 @@ fun EmphasizeMedium(content: @Composable () -> Unit) {
  * color alpha that apply a disabled emphasis which is close to Gray or Light Gray.
  */
 @Composable
-fun EmphasizeDisable(content: @Composable () -> Unit) {
+public fun EmphasizeDisable(content: @Composable () -> Unit) {
     CompositionLocalProvider(
         LocalContentColor provides SparkTheme.colors.onSurface.copy(alpha = DisabledAlpha),
         content = content,
     )
 }
 
-const val DisabledAlpha = 0.38f
+public const val DisabledAlpha: Float = 0.38f
 
 @Composable
 @Preview(

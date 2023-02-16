@@ -61,7 +61,7 @@ internal fun SparkRadioButton(
  * appearance / behavior of this RadioButton in different [Interaction]s.
  */
 @Composable
-fun RadioButton(
+public fun RadioButton(
     selected: Boolean,
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
@@ -102,7 +102,7 @@ fun RadioButton(
  * @param endContent The end content displayed after the radio button, Usually a Text composable
  */
 @Composable
-fun RadioButtonLabelled(
+public fun RadioButtonLabelled(
     selected: Boolean,
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,

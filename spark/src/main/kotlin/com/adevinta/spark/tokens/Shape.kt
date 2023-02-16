@@ -75,7 +75,7 @@ import androidx.compose.material3.Shapes as Material3Shapes
  * Buttons, Icon buttons, Sliders, Switches and Search bar use this shape.
  */
 @Immutable
-data class SparkShapes(
+public data class SparkShapes(
     val none: CornerBasedShape = RoundedCornerShape(0.dp),
     val extraSmall: CornerBasedShape = RoundedCornerShape(4.0.dp),
     val small: CornerBasedShape = RoundedCornerShape(8.0.dp),
@@ -85,7 +85,7 @@ data class SparkShapes(
     val full: CornerBasedShape = CircleShape,
 )
 
-fun sparkShapes(
+public fun sparkShapes(
     none: CornerBasedShape = RoundedCornerShape(0.dp),
     extraSmall: CornerBasedShape = RoundedCornerShape(4.0.dp),
     small: CornerBasedShape = RoundedCornerShape(8.0.dp),
@@ -93,7 +93,7 @@ fun sparkShapes(
     large: CornerBasedShape = RoundedCornerShape(16.0.dp),
     extraLarge: CornerBasedShape = RoundedCornerShape(28.0.dp),
     full: CornerBasedShape = CircleShape,
-) = SparkShapes(
+): SparkShapes = SparkShapes(
     none = none,
     extraSmall = extraSmall,
     small = small,
@@ -103,7 +103,7 @@ fun sparkShapes(
     full = full,
 )
 
-fun SparkShapes.asMaterial3Shapes(): Material3Shapes = Material3Shapes(
+public fun SparkShapes.asMaterial3Shapes(): Material3Shapes = Material3Shapes(
     extraSmall = extraSmall,
     small = small,
     medium = medium,

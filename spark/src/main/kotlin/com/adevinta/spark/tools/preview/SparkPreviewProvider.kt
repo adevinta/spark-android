@@ -26,12 +26,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import kotlin.reflect.KClass
 
-class SparkPreviewProvider : PreviewParameterProvider<Pair<ThemeVariant, UserType>> by compositeProvider(
+public class SparkPreviewProvider : PreviewParameterProvider<Pair<ThemeVariant, UserType>> by compositeProvider(
     ThemeProvider::class,
     UserProProvider::class,
 )
 
-class SparkPreviewParamProvider : CollectionPreviewParameterProvider<SparkPreviewParam>(
+public class SparkPreviewParamProvider : CollectionPreviewParameterProvider<SparkPreviewParam>(
     listOf(
         SparkPreviewParam(ThemeVariant.Light, UserType.Part),
         SparkPreviewParam(ThemeVariant.Light, UserType.Pro),
@@ -40,7 +40,7 @@ class SparkPreviewParamProvider : CollectionPreviewParameterProvider<SparkPrevie
     ),
 )
 
-data class SparkPreviewParam(
+public data class SparkPreviewParam(
     val theme: ThemeVariant,
     val userType: UserType,
 )
@@ -54,7 +54,7 @@ data class SparkPreviewParam(
  *    by compositeProvider(Type1ParameterProvider::class, Type2ParameterProvider::class)
  * ```
  */
-fun <T1 : Any, T2 : Any> compositeProvider(
+public fun <T1 : Any, T2 : Any> compositeProvider(
     kClass1: KClass<out PreviewParameterProvider<T1>>,
     kClass2: KClass<out PreviewParameterProvider<T2>>,
 ): PreviewParameterProvider<Pair<T1, T2>> = CompositeParameterProvider(kClass1, kClass2)
@@ -75,24 +75,24 @@ private infix fun <T1 : Any, T2 : Any> Sequence<T1>.union(
     sequence: Sequence<T2>,
 ): Sequence<Pair<T1, T2>> = flatMap { original -> sequence.map { original to it } }
 
-class ThemeProvider : PreviewParameterProvider<ThemeVariant> {
-    override val values = sequenceOf(
+public class ThemeProvider : PreviewParameterProvider<ThemeVariant> {
+    override val values: Sequence<ThemeVariant> = sequenceOf(
         ThemeVariant.Light,
         ThemeVariant.Dark,
     )
 }
 
-class UserProProvider : PreviewParameterProvider<UserType> {
-    override val values = sequenceOf(
+public class UserProProvider : PreviewParameterProvider<UserType> {
+    override val values: Sequence<UserType> = sequenceOf(
         UserType.Part,
         UserType.Pro,
     )
 }
 
-enum class ThemeVariant {
+public enum class ThemeVariant {
     Light, Dark;
 }
 
-enum class UserType {
+public enum class UserType {
     Part, Pro;
 }

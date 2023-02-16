@@ -20,7 +20,7 @@ import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
 
 @Composable
 @InternalSparkApi
-fun SparkCheckbox(
+public fun SparkCheckbox(
     state: ToggleableState,
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
@@ -59,7 +59,7 @@ fun SparkCheckbox(
  * appearance / behavior of this Checkbox in different [Interaction]s.
  */
 @Composable
-fun Checkbox(
+public fun Checkbox(
     state: ToggleableState,
     onCheckedChange: (() -> Unit)?,
     modifier: Modifier = Modifier,
@@ -99,7 +99,7 @@ fun Checkbox(
  * @param endContent The end content displayed after the checkbox, Usually a Text composable
  */
 @Composable
-fun CheckboxLabelled(
+public fun CheckboxLabelled(
     state: ToggleableState,
     onCheckedChange: (() -> Unit)?,
     modifier: Modifier = Modifier,

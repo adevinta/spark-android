@@ -35,6 +35,7 @@ import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.remember
@@ -64,7 +65,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
 
 @Composable
-fun SparkTheme(
+public fun SparkTheme(
     // We don't want to automatically support dark theme in the app but still want it in the previews
     colors: SparkColors = SparkTheme.colors,
     shapes: SparkShapes = SparkTheme.shapes,
@@ -127,7 +128,7 @@ fun SparkTheme(
 
 @Suppress("ModifierMissing") // It's okay since its a base theme
 @Composable
-fun PreviewTheme(
+public fun PreviewTheme(
     themeVariant: ThemeVariant = if (LocalInspectionMode.current && isSystemInDarkTheme()) {
         ThemeVariant.Dark
     } else {
@@ -187,11 +188,11 @@ internal fun SparkTenantTheme(
  * Contains functions to access the current theme values provided at the call site's position in
  * the hierarchy.
  */
-object SparkTheme {
+public object SparkTheme {
     /**
      * Retrieves the current [SparkColors] at the call site's position in the hierarchy.
      */
-    val colors: SparkColors
+    public val colors: SparkColors
         @Composable
         @ReadOnlyComposable
         get() = LocalSparkColors.current
@@ -200,7 +201,7 @@ object SparkTheme {
      * Retrieves the current [SparkTypography] at the call site's position in the hierarchy.
      *
      */
-    val typography: SparkTypography
+    public val typography: SparkTypography
         @Composable
         @ReadOnlyComposable
         get() = LocalSparkTypography.current
@@ -208,7 +209,7 @@ object SparkTheme {
     /**
      * Retrieves the current [SparkShapes] at the call site's position in the hierarchy.
      */
-    val shapes: SparkShapes
+    public val shapes: SparkShapes
         @Composable
         @ReadOnlyComposable
         get() = LocalSparkShapes.current
@@ -241,4 +242,4 @@ internal val LocalHighlightComponents = staticCompositionLocalOf { false }
  *
  */
 @ExperimentalSparkApi
-val LocalIsUserPro = staticCompositionLocalOf { false }
+public val LocalIsUserPro: ProvidableCompositionLocal<Boolean> = staticCompositionLocalOf { false }

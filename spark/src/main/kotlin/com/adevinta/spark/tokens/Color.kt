@@ -109,7 +109,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
 import com.adevinta.spark.utils.ShowkaseComposable
 
-fun lightSparkColors(
+public fun lightSparkColors(
     isPro: Boolean = false,
     primary: Color = if (isPro) BrikkeBlue else BrikkeOrange,
     onPrimary: Color = if (isPro) Grey100 else Grey100,
@@ -144,7 +144,7 @@ fun lightSparkColors(
     inverseSurface: Color = Grey20,
     inverseOnSurface: Color = Grey95,
     scrim: Color = Grey0,
-) = SparkColors(
+): SparkColors = SparkColors(
     primary = primary,
     onPrimary = onPrimary,
     primaryContainer = primaryContainer,
@@ -180,7 +180,7 @@ fun lightSparkColors(
     inverseOnSurface = inverseOnSurface,
 )
 
-fun darkSparkColors(
+public fun darkSparkColors(
     isPro: Boolean = false,
     primary: Color = if (isPro) Blue80 else Orange80,
     onPrimary: Color = if (isPro) Blue20 else Orange20,
@@ -215,7 +215,7 @@ fun darkSparkColors(
     inverseSurface: Color = onSurface,
     inverseOnSurface: Color = Grey20,
     scrim: Color = Grey0,
-) = SparkColors(
+): SparkColors = SparkColors(
     primary = primary,
     onPrimary = onPrimary,
     primaryContainer = primaryContainer,
@@ -314,7 +314,7 @@ fun darkSparkColors(
  * and opacity is automatically handled by the system UI.
  */
 @Stable
-class SparkColors(
+public class SparkColors(
     primary: Color,
     onPrimary: Color,
     primaryContainer: Color,
@@ -349,79 +349,79 @@ class SparkColors(
     outlineVariant: Color,
     scrim: Color,
 ) {
-    var primary by mutableStateOf(primary, structuralEqualityPolicy())
+    public var primary: Color by mutableStateOf(primary, structuralEqualityPolicy())
         internal set
-    var onPrimary by mutableStateOf(onPrimary, structuralEqualityPolicy())
+    public var onPrimary: Color by mutableStateOf(onPrimary, structuralEqualityPolicy())
         internal set
-    var primaryContainer by mutableStateOf(primaryContainer, structuralEqualityPolicy())
+    public var primaryContainer: Color by mutableStateOf(primaryContainer, structuralEqualityPolicy())
         internal set
-    var onPrimaryContainer by mutableStateOf(onPrimaryContainer, structuralEqualityPolicy())
-        internal set
-
-    var secondary by mutableStateOf(secondary, structuralEqualityPolicy())
-        internal set
-    var onSecondary by mutableStateOf(onSecondary, structuralEqualityPolicy())
+    public var onPrimaryContainer: Color by mutableStateOf(onPrimaryContainer, structuralEqualityPolicy())
         internal set
 
-    var secondaryContainer by mutableStateOf(secondaryContainer, structuralEqualityPolicy())
+    public var secondary: Color by mutableStateOf(secondary, structuralEqualityPolicy())
         internal set
-    var onSecondaryContainer by mutableStateOf(onSecondaryContainer, structuralEqualityPolicy())
+    public var onSecondary: Color by mutableStateOf(onSecondary, structuralEqualityPolicy())
         internal set
-    var tertiary by mutableStateOf(tertiary, structuralEqualityPolicy())
+
+    public var secondaryContainer: Color by mutableStateOf(secondaryContainer, structuralEqualityPolicy())
         internal set
-    var onTertiary by mutableStateOf(onTertiary, structuralEqualityPolicy())
+    public var onSecondaryContainer: Color by mutableStateOf(onSecondaryContainer, structuralEqualityPolicy())
         internal set
-    var tertiaryContainer by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
+    public var tertiary: Color by mutableStateOf(tertiary, structuralEqualityPolicy())
         internal set
-    var onTertiaryContainer by mutableStateOf(onTertiaryContainer, structuralEqualityPolicy())
+    public var onTertiary: Color by mutableStateOf(onTertiary, structuralEqualityPolicy())
         internal set
-    var background by mutableStateOf(background, structuralEqualityPolicy())
+    public var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
         internal set
-    var onBackground by mutableStateOf(onBackground, structuralEqualityPolicy())
+    public var onTertiaryContainer: Color by mutableStateOf(onTertiaryContainer, structuralEqualityPolicy())
         internal set
-    var surface by mutableStateOf(surface, structuralEqualityPolicy())
+    public var background: Color by mutableStateOf(background, structuralEqualityPolicy())
         internal set
-    var onSurface by mutableStateOf(onSurface, structuralEqualityPolicy())
+    public var onBackground: Color by mutableStateOf(onBackground, structuralEqualityPolicy())
         internal set
-    var surfaceVariant by mutableStateOf(surfaceVariant, structuralEqualityPolicy())
+    public var surface: Color by mutableStateOf(surface, structuralEqualityPolicy())
         internal set
-    var onSurfaceVariant by mutableStateOf(onSurfaceVariant, structuralEqualityPolicy())
+    public var onSurface: Color by mutableStateOf(onSurface, structuralEqualityPolicy())
         internal set
-    var surfaceTint by mutableStateOf(surfaceTint, structuralEqualityPolicy())
+    public var surfaceVariant: Color by mutableStateOf(surfaceVariant, structuralEqualityPolicy())
         internal set
-    var outline by mutableStateOf(outline, structuralEqualityPolicy())
+    public var onSurfaceVariant: Color by mutableStateOf(onSurfaceVariant, structuralEqualityPolicy())
         internal set
-    var outlineVariant by mutableStateOf(outlineVariant, structuralEqualityPolicy())
+    public var surfaceTint: Color by mutableStateOf(surfaceTint, structuralEqualityPolicy())
         internal set
-    var scrim by mutableStateOf(scrim, structuralEqualityPolicy())
+    public var outline: Color by mutableStateOf(outline, structuralEqualityPolicy())
         internal set
-    var error by mutableStateOf(error, structuralEqualityPolicy())
+    public var outlineVariant: Color by mutableStateOf(outlineVariant, structuralEqualityPolicy())
         internal set
-    var onError by mutableStateOf(onError, structuralEqualityPolicy())
+    public var scrim: Color by mutableStateOf(scrim, structuralEqualityPolicy())
         internal set
-    var errorContainer by mutableStateOf(errorContainer, structuralEqualityPolicy())
+    public var error: Color by mutableStateOf(error, structuralEqualityPolicy())
         internal set
-    var onErrorContainer by mutableStateOf(onErrorContainer, structuralEqualityPolicy())
+    public var onError: Color by mutableStateOf(onError, structuralEqualityPolicy())
         internal set
-    var valid by mutableStateOf(valid, structuralEqualityPolicy())
+    public var errorContainer: Color by mutableStateOf(errorContainer, structuralEqualityPolicy())
         internal set
-    var onValid by mutableStateOf(onValid, structuralEqualityPolicy())
+    public var onErrorContainer: Color by mutableStateOf(onErrorContainer, structuralEqualityPolicy())
         internal set
-    var validContainer by mutableStateOf(validContainer, structuralEqualityPolicy())
+    public var valid: Color by mutableStateOf(valid, structuralEqualityPolicy())
         internal set
-    var onValidContainer by mutableStateOf(onValidContainer, structuralEqualityPolicy())
+    public var onValid: Color by mutableStateOf(onValid, structuralEqualityPolicy())
         internal set
-    var inversePrimary by mutableStateOf(inversePrimary, structuralEqualityPolicy())
+    public var validContainer: Color by mutableStateOf(validContainer, structuralEqualityPolicy())
         internal set
-    var inverseSurface by mutableStateOf(inverseSurface, structuralEqualityPolicy())
+    public var onValidContainer: Color by mutableStateOf(onValidContainer, structuralEqualityPolicy())
         internal set
-    var inverseOnSurface by mutableStateOf(inverseOnSurface, structuralEqualityPolicy())
+    public var inversePrimary: Color by mutableStateOf(inversePrimary, structuralEqualityPolicy())
+        internal set
+    public var inverseSurface: Color by mutableStateOf(inverseSurface, structuralEqualityPolicy())
+        internal set
+    public var inverseOnSurface: Color by mutableStateOf(inverseOnSurface, structuralEqualityPolicy())
         internal set
 
     /**
      * Returns a copy of this Colors, optionally overriding some of the values.
      */
-    fun copy(
+    public fun copy(
         primary: Color = this.primary,
         onPrimary: Color = this.onPrimary,
         primaryContainer: Color = this.primaryContainer,
@@ -532,7 +532,7 @@ class SparkColors(
     }
 }
 
-fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
+public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
     primary = primary,
     onPrimary = onPrimary,
     primaryContainer = primaryContainer,
@@ -581,7 +581,7 @@ fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
  *
  * @see contentColorFor
  */
-fun SparkColors.contentColorFor(backgroundColor: Color): Color {
+public fun SparkColors.contentColorFor(backgroundColor: Color): Color {
     return when (backgroundColor) {
         primary -> onPrimary
         primaryContainer -> onPrimaryContainer
@@ -620,7 +620,7 @@ fun SparkColors.contentColorFor(backgroundColor: Color): Color {
  */
 @Composable
 @ReadOnlyComposable
-fun contentColorFor(backgroundColor: Color): Color {
+public fun contentColorFor(backgroundColor: Color): Color {
     return SparkTheme.colors.contentColorFor(backgroundColor).takeOrElse {
         LocalContentColor.current
     }
@@ -691,10 +691,10 @@ internal val LocalSparkColors = staticCompositionLocalOf { lightSparkColors() }
  * A [SparkColors] implementation which sets all colors to [debugColor] to help highlighting the usage
  * of [SparkTheme.colors] to more easily detect where they're not used.
  */
-fun debugColors(
+public fun debugColors(
     debugColor: Color = Color.Magenta,
     onDebugColor: Color = Color.Green,
-) = SparkColors(
+): SparkColors = SparkColors(
     primary = debugColor,
     onPrimary = onDebugColor,
     primaryContainer = debugColor,

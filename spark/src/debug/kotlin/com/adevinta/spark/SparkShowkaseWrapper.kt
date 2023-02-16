@@ -30,4 +30,4 @@ import com.airbnb.android.showkase.annotation.ShowkaseRootModule
  * Be careful if you rename it, because it has to be modify too in the intent in :Tools (file tools_preferences)
  */
 @ShowkaseRoot
-class SparkShowkaseRootModule : ShowkaseRootModule
+public class SparkShowkaseRootModule : ShowkaseRootModule
