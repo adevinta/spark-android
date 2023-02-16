@@ -40,6 +40,21 @@ public inline fun Modifier.ifTrue(predicate: Boolean, builder: () -> Modifier): 
     then(if (predicate) builder() else Modifier)
 
 /**
+ * Modifier to make it easy to conditionally add a modifier based on [predicate]
+ * ```kotlin
+ * Box(
+ *  modifier = Modifier.fillMaxWidth()
+ *    .ifFalse(isError) { background(SparkTheme.colors.valid) }
+ *    .padding(16.dp)
+ *  ) {...}
+ * ```
+ * @param predicate condition to decide if the [builder] is added or not to the modifier chain
+ * @param builder the modifier(s) to apply when [predicate] is true
+ */
+public inline fun Modifier.ifFalse(predicate: Boolean, builder: () -> Modifier): Modifier =
+    then(if (predicate) builder() else Modifier)
+
+/**
  * Modifier to make it easy to conditionally add a modifier based on [value] nullability
  * ```kotlin
  * Box(
@@ -53,3 +68,18 @@ public inline fun Modifier.ifTrue(predicate: Boolean, builder: () -> Modifier): 
  */
 public inline fun <T : Any> Modifier.ifNotNull(value: T?, builder: (T) -> Modifier): Modifier =
     then(if (value != null) builder(value) else Modifier)
+
+/**
+ * Modifier to make it easy to conditionally add a modifier based on [value] nullability
+ * ```kotlin
+ * Box(
+ *  modifier = Modifier.fillMaxWidth()
+ *    .ifNull(errorMetadata) { errorData -> background(errorData.valid) }
+ *    .padding(16.dp)
+ *  ) {...}
+ * ```
+ * @param value decide if the [builder] is added or not to the modifier chain
+ * @param builder the modifier(s) to apply when [value] is not null
+ */
+public inline fun <T : Any> Modifier.ifNull(value: T?, builder: () -> Modifier): Modifier =
+    then(if (value == null) builder() else Modifier)
