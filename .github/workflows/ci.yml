@@ -28,7 +28,7 @@ jobs:
       - uses: actionsdesk/lfs-warning@e5f9a4c21f4bee104db7c0f23954dde59e5df909 # v3.2
       - uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
-          arguments: dependencyGuard --quiet
+          arguments: dependencyGuard --quiet --profile
 
   build-test-lint:
     needs: validation
@@ -48,7 +48,7 @@ jobs:
         id: build
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
-          arguments: assembleRelease
+          arguments: assembleRelease --profile
       - name: '📦 Archive AARs'
         uses: actions/upload-artifact@v3
         with:
@@ -65,7 +65,7 @@ jobs:
         id: test
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
-          arguments: testReleaseUnitTest
+          arguments: testReleaseUnitTest --profile
       - name: '📦 Archive JUnit reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports
@@ -77,7 +77,7 @@ jobs:
         id: lint
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
-          arguments: lintRelease
+          arguments: lintRelease --profile
       - name: '📦 Archive Lint reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
@@ -86,3 +86,10 @@ jobs:
           html: '**/build/reports/lint-results-*.html'
           sarif: '**/build/reports/lint-results-*.sarif'
           xml: '**/build/reports/lint-results-*.xml'
+
+      - name: 'Archive Gradle Profile reports'
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: gradle-profile-reports.zip
+          path: build/reports/
