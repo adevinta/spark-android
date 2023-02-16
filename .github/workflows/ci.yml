@@ -62,7 +62,6 @@ jobs:
           pr-number: ${{ github.event.pull_request.number }}
       - name: 'Run screenshot tests'
         id: verifyPaparazziDebug
-        continue-on-error: true
         run: ./gradlew spark:mergeFailuresIntoHtml
 
       - name: 'Error Screenshot tests'
