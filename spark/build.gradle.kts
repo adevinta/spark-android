@@ -1,4 +1,8 @@
+import org.gradle.internal.impldep.org.eclipse.jgit.util.FileUtils.createNewFile
 import org.jetbrains.dokka.gradle.DokkaTask
+import java.io.File
+import java.util.Base64
+
 /*
  * Copyright (c) 2023 Adevinta
  *
@@ -161,4 +165,54 @@ dependencies {
     testImplementation(libs.google.testParameterInjector)
 
     dokkaHtmlPlugin(libs.android.documentation.plugin)
+}
+
+abstract class ScreenShotFailureGeneratorTask : DefaultTask() {
+
+    companion object {
+        private const val screenshotFailureDir = "reports/paparazzi/failures"
+        private const val screenshotFailureHtml = "$screenshotFailureDir/failure.html"
+    }
+
+    @get:InputDirectory
+    abstract val buildDir: DirectoryProperty
+
+    @get:InputDirectory
+    @get:SkipWhenEmpty
+    abstract val screenshotFailuresDir: DirectoryProperty
+
+    private val htmlStart = """<!DOCTYPE html>
+<html>
+<body style="text-align: center;">"""
+    private val htmlEnd = "</body></html>"
+
+    @TaskAction
+    fun generateOwnersFile() {
+        File(buildDir.asFile.get(), screenshotFailureDir).mkdirs()
+        File(buildDir.asFile.get(), screenshotFailureHtml).apply {
+            val failures = screenshotFailuresDir.asFile.get().listFiles { _, name ->
+                name.startsWith("delta")
+            }?.toList().orEmpty()
+            createNewFile()
+            writeText(generateHtmlFile(failures))
+        }
+    }
+
+    private fun generateHtmlFile(failuresFile: List<File>): String = buildString {
+        append(htmlStart)
+        failuresFile.forEach { failure ->
+            val failureName = failure.name.replace("delta-", "")
+            val base64 = Base64.getEncoder().encodeToString(failure.readBytes())
+            """
+            <p>$failureName</p>
+            <img src="data:image/png;base64,$base64">
+            """.trimIndent().let(::append)
+        }
+        append(htmlEnd)
+    }
+}
+
+tasks.register<ScreenShotFailureGeneratorTask>("mergeFailuresIntoHtml") {
+    this.buildDir.set(project.buildDir)
+    this.screenshotFailuresDir.set(file(project.projectDir.absolutePath + "/out/failures"))
 }

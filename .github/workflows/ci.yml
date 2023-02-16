@@ -63,17 +63,17 @@ jobs:
       - name: 'Run screenshot tests'
         id: verifyPaparazziDebug
         continue-on-error: true
-        run: ./gradlew spark:verifyPaparazziDebug
+        run: ./gradlew spark:mergeFailuresIntoHtml
 
       - name: 'Error Screenshot tests'
-        if: ${{ always() && hashFiles('./spark/out/failures/*.png') != '' }}
+        if: ${{ always() && hashFiles('./spark/build/reports/failures/failure.html') != '' }}
         uses: actions/upload-artifact@v3
         with:
           name: screenshot-test-results
-          path: ./spark/out/failures
+          path: ./spark/build/reports/failures/failure.html
 
       - name: 'Comment PR'
-        if: ${{ hashFiles('preview-screenshots/out/failures/*.png') != '' }}
+        if: ${{ hashFiles('./spark/build/reports/failures/failure.html') != '' }}
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
