@@ -1,0 +1,22 @@
+name: '📦 Archive JUnit reports'
+description: 'Archive JUnit reports'
+inputs:
+  html:
+    description: 'A file, directory or wildcard pattern that describes what to upload'
+  xml:
+    description: 'A file, directory or wildcard pattern that describes what to upload'
+runs:
+  using: composite
+  steps:
+    - name: 'Archive JUnit HTML report'
+      if: inputs.html != ''
+      uses: actions/upload-artifact@v3
+      with:
+        name: junit-html.zip
+        path: ${{ inputs.html }}
+    - name: 'Archive JUnit XML report'
+      if: inputs.xml != ''
+      uses: actions/upload-artifact@v3
+      with:
+        name: junit-xml.zip
+        path: ${{ inputs.xml }}

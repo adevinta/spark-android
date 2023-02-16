@@ -1,0 +1,30 @@
+name: '📦 Archive Lint reports'
+description: 'Archive Lint reports'
+inputs:
+  html:
+    description: 'A file, directory or wildcard pattern that describes what to upload'
+  sarif:
+    description: 'A file, directory or wildcard pattern that describes what to upload'
+  xml:
+    description: 'A file, directory or wildcard pattern that describes what to upload'
+runs:
+  using: composite
+  steps:
+    - name: 'Archive Lint HTML report'
+      if: inputs.html != ''
+      uses: actions/upload-artifact@v3
+      with:
+        name: lint-html.zip
+        path: ${{ inputs.html }}
+    - name: 'Archive Lint SARIF report'
+      if: inputs.sarif != ''
+      uses: actions/upload-artifact@v3
+      with:
+        name: lint-sarif.zip
+        path: ${{ inputs.sarif }}
+    - name: 'Archive Lint XML report'
+      if: inputs.xml != ''
+      uses: actions/upload-artifact@v3
+      with:
+        name: lint-xml.zip
+        path: ${{ inputs.xml }}
