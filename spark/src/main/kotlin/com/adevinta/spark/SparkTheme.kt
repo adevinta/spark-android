@@ -126,7 +126,7 @@ public fun SparkTheme(
     }
 }
 
-@Suppress("ModifierMissing") // It's okay since its a base theme
+@Suppress("ModifierMissing") // It's okay since it’s a base theme
 @Composable
 public fun PreviewTheme(
     themeVariant: ThemeVariant = if (LocalInspectionMode.current && isSystemInDarkTheme()) {
@@ -216,18 +216,14 @@ public object SparkTheme {
 }
 
 /**
- * CompositionLocal used to pass the FF for new design.
- *
- * Setting it to tru makes the any component use their new design layout and only the layout. You still need to pass
- *
+ * CompositionLocal used to highlight visually where the spark tokens are used or not.
+ * Setting it to true makes the text in cursive, colors in red/green/blue and shapes in full cut corners
  */
 internal val LocalHighlightToken = staticCompositionLocalOf { false }
 
 /**
- * CompositionLocal used to pass the FF for new design.
- *
- * Setting it to tru makes the any component use their new design layout and only the layout. You still need to pass
- *
+ * CompositionLocal used to highlight visually with an overlay where the spark components are used or not.
+ * Setting it to true show an overlay on spark components.
  */
 internal val LocalHighlightComponents = staticCompositionLocalOf { false }
 
@@ -235,7 +231,7 @@ internal val LocalHighlightComponents = staticCompositionLocalOf { false }
  * CompositionLocal used to pass the status of the user.
  *
  * We already have a isPro parameter to our theme but it affects only the primary color, if we need to modify a
- * composable to get a particular image or icon asset based on its status its complicated as the app is not
+ * composable to get a particular image or icon asset based on its status it’s complicated as the app is not
  * entirely migrated.
  *
  * If you use this CompositionLocal you must provide it has a default parameter to your composable isPro parameter

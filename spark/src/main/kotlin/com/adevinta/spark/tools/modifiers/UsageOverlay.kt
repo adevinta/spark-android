@@ -35,10 +35,10 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.LocalHighlightComponents
 
 /**
- * A [Modifier.Element] that adds a draw layer to identify brikke components easily.
+ * A [Modifier.Element] that adds a draw layer to identify spark components easily.
  */
 @Stable
-internal fun Modifier.brikkeUsageOverlay(overlayColor: Color = Color.Red): Modifier = composed {
+internal fun Modifier.sparkUsageOverlay(overlayColor: Color = Color.Red): Modifier = composed {
     this then if (LocalHighlightComponents.current) {
         Modifier.drawWithContent {
             drawContent()
@@ -51,7 +51,7 @@ internal fun Modifier.brikkeUsageOverlay(overlayColor: Color = Color.Red): Modif
 
 
 /**
- * A Composable that hide its content and adds a draw dashed border to identify slot areas.
+ * A Composable that hides its content and draw a dashed border to identify slot areas.
  */
 @Composable
 internal fun SlotArea(

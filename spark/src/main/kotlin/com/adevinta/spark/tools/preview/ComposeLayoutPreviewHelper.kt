@@ -53,7 +53,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 
 /**
  * Call this in onAttachedToWindow() like this:
- *
+ * ```kotlin
  *  override fun onAttachedToWindow() {
  *      if (isInEditMode) {
  *          setupEditMode()
@@ -61,13 +61,14 @@ import kotlin.coroutines.EmptyCoroutineContext
  *
  *      super.onAttachedToWindow()
  *  }
+ * ```
  */
 public fun AbstractComposeView.setupEditMode() {
     ComposeLayoutPreviewHelper(this).createAndInstallWindowRecomposer()
 }
 
 /**
- * Initializes a barebones Recomposer with a fake SavedStateRegisterOwner
+ * Initializes a barebone Recomposer with a fake SavedStateRegisterOwner
  * and a fake ViewModelStoreOwner.
  *
  * Most of this code is taken from [ComposeViewAdapter] and [ComposeView].

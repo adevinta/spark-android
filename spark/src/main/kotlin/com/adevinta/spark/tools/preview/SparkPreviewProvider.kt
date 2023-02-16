@@ -49,7 +49,7 @@ public data class SparkPreviewParam(
  * Creates a [PreviewParameterProvider] based on the classes of two existing providers.
  *
  * You can create your own easily with Kotlin delegation:
- * ```
+ * ```kotlin
  * class ExampleProvider : PreviewParameterProvider<Pair<Type1, Type2>>
  *    by compositeProvider(Type1ParameterProvider::class, Type2ParameterProvider::class)
  * ```

@@ -110,7 +110,7 @@ public fun Modifier.dashedBorder(width: Dp, radius: Dp, color: Color): Modifier 
  *
  * Taken from [Autofill with Jetpack Compose · Bryan Herbst](https://bryanherbst.com/2021/04/13/compose-autofill/)
  */
-// TODO-scott.rayapoulle.ext (03-51-2023): Replace by official implementation on b/176949051
+// TODO-@Soulcramer (03-51-2023): Replace by official implementation on b/176949051
 @ExperimentalComposeUiApi
 public fun Modifier.autofill(
     autofillTypes: List<AutofillType>,

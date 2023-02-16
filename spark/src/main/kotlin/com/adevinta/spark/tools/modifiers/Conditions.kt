@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 
 /**
  * Modifier to make it easy to conditionally add a modifier based on [predicate]
- * ```
+ * ```kotlin
  * Box(
  *  modifier = Modifier.fillMaxWidth()
  *    .ifTrue(isError) { background(SparkTheme.colors.error) }
@@ -41,7 +41,7 @@ public inline fun Modifier.ifTrue(predicate: Boolean, builder: () -> Modifier): 
 
 /**
  * Modifier to make it easy to conditionally add a modifier based on [value] nullability
- * ```
+ * ```kotlin
  * Box(
  *  modifier = Modifier.fillMaxWidth()
  *    .ifNotNull(errorMetadata) { errorData -> background(errorData.color) }
