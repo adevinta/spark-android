@@ -65,42 +65,24 @@ jobs:
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: testReleaseUnitTest
-      - name: '📦 Archive JUnit HTML report'
+      - name: '📦 Archive JUnit reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
-        uses: actions/upload-artifact@v3
+        uses: ./.github/actions/archive-lint-reports
         with:
-          name: junit-html
-          path: '**/build/reports/tests/testReleaseUnitTest'
-      - name: '📦 Archive JUnit XML report'
-        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: junit-xml
-          path: '**/build/test-results/testReleaseUnitTest/**.xml'
+          html: '**/build/reports/tests/testReleaseUnitTest'
+          xml: '**/build/test-results/testReleaseUnitTest/**.xml'
 
       - name: '🕵️ Lint'
         id: lint
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           arguments: lintRelease
-      - name: '📦 Archive Lint HTML report'
-        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
-        uses: actions/upload-artifact@v3
+      - name: '📦 Archive Lint reports'
+        uses: ./.github/actions/archive-lint-reports
         with:
-          name: lint-html
-          path: '**/build/reports/lint-results-release.html'
-      - name: '📦 Archive Lint XML report'
-        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: lint-xml
-          path: '**/build/reports/lint-results-release.xml'
-      - name: '📦 Archive Lint SARIF report'
-        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: lint-xml
-          path: '**/build/reports/lint-results-release.sarif'
+          html: '**/build/reports/lint-results-*.html'
+          sarif: '**/build/reports/lint-results-*.sarif'
+          xml: '**/build/reports/lint-results-*.xml'
       - name: '📦 Upload Lint SARIF report'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: github/codeql-action/upload-sarif@v2
