@@ -1,6 +1,9 @@
 name: '👷 Build → 🧑‍🔬 Test → 🕵️ Lint'
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -54,7 +57,7 @@ jobs:
           name: aar
           path: '**/build/outputs/aar'
       - name: '📢 Diffuse report'
-        if: ${{ always() && steps.build.outcome == 'success' }}
+        if: ${{ always() && github.event_name == 'pull_request' && steps.build.outcome == 'success' }}
         uses: ./.github/actions/diffuse-aar
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
