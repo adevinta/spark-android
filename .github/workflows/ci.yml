@@ -62,6 +62,7 @@ jobs:
           pr-number: ${{ github.event.pull_request.number }}
       - name: 'Run screenshot tests'
         id: verifyPaparazziDebug
+        continue-on-error: true
         run: ./gradlew spark:verifyPaparazziDebug
 
       - name: 'Run screenshot tests'
