@@ -66,10 +66,10 @@ jobs:
         run: ./gradlew spark:verifyPaparazziDebug
 
       - name: 'Error Screenshot tests'
-        if: ${{ hashFiles('spark/out/failures/*.png') != '' }}
+        if: ${{ always() && hashFiles('spark/out/failures/*.png') != '' }}
         uses: actions/upload-artifact@v3
         with:
-          name: scrennshot-test-results
+          name: screenshot-test-results
           path: spark/out/failures
 
 #      - name: 'Comment PR'
