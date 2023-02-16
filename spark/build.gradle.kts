@@ -1,3 +1,4 @@
+import org.jetbrains.dokka.gradle.DokkaTask
 /*
  * Copyright (c) 2023 Adevinta
  *
@@ -27,6 +28,7 @@ plugins {
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.dependencyGuard)
     alias(libs.plugins.google.ksp)
+    alias(libs.plugins.dokka)
     `maven-publish`
 }
 
@@ -60,13 +62,12 @@ android {
     kotlinOptions {
         jvmTarget = "11"
         allWarningsAsErrors = true
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=com.adevinta.spark.InternalSparkApi"
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=com.adevinta.spark.ExperimentalSparkApi"
-        freeCompilerArgs = freeCompilerArgs + "-opt-in=kotlin.RequiresOptIn"
-    }
-
-    sourceSets.configureEach {
-        kotlin.srcDir("build/generated/ksp/${name}/kotlin")
+        freeCompilerArgs += listOf(
+            "-Xexplicit-api=strict",
+            "-opt-in=com.adevinta.spark.InternalSparkApi",
+            "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
+            "-opt-in=kotlin.RequiresOptIn",
+        )
     }
 
     buildFeatures.compose = true
@@ -89,6 +90,19 @@ android {
 
 dependencyGuard {
     configuration("releaseRuntimeClasspath")
+}
+
+tasks.dokkaHtml.configure {
+    moduleName.set("Spark")
+    outputDirectory.set(rootProject.buildDir.resolve("dokka"))
+    dokkaSourceSets.configureEach {
+        // List of files or directories containing sample code (referenced with @sample tags)
+        // samples.from("samples/basic.kt", "samples/advanced.kt")
+    }
+}
+
+tasks.withType<DokkaTask> {
+    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
 }
 
 publishing {
@@ -123,6 +137,8 @@ publishing {
 }
 
 dependencies {
+    lintPublish(projects.sparkLint)
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
@@ -138,4 +154,6 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
+
+    dokkaHtmlPlugin(libs.android.documentation.plugin)
 }

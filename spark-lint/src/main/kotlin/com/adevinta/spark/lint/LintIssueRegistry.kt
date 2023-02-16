@@ -20,9 +20,22 @@
  * SOFTWARE.
  */
 
-package com.adevinta.spark
+package com.adevinta.spark.lint
 
-/**
- * Spark
- */
-public object Spark
+import com.android.tools.lint.client.api.IssueRegistry
+import com.android.tools.lint.client.api.Vendor
+import com.android.tools.lint.detector.api.CURRENT_API
+import com.android.tools.lint.detector.api.Issue
+
+public class LintIssueRegistry : IssueRegistry() {
+
+    override val vendor: Vendor = Vendor(
+        vendorName = "spark",
+        identifier = "com.adevinta.spark:spark-lints",
+    )
+
+    override val api: Int = CURRENT_API
+    override val issues: List<Issue> = listOf(
+        MaterialComposableUsageDetector.ISSUE,
+    )
+}

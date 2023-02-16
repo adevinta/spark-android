@@ -112,3 +112,7 @@ Temporary Items
 
 # IDEA copyright
 !.idea/copyright
+
+# IDEA project icons
+!.idea/icon.png
+!.idea/icon_dark.png

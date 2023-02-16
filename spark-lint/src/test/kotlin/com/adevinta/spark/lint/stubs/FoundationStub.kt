@@ -20,9 +20,17 @@
  * SOFTWARE.
  */
 
-package com.adevinta.spark
+package com.adevinta.spark.lint.stubs
 
-/**
- * Spark
- */
-public object Spark
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
+
+// Simplified Foundation.kt stubs
+internal val FoundationStub = kotlin(
+    """
+    package androidx.compose.foundation
+    import androidx.compose.runtime.Composable
+    
+    @Composable
+    fun Image() {}
+""".trimIndent()
+)

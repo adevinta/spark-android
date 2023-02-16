@@ -20,9 +20,56 @@
  * SOFTWARE.
  */
 
-package com.adevinta.spark
+package com.adevinta.spark.lint.stubs
 
-/**
- * Spark
- */
-public object Spark
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
+
+// Simplified Spark.kt stubs
+internal val SparkComponentsStub = kotlin(
+    """
+    package com.adevinta.spark
+    import androidx.compose.runtime.Composable
+    
+    @Composable
+    fun PrimaryButton() {}
+    
+    @Composable
+    fun SecondaryButton() {}
+    
+    @Composable
+    fun TextButton() {}
+    
+    @Composable
+    fun TextField() {}
+    
+    @Composable
+    fun SelectTextField() {}
+    
+    @Composable
+    fun CheckBox() {}
+    
+    @Composable
+    fun RadioButton() {}
+    
+    @Composable
+    fun Switch() {}
+    
+    @Composable
+    fun Snackbar() {}
+    
+    @Composable
+    fun LinearProgressIndicator() {}
+    
+    @Composable
+    fun CircularProgressIndicator() {}
+    
+    @Composable
+    fun SparkTheme() {}
+    
+    @Composable
+    fun Image() {}
+    
+    @Composable
+    fun Illustration() {}
+""".trimIndent()
+)

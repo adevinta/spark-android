@@ -20,9 +20,20 @@
  * SOFTWARE.
  */
 
-package com.adevinta.spark
+package com.adevinta.spark.lint.stubs
 
-/**
- * Spark
- */
-public object Spark
+import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
+
+// Simplified Coil.kt stubs
+internal val CoilComponentsStub = kotlin(
+    """
+    package coil.compose
+    import androidx.compose.runtime.Composable
+    
+    @Composable
+    fun AsyncImage() {}
+    
+    @Composable
+    fun SubcomposeAsyncImage() {}
+""".trimIndent()
+)
