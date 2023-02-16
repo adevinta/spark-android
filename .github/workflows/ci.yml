@@ -65,8 +65,8 @@ jobs:
         continue-on-error: true
         run: ./gradlew spark:verifyPaparazziDebug
 
-      - name: 'Run screenshot tests'
-        if: ${{ always() && hashFiles('./spark/out/failures/*.html') != '' }}
+      - name: 'Merge screenshot into report'
+        if: ${{ always() && hashFiles('./spark/out/failures/*.png') != '' }}
         id: merge-screenshot-reports
         run: ./gradlew spark:mergeFailuresIntoHtml
 
