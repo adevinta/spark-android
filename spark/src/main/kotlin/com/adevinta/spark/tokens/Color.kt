@@ -111,7 +111,7 @@ import com.adevinta.spark.utils.ShowkaseComposable
 
 public fun lightSparkColors(
     isPro: Boolean = false,
-    primary: Color = if (isPro) BrikkeBlue else BrikkeOrange,
+    primary: Color = if (isPro) BrikkeOrange else BrikkeBlue,
     onPrimary: Color = if (isPro) Grey100 else Grey100,
     primaryContainer: Color = if (isPro) BrikkeBlueSurface else BrikkeOrangeSurface,
     onPrimaryContainer: Color = if (isPro) Blue10 else Orange10,

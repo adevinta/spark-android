@@ -80,7 +80,7 @@ jobs:
           path: ./spark/build/reports/paparazzi/failures/failure.html
 
       - name: 'Comment PR'
-        if: hashFiles('./spark/build/reports/failures/failure.html') != ''
+        if: hashFiles('./spark/build/reports/paparazzi/failures/failure.html') != ''
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
