@@ -100,7 +100,7 @@ public fun RadioButton(
  * [Interaction]s for this Checkbox. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this Checkbox in different [Interaction]s.
- * @param endContent The end content displayed after the radio button, Usually a Text composable
+ * @param endContent The end content displayed after the radio button, usually a Text composable
  */
 @Composable
 public fun RadioButtonLabelled(
