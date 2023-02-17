@@ -51,7 +51,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                     CircularProgressIndicator()
                     MaterialTheme()
                 }
-            """
+            """,
             ),
             MaterialComponentsStub,
             Composable,
@@ -60,126 +60,126 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
             .run()
             .expect(
                 """
-                src/foo/test.kt:8: ${explanation("Button" to "PrimaryButton")}
-                    Button()
-                    ~~~~~~~~
-                src/foo/test.kt:9: ${explanation("ElevatedButton" to "PrimaryButton")}
-                    ElevatedButton()
-                    ~~~~~~~~~~~~~~~~
-                src/foo/test.kt:10: ${explanation("FilledTonalButton" to "PrimaryButton")}
-                    FilledTonalButton()
-                    ~~~~~~~~~~~~~~~~~~~
-                src/foo/test.kt:11: ${explanation("OutlinedButton" to "SecondaryButton")}
-                    OutlinedButton()
-                    ~~~~~~~~~~~~~~~~
-                src/foo/test.kt:12: ${explanation("TextButton" to "TextButton")}
-                    TextButton()
-                    ~~~~~~~~~~~~
-                src/foo/test.kt:13: ${explanation("OutlinedTextField" to "TextField")}
-                    OutlinedTextField()
-                    ~~~~~~~~~~~~~~~~~~~
-                src/foo/test.kt:14: ${explanation("FilledTextField" to "TextField")}
-                    FilledTextField()
-                    ~~~~~~~~~~~~~~~~~
-                src/foo/test.kt:15: ${explanation("CheckBox" to "CheckBox")}
-                    CheckBox()
-                    ~~~~~~~~~~
-                src/foo/test.kt:16: ${explanation("TriStateCheckbox" to "CheckBox")}
-                    TriStateCheckbox()
-                    ~~~~~~~~~~~~~~~~~~
-                src/foo/test.kt:17: ${explanation("RadioButton" to "RadioButton")}
-                    RadioButton()
-                    ~~~~~~~~~~~~~
-                src/foo/test.kt:18: ${explanation("Switch" to "Switch")}
-                    Switch()
-                    ~~~~~~~~
-                src/foo/test.kt:19: ${explanation("Snackbar" to "Snackbar")}
-                    Snackbar()
-                    ~~~~~~~~~~
-                src/foo/test.kt:20: ${explanation("LinearProgressIndicator" to "LinearProgressIndicator")}
-                    LinearProgressIndicator()
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~
-                src/foo/test.kt:21: ${explanation("CircularProgressIndicator" to "CircularProgressIndicator")}
-                    CircularProgressIndicator()
-                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                src/foo/test.kt:22: ${explanation("MaterialTheme" to "SparkTheme")}
-                    MaterialTheme()
-                    ~~~~~~~~~~~~~~~
+                src/foo/test.kt:9: ${explanation("Button" to "PrimaryButton")}
+                                    Button()
+                                    ~~~~~~~~
+                src/foo/test.kt:10: ${explanation("ElevatedButton" to "PrimaryButton")}
+                                    ElevatedButton()
+                                    ~~~~~~~~~~~~~~~~
+                src/foo/test.kt:11: ${explanation("FilledTonalButton" to "PrimaryButton")}
+                                    FilledTonalButton()
+                                    ~~~~~~~~~~~~~~~~~~~
+                src/foo/test.kt:12: ${explanation("OutlinedButton" to "SecondaryButton")}
+                                    OutlinedButton()
+                                    ~~~~~~~~~~~~~~~~
+                src/foo/test.kt:13: ${explanation("TextButton" to "TextButton")}
+                                    TextButton()
+                                    ~~~~~~~~~~~~
+                src/foo/test.kt:14: ${explanation("OutlinedTextField" to "TextField")}
+                                    OutlinedTextField()
+                                    ~~~~~~~~~~~~~~~~~~~
+                src/foo/test.kt:15: ${explanation("FilledTextField" to "TextField")}
+                                    FilledTextField()
+                                    ~~~~~~~~~~~~~~~~~
+                src/foo/test.kt:16: ${explanation("CheckBox" to "CheckBox")}
+                                    CheckBox()
+                                    ~~~~~~~~~~
+                src/foo/test.kt:17: ${explanation("TriStateCheckbox" to "CheckBox")}
+                                    TriStateCheckbox()
+                                    ~~~~~~~~~~~~~~~~~~
+                src/foo/test.kt:18: ${explanation("RadioButton" to "RadioButton")}
+                                    RadioButton()
+                                    ~~~~~~~~~~~~~
+                src/foo/test.kt:19: ${explanation("Switch" to "Switch")}
+                                    Switch()
+                                    ~~~~~~~~
+                src/foo/test.kt:20: ${explanation("Snackbar" to "Snackbar")}
+                                    Snackbar()
+                                    ~~~~~~~~~~
+                src/foo/test.kt:21: ${explanation("LinearProgressIndicator" to "LinearProgressIndicator")}
+                                    LinearProgressIndicator()
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~
+                src/foo/test.kt:22: ${explanation("CircularProgressIndicator" to "CircularProgressIndicator")}
+                                    CircularProgressIndicator()
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                src/foo/test.kt:23: ${explanation("MaterialTheme" to "SparkTheme")}
+                                    MaterialTheme()
+                                    ~~~~~~~~~~~~~~~
                 15 errors, 0 warnings
-            """.trimIndent()
+            """.trimIndent(),
             )
             .expectFixDiffs(
                 """
-                Fix for src/foo/test.kt line 8: Replace Button with Spark's PrimaryButton:
-                @@ -2 +2
-                + import com.adevinta.spark.components.buttons.PrimaryButton
-                @@ -8 +9
-                -     Button()
-                +     PrimaryButton()
-                Fix for src/foo/test.kt line 9: Replace ElevatedButton with Spark's PrimaryButton:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 9: Replace Button with Spark's PrimaryButton:
+                @@ -3 +3
                 + import com.adevinta.spark.components.buttons.PrimaryButton
                 @@ -9 +10
-                -     ElevatedButton()
-                +     PrimaryButton()
-                Fix for src/foo/test.kt line 10: Replace FilledTonalButton with Spark's PrimaryButton:
-                @@ -2 +2
+                -                     Button()
+                +                     PrimaryButton()
+                Fix for src/foo/test.kt line 10: Replace ElevatedButton with Spark's PrimaryButton:
+                @@ -3 +3
                 + import com.adevinta.spark.components.buttons.PrimaryButton
                 @@ -10 +11
-                -     FilledTonalButton()
-                +     PrimaryButton()
-                Fix for src/foo/test.kt line 11: Replace OutlinedButton with Spark's SecondaryButton:
-                @@ -2 +2
-                + import com.adevinta.spark.components.buttons.SecondaryButton
+                -                     ElevatedButton()
+                +                     PrimaryButton()
+                Fix for src/foo/test.kt line 11: Replace FilledTonalButton with Spark's PrimaryButton:
+                @@ -3 +3
+                + import com.adevinta.spark.components.buttons.PrimaryButton
                 @@ -11 +12
-                -     OutlinedButton()
-                +     SecondaryButton()
-                Fix for src/foo/test.kt line 12: Replace TextButton with Spark's TextButton:
-                @@ -2 +2
+                -                     FilledTonalButton()
+                +                     PrimaryButton()
+                Fix for src/foo/test.kt line 12: Replace OutlinedButton with Spark's SecondaryButton:
+                @@ -3 +3
+                + import com.adevinta.spark.components.buttons.SecondaryButton
+                @@ -12 +13
+                -                     OutlinedButton()
+                +                     SecondaryButton()
+                Fix for src/foo/test.kt line 13: Replace TextButton with Spark's TextButton:
+                @@ -3 +3
                 + import com.adevinta.spark.components.buttons.TextButton
-                Fix for src/foo/test.kt line 13: Replace OutlinedTextField with Spark's TextField:
-                @@ -2 +2
-                + import com.adevinta.spark.components.textfields.TextField
-                @@ -13 +14
-                -     OutlinedTextField()
-                +     TextField()
-                Fix for src/foo/test.kt line 14: Replace FilledTextField with Spark's TextField:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 14: Replace OutlinedTextField with Spark's TextField:
+                @@ -3 +3
                 + import com.adevinta.spark.components.textfields.TextField
                 @@ -14 +15
-                -     FilledTextField()
-                +     TextField()
-                Fix for src/foo/test.kt line 15: Replace CheckBox with Spark's CheckBox:
-                @@ -2 +2
+                -                     OutlinedTextField()
+                +                     TextField()
+                Fix for src/foo/test.kt line 15: Replace FilledTextField with Spark's TextField:
+                @@ -3 +3
+                + import com.adevinta.spark.components.textfields.TextField
+                @@ -15 +16
+                -                     FilledTextField()
+                +                     TextField()
+                Fix for src/foo/test.kt line 16: Replace CheckBox with Spark's CheckBox:
+                @@ -3 +3
                 + import com.adevinta.spark.components.toggles.CheckBox
-                Fix for src/foo/test.kt line 16: Replace TriStateCheckbox with Spark's CheckBox:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 17: Replace TriStateCheckbox with Spark's CheckBox:
+                @@ -3 +3
                 + import com.adevinta.spark.components.toggles.CheckBox
-                @@ -16 +17
-                -     TriStateCheckbox()
-                +     CheckBox()
-                Fix for src/foo/test.kt line 17: Replace RadioButton with Spark's RadioButton:
-                @@ -2 +2
+                @@ -17 +18
+                -                     TriStateCheckbox()
+                +                     CheckBox()
+                Fix for src/foo/test.kt line 18: Replace RadioButton with Spark's RadioButton:
+                @@ -3 +3
                 + import com.adevinta.spark.components.toggles.RadioButton
-                Fix for src/foo/test.kt line 18: Replace Switch with Spark's Switch:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 19: Replace Switch with Spark's Switch:
+                @@ -3 +3
                 + import com.adevinta.spark.components.toggles.Switch
-                Fix for src/foo/test.kt line 19: Replace Snackbar with Spark's Snackbar:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 20: Replace Snackbar with Spark's Snackbar:
+                @@ -3 +3
                 + import com.adevinta.spark.components.snackbars.Snackbar
-                Fix for src/foo/test.kt line 20: Replace LinearProgressIndicator with Spark's LinearProgressIndicator:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 21: Replace LinearProgressIndicator with Spark's LinearProgressIndicator:
+                @@ -3 +3
                 + import com.adevinta.spark.components.progress.LinearProgressIndicator
-                Fix for src/foo/test.kt line 21: Replace CircularProgressIndicator with Spark's CircularProgressIndicator:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 22: Replace CircularProgressIndicator with Spark's CircularProgressIndicator:
+                @@ -3 +3
                 + import com.adevinta.spark.components.progress.CircularProgressIndicator
-                Fix for src/foo/test.kt line 22: Replace MaterialTheme with Spark's SparkTheme:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 23: Replace MaterialTheme with Spark's SparkTheme:
+                @@ -3 +3
                 + import com.adevinta.spark.SparkTheme
-                @@ -22 +23
-                -     MaterialTheme()
-                +     SparkTheme()
-            """.trimIndent()
+                @@ -23 +24
+                -                     MaterialTheme()
+                +                     SparkTheme()
+            """.trimIndent(),
             )
     }
 
@@ -196,7 +196,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 fun Test() {
                     Image()
                 }
-            """
+            """,
             ),
             Composable,
             FoundationStub,
@@ -205,21 +205,21 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
             .run()
             .expect(
                 """
-                src/foo/test.kt:7: ${explanation("Image" to "Illustration")}
-                    Image()
-                    ~~~~~~~
+                src/foo/test.kt:8: ${explanation("Image" to "Illustration")}
+                                    Image()
+                                    ~~~~~~~
                 1 errors, 0 warnings
-            """.trimIndent()
+            """.trimIndent(),
             )
             .expectFixDiffs(
                 """
-                Fix for src/foo/test.kt line 7: Replace Image with Spark's Illustration:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 8: Replace Image with Spark's Illustration:
+                @@ -3 +3
                 + import com.adevinta.spark.components.image.Illustration
-                @@ -7 +8
-                -     Image()
-                +     Illustration()
-            """.trimIndent()
+                @@ -8 +9
+                -                     Image()
+                +                     Illustration()
+            """.trimIndent(),
             )
     }
 
@@ -238,7 +238,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                     AsyncImage()
                     SubcomposeAsyncImage()
                 }
-            """
+            """,
             ),
             Composable,
             CoilComponentsStub,
@@ -247,30 +247,30 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
             .run()
             .expect(
                 """
-                src/foo/test.kt:8: ${explanation("AsyncImage" to "Image")}
-                    AsyncImage()
-                    ~~~~~~~~~~~~
-                src/foo/test.kt:9: ${explanation("SubcomposeAsyncImage" to "Image")}
-                    SubcomposeAsyncImage()
-                    ~~~~~~~~~~~~~~~~~~~~~~
+                src/foo/test.kt:9: ${explanation("AsyncImage" to "Image")}
+                                    AsyncImage()
+                                    ~~~~~~~~~~~~
+                src/foo/test.kt:10: ${explanation("SubcomposeAsyncImage" to "Image")}
+                                    SubcomposeAsyncImage()
+                                    ~~~~~~~~~~~~~~~~~~~~~~
                 2 errors, 0 warnings
-            """.trimIndent()
+            """.trimIndent(),
             )
             .expectFixDiffs(
                 """
-                Fix for src/foo/test.kt line 8: Replace AsyncImage with Spark's Image:
-                @@ -2 +2
-                + import com.adevinta.spark.components.image.Image
-                @@ -8 +9
-                -     AsyncImage()
-                +     Image()
-                Fix for src/foo/test.kt line 9: Replace SubcomposeAsyncImage with Spark's Image:
-                @@ -2 +2
+                Fix for src/foo/test.kt line 9: Replace AsyncImage with Spark's Image:
+                @@ -3 +3
                 + import com.adevinta.spark.components.image.Image
                 @@ -9 +10
-                -     SubcomposeAsyncImage()
-                +     Image()
-            """.trimIndent()
+                -                     AsyncImage()
+                +                     Image()
+                Fix for src/foo/test.kt line 10: Replace SubcomposeAsyncImage with Spark's Image:
+                @@ -3 +3
+                + import com.adevinta.spark.components.image.Image
+                @@ -10 +11
+                -                     SubcomposeAsyncImage()
+                +                     Image()
+            """.trimIndent(),
             )
     }
 
@@ -298,7 +298,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                     LinearProgressIndicator()
                     Snackbar()
                 }
-            """
+            """,
             ),
             SparkComponentsStub,
             Composable,
