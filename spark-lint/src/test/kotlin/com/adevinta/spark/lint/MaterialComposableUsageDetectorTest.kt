@@ -51,7 +51,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                     CircularProgressIndicator()
                     MaterialTheme()
                 }
-            """
+            """,
             ),
             MaterialComponentsStub,
             Composable,
@@ -106,7 +106,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                                     MaterialTheme()
                                     ~~~~~~~~~~~~~~~
                 15 errors, 0 warnings
-            """.trimIndent()
+            """.trimIndent(),
             )
             .expectFixDiffs(
                 """
@@ -179,7 +179,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 @@ -23 +24
                 -                     MaterialTheme()
                 +                     SparkTheme()
-            """.trimIndent()
+            """.trimIndent(),
             )
     }
 
@@ -196,7 +196,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 fun Test() {
                     Image()
                 }
-            """
+            """,
             ),
             Composable,
             FoundationStub,
@@ -209,7 +209,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                                     Image()
                                     ~~~~~~~
                 1 errors, 0 warnings
-            """.trimIndent()
+            """.trimIndent(),
             )
             .expectFixDiffs(
                 """
@@ -219,7 +219,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 @@ -8 +9
                 -                     Image()
                 +                     Illustration()
-            """.trimIndent()
+            """.trimIndent(),
             )
     }
 
@@ -238,7 +238,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                     AsyncImage()
                     SubcomposeAsyncImage()
                 }
-            """
+            """,
             ),
             Composable,
             CoilComponentsStub,
@@ -254,7 +254,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                                     SubcomposeAsyncImage()
                                     ~~~~~~~~~~~~~~~~~~~~~~
                 2 errors, 0 warnings
-            """.trimIndent()
+            """.trimIndent(),
             )
             .expectFixDiffs(
                 """
@@ -270,7 +270,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 @@ -10 +11
                 -                     SubcomposeAsyncImage()
                 +                     Image()
-            """.trimIndent()
+            """.trimIndent(),
             )
     }
 
@@ -298,7 +298,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                     LinearProgressIndicator()
                     Snackbar()
                 }
-            """
+            """,
             ),
             SparkComponentsStub,
             Composable,
