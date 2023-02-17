@@ -29,7 +29,7 @@ runs:
       shell: bash
       run: |
         wget "$DIFFUSE_URL" && chmod +x "$DIFFUSE_JAR"
-        mkdir --parents ~/.spark/diffuse-jar && mv "$DIFFUSE_JAR" "~/.spark/diffuse-jar/
+        mkdir --parents ~/.spark/diffuse-jar && mv "$DIFFUSE_JAR" "~/.spark/diffuse-jar/"
       env:
         DIFFUSE_URL: https://github.com/JakeWharton/diffuse/releases/download/${{ inputs.diffuse-version }}/diffuse-${{ inputs.diffuse-version }}-binary.jar
         DIFFUSE_JAR: diffuse-${{ inputs.diffuse-version }}-binary.jar
