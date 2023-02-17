@@ -20,7 +20,7 @@ jobs:
           set +e
           for key in $(gh actions-cache list --limit 100 | cut -f 1 )
           do
-              gh actions-cache delete $key --confirm >> $GITHUB_SUMMARY
+              gh actions-cache delete $key --confirm >> $GITHUB_STEP_SUMMARY
           done
       - if: github.event_name == 'pull_request'
         run: |
@@ -28,7 +28,7 @@ jobs:
           BRANCH="refs/pull/${{ github.event.pull_request.number }}/merge"
           for key in $(gh actions-cache list --limit 100 --branch $BRANCH | cut -f 1 )
           do
-              gh actions-cache delete $key --branch $BRANCH --confirm >> $GITHUB_SUMMARY
+              gh actions-cache delete $key --branch $BRANCH --confirm >> $GITHUB_STEP_SUMMARY
           done
       - run: gh actions-cache list
 
