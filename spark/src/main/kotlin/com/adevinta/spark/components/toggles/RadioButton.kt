@@ -49,7 +49,7 @@ internal fun SparkRadioButton(
  *  menu because it uses less space.
  *
  * @see [SparkRadioButton] if you require color customization between states. Be aware that this is still an internal
- * composable so if you need such state contact the brikke team
+ * composable so if you need such state contact the spark team
  *
  * @param selected whether this radio button is selected or not
  * @param onClick callback to be invoked when the RadioButton is clicked. If null, then this RadioButton will not
@@ -89,7 +89,7 @@ public fun RadioButton(
  *  menu because it uses less space.
  *
  * @see [SparkRadioButton] if you require color customization between states. Be aware that this is still an internal
- * composable so if you need such state contact the brikke team
+ * composable so if you need such state contact the spark team
  *
  * @param selected whether this radio button is selected or not
  * @param onClick callback to be invoked when the RadioButton is clicked. If null, then this RadioButton will not

@@ -46,10 +46,10 @@ internal fun SparkCheckbox(
  *
  * @see [SparkCheckbox] if you require support for an indeterminate state, or more advanced
  * color customization between states. Be aware that this is still an internal composable so if you need such
- * state contact the brikke team
+ * state contact the spark team
  *
  * @param state whether TriStateCheckbox is checked, unchecked or in indeterminate state
- * @param onCheckedChange callback to be invoked when checkbox is being clicked,
+ * @param onClick callback to be invoked when checkbox is being clicked,
  * therefore the change of checked state in requested.  If null, then this is passive
  * and relies entirely on a higher-level component to control the "checked" state.
  * @param modifier Modifier to be applied to the layout of the checkbox
@@ -62,14 +62,14 @@ internal fun SparkCheckbox(
 @Composable
 public fun Checkbox(
     state: ToggleableState,
-    onCheckedChange: (() -> Unit)?,
+    onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     SparkCheckbox(
         state = state,
-        onClick = onCheckedChange,
+        onClick = onClick,
         interactionSource = interactionSource,
         enabled = enabled,
         modifier = modifier,
@@ -85,10 +85,10 @@ public fun Checkbox(
  *
  * @see [SparkCheckbox] if you require support for an indeterminate state, or more advanced
  * color customization between states. Be aware that this is still an internal composable so if you need such
- * state contact the brikke team
+ * state contact the spark team
  *
  * @param state whether TriStateCheckbox is checked, unchecked or in indeterminate state
- * @param onCheckedChange callback to be invoked when checkbox is being clicked,
+ * @param onClick callback to be invoked when checkbox is being clicked,
  * therefore the change of checked state in requested.  If null, then this is passive
  * and relies entirely on a higher-level component to control the "checked" state.
  * @param modifier Modifier to be applied to the layout of the checkbox
@@ -102,7 +102,7 @@ public fun Checkbox(
 @Composable
 public fun CheckboxLabelled(
     state: ToggleableState,
-    onCheckedChange: (() -> Unit)?,
+    onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -114,13 +114,13 @@ public fun CheckboxLabelled(
             Checkbox(
                 modifier = Modifier.minimumTouchTargetSize(),
                 state = state,
-                onCheckedChange = null,
+                onClick = null,
                 interactionSource = interactionSource,
                 enabled = enabled,
             )
         },
         role = Role.Checkbox,
-        onClick = onCheckedChange,
+        onClick = onClick,
         modifier = modifier,
         enabled = enabled,
         endContent = endContent,
@@ -138,12 +138,12 @@ internal fun AllStatesCheckboxPreview(
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
         Row {
-            Checkbox(enabled = true, state = ToggleableState.On, onCheckedChange = {})
-            Checkbox(enabled = false, state = ToggleableState.On, onCheckedChange = {})
-            Checkbox(enabled = true, state = ToggleableState.Indeterminate, onCheckedChange = {})
-            Checkbox(enabled = false, state = ToggleableState.Indeterminate, onCheckedChange = {})
-            Checkbox(enabled = true, state = ToggleableState.Off, onCheckedChange = {})
-            Checkbox(enabled = false, state = ToggleableState.Off, onCheckedChange = {})
+            Checkbox(enabled = true, state = ToggleableState.On, onClick = {})
+            Checkbox(enabled = false, state = ToggleableState.On, onClick = {})
+            Checkbox(enabled = true, state = ToggleableState.Indeterminate, onClick = {})
+            Checkbox(enabled = false, state = ToggleableState.Indeterminate, onClick = {})
+            Checkbox(enabled = true, state = ToggleableState.Off, onClick = {})
+            Checkbox(enabled = false, state = ToggleableState.Off, onClick = {})
         }
     }
 }
@@ -161,32 +161,32 @@ internal fun AllStatesCheckBoxLabelledPreview(
         CheckboxLabelled(
             enabled = true,
             state = ToggleableState.On,
-            onCheckedChange = {},
+            onClick = {},
         ) { Text("CheckBox On") }
         CheckboxLabelled(
             enabled = false,
             state = ToggleableState.On,
-            onCheckedChange = {},
+            onClick = {},
         ) { Text("CheckBox On") }
         CheckboxLabelled(
             enabled = true,
             state = ToggleableState.Indeterminate,
-            onCheckedChange = {},
+            onClick = {},
         ) { Text("CheckBox Indeterminate") }
         CheckboxLabelled(
             enabled = false,
             state = ToggleableState.Indeterminate,
-            onCheckedChange = {},
+            onClick = {},
         ) { Text("CheckBox Indeterminate") }
         CheckboxLabelled(
             enabled = true,
             state = ToggleableState.Off,
-            onCheckedChange = {},
+            onClick = {},
         ) { Text("CheckBox Off") }
         CheckboxLabelled(
             enabled = false,
             state = ToggleableState.Off,
-            onCheckedChange = {},
+            onClick = {},
         ) { Text("CheckBox Off") }
     }
 }
