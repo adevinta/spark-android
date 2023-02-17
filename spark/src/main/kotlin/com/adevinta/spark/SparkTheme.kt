@@ -43,7 +43,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontFamily.Companion
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.tokens.LocalSparkColors
@@ -126,7 +125,7 @@ public fun SparkTheme(
     }
 }
 
-@Suppress("ModifierMissing") // It's okay since it’s a base theme
+@Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
 @Composable
 public fun PreviewTheme(
     themeVariant: ThemeVariant = if (LocalInspectionMode.current && isSystemInDarkTheme()) {

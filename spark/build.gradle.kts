@@ -78,6 +78,7 @@ android {
     lint {
         warningsAsErrors = true
         sarifReport = true
+        lintConfig = file("$rootDir/lint/lint-config.xml")
     }
 
     publishing {
