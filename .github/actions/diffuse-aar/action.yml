@@ -19,18 +19,27 @@ runs:
       run: |
         echo "Unsupported runner os ${{ runner.os }}"
         exit 1
-    - name: 'Downloading diffuse v${{ inputs.diffuse-version }}…'
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        key: ${{ runner.os }}-diffuse-${{ inputs.diffuse-version }}-jar
+        path: ~/.spark/diffuse-jar
+    - name: 'Installing diffuse v${{ inputs.diffuse-version }}…'
+      if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
-      run: wget "https://github.com/JakeWharton/diffuse/releases/download/$DIFFUSE_VERSION/diffuse-$DIFFUSE_VERSION-binary.jar"
+      run: |
+        wget "$DIFFUSE_URL" && chmod +x "$DIFFUSE_JAR"
+        mkdir --parents ~/.spark/diffuse-jar && mv "$DIFFUSE_JAR" "~/.spark/diffuse-jar/
       env:
-        DIFFUSE_VERSION: ${{ inputs.diffuse-version }}
+        DIFFUSE_URL: https://github.com/JakeWharton/diffuse/releases/download/${{ inputs.diffuse-version }}/diffuse-${{ inputs.diffuse-version }}-binary.jar
+        DIFFUSE_JAR: diffuse-${{ inputs.diffuse-version }}-binary.jar
     - shell: bash
       run: |
         ( \
           echo -e "<details><summary>📢 Diffuse report…</summary>" ; \
           echo -e "" ; \
           echo -e "\`\`\`" ; \
-          java -jar diffuse-0.1.0-binary.jar info --aar spark/build/outputs/aar/spark-release.aar ; \
+          java -jar "$HOME/.spark/diffuse-jar/$DIFFUSE_JAR" info --aar spark/build/outputs/aar/spark-release.aar ; \
           echo -e "\`\`\`" ; \
           echo -e "" ; \
           echo -e "</details>" ; \
@@ -38,7 +47,4 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
         PR_NUMBER: ${{ inputs.pr-number }}
-    - shell: bash
-      run: rm -rf "diffuse-$DIFFUSE_VERSION-binary.jar"
-      env:
-        DIFFUSE_VERSION: ${{ inputs.diffuse-version }}
+        DIFFUSE_JAR: diffuse-${{ inputs.diffuse-version }}-binary.jar
