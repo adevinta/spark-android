@@ -65,22 +65,22 @@ jobs:
           pr-number: ${{ github.event.pull_request.number }}
       - name: 'Run screenshot tests'
         id: verifyPaparazziDebug
-        continue-on-error: true
         run: ./gradlew spark:verifyPaparazziDebug
 
       - name: 'Merge screenshot into report'
+        if: failure() && hashFiles('./spark/out/failures/*.png') != ''
         id: merge-screenshot-reports
         run: ./gradlew spark:mergeFailuresIntoHtml
 
       - name: 'Error Screenshot tests'
-        if: hashFiles('./spark/build/reports/paparazzi/failures/failure.html') != ''
+        if: failure() && hashFiles('./spark/build/reports/paparazzi/failures/failure.html') != ''
         uses: actions/upload-artifact@v3
         with:
           name: screenshot-test-results.html
           path: ./spark/build/reports/paparazzi/failures/failure.html
 
       - name: 'Comment PR'
-        if: hashFiles('./spark/build/reports/paparazzi/failures/failure.html') != ''
+        if: failure() && hashFiles('./spark/build/reports/paparazzi/failures/failure.html') != ''
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
