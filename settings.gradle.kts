@@ -43,5 +43,5 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "spark-android"
 
 include(":spark")
-include(":sample")
+// include(":sample")
 include(":spark-lint")
