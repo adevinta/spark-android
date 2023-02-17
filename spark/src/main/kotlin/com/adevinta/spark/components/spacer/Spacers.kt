@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.adevinta.spark.component.spacer
+package com.adevinta.spark.components.spacer
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
