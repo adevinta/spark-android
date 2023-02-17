@@ -13,6 +13,7 @@ kotlinx-coroutines = "1.6.4"
 ksp = "1.8.10-1.0.9"
 lint = "31.1.0-alpha05"
 showkase = "1.0.0-beta17"
+slackLint = "1.0.0"
 
 [libraries]
 
@@ -56,6 +57,8 @@ lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "lint" }
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+
+slack-lint-compose = { module = "com.slack.lint.compose:compose-lint-checks", version.ref = "slackLint" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradlePlugin" }

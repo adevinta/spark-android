@@ -138,6 +138,7 @@ publishing {
 
 dependencies {
     lintPublish(projects.sparkLint)
+    lintChecks(libs.slack.lint.compose)
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
