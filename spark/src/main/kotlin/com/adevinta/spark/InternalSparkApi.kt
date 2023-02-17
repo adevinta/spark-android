@@ -32,7 +32,7 @@ package com.adevinta.spark
 @RequiresOptIn(
     level = RequiresOptIn.Level.ERROR,
     message = """This is an internal com.adevinta.spark API that should not be used from outside of com.adevinta.spark. 
-        |No compatibility guarantees are provided.
-        |It is recommended to create a feature request, so the Spark team can see with you if the existing API needs to be more open in a next version of Spark""",
+ No compatibility guarantees are provided.
+ It is recommended to create a feature request, so the Spark team can see with you if the existing API needs to be more open in a next version of Spark""",
 )
 public annotation class InternalSparkApi
