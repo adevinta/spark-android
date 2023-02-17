@@ -19,7 +19,7 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: |
           set +e
-          for key in $(gh actions-cache list --limit 100 | cut -f 1 )
+          for key in $(gh actions-cache list --sort size --order desc --limit 100 | cut -f 1 )
           do
               gh actions-cache delete $key --confirm | sed -e 's/\x1b\[[0-9;]*m//g' >> $GITHUB_STEP_SUMMARY
           done
@@ -28,7 +28,7 @@ jobs:
         run: |
           set +e
           BRANCH="refs/pull/${{ github.event.pull_request.number }}/merge"
-          for key in $(gh actions-cache list --limit 100 --branch $BRANCH | cut -f 1 )
+          for key in $(gh actions-cache list --sort size --order desc --limit 100 --branch $BRANCH | cut -f 1 )
           do
               gh actions-cache delete $key --branch $BRANCH --confirm | sed -e 's/\x1b\[[0-9;]*m//g' >> $GITHUB_STEP_SUMMARY
           done
