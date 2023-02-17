@@ -28,13 +28,13 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
     explicitApi()
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        allWarningsAsErrors = true
+    compilerOptions {
+        allWarningsAsErrors.set(true)
     }
 }
 

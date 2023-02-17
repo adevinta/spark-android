@@ -22,13 +22,15 @@
 
 package com.adevinta.spark.lint.stubs
 
-import com.adevinta.spark.lint.compiledStub
 import com.android.tools.lint.checks.infrastructure.TestFile
 
-val Composable: TestFile = compiledStub(
+// If you need to update these values, check the following docs first:
+// https://github.com/androidx/androidx/blob/androidx-main/docs/lint_guide.md#updating-bytecode-and-checksum-in-tests-tips-bytecode
+
+val Composable: TestFile = bytecodeStub(
     filename = "Composable.kt",
     filepath = "androidx/compose/runtime",
-    checksum = 0x8b9ba0f5,
+    checksum = 0x497e6ba7,
     source = """
         package androidx.compose.runtime
         @MustBeDocumented
@@ -40,26 +42,26 @@ val Composable: TestFile = compiledStub(
             AnnotationTarget.PROPERTY_GETTER
         )
         annotation class Composable
-    """.trimIndent(),
+        """.trimIndent(),
     """
         META-INF/main.kotlin_module:
-        H4sIAAAAAAAAAGNgYGBmYGBgBGJWKM3ApcYlkZiXUpSfmVKhl5yfW5BfnKpX
-        VJpXkpmbKsQVlJqbmpuUWuRdwqXJJYyhrjRTSMgZwk7xzU/JTMsEK+XjYilJ
-        LS4RYgsBkt4lSgxaDACMRj6sewAAAA==
+        H4sIAAAAAAAA/2NgYGBmYGBgBGIOBijgUuWSTsxLKcrPTKnQS87PLcgvTtVL
+        yy/NS0ksyczPE2ILSS0u8S7h4uViTsvPh3GVGLQYANHGQaFOAAAA
+        
     """.trimIndent(),
     """
         androidx/compose/runtime/Composable.class:
-        H4sIAAAAAAAAAI1STW/aQBB9ayBQ2ibQT0ia5pu0PdRp1FtPQJwWiS8ZJxLi
-        EG3sVeRg7AivaXLjUKn/qYcK9dgfVXUWVKCSpdaW3s7OvNnZeTs/f337DuA9
-        3jDscd8ZBq5zq9vB4CYIhT6MfOkOhF6d7vmlJ9JgDLlrPuK6x/0rvXV5LWyZ
-        RoJha+Hlvh9ILt3A18tzM40Uw369H0jP9ZcpjSiUFXES2NFA+FI4Hxg2Y2im
-        kBQmi+KpEfciwXAYw1tUXM5YqdSaZbPLsB6TYvHhlZDEWuWeF3wWzswRxt93
-        UWCelzk9a1atWqvJkLS6bYNOUstFu2yWG4ZlmAxrbbPVNkyre/HRsKaenXqs
-        Yn8JsR3PWe6s9A9KO/Bc+06JVq2XOx0lbmzCvJnd+LjhCXUt6+5GKD2prU+t
-        E2p92uhZh3rO/xGrISR3uOTE0wajBA0YU0Dvz/rkunXV7ogs5x1DcTLOZLWC
-        ltVyG5kfX7XCZHysHbHKZKwIxwwH9f8YTCoFhocLx9u+ZMh2gmhoi1PXo2Ep
-        mrOsczd0ibB4xrBElZCk/BWoT8OrKR7iNa1fkKYfyFD8nkAW9/FAleohKbCK
-        NQU5BXkFj/CYuE9m3Kd4hufK7CEhUEBRQV7BOjaQwgvy17BZw0tCbCnYrmEH
-        uz2wEHvY70ELcRCi9BuuoX9IqAMAAA==
-        """.trimIndent(),
+        H4sIAAAAAAAA/41SS2/aQBD+1kCgtE2gT0ia5k36kOo06q0nIE5riYdlnEqI
+        Q7TBq8jB2BFeaHLjUKn/qYcK9dgfVXUWVKCSpVaWvp2d+WZnvvH8/PXtO4B3
+        eM2wxwN3EHrujd4N+9dhJPTBMJBeX+jV6Z1f+CINxpC74iOu+zy41JsXV6Ir
+        00gwbC28PAhCyaUXBnp5bqaRYtiv9ULpe8EypT6MZEWchN1hXwRSuO8ZNmNo
+        tpAUJoviqRH3h4LhMIa3qLicsVIxG2W7zbAek+LwwaWQxFrlvh9+Fu7MEcX3
+        uygwz8ucnjWqjtlsMCSdtmXQS+o4t8p2uW44hs2wZtlNy7Cd9vkHw5l6dmqx
+        E/trENvxnGVlpX9QrND3urdqaNVaudVSw41NmIvZjY8bvlBtObfXQs2TZH1s
+        npD0qdCzFmnO/xlWXUjucsmJp/VHCVowpiCjAAysR/4bT92OyHLfMhQn40xW
+        K2hZLbeR+fFVK0zGx9oRq0zGinDMcFD7j+2kevT8/YXjTU8yZFvhcNAVp55P
+        G1O0Z1mfvMgjwuJfRiWqhCTlr6guyX45xRd4RecXpOkjCRS/I5DFXdxTpTpI
+        CqxiTUFOQV7BAzwk7qMZ9zGe4KkyO0gIFFBUkFewjg2k8Iz8JjZNPDexhW0y
+        sWNiF3sdsAj7OOhAi1CKcPgbSLYGUK0DAAA=
+    """.trimIndent(),
 )
