@@ -35,14 +35,14 @@ import androidx.compose.ui.unit.Dp
  * Add a dashed border on a Composable
  */
 public fun Modifier.dashedBorder(width: Dp, radius: Dp, color: Color): Modifier = drawBehind {
+    val paint = Paint()
+        .apply {
+            strokeWidth = width.toPx()
+            this.color = color
+            style = PaintingStyle.Stroke
+            pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
+        }
     drawIntoCanvas {
-        val paint = Paint()
-            .apply {
-                strokeWidth = width.toPx()
-                this.color = color
-                style = PaintingStyle.Stroke
-                pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
-            }
         it.drawRoundRect(
             left = width.toPx(),
             top = width.toPx(),
