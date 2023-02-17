@@ -46,7 +46,7 @@ internal fun SparkCheckbox(
  *
  * @see [SparkCheckbox] if you require support for an indeterminate state, or more advanced
  * color customization between states. Be aware that this is still an internal composable so if you need such
- * state contact the brikke team
+ * state contact the Spark team.
  *
  * @param state whether TriStateCheckbox is checked, unchecked or in indeterminate state
  * @param onCheckedChange callback to be invoked when checkbox is being clicked,
