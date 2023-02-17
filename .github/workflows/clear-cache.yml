@@ -15,20 +15,22 @@ jobs:
       - uses: actions/checkout@v3
       - run: gh extension install actions/gh-actions-cache
       - run: gh actions-cache list
-      - if: github.event_name == 'workflow_dispatch'
+      - name: Clear cache entries
+        if: github.event_name == 'workflow_dispatch'
         run: |
           set +e
           for key in $(gh actions-cache list --limit 100 | cut -f 1 )
           do
-              gh actions-cache delete $key --confirm >> $GITHUB_STEP_SUMMARY
+              gh actions-cache delete $key --confirm | sed -e 's/\x1b\[[0-9;]*m//g' >> $GITHUB_STEP_SUMMARY
           done
-      - if: github.event_name == 'pull_request'
+      - name: Clear cache entries from PR
+        if: github.event_name == 'pull_request'
         run: |
           set +e
           BRANCH="refs/pull/${{ github.event.pull_request.number }}/merge"
           for key in $(gh actions-cache list --limit 100 --branch $BRANCH | cut -f 1 )
           do
-              gh actions-cache delete $key --branch $BRANCH --confirm >> $GITHUB_STEP_SUMMARY
+              gh actions-cache delete $key --branch $BRANCH --confirm | sed -e 's/\x1b\[[0-9;]*m//g' >> $GITHUB_STEP_SUMMARY
           done
       - run: gh actions-cache list
 
