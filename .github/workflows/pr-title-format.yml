@@ -10,10 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
+        id: pip
         with:
           python-version: '3.9'
           cache: 'pip'
           cache-dependency-path: '.github/requirements.txt'
+      - run: echo "cache-hit=${{ steps.pip.outputs.cache-hit }}"
       - run: pip install -r .github/requirements.txt
       - id: check
         name: 'Check title format'
