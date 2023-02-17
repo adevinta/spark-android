@@ -21,10 +21,13 @@ import org.jetbrains.dokka.gradle.DokkaTask
  * SOFTWARE.
  */
 
+// TODO: Remove once https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.dependencyGuard)
+    alias(libs.plugins.google.ksp)
     alias(libs.plugins.dokka)
     `maven-publish`
 }
@@ -32,6 +35,10 @@ plugins {
 kotlin {
     jvmToolchain(11)
     explicitApi()
+}
+
+ksp {
+    arg("skipPrivatePreviews", "true")
 }
 
 android {
@@ -57,7 +64,15 @@ android {
         allWarningsAsErrors = true
         freeCompilerArgs += listOf(
             "-Xexplicit-api=strict",
+            "-opt-in=com.adevinta.spark.InternalSparkApi",
+            "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
+            "-opt-in=kotlin.RequiresOptIn",
         )
+    }
+
+    buildFeatures.compose = true
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
 
     lint {
@@ -123,7 +138,22 @@ publishing {
 
 dependencies {
     lintPublish(projects.sparkLint)
+
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+
+    debugImplementation(libs.androidx.compose.ui.testManifest)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
+    debugImplementation(libs.airbnb.showkase)
+    kspDebug(libs.airbnb.showkase.processor)
+
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
+
     dokkaHtmlPlugin(libs.android.documentation.plugin)
 }

@@ -20,11 +20,14 @@
  * SOFTWARE.
  */
 
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.lint) apply false
-    alias(libs.plugins.android.kotlin) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.google.ksp) apply false
-}
+package com.adevinta.spark
+
+import com.airbnb.android.showkase.annotation.ShowkaseRoot
+import com.airbnb.android.showkase.annotation.ShowkaseRootModule
+
+/**
+ * This class is needed by Showkase to find all composable components.
+ * Be careful if you rename it, because it has to be modified in the intent used to display the demo app
+ */
+@ShowkaseRoot
+internal class SparkShowkaseRootModule : ShowkaseRootModule

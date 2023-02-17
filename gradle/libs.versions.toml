@@ -10,7 +10,9 @@ dokka = "1.7.20"
 junit = "4.13.2"
 kotlin = "1.8.10"
 kotlinx-coroutines = "1.6.4"
+ksp = "1.8.10-1.0.9"
 lint = "30.4.1"
+showkase = "1.0.0-beta17"
 
 [libraries]
 
@@ -21,6 +23,9 @@ accompanist-permissions = { module = "com.google.accompanist:accompanist-permiss
 accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-testharness = { module = "com.google.accompanist:accompanist-testharness", version.ref = "accompanist" }
+
+airbnb-showkase = { module = "com.airbnb.android:showkase", version.ref = "showkase" }
+airbnb-showkase-processor = { module = "com.airbnb.android:showkase-processor", version.ref = "showkase" }
 
 android-documentation-plugin = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "androidDocumentationPlugin" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
@@ -61,3 +66,4 @@ android-test = { id = "com.android.test", version.ref = "android-gradlePlugin" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
