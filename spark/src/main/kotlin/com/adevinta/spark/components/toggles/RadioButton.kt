@@ -49,7 +49,7 @@ internal fun SparkRadioButton(
  *  menu because it uses less space.
  *
  * @see [SparkRadioButton] if you require color customization between states. Be aware that this is still an internal
- * composable so if you need such state contact the spark team
+ * composable so if you need such state contact the Spark team
  *
  * @param selected whether this radio button is selected or not
  * @param onClick callback to be invoked when the RadioButton is clicked. If null, then this RadioButton will not
@@ -89,7 +89,7 @@ public fun RadioButton(
  *  menu because it uses less space.
  *
  * @see [SparkRadioButton] if you require color customization between states. Be aware that this is still an internal
- * composable so if you need such state contact the spark team
+ * composable so if you need such state contact the Spark team
  *
  * @param selected whether this radio button is selected or not
  * @param onClick callback to be invoked when the RadioButton is clicked. If null, then this RadioButton will not
@@ -100,7 +100,7 @@ public fun RadioButton(
  * [Interaction]s for this Checkbox. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this Checkbox in different [Interaction]s.
- * @param endContent The end content displayed after the radio button, Usually a Text composable
+ * @param endContent The end content displayed after the radio button, usually a Text composable
  */
 @Composable
 public fun RadioButtonLabelled(

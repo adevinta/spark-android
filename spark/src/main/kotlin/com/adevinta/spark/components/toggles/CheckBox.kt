@@ -46,7 +46,7 @@ internal fun SparkCheckbox(
  *
  * @see [SparkCheckbox] if you require support for an indeterminate state, or more advanced
  * color customization between states. Be aware that this is still an internal composable so if you need such
- * state contact the spark team
+ * state contact the Spark team.
  *
  * @param state whether TriStateCheckbox is checked, unchecked or in indeterminate state
  * @param onClick callback to be invoked when checkbox is being clicked,
@@ -85,7 +85,7 @@ public fun Checkbox(
  *
  * @see [SparkCheckbox] if you require support for an indeterminate state, or more advanced
  * color customization between states. Be aware that this is still an internal composable so if you need such
- * state contact the spark team
+ * state contact the Spark team
  *
  * @param state whether TriStateCheckbox is checked, unchecked or in indeterminate state
  * @param onClick callback to be invoked when checkbox is being clicked,
@@ -97,7 +97,7 @@ public fun Checkbox(
  * [Interaction]s for this Checkbox. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this Checkbox in different [Interaction]s.
- * @param endContent The end content displayed after the checkbox, Usually a Text composable
+ * @param endContent The end content displayed after the checkbox, usually a Text composable
  */
 @Composable
 public fun CheckboxLabelled(
