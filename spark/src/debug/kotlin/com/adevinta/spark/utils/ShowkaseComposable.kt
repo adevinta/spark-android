@@ -22,4 +22,4 @@
 
 package com.adevinta.spark.utils
 
-typealias ShowkaseComposable = com.airbnb.android.showkase.annotation.ShowkaseComposable
+public typealias ShowkaseComposable = com.airbnb.android.showkase.annotation.ShowkaseComposable
