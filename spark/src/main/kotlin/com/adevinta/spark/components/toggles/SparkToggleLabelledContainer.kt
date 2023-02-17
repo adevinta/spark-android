@@ -121,7 +121,7 @@ internal fun TogglesLabelledSlotPreview() {
                 Checkbox(
                     modifier = Modifier.minimumTouchTargetSize(),
                     state = ToggleableState(true),
-                    onCheckedChange = null,
+                    onClick = null,
                 )
             },
             role = Role.Checkbox,
