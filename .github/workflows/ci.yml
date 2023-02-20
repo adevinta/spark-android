@@ -68,7 +68,7 @@ jobs:
         id: test
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
-          arguments: testReleaseUnitTest
+          arguments: testReleaseUnitTest -x :screenshots-test:testReleaseUnitTest
       - name: '📦 Archive JUnit reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports

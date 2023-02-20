@@ -27,4 +27,5 @@ plugins {
     alias(libs.plugins.android.kotlin) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.google.ksp) apply false
+    alias(libs.plugins.cashapp.paparazzi) apply false
 }
