@@ -19,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: true
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
@@ -68,13 +70,23 @@ jobs:
         id: test
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
-          arguments: testReleaseUnitTest
+          arguments: testReleaseUnitTest verifyPaparazziRelease
       - name: '📦 Archive JUnit reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports
         with:
           html: '**/build/reports/tests/testReleaseUnitTest'
           xml: '**/build/test-results/testReleaseUnitTest/**.xml'
+      - name: '📦 Archive Paparazzi reports'
+        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
+        uses: ./.github/actions/archive-paparazzi-reports
+
+      - name: '📢 Paparazzi report'
+        if: ${{ failure() && steps.test.outcome == 'failure' && github.event_name == 'pull_request'}}
+        uses: ./.github/actions/paparazzi-report
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-number: ${{ github.event.pull_request.number }}
 
       - name: '🕵️ Lint'
         id: lint
