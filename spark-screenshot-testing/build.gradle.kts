@@ -26,7 +26,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.google.ksp)
-    alias(libs.plugins.cashapp.paparazzi)
+    alias(libs.plugins.paparazzi)
 }
 
 kotlin {
