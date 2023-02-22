@@ -67,10 +67,11 @@ internal class PreviewScreenshotTests {
                         else -> name
                     }
                     paparazzi.unsafeUpdateConfig(deviceConfig = BaseDeviceConfig.PIXEL_5.deviceConfig)
-                    paparazzi.snapshotPlus(name = previewNameWithVariants) {
+                    paparazzi.sparkSnapshot(name = previewNameWithVariants) {
                         showkaseComponent.component()
                     }
-                } catch (e: Exception) {
+                } catch (t: Throwable) {
+                    // TODO-@soulcramer (22-48-2023): Should we display the throwable message here too?
                     failure = true
                 }
             }

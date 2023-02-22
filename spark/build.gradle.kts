@@ -144,15 +144,9 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-
-    debugImplementation(libs.androidx.compose.ui.testManifest)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-
-    implementation(libs.androidx.compose.ui.testManifest)
     implementation(libs.androidx.compose.ui.tooling)
 
-    implementation(libs.airbnb.showkase)
+    compileOnly(libs.airbnb.showkase)
     ksp(libs.airbnb.showkase.processor)
 
     dokkaHtmlPlugin(libs.android.documentation.plugin)
