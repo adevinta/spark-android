@@ -1,0 +1,16 @@
+name: '📦 Archive Paparazzi reports'
+description: 'Archive Paparazzi reports and deltas'
+runs:
+  using: composite
+  steps:
+    - name: 'Archive report'
+      uses: actions/upload-artifact@v3
+      with:
+        name: paparazzi-html
+        path: '**/build/reports/paparazzi'
+    - name: 'Archive deltas'
+      if: ${{ hashFiles('**/out/failures/**.png') != '' }}
+      uses: actions/upload-artifact@v3
+      with:
+        name: paparazzi-delta
+        path: '**/out/failures/**.png'

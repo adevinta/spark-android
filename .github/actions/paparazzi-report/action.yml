@@ -1,0 +1,24 @@
+name: '📢 Paparazzi report'
+description: 'Comment on PR when paparazzi produced delta images'
+inputs:
+  github-token:
+    description: 'GitHub token'
+    required: true
+  pr-number:
+    description: 'PR number'
+    required: true
+runs:
+  using: composite
+  steps:
+    - if: ${{ hashFiles('**/out/failures/**.png') != '' }}
+      shell: bash
+      run: |
+        ( \
+          echo "🚨 UI regression detected! Checkout the [paparazzi-delta](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts) artifact." ; \
+          echo -e "If these changes are expected, you can either:" ; \
+          echo -e "- manually run the \`gradlew recordPaparazziRelease\` and commit the new golden images" ; \
+          echo -e "- or ask \`@adevinta/spark-bot paparazzi golden images\` in this PR" ; \
+        ) | gh pr comment "$PR_NUMBER" --body-file -
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        PR_NUMBER: ${{ inputs.pr-number }}
