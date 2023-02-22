@@ -139,6 +139,8 @@ publishing {
 dependencies {
     lintPublish(projects.sparkLint)
 
+    api(projects.sparkIcons)
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
