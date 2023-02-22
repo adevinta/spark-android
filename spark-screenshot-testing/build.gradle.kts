@@ -1,4 +1,3 @@
-import org.jetbrains.dokka.gradle.DokkaTask
 /*
  * Copyright (c) 2023 Adevinta
  *
@@ -26,10 +25,8 @@ import org.jetbrains.dokka.gradle.DokkaTask
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
-    alias(libs.plugins.dependencyGuard)
     alias(libs.plugins.google.ksp)
-    alias(libs.plugins.dokka)
-    `maven-publish`
+    alias(libs.plugins.paparazzi)
 }
 
 kotlin {
@@ -42,16 +39,11 @@ ksp {
 }
 
 android {
-    namespace = "com.adevinta.spark"
+    namespace = "com.adevinta.spark.screenshots.test"
     compileSdk = 33
-    resourcePrefix = "spark_"
 
     defaultConfig {
         minSdk = 24
-        consumerProguardFile("consumer-rules.pro")
-        aarMetadata {
-            minCompileSdk = 24
-        }
     }
 
     compileOptions {
@@ -74,83 +66,18 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
-
-    lint {
-        warningsAsErrors = true
-        sarifReport = true
-    }
-
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
-}
-
-dependencyGuard {
-    configuration("releaseRuntimeClasspath")
-}
-
-tasks.dokkaHtml.configure {
-    moduleName.set("Spark")
-    outputDirectory.set(rootProject.buildDir.resolve("dokka"))
-    dokkaSourceSets.configureEach {
-        // List of files or directories containing sample code (referenced with @sample tags)
-        // samples.from("samples/basic.kt", "samples/advanced.kt")
-    }
-}
-
-tasks.withType<DokkaTask> {
-    notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
-}
-
-publishing {
-    repositories {
-        mavenLocal {
-            name = "Local"
-            url = uri(rootProject.layout.buildDirectory.dir(".m2/repository"))
-        }
-    }
-    publications {
-        register<MavenPublication>("maven") {
-            // AGP creates software components during the afterEvaluate callback step...
-            afterEvaluate {
-                from(components.getByName("release"))
-            }
-            pom {
-                name.set("Spark")
-                description.set("Spark Design System")
-                url.set("https://github.com/adevinta/spark-android")
-                licenses {
-                    license {
-                        name.set("MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-                scm {
-                    url.set("https://github.com/adevinta/spark-android")
-                }
-            }
-        }
-    }
 }
 
 dependencies {
-    lintPublish(projects.sparkLint)
+    implementation(projects.spark)
 
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling)
 
-    compileOnly(libs.airbnb.showkase)
+    implementation(libs.airbnb.showkase)
     ksp(libs.airbnb.showkase.processor)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
-
-    dokkaHtmlPlugin(libs.android.documentation.plugin)
 }
