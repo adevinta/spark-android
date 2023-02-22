@@ -33,7 +33,7 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.Dp
 import app.cash.paparazzi.Paparazzi
 
-internal fun Paparazzi.snapshotPlus(
+internal fun Paparazzi.sparkSnapshot(
     name: String? = null,
     drawBackground: Boolean = true,
     composable: @Composable () -> Unit,
