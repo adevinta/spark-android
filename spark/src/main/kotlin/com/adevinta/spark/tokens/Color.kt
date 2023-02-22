@@ -106,7 +106,6 @@ import com.adevinta.spark.tokens.PaletteTokens.Red90
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
-import com.adevinta.spark.utils.ShowkaseComposable
 
 public fun lightSparkColors(
     isPro: Boolean = false,
@@ -730,13 +729,12 @@ public fun debugColors(
     name = "Colors",
 )
 @Composable
-@ShowkaseComposable(skip = true) // FIXME: This preview doesn't render dark mode with paparazzi which fail the tests
-internal fun ColorPreview(
+private fun ColorPreview(
     @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-        Row() {
+        Row {
             ColorItem(SparkTheme.colors.primary, "primary")
             ColorItem(SparkTheme.colors.primaryContainer, "primary Container")
         }

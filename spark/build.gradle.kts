@@ -149,11 +149,11 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.testManifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    debugImplementation(libs.airbnb.showkase)
-    kspDebug(libs.airbnb.showkase.processor)
+    implementation(libs.androidx.compose.ui.testManifest)
+    implementation(libs.androidx.compose.ui.tooling)
 
-    testImplementation(libs.junit)
-    testImplementation(libs.kotlin.test)
+    implementation(libs.airbnb.showkase)
+    ksp(libs.airbnb.showkase.processor)
 
     dokkaHtmlPlugin(libs.android.documentation.plugin)
 }

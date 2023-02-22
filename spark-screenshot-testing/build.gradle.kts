@@ -75,10 +75,9 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.ui)
 
-    debugImplementation(libs.airbnb.showkase)
-    kspDebug(libs.airbnb.showkase.processor)
+    implementation(libs.airbnb.showkase)
+    ksp(libs.airbnb.showkase.processor)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
-    testImplementation(libs.google.testParameterInjector)
 }

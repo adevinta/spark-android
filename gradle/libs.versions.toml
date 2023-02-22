@@ -47,7 +47,7 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 androidx-compose-ui-util = { module = "androidx.compose.ui:ui-util" }
 
 # https://github.com/google/TestParameterInjector
-google-testParameterInjector = { module = "com.google.testparameterinjector:test-parameter-injector", version.ref = "testParameterInjector" }
+testParameterInjector = { module = "com.google.testparameterinjector:test-parameter-injector", version.ref = "testParameterInjector" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 
