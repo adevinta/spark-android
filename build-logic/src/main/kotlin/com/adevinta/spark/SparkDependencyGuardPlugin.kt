@@ -20,14 +20,23 @@
  * SOFTWARE.
  */
 
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.lint) apply false
-    alias(libs.plugins.android.kotlin) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.google.ksp) apply false
-    alias(libs.plugins.paparazzi) apply false
-    alias(libs.plugins.dokka) apply false
-    alias(libs.plugins.dependencyGuard) apply false
+package com.adevinta.spark
+
+
+import com.dropbox.gradle.plugins.dependencyguard.DependencyGuardPluginExtension
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.configure
+
+internal class SparkDependencyGuardPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        with(target) {
+            apply(plugin = "com.dropbox.dependency-guard")
+
+            configure<DependencyGuardPluginExtension> {
+                configuration("releaseRuntimeClasspath")
+            }
+        }
+    }
 }
