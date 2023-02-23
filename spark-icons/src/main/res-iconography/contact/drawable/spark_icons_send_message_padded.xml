@@ -1,0 +1,6 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/design_ic_send_message_16dp"
+        android:left="2dp" />
+</layer-list>
+

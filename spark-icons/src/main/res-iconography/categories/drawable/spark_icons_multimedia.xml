@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!--TODO update 24dp with Brikke iconography dimens when available-->
+    <path
+        android:fillColor="#000"
+        android:fillType="evenOdd"
+        android:pathData="M10.443 21.183c-0.322 0-0.644-0.313-0.644-0.626s0.322-0.626 0.644-0.626h3.114c0.429 0 0.644 0.313 0.644 0.626s-0.321 0.626-0.644 0.626h-3.114zm7.41-17.53v-0.94c0-0.313-0.323-0.626-0.646-0.626H6.791c-0.322 0-0.644 0.313-0.644 0.626v0.94h11.705zM6.146 16.798h11.705V5.74H6.148V16.8zm11.705 4.488v-2.4H6.148v2.4c0 0.312 0.322 0.626 0.644 0.626h10.416c0.43 0 0.645-0.209 0.645-0.626zM17.207 0C18.819 0 20 1.252 20 2.713v18.574C20 22.748 18.712 24 17.207 24H6.791C5.288 24 4 22.748 4 21.287V2.713C4 1.253 5.29 0 6.791 0h10.416z" />
+</vector>

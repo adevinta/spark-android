@@ -1,0 +1,89 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="24dp"
+            android:height="24dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <group
+                android:name="heart"
+                android:pivotX="12"
+                android:pivotY="12"
+                android:scaleX="0.8"
+                android:scaleY="0.8">
+                <path
+                    android:name="heart_outline"
+                    android:fillColor="#000"
+                    android:fillType="evenOdd"
+                    android:pathData="M21.19 2.24A6.76 6.76 0 0 0 12 3.61a6.76 6.76 0 0 0-9.19-1.37A6.89 6.89 0 0 0 0 7.58c-0.16 4.84 4 8.72 10.26 14.66l0.12 0.12a2.32 2.32 0 0 0 3.23 0l0.13-0.12C20 16.29 24.15 12.41 24 7.57a6.89 6.89 0 0 0-2.81-5.33zm-9.07 18.15L12 20.51l-0.12-0.12C6.17 15 2.4 11.46 2.4 7.86a4.18 4.18 0 0 1 4.2-4.37 4.68 4.68 0 0 1 4.28 3h2.25a4.66 4.66 0 0 1 4.27-3 4.18 4.18 0 0 1 4.2 4.37c0 3.6-3.77 7.14-9.48 12.53z" />
+                <path
+                    android:name="heart_filled"
+                    android:fillAlpha="0"
+                    android:fillColor="#000"
+                    android:fillType="evenOdd"
+                    android:pathData="M21.188 2.235C18.021-0.021 14.111 1.038 12 3.607 9.889 1.037 5.978-0.01 2.811 2.235 1.12 3.432 0.076 5.464 0.004 7.583-0.152 12.42 3.963 16.298 10.26 22.22l0.132 0.124a2.328 2.328 0 0 0 3.227 0.013l0.12-0.113c6.298-5.946 10.424-9.823 10.256-14.661-0.072-2.12-1.116-4.151-2.807-5.348" />
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="heart">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="400"
+                    android:interpolator="@android:anim/bounce_interpolator"
+                    android:propertyName="scaleX"
+                    android:startOffset="0"
+                    android:valueFrom="0.8"
+                    android:valueTo="1"
+                    android:valueType="floatType" />
+                <objectAnimator
+                    android:duration="400"
+                    android:interpolator="@android:anim/bounce_interpolator"
+                    android:propertyName="scaleY"
+                    android:startOffset="0"
+                    android:valueFrom="0.8"
+                    android:valueTo="1"
+                    android:valueType="floatType" />
+                <objectAnimator
+                    android:duration="100"
+                    android:interpolator="@android:interpolator/fast_out_linear_in"
+                    android:propertyName="scaleX"
+                    android:startOffset="900"
+                    android:valueFrom="1"
+                    android:valueTo="0.8"
+                    android:valueType="floatType" />
+                <objectAnimator
+                    android:duration="100"
+                    android:interpolator="@android:interpolator/fast_out_linear_in"
+                    android:propertyName="scaleY"
+                    android:startOffset="900"
+                    android:valueFrom="1"
+                    android:valueTo="0.8"
+                    android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="heart_filled">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="150"
+                    android:interpolator="@android:interpolator/fast_out_linear_in"
+                    android:propertyName="fillAlpha"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType" />
+                <objectAnimator
+                    android:duration="100"
+                    android:interpolator="@android:interpolator/fast_out_linear_in"
+                    android:propertyName="fillAlpha"
+                    android:startOffset="900"
+                    android:valueFrom="1"
+                    android:valueTo="0"
+                    android:valueType="floatType" />
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
