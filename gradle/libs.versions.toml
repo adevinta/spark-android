@@ -15,6 +15,7 @@ lint = "31.1.0-alpha05"
 paparazzi = "1.2.0"
 showkase = "1.0.0-beta17"
 testParameterInjector = "1.10"
+slack-lint = "0.2.3"
 
 [libraries]
 
@@ -61,6 +62,8 @@ lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "lint" }
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+
+slack-lint = { module = "com.slack.lint:slack-lint-checks", version.ref = "slack-lint" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradlePlugin" }
