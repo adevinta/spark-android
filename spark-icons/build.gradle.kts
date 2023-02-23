@@ -66,46 +66,9 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
 
-    sourceSets.getByName("main") {
-        res.srcDirs(
-            "src/main/res-iconography/account",
-            "src/main/res-iconography/actions",
-            "src/main/res-iconography/arrows",
-            "src/main/res-iconography/calendar",
-            "src/main/res-iconography/camera",
-            "src/main/res-iconography/categories",
-            "src/main/res-iconography/check",
-            "src/main/res-iconography/clock",
-            "src/main/res-iconography/criteria",
-            "src/main/res-iconography/contact",
-            "src/main/res-iconography/covid",
-            "src/main/res-iconography/donation",
-            "src/main/res-iconography/eye",
-            "src/main/res-iconography/flags",
-            "src/main/res-iconography/heart",
-            "src/main/res-iconography/icons",
-            "src/main/res-iconography/infos",
-            "src/main/res-iconography/lightbulb",
-            "src/main/res-iconography/key",
-            "src/main/res-iconography/lock",
-            "src/main/res-iconography/logo",
-            "src/main/res-iconography/map",
-            "src/main/res-iconography/micro",
-            "src/main/res-iconography/notif",
-            "src/main/res-iconography/offers",
-            "src/main/res-iconography/options",
-            "src/main/res-iconography/pen",
-            "src/main/res-iconography/picture",
-            "src/main/res-iconography/share",
-            "src/main/res-iconography/shipping",
-            "src/main/res-iconography/toggles",
-            "src/main/res-iconography/trash",
-            "src/main/res-iconography/user",
-            "src/main/res-iconography/value",
-            "src/main/res-iconography/wheel",
-        )
+    sourceSets.configureEach {
+        projectDir.resolve("src/$name/res-iconography").listFiles()?.forEach(res::srcDir)
     }
-
     lint {
         warningsAsErrors = true
         sarifReport = true
