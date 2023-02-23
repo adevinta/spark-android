@@ -33,7 +33,7 @@ airbnb-showkase-processor = { module = "com.airbnb.android:showkase-processor", 
 android-documentation-plugin = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "androidDocumentationPlugin" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
 # https://androidx.tech/artifacts/appcompat/appcompat-resources/
-androidx-appCompat-ressources = { module = "androidx.appcompat:appcompat-resources", version.ref = "androidx-appCompat" }
+androidx-appCompat-resources = { module = "androidx.appcompat:appcompat-resources", version.ref = "androidx-appCompat" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }

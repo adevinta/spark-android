@@ -75,5 +75,5 @@ android {
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.appCompat.ressources) // Needed for compat vector drawables
+    implementation(libs.androidx.appCompat.resources) // Needed for compat vector drawables
 }
