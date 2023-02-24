@@ -483,9 +483,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
 
         public object LivraisonPerso : Delivery(R.drawable.spark_icons_delivery_sparkles)
-        public object MondialRelay : Delivery(R.drawable.spark_icons_mondial_relay)
-        public object Colissimo : Delivery(R.drawable.spark_icons_colissimo)
-        public object LaPoste : Delivery(R.drawable.spark_icons_la_poste)
+        public abstract class Partner(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId)
     }
 
     public sealed class Map(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
@@ -635,8 +633,5 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public abstract class Logo(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
-        public object Lbc : Logo(R.drawable.spark_icons_lbc_logo_24dp)
-        public object Leboncoin : Logo(R.drawable.spark_icons_leboncoin)
-    }
+    public abstract class Logo(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId)
 }
