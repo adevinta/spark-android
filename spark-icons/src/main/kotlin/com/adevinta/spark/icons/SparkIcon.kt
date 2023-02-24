@@ -250,7 +250,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public sealed class Generique(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
             public object Defaut1 : Generique(R.drawable.spark_icons_like)
             public object Defaut2 : Generique(R.drawable.spark_icons_criteria)
-            public object Donate : Emploi(R.drawable.spark_icons_donate) // generique
+            public object Donate : Emploi(R.drawable.spark_icons_donate)
             public object Smoking : Generique(R.drawable.spark_icons_smoking)
             public object Localisation : Generique(R.drawable.spark_icons_localisation)
             public object Delivery : Generique(R.drawable.spark_icons_delivery)
@@ -307,7 +307,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
             public object Vue : Location(R.drawable.spark_icons_location_vue)
             public object VueMer : Location(R.drawable.spark_icons_location_vue_mer)
             public object Wc : Location(R.drawable.spark_icons_location_wc)
-            public object Ascenseur : Location(R.drawable.spark_icons_elevator) // okay
+            public object Ascenseur : Location(R.drawable.spark_icons_elevator)
             public object ChargesComprises : Location(R.drawable.spark_icons_location_charges_comprises)
         }
 
@@ -328,7 +328,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
             public object LinensType : Maison(R.drawable.spark_icons_linens_type)
             public object TableArtMaterial : Maison(R.drawable.spark_icons_maison_tableart_material)
             public object TableArtProduct : Maison(R.drawable.spark_icons_maison_tableart_product)
-            public object FournitureType : Maison(R.drawable.spark_icons_furniture_type) // okay
+            public object FournitureType : Maison(R.drawable.spark_icons_furniture_type)
         }
 
         public sealed class Mode(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
@@ -374,7 +374,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
             public object Jardin : Vacances(R.drawable.spark_icons_garden)
             public object Parking : Vacances(R.drawable.spark_icons_park)
             public object Piscine : Vacances(R.drawable.spark_icons_swimming_pool)
-            public object Accessories : Vacances(R.drawable.spark_icons_accessories_type) // FIXME: listed in vacances
+            public object Accessories : Vacances(R.drawable.spark_icons_accessories_type)
             public object Date : Vacances(R.drawable.spark_icons_date)
         }
 
@@ -424,8 +424,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
 
         public object NoPhoto : Images(R.drawable.spark_icons_no_photo1)
-        public object ErrorPhoto :
-            Images(R.drawable.spark_icons_error_photo) //This is not yet part of DS, waiting for real icon
+        public object ErrorPhoto : Images(R.drawable.spark_icons_error_photo)
 
         public object NoPhoto2 : Images(R.drawable.spark_icons_no_photo2)
         public object Rotate : Images(R.drawable.spark_icons_photo_rotate)
@@ -466,7 +465,6 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
     }
 
     public abstract class Delivery(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
-        //        public object DeliveryFast : Delivery(R.drawable.spark_icons_warning)
         public object DeliveryHand : Delivery(R.drawable.spark_icons_delivery_hands)
         public object DeliveryOutline : Delivery(R.drawable.spark_icons_box_outline)
         public object Truck : Delivery(R.drawable.spark_icons_delivery_truck)
@@ -566,7 +564,6 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
     }
 
     public sealed class Paiement(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
-        // Weird this is listed in livraison
         public object GarantiePanne : Paiement(R.drawable.spark_icons_garantie_panne)
     }
 
