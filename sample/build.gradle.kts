@@ -21,46 +21,13 @@
  */
 
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.android.kotlin)
-}
-
-kotlin {
-    jvmToolchain(11)
+    id("com.adevinta.spark.android-application")
+    id("com.adevinta.spark.android-compose")
 }
 
 android {
     namespace = "com.adevinta.spark.sample"
-    compileSdk = 33
-
-    defaultConfig {
-        applicationId = "com.adevinta.spark.sample"
-        minSdk = 24
-        targetSdk = 33
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures.compose = true
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+    defaultConfig.applicationId = "com.adevinta.spark.sample"
 }
 
 dependencies {

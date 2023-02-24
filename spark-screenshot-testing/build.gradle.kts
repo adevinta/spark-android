@@ -23,55 +23,19 @@
 // TODO: Remove once https://youtrack.jetbrains.com/issue/KTIJ-19369 is fixed
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.android.kotlin)
-    alias(libs.plugins.google.ksp)
+    id("com.adevinta.spark.android-library")
+    id("com.adevinta.spark.android-compose")
+    id("com.adevinta.spark.ksp")
     alias(libs.plugins.paparazzi)
 }
 
-kotlin {
-    jvmToolchain(11)
-    explicitApi()
-}
-
-ksp {
-    arg("skipPrivatePreviews", "true")
-}
-
 android {
-    namespace = "com.adevinta.spark.screenshots.test"
-    compileSdk = 33
-
-    defaultConfig {
-        minSdk = 24
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = "11"
-        allWarningsAsErrors = true
-        freeCompilerArgs += listOf(
-            "-Xexplicit-api=strict",
-            "-opt-in=com.adevinta.spark.InternalSparkApi",
-            "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
-            "-opt-in=kotlin.RequiresOptIn",
-        )
-    }
-
-    buildFeatures.compose = true
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
-    }
+    namespace = "com.adevinta.spark.screenshot.testing"
 }
 
 dependencies {
     implementation(projects.spark)
 
-    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.ui)
 

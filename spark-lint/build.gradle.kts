@@ -23,24 +23,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  */
 
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-    alias(libs.plugins.android.lint)
-}
-
-kotlin {
-    jvmToolchain(17)
-    explicitApi()
-}
-
-tasks.withType<KotlinCompile> {
-    compilerOptions {
-        allWarningsAsErrors.set(true)
-    }
-}
-
-lint {
-    warningsAsErrors = true
-    sarifReport = true
+    id("com.adevinta.spark.kotlin-jvm")
+    id("com.adevinta.spark.android-lint")
 }
 
 dependencies {
