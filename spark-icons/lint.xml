@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- We ignore it since criteria icons almost all have this issue and we have to wait for design to chnage these path to resolve it -->
+    <issue id="VectorPath">
+        <ignore path="src/main/res-iconography/*/drawable/*.xml" />
+    </issue>
+</lint>

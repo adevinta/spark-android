@@ -66,9 +66,13 @@ android {
         kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
 
+    sourceSets.configureEach {
+        projectDir.resolve("src/$name/res-iconography").listFiles()?.forEach(res::srcDir)
+    }
     lint {
         warningsAsErrors = true
         sarifReport = true
+        lintConfig = file("lint.xml")
     }
 }
 
