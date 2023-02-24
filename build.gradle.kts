@@ -27,4 +27,7 @@ plugins {
     alias(libs.plugins.android.kotlin) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.google.ksp) apply false
+    alias(libs.plugins.paparazzi) apply false
+    alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.dependencyGuard) apply false
 }
