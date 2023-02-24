@@ -28,6 +28,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+import java.io.File
 
 public class SparkAndroidPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -52,6 +53,7 @@ public class SparkAndroidPlugin : Plugin<Project> {
                 lint {
                     warningsAsErrors = true
                     sarifReport = true
+                    lintConfig = file("lint.xml").takeIf(File::exists)
                 }
             }
         }
