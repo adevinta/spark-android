@@ -32,6 +32,13 @@ plugins {
 android {
     namespace = "com.adevinta.spark"
     resourcePrefix = "spark_"
+
+    kotlinOptions {
+        freeCompilerArgs += listOf(
+            "-opt-in=com.adevinta.spark.InternalSparkApi",
+            "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
+        )
+    }
 }
 
 dependencies {
