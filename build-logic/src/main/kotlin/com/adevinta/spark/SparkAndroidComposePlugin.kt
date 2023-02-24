@@ -27,9 +27,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal class SparkAndroidComposePlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -41,16 +38,6 @@ internal class SparkAndroidComposePlugin : Plugin<Project> {
                 composeOptions {
                     kotlinCompilerExtensionVersion = spark().versions.`androidx-compose-compiler`.toString()
                 }
-            }
-
-            // Ignore [KaptGenerateStubsTask] types as they inherit arguments from standard tasks via
-            // [KaptGenerateStubsTask.compileKotlinArgumentsContributor] and applying arguments to them could result in duplicates.
-            target.tasks.withType<KotlinCompile>().matching { it !is KaptGenerateStubsTask }.configureEach {
-                compilerOptions.freeCompilerArgs.addAll(
-                    "-opt-in=com.adevinta.spark.InternalSparkApi",
-                    "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
-                    "-opt-in=kotlin.RequiresOptIn",
-                )
             }
 
             dependencies {
