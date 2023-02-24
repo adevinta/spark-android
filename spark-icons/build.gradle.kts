@@ -30,6 +30,9 @@ plugins {
 android {
     namespace = "com.adevinta.spark.icons"
     resourcePrefix = "spark_icons_"
+    sourceSets.configureEach {
+        projectDir.resolve("src/$name/res-iconography").listFiles()?.forEach(res::srcDir)
+    }
 }
 
 dependencies {

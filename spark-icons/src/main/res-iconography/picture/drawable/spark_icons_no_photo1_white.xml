@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--Required mostly when we use it as a placeholder or a failure image for fresco since we can't tint them-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="1dp"
+    android:height="1dp"
+    android:tint="#fff"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#000"
+        android:fillType="evenOdd"
+        android:pathData="M10.91 15.9l3.817-5.012 4.91 6.667H4.363l3.818-5L10.91 15.9zm10.908 3.788h-0.01V4.311c-0.023-0.022-0.055-0.067-0.088-0.089H2.27l-0.089 0.09v15.465h19.55c0.022-0.022 0.065-0.055 0.087-0.089zm0-17.688C22.91 2 24 3.111 24 4.222v15.555C24 20.888 22.91 22 21.818 22H2.181c-1.2 0-2.18-1-2.18-2.223V4.222C0 3.112 1.09 2 2.18 2h19.637z" />
+</vector>
