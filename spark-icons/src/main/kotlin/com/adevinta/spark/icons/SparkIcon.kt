@@ -464,7 +464,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object Warning : Infos(R.drawable.spark_icons_warning)
     }
 
-    public abstract class Delivery(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Delivery(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
         public object DeliveryHand : Delivery(R.drawable.spark_icons_delivery_hands)
         public object DeliveryOutline : Delivery(R.drawable.spark_icons_box_outline)
         public object Truck : Delivery(R.drawable.spark_icons_delivery_truck)
@@ -479,9 +479,6 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
                 public object Up : Open(R.drawable.spark_icons_delivery_mailbox_open_up)
             }
         }
-
-        public object LivraisonPerso : Delivery(R.drawable.spark_icons_delivery_sparkles)
-        public abstract class Partner(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId)
     }
 
     public sealed class Map(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
@@ -630,5 +627,5 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public abstract class Logo(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId)
+    public abstract class Custom(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId)
 }
