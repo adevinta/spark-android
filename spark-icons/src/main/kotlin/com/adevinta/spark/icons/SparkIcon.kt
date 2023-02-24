@@ -154,7 +154,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
     public sealed class Calendar(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
         public object Booking : Calendar(R.drawable.spark_icons_calendar_booking)
         public object Default : Calendar(R.drawable.spark_icons_calendar_simple)
-        public object Valid : Calendar(R.drawable.spark_icons_calendar_simple)
+        public object Valid : Calendar(R.drawable.spark_icons_calendar_valid)
     }
 
     public sealed class Categories(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
