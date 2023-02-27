@@ -49,6 +49,7 @@ androidx.tracing:tracing:1.0.0
 androidx.vectordrawable:vectordrawable-animated:1.1.0
 androidx.vectordrawable:vectordrawable:1.1.0
 androidx.versionedparcelable:versionedparcelable:1.1.1
+com.google.accompanist:accompanist-drawablepainter:0.28.0
 com.google.guava:listenablefuture:1.0
 org.jetbrains.kotlin:kotlin-stdlib-common:1.8.10
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10
