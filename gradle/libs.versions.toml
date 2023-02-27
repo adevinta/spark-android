@@ -1,6 +1,6 @@
 [versions]
 accompanist = "0.28.0"
-android-gradlePlugin = "8.1.0-alpha05"
+android-gradlePlugin = "8.1.0-alpha06"
 androidDocumentationPlugin = "1.7.20"
 androidx-activity = "1.6.1"
 androidx-appCompat = "1.5.1"
