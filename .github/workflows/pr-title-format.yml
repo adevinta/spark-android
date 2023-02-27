@@ -32,6 +32,6 @@ jobs:
             echo -e "[![🔣 PR title format]($BADGE_SVG)]($BADGE_URL) ; \
             echo -e "" ; \
             echo -e "\`\`\`" ; \
-            cz check --message "$PR_TITLE" 2>&1
+            cz check --message "$PR_TITLE" 2>&1 ; \
             echo -e "\`\`\`" ; \
           ) | gh pr comment "$PR_NUMBER" --body-file -
