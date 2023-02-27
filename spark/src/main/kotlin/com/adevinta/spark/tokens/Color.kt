@@ -457,7 +457,7 @@ public fun darkSparkColors(
  * @property outline Subtle color used for boundaries. Outline color role adds contrast for
  * accessibility purposes.
  * @property outlineHigh Utility color used for boundaries for decorative elements when strong
- *  * contrast is not required.
+ * contrast is not required.
  * @property outlineVariant Utility color used for boundaries for decorative elements when strong
  * contrast is not required.
  * @property overlay Color of a scrim that obscures content. Commonly used for layers in Modals, Drawers, etc.
