@@ -46,9 +46,12 @@ dependencies {
 
     api(projects.sparkIcons)
 
+    implementation(libs.accompanist.drawablepainter)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appCompat.resources)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material3.windowSizeClass)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling)
 
