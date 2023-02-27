@@ -138,6 +138,7 @@ fun Icon(
 
 @Composable
 fun rememberSparkIconPainter(sparkIcon: SparkIcon): Painter {
+    @Suppress("USELESS_IS_CHECK") // Currently all icons are IconDrawableRes but that might not be true in the future
     return when (sparkIcon) {
         is IconVector -> rememberVectorPainter(sparkIcon.imageVector)
 
