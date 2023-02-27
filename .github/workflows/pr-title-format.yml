@@ -29,7 +29,7 @@ jobs:
           BADGE_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           ( \
-            echo -e "[![🔣 PR title format]($BADGE_SVG)]($BADGE_URL) ; \
+            echo -e "[![🔣 PR title format]($BADGE_SVG)]($BADGE_URL)" ; \
             echo -e "" ; \
             echo -e "\`\`\`" ; \
             cz check --message "$PR_TITLE" 2>&1 ; \
