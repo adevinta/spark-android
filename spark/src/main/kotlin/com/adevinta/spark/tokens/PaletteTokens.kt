@@ -98,6 +98,45 @@ internal object PaletteTokens {
     internal val GreyBlue99 = Color(0xFFfcfcff)
     // endregion
 
+    // region Spark colors
+    internal val White = Color(0xFFFFFFFF)
+
+    internal val TheBlue20 = Color(0xFFB1AEEC)
+
+    internal val Sugarcotton10 = Color(0xFFFFE1ED)
+    internal val Sugarcotton30 = Color(0xFFFE92BF)
+    internal val Sugarcotton50 = Color(0xFF982253)
+    internal val Sugarcotton70 = Color(0xFFFD398A)
+
+    internal val Apple10 = Color(0xFFE0F2E9)
+    internal val Apple20 = Color(0xFFB7DFCB)
+    internal val Apple40 = Color(0xFF64BC90)
+    internal val Apple50 = Color(0xFF31A56B)
+    internal val Apple70 = Color(0xFF1D6340)
+    internal val Apple80 = Color(0xFF14422B)
+
+    internal val Wiggings10 = Color(0xFFFDF5E4)
+    internal val Wiggings20 = Color(0xFFFBE9BF)
+    internal val Wiggings40 = Color(0xFFF7CF76)
+    internal val Wiggings50 = Color(0xFFF4BF48)
+    internal val Wiggings70 = Color(0xFF92732B)
+    internal val Wiggings80 = Color(0xFF624C1D)
+
+    internal val Sky10 = Color(0xFFDAF1F4)
+    internal val Sky20 = Color(0xFFA8DEE6)
+    internal val Sky40 = Color(0xFF45B8CA)
+    internal val Sky50 = Color(0xFF07A0B8)
+    internal val Sky70 = Color(0xFF04606E)
+    internal val Sky80 = Color(0xFF03404A)
+
+    internal val Surfer10 = Color(0xFF7B7986)
+    internal val Surfer20 = Color(0xFFD1D0D5)
+    internal val Surfer50 = Color(0xFF7B7986)
+    internal val Surfer70 = Color(0xFF7B7986)
+    internal val Surfer80 = Color(0xFF313036)
+    internal val Surfer90 = Color(0xFF252428)
+    //endregion
+
     // region Brikke Colors
     internal val BrikkeGreyExtraLight = Color(0xFFF4F6F7) // Information / Disabled Surface
     internal val BrikkeGreyLight = Color(0xFFE6EBEF) // Highlight Surface
