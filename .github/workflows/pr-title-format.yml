@@ -25,4 +25,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           PR_TITLE: ${{ github.event.pull_request.title }}
-        run: cz check --message "$PR_TITLE" 2>&1 | gh pr comment "$PR_NUMBER" --body-file -
+          BADGE_SVG: ${{ github.server_url }}/${{ github.repository }}/actions/workflows/pr-title-format.yml/badge.svg?branch=${{ github.head_ref }}&event=pull_request
+          BADGE_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          ( \
+            echo -e "[![🔣 PR title format]($BADGE_SVG)]($BADGE_URL) ; \
+            echo -e "" ; \
+            echo -e "\`\`\`" ; \
+            cz check --message "$PR_TITLE" 2>&1
+            echo -e "\`\`\`" ; \
+          ) | gh pr comment "$PR_NUMBER" --body-file -
