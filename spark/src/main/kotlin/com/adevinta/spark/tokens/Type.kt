@@ -37,7 +37,6 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.utils.ShowkaseComposable
 
 internal val tile1Type = TextStyle(
     fontFamily = FontFamily.Default,
@@ -194,9 +193,8 @@ public fun SparkTypography.asMaterial3Typography(): Typography = Typography(
     group = "Tokens",
     name = "Spark Typography",
 )
-@ShowkaseComposable(skip = true)
 @Composable
-internal fun TextPreview(
+private fun TextPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {

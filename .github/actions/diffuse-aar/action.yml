@@ -1,12 +1,6 @@
 name: '📢 Diffuse AAR report'
 description: 'Add diffuse AAR report to Pull Requests'
 inputs:
-  github-token:
-    description: 'GitHub token'
-    required: true
-  pr-number:
-    description: 'PR number'
-    required: true
   diffuse-version:
     description: 'Diffuse version'
     required: true
@@ -29,22 +23,20 @@ runs:
       shell: bash
       run: |
         wget "$DIFFUSE_URL" && chmod +x "$DIFFUSE_JAR"
-        mkdir --parents ~/.spark/diffuse-jar && mv "$DIFFUSE_JAR" "~/.spark/diffuse-jar/
+        mkdir --parents ~/.spark/diffuse-jar && mv "$DIFFUSE_JAR" "$HOME/.spark/diffuse-jar/"
       env:
         DIFFUSE_URL: https://github.com/JakeWharton/diffuse/releases/download/${{ inputs.diffuse-version }}/diffuse-${{ inputs.diffuse-version }}-binary.jar
         DIFFUSE_JAR: diffuse-${{ inputs.diffuse-version }}-binary.jar
     - shell: bash
       run: |
-        ( \
-          echo -e "<details><summary>📢 Diffuse report…</summary>" ; \
-          echo -e "" ; \
-          echo -e "\`\`\`" ; \
-          java -jar "$HOME/.spark/diffuse-jar/$DIFFUSE_JAR" info --aar spark/build/outputs/aar/spark-release.aar ; \
-          echo -e "\`\`\`" ; \
-          echo -e "" ; \
-          echo -e "</details>" ; \
-        ) | gh pr comment "$PR_NUMBER" --body-file -
+        tee $GITHUB_STEP_SUMMARY << EOF || true
+        <details><summary>📢 Diffuse reports…</summary>
+
+        \`\`\`
+        $(find . -path "*/build/outputs/aar/*-release.aar" -exec java -jar "$HOME/.spark/diffuse-jar/$DIFFUSE_JAR" info --aar {} \;)
+        \`\`\`
+
+        </details>
+        EOF
       env:
-        GITHUB_TOKEN: ${{ inputs.github-token }}
-        PR_NUMBER: ${{ inputs.pr-number }}
         DIFFUSE_JAR: diffuse-${{ inputs.diffuse-version }}-binary.jar

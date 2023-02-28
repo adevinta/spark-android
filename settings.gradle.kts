@@ -21,6 +21,7 @@
  */
 
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -44,4 +45,6 @@ rootProject.name = "spark-android"
 
 include(":spark")
 include(":sample")
+include(":spark-icons")
 include(":spark-lint")
+include(":spark-screenshot-testing")

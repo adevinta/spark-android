@@ -37,10 +37,13 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
+        with:
+          lfs: true
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
+      - uses: ./.github/actions/setup-gradle-properties
 
       - name: '🐘 Setup Gradle'
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
@@ -57,24 +60,31 @@ jobs:
         with:
           name: aar
           path: '**/build/outputs/aar'
-      - name: '📢 Diffuse report'
+      - name: '📢 Diffuse reports'
         if: ${{ always() && github.event_name == 'pull_request' && steps.build.outcome == 'success' }}
         uses: ./.github/actions/diffuse-aar
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          pr-number: ${{ github.event.pull_request.number }}
 
       - name: '🧑‍🔬 Test'
         id: test
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
-          arguments: testReleaseUnitTest
+          arguments: testReleaseUnitTest verifyPaparazziRelease
       - name: '📦 Archive JUnit reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports
         with:
           html: '**/build/reports/tests/testReleaseUnitTest'
           xml: '**/build/test-results/testReleaseUnitTest/**.xml'
+      - name: '📦 Archive Paparazzi reports'
+        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
+        uses: ./.github/actions/archive-paparazzi-reports
+
+      - name: '📢 Paparazzi report'
+        if: ${{ failure() && steps.test.outcome == 'failure' && github.event_name == 'pull_request'}}
+        uses: ./.github/actions/paparazzi-report
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          pr-number: ${{ github.event.pull_request.number }}
 
       - name: '🕵️ Lint'
         id: lint
