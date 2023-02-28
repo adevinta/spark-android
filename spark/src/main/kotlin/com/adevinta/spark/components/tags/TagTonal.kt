@@ -40,8 +40,8 @@ import com.adevinta.spark.tools.preview.UserType
 @InternalSparkApi
 @Composable
 fun TagTonal(
-    modifier: Modifier = Modifier,
     colors: TagColors,
+    modifier: Modifier = Modifier,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
     content: @Composable RowScope.() -> Unit,
