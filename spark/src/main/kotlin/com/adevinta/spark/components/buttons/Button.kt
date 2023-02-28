@@ -22,6 +22,7 @@
 
 package com.adevinta.spark.components.buttons
 
+import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
@@ -46,7 +47,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.buttons.SparkButton.TAG_PROGRESS_INDICATOR
+import com.adevinta.spark.components.buttons.SparkButtonTags.TAG_PROGRESS_INDICATOR
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.SlotArea
@@ -113,7 +114,8 @@ fun SparkButton(
     }
 }
 
-object SparkButton {
+@VisibleForTesting
+object SparkButtonTags {
     const val TAG_PROGRESS_INDICATOR = "progress_indicator"
 }
 
@@ -122,12 +124,12 @@ enum class IconSide { START, END }
 object SparkButtonDefaults {
 
     /**
-     * The default size of the icon when used inside a [SparkButton].
+     * The default size of the icon when used inside a [SparkButtonTags].
      */
     val IconSize = 14.dp
 
     /**
-     * The default size of the spacing between an icon and a text when they used inside a [SparkButton].
+     * The default size of the spacing between an icon and a text when they used inside a [SparkButtonTags].
      */
     val IconSpacing = ButtonDefaults.IconSpacing
 

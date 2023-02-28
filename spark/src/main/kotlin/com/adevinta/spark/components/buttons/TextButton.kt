@@ -40,7 +40,6 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- *
  * The text button is the button for non important actions. The mandatory icon help to indicate that it's a
  * clickable text
  *
@@ -79,7 +78,7 @@ fun TextButton(
             ButtonDefaults.filledTonalButtonColors()
         } else {
             ButtonDefaults.textButtonColors(
-                contentColor = if (isDanger) SparkTheme.colors.error else SparkTheme.colors.secondary,
+                contentColor = if (isDanger) SparkTheme.colors.error else SparkTheme.colors.onSurface,
             )
         },
         contentPadding = SparkButtonDefaults.TextButtonContentPadding,
@@ -137,7 +136,7 @@ internal fun TextPreview(
             iconSide = IconSide.END,
             isDanger = true,
         ) {
-            Text("Danger button")
+            Text("Danger Button")
         }
     }
 }

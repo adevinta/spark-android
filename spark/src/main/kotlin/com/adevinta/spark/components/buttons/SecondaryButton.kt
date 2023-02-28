@@ -22,10 +22,12 @@
 
 package com.adevinta.spark.components.buttons
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -36,7 +38,6 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- *
  * The secondary button is the standard button for most use cases. The outlined styling
  * places less emphasis on these buttons
  *
@@ -66,13 +67,14 @@ fun SecondaryButton(
     isDanger: Boolean = false,
     content: @Composable RowScope.() -> Unit,
 ) {
-    val colors = if (isDanger) {
-        ButtonDefaults.outlinedButtonColors(
-            contentColor = SparkTheme.colors.error,
-        )
-    } else {
-        ButtonDefaults.outlinedButtonColors(contentColor = SparkTheme.colors.secondary)
-    }
+    val color by animateColorAsState(
+        targetValue = if (isDanger) {
+            SparkTheme.colors.error
+        } else {
+            SparkTheme.colors.onSurface
+        },
+        label = "button color",
+    )
 
     SparkButton(
         onClick = onClick,
@@ -81,7 +83,7 @@ fun SecondaryButton(
         elevation = null,
         border = SparkButtonDefaults.outlinedBorder(isDanger),
         contentPadding = SparkButtonDefaults.ButtonContentPadding,
-        colors = colors,
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = color),
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,

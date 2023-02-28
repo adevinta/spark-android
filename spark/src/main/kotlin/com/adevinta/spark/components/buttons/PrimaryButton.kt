@@ -40,7 +40,6 @@ import com.adevinta.spark.tools.preview.SparkPreviewParam
 import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
 
 /**
- *
  * The primary button should only be used once per view (not including a modal dialog),
  * these buttons have the most emphasis.
  *
