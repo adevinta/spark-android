@@ -43,7 +43,7 @@ import androidx.compose.foundation.layout.Spacer as FoundationSpacer
  */
 @Composable
 @NonRestartableComposable
-public fun Spacer(modifier: Modifier) {
+public fun Spacer(modifier: Modifier = Modifier) {
     FoundationSpacer(modifier = modifier)
 }
 
