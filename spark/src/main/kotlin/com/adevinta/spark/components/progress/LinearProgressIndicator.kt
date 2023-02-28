@@ -22,6 +22,7 @@
 
 package com.adevinta.spark.components.progress
 
+import androidx.annotation.FloatRange
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ProgressIndicatorDefaults
@@ -41,12 +42,13 @@ import androidx.compose.material3.LinearProgressIndicator as MaterialLinearProgr
 @InternalSparkApi
 @Composable
 fun SparkLinearProgressIndicator(
+    @FloatRange(from = 0.0, to = 1.0)
     progress: Float,
     isIndeterminate: Boolean,
     modifier: Modifier = Modifier,
 ) {
     val color = ProgressIndicatorDefaults.linearColor // Primary
-    val trackColor = SparkTheme.colors.secondaryContainer
+    val trackColor = SparkTheme.colors.neutralContainer
     if (isIndeterminate) {
         MaterialLinearProgressIndicator(
             modifier = modifier.sparkUsageOverlay(),
@@ -64,9 +66,6 @@ fun SparkLinearProgressIndicator(
 }
 
 /**
- *
- * [Determinate Spark linear progress indicator](https://github.mpi-internal.com/leboncoin/android-app/blob/delivery/libraries/Compose/ProgressIndicators.md)
- *
  * Progress indicators express an unspecified wait time or display the duration of a process.
  *
  * By default there is no animation between [progress] values. You can use
@@ -79,20 +78,18 @@ fun SparkLinearProgressIndicator(
  */
 @Composable
 fun LinearProgressIndicator(
+    @FloatRange(from = 0.0, to = 1.0)
     progress: Float,
     modifier: Modifier = Modifier,
 ) {
-    check(progress in 0.0f..1.0f) { "LinearProgressIndicator progress must be > 0 or < 1 but was $progress" }
     SparkLinearProgressIndicator(
-        progress = progress,
+        progress = progress.coerceIn(0.0f, 1.0f),
         isIndeterminate = false,
         modifier = modifier,
     )
 }
 
 /**
- * <a href="https://github.mpi-internal.com/leboncoin/android-app/blob/delivery/libraries/Compose/ProgressIndicators.md" class="external" target="_blank">Indeterminate Spark linear progress indicator</a>.
- *
  * Progress indicators express an unspecified wait time or display the duration of a process.
  *
  * @param modifier the [Modifier] to be applied to this progress indicator

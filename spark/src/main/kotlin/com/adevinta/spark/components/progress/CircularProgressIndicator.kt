@@ -22,6 +22,7 @@
 
 package com.adevinta.spark.components.progress
 
+import androidx.annotation.FloatRange
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
@@ -43,6 +44,7 @@ import androidx.compose.material3.CircularProgressIndicator as MaterialCircularP
 @InternalSparkApi
 @Composable
 fun SparkCircularProgressIndicator(
+    @FloatRange(from = 0.0, to = 1.0)
     progress: Float,
     isIndeterminate: Boolean,
     modifier: Modifier = Modifier,
@@ -66,8 +68,6 @@ fun SparkCircularProgressIndicator(
 }
 
 /**
- * <a href="https://github.mpi-internal.com/leboncoin/android-app/blob/delivery/libraries/Compose/ProgressIndicators.md" class="external" target="_blank">Determinate Spark linear progress indicator</a>.
- *
  * Progress indicators express an unspecified wait time or display the duration of a process.
  *
  * By default there is no animation between [progress] values. You can use
@@ -80,12 +80,12 @@ fun SparkCircularProgressIndicator(
  */
 @Composable
 fun CircularProgressIndicator(
+    @FloatRange(from = 0.0, to = 1.0)
     progress: Float,
     modifier: Modifier = Modifier,
 ) {
-    check(progress in 0.0f..1.0f) { "CircularProgressIndicator progress must be > 0 or < 1 but was $progress" }
     SparkCircularProgressIndicator(
-        progress = progress,
+        progress = progress.coerceIn(0.0f, 1.0f),
         isIndeterminate = false,
         modifier = modifier,
     )
