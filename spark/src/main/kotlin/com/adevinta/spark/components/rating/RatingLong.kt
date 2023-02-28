@@ -109,46 +109,46 @@ fun RatingNaked(
 }
 
 /**
- * Display the [value] rating of an user with stars followed by the [nbComments] in the following form `***** (5)`
+ * Display the [value] rating of an user with stars followed by the [commentCount] in the following form `***** (5)`
  *
  * @param value rating value as a float, should be between 0.0 and 5.0
- * @param nbComments the nb of comments to be displayed after the rating stars.
+ * @param commentCount the nb of comments to be displayed after the rating stars.
  * @param modifier to apply
  */
 @Composable
 fun RatingCompressed(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
-    nbComments: Int,
+    commentCount: Int,
     modifier: Modifier = Modifier,
 ) {
     SparkRatingLong(
         modifier = modifier,
         value = value,
-        contentDescription = stringResource(id = R.string.spark_rating_with_comments_a11y, value, nbComments),
-        label = stringResource(id = R.string.spark_rating_label, nbComments),
+        contentDescription = stringResource(id = R.string.spark_rating_with_comments_a11y, value, commentCount),
+        label = stringResource(id = R.string.spark_rating_label, commentCount),
     )
 }
 
 /**
- * Display the [value] rating of an user with stars followed by the [nbComments] in the following form `***** 5 avis`
+ * Display the [value] rating of an user with stars followed by the [commentCount] in the following form `***** 5 avis`
  *
  * @param value rating value as a float, should be between 0.0 and 5.0
- * @param nbComments the nb of comments to be displayed after the rating stars.
+ * @param commentCount the nb of comments to be displayed after the rating stars.
  * @param modifier to apply
  */
 @Composable
 fun RatingFull(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
-    nbComments: Int,
+    commentCount: Int,
     modifier: Modifier = Modifier,
 ) {
     SparkRatingLong(
         modifier = modifier,
         value = value,
-        contentDescription = stringResource(id = R.string.spark_rating_with_comments_a11y, value, nbComments),
-        label = stringResource(id = R.string.spark_rating_with_comments_count_label, nbComments),
+        contentDescription = stringResource(id = R.string.spark_rating_with_comments_a11y, value, commentCount),
+        label = stringResource(id = R.string.spark_rating_with_comments_count_label, commentCount),
     )
 }
 
@@ -162,9 +162,9 @@ internal fun RatingFullPreview(
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-        RatingFull(value = 1.6f, nbComments = 0)
-        RatingFull(value = 3.6f, nbComments = 23)
-        RatingFull(value = 5f, nbComments = 1000002)
+        RatingFull(value = 1.6f, commentCount = 0)
+        RatingFull(value = 3.6f, commentCount = 23)
+        RatingFull(value = 5f, commentCount = 1000002)
     }
 }
 
@@ -178,9 +178,9 @@ internal fun RatingCompressedPreview(
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-        RatingCompressed(value = 1.6f, nbComments = 0)
-        RatingCompressed(value = 2.8f, nbComments = 23)
-        RatingCompressed(value = 4.2f, nbComments = 1000002)
+        RatingCompressed(value = 1.6f, commentCount = 0)
+        RatingCompressed(value = 2.8f, commentCount = 23)
+        RatingCompressed(value = 4.2f, commentCount = 1000002)
     }
 }
 

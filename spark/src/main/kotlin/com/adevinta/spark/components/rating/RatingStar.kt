@@ -59,6 +59,7 @@ internal fun SparkRatingStar(
         targetValue = if (enabled) SparkTheme.colors.primary else SparkTheme.colors.onSurface.copy(
             DisabledAlpha,
         ),
+        label = "star color",
     )
 
     CompositionLocalProvider(LocalContentColor provides color) {

@@ -42,6 +42,7 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.tokens.EmphasizeMedium
 import com.adevinta.spark.tools.preview.SparkPreviewParam
 import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
 import java.lang.String.format
@@ -53,7 +54,7 @@ import java.util.Locale
  *  - * 3,4 (5)
  * @param value rating value as a float, should be between 1.0 and 5.0
  * @param modifier to apply
- * @param nbComments the count of comments are associated with this rating
+ * @param commentCount the count of comments are associated with this rating
  */
 @InternalSparkApi
 @Composable
@@ -61,17 +62,17 @@ internal fun SparkRatingSmall(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     modifier: Modifier = Modifier,
-    nbComments: Int? = null,
+    commentCount: Int? = null,
     locale: Locale = firstLocale(),
 ) {
     if (value !in 1f..5f) return
 // TODO scott.rayapoulle.ext-21/12/2022: Use NumberFormat instead
     val format = if (value / value.toInt() == 1f) "%.0f" else "%.1f"
-    val contentDescription: String = if (nbComments != null) {
+    val contentDescription: String = if (commentCount != null) {
         stringResource(
             id = R.string.spark_rating_with_comments_a11y,
             value,
-            nbComments,
+            commentCount,
         )
     } else {
         stringResource(id = R.string.spark_rating_a11y, value)
@@ -90,13 +91,14 @@ internal fun SparkRatingSmall(
             textAlign = TextAlign.Center,
             style = SparkTheme.typography.small,
         )
-        if (nbComments != null) {
-            Text(
-                text = stringResource(id = R.string.spark_rating_label, nbComments),
-                textAlign = TextAlign.Center,
-                color = SparkTheme.colors.tertiary,
-                style = SparkTheme.typography.small,
-            )
+        if (commentCount != null) {
+            EmphasizeMedium {
+                Text(
+                    text = format(locale, "(%d)", commentCount),
+                    textAlign = TextAlign.Center,
+                    style = SparkTheme.typography.small,
+                )
+            }
         }
     }
 }
@@ -106,20 +108,20 @@ internal fun SparkRatingSmall(
  *
  * @param value the rating value included between [1..5]
  * @param modifier to be applied to this rating
- * @param nbComments number of collected ratings
+ * @param commentCount number of collected ratings
  */
 @Composable
 fun RatingSmall(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     modifier: Modifier = Modifier,
-    nbComments: Int? = null,
+    commentCount: Int? = null,
     locale: Locale = firstLocale(),
 ) {
     SparkRatingSmall(
         value = value,
         modifier = modifier,
-        nbComments = nbComments,
+        commentCount = commentCount,
         locale = locale,
     )
 }
@@ -144,7 +146,7 @@ internal fun RatingSmallPreview(
         RatingSmall(value = 3.0f, locale = frenchLocale)
         RatingSmall(value = 4.50f, locale = frenchLocale)
 
-        RatingSmall(value = 3.0f, nbComments = 8, locale = frenchLocale)
-        RatingSmall(value = 4.50f, nbComments = 12, locale = frenchLocale)
+        RatingSmall(value = 3.0f, commentCount = 8, locale = frenchLocale)
+        RatingSmall(value = 4.50f, commentCount = 12, locale = frenchLocale)
     }
 }
