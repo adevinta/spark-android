@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
@@ -62,6 +63,9 @@ internal fun SparkTag(
     tint: Color? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
+    DisableSelection {
+
+    }
     Surface(
         modifier = modifier.sparkUsageOverlay(),
         shape = SparkTheme.shapes.extraSmall,
@@ -107,12 +111,12 @@ object TagDefaults {
     internal val MinHeight = 20.dp
 
     /**
-     * The outlined chip's border size
+     * The outlined tag's border size
      */
     internal val OutlinedBorderSize = 1.dp
 
     /**
-     * The size of a chip's leading icon
+     * The size of a tag's leading icon
      */
     internal val LeadingIconSize = 16.dp
 
@@ -134,7 +138,7 @@ object TagDefaults {
 
     @Composable
     fun outlineColors(
-        contentColor: Color = SparkTheme.colors.tertiary,
+        contentColor: Color = SparkTheme.colors.neutral,
     ): TagColors = TagColors(
         backgroundColor = Color.Transparent,
         contentColor = contentColor,
@@ -144,14 +148,14 @@ object TagDefaults {
 private val LeadingIconEndSpacing = 4.dp
 
 /**
- * The content padding used by a chip.
+ * The content padding used by a tag.
  * Used as start padding when there's leading icon, used as eng padding when there's no
  * trailing icon.
  */
 private val HorizontalPadding = 8.dp
 
 /**
- * The content padding used by a chip.
+ * The content padding used by a tag.
  * Used as start padding when there's leading icon, used as eng padding when there's no
  * trailing icon.
  */
