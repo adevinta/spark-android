@@ -61,7 +61,7 @@ internal fun SparkSwitch(
  *  - Toggle a single item on or off.
  *  - Immediately activate or deactivate something.
  *
- * @see [SparkSwitch] if you require color customization between states. Be aware that this is still an internal composable so if you need such state contact the brikke team
+ * @see [SparkSwitch] if you require color customization between states. Be aware that this is still an internal composable so if you need such state contact the Spark team
  *
  * @param checked whether or not this component is checked
  * @param onCheckedChange callback to be invoked when Switch is being clicked, therefore the change of checked state is requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.
