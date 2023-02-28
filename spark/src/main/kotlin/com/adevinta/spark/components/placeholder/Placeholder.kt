@@ -54,7 +54,7 @@ import com.google.accompanist.placeholder.shimmer
 private fun PlaceholderDefaults.sparkColor() = color(
     backgroundColor = SparkTheme.colors.surface,
     contentColor = contentColorFor(backgroundColor = SparkTheme.colors.surface),
-    contentAlpha = 0.15f,
+    contentAlpha = 0.25f,
 )
 
 @Composable
