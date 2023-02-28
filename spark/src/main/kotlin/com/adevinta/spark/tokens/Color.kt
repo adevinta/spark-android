@@ -27,6 +27,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -54,59 +55,45 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tokens.PaletteTokens.Apple10
 import com.adevinta.spark.tokens.PaletteTokens.Apple20
+import com.adevinta.spark.tokens.PaletteTokens.Apple30
 import com.adevinta.spark.tokens.PaletteTokens.Apple40
 import com.adevinta.spark.tokens.PaletteTokens.Apple50
-import com.adevinta.spark.tokens.PaletteTokens.Apple70
 import com.adevinta.spark.tokens.PaletteTokens.Apple80
+import com.adevinta.spark.tokens.PaletteTokens.Apple90
 import com.adevinta.spark.tokens.PaletteTokens.Black
-import com.adevinta.spark.tokens.PaletteTokens.BrikkeGreen
-import com.adevinta.spark.tokens.PaletteTokens.BrikkeGreenSurface
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeGrey
 import com.adevinta.spark.tokens.PaletteTokens.BrikkeGreyExtraLight
-import com.adevinta.spark.tokens.PaletteTokens.BrikkeOrange
-import com.adevinta.spark.tokens.PaletteTokens.BrikkeOrangeSurface
-import com.adevinta.spark.tokens.PaletteTokens.BrikkeRed
-import com.adevinta.spark.tokens.PaletteTokens.BrikkeRedSurface
-import com.adevinta.spark.tokens.PaletteTokens.Green10
-import com.adevinta.spark.tokens.PaletteTokens.Green20
-import com.adevinta.spark.tokens.PaletteTokens.Green30
-import com.adevinta.spark.tokens.PaletteTokens.Green80
-import com.adevinta.spark.tokens.PaletteTokens.Green90
-import com.adevinta.spark.tokens.PaletteTokens.Grey0
+import com.adevinta.spark.tokens.PaletteTokens.Chili20
+import com.adevinta.spark.tokens.PaletteTokens.Chili30
+import com.adevinta.spark.tokens.PaletteTokens.Chili40
+import com.adevinta.spark.tokens.PaletteTokens.Chili50
+import com.adevinta.spark.tokens.PaletteTokens.Chili80
+import com.adevinta.spark.tokens.PaletteTokens.Chili90
 import com.adevinta.spark.tokens.PaletteTokens.Grey10
-import com.adevinta.spark.tokens.PaletteTokens.Grey100
-import com.adevinta.spark.tokens.PaletteTokens.Grey20
 import com.adevinta.spark.tokens.PaletteTokens.Grey80
 import com.adevinta.spark.tokens.PaletteTokens.Grey90
-import com.adevinta.spark.tokens.PaletteTokens.Grey95
 import com.adevinta.spark.tokens.PaletteTokens.GreyBlue10
 import com.adevinta.spark.tokens.PaletteTokens.GreyBlue20
 import com.adevinta.spark.tokens.PaletteTokens.GreyBlue30
 import com.adevinta.spark.tokens.PaletteTokens.GreyBlue40
-import com.adevinta.spark.tokens.PaletteTokens.GreyBlue50
 import com.adevinta.spark.tokens.PaletteTokens.GreyBlue80
 import com.adevinta.spark.tokens.PaletteTokens.GreyBlue90
 import com.adevinta.spark.tokens.PaletteTokens.GreyBlue95
 import com.adevinta.spark.tokens.PaletteTokens.GreyBlue99
-import com.adevinta.spark.tokens.PaletteTokens.Orange10
-import com.adevinta.spark.tokens.PaletteTokens.Orange20
-import com.adevinta.spark.tokens.PaletteTokens.Orange30
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi20
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi30
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi50
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi80
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi90
 import com.adevinta.spark.tokens.PaletteTokens.Orange40
 import com.adevinta.spark.tokens.PaletteTokens.Orange80
-import com.adevinta.spark.tokens.PaletteTokens.Orange90
-import com.adevinta.spark.tokens.PaletteTokens.Red10
-import com.adevinta.spark.tokens.PaletteTokens.Red20
-import com.adevinta.spark.tokens.PaletteTokens.Red30
-import com.adevinta.spark.tokens.PaletteTokens.Red80
-import com.adevinta.spark.tokens.PaletteTokens.Red90
-import com.adevinta.spark.tokens.PaletteTokens.Sky10
 import com.adevinta.spark.tokens.PaletteTokens.Sky20
+import com.adevinta.spark.tokens.PaletteTokens.Sky30
 import com.adevinta.spark.tokens.PaletteTokens.Sky40
 import com.adevinta.spark.tokens.PaletteTokens.Sky50
-import com.adevinta.spark.tokens.PaletteTokens.Sky70
 import com.adevinta.spark.tokens.PaletteTokens.Sky80
+import com.adevinta.spark.tokens.PaletteTokens.Sky90
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton20
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton30
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton50
@@ -116,8 +103,8 @@ import com.adevinta.spark.tokens.PaletteTokens.SugarCotton80
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton90
 import com.adevinta.spark.tokens.PaletteTokens.Surfer10
 import com.adevinta.spark.tokens.PaletteTokens.Surfer20
+import com.adevinta.spark.tokens.PaletteTokens.Surfer30
 import com.adevinta.spark.tokens.PaletteTokens.Surfer50
-import com.adevinta.spark.tokens.PaletteTokens.Surfer70
 import com.adevinta.spark.tokens.PaletteTokens.Surfer80
 import com.adevinta.spark.tokens.PaletteTokens.Surfer90
 import com.adevinta.spark.tokens.PaletteTokens.TheBlue20
@@ -127,26 +114,26 @@ import com.adevinta.spark.tokens.PaletteTokens.TheBlue80
 import com.adevinta.spark.tokens.PaletteTokens.TheBlue90
 import com.adevinta.spark.tokens.PaletteTokens.TheBlueV
 import com.adevinta.spark.tokens.PaletteTokens.White
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings10
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings20
+import com.adevinta.spark.tokens.PaletteTokens.Wiggings30
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings40
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings50
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings70
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings80
+import com.adevinta.spark.tokens.PaletteTokens.Wiggings90
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
 
 fun lightSparkColors(
     isPro: Boolean = false,
-    primary: Color = if (isPro) TheBlue50 else BrikkeOrange,
-    onPrimary: Color = if (isPro) Grey100 else Grey100,
-    primaryContainer: Color = if (isPro) TheBlue90 else BrikkeOrangeSurface,
-    onPrimaryContainer: Color = if (isPro) TheBlue30 else Orange10,
+    primary: Color = if (isPro) TheBlue50 else Kiwi50,
+    onPrimary: Color = if (isPro) White else Black,
+    primaryContainer: Color = if (isPro) TheBlue90 else Kiwi90,
+    onPrimaryContainer: Color = if (isPro) TheBlue30 else Kiwi30,
     primaryVariant: Color = TheBlue30,
-    onPrimaryVariant: Color = Grey100,
+    onPrimaryVariant: Color = White,
     secondary: Color = SugarCotton50,
-    onSecondary: Color = Grey100,
+    onSecondary: Color = White,
     secondaryContainer: Color = SugarCotton90,
     onSecondaryContainer: Color = SugarCotton30,
     secondaryVariant: Color = SugarCotton30,
@@ -157,45 +144,37 @@ fun lightSparkColors(
     onTertiaryContainer: Color = GreyBlue10,
     success: Color = Apple50,
     onSuccess: Color = White,
-    successContainer: Color = Apple10,
-    onSuccessContainer: Color = Apple70,
+    successContainer: Color = Apple90,
+    onSuccessContainer: Color = Apple30,
     alert: Color = Wiggings50,
     onAlert: Color = Black,
-    alertContainer: Color = Wiggings10,
-    onAlertContainer: Color = Wiggings70,
-    error: Color = BrikkeRed,
-    onError: Color = Grey100,
-    errorContainer: Color = BrikkeRedSurface,
-    onErrorContainer: Color = Red10,
+    alertContainer: Color = Wiggings90,
+    onAlertContainer: Color = Wiggings30,
+    error: Color = Chili50,
+    onError: Color = White,
+    errorContainer: Color = Chili90,
+    onErrorContainer: Color = Chili30,
     info: Color = Sky50,
     onInfo: Color = White,
-    infoContainer: Color = Sky10,
-    onInfoContainer: Color = Sky70,
+    infoContainer: Color = Sky90,
+    onInfoContainer: Color = Sky30,
     neutral: Color = Surfer50,
     onNeutral: Color = White,
-    neutralContainer: Color = Surfer10,
-    onNeutralContainer: Color = Surfer70,
-    valid: Color = BrikkeGreen,
-    onValid: Color = Grey100,
-    validContainer: Color = BrikkeGreenSurface,
-    onValidContainer: Color = Green10,
-    background: Color = Grey100,
+    neutralContainer: Color = Surfer90,
+    onNeutralContainer: Color = Surfer30,
+    background: Color = White,
     onBackground: Color = Grey10,
-    surface: Color = Grey100,
+    surface: Color = White,
     onSurface: Color = Grey10,
     surfaceVariant: Color = GreyBlue90,
     onSurfaceVariant: Color = GreyBlue30,
-    surfaceInverse: Color = Surfer90,
+    surfaceInverse: Color = Surfer10,
     onSurfaceInverse: Color = White,
     surfaceTint: Color = primary,
     inversePrimary: Color = Orange80,
-    inverseSurface: Color = Grey20,
-    inverseOnSurface: Color = Grey95,
-    outline: Color = GreyBlue50,
-    outlineHigh: Color = Surfer20,
-    overlay: Color = Surfer80.copy(alpha = 0.75f),
-    outlineVariant: Color = GreyBlue80,
-    scrim: Color = Grey0,
+    outline: Color = Surfer80,
+    outlineHigh: Color = Surfer80,
+    scrim: Color = Black,
 ): SparkColors = SparkColors(
     primary = primary,
     onPrimary = onPrimary,
@@ -233,10 +212,10 @@ fun lightSparkColors(
     onNeutral = onNeutral,
     neutralContainer = neutralContainer,
     onNeutralContainer = onNeutralContainer,
-    valid = valid,
-    onValid = onValid,
-    validContainer = validContainer,
-    onValidContainer = onValidContainer,
+    valid = success,
+    onValid = onSuccess,
+    validContainer = successContainer,
+    onValidContainer = onSuccessContainer,
     background = background,
     onBackground = onBackground,
     surface = surface,
@@ -248,56 +227,51 @@ fun lightSparkColors(
     surfaceTint = surfaceTint,
     outline = outline,
     outlineHigh = outlineHigh,
-    overlay = overlay,
-    outlineVariant = outlineVariant,
+    outlineVariant = outlineHigh,
     scrim = scrim,
     inversePrimary = inversePrimary,
-    inverseSurface = inverseSurface,
-    inverseOnSurface = inverseOnSurface,
+    inverseSurface = surfaceInverse,
+    inverseOnSurface = onSurfaceInverse,
 )
 
 fun darkSparkColors(
     isPro: Boolean = false,
-    primary: Color = if (isPro) TheBlueV else Orange80,
-    onPrimary: Color = if (isPro) TheBlue20 else Orange20,
-    primaryContainer: Color = if (isPro) TheBlue30 else Orange30,
-    onPrimaryContainer: Color = if (isPro) TheBlue80 else Orange90,
+    primary: Color = if (isPro) TheBlueV else Kiwi80,
+    onPrimary: Color = if (isPro) TheBlue20 else Kiwi20,
+    primaryContainer: Color = if (isPro) TheBlue30 else Kiwi30,
+    onPrimaryContainer: Color = if (isPro) TheBlue80 else Kiwi90,
     primaryVariant: Color = TheBlue80,
     onPrimaryVariant: Color = Black,
     secondary: Color = SugarCotton60,
-    onSecondary: Color = Grey0,
+    onSecondary: Color = Black,
     secondaryContainer: Color = SugarCotton20,
     onSecondaryContainer: Color = SugarCotton80,
     secondaryVariant: Color = SugarCotton70,
-    onSecondaryVariant: Color = Grey0,
+    onSecondaryVariant: Color = Black,
     tertiary: Color = GreyBlue40,
     onTertiary: Color = GreyBlue90,
     tertiaryContainer: Color = GreyBlue20,
     onTertiaryContainer: Color = GreyBlue95,
     success: Color = Apple40,
     onSuccess: Color = Black,
-    successContainer: Color = Apple80,
-    onSuccessContainer: Color = Apple20,
+    successContainer: Color = Apple20,
+    onSuccessContainer: Color = Apple80,
     alert: Color = Wiggings40,
     onAlert: Color = Black,
-    alertContainer: Color = Wiggings80,
-    onAlertContainer: Color = Wiggings20,
-    error: Color = Red80,
-    onError: Color = Red20,
-    errorContainer: Color = Red30,
-    onErrorContainer: Color = Red90,
+    alertContainer: Color = Wiggings20,
+    onAlertContainer: Color = Wiggings80,
+    error: Color = Chili40,
+    onError: Color = Black,
+    errorContainer: Color = Chili20,
+    onErrorContainer: Color = Chili80,
     info: Color = Sky40,
     onInfo: Color = Black,
-    infoContainer: Color = Sky80,
-    onInfoContainer: Color = Sky20,
+    infoContainer: Color = Sky20,
+    onInfoContainer: Color = Sky80,
     neutral: Color = Surfer50,
     onNeutral: Color = Black,
-    neutralContainer: Color = Surfer80,
-    onNeutralContainer: Color = Surfer20,
-    valid: Color = Green80,
-    onValid: Color = Green20,
-    validContainer: Color = Green30,
-    onValidContainer: Color = Green90,
+    neutralContainer: Color = Surfer20,
+    onNeutralContainer: Color = Surfer80,
     background: Color = Grey10,
     onBackground: Color = Grey90,
     surface: Color = Grey10,
@@ -307,14 +281,10 @@ fun darkSparkColors(
     surfaceInverse: Color = Surfer50,
     onSurfaceInverse: Color = Black,
     surfaceTint: Color = primary,
-    outline: Color = GreyBlue50,
-    outlineHigh: Color = Surfer70,
-    overlay: Color = Surfer80.copy(alpha = 0.75f),
-    outlineVariant: Color = GreyBlue30,
+    outline: Color = Surfer30,
+    outlineHigh: Color = Surfer30,
     inversePrimary: Color = Orange40,
-    inverseSurface: Color = onSurface,
-    inverseOnSurface: Color = Grey20,
-    scrim: Color = Grey0,
+    scrim: Color = Black,
 ): SparkColors = SparkColors(
     primary = primary,
     onPrimary = onPrimary,
@@ -352,10 +322,10 @@ fun darkSparkColors(
     onNeutral = onNeutral,
     neutralContainer = neutralContainer,
     onNeutralContainer = onNeutralContainer,
-    valid = valid,
-    onValid = onValid,
-    validContainer = validContainer,
-    onValidContainer = onValidContainer,
+    valid = success,
+    onValid = onSuccess,
+    validContainer = successContainer,
+    onValidContainer = onSuccessContainer,
     background = background,
     onBackground = onBackground,
     surface = surface,
@@ -367,12 +337,11 @@ fun darkSparkColors(
     surfaceTint = surfaceTint,
     outline = outline,
     outlineHigh = outlineHigh,
-    overlay = overlay,
-    outlineVariant = outlineVariant,
+    outlineVariant = outlineHigh,
     scrim = scrim,
     inversePrimary = inversePrimary,
-    inverseSurface = inverseSurface,
-    inverseOnSurface = inverseOnSurface,
+    inverseSurface = surfaceInverse,
+    inverseOnSurface = onSurfaceInverse,
 )
 
 
@@ -458,7 +427,6 @@ fun darkSparkColors(
  * contrast is not required.
  * @property outlineVariant Utility color used for boundaries for decorative elements when strong
  * contrast is not required.
- * @property overlay Color of a scrim that obscures content. Commonly used for layers in Modals, Drawers, etc.
  * @property scrim Color of a scrim that obscures content. On Android platforms, the scrim color
  * and opacity is automatically handled by the system UI.
  */
@@ -518,7 +486,6 @@ class SparkColors(
     inverseOnSurface: Color,
     outline: Color,
     outlineHigh: Color,
-    overlay: Color,
     outlineVariant: Color,
     scrim: Color,
 ) {
@@ -534,7 +501,6 @@ class SparkColors(
         internal set
     var onPrimaryVariant: Color by mutableStateOf(onPrimaryVariant, structuralEqualityPolicy())
         internal set
-
     var secondary: Color by mutableStateOf(secondary, structuralEqualityPolicy())
         internal set
     var onSecondary: Color by mutableStateOf(onSecondary, structuralEqualityPolicy())
@@ -577,7 +543,10 @@ class SparkColors(
     var onSurfaceInverse: Color by mutableStateOf(onSurfaceInverse, structuralEqualityPolicy())
         internal set
 
-    @Deprecated("This property will be removed as it is not part of Spark Token")
+    @Deprecated(
+        message = "This property will be removed as it is not part of Spark Token",
+        replaceWith = ReplaceWith("inverseSurface"),
+    )
     var surfaceVariant: Color by mutableStateOf(surfaceVariant, structuralEqualityPolicy())
         internal set
 
@@ -585,14 +554,10 @@ class SparkColors(
     var onSurfaceVariant: Color by mutableStateOf(onSurfaceVariant, structuralEqualityPolicy())
         internal set
 
-    @Deprecated("This property will be removed as it is not part of Spark Token")
-    var surfaceTint: Color by mutableStateOf(surfaceTint, structuralEqualityPolicy())
-        internal set
+    internal var surfaceTint: Color by mutableStateOf(surfaceTint, structuralEqualityPolicy())
     var outline: Color by mutableStateOf(outline, structuralEqualityPolicy())
         internal set
     var outlineHigh: Color by mutableStateOf(outlineHigh, structuralEqualityPolicy())
-        internal set
-    var overlay: Color by mutableStateOf(overlay, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -739,7 +704,6 @@ class SparkColors(
         surfaceTint: Color = this.surfaceTint,
         outline: Color = this.outline,
         outlineHigh: Color = this.outlineHigh,
-        overlay: Color = this.overlay,
         outlineVariant: Color = this.outlineVariant,
         scrim: Color = this.scrim,
         success: Color = this.success,
@@ -797,7 +761,6 @@ class SparkColors(
         surfaceTint = surfaceTint,
         outline = outline,
         outlineHigh = outlineHigh,
-        overlay = overlay,
         outlineVariant = outlineVariant,
         scrim = scrim,
         success = success,
@@ -851,16 +814,28 @@ class SparkColors(
         append("onSurfaceVariant=$onSurfaceVariant, ")
         append("surfaceTint=$surfaceTint, ")
         append("outline=$outline, ")
-        append("outlineVariant=$outlineVariant, ")
+        append("outlineHigh=$outlineHigh, ")
         append("scrim=$scrim, ")
-        append("error=$error, ")
-        append("onError=$onError, ")
-        append("errorContainer=$errorContainer, ")
-        append("onErrorContainer=$onErrorContainer, ")
         append("valid=$valid, ")
         append("onValid=$onValid, ")
         append("validContainer=$validContainer, ")
         append("onValidContainer=$onValidContainer, ")
+        append("alert=$alert, ")
+        append("onAlert=$onAlert, ")
+        append("alertContainer=$alertContainer, ")
+        append("onAlertContainer=$onAlertContainer, ")
+        append("error=$error, ")
+        append("onError=$onError, ")
+        append("errorContainer=$errorContainer, ")
+        append("onErrorContainer=$onErrorContainer, ")
+        append("info=$info, ")
+        append("onInfo=$onInfo, ")
+        append("infoContainer=$infoContainer, ")
+        append("onInfoContainer=$onInfoContainer, ")
+        append("neutral=$neutral, ")
+        append("onNeutral=$onNeutral, ")
+        append("neutralContainer=$neutralContainer, ")
+        append("onNeutralContainer=$onNeutralContainer, ")
         append("inversePrimary=$inversePrimary, ")
         append("inverseSurface=$inverseSurface, ")
         append("inverseOnSurface=$inverseOnSurface, ")
@@ -929,11 +904,18 @@ fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (backgroun
     background -> onBackground
     surface -> onSurface
     surfaceVariant -> onSurfaceVariant
+    surfaceInverse -> onSurfaceInverse
     inverseSurface -> inverseOnSurface
-    error -> onError
-    errorContainer -> onErrorContainer
     valid -> onValid
     validContainer -> onValidContainer
+    alert -> onAlert
+    alertContainer -> onAlertContainer
+    error -> onError
+    errorContainer -> onErrorContainer
+    info -> onInfo
+    infoContainer -> onInfoContainer
+    neutral -> onNeutral
+    neutralContainer -> onNeutralContainer
     else -> Color.Unspecified
 }
 
@@ -994,18 +976,33 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
     onSurface = other.onSurface
     surfaceVariant = other.surfaceVariant
     onSurfaceVariant = other.onSurfaceVariant
+    surfaceInverse = other.surfaceInverse
+    onSurfaceInverse = other.onSurfaceInverse
     surfaceTint = other.surfaceTint
     outline = other.outline
+    outlineHigh = other.outlineHigh
     outlineVariant = other.outlineVariant
     scrim = other.scrim
-    error = other.error
-    onError = other.onError
-    errorContainer = other.errorContainer
-    onErrorContainer = other.onErrorContainer
     valid = other.valid
     onValid = other.onValid
     validContainer = other.validContainer
     onValidContainer = other.onValidContainer
+    alert = other.alert
+    onAlert = other.onAlert
+    alertContainer = other.alertContainer
+    onAlertContainer = other.onAlertContainer
+    error = other.error
+    onError = other.onError
+    errorContainer = other.errorContainer
+    onErrorContainer = other.onErrorContainer
+    info = other.info
+    onInfo = other.onInfo
+    infoContainer = other.infoContainer
+    onInfoContainer = other.onInfoContainer
+    neutral = other.neutral
+    onNeutral = other.onNeutral
+    neutralContainer = other.neutralContainer
+    onNeutralContainer = other.onNeutralContainer
     inversePrimary = other.inversePrimary
     inverseSurface = other.inverseSurface
     inverseOnSurface = other.inverseOnSurface
@@ -1083,7 +1080,6 @@ fun debugColors(
     outline = debugColor,
     outlineHigh = debugColor,
     outlineVariant = debugColor,
-    overlay = debugColor,
     scrim = debugColor,
     inversePrimary = debugColor,
     inverseSurface = Color.Blue,
@@ -1103,36 +1099,49 @@ private fun ColorPreview(
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
         Row {
-            ColorItem(SparkTheme.colors.primary, "primary")
-            ColorItem(SparkTheme.colors.primaryContainer, "primary Container")
-            ColorItem(SparkTheme.colors.primaryVariant, "primary Variant")
-        }
-        Row {
-            ColorItem(SparkTheme.colors.secondary, "secondary")
-            ColorItem(SparkTheme.colors.secondaryContainer, "secondary Container")
-            ColorItem(SparkTheme.colors.secondaryVariant, "secondary Variant")
-        }
-        Row {
-            ColorItem(SparkTheme.colors.tertiary, "tertiary")
-            ColorItem(SparkTheme.colors.tertiaryContainer, "tertiary Container")
-        }
-        Row {
-            ColorItem(SparkTheme.colors.background, "background")
-            ColorItem(SparkTheme.colors.surface, "surface")
-            ColorItem(SparkTheme.colors.inverseSurface, "inverse Surface")
-        }
-        Row {
-            ColorItem(SparkTheme.colors.surfaceVariant, "surface Variant")
-            ColorItem(SparkTheme.colors.outline, "outline")
-            ColorItem(SparkTheme.colors.outlineVariant, "outline Variant")
-        }
-        Row {
-            ColorItem(SparkTheme.colors.error, "error")
-            ColorItem(SparkTheme.colors.errorContainer, "error Container")
-        }
-        Row {
-            ColorItem(SparkTheme.colors.valid, "valid")
-            ColorItem(SparkTheme.colors.validContainer, "valid Container")
+            Column {
+                Row {
+                    ColorItem(SparkTheme.colors.primary, "primary")
+                    ColorItem(SparkTheme.colors.primaryContainer, "primary Container")
+                    ColorItem(SparkTheme.colors.primaryVariant, "primary Variant")
+                }
+                Row {
+                    ColorItem(SparkTheme.colors.secondary, "secondary")
+                    ColorItem(SparkTheme.colors.secondaryContainer, "secondary Container")
+                    ColorItem(SparkTheme.colors.secondaryVariant, "secondary Variant")
+                }
+                Row {
+                    ColorItem(SparkTheme.colors.background, "background")
+                    ColorItem(SparkTheme.colors.surface, "surface")
+                    ColorItem(SparkTheme.colors.surfaceInverse, "surface inverse")
+                }
+                Row {
+                    ColorItem(SparkTheme.colors.outline, "outline")
+                    ColorItem(SparkTheme.colors.outlineHigh, "outline High")
+                }
+            }
+            Column {
+                Row {
+                    ColorItem(SparkTheme.colors.success, "success")
+                    ColorItem(SparkTheme.colors.successContainer, "success Container")
+                }
+                Row {
+                    ColorItem(SparkTheme.colors.alert, "alert")
+                    ColorItem(SparkTheme.colors.alertContainer, "alert Container")
+                }
+                Row {
+                    ColorItem(SparkTheme.colors.error, "error")
+                    ColorItem(SparkTheme.colors.errorContainer, "error Container")
+                }
+                Row {
+                    ColorItem(SparkTheme.colors.info, "info")
+                    ColorItem(SparkTheme.colors.infoContainer, "info Container")
+                }
+                Row {
+                    ColorItem(SparkTheme.colors.neutral, "neutral")
+                    ColorItem(SparkTheme.colors.neutralContainer, "neutral Container")
+                }
+            }
         }
     }
 }
