@@ -106,7 +106,7 @@ fun Switch(
  * [Interaction]s for this Switch. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this Switch in different [Interaction]s.
- * @param startContent The start content displayed before the checkbox, Usually a Text composable
+ * @param startContent The start content displayed before the switch, usually a Text composable
  */
 @Composable
 fun SwitchLabelled(
