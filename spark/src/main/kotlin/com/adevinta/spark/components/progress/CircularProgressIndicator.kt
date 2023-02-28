@@ -47,13 +47,12 @@ fun SparkCircularProgressIndicator(
     isIndeterminate: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    val color = ProgressIndicatorDefaults.circularColor // Primary
     if (isIndeterminate) {
         MaterialCircularProgressIndicator(
             modifier = modifier
                 .sparkUsageOverlay()
                 .size(CircularSize),
-            color = color,
+            color = ProgressIndicatorDefaults.circularColor,
         )
     } else {
         MaterialCircularProgressIndicator(
@@ -61,7 +60,7 @@ fun SparkCircularProgressIndicator(
                 .sparkUsageOverlay()
                 .size(CircularSize),
             progress = progress,
-            color = color,
+            color = ProgressIndicatorDefaults.circularColor,
         )
     }
 }
