@@ -43,6 +43,7 @@ android {
 
 dependencies {
     lintPublish(projects.sparkLint)
+    lintChecks(libs.slack.lint.compose)
 
     api(projects.sparkIcons)
 
