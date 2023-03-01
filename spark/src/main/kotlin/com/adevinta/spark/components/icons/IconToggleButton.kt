@@ -56,7 +56,7 @@ import androidx.compose.material3.OutlinedIconToggleButton as MaterialOutlinedIc
  * @param content the content of this icon button, typically an [Icon]
  */
 @Composable
-fun IconToggleButton(
+public fun IconToggleButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -108,7 +108,7 @@ fun IconToggleButton(
  */
 @ExperimentalSparkApi
 @Composable
-fun FilledIconToggleButton(
+public fun FilledIconToggleButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -167,7 +167,7 @@ fun FilledIconToggleButton(
  */
 @ExperimentalSparkApi
 @Composable
-fun FilledTonalIconToggleButton(
+public fun FilledTonalIconToggleButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
@@ -226,7 +226,7 @@ fun FilledTonalIconToggleButton(
  */
 @ExperimentalSparkApi
 @Composable
-fun OutlinedIconToggleButton(
+public fun OutlinedIconToggleButton(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,

@@ -54,7 +54,7 @@ import androidx.compose.material3.OutlinedIconButton as MaterialOutlinedIconButt
  * @param content the content of this icon button, typically an [Icon]
  */
 @Composable
-fun IconButton(
+public fun IconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -103,7 +103,7 @@ fun IconButton(
  */
 @ExperimentalSparkApi
 @Composable
-fun FilledIconButton(
+public fun FilledIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -159,7 +159,7 @@ fun FilledIconButton(
  */
 @ExperimentalSparkApi
 @Composable
-fun FilledTonalIconButton(
+public fun FilledTonalIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -220,7 +220,7 @@ fun FilledTonalIconButton(
  */
 @ExperimentalSparkApi
 @Composable
-fun OutlinedIconButton(
+public fun OutlinedIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,

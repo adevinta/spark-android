@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!--
   Copyright (c) 2023 Adevinta
@@ -21,9 +21,9 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
   -->
-<lint>
-    <!-- We ignore it since criteria icons almost all have this issue and we have to wait for design to chnage these path to resolve it -->
-    <issue id="VectorPath">
-        <ignore path="src/main/res-iconography/*/drawable/*.xml" />
-    </issue>
-</lint>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    <string name="spark_rating_label">(%d)</string>
+    <string name="spark_rating_with_comments_a11y">Note de %1$.1f pour %2$d avis</string>
+    <string name="spark_rating_with_comments_count_label">%d avis</string>
+    <string name="spark_rating_a11y">Note de %1$.1f</string>
+</resources>
