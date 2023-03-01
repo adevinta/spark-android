@@ -53,7 +53,10 @@ public fun EmphasizeHigh(content: @Composable () -> Unit) {
  */
 @Composable
 public fun EmphasizeMedium(content: @Composable () -> Unit) {
-    CompositionLocalProvider(LocalContentColor provides SparkTheme.colors.onSurfaceVariant, content = content)
+    CompositionLocalProvider(
+        LocalContentColor provides SparkTheme.colors.onSurface.copy(alpha = .72f),
+        content = content,
+    )
 }
 
 /**
