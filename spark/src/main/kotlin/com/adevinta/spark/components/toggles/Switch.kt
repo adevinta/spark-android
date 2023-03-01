@@ -73,7 +73,7 @@ internal fun SparkSwitch(
  * appearance / behavior of this Switch in different [Interaction]s.
  */
 @Composable
-fun Switch(
+public fun Switch(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
@@ -109,7 +109,7 @@ fun Switch(
  * @param startContent The start content displayed before the switch, usually a Text composable
  */
 @Composable
-fun SwitchLabelled(
+public fun SwitchLabelled(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
