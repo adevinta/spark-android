@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
@@ -63,9 +62,6 @@ internal fun SparkTag(
     tint: Color? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
-    DisableSelection {
-
-    }
     Surface(
         modifier = modifier.sparkUsageOverlay(),
         shape = SparkTheme.shapes.extraSmall,
