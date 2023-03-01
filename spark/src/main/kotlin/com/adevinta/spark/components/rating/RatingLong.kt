@@ -45,7 +45,7 @@ import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
 
 /**
  * Component that displays rating of an user with stars in the following form:
- *  - ***** (5)
+ *  commentCount***** (5)
  *  - ***** 5 avis
  * @param value rating value as a float, should be between 1.0 and 5.0
  * @param contentDescription description indicate wha is the rating and how many comments are associated with it

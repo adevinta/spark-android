@@ -43,9 +43,9 @@ internal fun rememberSparkTopAppBarState(
 
 /**
  * Creates a TopAppBarState that is remembered across compositions.
-@param initialHeightOffsetLimit - the initial value for TopAppBarState.heightOffsetLimit, which represents the pixel limit that a top app bar is allowed to collapse when the scrollable content is scrolled
-@param initialHeightOffset - the initial value for TopAppBarState.heightOffset. The initial offset height offset should be between zero and initialHeightOffsetLimit.
-@param initialContentOffset - the initial value for TopAppBarState.contentOffset
+@param initialHeightOffsetLimit the initial value for TopAppBarState.heightOffsetLimit, which represents the pixel limit that a top app bar is allowed to collapse when the scrollable content is scrolled
+@param initialHeightOffset the initial value for TopAppBarState.heightOffset. The initial offset height offset should be between zero and initialHeightOffsetLimit.
+@param initialContentOffset the initial value for TopAppBarState.contentOffset
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
