@@ -60,9 +60,9 @@ internal fun SparkBadgedBox(
  *
  * ![BadgedBox image](https://developer.android.com/images/reference/androidx/compose/material3/badge.png)
  *
- * @param badge - the badge to be displayed - typically a Badge
- * @param modifier - the Modifier to be applied to this BadgedBox
- * @param content - the anchor to which this badge will be positioned
+ * @param badge the badge to be displayed - typically a Badge
+ * @param modifier the Modifier to be applied to this BadgedBox
+ * @param content the anchor to which this badge will be positioned
  **/
 @ExperimentalSparkApi
 @Composable
