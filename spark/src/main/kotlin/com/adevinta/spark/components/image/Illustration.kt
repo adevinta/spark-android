@@ -139,7 +139,7 @@ internal fun SparkIllustration(
  * sampling algorithm
  */
 @Composable
-fun Illustration(
+public fun Illustration(
     bitmap: ImageBitmap,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -184,7 +184,7 @@ fun Illustration(
  * onscreen
  */
 @Composable
-fun Illustration(
+public fun Illustration(
     imageVector: ImageVector,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -230,7 +230,7 @@ fun Illustration(
  * @param colorFilter Optional colorFilter to apply for the [Painter] when it is rendered onscreen
  */
 @Composable
-fun Illustration(
+public fun Illustration(
     painter: Painter?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -271,7 +271,7 @@ fun Illustration(
  * @param colorFilter Optional colorFilter to apply for the [Painter] when it is rendered onscreen
  */
 @Composable
-fun Illustration(
+public fun Illustration(
     @DrawableRes drawableRes: Int,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -316,7 +316,7 @@ fun Illustration(
  * @param colorFilter Optional colorFilter to apply for the [Painter] when it is rendered onscreen
  */
 @Composable
-fun Illustration(
+public fun Illustration(
     sparkIcon: SparkIcon,
     contentDescription: String?,
     modifier: Modifier = Modifier,

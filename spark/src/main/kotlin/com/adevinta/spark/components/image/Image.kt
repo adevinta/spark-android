@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
+import coil.decode.DataSource
 import coil.request.ErrorResult
 import coil.request.ImageRequest
 import coil.request.NullRequestData
@@ -54,13 +55,11 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.rememberSparkIconPainter
-import com.adevinta.spark.components.image.State.Empty.painter
 import com.adevinta.spark.components.placeholder.illustrationPlaceholder
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import javax.sql.DataSource
 
 @InternalSparkApi
 @Composable
@@ -150,7 +149,7 @@ internal fun SparkImage(
  * sampling algorithm
  */
 @Composable
-fun Image(
+public fun Image(
     model: Any?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -177,7 +176,7 @@ fun Image(
 @Composable
 private fun ImageIconState(sparkIcon: SparkIcon) {
     Surface(
-        color = SparkTheme.colors.tertiary,
+        color = SparkTheme.colors.neutral,
     ) {
         Icon(
             sparkIcon = sparkIcon,
@@ -190,24 +189,24 @@ private fun ImageIconState(sparkIcon: SparkIcon) {
 /**
  * The current state of the [Image].
  */
-sealed class State {
+public sealed class State {
 
     /** The current painter being drawn by [Image]. */
-    abstract val painter: Painter?
+    public abstract val painter: Painter?
 
     /** The request has not been started or the request has no data*/
-    object Empty : State() {
+    public object Empty : State() {
         override val painter: Painter? get() = null
     }
 
     /** The request is in-progress. */
-    data class Loading(override val painter: Painter?) : State()
+    public data class Loading(override val painter: Painter?) : State()
 
     /** The request was successful. */
-    data class Success(override val painter: Painter) : State()
+    public data class Success(override val painter: Painter) : State()
 
     /** The request failed due to [ErrorResult.throwable]. */
-    data class Error(override val painter: Painter?) : State()
+    public data class Error(override val painter: Painter?) : State()
 }
 
 private fun AsyncImagePainter.State.asImageState(): State {

@@ -102,7 +102,7 @@ internal fun SparkUserAvatar(
 @Composable
 private fun ImageIconState(sparkIcon: SparkIcon) {
     Surface(
-        color = SparkTheme.colors.tertiary,
+        color = SparkTheme.colors.neutralContainer,
     ) {
         Illustration(
             sparkIcon = sparkIcon,
@@ -116,15 +116,15 @@ private fun PresenceIndicator(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .clip(CircleShape)
-            .border(1.dp, SparkTheme.colors.inverseOnSurface, CircleShape)
+            .border(1.dp, SparkTheme.colors.onSurfaceInverse, CircleShape)
             .padding(1.dp)
             .clip(CircleShape)
-            .background(SparkTheme.colors.valid),
+            .background(SparkTheme.colors.success),
     )
 }
 
 @Composable
-fun UserAvatar(
+public fun UserAvatar(
     modifier: Modifier = Modifier,
     style: UserAvatarStyle = UserAvatarStyle.SMALL,
     fillParentSize: Boolean = false,
@@ -147,7 +147,7 @@ fun UserAvatar(
  * @param badgeSize size of online badge in [Dp]
  * @param badgeOffset size of the offset of the badge in [Dp]
  */
-enum class UserAvatarStyle(val imageSize: Dp, val badgeSize: Dp, val badgeOffset: Dp) {
+public enum class UserAvatarStyle(public val imageSize: Dp, public val badgeSize: Dp, public val badgeOffset: Dp) {
     SMALL(imageSize = 32.dp, badgeSize = 9.dp, badgeOffset = (-1).dp),
     MEDIUM(imageSize = 40.dp, badgeSize = 9.dp, badgeOffset = (-1).dp),
 }
