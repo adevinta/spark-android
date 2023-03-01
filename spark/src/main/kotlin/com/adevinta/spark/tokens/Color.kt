@@ -568,11 +568,6 @@ public class SparkColors(
     public var outlineVariant: Color by mutableStateOf(outlineVariant, structuralEqualityPolicy())
         internal set
 
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith("overlay"),
-        level = DeprecationLevel.WARNING,
-    )
     public var scrim: Color by mutableStateOf(scrim, structuralEqualityPolicy())
         internal set
 
