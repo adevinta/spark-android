@@ -42,6 +42,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,6 +51,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.isFinite
 import com.adevinta.spark.PreviewTheme
@@ -58,6 +61,17 @@ import com.adevinta.spark.tools.preview.ThemesPreviews
 public object Layout {
 
     /// TODO: Use M3 WindowHeightSizeClass instead of our custom size ranges
+
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+    public val windowSize: WindowSizeClass
+        @Composable get() {
+            // Observe view configuration changes and recalculate the size class on each change. We can't
+            // use Activity#onConfigurationChanged as this will sometimes fail to be called on different
+            // API levels, hence why this function needs to be @Composable so we can observe the
+            // ComposeView's configuration changes.
+            val config = LocalConfiguration.current
+            return WindowSizeClass.calculateFromSize(DpSize(config.screenWidthDp.dp, config.screenHeightDp.dp))
+        }
 
     public val bodyMargin: Dp
         @Composable get() = when (LocalConfiguration.current.screenWidthDp) {

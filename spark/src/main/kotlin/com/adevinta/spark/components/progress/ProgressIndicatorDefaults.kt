@@ -20,23 +20,14 @@
  * SOFTWARE.
  */
 
-package com.adevinta.spark
+package com.adevinta.spark.components.progress
 
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-
-internal class SparkKotlinJvmPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            apply(plugin = "org.jetbrains.kotlin.jvm")
-
-            configureKotlin<KotlinJvmProjectExtension>()
-            configureKotlinCompiler()
-
-            addKotlinBom()
-        }
-    }
+/**
+ * Contains the default values used for [LinearProgressIndicator] and [CircularProgressIndicator].
+ */
+public object ProgressIndicatorDefaults {
+    public val CircularSize: Dp = 48.0.dp
 }
