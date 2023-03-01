@@ -46,9 +46,6 @@ import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
  * @param modifier to be applied
  * @param enabled whether the star should be colored
  */
-
-private const val BRIKKE_RATING_STAR_SIZE = 12
-
 @Composable
 @InternalSparkApi
 internal fun SparkRatingStar(
@@ -64,12 +61,14 @@ internal fun SparkRatingStar(
 
     CompositionLocalProvider(LocalContentColor provides color) {
         Icon(
-            modifier = modifier.size(BRIKKE_RATING_STAR_SIZE.dp),
+            modifier = modifier.size(StarSize),
             sparkIcon = SparkIcon.Options.Star.Default,
             contentDescription = null,
         )
     }
 }
+
+private val StarSize = 12.dp
 
 @Composable
 @Preview
