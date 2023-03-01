@@ -22,11 +22,12 @@
 
 package com.adevinta.spark.components.progress
 
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
  * Contains the default values used for [LinearProgressIndicator] and [CircularProgressIndicator].
  */
-object ProgressIndicatorDefaults {
-    val CircularSize = 48.0.dp
+public object ProgressIndicatorDefaults {
+    public val CircularSize: Dp = 48.0.dp
 }

@@ -41,7 +41,7 @@ import androidx.compose.material3.LinearProgressIndicator as MaterialLinearProgr
 
 @InternalSparkApi
 @Composable
-fun SparkLinearProgressIndicator(
+internal fun SparkLinearProgressIndicator(
     @FloatRange(from = 0.0, to = 1.0)
     progress: Float,
     isIndeterminate: Boolean,
@@ -77,7 +77,7 @@ fun SparkLinearProgressIndicator(
  * @param modifier the [Modifier] to be applied to this progress indicator
  */
 @Composable
-fun LinearProgressIndicator(
+public fun LinearProgressIndicator(
     @FloatRange(from = 0.0, to = 1.0)
     progress: Float,
     modifier: Modifier = Modifier,
@@ -95,7 +95,7 @@ fun LinearProgressIndicator(
  * @param modifier the [Modifier] to be applied to this progress indicator
  */
 @Composable
-fun LinearProgressIndicatorIndeterminate(
+public fun LinearProgressIndicatorIndeterminate(
     modifier: Modifier = Modifier,
 ) {
     SparkLinearProgressIndicator(

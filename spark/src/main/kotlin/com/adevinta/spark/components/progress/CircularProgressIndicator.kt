@@ -43,7 +43,7 @@ import androidx.compose.material3.CircularProgressIndicator as MaterialCircularP
 
 @InternalSparkApi
 @Composable
-fun SparkCircularProgressIndicator(
+internal fun SparkCircularProgressIndicator(
     @FloatRange(from = 0.0, to = 1.0)
     progress: Float,
     isIndeterminate: Boolean,
@@ -79,7 +79,7 @@ fun SparkCircularProgressIndicator(
  * @param modifier the [Modifier] to be applied to this progress indicator
  */
 @Composable
-fun CircularProgressIndicator(
+public fun CircularProgressIndicator(
     @FloatRange(from = 0.0, to = 1.0)
     progress: Float,
     modifier: Modifier = Modifier,
@@ -99,7 +99,7 @@ fun CircularProgressIndicator(
  * @param modifier the [Modifier] to be applied to this progress indicator
  */
 @Composable
-fun CircularProgressIndicatorIndeterminate(
+public fun CircularProgressIndicatorIndeterminate(
     modifier: Modifier = Modifier,
 ) {
     SparkCircularProgressIndicator(
