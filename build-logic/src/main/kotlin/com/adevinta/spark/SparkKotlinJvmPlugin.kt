@@ -35,6 +35,8 @@ internal class SparkKotlinJvmPlugin : Plugin<Project> {
 
             configureKotlin<KotlinJvmProjectExtension>()
             configureKotlinCompiler()
+
+            addKotlinBom()
         }
     }
 }

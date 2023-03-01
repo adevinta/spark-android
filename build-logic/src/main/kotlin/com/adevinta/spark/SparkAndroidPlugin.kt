@@ -56,6 +56,8 @@ public class SparkAndroidPlugin : Plugin<Project> {
                     lintConfig = file("lint.xml").takeIf(File::exists)
                 }
             }
+
+            addKotlinBom()
         }
     }
 }

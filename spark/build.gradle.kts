@@ -43,10 +43,12 @@ android {
 
 dependencies {
     lintPublish(projects.sparkLint)
+    lintChecks(libs.slack.lint.compose)
 
     api(projects.sparkIcons)
 
     implementation(libs.accompanist.drawablepainter)
+    implementation(libs.accompanist.placeholder)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appCompat.resources)
