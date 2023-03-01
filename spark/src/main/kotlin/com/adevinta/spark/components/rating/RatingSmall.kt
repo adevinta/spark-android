@@ -111,7 +111,7 @@ internal fun SparkRatingSmall(
  * @param commentCount number of collected ratings
  */
 @Composable
-fun RatingSmall(
+public fun RatingSmall(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     modifier: Modifier = Modifier,

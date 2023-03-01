@@ -95,7 +95,7 @@ internal fun SparkRatingLong(
  * @param modifier to be applied to this rating
  */
 @Composable
-fun RatingNaked(
+public fun RatingNaked(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     modifier: Modifier = Modifier,
@@ -116,7 +116,7 @@ fun RatingNaked(
  * @param modifier to apply
  */
 @Composable
-fun RatingCompressed(
+public fun RatingCompressed(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     commentCount: Int,
@@ -138,7 +138,7 @@ fun RatingCompressed(
  * @param modifier to apply
  */
 @Composable
-fun RatingFull(
+public fun RatingFull(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     commentCount: Int,
