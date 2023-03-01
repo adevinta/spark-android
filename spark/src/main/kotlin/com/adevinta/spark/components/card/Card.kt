@@ -69,13 +69,13 @@ internal fun SparkCard(
  *
  * ![Card image](https://developer.android.com/images/reference/androidx/compose/material3/filled-card.png)
  *
- * @param modifier the Modifier to be applied to this card
+ * @param modifier - the Modifier to be applied to this card
  * When false, this component will not respond to user input,
  * and it will appear visually disabled and disabled to accessibility services.
- * @param colors commentCountCardColors that will be used to resolve the colors used for this card in different states.
+ * @param colors - CardColors that will be used to resolve the colors used for this card in different states.
  * See [CardDefaults.cardColors]
- * @param border commentCountthe border to draw around the container of this card
- * @param content commentCountcontent of the card
+ * @param border - the border to draw around the container of this card
+ * @param content - content of the card
  */
 @ExperimentalSparkApi
 @Composable
