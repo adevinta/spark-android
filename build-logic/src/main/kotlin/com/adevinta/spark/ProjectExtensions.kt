@@ -62,6 +62,7 @@ internal fun Project.configureKotlinCompiler(
 ) = tasks.withType<KotlinCompile> {
     compilerOptions {
         this.allWarningsAsErrors.set(allWarningsAsErrors)
+        freeCompilerArgs.add("-Xexplicit-api=strict")
         configure()
     }
 }

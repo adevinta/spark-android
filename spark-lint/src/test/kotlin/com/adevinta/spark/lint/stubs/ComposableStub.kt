@@ -25,7 +25,7 @@ package com.adevinta.spark.lint.stubs
 import com.android.tools.lint.checks.infrastructure.TestFile
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
 
-val Composable: TestFile = kotlin(
+internal val Composable: TestFile = kotlin(
     """
     package androidx.compose.runtime
     @MustBeDocumented

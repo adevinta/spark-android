@@ -32,7 +32,7 @@ import androidx.compose.material3.Icon as MaterialIcon
  *  tint is applied
  */
 @Composable
-fun Icon(
+public fun Icon(
     sparkIcon: SparkIcon,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -62,7 +62,7 @@ fun Icon(
  * is applied.
  */
 @Composable
-fun Icon(
+public fun Icon(
     imageVector: ImageVector,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -92,7 +92,7 @@ fun Icon(
  * applied.
  */
 @Composable
-fun Icon(
+public fun Icon(
     bitmap: ImageBitmap,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -122,7 +122,7 @@ fun Icon(
  * applied.
  */
 @Composable
-fun Icon(
+public fun Icon(
     painter: Painter,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -137,7 +137,7 @@ fun Icon(
 }
 
 @Composable
-fun rememberSparkIconPainter(sparkIcon: SparkIcon): Painter {
+public fun rememberSparkIconPainter(sparkIcon: SparkIcon): Painter {
     @Suppress("USELESS_IS_CHECK") // Currently all icons are IconDrawableRes but that might not be true in the future
     return when (sparkIcon) {
         is IconVector -> rememberVectorPainter(sparkIcon.imageVector)

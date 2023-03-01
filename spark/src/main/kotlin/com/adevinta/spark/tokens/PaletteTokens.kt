@@ -177,7 +177,7 @@ internal object PaletteTokens {
     internal val Surfer60 = Color(0xFF9C9BA4)
     internal val Surfer70 = Color(0xFFB6B5BC)
     internal val Surfer80 = Color(0xFFD1D0D5)
-    internal val Surfer90 = Color(0xFF7B7986)
+    internal val Surfer90 = Color(0xFFEBEBED)
     internal val Surfer95 = Color(0xFFF8F8F9)
 
     internal val Kiwi10 = Color(0xFF353710)
