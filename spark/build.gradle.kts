@@ -59,6 +59,8 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling)
 
+    implementation(libs.coilCompose)
+
     compileOnly(libs.airbnb.showkase)
     ksp(libs.airbnb.showkase.processor)
 
