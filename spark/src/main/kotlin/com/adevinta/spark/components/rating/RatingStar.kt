@@ -47,7 +47,7 @@ import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
  * @param enabled whether the star should be colored
  */
 
-const val BRIKKE_RATING_STAR_SIZE = 12
+private const val BRIKKE_RATING_STAR_SIZE = 12
 
 @Composable
 @InternalSparkApi

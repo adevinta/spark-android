@@ -69,7 +69,7 @@ private fun PlaceholderHighlight.Companion.sparkShimmer() = shimmer(
     animationSpec = PlaceholderDefaults.shimmerAnimationSpec,
 )
 
-fun Modifier.defaultPlaceholder(visible: Boolean) =
+public fun Modifier.defaultPlaceholder(visible: Boolean): Modifier =
     composed {
         placeholder(
             visible = visible,
@@ -79,7 +79,7 @@ fun Modifier.defaultPlaceholder(visible: Boolean) =
         )
     }
 
-fun Modifier.textPlaceholder(visible: Boolean) = composed {
+public fun Modifier.textPlaceholder(visible: Boolean): Modifier = composed {
     placeholder(
         visible = visible,
         highlight = PlaceholderHighlight.sparkFade(),
@@ -88,10 +88,10 @@ fun Modifier.textPlaceholder(visible: Boolean) = composed {
     )
 }
 
-fun Modifier.illustrationPlaceholder(
+public fun Modifier.illustrationPlaceholder(
     visible: Boolean,
     shape: Shape,
-) = composed {
+): Modifier = composed {
     placeholder(
         visible = visible,
         highlight = PlaceholderHighlight.sparkShimmer(),
