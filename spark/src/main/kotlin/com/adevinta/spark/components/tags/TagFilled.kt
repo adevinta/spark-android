@@ -41,7 +41,7 @@ import com.adevinta.spark.tools.preview.UserType
  */
 @ExperimentalSparkApi
 @Composable
-fun TagFilled(
+public fun TagFilled(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {

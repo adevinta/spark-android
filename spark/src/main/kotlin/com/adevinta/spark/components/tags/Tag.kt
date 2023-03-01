@@ -102,12 +102,12 @@ internal fun SparkTag(
 }
 
 @Immutable
-data class TagColors(
+internal data class TagColors(
     val backgroundColor: Color,
     val contentColor: Color,
 )
 
-object TagDefaults {
+internal object TagDefaults {
     internal val MinHeight = 20.dp
 
     /**
@@ -121,7 +121,7 @@ object TagDefaults {
     internal val LeadingIconSize = 16.dp
 
     @Composable
-    fun tonalColors(
+    internal fun tonalColors(
         backgroundColor: Color = SparkTheme.colors.secondaryContainer,
     ): TagColors {
         return TagColors(
@@ -131,13 +131,13 @@ object TagDefaults {
     }
 
     @Composable
-    fun filledColors(): TagColors = TagColors(
+    internal fun filledColors(): TagColors = TagColors(
         backgroundColor = SparkTheme.colors.primary,
         contentColor = SparkTheme.colors.onPrimary,
     )
 
     @Composable
-    fun outlineColors(
+    internal fun outlineColors(
         contentColor: Color = SparkTheme.colors.neutral,
     ): TagColors = TagColors(
         backgroundColor = Color.Transparent,

@@ -56,7 +56,7 @@ internal fun TagOutlined(
 }
 
 @Composable
-fun TagPromote(
+public fun TagPromote(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -68,7 +68,7 @@ fun TagPromote(
 }
 
 @Composable
-fun TagUrgent(
+public fun TagUrgent(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -82,7 +82,7 @@ fun TagUrgent(
 }
 
 @Composable
-fun TagPro(
+public fun TagPro(
     modifier: Modifier = Modifier,
     content: @Composable RowScope.() -> Unit,
 ) {
