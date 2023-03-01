@@ -57,7 +57,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * these buttons have the most emphasis.
  */
 @Composable
-fun SecondaryButton(
+public fun SecondaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,

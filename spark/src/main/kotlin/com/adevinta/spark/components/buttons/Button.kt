@@ -43,6 +43,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -55,7 +56,7 @@ import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi
 @Composable
-fun SparkButton(
+internal fun SparkButton(
     onClick: () -> Unit,
     colors: ButtonColors,
     contentPadding: PaddingValues,
@@ -115,28 +116,28 @@ fun SparkButton(
 }
 
 @VisibleForTesting
-object SparkButtonTags {
-    const val TAG_PROGRESS_INDICATOR = "progress_indicator"
+public object SparkButtonTags {
+    public const val TAG_PROGRESS_INDICATOR: String = "progress_indicator"
 }
 
-enum class IconSide { START, END }
+public enum class IconSide { START, END }
 
-object SparkButtonDefaults {
+public object SparkButtonDefaults {
 
     /**
      * The default size of the icon when used inside a [SparkButtonTags].
      */
-    val IconSize = 14.dp
+    public val IconSize: Dp = 14.dp
 
     /**
      * The default size of the spacing between an icon and a text when they used inside a [SparkButtonTags].
      */
-    val IconSpacing = ButtonDefaults.IconSpacing
+    internal val IconSpacing: Dp = ButtonDefaults.IconSpacing
 
     /**
      * The default content padding used by [TextButton]
      */
-    val ButtonContentPadding = PaddingValues(
+    internal val ButtonContentPadding = PaddingValues(
         horizontal = 16.dp,
         vertical = 10.dp,
     )
@@ -144,13 +145,13 @@ object SparkButtonDefaults {
     /**
      * The default content padding used by [TextButton]
      */
-    val TextButtonContentPadding = ButtonDefaults.TextButtonContentPadding
+    internal val TextButtonContentPadding = ButtonDefaults.TextButtonContentPadding
 
     /**
      * The default border of [SecondaryButton]s
      */
     @Composable
-    fun outlinedBorder(isDanger: Boolean): BorderStroke = BorderStroke(
+    internal fun outlinedBorder(isDanger: Boolean): BorderStroke = BorderStroke(
         width = OutlinedBorderSize,
         color = if (isDanger) SparkTheme.colors.error else SparkTheme.colors.onSurface,
     )

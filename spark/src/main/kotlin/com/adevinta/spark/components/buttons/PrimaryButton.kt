@@ -59,7 +59,7 @@ import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
  * these buttons have the most emphasis.
  */
 @Composable
-fun PrimaryButton(
+public fun PrimaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,

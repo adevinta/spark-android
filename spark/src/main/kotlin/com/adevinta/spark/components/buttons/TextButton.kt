@@ -59,7 +59,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * these buttons have the most emphasis.
  */
 @Composable
-fun TextButton(
+public fun TextButton(
     onClick: () -> Unit,
     icon: SparkIcon?,
     modifier: Modifier = Modifier,

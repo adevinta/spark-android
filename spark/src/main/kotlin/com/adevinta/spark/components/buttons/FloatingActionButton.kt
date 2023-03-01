@@ -88,7 +88,7 @@ import androidx.compose.material3.SmallFloatingActionButton as MaterialSmallFloa
  * and customize the appearance / behavior of this FAB in different states.
  */
 @Composable
-fun FloatingActionButton(
+public fun FloatingActionButton(
     onClick: () -> Unit,
     icon: SparkIcon,
     contentDescription: String?,
@@ -144,7 +144,7 @@ fun FloatingActionButton(
  * and customize the appearance / behavior of this FAB in different states.
  */
 @Composable
-fun SmallFloatingActionButton(
+public fun SmallFloatingActionButton(
     onClick: () -> Unit,
     icon: SparkIcon,
     contentDescription: String?,
@@ -200,7 +200,7 @@ fun SmallFloatingActionButton(
  * and customize the appearance / behavior of this FAB in different states.
  */
 @Composable
-fun LargeFloatingActionButton(
+public fun LargeFloatingActionButton(
     onClick: () -> Unit,
     icon: SparkIcon,
     contentDescription: String?,
@@ -259,7 +259,7 @@ fun LargeFloatingActionButton(
  * @param content the content of this FAB, typically a [Text] label
  */
 @Composable
-fun ExtendedFloatingActionButton(
+public fun ExtendedFloatingActionButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     shape: Shape = FloatingActionButtonDefaults.extendedFabShape,
@@ -318,7 +318,7 @@ fun ExtendedFloatingActionButton(
  * and customize the appearance / behavior of this FAB in different states.
  */
 @Composable
-fun ExtendedFloatingActionButton(
+public fun ExtendedFloatingActionButton(
     text: @Composable () -> Unit,
     icon: SparkIcon,
     onClick: () -> Unit,
