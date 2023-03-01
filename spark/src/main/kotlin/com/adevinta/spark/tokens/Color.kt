@@ -124,7 +124,7 @@ import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
 
-fun lightSparkColors(
+public fun lightSparkColors(
     isPro: Boolean = false,
     primary: Color = if (isPro) TheBlue50 else Kiwi50,
     onPrimary: Color = if (isPro) White else Black,
@@ -234,7 +234,7 @@ fun lightSparkColors(
     inverseOnSurface = onSurfaceInverse,
 )
 
-fun darkSparkColors(
+public fun darkSparkColors(
     isPro: Boolean = false,
     primary: Color = if (isPro) TheBlueV else Kiwi80,
     onPrimary: Color = if (isPro) TheBlue20 else Kiwi20,
@@ -431,7 +431,7 @@ fun darkSparkColors(
  * and opacity is automatically handled by the system UI.
  */
 @Stable
-class SparkColors(
+public class SparkColors(
     primary: Color,
     onPrimary: Color,
     primaryContainer: Color,
@@ -489,75 +489,75 @@ class SparkColors(
     outlineVariant: Color,
     scrim: Color,
 ) {
-    var primary: Color by mutableStateOf(primary, structuralEqualityPolicy())
+    public var primary: Color by mutableStateOf(primary, structuralEqualityPolicy())
         internal set
-    var onPrimary: Color by mutableStateOf(onPrimary, structuralEqualityPolicy())
+    public var onPrimary: Color by mutableStateOf(onPrimary, structuralEqualityPolicy())
         internal set
-    var primaryContainer: Color by mutableStateOf(primaryContainer, structuralEqualityPolicy())
+    public var primaryContainer: Color by mutableStateOf(primaryContainer, structuralEqualityPolicy())
         internal set
-    var onPrimaryContainer: Color by mutableStateOf(onPrimaryContainer, structuralEqualityPolicy())
+    public var onPrimaryContainer: Color by mutableStateOf(onPrimaryContainer, structuralEqualityPolicy())
         internal set
-    var primaryVariant: Color by mutableStateOf(primaryVariant, structuralEqualityPolicy())
+    public var primaryVariant: Color by mutableStateOf(primaryVariant, structuralEqualityPolicy())
         internal set
-    var onPrimaryVariant: Color by mutableStateOf(onPrimaryVariant, structuralEqualityPolicy())
+    public var onPrimaryVariant: Color by mutableStateOf(onPrimaryVariant, structuralEqualityPolicy())
         internal set
-    var secondary: Color by mutableStateOf(secondary, structuralEqualityPolicy())
+    public var secondary: Color by mutableStateOf(secondary, structuralEqualityPolicy())
         internal set
-    var onSecondary: Color by mutableStateOf(onSecondary, structuralEqualityPolicy())
+    public var onSecondary: Color by mutableStateOf(onSecondary, structuralEqualityPolicy())
         internal set
-    var secondaryContainer: Color by mutableStateOf(secondaryContainer, structuralEqualityPolicy())
+    public var secondaryContainer: Color by mutableStateOf(secondaryContainer, structuralEqualityPolicy())
         internal set
-    var onSecondaryContainer: Color by mutableStateOf(onSecondaryContainer, structuralEqualityPolicy())
+    public var onSecondaryContainer: Color by mutableStateOf(onSecondaryContainer, structuralEqualityPolicy())
         internal set
-    var secondaryVariant: Color by mutableStateOf(secondaryVariant, structuralEqualityPolicy())
+    public var secondaryVariant: Color by mutableStateOf(secondaryVariant, structuralEqualityPolicy())
         internal set
-    var onSecondaryVariant: Color by mutableStateOf(onSecondaryVariant, structuralEqualityPolicy())
-        internal set
-
-    @Deprecated("This property will be removed as it is not part of Spark Token")
-    var tertiary: Color by mutableStateOf(tertiary, structuralEqualityPolicy())
+    public var onSecondaryVariant: Color by mutableStateOf(onSecondaryVariant, structuralEqualityPolicy())
         internal set
 
     @Deprecated("This property will be removed as it is not part of Spark Token")
-    var onTertiary: Color by mutableStateOf(onTertiary, structuralEqualityPolicy())
+    public var tertiary: Color by mutableStateOf(tertiary, structuralEqualityPolicy())
         internal set
 
     @Deprecated("This property will be removed as it is not part of Spark Token")
-    var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
+    public var onTertiary: Color by mutableStateOf(onTertiary, structuralEqualityPolicy())
         internal set
 
     @Deprecated("This property will be removed as it is not part of Spark Token")
-    var onTertiaryContainer: Color by mutableStateOf(onTertiaryContainer, structuralEqualityPolicy())
+    public var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
         internal set
 
-    var background: Color by mutableStateOf(background, structuralEqualityPolicy())
+    @Deprecated("This property will be removed as it is not part of Spark Token")
+    public var onTertiaryContainer: Color by mutableStateOf(onTertiaryContainer, structuralEqualityPolicy())
         internal set
-    var onBackground: Color by mutableStateOf(onBackground, structuralEqualityPolicy())
+
+    public var background: Color by mutableStateOf(background, structuralEqualityPolicy())
         internal set
-    var surface: Color by mutableStateOf(surface, structuralEqualityPolicy())
+    public var onBackground: Color by mutableStateOf(onBackground, structuralEqualityPolicy())
         internal set
-    var onSurface: Color by mutableStateOf(onSurface, structuralEqualityPolicy())
+    public var surface: Color by mutableStateOf(surface, structuralEqualityPolicy())
         internal set
-    var surfaceInverse: Color by mutableStateOf(surfaceInverse, structuralEqualityPolicy())
+    public var onSurface: Color by mutableStateOf(onSurface, structuralEqualityPolicy())
         internal set
-    var onSurfaceInverse: Color by mutableStateOf(onSurfaceInverse, structuralEqualityPolicy())
+    public var surfaceInverse: Color by mutableStateOf(surfaceInverse, structuralEqualityPolicy())
+        internal set
+    public var onSurfaceInverse: Color by mutableStateOf(onSurfaceInverse, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
         message = "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith("inverseSurface"),
     )
-    var surfaceVariant: Color by mutableStateOf(surfaceVariant, structuralEqualityPolicy())
+    public var surfaceVariant: Color by mutableStateOf(surfaceVariant, structuralEqualityPolicy())
         internal set
 
     @Deprecated("This property will be removed as it is not part of Spark Token")
-    var onSurfaceVariant: Color by mutableStateOf(onSurfaceVariant, structuralEqualityPolicy())
+    public var onSurfaceVariant: Color by mutableStateOf(onSurfaceVariant, structuralEqualityPolicy())
         internal set
 
     internal var surfaceTint: Color by mutableStateOf(surfaceTint, structuralEqualityPolicy())
-    var outline: Color by mutableStateOf(outline, structuralEqualityPolicy())
+    public var outline: Color by mutableStateOf(outline, structuralEqualityPolicy())
         internal set
-    var outlineHigh: Color by mutableStateOf(outlineHigh, structuralEqualityPolicy())
+    public var outlineHigh: Color by mutableStateOf(outlineHigh, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -565,7 +565,7 @@ class SparkColors(
         replaceWith = ReplaceWith("outlineHigh"),
         level = DeprecationLevel.WARNING,
     )
-    var outlineVariant: Color by mutableStateOf(outlineVariant, structuralEqualityPolicy())
+    public var outlineVariant: Color by mutableStateOf(outlineVariant, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -573,52 +573,52 @@ class SparkColors(
         replaceWith = ReplaceWith("overlay"),
         level = DeprecationLevel.WARNING,
     )
-    var scrim: Color by mutableStateOf(scrim, structuralEqualityPolicy())
+    public var scrim: Color by mutableStateOf(scrim, structuralEqualityPolicy())
         internal set
 
-    var success: Color by mutableStateOf(success, structuralEqualityPolicy())
+    public var success: Color by mutableStateOf(success, structuralEqualityPolicy())
         internal set
-    var onSuccess: Color by mutableStateOf(onSuccess, structuralEqualityPolicy())
+    public var onSuccess: Color by mutableStateOf(onSuccess, structuralEqualityPolicy())
         internal set
-    var successContainer: Color by mutableStateOf(successContainer, structuralEqualityPolicy())
+    public var successContainer: Color by mutableStateOf(successContainer, structuralEqualityPolicy())
         internal set
-    var onSuccessContainer: Color by mutableStateOf(onSuccessContainer, structuralEqualityPolicy())
-        internal set
-
-    var alert: Color by mutableStateOf(alert, structuralEqualityPolicy())
-        internal set
-    var onAlert: Color by mutableStateOf(onAlert, structuralEqualityPolicy())
-        internal set
-    var alertContainer: Color by mutableStateOf(alertContainer, structuralEqualityPolicy())
-        internal set
-    var onAlertContainer: Color by mutableStateOf(onAlertContainer, structuralEqualityPolicy())
+    public var onSuccessContainer: Color by mutableStateOf(onSuccessContainer, structuralEqualityPolicy())
         internal set
 
-    var error: Color by mutableStateOf(error, structuralEqualityPolicy())
+    public var alert: Color by mutableStateOf(alert, structuralEqualityPolicy())
         internal set
-    var onError: Color by mutableStateOf(onError, structuralEqualityPolicy())
+    public var onAlert: Color by mutableStateOf(onAlert, structuralEqualityPolicy())
         internal set
-    var errorContainer: Color by mutableStateOf(errorContainer, structuralEqualityPolicy())
+    public var alertContainer: Color by mutableStateOf(alertContainer, structuralEqualityPolicy())
         internal set
-    var onErrorContainer: Color by mutableStateOf(onErrorContainer, structuralEqualityPolicy())
-        internal set
-
-    var info: Color by mutableStateOf(info, structuralEqualityPolicy())
-        internal set
-    var onInfo: Color by mutableStateOf(onInfo, structuralEqualityPolicy())
-        internal set
-    var infoContainer: Color by mutableStateOf(infoContainer, structuralEqualityPolicy())
-        internal set
-    var onInfoContainer: Color by mutableStateOf(onInfoContainer, structuralEqualityPolicy())
+    public var onAlertContainer: Color by mutableStateOf(onAlertContainer, structuralEqualityPolicy())
         internal set
 
-    var neutral: Color by mutableStateOf(neutral, structuralEqualityPolicy())
+    public var error: Color by mutableStateOf(error, structuralEqualityPolicy())
         internal set
-    var onNeutral: Color by mutableStateOf(onNeutral, structuralEqualityPolicy())
+    public var onError: Color by mutableStateOf(onError, structuralEqualityPolicy())
         internal set
-    var neutralContainer: Color by mutableStateOf(neutralContainer, structuralEqualityPolicy())
+    public var errorContainer: Color by mutableStateOf(errorContainer, structuralEqualityPolicy())
         internal set
-    var onNeutralContainer: Color by mutableStateOf(onNeutralContainer, structuralEqualityPolicy())
+    public var onErrorContainer: Color by mutableStateOf(onErrorContainer, structuralEqualityPolicy())
+        internal set
+
+    public var info: Color by mutableStateOf(info, structuralEqualityPolicy())
+        internal set
+    public var onInfo: Color by mutableStateOf(onInfo, structuralEqualityPolicy())
+        internal set
+    public var infoContainer: Color by mutableStateOf(infoContainer, structuralEqualityPolicy())
+        internal set
+    public var onInfoContainer: Color by mutableStateOf(onInfoContainer, structuralEqualityPolicy())
+        internal set
+
+    public var neutral: Color by mutableStateOf(neutral, structuralEqualityPolicy())
+        internal set
+    public var onNeutral: Color by mutableStateOf(onNeutral, structuralEqualityPolicy())
+        internal set
+    public var neutralContainer: Color by mutableStateOf(neutralContainer, structuralEqualityPolicy())
+        internal set
+    public var onNeutralContainer: Color by mutableStateOf(onNeutralContainer, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -626,7 +626,7 @@ class SparkColors(
         replaceWith = ReplaceWith("success"),
         level = DeprecationLevel.WARNING,
     )
-    var valid: Color by mutableStateOf(valid, structuralEqualityPolicy())
+    public var valid: Color by mutableStateOf(valid, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -634,7 +634,7 @@ class SparkColors(
         replaceWith = ReplaceWith("onSuccess"),
         level = DeprecationLevel.WARNING,
     )
-    var onValid: Color by mutableStateOf(onValid, structuralEqualityPolicy())
+    public var onValid: Color by mutableStateOf(onValid, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -642,7 +642,7 @@ class SparkColors(
         replaceWith = ReplaceWith("successContainer"),
         level = DeprecationLevel.WARNING,
     )
-    var validContainer: Color by mutableStateOf(validContainer, structuralEqualityPolicy())
+    public var validContainer: Color by mutableStateOf(validContainer, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -650,11 +650,11 @@ class SparkColors(
         replaceWith = ReplaceWith("onSuccessContainer"),
         level = DeprecationLevel.WARNING,
     )
-    var onValidContainer: Color by mutableStateOf(onValidContainer, structuralEqualityPolicy())
+    public var onValidContainer: Color by mutableStateOf(onValidContainer, structuralEqualityPolicy())
         internal set
 
     @Deprecated("This property will be removed as it is not part of Spark Token")
-    var inversePrimary: Color by mutableStateOf(inversePrimary, structuralEqualityPolicy())
+    public var inversePrimary: Color by mutableStateOf(inversePrimary, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -662,7 +662,7 @@ class SparkColors(
         replaceWith = ReplaceWith("surfaceInverse"),
         level = DeprecationLevel.WARNING,
     )
-    var inverseSurface: Color by mutableStateOf(inverseSurface, structuralEqualityPolicy())
+    public var inverseSurface: Color by mutableStateOf(inverseSurface, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -670,13 +670,13 @@ class SparkColors(
         replaceWith = ReplaceWith("onSurfaceInverse"),
         level = DeprecationLevel.WARNING,
     )
-    var inverseOnSurface: Color by mutableStateOf(inverseOnSurface, structuralEqualityPolicy())
+    public var inverseOnSurface: Color by mutableStateOf(inverseOnSurface, structuralEqualityPolicy())
         internal set
 
     /**
      * Returns a copy of this Colors, optionally overriding some of the values.
      */
-    fun copy(
+    public fun copy(
         primary: Color = this.primary,
         onPrimary: Color = this.onPrimary,
         primaryContainer: Color = this.primaryContainer,
@@ -843,7 +843,7 @@ class SparkColors(
     }
 }
 
-fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
+public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
     primary = primary,
     onPrimary = onPrimary,
     primaryContainer = primaryContainer,
@@ -892,7 +892,7 @@ fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
  *
  * @see contentColorFor
  */
-fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (backgroundColor) {
+public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (backgroundColor) {
     primary -> onPrimary
     primaryContainer -> onPrimaryContainer
     primaryVariant -> onPrimaryVariant
@@ -938,7 +938,7 @@ fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (backgroun
  */
 @Composable
 @ReadOnlyComposable
-fun contentColorFor(backgroundColor: Color): Color {
+public fun contentColorFor(backgroundColor: Color): Color {
     return SparkTheme.colors.contentColorFor(backgroundColor).takeOrElse {
         LocalContentColor.current
     }
@@ -1024,7 +1024,7 @@ internal val LocalSparkColors = staticCompositionLocalOf { lightSparkColors() }
  * A [SparkColors] implementation which sets all colors to [debugColor] to help highlighting the usage
  * of [SparkTheme.colors] to more easily detect where they're not used.
  */
-fun debugColors(
+public fun debugColors(
     debugColor: Color = Color.Magenta,
     onDebugColor: Color = Color.Green,
 ): SparkColors = SparkColors(
