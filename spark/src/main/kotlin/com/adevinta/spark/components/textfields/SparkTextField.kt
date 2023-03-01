@@ -312,14 +312,14 @@ private fun animateBorderStrokeAsState(
 }
 
 @Stable
-data class TextFieldCharacterCounter(
+public data class TextFieldCharacterCounter(
     val count: Int,
     val maxCharacter: Int,
 )
 
 @Composable
 private fun Label(text: String?) {
-    if (text?.take(30) != null) {
+    if (text != null) {
         Box {
             Text(text = text)
         }
@@ -328,7 +328,7 @@ private fun Label(text: String?) {
 
 @Composable
 private fun PlaceHolder(text: String?) {
-    if (text?.take(40) != null) {
+    if (text != null) {
         Box {
             Text(text = text)
         }
@@ -341,7 +341,6 @@ This padding is used to allow label not overlap with the content above it. This 
 for default cases when developers do not override the label's font size. If they do, they will
 need to add additional padding themselves
 */
-/* @VisibleForTesting */
 internal val OutlinedTextFieldTopPadding = 8.dp
 
 @Preview(

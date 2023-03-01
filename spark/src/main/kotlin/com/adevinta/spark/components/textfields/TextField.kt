@@ -91,7 +91,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * appearance / behavior of this TextField in different [Interaction]s.
  */
 @Composable
-fun TextField(
+public fun TextField(
     value: TextFieldValue,
     onValueChange: (TextFieldValue) -> Unit,
     modifier: Modifier = Modifier,
@@ -173,7 +173,7 @@ fun TextField(
  * appearance / behavior of this TextField in different [Interaction]s.
  */
 @Composable
-fun TextField(
+public fun TextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,

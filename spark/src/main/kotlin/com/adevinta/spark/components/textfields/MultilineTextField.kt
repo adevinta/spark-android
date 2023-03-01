@@ -57,7 +57,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * Outlined text input to get an input value from the user.
- * Which can can scroll its content when [value] takes more place than the available width.
+ * Which can scroll its content when [value] takes more place than the available width.
  * We can also set the amount of maximum lines it can expand before overscrolling.
  * @param value the input [TextFieldValue] to be shown in the text field
  * @param onValueChange the callback that is triggered when the input service updates values in
@@ -101,7 +101,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * appearance / behavior of this TextField in different [Interaction]s.
  */
 @Composable
-fun MultilineTextField(
+public fun MultilineTextField(
     value: TextFieldValue,
     onValueChange: (TextFieldValue) -> Unit,
     onCancelClick: () -> Unit,
@@ -158,7 +158,7 @@ private fun getTrailingIcon(
                 modifier = Modifier
                     .rotate(180f),
                 imageVector = Icons.Default.Info,
-                contentDescription = null, // We should walready knnow that we're on error
+                contentDescription = null, // We should already know that we're on error
             )
         }
     }
@@ -185,7 +185,7 @@ private fun getTrailingIcon(
 
 /**
  * Outlined text input to get an input value from the user.
- * Which can can scroll its content when [value] takes more place than the available width.
+ * Which can scroll its content when [value] takes more place than the available width.
  * We can also set the amount of maximum lines it can expand before overscrolling.
  * @param value the input text to be shown in the text field
  * @param onValueChange the callback that is triggered when the input service updates the text. An
@@ -229,7 +229,7 @@ private fun getTrailingIcon(
  * appearance / behavior of this TextField in different [Interaction]s.
  */
 @Composable
-fun MultilineTextField(
+public fun MultilineTextField(
     value: String,
     onValueChange: (String) -> Unit,
     onCancelClick: () -> Unit,

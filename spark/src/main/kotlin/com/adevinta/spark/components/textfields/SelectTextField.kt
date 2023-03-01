@@ -59,7 +59,7 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- * Outlined text input to get an input value from a list of elements selectable thought a dropdown by the user.
+ * Outlined text input to get an input value from a list of elements selectable through a dropdown by the user.
  * @param value the input [TextFieldValue] to be shown in the text field
  * @param onValueChange the callback that is triggered when the input service updates values in
  * [TextFieldValue]. An updated [TextFieldValue] comes as a parameter of the callback
@@ -104,7 +104,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SelectTextField(
+public fun SelectTextField(
     value: TextFieldValue,
     onValueChange: (TextFieldValue) -> Unit,
     expanded: Boolean,
@@ -162,7 +162,7 @@ fun SelectTextField(
 }
 
 /**
- * Outlined text input to get an input value from a list of elements selectable thought a dropdown by the user.
+ * Outlined text input to get an input value from a list of elements selectable through a dropdown by the user.
  * @param value the input text to be shown in the text field
  * @param onValueChange the callback that is triggered when the input service updates the text. An
  * updated text comes as a parameter of the callback
@@ -207,7 +207,7 @@ fun SelectTextField(
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SelectTextField(
+public fun SelectTextField(
     value: String,
     onValueChange: (String) -> Unit,
     expanded: Boolean,
@@ -273,7 +273,7 @@ fun SelectTextField(
  */
 @ExperimentalSparkApi
 @Composable
-fun SparkSelectTrailingIcon(
+public fun SparkSelectTrailingIcon(
     expanded: Boolean,
     modifier: Modifier = Modifier,
     onIconClick: () -> Unit = {},

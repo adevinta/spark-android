@@ -176,9 +176,8 @@ internal fun SparkDecorationBox(
         // Developers need to handle invalid input manually. But since we don't provide error
         // message slot API, we can set the default error message in case developers forget about
         // it.
-//        val defaultErrorMessage = error ?: "une erreur est survenue"
-        val decorationBoxModifier =
-            Modifier/*.semantics { if (isError) error(defaultErrorMessage) }*/
+        // TODO-@soulcramer (01-30-2023): We should provide a semantic which tell the user the error state
+        val decorationBoxModifier = Modifier
 
         val leadingIconColor = colors.leadingIconColor(enabled, isError, interactionSource).value
         val decoratedLeading: @Composable (() -> Unit)? = leadingIcon?.let {
@@ -266,7 +265,7 @@ internal fun Decoration(
  * [SparkTextFieldLayout].
  * It doesn't use Row to position the icons and middle part because label should not be
  * positioned in the middle part.
-\ */
+ */
 @Composable
 internal fun SparkTextFieldLayout(
     textField: @Composable () -> Unit,
