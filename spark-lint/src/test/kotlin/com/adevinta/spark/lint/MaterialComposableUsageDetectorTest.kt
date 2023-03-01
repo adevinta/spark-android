@@ -15,16 +15,16 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-class MaterialComposableUsageDetectorTest : LintDetectorTest() {
+public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
 
     override fun getDetector(): Detector = MaterialComposableUsageDetector()
-    override fun getIssues() = listOf(ISSUE)
+    override fun getIssues(): List<Issue> = listOf(ISSUE)
 
     private fun Issue.explanation(replacement: Pair<String, String>) =
         "${defaultSeverity.description}: Composable ${replacement.first} has a Spark replacement that should be used instead: ${replacement.second} [$id]"
 
     @Test
-    fun materialUsages(): Unit = with(ISSUE) {
+    public fun materialUsages(): Unit = with(ISSUE) {
         lint().files(
             kotlin(
                 """
@@ -184,7 +184,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
     }
 
     @Test
-    fun foundationUsages(): Unit = with(ISSUE) {
+    public fun foundationUsages(): Unit = with(ISSUE) {
         lint().files(
             kotlin(
                 """
@@ -224,7 +224,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
     }
 
     @Test
-    fun coilUsages(): Unit = with(ISSUE) {
+    public fun coilUsages(): Unit = with(ISSUE) {
         lint().files(
             kotlin(
                 """
@@ -275,7 +275,7 @@ class MaterialComposableUsageDetectorTest : LintDetectorTest() {
     }
 
     @Test
-    fun noErrors() {
+    public fun noErrors() {
         lint().files(
             kotlin(
                 """
