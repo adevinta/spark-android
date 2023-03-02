@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 /*
  * Copyright (c) 2023 Adevinta
  *
@@ -22,6 +20,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * SOFTWARE.
  */
 
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `kotlin-dsl`
