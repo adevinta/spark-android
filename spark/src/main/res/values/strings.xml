@@ -22,8 +22,12 @@
   SOFTWARE.
   -->
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    <string name="spark_back_arrow_content_description">Retour en arrière</string>
+
     <string name="spark_rating_label">(%d)</string>
     <string name="spark_rating_with_comments_a11y">Note de %1$.1f pour %2$d avis</string>
     <string name="spark_rating_with_comments_count_label">%d avis</string>
     <string name="spark_rating_a11y">Note de %1$.1f</string>
+
+    <string name="spark_user_avatar_content_description">Photo de profil</string>
 </resources>

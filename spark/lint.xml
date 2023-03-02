@@ -34,4 +34,7 @@
         <ignore path="src/main/kotlin/com/adevinta/spark/components/spacer/Spacers.kt" />
         <ignore path="src/main/kotlin/com/adevinta/spark/SparkTheme.kt" />
     </issue>
+    <issue id="ComposeUnstableCollections">
+        <ignore path="src/main/kotlin/com/adevinta/spark/components/text/Text.kt" />
+    </issue>
 </lint>

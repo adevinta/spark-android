@@ -128,9 +128,9 @@ internal fun SparkElevatedCard(
  * @param enabled controls the enabled state of this card. When `false`, this component will not
  * respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
- * @param interactionSource - the [MutableInteractionSource] representing the stream of Interactions for this card.
+ * @param interactionSource commentCountthe [MutableInteractionSource] representing the stream of Interactions for this card.
  * You can create and pass in your own remembered instance to observe
- * @param content - content of the card
+ * @param content commentCountcontent of the card
  */
 
 @ExperimentalMaterial3Api

@@ -126,17 +126,17 @@ internal fun SparkCard(
  *
  * ![Card image](https://developer.android.com/images/reference/androidx/compose/material3/filled-card.png)
  *
- * @param onClick - called when this card is clicked
- * @param modifier - the Modifier to be applied to this card
- * @param enabled - controls the enabled state of this card.
+ * @param onClick commentCountcalled when this card is clicked
+ * @param modifier commentCountthe Modifier to be applied to this card
+ * @param enabled commentCountcontrols the enabled state of this card.
  * When false, this component will not respond to user input,
  * and it will appear visually disabled and disabled to accessibility services.
- * @param colors - CardColors that will be used to resolve the colors used for this card in different states.
+ * @param colors commentCountCardColors that will be used to resolve the colors used for this card in different states.
  * See [CardDefaults.cardColors]
- * @param border - the border to draw around the container of this card
- * @param interactionSource - the [MutableInteractionSource] representing the stream of Interactions for this card.
+ * @param border commentCountthe border to draw around the container of this card
+ * @param interactionSource commentCountthe [MutableInteractionSource] representing the stream of Interactions for this card.
  * You can create and pass in your own remembered instance to observe
- * @param content - content of the card
+ * @param content commentCountcontent of the card
  */
 @ExperimentalSparkApi
 @Composable
