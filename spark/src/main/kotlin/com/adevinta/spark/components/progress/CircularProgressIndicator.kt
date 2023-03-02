@@ -92,8 +92,6 @@ public fun CircularProgressIndicator(
 }
 
 /**
- * <a href="https://github.mpi-internal.com/leboncoin/android-app/blob/delivery/libraries/Compose/ProgressIndicators.md" class="external" target="_blank">Indeterminate Spark linear progress indicator</a>.
- *
  * Progress indicators express an unspecified wait time or display the duration of a process.
  *
  * @param modifier the [Modifier] to be applied to this progress indicator
