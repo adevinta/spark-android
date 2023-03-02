@@ -56,7 +56,7 @@ internal class SparkVersions(catalog: VersionCatalog) {
 @Suppress("HasPlatformType", "PropertyName")
 internal class SparkLibraries(catalog: VersionCatalog) {
     val `androidx-compose-bom` by catalog
-    val `android-documentation-plugin` by catalog
+    val `dokka-android-documentation-plugin` by catalog
     val `kotlin-bom` by catalog
 
     private operator fun VersionCatalog.getValue(
