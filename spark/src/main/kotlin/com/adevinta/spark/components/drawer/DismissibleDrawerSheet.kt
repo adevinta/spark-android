@@ -85,12 +85,12 @@ internal fun SparkDismissibleDrawerSheet(
  * An DismissibleDrawerSheet is a simple dismissible drawer sheet with content inside.
  *
  * @param modifier the [Modifier] to be applied to this drawer's content
- * @param drawerShape - defines the shape of this drawer's container
- * @param drawerContainerColor - the color used for the background of this drawer. Use Color.Transparent to have no color.
- * @param drawerContentColor - the preferred color for content inside this drawer. Defaults to either the matching content color for drawerContainerColor, or to the current LocalContentColor if drawerContainerColor is not a color from the theme.
- * @param drawerTonalElevation - when drawerContainerColor is ColorScheme.surface, a translucent primary color overlay is applied on top of the container. A higher tonal elevation value will result in a darker color in light theme and lighter color in dark theme. See also: Surface.
- * @param windowInsets - a window insets for the sheet.
- * @param content - content inside of a dismissible navigation drawer
+ * @param drawerShape defines the shape of this drawer's container
+ * @param drawerContainerColor the color used for the background of this drawer. Use Color.Transparent to have no color.
+ * @param drawerContentColor the preferred color for content inside this drawer. Defaults to either the matching content color for drawerContainerColor, or to the current LocalContentColor if drawerContainerColor is not a color from the theme.
+ * @param drawerTonalElevation when drawerContainerColor is ColorScheme.surface, a translucent primary color overlay is applied on top of the container. A higher tonal elevation value will result in a darker color in light theme and lighter color in dark theme. See also: Surface.
+ * @param windowInsets a window insets for the sheet.
+ * @param content content inside of a dismissible navigation drawer
  */
 @ExperimentalMaterial3Api
 @ExperimentalSparkApi

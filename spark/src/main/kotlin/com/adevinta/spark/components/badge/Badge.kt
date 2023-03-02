@@ -63,10 +63,10 @@ internal fun SparkBadge(
  *
  * ![Badge image](https://developer.android.com/images/reference/androidx/compose/material3/badge.png)
  *
- * @param modifier - the Modifier to be applied to this badge
- * @param containerColor - the color used for the background of this badge
- * @param contentColor - the preferred color for content inside this badge. Defaults to either the matching content color for containerColor, or to the current LocalContentColor if containerColor is not a color from the theme.
- * @param content - optional content to be rendered inside this badge
+ * @param modifier the Modifier to be applied to this badge
+ * @param containerColor the color used for the background of this badge
+ * @param contentColor the preferred color for content inside this badge. Defaults to either the matching content color for containerColor, or to the current LocalContentColor if containerColor is not a color from the theme.
+ * @param content optional content to be rendered inside this badge
  **/
 @OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
