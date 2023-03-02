@@ -61,11 +61,11 @@ internal fun SparkDismissibleNavigationDrawer(
  *
  * ![DismissibleNavigationDrawer image](https://developer.android.com/images/reference/androidx/compose/material3/navigation-drawer.png)
  *
- * @param drawerContent - content inside this drawer
+ * @param drawerContent content inside this drawer
  * @param modifier the [Modifier] to be applied to this drawer
- * @param drawerState - state of the drawer
- * @param gesturesEnabled - whether or not the drawer can be interacted by gestures
- * @param content - content of the rest of the UI
+ * @param drawerState state of the drawer
+ * @param gesturesEnabled whether or not the drawer can be interacted by gestures
+ * @param content content of the rest of the UI
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi

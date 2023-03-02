@@ -72,7 +72,7 @@ internal fun SparkElevatedCard(
  * @param modifier the [Modifier] to be applied to this card
  * @param colors [CardColors] that will be used to resolve the color(s) used for this card in
  * different states. See [CardDefaults.elevatedCardColors].
- * @param content - content of the card
+ * @param content content of the card
  */
 @Composable
 public fun ElevatedCard(
