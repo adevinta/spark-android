@@ -231,8 +231,6 @@ private fun spannableStringToAnnotatedString(
 private fun AnnotatedStringResourcePreview() {
     PreviewTheme {
         val annotatedString = annotatedStringResource(R.string.spark_annotatedStringResource_test)
-        Text(
-            annotatedString,
-        )
+        Text(annotatedString)
     }
 }
