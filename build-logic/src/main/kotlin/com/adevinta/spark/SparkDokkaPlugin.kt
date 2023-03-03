@@ -50,7 +50,7 @@ internal class SparkDokkaPlugin : Plugin<Project> {
             }
 
             dependencies {
-                add("dokkaHtmlPlugin", spark().libraries.`android-documentation-plugin`)
+                add("dokkaHtmlPlugin", spark().libraries.`dokka-android-documentation-plugin`)
             }
         }
     }
