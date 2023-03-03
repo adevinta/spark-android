@@ -22,84 +22,59 @@
 
 package com.adevinta.spark.res
 
-public sealed class SparkStringAnnotations {
-    public sealed class Color : SparkStringAnnotations() {
-        public object Primary : Color() {
-            override fun toString(): String = "primary"
-        }
+import androidx.compose.ui.text.SpanStyle
+import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkTypography
 
-        public object Secondary : Color() {
-            override fun toString(): String = "secondary"
-        }
+public interface SparkStringAnnotations<T : Any> {
 
-        public object Success : Color() {
-            override fun toString(): String = "success"
-        }
+    public fun toSpanStyle(value: String, token: T): SpanStyle?
 
-        public object Alert : Color() {
-            override fun toString(): String = "alert"
-        }
-
-        public object Error : Color() {
-            override fun toString(): String = "error"
-        }
-
-        public object Info : Color() {
-            override fun toString(): String = "info"
-        }
-
-        public object Neutral : Color() {
-            override fun toString(): String = "neutral"
-        }
-
+    public object Colors : SparkStringAnnotations<SparkColors> {
         override fun toString(): String = "color"
 
-        public companion object
+        public override fun toSpanStyle(value: String, token: SparkColors): SpanStyle? = when (value) {
+            "primary" -> SpanStyle(color = token.primary)
+            "secondary" -> SpanStyle(color = token.secondary)
+            "success" -> SpanStyle(color = token.success)
+            "alert" -> SpanStyle(color = token.alert)
+            "error" -> SpanStyle(color = token.error)
+            "info" -> SpanStyle(color = token.info)
+            "neutral" -> SpanStyle(color = token.neutral)
+            else -> null
+        }
     }
 
-    public sealed class Typography : SparkStringAnnotations() {
-        public object Title1 : Typography() {
-            override fun toString(): String = "title1"
-        }
+    public object Typography : SparkStringAnnotations<SparkTypography> {
+        override fun toString(): String = "typography"
 
-        public object Title2 : Typography() {
-            override fun toString(): String = "title2"
+        public override fun toSpanStyle(value: String, token: SparkTypography): SpanStyle? = when (value) {
+            "title1" -> token.title1.toSpanStyle()
+            "title2" -> token.title2.toSpanStyle()
+            "title3" -> token.title3.toSpanStyle()
+            "bodyImportant" -> token.bodyImportant.toSpanStyle()
+            "body" -> token.body.toSpanStyle()
+            "smallImportant" -> token.smallImportant.toSpanStyle()
+            "small" -> token.small.toSpanStyle()
+            "extraSmallImportant" -> token.extraSmallImportant.toSpanStyle()
+            "extraSmall" -> token.extraSmall.toSpanStyle()
+            "button" -> token.button.toSpanStyle()
+            else -> null
         }
+    }
 
-        public object Title3 : Typography() {
-            override fun toString(): String = "title3"
-        }
-
-        public object BodyImportant : Typography() {
-            override fun toString(): String = "bodyImportant"
-        }
-
-        public object Body : Typography() {
-            override fun toString(): String = "body"
-        }
-
-        public object SmallImportant : Typography() {
-            override fun toString(): String = "smallImportant"
-        }
-
-        public object Small : Typography() {
-            override fun toString(): String = "small"
-        }
-
-        public object ExtraSmallImportant : Typography() {
-            override fun toString(): String = "extraSmallImportant"
-        }
-
-        public object ExtraSmall : Typography() {
-            override fun toString(): String = "extraSmall"
-        }
-
-        public object Button : Typography() {
-            override fun toString(): String = "button"
-        }
-
-        public companion object {
-            public const val keyName: String = "typography"
+    public companion object {
+        public fun toSpanStyle(
+            key: String,
+            value: String,
+            colors: SparkColors,
+            typography: SparkTypography,
+        ): SpanStyle? {
+            return when (key) {
+                "color" -> Colors.toSpanStyle(value, colors)
+                "typography" -> Typography.toSpanStyle(value, typography)
+                else -> null
+            }
         }
     }
 }

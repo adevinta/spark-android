@@ -41,23 +41,6 @@ import androidx.core.text.HtmlCompat
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.res.SparkStringAnnotations.Color.Alert
-import com.adevinta.spark.res.SparkStringAnnotations.Color.Error
-import com.adevinta.spark.res.SparkStringAnnotations.Color.Info
-import com.adevinta.spark.res.SparkStringAnnotations.Color.Neutral
-import com.adevinta.spark.res.SparkStringAnnotations.Color.Primary
-import com.adevinta.spark.res.SparkStringAnnotations.Color.Secondary
-import com.adevinta.spark.res.SparkStringAnnotations.Color.Success
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.Body
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.BodyImportant
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.Button
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.ExtraSmall
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.ExtraSmallImportant
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.Small
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.SmallImportant
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.Title1
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.Title2
-import com.adevinta.spark.res.SparkStringAnnotations.Typography.Title3
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
 
@@ -226,83 +209,14 @@ private fun spannableStringToAnnotatedString(
                         )
 
                         is Annotation -> {
-                            when (it.key) {
-                                Color.toString() -> {
-                                    when (it.value) {
-                                        Primary.toString() -> addStyle(SpanStyle(color = colors.primary), start, end)
-                                        Secondary.toString() -> addStyle(
-                                            SpanStyle(color = colors.secondary),
-                                            start,
-                                            end,
-                                        )
-
-                                        Success.toString() -> addStyle(SpanStyle(color = colors.success), start, end)
-                                        Alert.toString() -> addStyle(SpanStyle(color = colors.alert), start, end)
-                                        Error.toString() -> addStyle(SpanStyle(color = colors.error), start, end)
-                                        Info.toString() -> addStyle(SpanStyle(color = colors.info), start, end)
-                                        Neutral.toString() -> addStyle(SpanStyle(color = colors.neutral), start, end)
-                                        else -> {
-                                            Log.d(
-                                                "StringResources",
-                                                "Annotation ${it.key} : ${it.value} is not supported",
-                                            )
-                                            addStyle(SpanStyle(), start, end)
-                                        }
-                                    }
+                            val span = SparkStringAnnotations.toSpanStyle(it.key, it.value, colors, typography)
+                                ?: SpanStyle().also { _ ->
+                                    Log.d(
+                                        "StringResources",
+                                        "Annotation  ${it.key} : ${it.value} is not supported by spark",
+                                    )
                                 }
-
-                                Typography.toString() -> {
-                                    when (it.value) {
-                                        Title1.toString() -> addStyle(typography.title1.toSpanStyle(), start, end)
-                                        Title2.toString() -> addStyle(typography.title2.toSpanStyle(), start, end)
-                                        Title3.toString() -> addStyle(typography.title3.toSpanStyle(), start, end)
-                                        BodyImportant.toString() -> addStyle(
-                                            typography.bodyImportant.toSpanStyle(),
-                                            start,
-                                            end,
-                                        )
-
-                                        Body.toString() -> addStyle(typography.body.toSpanStyle(), start, end)
-                                        SmallImportant.toString() -> addStyle(
-                                            typography.small.toSpanStyle(),
-                                            start,
-                                            end,
-                                        )
-
-                                        Small.toString() -> addStyle(
-                                            typography.smallImportant.toSpanStyle(),
-                                            start,
-                                            end,
-                                        )
-
-                                        ExtraSmallImportant.toString() -> addStyle(
-                                            typography.extraSmallImportant.toSpanStyle(),
-                                            start,
-                                            end,
-                                        )
-
-                                        ExtraSmall.toString() -> addStyle(
-                                            typography.extraSmall.toSpanStyle(),
-                                            start,
-                                            end,
-                                        )
-
-                                        Button.toString() -> addStyle(typography.button.toSpanStyle(), start, end)
-                                        else -> {
-                                            Log.d(
-                                                "StringResources",
-                                                "Annotation ${it.key} : ${it.value} is not supported",
-                                            )
-                                            addStyle(SpanStyle(), start, end)
-                                        }
-                                    }
-                                }
-
-                                else -> {
-                                    Log.d("StringResources", "Annotation ${it.key} : ${it.value} is not supported")
-                                    addStyle(SpanStyle(), start, end)
-                                }
-                            }
+                            addStyle(span, start, end)
                         }
 
                         else -> addStyle(SpanStyle(), start, end)
@@ -325,8 +239,6 @@ private fun AnnotatedStringResourcePreview() {
         val annotatedString = annotatedStringResource(R.string.spark_annotatedStringResource_test)
         Text(
             annotatedString,
-            style = SparkTheme.typography.large,
-            fontWeight = FontWeight.Bold,
         )
     }
 }
