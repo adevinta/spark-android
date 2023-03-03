@@ -49,7 +49,7 @@ import com.adevinta.spark.tokens.SparkTypography
 //   https://issuetracker.google.com/issues/139320238 to be fixed
 @Composable
 @ReadOnlyComposable
-public fun resources(): Resources {
+internal fun resources(): Resources {
     LocalConfiguration.current
     return LocalContext.current.resources
 }
