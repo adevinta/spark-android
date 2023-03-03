@@ -22,6 +22,7 @@
 
 package com.adevinta.spark.res
 
+import android.util.Log
 import androidx.compose.ui.text.SpanStyle
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
@@ -31,35 +32,35 @@ public interface SparkStringAnnotations<T : Any> {
     public fun toSpanStyle(value: String, token: T): SpanStyle?
 
     public object Colors : SparkStringAnnotations<SparkColors> {
-        override fun toString(): String = "color"
-
-        public override fun toSpanStyle(value: String, token: SparkColors): SpanStyle? = when (value) {
-            "primary" -> SpanStyle(color = token.primary)
-            "secondary" -> SpanStyle(color = token.secondary)
-            "success" -> SpanStyle(color = token.success)
-            "alert" -> SpanStyle(color = token.alert)
-            "error" -> SpanStyle(color = token.error)
-            "info" -> SpanStyle(color = token.info)
-            "neutral" -> SpanStyle(color = token.neutral)
+        public override fun toSpanStyle(value: String, token: SparkColors): SpanStyle = when (value) {
+            "primary" -> token.primary
+            "secondary" -> token.secondary
+            "success" -> token.success
+            "alert" -> token.alert
+            "error" -> token.error
+            "info" -> token.info
+            "neutral" -> token.neutral
             else -> null
+        }?.let(::SpanStyle) ?: SpanStyle().also { _ ->
+            Log.d("StringResources", "Spark color annotation : $value is not supported")
         }
     }
 
     public object Typography : SparkStringAnnotations<SparkTypography> {
-        override fun toString(): String = "typography"
-
-        public override fun toSpanStyle(value: String, token: SparkTypography): SpanStyle? = when (value) {
-            "title1" -> token.title1.toSpanStyle()
-            "title2" -> token.title2.toSpanStyle()
-            "title3" -> token.title3.toSpanStyle()
-            "bodyImportant" -> token.bodyImportant.toSpanStyle()
-            "body" -> token.body.toSpanStyle()
-            "smallImportant" -> token.smallImportant.toSpanStyle()
-            "small" -> token.small.toSpanStyle()
-            "extraSmallImportant" -> token.extraSmallImportant.toSpanStyle()
-            "extraSmall" -> token.extraSmall.toSpanStyle()
-            "button" -> token.button.toSpanStyle()
+        public override fun toSpanStyle(value: String, token: SparkTypography): SpanStyle = when (value) {
+            "title1" -> token.title1
+            "title2" -> token.title2
+            "title3" -> token.title3
+            "bodyImportant" -> token.bodyImportant
+            "body" -> token.body
+            "smallImportant" -> token.smallImportant
+            "small" -> token.small
+            "extraSmallImportant" -> token.extraSmallImportant
+            "extraSmall" -> token.extraSmall
+            "button" -> token.button
             else -> null
+        }?.toSpanStyle() ?: SpanStyle().also { _ ->
+            Log.d("StringResources", "Spark typography annotation : $value is not supported")
         }
     }
 
@@ -69,11 +70,21 @@ public interface SparkStringAnnotations<T : Any> {
             value: String,
             colors: SparkColors,
             typography: SparkTypography,
-        ): SpanStyle? {
-            return when (key) {
-                "color" -> Colors.toSpanStyle(value, colors)
-                "typography" -> Typography.toSpanStyle(value, typography)
-                else -> null
+        ): SpanStyle {
+            return when (key.asSparkAnnotation()) {
+                Colors -> Colors.toSpanStyle(value, colors)
+                Typography -> Typography.toSpanStyle(value, typography)
+                else -> SpanStyle()
+            }
+        }
+
+        private fun String.asSparkAnnotation(): SparkStringAnnotations<*>? {
+            return when (this) {
+                "color" -> Colors
+                "typography" -> Typography
+                else -> null.also { _ ->
+                    Log.d("StringResources", "Annotation  $this is not supported by spark")
+                }
             }
         }
     }

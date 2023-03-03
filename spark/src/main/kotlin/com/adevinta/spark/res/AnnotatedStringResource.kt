@@ -210,12 +210,6 @@ private fun spannableStringToAnnotatedString(
 
                         is Annotation -> {
                             val span = SparkStringAnnotations.toSpanStyle(it.key, it.value, colors, typography)
-                                ?: SpanStyle().also { _ ->
-                                    Log.d(
-                                        "StringResources",
-                                        "Annotation  ${it.key} : ${it.value} is not supported by spark",
-                                    )
-                                }
                             addStyle(span, start, end)
                         }
 
