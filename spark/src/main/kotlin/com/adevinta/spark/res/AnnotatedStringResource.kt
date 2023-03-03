@@ -104,7 +104,7 @@ private fun spannableStringToAnnotatedString(
     return if (text is Spanned) {
         with(density) {
             buildAnnotatedString {
-                append((text.toString()))
+                append(text.toString())
                 text.getSpans(0, text.length, Any::class.java).forEach {
                     val start = text.getSpanStart(it)
                     val end = text.getSpanEnd(it)
