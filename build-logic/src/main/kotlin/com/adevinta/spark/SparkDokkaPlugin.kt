@@ -39,7 +39,7 @@ internal class SparkDokkaPlugin : Plugin<Project> {
 
             if (this === rootProject) {
                 tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
-                    moduleName.set("✨ Spark Android")
+                    moduleName.set("✨ Spark")
                     outputDirectory.set(buildDir.resolve("dokka"))
                 }
             }
