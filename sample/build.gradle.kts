@@ -22,7 +22,6 @@
 
 plugins {
     id("com.adevinta.spark.android-application")
-    id("com.adevinta.spark.android-compose")
 }
 
 android {
@@ -33,7 +32,5 @@ android {
 dependencies {
     implementation(projects.spark)
 
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.appCompat.appCompat)
     implementation(libs.airbnb.showkase)
 }

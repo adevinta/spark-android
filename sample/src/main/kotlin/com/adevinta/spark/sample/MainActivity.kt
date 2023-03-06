@@ -22,18 +22,15 @@
 
 package com.adevinta.spark.sample
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import com.adevinta.spark.getBrowserIntent
 import com.airbnb.android.showkase.models.Showkase
 
-public class MainActivity : AppCompatActivity() {
+public class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            startActivity(Showkase.getBrowserIntent(this))
-            finish()
-        }
+        startActivity(Showkase.getBrowserIntent(this))
+        finish()
     }
 }
