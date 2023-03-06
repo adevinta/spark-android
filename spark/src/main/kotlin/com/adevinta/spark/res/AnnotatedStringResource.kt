@@ -95,7 +95,7 @@ internal fun resources(): Resources {
 }
 
 /**
- * Converts a [Spanned] to a [String] without the surrounding `<p dir=”rtl | ltr” style=”…”>` tags as we don't support
+ * Converts a [Spanned] to a [String] without the surrounding `<p dir="rtl | ltr" style="…">` tags as we don't support
  * [ParagraphStyle].
  */
 internal fun Spanned.toHtmlWithoutParagraphs(): String {
