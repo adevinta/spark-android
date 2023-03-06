@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -48,11 +49,17 @@ import com.adevinta.spark.tokens.SparkTypography
 // FIXME: There is no official way to do this yet so we're waiting for
 //   https://issuetracker.google.com/issues/139320238 to be fixed
 
+/**
+ * Load a annotated string resource with formatting.
+ *
+ * @param id the resource identifier
+ * @param formatArgs the format arguments
+ * @return the [AnnotatedString] data associated with the resource
+ */
 @Composable
 public fun annotatedStringResource(@StringRes id: Int, vararg formatArgs: Any): AnnotatedString {
     val resources = resources()
     val density = LocalDensity.current
-
     val colors = SparkTheme.colors
     val typography = SparkTheme.typography
     return remember(id, formatArgs) {
@@ -61,6 +68,12 @@ public fun annotatedStringResource(@StringRes id: Int, vararg formatArgs: Any): 
     }
 }
 
+/**
+ * Load a annotated string resource.
+ *
+ * @param id the resource identifier
+ * @return the [AnnotatedString] data associated with the resource
+ */
 @Composable
 public fun annotatedStringResource(@StringRes id: Int): AnnotatedString {
     val resources = resources()
@@ -81,11 +94,18 @@ internal fun resources(): Resources {
     return LocalContext.current.resources
 }
 
+/**
+ * Converts a [Spanned] to a [String] without the surrounding `<p dir=”rtl | ltr” style=”…”>` tags as we don't support
+ * [ParagraphStyle].
+ */
 internal fun Spanned.toHtmlWithoutParagraphs(): String {
     return HtmlCompat.toHtml(this, HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
         .substringAfter("<p dir=\"ltr\">").substringBeforeLast("</p>")
 }
 
+/**
+ * The framework `getText()` method doesn't support formatting arguments, so we need to do it ourselves.
+ */
 internal fun Resources.getText(@StringRes id: Int, vararg args: Any): CharSequence {
     val escapedArgs = args.map {
         if (it is Spanned) it.toHtmlWithoutParagraphs() else it

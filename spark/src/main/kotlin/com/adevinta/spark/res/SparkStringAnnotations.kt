@@ -27,10 +27,16 @@ import androidx.compose.ui.text.SpanStyle
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
 
+/**
+ * Represents a set of annotations supported by spark that can be used in a string resource.
+ */
 public interface SparkStringAnnotations<T : Any> {
 
     public fun toSpanStyle(value: String, token: T): SpanStyle?
 
+    /**
+     * Represents the color annotations supported by spark.
+     */
     public object Colors : SparkStringAnnotations<SparkColors> {
         public override fun toSpanStyle(value: String, token: SparkColors): SpanStyle = when (value) {
             "primary" -> token.primary
@@ -46,6 +52,9 @@ public interface SparkStringAnnotations<T : Any> {
         }
     }
 
+    /**
+     * Represents the typography annotations supported by spark.
+     */
     public object Typography : SparkStringAnnotations<SparkTypography> {
         public override fun toSpanStyle(value: String, token: SparkTypography): SpanStyle = when (value) {
             "title1" -> token.title1
