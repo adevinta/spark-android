@@ -90,8 +90,8 @@ internal fun Resources.getText(@StringRes id: Int, vararg args: Any): CharSequen
     val escapedArgs = args.map {
         if (it is Spanned) it.toHtmlWithoutParagraphs() else it
     }.toTypedArray()
-    val resource = SpannedString(getText(id))
-    val htmlResource = resource.toHtmlWithoutParagraphs()
+    val spannedString = SpannedString(getText(id))
+    val htmlResource = spannedString.toHtmlWithoutParagraphs()
     val formattedHtml = String.format(htmlResource, *escapedArgs)
     return HtmlCompat.fromHtml(formattedHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
 }
