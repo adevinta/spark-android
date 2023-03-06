@@ -22,5 +22,5 @@
   SOFTWARE.
   -->
 <resources>
-    <string name="spark_annotatedStringResource_test">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> pour les textes sur <annotation color="primary">Android</annotation></string>
+    <string name="spark_annotatedStringResource_test">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> pour les textes sur <i><annotation color="primary">Android</annotation></i></string>
 </resources>

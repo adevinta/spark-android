@@ -51,6 +51,8 @@ public interface SparkStringAnnotations<T : Any> {
             "title1" -> token.title1
             "title2" -> token.title2
             "title3" -> token.title3
+            "large" -> token.large
+            "largeImportant" -> token.largeImportant
             "bodyImportant" -> token.bodyImportant
             "body" -> token.body
             "smallImportant" -> token.smallImportant
