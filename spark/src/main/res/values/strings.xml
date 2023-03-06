@@ -31,6 +31,6 @@
 
     <string name="spark_user_avatar_content_description">Photo de profil</string>
 
-    <string name="spark_annotatedStringResource_test"><b>Best</b> <annotation typography="large">practices</annotation> for text on <annotation color="primary">Android</annotation></string>
+    <string name="spark_annotatedStringResource_test"><b>Best</b> <annotation typography="large">practices</annotation> for text on <i><annotation color="primary">Android</annotation></i></string>
 
 </resources>
