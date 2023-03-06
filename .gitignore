@@ -116,3 +116,6 @@ Temporary Items
 # IDEA project icons
 !.idea/icon.png
 !.idea/icon_dark.png
+
+# IDEA Code completion exclusion
+!.idea/codeInsightSettings.xml
