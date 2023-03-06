@@ -2,7 +2,7 @@
 
 <p align="center">
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="art/spark-logo-dak.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="art/spark-logo-dark.svg">
     <img alt="Spark Design System logo" src="art/spark-logo-light.svg">
   </picture>
 </p>
