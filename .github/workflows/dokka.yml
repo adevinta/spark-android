@@ -1,9 +1,14 @@
 name: '📋 Publish Dokka to GitHub Pages'
+run-name: "📋 Publish Dokka on ${{ inputs.ref }} to GitHub Pages by @${{ github.actor }}"
 
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch, tag, SHA, …'
+        required: true
+        default: 'main'
+        type: string
 
 permissions:
   contents: read
@@ -22,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        ref: ${{ inputs.ref }}
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
@@ -31,7 +37,7 @@ jobs:
         uses: gradle/gradle-build-action@3fbe033aaae657f011f88f29be9e65ed26bd29ef # v2.3.3
         with:
           # https://github.com/Kotlin/dokka/issues/1217
-          arguments: dokkaHtml --no-configuration-cache
+          arguments: dokkaHtmlMultiModule --no-configuration-cache
           gradle-home-cache-cleanup: true
       - uses: actions/configure-pages@v3.0.4
       - uses: actions/upload-pages-artifact@v1.0.7

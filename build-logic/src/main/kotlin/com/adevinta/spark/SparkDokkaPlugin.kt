@@ -29,6 +29,7 @@ import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
 
 internal class SparkDokkaPlugin : Plugin<Project> {
@@ -36,13 +37,19 @@ internal class SparkDokkaPlugin : Plugin<Project> {
         with(target) {
             apply(plugin = "org.jetbrains.dokka")
 
+            if (this === rootProject) {
+                tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
+                    moduleName.set("✨ Spark")
+                    outputDirectory.set(buildDir.resolve("dokka"))
+                }
+            }
+
             tasks.withType<DokkaTask> {
                 notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
             }
 
             tasks.named<DokkaTask>("dokkaHtml").configure {
                 moduleName.set("Spark")
-                outputDirectory.set(rootProject.buildDir.resolve("dokka"))
                 dokkaSourceSets.configureEach {
                     // List of files or directories containing sample code (referenced with @sample tags)
                     // samples.from("samples/basic.kt", "samples/advanced.kt")
