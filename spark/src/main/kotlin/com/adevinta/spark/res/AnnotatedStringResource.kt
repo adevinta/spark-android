@@ -146,12 +146,16 @@ private fun AnnotatedString.Builder.buildWithSpan(
     addStyle(span, start, end)
 }
 
-private fun buildWithStyleSpan(it: StyleSpan): SpanStyle = when (it.style) {
-    Typeface.NORMAL -> SpanStyle(fontWeight = FontWeight.Normal, fontStyle = FontStyle.Normal)
-    Typeface.BOLD -> SpanStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Normal)
-    Typeface.ITALIC -> SpanStyle(fontWeight = FontWeight.Normal, fontStyle = FontStyle.Italic)
-    Typeface.BOLD_ITALIC -> SpanStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic)
-    else -> SpanStyle()
+private fun buildWithStyleSpan(it: StyleSpan): SpanStyle {
+    return when (it.style) {
+        Typeface.NORMAL -> FontWeight.Normal to FontStyle.Normal
+        Typeface.BOLD -> FontWeight.Bold to FontStyle.Normal
+        Typeface.ITALIC -> FontWeight.Normal to FontStyle.Italic
+        Typeface.BOLD_ITALIC -> FontWeight.Bold to FontStyle.Italic
+        else -> null
+    }?.let { (fontWeight, fontStyle) ->
+        SpanStyle(fontWeight = fontWeight, fontStyle = fontStyle)
+    } ?: SpanStyle()
 }
 
 private fun buildWithTypefaceSpan(it: TypefaceSpan): SpanStyle = SpanStyle(

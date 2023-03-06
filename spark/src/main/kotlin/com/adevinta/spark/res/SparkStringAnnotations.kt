@@ -73,18 +73,10 @@ public interface SparkStringAnnotations<T : Any> {
             colors: SparkColors,
             typography: SparkTypography,
         ): SpanStyle {
-            return when (key.asSparkAnnotation()) {
-                Colors -> Colors.toSpanStyle(value, colors)
-                Typography -> Typography.toSpanStyle(value, typography)
-                else -> SpanStyle()
-            }
-        }
-
-        private fun String.asSparkAnnotation(): SparkStringAnnotations<*>? {
-            return when (this) {
-                "color" -> Colors
-                "typography" -> Typography
-                else -> null.also { _ ->
+            return when (key) {
+                "color" -> Colors.toSpanStyle(value, colors)
+                "typography" -> Typography.toSpanStyle(value, typography)
+                else -> SpanStyle().also { _ ->
                     Log.d("StringResources", "Annotation  $this is not supported by spark")
                 }
             }
