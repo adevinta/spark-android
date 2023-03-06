@@ -20,17 +20,17 @@
  * SOFTWARE.
  */
 
-plugins {
-    id("com.adevinta.spark.android-application")
-}
+package com.adevinta.spark.sample
 
-android {
-    namespace = "com.adevinta.spark.sample"
-    defaultConfig.applicationId = "com.adevinta.spark.sample"
-}
+import android.app.Activity
+import android.os.Bundle
+import com.adevinta.spark.getBrowserIntent
+import com.airbnb.android.showkase.models.Showkase
 
-dependencies {
-    implementation(projects.spark)
-
-    implementation(libs.airbnb.showkase)
+public class MainActivity : Activity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        startActivity(Showkase.getBrowserIntent(this))
+        finish()
+    }
 }
