@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+    <component name="JavaProjectCodeInsightSettings">
+        <excluded-names>
+            <name>androidx.compose.material3.Checkbox</name>
+            <name>androidx.compose.material3.TriStateCheckbox</name>
+            <name>androidx.compose.material3.CheckboxDefaults</name>
+            <name>androidx.compose.material3.CheckboxColors</name>
+            <name>androidx.compose.material3.RadioButton</name>
+            <name>androidx.compose.material3.RadioButtonDefaults</name>
+            <name>androidx.compose.material3.RadioButtonColors</name>
+        </excluded-names>
+    </component>
+</project>
