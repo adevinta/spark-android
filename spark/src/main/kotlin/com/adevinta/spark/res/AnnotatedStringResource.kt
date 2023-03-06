@@ -143,8 +143,9 @@ private fun AnnotatedString.Builder.buildWithSpan(
     val span: SpanStyle = when (it) {
         is StyleSpan -> buildWithStyleSpan(it)
         is TypefaceSpan -> buildWithTypefaceSpan(it)
-        is BulletSpan -> SpanStyle().also {
+        is BulletSpan -> {
             Log.d("StringResources", "BulletSpan not supported yet")
+            return
         }
 
         is AbsoluteSizeSpan -> with(density) {
@@ -157,11 +158,9 @@ private fun AnnotatedString.Builder.buildWithSpan(
         is SuperscriptSpan -> SpanStyle(baselineShift = BaselineShift.Superscript)
         is SubscriptSpan -> SpanStyle(baselineShift = BaselineShift.Subscript)
         is ForegroundColorSpan -> SpanStyle(color = Color(it.foregroundColor))
-        is Annotation -> {
-            SparkStringAnnotations.toSpanStyle(it.key, it.value, colors, typography)
-        }
+        is Annotation -> SparkStringAnnotations.toSpanStyle(it.key, it.value, colors, typography)
 
-        else -> SpanStyle()
+        else -> return
     }
     addStyle(span, start, end)
 }
