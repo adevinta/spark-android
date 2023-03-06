@@ -1,11 +1,10 @@
 # Tokens
 
-[Figma](https://www.figma.com/file/E9JHa3rw9OYmZceSVHLPnN/Brikke---Tokens-%F0%9F%94%B6?node-id=262%3A2390)
+[//]: # (Lint to zeroheight + figma tokens here)
 
 ## Colors
 
-[Figma](https://www.figma.com/file/E9JHa3rw9OYmZceSVHLPnN/Brikke---Tokens-%F0%9F%94%B6?node-id=0%3A1)
-[Zeroheight](https://zeroheight.com/25c15666f/p/40105d-colors/b/836d63)
+[//]: # (Lint to zeroheight + figma colors here)
 
 We have
 a [Figma File](https://www.figma.com/file/NSXzrskbAYebc1RTQUgKYN/Color-Mapping?node-id=0%3A1) that
@@ -15,13 +14,13 @@ map the colors we can found in features Figma projects into which Composables/to
 <p align="center">
   <img
     width="200px"
-    src="art/tokens/colors/gray.webp" />
+    src="../art/tokens/colors/gray.webp" />
 <img
     width="200px"
-    src="art/tokens/colors/state.webp" />
+    src="../art/tokens/colors/state.webp" />
 <img
     width="200px"
-    src="art/tokens/colors/primary.webp" />
+    src="../art/tokens/colors/primary.webp" />
 </p>
 </a>
 

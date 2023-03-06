@@ -2,8 +2,7 @@
 
 ## Illustration design specs
 
-You can find the design specs
-on [zeroheight.com/25c15666f/](https://zeroheight.com/25c15666f/p/54faa9-radio-button-/b/057def).
+[//]: # (Add the link to the design specs here)
 
 ## Usage
 
@@ -12,7 +11,7 @@ clear message.
 
 ### Illustration
 
-<img src="/Users/scott.rayapoulle.ext/StudioProjects/android-app/libraries/Compose/art/images/illu-exemple.png" title="A person with a cart full of items" width="500" />
+<img src="../art/images/illu-exemple.png" title="A person with a cart full of items" width="500" />
 
 ```kotlin
 @Composable

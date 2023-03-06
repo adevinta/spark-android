@@ -1,7 +1,7 @@
 <p align="center">
   <img
     width="300px"
-    src="art/brikke-logo.webp"
+    src="../../art/brikke-logo.webp"
     alt="Spark Design System logo" />
 </p>
 
@@ -39,7 +39,7 @@ SparkTheme {
 
 Buttons guides the user to the actions he can do in the app
 
-[![](../spark-screenshot-testing/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_primarybutton_part_light.png)
+[![](../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_primarybutton_part_light.png)
 ](./Buttons.md)
 
 ### [TextFields](./TextFields.md)
@@ -52,30 +52,30 @@ Buttons guides the user to the actions he can do in the app
 
 Buttons guides the user to the actions he can do in the app
 
-| [CheckBox](./CheckBox.md)                                                                                                                                               | [RadioButton](./RadioButton.md)                                                                                                                                               | [Switch](./Switch.md)                                                                                                                                               |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [![](../spark-screenshot-testing/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkboxlabelled_part_light.png)](./CheckBox.md) | [![](../spark-screenshot-testing/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_part_light.png)](./RadioButton.md) | [![](../spark-screenshot-testing/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_part_light.png)](./Switch.md) |
-| Allows user to choose between some options and one or several can be checked                                                                                            | Allows user to choose between some options and only one can be selected                                                                                                       | Allows user to activate or deactivate an option immediately                                                                                                         |
+| [CheckBox](./CheckBox.md)                                                                                                                                                   | [RadioButton](./RadioButton.md)                                                                                                                                               | [Switch](./Switch.md)                                                                                                                                               |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [![](../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkboxlabelled_part_light.png)](./CheckBox.md) | [![](../spark-screenshot-testing/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_part_light.png)](./RadioButton.md) | [![](../spark-screenshot-testing/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_part_light.png)](./Switch.md) |
+| Allows user to choose between some options and one or several can be checked                                                                                                | Allows user to choose between some options and only one can be selected                                                                                                       | Allows user to activate or deactivate an option immediately                                                                                                         |
 
 ### [Snackbar](./Snackbar.md)
 
 Snackbars inform users of a process that an app has performed or will perform.
 
-[![](../spark-screenshot-testing/test/snapshots/images/com.adevinta.spark_SnackbarScreenshot_SnackBar[1]_data[bodyactionsnackbar]_colors[default]_theme[light].png)
+[![](../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_SnackbarScreenshot_SnackBar[1]_data[bodyactionsnackbar]_colors[default]_theme[light].png)
 ](./Snackbar.md)
 
 ### [ProgressIndicators](./ProgressIndicators.md)
 
 Progress indicators displays the length of a process.
 
-[![](../spark-screenshot-testing/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_progressindicator_linearprogressindicator_part_light.png)
+[![](../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_progressindicator_linearprogressindicator_part_light.png)
 ](./ProgressIndicators.md)
 
 ### [Ratings](./Ratings.md)
 
 The rating element is essentially used to evaluate a product, service, or experience.
 
-[![](../spark-screenshot-testing/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_ratings_ratingsmall_part_light.png)
+[![](../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_ratings_ratingsmall_part_light.png)
 ](./Ratings.md)
 
 ## 🛠 Tooling
