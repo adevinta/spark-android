@@ -17,7 +17,7 @@ lint = "31.1.0-alpha05"
 minCompileSdk = "24"
 paparazzi = "1.2.0"
 showkase = "1.0.0-beta17"
-slackLint = "1.0.0"
+slackLint = "1.0.1"
 targetSdk = "33"
 testParameterInjector = "1.10"
 
