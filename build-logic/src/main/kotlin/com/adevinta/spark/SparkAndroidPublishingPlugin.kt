@@ -30,12 +30,16 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.register
+import org.gradle.kotlin.dsl.the
+import org.gradle.plugins.signing.SigningExtension
 
 internal class SparkAndroidPublishingPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             apply(plugin = "org.gradle.maven-publish")
+            apply(plugin = "org.gradle.signing")
 
             configure<LibraryExtension> {
                 publishing {
@@ -51,6 +55,17 @@ internal class SparkAndroidPublishingPlugin : Plugin<Project> {
                     mavenLocal {
                         name = "Local"
                         url = uri(rootProject.layout.buildDirectory.dir(".m2/repository"))
+                    }
+                    maven {
+                        name = "OSSRH"
+                        url = when (version.toString().endsWith("-SNAPSHOT")) {
+                            true -> "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+                            false -> "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+                        }.let(::uri)
+                        credentials {
+                            username = System.getenv("OSSRH_USERNAME")
+                            password = System.getenv("OSSRH_TOKEN")
+                        }
                     }
                 }
                 publications {
@@ -75,6 +90,13 @@ internal class SparkAndroidPublishingPlugin : Plugin<Project> {
                         }
                     }
                 }
+            }
+            configure<SigningExtension> signing@{
+                val signingKey: String? by project
+                val signingPassword: String? by project
+                if (signingKey == null || signingPassword == null) return@signing
+                useInMemoryPgpKeys(signingKey, signingPassword)
+                sign(the<PublishingExtension>().publications)
             }
         }
     }
