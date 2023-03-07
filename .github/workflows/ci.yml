@@ -8,6 +8,12 @@ on:
     paths-ignore:
       - 'docs/**'
       - '*.md'
+  merge_group:
+    types: [ checks_requested ]
+    branches: ["main"]
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}

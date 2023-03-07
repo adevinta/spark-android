@@ -3,6 +3,8 @@ name: '🔣 PR title format'
 on:
   pull_request:
     types: [ opened, edited, synchronize ]
+  merge_group:
+    types: [ checks_requested ]
 
 jobs:
   commitizen:
