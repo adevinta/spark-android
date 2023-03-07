@@ -158,7 +158,7 @@ private fun AnnotatedString.Builder.buildWithSpan(
         is SuperscriptSpan -> SpanStyle(baselineShift = BaselineShift.Superscript)
         is SubscriptSpan -> SpanStyle(baselineShift = BaselineShift.Subscript)
         is ForegroundColorSpan -> SpanStyle(color = Color(it.foregroundColor))
-        is Annotation -> SparkStringAnnotations.toSpanStyle(it.key, it.value, colors, typography)
+        is Annotation -> SparkStringAnnotations.toSpanStyle(it.key, it.value, colors, typography) ?: return
 
         else -> return
     }
