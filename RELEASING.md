@@ -22,4 +22,6 @@
  ```bash
  git commit -am "chore: prepare next development version"
  ```
-9. Check [Sonatype Nexus](Sonatype Nexus) to promote (close then release) the release. Or drop it if there is a problem!
+9. Check [Sonatype Nexus](nexus) to promote (close then release) the release. Or drop it if there is a problem!
+
+[nexus]: https://s01.oss.sonatype.org/
