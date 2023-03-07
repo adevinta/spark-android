@@ -22,6 +22,7 @@
 
 package com.adevinta.spark.res
 
+import android.text.Annotation
 import android.util.Log
 import androidx.compose.ui.text.SpanStyle
 import com.adevinta.spark.tokens.SparkColors
@@ -36,13 +37,12 @@ public object SparkStringAnnotations {
      * Given a string representing an annotation key and a string representing an annotation value, returns the corresponding [SpanStyle].
      */
     public fun toSpanStyle(
-        key: String,
-        value: String,
+        annotation: Annotation,
         colors: SparkColors,
         typography: SparkTypography,
-    ): SpanStyle? = when (key) {
-        "color" -> value.toColorSpanStyle(colors)
-        "typography" -> value.toTypographySpanStyle(typography)
+    ): SpanStyle? = when (annotation.key) {
+        "color" -> annotation.value.toColorSpanStyle(colors)
+        "typography" -> annotation.value.toTypographySpanStyle(typography)
         else -> null.also { _ ->
             Log.d("StringResources", "Annotation  $this is not supported by spark")
         }
