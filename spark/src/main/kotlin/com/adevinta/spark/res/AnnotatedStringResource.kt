@@ -98,10 +98,10 @@ internal fun resources(): Resources {
  * Converts a [Spanned] to a [String] without the surrounding `<p dir="rtl | ltr" style="…">` tags as we don't support
  * [ParagraphStyle].
  */
-internal fun Spanned.toHtmlWithoutParagraphs(): String {
-    return HtmlCompat.toHtml(this, HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE)
-        .substringAfter("<p dir=\"ltr\">").substringBeforeLast("</p>")
-}
+internal fun Spanned.toHtmlWithoutParagraphs(): String = HtmlCompat.toHtml(
+    this,
+    HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE,
+).substringAfter("<p dir=\"ltr\">").substringBeforeLast("</p>")
 
 /**
  * The framework `getText()` method doesn't support formatting arguments, so we need to do it ourselves.
@@ -141,8 +141,8 @@ private fun AnnotatedString.Builder.buildWithSpan(
     typography: SparkTypography,
 ) {
     val span: SpanStyle = when (it) {
-        is StyleSpan -> buildWithStyleSpan(it)
-        is TypefaceSpan -> buildWithTypefaceSpan(it)
+        is StyleSpan -> it.toSpanStyle()
+        is TypefaceSpan -> it.toSpanStyle()
         is BulletSpan -> {
             Log.d("StringResources", "BulletSpan not supported yet")
             return
@@ -165,20 +165,18 @@ private fun AnnotatedString.Builder.buildWithSpan(
     addStyle(span, start, end)
 }
 
-private fun buildWithStyleSpan(it: StyleSpan): SpanStyle {
-    return when (it.style) {
-        Typeface.NORMAL -> FontWeight.Normal to FontStyle.Normal
-        Typeface.BOLD -> FontWeight.Bold to FontStyle.Normal
-        Typeface.ITALIC -> FontWeight.Normal to FontStyle.Italic
-        Typeface.BOLD_ITALIC -> FontWeight.Bold to FontStyle.Italic
-        else -> null
-    }?.let { (fontWeight, fontStyle) ->
-        SpanStyle(fontWeight = fontWeight, fontStyle = fontStyle)
-    } ?: SpanStyle()
-}
+private fun StyleSpan.toSpanStyle(): SpanStyle = when (style) {
+    Typeface.NORMAL -> FontWeight.Normal to FontStyle.Normal
+    Typeface.BOLD -> FontWeight.Bold to FontStyle.Normal
+    Typeface.ITALIC -> FontWeight.Normal to FontStyle.Italic
+    Typeface.BOLD_ITALIC -> FontWeight.Bold to FontStyle.Italic
+    else -> null
+}?.let { (fontWeight, fontStyle) ->
+    SpanStyle(fontWeight = fontWeight, fontStyle = fontStyle)
+} ?: SpanStyle()
 
-private fun buildWithTypefaceSpan(it: TypefaceSpan): SpanStyle = SpanStyle(
-    fontFamily = when (it.family) {
+private fun TypefaceSpan.toSpanStyle() = SpanStyle(
+    fontFamily = when (family) {
         FontFamily.SansSerif.name -> FontFamily.SansSerif
         FontFamily.Serif.name -> FontFamily.Serif
         FontFamily.Monospace.name -> FontFamily.Monospace

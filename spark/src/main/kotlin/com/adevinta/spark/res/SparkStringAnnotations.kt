@@ -40,20 +40,18 @@ public object SparkStringAnnotations {
         value: String,
         colors: SparkColors,
         typography: SparkTypography,
-    ): SpanStyle {
-        return when (key) {
-            "color" -> value.toColorSpanStyle(colors)
-            "typography" -> value.toTypographySpanStyle(typography)
-            else -> SpanStyle().also { _ ->
-                Log.d("StringResources", "Annotation  $this is not supported by spark")
-            }
+    ): SpanStyle? = when (key) {
+        "color" -> value.toColorSpanStyle(colors)
+        "typography" -> value.toTypographySpanStyle(typography)
+        else -> null.also { _ ->
+            Log.d("StringResources", "Annotation  $this is not supported by spark")
         }
     }
 
     /**
      * Given a string representing annotation value of a spark color, returns the corresponding [SpanStyle] with the color token.
      */
-    private fun String.toColorSpanStyle(token: SparkColors): SpanStyle = when (this) {
+    private fun String.toColorSpanStyle(token: SparkColors): SpanStyle? = when (this) {
         "primary" -> token.primary
         "secondary" -> token.secondary
         "success" -> token.success
@@ -61,15 +59,15 @@ public object SparkStringAnnotations {
         "error" -> token.error
         "info" -> token.info
         "neutral" -> token.neutral
-        else -> null
-    }?.let(::SpanStyle) ?: SpanStyle().also { _ ->
-        Log.d("StringResources", "Spark color annotation : $this is not supported")
-    }
+        else -> null.also { _ ->
+            Log.d("StringResources", "Spark color annotation : $this is not supported")
+        }
+    }?.let(::SpanStyle)
 
     /**
      * Given a string representing annotation value of a spark typography, returns the corresponding [SpanStyle] with the typography token.
      */
-    private fun String.toTypographySpanStyle(token: SparkTypography): SpanStyle = when (this) {
+    private fun String.toTypographySpanStyle(token: SparkTypography): SpanStyle? = when (this) {
         "title1" -> token.title1
         "title2" -> token.title2
         "title3" -> token.title3
@@ -82,8 +80,8 @@ public object SparkStringAnnotations {
         "extraSmallImportant" -> token.extraSmallImportant
         "extraSmall" -> token.extraSmall
         "button" -> token.button
-        else -> null
-    }?.toSpanStyle() ?: SpanStyle().also { _ ->
-        Log.d("StringResources", "Spark typography annotation : $this is not supported")
-    }
+        else -> null.also { _ ->
+            Log.d("StringResources", "Spark typography annotation : $this is not supported")
+        }
+    }?.toSpanStyle()
 }
