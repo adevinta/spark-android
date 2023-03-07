@@ -44,8 +44,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "spark-android"
 
 include(":spark")
-// Disable sample app for now, until we have something interesting to showcase
-// include(":sample")
+include(":sample")
 include(":spark-icons")
 include(":spark-lint")
 include(":spark-screenshot-testing")
