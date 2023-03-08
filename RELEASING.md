@@ -22,4 +22,6 @@
  ```bash
  git commit -am "chore: prepare next development version"
  ```
-9. Check [Sonatype Nexus](Sonatype Nexus) to promote (close then release) the release. Or drop it if there is a problem!
+9. Go to [Sonatype Nexus](https://s01.oss.sonatype.org/) to promote (close then release) the artifact ([docs & detailed steps](https://central.sonatype.org/publish/release/)). Or drop it if there is a problem!
+10. Trigger the manual workflow [![📋 Publish Dokka to GitHub Pages](https://github.com/adevinta/spark-android/actions/workflows/dokka.yml/badge.svg)](https://github.com/adevinta/spark-android/actions/workflows/dokka.yml) with the version tag.
+11. Draft a [new release](https://github.com/adevinta/spark-android/releases/new) with the version tag, add the corresponding [CHANGELOG.md](CHANGELOG.md) entries, and publish it when ready.
