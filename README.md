@@ -50,8 +50,7 @@ dependencies {
 Please see [the contribution guide](docs/CONTRIBUTING.md) and
 the [Code of conduct](docs/CODE_OF_CONDUCT.md) before contributing.
 
-License
---------
+## License
 
     Copyright (c) 2023 Adevinta
     
