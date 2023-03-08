@@ -33,3 +33,43 @@ SparkTheme {
     // Your composable declarations
 }
 ```
+
+## Installation
+
+Just add the dependency to the `implementation` configuration.
+
+[//]: # ([![Maven Central]&#40;https://img.shields.io/maven-central/v/com.slack.lint.compose/compose-lint-checks.svg&#41;]&#40;https://mvnrepository.com/artifact/com.slack.lint.compose/compose-lint-checks&#41;)
+
+```kotlin
+dependencies {
+    implementation("com.adevinta.spark:spark:<version>")
+}
+```
+
+## Contributing
+
+Please see [the contribution guide](docs/CONTRIBUTING.md) and
+the [Code of conduct](docs/CODE_OF_CONDUCT.md) before contributing.
+
+License
+--------
+
+    Copyright (c) 2023 Adevinta
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
