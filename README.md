@@ -16,7 +16,7 @@ and designers.
 But these native components and tokens are overridden to respect Spark's Visual Identity. You'll
 find
 the design specifications and technical information for supported platforms by Adevinta on
-[https://zeroheight.com/1186e1705/p/25ae4e-spark](https://zeroheight.com/1186e1705/p/25ae4e-spark).
+[zeroheight](https://zeroheight.com/1186e1705/p/25ae4e-spark).
 
 The demo app is not currently available available, but we plan to publish it in the near future.
 
