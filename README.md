@@ -9,7 +9,7 @@
 
 [![👷 Build → 🧑‍🔬 Test → 🕵️ Lint](https://github.com/adevinta/spark-android/actions/workflows/ci.yml/badge.svg)](https://github.com/adevinta/spark-android/actions/workflows/ci.yml)
 
-Compose Spark Design System is based on Material 3 compose artifact described
+Compose Spark Design System is based on Material 3 Compose artifact described
 on the [official documentation](https://material.io/) and maintained by Google developers
 and designers.
 
