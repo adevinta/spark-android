@@ -35,7 +35,7 @@ SparkTheme {
 
 ## Installation
 
-Just add the dependency to the `implementation` configuration.
+Add the main Spark dependency:
 
 [//]: # ([![Maven Central]&#40;https://img.shields.io/maven-central/v/com.adevinta.spark/spark.svg&#41;]&#40;https://mvnrepository.com/artifact/com.adevinta.spark/spark&#41;)
 
