@@ -24,7 +24,7 @@ The demo app is not currently available, but we plan to publish it in the near f
 
 A `SparkTheme` is available from where you can get all
 colors, typographies and shapes in your composable hierarchy. Note that this theme is
-mandatory if you want to use any composable available.
+mandatory if you want to use any Spark composable.
 If you don't use it, an error will be triggered at the runtime.
 
 ```kotlin
