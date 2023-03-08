@@ -18,7 +18,7 @@ find
 the design specifications and technical information for supported platforms by Adevinta on
 [zeroheight](https://zeroheight.com/1186e1705/p/25ae4e-spark).
 
-The demo app is not currently available available, but we plan to publish it in the near future.
+The demo app is not currently available, but we plan to publish it in the near future.
 
 ## 🚀 Getting Started
 
