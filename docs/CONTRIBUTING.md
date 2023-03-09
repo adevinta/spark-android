@@ -27,17 +27,16 @@ git lfs install
 
 We currently use **AGP 8.1.0** which requires developers to use **JDK 17** on Gradle JDK.
 
-You can find the latest JDK 17
-release [here](https://www.azul.com/downloads/zulu-community/?version=java-17-lts&architecture=x86-64-bit&package=jdk).
-
 _If you're on macOS, you can install it with [brew](https://github.com/mdogan/homebrew-zulu/)_
 
 ```bash
-brew tap mdogan/zulu
-brew install zulu-jdk17
+brew install openjdk@17
 ```
 
-or install it directly from Studio
+> ℹ️ If you're using a device with an apple silicon ship (M1/M2) then you may be interested on using
+> a [zulu distribution](https://www.azul.com/downloads/zulu-community/?version=java-17-lts&architecture=x86-64-bit&package=jdk)
+
+or install it directly from **Android Studio**:
 
 ![](../art/docs/jdk.png)
 
