@@ -185,7 +185,7 @@ private fun TypefaceSpan.toSpanStyle() = SpanStyle(
     locale = "fr-rFR",
 )
 @Composable
-public fun AnnotatedStringResourcePreview() {
+private fun AnnotatedStringResourcePreview() {
     PreviewTheme {
         Text(annotatedStringResource(R.string.spark_annotatedStringResource_test))
         Text(annotatedStringResource(R.string.spark_annotatedStringResource_test_args, "Spark"))
