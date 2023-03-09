@@ -2,7 +2,7 @@
 
 ### Issues, Bugs, Feature or Component Requests
 
-While we don't accept issues from people outside the Adevinta Platform to this repo currently, we
+While we currently don't accept issues from people outside the Adevinta Platform to this repo, we
 welcome [discussions and questions here](https://github.com/adevinta/spark-android/discussions/categories/general)!
 
 ## If you're part of the Adevinta Platform ⬇️
@@ -11,9 +11,9 @@ welcome [discussions and questions here](https://github.com/adevinta/spark-andro
 
 #### [git-lfs](https://git-lfs.com/)
 
-This repository uses [cashapp/paparazzi](https://github.com/cashapp/paparazzi) for screenshot
-testing purposes.  
-If you introduce visible changes, you'll likely have to update screenshots files for the test to
+This repository uses git-lfs to handle [cashapp/paparazzi](https://github.com/cashapp/paparazzi)
+screenshot testing.  
+If you introduce visible changes, you'll likely have to update screenshots files for the tests to
 pass.
 
 ```bash
@@ -23,10 +23,14 @@ brew install git-lfs
 git lfs install
 ```
 
-#### [java 17](https://github.com/adevinta/spark-android/issues/74)
+#### [Java 17](https://github.com/adevinta/spark-android/issues/74)
 
-We use AGP 8.1.0 which requires developers to use JDK 17 on Gradle JDK
-If you're on macOS, you can install it with [brew](https://github.com/mdogan/homebrew-zulu/)
+We currently use **AGP 8.1.0** which requires developers to use **JDK 17** on Gradle JDK.
+
+You can find the latest JDK 17
+release [here](https://www.azul.com/downloads/zulu-community/?version=java-17-lts&architecture=x86-64-bit&package=jdk).
+
+_If you're on macOS, you can install it with [brew](https://github.com/mdogan/homebrew-zulu/)_
 
 ```bash
 brew tap mdogan/zulu
@@ -35,22 +39,7 @@ brew install zulu-jdk17
 
 or install it directly from Studio
 
-[//]: # (https://files.slack.com/files-pri/T0182J7UXEH-F04RH9F5U2G/image.png)
-
-[//]: # (https://files.slack.com/files-pri/T0182J7UXEH-F04RTEHLJQH/image.png)
-
-### How do I make a proper pull request?
-
-- Fork the project on GitHub
-- Create a new branch
-- Upload the changes to your branch
-- Check the [style guidelines](https://github.com/akyoto/quality/blob/master/STYLE.md)
-- Create a pull request
-
-### What if I already made a pull request but want to add more commits?
-
-If you correctly created a new branch for your changes, you can simply upload the new commits to
-your fork and they will automatically appear in the PR.
+![](../art/docs/jdk.png)
 
 ## Pull Requests
 
@@ -60,17 +49,23 @@ should be ‘solutions’ to GitHub issues.
 To make a pull request:
 
 1. Make sure there’s a GitHub issue for the change you’re proposing.
-2. [Fork](https://help.github.com/articles/fork-a-repo/) the repo for the platform your code works
+2. [Fork](https://github.com/adevinta/spark-android/fork) the repo for the platform your code works
    in.
-3. Write code on a branch in your fork.
+3. Write code in your fork, on a branch if you plan to make multiple changes.
 4. [Create a pull request](https://help.github.com/articles/creating-a-pull-request/) to merge your
    branch’s contributions into the corresponding Spark repo by following the .
-5. The pull request will be triaged by a #spark-dev member and code reviewed by a
-   #spark-contributors-android member.
-6. If the pull request is accepted, the accepting #spark-dev member will merge the pull request for
+5. The pull request will be triaged by a **#spark-dev** member and code reviewed by a
+   **#spark-contributors-android** member.
+6. If the pull request is accepted, the accepting **#spark-dev** member will merge the pull request
+   for
    you.
 
-### Code review
+### What if I already made a pull request but want to add more commits?
+
+If you correctly created a new branch for your changes, you can simply upload the new commits to
+your fork and they will automatically appear in the PR.
+
+## Code review
 
 Regardless of language or platform, all code goes through code review before it can be merged into
 main branches.
