@@ -26,7 +26,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -38,7 +37,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
+import androidx.core.text.toHtml
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
@@ -51,6 +51,8 @@ import com.adevinta.spark.tokens.SparkTypography
 
 /**
  * Load a annotated string resource with formatting.
+ *
+ * Be aware that using this method you'll loose the annotations support.
  *
  * @param id the resource identifier
  * @param formatArgs the format arguments
@@ -95,25 +97,19 @@ internal fun resources(): Resources {
 }
 
 /**
- * Converts a [Spanned] to a [String] without the surrounding `<p dir="rtl | ltr" style="…">` tags as we don't support
- * [ParagraphStyle].
- */
-internal fun Spanned.toHtmlWithoutParagraphs(): String = HtmlCompat.toHtml(
-    this,
-    HtmlCompat.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE,
-).substringAfter("<p dir=\"ltr\">").substringBeforeLast("</p>")
-
-/**
  * The framework `getText()` method doesn't support formatting arguments, so we need to do it ourselves.
+ *
+ * Unfortunately `toHtml()` doesn't support the `<annotation>` tag so we loose this span as we need to convert it to a
+ * [String] to be able to use `String.format()`.
  */
 internal fun Resources.getText(@StringRes id: Int, vararg args: Any): CharSequence {
     val escapedArgs = args.map {
-        if (it is Spanned) it.toHtmlWithoutParagraphs() else it
+        if (it is Spanned) it.toHtml() else it
     }.toTypedArray()
     val spannedString = SpannedString(getText(id))
-    val htmlResource = spannedString.toHtmlWithoutParagraphs()
+    val htmlResource = spannedString.toHtml()
     val formattedHtml = String.format(htmlResource, *escapedArgs)
-    return HtmlCompat.fromHtml(formattedHtml, HtmlCompat.FROM_HTML_MODE_LEGACY)
+    return formattedHtml.parseAsHtml()
 }
 
 private fun CharSequence.asAnnotatedString(
@@ -189,9 +185,9 @@ private fun TypefaceSpan.toSpanStyle() = SpanStyle(
     locale = "fr-rFR",
 )
 @Composable
-private fun AnnotatedStringResourcePreview() {
+public fun AnnotatedStringResourcePreview() {
     PreviewTheme {
-        val annotatedString = annotatedStringResource(R.string.spark_annotatedStringResource_test)
-        Text(annotatedString)
+        Text(annotatedStringResource(R.string.spark_annotatedStringResource_test))
+        Text(annotatedStringResource(R.string.spark_annotatedStringResource_test_args, "Spark"))
     }
 }
