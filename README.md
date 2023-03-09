@@ -9,24 +9,23 @@
 
 [![👷 Build → 🧑‍🔬 Test → 🕵️ Lint](https://github.com/adevinta/spark-android/actions/workflows/ci.yml/badge.svg)](https://github.com/adevinta/spark-android/actions/workflows/ci.yml)
 
-Compose Spark Design System is based on Material 3 compose artifact described
+Spark Design System is based on Material 3 Compose artifact described
 on the [official documentation](https://material.io/) and maintained by Google developers
 and designers.
 
 But these native components and tokens are overridden to respect Spark's Visual Identity. You'll
 find
 the design specifications and technical information for supported platforms by Adevinta on
-[zeroheight.com/25c15666f/](https://zeroheight.com/25c15666f/).
+[zeroheight](https://zeroheight.com/1186e1705/p/25ae4e-spark).
 
-The demo app is accessible from the `Tools` app at the bottom of the list. It's currently
-generated with Showkase but will be
+The demo app is not currently available, but we plan to publish it in the near future.
 
 ## 🚀 Getting Started
 
 A `SparkTheme` is available from where you can get all
 colors, typographies and shapes in your composable hierarchy. Note that this theme is
-mandatory if you want to use any composable available.
-If you don't use it, an error will be triggered at the runtime.
+mandatory if you want to use any Spark composable.
+Otherwise, a runtime error will be thrown.
 
 ```kotlin
 SparkTheme {
@@ -36,9 +35,7 @@ SparkTheme {
 
 ## Installation
 
-Just add the dependency to the `implementation` configuration.
-
-[//]: # ([![Maven Central]&#40;https://img.shields.io/maven-central/v/com.slack.lint.compose/compose-lint-checks.svg&#41;]&#40;https://mvnrepository.com/artifact/com.slack.lint.compose/compose-lint-checks&#41;)
+Add the main Spark dependency: [![Maven Central](https://img.shields.io/maven-central/v/com.adevinta.spark/spark?label=%20&color=success)](https://search.maven.org/artifact/com.adevinta.spark/spark) [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.adevinta.spark/spark?label=%20&color=lightgrey&server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/adevinta/spark/spark/)
 
 ```kotlin
 dependencies {
@@ -51,8 +48,7 @@ dependencies {
 Please see [the contribution guide](docs/CONTRIBUTING.md) and
 the [Code of conduct](docs/CODE_OF_CONDUCT.md) before contributing.
 
-License
---------
+## License
 
     Copyright (c) 2023 Adevinta
     
