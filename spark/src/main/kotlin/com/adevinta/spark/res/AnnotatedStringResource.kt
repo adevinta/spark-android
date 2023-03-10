@@ -16,6 +16,7 @@ import android.text.style.SuperscriptSpan
 import android.text.style.TypefaceSpan
 import android.text.style.UnderlineSpan
 import android.util.Log
+import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -89,6 +90,52 @@ public fun annotatedStringResource(@StringRes id: Int): AnnotatedString {
     }
 }
 
+/**
+ * Load a styled plurals resource.
+ *
+ * @param id the resource identifier
+ * @param count the count
+ * @return the pluralized string data associated with the resource
+ */
+@Composable
+public fun annotatedPluralStringResource(
+    @PluralsRes id: Int,
+    count: Int,
+): AnnotatedString {
+    val resources = resources()
+    val density = LocalDensity.current
+    val colors = SparkTheme.colors
+    val typography = SparkTheme.typography
+    return remember(id) {
+        val text = resources.getQuantityText(id, count)
+        text.asAnnotatedString(density, colors, typography)
+    }
+}
+
+/**
+ * Load a styled plurals resource with provided format arguments.
+ *
+ * @param id the resource identifier
+ * @param count the count
+ * @param formatArgs arguments used in the format string
+ * @return the pluralized string data associated with the resource
+ */
+@Composable
+public fun annotatedPluralStringResource(
+    @PluralsRes id: Int,
+    count: Int,
+    vararg formatArgs: Any,
+): AnnotatedString {
+    val resources = resources()
+    val density = LocalDensity.current
+    val colors = SparkTheme.colors
+    val typography = SparkTheme.typography
+    return remember(id) {
+        val text = resources.getQuantityText(id, count, *formatArgs)
+        text.asAnnotatedString(density, colors, typography)
+    }
+}
+
 @Composable
 @ReadOnlyComposable
 internal fun resources(): Resources {
@@ -108,6 +155,16 @@ internal fun Resources.getText(@StringRes id: Int, vararg args: Any): CharSequen
     }.toTypedArray()
     val spannedString = SpannedString(getText(id))
     val htmlResource = spannedString.toHtml()
+    val formattedHtml = String.format(htmlResource, *escapedArgs)
+    return formattedHtml.parseAsHtml()
+}
+
+internal fun Resources.getQuantityText(@PluralsRes id: Int, quantity: Int, vararg args: Any): CharSequence {
+    val escapedArgs = args.map {
+        if (it is Spanned) it.toHtml() else it
+    }.toTypedArray()
+    val resource = SpannedString(getQuantityText(id, quantity))
+    val htmlResource = resource.toHtml()
     val formattedHtml = String.format(htmlResource, *escapedArgs)
     return formattedHtml.parseAsHtml()
 }
