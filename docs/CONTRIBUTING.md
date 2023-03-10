@@ -36,9 +36,8 @@ brew install openjdk@17
 > ℹ️ If you're using a device with [Apple silicon (M1/M2)](https://support.apple.com/en-us/HT211814) then you might need to install
 > a [zulu distribution](https://www.azul.com/downloads/zulu-community/?version=java-17-lts&architecture=x86-64-bit&package=jdk)
 
-or install it directly from **Android Studio**:
-
-![](../art/docs/jdk.png)
+or install it directly from **Android Studio**:  
+`File` → `Settings` → `Build, Execution, Deployment` → `Build Tools` → `Gradle` → `Gradle JDK`
 
 ## Pull Requests
 
