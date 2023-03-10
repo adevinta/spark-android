@@ -98,12 +98,12 @@ internal fun SparkTag(
 }
 
 @Immutable
-internal data class TagColors(
+public data class TagColors(
     val backgroundColor: Color,
     val contentColor: Color,
 )
 
-internal object TagDefaults {
+public object TagDefaults {
     internal val MinHeight = 20.dp
 
     /**
@@ -117,7 +117,8 @@ internal object TagDefaults {
     internal val LeadingIconSize = 16.dp
 
     @Composable
-    internal fun tonalColors(
+    @InternalSparkApi
+    public fun tonalColors(
         backgroundColor: Color = SparkTheme.colors.secondaryContainer,
     ): TagColors {
         return TagColors(
