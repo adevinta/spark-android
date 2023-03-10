@@ -27,7 +27,7 @@ git lfs install
 
 We currently use **AGP 8.1.0** which requires developers to use **JDK 17** on Gradle JDK.
 
-_If you're on macOS, you can install it with [brew](https://github.com/mdogan/homebrew-zulu/)_
+_If you're on macOS, you can install it with [brew](https://formulae.brew.sh/formula/openjdk@17)_
 
 ```bash
 brew install openjdk@17
