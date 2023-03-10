@@ -33,7 +33,7 @@ _If you're on macOS, you can install it with [brew](https://formulae.brew.sh/for
 brew install openjdk@17
 ```
 
-> ℹ️ If you're using a device with an apple silicon ship (M1/M2) then you may be interested on using
+> ℹ️ If you're using a device with [Apple silicon (M1/M2)](https://support.apple.com/en-us/HT211814) then you might need to install
 > a [zulu distribution](https://www.azul.com/downloads/zulu-community/?version=java-17-lts&architecture=x86-64-bit&package=jdk)
 
 or install it directly from **Android Studio**:
