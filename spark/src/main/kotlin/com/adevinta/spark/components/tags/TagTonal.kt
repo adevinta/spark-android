@@ -39,7 +39,7 @@ import com.adevinta.spark.tools.preview.UserType
 
 @InternalSparkApi
 @Composable
-internal fun TagTonal(
+public fun TagTonal(
     colors: TagColors,
     modifier: Modifier = Modifier,
     leadingIcon: SparkIcon? = null,
