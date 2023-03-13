@@ -43,6 +43,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object Booking : SparkIcon.Account(R.drawable.spark_icons_booking)
 
         public object BurgerMenu : SparkIcon.Account(R.drawable.spark_icons_menu)
+        @Deprecated("This Icon is a part of Arrows", replaceWith = ReplaceWith("Arrows.Close.Full"))
         public object Close : SparkIcon.Account(R.drawable.spark_icons_close_full)
         public sealed class Cv(@DrawableRes override val drawableId: Int) : SparkIcon.Account(drawableId) {
             public object Default : Cv(R.drawable.spark_icons_cv)
@@ -144,7 +145,11 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
             public object Right : Arrow(R.drawable.spark_icons_chevron_double_right)
         }
 
-        public object Close : Arrows(R.drawable.spark_icons_close)
+        public sealed class Close(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
+            public object Default : Arrow(R.drawable.spark_icons_close)
+            public object Full : Arrows(R.drawable.spark_icons_close_full)
+        }
+
         public sealed class Chart(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
             public object Up : Chevron(R.drawable.spark_icons_chart_up)
             public object Down : Chevron(R.drawable.spark_icons_chart_down)
