@@ -60,7 +60,7 @@ internal fun SparkSwitch(
     // Icon isn't focusable, no need for content description
     val icon: (@Composable () -> Unit) = {
         Icon(
-            sparkIcon = if (checked) SparkIcon.Toggles.Check.Simple else SparkIcon.Arrows.Close,
+            sparkIcon = if (checked) SparkIcon.Toggles.Check.Simple else SparkIcon.Arrows.Close.Default,
             contentDescription = null,
             modifier = Modifier.size(12.dp),
         )
