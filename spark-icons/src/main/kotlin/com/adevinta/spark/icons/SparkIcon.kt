@@ -146,8 +146,8 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
 
         public sealed class Close(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
-            public object Default : Arrow(R.drawable.spark_icons_close)
-            public object Full : Arrows(R.drawable.spark_icons_close_full)
+            public object Default : Close(R.drawable.spark_icons_close)
+            public object Full : Close(R.drawable.spark_icons_close_full)
         }
 
         public sealed class Chart(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
