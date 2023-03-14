@@ -126,10 +126,10 @@ import com.adevinta.spark.tools.preview.UserType
 
 public fun lightSparkColors(
     isPro: Boolean = false,
-    primary: Color = if (isPro) TheBlue50 else Kiwi50,
-    onPrimary: Color = if (isPro) White else Black,
-    primaryContainer: Color = if (isPro) TheBlue90 else Kiwi90,
-    onPrimaryContainer: Color = if (isPro) TheBlue30 else Kiwi30,
+    primary: Color = if (isPro) Kiwi50 else TheBlue50,
+    onPrimary: Color = if (isPro) Black else White,
+    primaryContainer: Color = if (isPro) Kiwi90 else TheBlue90,
+    onPrimaryContainer: Color = if (isPro) Kiwi30 else TheBlue30,
     primaryVariant: Color = TheBlue30,
     onPrimaryVariant: Color = White,
     secondary: Color = SugarCotton50,
@@ -236,10 +236,10 @@ public fun lightSparkColors(
 
 public fun darkSparkColors(
     isPro: Boolean = false,
-    primary: Color = if (isPro) TheBlueV else Kiwi80,
-    onPrimary: Color = if (isPro) TheBlue20 else Kiwi20,
-    primaryContainer: Color = if (isPro) TheBlue30 else Kiwi30,
-    onPrimaryContainer: Color = if (isPro) TheBlue80 else Kiwi90,
+    primary: Color = if (isPro) Kiwi80 else TheBlueV,
+    onPrimary: Color = if (isPro) Kiwi20 else TheBlue20,
+    primaryContainer: Color = if (isPro) Kiwi30 else TheBlue30,
+    onPrimaryContainer: Color = if (isPro) Kiwi90 else TheBlue80,
     primaryVariant: Color = TheBlue80,
     onPrimaryVariant: Color = Black,
     secondary: Color = SugarCotton60,
