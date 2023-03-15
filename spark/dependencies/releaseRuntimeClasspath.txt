@@ -65,11 +65,11 @@ io.coil-kt:coil-compose:2.2.2
 io.coil-kt:coil:2.2.2
 io.github.aakira:napier-android:1.4.1
 io.github.aakira:napier:1.4.1
-org.jetbrains.kotlin:kotlin-bom:1.8.10
-org.jetbrains.kotlin:kotlin-stdlib-common:1.8.10
-org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10
-org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10
-org.jetbrains.kotlin:kotlin-stdlib:1.8.10
+org.jetbrains.kotlin:kotlin-bom:1.8.20-RC
+org.jetbrains.kotlin:kotlin-stdlib-common:1.8.20-RC
+org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20-RC
+org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20-RC
+org.jetbrains.kotlin:kotlin-stdlib:1.8.20-RC
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4
 org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.6.4
 org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4
