@@ -127,10 +127,6 @@ public fun lightSparkColors(
     onSecondaryContainer: Color = SugarCotton30,
     secondaryVariant: Color = SugarCotton30,
     onSecondaryVariant: Color = White,
-//    tertiary: Color = BrikkeGrey,
-//    onTertiary: Color = GreyBlue99,
-//    tertiaryContainer: Color = BrikkeGreyExtraLight,
-//    onTertiaryContainer: Color = GreyBlue10,
     success: Color = Apple50,
     onSuccess: Color = White,
     successContainer: Color = Apple90,
@@ -249,10 +245,6 @@ public fun darkSparkColors(
     onSecondaryContainer: Color = SugarCotton80,
     secondaryVariant: Color = SugarCotton70,
     onSecondaryVariant: Color = Black,
-//    tertiary: Color = GreyBlue40,
-//    onTertiary: Color = GreyBlue90,
-//    tertiaryContainer: Color = GreyBlue20,
-//    onTertiaryContainer: Color = GreyBlue95,
     success: Color = Apple40,
     onSuccess: Color = Black,
     successContainer: Color = Apple20,
@@ -390,12 +382,6 @@ public fun darkSparkColors(
  * top of [secondaryContainer].
  * @property secondaryVariant Darker variation of [secondary] color.
  * @property onSecondaryVariant Color used for text and icons displayed on top of the [secondaryVariant] color.
- * @property tertiary The tertiary color that can be used to balance primary and secondary
- * colors, or bring heightened attention to an element such as an input field.
- * @property onTertiary Color used for text and icons displayed on top of the tertiary color.
- * @property tertiaryContainer A tonal color to be used in containers.
- * @property onTertiaryContainer The color (and state variants) that should be used for content on
- * top of [tertiaryContainer].
  * @property success An emphasis color used to provide a positive feedback.
  * @property onSuccess Color used for text and icons displayed on top of the [success] color.
  * @property successContainer The preferred tonal color of success containers.
@@ -444,6 +430,11 @@ public fun darkSparkColors(
  * contrast is not required.
  * @property scrim Color of a scrim that obscures content. On Android platforms, the scrim color
  * and opacity is automatically handled by the system UI.
+ * @property dim1 An alpha used to apply a medium emphasis to text.
+ * @property dim2 An alpha used to apply a medium emphasis to icons.
+ * @property dim3 An alpha used to apply a disabled emphasis to all components.
+ * @property dim4 An alpha used to show a low element.
+ * @property dim5 An alpha used to apply a pressed/ripple visual but should not be used on Android.
  */
 @Stable
 public class SparkColors(
@@ -904,7 +895,6 @@ public class SparkColors(
         append("dim3=$dim3, ")
         append("dim4=$dim4, ")
         append("dim5=$dim5, ")
-        append(", ")
         append(")")
     }
 }
