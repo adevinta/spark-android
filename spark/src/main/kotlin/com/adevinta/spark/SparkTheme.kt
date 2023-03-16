@@ -35,9 +35,7 @@ import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
@@ -71,7 +69,6 @@ public fun SparkTheme(
     typography: SparkTypography = SparkTheme.typography,
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
-    isPro: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val internalColors = if (useSparkTokensHighlighter) debugColors() else colors
@@ -107,7 +104,6 @@ public fun SparkTheme(
         LocalSparkShapes provides internalShapes,
         LocalHighlightToken provides useSparkTokensHighlighter,
         LocalHighlightComponents provides useSparkComponentsHighlighter,
-        LocalIsUserPro provides isPro,
     ) {
         MaterialTheme(
             colorScheme = rememberedColors.asMaterial3Colors(),
@@ -127,7 +123,26 @@ public fun SparkTheme(
 
 @Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
 @Composable
-public fun PreviewTheme(
+public fun PreviewWrapper(
+    padding: PaddingValues = PaddingValues(16.dp),
+    contentPadding: Dp = 16.dp,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Surface(
+        color = SparkTheme.colors.surface,
+    ) {
+        Column(
+            modifier = Modifier.padding(padding),
+            verticalArrangement = Arrangement.spacedBy(contentPadding),
+        ) {
+            content()
+        }
+    }
+}
+
+@Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
+@Composable
+internal fun PreviewTheme(
     themeVariant: ThemeVariant = if (LocalInspectionMode.current && isSystemInDarkTheme()) {
         ThemeVariant.Dark
     } else {
@@ -143,17 +158,10 @@ public fun PreviewTheme(
         useDarkColors = themeVariant == ThemeVariant.Dark,
         isPro = userType == UserType.Pro,
     ) {
-        val previewContent = movableContentOf {
-            Column(
-                modifier = Modifier.padding(padding),
-                verticalArrangement = Arrangement.spacedBy(contentPadding),
-            ) {
-                content()
-            }
-        }
-        Surface(
-            color = SparkTheme.colors.surface,
-            content = previewContent,
+        PreviewWrapper(
+            padding = padding,
+            contentPadding = contentPadding,
+            content = content,
         )
     }
 }
@@ -178,7 +186,6 @@ internal fun SparkTenantTheme(
         typography = sparkTypography(),
         useSparkTokensHighlighter = useSparkTokensHighlighter,
         useSparkComponentsHighlighter = useSparkComponentsHighlighter,
-        isPro = isPro,
         content = content,
     )
 }
@@ -225,16 +232,3 @@ internal val LocalHighlightToken = staticCompositionLocalOf { false }
  * Setting it to true show an overlay on spark components.
  */
 internal val LocalHighlightComponents = staticCompositionLocalOf { false }
-
-/**
- * CompositionLocal used to pass the status of the user.
- *
- * We already have a isPro parameter to our theme but it affects only the primary color, if we need to modify a
- * composable to get a particular image or icon asset based on its status it’s complicated as the app is not
- * entirely migrated.
- *
- * If you use this CompositionLocal you must provide it has a default parameter to your composable isPro parameter
- *
- */
-@ExperimentalSparkApi
-public val LocalIsUserPro: ProvidableCompositionLocal<Boolean> = staticCompositionLocalOf { false }

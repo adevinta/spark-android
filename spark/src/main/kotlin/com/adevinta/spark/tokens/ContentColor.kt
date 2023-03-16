@@ -22,14 +22,23 @@
 
 package com.adevinta.spark.tokens
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.spacer.HorizontalSpacer
+import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -54,7 +63,7 @@ public fun EmphasizeHigh(content: @Composable () -> Unit) {
 @Composable
 public fun EmphasizeMedium(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalContentColor provides SparkTheme.colors.onSurface.copy(alpha = .72f),
+        LocalContentColor provides SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim1),
         content = content,
     )
 }
@@ -67,12 +76,70 @@ public fun EmphasizeMedium(content: @Composable () -> Unit) {
 @Composable
 public fun EmphasizeDisable(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalContentColor provides SparkTheme.colors.onSurface.copy(alpha = DisabledAlpha),
+        LocalContentColor provides SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim3),
         content = content,
     )
 }
 
 public const val DisabledAlpha: Float = 0.38f
+
+/**
+ * Medium emphasis for text.
+ */
+@Composable
+public fun EmphasizeDim1(content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim1),
+        content = content,
+    )
+}
+
+/**
+ * Medium emphasis for icons.
+ */
+@Composable
+public fun EmphasizeDim2(content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim2),
+        content = content,
+    )
+}
+
+/**
+ * Medium emphasis.
+ */
+@Composable
+public fun EmphasizeDim3(content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim3),
+        content = content,
+    )
+}
+
+/**
+ * To represent low elements.
+ */
+@Composable
+public fun EmphasizeDim4(content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim4),
+        content = content,
+    )
+}
+
+/**
+ * Used for press and ripples
+ *
+ * This is should not be used on Android as the Material Ripple handles this already.
+ */
+@InternalSparkApi
+@Composable
+public fun EmphasizeDim5(content: @Composable () -> Unit) {
+    CompositionLocalProvider(
+        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim5),
+        content = content,
+    )
+}
 
 @Composable
 @Preview(
@@ -83,7 +150,7 @@ internal fun EmphasePreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        Text("Uses MaterialTheme's provided alpha")
+        Text("Uses default alpha")
         EmphasizeHigh {
             Text("This Text uses the high value")
         }
@@ -92,6 +159,82 @@ internal fun EmphasePreview(
             Text("This Text also uses the medium value")
             EmphasizeDisable {
                 Text("This Text uses the disabled alpha now")
+            }
+        }
+    }
+}
+
+@Composable
+@Preview(
+    group = "Tokens",
+    name = "Dim",
+)
+internal fun DimPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                modifier = Modifier.size(24.dp),
+                sparkIcon = SparkIcon.Account.Identity,
+                contentDescription = "Favorite",
+            )
+            HorizontalSpacer(8.dp)
+            Text("This Text uses the default alpha")
+        }
+        EmphasizeDim1 {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    sparkIcon = SparkIcon.Account.Identity,
+                    contentDescription = "Favorite",
+                )
+                HorizontalSpacer(8.dp)
+                Text("This Text uses the Dim 1")
+            }
+        }
+        EmphasizeDim2 {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    sparkIcon = SparkIcon.Account.Identity,
+                    contentDescription = "Favorite",
+                )
+                HorizontalSpacer(8.dp)
+                Text("This Text uses the Dim 2")
+            }
+        }
+        EmphasizeDim3 {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    sparkIcon = SparkIcon.Account.Identity,
+                    contentDescription = "Favorite",
+                )
+                HorizontalSpacer(8.dp)
+                Text("This Text uses the Dim 3")
+            }
+        }
+        EmphasizeDim4 {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    sparkIcon = SparkIcon.Account.Identity,
+                    contentDescription = "Favorite",
+                )
+                HorizontalSpacer(8.dp)
+                Text("This Text uses the Dim 4")
+            }
+        }
+        EmphasizeDim5 {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    sparkIcon = SparkIcon.Account.Identity,
+                    contentDescription = "Favorite",
+                )
+                HorizontalSpacer(8.dp)
+                Text("This Text uses the Dim 5")
             }
         }
     }
