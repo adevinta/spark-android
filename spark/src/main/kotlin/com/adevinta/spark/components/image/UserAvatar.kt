@@ -44,7 +44,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import com.adevinta.spark.InternalSparkApi
-import com.adevinta.spark.LocalIsUserPro
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
@@ -62,7 +61,7 @@ internal fun SparkUserAvatar(
     style: UserAvatarStyle = UserAvatarStyle.SMALL,
     fillParentSize: Boolean = false,
     model: Any? = null,
-    isPro: Boolean = LocalIsUserPro.current,
+    isPro: Boolean = false,
     isOnline: Boolean = false,
 ) {
     val emptyIcon = @Composable {
@@ -129,7 +128,7 @@ public fun UserAvatar(
     style: UserAvatarStyle = UserAvatarStyle.SMALL,
     fillParentSize: Boolean = false,
     model: Any? = null,
-    isPro: Boolean = LocalIsUserPro.current,
+    isPro: Boolean = false,
     isOnline: Boolean = false,
 ) {
     SparkUserAvatar(
