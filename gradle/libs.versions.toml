@@ -19,7 +19,7 @@ paparazzi = "1.2.0"
 showkase = "1.0.0-beta17"
 slackLint = "1.1.1"
 targetSdk = "33"
-testParameterInjector = "1.10"
+testParameterInjector = "1.11"
 
 [libraries]
 
