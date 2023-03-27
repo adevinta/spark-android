@@ -34,3 +34,7 @@ plugins {
 
     id("com.adevinta.spark.dokka")
 }
+
+allprojects {
+    apply(plugin = "com.adevinta.spark.spotless")
+}
