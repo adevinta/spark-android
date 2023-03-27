@@ -24,6 +24,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.spotless)
 }
 
 kotlin {
@@ -73,4 +74,29 @@ fun NamedDomainObjectContainer<PluginDeclaration>.create(
 ) = create(name) {
     this.id = id
     this.implementationClass = implementationClass
+}
+
+// This block is a copy of SparkSpotlessPlugin since this included build can't use it's own plugins...
+spotless {
+    val licenseHeader = rootProject.file("./../spotless/spotless.kt")
+    format("misc") {
+        target("**/*.md", "**/.gitignore")
+        endWithNewline()
+    }
+    kotlin {
+        target("src/**/*.kt")
+        ktlint(libs.versions.ktlint.get())
+        trimTrailingWhitespace()
+        endWithNewline()
+        licenseHeaderFile(licenseHeader)
+    }
+    kotlinGradle {
+        ktlint(libs.versions.ktlint.get())
+        trimTrailingWhitespace()
+        endWithNewline()
+        licenseHeaderFile(
+            licenseHeader,
+            "(import |plugins|pluginManagement|rootProject|dependencyResolutionManagement|//)",
+        )
+    }
 }
