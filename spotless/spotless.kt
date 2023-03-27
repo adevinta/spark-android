@@ -19,18 +19,3 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.android.lint) apply false
-    alias(libs.plugins.android.kotlin) apply false
-    alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.google.ksp) apply false
-    alias(libs.plugins.paparazzi) apply false
-    alias(libs.plugins.dokka) apply false
-    alias(libs.plugins.dependencyGuard) apply false
-    alias(libs.plugins.spotless) apply false
-
-    id("com.adevinta.spark.dokka")
-}

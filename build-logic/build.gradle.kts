@@ -47,6 +47,7 @@ dependencies {
     compileOnly(libs.gradlePlugins.ksp)
     compileOnly(libs.gradlePlugins.dependencyGuard)
     compileOnly(libs.gradlePlugins.dokka)
+    compileOnly(libs.gradlePlugins.spotless)
 }
 
 gradlePlugin {
@@ -61,6 +62,7 @@ gradlePlugin {
         create("com.adevinta.spark.SparkKspPlugin", id = "com.adevinta.spark.ksp")
         create("com.adevinta.spark.SparkDokkaPlugin", id = "com.adevinta.spark.dokka")
         create("com.adevinta.spark.SparkDependencyGuardPlugin", id = "com.adevinta.spark.dependencyGuard")
+        create("com.adevinta.spark.SparkSpotlessPlugin", id = "com.adevinta.spark.spotless")
     }
 }
 
