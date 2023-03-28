@@ -22,7 +22,6 @@
 
 package com.adevinta.spark.components.drawer
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -138,11 +137,6 @@ internal fun AlertDialogPreview(
         // icons to mimic drawer destinations
         val items = listOf(Icons.Default.Favorite, Icons.Default.Face, Icons.Default.Email)
         val selectedItem = remember { mutableStateOf(items[0]) }
-        BackHandler(enabled = drawerState.isOpen) {
-            scope.launch {
-                drawerState.close()
-            }
-        }
 
         DismissibleNavigationDrawer(
             drawerState = drawerState,
