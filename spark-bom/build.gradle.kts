@@ -21,22 +21,14 @@
  */
 
 plugins {
-    id("com.adevinta.spark.android-library")
-    id("com.adevinta.spark.android-compose")
-    id("com.adevinta.spark.dokka")
+    `java-platform`
     id("com.adevinta.spark.publishing")
-    id("com.adevinta.spark.dependencyGuard")
-}
-
-android {
-    namespace = "com.adevinta.spark.icons"
-    resourcePrefix = "spark_icons_"
-    sourceSets.configureEach {
-        projectDir.resolve("src/$name/res-iconography").listFiles()?.forEach(res::srcDir)
-    }
 }
 
 dependencies {
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.appCompat.resources) // Needed for compat vector drawables
+    constraints {
+        // Declare the dependencies to include in the BoM
+        api("com.adevinta.spark:spark:$version")
+        api("com.adevinta.spark:spark-icons:$version")
+    }
 }
