@@ -20,34 +20,86 @@
  * SOFTWARE.
  */
 
+@file:Suppress("DEPRECATION")
 package com.adevinta.spark.components.tags
 
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
 
-@InternalSparkApi
+/**
+ * Tinted tag represent secondary information like `OutlinedTag`
+ * @param text The item label
+ * @param modifier The [Modifier] to be applied to the component
+ * @param intent The [TagIntent] color to use
+ * @param leadingIcon The spark icon shown at the start of the tag
+ * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
+ */
+@Composable
+public fun TagTinted(
+    text: String,
+    modifier: Modifier = Modifier,
+    intent: TagIntent = TagIntent.Primary,
+    leadingIcon: SparkIcon? = null,
+    tint: Color? = null,
+) {
+    SparkTag(
+        colors = TagDefaults.tintedColors(intent),
+        modifier = modifier,
+        leadingIcon = leadingIcon,
+        tint = tint,
+        text = text,
+    )
+}
+
+/**
+ * Tinted tag represent secondary information like `OutlinedTag`
+ * @param text The item label
+ * @param modifier The [Modifier] to be applied to the component
+ * @param intent The [TagIntent] color to use
+ * @param leadingIcon The spark icon shown at the start of the tag
+ * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
+ */
+@Composable
+public fun TagTinted(
+    text: AnnotatedString,
+    modifier: Modifier = Modifier,
+    intent: TagIntent = TagIntent.Primary,
+    leadingIcon: SparkIcon? = null,
+    tint: Color? = null,
+) {
+    SparkTag(
+        colors = TagDefaults.tintedColors(intent),
+        modifier = modifier,
+        leadingIcon = leadingIcon,
+        tint = tint,
+        text = text,
+    )
+}
+
+@Deprecated(
+    "Use TagTinted instead",
+    ReplaceWith("TagTinted"),
+)
 @Composable
 public fun TagTonal(
-    colors: TagColors,
     modifier: Modifier = Modifier,
+    intent: TagIntent = TagIntent.Primary,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
-    SparkTag(
-        colors = colors,
+    BaseSparkTag(
+        colors = TagDefaults.tintedColors(intent),
         modifier = modifier,
         leadingIcon = leadingIcon,
         tint = tint,
@@ -55,6 +107,10 @@ public fun TagTonal(
     )
 }
 
+@Deprecated(
+    "Use TagTinted instead with neutral intent",
+    ReplaceWith("TagTinted"),
+)
 @Composable
 public fun TagCriteria(
     modifier: Modifier = Modifier,
@@ -64,13 +120,17 @@ public fun TagCriteria(
 ) {
     TagTonal(
         modifier = modifier,
-        colors = TagDefaults.tonalColors(),
+        intent = TagIntent.Neutral,
         leadingIcon = leadingIcon,
         tint = tint,
         content = content,
     )
 }
 
+@Deprecated(
+    "Use TagTinted instead with primary intent",
+    ReplaceWith("TagTinted"),
+)
 @Composable
 public fun TagService(
     modifier: Modifier = Modifier,
@@ -80,7 +140,7 @@ public fun TagService(
 ) {
     TagTonal(
         modifier = modifier,
-        colors = TagDefaults.tonalColors(backgroundColor = SparkTheme.colors.primaryContainer),
+        intent = TagIntent.Primary,
         leadingIcon = leadingIcon,
         tint = tint,
         content = content,
@@ -96,17 +156,11 @@ internal fun TagTonalPreview(
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-        TagCriteria {
-            Text(text = "Tag")
-        }
-        TagCriteria(leadingIcon = SparkIcon.Categories.Car) {
-            Text(text = "Tag")
-        }
-        TagService {
-            Text(text = "Livraison : à partir de 4,99 €")
-        }
-        TagService(leadingIcon = SparkIcon.Delivery.DeliveryHand) {
-            Text(text = "Livraison : à partir de 4,99 €")
+        TagIntent.values().forEach { intent ->
+            TagTinted(
+                text = "Tag information",
+                intent = intent,
+            )
         }
     }
 }
