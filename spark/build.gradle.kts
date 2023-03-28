@@ -23,9 +23,9 @@
 plugins {
     id("com.adevinta.spark.android-library")
     id("com.adevinta.spark.android-compose")
-    id("com.adevinta.spark.android-publishing")
     id("com.adevinta.spark.ksp")
     id("com.adevinta.spark.dokka")
+    id("com.adevinta.spark.publishing")
     id("com.adevinta.spark.dependencyGuard")
 }
 
@@ -50,8 +50,10 @@ dependencies {
     implementation(libs.accompanist.drawablepainter)
     implementation(libs.accompanist.placeholder)
 
-    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appCompat.resources)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.savedstate)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)

@@ -58,7 +58,7 @@ gradlePlugin {
         create("com.adevinta.spark.SparkAndroidLibraryPlugin", id = "com.adevinta.spark.android-library")
         create("com.adevinta.spark.SparkAndroidComposePlugin", id = "com.adevinta.spark.android-compose")
         create("com.adevinta.spark.SparkAndroidLintPlugin", id = "com.adevinta.spark.android-lint")
-        create("com.adevinta.spark.SparkAndroidPublishingPlugin", id = "com.adevinta.spark.android-publishing")
+        create("com.adevinta.spark.SparkPublishingPlugin", id = "com.adevinta.spark.publishing")
         create("com.adevinta.spark.SparkKotlinJvmPlugin", id = "com.adevinta.spark.kotlin-jvm")
         create("com.adevinta.spark.SparkKspPlugin", id = "com.adevinta.spark.ksp")
         create("com.adevinta.spark.SparkDokkaPlugin", id = "com.adevinta.spark.dokka")

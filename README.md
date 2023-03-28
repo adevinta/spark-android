@@ -39,7 +39,12 @@ Add the main Spark dependency: [![Maven Central](https://img.shields.io/maven-ce
 
 ```kotlin
 dependencies {
-    implementation("com.adevinta.spark:spark:<version>")
+    // Import the Spark BoM
+    implementation(platform("com.adevinta.spark:spark-bom:<version>"))
+
+    // Declare dependencies without versions
+    implementation("com.adevinta.spark:spark")
+    implementation("com.adevinta.spark:spark-icons")
 }
 ```
 
