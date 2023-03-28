@@ -4,6 +4,9 @@ android-gradlePlugin = "8.1.0-alpha10"
 androidx-appCompat = "1.6.1"
 androidx-compose-bom = "2023.01.00"
 androidx-compose-compiler = "1.4.3"
+androidx-lifecycle = "2.6.1"
+androidx-savedstate = "1.2.1"
+androidx-core = "1.9.0"
 coil = "2.2.2"
 compileSdk = "33"
 dependencyGuard = "0.4.3"
@@ -49,6 +52,9 @@ androidx-compose-ui-testManifest = { module = "androidx.compose.ui:ui-test-manif
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-compose-ui-util = { module = "androidx.compose.ui:ui-util" }
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
+androidx-savedstate = { module = "androidx.savedstate:savedstate-ktx", version.ref = "androidx-savedstate" }
 
 # https://coil-kt.github.io/coil/
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
