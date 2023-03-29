@@ -4,12 +4,12 @@
 
 ## [Unreleased]
 
-## [0.0.0]
+## [0.0.1]
 
-_2023-00-00_
+_2023-03-29_
 
-- 
+- Pre-release
 
 <!-- Links -->
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.0.0...HEAD
-[0.0.0]: https://github.com/adevinta/spark-android/releases/tag/0.0.0
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.0.1...HEAD
+[0.0.1]: https://github.com/adevinta/spark-android/releases/tag/0.0.1
