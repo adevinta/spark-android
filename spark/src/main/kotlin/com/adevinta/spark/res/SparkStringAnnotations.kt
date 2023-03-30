@@ -68,18 +68,18 @@ public object SparkStringAnnotations {
      * Given a string representing annotation value of a spark typography, returns the corresponding [SpanStyle] with the typography token.
      */
     private fun String.toTypographySpanStyle(token: SparkTypography): SpanStyle? = when (this) {
-        "title1" -> token.title1
-        "title2" -> token.title2
-        "title3" -> token.title3
-        "large" -> token.large
-        "largeImportant" -> token.largeImportant
-        "bodyImportant" -> token.bodyImportant
-        "body" -> token.body
-        "smallImportant" -> token.smallImportant
+        "display1" -> token.display1
+        "display2" -> token.display2
+        "display3" -> token.display3
+        "headline1" -> token.headline1
+        "headline2" -> token.headline2
+        "subhead" -> token.subhead
+        "large" -> token.body1
+        "body1" -> token.body1
+        "body2" -> token.body2
+        "caption" -> token.caption
         "small" -> token.small
-        "extraSmallImportant" -> token.extraSmallImportant
-        "extraSmall" -> token.extraSmall
-        "button" -> token.button
+        "callout" -> token.callout
         else -> null.also { _ ->
             Log.d("StringResources", "Spark typography annotation : $this is not supported")
         }

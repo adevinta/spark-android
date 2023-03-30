@@ -112,7 +112,7 @@ internal fun SparkDecorationBox(
     }
 
     val typography = SparkTheme.typography
-    val bodyLarge = typography.large
+    val bodyLarge = typography.body1
     val bodySmall = typography.small
     val shouldOverrideTextStyleColor =
         (bodyLarge.color == Color.Unspecified && bodySmall.color != Color.Unspecified) ||
@@ -123,7 +123,7 @@ internal fun SparkDecorationBox(
         focusedTextStyleColor = with(SparkTheme.typography.small.color) {
             if (shouldOverrideTextStyleColor) this.takeOrElse { labelColor(inputState) } else this
         },
-        unfocusedTextStyleColor = with(SparkTheme.typography.large.color) {
+        unfocusedTextStyleColor = with(SparkTheme.typography.body1.color) {
             if (shouldOverrideTextStyleColor) this.takeOrElse { labelColor(inputState) } else this
         },
         contentColor = labelColor,
@@ -133,7 +133,7 @@ internal fun SparkDecorationBox(
         val decoratedLabel: @Composable (() -> Unit)? = label?.let {
             @Composable {
                 val labelTextStyle = lerp(
-                    SparkTheme.typography.large,
+                    SparkTheme.typography.body1,
                     SparkTheme.typography.small,
                     labelProgress,
                 ).let {
@@ -149,7 +149,7 @@ internal fun SparkDecorationBox(
                     Box(modifier.alpha(placeholderAlphaProgress)) {
                         Decoration(
                             contentColor = colors.placeholderColor(enabled).value,
-                            typography = SparkTheme.typography.large,
+                            typography = SparkTheme.typography.body1,
                             content = placeholder,
                         )
                     }
