@@ -111,11 +111,11 @@ internal val smallType = TextStyle(
 internal val calloutType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 14.sp,
-    fontWeight = FontWeight.SemiBold,
+    fontWeight = FontWeight.Bold,
 )
 
 public fun sparkTypography(
-    fontFamily: FontFamily = FontFamily.Default,
+    fontFamily: FontFamily = FontFamily.SansSerif,
     display1: TextStyle = display1Type.copy(fontFamily = fontFamily),
     display2: TextStyle = display2Type.copy(fontFamily = fontFamily),
     display3: TextStyle = display3Type.copy(fontFamily = fontFamily),
@@ -307,15 +307,15 @@ public fun SparkTypography.asMaterial3Typography(): Typography = Typography(
     displayMedium = display2,
     displaySmall = display3,
     headlineLarge = headline1,
-    headlineMedium = headline2,
-    headlineSmall = subhead,
-    titleLarge = display1,
+    headlineMedium = display2,
+    headlineSmall = display3,
+    titleLarge = headline1,
     titleMedium = display2,
     titleSmall = display3,
     bodyLarge = body1,
     bodyMedium = body2,
     bodySmall = caption,
-    labelLarge = body2,
+    labelLarge = body2.copy(fontWeight = FontWeight.Bold),
     labelMedium = caption,
     labelSmall = small,
 )
