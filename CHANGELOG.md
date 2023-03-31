@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+* Modify the `Image` fallback states backgroudn and icon colors #306
+
 ## [0.0.2]
 
 _2023-03-30_
