@@ -110,6 +110,12 @@ internal class SparkPublishingPlugin : Plugin<Project> {
         scm {
             url.set("https://github.com/adevinta/spark-android")
         }
+        developers {
+            developer {
+                name.set("Adevinta Engineers")
+                email.set("engineers@adevinta.com")
+            }
+        }
     }
 
     private fun Project.configureSigning() = configure<SigningExtension> signing@{
