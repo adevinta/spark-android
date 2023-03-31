@@ -307,7 +307,7 @@ public fun SparkTypography.asMaterial3Typography(): Typography = Typography(
     displayMedium = display2,
     displaySmall = display3,
     headlineLarge = headline1,
-    headlineMedium = display2,
+    headlineMedium = display2.copy(fontWeight = FontWeight.Normal),
     headlineSmall = display3,
     titleLarge = headline1,
     titleMedium = display2,
