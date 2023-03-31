@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-* Modify the `Image` fallback states backgroudn and icon colors #306
+* Modify the `Image` fallback states background and icon colors #306
 
 ## [0.0.2]
 
