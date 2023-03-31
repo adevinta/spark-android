@@ -26,8 +26,6 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,6 +54,8 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.rememberSparkIconPainter
 import com.adevinta.spark.components.placeholder.illustrationPlaceholder
+import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -176,7 +176,7 @@ public fun Image(
 @Composable
 private fun ImageIconState(sparkIcon: SparkIcon) {
     Surface(
-        color = SparkTheme.colors.neutral,
+        color = SparkTheme.colors.neutralContainer,
     ) {
         Icon(
             sparkIcon = sparkIcon,
