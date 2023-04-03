@@ -89,14 +89,14 @@ internal fun SparkRatingSmall(
         Text(
             text = format(locale, format, value),
             textAlign = TextAlign.Center,
-            style = SparkTheme.typography.small,
+            style = SparkTheme.typography.caption,
         )
         if (commentCount != null) {
             EmphasizeMedium {
                 Text(
                     text = format(locale, "(%d)", commentCount),
                     textAlign = TextAlign.Center,
-                    style = SparkTheme.typography.small,
+                    style = SparkTheme.typography.caption,
                 )
             }
         }

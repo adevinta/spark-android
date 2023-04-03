@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -68,7 +69,7 @@ internal fun SparkNavigationRailItem(
         modifier = modifier,
         enabled = enabled,
         label = label?.let {
-            { Text(text = it, style = SparkTheme.typography.smallImportant) }
+            { Text(text = it, style = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold)) }
         },
         alwaysShowLabel = alwaysShowLabel,
         colors = colors,
