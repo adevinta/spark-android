@@ -113,7 +113,7 @@ public fun SparkTheme(
             CompositionLocalProvider(
                 LocalContentColor provides SparkTheme.colors.onSurface,
             ) {
-                ProvideTextStyle(value = SparkTheme.typography.body) {
+                ProvideTextStyle(value = SparkTheme.typography.body2) {
                     content()
                 }
             }

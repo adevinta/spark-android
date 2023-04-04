@@ -188,7 +188,7 @@ private fun ShapeItem(
         Box(contentAlignment = Alignment.Center) {
             Text(
                 text = text,
-                style = SparkTheme.typography.small,
+                style = SparkTheme.typography.caption,
             )
         }
     }

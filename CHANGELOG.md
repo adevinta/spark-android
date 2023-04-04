@@ -5,6 +5,7 @@
 ## [Unreleased]
 
 * Modify the `Image` fallback states background and icon colors #306
+* Integrate the new typography tokens #298
 
 ## [0.0.2]
 
