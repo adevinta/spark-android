@@ -238,7 +238,7 @@ internal val LocalHighlightToken = staticCompositionLocalOf { false }
 internal val LocalHighlightComponents = staticCompositionLocalOf { false }
 
 /**
- * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the Adevinta Platform teams.
+ * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the Adevinta Platform teams
  * to migrate their screens to spark.
  */
 internal val LocalLegacyStyle = staticCompositionLocalOf { false }
