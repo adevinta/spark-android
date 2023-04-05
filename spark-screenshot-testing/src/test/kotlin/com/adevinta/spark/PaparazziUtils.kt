@@ -40,7 +40,7 @@ internal fun Paparazzi.sparkSnapshot(
 ): Unit = snapshot(name) {
     // Behave like in Android Studio Preview renderer
     CompositionLocalProvider(LocalInspectionMode provides true) {
-        SparkTheme {
+        SparkTheme(useLegacyStyle = false) {
             // The first box acts as a shield from ComposeView which forces the first layout node
             // to match it's size. This allows the content below to wrap as needed.
             Box {
