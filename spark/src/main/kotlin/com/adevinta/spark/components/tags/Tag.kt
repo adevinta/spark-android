@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
@@ -71,7 +72,7 @@ internal fun BaseSparkTag(
         border = border,
     ) {
         ProvideTextStyle(
-            value = SparkTheme.typography.smallImportant,
+            value = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold),
         ) {
             Row(
                 Modifier

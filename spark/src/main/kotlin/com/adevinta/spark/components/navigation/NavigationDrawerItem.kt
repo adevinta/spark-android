@@ -71,7 +71,7 @@ internal fun SparkNavigationDrawerItem(
         label = {
             Text(
                 text = label,
-                style = SparkTheme.typography.extraSmall,
+                style = SparkTheme.typography.small,
             )
         },
         selected = selected,

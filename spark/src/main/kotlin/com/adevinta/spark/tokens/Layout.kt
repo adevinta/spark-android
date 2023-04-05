@@ -177,7 +177,7 @@ private fun Item() {
         ) {
             Text(
                 text = "",
-                style = SparkTheme.typography.body,
+                style = SparkTheme.typography.body2,
                 textAlign = TextAlign.Center,
             )
         }

@@ -112,18 +112,18 @@ internal fun SparkDecorationBox(
     }
 
     val typography = SparkTheme.typography
-    val bodyLarge = typography.large
-    val bodySmall = typography.small
+    val bodyLarge = typography.body1
+    val bodySmall = typography.caption
     val shouldOverrideTextStyleColor =
         (bodyLarge.color == Color.Unspecified && bodySmall.color != Color.Unspecified) ||
                 (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
 
     TextFieldTransitionScope.Transition(
         inputState = inputState,
-        focusedTextStyleColor = with(SparkTheme.typography.small.color) {
+        focusedTextStyleColor = with(SparkTheme.typography.caption.color) {
             if (shouldOverrideTextStyleColor) this.takeOrElse { labelColor(inputState) } else this
         },
-        unfocusedTextStyleColor = with(SparkTheme.typography.large.color) {
+        unfocusedTextStyleColor = with(SparkTheme.typography.body1.color) {
             if (shouldOverrideTextStyleColor) this.takeOrElse { labelColor(inputState) } else this
         },
         contentColor = labelColor,
@@ -133,8 +133,8 @@ internal fun SparkDecorationBox(
         val decoratedLabel: @Composable (() -> Unit)? = label?.let {
             @Composable {
                 val labelTextStyle = lerp(
-                    SparkTheme.typography.large,
-                    SparkTheme.typography.small,
+                    SparkTheme.typography.body1,
+                    SparkTheme.typography.caption,
                     labelProgress,
                 ).let {
                     if (shouldOverrideTextStyleColor) it.copy(color = labelTextStyleColor) else it
@@ -149,7 +149,7 @@ internal fun SparkDecorationBox(
                     Box(modifier.alpha(placeholderAlphaProgress)) {
                         Decoration(
                             contentColor = colors.placeholderColor(enabled).value,
-                            typography = SparkTheme.typography.large,
+                            typography = SparkTheme.typography.body1,
                             content = placeholder,
                         )
                     }
@@ -166,7 +166,7 @@ internal fun SparkDecorationBox(
                             isError = isError,
                             interactionSource = interactionSource,
                         ).value,
-                        typography = SparkTheme.typography.small,
+                        typography = SparkTheme.typography.caption,
                         content = counter,
                     )
                 }
