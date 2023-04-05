@@ -180,7 +180,7 @@ internal fun TagOutlinedPreview(
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
         TagIntent.values().forEach {
-            TagOutlined("Tag information", intent = it)
+            TagOutlined("Tag ${it.name}", intent = it)
         }
     }
 }
