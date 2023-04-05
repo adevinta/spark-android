@@ -69,6 +69,7 @@ public fun SparkTheme(
     typography: SparkTypography = SparkTheme.typography,
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
+    useLegacyStyle: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val internalColors = if (useSparkTokensHighlighter) debugColors() else colors
@@ -104,6 +105,7 @@ public fun SparkTheme(
         LocalSparkShapes provides internalShapes,
         LocalHighlightToken provides useSparkTokensHighlighter,
         LocalHighlightComponents provides useSparkComponentsHighlighter,
+        LocalLegacyStyle provides useLegacyStyle,
     ) {
         MaterialTheme(
             colorScheme = rememberedColors.asMaterial3Colors(),
@@ -172,6 +174,7 @@ internal fun SparkTenantTheme(
     useDarkColors: Boolean = isSystemInDarkTheme(),
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
+    useLegacyStyle: Boolean = false,
     isPro: Boolean = false,
     content: @Composable () -> Unit,
 ) {
@@ -186,6 +189,7 @@ internal fun SparkTenantTheme(
         typography = sparkTypography(),
         useSparkTokensHighlighter = useSparkTokensHighlighter,
         useSparkComponentsHighlighter = useSparkComponentsHighlighter,
+        useLegacyStyle = useLegacyStyle,
         content = content,
     )
 }
@@ -232,3 +236,9 @@ internal val LocalHighlightToken = staticCompositionLocalOf { false }
  * Setting it to true show an overlay on spark components.
  */
 internal val LocalHighlightComponents = staticCompositionLocalOf { false }
+
+/**
+ * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the Adevinta Platform teams
+ * to migrate their screens to spark.
+ */
+internal val LocalLegacyStyle = staticCompositionLocalOf { false }
