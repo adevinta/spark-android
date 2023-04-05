@@ -30,7 +30,7 @@ import com.adevinta.spark.SparkTheme
  */
 public enum class TagIntent {
     /**
-     * Main tags are used for the most important information.
+     * Primary tags are used for the most important information.
      */
     Primary {
         @Composable
