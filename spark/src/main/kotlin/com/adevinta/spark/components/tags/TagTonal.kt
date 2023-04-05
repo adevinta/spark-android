@@ -158,7 +158,7 @@ internal fun TagTonalPreview(
     PreviewTheme(theme, userType) {
         TagIntent.values().forEach { intent ->
             TagTinted(
-                text = "Tag information",
+                text = "Tag ${intent.name}",
                 intent = intent,
             )
         }
