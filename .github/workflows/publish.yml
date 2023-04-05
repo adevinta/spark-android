@@ -7,6 +7,7 @@ on:
 
 jobs:
   publish:
+    if: github.repository == 'adevinta/spark-android'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
