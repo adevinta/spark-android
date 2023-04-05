@@ -24,7 +24,7 @@ _2023-03-29_
 
 [Unreleased]: https://github.com/adevinta/spark-android/compare/0.0.3...HEAD
 
-[0.0.2]: https://github.com/adevinta/spark-android/releases/tag/0.0.3
+[0.0.3]: https://github.com/adevinta/spark-android/releases/tag/0.0.3
 
 [0.0.2]: https://github.com/adevinta/spark-android/releases/tag/0.0.2
 
