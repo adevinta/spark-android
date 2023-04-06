@@ -152,7 +152,7 @@ public fun ButtonContrast(
 
 @Preview(
     group = "Buttons",
-    name = "TextContrast",
+    name = "Button Contrast",
 )
 @Composable
 internal fun ButtonContrastPreview(
@@ -193,7 +193,7 @@ internal fun ButtonContrastPreview(
 
 @Preview(
     group = "Buttons",
-    name = "ButtonContrastIntents",
+    name = "Button Contrast Intents",
 )
 @Composable
 internal fun ButtonContrastIntentPreview(

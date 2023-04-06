@@ -216,7 +216,7 @@ public fun PrimaryButton(
 
 @Preview(
     group = "Buttons",
-    name = "PrimaryButton",
+    name = "Button Filled",
 )
 @Composable
 internal fun PrimaryButtonPreview(
@@ -254,7 +254,7 @@ internal fun PrimaryButtonPreview(
 
 @Preview(
     group = "Buttons",
-    name = "ButtonFilledIntents",
+    name = "Button Filled Intents",
 )
 @Composable
 internal fun ButtonFilledIntentPreview(
@@ -279,7 +279,7 @@ internal fun ButtonFilledIntentPreview(
 
 @Preview(
     group = "Buttons",
-    name = "ButtonSizes",
+    name = "Button Sizes",
 )
 @Composable
 internal fun ButtonSizePreview(

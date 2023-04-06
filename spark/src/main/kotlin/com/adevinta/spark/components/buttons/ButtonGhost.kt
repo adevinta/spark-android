@@ -222,10 +222,10 @@ public fun TextButton(
 
 @Preview(
     group = "Buttons",
-    name = "TextButton",
+    name = "Button Ghost",
 )
 @Composable
-internal fun TextPreview(
+internal fun ButtonGhostPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
@@ -260,7 +260,7 @@ internal fun TextPreview(
 
 @Preview(
     group = "Buttons",
-    name = "ButtonGhostIntents",
+    name = "Button Ghost Intents",
 )
 @Composable
 internal fun ButtonGhostIntentPreview(

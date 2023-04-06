@@ -173,10 +173,10 @@ public fun SecondaryButton(
 
 @Preview(
     group = "Buttons",
-    name = "SecondaryButton",
+    name = "Button Outlined",
 )
 @Composable
-internal fun SecondaryButtonPreview(
+internal fun ButtonOutlinedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
@@ -203,7 +203,7 @@ internal fun SecondaryButtonPreview(
 
 @Preview(
     group = "Buttons",
-    name = "ButtonOutlinedIntents",
+    name = "Button Outlined Intents",
 )
 @Composable
 internal fun ButtonOutlinedIntentPreview(

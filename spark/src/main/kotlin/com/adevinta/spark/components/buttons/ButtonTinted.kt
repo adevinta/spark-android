@@ -152,7 +152,7 @@ public fun ButtonTinted(
 
 @Preview(
     group = "Buttons",
-    name = "ButtonTinted",
+    name = "Button Tinted",
 )
 @Composable
 internal fun ButtonTintedPreview(
@@ -190,7 +190,7 @@ internal fun ButtonTintedPreview(
 
 @Preview(
     group = "Buttons",
-    name = "ButtonTintedIntents",
+    name = "Button Tinted Intents",
 )
 @Composable
 internal fun ButtonTintedIntentPreview(
