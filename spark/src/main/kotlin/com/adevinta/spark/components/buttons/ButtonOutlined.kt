@@ -25,10 +25,10 @@ package com.adevinta.spark.components.buttons
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
@@ -36,6 +36,70 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+
+@Composable
+public fun ButtonOutlined(
+    onClick: () -> Unit,
+    text: String,
+    modifier: Modifier = Modifier,
+    intent: ButtonIntent = ButtonIntent.Secondary,
+    enabled: Boolean = true,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+) {
+    val contentColor by animateColorAsState(
+        targetValue = intent.colors().color,
+        label = "content color",
+    )
+    val colors = ButtonDefaults.outlinedButtonColors(
+        contentColor = contentColor,
+    )
+    SparkButton(
+        onClick = onClick,
+        text = text,
+        modifier = modifier,
+        enabled = enabled,
+        elevation = null,
+        border = SparkButtonDefaults.outlinedBorder(contentColor),
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+    )
+}
+
+@Composable
+public fun ButtonOutlined(
+    onClick: () -> Unit,
+    text: AnnotatedString,
+    modifier: Modifier = Modifier,
+    intent: ButtonIntent = ButtonIntent.Secondary,
+    enabled: Boolean = true,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+) {
+    val contentColor by animateColorAsState(
+        targetValue = intent.colors().onColor,
+        label = "content color",
+    )
+    val colors = ButtonDefaults.outlinedButtonColors(
+        contentColor = contentColor,
+    )
+    SparkButton(
+        onClick = onClick,
+        text = text,
+        modifier = modifier,
+        enabled = enabled,
+        elevation = null,
+        border = SparkButtonDefaults.outlinedBorder(contentColor),
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+    )
+}
 
 /**
  * The secondary button is the standard button for most use cases. The outlined styling
@@ -56,6 +120,13 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param isDanger The danger button should only be used once per view(screen) (not including a modal dialog),
  * these buttons have the most emphasis.
  */
+@Deprecated(
+    "Use ButtonOutlined instead with secondary intent",
+    ReplaceWith(
+        "ButtonOutlined(onClick, text, modifier, ButtonIntent.Secondary, enabled, icon, iconSide, isLoading)",
+        "com.adevinta.spark.components.buttons.ButtonIntent",
+    ),
+)
 @Composable
 public fun SecondaryButton(
     onClick: () -> Unit,
@@ -76,13 +147,12 @@ public fun SecondaryButton(
         label = "button color",
     )
 
-    SparkButton(
+    BaseSparkButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
         elevation = null,
-        border = SparkButtonDefaults.outlinedBorder(isDanger),
-        contentPadding = SparkButtonDefaults.ButtonContentPadding,
+        border = SparkButtonDefaults.outlinedBorder(color),
         colors = ButtonDefaults.outlinedButtonColors(contentColor = color),
         icon = icon,
         iconSide = iconSide,
@@ -102,37 +172,46 @@ internal fun SecondaryButtonPreview(
     PreviewTheme(theme) {
         val icon = SparkIcon.Infos.Camera
         val buttonText = "Secondary Button"
-        SecondaryButton({}) {
-            Text(buttonText)
-        }
-        SecondaryButton({}, icon = icon) {
-            Text(buttonText)
-        }
-        SecondaryButton(
+        ButtonOutlined(
             onClick = {},
+            text = buttonText,
+        )
+        ButtonOutlined(
+            icon = icon,
+            onClick = {},
+            text = buttonText,
+        )
+        ButtonOutlined(
             icon = icon,
             iconSide = IconSide.END,
             enabled = false,
-        ) {
-            Text(buttonText)
-        }
-        SecondaryButton(
             onClick = {},
-            icon = icon,
-            iconSide = IconSide.END,
-            enabled = true,
-            isDanger = true,
-        ) {
-            Text("Danger Button")
-        }
-        SecondaryButton(
-            onClick = {},
-            icon = icon,
-            iconSide = IconSide.END,
-            enabled = false,
-            isDanger = true,
-        ) {
-            Text("Danger Button")
+            text = buttonText,
+        )
+    }
+}
+
+@Preview(
+    group = "Buttons",
+    name = "ButtonOutlinedIntents",
+)
+@Composable
+internal fun ButtonOutlinedIntentPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(
+        themeVariant = theme,
+        color = { SparkTheme.colors.backgroundVariant },
+    ) {
+        val icon = SparkIcon.Account.Identity
+        ButtonIntent.values().forEach { intent ->
+            ButtonOutlined(
+                text = intent.name,
+                onClick = { },
+                intent = intent,
+                icon = icon,
+                iconSide = IconSide.END,
+            )
         }
     }
 }

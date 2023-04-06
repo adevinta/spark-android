@@ -22,25 +22,25 @@
 
 package com.adevinta.spark.components.buttons
 
-import androidx.compose.foundation.layout.RowScope
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.tools.preview.SparkPreviewParam
-import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
+import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- * The primary button should only be used once per view (not including a modal dialog),
+ * The filled button should only be used once per view (not including a modal dialog),
  * these buttons have the most emphasis.
  *
  * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
@@ -59,95 +59,147 @@ import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
  * these buttons have the most emphasis.
  */
 @Composable
-public fun PrimaryButton(
+public fun ButtonTinted(
     onClick: () -> Unit,
+    text: String,
     modifier: Modifier = Modifier,
+    intent: ButtonIntent = ButtonIntent.Primary,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
-    isDanger: Boolean = false,
-    content: @Composable RowScope.() -> Unit,
 ) {
-    val colors = if (isDanger) {
-        ButtonDefaults.buttonColors(
-            containerColor = SparkTheme.colors.error,
-            contentColor = SparkTheme.colors.onError,
-        )
-    } else {
-        ButtonDefaults.buttonColors()
-    }
+    val backgroundColor by animateColorAsState(
+        targetValue = intent.colors().containerColor,
+        label = "background color",
+    )
+    val contentColor by animateColorAsState(
+        targetValue = intent.colors().onContainerColor,
+        label = "content color",
+    )
+    val colors = ButtonDefaults.buttonColors(
+        containerColor = backgroundColor,
+        contentColor = contentColor,
+    )
     SparkButton(
         onClick = onClick,
+        text = text,
         modifier = modifier,
         enabled = enabled,
         elevation = ButtonDefaults.buttonElevation(),
         colors = colors,
-        contentPadding = SparkButtonDefaults.ButtonContentPadding,
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
-        content = content,
+    )
+}
+
+/**
+ * The filled button should only be used once per view (not including a modal dialog),
+ * these buttons have the most emphasis.
+ *
+ * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
+ * after a click action for example.
+ *
+ * @param onClick Will be called when the user clicks the button
+ * @param modifier Modifier to be applied to the button
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not
+ * be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container, you can
+ * use [SparkButtonDefaults.IconSize] as a good default icon size.
+ * @param iconSide If an icon is added, you can configure the side at the start or end of the button
+ * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
+ * loading state
+ * @param isDanger The danger button should only be used once per view(screen) (not including a modal dialog),
+ * these buttons have the most emphasis.
+ */
+@Composable
+public fun ButtonTinted(
+    onClick: () -> Unit,
+    text: AnnotatedString,
+    modifier: Modifier = Modifier,
+    intent: ButtonIntent = ButtonIntent.Primary,
+    enabled: Boolean = true,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+) {
+    val colors = ButtonDefaults.buttonColors(
+        containerColor = intent.colors().color,
+        contentColor = intent.colors().onColor,
+    )
+    SparkButton(
+        onClick = onClick,
+        text = text,
+        modifier = modifier,
+        enabled = enabled,
+        elevation = ButtonDefaults.buttonElevation(),
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
     )
 }
 
 @Preview(
     group = "Buttons",
-    name = "PrimaryButton",
+    name = "ButtonTinted",
 )
 @Composable
-internal fun PrimaryButtonPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+internal fun ButtonTintedPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         val icon = SparkIcon.Account.Identity
         var isLoading by remember { mutableStateOf(false) }
         val buttonText = "Primary Button"
-        PrimaryButton(
+        ButtonTinted(
             onClick = {
                 isLoading = !isLoading
             },
+            text = buttonText,
             isLoading = isLoading,
-        ) {
-            Text(buttonText)
-        }
-        PrimaryButton(
+        )
+        ButtonTinted(
             onClick = {
                 isLoading = !isLoading
             },
             icon = icon,
+            text = buttonText,
             isLoading = isLoading,
-        ) {
-            Text(buttonText)
-        }
-        PrimaryButton(
+        )
+        ButtonTinted(
             onClick = { isLoading = !isLoading },
             icon = icon,
             iconSide = IconSide.END,
             isLoading = isLoading,
             enabled = false,
-        ) {
-            Text(buttonText)
-        }
-        PrimaryButton(
-            onClick = { isLoading = !isLoading },
-            icon = icon,
-            iconSide = IconSide.END,
-            isLoading = isLoading,
-            isDanger = true,
-        ) {
-            Text("Danger Button")
-        }
-        PrimaryButton(
-            onClick = { isLoading = !isLoading },
-            icon = icon,
-            iconSide = IconSide.END,
-            isLoading = isLoading,
-            enabled = false,
-            isDanger = true,
-        ) {
-            Text("Danger Button")
+            text = buttonText,
+        )
+    }
+}
+
+@Preview(
+    group = "Buttons",
+    name = "ButtonTintedIntents",
+)
+@Composable
+internal fun ButtonTintedIntentPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(
+        themeVariant = theme,
+        color = { SparkTheme.colors.backgroundVariant },
+    ) {
+        val icon = SparkIcon.Account.Identity
+        ButtonIntent.values().forEach { intent ->
+            ButtonTinted(
+                text = intent.name,
+                onClick = { },
+                intent = intent,
+                icon = icon,
+                iconSide = IconSide.END,
+            )
         }
     }
 }
