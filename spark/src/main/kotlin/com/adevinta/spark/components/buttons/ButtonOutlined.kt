@@ -23,10 +23,12 @@
 package com.adevinta.spark.components.buttons
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,6 +50,7 @@ public fun ButtonOutlined(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val contentColor by animateColorAsState(
         targetValue = intent.colors().color,
@@ -68,6 +71,7 @@ public fun ButtonOutlined(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     )
 }
 
@@ -82,6 +86,7 @@ public fun ButtonOutlined(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val contentColor by animateColorAsState(
         targetValue = intent.colors().onColor,
@@ -102,6 +107,7 @@ public fun ButtonOutlined(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     )
 }
 

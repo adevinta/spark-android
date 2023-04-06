@@ -23,6 +23,7 @@
 package com.adevinta.spark.components.buttons
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ProvideTextStyle
@@ -74,6 +75,7 @@ public fun ButtonGhost(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val contentColor by animateColorAsState(
         targetValue = intent.colors().color,
@@ -98,6 +100,7 @@ public fun ButtonGhost(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     )
 }
 
@@ -131,6 +134,7 @@ public fun ButtonGhost(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val contentColor by animateColorAsState(
         targetValue = intent.colors().onColor,
@@ -156,6 +160,7 @@ public fun ButtonGhost(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     )
 }
 

@@ -141,6 +141,7 @@ internal fun SparkButton(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BaseSparkButton(
         onClick = onClick,
@@ -153,6 +154,7 @@ internal fun SparkButton(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     ) {
         Text(
             text = text,
@@ -175,6 +177,7 @@ internal fun SparkButton(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     BaseSparkButton(
         onClick = onClick,
@@ -187,6 +190,7 @@ internal fun SparkButton(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     ) {
         Text(
             text = text,

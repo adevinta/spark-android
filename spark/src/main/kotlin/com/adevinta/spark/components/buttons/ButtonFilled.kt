@@ -23,6 +23,7 @@
 package com.adevinta.spark.components.buttons
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
@@ -70,6 +71,7 @@ public fun ButtonFilled(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val backgroundColor by animateColorAsState(
         targetValue = intent.colors().color,
@@ -94,6 +96,7 @@ public fun ButtonFilled(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     )
 }
 
@@ -127,6 +130,7 @@ public fun ButtonFilled(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val backgroundColor by animateColorAsState(
         targetValue = intent.colors().color,
@@ -151,6 +155,7 @@ public fun ButtonFilled(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     )
 }
 

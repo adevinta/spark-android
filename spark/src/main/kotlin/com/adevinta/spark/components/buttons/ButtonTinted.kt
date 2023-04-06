@@ -23,6 +23,7 @@
 package com.adevinta.spark.components.buttons
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -69,6 +70,7 @@ public fun ButtonTinted(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val backgroundColor by animateColorAsState(
         targetValue = intent.colors().containerColor,
@@ -93,6 +95,7 @@ public fun ButtonTinted(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     )
 }
 
@@ -126,6 +129,7 @@ public fun ButtonTinted(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val colors = ButtonDefaults.buttonColors(
         containerColor = intent.colors().color,
@@ -142,6 +146,7 @@ public fun ButtonTinted(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        interactionSource = interactionSource,
     )
 }
 
