@@ -86,10 +86,7 @@ internal fun BaseSparkButton(
         border = border,
         colors = colors,
         interactionSource = interactionSource,
-        contentPadding = PaddingValues(
-            horizontal = 16.dp,
-            vertical = size.contentVerticalPadding,
-        ),
+        contentPadding = SparkButtonDefaults.buttonContentPadding(size),
     ) {
         AnimatedVisibility(visible = isLoading) {
             Row {
@@ -222,18 +219,13 @@ public object SparkButtonDefaults {
     /**
      * The default content padding used by [TextButton]
      */
-    internal val ButtonContentPadding = PaddingValues(
+    internal fun buttonContentPadding(size: ButtonSize) = PaddingValues(
         horizontal = 16.dp,
-        vertical = 10.dp,
+        vertical = size.contentVerticalPadding,
     )
 
     /**
-     * The default content padding used by [TextButton]
-     */
-    internal val TextButtonContentPadding = ButtonDefaults.TextButtonContentPadding
-
-    /**
-     * The default border of [SecondaryButton]s
+     * The default border of [ButtonOutlined]
      */
     @Composable
     internal fun outlinedBorder(color: Color): BorderStroke = BorderStroke(
