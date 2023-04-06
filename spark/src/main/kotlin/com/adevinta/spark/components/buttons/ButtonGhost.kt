@@ -183,6 +183,12 @@ public fun ButtonGhost(
  * @param isDanger The danger button should only be used once per view(screen) (not including a modal dialog),
  * these buttons have the most emphasis.
  */
+@Deprecated(
+    "Use ButtonGhost instead",
+    ReplaceWith(
+        "ButtonGhost(onClick, text, modifier, size, intent, enabled, icon, iconSide, isLoading, interactionSource)",
+    ),
+)
 @Composable
 public fun TextButton(
     onClick: () -> Unit,
