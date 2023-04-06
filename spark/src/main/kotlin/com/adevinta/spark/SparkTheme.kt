@@ -39,6 +39,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
@@ -128,10 +129,11 @@ public fun SparkTheme(
 public fun PreviewWrapper(
     padding: PaddingValues = PaddingValues(16.dp),
     contentPadding: Dp = 16.dp,
+    color: @Composable () -> Color = { SparkTheme.colors.background },
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Surface(
-        color = SparkTheme.colors.surface,
+        color = color(),
     ) {
         Column(
             modifier = Modifier.padding(padding),
@@ -153,6 +155,7 @@ internal fun PreviewTheme(
     userType: UserType = UserType.Part,
     padding: PaddingValues = PaddingValues(16.dp),
     contentPadding: Dp = 16.dp,
+    color: @Composable () -> Color = { SparkTheme.colors.background },
     content: @Composable ColumnScope.() -> Unit,
 ) {
     SparkTenantTheme(
@@ -163,6 +166,7 @@ internal fun PreviewTheme(
         PreviewWrapper(
             padding = padding,
             contentPadding = contentPadding,
+            color = color,
             content = content,
         )
     }

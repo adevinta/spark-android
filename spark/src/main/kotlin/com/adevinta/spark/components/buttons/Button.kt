@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -41,11 +42,14 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
+import com.adevinta.spark.LocalLegacyStyle
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.SparkButtonTags.TAG_PROGRESS_INDICATOR
@@ -56,10 +60,9 @@ import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi
 @Composable
-internal fun SparkButton(
+internal fun BaseSparkButton(
     onClick: () -> Unit,
     colors: ButtonColors,
-    contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
@@ -71,13 +74,15 @@ internal fun SparkButton(
 ) {
     Button(
         onClick = onClick,
-        modifier = modifier.sparkUsageOverlay(),
+        modifier = modifier
+            .defaultMinSize(minHeight = 44.dp)
+            .sparkUsageOverlay(),
         enabled = enabled,
         elevation = elevation,
-        shape = SparkTheme.shapes.extraSmall,
+        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.large,
         border = border,
         colors = colors,
-        contentPadding = contentPadding,
+        contentPadding = ButtonDefaults.ContentPadding,
     ) {
         AnimatedVisibility(visible = isLoading) {
             Row {
@@ -115,6 +120,71 @@ internal fun SparkButton(
     }
 }
 
+@InternalSparkApi
+@Composable
+internal fun SparkButton(
+    text: String,
+    onClick: () -> Unit,
+    colors: ButtonColors,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
+    border: BorderStroke? = null,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+) {
+    BaseSparkButton(
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        elevation = elevation,
+        border = border,
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+    ) {
+        Text(
+            text = text,
+            style = SparkTheme.typography.callout,
+        )
+    }
+}
+
+@InternalSparkApi
+@Composable
+internal fun SparkButton(
+    text: AnnotatedString,
+    onClick: () -> Unit,
+    colors: ButtonColors,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
+    border: BorderStroke? = null,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+) {
+    BaseSparkButton(
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        elevation = elevation,
+        border = border,
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+    ) {
+        Text(
+            text = text,
+            style = SparkTheme.typography.callout,
+        )
+    }
+}
+
+
 @VisibleForTesting
 public object SparkButtonTags {
     public const val TAG_PROGRESS_INDICATOR: String = "progress_indicator"
@@ -127,7 +197,7 @@ public object SparkButtonDefaults {
     /**
      * The default size of the icon when used inside a [SparkButtonTags].
      */
-    public val IconSize: Dp = 14.dp
+    public val IconSize: Dp = 16.dp
 
     /**
      * The default size of the spacing between an icon and a text when they used inside a [SparkButtonTags].
@@ -151,12 +221,12 @@ public object SparkButtonDefaults {
      * The default border of [SecondaryButton]s
      */
     @Composable
-    internal fun outlinedBorder(isDanger: Boolean): BorderStroke = BorderStroke(
+    internal fun outlinedBorder(color: Color): BorderStroke = BorderStroke(
         width = OutlinedBorderSize,
-        color = if (isDanger) SparkTheme.colors.error else SparkTheme.colors.onSurface,
+        color = color,
     )
 
-    private val OutlinedBorderSize = 1.0.dp
+    private val OutlinedBorderSize = 2.0.dp
 }
 
 @Preview(
@@ -168,25 +238,28 @@ internal fun SparkButtonPreview() {
     PreviewTheme {
         val icon = SparkIcon.Account.Identity
         val buttonText = "Primary Button"
-        PrimaryButton(
+        BaseSparkButton(
             onClick = {},
+            colors = ButtonDefaults.buttonColors(),
         ) {
             SlotArea(color = LocalContentColor.current) {
                 Text(buttonText)
             }
         }
-        PrimaryButton(
+        BaseSparkButton(
             onClick = {},
             icon = icon,
+            colors = ButtonDefaults.buttonColors(),
         ) {
             SlotArea(color = LocalContentColor.current) {
                 Text(buttonText)
             }
         }
-        PrimaryButton(
+        BaseSparkButton(
             onClick = {},
             icon = icon,
             iconSide = IconSide.END,
+            colors = ButtonDefaults.buttonColors(),
         ) {
             SlotArea(color = LocalContentColor.current) {
                 Text(buttonText)
