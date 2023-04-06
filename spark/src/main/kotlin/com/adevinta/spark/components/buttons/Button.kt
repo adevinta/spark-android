@@ -45,17 +45,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.LocalLegacyStyle
-import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.SparkButtonTags.TAG_PROGRESS_INDICATOR
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.tools.modifiers.SlotArea
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi
@@ -227,43 +224,4 @@ public object SparkButtonDefaults {
     )
 
     private val OutlinedBorderSize = 2.0.dp
-}
-
-@Preview(
-    group = "Buttons",
-    name = "Button Slots",
-)
-@Composable
-internal fun SparkButtonPreview() {
-    PreviewTheme {
-        val icon = SparkIcon.Account.Identity
-        val buttonText = "Primary Button"
-        BaseSparkButton(
-            onClick = {},
-            colors = ButtonDefaults.buttonColors(),
-        ) {
-            SlotArea(color = LocalContentColor.current) {
-                Text(buttonText)
-            }
-        }
-        BaseSparkButton(
-            onClick = {},
-            icon = icon,
-            colors = ButtonDefaults.buttonColors(),
-        ) {
-            SlotArea(color = LocalContentColor.current) {
-                Text(buttonText)
-            }
-        }
-        BaseSparkButton(
-            onClick = {},
-            icon = icon,
-            iconSide = IconSide.END,
-            colors = ButtonDefaults.buttonColors(),
-        ) {
-            SlotArea(color = LocalContentColor.current) {
-                Text(buttonText)
-            }
-        }
-    }
 }
