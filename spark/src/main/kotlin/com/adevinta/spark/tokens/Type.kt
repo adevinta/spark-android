@@ -105,13 +105,14 @@ internal val smallType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 10.sp,
     fontWeight = FontWeight.Normal,
-    lineHeight = 10.sp,
+    lineHeight = 14.sp,
 )
 
 internal val calloutType = TextStyle(
     fontFamily = FontFamily.Default,
-    fontSize = 14.sp,
+    fontSize = 16.sp,
     fontWeight = FontWeight.Bold,
+    lineHeight = 24.sp,
 )
 
 public fun sparkTypography(

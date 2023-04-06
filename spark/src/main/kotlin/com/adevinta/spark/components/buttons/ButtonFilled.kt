@@ -64,6 +64,7 @@ public fun ButtonFilled(
     onClick: () -> Unit,
     text: String,
     modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
     intent: ButtonIntent = ButtonIntent.Primary,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
@@ -86,6 +87,7 @@ public fun ButtonFilled(
         onClick = onClick,
         text = text,
         modifier = modifier,
+        size = size,
         enabled = enabled,
         elevation = ButtonDefaults.buttonElevation(),
         colors = colors,
@@ -119,6 +121,7 @@ public fun ButtonFilled(
     onClick: () -> Unit,
     text: AnnotatedString,
     modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
     intent: ButtonIntent = ButtonIntent.Primary,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
@@ -141,6 +144,7 @@ public fun ButtonFilled(
         onClick = onClick,
         text = text,
         modifier = modifier,
+        size = size,
         enabled = enabled,
         elevation = ButtonDefaults.buttonElevation(),
         colors = colors,
@@ -261,6 +265,31 @@ internal fun ButtonFilledIntentPreview(
                 text = intent.name,
                 onClick = { },
                 intent = intent,
+                icon = icon,
+                iconSide = IconSide.END,
+            )
+        }
+    }
+}
+
+@Preview(
+    group = "Buttons",
+    name = "ButtonSizes",
+)
+@Composable
+internal fun ButtonSizePreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(
+        themeVariant = theme,
+        color = { SparkTheme.colors.backgroundVariant },
+    ) {
+        val icon = SparkIcon.Account.Identity
+        ButtonSize.values().forEach { size ->
+            ButtonFilled(
+                text = size.name,
+                onClick = { },
+                size = size,
                 icon = icon,
                 iconSide = IconSide.END,
             )

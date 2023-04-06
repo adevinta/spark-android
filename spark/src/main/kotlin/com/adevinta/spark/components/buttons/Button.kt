@@ -25,12 +25,13 @@ package com.adevinta.spark.components.buttons
 import androidx.annotation.VisibleForTesting
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -41,16 +42,17 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.LocalLegacyStyle
-import com.adevinta.spark.LocalLegacyStyle
+import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.SparkButtonTags.TAG_PROGRESS_INDICATOR
 import com.adevinta.spark.components.icons.Icon
@@ -63,25 +65,31 @@ internal fun BaseSparkButton(
     onClick: () -> Unit,
     colors: ButtonColors,
     modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     Button(
         onClick = onClick,
         modifier = modifier
-            .defaultMinSize(minHeight = 44.dp)
+            .height(height = size.height)
             .sparkUsageOverlay(),
         enabled = enabled,
         elevation = elevation,
         shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.large,
         border = border,
         colors = colors,
-        contentPadding = ButtonDefaults.ContentPadding,
+        interactionSource = interactionSource,
+        contentPadding = PaddingValues(
+            horizontal = 16.dp,
+            vertical = size.contentVerticalPadding,
+        ),
     ) {
         AnimatedVisibility(visible = isLoading) {
             Row {
@@ -126,6 +134,7 @@ internal fun SparkButton(
     onClick: () -> Unit,
     colors: ButtonColors,
     modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
@@ -136,6 +145,7 @@ internal fun SparkButton(
     BaseSparkButton(
         onClick = onClick,
         modifier = modifier,
+        size = size,
         enabled = enabled,
         elevation = elevation,
         border = border,
@@ -158,6 +168,7 @@ internal fun SparkButton(
     onClick: () -> Unit,
     colors: ButtonColors,
     modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
@@ -168,6 +179,7 @@ internal fun SparkButton(
     BaseSparkButton(
         onClick = onClick,
         modifier = modifier,
+        size = size,
         enabled = enabled,
         elevation = elevation,
         border = border,
@@ -226,4 +238,24 @@ public object SparkButtonDefaults {
     )
 
     private val OutlinedBorderSize = 2.0.dp
+}
+
+@Preview
+@Composable
+private fun SparkButtonPreview() {
+    PreviewTheme(
+        color = { SparkTheme.colors.backgroundVariant },
+    ) {
+        val icon = SparkIcon.Account.Identity
+        ButtonSize.values().forEach { size ->
+            SparkButton(
+                text = "Button",
+                onClick = { },
+                colors = ButtonDefaults.buttonColors(),
+                size = size,
+                icon = icon,
+                iconSide = IconSide.END,
+            )
+        }
+    }
 }
