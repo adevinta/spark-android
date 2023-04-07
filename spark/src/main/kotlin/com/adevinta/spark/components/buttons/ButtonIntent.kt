@@ -20,18 +20,18 @@
  * SOFTWARE.
  */
 
-package com.adevinta.spark.components.tags
+package com.adevinta.spark.components.buttons
 
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
 
 /**
- * TagIntent is used to define the intent of the tag.
+ * ButtonIntent is used to define the intent of the buttons.
  */
-public enum class TagIntent {
+public enum class ButtonIntent {
     /**
-     * Primary tags are used for the most important information.
+     * Primary buttons are used for the most important actions.
      */
     Primary {
         @Composable
@@ -44,7 +44,7 @@ public enum class TagIntent {
     },
 
     /**
-     * Secondary tags are used to highlight information.
+     * Secondary buttons are used to highlight/accentuate actions.
      */
     Secondary {
         @Composable
@@ -57,7 +57,20 @@ public enum class TagIntent {
     },
 
     /**
-     * Used for feedbacks that are positive.
+     * Actions on a color / image panel without on intent color.
+     */
+    Surface {
+        @Composable
+        override fun colors() = IntentColor(
+            color = SparkTheme.colors.surface,
+            onColor = SparkTheme.colors.onSurface,
+            containerColor = SparkTheme.colors.surface,
+            onContainerColor = SparkTheme.colors.onSurface,
+        )
+    },
+
+    /**
+     * Used for confirmation actions.
      */
     Success {
         @Composable
@@ -70,7 +83,7 @@ public enum class TagIntent {
     },
 
     /**
-     * Used for feedbacks that are negative.
+     * Used for warning actions.
      */
     Alert {
         @Composable
@@ -83,7 +96,7 @@ public enum class TagIntent {
     },
 
     /**
-     * Used for feedbacks that are negative and dangerous.
+     * Used for risky actions.
      */
     Danger {
         @Composable
@@ -96,20 +109,7 @@ public enum class TagIntent {
     },
 
     /**
-     * Used for feedbacks that are informative.
-     */
-    Info {
-        @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.info,
-            onColor = SparkTheme.colors.onInfo,
-            containerColor = SparkTheme.colors.infoContainer,
-            onContainerColor = SparkTheme.colors.onInfoContainer,
-        )
-    },
-
-    /**
-     * Used for feedbacks that are neutral.
+     * Used for low or irrelevant actions.
      */
     Neutral {
         @Composable
