@@ -23,6 +23,7 @@
 package com.adevinta.spark.components.buttons
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
@@ -39,6 +40,26 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
+/**
+ * Outlined buttons are used for secondary actions. The outlined styling places less emphasis on these actions that are important but not the primary ones.
+ * It is recommended to pair it with a button wit more emphasis like the filled button or the tinted button.
+ *
+ * Be aware that it's not advised to use it on top of images since it will be hard to see.
+ *
+ * @param onClick Will be called when the user clicks the button
+ * @param text The text to be displayed in the button
+ * @param modifier Modifier to be applied to the button
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
+ * loading state
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
+ */
 @Composable
 public fun ButtonOutlined(
     onClick: () -> Unit,
@@ -75,6 +96,27 @@ public fun ButtonOutlined(
     )
 }
 
+/**
+ *
+ * Outlined buttons are used for secondary actions. The outlined styling places less emphasis on these actions that are important but not the primary ones.
+ * It is recommended to pair it with a button wit more emphasis like the filled button or the tinted button.
+ *
+ * Be aware that it's not advised to use it on top of images since it will be hard to see.
+ *
+ * @param onClick Will be called when the user clicks the button
+ * @param text The text to be displayed in the button
+ * @param modifier Modifier to be applied to the button
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
+ * loading state
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
+ */
 @Composable
 public fun ButtonOutlined(
     onClick: () -> Unit,

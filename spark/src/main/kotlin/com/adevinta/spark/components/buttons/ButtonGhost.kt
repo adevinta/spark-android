@@ -23,6 +23,7 @@
 package com.adevinta.spark.components.buttons
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
@@ -53,16 +54,18 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * after a click action for example.
  *
  * @param onClick Will be called when the user clicks the button
+ * @param text The text to be displayed in the button
  * @param modifier Modifier to be applied to the button
- * @param enabled Controls the enabled state of the button. When `false`, this button will not
- * be clickable
- * @param icon The optional icon to be displayed at the start or the end of the button container, you can
- * use [SparkButtonDefaults.IconSize] as a good default icon size.
- * @param iconSide If an icon is added, you can configure the side at the start or end of the button
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
  * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
  * loading state
- * @param isDanger The danger button should only be used once per view(screen) (not including a modal dialog),
- * these buttons have the most emphasis.
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
  */
 @Composable
 public fun ButtonGhost(
@@ -112,16 +115,18 @@ public fun ButtonGhost(
  * after a click action for example.
  *
  * @param onClick Will be called when the user clicks the button
+ * @param text The text to be displayed in the button
  * @param modifier Modifier to be applied to the button
- * @param enabled Controls the enabled state of the button. When `false`, this button will not
- * be clickable
- * @param icon The optional icon to be displayed at the start or the end of the button container, you can
- * use [SparkButtonDefaults.IconSize] as a good default icon size.
- * @param iconSide If an icon is added, you can configure the side at the start or end of the button
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
  * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
  * loading state
- * @param isDanger The danger button should only be used once per view(screen) (not including a modal dialog),
- * these buttons have the most emphasis.
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
  */
 @Composable
 public fun ButtonGhost(
