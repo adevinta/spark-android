@@ -27,6 +27,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -61,6 +66,9 @@ import com.adevinta.spark.tokens.EmphasizeDim2
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+import kotlinx.coroutines.delay
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 
 @InternalSparkApi
 @Composable
@@ -93,31 +101,62 @@ internal fun SparkImage(
         filterQuality = filterQuality,
     ) {
 
-        when (painter.state) {
-            AsyncImagePainter.State.Empty -> emptyIcon()
-            is AsyncImagePainter.State.Loading -> Spacer(
+        val minDelayDuration: Duration = 200.milliseconds
+        val minShowDuration: Duration = 500.milliseconds
+
+        var showLoading by rememberSaveable { mutableStateOf(false) }
+        var showContent by rememberSaveable { mutableStateOf(false) }
+
+        // Add support for content loading that wait 200ms before displaying the loading and then display the loading
+        // at least 500ms to avoid the loading flickering.
+        val isLoading = painter.state is AsyncImagePainter.State.Loading
+        LaunchedEffect(isLoading) {
+            if (showContent) return@LaunchedEffect
+
+            if (isLoading && !showLoading) {
+                delay(minDelayDuration)
+                showLoading = true
+            } else if (!isLoading && showLoading) {
+                delay(minShowDuration)
+                showLoading = false
+                showContent = true
+            } else {
+                showContent = true
+            }
+        }
+
+        val loading = @Composable {
+            Spacer(
                 modifier = Modifier.illustrationPlaceholder(
                     visible = true,
                     shape = SparkTheme.shapes.none,
                 ),
             )
+        }
 
-            is AsyncImagePainter.State.Error -> {
-                // since model can be anything transformed in to a ImageRequest OR a ImageRequest we need to
-                // handel both cases
-                val requestData = painter.request.data
-                val showEmptyIcon = when {
-                    (requestData is String) -> requestData.isBlank()
-                    requestData == NullRequestData -> true
-                    model == null -> true
-                    else -> false
+        if (showLoading) {
+            loading()
+        } else if (showContent) {
+            when (painter.state) {
+                AsyncImagePainter.State.Empty -> emptyIcon()
+                is AsyncImagePainter.State.Loading -> loading()
+                is AsyncImagePainter.State.Error -> {
+                    // since model can be anything transformed in to a ImageRequest OR a ImageRequest we need to
+                    // handel both cases
+                    val requestData = painter.request.data
+                    val showEmptyIcon = when {
+                        (requestData is String) -> requestData.isBlank()
+                        requestData == NullRequestData -> true
+                        model == null -> true
+                        else -> false
+                    }
+
+                    if (showEmptyIcon) emptyIcon()
+                    else errorIcon()
                 }
 
-                if (showEmptyIcon) emptyIcon()
-                else errorIcon()
+                is AsyncImagePainter.State.Success -> SubcomposeAsyncImageContent()
             }
-
-            is AsyncImagePainter.State.Success -> SubcomposeAsyncImageContent()
         }
     }
 }
