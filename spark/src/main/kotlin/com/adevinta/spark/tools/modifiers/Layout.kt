@@ -27,20 +27,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.AutofillNode
 import androidx.compose.ui.autofill.AutofillType
 import androidx.compose.ui.composed
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.PaintingStyle
-import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.node.LayoutModifierNode
-import androidx.compose.ui.node.modifierElementOf
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.platform.LocalAutofill
 import androidx.compose.ui.platform.LocalAutofillTree
 import androidx.compose.ui.unit.Constraints
@@ -53,18 +48,32 @@ import androidx.compose.ui.unit.Dp
  * @param horizontalPadding The horizontal padding to ignore from the parent
  */
 @OptIn(ExperimentalComposeUiApi::class)
-public fun Modifier.ignoreParentHorizontalPadding(horizontalPadding: Dp): Modifier = this then modifierElementOf(
-    params = horizontalPadding,
-    create = { IgnoreParentHorizontalPaddingModifier(horizontalPadding) },
-    update = { it.horizontalPadding = horizontalPadding },
-    definitions = {
-        name = "ignoredParentPadding"
-        properties["horizontalPadding"] = horizontalPadding
-    },
-)
+public fun Modifier.ignoreParentHorizontalPadding(horizontalPadding: Dp): Modifier =
+    this then IgnoreParentHorizontalPaddingModifier(horizontalPadding)
 
 @OptIn(ExperimentalComposeUiApi::class)
-private class IgnoreParentHorizontalPaddingModifier(var horizontalPadding: Dp) : Modifier.Node(), LayoutModifierNode {
+private data class IgnoreParentHorizontalPaddingModifier(
+    private val horizontalPadding: Dp,
+) : ModifierNodeElement<IgnoreParentHorizontalPaddingModifierNode>() {
+
+    override fun create(): IgnoreParentHorizontalPaddingModifierNode {
+        return IgnoreParentHorizontalPaddingModifierNode(horizontalPadding)
+    }
+
+    override fun update(node: IgnoreParentHorizontalPaddingModifierNode): IgnoreParentHorizontalPaddingModifierNode {
+        return node.apply {
+        }
+    }
+
+    override fun InspectorInfo.inspectableProperties() {
+        name = "ignoredParentPadding"
+        properties["horizontalPadding"] = horizontalPadding
+    }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+private class IgnoreParentHorizontalPaddingModifierNode(var horizontalPadding: Dp) : Modifier.Node(),
+    LayoutModifierNode {
     override fun MeasureScope.measure(
         measurable: Measurable,
         constraints: Constraints,

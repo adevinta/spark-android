@@ -28,7 +28,8 @@ import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.node.LayoutModifierNode
-import androidx.compose.ui.node.modifierElementOf
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -40,17 +41,27 @@ import kotlin.math.roundToInt
  * Duplicate of Material minimumTouchTargetSize() since it's internal on their side
  */
 @OptIn(ExperimentalComposeUiApi::class)
-public fun Modifier.minimumTouchTargetSize(): Modifier = this then modifierElementOf(
-    create = { MinimumTouchTargetModifier() },
-    definitions = {
+public fun Modifier.minimumTouchTargetSize(): Modifier = this then MinimumTouchTargetModifier()
+
+@OptIn(ExperimentalComposeUiApi::class)
+private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTargetModifierNode>() {
+
+    override fun create(): MinimumTouchTargetModifierNode = MinimumTouchTargetModifierNode()
+    override fun equals(other: Any?): Boolean = true
+
+    override fun hashCode(): Int = 0
+
+    override fun update(node: MinimumTouchTargetModifierNode): MinimumTouchTargetModifierNode = node
+
+    override fun InspectorInfo.inspectableProperties() {
         name = "minimumTouchTargetSize"
         properties["README"] = "Adds outer padding to measure at least 48.dp (default) in " +
                 "size to disambiguate touch interactions if the element would measure smaller"
-    },
-)
+    }
+}
 
 @OptIn(ExperimentalComposeUiApi::class)
-private class MinimumTouchTargetModifier : Modifier.Node(), LayoutModifierNode {
+private class MinimumTouchTargetModifierNode : Modifier.Node(), LayoutModifierNode {
 
     private val minimumTouchTargetSize = DpSize(48.dp, 48.dp)
     override fun MeasureScope.measure(
