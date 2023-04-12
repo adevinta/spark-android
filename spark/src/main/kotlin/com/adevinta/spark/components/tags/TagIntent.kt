@@ -24,6 +24,7 @@ package com.adevinta.spark.components.tags
 
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.IntentColor
 
 /**
  * TagIntent is used to define the intent of the tag.

@@ -198,13 +198,6 @@ public object TagDefaults {
     }
 }
 
-internal data class IntentColor(
-    val color: Color,
-    val onColor: Color,
-    val containerColor: Color,
-    val onContainerColor: Color,
-)
-
 /**
  * The content padding used by a tag.
  * Used as start padding when there's leading icon, used as eng padding when there's no

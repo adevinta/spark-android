@@ -46,8 +46,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.buttons.SparkButton
-import com.adevinta.spark.components.buttons.SparkButtonDefaults
+import com.adevinta.spark.components.buttons.BaseSparkButton
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tokens.contentColorFor
@@ -72,11 +71,10 @@ public fun SparkSnackbar(
 
     val actionComposable: (@Composable () -> Unit)? = actionLabel?.let {
         @Composable {
-            SparkButton(
+            BaseSparkButton(
                 colors = ButtonDefaults.textButtonColors(contentColor = contentColor),
                 onClick = { onActionClick?.invoke() },
                 elevation = null,
-                contentPadding = SparkButtonDefaults.TextButtonContentPadding,
                 content = { Text(it) },
             )
         }
