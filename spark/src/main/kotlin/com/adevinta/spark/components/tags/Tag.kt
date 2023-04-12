@@ -39,9 +39,12 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
+import com.adevinta.spark.LocalLegacyStyle
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
@@ -54,7 +57,7 @@ import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi
 @Composable
-internal fun SparkTag(
+internal fun BaseSparkTag(
     colors: TagColors,
     modifier: Modifier = Modifier,
     border: BorderStroke? = null,
@@ -64,13 +67,13 @@ internal fun SparkTag(
 ) {
     Surface(
         modifier = modifier.sparkUsageOverlay(),
-        shape = SparkTheme.shapes.extraSmall,
+        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.full,
         color = colors.backgroundColor,
         contentColor = colors.contentColor.copy(1.0f),
         border = border,
     ) {
         ProvideTextStyle(
-            value = SparkTheme.typography.smallImportant,
+            value = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold),
         ) {
             Row(
                 Modifier
@@ -91,9 +94,53 @@ internal fun SparkTag(
                         )
                     }
                 }
-                content()
+                ProvideTextStyle(value = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold)) {
+                    content()
+                }
             }
         }
+    }
+}
+
+@InternalSparkApi
+@Composable
+internal fun SparkTag(
+    colors: TagColors,
+    text: String,
+    modifier: Modifier = Modifier,
+    border: BorderStroke? = null,
+    leadingIcon: SparkIcon? = null,
+    tint: Color? = null,
+) {
+    BaseSparkTag(
+        colors = colors,
+        modifier = modifier,
+        border = border,
+        leadingIcon = leadingIcon,
+        tint = tint,
+    ) {
+        Text(text = text)
+    }
+}
+
+@InternalSparkApi
+@Composable
+internal fun SparkTag(
+    colors: TagColors,
+    text: AnnotatedString,
+    modifier: Modifier = Modifier,
+    border: BorderStroke? = null,
+    leadingIcon: SparkIcon? = null,
+    tint: Color? = null,
+) {
+    BaseSparkTag(
+        colors = colors,
+        modifier = modifier,
+        border = border,
+        leadingIcon = leadingIcon,
+        tint = tint,
+    ) {
+        Text(text = text)
     }
 }
 
@@ -114,13 +161,14 @@ public object TagDefaults {
     /**
      * The size of a tag's leading icon
      */
-    internal val LeadingIconSize = 16.dp
+    internal val LeadingIconSize = 12.dp
 
     @Composable
     @InternalSparkApi
-    public fun tonalColors(
-        backgroundColor: Color = SparkTheme.colors.secondaryContainer,
+    public fun tintedColors(
+        intent: TagIntent = TagIntent.Neutral,
     ): TagColors {
+        val backgroundColor = intent.colors().containerColor
         return TagColors(
             backgroundColor = backgroundColor,
             contentColor = contentColorFor(backgroundColor = backgroundColor),
@@ -128,34 +176,37 @@ public object TagDefaults {
     }
 
     @Composable
-    internal fun filledColors(): TagColors = TagColors(
-        backgroundColor = SparkTheme.colors.primary,
-        contentColor = SparkTheme.colors.onPrimary,
-    )
+    internal fun filledColors(
+        intent: TagIntent = TagIntent.Primary,
+    ): TagColors {
+        val backgroundColor = intent.colors().color
+        return TagColors(
+            backgroundColor = backgroundColor,
+            contentColor = contentColorFor(backgroundColor = backgroundColor),
+        )
+    }
 
     @Composable
-    internal fun outlineColors(
-        contentColor: Color = SparkTheme.colors.neutral,
-    ): TagColors = TagColors(
-        backgroundColor = Color.Transparent,
-        contentColor = contentColor,
-    )
+    internal fun outlinedColors(
+        intent: TagIntent = TagIntent.Neutral,
+    ): TagColors {
+        val contentColor = intent.colors().color
+        return TagColors(
+            backgroundColor = Color.Transparent,
+            contentColor = contentColor,
+        )
+    }
 }
 
+/**
+ * The content padding used by a tag.
+ * Used as start padding when there's leading icon, used as eng padding when there's no
+ * trailing icon.
+ */
 private val LeadingIconEndSpacing = 4.dp
 
-/**
- * The content padding used by a tag.
- * Used as start padding when there's leading icon, used as eng padding when there's no
- * trailing icon.
- */
-private val HorizontalPadding = 8.dp
 
-/**
- * The content padding used by a tag.
- * Used as start padding when there's leading icon, used as eng padding when there's no
- * trailing icon.
- */
+private val HorizontalPadding = 8.dp
 private val VerticalPadding = 2.dp
 
 @Preview(
@@ -166,12 +217,12 @@ private val VerticalPadding = 2.dp
 private fun SparkTagPreview() {
     PreviewTheme {
         val colors = TagDefaults.filledColors()
-        SparkTag(colors = colors) {
+        BaseSparkTag(colors = colors) {
             SlotArea(color = LocalContentColor.current) {
                 Text("À la une")
             }
         }
-        SparkTag(leadingIcon = SparkIcon.Options.Booster, colors = colors) {
+        BaseSparkTag(leadingIcon = SparkIcon.Options.Booster, colors = colors) {
             SlotArea(color = LocalContentColor.current) {
                 Text("À la une")
             }

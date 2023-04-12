@@ -39,6 +39,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
@@ -69,6 +70,7 @@ public fun SparkTheme(
     typography: SparkTypography = SparkTheme.typography,
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
+    useLegacyStyle: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val internalColors = if (useSparkTokensHighlighter) debugColors() else colors
@@ -104,6 +106,7 @@ public fun SparkTheme(
         LocalSparkShapes provides internalShapes,
         LocalHighlightToken provides useSparkTokensHighlighter,
         LocalHighlightComponents provides useSparkComponentsHighlighter,
+        LocalLegacyStyle provides useLegacyStyle,
     ) {
         MaterialTheme(
             colorScheme = rememberedColors.asMaterial3Colors(),
@@ -113,7 +116,7 @@ public fun SparkTheme(
             CompositionLocalProvider(
                 LocalContentColor provides SparkTheme.colors.onSurface,
             ) {
-                ProvideTextStyle(value = SparkTheme.typography.body) {
+                ProvideTextStyle(value = SparkTheme.typography.body2) {
                     content()
                 }
             }
@@ -126,10 +129,11 @@ public fun SparkTheme(
 public fun PreviewWrapper(
     padding: PaddingValues = PaddingValues(16.dp),
     contentPadding: Dp = 16.dp,
+    color: @Composable () -> Color = { SparkTheme.colors.background },
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Surface(
-        color = SparkTheme.colors.surface,
+        color = color(),
     ) {
         Column(
             modifier = Modifier.padding(padding),
@@ -151,6 +155,7 @@ internal fun PreviewTheme(
     userType: UserType = UserType.Part,
     padding: PaddingValues = PaddingValues(16.dp),
     contentPadding: Dp = 16.dp,
+    color: @Composable () -> Color = { SparkTheme.colors.background },
     content: @Composable ColumnScope.() -> Unit,
 ) {
     SparkTenantTheme(
@@ -161,6 +166,7 @@ internal fun PreviewTheme(
         PreviewWrapper(
             padding = padding,
             contentPadding = contentPadding,
+            color = color,
             content = content,
         )
     }
@@ -172,6 +178,7 @@ internal fun SparkTenantTheme(
     useDarkColors: Boolean = isSystemInDarkTheme(),
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
+    useLegacyStyle: Boolean = false,
     isPro: Boolean = false,
     content: @Composable () -> Unit,
 ) {
@@ -186,6 +193,7 @@ internal fun SparkTenantTheme(
         typography = sparkTypography(),
         useSparkTokensHighlighter = useSparkTokensHighlighter,
         useSparkComponentsHighlighter = useSparkComponentsHighlighter,
+        useLegacyStyle = useLegacyStyle,
         content = content,
     )
 }
@@ -232,3 +240,9 @@ internal val LocalHighlightToken = staticCompositionLocalOf { false }
  * Setting it to true show an overlay on spark components.
  */
 internal val LocalHighlightComponents = staticCompositionLocalOf { false }
+
+/**
+ * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the Adevinta Platform teams
+ * to migrate their screens to spark.
+ */
+internal val LocalLegacyStyle = staticCompositionLocalOf { false }

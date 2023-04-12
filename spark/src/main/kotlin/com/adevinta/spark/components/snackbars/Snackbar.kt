@@ -40,13 +40,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.buttons.SparkButton
-import com.adevinta.spark.components.buttons.SparkButtonDefaults
+import com.adevinta.spark.components.buttons.BaseSparkButton
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tokens.contentColorFor
@@ -71,11 +71,10 @@ public fun SparkSnackbar(
 
     val actionComposable: (@Composable () -> Unit)? = actionLabel?.let {
         @Composable {
-            SparkButton(
+            BaseSparkButton(
                 colors = ButtonDefaults.textButtonColors(contentColor = contentColor),
                 onClick = { onActionClick?.invoke() },
                 elevation = null,
-                contentPadding = SparkButtonDefaults.TextButtonContentPadding,
                 content = { Text(it) },
             )
         }
@@ -101,7 +100,7 @@ public fun SparkSnackbar(
         action = actionComposable,
     ) {
         Column {
-            ProvideTextStyle(value = SparkTheme.typography.bodyImportant) {
+            ProvideTextStyle(value = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold)) {
                 titleComposable?.invoke()
                 Spacer(Modifier.height(4.dp))
             }
