@@ -36,8 +36,8 @@ import androidx.compose.ui.Modifier
  * @param predicate condition to decide if the [builder] is added or not to the modifier chain
  * @param builder the modifier(s) to apply when [predicate] is true
  */
-public inline fun Modifier.ifTrue(predicate: Boolean, builder: () -> Modifier): Modifier =
-    then(if (predicate) builder() else Modifier)
+public inline fun Modifier.ifTrue(predicate: Boolean, builder: Modifier.() -> Modifier): Modifier =
+    then(if (predicate) this.builder() else Modifier)
 
 /**
  * Modifier to make it easy to conditionally add a modifier based on [predicate]
@@ -51,8 +51,8 @@ public inline fun Modifier.ifTrue(predicate: Boolean, builder: () -> Modifier): 
  * @param predicate condition to decide if the [builder] is added or not to the modifier chain
  * @param builder the modifier(s) to apply when [predicate] is false
  */
-public inline fun Modifier.ifFalse(predicate: Boolean, builder: () -> Modifier): Modifier =
-    then(if (!predicate) builder() else Modifier)
+public inline fun Modifier.ifFalse(predicate: Boolean, builder: Modifier.() -> Modifier): Modifier =
+    then(if (!predicate) this.builder() else Modifier)
 
 /**
  * Modifier to make it easy to conditionally add a modifier based on [value] nullability
@@ -66,8 +66,8 @@ public inline fun Modifier.ifFalse(predicate: Boolean, builder: () -> Modifier):
  * @param value decide if the [builder] is added or not to the modifier chain
  * @param builder the modifier(s) to apply when [value] is not null
  */
-public inline fun <T : Any> Modifier.ifNotNull(value: T?, builder: (T) -> Modifier): Modifier =
-    then(if (value != null) builder(value) else Modifier)
+public inline fun <T : Any> Modifier.ifNotNull(value: T?, builder: Modifier.(T) -> Modifier): Modifier =
+    then(if (value != null) this.builder(value) else Modifier)
 
 /**
  * Modifier to make it easy to conditionally add a modifier based on [value] nullability
@@ -81,5 +81,5 @@ public inline fun <T : Any> Modifier.ifNotNull(value: T?, builder: (T) -> Modifi
  * @param value decide if the [builder] is added or not to the modifier chain
  * @param builder the modifier(s) to apply when [value] is null
  */
-public inline fun <T : Any> Modifier.ifNull(value: T?, builder: () -> Modifier): Modifier =
-    then(if (value == null) builder() else Modifier)
+public inline fun <T : Any> Modifier.ifNull(value: T?, builder: Modifier.() -> Modifier): Modifier =
+    then(if (value == null) this.builder() else Modifier)
