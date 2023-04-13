@@ -40,7 +40,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.window.DialogProperties
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.buttons.TextButton
+import com.adevinta.spark.components.buttons.ButtonGhost
+import com.adevinta.spark.components.buttons.IconSide
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -171,24 +172,24 @@ internal fun AlertDialogPreview(
                     )
                 },
                 confirmButton = {
-                    TextButton(
-                        icon = SparkIcon.Actions.Copy,
+                    ButtonGhost(
                         onClick = {
                             openDialog.value = false
                         },
-                    ) {
-                        Text("Confirm")
-                    }
+                        text = "Confirm",
+                        icon = SparkIcon.Actions.Copy,
+                        iconSide = IconSide.START,
+                    )
                 },
                 dismissButton = {
-                    TextButton(
-                        icon = SparkIcon.Actions.Copy,
+                    ButtonGhost(
                         onClick = {
                             openDialog.value = false
                         },
-                    ) {
-                        Text("Dismiss")
-                    }
+                        text = "Dismiss",
+                        icon = SparkIcon.Actions.Copy,
+                        iconSide = IconSide.START,
+                    )
                 },
             )
         }

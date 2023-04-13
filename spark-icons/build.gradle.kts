@@ -23,8 +23,8 @@
 plugins {
     id("com.adevinta.spark.android-library")
     id("com.adevinta.spark.android-compose")
-    id("com.adevinta.spark.android-publishing")
     id("com.adevinta.spark.dokka")
+    id("com.adevinta.spark.publishing")
     id("com.adevinta.spark.dependencyGuard")
 }
 

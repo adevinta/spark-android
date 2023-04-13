@@ -163,25 +163,23 @@ internal fun LayoutPreview() {
 
 @Composable
 private fun Item() {
-    SparkTheme(isPro = true) {
-        Surface(
-            modifier = Modifier
-                .aspectRatio(2 / 3f),
-            color = SparkTheme.colors.primary,
-            shape = SparkTheme.shapes.medium,
-            shadowElevation = 4.dp,
-            tonalElevation = 4.dp,
+    Surface(
+        modifier = Modifier
+            .aspectRatio(2 / 3f),
+        color = SparkTheme.colors.primary,
+        shape = SparkTheme.shapes.medium,
+        shadowElevation = 4.dp,
+        tonalElevation = 4.dp,
+    ) {
+        Box(
+            modifier = Modifier.padding(8.dp),
+            contentAlignment = Alignment.Center,
         ) {
-            Box(
-                modifier = Modifier.padding(8.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(
-                    text = "",
-                    style = SparkTheme.typography.body,
-                    textAlign = TextAlign.Center,
-                )
-            }
+            Text(
+                text = "",
+                style = SparkTheme.typography.body2,
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }

@@ -35,11 +35,16 @@ SparkTheme {
 
 ## Installation
 
-Add the main Spark dependency: [![Maven Central](https://img.shields.io/maven-central/v/com.adevinta.spark/spark?label=%20&color=success)](https://search.maven.org/artifact/com.adevinta.spark/spark) [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.adevinta.spark/spark?label=%20&color=lightgrey&server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/adevinta/spark/spark/)
+Add the main Spark dependency: [![Maven Central](https://img.shields.io/maven-central/v/com.adevinta.spark/spark?label=%20&color=success)](https://central.sonatype.com/namespace/com.adevinta.spark) [![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/com.adevinta.spark/spark?label=%20&color=lightgrey&server=https%3A%2F%2Fs01.oss.sonatype.org%2F)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/adevinta/spark/spark/)
 
 ```kotlin
 dependencies {
-    implementation("com.adevinta.spark:spark:<version>")
+    // Import the Spark BoM
+    implementation(platform("com.adevinta.spark:spark-bom:<version>"))
+
+    // Declare dependencies without versions
+    implementation("com.adevinta.spark:spark")
+    implementation("com.adevinta.spark:spark-icons")
 }
 ```
 

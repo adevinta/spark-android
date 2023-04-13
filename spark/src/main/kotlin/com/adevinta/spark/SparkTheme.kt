@@ -35,12 +35,11 @@ import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
@@ -71,7 +70,7 @@ public fun SparkTheme(
     typography: SparkTypography = SparkTheme.typography,
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
-    isPro: Boolean = false,
+    useLegacyStyle: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val internalColors = if (useSparkTokensHighlighter) debugColors() else colors
@@ -107,7 +106,7 @@ public fun SparkTheme(
         LocalSparkShapes provides internalShapes,
         LocalHighlightToken provides useSparkTokensHighlighter,
         LocalHighlightComponents provides useSparkComponentsHighlighter,
-        LocalIsUserPro provides isPro,
+        LocalLegacyStyle provides useLegacyStyle,
     ) {
         MaterialTheme(
             colorScheme = rememberedColors.asMaterial3Colors(),
@@ -117,7 +116,7 @@ public fun SparkTheme(
             CompositionLocalProvider(
                 LocalContentColor provides SparkTheme.colors.onSurface,
             ) {
-                ProvideTextStyle(value = SparkTheme.typography.body) {
+                ProvideTextStyle(value = SparkTheme.typography.body2) {
                     content()
                 }
             }
@@ -127,7 +126,27 @@ public fun SparkTheme(
 
 @Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
 @Composable
-public fun PreviewTheme(
+public fun PreviewWrapper(
+    padding: PaddingValues = PaddingValues(16.dp),
+    contentPadding: Dp = 16.dp,
+    color: @Composable () -> Color = { SparkTheme.colors.background },
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Surface(
+        color = color(),
+    ) {
+        Column(
+            modifier = Modifier.padding(padding),
+            verticalArrangement = Arrangement.spacedBy(contentPadding),
+        ) {
+            content()
+        }
+    }
+}
+
+@Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
+@Composable
+internal fun PreviewTheme(
     themeVariant: ThemeVariant = if (LocalInspectionMode.current && isSystemInDarkTheme()) {
         ThemeVariant.Dark
     } else {
@@ -136,6 +155,7 @@ public fun PreviewTheme(
     userType: UserType = UserType.Part,
     padding: PaddingValues = PaddingValues(16.dp),
     contentPadding: Dp = 16.dp,
+    color: @Composable () -> Color = { SparkTheme.colors.background },
     content: @Composable ColumnScope.() -> Unit,
 ) {
     SparkTenantTheme(
@@ -143,17 +163,11 @@ public fun PreviewTheme(
         useDarkColors = themeVariant == ThemeVariant.Dark,
         isPro = userType == UserType.Pro,
     ) {
-        val previewContent = movableContentOf {
-            Column(
-                modifier = Modifier.padding(padding),
-                verticalArrangement = Arrangement.spacedBy(contentPadding),
-            ) {
-                content()
-            }
-        }
-        Surface(
-            color = SparkTheme.colors.surface,
-            content = previewContent,
+        PreviewWrapper(
+            padding = padding,
+            contentPadding = contentPadding,
+            color = color,
+            content = content,
         )
     }
 }
@@ -164,6 +178,7 @@ internal fun SparkTenantTheme(
     useDarkColors: Boolean = isSystemInDarkTheme(),
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
+    useLegacyStyle: Boolean = false,
     isPro: Boolean = false,
     content: @Composable () -> Unit,
 ) {
@@ -178,7 +193,7 @@ internal fun SparkTenantTheme(
         typography = sparkTypography(),
         useSparkTokensHighlighter = useSparkTokensHighlighter,
         useSparkComponentsHighlighter = useSparkComponentsHighlighter,
-        isPro = isPro,
+        useLegacyStyle = useLegacyStyle,
         content = content,
     )
 }
@@ -227,14 +242,7 @@ internal val LocalHighlightToken = staticCompositionLocalOf { false }
 internal val LocalHighlightComponents = staticCompositionLocalOf { false }
 
 /**
- * CompositionLocal used to pass the status of the user.
- *
- * We already have a isPro parameter to our theme but it affects only the primary color, if we need to modify a
- * composable to get a particular image or icon asset based on its status it’s complicated as the app is not
- * entirely migrated.
- *
- * If you use this CompositionLocal you must provide it has a default parameter to your composable isPro parameter
- *
+ * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the Adevinta Platform teams
+ * to migrate their screens to spark.
  */
-@ExperimentalSparkApi
-public val LocalIsUserPro: ProvidableCompositionLocal<Boolean> = staticCompositionLocalOf { false }
+internal val LocalLegacyStyle = staticCompositionLocalOf { false }
