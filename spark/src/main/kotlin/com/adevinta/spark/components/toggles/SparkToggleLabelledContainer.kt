@@ -26,12 +26,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -54,8 +51,8 @@ internal fun SparkToggleLabelledContainer(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    startContent: @Composable() (RowScope.() -> Unit)? = null,
-    endContent: @Composable() (RowScope.() -> Unit)? = null,
+    contentSide: ContentSide = ContentSide.End,
+    content: @Composable() (RowScope.() -> Unit),
 ) {
     val toggleableModifier = if (onClick != null) {
         Modifier.triStateToggleable(
@@ -76,23 +73,25 @@ internal fun SparkToggleLabelledContainer(
             .sparkUsageOverlay(),
     ) {
 
-        startContent?.let {
+        if (contentSide == ContentSide.Start) {
             HorizontalSpacer(8.dp)
-            it()
-            HorizontalSpacer(ToggleLabelledPadding)
+            ProvideTextStyle(value = SparkTheme.typography.body1) {
+                content()
+            }
         }
 
         toggle()
 
-        endContent?.let {
-            HorizontalSpacer(ToggleLabelledPadding)
-            it()
+        if (contentSide == ContentSide.End) {
+            ProvideTextStyle(value = SparkTheme.typography.body1) {
+                content()
+            }
             HorizontalSpacer(8.dp)
         }
     }
 }
 
-private val ToggleLabelledPadding = 16.dp
+public enum class ContentSide { Start, End }
 
 @Preview(
     group = "Toggles",
@@ -112,7 +111,8 @@ internal fun TogglesLabelledSlotPreview() {
             },
             role = Role.Checkbox,
             onClick = {},
-            startContent = {
+            contentSide = ContentSide.Start,
+            content = {
                 SlotArea(color = LocalContentColor.current) {
                     Text("CheckBox On")
                 }
@@ -130,7 +130,8 @@ internal fun TogglesLabelledSlotPreview() {
             },
             role = Role.Checkbox,
             onClick = {},
-            endContent = {
+            contentSide = ContentSide.End,
+            content = {
                 SlotArea(color = LocalContentColor.current) {
                     Text("CheckBox On")
                 }
@@ -148,61 +149,12 @@ internal fun TogglesLabelledSlotPreview() {
             },
             role = Role.Checkbox,
             onClick = {},
-            endContent = {
+            contentSide = ContentSide.End,
+            content = {
                 SlotArea(color = LocalContentColor.current) {
                     Text("CheckBox On")
                 }
             },
         )
-    }
-}
-
-@Preview
-@Composable
-private fun SparkToggleLabelledContainerPreview() {
-    PreviewTheme {
-        var state by remember { mutableStateOf(true) }
-        SparkToggleLabelledContainer(
-            state = ToggleableState(state),
-            toggle = {
-                RadioButton(
-                    modifier = Modifier.minimumTouchTargetSize(),
-                    selected = true,
-                    onClick = null,
-                )
-            },
-            role = Role.Checkbox,
-            onClick = {
-                state = !state
-            },
-            startContent = {
-                Text("CheckBox On")
-            },
-        ) {
-            Text("CheckBox On")
-        }
-        SparkToggleLabelledContainer(
-            state = ToggleableState(state),
-            toggle = {
-                RadioButton(
-                    modifier = Modifier.minimumTouchTargetSize(),
-                    selected = state,
-                    onClick = null,
-                )
-            },
-            role = Role.Checkbox,
-            onClick = {
-                state = !state
-            },
-            startContent = {
-                Text(
-                    "CheckBox OnRadioButton Off \nRadioButton Off \nRadioButton Off \n",
-                )
-            },
-        ) {
-            Text(
-                "CheckBox OnRadioButton Off \nRadioButton Off \nRadioButton Off \n",
-            )
-        }
     }
 }

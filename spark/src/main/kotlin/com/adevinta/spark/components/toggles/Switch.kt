@@ -128,7 +128,8 @@ public fun Switch(
  * [Interaction]s for this Switch. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this Switch in different [Interaction]s.
- * @param startContent The start content displayed before the switch, usually a Text composable
+ * @param contentSide The side where we want to show the label, default to [ContentSide.Start].
+ * @param content The content displayed before the switch, usually a Text composable shown at the start.
  */
 @Composable
 public fun SwitchLabelled(
@@ -137,7 +138,8 @@ public fun SwitchLabelled(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    startContent: @Composable RowScope.() -> Unit,
+    contentSide: ContentSide = ContentSide.Start,
+    content: @Composable RowScope.() -> Unit,
 ) {
     SparkToggleLabelledContainer(
         state = ToggleableState(checked),
@@ -156,9 +158,8 @@ public fun SwitchLabelled(
         } else null,
         modifier = modifier.selectableGroup(),
         enabled = enabled,
-        startContent = {
-            startContent()
-        },
+        contentSide = contentSide,
+        content = content,
     )
 }
 
