@@ -47,7 +47,6 @@ import androidx.compose.ui.unit.Dp
  * width if misused
  * @param horizontalPadding The horizontal padding to ignore from the parent
  */
-@OptIn(ExperimentalComposeUiApi::class)
 public fun Modifier.ignoreParentHorizontalPadding(horizontalPadding: Dp): Modifier =
     this then IgnoreParentHorizontalPaddingModifier(horizontalPadding)
 
@@ -56,13 +55,10 @@ private data class IgnoreParentHorizontalPaddingModifier(
     private val horizontalPadding: Dp,
 ) : ModifierNodeElement<IgnoreParentHorizontalPaddingModifierNode>() {
 
-    override fun create(): IgnoreParentHorizontalPaddingModifierNode {
-        return IgnoreParentHorizontalPaddingModifierNode(horizontalPadding)
-    }
+    override fun create() = IgnoreParentHorizontalPaddingModifierNode(horizontalPadding)
 
-    override fun update(node: IgnoreParentHorizontalPaddingModifierNode): IgnoreParentHorizontalPaddingModifierNode {
-        return node.apply {
-        }
+    override fun update(node: IgnoreParentHorizontalPaddingModifierNode) = node.apply {
+        node.horizontalPadding = horizontalPadding
     }
 
     override fun InspectorInfo.inspectableProperties() {

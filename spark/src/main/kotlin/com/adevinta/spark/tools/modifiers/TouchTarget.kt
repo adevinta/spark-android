@@ -40,18 +40,17 @@ import kotlin.math.roundToInt
  *
  * Duplicate of Material minimumTouchTargetSize() since it's internal on their side
  */
-@OptIn(ExperimentalComposeUiApi::class)
 public fun Modifier.minimumTouchTargetSize(): Modifier = this then MinimumTouchTargetModifier()
 
 @OptIn(ExperimentalComposeUiApi::class)
 private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTargetModifierNode>() {
 
-    override fun create(): MinimumTouchTargetModifierNode = MinimumTouchTargetModifierNode()
+    override fun create() = MinimumTouchTargetModifierNode()
     override fun equals(other: Any?): Boolean = true
 
     override fun hashCode(): Int = 0
 
-    override fun update(node: MinimumTouchTargetModifierNode): MinimumTouchTargetModifierNode = node
+    override fun update(node: MinimumTouchTargetModifierNode) = node
 
     override fun InspectorInfo.inspectableProperties() {
         name = "minimumTouchTargetSize"
