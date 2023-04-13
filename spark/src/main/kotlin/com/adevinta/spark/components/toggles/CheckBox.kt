@@ -119,6 +119,7 @@ public fun Checkbox(
  * [Interaction]s for this Checkbox. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this Checkbox in different [Interaction]s.
+ * @param contentSide The side where we want to show the label, default to [ContentSide.End].
  * @param content The content displayed after the checkbox, usually a Text composable shown at the end.
  */
 @Composable
