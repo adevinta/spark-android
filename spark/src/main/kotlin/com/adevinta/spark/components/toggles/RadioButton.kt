@@ -119,10 +119,11 @@ public fun RadioButton(
  * @param modifier Modifier to be applied to the layout of the checkbox
  * @param enabled whether the component is enabled or grayed out
  * @param interactionSource the [MutableInteractionSource] representing the stream of
- * [Interaction]s for this Checkbox. You can create and pass in your own remembered
+ * [Interaction]s for this RadioButton. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
- * appearance / behavior of this Checkbox in different [Interaction]s.
- * @param endContent The end content displayed after the radio button, usually a Text composable
+ * appearance / behavior of this RadioButton in different [Interaction]s.
+ * @param contentSide The side where we want to show the label, default to [ContentSide.End].
+ * @param content The content displayed after the radio button, usually a Text composable shown at the end.
  */
 @Composable
 public fun RadioButtonLabelled(
@@ -131,7 +132,8 @@ public fun RadioButtonLabelled(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    endContent: @Composable RowScope.() -> Unit,
+    contentSide: ContentSide = ContentSide.End,
+    content: @Composable RowScope.() -> Unit,
 ) {
     SparkToggleLabelledContainer(
         state = ToggleableState(selected),
@@ -148,7 +150,8 @@ public fun RadioButtonLabelled(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        endContent = endContent,
+        contentSide = contentSide,
+        content = content,
     )
 }
 

@@ -37,8 +37,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
-import androidx.lifecycle.setViewTreeLifecycleOwner
-import androidx.lifecycle.setViewTreeViewModelStoreOwner
+import androidx.lifecycle.ViewTreeLifecycleOwner
+import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
@@ -76,7 +76,7 @@ public fun AbstractComposeView.setupEditMode() {
 private class ComposeLayoutPreviewHelper(val view: AbstractComposeView) {
 
     private val fakeSavedStateRegistryOwner = object : SavedStateRegistryOwner {
-        override val lifecycle = LifecycleRegistry(this)
+        private val lifecycle = LifecycleRegistry(this)
         private val controller = SavedStateRegistryController.create(this).apply {
             performRestore(Bundle())
         }
@@ -88,18 +88,22 @@ private class ComposeLayoutPreviewHelper(val view: AbstractComposeView) {
 
         override val savedStateRegistry: SavedStateRegistry
             get() = controller.savedStateRegistry
+
+        override fun getLifecycle(): Lifecycle = lifecycle
     }
 
     private val fakeViewModelStoreOwner = object : ViewModelStoreOwner {
-        override val viewModelStore = ViewModelStore()
+        private val viewModelStore = ViewModelStore()
+
+        override fun getViewModelStore() = viewModelStore
     }
 
     init {
         val stateRegistryOwner = fakeSavedStateRegistryOwner
         val viewModelStoreOwner = fakeViewModelStoreOwner
-        view.setViewTreeLifecycleOwner(stateRegistryOwner)
+        ViewTreeLifecycleOwner.set(view, stateRegistryOwner)
         view.setViewTreeSavedStateRegistryOwner(stateRegistryOwner)
-        view.setViewTreeViewModelStoreOwner(viewModelStoreOwner)
+        ViewTreeViewModelStoreOwner.set(view, viewModelStoreOwner)
     }
 
     @OptIn(DelicateCoroutinesApi::class, InternalComposeUiApi::class)

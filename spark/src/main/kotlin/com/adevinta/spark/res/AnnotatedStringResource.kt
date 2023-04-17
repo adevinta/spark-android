@@ -151,22 +151,30 @@ internal fun resources(): Resources {
  */
 internal fun Resources.getText(@StringRes id: Int, vararg args: Any): CharSequence {
     val escapedArgs = args.map {
-        if (it is Spanned) it.toHtml() else it
+        if (it is Spanned) it.toHtmlWithoutParagraphs() else it
     }.toTypedArray()
     val spannedString = SpannedString(getText(id))
-    val htmlResource = spannedString.toHtml()
+    val htmlResource = spannedString.toHtmlWithoutParagraphs()
     val formattedHtml = String.format(htmlResource, *escapedArgs)
     return formattedHtml.parseAsHtml()
 }
 
 internal fun Resources.getQuantityText(@PluralsRes id: Int, quantity: Int, vararg args: Any): CharSequence {
     val escapedArgs = args.map {
-        if (it is Spanned) it.toHtml() else it
+        if (it is Spanned) it.toHtmlWithoutParagraphs() else it
     }.toTypedArray()
     val resource = SpannedString(getQuantityText(id, quantity))
-    val htmlResource = resource.toHtml()
+    val htmlResource = resource.toHtmlWithoutParagraphs()
     val formattedHtml = String.format(htmlResource, *escapedArgs)
     return formattedHtml.parseAsHtml()
+}
+
+/**
+ * Convert a [Spanned] to a [String] without the `<p dir="ltr">` and `</p>` tags that are added by `toHtml()` which
+ * added a padding at the end of the text.
+ */
+private fun Spanned.toHtmlWithoutParagraphs(): String {
+    return toHtml().substringAfter("<p dir=\"ltr\">").substringBeforeLast("</p>")
 }
 
 private fun CharSequence.asAnnotatedString(

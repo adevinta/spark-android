@@ -21,6 +21,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: github.repository == 'adevinta/spark-android'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -35,12 +36,12 @@ jobs:
           distribution: 'temurin'
       - uses: ./.github/actions/setup-gradle-properties
       - name: Dokka
-        uses: gradle/gradle-build-action@6095a76664413da4c8c134ee32e8a8ae900f0f1f # v2.4.0
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
           # https://github.com/Kotlin/dokka/issues/1217
           arguments: dokkaHtmlMultiModule --no-configuration-cache
           gradle-home-cache-cleanup: true
-      - uses: actions/configure-pages@v3.0.5
+      - uses: actions/configure-pages@v3.0.6
       - uses: actions/upload-pages-artifact@v1.0.8
         with:
           path: 'build/dokka'
