@@ -18,15 +18,6 @@ _2023-04-18_
   than `SparkTheme.colors.background` which is useful to test custom surfaces for example.
 * 💄Fix `callout` Typo having a size of `14.sp` instead of `16.sp`
 
-#### Dependency Updates
-
-| Dependency                | Previous version | New version    |
-|---------------------------|------------------|----------------|
-| androidx-compose-compiler | 1.4.3            | 1.4.5          |
-| kotlin                    | 1.8.10           | 1.8.20         |
-| ksp                       | 1.5.31-1.0.0     | 1.8.20-1.0.11  |
-| lint                      | 31.1.0-alpha10   | 31.1.0-alpha11 |
-
 ## [0.0.3]
 
 _2023-04-05_
