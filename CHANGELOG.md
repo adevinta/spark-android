@@ -8,23 +8,20 @@
 
 _2023-04-18_
 
-### What's new since 0.1.0
+### What's new since 0.0.3
 
-* Migrate `Button` to the new spark spec with multiple sizes, styles and intents.
-* Migrate `Tags` to the new spark spec with multiple styles and intents.
-* Migrate `RadioButton` to the new spark spec with the ability to have content on both side now.
-* Migrate `Checkbox` to the new spark spec with the ability to have content on both side now.
-* Brand new Search component! Check out the Search design guidance and developer documentation for
-  more details.
-* Fix `callout` Typo having a size of `14.sp` instead of `16.sp`
-* Add the ability for `PreviewWrapper` to specify a different background color
+* 🆕 Migrate `Button` to the new spark spec with multiple sizes, styles and intents.
+* 🆕 Migrate `Tags` to the new spark spec with multiple styles and intents.
+* 🆕 Migrate `RadioButton` to the new spark spec with the ability to have content on both side now.
+* 🆕 Migrate `Checkbox` to the new spark spec with the ability to have content on both side now.
+* 🆕 Add the ability for `PreviewWrapper` to specify a different background color
   than `SparkTheme.colors.background` which is useful to test custom surfaces for example.
+* 💄Fix `callout` Typo having a size of `14.sp` instead of `16.sp`
 
 #### Dependency Updates
 
 | Dependency                | Previous version | New version    |
 |---------------------------|------------------|----------------|
-| android-gradlePlugin      | 8.1.0-alpha11    | 8.0.0          |
 | androidx-compose-compiler | 1.4.3            | 1.4.5          |
 | kotlin                    | 1.8.10           | 1.8.20         |
 | ksp                       | 1.5.31-1.0.0     | 1.8.20-1.0.11  |
