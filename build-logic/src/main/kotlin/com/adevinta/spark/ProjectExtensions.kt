@@ -44,7 +44,7 @@ internal val Project.isAndroid: Boolean get() = pluginManager.hasPlugin("com.and
 internal val Project.isJavaPlatform: Boolean get() = pluginManager.hasPlugin("org.gradle.java-platform")
 
 internal fun Project.configureAndroidExtension(
-    configure: CommonExtension<*, *, *, *, *>.() -> Unit,
+    configure: CommonExtension<*, *, *, *>.() -> Unit,
 ) = when {
     isAndroidApplication -> configure<ApplicationExtension>(configure)
     isAndroidLibrary -> configure<LibraryExtension>(configure)
