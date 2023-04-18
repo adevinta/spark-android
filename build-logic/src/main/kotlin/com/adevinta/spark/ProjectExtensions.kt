@@ -72,7 +72,7 @@ internal fun Project.configureKotlinCompiler(
 internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotlin(
     crossinline configure: T.() -> Unit = {},
 ): Unit = configure<T> {
-    jvmToolchain(11)
+    jvmToolchain(17)
     explicitApi()
     configure()
 }
