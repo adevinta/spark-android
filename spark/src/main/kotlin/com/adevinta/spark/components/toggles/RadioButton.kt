@@ -38,8 +38,9 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.SparkPreviewParam
-import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
+import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeVariant
+import com.adevinta.spark.tools.preview.UserType
 
 
 @Composable
@@ -161,7 +162,7 @@ public fun RadioButtonLabelled(
 )
 @Composable
 internal fun AllStatesRadioButtonPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
@@ -180,7 +181,7 @@ internal fun AllStatesRadioButtonPreview(
 )
 @Composable
 internal fun AllStatesRadioButtonLabelledPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
