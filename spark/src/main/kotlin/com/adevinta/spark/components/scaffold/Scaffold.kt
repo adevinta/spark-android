@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.consumedWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
@@ -175,7 +176,7 @@ private fun ScaffoldPreview(
             content = { innerPadding ->
                 LazyColumn(
                     // consume insets as scaffold doesn't do it by default
-                    modifier = Modifier.consumeWindowInsets(innerPadding),
+                    modifier = Modifier.consumedWindowInsets(innerPadding),
                     contentPadding = innerPadding,
                 ) {
                     items(count = 100) {
