@@ -18,7 +18,7 @@ _2023-04-18_
   more details.
 * Fix `callout` Typo having a size of `14.sp` instead of `16.sp`
 * Add the ability for `PreviewWrapper` to specify a different background color
-  than `sparkThem.colors.background` which is useful to test custom surfaces for example.
+  than `SparkTheme.colors.background` which is useful to test custom surfaces for example.
 
 #### Dependency Updates
 
