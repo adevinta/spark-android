@@ -229,11 +229,12 @@ public object SparkButtonDefaults {
      */
     @Composable
     internal fun outlinedBorder(color: Color): BorderStroke = BorderStroke(
-        width = OutlinedBorderSize,
+        width = if (LocalLegacyStyle.current) LegacyOutlinedBorderSize else OutlinedBorderSize,
         color = color,
     )
 
     private val OutlinedBorderSize = 2.0.dp
+    private val LegacyOutlinedBorderSize = 1.0.dp
 }
 
 @Preview
