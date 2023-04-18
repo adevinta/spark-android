@@ -25,7 +25,14 @@ package com.adevinta.spark
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskProvider
+import org.gradle.api.tasks.testing.Test
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat.SHORT
+import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
+import org.gradle.api.tasks.testing.logging.TestLogEvent.STARTED
 import org.gradle.configurationcache.extensions.capitalized
+import org.gradle.kotlin.dsl.withType
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 /**
@@ -51,6 +58,7 @@ internal object SparkUnitTests {
         project.pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
             createJcmCiUnitTestTask(project, globalTask)
         }
+        configureTestTasks(project)
     }
 
     private fun createJcmCiUnitTestTask(
@@ -85,6 +93,17 @@ internal object SparkUnitTests {
         project.tasks.register(COMPILE_CI_UNIT_TEST_NAME) {
             group = LifecycleBasePlugin.VERIFICATION_GROUP
             dependsOn(variantCompileUnitTestTaskName)
+        }
+    }
+
+    private fun configureTestTasks(project: Project) {
+        project.tasks.withType<Test> {
+            testLogging {
+                showStandardStreams = true
+                showStackTraces = true
+                events(STARTED, PASSED, FAILED, SKIPPED)
+                setExceptionFormat(SHORT)
+            }
         }
     }
 
