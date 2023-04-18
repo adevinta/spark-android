@@ -44,8 +44,9 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.SparkPreviewParam
-import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
+import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeVariant
+import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.Switch as MaterialSwitch
 
 @Composable
@@ -169,7 +170,7 @@ public fun SwitchLabelled(
 )
 @Composable
 internal fun AllStatesSwitchPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
@@ -189,7 +190,7 @@ internal fun AllStatesSwitchPreview(
 )
 @Composable
 internal fun AllStatesSwitchLabelledPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
