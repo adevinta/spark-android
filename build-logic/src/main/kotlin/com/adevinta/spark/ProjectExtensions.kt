@@ -49,7 +49,7 @@ internal fun Project.configureAndroidExtension(
     isAndroidApplication -> configure<ApplicationExtension>(configure)
     isAndroidLibrary -> configure<LibraryExtension>(configure)
     isAndroidTest -> configure<TestExtension>(configure)
-    else -> TODO("Unsupported project $this (com.adevinta.spark.isAndroid=$isAndroid)")
+    else -> TODO("Unsupported project $this (isAndroid=$isAndroid)")
 }
 
 internal fun Project.getVersionsCatalog(): VersionCatalog = runCatching {
