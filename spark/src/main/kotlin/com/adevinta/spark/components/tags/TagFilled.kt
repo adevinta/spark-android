@@ -23,7 +23,6 @@
 @file:Suppress("DEPRECATION")
 package com.adevinta.spark.components.tags
 
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -83,28 +82,6 @@ public fun TagFilled(
         modifier = modifier,
         leadingIcon = leadingIcon,
         tint = tint,
-    )
-}
-
-@Deprecated(
-    "Use TagFilled instead without `content` parameter",
-    ReplaceWith("TagFilled(text, modifier, intent, leadingIcon, tint)"),
-    level = DeprecationLevel.ERROR,
-)
-@Composable
-public fun TagFilled(
-    modifier: Modifier = Modifier,
-    colors: TagColors = TagDefaults.filledColors(TagIntent.Primary),
-    leadingIcon: SparkIcon? = null,
-    tint: Color? = null,
-    content: @Composable RowScope.() -> Unit,
-) {
-    BaseSparkTag(
-        colors = colors,
-        modifier = modifier,
-        leadingIcon = leadingIcon,
-        tint = tint,
-        content = content,
     )
 }
 

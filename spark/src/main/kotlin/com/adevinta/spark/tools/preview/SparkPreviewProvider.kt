@@ -33,21 +33,16 @@ public class SparkPreviewProvider : PreviewParameterProvider<Pair<ThemeVariant, 
 
 public class SparkPreviewParamProvider : CollectionPreviewParameterProvider<SparkPreviewParam>(
     listOf(
-        SparkPreviewParam(ThemeVariant.Light, UserType.Part, false),
-        SparkPreviewParam(ThemeVariant.Light, UserType.Pro, false),
-        SparkPreviewParam(ThemeVariant.Dark, UserType.Part, false),
-        SparkPreviewParam(ThemeVariant.Dark, UserType.Pro, false),
-        SparkPreviewParam(ThemeVariant.Light, UserType.Part, true),
-        SparkPreviewParam(ThemeVariant.Light, UserType.Pro, true),
-        SparkPreviewParam(ThemeVariant.Dark, UserType.Part, true),
-        SparkPreviewParam(ThemeVariant.Dark, UserType.Pro, true),
+        SparkPreviewParam(ThemeVariant.Light, UserType.Part),
+        SparkPreviewParam(ThemeVariant.Light, UserType.Pro),
+        SparkPreviewParam(ThemeVariant.Dark, UserType.Part),
+        SparkPreviewParam(ThemeVariant.Dark, UserType.Pro),
     ),
 )
 
 public data class SparkPreviewParam(
     val theme: ThemeVariant,
     val userType: UserType,
-    val isLegacy: Boolean,
 )
 
 /**
