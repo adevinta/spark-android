@@ -53,6 +53,7 @@ dependencies {
 
 gradlePlugin {
     plugins {
+        create("com.adevinta.spark.SparkRootPlugin", id = "com.adevinta.spark.root")
         create("com.adevinta.spark.SparkAndroidPlugin", id = "com.adevinta.spark.android")
         create("com.adevinta.spark.SparkAndroidApplicationPlugin", id = "com.adevinta.spark.android-application")
         create("com.adevinta.spark.SparkAndroidLibraryPlugin", id = "com.adevinta.spark.android-library")
