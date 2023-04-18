@@ -58,6 +58,7 @@ public class SparkAndroidPlugin : Plugin<Project> {
             }
 
             addKotlinBom()
+            SparkUnitTests.configureSubproject(this)
         }
     }
 }

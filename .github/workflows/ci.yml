@@ -73,13 +73,13 @@ jobs:
         id: test
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
-          arguments: testReleaseUnitTest verifyPaparazziRelease
+          arguments: globalCiUnitTest verifyPaparazziRelease
       - name: '📦 Archive JUnit reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports
         with:
-          html: '**/build/reports/tests/testReleaseUnitTest'
-          xml: '**/build/test-results/testReleaseUnitTest/**.xml'
+          html: '**/build/reports/tests/test*'
+          xml: '**/build/test-results/test*/**.xml'
       - name: '📦 Archive Paparazzi reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-paparazzi-reports

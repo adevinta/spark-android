@@ -27,6 +27,9 @@ import org.gradle.api.Project
 
 internal class SparkRootPlugin : Plugin<Project> {
     override fun apply(target: Project) {
+        with(target) {
+            SparkUnitTests.configureRootProject(project)
+        }
     }
 }
 

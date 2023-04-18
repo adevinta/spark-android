@@ -22,22 +22,6 @@
 
 package com.adevinta.spark
 
+import java.util.Locale
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
-
-internal class SparkKotlinJvmPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            apply(plugin = "org.jetbrains.kotlin.jvm")
-
-            configureKotlin<KotlinJvmProjectExtension>()
-            configureKotlinCompiler()
-
-            addKotlinBom()
-            SparkUnitTests.configureSubproject(this)
-        }
-    }
-}
+public fun String.capitalized(): String = replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
