@@ -26,7 +26,7 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
       - uses: gradle/wrapper-validation-action@8d49e559aae34d3e0eb16cde532684bc9702762b # v1.0.6
       - uses: actionsdesk/lfs-warning@e5f9a4c21f4bee104db7c0f23954dde59e5df909 # v3.2
-      - uses: gradle/gradle-build-action@6095a76664413da4c8c134ee32e8a8ae900f0f1f # v2.4.0
+      - uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
           arguments: dependencyGuard --quiet
           gradle-home-cache-cleanup: true
@@ -46,13 +46,13 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
 
       - name: '🐘 Setup Gradle'
-        uses: gradle/gradle-build-action@6095a76664413da4c8c134ee32e8a8ae900f0f1f # v2.4.0
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
           gradle-home-cache-cleanup: true
 
       - name: '👷 Build'
         id: build
-        uses: gradle/gradle-build-action@6095a76664413da4c8c134ee32e8a8ae900f0f1f # v2.4.0
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
           arguments: assembleRelease
       - name: '📦 Archive AARs'
@@ -66,7 +66,7 @@ jobs:
 
       - name: '🧑‍🔬 Test'
         id: test
-        uses: gradle/gradle-build-action@6095a76664413da4c8c134ee32e8a8ae900f0f1f # v2.4.0
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
           arguments: testReleaseUnitTest verifyPaparazziRelease
       - name: '📦 Archive JUnit reports'
@@ -88,7 +88,7 @@ jobs:
 
       - name: '🕵️ Lint'
         id: lint
-        uses: gradle/gradle-build-action@6095a76664413da4c8c134ee32e8a8ae900f0f1f # v2.4.0
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
           arguments: lintRelease
       - name: '📦 Archive Lint reports'
@@ -113,7 +113,7 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
 
       - name: '📋 Build Dokka'
-        uses: gradle/gradle-build-action@6095a76664413da4c8c134ee32e8a8ae900f0f1f # v2.4.0
+        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
           # https://github.com/Kotlin/dokka/issues/1217
           arguments: dokkaHtmlMultiModule --no-configuration-cache

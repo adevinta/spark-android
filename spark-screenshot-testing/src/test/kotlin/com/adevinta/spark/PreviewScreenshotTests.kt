@@ -73,6 +73,7 @@ internal class PreviewScreenshotTests {
                 } catch (t: Throwable) {
                     // TODO-@soulcramer (22-48-2023): Should we display the throwable message here too?
                     failure = true
+                    throw t
                 }
             }
         }

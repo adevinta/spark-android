@@ -44,8 +44,9 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.SparkPreviewParam
-import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
+import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeVariant
+import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.Switch as MaterialSwitch
 
 @Composable
@@ -128,7 +129,8 @@ public fun Switch(
  * [Interaction]s for this Switch. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this Switch in different [Interaction]s.
- * @param startContent The start content displayed before the switch, usually a Text composable
+ * @param contentSide The side where we want to show the label, default to [ContentSide.Start].
+ * @param content The content displayed before the switch, usually a Text composable shown at the start.
  */
 @Composable
 public fun SwitchLabelled(
@@ -137,7 +139,8 @@ public fun SwitchLabelled(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    startContent: @Composable RowScope.() -> Unit,
+    contentSide: ContentSide = ContentSide.Start,
+    content: @Composable RowScope.() -> Unit,
 ) {
     SparkToggleLabelledContainer(
         state = ToggleableState(checked),
@@ -156,9 +159,8 @@ public fun SwitchLabelled(
         } else null,
         modifier = modifier.selectableGroup(),
         enabled = enabled,
-        startContent = {
-            startContent()
-        },
+        contentSide = contentSide,
+        content = content,
     )
 }
 
@@ -168,7 +170,7 @@ public fun SwitchLabelled(
 )
 @Composable
 internal fun AllStatesSwitchPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
@@ -188,7 +190,7 @@ internal fun AllStatesSwitchPreview(
 )
 @Composable
 internal fun AllStatesSwitchLabelledPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {

@@ -38,8 +38,9 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.SparkPreviewParam
-import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
+import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeVariant
+import com.adevinta.spark.tools.preview.UserType
 
 @Composable
 @InternalSparkApi
@@ -119,7 +120,8 @@ public fun Checkbox(
  * [Interaction]s for this Checkbox. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this Checkbox in different [Interaction]s.
- * @param endContent The end content displayed after the checkbox, usually a Text composable
+ * @param contentSide The side where we want to show the label, default to [ContentSide.End].
+ * @param content The content displayed after the checkbox, usually a Text composable shown at the end.
  */
 @Composable
 public fun CheckboxLabelled(
@@ -128,7 +130,8 @@ public fun CheckboxLabelled(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    endContent: @Composable RowScope.() -> Unit,
+    contentSide: ContentSide = ContentSide.End,
+    content: @Composable RowScope.() -> Unit,
 ) {
     SparkToggleLabelledContainer(
         state = state,
@@ -145,7 +148,8 @@ public fun CheckboxLabelled(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        endContent = endContent,
+        contentSide = contentSide,
+        content = content,
     )
 }
 
@@ -155,7 +159,7 @@ public fun CheckboxLabelled(
 )
 @Composable
 internal fun AllStatesCheckboxPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
@@ -176,7 +180,7 @@ internal fun AllStatesCheckboxPreview(
 )
 @Composable
 internal fun AllStatesCheckBoxLabelledPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
