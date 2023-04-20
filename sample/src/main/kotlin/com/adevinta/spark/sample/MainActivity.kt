@@ -22,15 +22,39 @@
 
 package com.adevinta.spark.sample
 
-import android.app.Activity
 import android.os.Bundle
-import com.adevinta.spark.getBrowserIntent
-import com.airbnb.android.showkase.models.Showkase
+import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.core.view.WindowCompat
+import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
+import com.airbnb.android.showkase.models.ShowkaseProvider
 
-public class MainActivity : Activity() {
+public class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Showkase.getBrowserIntent(this))
-        finish()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        setContent {
+            val groupedComponentsList = getShowkaseProviderElements()
+            val showkaseBrowserScreenMetadata = remember { mutableStateOf(ShowkaseBrowserScreenMetadata()) }
+            if (groupedComponentsList.isNotEmpty()) {
+                ShowkaseBrowserApp(
+                    groupedComponentMap = groupedComponentsList.groupBy { it.group },
+                    showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                )
+            }
+        }
+    }
+
+    private fun getShowkaseProviderElements(): List<ShowkaseBrowserComponent> = try {
+        val showkaseComponentProvider =
+            Class.forName("com.adevinta.spark.SparkShowkaseRootModuleCodegen").newInstance()
+
+        val showkaseMetadata = (showkaseComponentProvider as ShowkaseProvider).metadata()
+
+        showkaseMetadata.componentList
+    } catch (exception: ClassNotFoundException) {
+        emptyList()
     }
 }
