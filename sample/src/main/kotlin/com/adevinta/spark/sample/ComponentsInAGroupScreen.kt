@@ -52,15 +52,13 @@ internal fun ShowkaseComponentsInAGroupScreen(
     navController: NavHostController,
     contentPadding: PaddingValues,
 ) {
-    val groupByComponentName =
-        groupedComponentMap[showkaseBrowserScreenMetadata.value.currentGroup]
-            ?.groupBy { it.componentName } ?: return
+    val groupByComponentName = groupedComponentMap[showkaseBrowserScreenMetadata.value.currentGroup]
+        ?.groupBy { it.componentName } ?: return
     // Use the default style as the preview if its available or take the first style for the component
     val componentList = groupByComponentName.values.map {
         it.firstOrNull { it.isDefaultStyle } ?: it.first()
     }
-    val filteredList =
-        getFilteredSearchList(componentList, showkaseBrowserScreenMetadata)
+    val filteredList = getFilteredSearchList(componentList, showkaseBrowserScreenMetadata)
     LazyColumn(
         modifier = Modifier.consumedWindowInsets(contentPadding),
         contentPadding = PaddingValues(
@@ -99,7 +97,7 @@ internal fun ShowkaseComponentsInAGroupScreen(
                         // composableContainerModifier does not have any clickable modifiers, this column has no
                         // impact and the touches go through to the component(this happens in the "Component
                         // Detail" screen.
-                        Column(
+                        Box(
                             modifier = Modifier
                                 .matchParentSize()
                                 .clickable {
@@ -113,7 +111,9 @@ internal fun ShowkaseComponentsInAGroupScreen(
                                     }
                                     navController.navigate(CurrentScreen.COMPONENT_DETAIL)
                                 },
-                        ) {}
+                        ) {
+                            // empty content to catch the touch events
+                        }
                     }
 
                 }

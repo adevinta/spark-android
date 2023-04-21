@@ -66,5 +66,5 @@ internal fun MutableState<ShowkaseBrowserScreenMetadata>.clearActiveSearch() {
 }
 
 internal fun <T> MutableState<T>.update(block: T.() -> T) {
-    value = this.component1().run(block)
+    value = block(value)
 }

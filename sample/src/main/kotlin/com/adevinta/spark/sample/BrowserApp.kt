@@ -65,7 +65,6 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
-import com.airbnb.android.showkase.models.ShowkaseCategory
 import com.airbnb.android.showkase.ui.SemanticsUtils.lineCountVal
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -87,12 +86,11 @@ internal fun ShowkaseBrowserApp(
                     AppBar(
                         navController = navController,
                         scrollBehavior = scrollBehavior,
-                        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                        metadata = showkaseBrowserScreenMetadata,
                     )
                 },
                 content = {
                     BodyContent(
-//                        modifier = Modifier.fillMaxSize(),
                         contentPadding = it,
                         navController = navController,
                         groupedComponentMap = groupedComponentMap,
@@ -109,7 +107,7 @@ internal fun ShowkaseBrowserApp(
 internal fun AppBar(
     navController: NavHostController,
     scrollBehavior: TopAppBarScrollBehavior,
-    showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
+    metadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -117,29 +115,29 @@ internal fun AppBar(
         scrollBehavior = scrollBehavior,
         title = {
             SampleAppBarTitle(
-                isSearchActive = showkaseBrowserScreenMetadata.value.isSearchActive,
-                currentGroup = showkaseBrowserScreenMetadata.value.currentGroup,
-                currentComponentName = showkaseBrowserScreenMetadata.value.currentComponentName,
-                currentComponentStyleName = showkaseBrowserScreenMetadata.value.currentComponentStyleName,
-                currentRoute = currentRoute,
-                searchQuery = showkaseBrowserScreenMetadata.value.searchQuery,
+                isSearchActive = metadata.value.isSearchActive,
+                group = metadata.value.currentGroup,
+                componentName = metadata.value.currentComponentName,
+                componentStyleName = metadata.value.currentComponentStyleName,
+                route = currentRoute,
+                searchQuery = metadata.value.searchQuery,
                 searchQueryValueChange = {
-                    showkaseBrowserScreenMetadata.value =
-                        showkaseBrowserScreenMetadata.value.copy(searchQuery = it)
+                    metadata.value =
+                        metadata.value.copy(searchQuery = it)
                 },
                 onCloseSearchFieldClick = {
-                    showkaseBrowserScreenMetadata.value =
-                        showkaseBrowserScreenMetadata.value.copy(isSearchActive = false)
+                    metadata.value =
+                        metadata.value.copy(isSearchActive = false)
                 },
                 onClearSearchField = {
-                    showkaseBrowserScreenMetadata.value =
-                        showkaseBrowserScreenMetadata.value.copy(searchQuery = "")
+                    metadata.value =
+                        metadata.value.copy(searchQuery = "")
                 },
             )
         },
         actions = {
             ShowkaseAppBarActions(
-                showkaseBrowserScreenMetadata,
+                metadata,
                 currentRoute,
             )
         },
@@ -150,10 +148,10 @@ internal fun AppBar(
 @Composable
 private fun SampleAppBarTitle(
     isSearchActive: Boolean,
-    currentGroup: String?,
-    currentComponentName: String?,
-    currentComponentStyleName: String?,
-    currentRoute: String?,
+    group: String?,
+    componentName: String?,
+    componentStyleName: String?,
+    route: String?,
     searchQuery: String?,
     searchQueryValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -178,11 +176,11 @@ private fun SampleAppBarTitle(
         enter = slideInHorizontally() + expandIn(),
     ) {
         AppBarTitle(
-            currentRoute = currentRoute,
+            currentRoute = route,
             modifier = modifier,
-            currentGroup = currentGroup,
-            currentComponentName = currentComponentName,
-            currentComponentStyleName = currentComponentStyleName,
+            currentGroup = group,
+            currentComponentName = componentName,
+            currentComponentStyleName = componentStyleName,
         )
     }
 }
@@ -196,9 +194,6 @@ private fun AppBarTitle(
     currentComponentStyleName: String?,
 ) {
     when {
-        currentRoute == CurrentScreen.CATEGORIES.name -> {
-            ToolbarTitle(stringResource(R.string.app_name), modifier)
-        }
 
         currentRoute == CurrentScreen.COMPONENT_GROUPS.name -> {
             ToolbarTitle(stringResource(R.string.components_category), modifier)
@@ -288,8 +283,7 @@ private fun ShowkaseAppBarActions(
         metadata.value.isSearchActive -> {
         }
 
-        currentRoute == CurrentScreen.COMPONENT_DETAIL.name ||
-                currentRoute == CurrentScreen.CATEGORIES.name -> {
+        currentRoute == CurrentScreen.COMPONENT_DETAIL.name -> {
         }
 
         else -> {
@@ -313,11 +307,10 @@ internal fun BodyContent(
     groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
-    val startDestination = startDestination()
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = startDestination,
+        startDestination = CurrentScreen.COMPONENT_GROUPS.name,
         builder = {
             navGraph(
                 navController,
@@ -328,9 +321,6 @@ internal fun BodyContent(
         },
     )
 }
-
-private fun startDestination(
-) = CurrentScreen.COMPONENT_GROUPS.name
 
 private fun NavGraphBuilder.navGraph(
     navController: NavHostController,
@@ -382,14 +372,6 @@ private fun NavGraphBuilder.fullNavGraph(
     groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
-    composable(CurrentScreen.CATEGORIES.name) {
-        ShowkaseCategoriesScreen(
-            showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
-            navController = navController,
-            contentPadding = contentPadding,
-            categoryMetadataMap = getCategoryMetadataMap(groupedComponentMap),
-        )
-    }
     componentsNavGraph(
         navController = navController,
         groupedComponentMap = groupedComponentMap,
@@ -398,20 +380,7 @@ private fun NavGraphBuilder.fullNavGraph(
     )
 }
 
-private fun getCategoryMetadataMap(
-    groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
-) = mapOf(
-    ShowkaseCategory.COMPONENTS to groupedComponentMap.flatComponentCount(),
-)
-
-private fun Map<String, List<ShowkaseBrowserComponent>>.flatComponentCount() = flatMap { entry ->
-    // Only group name and component name is taken into account for the count to ensure that the
-    // styles of the same component aren't added  in this calculation.
-    entry.value.distinctBy { "${it.group}_${it.componentName}" }
-}.count()
-
 /**
  * Helper function to navigate to the passed [CurrentScreen]
  */
-internal fun NavHostController.navigate(destinationScreen: CurrentScreen) =
-    navigate(destinationScreen.name)
+internal fun NavHostController.navigate(destinationScreen: CurrentScreen) = navigate(destinationScreen.name)
