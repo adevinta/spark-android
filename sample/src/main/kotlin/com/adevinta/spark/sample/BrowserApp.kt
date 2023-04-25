@@ -34,7 +34,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,11 +41,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -62,21 +63,42 @@ import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.sample.themes.FontScaleMode
+import com.adevinta.spark.sample.themes.TextDirection
+import com.adevinta.spark.sample.themes.Theme
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.airbnb.android.showkase.ui.SemanticsUtils.lineCountVal
+import com.airbnb.android.showkase.ui.ToolbarTitle
+import com.google.accompanist.testharness.TestHarness
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ShowkaseBrowserApp(
+    theme: Theme,
+    onThemeChange: (theme: Theme) -> Unit,
     groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
     val colors = if (isSystemInDarkTheme()) darkSparkColors() else lightSparkColors()
-    SparkTheme(colors = colors) {
-        CompositionLocalProvider(
-            LocalInspectionMode provides true,
+
+    SparkTheme(
+        colors = colors,
+    ) {
+        val layoutDirection = when (theme.textDirection) {
+            TextDirection.LTR -> LayoutDirection.Ltr
+            TextDirection.RTL -> LayoutDirection.Rtl
+            TextDirection.System -> LocalLayoutDirection.current
+        }
+
+        TestHarness(
+            layoutDirection = layoutDirection,
+            fontScale = if (theme.fontScaleMode == FontScaleMode.System) {
+                LocalDensity.current.fontScale
+            } else {
+                theme.fontScale
+            },
         ) {
             val navController = rememberNavController()
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -301,6 +323,8 @@ private fun ShowkaseAppBarActions(
 
 @Composable
 internal fun BodyContent(
+    theme: Theme,
+    onThemeChange: (theme: Theme) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues,
     navController: NavHostController,
@@ -323,6 +347,8 @@ internal fun BodyContent(
 }
 
 private fun NavGraphBuilder.navGraph(
+    theme: Theme,
+    onThemeChange: (theme: Theme) -> Unit,
     navController: NavHostController,
     contentPadding: PaddingValues,
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
@@ -335,6 +361,8 @@ private fun NavGraphBuilder.navGraph(
 )
 
 private fun NavGraphBuilder.componentsNavGraph(
+    theme: Theme,
+    onThemeChange: (theme: Theme) -> Unit,
     navController: NavHostController,
     groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
     contentPadding: PaddingValues,

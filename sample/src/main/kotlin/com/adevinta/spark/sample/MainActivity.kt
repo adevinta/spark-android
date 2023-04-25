@@ -40,6 +40,7 @@ public class MainActivity : AppCompatActivity() {
             val showkaseBrowserScreenMetadata = remember { mutableStateOf(ShowkaseBrowserScreenMetadata()) }
             if (groupedComponentsList.isNotEmpty()) {
                 ShowkaseBrowserApp(
+                    theme = theme,
                     groupedComponentMap = groupedComponentsList.groupBy { it.group },
                     showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
                 )

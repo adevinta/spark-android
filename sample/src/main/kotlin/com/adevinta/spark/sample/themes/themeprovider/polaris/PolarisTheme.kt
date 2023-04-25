@@ -20,29 +20,31 @@
  * SOFTWARE.
  */
 
-plugins {
-    id("com.adevinta.spark.android-application")
-    id("com.adevinta.spark.android-compose")
-}
+package com.adevinta.spark.sample.themes.themeprovider.polaris
 
-android {
-    namespace = "com.adevinta.spark.sample"
-    defaultConfig.applicationId = "com.adevinta.spark.sample"
-}
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
+import com.adevinta.spark.sample.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkShapes
+import com.adevinta.spark.tokens.SparkTypography
+import com.adevinta.spark.tokens.darkSparkColors
+import com.adevinta.spark.tokens.lightSparkColors
+import com.adevinta.spark.tokens.sparkShapes
+import com.adevinta.spark.tokens.sparkTypography
 
-dependencies {
-    implementation(projects.spark)
+public object PolarisTheme : ThemeProvider {
+    @Composable
+    override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
+        return when {
+            useDarkColors || isSystemInDarkTheme() -> darkSparkColors()
+            else -> lightSparkColors()
+        }
+    }
 
-    implementation(libs.airbnb.showkase)
+    @Composable
+    override fun shapes(isLegacy: Boolean): SparkShapes = sparkShapes()
 
-    implementation(libs.accompanist.testharness)
-
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.material3)
-
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.appCompat)
-    implementation(libs.androidx.navigation.compose)
+    @Composable
+    override fun typography(isLegacy: Boolean): SparkTypography = sparkTypography()
 }
