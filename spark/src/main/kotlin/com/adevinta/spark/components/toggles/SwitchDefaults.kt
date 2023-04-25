@@ -22,12 +22,11 @@
 
 package com.adevinta.spark.components.toggles
 
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SwitchDefaults as MaterialSwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import com.adevinta.spark.SparkTheme
+import androidx.compose.material3.SwitchDefaults as MaterialSwitchDefaults
 
 internal object SwitchDefaults {
 
@@ -40,21 +39,21 @@ internal object SwitchDefaults {
         uncheckedThumbColor: Color = SparkTheme.colors.surface,
         uncheckedTrackColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim4),
         uncheckedBorderColor: Color = Color.Transparent,
-        uncheckedIconColor: Color =SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim4),
+        uncheckedIconColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim4),
         disabledCheckedThumbColor: Color = checkedThumbColor.copy(alpha = SparkTheme.colors.dim3)
-            .compositeOver(MaterialTheme.colorScheme.surface),
+            .compositeOver(SparkTheme.colors.surface),
         disabledCheckedTrackColor: Color = checkedTrackColor.copy(alpha = SparkTheme.colors.dim4)
-            .compositeOver(MaterialTheme.colorScheme.surface),
+            .compositeOver(SparkTheme.colors.surface),
         disabledCheckedBorderColor: Color = Color.Transparent,
         disabledCheckedIconColor: Color = checkedIconColor.copy(alpha = SparkTheme.colors.dim3)
-            .compositeOver(MaterialTheme.colorScheme.surface),
+            .compositeOver(SparkTheme.colors.surface),
         disabledUncheckedThumbColor: Color = uncheckedThumbColor.copy(alpha = SparkTheme.colors.dim3)
-            .compositeOver(MaterialTheme.colorScheme.surface),
+            .compositeOver(SparkTheme.colors.surface),
         disabledUncheckedTrackColor: Color = uncheckedTrackColor.copy(alpha = SparkTheme.colors.dim5)
-            .compositeOver(MaterialTheme.colorScheme.surface),
+            .compositeOver(SparkTheme.colors.surface),
         disabledUncheckedBorderColor: Color = Color.Transparent,
         disabledUncheckedIconColor: Color = uncheckedIconColor.copy(alpha = SparkTheme.colors.dim5)
-            .compositeOver(MaterialTheme.colorScheme.surface),
+            .compositeOver(SparkTheme.colors.surface),
     ) = MaterialSwitchDefaults.colors(
         checkedThumbColor = checkedThumbColor,
         checkedTrackColor = checkedTrackColor,

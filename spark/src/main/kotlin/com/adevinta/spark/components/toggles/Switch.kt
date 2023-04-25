@@ -27,6 +27,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.Text
@@ -80,6 +81,7 @@ internal fun SparkSwitch(
         colors = SwitchDefaults.colors(),
         modifier = modifier
             .minimumTouchTargetSize()
+            .padding(horizontal = 8.dp)
             .sparkUsageOverlay(),
     )
 }
@@ -161,6 +163,10 @@ public fun SwitchLabelled(
                 interactionSource = interactionSource,
                 enabled = enabled,
                 modifier = Modifier.minimumTouchTargetSize(),
+                /*.
+                                ifTrue(contentSide == ContentSide.End) {
+                                    padding(end = 8.dp)
+                                }*/
             )
         },
         role = Role.Switch,
@@ -184,7 +190,7 @@ internal fun AllStatesSwitchPreview(
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row {
             Switch(checked = true, onCheckedChange = {}, enabled = true)
             Switch(checked = true, onCheckedChange = {}, enabled = false)
             Switch(checked = false, onCheckedChange = {}, enabled = true)
@@ -214,6 +220,15 @@ internal fun AllStatesSwitchLabelledPreview(
             enabled = true,
             checked = true, onCheckedChange = {},
         ) { Text(text = "Switch On") }
+        SwitchLabelled(
+            enabled = true,
+            checked = true, onCheckedChange = {},
+        ) { Text(text = "Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On ") }
+        SwitchLabelled(
+            enabled = true,
+            checked = true, onCheckedChange = {},
+            contentSide = ContentSide.End,
+        ) { Text(text = "Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On ") }
         SwitchLabelled(
             enabled = false,
             checked = true, onCheckedChange = {},
