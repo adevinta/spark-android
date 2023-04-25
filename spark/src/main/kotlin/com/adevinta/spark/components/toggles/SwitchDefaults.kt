@@ -37,23 +37,19 @@ internal object SwitchDefaults {
         checkedBorderColor: Color = Color.Transparent,
         checkedIconColor: Color = SparkTheme.colors.primary,
         uncheckedThumbColor: Color = SparkTheme.colors.surface,
-        uncheckedTrackColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim4),
+        uncheckedTrackColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim4)
+            .compositeOver(SparkTheme.colors.surface),
         uncheckedBorderColor: Color = Color.Transparent,
-        uncheckedIconColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim4),
-        disabledCheckedThumbColor: Color = checkedThumbColor.copy(alpha = SparkTheme.colors.dim3)
+        uncheckedIconColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim4)
             .compositeOver(SparkTheme.colors.surface),
-        disabledCheckedTrackColor: Color = checkedTrackColor.copy(alpha = SparkTheme.colors.dim4)
-            .compositeOver(SparkTheme.colors.surface),
+        disabledCheckedThumbColor: Color = SparkTheme.colors.surface,
+        disabledCheckedTrackColor: Color = SparkTheme.colors.primaryContainer,
         disabledCheckedBorderColor: Color = Color.Transparent,
-        disabledCheckedIconColor: Color = checkedIconColor.copy(alpha = SparkTheme.colors.dim3)
-            .compositeOver(SparkTheme.colors.surface),
-        disabledUncheckedThumbColor: Color = uncheckedThumbColor.copy(alpha = SparkTheme.colors.dim3)
-            .compositeOver(SparkTheme.colors.surface),
-        disabledUncheckedTrackColor: Color = uncheckedTrackColor.copy(alpha = SparkTheme.colors.dim5)
-            .compositeOver(SparkTheme.colors.surface),
+        disabledCheckedIconColor: Color = SparkTheme.colors.primaryContainer,
+        disabledUncheckedThumbColor: Color = SparkTheme.colors.surface,
+        disabledUncheckedTrackColor: Color = SparkTheme.colors.neutralContainer,
         disabledUncheckedBorderColor: Color = Color.Transparent,
-        disabledUncheckedIconColor: Color = uncheckedIconColor.copy(alpha = SparkTheme.colors.dim5)
-            .compositeOver(SparkTheme.colors.surface),
+        disabledUncheckedIconColor: Color = SparkTheme.colors.neutralContainer,
     ) = MaterialSwitchDefaults.colors(
         checkedThumbColor = checkedThumbColor,
         checkedTrackColor = checkedTrackColor,

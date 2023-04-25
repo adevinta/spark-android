@@ -24,7 +24,6 @@ package com.adevinta.spark.components.toggles
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
@@ -57,15 +56,15 @@ internal fun SparkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    selectedIcon: SparkIcon? = SparkIcon.Toggles.Check.Simple,
-    unSelectedIcon: SparkIcon? = SparkIcon.Arrows.Close.Default,
+    checkedIcon: SparkIcon? = SparkIcon.Toggles.Check.Simple,
+    uncheckedIcon: SparkIcon? = SparkIcon.Arrows.Close.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     // Icon isn't focusable, no need for content description
-    val icon: (@Composable () -> Unit)? = if (selectedIcon != null && unSelectedIcon != null) {
+    val icon: (@Composable () -> Unit)? = if (checkedIcon != null && uncheckedIcon != null) {
         {
             Icon(
-                sparkIcon = if (checked) SparkIcon.Toggles.Check.Simple else SparkIcon.Arrows.Close.Default,
+                sparkIcon = if (checked) checkedIcon else uncheckedIcon,
                 contentDescription = null,
                 modifier = Modifier.size(12.dp),
             )
@@ -94,10 +93,10 @@ internal fun SparkSwitch(
  *
  * @param checked whether or not this component is checked
  * @param onCheckedChange callback to be invoked when Switch is being clicked, therefore the change of checked state is requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.
- * @param modifier Modifier to be applied to the layout of the switch layout
+ * @param modifier Modifier to be applied to  switch layout
  * @param enabled whether the component is enabled or grayed out
- * @param selectedIcon thumb's icon when [checked] state is set to true
- * @param unSelectedIcon thumb's icon when [checked] state is set to false
+ * @param checkedIcon thumb's icon when [checked] state is set to true
+ * @param uncheckedIcon thumb's icon when [checked] state is set to false
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this Switch. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
@@ -109,8 +108,8 @@ public fun Switch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    selectedIcon: SparkIcon? = SparkIcon.Toggles.Check.Simple,
-    unSelectedIcon: SparkIcon? = SparkIcon.Arrows.Close.Default,
+    checkedIcon: SparkIcon? = SparkIcon.Toggles.Check.Simple,
+    uncheckedIcon: SparkIcon? = SparkIcon.Arrows.Close.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     SparkSwitch(
@@ -118,8 +117,8 @@ public fun Switch(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
-        selectedIcon = selectedIcon,
-        unSelectedIcon = unSelectedIcon,
+        checkedIcon = checkedIcon,
+        uncheckedIcon = uncheckedIcon,
         interactionSource = interactionSource,
     )
 }
@@ -150,6 +149,8 @@ public fun SwitchLabelled(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    checkedIcon: SparkIcon? = SparkIcon.Toggles.Check.Simple,
+    uncheckedIcon: SparkIcon? = SparkIcon.Arrows.Close.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     contentSide: ContentSide = ContentSide.Start,
     content: @Composable RowScope.() -> Unit,
@@ -162,11 +163,9 @@ public fun SwitchLabelled(
                 onCheckedChange = null,
                 interactionSource = interactionSource,
                 enabled = enabled,
+                checkedIcon = checkedIcon,
+                uncheckedIcon = uncheckedIcon,
                 modifier = Modifier.minimumTouchTargetSize(),
-                /*.
-                                ifTrue(contentSide == ContentSide.End) {
-                                    padding(end = 8.dp)
-                                }*/
             )
         },
         role = Role.Switch,
@@ -192,15 +191,45 @@ internal fun AllStatesSwitchPreview(
     PreviewTheme(theme, userType) {
         Row {
             Switch(checked = true, onCheckedChange = {}, enabled = true)
-            Switch(checked = true, onCheckedChange = {}, enabled = false)
             Switch(checked = false, onCheckedChange = {}, enabled = true)
+            Switch(checked = true, onCheckedChange = {}, enabled = false)
             Switch(checked = false, onCheckedChange = {}, enabled = false)
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Switch(checked = true, onCheckedChange = {}, enabled = true, selectedIcon = null)
-            Switch(checked = true, onCheckedChange = {}, enabled = false, selectedIcon = null)
-            Switch(checked = false, onCheckedChange = {}, enabled = true, selectedIcon = null)
-            Switch(checked = false, onCheckedChange = {}, enabled = false, selectedIcon = null)
+        Row {
+            Switch(checked = true, onCheckedChange = {}, enabled = true, checkedIcon = null)
+            Switch(checked = false, onCheckedChange = {}, enabled = true, checkedIcon = null)
+            Switch(checked = true, onCheckedChange = {}, enabled = false, checkedIcon = null)
+            Switch(checked = false, onCheckedChange = {}, enabled = false, checkedIcon = null)
+        }
+        Row {
+            Switch(
+                checked = true,
+                onCheckedChange = {},
+                enabled = true,
+                checkedIcon = SparkIcon.Notifications.Active,
+                uncheckedIcon = SparkIcon.Notifications.Disable,
+            )
+            Switch(
+                checked = false,
+                onCheckedChange = {},
+                enabled = true,
+                checkedIcon = SparkIcon.Notifications.Active,
+                uncheckedIcon = SparkIcon.Notifications.Disable,
+            )
+            Switch(
+                checked = true,
+                onCheckedChange = {},
+                enabled = false,
+                checkedIcon = SparkIcon.Notifications.Active,
+                uncheckedIcon = SparkIcon.Notifications.Disable,
+            )
+            Switch(
+                checked = false,
+                onCheckedChange = {},
+                enabled = false,
+                checkedIcon = SparkIcon.Notifications.Active,
+                uncheckedIcon = SparkIcon.Notifications.Disable,
+            )
         }
     }
 }
@@ -208,38 +237,36 @@ internal fun AllStatesSwitchPreview(
 
 @Preview(
     group = "Toggles",
-    name = "SwitchLabelled",
+    name = "SwitchLabelled Content Start",
 )
 @Composable
 internal fun AllStatesSwitchLabelledPreview(
     @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
+    val text =
+        "This is an example of a multi-line text which is very long and in which the user should read all the information."
     PreviewTheme(theme, userType) {
         SwitchLabelled(
             enabled = true,
             checked = true, onCheckedChange = {},
-        ) { Text(text = "Switch On") }
+        ) { Text(text = "Label") }
         SwitchLabelled(
             enabled = true,
-            checked = true, onCheckedChange = {},
-        ) { Text(text = "Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On ") }
-        SwitchLabelled(
-            enabled = true,
-            checked = true, onCheckedChange = {},
+            checked = false,
             contentSide = ContentSide.End,
-        ) { Text(text = "Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On Switch On ") }
+            onCheckedChange = {},
+        ) { Text("Label") }
         SwitchLabelled(
             enabled = false,
             checked = true, onCheckedChange = {},
-        ) { Text("Switch On disabled") }
-        SwitchLabelled(
-            enabled = true,
-            checked = false, onCheckedChange = {},
-        ) { Text("Switch Off") }
+        ) { Text(text) }
         SwitchLabelled(
             enabled = false,
-            checked = false, onCheckedChange = {},
-        ) { Text("Switch Off disabled") }
+            checked = false,
+            contentSide = ContentSide.End,
+            onCheckedChange = {},
+        ) { Text(text) }
     }
 }
+
