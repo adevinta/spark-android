@@ -105,7 +105,15 @@ internal fun GroupsScreen(
 
     val activity = LocalContext.current as AppCompatActivity
     BackHandler {
-        goBackToCategoriesScreen(showkaseBrowserScreenMetadata, navController) { activity.finish() }
+        when {
+            showkaseBrowserScreenMetadata.value.isSearchActive -> {
+                showkaseBrowserScreenMetadata.clearActiveSearch()
+            }
+
+            navController.currentDestination?.id == navController.graph.startDestinationId -> {
+                activity.finish()
+            }
+        }
     }
 }
 
