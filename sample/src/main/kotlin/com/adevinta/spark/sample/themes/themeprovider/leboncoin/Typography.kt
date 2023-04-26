@@ -29,83 +29,83 @@ import androidx.compose.ui.unit.sp
 import com.adevinta.spark.tokens.SparkTypography
 import com.adevinta.spark.tokens.sparkTypography
 
-internal val display1Type = TextStyle(
+private val display1Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 40.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 56.sp,
 )
 
-internal val display2Type = TextStyle(
+private val display2Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 32.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 44.sp,
 )
 
-internal val display3Type = TextStyle(
+private val display3Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 24.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 32.sp,
 )
 
-internal val headline1Type = TextStyle(
+private val headline1Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 20.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 28.sp,
 )
 
-internal val headline2Type = TextStyle(
+private val headline2Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 18.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 24.sp,
 )
 
-internal val subheadType = TextStyle(
+private val subheadType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 16.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 24.sp,
 )
 
-internal val body1Type = TextStyle(
+private val body1Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 16.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 24.sp,
 )
 
-internal val body2Type = TextStyle(
+private val body2Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 14.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 20.sp,
 )
 
-internal val captionType = TextStyle(
+private val captionType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 12.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 16.sp,
 )
 
-internal val smallType = TextStyle(
+private val smallType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 10.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 10.sp,
 )
 
-internal val calloutType = TextStyle(
+private val calloutType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 14.sp,
     fontWeight = FontWeight.Bold,
 )
 
-internal val tile1Type = TextStyle(
+private val tile1Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 24.sp,
     fontWeight = FontWeight.SemiBold,
@@ -113,7 +113,7 @@ internal val tile1Type = TextStyle(
     letterSpacing = 0.sp,
 )
 
-internal val title2Type = TextStyle(
+private val title2Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 20.sp,
     fontWeight = FontWeight.SemiBold,
@@ -121,7 +121,7 @@ internal val title2Type = TextStyle(
     letterSpacing = 0.15.sp,
 )
 
-internal val title3Type = TextStyle(
+private val title3Type = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 18.sp,
     fontWeight = FontWeight.SemiBold,
@@ -129,7 +129,7 @@ internal val title3Type = TextStyle(
     letterSpacing = 0.15.sp,
 )
 
-internal val largeImportantType = TextStyle(
+private val largeImportantType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 16.sp,
     fontWeight = FontWeight.SemiBold,
@@ -137,7 +137,7 @@ internal val largeImportantType = TextStyle(
     letterSpacing = 0.15.sp,
 )
 
-internal val largeType = TextStyle(
+private val largeType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 16.sp,
     fontWeight = FontWeight.Normal,
@@ -145,7 +145,7 @@ internal val largeType = TextStyle(
     letterSpacing = 0.5.sp,
 )
 
-internal val bodyImportantType = TextStyle(
+private val bodyImportantType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 14.sp,
     fontWeight = FontWeight.SemiBold,
@@ -153,7 +153,7 @@ internal val bodyImportantType = TextStyle(
     letterSpacing = 0.1.sp,
 )
 
-internal val bodyType = TextStyle(
+private val bodyType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 14.sp,
     fontWeight = FontWeight.Normal,
@@ -161,39 +161,71 @@ internal val bodyType = TextStyle(
     letterSpacing = 0.25.sp,
 )
 
-internal val smallImportantType = TextStyle(
+private val smallImportantType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 12.sp,
     fontWeight = FontWeight.SemiBold,
     lineHeight = 16.sp,
 )
 
-internal val smallLegacyType = TextStyle(
+private val smallLegacyType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 12.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 16.sp,
 )
 
-internal val extraSmallImportantType = TextStyle(
+private val extraSmallImportantType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 10.sp,
     fontWeight = FontWeight.SemiBold,
     lineHeight = 10.sp,
 )
 
-internal val extraSmallType = TextStyle(
+private val extraSmallType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 10.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 10.sp,
 )
 
-internal val buttonType = TextStyle(
+private val buttonType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 14.sp,
     fontWeight = FontWeight.SemiBold,
     letterSpacing = 1.25.sp,
+)
+
+private val LeboncoinLegacyFontFamily = FontFamily.Default
+
+internal val LeboncoinLegacyTypo: SparkTypography = sparkTypography(
+    fontFamily = FontFamily.Default,
+    display1 = display1Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    display2 = display2Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    display3 = tile1Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    headline1 = title2Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    headline2 = title3Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    subhead = subheadType.copy(fontFamily = LeboncoinLegacyFontFamily),
+    body1 = largeType.copy(fontFamily = LeboncoinLegacyFontFamily),
+    body2 = bodyType.copy(fontFamily = LeboncoinLegacyFontFamily),
+    caption = smallLegacyType.copy(fontFamily = LeboncoinLegacyFontFamily),
+    small = extraSmallType.copy(fontFamily = LeboncoinLegacyFontFamily),
+    callout = buttonType.copy(fontFamily = LeboncoinLegacyFontFamily),
+)
+
+internal val LeboncoinTypo: SparkTypography = sparkTypography(
+    fontFamily = FontFamily.Default,
+    display1 = display1Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    display2 = display2Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    display3 = display3Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    headline1 = headline1Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    headline2 = headline2Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    subhead = subheadType.copy(fontFamily = LeboncoinLegacyFontFamily),
+    body1 = body1Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    body2 = body2Type.copy(fontFamily = LeboncoinLegacyFontFamily),
+    caption = captionType.copy(fontFamily = LeboncoinLegacyFontFamily),
+    small = smallType.copy(fontFamily = LeboncoinLegacyFontFamily),
+    callout = calloutType.copy(fontFamily = LeboncoinLegacyFontFamily),
 )
 
 public fun brandTypography(
