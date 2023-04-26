@@ -25,9 +25,14 @@ package com.adevinta.spark.sample
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.core.view.WindowCompat
+import com.adevinta.spark.sample.themes.Theme
+import com.adevinta.spark.sample.themes.ThemeSaver
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.airbnb.android.showkase.models.ShowkaseProvider
 
@@ -38,11 +43,14 @@ public class MainActivity : AppCompatActivity() {
         setContent {
             val groupedComponentsList = getShowkaseProviderElements()
             val showkaseBrowserScreenMetadata = remember { mutableStateOf(ShowkaseBrowserScreenMetadata()) }
+            var theme by rememberSaveable(stateSaver = ThemeSaver) { mutableStateOf(Theme()) }
+
             if (groupedComponentsList.isNotEmpty()) {
                 ShowkaseBrowserApp(
                     theme = theme,
                     groupedComponentMap = groupedComponentsList.groupBy { it.group },
                     showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                    onThemeChange = { theme = it },
                 )
             }
         }

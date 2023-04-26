@@ -27,6 +27,8 @@ import androidx.compose.runtime.saveable.Saver
 public data class Theme(
     val themeMode: ThemeMode = ThemeMode.System,
     val colorMode: ColorMode = ColorMode.Baseline,
+    val brandMode: BrandMode = BrandMode.Polaris,
+    val userMode: UserMode = UserMode.Part,
     val fontScale: Float = 1.0f,
     val fontScaleMode: FontScaleMode = FontScaleMode.System,
     val textDirection: TextDirection = TextDirection.System,
@@ -61,12 +63,11 @@ public enum class ColorMode(public val label: String) {
     Baseline("Baseline"),
 
     /**
-     * Build a color scheme from a pre-selected color palette that behaves the same as a dynamic color
-     * palette.
+     * Build a color scheme from a pre-selected color palette from the selected brand.
      *
-     * Useful for testing dynamic color schemes on devices that don't support dynamic colors.
+     * Useful to test that the brand palette works with Spark.
      */
-    Custom("Custom"),
+    Brand("Brand"),
 
     /**
      * Build a color scheme from the dynamic colors taken from the Android System.
@@ -87,11 +88,24 @@ public enum class ThemeMode {
     Dark,
 }
 
+public enum class BrandMode(public val label: String) {
+    LeboncoinLegacy("Leboncoin (Legacy)"),
+    Leboncoin("Leboncoin (New Ui)"),
+    Polaris("Polaris"),
+}
+
+public enum class UserMode {
+    Part,
+    Pro,
+}
+
 public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
     save = { theme ->
         mapOf(
             ThemeModeKey to theme.themeMode.ordinal,
             ColorModeKey to theme.colorMode.ordinal,
+            BrandModeKey to theme.colorMode.ordinal,
+            UserModeKey to theme.colorMode.ordinal,
             FontScaleKey to theme.fontScale.toInt(),
             TextDirectionKey to theme.textDirection.ordinal,
         )
@@ -100,6 +114,8 @@ public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
         Theme(
             themeMode = ThemeMode.values()[map.getValue(ThemeModeKey)],
             colorMode = ColorMode.values()[map.getValue(ColorModeKey)],
+            brandMode = BrandMode.values()[map.getValue(BrandModeKey)],
+            userMode = UserMode.values()[map.getValue(UserModeKey)],
             fontScale = map.getValue(FontScaleKey).toFloat(),
             textDirection = TextDirection.values()[map.getValue(TextDirectionKey)],
         )
@@ -111,5 +127,7 @@ public const val MaxFontScale: Float = 2f
 
 private const val ThemeModeKey = "themeMode"
 private const val ColorModeKey = "colorMode"
+private const val BrandModeKey = "brandMode"
+private const val UserModeKey = "userMode"
 private const val FontScaleKey = "fontScale"
 private const val TextDirectionKey = "textDirection"
