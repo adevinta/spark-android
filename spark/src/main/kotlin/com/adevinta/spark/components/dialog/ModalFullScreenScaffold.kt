@@ -18,12 +18,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.buttons.ButtonFilled
@@ -94,18 +96,6 @@ public fun ModalFullScreenScaffold(
                 content = content,
             )
         }
-//
-//        isFoldable -> {
-//            FoldableModal(
-//                modifier = modifier,
-//                onClose = onClose,
-//                illustration = illustration,
-//                primaryButton = primaryButton,
-//                secondaryButton = secondaryButton,
-//                content = content,
-//            )
-//        }
-//
         else -> ModalScaffold(
             modifier = modifier,
             onClose = onClose,
@@ -192,7 +182,7 @@ private fun PhonePortraitModalScaffold(
                     IconButton(onClick = onClose) {
                         Icon(
                             sparkIcon = SparkIcon.Navs.Close,
-                            contentDescription = null, // FIXME-scott.rayapoulle.ext (13-36-2023): Add description
+                            contentDescription = stringResource(id = R.string.spark_a11y_modal_fullscreen_close),
                         )
                     }
                 },
