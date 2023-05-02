@@ -29,24 +29,29 @@ import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -56,48 +61,114 @@ import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
+import com.adevinta.spark.components.bottomsheet.ModalBottomSheetLayout
+import com.adevinta.spark.components.bottomsheet.ModalBottomSheetValue
+import com.adevinta.spark.components.bottomsheet.rememberModalBottomSheetState
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.tokens.darkSparkColors
-import com.adevinta.spark.tokens.lightSparkColors
+import com.adevinta.spark.sample.themes.BrandMode
+import com.adevinta.spark.sample.themes.FontScaleMode
+import com.adevinta.spark.sample.themes.TextDirection
+import com.adevinta.spark.sample.themes.Theme
+import com.adevinta.spark.sample.themes.ThemeMode
+import com.adevinta.spark.sample.themes.ThemePicker
+import com.adevinta.spark.sample.themes.UserMode
+import com.adevinta.spark.sample.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.sample.themes.themeprovider.leboncoin.LeBoncoinTheme
+import com.adevinta.spark.sample.themes.themeprovider.polaris.PolarisTheme
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.airbnb.android.showkase.ui.SemanticsUtils.lineCountVal
+import com.airbnb.android.showkase.ui.ToolbarTitle
+import com.google.accompanist.testharness.TestHarness
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ShowkaseBrowserApp(
+    theme: Theme,
+    onThemeChange: (theme: Theme) -> Unit,
     groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
-    val colors = if (isSystemInDarkTheme()) darkSparkColors() else lightSparkColors()
-    SparkTheme(colors = colors) {
-        CompositionLocalProvider(
-            LocalInspectionMode provides true,
+    val themeProvider: ThemeProvider = when (theme.brandMode) {
+        BrandMode.Polaris -> PolarisTheme
+        BrandMode.Leboncoin -> LeBoncoinTheme
+        BrandMode.LeboncoinLegacy -> LeBoncoinTheme
+    }
+
+    val isLegacy = theme.brandMode == BrandMode.LeboncoinLegacy
+
+    val useDark = (theme.themeMode == ThemeMode.System && isSystemInDarkTheme()) || theme.themeMode == ThemeMode.Dark
+
+    val colors =
+        themeProvider.colors(useDarkColors = useDark, isPro = theme.userMode == UserMode.Pro, isLegacy = isLegacy)
+    val shapes = themeProvider.shapes(isLegacy = isLegacy)
+    val typography = themeProvider.typography(isLegacy = isLegacy)
+
+    SparkTheme(
+        colors = colors,
+        shapes = shapes,
+        typography = typography,
+        useLegacyStyle = isLegacy,
+    ) {
+        val layoutDirection = when (theme.textDirection) {
+            TextDirection.LTR -> LayoutDirection.Ltr
+            TextDirection.RTL -> LayoutDirection.Rtl
+            TextDirection.System -> LocalLayoutDirection.current
+        }
+
+        TestHarness(
+            layoutDirection = layoutDirection,
+            fontScale = if (theme.fontScaleMode == FontScaleMode.System) {
+                LocalDensity.current.fontScale
+            } else {
+                theme.fontScale
+            },
         ) {
             val navController = rememberNavController()
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-            Scaffold(
-                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-                topBar = {
-                    AppBar(
-                        navController = navController,
-                        scrollBehavior = scrollBehavior,
-                        metadata = showkaseBrowserScreenMetadata,
+            val coroutineScope = rememberCoroutineScope()
+            val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
+            ModalBottomSheetLayout(
+                sheetState = sheetState,
+                sheetContent = {
+                    ThemePicker(
+                        theme = theme,
+                        onThemeChange = { theme ->
+                            coroutineScope.launch {
+                                onThemeChange(theme)
+                            }
+                        },
                     )
                 },
-                content = {
-                    BodyContent(
-                        contentPadding = it,
-                        navController = navController,
-                        groupedComponentMap = groupedComponentMap,
-                        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
-                    )
-                },
-            )
+                // Default scrim color is onSurface which is incorrect in dark theme
+                // https://issuetracker.google.com/issues/183697056
+                scrimColor = SheetScrimColor,
+            ) {
+                Scaffold(
+                    modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+                    topBar = {
+                        AppBar(
+                            navController = navController,
+                            scrollBehavior = scrollBehavior,
+                            metadata = showkaseBrowserScreenMetadata,
+                            onThemeClick = { coroutineScope.launch { sheetState.show() } },
+                        )
+                    },
+                    content = {
+                        BodyContent(
+                            contentPadding = it,
+                            navController = navController,
+                            groupedComponentMap = groupedComponentMap,
+                            showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                        )
+                    },
+                )
+            }
         }
     }
 }
@@ -108,6 +179,7 @@ internal fun AppBar(
     navController: NavHostController,
     scrollBehavior: TopAppBarScrollBehavior,
     metadata: MutableState<ShowkaseBrowserScreenMetadata>,
+    onThemeClick: () -> Unit = {},
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -137,8 +209,9 @@ internal fun AppBar(
         },
         actions = {
             ShowkaseAppBarActions(
-                metadata,
-                currentRoute,
+                metadata = metadata,
+                currentRoute = currentRoute,
+                onThemeClick = onThemeClick,
             )
         },
     )
@@ -278,22 +351,32 @@ private fun ShowkaseAppBarActions(
     metadata: MutableState<ShowkaseBrowserScreenMetadata>,
     currentRoute: String?,
     modifier: Modifier = Modifier,
+    onThemeClick: () -> Unit = {},
 ) {
-    when {
-        metadata.value.isSearchActive -> {
-        }
+    Row {
 
-        currentRoute == CurrentScreen.COMPONENT_DETAIL.name -> {
-        }
+        when {
+            metadata.value.isSearchActive -> {
+            }
 
-        else -> {
-            IconButton(
-                modifier = modifier.testTag("SearchIcon"),
-                onClick = {
-                    metadata.value = metadata.value.copy(isSearchActive = true)
-                },
-            ) {
-                Icon(sparkIcon = SparkIcon.Actions.Search, contentDescription = "Search Icon")
+            currentRoute == CurrentScreen.COMPONENT_DETAIL.name -> {
+            }
+
+            else -> {
+                IconButton(
+                    modifier = modifier.testTag("SearchIcon"),
+                    onClick = {
+                        metadata.value = metadata.value.copy(isSearchActive = true)
+                    },
+                ) {
+                    Icon(sparkIcon = SparkIcon.Actions.Search, contentDescription = "Search Icon")
+                }
+                IconButton(onClick = onThemeClick) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_palette_24dp),
+                        contentDescription = null,
+                    )
+                }
             }
         }
     }
@@ -313,28 +396,16 @@ internal fun BodyContent(
         startDestination = CurrentScreen.COMPONENT_GROUPS.name,
         builder = {
             navGraph(
-                navController,
+                navController = navController,
                 contentPadding = contentPadding,
-                showkaseBrowserScreenMetadata,
-                groupedComponentMap,
+                showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                groupedComponentMap = groupedComponentMap,
             )
         },
     )
 }
 
 private fun NavGraphBuilder.navGraph(
-    navController: NavHostController,
-    contentPadding: PaddingValues,
-    showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
-    groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
-) = fullNavGraph(
-    navController,
-    contentPadding = contentPadding,
-    groupedComponentMap,
-    showkaseBrowserScreenMetadata,
-)
-
-private fun NavGraphBuilder.componentsNavGraph(
     navController: NavHostController,
     groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
     contentPadding: PaddingValues,
@@ -366,21 +437,10 @@ private fun NavGraphBuilder.componentsNavGraph(
     }
 }
 
-private fun NavGraphBuilder.fullNavGraph(
-    navController: NavHostController,
-    contentPadding: PaddingValues,
-    groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
-    showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
-) {
-    componentsNavGraph(
-        navController = navController,
-        groupedComponentMap = groupedComponentMap,
-        contentPadding = contentPadding,
-        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
-    )
-}
-
 /**
  * Helper function to navigate to the passed [CurrentScreen]
  */
 internal fun NavHostController.navigate(destinationScreen: CurrentScreen) = navigate(destinationScreen.name)
+
+private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
+

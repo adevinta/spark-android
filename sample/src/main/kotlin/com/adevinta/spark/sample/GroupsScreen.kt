@@ -22,6 +22,9 @@
 
 package com.adevinta.spark.sample
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import androidx.activity.compose.BackHandler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -103,7 +106,7 @@ internal fun GroupsScreen(
         )
     }
 
-    val activity = LocalContext.current as AppCompatActivity
+    val activity = LocalContext.current.findActivity() as AppCompatActivity
     BackHandler {
         when {
             showkaseBrowserScreenMetadata.value.isSearchActive -> {
@@ -164,3 +167,10 @@ internal fun matchSearchQuery(
     searchQuery: String,
     vararg properties: String,
 ) = properties.any { it.contains(searchQuery, ignoreCase = true) }
+
+private tailrec fun Context.findActivity(): Activity =
+    when (this) {
+        is Activity -> this
+        is ContextWrapper -> this.baseContext.findActivity()
+        else -> throw IllegalArgumentException("Could not find activity!")
+    }
