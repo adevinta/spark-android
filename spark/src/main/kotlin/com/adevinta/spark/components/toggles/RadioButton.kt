@@ -140,7 +140,7 @@ public fun RadioButtonLabelled(
         state = ToggleableState(selected),
         toggle = {
             RadioButton(
-                modifier = Modifier.minimumTouchTargetSize(),
+                modifier = it.minimumTouchTargetSize(),
                 selected = selected,
                 onClick = null,
                 interactionSource = interactionSource,
