@@ -20,36 +20,20 @@
  * SOFTWARE.
  */
 
-plugins {
-    id("com.adevinta.spark.android-application")
-    id("com.adevinta.spark.android-compose")
-}
+package com.adevinta.spark.sample.themes.themeprovider.leboncoin
 
-android {
-    namespace = "com.adevinta.spark.sample"
-    defaultConfig.applicationId = "com.adevinta.spark.sample"
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.tokens.sparkShapes
 
-    kotlinOptions {
-        freeCompilerArgs += listOf(
-            "-opt-in=com.adevinta.spark.InternalSparkApi",
-            "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
-        )
-    }
-}
+internal val LeboncoinShapes = sparkShapes(
+    none = RoundedCornerShape(0.dp),
+    extraSmall = RoundedCornerShape(4.0.dp),
+    small = RoundedCornerShape(8.0.dp),
+    medium = RoundedCornerShape(12.0.dp),
+    large = RoundedCornerShape(16.0.dp),
+    extraLarge = RoundedCornerShape(28.0.dp),
+    full = CircleShape,
+)
 
-dependencies {
-    implementation(projects.spark)
-
-    implementation(libs.airbnb.showkase)
-
-    implementation(libs.accompanist.testharness)
-
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.material3)
-
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.appCompat)
-    implementation(libs.androidx.navigation.compose)
-}
