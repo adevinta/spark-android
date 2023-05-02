@@ -38,8 +38,9 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.SparkPreviewParam
-import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
+import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeVariant
+import com.adevinta.spark.tools.preview.UserType
 
 @Composable
 @InternalSparkApi
@@ -136,7 +137,7 @@ public fun CheckboxLabelled(
         state = state,
         toggle = {
             Checkbox(
-                modifier = Modifier.minimumTouchTargetSize(),
+                modifier = it.minimumTouchTargetSize(),
                 state = state,
                 onClick = null,
                 interactionSource = interactionSource,
@@ -158,7 +159,7 @@ public fun CheckboxLabelled(
 )
 @Composable
 internal fun AllStatesCheckboxPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
@@ -179,7 +180,7 @@ internal fun AllStatesCheckboxPreview(
 )
 @Composable
 internal fun AllStatesCheckBoxLabelledPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {

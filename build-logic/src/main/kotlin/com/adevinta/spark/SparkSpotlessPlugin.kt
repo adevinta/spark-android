@@ -19,46 +19,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark
 
-
-import org.gradle.api.JavaVersion
+import com.diffplug.gradle.spotless.SpotlessExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
-import java.io.File
+import org.gradle.kotlin.dsl.configure
 
-public class SparkAndroidPlugin : Plugin<Project> {
+internal class SparkSpotlessPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            apply(plugin = "org.jetbrains.kotlin.android")
+            apply(plugin = "com.diffplug.spotless")
 
-            configureKotlin<KotlinAndroidProjectExtension>()
-            configureKotlinCompiler()
-
-            configureAndroidExtension {
-                compileSdk = spark().versions.compileSdk.toString().toInt()
-                defaultConfig.minSdk = spark().versions.minCompileSdk.toString().toInt()
-                compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_17
-                    targetCompatibility = JavaVersion.VERSION_17
+            configure<SpotlessExtension> {
+                val licenseHeader = rootProject.file("spotless/spotless.kt")
+                format("misc") {
+                    target("**/*.md", "**/.gitignore")
+                    endWithNewline()
                 }
-                packaging {
-                    resources {
-                        excludes += "/META-INF/{AL2.0,LGPL2.1}"
-                    }
+                kotlin {
+                    target("src/**/*.kt")
+                    ktlint(spark().versions.ktlint.toString())
+                    trimTrailingWhitespace()
+                    endWithNewline()
+                    licenseHeaderFile(licenseHeader)
+                    targetExclude("spotless/*.kt")
                 }
-                lint {
-                    warningsAsErrors = true
-                    sarifReport = true
-                    lintConfig = file("lint.xml").takeIf(File::exists)
+                kotlinGradle {
+                    ktlint(spark().versions.ktlint.toString())
+                    trimTrailingWhitespace()
+                    endWithNewline()
+                    licenseHeaderFile(
+                        licenseHeader,
+                        "(import |plugins|pluginManagement|rootProject|dependencyResolutionManagement|//)",
+                    )
                 }
             }
-
-            addKotlinBom()
         }
     }
 }
-
