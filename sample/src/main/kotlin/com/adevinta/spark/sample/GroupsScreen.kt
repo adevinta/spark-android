@@ -29,7 +29,7 @@ import androidx.activity.compose.BackHandler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.consumedWindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -64,7 +64,7 @@ internal fun GroupsScreen(
     )
 
     LazyVerticalGrid(
-        modifier = Modifier.consumedWindowInsets(contentPadding),
+        modifier = Modifier.consumeWindowInsets(contentPadding),
         columns = GridCells.Fixed(Layout.columns / 2),
         contentPadding = PaddingValues(
             start = Layout.bodyMargin / 2 + contentPadding.calculateLeftPadding(LocalLayoutDirection.current),
