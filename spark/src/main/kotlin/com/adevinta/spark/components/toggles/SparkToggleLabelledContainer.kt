@@ -22,13 +22,16 @@
 
 package com.adevinta.spark.components.toggles
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.movableContentOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -46,13 +49,13 @@ import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 @Composable
 internal fun SparkToggleLabelledContainer(
     state: ToggleableState,
-    toggle: @Composable () -> Unit,
+    toggle: @Composable (Modifier) -> Unit,
     role: Role,
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     contentSide: ContentSide = ContentSide.End,
-    content: @Composable() (RowScope.() -> Unit),
+    content: @Composable() RowScope.() -> Unit,
 ) {
     val toggleableModifier = if (onClick != null) {
         Modifier.triStateToggleable(
@@ -66,27 +69,32 @@ internal fun SparkToggleLabelledContainer(
     }
     Row(
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
-            .minimumTouchTargetSize()
             .clip(SparkTheme.shapes.small)
             .then(toggleableModifier)
+            .padding(horizontal = 8.dp)
             .sparkUsageOverlay(),
     ) {
-
-        if (contentSide == ContentSide.Start) {
-            HorizontalSpacer(8.dp)
+        val label = movableContentOf {
             ProvideTextStyle(value = SparkTheme.typography.body1) {
-                content()
+                Row(
+                    modifier = Modifier.weight(1f, false),
+                ) {
+                    content()
+                }
             }
         }
 
-        toggle()
+        if (contentSide == ContentSide.Start) {
+            label()
+            HorizontalSpacer(32.dp)
+        }
+
+        toggle(Modifier)
 
         if (contentSide == ContentSide.End) {
-            ProvideTextStyle(value = SparkTheme.typography.body1) {
-                content()
-            }
-            HorizontalSpacer(8.dp)
+            label()
         }
     }
 }
@@ -104,7 +112,7 @@ internal fun TogglesLabelledSlotPreview() {
             state = ToggleableState(true),
             toggle = {
                 RadioButton(
-                    modifier = Modifier.minimumTouchTargetSize(),
+                    modifier = it.minimumTouchTargetSize(),
                     selected = true,
                     onClick = null,
                 )
@@ -123,7 +131,7 @@ internal fun TogglesLabelledSlotPreview() {
             state = ToggleableState(true),
             toggle = {
                 RadioButton(
-                    modifier = Modifier.minimumTouchTargetSize(),
+                    modifier = it.minimumTouchTargetSize(),
                     selected = true,
                     onClick = null,
                 )
@@ -142,7 +150,7 @@ internal fun TogglesLabelledSlotPreview() {
             state = ToggleableState(true),
             toggle = {
                 Checkbox(
-                    modifier = Modifier.minimumTouchTargetSize(),
+                    modifier = it.minimumTouchTargetSize(),
                     state = ToggleableState(true),
                     onClick = null,
                 )

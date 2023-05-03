@@ -30,6 +30,11 @@ plugins {
     alias(libs.plugins.paparazzi) apply false
     alias(libs.plugins.dokka) apply false
     alias(libs.plugins.dependencyGuard) apply false
+    alias(libs.plugins.spotless) apply false
 
     id("com.adevinta.spark.dokka")
+}
+
+allprojects {
+    apply(plugin = "com.adevinta.spark.spotless")
 }

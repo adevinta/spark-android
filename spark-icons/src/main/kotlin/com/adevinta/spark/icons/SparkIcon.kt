@@ -36,13 +36,15 @@ public interface IconVector {
 }
 
 @Stable
-public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconDrawableRes {
-    public sealed class Account(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+public interface SparkIcon : IconDrawableRes {
+
+    public sealed class Account(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Account : SparkIcon.Account(R.drawable.spark_icons_account)
         public object Activity : SparkIcon.Account(R.drawable.spark_icons_activity)
         public object Booking : SparkIcon.Account(R.drawable.spark_icons_booking)
 
         public object BurgerMenu : SparkIcon.Account(R.drawable.spark_icons_menu)
+
         @Deprecated("This Icon is a part of Arrows", replaceWith = ReplaceWith("Arrows.Close.Full"))
         public object Close : SparkIcon.Account(R.drawable.spark_icons_close_full)
         public sealed class Cv(@DrawableRes override val drawableId: Int) : SparkIcon.Account(drawableId) {
@@ -80,7 +82,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public sealed class Actions(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Actions(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Calculate : Actions(R.drawable.spark_icons_calculate)
         public object Copy : Actions(R.drawable.spark_icons_copy)
         public sealed class Eyes(@DrawableRes override val drawableId: Int) : Actions(drawableId) {
@@ -127,7 +129,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public sealed class Arrows(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Arrows(@DrawableRes override val drawableId: Int) : SparkIcon {
         public sealed class Arrow(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
             public object Left : Arrow(R.drawable.spark_icons_arrow_left)
             public object Right : Arrow(R.drawable.spark_icons_arrow_right)
@@ -156,13 +158,13 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public sealed class Calendar(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Calendar(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Booking : Calendar(R.drawable.spark_icons_calendar_booking)
         public object Default : Calendar(R.drawable.spark_icons_calendar_simple)
         public object Valid : Calendar(R.drawable.spark_icons_calendar_valid)
     }
 
-    public sealed class Categories(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Categories(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Apartment : Categories(R.drawable.spark_icons_apartment)
         public object Car : Categories(R.drawable.spark_icons_car)
         public object Couch : Categories(R.drawable.spark_icons_couch)
@@ -182,7 +184,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object Suitcase : Categories(R.drawable.spark_icons_suitcase)
     }
 
-    public sealed class Contact(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Contact(@DrawableRes override val drawableId: Int) : SparkIcon {
         public sealed class Mail(@DrawableRes override val drawableId: Int) : Contact(drawableId) {
             public object Default : Mail(R.drawable.spark_icons_mail)
             public object Outlined : Mail(R.drawable.spark_icons_mail_outline)
@@ -208,7 +210,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object SendMessage : Contact(R.drawable.spark_icons_send_message)
     }
 
-    public sealed class Criterias(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Criterias(@DrawableRes override val drawableId: Int) : SparkIcon {
         public sealed class Animaux(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
             public object Age : Animaux(R.drawable.spark_icons_animal_age)
             public object Loof : Animaux(R.drawable.spark_icons_animal_race)
@@ -390,7 +392,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public sealed class Flags(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Flags(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object FlagAT : Flags(R.drawable.spark_icons_flag_at)
         public object FlagBE : Flags(R.drawable.spark_icons_flag_be)
         public object FlagBR : Flags(R.drawable.spark_icons_flag_br)
@@ -415,7 +417,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object FlagVN : Flags(R.drawable.spark_icons_flag_vn)
     }
 
-    public sealed class Images(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Images(@DrawableRes override val drawableId: Int) : SparkIcon {
         public sealed class Camera(@DrawableRes override val drawableId: Int) : Images(drawableId) {
             public object Default : Camera(R.drawable.spark_icons_camera)
             public object Outline : Camera(R.drawable.spark_icons_camera_outline)
@@ -435,7 +437,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object Rotate : Images(R.drawable.spark_icons_photo_rotate)
     }
 
-    public sealed class Infos(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Infos(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Camera : Infos(R.drawable.spark_icons_camera)
 
         public object Block : Infos(R.drawable.spark_icons_block)
@@ -469,7 +471,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object Warning : Infos(R.drawable.spark_icons_warning)
     }
 
-    public sealed class Delivery(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Delivery(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object DeliveryHand : Delivery(R.drawable.spark_icons_delivery_hands)
         public object DeliveryOutline : Delivery(R.drawable.spark_icons_box_outline)
         public object Truck : Delivery(R.drawable.spark_icons_delivery_truck)
@@ -486,7 +488,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public sealed class Map(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Map(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object ThreeSixty : Map(R.drawable.spark_icons_three_sixty)
         public object Bike : Map(R.drawable.spark_icons_bike)
         public object Drag : Map(R.drawable.spark_icons_drag)
@@ -515,20 +517,20 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object Car : Map(R.drawable.spark_icons_car)
     }
 
-    public sealed class Navs(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Navs(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Arrow : Navs(R.drawable.spark_icons_notif_actif)
         public object Drawer : Navs(R.drawable.spark_icons_menu)
         public object Close : Navs(R.drawable.spark_icons_close)
     }
 
-    public sealed class Notifications(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Notifications(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Active : Notifications(R.drawable.spark_icons_notif_actif)
         public object Default : Notifications(R.drawable.spark_icons_notif)
         public object Disable : Notifications(R.drawable.spark_icons_no_notif)
         public object Outline : Notifications(R.drawable.spark_icons_notif_outline)
     }
 
-    public sealed class Options(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Options(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Booster : Options(R.drawable.spark_icons_booster)
         public sealed class Clock(@DrawableRes override val drawableId: Int) : Options(drawableId) {
             public object Arrow : Clock(R.drawable.spark_icons_clockarrow)
@@ -550,7 +552,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public sealed class Others(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Others(@DrawableRes override val drawableId: Int) : SparkIcon {
         public sealed class Megaphone(@DrawableRes override val drawableId: Int) : Others(drawableId) {
             public object Default : Megaphone(R.drawable.spark_icons_demand_filled)
             public object Outline : Megaphone(R.drawable.spark_icons_demand)
@@ -565,11 +567,11 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object Refund : Others(R.drawable.spark_icons_refund)
     }
 
-    public sealed class Paiement(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Paiement(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object GarantiePanne : Paiement(R.drawable.spark_icons_garantie_panne)
     }
 
-    public sealed class Pro(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Pro(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Actions : Pro(R.drawable.spark_icons_actions)
         public object Apparitions : Pro(R.drawable.spark_icons_apparitions)
 
@@ -582,7 +584,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object SpaceShip : Pro(R.drawable.spark_icons_spaceship)
     }
 
-    public sealed class Share(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Share(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object AttachFile : Share(R.drawable.spark_icons_attachment)
         public object Facebook : Share(R.drawable.spark_icons_facebook)
         public object Messenger : Share(R.drawable.spark_icons_messenger)
@@ -598,7 +600,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object Download : Share(R.drawable.spark_icons_share_download)
     }
 
-    public sealed class Toggles(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Toggles(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Add : Toggles(R.drawable.spark_icons_add)
 
         public sealed class Check(@DrawableRes override val drawableId: Int) : Toggles(drawableId) {
@@ -609,7 +611,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public sealed class User(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class User(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Pro : User(R.drawable.spark_icons_profile_pro2)
         public object Default : User(R.drawable.spark_icons_user)
         public object Outline : User(R.drawable.spark_icons_user_outline)
@@ -623,7 +625,7 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         public object Store : User(R.drawable.spark_icons_profile_pro1_grey)
     }
 
-    public sealed class Value(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId) {
+    public sealed class Value(@DrawableRes override val drawableId: Int) : SparkIcon {
         public object Minus : Value(R.drawable.spark_icons_minus_outline)
 
         public sealed class More(@DrawableRes override val drawableId: Int) : Value(drawableId) {
@@ -632,5 +634,5 @@ public sealed class SparkIcon(@DrawableRes override val drawableId: Int) : IconD
         }
     }
 
-    public abstract class Custom(@DrawableRes override val drawableId: Int) : SparkIcon(drawableId)
+    public abstract class Custom(@DrawableRes override val drawableId: Int) : SparkIcon
 }

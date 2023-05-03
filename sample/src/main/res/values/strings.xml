@@ -23,4 +23,17 @@
   -->
 <resources>
     <string name="app_name">Spark</string>
+    <string name="search_label">Search</string>
+    <string name="showkase_browser_show_documentation">Show Documentation</string>
+    <string name="showkase_browser_hide_documentation">Hide Documentation</string>
+    <string name="components_category">Components</string>
+
+    <string name="color_mode" description=" Spark Color Mode. [CHAR_LIMIT=NONE]">Color mode</string>
+    <string name="font_scale" description="Font scale. [CHAR_LIMIT=NONE]">Font scale</string>
+    <string name="text_direction" description="Text direction. [CHAR_LIMIT=NONE]">Text direction</string>
+
+    <string name="brand">Select a brand</string>
+    <string name="pro">Use the pro theme</string>
+
+    <string name="scale">%.1f</string>
 </resources>

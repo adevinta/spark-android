@@ -44,6 +44,7 @@ internal class SparkVersions(catalog: VersionCatalog) {
     val `targetSdk` by catalog
     val `minCompileSdk` by catalog
     val `compileSdk` by catalog
+    val `ktlint` by catalog
 
     private operator fun VersionCatalog.getValue(
         thisRef: Any?,

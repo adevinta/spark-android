@@ -56,8 +56,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.tools.preview.SparkPreviewParam
-import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
+import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeVariant
+import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.InputChip as MaterialInputChip
 
 /**
@@ -150,7 +151,7 @@ public fun InputChip(
     name = "InputChip",
 )
 internal fun InputChipPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {

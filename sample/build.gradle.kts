@@ -22,15 +22,34 @@
 
 plugins {
     id("com.adevinta.spark.android-application")
+    id("com.adevinta.spark.android-compose")
 }
 
 android {
     namespace = "com.adevinta.spark.sample"
     defaultConfig.applicationId = "com.adevinta.spark.sample"
+
+    kotlinOptions {
+        freeCompilerArgs += listOf(
+            "-opt-in=com.adevinta.spark.InternalSparkApi",
+            "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
+        )
+    }
 }
 
 dependencies {
     implementation(projects.spark)
 
     implementation(libs.airbnb.showkase)
+
+    implementation(libs.accompanist.testharness)
+
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.material3)
+
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appCompat)
+    implementation(libs.androidx.navigation.compose)
 }
