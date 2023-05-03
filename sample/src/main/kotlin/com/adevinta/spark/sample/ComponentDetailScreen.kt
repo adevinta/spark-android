@@ -29,7 +29,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.consumedWindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -84,7 +84,7 @@ internal fun ComponentDetailScreen(
     LazyColumn(
         modifier = Modifier
             .testTag("ShowkaseComponentDetailList")
-            .consumedWindowInsets(contentPadding),
+            .consumeWindowInsets(contentPadding),
         contentPadding = PaddingValues(
             start = Layout.bodyMargin / 2 + contentPadding.calculateLeftPadding(LocalLayoutDirection.current),
             end = Layout.bodyMargin / 2 + contentPadding.calculateRightPadding(LocalLayoutDirection.current),

@@ -28,7 +28,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.consumedWindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -60,7 +60,7 @@ internal fun ShowkaseComponentsInAGroupScreen(
     }
     val filteredList = getFilteredSearchList(componentList, showkaseBrowserScreenMetadata)
     LazyColumn(
-        modifier = Modifier.consumedWindowInsets(contentPadding),
+        modifier = Modifier.consumeWindowInsets(contentPadding),
         contentPadding = PaddingValues(
             start = Layout.bodyMargin / 2 + contentPadding.calculateLeftPadding(LocalLayoutDirection.current),
             end = Layout.bodyMargin / 2 + contentPadding.calculateRightPadding(LocalLayoutDirection.current),
