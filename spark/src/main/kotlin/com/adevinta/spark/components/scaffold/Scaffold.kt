@@ -30,7 +30,6 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.consumedWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
@@ -58,9 +57,8 @@ import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.tokens.contentColorFor
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
+import com.adevinta.spark.tools.preview.SparkPreviewParam
+import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
 import androidx.compose.material3.Scaffold as MaterialScaffold
 
 /**
@@ -136,7 +134,7 @@ public fun Scaffold(
 )
 @Composable
 private fun ScaffoldPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
 ) {
     val (theme, userType) = param
     PreviewTheme(
@@ -176,7 +174,7 @@ private fun ScaffoldPreview(
             content = { innerPadding ->
                 LazyColumn(
                     // consume insets as scaffold doesn't do it by default
-                    modifier = Modifier.consumedWindowInsets(innerPadding),
+                    modifier = Modifier.consumeWindowInsets(innerPadding),
                     contentPadding = innerPadding,
                 ) {
                     items(count = 100) {
