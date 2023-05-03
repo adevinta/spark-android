@@ -137,7 +137,7 @@ public fun CheckboxLabelled(
         state = state,
         toggle = {
             Checkbox(
-                modifier = Modifier.minimumTouchTargetSize(),
+                modifier = it.minimumTouchTargetSize(),
                 state = state,
                 onClick = null,
                 interactionSource = interactionSource,
