@@ -22,23 +22,35 @@
 
 package com.adevinta.spark.components.badge
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.material3.BadgedBox
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.layout.LastBaseline
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
-@OptIn(ExperimentalMaterial3Api::class)
+internal val SmallBadgeWithContentOffset = 4.dp
+internal val MediumBadgeWithContentOffset = 8.dp
+internal val BadgeWithNoContentOffset = 4.dp
+
 @InternalSparkApi
 @Composable
 internal fun SparkBadgedBox(
@@ -46,11 +58,57 @@ internal fun SparkBadgedBox(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    BadgedBox(
-        badge = badge,
+    Layout(
+        {
+            Box(
+                modifier = Modifier.layoutId("anchor"),
+                contentAlignment = Alignment.Center,
+                content = content,
+            )
+            Box(
+                modifier = Modifier.layoutId("badge"),
+                content = badge,
+            )
+        },
         modifier = modifier,
-        content = content,
-    )
+    ) { measurables, constraints ->
+
+        val badgePlaceable = measurables.first { it.layoutId == "badge" }.measure(
+            // Measure with loose constraints for height as we don't want the text to take up more
+            // space than it needs.
+            constraints.copy(minHeight = 0),
+        )
+
+        val anchorPlaceable = measurables.first { it.layoutId == "anchor" }.measure(constraints)
+
+        val hasContent = badgePlaceable.width > BadgeWithNoContentSize.roundToPx()
+        val offset = when {
+            hasContent && badgePlaceable.width >= MediumBadgeWithContentOffset.roundToPx() -> MediumBadgeWithContentOffset
+            hasContent -> SmallBadgeWithContentOffset
+            else -> BadgeWithNoContentOffset
+        }.roundToPx()
+
+        val firstBaseline = anchorPlaceable[FirstBaseline]
+        val lastBaseline = anchorPlaceable[LastBaseline]
+        val totalWidth = anchorPlaceable.width
+        val totalHeight = anchorPlaceable.height
+
+        layout(
+            totalWidth,
+            totalHeight,
+            // Provide custom baselines based only on the anchor content to avoid default baseline
+            // calculations from including by any badge content.
+            mapOf(
+                FirstBaseline to firstBaseline,
+                LastBaseline to lastBaseline,
+            ),
+        ) {
+            anchorPlaceable.placeRelative(0, 0)
+            val badgeX = anchorPlaceable.width - offset
+            val badgeY = -badgePlaceable.height / 2
+            badgePlaceable.placeRelative(badgeX, badgeY)
+        }
+    }
 }
 
 /**
@@ -78,7 +136,6 @@ public fun BadgedBox(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(
     group = "Badge",
     name = "BadgedBox",
@@ -88,27 +145,133 @@ internal fun BadgedBoxPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        BadgedBox(
-            badge = {
-                Badge()
-            },
-        ) {
-            Icon(
-                SparkIcon.Actions.Eyes.Filled.Enabled,
-                contentDescription = "Seen",
-            )
-        }
-        BadgedBox(
-            badge = {
-                Badge {
-                    Text(text = "3")
+        BadgeStyle.values().forEach {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                BadgedBox(
+                    badge = {
+                        Badge(count = 1, badgeStyle = it)
+                    },
+                ) {
+                    Icon(
+                        SparkIcon.Actions.Favorite.Outlined,
+                        modifier = Modifier.size(24.dp),
+                        contentDescription = "Favorite",
+                    )
                 }
-            },
-        ) {
-            Icon(
-                SparkIcon.Actions.Eyes.Filled.Enabled,
-                contentDescription = "Seen",
-            )
+                BadgedBox(
+                    badge = {
+                        Badge(count = 100, badgeStyle = it)
+                    },
+                ) {
+                    Icon(
+                        SparkIcon.Contact.Message.Outlined,
+                        modifier = Modifier.size(24.dp),
+                        contentDescription = "Notifications",
+                    )
+                }
+                BadgedBox(
+                    badge = {
+                        Badge(badgeStyle = it)
+                    },
+                ) {
+                    Icon(
+                        SparkIcon.User.Outline,
+                        modifier = Modifier.size(24.dp),
+                        contentDescription = "Notifications",
+                    )
+                }
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                BadgedBox(
+                    badge = {
+                        Badge(count = 1, badgeStyle = it, hasBorder = false)
+                    },
+                ) {
+                    Icon(
+                        SparkIcon.Actions.Favorite.Outlined,
+                        modifier = Modifier.size(24.dp),
+                        contentDescription = "Favorite",
+                    )
+                }
+                BadgedBox(
+                    badge = {
+                        Badge(count = 100, badgeStyle = it, hasBorder = false)
+                    },
+                ) {
+                    Icon(
+                        SparkIcon.Contact.Message.Outlined,
+                        modifier = Modifier.size(24.dp),
+                        contentDescription = "Notifications",
+                    )
+                }
+                BadgedBox(
+                    badge = {
+                        Badge(badgeStyle = it, hasBorder = false)
+                    },
+                ) {
+                    Icon(
+                        SparkIcon.User.Outline,
+                        modifier = Modifier.size(24.dp),
+                        contentDescription = "Notifications",
+                    )
+                }
+            }
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                BadgedBox(
+                    badge = {
+                        Badge(count = 1, badgeStyle = it)
+                    },
+                ) {
+                    Text("Notifications")
+                }
+                BadgedBox(
+                    badge = {
+                        Badge(count = 100, badgeStyle = it)
+                    },
+                ) {
+                    Text("Messages")
+                }
+                BadgedBox(
+                    badge = {
+                        Badge(badgeStyle = it)
+                    },
+                ) {
+                    Text("Favorites")
+                }
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                BadgedBox(
+                    badge = {
+                        Badge(count = 1, badgeStyle = it, hasBorder = false)
+                    },
+                ) {
+                    Text("Notifications")
+                }
+                BadgedBox(
+                    badge = {
+                        Badge(count = 100, badgeStyle = it, hasBorder = false)
+                    },
+                ) {
+                    Text("Messages")
+                }
+                BadgedBox(
+                    badge = {
+                        Badge(badgeStyle = it, hasBorder = false)
+                    },
+                ) {
+                    Text("Favorites")
+                }
+            }
         }
     }
 }

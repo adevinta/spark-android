@@ -44,6 +44,7 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.badge.Badge
+import com.adevinta.spark.components.badge.BadgeStyle
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
@@ -153,8 +154,6 @@ private object NavigationDrawerItemDefaults {
     )
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(
     group = "NavigationDrawerItem",
     name = "NavigationDrawerItem",
@@ -175,7 +174,7 @@ internal fun NavigationDrawerItemPreview(
                 onClick = { },
                 label = tab.first,
                 icon = tab.second,
-                badge = { Badge { Text("1") } },
+                badge = { Badge(badgeStyle = BadgeStyle.MEDIUM) { Text("1") } },
             )
         }
         NavigationDrawerItem(
