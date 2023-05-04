@@ -56,14 +56,14 @@ internal fun SparkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    iconState: IconState? = null,
+    icons: SwitchIcons? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     // Icon isn't focusable, no need for content description
-    val icon: (@Composable () -> Unit)? = iconState?.let {
+    val icon: (@Composable () -> Unit)? = icons?.let {
         {
             Icon(
-                sparkIcon = if (checked) it.checkedIcon else it.uncheckedIcon,
+                sparkIcon = if (checked) it.checked else it.unchecked,
                 contentDescription = null,
                 modifier = Modifier.size(12.dp),
             )
@@ -94,7 +94,7 @@ internal fun SparkSwitch(
  * @param onCheckedChange callback to be invoked when Switch is being clicked, therefore the change of checked state is requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.
  * @param modifier Modifier to be applied to  switch layout
  * @param enabled whether the component is enabled or grayed out
- * @param iconState represents the pair of icons to use for check/unchecked states
+ * @param icons represents the pair of icons to use for check/unchecked states, you can use [SwitchDefaults.icons] if you want to use the default ones.
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this Switch. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
@@ -106,7 +106,7 @@ public fun Switch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    iconState: IconState? = null,
+    icons: SwitchIcons? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     SparkSwitch(
@@ -114,7 +114,7 @@ public fun Switch(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
-        iconState = iconState,
+        icons = icons,
         interactionSource = interactionSource,
     )
 }
@@ -132,7 +132,7 @@ public fun Switch(
  * @param onCheckedChange callback to be invoked when Switch is being clicked, therefore the change of checked state is requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.
  * @param modifier Modifier to be applied to the layout of the switch layout
  * @param enabled whether the component is enabled or grayed out
- * @param iconState represents the pair of icons to use for check/unchecked states
+ * @param icons represents the pair of icons to use for check/unchecked states
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this Switch. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
@@ -146,7 +146,7 @@ public fun SwitchLabelled(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    iconState: IconState? = null,
+    icons: SwitchIcons? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     contentSide: ContentSide = ContentSide.Start,
     content: @Composable RowScope.() -> Unit,
@@ -159,7 +159,7 @@ public fun SwitchLabelled(
                 onCheckedChange = null,
                 interactionSource = interactionSource,
                 enabled = enabled,
-                iconState = iconState,
+                icons = icons,
                 modifier = Modifier.minimumTouchTargetSize(),
             )
         },
@@ -174,12 +174,12 @@ public fun SwitchLabelled(
     )
 }
 /**
- * @property checkedIcon icon to be used for the thumb in checked state
- * @property uncheckedIcon icon to be used for the thumb in unchecked state
+ * @property checked icon to be used for the thumb in checked state
+ * @property unchecked icon to be used for the thumb in unchecked state
  */
-public data class IconState(
-    val checkedIcon: SparkIcon = SparkIcon.Toggles.Check.Simple,
-    val uncheckedIcon: SparkIcon = SparkIcon.Arrows.Close.Default,
+public data class SwitchIcons(
+    val checked: SparkIcon = SparkIcon.Toggles.Check.Simple,
+    val unchecked: SparkIcon = SparkIcon.Arrows.Close.Default,
 )
 
 @Preview(
@@ -193,10 +193,10 @@ internal fun AllStatesSwitchPreview(
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
         Row {
-            Switch(checked = true, onCheckedChange = {}, enabled = true, iconState = IconState())
-            Switch(checked = false, onCheckedChange = {}, enabled = true, iconState = IconState())
-            Switch(checked = true, onCheckedChange = {}, enabled = false, iconState = IconState())
-            Switch(checked = false, onCheckedChange = {}, enabled = false, iconState = IconState())
+            Switch(checked = true, onCheckedChange = {}, enabled = true, icons = SwitchDefaults.icons)
+            Switch(checked = false, onCheckedChange = {}, enabled = true, icons = SwitchDefaults.icons)
+            Switch(checked = true, onCheckedChange = {}, enabled = false, icons = SwitchDefaults.icons)
+            Switch(checked = false, onCheckedChange = {}, enabled = false, icons = SwitchDefaults.icons)
         }
         Row {
             Switch(checked = true, onCheckedChange = {}, enabled = true)
