@@ -28,10 +28,10 @@ import androidx.compose.ui.graphics.compositeOver
 import com.adevinta.spark.SparkTheme
 import androidx.compose.material3.SwitchDefaults as MaterialSwitchDefaults
 
-internal object SwitchDefaults {
+public object SwitchDefaults {
 
     @Composable
-    fun colors(
+    internal fun colors(
         checkedThumbColor: Color = SparkTheme.colors.surface,
         checkedTrackColor: Color = SparkTheme.colors.primary,
         checkedBorderColor: Color = Color.Transparent,
@@ -68,4 +68,6 @@ internal object SwitchDefaults {
         disabledUncheckedBorderColor = disabledUncheckedBorderColor,
         disabledUncheckedIconColor = disabledUncheckedIconColor
     )
+
+    public val icons: SwitchIcons = SwitchIcons()
 }
