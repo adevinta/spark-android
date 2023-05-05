@@ -21,7 +21,7 @@ A badge is a visual indicator for numeric values such as tallies and scores.
 fun Badge(
     count: Int,
     modifier: Modifier = Modifier,
-    badgeStyle: BadgeStyle = BadgeStyle.MEDIUM,
+    badgeStyle: BadgeStyle = BadgeStyle.Medium,
     intent: BadgeIntent = BadgeIntent.Danger,
     overflowCount: Int = BADGE_MAX_COUNT,
     hasBorder: Boolean = true,
@@ -40,7 +40,7 @@ Badge content can contain:
 
 ```kotlin
 Badge(
-    badgeStyle = BadgeStyle.SMALL,
+    badgeStyle = BadgeStyle.Small,
     intent = intent,
     count = 1000,
     overflowCount = 999,
@@ -56,7 +56,7 @@ the default of 99 is used.
 public fun Badge(
     count: Int,
     modifier: Modifier = Modifier,
-    badgeStyle: BadgeStyle = BadgeStyle.MEDIUM,
+    badgeStyle: BadgeStyle = BadgeStyle.Medium,
     intent: BadgeIntent = BadgeIntent.Danger,
     overflowCount: Int = BADGE_MAX_COUNT,
     hasBorder: Boolean = true,
@@ -67,7 +67,7 @@ public fun Badge(
 |----------------------------------------------|------------------------------------------------------------------------|
 | `count: Int`                                 | count to use inside the label                                          |
 | `modifier: Modifier = Modifier`              | modifier the Modifier to be applied to this badge                      |                                                                                                                     |
-| `badgeStyle: BadgeStyle = BadgeStyle.MEDIUM` | badgeStyle style of the badge which defines its size                   |
+| `badgeStyle: BadgeStyle = BadgeStyle.Medium` | badgeStyle style of the badge which defines its size                   |
 | `intent: BadgeIntent = BadgeIntent.Danger`   | The [BadgeIntent] color to use                                         |
 | `overflowCount: Int = BADGE_MAX_COUNT`       | overflowCount defines the max count starting from which + is displayed |
 | `hasBorder: Boolean = true`                  | hasBorder whether a border should be drawn                             |
@@ -89,7 +89,7 @@ public fun Badge(
 | Parameters                                   | Descriptions                                              |
 |----------------------------------------------|-----------------------------------------------------------|
 | `modifier: Modifier = Modifier`              | modifier the Modifier to be applied to this badge         |                                                                                                                     |
-| `badgeStyle: BadgeStyle = BadgeStyle.MEDIUM` | badgeStyle style of the badge which defines its size      |
+| `badgeStyle: BadgeStyle = BadgeStyle.Medium` | badgeStyle style of the badge which defines its size      |
 | `intent: BadgeIntent = BadgeIntent.Danger`   | the [BadgeIntent] color to use                            |
 | `hasStroke: Boolean = true`                  | whether a border should be drawn                          |
 | `content: (@Composable () -> Unit)? = null`  | content optional content to be rendered inside this badge |                                                                        |

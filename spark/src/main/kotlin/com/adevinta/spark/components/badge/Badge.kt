@@ -113,7 +113,7 @@ internal fun SparkBadge(
 public fun Badge(
     count: Int,
     modifier: Modifier = Modifier,
-    badgeStyle: BadgeStyle = BadgeStyle.MEDIUM,
+    badgeStyle: BadgeStyle = BadgeStyle.Medium,
     intent: BadgeIntent = BadgeIntent.Danger,
     overflowCount: Int = BADGE_MAX_COUNT,
     hasStroke: Boolean = true,
@@ -146,7 +146,7 @@ public fun Badge(
 @Composable
 public fun Badge(
     modifier: Modifier = Modifier,
-    badgeStyle: BadgeStyle = BadgeStyle.MEDIUM,
+    badgeStyle: BadgeStyle = BadgeStyle.Medium,
     intent: BadgeIntent = BadgeIntent.Danger,
     hasStroke: Boolean = true,
     content: (@Composable () -> Unit)? = null,

@@ -174,7 +174,7 @@ internal fun NavigationDrawerItemPreview(
                 onClick = { },
                 label = tab.first,
                 icon = tab.second,
-                badge = { Badge(badgeStyle = BadgeStyle.MEDIUM) { Text("1") } },
+                badge = { Badge(badgeStyle = BadgeStyle.Medium) { Text("1") } },
             )
         }
         NavigationDrawerItem(
