@@ -34,7 +34,6 @@ import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -42,7 +41,6 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -147,7 +145,7 @@ internal fun BadgedBoxPreview(
     PreviewTheme(theme) {
         BadgeStyle.values().forEach {
             Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(32.dp),
             ) {
                 BadgedBox(
                     badge = {
@@ -173,6 +171,17 @@ internal fun BadgedBoxPreview(
                 }
                 BadgedBox(
                     badge = {
+                        Badge(count = 1000, badgeStyle = it, overflowCount = 999)
+                    },
+                ) {
+                    Icon(
+                        SparkIcon.Actions.Search,
+                        modifier = Modifier.size(24.dp),
+                        contentDescription = "Search",
+                    )
+                }
+                BadgedBox(
+                    badge = {
                         Badge(badgeStyle = it)
                     },
                 ) {
@@ -185,11 +194,11 @@ internal fun BadgedBoxPreview(
             }
 
             Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(32.dp),
             ) {
                 BadgedBox(
                     badge = {
-                        Badge(count = 1, badgeStyle = it, hasBorder = false)
+                        Badge(count = 1, badgeStyle = it, intent = BadgeIntent.Info, hasBorder = false)
                     },
                 ) {
                     Icon(
@@ -200,7 +209,7 @@ internal fun BadgedBoxPreview(
                 }
                 BadgedBox(
                     badge = {
-                        Badge(count = 100, badgeStyle = it, hasBorder = false)
+                        Badge(count = 100, badgeStyle = it, intent = BadgeIntent.Info, hasBorder = false)
                     },
                 ) {
                     Icon(
@@ -211,65 +220,25 @@ internal fun BadgedBoxPreview(
                 }
                 BadgedBox(
                     badge = {
-                        Badge(badgeStyle = it, hasBorder = false)
+                        Badge(count = 1000, badgeStyle = it, overflowCount = 999, intent = BadgeIntent.Info, hasBorder = false)
+                    },
+                ) {
+                    Icon(
+                        SparkIcon.Actions.Search,
+                        modifier = Modifier.size(24.dp),
+                        contentDescription = "Search",
+                    )
+                }
+                BadgedBox(
+                    badge = {
+                        Badge(badgeStyle = it, intent = BadgeIntent.Info, hasBorder = false)
                     },
                 ) {
                     Icon(
                         SparkIcon.User.Outline,
                         modifier = Modifier.size(24.dp),
-                        contentDescription = "Notifications",
+                        contentDescription = "Account",
                     )
-                }
-            }
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                BadgedBox(
-                    badge = {
-                        Badge(count = 1, badgeStyle = it)
-                    },
-                ) {
-                    Text("Notifications")
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(count = 100, badgeStyle = it)
-                    },
-                ) {
-                    Text("Messages")
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(badgeStyle = it)
-                    },
-                ) {
-                    Text("Favorites")
-                }
-            }
-
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                BadgedBox(
-                    badge = {
-                        Badge(count = 1, badgeStyle = it, hasBorder = false)
-                    },
-                ) {
-                    Text("Notifications")
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(count = 100, badgeStyle = it, hasBorder = false)
-                    },
-                ) {
-                    Text("Messages")
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(badgeStyle = it, hasBorder = false)
-                    },
-                ) {
-                    Text("Favorites")
                 }
             }
         }

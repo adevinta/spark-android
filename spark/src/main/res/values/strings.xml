@@ -21,7 +21,7 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
   -->
-<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" tools:locale="fr">
     <string name="spark_a11y_modal_fullscreen_close">Close the dialog</string>
 
     <string name="spark_back_arrow_content_description">Retour en arrière</string>
@@ -33,7 +33,15 @@
 
     <string name="spark_user_avatar_content_description">Photo de profil</string>
 
+    <!--Badge-->
+    <string name="spark_exceed_max_badge_number_a11y" tools:ignore="PluralsCandidate"
+        description="Plural form content description for when the number of new notifications exceeds a maximum count[CHAR_LIMIT=NONE]">More than <xliff:g example="999" id="maximum number">%1$d</xliff:g> new notifications</string>
+    <string name="spark_badge_numberless_a11y" description="Content description for new notification (no number count) [CHAR_LIMIT=NONE]">New notification</string>
+    <plurals name="spark_badge_a11y" description="Plural form content description for number of new notifications [CHAR_LIMIT=NONE]">
+        <item quantity="one"><xliff:g id="count">%d</xliff:g> new notification</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> new notifications</item>
+    </plurals>
+
     <string name="spark_annotatedStringResource_test"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for text on</p> <i><annotation color="primary">Android</annotation></i></string>
     <string name="spark_annotatedStringResource_test_args"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for %s on</p> <i><annotation color="primary">Android</annotation></i></string>
-
 </resources>
