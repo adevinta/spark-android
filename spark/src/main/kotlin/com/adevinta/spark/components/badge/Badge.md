@@ -82,6 +82,7 @@ public fun Badge(
     badgeStyle: BadgeStyle = BadgeStyle.MEDIUM,
     intent: BadgeIntent = BadgeIntent.Danger,
     hasStroke: Boolean = true,
+    contentDescription: String? = null,
     content: (@Composable () -> Unit)? = null,
 )
 ```
@@ -92,6 +93,7 @@ public fun Badge(
 | `badgeStyle: BadgeStyle = BadgeStyle.Medium` | badgeStyle style of the badge which defines its size      |
 | `intent: BadgeIntent = BadgeIntent.Danger`   | the [BadgeIntent] color to use                            |
 | `hasStroke: Boolean = true`                  | whether a border should be drawn                          |
+| `contentDescription: String? = null`         | a content description to use instead of default           |
 | `content: (@Composable () -> Unit)? = null`  | content optional content to be rendered inside this badge |                                                                        |
 
 ### Style

@@ -37,12 +37,17 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifTrue
@@ -123,9 +128,18 @@ public fun Badge(
             text = if (count > overflowCount) "$overflowCount+" else "$count",
         )
     }
+    val contentA11y = if (count > overflowCount) {
+        stringResource(id = R.string.spark_exceed_max_badge_number_a11y)
+    } else {
+        pluralStringResource(id = R.plurals.spark_badge_a11y, count = count)
+    }
     SparkBadge(
         badgeStyle = badgeStyle,
-        modifier = modifier.sparkUsageOverlay(),
+        modifier = modifier
+            .semantics(mergeDescendants = true) {
+                contentDescription = contentA11y
+            }
+            .sparkUsageOverlay(),
         intent = intent,
         hasStroke = hasStroke,
         content = content,
@@ -141,6 +155,7 @@ public fun Badge(
  * @param modifier the Modifier to be applied to this badge
  * @param intent The [BadgeIntent] color to use
  * @param hasStroke whether a border should be drawn
+ * @param contentDescription
  * @param content optional content to be rendered inside this badge
  **/
 @Composable
@@ -149,10 +164,16 @@ public fun Badge(
     badgeStyle: BadgeStyle = BadgeStyle.Medium,
     intent: BadgeIntent = BadgeIntent.Danger,
     hasStroke: Boolean = true,
+    contentDescription: String? = null,
     content: (@Composable () -> Unit)? = null,
 ) {
+    val contentA11y = contentDescription ?: stringResource(id = R.string.spark_badge_numberless_a11y)
     SparkBadge(
-        modifier = modifier,
+        modifier = modifier
+            .semantics(mergeDescendants = true) {
+                this.contentDescription = contentA11y
+            }
+            .sparkUsageOverlay(),
         badgeStyle = badgeStyle,
         intent = intent,
         hasStroke = hasStroke,
