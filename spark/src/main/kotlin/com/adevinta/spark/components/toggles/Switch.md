@@ -95,20 +95,10 @@ public fun SwitchLabelled(
 | `content: @Composable RowScope.() -> Unit`                                              | The content displayed before the switch, usually a Text composable shown at the start                                                                                                                                                                                                                   |
 
 ## Layout
-BadgedBox can be used to position badge at the top right corner of another component.
+- The Switch respects the minimum touch size.
+- Switch labels can be positioned at the Left or the Right, but usually the left position is more often used on small screens and mobile devices.
 
+### SwitchGroup
 
-```kotlin
-@Composable
-public fun BadgedBox(
-    badge: @Composable BoxScope.() -> Unit,
-    modifier: Modifier = Modifier,
-    content: @Composable BoxScope.() -> Unit,
-)
-```
-
-| Parameters                                 | Descriptions                                      |
-|--------------------------------------------|---------------------------------------------------|
-| `badge: @Composable BoxScope.() -> Unit`   | the badge to be displayed - typically a Badge     |
-| `modifier: Modifier = Modifier`            | the Modifier to be applied to this BadgedBox      |
-| `content: @Composable RowScope.() -> Unit` | the anchor to which this badge will be positioned |
+> 🚀 TODO
+> We plan to provide a layout composable to make it easier to follow the design specs.

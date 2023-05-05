@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -60,7 +61,7 @@ internal fun SparkBadge(
     badgeStyle: BadgeStyle,
     modifier: Modifier = Modifier,
     intent: BadgeIntent = BadgeIntent.Danger,
-    hasBorder: Boolean = false,
+    hasStroke: Boolean = false,
     content: (@Composable () -> Unit)? = null,
 ) {
     val size = if (content != null) badgeStyle.size else BadgeWithNoContentSize
@@ -69,17 +70,16 @@ internal fun SparkBadge(
 
     Row(
         modifier = modifier
-            .ifTrue(hasBorder) { border(2.dp, SparkTheme.colors.surface, SparkTheme.shapes.full).padding(2.dp) }
+            .ifTrue(hasStroke) { border(2.dp, SparkTheme.colors.surface, SparkTheme.shapes.full).padding(2.dp) }
             .defaultMinSize(minWidth = size, minHeight = size)
             .background(
                 color = colors.color,
                 shape = shape,
             )
             .clip(shape)
-            .then(
-                if (content != null)
-                    Modifier.padding(horizontal = badgeStyle.contentPadding) else Modifier,
-            ),
+            .ifNotNull(content) {
+                padding(horizontal = badgeStyle.contentPadding)
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
     ) {
@@ -107,7 +107,7 @@ internal fun SparkBadge(
  * @param badgeStyle style of the badge which defines its size
  * @param intent The [BadgeIntent] color to use
  * @param overflowCount defines the max count starting from which + is displayed
- * @param hasBorder whether a border should be drawn
+ * @param hasStroke whether a border should be drawn
  **/
 @Composable
 public fun Badge(
@@ -116,7 +116,7 @@ public fun Badge(
     badgeStyle: BadgeStyle = BadgeStyle.MEDIUM,
     intent: BadgeIntent = BadgeIntent.Danger,
     overflowCount: Int = BADGE_MAX_COUNT,
-    hasBorder: Boolean = true,
+    hasStroke: Boolean = true,
 ) {
     val content: @Composable () -> Unit = {
         Text(
@@ -127,7 +127,7 @@ public fun Badge(
         badgeStyle = badgeStyle,
         modifier = modifier.sparkUsageOverlay(),
         intent = intent,
-        hasBorder = hasBorder,
+        hasStroke = hasStroke,
         content = content,
     )
 }
@@ -140,7 +140,7 @@ public fun Badge(
  * @param badgeStyle style of the badge which defines its size
  * @param modifier the Modifier to be applied to this badge
  * @param intent The [BadgeIntent] color to use
- * @param hasBorder whether a border should be drawn
+ * @param hasStroke whether a border should be drawn
  * @param content optional content to be rendered inside this badge
  **/
 @Composable
@@ -148,14 +148,14 @@ public fun Badge(
     modifier: Modifier = Modifier,
     badgeStyle: BadgeStyle = BadgeStyle.MEDIUM,
     intent: BadgeIntent = BadgeIntent.Danger,
-    hasBorder: Boolean = true,
+    hasStroke: Boolean = true,
     content: (@Composable () -> Unit)? = null,
 ) {
     SparkBadge(
         modifier = modifier,
         badgeStyle = badgeStyle,
         intent = intent,
-        hasBorder = hasBorder,
+        hasStroke = hasStroke,
         content = content,
     )
 }
@@ -175,13 +175,13 @@ internal fun BadgePreview(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    Badge(badgeStyle = it, intent = intent, hasBorder = false)
-                    Badge(badgeStyle = it, intent = intent, hasBorder = false) { Text("56k") }
-                    Badge(badgeStyle = it, intent = intent, count = 3, hasBorder = false)
-                    Badge(badgeStyle = it, intent = intent, count = 99, hasBorder = false)
-                    Badge(badgeStyle = it, intent = intent, count = 200, overflowCount = 99, hasBorder = false)
-                    Badge(badgeStyle = it, intent = intent, count = 99, overflowCount = 999, hasBorder = false)
-                    Badge(badgeStyle = it, intent = intent, count = 1000, overflowCount = 999, hasBorder = false)
+                    Badge(badgeStyle = it, intent = intent, hasStroke = false)
+                    Badge(badgeStyle = it, intent = intent, hasStroke = false) { Text("56k") }
+                    Badge(badgeStyle = it, intent = intent, count = 3, hasStroke = false)
+                    Badge(badgeStyle = it, intent = intent, count = 99, hasStroke = false)
+                    Badge(badgeStyle = it, intent = intent, count = 200, overflowCount = 99, hasStroke = false)
+                    Badge(badgeStyle = it, intent = intent, count = 99, overflowCount = 999, hasStroke = false)
+                    Badge(badgeStyle = it, intent = intent, count = 1000, overflowCount = 999, hasStroke = false)
                 }
                 Row(
                     modifier = Modifier

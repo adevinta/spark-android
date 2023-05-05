@@ -198,7 +198,7 @@ internal fun BadgedBoxPreview(
             ) {
                 BadgedBox(
                     badge = {
-                        Badge(count = 1, badgeStyle = it, intent = BadgeIntent.Info, hasBorder = false)
+                        Badge(count = 1, badgeStyle = it, intent = BadgeIntent.Info, hasStroke = false)
                     },
                 ) {
                     Icon(
@@ -209,7 +209,7 @@ internal fun BadgedBoxPreview(
                 }
                 BadgedBox(
                     badge = {
-                        Badge(count = 100, badgeStyle = it, intent = BadgeIntent.Info, hasBorder = false)
+                        Badge(count = 100, badgeStyle = it, intent = BadgeIntent.Info, hasStroke = false)
                     },
                 ) {
                     Icon(
@@ -220,7 +220,7 @@ internal fun BadgedBoxPreview(
                 }
                 BadgedBox(
                     badge = {
-                        Badge(count = 1000, badgeStyle = it, overflowCount = 999, intent = BadgeIntent.Info, hasBorder = false)
+                        Badge(count = 1000, badgeStyle = it, overflowCount = 999, intent = BadgeIntent.Info, hasStroke = false)
                     },
                 ) {
                     Icon(
@@ -231,7 +231,7 @@ internal fun BadgedBoxPreview(
                 }
                 BadgedBox(
                     badge = {
-                        Badge(badgeStyle = it, intent = BadgeIntent.Info, hasBorder = false)
+                        Badge(badgeStyle = it, intent = BadgeIntent.Info, hasStroke = false)
                     },
                 ) {
                     Icon(
