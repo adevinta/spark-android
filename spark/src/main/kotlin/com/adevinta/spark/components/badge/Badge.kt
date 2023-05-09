@@ -75,16 +75,17 @@ internal fun SparkBadge(
 
     Row(
         modifier = modifier
-            .ifTrue(hasStroke) { border(2.dp, SparkTheme.colors.surface, SparkTheme.shapes.full).padding(2.dp) }
+            .ifTrue(hasStroke) { border(2.dp, SparkTheme.colors.surface, shape).padding(2.dp) }
             .defaultMinSize(minWidth = size, minHeight = size)
             .background(
                 color = colors.color,
                 shape = shape,
             )
             .clip(shape)
-            .ifNotNull(content) {
-                padding(horizontal = badgeStyle.contentPadding)
-            },
+            .then(
+                Modifier.ifNotNull(content) { padding(horizontal = badgeStyle.contentPadding) }
+            )
+        ,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
     ) {

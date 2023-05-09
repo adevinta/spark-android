@@ -33,8 +33,8 @@ import com.adevinta.spark.SparkTheme
  * @param contentPadding padding to use for badge content
  */
 public enum class BadgeStyle(public val size: Dp, public val contentPadding: Dp) {
-    Small(size = _smallBadgeSize, contentPadding = _smallBadgeContentPadding),
-    Medium(size = _mediumBadgeSize, contentPadding = _mediumBadgeContentPadding),
+    Small(size = smallBadgeSize, contentPadding = smallBadgeContentPadding),
+    Medium(size = mediumBadgeSize, contentPadding = mediumBadgeContentPadding),
 }
 
 @Composable
