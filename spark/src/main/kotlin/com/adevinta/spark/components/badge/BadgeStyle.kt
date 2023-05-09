@@ -44,7 +44,7 @@ internal fun BadgeStyle.getTextStyle() = when (this) {
 }.copy(fontWeight = FontWeight.Bold)
 
 
-private val _mediumBadgeSize = 24.dp
-private val _mediumBadgeContentPadding = 8.dp
-private val _smallBadgeSize = 14.dp
-private val _smallBadgeContentPadding = 4.dp
+private val mediumBadgeSize = 24.dp
+private val mediumBadgeContentPadding = 8.dp
+private val smallBadgeSize = 14.dp
+private val smallBadgeContentPadding = 4.dp
