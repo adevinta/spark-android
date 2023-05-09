@@ -132,7 +132,7 @@ public fun Badge(
     val contentA11y = if (count > overflowCount) {
         stringResource(id = R.string.spark_exceed_max_badge_number_a11y)
     } else {
-        pluralStringResource(id = R.plurals.spark_badge_a11y, count = count)
+        pluralStringResource(id = R.plurals.spark_badge_a11y, count, count)
     }
     SparkBadge(
         badgeStyle = badgeStyle,
