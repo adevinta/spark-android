@@ -11,10 +11,10 @@ A badge is a visual indicator for numeric values such as tallies and scores.
 
 ### Styles
 
-|       | Danger and Info                                                                                                                                                         |
-|-------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Light | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_light.png)        |
-| Dark  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_badge_badge_dark.png) |
+|       | Danger and Info                                                                                                                                                  |
+|-------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Light | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_light.png) |
+| Dark  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_dark.png)  |
 
 ```kotlin
 @Composable
@@ -117,9 +117,9 @@ Badge(
 )
 ```
 
-| Light                                                                                                                                                              | Dark                                                                                                                                                                      |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge__badge_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonfilled_dark.png) |
+| Light                                                                                                                                                                 | Dark                                                                                                                                                                 |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badgedbox_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badgedbox_dark.png) |
 
 ## Layout
 
