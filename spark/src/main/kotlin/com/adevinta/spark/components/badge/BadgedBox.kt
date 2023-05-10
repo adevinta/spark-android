@@ -56,28 +56,30 @@ internal fun SparkBadgedBox(
     modifier: Modifier = Modifier,
     content: @Composable BoxScope.() -> Unit,
 ) {
+    val anchorId = "anchor"
+    val badgeId = "badge"
     Layout(
         {
             Box(
-                modifier = Modifier.layoutId("anchor"),
+                modifier = Modifier.layoutId(anchorId),
                 contentAlignment = Alignment.Center,
                 content = content,
             )
             Box(
-                modifier = Modifier.layoutId("badge"),
+                modifier = Modifier.layoutId(badgeId),
                 content = badge,
             )
         },
         modifier = modifier,
     ) { measurables, constraints ->
 
-        val badgePlaceable = measurables.first { it.layoutId == "badge" }.measure(
+        val badgePlaceable = measurables.first { it.layoutId == badgeId }.measure(
             // Measure with loose constraints for height as we don't want the text to take up more
             // space than it needs.
             constraints.copy(minHeight = 0),
         )
 
-        val anchorPlaceable = measurables.first { it.layoutId == "anchor" }.measure(constraints)
+        val anchorPlaceable = measurables.first { it.layoutId == anchorId }.measure(constraints)
 
         val hasContent = badgePlaceable.width > BadgeWithNoContentSize.roundToPx()
         val offset = when {
