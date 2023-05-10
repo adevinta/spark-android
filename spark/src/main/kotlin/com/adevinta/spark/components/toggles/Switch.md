@@ -96,10 +96,8 @@ public fun SwitchLabelled(
 | `content: @Composable RowScope.() -> Unit`                                              | The content displayed before the switch, usually a Text composable shown at the start                                                                                                                                                                                                                   |
 
 ## Layout
-
 - The Switch respects the minimum touch size.
-- Switch labels can be positioned at the Left or the Right, but usually the left position is more
-  often used on small screens and mobile devices.
+- Switch labels can be positioned at the Left or the Right, but usually the left position is more often used on small screens and mobile devices.
 
 ### SwitchGroup
 
