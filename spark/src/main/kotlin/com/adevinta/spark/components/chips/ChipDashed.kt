@@ -26,8 +26,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -39,7 +39,6 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.badge.Badge
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.tools.modifiers.dashedBorder
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -59,7 +58,6 @@ import com.adevinta.spark.tools.preview.UserType
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  * @param onClick called when this chip is clicked
  * @param content a Composable to set as the chip's custom content.
- * Use [ChipLayout] to set a custom content that respects Spark specs.
  */
 @Composable
 public fun ChipDashed(
@@ -68,27 +66,16 @@ public fun ChipDashed(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
-    content: @Composable () -> Unit,
+    content: @Composable RowScope.() -> Unit,
 ) {
-    val colors = ChipStyles.Dashed.colors(intent = intent)
-    val chipContent: @Composable () -> Unit = {
-        Box(
-            Modifier.dashedBorder(
-                width = ChipDefaults.BorderStrokeWidth,
-                radius = ChipDefaults.DashedBorderRadius,
-                color = if (enabled) colors.contentColor else colors.disabledContentColor,
-            ),
-        ) {
-            content()
-        }
-    }
-    BaseSparkChip(
-        colors = colors,
+    Chip(
+        style = ChipStyles.Dashed,
+        intent = intent,
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
         interactionSource = interactionSource,
-        content = chipContent,
+        content = content,
     )
 }
 
@@ -117,21 +104,16 @@ public fun ChipDashed(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
 ) {
-    val colors = ChipStyles.Dashed.colors(intent = intent)
-    ChipDashed(
+    Chip(
+        style = ChipStyles.Dashed,
         intent = intent,
+        onClick = onClick,
+        text = text,
         modifier = modifier,
         enabled = enabled,
+        leadingIcon = leadingIcon,
         interactionSource = interactionSource,
-        onClick = onClick,
-    ) {
-        ChipContent(
-            colors = colors,
-            leadingIcon = leadingIcon,
-            text = text,
-            enabled = enabled,
-        )
-    }
+    )
 }
 
 /**
@@ -162,22 +144,17 @@ public fun ChipDashed(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
 ) {
-    val colors = ChipStyles.Dashed.colors(intent = intent)
-    ChipDashed(
+    Chip(
+        style = ChipStyles.Dashed,
         intent = intent,
+        onClick = onClick,
+        text = null,
         modifier = modifier,
         enabled = enabled,
+        leadingIcon = icon,
+        contentDescription = contentDescription,
         interactionSource = interactionSource,
-        onClick = onClick,
-    ) {
-        ChipContent(
-            colors = colors,
-            leadingIcon = icon,
-            text = null,
-            contentDescription = contentDescription,
-            enabled = enabled,
-        )
-    }
+    )
 }
 
 
@@ -201,10 +178,8 @@ internal fun ChipDashedPreview(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     ChipDashed(intent = intent, enabled = enabled) {
-                        ChipLayout {
-                            Text("Chip")
-                            Badge(hasStroke = false, count = 1)
-                        }
+                        Text("Chip")
+                        Badge(hasStroke = false, count = 1)
                     }
                     ChipDashed(intent.name, intent, leadingIcon = SparkIcon.Account.Offers.Outlined, enabled = enabled)
                     ChipDashed(intent.name, intent, enabled = enabled)

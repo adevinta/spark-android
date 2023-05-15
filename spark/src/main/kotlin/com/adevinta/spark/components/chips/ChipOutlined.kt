@@ -22,12 +22,12 @@
 
 package com.adevinta.spark.components.chips
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -67,16 +67,14 @@ public fun ChipOutlined(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
 ) {
-    val colors = ChipStyles.Outlined.colors(intent = intent)
-    val borderColor = if (enabled) colors.contentColor else colors.disabledContentColor
-    SparkChip(
-        colors = colors,
+    Chip(
+        style = ChipStyles.Outlined,
+        intent = intent,
         onClick = onClick,
         text = text,
         modifier = modifier,
         enabled = enabled,
         leadingIcon = leadingIcon,
-        border = BorderStroke(width = ChipDefaults.BorderStrokeWidth, color = borderColor),
         interactionSource = interactionSource,
     )
 }
@@ -89,7 +87,7 @@ public fun ChipOutlined(
  * @param contentDescription text used by accessibility services to describe what this icon
  * represents. This should always be provided unless this icon is used for decorative purposes,
  * and does not represent a meaningful action that a user can take. This text should be
- * localized, such as by using [androidx.compose.ui.res.stringResource] or similar
+ * localized, such as by using [androidx.compose.ui.res.stringResource] or similar.
  * @param modifier The [Modifier] to be applied to the component
  * @param enabled controls the enabled state of this chip. When `false`, this component will not
  * respond to user input, and it will appear visually disabled and disabled to accessibility
@@ -109,17 +107,15 @@ public fun ChipOutlined(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
 ) {
-    val colors = ChipStyles.Outlined.colors(intent = intent)
-    val borderColor = if (enabled) colors.contentColor else colors.disabledContentColor
-    SparkChip(
-        text = null,
-        colors = colors,
+    Chip(
+        style = ChipStyles.Outlined,
+        intent = intent,
         onClick = onClick,
-        contentDescription = contentDescription,
+        text = null,
         modifier = modifier,
         enabled = enabled,
         leadingIcon = icon,
-        border = BorderStroke(width = ChipDefaults.BorderStrokeWidth, color = borderColor),
+        contentDescription = contentDescription,
         interactionSource = interactionSource,
     )
 }
@@ -138,7 +134,6 @@ public fun ChipOutlined(
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  * @param onClick called when this chip is clicked
  * @param content a Composable to set as the chip's custom content.
- * Use [ChipLayout] to set a custom content that respects Spark specs.
  */
 @Composable
 public fun ChipOutlined(
@@ -147,16 +142,14 @@ public fun ChipOutlined(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
-    content: @Composable () -> Unit,
+    content: @Composable RowScope.() -> Unit,
 ) {
-    val colors = ChipStyles.Outlined.colors(intent = intent)
-    val borderColor = if (enabled) colors.contentColor else colors.disabledContentColor
-    BaseSparkChip(
-        colors = colors,
+    Chip(
+        style = ChipStyles.Outlined,
+        intent = intent,
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        border = BorderStroke(width = ChipDefaults.BorderStrokeWidth, color = borderColor),
         interactionSource = interactionSource,
         content = content,
     )

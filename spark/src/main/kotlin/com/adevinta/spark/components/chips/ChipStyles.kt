@@ -22,6 +22,7 @@
 
 package com.adevinta.spark.components.chips
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
@@ -97,3 +98,11 @@ internal data class ChipColors(
     val disabledBackgroundColor: Color,
     val disabledContentColor: Color,
 )
+
+@Composable
+public fun ChipStyles.border(intent: ChipIntent, enabled: Boolean): BorderStroke? {
+    if (this != ChipStyles.Outlined) return null
+    val colors = this.colors(intent = intent)
+    val borderColor = if (enabled) colors.contentColor else colors.disabledContentColor
+    return BorderStroke(width = ChipDefaults.BorderStrokeWidth, color = borderColor)
+}

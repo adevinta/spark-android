@@ -23,7 +23,6 @@
 package com.adevinta.spark.components.chips
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -52,6 +51,7 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.tags.TagDefaults
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.tools.modifiers.dashedBorder
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
@@ -64,7 +64,7 @@ import com.adevinta.spark.tools.preview.UserType
  * trigger actions, make selections, or filter content.
  *
  * @param colors one of [ChipColors] that will be used to resolve the colors used for this chip in
- * different states, as well as the border to draw around the container of this chip.
+ * different states, as well as the color of the border to draw around the container of this chip.
  * @param onClick called when this chip is clicked
  * @param modifier the [Modifier] to be applied to this chip
  * @param enabled controls the enabled state of this chip. When `false`, this component will not
@@ -75,12 +75,11 @@ import com.adevinta.spark.tools.preview.UserType
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  * @param content a Composable to set as the chip's content,
- * Use [ChipLayout] to set a custom content that respects Spark specs.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
-internal fun BaseSparkChip(
+private fun SparkChip(
     colors: ChipColors,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -91,7 +90,9 @@ internal fun BaseSparkChip(
 ) {
     Surface(
         onClick = onClick,
-        modifier = modifier.minimumTouchTargetSize().sparkUsageOverlay(),
+        modifier = modifier
+            .minimumTouchTargetSize()
+            .sparkUsageOverlay(),
         enabled = enabled,
         shape = SparkTheme.shapes.small,
         color = if (enabled) colors.backgroundColor else colors.disabledBackgroundColor,
@@ -112,34 +113,32 @@ internal fun BaseSparkChip(
  * Chips help users quickly recognize an important information that has been entered by them,
  * trigger actions, make selections, or filter content.
  *
- * @param colors one of [ChipColors] that will be used to resolve the colors used for this chip in
- * different states, as well as the border to draw around the container of this chip.
+ * @param style one of [ChipStyles] that defines chips background and border colors.
+ * @param intent The [ChipIntent] colors that will be used for the content and background of this chip in
+ * different states.
  * @param onClick called when this chip is clicked
- * @param text label for this chip
  * @param modifier the [Modifier] to be applied to this chip
  * @param enabled controls the enabled state of this chip. When `false`, this component will not
  * respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
- * @param leadingIcon optional icon at the start of the chip, preceding the [text]
- * @param border [BorderStroke] the border to draw around the container of this chip. Pass `null` for no border.
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
+ * @param content a Composable to set as the chip's custom content.
  */
-@InternalSparkApi
 @Composable
-internal fun SparkChip(
-    colors: ChipColors,
+public fun Chip(
+    style: ChipStyles,
+    intent: ChipIntent,
     onClick: () -> Unit,
-    text: String?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    leadingIcon: SparkIcon? = null,
-    border: BorderStroke? = null,
-    contentDescription: String? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.() -> Unit,
 ) {
-    BaseSparkChip(
+    val colors = style.colors(intent = intent)
+    val border = style.border(intent = intent, enabled = enabled)
+    SparkChip(
         colors = colors,
         onClick = onClick,
         modifier = modifier,
@@ -147,72 +146,74 @@ internal fun SparkChip(
         border = border,
         interactionSource = interactionSource,
     ) {
-        ChipContent(
-            colors = colors,
-            leadingIcon = leadingIcon,
-            text = text,
-            contentDescription = contentDescription,
-            enabled = enabled,
-        )
+        Row(
+            Modifier
+                .ifTrue(style == ChipStyles.Dashed) {
+                    dashedBorder(
+                        width = ChipDefaults.BorderStrokeWidth,
+                        radius = ChipDefaults.DashedBorderRadius,
+                        color = if (enabled) colors.contentColor else colors.disabledContentColor,
+                    )
+                }
+                .defaultMinSize(minHeight = ChipDefaults.MinHeight)
+                .sizeIn(maxWidth = ChipDefaults.MaxWidth)
+                .padding(ChipDefaults.ChipPadding),
+            horizontalArrangement = Arrangement.spacedBy(
+                ChipDefaults.LeadingIconEndSpacing,
+                Alignment.CenterHorizontally,
+            ),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            content()
+        }
     }
+
 }
 
 /**
- * Layout to arrange the chips content. Set's expected padding, size, arrangement and alignment.
- * It could be used to set a custom content for the chip.
+ * Chips help users quickly recognize an important information that has been entered by them,
+ * trigger actions, make selections, or filter content.
  *
- * @param modifier the [Modifier] to be applied to this layout.
- * @param content a Composable to set as the chip's content.
+ *
+ * @param style one of [ChipStyles] that defines chips background and border.
+ * @param intent The [ChipIntent] colors that will be used for the content and background of this chip in
+ * different states.
+ * @param onClick called when this chip is clicked
+ * @param text label for this chip, set `null` if no label is needed
+ * @param modifier the [Modifier] to be applied to this chip
+ * @param enabled controls the enabled state of this chip. When `false`, this component will not
+ * respond to user input, and it will appear visually disabled and disabled to accessibility
+ * services.
+ * @param leadingIcon optional icon at the start of the chip, preceding the [text]
+ * @param contentDescription text used by accessibility services to describe what this icon
+ * represents. This should always be provided unless this icon is used for decorative purposes,
+ * and does not represent a meaningful action that a user can take. This text should be
+ * localized, such as by using [androidx.compose.ui.res.stringResource] or similar.
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this chip. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
-@InternalSparkApi
 @Composable
-public fun ChipLayout(
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit,
-) {
-    Row(
-        modifier
-            .defaultMinSize(minHeight = ChipDefaults.MinHeight)
-            .sizeIn(maxWidth = ChipDefaults.MaxWidth)
-            .padding(horizontal = ChipDefaults.HorizontalElementsPadding),
-        horizontalArrangement = Arrangement.spacedBy(
-            ChipDefaults.LeadingIconEndSpacing,
-            Alignment.CenterHorizontally,
-        ),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        content()
-    }
-}
-
-@InternalSparkApi
-@Composable
-internal fun ChipContent(
-    colors: ChipColors,
-    leadingIcon: SparkIcon?,
+public fun Chip(
+    style: ChipStyles,
+    intent: ChipIntent,
+    onClick: () -> Unit,
     text: String?,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    leadingIcon: SparkIcon? = null,
     contentDescription: String? = null,
-    enabled: Boolean = true,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    ChipLayout(modifier = modifier) {
-        this.ChipContent(leadingIcon, colors, contentDescription, text, enabled)
-    }
-}
-
-@InternalSparkApi
-@Composable
-internal fun RowScope.ChipContent(
-    leadingIcon: SparkIcon?,
-    colors: ChipColors,
-    contentDescription: String?,
-    text: String?,
-    enabled: Boolean = true,
-) {
-    if (leadingIcon != null) {
-        CompositionLocalProvider(
-            LocalContentColor provides if (enabled) colors.contentColor else colors.disabledContentColor,
-        ) {
+    Chip(
+        style = style,
+        intent = intent,
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        interactionSource = interactionSource,
+    ) {
+        if (leadingIcon != null) {
             Icon(
                 sparkIcon = leadingIcon,
                 modifier = Modifier.size(TagDefaults.LeadingIconSize),
@@ -220,14 +221,16 @@ internal fun RowScope.ChipContent(
                 tint = LocalContentColor.current,
             )
         }
-    }
-    if (text != null) {
-        Text(text = text)
+        if (text != null) {
+            Text(text = text)
+        }
     }
 }
 
+
 @Preview(
     group = "Chips",
+    name = "Chips",
 )
 @Composable
 internal fun ChipPreview(
@@ -236,53 +239,25 @@ internal fun ChipPreview(
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
         val intent = ChipIntent.Primary
-        Row(
-            modifier = Modifier
-                .ifTrue(intent == ChipIntent.Surface) {
-                    background(SparkTheme.colors.surfaceInverse)
-                }
-                .padding(horizontal = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             ChipOutlined("outlined", intent, leadingIcon = SparkIcon.Account.Offers.Outlined)
             ChipFilled("filled", intent, leadingIcon = SparkIcon.Account.Offers.Outlined)
             ChipTinted("tinted", intent, leadingIcon = SparkIcon.Account.Offers.Outlined)
             ChipDashed("dashed", intent, leadingIcon = SparkIcon.Account.Offers.Outlined)
         }
-        Row(
-            modifier = Modifier
-                .ifTrue(intent == ChipIntent.Surface) {
-                    background(SparkTheme.colors.surfaceInverse)
-                }
-                .padding(horizontal = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             ChipOutlined("outlined", intent, leadingIcon = SparkIcon.Account.Offers.Outlined, enabled = false)
             ChipFilled("filled", intent, leadingIcon = SparkIcon.Account.Offers.Outlined, enabled = false)
             ChipTinted("tinted", intent, leadingIcon = SparkIcon.Account.Offers.Outlined, enabled = false)
             ChipDashed("dashed", intent, leadingIcon = SparkIcon.Account.Offers.Outlined, enabled = false)
         }
-        Row(
-            modifier = Modifier
-                .ifTrue(intent == ChipIntent.Surface) {
-                    background(SparkTheme.colors.surfaceInverse)
-                }
-                .padding(horizontal = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             ChipOutlined("outlined", intent)
             ChipFilled("filled", intent)
             ChipTinted("tinted", intent)
             ChipDashed("dashed", intent)
         }
-        Row(
-            modifier = Modifier
-                .ifTrue(intent == ChipIntent.Surface) {
-                    background(SparkTheme.colors.surfaceInverse)
-                }
-                .padding(horizontal = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             ChipOutlined("outlined", intent, enabled = false)
             ChipFilled("filled", intent, enabled = false)
             ChipTinted("tinted", intent, enabled = false)

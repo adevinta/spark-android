@@ -27,6 +27,7 @@ import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -66,9 +67,9 @@ public fun ChipTinted(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
 ) {
-    val colors = ChipStyles.Tinted.colors(intent = intent)
-    SparkChip(
-        colors = colors,
+    Chip(
+        style = ChipStyles.Tinted,
+        intent = intent,
         onClick = onClick,
         text = text,
         modifier = modifier,
@@ -106,9 +107,9 @@ public fun ChipTinted(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
 ) {
-    val colors = ChipStyles.Tinted.colors(intent = intent)
-    SparkChip(
-        colors = colors,
+    Chip(
+        style = ChipStyles.Tinted,
+        intent = intent,
         onClick = onClick,
         text = null,
         modifier = modifier,
@@ -132,7 +133,6 @@ public fun ChipTinted(
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  * @param onClick called when this chip is clicked
  * @param content a Composable to set as the chip's custom content.
- * Use [ChipLayout] to set a custom content that respects Spark specs.
  */
 @Composable
 public fun ChipTinted(
@@ -141,11 +141,11 @@ public fun ChipTinted(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
-    content: @Composable () -> Unit,
+    content: @Composable RowScope.() -> Unit,
 ) {
-    val colors = ChipStyles.Tinted.colors(intent = intent)
-    BaseSparkChip(
-        colors = colors,
+    Chip(
+        style = ChipStyles.Tinted,
+        intent = intent,
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
@@ -160,7 +160,7 @@ public fun ChipTinted(
     name = "Chips Tinted",
 )
 @Composable
-internal fun ChipTintdPreview(
+internal fun ChipTintedPreview(
     @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param

@@ -22,13 +22,19 @@
 
 package com.adevinta.spark.components.chips
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.dp
 
 public object ChipDefaults {
     /**
      * The padding between the elements in the chip.
      */
-    internal val HorizontalElementsPadding = 8.dp
+    private val HorizontalElementsPadding = 8.dp
+
+    /**
+     * Returns the [PaddingValues] for the assist chip.
+     */
+    internal val ChipPadding = PaddingValues(horizontal = HorizontalElementsPadding)
 
     /**
      * Spacing between the leading icon and the label.
