@@ -28,6 +28,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -167,13 +168,13 @@ internal fun ChipDashedPreview(
     @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme, userType, contentPadding = 0.dp) {
         ChipIntent.values().forEach { intent ->
             listOf(true, false).forEach { enabled ->
                 Row(
                     modifier = Modifier
                         .ifTrue(intent == ChipIntent.Surface) {
-                            background(SparkTheme.colors.surfaceInverse)
+                            background(SparkTheme.colors.surfaceInverse).padding(horizontal = 2.dp)
                         },
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
