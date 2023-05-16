@@ -31,7 +31,7 @@ fun Spinner(
 | Parameters                                         | Descriptions                                                                          |
 |----------------------------------------------------|---------------------------------------------------------------------------------------|
 | `intent: SpinnerIntent`                            | One of [SpinnerIntent](SpinnerIntent.kt) colors that will be used to draw the spinner |
-| `modifier: Modifier = Modifier`                    | Modifier the Modifier to be applied to this badge                                     |                                                                                                                     |
+| `modifier: Modifier = Modifier`                    | Modifier to be applied to this badge                                                  |                                                                                                                     |
 | `size: SpinnerSize = SpinnerDefaults.CircularSize` | one of the [SpinnerSize](SpinnerDefaults.kt) that defines the size of the component   |
 | `isBackgroundVisible: Boolean = false`             | whether a background should be drawn                                                  |
 
@@ -39,7 +39,7 @@ fun Spinner(
 
 A visible background may be added to display a background behind the spinner.
 
-All intents from Spark are available for this component (`SpinnerIntent`).
+All intents from Spark are available for this component ([SpinnerIntent](SpinnerIntent.kt)).
 - Primary
 - Secondary
 - Surface
@@ -49,6 +49,6 @@ All intents from Spark are available for this component (`SpinnerIntent`).
 - Info
 - Neutral
 
-The spinner has two sizes `SpinnerSize`:
+The spinner has two sizes ([SpinnerSize](SpinnerDefaults.kt)):
 - Small (20.dp)
 - Medium (28.dp)
