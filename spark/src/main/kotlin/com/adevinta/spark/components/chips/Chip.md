@@ -3,7 +3,7 @@
 ## Chip design specs
 
 You can find the design specs
-on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/8711ec-badge/b/98915d).
+on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/17568d-chip/b/98915d).
 
 ## Usage
 
@@ -39,8 +39,6 @@ fun Chip(
 | `enabled: Boolean = true`                                                               | Controls the enabled state of this chip                                                                                  |
 | `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the `MutableInteractionSource` representing the stream of `Interaction`s                                                 |
 | `content: @Composable RowScope.() -> Unit`                                              | Composable to set as the chip's custom content                                                                           |
-
-Use `ChipLayout` to set a custom content that respects Spark specs.
 
 Most commonly chip contains an optional LeadingIcon and the text:
 
@@ -90,10 +88,10 @@ The color is set using one of the `ChipIntent`s:
 
 
 Instead of manually passing `ChipStyles`, you can use one of the following options:
-- `ChipOutlined`
-- `ChipFilled`
-- `ChipDashed`
-- `ChipTinted`
+- [ChipOutlined](ChipOutlined.kt)
+- [ChipFilled](ChipFilled.kt)
+- [ChipTinted](ChipTinted.kt)
+- [ChipDashed](ChipDashed.kt)
 
 Part:
 | Style    | Light                                                                                                                                                                         | Dark                                                                                                                                                                         |
@@ -110,12 +108,6 @@ Pro:
 | Filled   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_light.png)   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_dark.png)   |
 | Tinted   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_light.png)   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_dark.png)   |
 | Dashed   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_light.png)   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_dark.png)   |
-
-Instead of passing [ChipIntent](ChipIntent.kt), you can use:
-- [ChipOutlined](ChipOutlined.kt)
-- [ChipFilled](ChipFilled.kt)
-- [ChipTinted](ChipTinted.kt)
-- [ChipDashed](ChipDashed.kt)
 
 To draw a chip with an optional leading icon and text:
 ```kotlin
@@ -213,4 +205,12 @@ Chip(
     text = "Chip",
     leadingIcon = if (selected) SparkIcon.Toggles.Check.Simple else null
 )
+```
+
+To correctly handle selectable state, pass the following modifier to components 
+ ```kotlin
+fun Modifier.semantics {
+    this.selected = selected
+    this.role = Role.Tab // TODO: choose a correct role relevant for your use case
+}
 ```
