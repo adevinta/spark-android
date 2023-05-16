@@ -46,6 +46,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
@@ -139,7 +140,7 @@ public fun Spinner(
 ) {
     SparkSpinner(
         intent = intent,
-        modifier = modifier,
+        modifier = modifier.sparkUsageOverlay(),
         size = size,
         isBackgroundVisible = isBackgroundVisible,
     )
