@@ -7,7 +7,7 @@ on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/7651da-spinner/b/
 
 ## Usage
 
-Spinners provide a visual cue that an action is processing awaiting a course of change or a result.
+Spinners provide a visual clue that an action is processing awaiting a course of change or a result.
 
 ### Styles
 

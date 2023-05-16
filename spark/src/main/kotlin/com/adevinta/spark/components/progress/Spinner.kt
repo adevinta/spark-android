@@ -51,7 +51,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
 
 /**
- * Spinners provide a visual cue that an action is processing awaiting a course of change or a result.
+ * Spinners provide a visual clue that an action is processing awaiting a course of change or a result.
  * @param intent The [SpinnerIntent] colors that will be used to draw the spinner
  * @param modifier the [Modifier] to be applied to this component
  * @param size one of the [SpinnerSize]s that defines the size of the component
@@ -124,7 +124,7 @@ private fun DrawScope.drawCircularIndicator(
 }
 
 /**
- * Spinners provide a visual cue that an action is processing awaiting a course of change or a result.
+ * Spinners provide a visual clue that an action is processing awaiting a course of change or a result.
  * @param intent The [SpinnerIntent] colors that will be used to draw the spinner
  * @param modifier the [Modifier] to be applied to this component
  * @param size one of the [SpinnerSize]s that defines the size of the component
