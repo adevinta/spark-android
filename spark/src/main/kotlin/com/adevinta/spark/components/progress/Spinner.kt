@@ -55,6 +55,7 @@ import com.adevinta.spark.tools.preview.UserType
  * @param intent The [SpinnerIntent] colors that will be used to draw the spinner
  * @param modifier the [Modifier] to be applied to this component
  * @param size one of the [SpinnerSize]s that defines the size of the component
+ * @param isBackgroundVisible whether a background should be added
  */
 @InternalSparkApi
 @Composable
@@ -127,6 +128,7 @@ private fun DrawScope.drawCircularIndicator(
  * @param intent The [SpinnerIntent] colors that will be used to draw the spinner
  * @param modifier the [Modifier] to be applied to this component
  * @param size one of the [SpinnerSize]s that defines the size of the component
+ * @param isBackgroundVisible whether a background should be drawn
  */
 @Composable
 public fun Spinner(
