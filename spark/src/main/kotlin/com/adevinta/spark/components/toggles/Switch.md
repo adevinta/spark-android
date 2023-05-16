@@ -7,10 +7,12 @@ on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/58a2c6-switch/b/7
 
 ## Usage
 
-Switches can be used in forms on a full page, in modals, or on side panels. 
-They can be used in a list but we shouldn’t mix them with other components such as checkboxes or radio buttons.
+Switches can be used in forms on a full page, in modals, or on side panels.
+They can be used in a list but we shouldn’t mix them with other components such as checkboxes or
+radio buttons.
 
-Switches must respect the established color code and not use other colors to emphasize the activation and deactivation of a functionality or service.
+Switches must respect the established color code and not use other colors to emphasize the
+activation and deactivation of a functionality or service.
 
 ### Switch
 
@@ -29,8 +31,7 @@ public fun Switch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    selectedIcon: SparkIcon? = SparkIcon.Toggles.Check.Simple,
-    unSelectedIcon: SparkIcon? = SparkIcon.Arrows.Close.Default,
+    icons: SwitchIcons? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 )
 ```
@@ -41,8 +42,7 @@ public fun Switch(
 | `onCheckedChange: (() -> Unit)?`                                                        | callback to be invoked when Switch is being clicked, therefore the change of checked state is requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.                                                                                  |
 | `modifier: Modifier = Modifier`                                                         | Modifier to be applied to the switch layout                                                                                                                                                                                                                                                             |
 | `enabled: Boolean = true`                                                               | whether the component is enabled or grayed out                                                                                                                                                                                                                                                          |
-| `checkedIcon: SparkIcon? = SparkIcon.Toggles.Check.Simple`                              | thumb's icon when [checked] state is set to true                                                                                                                                                                                                                                                        |
-| `uncheckedIcon: SparkIcon? = SparkIcon.Arrows.Close.Default`                            | thumb's icon when [checked] state is set to false                                                                                                                                                                                                                                                       |
+| `icons: SwitchIcons? = null,`                                                           | represents the pair of icons to use for check/unchecked states, you can use [SwitchDefaults.icons] if you want to use the default ones.                                                                                                                                                                 |
 | `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the [MutableInteractionSource] representing the stream of [Interaction]s for this RadioButton. You can create and pass in your own remembered [MutableInteractionSource] if you want to observe [Interaction]s and customize the appearance / behavior of this RadioButton in different [Interaction]s. |
 
 If either `checkedIcon` or ùncheckedIcon` are `null`, both icons are not rendered. You have pass two icons to have icons rendered.
@@ -54,11 +54,12 @@ If either `checkedIcon` or ùncheckedIcon` are `null`, both icons are not render
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_part_dark.png) |
 
-
-The minimal usage of the component is a standalone checkbox but you can add a label using [SwitchLabelled].
+The minimal usage of the component is a standalone checkbox but you can add a label
+using [SwitchLabelled].
 Please refer to design specs to find what content is accepted.
- - An icon can be added on the left or right of label.
- - A caption can be added in different positions of the label in order to to expand the information.
+
+- An icon can be added on the left or right of label.
+- A caption can be added in different positions of the label in order to to expand the information.
 
 ```kotlin
 var checked by remember { mutableStateOf(false) }
@@ -77,6 +78,7 @@ public fun SwitchLabelled(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    icons: SwitchIcons? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     contentSide: ContentSide = ContentSide.Start,
     content: @Composable RowScope.() -> Unit,
@@ -89,16 +91,13 @@ public fun SwitchLabelled(
 | `onCheckedChange: (() -> Unit)?`                                                        | callback to be invoked when Switch is being clicked, therefore the change of checked state is requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.                                                                                  |
 | `modifier: Modifier = Modifier`                                                         | Modifier to be applied to the switch layout                                                                                                                                                                                                                                                             |
 | `enabled: Boolean = true`                                                               | whether the component is enabled or grayed out                                                                                                                                                                                                                                                          |
-| `checkededIcon: SparkIcon? = SparkIcon.Toggles.Check.Simple`                            | thumb's icon when [checked] state is set to true                                                                                                                                                                                                                                                        |
-| `uncheckedIcon: SparkIcon? = SparkIcon.Arrows.Close.Default`                            | thumb's icon when [checked] state is set to false                                                                                                                                                                                                                                                       |
+| `icons: SwitchIcons? = null,`                                                           | represents the pair of icons to use for check/unchecked states, you can use [SwitchDefaults.icons] if you want to use the default ones.                                                                                                                                                                 |
 | `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the [MutableInteractionSource] representing the stream of [Interaction]s for this RadioButton. You can create and pass in your own remembered [MutableInteractionSource] if you want to observe [Interaction]s and customize the appearance / behavior of this RadioButton in different [Interaction]s. |
 | `content: @Composable RowScope.() -> Unit`                                              | The content displayed before the switch, usually a Text composable shown at the start                                                                                                                                                                                                                   |
 
 ## Layout
-
 - The Switch respects the minimum touch size.
 - Switch labels can be positioned at the Left or the Right, but usually the left position is more often used on small screens and mobile devices.
-
 
 ### SwitchGroup
 

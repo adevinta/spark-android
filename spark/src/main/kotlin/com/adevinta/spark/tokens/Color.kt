@@ -579,12 +579,15 @@ public class SparkColors(
 
     @Deprecated(
         message = "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith("surfaceInverse"),
+        replaceWith = ReplaceWith("backgroundVariant"),
     )
     public var surfaceVariant: Color by mutableStateOf(surfaceVariant, structuralEqualityPolicy())
         internal set
 
-    @Deprecated("This property will be removed as it is not part of Spark Token")
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        replaceWith = ReplaceWith("onBackgroundVariant"),
+    )
     public var onSurfaceVariant: Color by mutableStateOf(onSurfaceVariant, structuralEqualityPolicy())
         internal set
 

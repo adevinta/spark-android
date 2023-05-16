@@ -93,6 +93,14 @@ import androidx.compose.material3.ElevatedAssistChip as MaterialElevatedAssistCh
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
+@Deprecated(
+    message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
+    replaceWith = ReplaceWith(
+        expression = "ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)",
+        imports = ["com.adevinta.spark.components.chips.ChipFilled"],
+    ),
+    level = DeprecationLevel.WARNING,
+)
 @ExperimentalMaterial3Api
 @Composable
 public fun AssistChip(
@@ -163,6 +171,14 @@ public fun AssistChip(
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
+@Deprecated(
+    message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
+    replaceWith = ReplaceWith(
+        expression = "ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)",
+        imports = ["com.adevinta.spark.components.chips.ChipFilled"],
+    ),
+    level = DeprecationLevel.WARNING,
+)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun ElevatedAssistChip(
@@ -191,40 +207,4 @@ public fun ElevatedAssistChip(
         border = border,
         interactionSource = interactionSource,
     )
-}
-
-@Composable
-@Preview(
-    group = "Chips",
-    name = "AssistChip",
-)
-internal fun AssistChipPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
-) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
-        AssistChip(
-            onClick = { /* Do something! */ },
-            label = { Text("Assist Chip") },
-            leadingIcon = {
-                Icon(
-                    Icons.Filled.Settings,
-                    contentDescription = "Localized description",
-                    Modifier.size(AssistChipDefaults.IconSize),
-                )
-            },
-        )
-
-        ElevatedAssistChip(
-            onClick = { /* Do something! */ },
-            label = { Text("Elevated Assist Chip") },
-            leadingIcon = {
-                Icon(
-                    Icons.Filled.Settings,
-                    contentDescription = "Localized description",
-                    Modifier.size(AssistChipDefaults.IconSize),
-                )
-            },
-        )
-    }
 }
