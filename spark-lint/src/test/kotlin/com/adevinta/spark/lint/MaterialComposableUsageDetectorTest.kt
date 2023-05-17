@@ -307,9 +307,11 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 
                 @Composable
                 fun Test() {
-                    PrimaryButton()
-                    SecondaryButton()
-                    TextButton()
+                    ButtonFilled()
+                    ButtonOutlined()
+                    ButtonTinted()
+                    ButtonGhost()
+                    ButtonContrast()
                     TextField()
                     MultilineTextField()
                     SelectTextField()
