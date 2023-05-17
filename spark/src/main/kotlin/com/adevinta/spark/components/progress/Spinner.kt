@@ -64,7 +64,7 @@ import com.adevinta.spark.tools.preview.UserType
 internal fun SparkSpinner(
     intentColor: IntentColor,
     modifier: Modifier = Modifier,
-    size: SpinnerSize = SpinnerDefaults.CircularSize,
+    size: SpinnerSize = SpinnerDefaults.Size,
     isBackgroundVisible: Boolean = false,
 ) {
     val stroke = with(LocalDensity.current) {
@@ -76,11 +76,11 @@ internal fun SparkSpinner(
         SpinnerDefaults.BaseRotationAngle,
         infiniteRepeatable(
             animation = tween(
-                durationMillis = SpinnerDefaults.RotationDuration,
+                durationMillis = SpinnerDefaults.RotationDurationInMillis,
                 easing = LinearEasing,
             ),
         ),
-        label = "Spinner BAse Rotation",
+        label = "Spinner Base Rotation",
     )
     Canvas(
         modifier
@@ -135,7 +135,7 @@ private fun DrawScope.drawCircularIndicator(
 public fun Spinner(
     intent: SpinnerIntent,
     modifier: Modifier = Modifier,
-    size: SpinnerSize = SpinnerDefaults.CircularSize,
+    size: SpinnerSize = SpinnerDefaults.Size,
     isBackgroundVisible: Boolean = false,
 ) {
     SparkSpinner(
@@ -156,13 +156,7 @@ internal fun PreviewSpinnerMedium(
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-        SpinnerIntent.values().forEach { intent ->
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                listOf(false, true).forEach { isBackgroundVisible ->
-                    Spinner(intent = intent, isBackgroundVisible = isBackgroundVisible)
-                }
-            }
-        }
+        SpinnerPreview(size = SpinnerSize.Medium)
     }
 }
 
@@ -176,11 +170,16 @@ internal fun PreviewSpinnerSmall(
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-        SpinnerIntent.values().forEach { intent ->
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                listOf(false, true).forEach { isBackgroundVisible ->
-                    Spinner(intent = intent, size = SpinnerSize.Small, isBackgroundVisible = isBackgroundVisible)
-                }
+        SpinnerPreview(size = SpinnerSize.Small)
+    }
+}
+
+@Composable
+private fun SpinnerPreview(size: SpinnerSize) {
+    SpinnerIntent.values().forEach { intent ->
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            listOf(false, true).forEach { isBackgroundVisible ->
+                Spinner(intent = intent, size = size, isBackgroundVisible = isBackgroundVisible)
             }
         }
     }
