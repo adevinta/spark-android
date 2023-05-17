@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 
 public object SpinnerDefaults {
     public val CircularSize: SpinnerSize = SpinnerSize.Medium
-    internal val IndicatorStrokeWidth = 2.5.dp
+    internal val IndicatorStrokeWidth = 2.dp
 
     // Each rotation is 1 second
     internal const val RotationDuration = 1000

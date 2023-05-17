@@ -46,6 +46,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -53,20 +54,19 @@ import com.adevinta.spark.tools.preview.UserType
 
 /**
  * Spinners provide a visual clue that an action is processing awaiting a course of change or a result.
- * @param intent The [SpinnerIntent] colors that will be used to draw the spinner
+ * @param intentColor The [IntentColor] to use to draw the spinner
  * @param modifier the [Modifier] to be applied to this component
  * @param size one of the [SpinnerSize]s that defines the size of the component
  * @param isBackgroundVisible whether a background should be added
  */
 @InternalSparkApi
 @Composable
-private fun SparkSpinner(
-    intent: SpinnerIntent,
+internal fun SparkSpinner(
+    intentColor: IntentColor,
     modifier: Modifier = Modifier,
     size: SpinnerSize = SpinnerDefaults.CircularSize,
     isBackgroundVisible: Boolean = false,
 ) {
-    val colors = intent.colors()
     val stroke = with(LocalDensity.current) {
         Stroke(width = SpinnerDefaults.IndicatorStrokeWidth.toPx(), cap = StrokeCap.Square)
     }
@@ -91,13 +91,13 @@ private fun SparkSpinner(
         val offset = SpinnerDefaults.StartAngleOffset + rotation.value
         if (isBackgroundVisible) {
             drawCircularIndicator(
-                startAngle = 0f, sweep = 360f, color = colors.containerColor, stroke = stroke,
+                startAngle = 0f, sweep = 360f, color = intentColor.containerColor, stroke = stroke,
             )
         }
         drawCircularIndicator(
             startAngle = offset,
             sweep = sweep,
-            color = colors.color,
+            color = intentColor.color,
             stroke = stroke,
         )
     }
@@ -139,7 +139,7 @@ public fun Spinner(
     isBackgroundVisible: Boolean = false,
 ) {
     SparkSpinner(
-        intent = intent,
+        intentColor = intent.colors(),
         modifier = modifier.sparkUsageOverlay(),
         size = size,
         isBackgroundVisible = isBackgroundVisible,
