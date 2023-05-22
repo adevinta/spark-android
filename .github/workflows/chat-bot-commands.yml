@@ -27,3 +27,10 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: DependencyGuardBaseline
+        if: github.event.issue.pull_request && contains(github.event.comment.body, 'dependencyGuardBaseline')
+        uses: ./.github/actions/dependencyguard-baseline
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.pull_request.head.ref }}
