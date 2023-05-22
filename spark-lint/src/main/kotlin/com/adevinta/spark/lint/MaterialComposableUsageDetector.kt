@@ -79,11 +79,11 @@ public class MaterialComposableUsageDetector : Detector(), SourceCodeScanner {
 
         private val REPLACEMENTS: Map<String, String> = mapOf(
             //region Material3
-            "androidx.compose.material3.Button" to "com.adevinta.spark.components.buttons.PrimaryButton",
-            "androidx.compose.material3.ElevatedButton" to "com.adevinta.spark.components.buttons.PrimaryButton",
-            "androidx.compose.material3.FilledTonalButton" to "com.adevinta.spark.components.buttons.PrimaryButton",
-            "androidx.compose.material3.OutlinedButton" to "com.adevinta.spark.components.buttons.SecondaryButton",
-            "androidx.compose.material3.TextButton" to "com.adevinta.spark.components.buttons.TextButton",
+            "androidx.compose.material3.Button" to "com.adevinta.spark.components.buttons.ButtonFilled",
+            "androidx.compose.material3.ElevatedButton" to "com.adevinta.spark.components.buttons.ButtonFilled",
+            "androidx.compose.material3.FilledTonalButton" to "com.adevinta.spark.components.buttons.ButtonTinted",
+            "androidx.compose.material3.OutlinedButton" to "com.adevinta.spark.components.buttons.ButtonOutlined",
+            "androidx.compose.material3.TextButton" to "com.adevinta.spark.components.buttons.ButtonGhost",
             "androidx.compose.material3.FilledTextField" to "com.adevinta.spark.components.textfields.TextField",
             "androidx.compose.material3.OutlinedTextField" to "com.adevinta.spark.components.textfields.TextField",
             "androidx.compose.material3.CheckBox" to "com.adevinta.spark.components.toggles.CheckBox",

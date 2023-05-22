@@ -1,0 +1,36 @@
+name: '🧰 Chat Bot Commands'
+
+on:
+  issue_comment:
+    types: [created]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  check-comment:
+    name: Check comment
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.comment.body, '@spark-ui-bot')
+    env:
+      ACTOR: ${{ github.actor }}
+      NUMBER: ${{ github.event.issue.number }}
+      COMMENT: ${{ github.event.comment.body }}
+    steps:
+      - uses: actions/checkout@v3
+      - if: github.event.issue.pull_request
+        run: gh pr checkout $NUMBER
+
+      - name: Paparazzi golden images
+        if: github.event.issue.pull_request && contains(github.event.comment.body, 'paparazzi golden images')
+        uses: ./.github/actions/paparazzi-golden-images
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: DependencyGuardBaseline
+        if: github.event.issue.pull_request && contains(github.event.comment.body, 'dependencyGuardBaseline')
+        uses: ./.github/actions/dependencyguard-baseline
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.pull_request.head.ref }}
