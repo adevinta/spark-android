@@ -97,6 +97,14 @@ public fun CircularProgressIndicator(
  * @param modifier the [Modifier] to be applied to this progress indicator
  */
 @Composable
+@Deprecated(
+    message = "This component should be replaced with Spark Spinner",
+    replaceWith = ReplaceWith(
+        "Spinner(intent)",
+        imports = ["com.adevinta.spark.components.progress.Spinner"],
+    ),
+    level = DeprecationLevel.WARNING,
+)
 public fun CircularProgressIndicatorIndeterminate(
     modifier: Modifier = Modifier,
 ) {
@@ -129,19 +137,5 @@ internal fun PreviewCircularProgressIndicator(
             modifier = Modifier.size(48.dp),
             progress = 1f,
         )
-    }
-}
-
-@Preview(
-    group = "ProgressIndicator",
-    name = "CircularProgressIndicatorIndeterminate",
-)
-@Composable
-internal fun PreviewCircularProgressIndicatorIndeterminate(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
-) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
-        CircularProgressIndicatorIndeterminate(modifier = Modifier.size(48.dp))
     }
 }
