@@ -31,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -70,8 +71,9 @@ internal fun SparkRatingSmall(
 // TODO scott.rayapoulle.ext-21/12/2022: Use NumberFormat instead
     val format = if (value / value.toInt() == 1f) "%.0f" else "%.1f"
     val contentDescription: String = if (commentCount != null) {
-        stringResource(
-            id = R.string.spark_rating_with_comments_a11y,
+        pluralStringResource(
+            id = R.plurals.spark_rating_with_comments_a11y,
+            commentCount,
             value,
             commentCount,
         )

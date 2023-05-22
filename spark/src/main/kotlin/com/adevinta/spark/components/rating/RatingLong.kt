@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -127,7 +128,7 @@ public fun RatingCompressed(
     SparkRatingLong(
         modifier = modifier,
         value = value,
-        contentDescription = stringResource(id = R.string.spark_rating_with_comments_a11y, value, commentCount),
+        contentDescription = pluralStringResource(id = R.plurals.spark_rating_with_comments_a11y, commentCount, value, commentCount),
         label = stringResource(id = R.string.spark_rating_label, commentCount),
     )
 }
@@ -149,8 +150,8 @@ public fun RatingFull(
     SparkRatingLong(
         modifier = modifier,
         value = value,
-        contentDescription = stringResource(id = R.string.spark_rating_with_comments_a11y, value, commentCount),
-        label = stringResource(id = R.string.spark_rating_with_comments_count_label, commentCount),
+        contentDescription = pluralStringResource(id = R.plurals.spark_rating_with_comments_a11y, commentCount, value, commentCount),
+        label = pluralStringResource(id = R.plurals.spark_rating_with_comments_count_label, commentCount, commentCount),
     )
 }
 
@@ -164,7 +165,7 @@ internal fun RatingFullPreview(
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-        RatingFull(value = 1.6f, commentCount = 0)
+        RatingFull(value = 1.6f, commentCount = 1)
         RatingFull(value = 3.6f, commentCount = 23)
         RatingFull(value = 5f, commentCount = 1000002)
     }
