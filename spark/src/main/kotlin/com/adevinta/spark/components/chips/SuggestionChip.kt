@@ -32,19 +32,11 @@ import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ElevatedSuggestionChip
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.SuggestionChipDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.SuggestionChip as MaterialSuggestionChip
 
 
@@ -87,6 +79,14 @@ import androidx.compose.material3.SuggestionChip as MaterialSuggestionChip
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
+@Deprecated(
+    message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
+    replaceWith = ReplaceWith(
+        expression = "ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)",
+        imports = ["com.adevinta.spark.components.chips.ChipFilled"],
+    ),
+    level = DeprecationLevel.WARNING,
+)
 @ExperimentalMaterial3Api
 @Composable
 public fun SuggestionChip(
@@ -113,21 +113,4 @@ public fun SuggestionChip(
         border = border,
         interactionSource = interactionSource,
     )
-}
-
-@Composable
-@Preview(
-    group = "Chips",
-    name = "SuggestionChip",
-)
-internal fun SuggestionChipPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
-) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
-        SuggestionChip(
-            onClick = { /* Do something! */ },
-            label = { Text("Suggestion Chip") },
-        )
-    }
 }
