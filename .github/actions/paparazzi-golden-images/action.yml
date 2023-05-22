@@ -1,0 +1,44 @@
+name: '📸 Paparazzi golden images'
+description: 'Update Paparazzi golden images and commit the result'
+
+inputs:
+  github-token:
+    description: 'GitHub token'
+    required: true
+  ref:
+    description: 'Branch, tag, SHA, …'
+    required: true
+    default: '${{ github.event.repository.default_branch }}'
+    type: string
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ inputs.ref }}
+        lfs: true
+    - uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - uses: ./.github/actions/setup-gradle-properties
+    - uses: gradle/wrapper-validation-action@8d49e559aae34d3e0eb16cde532684bc9702762b # v1.0.6
+    - uses: actionsdesk/lfs-warning@e5f9a4c21f4bee104db7c0f23954dde59e5df909 # v3.2
+    - uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
+      with:
+        arguments: recordPaparazziRelease
+        gradle-home-cache-cleanup: true
+    - run: |
+        if ! git diff --quiet --exit-code -- **/src/test/snapshots/**/*.png ;
+        then
+          git config user.name 'spark-ui-bot'
+          git config user.email 'spark-ui-bot@users.noreply.github.com'
+          git commit **/src/test/snapshots/**/*.png -m "📸 Update Paparazzi golden images"
+          git show
+          git push
+          echo "::notice::UPDATED"
+        else
+          echo "::notice::UP-TO-DATE"
+        fi
+      shell: bash
