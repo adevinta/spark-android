@@ -1,0 +1,31 @@
+<!--
+  Copyright (c) 2023 Adevinta
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="#FF000000"
+        android:fillType="evenOdd"
+        android:pathData="M12.04,1.8a4.7,4.7 0,0 0,-2.39 8.75c-3.01,0.22 -4.69,2.8 -5.55,4.85a18.02,18.02 0,0 0,-1.22 4.42v0.02l-0.33,2.24a1.2,1.2 0,0 0,2.38 0.34l0.32,-2.25v-0.03a6.49,6.49 0,0 1,0.05 -0.3,16.25 16.25,0 0,1 1,-3.5c0.86,-2 2.07,-3.4 3.77,-3.4 0.55,0 1.05,0.14 1.5,0.4a4.08,4.08 0,0 0,2.67 4.37c-2.56,0.67 -3.79,3.1 -4.3,4.5a1.2,1.2 0,0 0,2.26 0.83c0.55,-1.53 1.58,-3.1 3.47,-3.1 1.88,0 2.91,1.57 3.46,3.1a1.2,1.2 0,1 0,2.26 -0.82c-0.51,-1.41 -1.74,-3.84 -4.3,-4.51a4.08,4.08 0,0 0,2.7 -3.83,4.1 4.1,0 0,0 -4.4,-4.07 4.7,4.7 0,0 0,-3.35 -8ZM9.73,6.5a2.3,2.3 0,0 1,2.31 -2.3,2.3 2.3,0 0,1 2.32,2.3 2.3,2.3 0,0 1,-2.32 2.3,2.3 2.3,0 0,1 -2.31,-2.3ZM15.67,12.2a1.7,1.7 0,0 0,-1.74 1.68c0,0.9 0.76,1.68 1.74,1.68a1.7,1.7 0,0 0,1.73 -1.68c0,-0.9 -0.76,-1.68 -1.73,-1.68Z" />
+</vector>
