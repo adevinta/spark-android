@@ -25,7 +25,7 @@ runs:
     - uses: gradle/wrapper-validation-action@8d49e559aae34d3e0eb16cde532684bc9702762b # v1.0.6
     - uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
       with:
-        arguments: dependencyGuardBaseline
+        arguments: dependencyGuardBaseline --no-configuration-cache
         gradle-home-cache-cleanup: true
     - run: |
         if ! git diff --quiet --exit-code -- **/dependencies/*.txt ;
