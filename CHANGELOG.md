@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.1.1]
+
+_2023-05-23_
+
+* Add missing Categories/Family icon #388
+
 ## [0.1.0]
 
 _2023-04-18_
@@ -36,7 +42,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.1.1...HEAD
+
+[0.1.1]: https://github.com/adevinta/spark-android/releases/tag/0.1.1
 
 [0.1.0]: https://github.com/adevinta/spark-android/releases/tag/0.1.0
 
