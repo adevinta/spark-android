@@ -3,7 +3,7 @@
 ## RadioButton design specs
 
 You can find the design specs
-on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/34b742-button/b/32e1a2).
+on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/98058f-radio-button/b/700a17).
 
 ## Usage
 
@@ -49,7 +49,7 @@ RadioButton(
 |-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `selected: Boolean`                                                                     | whether this radio button is selected or not                                                                                                                                                                                                                                                            |
 | `onClick: (() -> Unit)?`                                                                | callback to be invoked when the RadioButton is clicked. If null, then this RadioButton will not handle input events, and only act as a visual indicator of selected state                                                                                                                               |
-| `modifier: Modifier = Modifier`                                                         | A Modifier for this text field                                                                                                                                                                                                                                                                          |
+| `modifier: Modifier = Modifier`                                                         | A Modifier for this RadioButton                                                                                                                                                                                                                                                                         |
 | `enabled: Boolean = true`                                                               | whether the component is enabled or grayed out                                                                                                                                                                                                                                                          |
 | `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the [MutableInteractionSource] representing the stream of [Interaction]s for this RadioButton. You can create and pass in your own remembered [MutableInteractionSource] if you want to observe [Interaction]s and customize the appearance / behavior of this RadioButton in different [Interaction]s. |
 

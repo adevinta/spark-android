@@ -21,7 +21,35 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
   -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="fr">
+    <string name="spark_a11y_modal_fullscreen_close">Fermer la Boîte de dialogue</string>
+
+    <string name="spark_back_arrow_content_description">Retour en arrière</string>
+
+    <!--Rating-->
+    <plurals name="spark_rating_with_comments_a11y">
+        <item quantity="one">Note de %1$.1f pour %2$d avis</item>
+        <item quantity="other">Note de %1$.1f pour %2$d avis</item>
+        <item quantity="many">Note de %1$.1f pour %2$d avis</item>
+    </plurals>
+    <plurals name="spark_rating_with_comments_count_label">
+        <item quantity="one">%d avis</item>
+        <item quantity="other">%d avis</item>
+        <item quantity="many">%d avis</item>
+    </plurals>
+    <string name="spark_rating_a11y">Note de %1$.1f</string>
+
+    <string name="spark_user_avatar_content_description">Photo de profil</string>
+
+    <!--Badge-->
+    <string name="spark_exceed_max_badge_number_a11y">Plus de %1$d nouvelles notifications</string>
+    <string name="spark_badge_numberless_a11y">Nouvelle notification</string>
+    <plurals name="spark_badge_a11y">
+        <item quantity="one">%d nouvelle notification</item>
+        <item quantity="other">%d nouvelles notifications</item>
+        <item quantity="many">%d nouvelles notifications</item>
+    </plurals>
+
     <string name="spark_annotatedStringResource_test">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> pour les textes sur <i><annotation color="primary">Android</annotation></i></string>
     <string name="spark_annotatedStringResource_test_args">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> <p dir="rtl">pour les %s sur</p> <p dir="ltrr"><i><annotation color="primary">Android</annotation></i></p></string>
 </resources>

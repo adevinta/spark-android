@@ -24,16 +24,8 @@
 
 package com.adevinta.spark.components.chips
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.ColorScheme
@@ -42,23 +34,10 @@ import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.SelectableChipBorder
 import androidx.compose.material3.SelectableChipColors
 import androidx.compose.material3.SelectableChipElevation
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.dp
-import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.InputChip as MaterialInputChip
 
 /**
@@ -111,6 +90,14 @@ import androidx.compose.material3.InputChip as MaterialInputChip
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
+@Deprecated(
+    message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
+    replaceWith = ReplaceWith(
+        expression = "ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)",
+        imports = ["com.adevinta.spark.components.chips.ChipFilled"],
+    ),
+    level = DeprecationLevel.WARNING,
+)
 @ExperimentalMaterial3Api
 @Composable
 public fun InputChip(
@@ -143,50 +130,4 @@ public fun InputChip(
         border = border,
         interactionSource = interactionSource,
     )
-}
-
-@Composable
-@Preview(
-    group = "Chips",
-    name = "InputChip",
-)
-internal fun InputChipPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
-) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
-        var selected by remember { mutableStateOf(false) }
-
-        InputChip(
-            selected = selected,
-            onClick = { selected = !selected },
-            label = { Text("Input Chip") },
-        )
-
-        InputChip(
-            selected = selected,
-            onClick = { selected = !selected },
-            label = { Text("Input Chip") },
-            avatar = {
-                Icon(
-                    Icons.Filled.Person,
-                    contentDescription = "Localized description",
-                    Modifier.size(InputChipDefaults.AvatarSize),
-                )
-            },
-        )
-
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-                repeat(9) { index ->
-                    InputChip(
-                        selected = selected,
-                        modifier = Modifier.padding(horizontal = 4.dp),
-                        onClick = { /* do something*/ },
-                        label = { Text("Chip $index") },
-                    )
-                }
-            }
-        }
-    }
 }
