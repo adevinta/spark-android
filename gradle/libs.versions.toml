@@ -25,7 +25,7 @@ showkase = "1.0.0-beta17"
 slackLint = "1.2.0"
 spotless = "6.18.0"
 targetSdk = "33"
-testParameterInjector = "1.11"
+testParameterInjector = "1.12"
 
 [libraries]
 
