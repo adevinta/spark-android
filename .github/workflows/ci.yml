@@ -2,12 +2,12 @@ name: '👷 Build → 🧑‍🔬 Test → 🕵️ Lint'
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "hotfix/*"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "hotfix/*"]
   merge_group:
     types: [ checks_requested ]
-    branches: ["main"]
+    branches: ["main", "hotfix/*"]
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
