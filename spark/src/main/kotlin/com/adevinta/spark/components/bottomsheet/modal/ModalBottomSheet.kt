@@ -82,6 +82,7 @@ import com.adevinta.spark.components.bottomsheet.SheetState
 import com.adevinta.spark.components.bottomsheet.SheetValue
 import com.adevinta.spark.components.bottomsheet.SheetValue.Expanded
 import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
+import com.adevinta.spark.components.bottomsheet.SheetValue.PartiallyExpanded
 import com.adevinta.spark.components.bottomsheet.rememberSheetState
 import com.adevinta.spark.components.bottomsheet.swipeAnchors
 import com.adevinta.spark.components.buttons.ButtonFilled
@@ -282,8 +283,9 @@ public fun ModalBottomSheet(
 @ExperimentalMaterial3Api
 public fun rememberModalBottomSheetState(
     skipPartiallyExpanded: Boolean = false,
+    initialValue: SheetValue = Hidden,
     confirmValueChange: (SheetValue) -> Boolean = { true },
-): SheetState = rememberSheetState(skipPartiallyExpanded, confirmValueChange, Hidden)
+): SheetState = rememberSheetState(skipPartiallyExpanded, confirmValueChange, initialValue)
 
 @Composable
 private fun Scrim(
@@ -402,7 +404,10 @@ internal fun ModalBottomSheetSample() {
     var openBottomSheet by rememberSaveable { mutableStateOf(true) }
     var skipPartiallyExpanded by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
-    val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded)
+    val bottomSheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = skipPartiallyExpanded,
+        initialValue = PartiallyExpanded,
+    )
 
     // App content
     Column(
