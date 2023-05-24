@@ -132,7 +132,7 @@ public fun BottomSheetScaffold(
     sheetShape: Shape = BottomSheetDefaults.ExpandedShape,
     sheetContainerColor: Color = BottomSheetDefaults.ContainerColor,
     sheetContentColor: Color = contentColorFor(sheetContainerColor),
-    sheetTonalElevation: Dp = BottomSheetDefaults.Elevation,
+    sheetTonalElevation: Dp = 0.dp,
     sheetShadowElevation: Dp = BottomSheetDefaults.Elevation,
     sheetDragHandle: @Composable (() -> Unit)? = {
         BottomSheetDefaults.DragHandle(Modifier.padding(vertical = 8.dp))
