@@ -1,0 +1,16 @@
+name: '🎨 PR icon updates'
+
+on:
+  push:
+    branches: [ "chore-updated-icons" ]
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  pr-icon-updates:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh pr create --fill
+        continue-on-error: true
