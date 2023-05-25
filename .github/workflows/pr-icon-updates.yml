@@ -16,5 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: gh pr checkout chore-updated-icons
       - run: gh pr create --fill
         continue-on-error: true
