@@ -25,7 +25,7 @@
 @file:Repository("https://repo1.maven.org/maven2/")
 @file:Repository("https://maven.google.com")
 @file:DependsOn("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21")
-@file:DependsOn("com.android.tools:sdk-common:31.0.1")
+@file:DependsOn("com.android.tools:sdk-common:31.0.2")
 @file:DependsOn("com.github.ajalt.clikt:clikt-jvm:3.5.2")
 @file:DependsOn("org.jetbrains.kotlinx:kotlinx-cli:0.3.5")
 
