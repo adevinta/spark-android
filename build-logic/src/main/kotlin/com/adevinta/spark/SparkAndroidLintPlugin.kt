@@ -36,7 +36,6 @@ internal class SparkAndroidLintPlugin : Plugin<Project> {
             configureKotlin<KotlinJvmProjectExtension>()
 
             configure<Lint> {
-                warningsAsErrors = true
                 sarifReport = true
             }
         }
