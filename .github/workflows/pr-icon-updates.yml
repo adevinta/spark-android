@@ -15,5 +15,6 @@ jobs:
   pr-icon-updates:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: gh pr create --fill
         continue-on-error: true
