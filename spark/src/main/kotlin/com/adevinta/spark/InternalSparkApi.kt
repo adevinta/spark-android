@@ -30,7 +30,7 @@ package com.adevinta.spark
 @Retention(value = AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS, AnnotationTarget.PROPERTY)
 @RequiresOptIn(
-    level = RequiresOptIn.Level.ERROR,
+    level = RequiresOptIn.Level.WARNING,
     message = """This is an internal com.adevinta.spark API that should not be used from outside of com.adevinta.spark.
 No compatibility guarantees are provided.
 It is recommended to create a feature request, so the Spark team can see with you if the existing API needs to be more open in a next version of Spark""",
