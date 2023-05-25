@@ -25,9 +25,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Badge as MaterialBadge
+import androidx.compose.material3.BadgeDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
@@ -36,6 +40,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -48,6 +53,7 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
@@ -154,7 +160,10 @@ public fun Badge(
  * @param modifier the Modifier to be applied to this badge
  * @param intent The [BadgeIntent] color to use
  * @param hasStroke whether a border should be drawn
- * @param contentDescription
+ * @param contentDescription text used by accessibility services to describe what this icon
+ * represents. This should always be provided unless this icon is used for decorative purposes, and
+ * does not represent a meaningful action that a user can take. This text should be localized, such
+ * as by using [androidx.compose.ui.res.stringResource] or similar
  * @param content optional content to be rendered inside this badge
  **/
 @Composable
@@ -176,6 +185,38 @@ public fun Badge(
         badgeStyle = badgeStyle,
         intent = intent,
         hasStroke = hasStroke,
+        content = content,
+    )
+}
+
+/**
+ * Spark Badge.
+ *
+ * A badge represents dynamic information such as a number of pending requests in a navigation bar.
+ *
+ * ![Badge image](https://developer.android.com/images/reference/androidx/compose/material3/badge.png)
+ *
+ * @param modifier the Modifier to be applied to this badge
+ * @param containerColor the color used for the background of this badge
+ * @param contentColor the preferred color for content inside this badge. Defaults to either the matching content color for containerColor, or to the current LocalContentColor if containerColor is not a color from the theme.
+ * @param content optional content to be rendered inside this badge
+ **/
+@OptIn(ExperimentalMaterial3Api::class)
+@Deprecated(
+    "This component is no longer compliant with Spark specs",
+    replaceWith = ReplaceWith("Badge(modifier, badgeStyle, intent, hasStroke, contentDescription, content"),
+)
+@Composable
+public fun Badge(
+    modifier: Modifier = Modifier,
+    containerColor: Color = BadgeDefaults.containerColor,
+    contentColor: Color = contentColorFor(containerColor),
+    content: (@Composable RowScope.() -> Unit)? = null,
+) {
+    MaterialBadge(
+        modifier = modifier,
+        containerColor = containerColor,
+        contentColor = contentColor,
         content = content,
     )
 }
