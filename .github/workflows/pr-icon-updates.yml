@@ -8,6 +8,9 @@ concurrency:
   group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
+env:
+  GH_TOKEN: ${{ github.token }}
+
 jobs:
   pr-icon-updates:
     runs-on: ubuntu-latest
