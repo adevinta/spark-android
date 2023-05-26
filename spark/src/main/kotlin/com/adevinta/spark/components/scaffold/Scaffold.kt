@@ -55,6 +55,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
+import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.SparkPreviewParam
 import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
@@ -157,7 +158,7 @@ private fun ScaffoldPreview(
                         IconButton(
                             onClick = { /* "Open nav drawer" */ },
                         ) {
-                            Icon(Icons.Filled.Menu, contentDescription = "Localized description")
+                            Icon(SparkIcon.Account.BurgerMenu, contentDescription = "Localized description")
                         }
                     },
                 )

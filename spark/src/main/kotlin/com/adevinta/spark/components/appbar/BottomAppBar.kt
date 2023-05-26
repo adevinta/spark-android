@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
@@ -47,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
+import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -164,18 +166,22 @@ internal fun BottomAppBarPreview(
     ) {
         BottomAppBar {
             IconButton(onClick = { /* doSomething() */ }) {
-                Icon(Icons.Filled.Menu, contentDescription = "Localized description")
+                Icon(SparkIcon.Actions.Wheel.Outlined, contentDescription = "Localized description")
             }
         }
 
         BottomAppBar(
             actions = {
                 IconButton(onClick = { /* doSomething() */ }) {
-                    Icon(Icons.Filled.Check, contentDescription = "Localized description")
+                    Icon(
+                        modifier = Modifier.size(24.dp),
+                        sparkIcon = SparkIcon.Toggles.Check.Simple,
+                        contentDescription = "Localized description",
+                    )
                 }
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        Icons.Filled.Edit,
+                        SparkIcon.Actions.Pen.Outlined,
                         contentDescription = "Localized description",
                     )
                 }
@@ -186,7 +192,7 @@ internal fun BottomAppBarPreview(
                     containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
                     elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation(),
                 ) {
-                    Icon(Icons.Filled.Add, "Localized description")
+                    Icon(SparkIcon.Toggles.Add,"Localized description")
                 }
             },
         )
