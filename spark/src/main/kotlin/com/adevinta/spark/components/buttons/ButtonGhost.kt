@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.buttons
 
 import androidx.compose.animation.animateColorAsState
@@ -203,7 +202,7 @@ public fun TextButton(
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
     isDanger: Boolean = false,
-    content: @Composable() (RowScope.() -> Unit),
+    content: @Composable (RowScope.() -> Unit),
 ) {
     BaseSparkButton(
         onClick = onClick,

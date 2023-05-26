@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.icons
 
 import androidx.compose.foundation.BorderStroke
@@ -273,7 +272,6 @@ public fun OutlinedIconToggleButton(
     )
 }
 
-
 @Preview(
     group = "Icons",
     name = "IconToggleButtons",
@@ -284,8 +282,6 @@ internal fun IconToggleButtonPreview(
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-
-
         Text("IconButton")
         Row {
             IconToggleButton(checked = false, onCheckedChange = { }) {

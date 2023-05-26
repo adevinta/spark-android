@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.badge
 
 import androidx.compose.foundation.background
@@ -83,9 +82,8 @@ internal fun SparkBadge(
             )
             .clip(shape)
             .then(
-                Modifier.ifNotNull(content) { padding(horizontal = badgeStyle.contentPadding) }
-            )
-        ,
+                Modifier.ifNotNull(content) { padding(horizontal = badgeStyle.contentPadding) },
+            ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
     ) {

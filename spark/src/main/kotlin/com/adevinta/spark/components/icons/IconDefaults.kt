@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.icons
 
 import androidx.compose.ui.unit.Dp
@@ -34,5 +33,5 @@ public enum class IconSize(public val size: Dp) {
     Small(16.dp),
     Medium(24.dp),
     Large(32.dp),
-    ExtraLarge(40.dp)
+    ExtraLarge(40.dp),
 }

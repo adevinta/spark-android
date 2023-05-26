@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.buttons
 
 import androidx.annotation.Discouraged
@@ -29,6 +28,7 @@ import androidx.compose.ui.unit.dp
 /**
  * ButtonSize is used to define the height of the buttons.
  */
+@Suppress("ktlint:max-line-length", "ktlint:trailing-comma-on-call-site")
 public enum class ButtonSize {
     /**
      * Alternative small button size when is needed a low spacing/emphasis to the action.
@@ -37,7 +37,9 @@ public enum class ButtonSize {
      *
      * Note : The button takes 44dp of height for a11y but is drown with 32dp of height.
      */
-    @Discouraged("The button small is not meant to be used on native apps, consider reviewing this usage with your designer to use more accessible size like Medium.")
+    @Discouraged(
+        "The button small is not meant to be used on native apps, consider reviewing this usage with your designer to use more accessible size like Medium."
+    )
     Small {
         override val height = 32.dp
         override val verticalPadding = 12.dp
@@ -60,7 +62,8 @@ public enum class ButtonSize {
         override val height = 56.dp
         override val verticalPadding = 0.dp
         override val contentVerticalPadding = 16.dp
-    };
+    },
+    ;
 
     internal abstract val height: Dp
     internal abstract val verticalPadding: Dp

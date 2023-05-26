@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.tools.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
@@ -95,9 +94,9 @@ public class UserProProvider : PreviewParameterProvider<UserType> {
 }
 
 public enum class ThemeVariant {
-    Light, Dark;
+    Light, Dark
 }
 
 public enum class UserType {
-    Part, Pro;
+    Part, Pro
 }

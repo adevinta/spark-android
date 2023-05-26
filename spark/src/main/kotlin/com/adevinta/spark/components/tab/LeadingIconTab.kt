@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.tab
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -57,7 +56,7 @@ internal fun SparkLeadingIconTab(
     unselectedContentColor: Color = selectedContentColor,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 
-    ) {
+) {
     MaterialLeadingIconTab(
         selected = selected,
         onClick = onClick,
@@ -106,7 +105,7 @@ public fun LeadingIconTab(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 
-    ) {
+) {
     SparkLeadingIconTab(
         selected = selected,
         onClick = onClick,

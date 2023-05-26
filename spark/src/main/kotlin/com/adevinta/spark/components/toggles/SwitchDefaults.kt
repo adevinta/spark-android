@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.toggles
 
 import androidx.compose.runtime.Composable
@@ -66,7 +65,7 @@ public object SwitchDefaults {
         disabledUncheckedThumbColor = disabledUncheckedThumbColor,
         disabledUncheckedTrackColor = disabledUncheckedTrackColor,
         disabledUncheckedBorderColor = disabledUncheckedBorderColor,
-        disabledUncheckedIconColor = disabledUncheckedIconColor
+        disabledUncheckedIconColor = disabledUncheckedIconColor,
     )
 
     public val icons: SwitchIcons = SwitchIcons()

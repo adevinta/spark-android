@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.bottomsheet
 
 import androidx.compose.animation.core.AnimationSpec
@@ -98,7 +97,7 @@ public enum class ModalBottomSheetValue {
      * The bottom sheet is partially visible at 50% of the screen height. This state is only
      * enabled if the height of the bottom sheet is more than 50% of the screen height.
      */
-    HalfExpanded
+    HalfExpanded,
 }
 
 /**
@@ -144,8 +143,7 @@ public class ModalBottomSheetState(
     init {
         if (isSkipHalfExpanded) {
             require(initialValue != HalfExpanded) {
-                "The initial value must not be set to HalfExpanded if skipHalfExpanded is set to" +
-                        " true."
+                "The initial value must not be set to HalfExpanded if skipHalfExpanded is set to true."
             }
         }
     }
@@ -240,7 +238,10 @@ public fun rememberModalBottomSheetState(
     confirmStateChange: (ModalBottomSheetValue) -> Boolean = { true },
 ): ModalBottomSheetState {
     return rememberSaveable(
-        initialValue, animationSpec, skipHalfExpanded, confirmStateChange,
+        initialValue,
+        animationSpec,
+        skipHalfExpanded,
+        confirmStateChange,
         saver = ModalBottomSheetState.Saver(
             animationSpec = animationSpec,
             skipHalfExpanded = skipHalfExpanded,

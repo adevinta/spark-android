@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.textfields
 
 import androidx.compose.foundation.interaction.Interaction
@@ -284,7 +283,8 @@ public fun SparkSelectTrailingIcon(
     // trailing icon.
     IconButton(onClick = onIconClick, modifier = modifier.clearAndSetSemantics { }) {
         Icon(
-            Icons.Filled.KeyboardArrowDown, // TODO scott.rayapoulle.ext-12/07/2022: Use or create ImageVector variant of this Spark icon
+            // TODO scott.rayapoulle.ext-12/07/2022: Use or create ImageVector variant of this Spark icon
+            Icons.Filled.KeyboardArrowDown,
             "Trailing icon for exposed dropdown menu",
             Modifier
                 .size(ButtonDefaults.IconSize)

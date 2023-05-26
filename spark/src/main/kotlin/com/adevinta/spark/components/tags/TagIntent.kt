@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.tags
 
 import androidx.compose.runtime.Composable
@@ -119,7 +118,8 @@ public enum class TagIntent {
             containerColor = SparkTheme.colors.neutralContainer,
             onContainerColor = SparkTheme.colors.onNeutralContainer,
         )
-    };
+    },
+    ;
 
     @Composable
     internal abstract fun colors(): IntentColor

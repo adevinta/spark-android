@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 @file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.adevinta.spark.components.appbar
@@ -116,7 +115,6 @@ public fun NavigationBar(
         content = content,
     )
 }
-
 
 /**
  * Material Design navigation bar item.

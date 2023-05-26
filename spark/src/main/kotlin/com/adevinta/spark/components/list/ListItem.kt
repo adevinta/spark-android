@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.list
 
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -106,7 +105,6 @@ public fun ListItem(
         shadowElevation = shadowElevation,
     )
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(

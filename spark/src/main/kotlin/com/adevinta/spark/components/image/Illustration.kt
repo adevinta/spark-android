@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.image
 
 import androidx.annotation.DrawableRes
@@ -64,7 +63,6 @@ internal fun SparkIllustration(
     colorFilter: ColorFilter? = null,
     filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
 ) {
-
     when (data) {
         is ImageBitmap -> FoundationImage(
             bitmap = data,
