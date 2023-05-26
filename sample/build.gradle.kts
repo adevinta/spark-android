@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 plugins {
     id("com.adevinta.spark.android-application")
     id("com.adevinta.spark.android-compose")

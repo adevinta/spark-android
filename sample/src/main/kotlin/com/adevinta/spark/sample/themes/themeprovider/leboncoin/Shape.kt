@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.sample.themes.themeprovider.leboncoin
 
 import androidx.compose.foundation.shape.CircleShape
@@ -36,4 +35,3 @@ internal val LeboncoinShapes = sparkShapes(
     extraLarge = RoundedCornerShape(28.0.dp),
     full = CircleShape,
 )
-
