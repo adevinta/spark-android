@@ -1,4 +1,4 @@
-# CheckBox components
+# Package com.adevinta.spark.components.toggles
 
 ## CheckBox design specs
 

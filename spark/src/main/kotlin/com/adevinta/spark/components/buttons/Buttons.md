@@ -1,4 +1,4 @@
-# Button components
+# Package com.adevinta.spark.components.buttons
 
 ## Button design specs
 

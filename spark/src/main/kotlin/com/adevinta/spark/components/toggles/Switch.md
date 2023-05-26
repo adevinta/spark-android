@@ -1,4 +1,4 @@
-# Switch components
+# Package com.adevinta.spark.components.toggles
 
 ## Switch design specs
 

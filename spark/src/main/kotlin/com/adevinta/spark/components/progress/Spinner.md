@@ -1,4 +1,4 @@
-# Spinner component
+# Package com.adevinta.spark.components.progress
 
 ## Spinner design specs
 

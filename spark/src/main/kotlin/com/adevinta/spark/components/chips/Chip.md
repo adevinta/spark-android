@@ -1,4 +1,4 @@
-# Chip components
+# Package com.adevinta.spark.components.chips
 
 ## Chip design specs
 
