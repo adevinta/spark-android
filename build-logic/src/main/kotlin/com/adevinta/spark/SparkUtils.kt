@@ -19,9 +19,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark
 
 import java.util.Locale
 
-public fun String.capitalized(): String = replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
+public fun String.capitalized(): String = replaceFirstChar {
+    if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString()
+}
