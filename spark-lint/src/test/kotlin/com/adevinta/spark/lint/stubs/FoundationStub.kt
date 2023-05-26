@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.lint.stubs
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin
@@ -29,8 +28,8 @@ internal val FoundationStub = kotlin(
     """
     package androidx.compose.foundation
     import androidx.compose.runtime.Composable
-    
+
     @Composable
     fun Image() {}
-""".trimIndent()
+    """.trimIndent(),
 )

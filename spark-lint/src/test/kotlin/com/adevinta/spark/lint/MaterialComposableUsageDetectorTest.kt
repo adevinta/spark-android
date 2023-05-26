@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.lint
 
 import com.adevinta.spark.lint.MaterialComposableUsageDetector.Companion.ISSUE
@@ -35,7 +34,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-
 @RunWith(JUnit4::class)
 public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
 
@@ -43,7 +41,8 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
     override fun getIssues(): List<Issue> = listOf(ISSUE)
 
     private fun Issue.explanation(replacement: Pair<String, String>) =
-        "${defaultSeverity.description}: Composable ${replacement.first} has a Spark replacement that should be used instead: ${replacement.second} [$id]"
+        "${defaultSeverity.description}: Composable ${replacement.first} has a Spark replacement " +
+            "that should be used instead: ${replacement.second} [$id]"
 
     @Test
     public fun materialUsages(): Unit = with(ISSUE) {
@@ -54,7 +53,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 import androidx.compose.material3.*
                 import androidx.compose.runtime.*
                 import androidx.compose.ui.*
-                
+
                 @Composable
                 fun Test() {
                     Button()
@@ -128,7 +127,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                                     MaterialTheme()
                                     ~~~~~~~~~~~~~~~
                 15 errors, 0 warnings
-            """.trimIndent(),
+                """.trimIndent(),
             )
             .expectFixDiffs(
                 """
@@ -204,7 +203,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 @@ -23 +24
                 -                     MaterialTheme()
                 +                     SparkTheme()
-            """.trimIndent(),
+                """.trimIndent(),
             )
     }
 
@@ -216,7 +215,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 package foo
                 import androidx.compose.foundation.*
                 import androidx.compose.runtime.*
-                
+
                 @Composable
                 fun Test() {
                     Image()
@@ -234,7 +233,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                                     Image()
                                     ~~~~~~~
                 1 errors, 0 warnings
-            """.trimIndent(),
+                """.trimIndent(),
             )
             .expectFixDiffs(
                 """
@@ -244,7 +243,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 @@ -8 +9
                 -                     Image()
                 +                     Illustration()
-            """.trimIndent(),
+                """.trimIndent(),
             )
     }
 
@@ -257,7 +256,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 import coil.compose.AsyncImage
                 import coil.compose.SubcomposeAsyncImage
                 import androidx.compose.runtime.Composable
-                
+
                 @Composable
                 fun Test() {
                     AsyncImage()
@@ -279,7 +278,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                                     SubcomposeAsyncImage()
                                     ~~~~~~~~~~~~~~~~~~~~~~
                 2 errors, 0 warnings
-            """.trimIndent(),
+                """.trimIndent(),
             )
             .expectFixDiffs(
                 """
@@ -295,7 +294,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 @@ -10 +11
                 -                     SubcomposeAsyncImage()
                 +                     Image()
-            """.trimIndent(),
+                """.trimIndent(),
             )
     }
 
@@ -307,7 +306,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 package foo
                 import androidx.compose.runtime.*
                 import com.adevinta.spark.*
-                
+
                 @Composable
                 fun Test() {
                     ButtonFilled()
@@ -334,5 +333,4 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
             .run()
             .expectClean()
     }
-
 }
