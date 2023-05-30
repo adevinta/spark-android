@@ -171,6 +171,7 @@ public interface SparkIcon : IconDrawableRes {
         public object Computer : Categories(R.drawable.spark_icons_computer)
         public object Clothes : Categories(R.drawable.spark_icons_mode)
         public object Equipment : Categories(R.drawable.spark_icons_equipment)
+        public object Family : Categories(R.drawable.spark_icons_family)
         public object Ground : Categories(R.drawable.spark_icons_ground)
         public object Hobbies : Categories(R.drawable.spark_icons_hobbies)
         public object Holidays : Categories(R.drawable.spark_icons_holidays)

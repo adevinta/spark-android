@@ -28,6 +28,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.get
 
 internal class SparkAndroidApplicationPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -42,6 +43,7 @@ internal class SparkAndroidApplicationPlugin : Plugin<Project> {
                 buildTypes {
                     release {
                         isMinifyEnabled = false
+                        signingConfig = signingConfigs["debug"]
                         proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
                     }
                 }

@@ -32,6 +32,7 @@ plugins {
     alias(libs.plugins.dependencyGuard) apply false
     alias(libs.plugins.spotless) apply false
 
+    id("com.adevinta.spark.root")
     id("com.adevinta.spark.dokka")
 }
 

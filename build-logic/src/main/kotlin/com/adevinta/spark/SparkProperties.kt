@@ -24,6 +24,7 @@ package com.adevinta.spark
 
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
+import org.gradle.kotlin.dsl.provideDelegate
 import kotlin.reflect.KProperty
 
 internal fun Project.spark() = SparkProperties(this)
@@ -32,6 +33,8 @@ internal class SparkProperties private constructor(project: Project) {
     private val catalog by lazy(project.rootProject::getVersionsCatalog)
     val libraries by lazy { SparkLibraries(catalog) }
     val versions by lazy { SparkVersions(catalog) }
+    val ciUnitTestVariant = project.providers.gradleProperty("spark.ci-unit-test.variant").orElse("release")
+
     companion object {
         private const val EXT_KEY = "com.adevinta.spark.SparkProperties"
         operator fun invoke(project: Project): SparkProperties = project.getOrCreateExtra(EXT_KEY, ::SparkProperties)

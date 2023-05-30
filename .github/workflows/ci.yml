@@ -2,12 +2,12 @@ name: '👷 Build → 🧑‍🔬 Test → 🕵️ Lint'
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "hotfix/*", "chore-updated-icons"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "hotfix/*", "chore-updated-icons"]
   merge_group:
     types: [ checks_requested ]
-    branches: ["main"]
+    branches: ["main", "hotfix/*", "chore-updated-icons"]
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -55,6 +55,11 @@ jobs:
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
           arguments: assembleRelease
+      - name: '📦 Archive APKs'
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: '**/build/outputs/apk/**/*.apk'
       - name: '📦 Archive AARs'
         uses: actions/upload-artifact@v3
         with:
@@ -68,13 +73,13 @@ jobs:
         id: test
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
         with:
-          arguments: testReleaseUnitTest verifyPaparazziRelease
+          arguments: globalCiUnitTest verifyPaparazziRelease
       - name: '📦 Archive JUnit reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports
         with:
-          html: '**/build/reports/tests/testReleaseUnitTest'
-          xml: '**/build/test-results/testReleaseUnitTest/**.xml'
+          html: '**/build/reports/tests/test*'
+          xml: '**/build/test-results/test*/**.xml'
       - name: '📦 Archive Paparazzi reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-paparazzi-reports

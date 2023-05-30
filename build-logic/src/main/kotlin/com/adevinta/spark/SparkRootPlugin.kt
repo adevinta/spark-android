@@ -22,22 +22,14 @@
 
 package com.adevinta.spark
 
-
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 
-internal class SparkKotlinJvmPlugin : Plugin<Project> {
+internal class SparkRootPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            apply(plugin = "org.jetbrains.kotlin.jvm")
-
-            configureKotlin<KotlinJvmProjectExtension>()
-            configureKotlinCompiler()
-
-            addKotlinBom()
-            SparkUnitTests.configureSubproject(this)
+            SparkUnitTests.configureRootProject(project)
         }
     }
 }
+

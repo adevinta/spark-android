@@ -82,19 +82,19 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
             .run()
             .expect(
                 """
-                src/foo/test.kt:9: ${explanation("Button" to "PrimaryButton")}
+                src/foo/test.kt:9: ${explanation("Button" to "ButtonFilled")}
                                     Button()
                                     ~~~~~~~~
-                src/foo/test.kt:10: ${explanation("ElevatedButton" to "PrimaryButton")}
+                src/foo/test.kt:10: ${explanation("ElevatedButton" to "ButtonFilled")}
                                     ElevatedButton()
                                     ~~~~~~~~~~~~~~~~
-                src/foo/test.kt:11: ${explanation("FilledTonalButton" to "PrimaryButton")}
+                src/foo/test.kt:11: ${explanation("FilledTonalButton" to "ButtonTinted")}
                                     FilledTonalButton()
                                     ~~~~~~~~~~~~~~~~~~~
-                src/foo/test.kt:12: ${explanation("OutlinedButton" to "SecondaryButton")}
+                src/foo/test.kt:12: ${explanation("OutlinedButton" to "ButtonOutlined")}
                                     OutlinedButton()
                                     ~~~~~~~~~~~~~~~~
-                src/foo/test.kt:13: ${explanation("TextButton" to "TextButton")}
+                src/foo/test.kt:13: ${explanation("TextButton" to "ButtonGhost")}
                                     TextButton()
                                     ~~~~~~~~~~~~
                 src/foo/test.kt:14: ${explanation("OutlinedTextField" to "TextField")}
@@ -132,33 +132,36 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
             )
             .expectFixDiffs(
                 """
-                Fix for src/foo/test.kt line 9: Replace Button with Spark's PrimaryButton:
+                Fix for src/foo/test.kt line 9: Replace Button with Spark's ButtonFilled:
                 @@ -3 +3
-                + import com.adevinta.spark.components.buttons.PrimaryButton
+                + import com.adevinta.spark.components.buttons.ButtonFilled
                 @@ -9 +10
                 -                     Button()
-                +                     PrimaryButton()
-                Fix for src/foo/test.kt line 10: Replace ElevatedButton with Spark's PrimaryButton:
+                +                     ButtonFilled()
+                Fix for src/foo/test.kt line 10: Replace ElevatedButton with Spark's ButtonFilled:
                 @@ -3 +3
-                + import com.adevinta.spark.components.buttons.PrimaryButton
+                + import com.adevinta.spark.components.buttons.ButtonFilled
                 @@ -10 +11
                 -                     ElevatedButton()
-                +                     PrimaryButton()
-                Fix for src/foo/test.kt line 11: Replace FilledTonalButton with Spark's PrimaryButton:
+                +                     ButtonFilled()
+                Fix for src/foo/test.kt line 11: Replace FilledTonalButton with Spark's ButtonTinted:
                 @@ -3 +3
-                + import com.adevinta.spark.components.buttons.PrimaryButton
+                + import com.adevinta.spark.components.buttons.ButtonTinted
                 @@ -11 +12
                 -                     FilledTonalButton()
-                +                     PrimaryButton()
-                Fix for src/foo/test.kt line 12: Replace OutlinedButton with Spark's SecondaryButton:
+                +                     ButtonTinted()
+                Fix for src/foo/test.kt line 12: Replace OutlinedButton with Spark's ButtonOutlined:
                 @@ -3 +3
-                + import com.adevinta.spark.components.buttons.SecondaryButton
+                + import com.adevinta.spark.components.buttons.ButtonOutlined
                 @@ -12 +13
                 -                     OutlinedButton()
-                +                     SecondaryButton()
-                Fix for src/foo/test.kt line 13: Replace TextButton with Spark's TextButton:
+                +                     ButtonOutlined()
+                Fix for src/foo/test.kt line 13: Replace TextButton with Spark's ButtonGhost:
                 @@ -3 +3
-                + import com.adevinta.spark.components.buttons.TextButton
+                + import com.adevinta.spark.components.buttons.ButtonGhost
+                @@ -13 +14
+                -                     TextButton()
+                +                     ButtonGhost()
                 Fix for src/foo/test.kt line 14: Replace OutlinedTextField with Spark's TextField:
                 @@ -3 +3
                 + import com.adevinta.spark.components.textfields.TextField

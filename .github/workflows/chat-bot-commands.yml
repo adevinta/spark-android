@@ -17,6 +17,11 @@ jobs:
       NUMBER: ${{ github.event.issue.number }}
       COMMENT: ${{ github.event.comment.body }}
     steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
       - uses: actions/checkout@v3
       - if: github.event.issue.pull_request
         run: gh pr checkout $NUMBER
@@ -26,11 +31,11 @@ jobs:
         uses: ./.github/actions/paparazzi-golden-images
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.event.pull_request.head.ref }}
+          pr-number: ${{ github.event.issue.number }}
 
       - name: DependencyGuardBaseline
         if: github.event.issue.pull_request && contains(github.event.comment.body, 'dependencyGuardBaseline')
         uses: ./.github/actions/dependencyguard-baseline
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          ref: ${{ github.event.pull_request.head.ref }}
+          pr-number: ${{ github.event.issue.number }}
