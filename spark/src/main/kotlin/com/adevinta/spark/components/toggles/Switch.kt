@@ -241,7 +241,7 @@ internal fun AllStatesSwitchPreview(
 
 @Preview(
     group = "Toggles",
-    name = "SwitchLabelled Content Start",
+    name = "SwitchLabelled",
 )
 @Composable
 internal fun AllStatesSwitchLabelledPreview(

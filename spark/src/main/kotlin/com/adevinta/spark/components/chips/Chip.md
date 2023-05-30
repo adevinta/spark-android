@@ -3,7 +3,7 @@
 ## Chip design specs
 
 You can find the design specs
-on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/8711ec-badge/b/98915d).
+on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/17568d-chip/b/98915d).
 
 ## Usage
 
@@ -35,14 +35,12 @@ fun Chip(
 | `style: ChipStyles`                                                                     | One of [ChipStyles](ChipStyles.kt) that defines chips background and border color                                        |
 | `intent: ChipIntent`                                                                    | The [ChipIntent](ChipIntent.kt) colors that will be used for the content and background of this chip in different states |
 | `onClick: () -> Unit`                                                                   | Called when this chip is clicked                                                                                         |
-| `modifier: Modifier = Modifier`                                                         | Modifier the Modifier to be applied to this badge                                                                        |                                                                                                                     |
+| `modifier: Modifier = Modifier`                                                         | The `Modifier` to be applied to this badge                                                                               |                                                                                                                     |
 | `enabled: Boolean = true`                                                               | Controls the enabled state of this chip                                                                                  |
 | `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the `MutableInteractionSource` representing the stream of `Interaction`s                                                 |
 | `content: @Composable RowScope.() -> Unit`                                              | Composable to set as the chip's custom content                                                                           |
 
-Use `ChipLayout` to set a custom content that respects Spark specs.
-
-Most commonly chip contains an optional LeadingIcon and the text:
+Most commonly chip contains an optional `leadingIcon` and the text:
 
 ```kotlin
 fun Chip(
@@ -64,7 +62,7 @@ fun Chip(
 | `intent: ChipIntent`                                                                    | The [ChipIntent](ChipIntent.kt) colors that will be used for the content and background of this chip in different states |
 | `onClick: () -> Unit`                                                                   | Called when this chip is clicked                                                                                         |
 | `text: String?`                                                                         | Label for this chip, set `null` if no label is needed                                                                    |
-| `modifier: Modifier = Modifier`                                                         | Modifier the Modifier to be applied to this badge                                                                        |                                                                                                                     |
+| `modifier: Modifier = Modifier`                                                         | The `Modifier` to be applied to this badge                                                                               |                                                                                                                     |
 | `enabled: Boolean = true`                                                               | Controls the enabled state of this chip                                                                                  |
 | `leadingIcon: SparkIcon? = null`                                                        | Optional icon at the start of the chip, preceding the `text`                                                             |
 | `contentDescription: String? = null`                                                    | Text used by accessibility services to describe what this icon represents                                                |
@@ -72,13 +70,13 @@ fun Chip(
 
 ### Style
 
-The chip can have one of the `ChipStyles`:
-- Outline - using a solid border stroke and no background
+The chip can have one of the [ChipStyles](ChipStyles.kt):
+- Outlined - using a solid border stroke and no background
 - Filled - using a solid color for the background
 - Tinted - using one of the "containers" colors
 - Dashed - using a dashed border and no background
 
-The color is set using one of the `ChipIntent`s:
+The color is set using one of the [ChipIntent](ChipIntent.kt)s:
 - Primary
 - Secondary
 - Success
@@ -88,12 +86,11 @@ The color is set using one of the `ChipIntent`s:
 - Neutral
 - Surface
 
-
-Instead of manually passing `ChipStyles`, you can use one of the following options:
-- `ChipOutlined`
-- `ChipFilled`
-- `ChipDashed`
-- `ChipTinted`
+Instead of manually passing [ChipStyles](ChipStyles.kt)`, you can use one of the following options:
+- [ChipOutlined](ChipOutlined.kt)
+- [ChipFilled](ChipFilled.kt)
+- [ChipDashed](ChipDashed.kt)
+- [ChipTinted](ChipTinted.kt)
 
 Part:
 | Style    | Light                                                                                                                                                                         | Dark                                                                                                                                                                         |
@@ -110,12 +107,6 @@ Pro:
 | Filled   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_light.png)   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_dark.png)   |
 | Tinted   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_light.png)   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_dark.png)   |
 | Dashed   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_light.png)   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_dark.png)   |
-
-Instead of passing [ChipIntent](ChipIntent.kt), you can use:
-- [ChipOutlined](ChipOutlined.kt)
-- [ChipFilled](ChipFilled.kt)
-- [ChipTinted](ChipTinted.kt)
-- [ChipDashed](ChipDashed.kt)
 
 To draw a chip with an optional leading icon and text:
 ```kotlin
@@ -135,7 +126,7 @@ fun ChipOutlined(
 | `intent: ChipIntent`                                                                    | The [ChipIntent](ChipIntent.kt) colors that will be used for the content and background of this chip in different states |
 | `onClick: () -> Unit`                                                                   | Called when this chip is clicked                                                                                         |
 | `text: String?`                                                                         | Label for this chip, set `null` if no label is needed                                                                    |
-| `modifier: Modifier = Modifier`                                                         | Modifier the Modifier to be applied to this badge                                                                        |                                                                                                                     |
+| `modifier: Modifier = Modifier`                                                         | The `Modifier` to be applied to this badge                                                                               |                                                                                                                     |
 | `enabled: Boolean = true`                                                               | Controls the enabled state of this chip                                                                                  |
 | `leadingIcon: SparkIcon? = null`                                                        | Optional icon at the start of the chip, preceding the `text`                                                             |
 | `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | The `MutableInteractionSource` representing the stream of `Interaction`s                                                 |
@@ -159,7 +150,7 @@ fun ChipOutlined(
 | `icon: SparkIcon`                                                                       | icon to draw inside the chip's content                                                                                   |
 | `intent: ChipIntent`                                                                    | The [ChipIntent](ChipIntent.kt) colors that will be used for the content and background of this chip in different states |
 | `onClick: () -> Unit`                                                                   | Called when this chip is clicked                                                                                         |
-| `modifier: Modifier = Modifier`                                                         | Modifier the Modifier to be applied to this badge                                                                        |                                                                                                                     |
+| `modifier: Modifier = Modifier`                                                         | The `Modifier` to be applied to this badge                                                                               |                                                                                                                     |
 | `enabled: Boolean = true`                                                               | Controls the enabled state of this chip                                                                                  |
 | `leadingIcon: SparkIcon? = null`                                                        | Optional icon at the start of the chip, preceding the `text`                                                             |
 | `contentDescription: String? = null`                                                    | Text used by accessibility services to describe what this icon represents                                                |
@@ -181,7 +172,7 @@ fun ChipOutlined(
 | Parameters                                                                              | Descriptions                                                                                                             |
 |-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
 | `intent: ChipIntent`                                                                    | The [ChipIntent](ChipIntent.kt) colors that will be used for the content and background of this chip in different states |
-| `modifier: Modifier = Modifier`                                                         | The Modifier to be applied to this badge                                                                                 |
+| `modifier: Modifier = Modifier`                                                         | The `Modifier` to be applied to this badge                                                                               |
 | `enabled: Boolean = true`                                                               | Controls the enabled state of this chip                                                                                  |
 | `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | The `MutableInteractionSource` representing the stream of `Interaction`s                                                 |
 | `onClick: () -> Unit`                                                                   | Called when this chip is clicked                                                                                         |
