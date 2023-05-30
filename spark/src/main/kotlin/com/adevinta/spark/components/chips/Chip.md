@@ -205,3 +205,11 @@ Chip(
     leadingIcon = if (selected) SparkIcon.Toggles.Check.Simple else null
 )
 ```
+
+To correctly handle selectable state, pass the following modifier to components 
+ ```kotlin
+fun Modifier.semantics {
+    this.selected = selected
+    this.role = Role.Tab // TODO: choose a correct role relevant for your use case
+}
+```
