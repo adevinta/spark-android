@@ -19,16 +19,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 @file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.adevinta.spark.components.chips
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ChipBorder
@@ -37,18 +33,10 @@ import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.AssistChip as MaterialAssistChip
 import androidx.compose.material3.ElevatedAssistChip as MaterialElevatedAssistChip
 
@@ -93,6 +81,7 @@ import androidx.compose.material3.ElevatedAssistChip as MaterialElevatedAssistCh
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
+@Suppress("ktlint:max-line-length")
 @Deprecated(
     message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
     replaceWith = ReplaceWith(
@@ -171,6 +160,7 @@ public fun AssistChip(
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
+@Suppress("ktlint:max-line-length")
 @Deprecated(
     message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
     replaceWith = ReplaceWith(

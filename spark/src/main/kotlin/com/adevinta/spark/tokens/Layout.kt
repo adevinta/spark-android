@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.tokens
 
 import androidx.compose.foundation.background
@@ -60,7 +59,7 @@ import com.adevinta.spark.tools.preview.ThemesPreviews
 
 public object Layout {
 
-    /// TODO: Use M3 WindowHeightSizeClass instead of our custom size ranges
+    // TODO: Use M3 WindowHeightSizeClass instead of our custom size ranges
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     public val windowSize: WindowSizeClass
@@ -107,7 +106,6 @@ public object Layout {
             else -> 12
         }
 }
-
 
 /**
  * Support wide screen by making the content width max 840dp, centered horizontally.

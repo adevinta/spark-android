@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.slider
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -83,7 +82,7 @@ internal fun SparkSlider(
  * Sliders reflect a range of values along a bar, from which users may select a single value.
  * They are ideal for adjusting settings such as volume, brightness, or applying image filters.
  *
- * @param  value current value of the slider. If outside of valueRange provided,
+ * @param value current value of the slider. If outside of valueRange provided,
  * value will be coerced to this range.
  * @param onValueChange callback in which value should be updated
  * @param modifier the Modifier to be applied to this slider

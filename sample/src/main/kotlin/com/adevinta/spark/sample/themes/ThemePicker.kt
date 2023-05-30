@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.sample.themes
 
 import android.os.Build
@@ -149,7 +148,6 @@ public fun ThemePicker(
             }
 
             AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
-
                 var expanded by remember { mutableStateOf(false) }
                 SelectTextField(
                     modifier = Modifier
@@ -180,7 +178,6 @@ public fun ThemePicker(
                 }
             }
             AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
-
                 SwitchLabelled(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -263,7 +260,6 @@ public fun ThemePicker(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(ThemePickerPadding),
                 ) {
-
                     RadioButton(
                         selected = theme.fontScaleMode == FontScaleMode.Custom,
                         onClick = {

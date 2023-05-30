@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.textfields
 
 import androidx.compose.foundation.layout.PaddingValues
@@ -57,7 +56,6 @@ internal class SparkTextFieldMeasurePolicy(
         var occupiedSpaceVertically = 0
         val bottomPadding = paddingValues.calculateBottomPadding().roundToPx()
 
-
         // measure leading icon
         val relaxedConstraints = constraints.copy(minWidth = 0, minHeight = 0)
 
@@ -77,7 +75,7 @@ internal class SparkTextFieldMeasurePolicy(
         val isLabelInMiddleSection = animationProgress < 1f
         val labelHorizontalPaddingOffset =
             paddingValues.calculateLeftPadding(layoutDirection).roundToPx() +
-                    paddingValues.calculateRightPadding(layoutDirection).roundToPx()
+                paddingValues.calculateRightPadding(layoutDirection).roundToPx()
         val labelConstraints = relaxedConstraints.offset(
             horizontal = if (isLabelInMiddleSection) {
                 -occupiedSpaceHorizontally - labelHorizontalPaddingOffset
@@ -118,7 +116,7 @@ internal class SparkTextFieldMeasurePolicy(
                 heightOrZero(textFieldPlaceable),
                 heightOrZero(placeholderPlaceable),
             ) +
-                    topPadding + bottomPadding,
+                topPadding + bottomPadding,
         )
 
         val width = calculateWidth(
@@ -162,7 +160,6 @@ internal class SparkTextFieldMeasurePolicy(
         )
         val counterHelperMaxHeight = max(heightOrZero(supportingPlaceable), heightOrZero(counterPlaceable))
         val height = totalHeight - counterHelperMaxHeight
-
 
         val borderPlaceable = measurables.first { it.layoutId == ContainerId }.measure(
             Constraints(
@@ -326,8 +323,10 @@ private fun calculateWidth(
     val focusedLabelWidth =
         if (!isLabelInMiddleSection) {
             // Actual LayoutDirection doesn't matter; we only need the sum
-            val labelHorizontalPadding = (paddingValues.calculateLeftPadding(LayoutDirection.Ltr) +
-                    paddingValues.calculateRightPadding(LayoutDirection.Ltr)).value * density
+            val labelHorizontalPadding = (
+                paddingValues.calculateLeftPadding(LayoutDirection.Ltr) +
+                    paddingValues.calculateRightPadding(LayoutDirection.Ltr)
+                ).value * density
             labelPlaceableWidth + labelHorizontalPadding.roundToInt()
         } else {
             0
@@ -363,8 +362,8 @@ private fun calculateHeight(
     val topPadding = paddingValues.calculateTopPadding().value * density
     val bottomPadding = paddingValues.calculateBottomPadding().value * density
     val middleSectionHeight = inputFieldHeight +
-            bottomPadding +
-            max(topPadding, labelPlaceableHeight / 2f)
+        bottomPadding +
+        max(topPadding, labelPlaceableHeight / 2f)
     return max(
         constraints.minHeight,
         maxOf(
@@ -396,7 +395,6 @@ private fun Placeable.PlacementScope.place(
     layoutDirection: LayoutDirection,
     paddingValues: PaddingValues,
 ) {
-
     // place container
     containerPlaceable.place(IntOffset.Zero)
 
@@ -434,12 +432,12 @@ private fun Placeable.PlacementScope.place(
         val positionY =
             startPositionY * (1 - animationProgress) - (it.height / 2) * animationProgress
         val positionX = (
-                if (leadingPlaceable == null) {
-                    0f
-                } else {
-                    (widthOrZero(leadingPlaceable) - iconPadding) * (1 - animationProgress)
-                }
-                ).roundToInt() + startPadding
+            if (leadingPlaceable == null) {
+                0f
+            } else {
+                (widthOrZero(leadingPlaceable) - iconPadding) * (1 - animationProgress)
+            }
+            ).roundToInt() + startPadding
         it.placeRelative(positionX, positionY.roundToInt())
     }
 

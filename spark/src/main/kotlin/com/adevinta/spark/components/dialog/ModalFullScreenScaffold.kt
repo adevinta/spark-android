@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.dialog
 
 import androidx.annotation.DrawableRes
@@ -64,7 +63,6 @@ import com.adevinta.spark.tokens.Layout
 import com.adevinta.spark.tokens.bodyWidth
 import com.adevinta.spark.tools.preview.DevicePreviews
 
-
 /**
  * A composable function that creates a full-screen modal scaffold, adapting its layout based on the device's screen
  * size and orientation.
@@ -95,7 +93,7 @@ public fun ModalFullScreenScaffold(
     val isPhoneLandscape = size.heightSizeClass == WindowHeightSizeClass.Compact
     val isPhonePortraitOrFoldable =
         (size.widthSizeClass == WindowWidthSizeClass.Compact || size.widthSizeClass == WindowWidthSizeClass.Medium) &&
-                size.heightSizeClass == WindowHeightSizeClass.Medium
+            size.heightSizeClass == WindowHeightSizeClass.Medium
 
     when {
         isPhonePortraitOrFoldable -> {
@@ -130,7 +128,6 @@ public fun ModalFullScreenScaffold(
         )
     }
 }
-
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -237,7 +234,6 @@ private fun PhonePortraitModalScaffold(
                     primaryButton(Modifier)
                 }
             }
-
         },
     ) { innerPadding ->
         Column(
@@ -310,7 +306,6 @@ private fun PhoneLandscapeModalScaffold(
                         contentScale = ContentScale.Fit,
                     )
                 }
-
             }
             Column(
                 modifier = Modifier
@@ -330,7 +325,6 @@ private fun PhoneLandscapeModalScaffold(
                 }
             }
         }
-
     }
 }
 
@@ -366,10 +360,10 @@ private fun ModalPreview() {
             Text(
                 modifier = Modifier.padding(innerPadding),
                 text = "Modal content Modal content Modal content Modal content Modal content Modal content Modal " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "Modal content Modal content",
+                    "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                    "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                    "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                    "Modal content Modal content",
             )
         }
     }

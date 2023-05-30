@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.badge
 
 import androidx.compose.runtime.Composable
@@ -42,7 +41,6 @@ internal fun BadgeStyle.getTextStyle() = when (this) {
     BadgeStyle.Small -> SparkTheme.typography.small
     BadgeStyle.Medium -> SparkTheme.typography.caption
 }.copy(fontWeight = FontWeight.Bold)
-
 
 private val mediumBadgeSize = 24.dp
 private val mediumBadgeContentPadding = 8.dp

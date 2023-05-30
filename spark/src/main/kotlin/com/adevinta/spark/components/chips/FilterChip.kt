@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 @file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.adevinta.spark.components.chips
@@ -90,9 +89,12 @@ import androidx.compose.material3.FilterChip as MaterialFilterChip
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
+@Suppress("ktlint:max-line-length", "ktlint:trailing-comma-on-call-site")
 @Deprecated(
     "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
-    ReplaceWith("ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)"),
+    ReplaceWith(
+        "ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)"
+    ),
 )
 @ExperimentalMaterial3Api
 @Composable
@@ -172,6 +174,7 @@ public fun FilterChip(
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
+@Suppress("ktlint:max-line-length")
 @Deprecated(
     message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
     replaceWith = ReplaceWith(

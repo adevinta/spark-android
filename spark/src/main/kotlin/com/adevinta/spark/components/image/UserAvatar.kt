@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.image
 
 import androidx.compose.foundation.background
@@ -70,9 +69,13 @@ internal fun SparkUserAvatar(
         )
     }
     Box(
-        modifier = (if (fillParentSize) modifier.fillMaxSize() else modifier.size(
-            style.imageSize,
-        )).sparkUsageOverlay(),
+        modifier = (
+            if (fillParentSize) {
+                modifier.fillMaxSize()
+            } else {
+                modifier.size(style.imageSize)
+            }
+            ).sparkUsageOverlay(),
     ) {
         SparkImage(
             modifier = Modifier
@@ -159,7 +162,6 @@ public enum class UserAvatarStyle(public val imageSize: Dp, public val badgeSize
 internal fun UserAvatarPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-
     PreviewTheme(theme) {
         SparkUserAvatar(
             style = UserAvatarStyle.MEDIUM,
