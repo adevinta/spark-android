@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -51,10 +52,12 @@ public fun Component(
 ) {
     val ltr = LocalLayoutDirection.current
     LazyColumn(
-        modifier = Modifier.consumeWindowInsets(contentPadding),
+        modifier = Modifier
+            .fillMaxSize()
+            .consumeWindowInsets(contentPadding),
         contentPadding = PaddingValues(
-            start = Layout.bodyMargin / 2 + contentPadding.calculateLeftPadding(ltr),
-            end = Layout.bodyMargin / 2 + contentPadding.calculateRightPadding(ltr),
+            start = Layout.bodyMargin + contentPadding.calculateLeftPadding(ltr),
+            end = Layout.bodyMargin + contentPadding.calculateRightPadding(ltr),
             top = contentPadding.calculateTopPadding(),
             bottom = contentPadding.calculateBottomPadding(),
         ),

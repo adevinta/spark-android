@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.catalog.themes.themeprovider.leboncoin
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.tokens.SparkColors
