@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.tags
 
 import androidx.compose.foundation.BorderStroke
@@ -204,7 +203,6 @@ public object TagDefaults {
  * trailing icon.
  */
 private val LeadingIconEndSpacing = 4.dp
-
 
 private val HorizontalPadding = 8.dp
 private val VerticalPadding = 2.dp

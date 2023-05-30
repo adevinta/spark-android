@@ -20,6 +20,7 @@
  * SOFTWARE.
  */
 @file:Suppress("DEPRECATION")
+
 package com.adevinta.spark.components.tags
 
 import androidx.compose.foundation.BorderStroke

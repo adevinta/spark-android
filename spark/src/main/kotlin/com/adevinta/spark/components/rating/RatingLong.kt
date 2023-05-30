@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.rating
 
 import androidx.annotation.FloatRange
@@ -119,6 +118,7 @@ public fun RatingNaked(
  * @param modifier to apply
  */
 @Composable
+@Suppress("ktlint:trailing-comma-on-call-site")
 public fun RatingCompressed(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
@@ -128,7 +128,12 @@ public fun RatingCompressed(
     SparkRatingLong(
         modifier = modifier,
         value = value,
-        contentDescription = pluralStringResource(id = R.plurals.spark_rating_with_comments_a11y, commentCount, value, commentCount),
+        contentDescription = pluralStringResource(
+            id = R.plurals.spark_rating_with_comments_a11y,
+            commentCount,
+            value,
+            commentCount
+        ),
         label = stringResource(id = R.string.spark_rating_label, commentCount),
     )
 }
@@ -141,6 +146,7 @@ public fun RatingCompressed(
  * @param modifier to apply
  */
 @Composable
+@Suppress("ktlint:trailing-comma-on-call-site")
 public fun RatingFull(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
@@ -150,7 +156,12 @@ public fun RatingFull(
     SparkRatingLong(
         modifier = modifier,
         value = value,
-        contentDescription = pluralStringResource(id = R.plurals.spark_rating_with_comments_a11y, commentCount, value, commentCount),
+        contentDescription = pluralStringResource(
+            id = R.plurals.spark_rating_with_comments_a11y,
+            commentCount,
+            value,
+            commentCount
+        ),
         label = pluralStringResource(id = R.plurals.spark_rating_with_comments_count_label, commentCount, commentCount),
     )
 }
@@ -204,4 +215,3 @@ internal fun RatingNakedPreview(
         RatingNaked(value = 5f)
     }
 }
-

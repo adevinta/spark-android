@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.chips
 
 import androidx.compose.foundation.BorderStroke
@@ -85,7 +84,8 @@ public enum class ChipStyles {
                     .compositeOver(SparkTheme.colors.surface),
             )
         }
-    };
+    },
+    ;
 
     @Composable
     internal abstract fun colors(intent: ChipIntent): ChipColors

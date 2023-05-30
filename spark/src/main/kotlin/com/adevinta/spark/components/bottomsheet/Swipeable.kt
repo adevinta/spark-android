@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.bottomsheet
 
 /*
@@ -396,9 +395,12 @@ public open class SwipeableState<T>(
                 velocityThreshold = velocityThreshold,
             )
             val targetState = anchors[targetValue]
-            if (targetState != null && confirmStateChange(targetState)) animateTo(targetState)
-            // If the user vetoed the state change, rollback to the previous state.
-            else animateInternalToOffset(lastAnchor, animationSpec)
+            if (targetState != null && confirmStateChange(targetState)) {
+                animateTo(targetState)
+            } else {
+                // If the user vetoed the state change, rollback to the previous state.
+                animateInternalToOffset(lastAnchor, animationSpec)
+            }
         }
     }
 

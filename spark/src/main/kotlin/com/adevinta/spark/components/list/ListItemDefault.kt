@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.list
 
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,7 +28,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
-
 
 public object ListItemDefault {
     private const val ListItemDisabledLabelTextOpacity = 0.3f
@@ -51,5 +49,4 @@ public object ListItemDefault {
         disabledLeadingIconColor = SparkTheme.colors.onSurface.copy(alpha = ListItemDisabledLeadingIconOpacity),
         disabledTrailingIconColor = SparkTheme.colors.onSurface.copy(alpha = ListItemDisabledTrailingIconOpacity),
     )
-
 }

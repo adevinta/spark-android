@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.icons
 
 import androidx.compose.material3.LocalContentColor
@@ -98,7 +97,8 @@ public enum class IconTints {
     Unspecified {
         @Composable
         override fun color() = Color.Unspecified
-    };
+    },
+    ;
 
     @Composable
     internal abstract fun color(): Color

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.tools.modifiers
 
 import androidx.compose.foundation.layout.Box
@@ -48,7 +47,6 @@ internal fun Modifier.sparkUsageOverlay(overlayColor: Color = Color.Red): Modifi
         Modifier
     }
 }
-
 
 /**
  * A Composable that hides its content and draw a dashed border to identify slot areas.

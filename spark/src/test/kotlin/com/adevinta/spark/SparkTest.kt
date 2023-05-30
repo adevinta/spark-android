@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark
 
 import org.junit.Test
@@ -31,5 +30,4 @@ public class SparkTest {
     public fun spark() {
         assertNotNull(Spark)
     }
-
 }

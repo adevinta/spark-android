@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.toggles
 
 import androidx.compose.foundation.interaction.Interaction
@@ -166,13 +165,16 @@ public fun SwitchLabelled(
         role = Role.Switch,
         onClick = if (onCheckedChange != null) {
             { onCheckedChange(!checked) }
-        } else null,
+        } else {
+            null
+        },
         modifier = modifier.selectableGroup(),
         enabled = enabled,
         contentSide = contentSide,
         content = content,
     )
 }
+
 /**
  * @property checked icon to be used for the thumb in checked state
  * @property unchecked icon to be used for the thumb in unchecked state
@@ -207,7 +209,7 @@ internal fun AllStatesSwitchPreview(
         Row {
             val icons = SwitchIcons(
                 checked = SparkIcon.Notifications.Active,
-                unchecked = SparkIcon.Notifications.Disable
+                unchecked = SparkIcon.Notifications.Disable,
             )
             Switch(
                 checked = true,
@@ -237,7 +239,6 @@ internal fun AllStatesSwitchPreview(
     }
 }
 
-
 @Preview(
     group = "Toggles",
     name = "SwitchLabelled",
@@ -247,12 +248,15 @@ internal fun AllStatesSwitchLabelledPreview(
     @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
 ) {
     val (theme, userType) = param
+
+    @Suppress("ktlint:max-line-length")
     val text =
         "This is an example of a multi-line text which is very long and in which the user should read all the information."
     PreviewTheme(theme, userType) {
         SwitchLabelled(
             enabled = true,
-            checked = true, onCheckedChange = {},
+            checked = true,
+            onCheckedChange = {},
         ) { Text(text = "Label") }
         SwitchLabelled(
             enabled = true,
@@ -262,7 +266,8 @@ internal fun AllStatesSwitchLabelledPreview(
         ) { Text("Label") }
         SwitchLabelled(
             enabled = false,
-            checked = true, onCheckedChange = {},
+            checked = true,
+            onCheckedChange = {},
         ) { Text(text) }
         SwitchLabelled(
             enabled = false,
@@ -272,4 +277,3 @@ internal fun AllStatesSwitchLabelledPreview(
         ) { Text(text) }
     }
 }
-

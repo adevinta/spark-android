@@ -353,7 +353,6 @@ public fun darkSparkColors(
     dimContent5 = dimContent5,
 )
 
-
 /**
  * A color scheme holds all the named color parameters for a [SparkTheme] highly inspired by Material 3 ColorScheme.
  *
@@ -549,7 +548,7 @@ public class SparkColors(
         "This property will be removed as it is not part of Spark Token",
         ReplaceWith("backgroundVariant"),
 
-        )
+    )
     public var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
         internal set
 
@@ -1089,7 +1088,6 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
  */
 @Suppress("CompositionLocalAllowlist") // We need it to get access to our color like Material
 internal val LocalSparkColors = staticCompositionLocalOf { lightSparkColors() }
-
 
 /**
  * A [SparkColors] implementation which sets all colors to [debugColor] to help highlighting the usage

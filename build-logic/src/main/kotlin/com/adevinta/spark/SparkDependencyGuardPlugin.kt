@@ -19,9 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark
-
 
 import com.dropbox.gradle.plugins.dependencyguard.DependencyGuardPluginExtension
 import org.gradle.api.Plugin
