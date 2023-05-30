@@ -73,12 +73,12 @@ internal fun SparkImage(
     onState: ((State) -> Unit)? = null,
     emptyIcon: @Composable () -> Unit = { ImageIconState(SparkIcon.Images.NoPhoto) },
     errorIcon: @Composable () -> Unit = { ImageIconState(SparkIcon.Images.ErrorPhoto) },
+    loadingPlaceholder: @Composable () -> Unit = ImageDefaults.placeholder,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
-    withPlaceholder: Boolean = true,
 ) {
 
     SubcomposeAsyncImage(
@@ -96,12 +96,7 @@ internal fun SparkImage(
 
         when (painter.state) {
             AsyncImagePainter.State.Empty -> emptyIcon()
-            is AsyncImagePainter.State.Loading -> Spacer(
-                modifier = Modifier.illustrationPlaceholder(
-                    visible = withPlaceholder,
-                    shape = SparkTheme.shapes.none,
-                ),
-            )
+            is AsyncImagePainter.State.Loading -> loadingPlaceholder()
 
             is AsyncImagePainter.State.Error -> {
                 // since model can be anything transformed in to a ImageRequest OR a ImageRequest we need to
@@ -149,8 +144,8 @@ internal fun SparkImage(
  * @param filterQuality Sampling algorithm applied to the image when it is scaled and drawn
  * into the destination. The default is [FilterQuality.Low] which scales using a bilinear
  * sampling algorithm
- * @param withPlaceholder Don't show the shimmering placeholder in cases where the images is in fullscreen which
- * would make a big flash when the image is loaded too quick (~less than 500ms)
+ * @param loadingPlaceholder Placeholder used when the image is loading. You can use a different one in special cases
+ * like when the image is displayed in fullscreen for example.
  */
 @Composable
 public fun Image(
@@ -163,7 +158,7 @@ public fun Image(
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
     filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
-    withPlaceholder: Boolean = true,
+    loadingPlaceholder: @Composable () -> Unit = ImageDefaults.placeholder,
 ) {
     SparkImage(
         model = model,
@@ -175,8 +170,19 @@ public fun Image(
         alpha = alpha,
         colorFilter = colorFilter,
         filterQuality = filterQuality,
-        withPlaceholder = withPlaceholder,
+        loadingPlaceholder = loadingPlaceholder,
     )
+}
+
+public object ImageDefaults {
+    public val placeholder: @Composable () -> Unit = {
+        Spacer(
+            modifier = Modifier.illustrationPlaceholder(
+                visible = true,
+                shape = SparkTheme.shapes.none,
+            ),
+        )
+    }
 }
 
 @Composable
