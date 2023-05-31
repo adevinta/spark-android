@@ -272,7 +272,7 @@ public sealed class SparkIcon {
         public val Pending: SparkIcon = SparkIcons.MoreMenuHorizontal
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Pets", "com.adevinta.spark.icons"))
         public val Pets: SparkIcon = SparkIcons.Pets
-        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Services", "com.adevinta.spark.icons"))
+        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Service", "com.adevinta.spark.icons"))
         public val Services: SparkIcon = SparkIcons.Service
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Job", "com.adevinta.spark.icons"))
         public val Suitcase: SparkIcon = SparkIcons.Job
@@ -401,7 +401,7 @@ public sealed class SparkIcon {
 
         @Deprecated("Use SparkIcons instead.")
         public object Generique {
-        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Defaut1", "com.adevinta.spark.icons"))
+        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.LikeOutline", "com.adevinta.spark.icons"))
             public val Defaut1: SparkIcon = SparkIcons.LikeOutline
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Listing", "com.adevinta.spark.icons"))
             public val Defaut2: SparkIcon = SparkIcons.Listing
@@ -445,7 +445,7 @@ public sealed class SparkIcon {
             public val Cave: SparkIcon = SparkIcons.Cave
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Duplex", "com.adevinta.spark.icons"))
             public val Duplex: SparkIcon = SparkIcons.Duplex
-        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Etage", "com.adevinta.spark.icons"))
+        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Floor", "com.adevinta.spark.icons"))
             public val Etage: SparkIcon = SparkIcons.Floor
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Garage", "com.adevinta.spark.icons"))
             public val Garage: SparkIcon = SparkIcons.Garage
@@ -561,7 +561,7 @@ public sealed class SparkIcon {
             public val EquipementBebe: SparkIcon = SparkIcons.EquipmentBaby
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Color", "com.adevinta.spark.icons"))
             public val Couleur: SparkIcon = SparkIcons.Color
-        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Etat", "com.adevinta.spark.icons"))
+        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Condition", "com.adevinta.spark.icons"))
             public val Etat: SparkIcon = SparkIcons.Condition
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.OfferOutline", "com.adevinta.spark.icons"))
             public val Marque: SparkIcon = SparkIcons.OfferOutline
@@ -609,7 +609,7 @@ public sealed class SparkIcon {
             public val Chambres: SparkIcon = SparkIcons.Rooms
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Arrival", "com.adevinta.spark.icons"))
             public val Arrive: SparkIcon = SparkIcons.Arrival
-        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Depart", "com.adevinta.spark.icons"))
+        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Start", "com.adevinta.spark.icons"))
             public val Depart: SparkIcon = SparkIcons.Start
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Rating", "com.adevinta.spark.icons"))
             public val NombreEtoiles: SparkIcon = SparkIcons.Rating
