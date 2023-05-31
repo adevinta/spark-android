@@ -30,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -76,8 +77,12 @@ public fun ButtonOutlined(
         targetValue = intent.colors().color,
         label = "content color",
     )
+    val disabledContentColor = contentColor.copy(alpha = SparkTheme.colors.dim3)
+        .compositeOver(SparkTheme.colors.surface)
+
     val colors = ButtonDefaults.outlinedButtonColors(
         contentColor = contentColor,
+        disabledContentColor = disabledContentColor,
     )
     SparkButton(
         onClick = onClick,
@@ -86,7 +91,7 @@ public fun ButtonOutlined(
         size = size,
         enabled = enabled,
         elevation = null,
-        border = SparkButtonDefaults.outlinedBorder(contentColor),
+        border = SparkButtonDefaults.outlinedBorder(if (enabled) contentColor else disabledContentColor),
         colors = colors,
         icon = icon,
         iconSide = iconSide,
