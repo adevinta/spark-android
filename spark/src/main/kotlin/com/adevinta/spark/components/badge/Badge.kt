@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Badge as MaterialBadge
 import androidx.compose.material3.BadgeDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
@@ -59,6 +58,7 @@ import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+import androidx.compose.material3.Badge as MaterialBadge
 
 internal val BadgeWithNoContentSize = 12.dp
 

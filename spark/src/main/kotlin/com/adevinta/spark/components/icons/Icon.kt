@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.icon // keep a separate package for deprecated APIs
 
 import androidx.compose.material3.IconButton
@@ -36,7 +35,6 @@ import com.adevinta.spark.components.icons.rememberSparkIconPainter
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import androidx.compose.material3.Icon as MaterialIcon
-
 
 /**
  * Icon component that draws [imageVector] using [tint], defaulting to [LocalContentColor]. For a
@@ -177,4 +175,3 @@ public fun Icon(
         tint = tint,
     )
 }
-
