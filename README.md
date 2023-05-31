@@ -50,8 +50,7 @@ dependencies {
 
 ## Contributing
 
-Please see [the contribution guide](docs/CONTRIBUTING.md) and
-the [Code of conduct](docs/CODE_OF_CONDUCT.md) before contributing.
+Please take a look at the [contribution guide](docs/CONTRIBUTING.md) to setup your dev environment and get a list of common tasks used in this project, as well as the [Code of conduct](docs/CODE_OF_CONDUCT.md).
 
 ## License
 
