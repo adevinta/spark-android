@@ -11,6 +11,11 @@ A badge is a visual indicator for numeric values such as tallies and scores.
 
 ### Styles
 
+|       | Danger and Info                                                                                                                                                  |
+|-------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Light | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_light.png) |
+| Dark  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_dark.png)  |
+
 The default value of overflowCount is 99. When count is larger than 99, a `+` is displayed.
 A badge can be used as a part of `BadgedBox` or as a standalone when it is not attached visually to
 a specific relative element.
