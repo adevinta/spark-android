@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.sample
 
 import androidx.activity.compose.BackHandler
@@ -115,7 +114,6 @@ internal fun ShowkaseComponentsInAGroupScreen(
                             // empty content to catch the touch events
                         }
                     }
-
                 }
             },
         )
@@ -138,7 +136,6 @@ private fun goBackFromComponentsInAGroupScreen(
         }
     }
 }
-
 
 private fun getFilteredSearchList(
     list: List<ShowkaseBrowserComponent>,

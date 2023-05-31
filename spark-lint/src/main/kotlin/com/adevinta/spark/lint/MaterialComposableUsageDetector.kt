@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 @file:Suppress("UnstableApiUsage")
 
 package com.adevinta.spark.lint
@@ -53,7 +52,11 @@ public class MaterialComposableUsageDetector : Detector(), SourceCodeScanner {
         method.reportUsage(context, node, replacement)
     }
 
-    private fun PsiMethod.reportUsage(context: JavaContext, node: UCallExpression, replacement: String) = Incident(context)
+    private fun PsiMethod.reportUsage(
+        context: JavaContext,
+        node: UCallExpression,
+        replacement: String,
+    ) = Incident(context)
         .issue(ISSUE).at(node)
         .message("Composable $name has a Spark replacement that should be used instead: ${replacement.methodName()}")
         .fix(quickfixData(replacement))
@@ -74,9 +77,13 @@ public class MaterialComposableUsageDetector : Detector(), SourceCodeScanner {
             category = CORRECTNESS,
             priority = 8,
             severity = ERROR,
-            implementation = Implementation(MaterialComposableUsageDetector::class.java, EnumSet.of(JAVA_FILE, TEST_SOURCES)),
+            implementation = Implementation(
+                MaterialComposableUsageDetector::class.java,
+                EnumSet.of(JAVA_FILE, TEST_SOURCES),
+            ),
         )
 
+        /* ktlint-disable max-line-length */
         private val REPLACEMENTS: Map<String, String> = mapOf(
             //region Material3
             "androidx.compose.material3.Button" to "com.adevinta.spark.components.buttons.ButtonFilled",
@@ -103,6 +110,8 @@ public class MaterialComposableUsageDetector : Detector(), SourceCodeScanner {
             "coil.compose.SubcomposeAsyncImage" to "com.adevinta.spark.components.image.Image",
             //endregion
         )
+
+        /* ktlint-enable max-line-length */
         private val METHOD_NAMES = REPLACEMENTS.keys.map { it.methodName() }
         private fun String.methodName() = substringAfterLast(".")
     }

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.tokens
 
 import androidx.compose.ui.graphics.Color
@@ -156,7 +155,6 @@ internal object PaletteTokens {
     internal val Chili80 = Color.hsl(2f, .91f, .87f)
     internal val Chili90 = Color.hsl(2f, .93f, .95f)
     internal val Chili95 = Color.hsl(7f, 1f, .98f)
-
 
     internal val Sky10 = Color(0xFF02282E)
     internal val Sky20 = Color(0xFF03404A)

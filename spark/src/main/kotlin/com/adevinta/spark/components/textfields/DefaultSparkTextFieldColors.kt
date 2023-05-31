@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.textfields
 
 import androidx.compose.animation.animateColorAsState
@@ -372,4 +371,3 @@ internal data class DefaultSparkTextFieldColors(
 }
 
 private const val DisabledOpacity = 0.38f
-

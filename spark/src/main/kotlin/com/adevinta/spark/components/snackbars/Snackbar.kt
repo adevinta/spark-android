@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.snackbars
 
 import androidx.compose.foundation.layout.Column
@@ -60,13 +59,12 @@ public fun SparkSnackbar(
     colors: SnackbarColors,
     modifier: Modifier = Modifier,
     actionOnNewLine: Boolean = false,
-    icon: @Composable() ((iconModifier: Modifier) -> Unit)? = null,
+    icon: @Composable ((iconModifier: Modifier) -> Unit)? = null,
     title: String? = null,
     actionLabel: String? = null,
     onActionClick: (() -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
-
     val contentColor = contentColorFor(backgroundColor = colors.baseColor)
 
     val actionComposable: (@Composable () -> Unit)? = actionLabel?.let {
@@ -155,7 +153,6 @@ public fun Snackbar(
     onActionClick: (() -> Unit)? = null,
     content: @Composable (() -> Unit),
 ) {
-
     SparkSnackbar(
         colors = colors,
         modifier = modifier,
@@ -209,9 +206,8 @@ private const val StubTitle = "Title"
 private const val StubBodyShort = "Lorem ipsum dolor sit amet"
 private const val StubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolorsnx -d"
 private const val StubBodyLong = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
-        "pulvinar eu nulla sit amet, iaculis interdum."
+    "pulvinar eu nulla sit amet, iaculis interdum."
 private const val StubAction = "Action"
-
 
 @Preview(
     group = "Snackbar",
@@ -258,7 +254,6 @@ private fun BodyLongSnackbarPreview() {
     }
 }
 
-
 @Preview
 @Composable
 private fun BodyActionSnackbarPreview() {
@@ -288,7 +283,6 @@ private fun BodyIconActionSnackbarPreview() {
     }
 }
 
-
 @Preview
 @Composable
 private fun BodyIconSnackbarPreview() {
@@ -303,7 +297,6 @@ private fun BodyIconSnackbarPreview() {
         }
     }
 }
-
 
 @Preview
 @Composable
@@ -321,7 +314,6 @@ private fun BodyIconActionNewLineSnackbarPreview() {
         }
     }
 }
-
 
 @Preview
 @Composable
@@ -355,7 +347,6 @@ private fun BodyLongTitleSnackbarPreview() {
     }
 }
 
-
 @Preview
 @Composable
 private fun BodyTitleActionSnackbarPreview() {
@@ -373,4 +364,3 @@ private fun BodyTitleActionSnackbarPreview() {
         }
     }
 }
-

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.badge
 
 import androidx.compose.foundation.layout.Arrangement
@@ -83,7 +82,8 @@ internal fun SparkBadgedBox(
 
         val hasContent = badgePlaceable.width > BadgeWithNoContentSize.roundToPx()
         val offset = when {
-            hasContent && badgePlaceable.width >= MediumBadgeWithContentOffset.roundToPx() -> MediumBadgeWithContentOffset
+            hasContent &&
+                badgePlaceable.width >= MediumBadgeWithContentOffset.roundToPx() -> MediumBadgeWithContentOffset
             hasContent -> SmallBadgeWithContentOffset
             else -> BadgeWithNoContentOffset
         }.roundToPx()
@@ -222,7 +222,13 @@ internal fun BadgedBoxPreview(
                 }
                 BadgedBox(
                     badge = {
-                        Badge(count = 1000, badgeStyle = it, overflowCount = 999, intent = BadgeIntent.Info, hasStroke = false)
+                        Badge(
+                            count = 1000,
+                            badgeStyle = it,
+                            overflowCount = 999,
+                            intent = BadgeIntent.Info,
+                            hasStroke = false,
+                        )
                     },
                 ) {
                     Icon(

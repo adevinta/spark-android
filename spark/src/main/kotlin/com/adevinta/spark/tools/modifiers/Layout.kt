@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.tools.modifiers
 
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -68,13 +67,14 @@ private data class IgnoreParentHorizontalPaddingModifier(
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
-private class IgnoreParentHorizontalPaddingModifierNode(var horizontalPadding: Dp) : Modifier.Node(),
+private class IgnoreParentHorizontalPaddingModifierNode(
+    var horizontalPadding: Dp,
+) : Modifier.Node(),
     LayoutModifierNode {
     override fun MeasureScope.measure(
         measurable: Measurable,
         constraints: Constraints,
     ): MeasureResult {
-
         val placeable = measurable.measure(
             constraints.copy(
                 maxWidth = constraints.maxWidth + (horizontalPadding * 2).roundToPx(),

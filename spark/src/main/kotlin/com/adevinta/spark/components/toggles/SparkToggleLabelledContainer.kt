@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.toggles
 
 import androidx.compose.foundation.layout.Arrangement
@@ -55,7 +54,7 @@ internal fun SparkToggleLabelledContainer(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     contentSide: ContentSide = ContentSide.End,
-    content: @Composable() RowScope.() -> Unit,
+    content: @Composable RowScope.() -> Unit,
 ) {
     val toggleableModifier = if (onClick != null) {
         Modifier.triStateToggleable(

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.image
 
 import androidx.appcompat.content.res.AppCompatResources
@@ -80,7 +79,6 @@ internal fun SparkImage(
     colorFilter: ColorFilter? = null,
     filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
 ) {
-
     SubcomposeAsyncImage(
         model = model,
         contentDescription = contentDescription,
@@ -93,7 +91,6 @@ internal fun SparkImage(
         colorFilter = colorFilter,
         filterQuality = filterQuality,
     ) {
-
         when (painter.state) {
             AsyncImagePainter.State.Empty -> emptyIcon()
             is AsyncImagePainter.State.Loading -> loadingPlaceholder()
@@ -109,8 +106,11 @@ internal fun SparkImage(
                     else -> false
                 }
 
-                if (showEmptyIcon) emptyIcon()
-                else errorIcon()
+                if (showEmptyIcon) {
+                    emptyIcon()
+                } else {
+                    errorIcon()
+                }
             }
 
             is AsyncImagePainter.State.Success -> SubcomposeAsyncImageContent()

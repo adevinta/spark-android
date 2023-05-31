@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.progress
 
 import androidx.compose.runtime.Composable
@@ -132,7 +131,8 @@ public enum class SpinnerIntent {
             containerColor = SparkTheme.colors.surface,
             onContainerColor = SparkTheme.colors.onSurface,
         )
-    };
+    },
+    ;
 
     @Composable
     internal abstract fun colors(): IntentColor

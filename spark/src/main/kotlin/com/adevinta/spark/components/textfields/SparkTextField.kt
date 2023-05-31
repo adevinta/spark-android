@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.textfields
 
 import androidx.compose.animation.core.animateDpAsState
@@ -132,7 +131,9 @@ internal fun SparkTextField(
                         { Text(text = helper) }
                     } else if (error != null && isError) {
                         { Text(text = error) }
-                    } else null
+                    } else {
+                        null
+                    }
 
                 SparkDecorationBox(
                     value = value.text,
@@ -225,7 +226,9 @@ internal fun SparkTextField(
                         { Text(text = helper) }
                     } else if (error != null && isError) {
                         { Text(text = error) }
-                    } else null
+                    } else {
+                        null
+                    }
 
                 SparkDecorationBox(
                     value = value,
@@ -334,7 +337,6 @@ private fun PlaceHolder(text: String?) {
         }
     }
 }
-
 
 /*
 This padding is used to allow label not overlap with the content above it. This 8.dp will work

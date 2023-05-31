@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.tools.modifiers
 
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -55,7 +54,7 @@ private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTarge
     override fun InspectorInfo.inspectableProperties() {
         name = "minimumTouchTargetSize"
         properties["README"] = "Adds outer padding to measure at least 48.dp (default) in " +
-                "size to disambiguate touch interactions if the element would measure smaller"
+            "size to disambiguate touch interactions if the element would measure smaller"
     }
 }
 
@@ -67,7 +66,6 @@ private class MinimumTouchTargetModifierNode : Modifier.Node(), LayoutModifierNo
         measurable: Measurable,
         constraints: Constraints,
     ): MeasureResult {
-
         val placeable = measurable.measure(constraints)
 
         // Be at least as big as the minimum dimension in both dimensions

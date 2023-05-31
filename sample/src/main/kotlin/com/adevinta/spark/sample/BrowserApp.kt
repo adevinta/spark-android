@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.sample
 
 import androidx.compose.animation.AnimatedVisibility
@@ -231,7 +230,6 @@ private fun SampleAppBarTitle(
     onCloseSearchFieldClick: () -> Unit,
     onClearSearchField: () -> Unit,
 ) {
-
     AnimatedVisibility(
         visible = isSearchActive,
         enter = expandHorizontally(),
@@ -267,7 +265,6 @@ private fun AppBarTitle(
     currentComponentStyleName: String?,
 ) {
     when {
-
         currentRoute == CurrentScreen.COMPONENT_GROUPS.name -> {
             ToolbarTitle(stringResource(R.string.components_category), modifier)
         }
@@ -289,7 +286,6 @@ private fun AppBarTitle(
         }
     }
 }
-
 
 @Composable
 public fun ToolbarTitle(
@@ -354,7 +350,6 @@ private fun ShowkaseAppBarActions(
     onThemeClick: () -> Unit = {},
 ) {
     Row {
-
         when {
             metadata.value.isSearchActive -> {
             }
@@ -443,4 +438,3 @@ private fun NavGraphBuilder.navGraph(
 internal fun NavHostController.navigate(destinationScreen: CurrentScreen) = navigate(destinationScreen.name)
 
 private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
-

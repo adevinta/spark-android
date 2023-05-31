@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark
 
 /**
@@ -27,12 +26,13 @@ package com.adevinta.spark
  * `com.adevinta.spark`, because their signatures and semantics will change between future releases without
  * any warnings and without providing any migration guide.
  */
+@Suppress("ktlint:max-line-length")
 @Retention(value = AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS, AnnotationTarget.PROPERTY)
 @RequiresOptIn(
     level = RequiresOptIn.Level.ERROR,
-    message = """This is an internal com.adevinta.spark API that should not be used from outside of com.adevinta.spark. 
- No compatibility guarantees are provided.
- It is recommended to create a feature request, so the Spark team can see with you if the existing API needs to be more open in a next version of Spark""",
+    message = """This is an internal com.adevinta.spark API that should not be used from outside of com.adevinta.spark.
+No compatibility guarantees are provided.
+It is recommended to create a feature request, so the Spark team can see with you if the existing API needs to be more open in a next version of Spark""",
 )
 public annotation class InternalSparkApi

@@ -63,16 +63,16 @@ public fun Badge(
 )
 ```
 
-| Parameters                                   | Descriptions                                                           |
-|----------------------------------------------|------------------------------------------------------------------------|
-| `count: Int`                                 | count to use inside the label                                          |
-| `modifier: Modifier = Modifier`              | modifier the Modifier to be applied to this badge                      |                                                                                                                     |
-| `badgeStyle: BadgeStyle = BadgeStyle.Medium` | badgeStyle style of the badge which defines its size                   |
-| `intent: BadgeIntent = BadgeIntent.Danger`   | The [BadgeIntent] color to use                                         |
-| `overflowCount: Int = BADGE_MAX_COUNT`       | overflowCount defines the max count starting from which + is displayed |
-| `hasBorder: Boolean = true`                  | hasBorder whether a border should be drawn                             |
+| Parameters                                   | Descriptions                                             |
+|----------------------------------------------|----------------------------------------------------------|
+| `count: Int`                                 | The count to use inside the label                        |
+| `modifier: Modifier = Modifier`              | The Modifier to be applied to this badge                 |                                                                                                                     |
+| `badgeStyle: BadgeStyle = BadgeStyle.Medium` | The style of the badge which defines its size            |
+| `intent: BadgeIntent = BadgeIntent.Danger`   | The [BadgeIntent](BadgeIntent.kt) color to use           |
+| `overflowCount: Int = BADGE_MAX_COUNT`       | Defines the max count starting from which + is displayed |
+| `hasBorder: Boolean = true`                  | hWhether a border should be drawn                        |
 
-Instead of the count badge can accept an optional @Composable content.
+Instead of the count badge can accept an optional `@Composable` content.
 If no content is passed, an empty badge is drawn.
 
 ```kotlin
@@ -87,14 +87,14 @@ public fun Badge(
 )
 ```
 
-| Parameters                                   | Descriptions                                              |
-|----------------------------------------------|-----------------------------------------------------------|
-| `modifier: Modifier = Modifier`              | modifier the Modifier to be applied to this badge         |                                                                                                                     |
-| `badgeStyle: BadgeStyle = BadgeStyle.Medium` | badgeStyle style of the badge which defines its size      |
-| `intent: BadgeIntent = BadgeIntent.Danger`   | the [BadgeIntent] color to use                            |
-| `hasStroke: Boolean = true`                  | whether a border should be drawn                          |
-| `contentDescription: String? = null`         | a content description to use instead of default           |
-| `content: (@Composable () -> Unit)? = null`  | content optional content to be rendered inside this badge |                                                                        |
+| Parameters                                   | Descriptions                                         |
+|----------------------------------------------|------------------------------------------------------|
+| `modifier: Modifier = Modifier`              | The `Modifier` to be applied to this badge           |                                                                                                                     |
+| `badgeStyle: BadgeStyle = BadgeStyle.Medium` | Style of the badge which defines its size            |
+| `intent: BadgeIntent = BadgeIntent.Danger`   | the [BadgeIntent](BadgeIntent.kt) color to use       |
+| `hasStroke: Boolean = true`                  | Whether a border should be drawn                     |
+| `contentDescription: String? = null`         | A content description to use instead of default      |
+| `content: (@Composable () -> Unit)? = null`  | An optional content to be rendered inside this badge |                                                                        |
 
 ### Style
 
@@ -134,8 +134,8 @@ public fun BadgedBox(
 )
 ```
 
-| Parameters                                 | Descriptions                                      |
-|--------------------------------------------|---------------------------------------------------|
-| `badge: @Composable BoxScope.() -> Unit`   | the badge to be displayed - typically a Badge     |
-| `modifier: Modifier = Modifier`            | the Modifier to be applied to this BadgedBox      |
-| `content: @Composable RowScope.() -> Unit` | the anchor to which this badge will be positioned |
+| Parameters                                 | Descriptions                                              |
+|--------------------------------------------|-----------------------------------------------------------|
+| `badge: @Composable BoxScope.() -> Unit`   | The badge to be displayed - typically a [Badge](Badge.kt) |
+| `modifier: Modifier = Modifier`            | The `Modifier` to be applied to this BadgedBox            |
+| `content: @Composable RowScope.() -> Unit` | The anchor to which this badge will be positioned         |

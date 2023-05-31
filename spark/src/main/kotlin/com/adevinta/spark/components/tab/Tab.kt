@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.tab
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -101,7 +100,6 @@ public fun Tab(
     )
 }
 
-
 @Preview(
     group = "Tabs",
     name = "Tab",
@@ -144,4 +142,3 @@ internal fun TabPreview(
         }
     }
 }
-

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.card
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -40,7 +39,6 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.CardDefaults as MaterialCardDefaults
 import androidx.compose.material3.ElevatedCard as MaterialElevatedCard
-
 
 @Composable
 internal fun SparkElevatedCard(
