@@ -38,7 +38,6 @@ public enum class ChipStyles {
                 contentColor = contentColor,
                 disabledBackgroundColor = Color.Transparent,
                 disabledContentColor = contentColor.copy(alpha = SparkTheme.colors.dim3)
-                    .compositeOver(SparkTheme.colors.surface),
             )
         }
     },
@@ -81,7 +80,6 @@ public enum class ChipStyles {
                 contentColor = contentColor,
                 disabledBackgroundColor = Color.Transparent,
                 disabledContentColor = contentColor.copy(alpha = SparkTheme.colors.dim3)
-                    .compositeOver(SparkTheme.colors.surface),
             )
         }
     },

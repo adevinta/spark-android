@@ -78,7 +78,6 @@ public fun ButtonOutlined(
         label = "content color",
     )
     val disabledContentColor = contentColor.copy(alpha = SparkTheme.colors.dim3)
-        .compositeOver(SparkTheme.colors.surface)
 
     val colors = ButtonDefaults.outlinedButtonColors(
         contentColor = contentColor,
