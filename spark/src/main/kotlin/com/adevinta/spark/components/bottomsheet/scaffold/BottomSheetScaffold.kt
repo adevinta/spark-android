@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.bottomsheet.scaffold
 
 import androidx.compose.foundation.background
@@ -73,9 +72,9 @@ import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.contentColorFor
+import kotlinx.coroutines.launch
 import java.lang.Float.max
 import kotlin.math.roundToInt
-import kotlinx.coroutines.launch
 
 /**
  * <a href="https://m3.material.io/components/bottom-sheets/overview" class="external" target="_blank">Material Design standard bottom sheet scaffold</a>.
@@ -250,7 +249,8 @@ private fun StandardBottomSheet(
             animateTo = { target, velocity ->
                 scope.launch {
                     state.swipeableState.animateTo(
-                        target, velocity = velocity,
+                        target,
+                        velocity = velocity,
                     )
                 }
             },
@@ -284,8 +284,11 @@ private fun StandardBottomSheet(
                 anchorChangeHandler = anchorChangeHandler,
             ) { value, sheetSize ->
                 when (value) {
-                    PartiallyExpanded -> if (state.skipPartiallyExpanded)
-                        null else layoutHeight - peekHeightPx
+                    PartiallyExpanded -> if (state.skipPartiallyExpanded) {
+                        null
+                    } else {
+                        layoutHeight - peekHeightPx
+                    }
 
                     Expanded -> if (sheetSize.height == peekHeightPx.roundToInt()) {
                         null

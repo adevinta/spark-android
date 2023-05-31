@@ -19,18 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.bottomsheet
 
 import androidx.compose.foundation.MutatePriority
 import androidx.compose.runtime.Stable
-import java.util.concurrent.atomic.AtomicReference
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-
+import java.util.concurrent.atomic.AtomicReference
 
 /**
  * Mutual exclusion for UI state mutation over time.
@@ -65,7 +63,9 @@ internal class InternalMutatorMutex {
                     oldMutator?.cancel()
                     break
                 }
-            } else throw CancellationException("Current mutation had a higher priority")
+            } else {
+                throw CancellationException("Current mutation had a higher priority")
+            }
         }
     }
 

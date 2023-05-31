@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.bottomsheet.modal
 
 import androidx.compose.animation.core.TweenSpec
@@ -94,9 +93,9 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.toggles.Checkbox
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tokens.contentColorFor
-import kotlin.math.max
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.math.max
 
 /**
  * <a href="https://m3.material.io/components/bottom-sheets/overview" class="external" target="_blank">Material Design modal bottom sheet</a>.
@@ -348,7 +347,9 @@ private fun Modifier.modalBottomSheetSwipeable(
 
             Expanded -> if (sheetSize.height != 0) {
                 max(0f, screenHeight - sheetSize.height)
-            } else null
+            } else {
+                null
+            }
         }
     }
 
@@ -363,8 +364,9 @@ private fun ModalBottomSheetAnchorChangeHandler(
         Hidden -> Hidden
         SheetValue.PartiallyExpanded, Expanded -> {
             val hasPartiallyExpandedState = newAnchors.containsKey(SheetValue.PartiallyExpanded)
-            val newTarget = if (hasPartiallyExpandedState) SheetValue.PartiallyExpanded
-            else if (newAnchors.containsKey(Expanded)) Expanded else Hidden
+            val newTarget = if (hasPartiallyExpandedState) {
+                SheetValue.PartiallyExpanded
+            } else if (newAnchors.containsKey(Expanded)) Expanded else Hidden
             newTarget
         }
     }
@@ -477,4 +479,3 @@ internal fun ModalBottomSheetSample() {
         }
     }
 }
-

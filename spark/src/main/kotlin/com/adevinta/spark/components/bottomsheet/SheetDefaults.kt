@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.bottomsheet
 
 import androidx.compose.foundation.gestures.Orientation
@@ -71,7 +70,7 @@ public class SheetState(
         if (skipPartiallyExpanded) {
             require(initialValue != PartiallyExpanded) {
                 "The initial value must not be set to PartiallyExpanded if skipPartiallyExpanded " +
-                        "is set to true."
+                    "is set to true."
             }
         }
         if (skipHiddenState) {
@@ -156,7 +155,7 @@ public class SheetState(
     public suspend fun partialExpand() {
         check(!skipPartiallyExpanded) {
             "Attempted to animate to partial expanded when skipPartiallyExpanded was enabled. Set" +
-                    " skipPartiallyExpanded to false to use this function."
+                " skipPartiallyExpanded to false to use this function."
         }
         animateTo(PartiallyExpanded)
     }
@@ -182,7 +181,7 @@ public class SheetState(
     public suspend fun hide() {
         check(!skipHiddenState) {
             "Attempted to animate to hidden when skipHiddenState was enabled. Set skipHiddenState" +
-                    " to false to use this function."
+                " to false to use this function."
         }
         animateTo(Hidden)
     }
@@ -308,7 +307,6 @@ public object BottomSheetDefaults {
     public fun DragHandle(modifier: Modifier = Modifier) {
         com.adevinta.spark.components.bottomsheet.DragHandle(modifier)
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -376,7 +374,8 @@ internal fun rememberSheetState(
     skipHiddenState: Boolean = false,
 ): SheetState {
     return rememberSaveable(
-        skipPartiallyExpanded, confirmValueChange,
+        skipPartiallyExpanded,
+        confirmValueChange,
         saver = SheetState.Saver(
             skipPartiallyExpanded = skipPartiallyExpanded,
             confirmValueChange = confirmValueChange,

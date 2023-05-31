@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.bottomsheet
 
 import androidx.compose.animation.core.AnimationSpec
@@ -55,10 +54,10 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import kotlin.math.abs
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 /**
  * Enable swipe gestures between a set of predefined values.
@@ -216,7 +215,9 @@ internal class SwipeableV2State<T>(
             val currentOffset = offset
             if (currentOffset != null) {
                 computeTarget(currentOffset, currentValue, velocity = 0f)
-            } else currentValue
+            } else {
+                currentValue
+            }
         }
     }
 
@@ -244,7 +245,7 @@ internal class SwipeableV2State<T>(
      */
     fun requireOffset(): Float = checkNotNull(offset) {
         "The offset was read before being initialized. Did you access the offset in a phase " +
-                "before layout, like effects or composition?"
+            "before layout, like effects or composition?"
     }
 
     /**
@@ -265,7 +266,9 @@ internal class SwipeableV2State<T>(
             val progress = (this.requireOffset() - a) / (b - a)
             // If we are very close to 0f or 1f, we round to the closest
             if (progress < 1e-6f) 0f else if (progress > 1 - 1e-6f) 1f else progress
-        } else 1f
+        } else {
+            1f
+        }
     }
 
     /**
@@ -313,7 +316,9 @@ internal class SwipeableV2State<T>(
             val initialValueHasAnchor = initialValueAnchor != null
             if (initialValueHasAnchor) trySnapTo(initialValue)
             initialValueHasAnchor
-        } else true
+        } else {
+            true
+        }
         return !initialValueHasAnchor || !previousAnchorsEmpty
     }
 
@@ -460,7 +465,7 @@ internal class SwipeableV2State<T>(
 
     private fun requireDensity() = requireNotNull(density) {
         "SwipeableState did not have a density attached. Are you using Modifier.swipeable with " +
-                "this=$this SwipeableState?"
+            "this=$this SwipeableState?"
     }
 
     private suspend fun swipe(
@@ -528,7 +533,9 @@ internal fun <T : Any> rememberSwipeableV2State(
     confirmValueChange: (newValue: T) -> Boolean = { true },
 ): SwipeableV2State<T> {
     return rememberSaveable(
-        initialValue, animationSpec, confirmValueChange,
+        initialValue,
+        animationSpec,
+        confirmValueChange,
         saver = SwipeableV2State.Saver(
             animationSpec = animationSpec,
             confirmValueChange = confirmValueChange,
@@ -680,7 +687,7 @@ private class SwipeAnchorsModifier(
     }
 
     override fun toString() = "SwipeAnchorsModifierImpl(updateDensity=$onDensityChanged, " +
-            "onSizeChanged=$onSizeChanged)"
+        "onSizeChanged=$onSizeChanged)"
 }
 
 private fun <T> Map<T, Float>.closestAnchor(
