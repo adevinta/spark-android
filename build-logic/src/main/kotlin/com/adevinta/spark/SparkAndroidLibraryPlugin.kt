@@ -19,9 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark
-
 
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin

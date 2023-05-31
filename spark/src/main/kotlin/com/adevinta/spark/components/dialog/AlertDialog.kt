@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.dialog
 
 import androidx.compose.material.icons.Icons
@@ -168,7 +167,7 @@ internal fun AlertDialogPreview(
                 text = {
                     Text(
                         "This area typically contains the supportive text " +
-                                "which presents the details regarding the Dialog's purpose.",
+                            "which presents the details regarding the Dialog's purpose.",
                     )
                 },
                 confirmButton = {

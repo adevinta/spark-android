@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.tab
 
 import androidx.compose.foundation.background
@@ -40,7 +39,6 @@ public object TabRowDefaults {
 
     public val containerColor: Color
         @Composable get() = PrimaryNavigationTabTokens.ContainerColor
-
 
     /** Default content color of a tab row. */
     public val contentColor: Color

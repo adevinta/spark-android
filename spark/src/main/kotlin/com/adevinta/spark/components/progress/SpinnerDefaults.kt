@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.progress
 
 import androidx.compose.ui.unit.Dp
@@ -44,5 +43,5 @@ public object SpinnerDefaults {
 
 public enum class SpinnerSize(public val dp: Dp) {
     Small(20.dp),
-    Medium(28.dp)
+    Medium(28.dp),
 }

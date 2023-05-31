@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.badge
 
 import androidx.compose.runtime.Composable
@@ -55,7 +54,8 @@ public enum class BadgeIntent {
             containerColor = SparkTheme.colors.infoContainer,
             onContainerColor = SparkTheme.colors.onInfoContainer,
         )
-    };
+    },
+    ;
 
     @Composable
     internal abstract fun colors(): IntentColor

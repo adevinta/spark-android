@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.rating
 
 import androidx.compose.animation.animateColorAsState
@@ -54,9 +53,11 @@ internal fun SparkRatingStar(
     enabled: Boolean = true,
 ) {
     val color by animateColorAsState(
-        targetValue = if (enabled) SparkTheme.colors.primary else SparkTheme.colors.onSurface.copy(
-            DisabledAlpha,
-        ),
+        targetValue = if (enabled) {
+            SparkTheme.colors.primary
+        } else {
+            SparkTheme.colors.onSurface.copy(DisabledAlpha)
+        },
         label = "star color",
     )
 

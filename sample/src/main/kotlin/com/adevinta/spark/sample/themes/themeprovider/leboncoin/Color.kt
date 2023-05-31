@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.sample.themes.themeprovider.leboncoin
 
 import androidx.compose.ui.graphics.Color
@@ -181,7 +180,6 @@ internal val GreyBlue80 = Color(0xFFb8c8d8)
 internal val GreyBlue90 = Color(0xFFd4e4f5)
 internal val GreyBlue95 = Color(0xFFe6f2ff)
 internal val GreyBlue99 = Color(0xFFfcfcff)
-
 
 internal val LeboncoinColorPartLightLegacy: SparkColors = lightSparkColors(
     primary = BrikkeOrange,

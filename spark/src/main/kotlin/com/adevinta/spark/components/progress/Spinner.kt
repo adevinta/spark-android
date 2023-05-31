@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.progress
 
 import androidx.compose.animation.core.LinearEasing
@@ -91,7 +90,10 @@ internal fun SparkSpinner(
         val offset = SpinnerDefaults.StartAngleOffset + rotation.value
         if (isBackgroundVisible) {
             drawCircularIndicator(
-                startAngle = 0f, sweep = 360f, color = intentColor.containerColor, stroke = stroke,
+                startAngle = 0f,
+                sweep = 360f,
+                color = intentColor.containerColor,
+                stroke = stroke,
             )
         }
         drawCircularIndicator(

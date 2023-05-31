@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.sample
 
 import androidx.activity.compose.BackHandler
@@ -108,7 +107,6 @@ internal fun ComponentDetailScreen(
     BackHandler {
         back(showkaseBrowserScreenMetadata, navController)
     }
-
 }
 
 @Composable

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.textfields
 
 import androidx.compose.animation.animateColor
@@ -81,18 +80,18 @@ internal fun SparkDecorationBox(
     value: String,
     innerTextField: @Composable () -> Unit,
     visualTransformation: VisualTransformation,
-    label: @Composable() (() -> Unit)?,
+    label: @Composable (() -> Unit)?,
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
-    placeholder: @Composable() (() -> Unit)? = null,
-    supportingText: @Composable() (() -> Unit)? = null,
-    counter: @Composable() (() -> Unit)? = null,
-    leadingIcon: @Composable() (() -> Unit)? = null,
-    trailingIcon: @Composable() (() -> Unit)? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    supportingText: @Composable (() -> Unit)? = null,
+    counter: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean = false,
     enabled: Boolean = true,
     isError: Boolean = false,
-    border: @Composable() (() -> Unit)? = null,
+    border: @Composable (() -> Unit)? = null,
 ) {
     val transformedText = remember(value, visualTransformation) {
         visualTransformation.filter(AnnotatedString(value))
@@ -116,7 +115,7 @@ internal fun SparkDecorationBox(
     val bodySmall = typography.caption
     val shouldOverrideTextStyleColor =
         (bodyLarge.color == Color.Unspecified && bodySmall.color != Color.Unspecified) ||
-                (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
+            (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
 
     TextFieldTransitionScope.Transition(
         inputState = inputState,
@@ -154,8 +153,9 @@ internal fun SparkDecorationBox(
                         )
                     }
                 }
-            } else null
-
+            } else {
+                null
+            }
 
         val decoratedCounter: @Composable (() -> Unit)? = counter?.let {
             @Composable {
@@ -252,7 +252,7 @@ internal fun SparkDecorationBox(
 internal fun Decoration(
     contentColor: Color,
     typography: TextStyle? = null,
-    content: @Composable @ComposableOpenTarget(index = 0) () -> Unit,
+    content: @Composable @ComposableOpenTarget(index = 0) () -> Unit, // ktlint-disable annotation
 ) {
     val colorAndEmphasis: @Composable () -> Unit = @Composable {
         CompositionLocalProvider(LocalContentColor provides contentColor, content = content)
@@ -269,16 +269,16 @@ internal fun Decoration(
 @Composable
 internal fun SparkTextFieldLayout(
     textField: @Composable () -> Unit,
-    placeholder: @Composable() ((Modifier) -> Unit)?,
-    label: @Composable() (() -> Unit)?,
-    counter: @Composable() (() -> Unit)?,
-    leading: @Composable() (() -> Unit)?,
-    trailing: @Composable() (() -> Unit)?,
+    placeholder: @Composable ((Modifier) -> Unit)?,
+    label: @Composable (() -> Unit)?,
+    counter: @Composable (() -> Unit)?,
+    leading: @Composable (() -> Unit)?,
+    trailing: @Composable (() -> Unit)?,
     singleLine: Boolean,
     animationProgress: Float,
     onLabelMeasured: (Size) -> Unit,
     container: @Composable () -> Unit,
-    supporting: @Composable() (() -> Unit)?,
+    supporting: @Composable (() -> Unit)?,
     paddingValues: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
@@ -375,7 +375,6 @@ internal fun SparkTextFieldLayout(
                     counter()
                 }
             }
-
         },
         measurePolicy = measurePolicy,
     )
@@ -505,7 +504,7 @@ private enum class InputPhase {
     UnfocusedEmpty,
 
     // Text field is not focused but input text is not empty
-    UnfocusedNotEmpty
+    UnfocusedNotEmpty,
 }
 
 internal val IntrinsicMeasurable.layoutId: Any?

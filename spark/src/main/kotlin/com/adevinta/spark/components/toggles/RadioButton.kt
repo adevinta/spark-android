@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.toggles
 
 import androidx.compose.foundation.interaction.Interaction
@@ -41,7 +40,6 @@ import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
-
 
 @Composable
 @InternalSparkApi
@@ -187,19 +185,23 @@ internal fun AllStatesRadioButtonLabelledPreview(
     PreviewTheme(theme, userType) {
         RadioButtonLabelled(
             enabled = true,
-            selected = true, onClick = {},
+            selected = true,
+            onClick = {},
         ) { Text("RadioButton On") }
         RadioButtonLabelled(
             enabled = false,
-            selected = true, onClick = {},
+            selected = true,
+            onClick = {},
         ) { Text("RadioButton On") }
         RadioButtonLabelled(
             enabled = true,
-            selected = false, onClick = {},
+            selected = false,
+            onClick = {},
         ) { Text("RadioButton Off") }
         RadioButtonLabelled(
             enabled = false,
-            selected = false, onClick = {},
+            selected = false,
+            onClick = {},
         ) { Text("RadioButton Off") }
     }
 }

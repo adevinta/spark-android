@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.snackbars
 
 import androidx.compose.material3.SnackbarData
@@ -62,7 +61,6 @@ public fun SnackbarDefault(
     onActionClick: (() -> Unit)? = null,
     content: @Composable (() -> Unit),
 ) {
-
     Snackbar(
         colors = SnackbarColors.Default,
         modifier = modifier,
@@ -81,7 +79,6 @@ public fun SnackbarDefault(
     modifier: Modifier = Modifier,
     actionOnNewLine: Boolean = false,
 ) {
-
     Snackbar(
         data = data,
         colors = SnackbarColors.Default,

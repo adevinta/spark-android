@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.chips
 
 import androidx.compose.foundation.background
@@ -123,7 +122,6 @@ public fun ChipOutlined(
     )
 }
 
-
 /**
  * A chip with no background but having a border
  * @param intent The [ChipIntent] colors that will be used for the content and background of this chip in
@@ -157,7 +155,6 @@ public fun ChipOutlined(
         content = content,
     )
 }
-
 
 @Preview(
     group = "Chips",

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.chips
 
 import androidx.compose.foundation.background
@@ -44,7 +43,6 @@ import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
-
 
 /**
  * Outlined chip with dashed border.
@@ -157,7 +155,6 @@ public fun ChipDashed(
         interactionSource = interactionSource,
     )
 }
-
 
 @Preview(
     group = "Chips",

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.icons
 
 import androidx.appcompat.content.res.AppCompatResources
@@ -50,7 +49,6 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.compose.material3.Icon as MaterialIcon
-
 
 /**
  * Icon component that draws [sparkIcon] using [tint], defaulting to [LocalContentColor]. For a
@@ -222,7 +220,6 @@ public fun rememberSparkIconPainter(sparkIcon: SparkIcon): Painter {
         else -> error("Can't found Painter for sparkIcon $sparkIcon")
     }
 }
-
 
 @Preview(
     group = "Icon",

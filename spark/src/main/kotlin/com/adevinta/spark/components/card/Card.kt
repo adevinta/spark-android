@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.card
 
 import androidx.compose.foundation.BorderStroke
@@ -160,7 +159,6 @@ public fun Card(
     )
 }
 
-
 @Preview(
     group = "Cards",
     name = "Card",
@@ -178,4 +176,3 @@ internal fun CardPreview(
         }
     }
 }
-
