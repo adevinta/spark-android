@@ -1,0 +1,30 @@
+<!--
+  Copyright (c) 2023 Adevinta
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M20.058,2.2L17.95,2.2v5.423c0,0.414 -0.158,0.736 -0.408,0.99 -0.25,0.253 -0.65,0.414 -0.975,0.414h-2.675a1.32,1.32 0,0 1,-0.975 -0.414,1.518 1.518,0 0,1 -0.409,-0.99L12.508,2.2L10.4,2.2c-1.05,0 -1.858,0.82 -1.858,1.886v9.865c0,0.16 0,0.245 0.083,0.415 0.075,0.279 0.2,0.533 0.35,0.76a2.29,2.29 0,0 1,-0.433 -0.837c-0.809,-0.66 -1.784,-1.066 -2.834,-1.066L2.975,13.223c-0.567,0 -0.975,0.415 -0.975,0.99 0,0.576 0.408,0.99 0.975,0.99h2.75c0.65,0 1.292,0.245 1.783,0.736 0.242,0.245 0.409,0.49 0.484,0.82L2.975,16.759c-0.567,0 -0.975,0.415 -0.975,0.99 0,0.576 0.408,0.99 0.975,0.99h8.908c0.484,0 0.892,0.161 1.292,0.491 0.242,0.245 0.408,0.575 0.483,0.99L2.975,20.22c-0.567,0 -0.975,0.415 -0.975,0.99s0.408,0.99 0.975,0.99h11.008c0.409,0 0.892,-0.161 1.134,-0.491 0.325,-0.33 0.483,-0.736 0.483,-1.15 0,-0.99 -0.408,-1.972 -1.05,-2.632 -0.725,-0.736 -1.617,-1.066 -2.592,-1.066L10.1,16.861c-0.075,-0.397 -0.233,-0.727 -0.392,-1.125 0.217,0.068 0.434,0.135 0.717,0.135h9.717c1.05,0 1.858,-0.82 1.858,-1.886L22,4.086C21.917,3.02 21.108,2.2 20.058,2.2ZM18.767,13.545h-2.184c-0.566,0 -0.975,-0.415 -0.975,-0.99s0.409,-0.99 0.975,-0.99h2.184c0.566,0 0.975,0.415 0.975,0.99s-0.409,0.99 -0.975,0.99Z"/>
+</vector>

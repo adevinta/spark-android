@@ -1,0 +1,30 @@
+<!--
+  Copyright (c) 2023 Adevinta
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M17.906,2.2L6.17,2.2C5.045,2.2 4,3.117 4,4.367v15.666c0,1.25 1.045,2.167 2.17,2.167h11.655c1.126,0 2.17,-0.917 2.17,-2.167L19.995,4.367c0.081,-1.25 -0.964,-2.167 -2.09,-2.167ZM15.976,16.783c-0.723,0 -1.366,-0.583 -1.366,-1.416 0,-0.834 0.643,-1.334 1.367,-1.334 0.723,0 1.366,0.584 1.366,1.334 0,0.833 -0.643,1.416 -1.366,1.416ZM17.343,18.783c0,0.834 -0.643,1.334 -1.366,1.334 -0.724,0 -1.367,-0.584 -1.367,-1.334 0,-0.833 0.643,-1.416 1.367,-1.416 0.723,0 1.366,0.583 1.366,1.416ZM15.977,13.367c-0.724,0 -1.367,-0.584 -1.367,-1.334 0,-0.833 0.643,-1.416 1.367,-1.416 0.723,0 1.366,0.583 1.366,1.416 0,0.834 -0.643,1.334 -1.366,1.334ZM16.941,9.617L7.135,9.617a0.734,0.734 0,0 1,-0.724 -0.75L6.411,5.533c0,-0.5 0.322,-0.833 0.724,-0.833h9.726c0.402,0 0.723,0.333 0.723,0.75v3.333c0.08,0.5 -0.24,0.834 -0.643,0.834ZM11.958,16.783c-0.724,0 -1.367,-0.583 -1.367,-1.416 0,-0.834 0.643,-1.334 1.367,-1.334 0.723,0 1.366,0.584 1.366,1.334 0,0.833 -0.723,1.416 -1.366,1.416ZM13.324,18.783c0,0.834 -0.643,1.334 -1.366,1.334 -0.724,0 -1.367,-0.584 -1.367,-1.334 0,-0.833 0.643,-1.416 1.367,-1.416 0.643,0 1.366,0.583 1.366,1.416ZM11.958,13.367c-0.724,0 -1.367,-0.584 -1.367,-1.334 0,-0.833 0.643,-1.416 1.367,-1.416 0.723,0 1.366,0.583 1.366,1.416 0,0.834 -0.723,1.334 -1.366,1.334ZM7.858,16.783c-0.723,0 -1.366,-0.583 -1.366,-1.416 0,-0.834 0.643,-1.334 1.366,-1.334 0.724,0 1.367,0.584 1.367,1.334 0,0.833 -0.643,1.416 -1.367,1.416ZM9.225,18.783c0,0.834 -0.643,1.334 -1.367,1.334 -0.723,0 -1.366,-0.584 -1.366,-1.334 0,-0.833 0.643,-1.416 1.366,-1.416 0.724,0 1.367,0.583 1.367,1.416ZM7.858,13.367c-0.723,0 -1.366,-0.584 -1.366,-1.334 0,-0.833 0.643,-1.416 1.366,-1.416 0.724,0 1.367,0.583 1.367,1.416 0,0.834 -0.643,1.334 -1.367,1.334Z"/>
+</vector>

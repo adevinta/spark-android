@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!--
   Copyright (c) 2023 Adevinta
 
@@ -26,8 +24,8 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-    <path
-        android:fillColor="#000"
-        android:fillType="evenOdd"
-        android:pathData="M21.6 19.67L13.92 12l7.58-7.6c0.53-0.52 0.53-1.4 0-1.92-0.53-0.54-1.4-0.54-1.93 0l-7.58 7.57L4.33 2.4c-0.53-0.53-1.4-0.53-1.93 0s-0.53 1.4 0 1.93L10.06 12 2.4 19.65c-0.53 0.53-0.53 1.4 0 1.93 0.53 0.54 1.4 0.54 1.93 0L12 13.92l7.68 7.68c0.53 0.53 1.4 0.53 1.93 0s0.53-1.4 0-1.93Z" />
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m21.6,20.074 l-7.675,-7.678L21.5,4.809a1.368,1.368 0,0 0,-1.933 -1.934l-7.575,7.578L4.333,2.8A1.368,1.368 0,0 0,2.4 4.734l7.658,7.662L2.4,20.049a1.368,1.368 0,0 0,1.933 1.934l7.659,-7.661L19.667,22a1.368,1.368 0,0 0,1.933 -1.934v0.008Z"
+      android:fillType="evenOdd"/>
 </vector>

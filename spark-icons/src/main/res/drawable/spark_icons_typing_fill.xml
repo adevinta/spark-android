@@ -1,0 +1,30 @@
+<!--
+  Copyright (c) 2023 Adevinta
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M17.9,2.8L6.017,2.8C3.84,2.8 2,4.626 2,6.783v8.963c0,2.24 1.841,3.984 4.1,3.984h10.88l3.848,2.904c0.168,0.083 0.252,0.166 0.419,0.166 0.084,0 0.25,0 0.335,-0.083 0.25,-0.083 0.418,-0.332 0.418,-0.664L22,6.866c0,-2.24 -1.841,-4.066 -4.1,-4.066ZM13.548,11.016c0,0.747 -0.67,1.41 -1.422,1.41 -0.754,0 -1.423,-0.663 -1.423,-1.41 0,-0.747 0.67,-1.411 1.423,-1.411s1.422,0.58 1.422,1.41ZM8.862,11.016c0,0.747 -0.67,1.41 -1.423,1.41s-1.422,-0.663 -1.422,-1.41c0,-0.747 0.67,-1.411 1.422,-1.411 0.753,0 1.423,0.58 1.423,1.41ZM16.728,9.605c0.753,0 1.423,0.664 1.423,1.41 0,0.748 -0.67,1.412 -1.423,1.412s-1.423,-0.664 -1.423,-1.411 0.67,-1.411 1.423,-1.411Z"/>
+</vector>
