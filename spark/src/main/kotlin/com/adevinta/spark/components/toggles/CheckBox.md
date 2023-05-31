@@ -13,17 +13,6 @@ on [zeroheight.com/25c15666f/](https://zeroheight.com/25c15666f/p/72b9ad-checkbo
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_part_dark.png) |
 
-```kotlin
-@Composable
-fun Checkbox(
-    state: Boolean,
-    onCheckedChange: (() -> Unit)?,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-)
-```
-
 Checkboxes allows users to select one or more items from a set. Checkboxes can turn an option on or
 off.
 
@@ -43,14 +32,6 @@ Checkbox(
 )
 ```
 
-| Parameters                                                                              | Descriptions                                                                                                                                                                                                                                                                                       |
-|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `checked: Boolean`                                                                      | whether Checkbox is checked or unchecked                                                                                                                                                                                                                                                           |
-| `onClick: (() -> Unit)?`                                                                | callback to be invoked when checkbox is being clicked, therefore the change of checked state in requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.                                                                           |
-| `modifier: Modifier = Modifier`                                                         | A Modifier for this Checkbox                                                                                                                                                                                                                                                                       |
-| `enabled: Boolean = true`                                                               | whether the component is enabled or grayed out                                                                                                                                                                                                                                                     |
-| `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the [MutableInteractionSource] representing the stream of [Interaction]s for this Checkbox. You can create and pass in your own remembered [MutableInteractionSource] if you want to observe [Interaction]s and customize the appearance / behavior of this TextField in different [Interaction]s. |
-
 ---
 
 ### CheckBoxLabelled
@@ -58,19 +39,6 @@ Checkbox(
 | Light                                                                                                                                                                              | Dark                                                                                                                                                                              |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkboxlabelled_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkboxlabelled_part_dark.png) |
-
-```kotlin
-@Composable
-fun CheckboxLabelled(
-    state: ToggleableState,
-    onClick: (() -> Unit)?,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    contentSide: ContentSide = ContentSide.End,
-    content: @Composable RowScope.() -> Unit,
-)
-```
 
 The Checkbox allows users to select one or more items from a set. Checkboxes can turn an option on
 or off.
@@ -88,16 +56,6 @@ CheckboxLabelled(
     onClick = {},
 ) { Text("CheckBox On") }
 ```
-
-| Parameters                                                                              | Descriptions                                                                                                                                                                                                                                                                                       |
-|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `checked: Boolean`                                                                      | whether Checkbox is checked or unchecked                                                                                                                                                                                                                                                           |
-| `onClick: (() -> Unit)?`                                                                | callback to be invoked when checkbox is being clicked, therefore the change of checked state in requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.                                                                           |
-| `modifier: Modifier = Modifier`                                                         | A Modifier for this text field                                                                                                                                                                                                                                                                     |
-| `enabled: Boolean = true`                                                               | whether the component is enabled or grayed out                                                                                                                                                                                                                                                     |
-| `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the [MutableInteractionSource] representing the stream of [Interaction]s for this Checkbox. You can create and pass in your own remembered [MutableInteractionSource] if you want to observe [Interaction]s and customize the appearance / behavior of this TextField in different [Interaction]s. |
-| `contentSide: ContentSide = ContentSide.End`                                            | The side where we want to show the label, default to [ContentSide.End].                                                                                                                                                                                                                            |
-| `content: @Composable RowScope.() -> Unit`                                              | The content displayed after the checkbox, usually a Text composable shown at the end.                                                                                                                                                                                                              |                                                                                                                                                                                                                                                                                                    |
 
 ## Layout
 

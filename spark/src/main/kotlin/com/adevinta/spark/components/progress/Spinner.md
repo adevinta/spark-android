@@ -18,25 +18,6 @@ Spinners provide a visual clue that an action is processing awaiting a course of
 | Dark  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_part_dark.png)  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_pro_dark.png)  |
 |       | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_part_dark.png)   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_pro_dark.png)   |
 
-```kotlin
-@Composable
-fun Spinner(
-    intent: SpinnerIntent,
-    modifier: Modifier = Modifier,
-    size: SpinnerSize = SpinnerDefaults.CircularSize,
-    isBackgroundVisible: Boolean = false,
-)
-```
-
-| Parameters                                         | Descriptions                                                                          |
-|----------------------------------------------------|---------------------------------------------------------------------------------------|
-| `intent: SpinnerIntent`                            | One of [SpinnerIntent](SpinnerIntent.kt) colors that will be used to draw the spinner |
-| `modifier: Modifier = Modifier`                    | Modifier to be applied to this badge                                                  |                                                                                                                     |
-| `size: SpinnerSize = SpinnerDefaults.CircularSize` | one of the [SpinnerSize](SpinnerDefaults.kt) that defines the size of the component   |
-| `isBackgroundVisible: Boolean = false`             | whether a background should be drawn                                                  |
-
-### Style
-
 A visible background may be added to display a background behind the spinner.
 
 All intents from Spark are available for this component ([SpinnerIntent](SpinnerIntent.kt)).

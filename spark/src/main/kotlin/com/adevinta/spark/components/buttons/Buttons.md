@@ -18,22 +18,6 @@ on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/34b742-button/b/3
 
 ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonsizes_light.png)
 
-```kotlin
-@Composable
-fun ButtonFilled(
-    onClick: () -> Unit,
-    text: String,
-    modifier: Modifier = Modifier,
-    size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Primary,
-    enabled: Boolean = true,
-    icon: SparkIcon? = null,
-    iconSide: IconSide = IconSide.START,
-    isLoading: Boolean = false,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-)
-```
-
 The minimal usage of the component is the text and the click action.
 
 ```kotlin
@@ -47,18 +31,6 @@ The buttons have an loading state that can be used to indicate that the button i
 data and show/hide an indeterminate circular progress indicator on the start of the button.
 
 ![](../../../../../../../../../art/components/button/loading-button.gif)
-
-| Parameters                                                                              | Descriptions                                                                                                                                                                                                                                                    |
-|-----------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `onClick: () -> Unit`                                                                   | The callback to be called when the user click on the button                                                                                                                                                                                                     |
-| `text: String or AnnotatedString`                                                       | The text to be displayed in the button                                                                                                                                                                                                                          | Modifier to be applied to the button                                                                                                                       |
-| `size: ButtonSize = ButtonSize.Medium`                                                  | The size of the button                                                                                                                                                                                                                                          |
-| `intent: ButtonIntent = ButtonIntent.Primary`                                           | The intent color for the button.                                                                                                                                                                                                                                |
-| `enabled: Boolean = true`                                                               | True Controls the enabled state of the button. When `false`, this button will not be clickable                                                                                                                                                                  |
-| `icon: (@Composable () -> Unit)? = null`                                                | The optional icon to be displayed at the start or the end of the button container.                                                                                                                                                                              |
-| `iconSide: IconSide = IconSide.LEFT`                                                    | If an icon is added, you can configure the side at the start or end of the button                                                                                                                                                                               |
-| `isLoading: Boolean = false`                                                            | show or hide a CircularProgressIndicator at the start that push the content to indicate a loading state                                                                                                                                                         |
-| `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the **MutableInteractionSource** representing the stream of **Interaction**s for this button. You can create and pass in your own `remember`ed instance to observe **Interaction**s and customize the appearance / behavior of this button in different states. |
 
 ### All Styles
 
