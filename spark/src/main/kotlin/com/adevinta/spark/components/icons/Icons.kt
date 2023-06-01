@@ -94,7 +94,7 @@ public fun Icon(
  * localized, such as by using [androidx.compose.ui.res.stringResource] or similar
  * @param modifier optional [Modifier] for this Icon
  * @param tint to be applied to [imageVector]. If no intent is provided, then a default is used.
- * @param iconSize one of [IconSize] to be applied as size of the icon.
+ * @param size one of [IconSize] to be applied as size of the icon.
  * If no size is provided the default [IconSize.Medium] is used.
  */
 @Composable
@@ -103,14 +103,14 @@ public fun Icon(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     tint: Color = IconDefaults.color.color(),
-    iconSize: IconSize = IconDefaults.size,
+    size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
         imageVector = imageVector,
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(iconSize.size),
+            .size(size.size),
         tint = tint,
     )
 }
@@ -126,7 +126,7 @@ public fun Icon(
  * localized, such as by using [androidx.compose.ui.res.stringResource] or similar
  * @param modifier optional [Modifier] for this Icon
  * @param tint to be applied to [bitmap]. If no intent is provided, then a default is used
- * @param iconSize one of [IconSize] to be applied as size of the icon.
+ * @param size one of [IconSize] to be applied as size of the icon.
  * If no size is provided the default [IconSize.Medium] is used.
  */
 @Composable
@@ -135,14 +135,14 @@ public fun Icon(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     tint: Color = IconDefaults.color.color(),
-    iconSize: IconSize = IconDefaults.size,
+    size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
         bitmap = bitmap,
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(iconSize.size),
+            .size(size.size),
         tint = tint,
     )
 }
@@ -158,7 +158,7 @@ public fun Icon(
  * localized, such as by using [androidx.compose.ui.res.stringResource] or similar
  * @param modifier optional [Modifier] for this Icon
  * @param tint to be applied to [painter]. If no intent is provided, then a default is used
- * @param iconSize one of [IconSize] to be applied as size of the icon.
+ * @param size one of [IconSize] to be applied as size of the icon.
  * If no size is provided the default [IconSize.Medium] is used.
  */
 @Composable
@@ -167,14 +167,14 @@ public fun Icon(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     tint: Color = IconDefaults.color.color(),
-    iconSize: IconSize = IconDefaults.size,
+    size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
         painter = painter,
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(iconSize.size),
+            .size(size.size),
         tint = tint,
     )
 }
@@ -194,7 +194,7 @@ public fun Icon(
  */
 @InternalSparkApi
 @Composable
-public fun Icon(
+internal fun Icon(
     sparkIcon: SparkIcon,
     contentDescription: String?,
     modifier: Modifier = Modifier,

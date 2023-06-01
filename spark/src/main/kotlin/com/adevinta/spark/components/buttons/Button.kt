@@ -55,6 +55,7 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.SparkButtonTags.TAG_PROGRESS_INDICATOR
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
@@ -207,7 +208,12 @@ public object SparkButtonDefaults {
     /**
      * The default size of the icon when used inside a [SparkButtonTags].
      */
-    public val IconSize: Dp = 16.dp
+    internal val IconSize: Dp = 16.dp
+
+    /**
+     * The default size of the icon when used inside a [SparkButtonTags].
+     */
+    public val IconDefaultSize: IconSize = com.adevinta.spark.components.icons.IconSize.Small
 
     /**
      * The default size of the spacing between an icon and a text when they used inside a [SparkButtonTags].
