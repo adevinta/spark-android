@@ -5,11 +5,9 @@
 You can find the design specs
 on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/8711ec-badge/b/98915d).
 
-## Usage
+### Badge
 
-A badge is a visual indicator for numeric values such as tallies and scores.
-
-### Styles
+Badges convey dynamic information, such as counts or status. A badge can include labels or numbers.
 
 |       | Danger and Info                                                                                                                                                  |
 |-------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -41,9 +39,7 @@ the default of 99 is used.
 
 Instead of the count badge can accept an optional `@Composable` content.
 If no content is passed, an empty badge is drawn.
-|
 
-### Style
 
 A 2px stroke is displayed by default. But it can be removed if needed.
 When no count is displayed in the badge, the badge is smaller but still round.

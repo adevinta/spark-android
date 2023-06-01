@@ -5,16 +5,14 @@
 You can find the design specs
 on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/58a2c6-switch/b/700a17).
 
-## Usage
+### Switch
 
 Switches can be used in forms on a full page, in modals, or on side panels.
-They can be used in a list but we shouldn’t mix them with other components such as checkboxes or
-radio buttons.
+They can be used in a list but we shouldn’t mix them with other components such as [Checkboxes](./CheckBox.md) or
+[Radio buttons](./RadioButton.md).
 
 Switches must respect the established color code and not use other colors to emphasize the
 activation and deactivation of a functionality or service.
-
-### Switch
 
 Switch component allows the user to activate or deactivate the state of an element or concept.
 It is usually used as an element to add services, activate functionalities or adjust settings.
@@ -47,7 +45,7 @@ SwitchLabelled(
     }
 ) { Text(text = "Switch On") }
 ```
-
+z
 ## Layout
 - The Switch respects the minimum touch size.
 - Switch labels can be positioned at the Left or the Right, but usually the left position is more often used on small screens and mobile devices.

@@ -5,12 +5,10 @@
 You can find the design specs
 on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/17568d-chip/b/98915d).
 
-## Usage
+### Chip
 
 Chips help users quickly recognize an important information that has been entered by them, 
 trigger actions, make selections, or filter content.
-
-### Styles
 
 |       | Part                                                                                                                                                                  | Pro                                                                                                                                                                  |
 |-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -19,8 +17,7 @@ trigger actions, make selections, or filter content.
 
 Most commonly chip contains an optional `leadingIcon` and the text.
 
-
-### Style
+### Styles
 
 The chip can have one of the [ChipStyles](ChipStyles.kt):
 - Outlined - using a solid border stroke and no background

@@ -5,19 +5,19 @@
 You can find the design specs
 on [zeroheight.com/25c15666f/](https://zeroheight.com/25c15666f/p/72b9ad-checkbox-/b/057def).
 
-## Usage
-
 ### CheckBox
-
-| Light                                                                                                                                                                      | Dark                                                                                                                                                                      |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_part_dark.png) |
 
 Checkboxes allows users to select one or more items from a set. Checkboxes can turn an option on or
 off.
 
 - Toggle a single item on or off.
 - Require another action to activate or deactivate something.
+- In cases of a global activation in a indeterminate state where on and off states coexist in the children.
+
+| Light                                                                                                                                                                      | Dark                                                                                                                                                                      |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_part_dark.png) |
+
 
 The minimal usage of the component is the checkbox in standalone but you can add a content at the
 end of the box or customize it.
