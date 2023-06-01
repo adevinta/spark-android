@@ -21,18 +21,18 @@ public fun Icon(
     sparkIcon: SparkIcon,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
+    tint: Color = IconDefaults.color.color(),
     size: IconSize = IconDefaults.size,
 )
 ```
 
-| Parameters                             | Descriptions                                                                                                                       |
-|----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| `sparkIcon: SparkIcon`                 | [SparkIcon](../../../../../../../../../spark-icons/src/main/kotlin/com/adevinta/spark/icons/SparkIcon.kt) to draw inside this Icon |
-| `contentDescription: String?`          | Text used by accessibility services to describe what this icon represents                                                          |
-| `modifier: Modifier = Modifier`        | An optional `Modifier` to be applied to this icon                                                                                  |                                                                                                                     |
-| `tint: IconTints = IconDefaults.color` | One of the [IconTint](IconTints.kt)s to be applied to `sparkIcon`. If no tint is provided, then a default is used                  |
-| `size: IconSize = IconDefaults.size`   | One of [IconSize](IconDefaults.kt)s to be applied as size of the icon                                                              |
+| Parameters                             | Descriptions                                                                                                                           |
+|----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `sparkIcon: SparkIcon`                 | [SparkIcon](../../../../../../../../../spark-icons/src/main/kotlin/com/adevinta/spark/icons/SparkIcon.kt) to draw inside this Icon     |
+| `contentDescription: String?`          | text used by accessibility services to describe what this icon represents                                                              |
+| `modifier: Modifier = Modifier`        | optional `Modifier` to be applied to this icon                                                                                         |                                                                                                                     |
+| `tint: IconTints = IconDefaults.color` | tint color, it should be one of [IconTint](IconTints.kt)s to be applied to `sparkIcon`. If no tint is provided, then a default is used |
+| `size: IconSize = IconDefaults.size`   | one of [IconSize](IconDefaults.kt) to be applied as size of the icon                                                                   |
 
 Icon component that draws `sparkIcon` using `tint`, defaulting to `LocalContentColor`. For a
 clickable icon, see [IconButton](IconButton.kt).
@@ -48,18 +48,18 @@ public fun Icon(
     imageVector: ImageVector,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
+    tint: Color = IconDefaults.color.color(),
     size: IconSize = IconDefaults.size,
 )
 ```
 
-| Parameters                             | Descriptions                                                                                                    |
-|----------------------------------------|-----------------------------------------------------------------------------------------------------------------|
-| `imageVector: ImageVector`             | `ImageVector` to draw inside this Icon                                                                          |
-| `contentDescription: String?`          | Text used by accessibility services to describe what this icon represents                                       |
-| `modifier: Modifier = Modifier`        | optional `Modifier` to be applied to this icon                                                                  |                                                                                                                     |
-| `tint: IconTints = IconDefaults.color` | One of [IconTint](IconTints.kt)s to be applied to `imageVector`. If no tint is provided, then a default is used |
-| `size: IconSize = IconDefaults.size`   | One of [IconSize](IconDefaults.kt)  to be applied as size of the icon                                           |
+| Parameters                             | Descriptions                                                                                                                             |
+|----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| `imageVector: ImageVector`             | `ImageVector` to draw inside this Icon                                                                                                   |
+| `contentDescription: String?`          | text used by accessibility services to describe what this icon represents                                                                |
+| `modifier: Modifier = Modifier`        | optional `Modifier` to be applied to this icon                                                                                           |                                                                                                                     |
+| `tint: IconTints = IconDefaults.color` | tint color, it should be one of [IconTint](IconTints.kt)s to be applied to `imageVector`. If no tint is provided, then a default is used |
+| `size: IconSize = IconDefaults.size`   | size one of [IconSize](IconDefaults.kt)  to be applied as size of the icon                                                               |
 
 ```kotlin
 @Composable
@@ -67,18 +67,18 @@ public fun Icon(
     bitmap: ImageBitmap,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
+    tint: Color = IconDefaults.color.color(),
     size: IconSize = IconDefaults.size,
 )
 ```
 
-| Parameters                             | Descriptions                                                                                              |
-|----------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| `bitmap: ImageBitmap`                  | `ImageBitmap` to draw inside this Icon                                                                    |
-| `contentDescription: String?`          | text used by accessibility services to describe what this icon represents                                 |
-| `modifier: Modifier = Modifier`        | optional `Modifier` to be applied to this icon                                                            |                                                                                                                     |
-| `tint: IconTints = IconDefaults.color` | a tint [IconTint](IconTints.kt) to be applied to `bitmap`. If no tint is provided, then a default is used |
-| `size: IconSize = IconDefaults.size`   | size one of [IconSize](IconDefaults.kt) to be applied as size of the icon                                 |
+| Parameters                             | Descriptions                                                                                                                          |
+|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `bitmap: ImageBitmap`                  | `ImageBitmap` to draw inside this Icon                                                                                                |
+| `contentDescription: String?`          | text used by accessibility services to describe what this icon represents                                                             |
+| `modifier: Modifier = Modifier`        | optional `Modifier` to be applied to this icon                                                                                        |                                                                                                                     |
+| `tint: IconTints = IconDefaults.color` | a tint color, it should be one of [IconTint](IconTints.kt)s to be applied to `bitmap`. If no tint is provided, then a default is used |
+| `size: IconSize = IconDefaults.size`   | size one of [IconSize](IconDefaults.kt) to be applied as size of the icon                                                             |
 
 ```kotlin
 @Composable
@@ -86,23 +86,25 @@ public fun Icon(
     painter: Painter,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
+    tint: Color = IconDefaults.color.color(),
     size: IconSize = IconDefaults.size,
 )
 ```
 
-| Parameters                             | Descriptions                                                                                               |
-|----------------------------------------|------------------------------------------------------------------------------------------------------------|
-| `painter: Painter`                     | `Painter` to draw inside this Icon                                                                         |
-| `contentDescription: String?`          | text used by accessibility services to describe what this icon represents                                  |
-| `modifier: Modifier = Modifier`        | optional `Modifier` to be applied to this icon                                                             |                                                                                                                     |
-| `tint: IconTints = IconDefaults.color` | a tint [IconTint](IconTints.kt) to be applied to `painter`. If no tint is provided, then a default is used |
-| `size: IconSize = IconDefaults.size`   | size one of [IconSize](IconDefaults.kt) to be applied as size of the icon                                  |
+| Parameters                             | Descriptions                                                                                                                           |
+|----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `painter: Painter`                     | `Painter` to draw inside this Icon                                                                                                     |
+| `contentDescription: String?`          | text used by accessibility services to describe what this icon represents                                                              |
+| `modifier: Modifier = Modifier`        | optional `Modifier` to be applied to this icon                                                                                         |                                                                                                                     |
+| `tint: IconTints = IconDefaults.color` | a tint color, it should be one of [IconTint](IconTints.kt)s to be applied to `painter`. If no tint is provided, then a default is used |
+| `size: IconSize = IconDefaults.size`   | size one of [IconSize](IconDefaults.kt) to be applied as size of the icon                                                              |
 
 
 ### Style
 
-All icons accept 7 intents as tints:
+Icons are supposed to have one of the [IconTint](IconTints.kt)s, however you can pass your
+own `Color`, for example in order to handle a disabled state or animations:
+
 - Primary
 - Secondary
 - Surface
