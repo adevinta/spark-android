@@ -1,0 +1,67 @@
+<!--
+  Copyright (c) 2023 Adevinta
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:pathData="M23.586,20.213H0.414A0.414,0.414 0,0 1,0 19.8V4.903c0,-0.228 0.185,-0.414 0.414,-0.414h23.172c0.229,0 0.414,0.186 0.414,0.414V19.8a0.414,0.414 0,0 1,-0.414 0.413Z"
+      android:fillColor="#FF4B55"/>
+  <path
+      android:pathData="M8.69,4.49H0.414A0.414,0.414 0,0 0,0 4.902V19.8c0,0.228 0.185,0.413 0.414,0.413H8.69V4.49Z"
+      android:fillColor="#73AF00"/>
+  <path
+      android:pathData="M8.693,12.351m-3.721,0a3.721,3.721 0,1 1,7.442 0a3.721,3.721 0,1 1,-7.442 0"
+      android:fillColor="#FFE15A"/>
+  <path
+      android:pathData="M7.038,10.283h3.31c0.229,0 0.414,0.185 0.414,0.413v2.07a2.069,2.069 0,0 1,-4.138 0v-2.07c0,-0.228 0.185,-0.413 0.414,-0.413ZM9.934,12.765L9.934,11.11L7.452,11.11v1.655c0,0.685 0.557,1.242 1.241,1.242 0.685,0 1.241,-0.557 1.241,-1.242Z"
+      android:fillColor="#FF4B55"
+      android:fillType="evenOdd"/>
+  <path
+      android:pathData="M9.934,11.11v1.655c0,0.684 -0.557,1.241 -1.241,1.241a1.243,1.243 0,0 1,-1.242 -1.241V11.11h2.483Z"
+      android:fillColor="#F5F5F5"/>
+  <path
+      android:pathData="M7.035,10.696m-0.207,0a0.207,0.207 0,1 1,0.414 0a0.207,0.207 0,1 1,-0.414 0"
+      android:fillColor="#FFE15A"/>
+  <path
+      android:pathData="M10.345,10.696m-0.207,0a0.207,0.207 0,1 1,0.414 0a0.207,0.207 0,1 1,-0.414 0"
+      android:fillColor="#FFE15A"/>
+  <path
+      android:pathData="M7.035,12.351m-0.207,0a0.207,0.207 0,1 1,0.414 0a0.207,0.207 0,1 1,-0.414 0"
+      android:fillColor="#FFE15A"/>
+  <path
+      android:pathData="M10.345,12.351m-0.207,0a0.207,0.207 0,1 1,0.414 0a0.207,0.207 0,1 1,-0.414 0"
+      android:fillColor="#FFE15A"/>
+  <path
+      android:pathData="M8.69,10.696m-0.207,0a0.207,0.207 0,1 1,0.414 0a0.207,0.207 0,1 1,-0.414 0"
+      android:fillColor="#FFE15A"/>
+  <path
+      android:pathData="M9.932,13.877m-0.207,0a0.207,0.207 0,1 1,0.414 0a0.207,0.207 0,1 1,-0.414 0"
+      android:fillColor="#FFE15A"/>
+  <path
+      android:pathData="M7.472,13.877m-0.207,0a0.207,0.207 0,1 1,0.414 0a0.207,0.207 0,1 1,-0.414 0"
+      android:fillColor="#FFE15A"/>
+  <path
+      android:pathData="M8.96,12.246v0.357a0.268,0.268 0,0 1,-0.534 0v-0.357h0.534ZM8.96,11.402v0.356a0.268,0.268 0,0 1,-0.534 0v-0.356h0.534ZM8.96,13.1v0.356a0.268,0.268 0,0 1,-0.534 0L8.426,13.1h0.534ZM9.68,12.246v0.357a0.268,0.268 0,0 1,-0.535 0v-0.357h0.535ZM8.24,12.246v0.357a0.268,0.268 0,0 1,-0.534 0v-0.357h0.534Z"
+      android:fillColor="#41479B"/>
+</vector>
