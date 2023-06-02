@@ -41,7 +41,7 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.LikeOutline
-import com.adevinta.spark.icons.MegaphoneOutline
+import com.adevinta.spark.icons.MessageOutline
 import com.adevinta.spark.icons.Search
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
@@ -170,7 +170,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcons.MegaphoneOutline,
+                        SparkIcons.MessageOutline,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Notifications",
                     )
@@ -219,7 +219,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcons.MegaphoneOutline,
+                        SparkIcons.MessageOutline,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Notifications",
                     )

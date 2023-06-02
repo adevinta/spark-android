@@ -302,8 +302,8 @@ public sealed class SparkIcon {
         public object Message {
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.MessageFill", "com.adevinta.spark.icons"))
             public val Default: SparkIcon = SparkIcons.MessageFill
-        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.MegaphoneOutline", "com.adevinta.spark.icons"))
-            public val Outlined: SparkIcon = SparkIcons.MegaphoneOutline
+        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.MessageOutline", "com.adevinta.spark.icons"))
+            public val Outlined: SparkIcon = SparkIcons.MessageOutline
         }
 
         @Deprecated("Use SparkIcons instead.")
