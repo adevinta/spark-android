@@ -91,9 +91,11 @@ class SparkIcons : CliktCommand(
             copyright?.takeIf { it.isRegularFile() }?.readText()?.let(it::write)
             it.write(
                 """
-                @file:Suppress("UnusedReceiverParameter")
+                @file:Suppress("UnusedReceiverParameter", "unused")
 
                 package com.adevinta.spark.icons
+
+                import com.adevinta.spark.icons.SparkIcon.DrawableRes
 
                 public object SparkIcons
 
@@ -105,7 +107,7 @@ class SparkIcons : CliktCommand(
                 .sorted()
                 .map { it.nameWithoutExtension.removePrefix("spark_icons_").toPascalCase() to it.nameWithoutExtension }
                 .forEach { (name, resource) ->
-                    it.write("""public val SparkIcons.$name: SparkIcon get() = SparkIcon.DrawableRes(R.drawable.$resource)""")
+                    it.write("""public val SparkIcons.$name: DrawableRes get() = DrawableRes(R.drawable.$resource)""")
                     it.newLine()
                 }
         }
