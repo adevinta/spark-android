@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.icons
 
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

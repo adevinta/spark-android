@@ -60,7 +60,6 @@ import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.BicycleType
 import com.adevinta.spark.icons.Close
-import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.Layout
 import com.adevinta.spark.tokens.bodyWidth

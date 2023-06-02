@@ -40,10 +40,10 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.icons.AccountOutline
 import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.MessageOutline
 import com.adevinta.spark.icons.Search
-import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -192,7 +192,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcon.User.Outline,
+                        SparkIcons.AccountOutline,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Notifications",
                     )
@@ -247,7 +247,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcon.User.Outline,
+                        SparkIcons.AccountOutline,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Account",
                     )

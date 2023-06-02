@@ -39,7 +39,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WheelFill
 import com.adevinta.spark.icons.WheelOutline

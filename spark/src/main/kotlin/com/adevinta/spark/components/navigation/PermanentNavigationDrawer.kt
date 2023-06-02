@@ -42,7 +42,6 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.Activity
 import com.adevinta.spark.icons.IdentityOutline
-import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Store
 import com.adevinta.spark.tools.preview.ThemeProvider

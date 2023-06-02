@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.R
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.ArrowLeft
-import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 

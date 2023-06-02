@@ -45,7 +45,6 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.BurgerMenu
 import com.adevinta.spark.icons.CameraFill
-import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
