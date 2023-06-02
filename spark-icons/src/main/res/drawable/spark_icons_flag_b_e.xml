@@ -25,12 +25,12 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
   <path
-      android:pathData="M8.002,20.212H0.412A0.413,0.413 0,0 1,0 19.8V4.903c0,-0.23 0.188,-0.413 0.412,-0.413h7.585v15.722h0.005Z"
+      android:pathData="M8,20.21H0.41A0.41,0.41 0,0 1,0 19.8V4.9c0,-0.23 0.19,-0.41 0.41,-0.41H8v15.72Z"
       android:fillColor="#4E6579"/>
   <path
-      android:pathData="M8.002,4.49h8.002v15.722H8.002z"
+      android:pathData="M8,4.49h8v15.72H8z"
       android:fillColor="#FAE042"/>
   <path
-      android:pathData="M23.587,20.212h-7.589V4.49h7.585c0.23,0 0.412,0.188 0.412,0.413V19.8a0.406,0.406 0,0 1,-0.408 0.412Z"
+      android:pathData="M23.59,20.21h-7.6V4.5h7.6c0.22,0 0.4,0.19 0.4,0.41v14.9a0.4,0.4 0,0 1,-0.4 0.41Z"
       android:fillColor="#ED2939"/>
 </vector>
