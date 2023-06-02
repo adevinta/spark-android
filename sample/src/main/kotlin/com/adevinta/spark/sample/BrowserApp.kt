@@ -60,9 +60,10 @@ import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
-import com.adevinta.spark.components.bottomsheet.ModalBottomSheetLayout
-import com.adevinta.spark.components.bottomsheet.ModalBottomSheetValue
-import com.adevinta.spark.components.bottomsheet.rememberModalBottomSheetState
+import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
+import com.adevinta.spark.components.bottomsheet.scaffold.BottomSheetScaffold
+import com.adevinta.spark.components.bottomsheet.scaffold.rememberBottomSheetScaffoldState
+import com.adevinta.spark.components.bottomsheet.scaffold.rememberStandardBottomSheetState
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.scaffold.Scaffold
@@ -133,9 +134,11 @@ internal fun ShowkaseBrowserApp(
             val navController = rememberNavController()
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
             val coroutineScope = rememberCoroutineScope()
-            val sheetState = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
-            ModalBottomSheetLayout(
-                sheetState = sheetState,
+            val sheetState = rememberStandardBottomSheetState(Hidden)
+            val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
+
+            BottomSheetScaffold(
+                scaffoldState = scaffoldState,
                 sheetContent = {
                     ThemePicker(
                         theme = theme,
@@ -146,9 +149,6 @@ internal fun ShowkaseBrowserApp(
                         },
                     )
                 },
-                // Default scrim color is onSurface which is incorrect in dark theme
-                // https://issuetracker.google.com/issues/183697056
-                scrimColor = SheetScrimColor,
             ) {
                 Scaffold(
                     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

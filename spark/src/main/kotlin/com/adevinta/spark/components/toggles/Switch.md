@@ -43,7 +43,7 @@ public fun Switch(
 | `modifier: Modifier = Modifier`                                                         | Modifier to be applied to the switch layout                                                                                                                                                                                                                                                             |
 | `enabled: Boolean = true`                                                               | whether the component is enabled or grayed out                                                                                                                                                                                                                                                          |
 | `icons: SwitchIcons? = null,`                                                           | represents the pair of icons to use for check/unchecked states, you can use [SwitchDefaults.icons](SwitchDefaults.kt) if you want to use the default ones.                                                                                                                                              |
-| `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the `MutableInteractionSource` representing the stream of `Interaction`s for this RadioButton. You can create and pass in your own remembered `MutableInteractionSource` if you want to observe `Interaction`s and customize the appearance / behavior of this RadioButton in different `Interaction`s. |
+| `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the `MutableInteractionSource` representing the stream of `Interaction`s for this RadioButton. You can create and pass in your own remembered [MutableInteractionSource] if you want to observe [Interaction]s and customize the appearance / behavior of this RadioButton in different [Interaction]s. |
 
 
 ### SwitchLabelled
@@ -54,7 +54,7 @@ public fun Switch(
 | Pro  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_pro_light.png)  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_pro_dark.png)  |
 
 The minimal usage of the component is a standalone checkbox but you can add a label
-using `SwitchLabelled`.
+using [SwitchLabelled](Switch.kt).
 Please refer to design specs to find what content is accepted.
 
 - An icon can be added on the left or right of label.
@@ -91,7 +91,7 @@ public fun SwitchLabelled(
 | `modifier: Modifier = Modifier`                                                         | Modifier to be applied to the switch layout                                                                                                                                                                                                                                                             |
 | `enabled: Boolean = true`                                                               | whether the component is enabled or grayed out                                                                                                                                                                                                                                                          |
 | `icons: SwitchIcons? = null,`                                                           | represents the pair of icons to use for check/unchecked states, you can use [SwitchDefaults.icons](SwitchDefaults.kt) if you want to use the default ones.                                                                                                                                              |
-| `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the `MutableInteractionSource` representing the stream of `Interaction`s for this RadioButton. You can create and pass in your own remembered `MutableInteractionSource` if you want to observe `Interaction`s and customize the appearance / behavior of this RadioButton in different `Interaction`s. |
+| `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the `MutableInteractionSource` representing the stream of `Interaction`s for this RadioButton. You can create and pass in your own remembered [MutableInteractionSource] if you want to observe [Interaction]s and customize the appearance / behavior of this RadioButton in different [Interaction]s. |
 | `content: @Composable RowScope.() -> Unit`                                              | The content displayed before the switch, usually a Text composable shown at the start                                                                                                                                                                                                                   |
 
 ## Layout

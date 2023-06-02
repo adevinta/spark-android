@@ -35,11 +35,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -62,11 +60,9 @@ import androidx.compose.ui.semantics.dismiss
 import androidx.compose.ui.semantics.expand
 import androidx.compose.ui.semantics.onClick
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.bottomsheet.ModalBottomSheetValue.Expanded
 import com.adevinta.spark.components.bottomsheet.ModalBottomSheetValue.HalfExpanded
@@ -143,7 +139,8 @@ public class ModalBottomSheetState(
     init {
         if (isSkipHalfExpanded) {
             require(initialValue != HalfExpanded) {
-                "The initial value must not be set to HalfExpanded if skipHalfExpanded is set to true."
+                "The initial value must not be set to HalfExpanded if skipHalfExpanded is set to" +
+                    " true."
             }
         }
     }
@@ -307,11 +304,18 @@ public fun rememberModalBottomSheetState(
  */
 @Composable
 @ExperimentalMaterial3Api
+@Deprecated(
+    message = "Use one of the options: ModalBottomSheet, BottomSheetScaffold",
+    level = DeprecationLevel.WARNING,
+)
 public fun ModalBottomSheetLayout(
     sheetContent: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
     sheetState: ModalBottomSheetState = rememberModalBottomSheetState(Hidden),
-    sheetShape: Shape = SparkTheme.shapes.large.copy(bottomStart = CornerSize(0.dp), bottomEnd = CornerSize(0.dp)),
+    sheetShape: Shape = SparkTheme.shapes.large.copy(
+        bottomStart = CornerSize(0.dp),
+        bottomEnd = CornerSize(0.dp),
+    ),
     sheetElevation: Dp = ModalBottomSheetDefaults.Elevation,
     sheetBackgroundColor: Color = SparkTheme.colors.surface,
     sheetContentColor: Color = contentColorFor(sheetBackgroundColor),
@@ -480,21 +484,4 @@ public object ModalBottomSheetDefaults {
     public val scrimColor: Color
         @Composable
         get() = SparkTheme.colors.onSurface.copy(alpha = 0.32f)
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
-@Composable
-private fun BottomSheetPreview() {
-    PreviewTheme {
-        ModalBottomSheetLayout(
-            sheetContent = {
-                Text("Sheet Content")
-            },
-            modifier = Modifier.size(height = 200.dp, width = 100.dp),
-            rememberModalBottomSheetState(HalfExpanded),
-        ) {
-            Text("Screen Content")
-        }
-    }
 }

@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.CheckFill
@@ -70,7 +71,7 @@ public fun Icon(
     sparkIcon: SparkIcon,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
+    tint: Color = IconDefaults.color.color(),
     size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
@@ -79,7 +80,7 @@ public fun Icon(
         modifier = modifier
             .sparkUsageOverlay()
             .size(size.size),
-        tint = tint.color(),
+        tint = tint,
     )
 }
 
@@ -102,7 +103,7 @@ public fun Icon(
     imageVector: ImageVector,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
+    tint: Color = IconDefaults.color.color(),
     iconSize: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
@@ -111,7 +112,7 @@ public fun Icon(
         modifier = modifier
             .sparkUsageOverlay()
             .size(iconSize.size),
-        tint = tint.color(),
+        tint = tint,
     )
 }
 
@@ -134,7 +135,7 @@ public fun Icon(
     bitmap: ImageBitmap,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
+    tint: Color = IconDefaults.color.color(),
     iconSize: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
@@ -143,7 +144,7 @@ public fun Icon(
         modifier = modifier
             .sparkUsageOverlay()
             .size(iconSize.size),
-        tint = tint.color(),
+        tint = tint,
     )
 }
 
@@ -166,7 +167,7 @@ public fun Icon(
     painter: Painter,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
+    tint: Color = IconDefaults.color.color(),
     iconSize: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
@@ -175,7 +176,7 @@ public fun Icon(
         modifier = modifier
             .sparkUsageOverlay()
             .size(iconSize.size),
-        tint = tint.color(),
+        tint = tint,
     )
 }
 
@@ -192,8 +193,9 @@ public fun Icon(
  * @param tint tint to be applied to [sparkIcon]. If [Color.Unspecified] is provided, then no
  *  tint is applied
  */
+@InternalSparkApi
 @Composable
-internal fun Icon(
+public fun Icon(
     sparkIcon: SparkIcon,
     contentDescription: String?,
     modifier: Modifier = Modifier,
@@ -234,7 +236,7 @@ internal fun IconPreview(
                         ) {
                             Icon(
                                 sparkIcon = SparkIcons.CheckFill,
-                                tint = tints[index],
+                                tint = tints[index].color(),
                                 contentDescription = "Done",
                                 size = size,
                             )
