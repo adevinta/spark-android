@@ -91,7 +91,7 @@ class SparkIcons : CliktCommand(
             copyright?.takeIf { it.isRegularFile() }?.readText()?.let(it::write)
             it.write(
                 """
-                @file:Suppress("UnusedReceiverParameter", "unused")
+                @file:Suppress("UnusedReceiverParameter", "unused", "ktlint")
 
                 package com.adevinta.spark.icons
 

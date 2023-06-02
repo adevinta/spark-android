@@ -19,8 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-@file:Suppress("UnusedReceiverParameter", "unused")
+@file:Suppress("UnusedReceiverParameter", "unused", "ktlint")
 
 package com.adevinta.spark.icons
 
