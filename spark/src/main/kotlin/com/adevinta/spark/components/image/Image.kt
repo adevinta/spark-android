@@ -74,7 +74,7 @@ internal fun SparkImage(
     transform: (AsyncImagePainter.State) -> AsyncImagePainter.State = AsyncImagePainter.DefaultTransform,
     onState: ((State) -> Unit)? = null,
     emptyIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.NoPhoto) },
-    errorIcon: @Composable () -> Unit = { ImageIconState(SparkIcon.Images.ErrorPhoto) },
+    errorIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.NoPhoto) }, // FIXME
     loadingPlaceholder: @Composable () -> Unit = ImageDefaults.placeholder,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
