@@ -360,8 +360,6 @@ public sealed class SparkIcon {
 
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Mileage", "com.adevinta.spark.icons"))
             public val Kilometrage: SparkIcon = SparkIcons.Mileage
-        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Marque", "com.adevinta.spark.icons"))
-            public val Marque: SparkIcon = SparkIcons.Marque
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Moto", "com.adevinta.spark.icons"))
             public val Moto: SparkIcon = SparkIcons.Moto
 
