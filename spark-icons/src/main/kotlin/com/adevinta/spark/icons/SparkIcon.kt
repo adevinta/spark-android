@@ -957,8 +957,8 @@ public sealed class SparkIcon {
     public object Pro {
         @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.ProCursorOutline", "com.adevinta.spark.icons"))
         public val Actions: SparkIcon = SparkIcons.ProCursorOutline
-        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.Apparitions", "com.adevinta.spark.icons"))
-        public val Apparitions: SparkIcon = SparkIcons.Apparitions
+        @Deprecated(message = "Use SparkIcons instead.", replaceWith = ReplaceWith("SparkIcons.AppearanceFill", "com.adevinta.spark.icons"))
+        public val Apparitions: SparkIcon = SparkIcons.AppearanceFill
 
         @Deprecated("Use SparkIcons instead.")
         public object Download {
