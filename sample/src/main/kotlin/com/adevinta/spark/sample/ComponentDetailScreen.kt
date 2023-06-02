@@ -62,7 +62,9 @@ import androidx.navigation.NavHostController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.ArrowHorizontalDown
+import com.adevinta.spark.icons.ArrowHorizontalUp
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.Layout
 import com.airbnb.android.showkase.R
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
@@ -148,9 +150,9 @@ private fun DocumentationPanel(kDoc: String) {
 
 @Composable
 private fun getCollabsableTextAndIcon(showDocumentation: Boolean) = if (showDocumentation) {
-    stringResource(R.string.showkase_browser_hide_documentation) to SparkIcon.Arrows.Chevron.Up
+    stringResource(R.string.showkase_browser_hide_documentation) to SparkIcons.ArrowHorizontalUp
 } else {
-    stringResource(R.string.showkase_browser_show_documentation) to SparkIcon.Arrows.Chevron.Down
+    stringResource(R.string.showkase_browser_show_documentation) to SparkIcons.ArrowHorizontalDown
 }
 
 internal fun Modifier.generateComposableModifier(metadata: ShowkaseBrowserComponent) = composed {

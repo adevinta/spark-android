@@ -55,7 +55,10 @@ import com.adevinta.spark.components.icons.rememberSparkIconPainter
 import com.adevinta.spark.components.placeholder.illustrationPlaceholder
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.NoPhoto
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.Tattoo
 import com.adevinta.spark.tokens.EmphasizeDim2
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -70,7 +73,7 @@ internal fun SparkImage(
     // Useful to preview different states
     transform: (AsyncImagePainter.State) -> AsyncImagePainter.State = AsyncImagePainter.DefaultTransform,
     onState: ((State) -> Unit)? = null,
-    emptyIcon: @Composable () -> Unit = { ImageIconState(SparkIcon.Images.NoPhoto) },
+    emptyIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.NoPhoto) },
     errorIcon: @Composable () -> Unit = { ImageIconState(SparkIcon.Images.ErrorPhoto) },
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
@@ -230,9 +233,9 @@ internal fun ImagePreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(themeVariant = theme) {
-        val painter = rememberSparkIconPainter(sparkIcon = SparkIcon.Criterias.Animaux.Tatouage)
+        val painter = rememberSparkIconPainter(sparkIcon = SparkIcons.Tattoo)
         val drawable =
-            AppCompatResources.getDrawable(LocalContext.current, SparkIcon.Criterias.Animaux.Tatouage.drawableId)!!
+            AppCompatResources.getDrawable(LocalContext.current, SparkIcons.Tattoo.drawableId)!!
         val imageRequest = ImageRequest.Builder(LocalContext.current).data(Unit).build()
 
         Text("Empty")

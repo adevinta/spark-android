@@ -40,6 +40,9 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.WheelFill
+import com.adevinta.spark.icons.WheelOutline
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -326,8 +329,8 @@ internal fun IconToggleButtonPreview(
 
 @Composable
 private fun ToggledIcon(checked: Boolean) {
-    val icon = SparkIcon.Actions.Wheel.Outlined
-    val selectedIcon = SparkIcon.Actions.Wheel.Default
+    val icon = SparkIcons.WheelOutline
+    val selectedIcon = SparkIcons.WheelFill
     val contentDescription = "Localized description"
     if (checked) {
         Icon(selectedIcon, contentDescription = contentDescription)

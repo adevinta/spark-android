@@ -55,7 +55,9 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.SparkButtonTags.TAG_PROGRESS_INDICATOR
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi
@@ -241,14 +243,13 @@ private fun SparkButtonPreview() {
     PreviewTheme(
         color = { SparkTheme.colors.backgroundVariant },
     ) {
-        val icon = SparkIcon.Account.Identity
         ButtonSize.values().forEach { size ->
             SparkButton(
                 text = "Button",
                 onClick = { },
                 colors = ButtonDefaults.buttonColors(),
                 size = size,
-                icon = icon,
+                icon = SparkIcons.IdentityOutline,
                 iconSide = IconSide.END,
             )
         }

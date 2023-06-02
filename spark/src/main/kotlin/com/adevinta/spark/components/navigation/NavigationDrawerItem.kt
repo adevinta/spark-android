@@ -46,7 +46,11 @@ import com.adevinta.spark.components.badge.Badge
 import com.adevinta.spark.components.badge.BadgeStyle
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.AccountFill
+import com.adevinta.spark.icons.House
+import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.NavigationDrawerItem as MaterialNavigationDrawerItem
@@ -163,9 +167,9 @@ internal fun NavigationDrawerItemPreview(
 ) {
     PreviewTheme(theme) {
         val items = mutableListOf(
-            Pair("Home", SparkIcon.Account.House),
-            Pair("Favourite", SparkIcon.Actions.Favorite.Outlined),
-            Pair("Account", SparkIcon.User.Default),
+            Pair("Home", SparkIcons.House),
+            Pair("Favourite", SparkIcons.LikeOutline),
+            Pair("Account", SparkIcons.AccountFill),
         )
         items.forEachIndexed { index, tab ->
             NavigationDrawerItem(

@@ -45,7 +45,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.icons.PenOutline
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
@@ -366,7 +368,7 @@ internal fun DropdownMenuPreview(
 
         LargeFloatingActionButton(
             onClick = { /* do something */ },
-            icon = SparkIcon.Actions.Pen.Outlined,
+            icon = SparkIcons.PenOutline,
             contentDescription = "Localized description",
         )
 
@@ -374,7 +376,7 @@ internal fun DropdownMenuPreview(
 
         FloatingActionButton(
             onClick = { /* do something */ },
-            icon = SparkIcon.Actions.Pen.Outlined,
+            icon = SparkIcons.PenOutline,
             contentDescription = "Localized description",
         )
 
@@ -382,7 +384,7 @@ internal fun DropdownMenuPreview(
 
         SmallFloatingActionButton(
             onClick = { /* do something */ },
-            icon = SparkIcon.Actions.Pen.Outlined,
+            icon = SparkIcons.PenOutline,
             contentDescription = "Localized description",
         )
 
@@ -397,7 +399,7 @@ internal fun DropdownMenuPreview(
         }
 
         ExtendedFloatingActionButton(
-            icon = SparkIcon.Actions.Pen.Outlined,
+            icon = SparkIcons.PenOutline,
             text = { Text(text = "Extended FAB") },
             onClick = { expandedFab = !expandedFab },
             expanded = expandedFab,

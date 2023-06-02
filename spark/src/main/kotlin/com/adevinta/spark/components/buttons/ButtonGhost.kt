@@ -41,7 +41,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.LocalHighlightToken
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.icons.IdentityOutline
+import com.adevinta.spark.icons.Link
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -239,7 +242,7 @@ internal fun ButtonGhostPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        val icon = SparkIcon.Share.Link
+        val icon = SparkIcons.Link
         var isLoading by remember { mutableStateOf(false) }
         val buttonText = "Primary Button"
         ButtonGhost(
@@ -280,7 +283,7 @@ internal fun ButtonGhostIntentPreview(
         themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
-        val icon = SparkIcon.Account.Identity
+        val icon = SparkIcons.IdentityOutline
         ButtonIntent.values().forEach { intent ->
             ButtonGhost(
                 text = intent.name,

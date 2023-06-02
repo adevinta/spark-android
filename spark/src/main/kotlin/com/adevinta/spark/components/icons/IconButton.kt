@@ -40,6 +40,8 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.WheelOutline
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
@@ -274,7 +276,7 @@ internal fun IconButtonPreview(
 ) {
     val (theme, userType) = param
     PreviewTheme(theme, userType) {
-        val icon = SparkIcon.Actions.Wheel.Outlined
+        val icon = SparkIcons.WheelOutline
         val contentDescription = "Localized description"
 
         Text("IconButton")

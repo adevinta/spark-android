@@ -49,7 +49,9 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.tags.TagDefaults
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.OfferOutline
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.dashedBorder
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
@@ -237,16 +239,16 @@ internal fun ChipPreview(
     PreviewTheme(theme, userType) {
         val intent = ChipIntent.Primary
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ChipOutlined("outlined", intent, leadingIcon = SparkIcon.Account.Offers.Outlined)
-            ChipFilled("filled", intent, leadingIcon = SparkIcon.Account.Offers.Outlined)
-            ChipTinted("tinted", intent, leadingIcon = SparkIcon.Account.Offers.Outlined)
-            ChipDashed("dashed", intent, leadingIcon = SparkIcon.Account.Offers.Outlined)
+            ChipOutlined("outlined", intent, leadingIcon = SparkIcons.OfferOutline)
+            ChipFilled("filled", intent, leadingIcon = SparkIcons.OfferOutline)
+            ChipTinted("tinted", intent, leadingIcon = SparkIcons.OfferOutline)
+            ChipDashed("dashed", intent, leadingIcon = SparkIcons.OfferOutline)
         }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ChipOutlined("outlined", intent, leadingIcon = SparkIcon.Account.Offers.Outlined, enabled = false)
-            ChipFilled("filled", intent, leadingIcon = SparkIcon.Account.Offers.Outlined, enabled = false)
-            ChipTinted("tinted", intent, leadingIcon = SparkIcon.Account.Offers.Outlined, enabled = false)
-            ChipDashed("dashed", intent, leadingIcon = SparkIcon.Account.Offers.Outlined, enabled = false)
+            ChipOutlined("outlined", intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
+            ChipFilled("filled", intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
+            ChipTinted("tinted", intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
+            ChipDashed("dashed", intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
         }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             ChipOutlined("outlined", intent)

@@ -35,7 +35,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.icons.CameraFill
+import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -221,7 +224,7 @@ internal fun ButtonOutlinedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        val icon = SparkIcon.Infos.Camera
+        val icon = SparkIcons.CameraFill
         val buttonText = "Secondary Button"
         ButtonOutlined(
             onClick = {},
@@ -254,7 +257,7 @@ internal fun ButtonOutlinedIntentPreview(
         themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
-        val icon = SparkIcon.Account.Identity
+        val icon = SparkIcons.IdentityOutline
         ButtonIntent.values().forEach { intent ->
             ButtonOutlined(
                 text = intent.name,

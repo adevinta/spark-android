@@ -40,7 +40,11 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.icons.LikeOutline
+import com.adevinta.spark.icons.MegaphoneOutline
+import com.adevinta.spark.icons.Search
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -155,7 +159,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcon.Actions.Favorite.Outlined,
+                        SparkIcons.LikeOutline,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Favorite",
                     )
@@ -166,7 +170,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcon.Contact.Message.Outlined,
+                        SparkIcons.MegaphoneOutline,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Notifications",
                     )
@@ -177,7 +181,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcon.Actions.Search,
+                        SparkIcons.Search,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Search",
                     )
@@ -204,7 +208,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcon.Actions.Favorite.Outlined,
+                        SparkIcons.LikeOutline,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Favorite",
                     )
@@ -215,7 +219,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcon.Contact.Message.Outlined,
+                        SparkIcons.MegaphoneOutline,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Notifications",
                     )
@@ -232,7 +236,7 @@ internal fun BadgedBoxPreview(
                     },
                 ) {
                     Icon(
-                        SparkIcon.Actions.Search,
+                        SparkIcons.Search,
                         modifier = Modifier.size(24.dp),
                         contentDescription = "Search",
                     )

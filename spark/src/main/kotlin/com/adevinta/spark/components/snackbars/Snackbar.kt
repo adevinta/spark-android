@@ -47,7 +47,9 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.BaseSparkButton
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.icons.FlashlightFill
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.modifiers.SlotArea
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
@@ -222,7 +224,7 @@ private fun SnackbarPreview() {
                 SlotArea(
                     color = LocalContentColor.current,
                 ) {
-                    Icon(SparkIcon.Options.Flash, contentDescription = null, modifier = iconModifier)
+                    Icon(SparkIcons.FlashlightFill, contentDescription = null, modifier = iconModifier)
                 }
             },
             actionLabel = StubAction,
@@ -274,7 +276,7 @@ private fun BodyIconActionSnackbarPreview() {
         Snackbar(
             colors = SnackbarColors.Default,
             icon = { iconModifier ->
-                Icon(SparkIcon.Options.Flash, contentDescription = null, modifier = iconModifier)
+                Icon(SparkIcons.FlashlightFill, contentDescription = null, modifier = iconModifier)
             },
             actionLabel = StubAction,
         ) {
@@ -290,7 +292,7 @@ private fun BodyIconSnackbarPreview() {
         Snackbar(
             colors = SnackbarColors.Default,
             icon = { iconModifier ->
-                Icon(SparkIcon.Options.Flash, contentDescription = null, modifier = iconModifier)
+                Icon(SparkIcons.FlashlightFill, contentDescription = null, modifier = iconModifier)
             },
         ) {
             Text(StubBodyShort)
@@ -306,7 +308,7 @@ private fun BodyIconActionNewLineSnackbarPreview() {
             colors = SnackbarColors.Default,
             actionOnNewLine = true,
             icon = { iconModifier ->
-                Icon(SparkIcon.Options.Flash, contentDescription = null, modifier = iconModifier)
+                Icon(SparkIcons.FlashlightFill, contentDescription = null, modifier = iconModifier)
             },
             actionLabel = StubAction,
         ) {
@@ -322,7 +324,7 @@ private fun BodyTitleSnackbarPreview() {
         Snackbar(
             colors = SnackbarColors.Default,
             icon = { iconModifier ->
-                Icon(SparkIcon.Options.Flash, contentDescription = null, modifier = iconModifier)
+                Icon(SparkIcons.FlashlightFill, contentDescription = null, modifier = iconModifier)
             },
             title = StubTitle,
         ) {
@@ -338,7 +340,7 @@ private fun BodyLongTitleSnackbarPreview() {
         Snackbar(
             colors = SnackbarColors.Default,
             icon = { iconModifier ->
-                Icon(SparkIcon.Options.Flash, contentDescription = null, modifier = iconModifier)
+                Icon(SparkIcons.FlashlightFill, contentDescription = null, modifier = iconModifier)
             },
             title = StubTitle,
         ) {
@@ -355,7 +357,7 @@ private fun BodyTitleActionSnackbarPreview() {
             colors = SnackbarColors.Default,
             actionOnNewLine = true,
             icon = { iconModifier ->
-                Icon(SparkIcon.Options.Flash, contentDescription = null, modifier = iconModifier)
+                Icon(SparkIcons.FlashlightFill, contentDescription = null, modifier = iconModifier)
             },
             title = StubTitle,
             actionLabel = StubAction,
