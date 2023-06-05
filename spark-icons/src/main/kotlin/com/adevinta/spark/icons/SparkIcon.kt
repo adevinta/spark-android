@@ -338,9 +338,9 @@ public sealed class SparkIcon {
 
             @Deprecated(
                 message = "Use SparkIcons instead.",
-                replaceWith = ReplaceWith("SparkIcons.Close", "com.adevinta.spark.icons"),
+                replaceWith = ReplaceWith("SparkIcons.TrashCloseFill", "com.adevinta.spark.icons"),
             )
-            public val Close: SparkIcon = SparkIcons.Close
+            public val Close: SparkIcon = SparkIcons.TrashCloseFill
         }
 
         @Deprecated("Use SparkIcons instead.")
@@ -2376,9 +2376,9 @@ public sealed class SparkIcon {
 
         @Deprecated(
             message = "Use SparkIcons instead.",
-            replaceWith = ReplaceWith("SparkIcons.ProfileFill", "com.adevinta.spark.icons"),
+            replaceWith = ReplaceWith("SparkIcons.AvatarFill", "com.adevinta.spark.icons"),
         )
-        public val Avatar: SparkIcon = SparkIcons.ProfileFill
+        public val Avatar: SparkIcon = SparkIcons.AvatarFill
 
         @Deprecated(
             message = "Use SparkIcons instead.",
@@ -2391,9 +2391,9 @@ public sealed class SparkIcon {
     public object Value {
         @Deprecated(
             message = "Use SparkIcons instead.",
-            replaceWith = ReplaceWith("SparkIcons.Minus", "com.adevinta.spark.icons"),
+            replaceWith = ReplaceWith("SparkIcons.RemoveOutline", "com.adevinta.spark.icons"),
         )
-        public val Minus: SparkIcon = SparkIcons.Minus
+        public val Minus: SparkIcon = SparkIcons.RemoveOutline
 
         @Deprecated("Use SparkIcons instead.")
         public object More {
