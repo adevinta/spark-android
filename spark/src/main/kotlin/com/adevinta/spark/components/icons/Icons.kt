@@ -38,7 +38,6 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.IconDrawableRes
@@ -175,35 +174,6 @@ public fun Icon(
         modifier = modifier
             .sparkUsageOverlay()
             .size(size.size),
-        tint = tint,
-    )
-}
-
-/**
- * Icon component that draws [sparkIcon] using [tint], defaulting to [LocalContentColor].
- * An internal function used for other Spark components internally.
- *
- * @param sparkIcon [SparkIcon] to draw inside this Icon
- * @param contentDescription text used by accessibility services to describe what this icon
- * represents. This should always be provided unless this icon is used for decorative purposes,
- * and does not represent a meaningful action that a user can take. This text should be
- * localized, such as by using [androidx.compose.ui.res.stringResource] or similar
- * @param modifier optional [Modifier] for this Icon
- * @param tint tint to be applied to [sparkIcon]. If [Color.Unspecified] is provided, then no
- *  tint is applied
- */
-@InternalSparkApi
-@Composable
-internal fun Icon(
-    sparkIcon: SparkIcon,
-    contentDescription: String?,
-    modifier: Modifier = Modifier,
-    tint: Color = LocalContentColor.current,
-) {
-    MaterialIcon(
-        painter = rememberSparkIconPainter(sparkIcon),
-        contentDescription = contentDescription,
-        modifier = modifier.sparkUsageOverlay(),
         tint = tint,
     )
 }
