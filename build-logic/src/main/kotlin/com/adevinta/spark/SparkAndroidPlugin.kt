@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark
 
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -34,15 +33,10 @@ public class SparkAndroidPlugin : Plugin<Project> {
             apply(plugin = "org.jetbrains.kotlin.android")
 
             configureKotlin<KotlinAndroidProjectExtension>()
-            configureKotlinCompiler()
 
-            configureAndroidExtension {
+            configureAndroid {
                 compileSdk = spark().versions.compileSdk.toString().toInt()
                 defaultConfig.minSdk = spark().versions.minCompileSdk.toString().toInt()
-                compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_17
-                    targetCompatibility = JavaVersion.VERSION_17
-                }
                 packaging {
                     resources {
                         excludes += "/META-INF/{AL2.0,LGPL2.1}"
