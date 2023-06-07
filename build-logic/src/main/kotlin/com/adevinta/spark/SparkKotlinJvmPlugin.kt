@@ -32,7 +32,6 @@ internal class SparkKotlinJvmPlugin : Plugin<Project> {
             apply(plugin = "org.jetbrains.kotlin.jvm")
 
             configureKotlin<KotlinJvmProjectExtension>()
-            configureKotlinCompiler()
 
             addKotlinBom()
             SparkUnitTests.configureSubproject(this)
