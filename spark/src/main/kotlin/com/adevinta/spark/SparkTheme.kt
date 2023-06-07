@@ -39,14 +39,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFontFamilyResolver
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.createFontFamilyResolver
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.tokens.LocalSparkColors
 import com.adevinta.spark.tokens.LocalSparkShapes
 import com.adevinta.spark.tokens.LocalSparkTypography
 import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkFontFamily
 import com.adevinta.spark.tokens.SparkShapes
 import com.adevinta.spark.tokens.SparkTypography
 import com.adevinta.spark.tokens.asMaterial3Colors
@@ -55,9 +59,11 @@ import com.adevinta.spark.tokens.asMaterial3Typography
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.debugColors
 import com.adevinta.spark.tokens.lightSparkColors
+import com.adevinta.spark.tokens.sparkFontFamily
 import com.adevinta.spark.tokens.sparkShapes
 import com.adevinta.spark.tokens.sparkTypography
 import com.adevinta.spark.tokens.updateColorsFrom
+import com.adevinta.spark.tokens.updateFontFamily
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
 
@@ -66,7 +72,8 @@ public fun SparkTheme(
     // We don't want to automatically support dark theme in the app but still want it in the previews
     colors: SparkColors = SparkTheme.colors,
     shapes: SparkShapes = SparkTheme.shapes,
-    typography: SparkTypography = SparkTheme.typography,
+    fontFamily: SparkFontFamily = sparkFontFamily(),
+    typography: SparkTypography = SparkTheme.typography.copy(),
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
     useLegacyStyle: Boolean = false,
@@ -92,13 +99,9 @@ public fun SparkTheme(
     } else {
         shapes
     }
-    val typo = if (useSparkTokensHighlighter) {
-        sparkTypography(
-            fontFamily = FontFamily.Cursive,
-        )
-    } else {
-        typography
-    }
+
+    val typo = typography.updateFontFamily(fontFamily = fontFamily)
+
     CompositionLocalProvider(
         LocalSparkColors provides rememberedColors,
         LocalSparkTypography provides typo,
@@ -106,6 +109,7 @@ public fun SparkTheme(
         LocalHighlightToken provides useSparkTokensHighlighter,
         LocalHighlightComponents provides useSparkComponentsHighlighter,
         LocalLegacyStyle provides useLegacyStyle,
+        LocalFontFamilyResolver provides createFontFamilyResolver(LocalContext.current, fontFamily.fontHandler),
     ) {
         MaterialTheme(
             colorScheme = rememberedColors.asMaterial3Colors(),

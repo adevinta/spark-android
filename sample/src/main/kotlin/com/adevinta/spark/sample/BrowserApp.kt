@@ -60,6 +60,7 @@ import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
+import com.adevinta.spark.components.bottomsheet.SheetValue
 import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
 import com.adevinta.spark.components.bottomsheet.scaffold.BottomSheetScaffold
 import com.adevinta.spark.components.bottomsheet.scaffold.rememberBottomSheetScaffoldState
@@ -132,7 +133,7 @@ internal fun ShowkaseBrowserApp(
             val navController = rememberNavController()
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
             val coroutineScope = rememberCoroutineScope()
-            val sheetState = rememberStandardBottomSheetState(Hidden)
+            val sheetState = rememberStandardBottomSheetState(SheetValue.PartiallyExpanded)
             val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
             BottomSheetScaffold(

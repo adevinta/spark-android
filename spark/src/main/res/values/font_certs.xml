@@ -21,26 +21,17 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
   -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <application
-        android:label="@string/app_name"
-        android:theme="@style/Theme.Catalog"
-        tools:ignore="MissingApplicationIcon">
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-    </application>
-
-</manifest>
+<resources>
+    <string-array name="spark_com_google_android_gms_fonts_certs_dev">
+        <item>
+        </item>
+    </string-array>
+    <string-array name="spark_com_google_android_gms_fonts_certs_prod">
+        <item>
+        </item>
+    </string-array>
+    <array name="spark_com_google_android_gms_fonts_certs">
+        <item>@array/spark_com_google_android_gms_fonts_certs_dev</item>
+        <item>@array/spark_com_google_android_gms_fonts_certs_prod</item>
+    </array>
+</resources>

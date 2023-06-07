@@ -198,7 +198,6 @@ private val buttonType = TextStyle(
 private val LeboncoinLegacyFontFamily = FontFamily.Default
 
 internal val LeboncoinLegacyTypo: SparkTypography = sparkTypography(
-    fontFamily = FontFamily.Default,
     display1 = display1Type.copy(fontFamily = LeboncoinLegacyFontFamily),
     display2 = display2Type.copy(fontFamily = LeboncoinLegacyFontFamily),
     display3 = tile1Type.copy(fontFamily = LeboncoinLegacyFontFamily),
@@ -213,7 +212,6 @@ internal val LeboncoinLegacyTypo: SparkTypography = sparkTypography(
 )
 
 internal val LeboncoinTypo: SparkTypography = sparkTypography(
-    fontFamily = FontFamily.Default,
     display1 = display1Type.copy(fontFamily = LeboncoinLegacyFontFamily),
     display2 = display2Type.copy(fontFamily = LeboncoinLegacyFontFamily),
     display3 = display3Type.copy(fontFamily = LeboncoinLegacyFontFamily),
@@ -242,7 +240,6 @@ public fun brandTypography(
     small: TextStyle = (if (isLegacy) extraSmallType else smallType).copy(fontFamily = fontFamily),
     callout: TextStyle = (if (isLegacy) buttonType else calloutType).copy(fontFamily = fontFamily),
 ): SparkTypography = sparkTypography(
-    fontFamily = fontFamily,
     display1 = display1,
     display2 = display2,
     display3 = display3,

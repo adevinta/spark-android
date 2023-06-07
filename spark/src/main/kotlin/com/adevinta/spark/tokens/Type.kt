@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -115,18 +116,17 @@ internal val calloutType = TextStyle(
 )
 
 public fun sparkTypography(
-    fontFamily: FontFamily = FontFamily.SansSerif,
-    display1: TextStyle = display1Type.copy(fontFamily = fontFamily),
-    display2: TextStyle = display2Type.copy(fontFamily = fontFamily),
-    display3: TextStyle = display3Type.copy(fontFamily = fontFamily),
-    headline1: TextStyle = headline1Type.copy(fontFamily = fontFamily),
-    headline2: TextStyle = headline2Type.copy(fontFamily = fontFamily),
-    subhead: TextStyle = subheadType.copy(fontFamily = fontFamily),
-    body1: TextStyle = body1Type.copy(fontFamily = fontFamily),
-    body2: TextStyle = body2Type.copy(fontFamily = fontFamily),
-    caption: TextStyle = captionType.copy(fontFamily = fontFamily),
-    small: TextStyle = smallType.copy(fontFamily = fontFamily),
-    callout: TextStyle = calloutType.copy(fontFamily = fontFamily),
+    display1: TextStyle = display1Type,
+    display2: TextStyle = display2Type,
+    display3: TextStyle = display3Type,
+    headline1: TextStyle = headline1Type,
+    headline2: TextStyle = headline2Type,
+    subhead: TextStyle = subheadType,
+    body1: TextStyle = body1Type,
+    body2: TextStyle = body2Type,
+    caption: TextStyle = captionType,
+    small: TextStyle = smallType,
+    callout: TextStyle = calloutType,
 ): SparkTypography = SparkTypography(
     display1 = display1,
     display2 = display2,
@@ -140,6 +140,26 @@ public fun sparkTypography(
     small = small,
     callout = callout,
 )
+
+/**
+ * Copy
+ */
+@Composable
+internal fun SparkTypography.updateFontFamily(fontFamily: SparkFontFamily): SparkTypography {
+    return copy(
+        display1 = display1.copy(fontFamily = fontFamily.default),
+        display2 = display2.copy(fontFamily = fontFamily.default),
+        display3 = display3.copy(fontFamily = fontFamily.default),
+        headline1 = headline1.copy(fontFamily = fontFamily.default),
+        headline2 = headline2.copy(fontFamily = fontFamily.default),
+        subhead = subhead.copy(fontFamily = fontFamily.default),
+        body1 = body1.copy(fontFamily = fontFamily.default),
+        body2 = body2.copy(fontFamily = fontFamily.default),
+        caption = caption.copy(fontFamily = fontFamily.default),
+        small = small.copy(fontFamily = fontFamily.default),
+        callout = callout.copy(fontFamily = fontFamily.default),
+    )
+}
 
 @Immutable
 public data class SparkTypography(
