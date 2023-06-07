@@ -30,7 +30,7 @@ It is also used to control binary options (On/Off or True/False).
 | Pro  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_pro_light.png)  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_pro_dark.png)  |
 
 The minimal usage of the component is a standalone checkbox but you can add a label
-using `SwitchLabelled`.
+using [SwitchLabelled](Switch.kt).
 Please refer to design specs to find what content is accepted.
 
 - An icon can be added on the left or right of label.
@@ -45,7 +45,7 @@ SwitchLabelled(
     }
 ) { Text(text = "Switch On") }
 ```
-z
+
 ## Layout
 - The Switch respects the minimum touch size.
 - Switch labels can be positioned at the Left or the Right, but usually the left position is more often used on small screens and mobile devices.

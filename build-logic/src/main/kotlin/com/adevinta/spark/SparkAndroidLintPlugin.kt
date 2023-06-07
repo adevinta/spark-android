@@ -34,7 +34,6 @@ internal class SparkAndroidLintPlugin : Plugin<Project> {
             apply(plugin = "com.android.lint")
 
             configureKotlin<KotlinJvmProjectExtension>()
-            configureKotlinCompiler()
 
             configure<Lint> {
                 warningsAsErrors = true
