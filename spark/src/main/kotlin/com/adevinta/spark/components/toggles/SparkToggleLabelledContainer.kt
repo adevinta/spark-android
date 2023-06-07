@@ -68,11 +68,9 @@ internal fun SparkToggleLabelledContainer(
     }
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
             .clip(SparkTheme.shapes.small)
             .then(toggleableModifier)
-            .padding(horizontal = 8.dp)
             .sparkUsageOverlay(),
     ) {
         val label = movableContentOf {

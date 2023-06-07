@@ -59,7 +59,7 @@ public sealed class SparkIcon {
             message = "Use SparkIcons instead.",
             replaceWith = ReplaceWith("SparkIcons.Close", "com.adevinta.spark.icons"),
         )
-        public val Close: SparkIcon = SparkIcons.Close
+        public val Close: SparkIcon = SparkIcons.DeleteFill
 
         @Deprecated("Use SparkIcons instead.")
         public object Cv {
