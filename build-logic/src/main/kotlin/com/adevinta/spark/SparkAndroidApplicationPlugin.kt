@@ -21,11 +21,9 @@
  */
 package com.adevinta.spark
 
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
 
 internal class SparkAndroidApplicationPlugin : Plugin<Project> {
@@ -34,7 +32,7 @@ internal class SparkAndroidApplicationPlugin : Plugin<Project> {
             apply(plugin = "com.android.application")
             apply(plugin = "com.adevinta.spark.android")
 
-            configure<BaseAppModuleExtension> {
+            androidApplication {
                 defaultConfig {
                     targetSdk = spark().versions.targetSdk.toString().toInt()
                 }

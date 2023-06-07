@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.adevinta.spark.R
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.icons.ArrowLeft
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
@@ -42,6 +43,7 @@ public fun UpNavigationIcon(
         onClick = onClick,
     ) {
         Icon(
+            size = IconSize.Small,
             sparkIcon = SparkIcons.ArrowLeft,
             contentDescription = contentDescription,
         )

@@ -25,14 +25,18 @@ plugins {
     `kotlin-dsl`
     alias(libs.plugins.spotless)
 }
-
-kotlin {
-    jvmToolchain(17)
-    explicitApi()
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 tasks.withType<KotlinCompile> {
     compilerOptions.allWarningsAsErrors.set(true)
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+}
+
+kotlin {
+    explicitApi()
 }
 
 repositories {
