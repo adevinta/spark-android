@@ -20,10 +20,10 @@ Most commonly chip contains an optional `leadingIcon` and the text.
 ### Styles
 
 The chip can have one of the [ChipStyles](ChipStyles.kt):
-- Outlined - using a solid border stroke and no background
-- Filled - using a solid color for the background
-- Tinted - using one of the "containers" colors
-- Dashed - using a dashed border and no background
+- [Outlined](ChipOutlined.kt) - using a solid border stroke and no background
+- [Filled](ChipFilled.kt) - using a solid color for the background
+- [Tinted](ChipTinted.kt) - using one of the "containers" colors
+- [Dashed](ChipDashed.kt) - using a dashed border and no background
 
 The color is set using one of the [ChipIntent](ChipIntent.kt)s:
 - Primary
@@ -34,12 +34,6 @@ The color is set using one of the [ChipIntent](ChipIntent.kt)s:
 - Info
 - Neutral
 - Surface
-
-Instead of manually passing [ChipStyles](ChipStyles.kt)`, you can use one of the following options:
-- [ChipOutlined](ChipOutlined.kt)
-- [ChipFilled](ChipFilled.kt)
-- [ChipDashed](ChipDashed.kt)
-- [ChipTinted](ChipTinted.kt)
 
 Part:
 | Style    | Light                                                                                                                                                                         | Dark                                                                                                                                                                         |

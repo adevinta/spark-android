@@ -15,7 +15,7 @@ Badges convey dynamic information, such as counts or status. A badge can include
 | Dark  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_dark.png)  |
 
 The default value of overflowCount is 99. When count is larger than 99, a `+` is displayed.
-A badge can be used as a part of `BadgedBox` or as a standalone when it is not attached visually to
+A badge can be used as a part of [`BadgedBox`](#layout) or as a standalone when it is not attached visually to
 a specific relative element.
 
 Badge content can contain:

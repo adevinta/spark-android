@@ -62,7 +62,7 @@ ButtonFilled(
 
 Outlined buttons are used for secondary actions. The outlined styling places less emphasis on these
 actions that are important but not the primary ones.
-It is recommended to pair it with a button wit more emphasis like the filled button or the tinted
+It is recommended to pair it with a button with more emphasis like the filled button or the tinted
 button.
 
 Be aware that it's not advised to use it on top of images since it will be hard to see.
@@ -85,7 +85,7 @@ default Buttons (filled) and Outlined buttons. They can be used in contexts wher
 button requires slightly more emphasis than an outline would give, such as "Next" in an onboarding
 flow.
 
-It's best paired with either a filled button or a outlined button.
+It's best paired with either a filled button or an outlined button.
 
 ```kotlin
 ButtonTinted(

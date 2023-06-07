@@ -3,7 +3,7 @@
 ## CheckBox design specs
 
 You can find the design specs
-on [zeroheight.com/25c15666f/](https://zeroheight.com/25c15666f/p/72b9ad-checkbox-/b/057def).
+on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/76f5a8-checkbox/b/98915d).
 
 ### CheckBox
 
