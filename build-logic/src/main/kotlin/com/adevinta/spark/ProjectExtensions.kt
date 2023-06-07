@@ -25,14 +25,16 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.api.dsl.TestExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompilerOptions
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -42,13 +44,35 @@ internal val Project.isAndroidTest: Boolean get() = pluginManager.hasPlugin("com
 internal val Project.isAndroid: Boolean get() = pluginManager.hasPlugin("com.android.base")
 internal val Project.isJavaPlatform: Boolean get() = pluginManager.hasPlugin("org.gradle.java-platform")
 
-internal fun Project.configureAndroidExtension(
+internal fun Project.android(
     configure: CommonExtension<*, *, *, *>.() -> Unit,
 ) = when {
-    isAndroidApplication -> configure<ApplicationExtension>(configure)
-    isAndroidLibrary -> configure<LibraryExtension>(configure)
-    isAndroidTest -> configure<TestExtension>(configure)
+    isAndroidApplication -> androidApplication(configure)
+    isAndroidLibrary -> androidLibrary(configure)
+    isAndroidTest -> androidTest(configure)
     else -> TODO("Unsupported project $this (isAndroid=$isAndroid)")
+}
+
+internal fun Project.androidApplication(
+    configure: ApplicationExtension.() -> Unit,
+) = configure<ApplicationExtension>(configure)
+
+internal fun Project.androidLibrary(
+    configure: LibraryExtension.() -> Unit,
+) = configure<LibraryExtension>(configure)
+
+internal fun Project.androidTest(
+    configure: TestExtension.() -> Unit,
+) = configure<TestExtension>(configure)
+
+internal fun Project.configureAndroid(
+    configure: CommonExtension<*, *, *, *>.() -> Unit,
+) = android {
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    configure()
 }
 
 internal fun Project.getVersionsCatalog(): VersionCatalog = runCatching {
@@ -57,23 +81,26 @@ internal fun Project.getVersionsCatalog(): VersionCatalog = runCatching {
     throw IllegalStateException("No versions catalog found!", it)
 }.getOrThrow()
 
-internal fun Project.configureKotlinCompiler(
+internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotlin(
     allWarningsAsErrors: Boolean = true,
-    configure: KotlinJvmCompilerOptions.() -> Unit = {},
-) = tasks.withType<KotlinCompile> {
-    compilerOptions {
-        this.allWarningsAsErrors.set(allWarningsAsErrors)
-        freeCompilerArgs.add("-Xexplicit-api=strict")
+    crossinline configure: T.() -> Unit = {},
+) {
+    configure<JavaPluginExtension> {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    configure<T> {
+        explicitApi()
         configure()
     }
-}
-
-internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotlin(
-    crossinline configure: T.() -> Unit = {},
-): Unit = configure<T> {
-    jvmToolchain(17)
-    explicitApi()
-    configure()
+    tasks.withType<KotlinCompile> {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+            // kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+            this.allWarningsAsErrors.set(allWarningsAsErrors)
+            freeCompilerArgs.add("-Xexplicit-api=strict")
+        }
+    }
 }
 
 internal fun <T> Project.getOrCreateExtra(
