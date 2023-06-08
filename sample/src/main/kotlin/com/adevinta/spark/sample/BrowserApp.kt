@@ -81,6 +81,7 @@ import com.adevinta.spark.sample.themes.UserMode
 import com.adevinta.spark.sample.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.sample.themes.themeprovider.leboncoin.LeBoncoinTheme
 import com.adevinta.spark.sample.themes.themeprovider.polaris.PolarisTheme
+import com.adevinta.spark.tokens.sparkFontFamily
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.airbnb.android.showkase.ui.SemanticsUtils.lineCountVal
 import com.airbnb.android.showkase.ui.ToolbarTitle
@@ -114,6 +115,7 @@ internal fun ShowkaseBrowserApp(
         colors = colors,
         shapes = shapes,
         typography = typography,
+        fontFamily = sparkFontFamily(isLegacy = isLegacy),
         useLegacyStyle = isLegacy,
     ) {
         val layoutDirection = when (theme.textDirection) {
