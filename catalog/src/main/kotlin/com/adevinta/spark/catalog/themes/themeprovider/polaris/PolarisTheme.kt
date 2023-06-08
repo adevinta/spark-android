@@ -19,11 +19,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.sample.themes.themeprovider.polaris
+package com.adevinta.spark.catalog.themes.themeprovider.polaris
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.sample.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkShapes
 import com.adevinta.spark.tokens.SparkTypography

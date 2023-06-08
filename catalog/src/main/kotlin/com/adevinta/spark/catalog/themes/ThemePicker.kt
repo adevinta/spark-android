@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.sample.themes
+package com.adevinta.spark.catalog.themes
 
 import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
@@ -53,7 +53,7 @@ import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.toggles.RadioButton
 import com.adevinta.spark.components.toggles.RadioButtonLabelled
 import com.adevinta.spark.components.toggles.SwitchLabelled
-import com.adevinta.spark.sample.R
+import com.adevinta.spark.catalog.R
 
 @Composable
 public fun ThemePicker(

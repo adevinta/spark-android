@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.sample.themes.themeprovider
+package com.adevinta.spark.catalog.themes.themeprovider
 
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.tokens.SparkColors
