@@ -70,7 +70,7 @@ import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeBoncoinTheme
 import com.adevinta.spark.catalog.themes.themeprovider.polaris.PolarisTheme
 import com.adevinta.spark.components.appbar.TopAppBar
-import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
+import com.adevinta.spark.components.bottomsheet.SheetValue
 import com.adevinta.spark.components.bottomsheet.scaffold.BottomSheetScaffold
 import com.adevinta.spark.components.bottomsheet.scaffold.rememberBottomSheetScaffoldState
 import com.adevinta.spark.components.bottomsheet.scaffold.rememberStandardBottomSheetState
@@ -80,6 +80,7 @@ import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.tokens.sparkFontFamily
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.airbnb.android.showkase.ui.SemanticsUtils.lineCountVal
 import com.airbnb.android.showkase.ui.ToolbarTitle
@@ -113,6 +114,7 @@ internal fun ShowkaseBrowserApp(
         colors = colors,
         shapes = shapes,
         typography = typography,
+        fontFamily = sparkFontFamily(isLegacy = isLegacy),
         useLegacyStyle = isLegacy,
     ) {
         val layoutDirection = when (theme.textDirection) {
@@ -132,7 +134,7 @@ internal fun ShowkaseBrowserApp(
             val navController = rememberNavController()
             val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
             val coroutineScope = rememberCoroutineScope()
-            val sheetState = rememberStandardBottomSheetState(Hidden)
+            val sheetState = rememberStandardBottomSheetState(SheetValue.PartiallyExpanded)
             val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
             BottomSheetScaffold(

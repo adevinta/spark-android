@@ -54,6 +54,8 @@ androidx-compose-material3-windowSizeClass = { module = "androidx.compose.materi
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }
+# https://developer.android.com/reference/kotlin/androidx/compose/ui/text/googlefonts/package-summary
+androidx-compose-ui-text = { module = "androidx.compose.ui:ui-text-google-fonts" }
 androidx-compose-ui-test = { module = "androidx.compose.ui:ui-test-junit4" }
 androidx-compose-ui-testManifest = { module = "androidx.compose.ui:ui-test-manifest" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
