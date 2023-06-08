@@ -79,7 +79,8 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-// TODO-scott.rayapoulle.ext (23-15-2023): Remove once M3 has this implementation available
+// TODO-scott.rayapoulle.ext (23-05-2023): Remove once M3 has this implementation available
+// Sources: https://github.com/androidx/androidx/blob/androidx-main/compose/material/material/src/commonMain/kotlin/androidx/compose/material/BackdropScaffold.kt
 /**
  * Possible values of [BackdropScaffoldState].
  */
