@@ -47,9 +47,6 @@ The minimal usage of the component is the checkbox in standalone but you can add
 end of the box or customize it.
 
 ```kotlin
-
-import jdk.javadoc.internal.doclets.formats.html.markup.Text
-
 var checkedState by remember { mutableStateOf(ToggleableState.On) }
 CheckboxLabelled(
     state = checkedState,
