@@ -103,7 +103,7 @@ import kotlin.math.sin
 public open class SwipeableState<T>(
     initialValue: T,
     internal val animationSpec: AnimationSpec<Float> = AnimationSpec,
-    internal val confirmStateChange: (newValue: T) -> Boolean = { true },
+    public val confirmStateChange: (newValue: T) -> Boolean = { true },
 ) {
     /**
      * The current value of the state.
@@ -263,7 +263,7 @@ public open class SwipeableState<T>(
      * Finally, if no swipe or animation is in progress, this is the same as the [currentValue].
      */
     @ExperimentalMaterial3Api
-    internal val targetValue: T
+    public val targetValue: T
         get() {
             // TODO(calintat): Track current velocity (b/149549482) and use that here.
             val target = animationTarget.value ?: computeTarget(
@@ -351,7 +351,7 @@ public open class SwipeableState<T>(
      * @param anim The animation that will be used to animate to the new value.
      */
     @ExperimentalMaterial3Api
-    internal suspend fun animateTo(targetValue: T, anim: AnimationSpec<Float> = animationSpec) {
+    public suspend fun animateTo(targetValue: T, anim: AnimationSpec<Float> = animationSpec) {
         latestNonEmptyAnchorsFlow.collect { anchors ->
             try {
                 val targetOffset = anchors.getOffset(targetValue)
@@ -471,9 +471,7 @@ public class SwipeProgress<T>(
 
         if (from != other.from) return false
         if (to != other.to) return false
-        if (fraction != other.fraction) return false
-
-        return true
+        return fraction == other.fraction
     }
 
     override fun hashCode(): Int {
@@ -751,9 +749,7 @@ public class ResistanceConfig(
 
         if (basis != other.basis) return false
         if (factorAtMin != other.factorAtMin) return false
-        if (factorAtMax != other.factorAtMax) return false
-
-        return true
+        return factorAtMax == other.factorAtMax
     }
 
     override fun hashCode(): Int {
@@ -856,7 +852,7 @@ public object SwipeableDefaults {
     /**
      * The default animation used by [SwipeableState].
      */
-    internal val AnimationSpec = SpringSpec<Float>()
+    public val AnimationSpec: SpringSpec<Float> = SpringSpec()
 
     /**
      * The default velocity threshold (1.8 dp per millisecond) used by [swipeable].
@@ -896,7 +892,7 @@ public object SwipeableDefaults {
 // temp default nested scroll connection for swipeables which desire as an opt in
 // revisit in b/174756744 as all types will have their own specific connection probably
 @ExperimentalMaterial3Api
-internal val <T> SwipeableState<T>.PreUpPostDownNestedScrollConnection: NestedScrollConnection
+public val <T> SwipeableState<T>.PreUpPostDownNestedScrollConnection: NestedScrollConnection
     get() = object : NestedScrollConnection {
         override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
             val delta = available.toFloat()
