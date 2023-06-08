@@ -21,6 +21,7 @@ androidx.compose.runtime:runtime-saveable:1.4.2
 androidx.compose.runtime:runtime:1.4.2
 androidx.compose.ui:ui-geometry:1.4.2
 androidx.compose.ui:ui-graphics:1.4.2
+androidx.compose.ui:ui-text-google-fonts:1.4.2
 androidx.compose.ui:ui-text:1.4.2
 androidx.compose.ui:ui-tooling-data:1.4.2
 androidx.compose.ui:ui-tooling-preview:1.4.2
