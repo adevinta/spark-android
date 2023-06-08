@@ -39,6 +39,39 @@ brew install openjdk@17
 or install it directly from **Android Studio**:  
 `File` → `Settings` → `Build, Execution, Deployment` → `Build Tools` → `Gradle` → `Gradle JDK`
 
+## Gradle tasks
+
+Here is a list of Gradle tasks commonly used in this project:
+
+- Building: assemble all modules in release mode
+  ```bash
+  ./gradlew assembleRelease
+  ```
+- Testing: run all unit tests and screenshot tests
+  ```bash
+  ./gradlew globalCiUnitTest verifyPaparazziRelease
+  ```
+- Screenshot testing: record golden images
+  ```bash
+  ./gradlew recordPaparazziRelease
+  ```
+- Linting: run Lint analysis
+  ```bash
+  ./gradlew lintRelease
+  ```
+- Code formatting: run spotless formatter
+  ```bash
+  ./gradlew spotlessApply
+  ```
+- Deploying: publish all Maven publications to the local Maven cache `~/.m2`.
+  ```bash
+  ./gradlew publishToMavenLocal
+  ```
+- Dokka: generate Dokka documentation [website](/build/dokka/index.html)
+  ```bash
+  ./gradlew dokkaHtmlMultiModule --no-configuration-cache
+  ```
+
 ## Pull Requests
 
 The best way to make an impact is by creating code submissions called pull requests. Pull requests

@@ -69,7 +69,7 @@ public fun Icon(
     sparkIcon: SparkIcon,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
+    tint: Color = IconDefaults.color.color(),
     size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
@@ -78,7 +78,7 @@ public fun Icon(
         modifier = modifier
             .sparkUsageOverlay()
             .size(size.size),
-        tint = tint.color(),
+        tint = tint,
     )
 }
 
@@ -93,7 +93,7 @@ public fun Icon(
  * localized, such as by using [androidx.compose.ui.res.stringResource] or similar
  * @param modifier optional [Modifier] for this Icon
  * @param tint to be applied to [imageVector]. If no intent is provided, then a default is used.
- * @param iconSize one of [IconSize] to be applied as size of the icon.
+ * @param size one of [IconSize] to be applied as size of the icon.
  * If no size is provided the default [IconSize.Medium] is used.
  */
 @Composable
@@ -101,16 +101,16 @@ public fun Icon(
     imageVector: ImageVector,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
-    iconSize: IconSize = IconDefaults.size,
+    tint: Color = IconDefaults.color.color(),
+    size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
         imageVector = imageVector,
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(iconSize.size),
-        tint = tint.color(),
+            .size(size.size),
+        tint = tint,
     )
 }
 
@@ -125,7 +125,7 @@ public fun Icon(
  * localized, such as by using [androidx.compose.ui.res.stringResource] or similar
  * @param modifier optional [Modifier] for this Icon
  * @param tint to be applied to [bitmap]. If no intent is provided, then a default is used
- * @param iconSize one of [IconSize] to be applied as size of the icon.
+ * @param size one of [IconSize] to be applied as size of the icon.
  * If no size is provided the default [IconSize.Medium] is used.
  */
 @Composable
@@ -133,16 +133,16 @@ public fun Icon(
     bitmap: ImageBitmap,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
-    iconSize: IconSize = IconDefaults.size,
+    tint: Color = IconDefaults.color.color(),
+    size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
         bitmap = bitmap,
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(iconSize.size),
-        tint = tint.color(),
+            .size(size.size),
+        tint = tint,
     )
 }
 
@@ -157,7 +157,7 @@ public fun Icon(
  * localized, such as by using [androidx.compose.ui.res.stringResource] or similar
  * @param modifier optional [Modifier] for this Icon
  * @param tint to be applied to [painter]. If no intent is provided, then a default is used
- * @param iconSize one of [IconSize] to be applied as size of the icon.
+ * @param size one of [IconSize] to be applied as size of the icon.
  * If no size is provided the default [IconSize.Medium] is used.
  */
 @Composable
@@ -165,43 +165,15 @@ public fun Icon(
     painter: Painter,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: IconTints = IconDefaults.color,
-    iconSize: IconSize = IconDefaults.size,
+    tint: Color = IconDefaults.color.color(),
+    size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
         painter = painter,
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(iconSize.size),
-        tint = tint.color(),
-    )
-}
-
-/**
- * Icon component that draws [sparkIcon] using [tint], defaulting to [LocalContentColor].
- * An internal function used for other Spark components internally.
- *
- * @param sparkIcon [SparkIcon] to draw inside this Icon
- * @param contentDescription text used by accessibility services to describe what this icon
- * represents. This should always be provided unless this icon is used for decorative purposes,
- * and does not represent a meaningful action that a user can take. This text should be
- * localized, such as by using [androidx.compose.ui.res.stringResource] or similar
- * @param modifier optional [Modifier] for this Icon
- * @param tint tint to be applied to [sparkIcon]. If [Color.Unspecified] is provided, then no
- *  tint is applied
- */
-@Composable
-internal fun Icon(
-    sparkIcon: SparkIcon,
-    contentDescription: String?,
-    modifier: Modifier = Modifier,
-    tint: Color = LocalContentColor.current,
-) {
-    MaterialIcon(
-        painter = rememberSparkIconPainter(sparkIcon),
-        contentDescription = contentDescription,
-        modifier = modifier.sparkUsageOverlay(),
+            .size(size.size),
         tint = tint,
     )
 }
@@ -242,7 +214,7 @@ internal fun IconPreview(
                         ) {
                             Icon(
                                 sparkIcon = SparkIcon.Toggles.Check.Simple,
-                                tint = tints[index],
+                                tint = tints[index].color(),
                                 contentDescription = "Done",
                                 size = size,
                             )

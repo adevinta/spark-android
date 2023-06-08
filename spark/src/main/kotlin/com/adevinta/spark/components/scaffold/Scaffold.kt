@@ -32,8 +32,6 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FabPosition
@@ -55,6 +53,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
+import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.SparkPreviewParam
 import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
@@ -157,7 +156,7 @@ private fun ScaffoldPreview(
                         IconButton(
                             onClick = { /* "Open nav drawer" */ },
                         ) {
-                            Icon(Icons.Filled.Menu, contentDescription = "Localized description")
+                            Icon(SparkIcon.Account.BurgerMenu, contentDescription = "Localized description")
                         }
                     },
                 )
