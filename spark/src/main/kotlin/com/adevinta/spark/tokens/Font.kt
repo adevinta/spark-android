@@ -38,7 +38,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
  * @param fontFamily The [FontFamily] you want to use globally inside your app.
  * @param useSparkTokensHighlighter If true, the [FontFamily] will be replaced by [FontFamily.Cursive] when the
  * token highlighting is enabled in the SparkTheme.
- * @param isLegacy If true, the [FontFamily] will be replaced by [FontFamily.Default] as we still need to support the legacy UI in LBC.
+ * @param isLegacy If true, the [FontFamily] will be replaced by [FontFamily.Default] as we still need to support the legacy UI.
  * @param fontHandler The [CoroutineExceptionHandler] you want to use to handle the font loading errors from the spark default [FontFamily.Resolver].
  */
 public fun sparkFontFamily(
