@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.sample
+package com.adevinta.spark.catalog
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -30,8 +30,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.core.view.WindowCompat
-import com.adevinta.spark.sample.themes.Theme
-import com.adevinta.spark.sample.themes.ThemeSaver
+import com.adevinta.spark.catalog.themes.Theme
+import com.adevinta.spark.catalog.themes.ThemeSaver
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.airbnb.android.showkase.models.ShowkaseProvider
 

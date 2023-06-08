@@ -25,8 +25,8 @@ plugins {
 }
 
 android {
-    namespace = "com.adevinta.spark.sample"
-    defaultConfig.applicationId = "com.adevinta.spark.sample"
+    namespace = "com.adevinta.spark.catalog"
+    defaultConfig.applicationId = "com.adevinta.spark.catalog"
 
     kotlinOptions {
         freeCompilerArgs += listOf(

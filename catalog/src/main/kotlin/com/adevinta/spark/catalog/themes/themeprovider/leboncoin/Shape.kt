@@ -19,20 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.sample.themes.themeprovider
+package com.adevinta.spark.catalog.themes.themeprovider.leboncoin
 
-import androidx.compose.runtime.Composable
-import com.adevinta.spark.tokens.SparkColors
-import com.adevinta.spark.tokens.SparkShapes
-import com.adevinta.spark.tokens.SparkTypography
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.tokens.sparkShapes
 
-public interface ThemeProvider {
-    @Composable
-    public fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors
-
-    @Composable
-    public fun shapes(isLegacy: Boolean): SparkShapes
-
-    @Composable
-    public fun typography(isLegacy: Boolean): SparkTypography
-}
+internal val LeboncoinShapes = sparkShapes(
+    none = RoundedCornerShape(0.dp),
+    extraSmall = RoundedCornerShape(4.0.dp),
+    small = RoundedCornerShape(8.0.dp),
+    medium = RoundedCornerShape(12.0.dp),
+    large = RoundedCornerShape(16.0.dp),
+    extraLarge = RoundedCornerShape(28.0.dp),
+    full = CircleShape,
+)
