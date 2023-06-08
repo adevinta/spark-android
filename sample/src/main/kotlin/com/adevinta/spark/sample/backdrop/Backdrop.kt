@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.backdrop
 
 import androidx.compose.animation.core.AnimationSpec
@@ -93,7 +92,7 @@ public enum class BackdropValue {
     /**
      * Indicates the back layer is revealed and the front layer is inactive.
      */
-    Revealed
+    Revealed,
 }
 
 /**
@@ -384,7 +383,11 @@ public fun BackdropScaffold(
                     .padding(
                         bottom = if (scaffoldState.isRevealed &&
                             revealedHeight == fullHeight - headerHeightPx
-                        ) headerHeight else 0.dp,
+                        ) {
+                            headerHeight
+                        } else {
+                            0.dp
+                        },
                     ),
                 contentAlignment = Alignment.BottomCenter,
             ) {
@@ -435,7 +438,8 @@ private fun BackLayerTransition(
     // The progress of the animation between Revealed (0) and Concealed (2).
     // The midpoint (1) is the point where the appBar and backContent are switched.
     val animationProgress by animateFloatAsState(
-        targetValue = if (target == Revealed) 0f else 2f, animationSpec = TweenSpec(),
+        targetValue = if (target == Revealed) 0f else 2f,
+        animationSpec = TweenSpec(),
         label = "Back Layer Transition",
     )
     val animationSlideOffset = with(LocalDensity.current) { AnimationSlideOffset.toPx() }
@@ -471,9 +475,9 @@ private fun BackLayerTransition(
 @UiComposable
 private fun BackdropStack(
     modifier: Modifier,
-    backLayer: @Composable @UiComposable () -> Unit,
+    backLayer: @Composable () -> Unit,
     calculateBackLayerConstraints: (Constraints) -> Constraints,
-    frontLayer: @Composable @UiComposable (Constraints, Float) -> Unit,
+    frontLayer: @Composable (Constraints, Float) -> Unit,
 ) {
     SubcomposeLayout(modifier) { constraints ->
         val backLayerPlaceable =
