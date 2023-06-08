@@ -61,7 +61,6 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.bottomsheet.SheetValue
-import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
 import com.adevinta.spark.components.bottomsheet.scaffold.BottomSheetScaffold
 import com.adevinta.spark.components.bottomsheet.scaffold.rememberBottomSheetScaffoldState
 import com.adevinta.spark.components.bottomsheet.scaffold.rememberStandardBottomSheetState

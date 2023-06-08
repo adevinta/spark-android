@@ -195,7 +195,6 @@ private val buttonType = TextStyle(
     letterSpacing = 1.25.sp,
 )
 
-
 internal val LeboncoinLegacyTypo: SparkTypography = sparkTypography(
     display1 = display1Type,
     display2 = display2Type,
