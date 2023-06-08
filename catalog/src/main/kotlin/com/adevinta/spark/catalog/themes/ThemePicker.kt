@@ -46,6 +46,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.R
 import com.adevinta.spark.components.divider.Divider
 import com.adevinta.spark.components.slider.Slider
 import com.adevinta.spark.components.text.Text
@@ -53,7 +54,6 @@ import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.toggles.RadioButton
 import com.adevinta.spark.components.toggles.RadioButtonLabelled
 import com.adevinta.spark.components.toggles.SwitchLabelled
-import com.adevinta.spark.catalog.R
 
 @Composable
 public fun ThemePicker(

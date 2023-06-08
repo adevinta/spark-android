@@ -30,7 +30,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.core.view.WindowCompat
-import com.adevinta.spark.catalog.ShowkaseBrowserApp
 import com.adevinta.spark.catalog.themes.Theme
 import com.adevinta.spark.catalog.themes.ThemeSaver
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent

@@ -38,8 +38,6 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.catalog.generateComposableModifier
-import com.adevinta.spark.catalog.navigate
 import com.adevinta.spark.components.card.OutlinedCard
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout

@@ -63,9 +63,6 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.catalog.CurrentScreen
-import com.adevinta.spark.catalog.ShowkaseBrowserScreenMetadata
-import com.adevinta.spark.catalog.update
 import com.adevinta.spark.tokens.Layout
 import com.airbnb.android.showkase.R
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
