@@ -73,7 +73,7 @@ public fun SparkTheme(
     colors: SparkColors = SparkTheme.colors,
     shapes: SparkShapes = SparkTheme.shapes,
     fontFamily: SparkFontFamily = sparkFontFamily(),
-    typography: SparkTypography = SparkTheme.typography.copy(),
+    typography: SparkTypography = SparkTheme.typography,
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
     useLegacyStyle: Boolean = false,
