@@ -142,24 +142,24 @@ public fun sparkTypography(
 )
 
 /**
- * Copy
+ * Takes a SparkTypography and returns a new SparkTypography with every typography using [fontFamily] as their fontFamily.
+ *
+ * @param fontFamily The [SparkFontFamily] to apply on each typography of [SparkTypography].
  */
 @Composable
-internal fun SparkTypography.updateFontFamily(fontFamily: SparkFontFamily): SparkTypography {
-    return copy(
-        display1 = display1.copy(fontFamily = fontFamily.default),
-        display2 = display2.copy(fontFamily = fontFamily.default),
-        display3 = display3.copy(fontFamily = fontFamily.default),
-        headline1 = headline1.copy(fontFamily = fontFamily.default),
-        headline2 = headline2.copy(fontFamily = fontFamily.default),
-        subhead = subhead.copy(fontFamily = fontFamily.default),
-        body1 = body1.copy(fontFamily = fontFamily.default),
-        body2 = body2.copy(fontFamily = fontFamily.default),
-        caption = caption.copy(fontFamily = fontFamily.default),
-        small = small.copy(fontFamily = fontFamily.default),
-        callout = callout.copy(fontFamily = fontFamily.default),
-    )
-}
+internal fun SparkTypography.updateFontFamily(fontFamily: SparkFontFamily): SparkTypography = copy(
+    display1 = display1.copy(fontFamily = fontFamily.default),
+    display2 = display2.copy(fontFamily = fontFamily.default),
+    display3 = display3.copy(fontFamily = fontFamily.default),
+    headline1 = headline1.copy(fontFamily = fontFamily.default),
+    headline2 = headline2.copy(fontFamily = fontFamily.default),
+    subhead = subhead.copy(fontFamily = fontFamily.default),
+    body1 = body1.copy(fontFamily = fontFamily.default),
+    body2 = body2.copy(fontFamily = fontFamily.default),
+    caption = caption.copy(fontFamily = fontFamily.default),
+    small = small.copy(fontFamily = fontFamily.default),
+    callout = callout.copy(fontFamily = fontFamily.default),
+)
 
 @Immutable
 public data class SparkTypography(

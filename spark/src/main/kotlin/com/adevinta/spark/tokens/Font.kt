@@ -33,27 +33,38 @@ import androidx.compose.ui.text.googlefonts.GoogleFont
 import com.adevinta.spark.R
 import kotlinx.coroutines.CoroutineExceptionHandler
 
-
+/**
+ * Creates a [SparkFontFamily] with the given [fontFamily] and [useSparkTokensHighlighter].
+ * @param fontFamily The [FontFamily] you want to use globally inside your app.
+ * @param useSparkTokensHighlighter If true, the [FontFamily] will be replaced by [FontFamily.Cursive] when the
+ * token highlighting is enabled in the SparkTheme.
+ * @param isLegacy If true, the [FontFamily] will be replaced by [FontFamily.Default] as we still need to support the legacy UI in LBC.
+ * @param fontHandler The [CoroutineExceptionHandler] you want to use to handle the font loading errors from the spark default [FontFamily.Resolver].
+ */
 public fun sparkFontFamily(
     fontFamily: FontFamily = nunitoFontFamily,
     useSparkTokensHighlighter: Boolean = false,
     isLegacy: Boolean = false,
     fontHandler: CoroutineExceptionHandler = defaultFontHandler,
-): SparkFontFamily {
-    return SparkFontFamily(
-        isLegacy = isLegacy,
-        useSparkTokensHighlighter = useSparkTokensHighlighter,
-        fontFamily = fontFamily,
-        fontHandler = fontHandler,
-    )
-}
+): SparkFontFamily = SparkFontFamily(
+    isLegacy = isLegacy,
+    useSparkTokensHighlighter = useSparkTokensHighlighter,
+    fontFamily = fontFamily,
+    fontHandler = fontHandler,
+)
 
+/**
+ *
+ */
 public class SparkFontFamily(
     private val isLegacy: Boolean,
     private val useSparkTokensHighlighter: Boolean,
     private val fontFamily: FontFamily,
     public val fontHandler: CoroutineExceptionHandler,
 ) {
+    /**
+     *
+     */
     public val default: FontFamily
         @Composable @ReadOnlyComposable get() = when {
             LocalInspectionMode.current -> fontFamily
@@ -72,12 +83,14 @@ internal val sparkFontProvider = GoogleFont.Provider(
 )
 
 internal val nunitoFontFamily = FontFamily(
-    Font(googleFont = nunitoFont, fontProvider = sparkFontProvider, weight = FontWeight.Normal),
-    Font(googleFont = nunitoFont, fontProvider = sparkFontProvider, weight = FontWeight.SemiBold),
-    Font(googleFont = nunitoFont, fontProvider = sparkFontProvider, weight = FontWeight.Bold),
+    fonts = listOf(
+        Font(googleFont = nunitoFont, fontProvider = sparkFontProvider, weight = FontWeight.Normal),
+        Font(googleFont = nunitoFont, fontProvider = sparkFontProvider, weight = FontWeight.SemiBold),
+        Font(googleFont = nunitoFont, fontProvider = sparkFontProvider, weight = FontWeight.Bold),
+    ),
 )
 
 internal val defaultFontHandler = CoroutineExceptionHandler { _, throwable ->
-    // process the Throwable
-    Log.e("Font Resolver", "There has been an issue: ", throwable)
+    // Log the Throwable
+    Log.e("Font Resolver", "" , throwable)
 }
