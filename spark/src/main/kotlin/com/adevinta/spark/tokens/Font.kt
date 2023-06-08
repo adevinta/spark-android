@@ -54,7 +54,7 @@ public fun sparkFontFamily(
 )
 
 /**
- *
+ * Utility class to handle the change of font family for the SparkTheme.
  */
 public class SparkFontFamily(
     private val isLegacy: Boolean,
@@ -63,7 +63,7 @@ public class SparkFontFamily(
     public val fontHandler: CoroutineExceptionHandler,
 ) {
     /**
-     *
+     * The [FontFamily] used globally inside the app.
      */
     public val default: FontFamily
         @Composable @ReadOnlyComposable get() = when {
