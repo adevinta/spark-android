@@ -19,32 +19,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-pluginManagement {
-    includeBuild("build-logic")
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+package com.adevinta.spark.catalog.themes.themeprovider
+
+import androidx.compose.runtime.Composable
+import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkShapes
+import com.adevinta.spark.tokens.SparkTypography
+
+public interface ThemeProvider {
+    @Composable
+    public fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors
+
+    @Composable
+    public fun shapes(isLegacy: Boolean): SparkShapes
+
+    @Composable
+    public fun typography(isLegacy: Boolean): SparkTypography
 }
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":spark-bom")
-include(":spark-icons")
-include(":spark-lint")
-include(":spark-screenshot-testing")
-include(":catalog")

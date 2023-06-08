@@ -20,17 +20,13 @@
  * SOFTWARE.
  */
 plugins {
-    id("com.adevinta.spark.android-library")
+    id("com.adevinta.spark.android-application")
     id("com.adevinta.spark.android-compose")
-    id("com.adevinta.spark.ksp")
-    id("com.adevinta.spark.dokka")
-    id("com.adevinta.spark.publishing")
-    id("com.adevinta.spark.dependencyGuard")
 }
 
 android {
-    namespace = "com.adevinta.spark"
-    resourcePrefix = "spark_"
+    namespace = "com.adevinta.spark.catalog"
+    defaultConfig.applicationId = "com.adevinta.spark.catalog"
 
     kotlinOptions {
         freeCompilerArgs += listOf(
@@ -41,32 +37,18 @@ android {
 }
 
 dependencies {
-    lintPublish(projects.sparkLint)
-    lintChecks(libs.slack.lint.compose)
+    implementation(projects.spark)
 
-    api(projects.sparkIcons)
+    implementation(libs.airbnb.showkase)
 
-    implementation(libs.accompanist.drawablepainter)
-    implementation(libs.accompanist.placeholder)
-
-    implementation(libs.androidx.appCompat.resources)
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.lifecycle.viewmodel)
-    implementation(libs.androidx.savedstate)
+    implementation(libs.accompanist.testharness)
 
     implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.windowSizeClass)
     implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.text)
-    implementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.androidx.compose.ui.util)
+    implementation(libs.androidx.compose.material3)
 
-    implementation(libs.coilCompose)
-
-    compileOnly(libs.airbnb.showkase)
-    ksp(libs.airbnb.showkase.processor)
-
-    testImplementation(libs.junit)
-    testImplementation(libs.kotlin.test)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appCompat)
+    implementation(libs.androidx.navigation.compose)
 }

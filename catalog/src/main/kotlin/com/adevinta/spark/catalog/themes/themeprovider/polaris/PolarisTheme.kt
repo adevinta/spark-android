@@ -19,32 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-pluginManagement {
-    includeBuild("build-logic")
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
+package com.adevinta.spark.catalog.themes.themeprovider.polaris
+
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
+import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkShapes
+import com.adevinta.spark.tokens.SparkTypography
+import com.adevinta.spark.tokens.darkSparkColors
+import com.adevinta.spark.tokens.lightSparkColors
+import com.adevinta.spark.tokens.sparkShapes
+import com.adevinta.spark.tokens.sparkTypography
+
+public object PolarisTheme : ThemeProvider {
+    @Composable
+    override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
+        return when {
+            useDarkColors || isSystemInDarkTheme() -> darkSparkColors()
+            else -> lightSparkColors()
+        }
     }
+
+    @Composable
+    override fun shapes(isLegacy: Boolean): SparkShapes = sparkShapes()
+
+    @Composable
+    override fun typography(isLegacy: Boolean): SparkTypography = sparkTypography()
 }
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":spark-bom")
-include(":spark-icons")
-include(":spark-lint")
-include(":spark-screenshot-testing")
-include(":catalog")
