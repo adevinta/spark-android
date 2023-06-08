@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.tokens
 
 import android.util.Log
@@ -66,7 +65,8 @@ public class SparkFontFamily(
      * The [FontFamily] used globally inside the app.
      */
     public val default: FontFamily
-        @Composable @ReadOnlyComposable get() = when {
+        @Composable @ReadOnlyComposable
+        get() = when {
             LocalInspectionMode.current -> fontFamily
             useSparkTokensHighlighter -> FontFamily.Cursive
             isLegacy -> FontFamily.Default
@@ -92,5 +92,5 @@ internal val nunitoFontFamily = FontFamily(
 
 internal val defaultFontHandler = CoroutineExceptionHandler { _, throwable ->
     // Log the Throwable
-    Log.e("Font Resolver", "" , throwable)
+    Log.e("Font Resolver", "", throwable)
 }
