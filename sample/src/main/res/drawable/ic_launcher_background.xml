@@ -188,20 +188,4 @@
         android:pathData="M79,19L79,89"
         android:strokeWidth="0.8"
         android:strokeColor="#10FFFFFF" />
-    <path android:pathData="M76 45.83c0 1.18-0.73 2.24-1.84 2.68l-8.55 3.4-24.88 10.51-1.32 0.5 19.31 7.14c0.97 0.35 2-0.35 2-1.36V56.17l4.89-1.94V70.2c0 4.1-4.21 6.9-8.08 5.38l-23.67-9.23c-1.12-0.44-1.86-1.5-1.86-2.69v-1.5c0-1.18 0.73-2.24 1.84-2.68L75.6 42.89c0.26 0.44 0.41 0.94 0.41 1.47v1.47Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:centerX="0"
-                android:centerY="0"
-                android:gradientRadius="1"
-                android:type="radial">
-                <item
-                    android:color="#FF7E49DD"
-                    android:offset="0.58" />
-                <item
-                    android:color="#FF4183D7"
-                    android:offset="1" />
-            </gradient>
-        </aapt:attr>
-    </path>
 </vector>
