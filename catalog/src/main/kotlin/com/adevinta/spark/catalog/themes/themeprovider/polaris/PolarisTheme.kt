@@ -19,19 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.sample.themes.themeprovider.leboncoin
+package com.adevinta.spark.catalog.themes.themeprovider.polaris
 
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
+import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkShapes
+import com.adevinta.spark.tokens.SparkTypography
+import com.adevinta.spark.tokens.darkSparkColors
+import com.adevinta.spark.tokens.lightSparkColors
 import com.adevinta.spark.tokens.sparkShapes
+import com.adevinta.spark.tokens.sparkTypography
 
-internal val LeboncoinShapes = sparkShapes(
-    none = RoundedCornerShape(0.dp),
-    extraSmall = RoundedCornerShape(4.0.dp),
-    small = RoundedCornerShape(8.0.dp),
-    medium = RoundedCornerShape(12.0.dp),
-    large = RoundedCornerShape(16.0.dp),
-    extraLarge = RoundedCornerShape(28.0.dp),
-    full = CircleShape,
-)
+public object PolarisTheme : ThemeProvider {
+    @Composable
+    override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
+        return when {
+            useDarkColors || isSystemInDarkTheme() -> darkSparkColors()
+            else -> lightSparkColors()
+        }
+    }
+
+    @Composable
+    override fun shapes(isLegacy: Boolean): SparkShapes = sparkShapes()
+
+    @Composable
+    override fun typography(isLegacy: Boolean): SparkTypography = sparkTypography()
+}
