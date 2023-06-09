@@ -1,4 +1,4 @@
-# Badge components
+# Package com.adevinta.spark.components.badge
 
 ## Badge design specs
 

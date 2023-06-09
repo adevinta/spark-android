@@ -1,4 +1,4 @@
-# Icon components
+# Package com.adevinta.spark.components.icons
 
 ## Icon design specs
 

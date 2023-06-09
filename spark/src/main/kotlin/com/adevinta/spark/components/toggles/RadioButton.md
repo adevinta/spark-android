@@ -1,4 +1,4 @@
-# RadioButton components
+# Package com.adevinta.spark.components.toggles
 
 ## RadioButton design specs
 
