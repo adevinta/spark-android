@@ -38,35 +38,8 @@ internal class SparkDokkaPlugin : Plugin<Project> {
             apply(plugin = "org.jetbrains.dokka")
 
             when {
-                this === rootProject -> tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
-                    moduleName.set("✨ Spark")
-                    outputDirectory.set(buildDir.resolve("dokka"))
-                }
-
-                else -> tasks.withType<DokkaTaskPartial> {
-                    dokkaSourceSets.configureEach {
-                        // Parse Module and Package docs
-                        // https://kotlinlang.org/docs/dokka-module-and-package-docs.html
-                        projectDir.resolve("src").walk()
-                            .filter { it.isFile && it.extension == "md" }.toList()
-                            .let { includes.from(project.files(), it) }
-
-                        // List of files or directories containing sample code (referenced with @sample tags)
-                        projectDir.resolve("samples").walk()
-                            .filter { it.isFile && it.extension == "kt" }.toList()
-                            .let { samples.from(it) }
-
-                        // https://kotlinlang.org/docs/dokka-gradle.html#source-link-configuration
-                        // FIXME(android): https://github.com/Kotlin/dokka/issues/2876
-                        @Suppress("ktlint:max-line-length", "ktlint:trailing-comma-on-call-site")
-                        sourceLink {
-                            val url = "https://github.com/Adevinta/spark-android/tree/main/${project.name}/src/main/kotlin"
-                            localDirectory.set(projectDir.resolve("src"))
-                            remoteUrl.set(URL(url))
-                            remoteLineSuffix.set("#L")
-                        }
-                    }
-                }
+                this === rootProject -> configureRootProject()
+                else -> configureSubProject()
             }
 
             tasks.withType<DokkaTask> {
@@ -75,6 +48,36 @@ internal class SparkDokkaPlugin : Plugin<Project> {
 
             dependencies {
                 add("dokkaHtmlPlugin", spark().libraries.`dokka-android-documentation-plugin`)
+            }
+        }
+    }
+
+    private fun Project.configureRootProject() = tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
+        moduleName.set("✨ Spark")
+        outputDirectory.set(buildDir.resolve("dokka"))
+    }
+
+    private fun Project.configureSubProject() = tasks.withType<DokkaTaskPartial> {
+        dokkaSourceSets.configureEach {
+            // Parse Module and Package docs
+            // https://kotlinlang.org/docs/dokka-module-and-package-docs.html
+            projectDir.resolve("src").walk()
+                .filter { it.isFile && it.extension == "md" }.toList()
+                .let { includes.from(project.files(), it) }
+
+            // List of files or directories containing sample code (referenced with @sample tags)
+            projectDir.resolve("samples").walk()
+                .filter { it.isFile && it.extension == "kt" }.toList()
+                .let { samples.from(it) }
+
+            // https://kotlinlang.org/docs/dokka-gradle.html#source-link-configuration
+            // FIXME(android): https://github.com/Kotlin/dokka/issues/2876
+            @Suppress("ktlint:max-line-length", "ktlint:trailing-comma-on-call-site")
+            sourceLink {
+                val url = "https://github.com/Adevinta/spark-android/tree/main/${project.name}/src/main/kotlin"
+                localDirectory.set(projectDir.resolve("src"))
+                remoteUrl.set(URL(url))
+                remoteLineSuffix.set("#L")
             }
         }
     }
