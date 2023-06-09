@@ -27,10 +27,14 @@ import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.dokka.base.DokkaBase
+import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
+import java.io.File
 import java.net.URL
+import java.time.Year
 
 internal class SparkDokkaPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -53,8 +57,18 @@ internal class SparkDokkaPlugin : Plugin<Project> {
     }
 
     private fun Project.configureRootProject() = tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
-        moduleName.set("✨ Spark")
+        moduleName.set("Spark")
         outputDirectory.set(buildDir.resolve("dokka"))
+        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+            fun File.recursiveFiles() = walk().filter(File::isFile).toList().toTypedArray()
+            // https://kotlinlang.org/docs/dokka-html.html#customize-assets
+            customAssets = listOf(
+                file("art/logo-icon.svg"), // https://kotlinlang.org/docs/dokka-html.html#change-the-logo
+                *rootDir.resolve("art").recursiveFiles(),
+                *rootDir.resolve("spark-screenshot-testing/src/test/snapshots/images").recursiveFiles(),
+            )
+            configureFooterMessage()
+        }
     }
 
     private fun Project.configureSubProject() = tasks.withType<DokkaTaskPartial> {
@@ -80,5 +94,10 @@ internal class SparkDokkaPlugin : Plugin<Project> {
                 remoteLineSuffix.set("#L")
             }
         }
+        pluginConfiguration<DokkaBase, DokkaBaseConfiguration> { configureFooterMessage() }
+    }
+
+    private fun DokkaBaseConfiguration.configureFooterMessage() {
+        footerMessage = "© ${Year.now().value} Adevinta"
     }
 }
