@@ -91,7 +91,8 @@ import com.adevinta.spark.components.spacer.HorizontalSpacer
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.toggles.Checkbox
-import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -469,7 +470,7 @@ internal fun ModalBottomSheetSample() {
                         headlineText = { Text("Item $it") },
                         leadingContent = {
                             Icon(
-                                SparkIcon.Actions.Favorite.Default,
+                                SparkIcons.LikeFill,
                                 contentDescription = "Localized description",
                             )
                         },

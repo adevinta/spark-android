@@ -43,7 +43,9 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.BurgerMenu
+import com.adevinta.spark.icons.CameraFill
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.CenterAlignedTopAppBar as MaterialCenterTopAppBar
@@ -284,7 +286,7 @@ internal fun PreviewTopAppBar(
             navigationIcon = {
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        sparkIcon = SparkIcon.Navs.Drawer,
+                        sparkIcon = SparkIcons.BurgerMenu,
                         contentDescription = "Localized description",
                     )
                 }
@@ -292,7 +294,7 @@ internal fun PreviewTopAppBar(
             actions = {
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        sparkIcon = SparkIcon.Infos.Camera,
+                        sparkIcon = SparkIcons.CameraFill,
                         contentDescription = "Localized description",
                     )
                 }
@@ -304,7 +306,7 @@ internal fun PreviewTopAppBar(
             navigationIcon = {
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        sparkIcon = SparkIcon.Navs.Drawer,
+                        sparkIcon = SparkIcons.BurgerMenu,
                         contentDescription = "Localized description",
                     )
                 }
@@ -312,7 +314,7 @@ internal fun PreviewTopAppBar(
             actions = {
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        sparkIcon = SparkIcon.Infos.Camera,
+                        sparkIcon = SparkIcons.CameraFill,
                         contentDescription = "Localized description",
                     )
                 }
@@ -324,7 +326,7 @@ internal fun PreviewTopAppBar(
             navigationIcon = {
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        sparkIcon = SparkIcon.Navs.Drawer,
+                        sparkIcon = SparkIcons.BurgerMenu,
                         contentDescription = "Localized description",
                     )
                 }
@@ -332,7 +334,7 @@ internal fun PreviewTopAppBar(
             actions = {
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        sparkIcon = SparkIcon.Infos.Camera,
+                        sparkIcon = SparkIcons.CameraFill,
                         contentDescription = "Localized description",
                     )
                 }
@@ -344,7 +346,7 @@ internal fun PreviewTopAppBar(
             navigationIcon = {
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        sparkIcon = SparkIcon.Navs.Drawer,
+                        sparkIcon = SparkIcons.BurgerMenu,
                         contentDescription = "Localized description",
                     )
                 }
@@ -352,7 +354,7 @@ internal fun PreviewTopAppBar(
             actions = {
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
-                        sparkIcon = SparkIcon.Infos.Camera,
+                        sparkIcon = SparkIcons.CameraFill,
                         contentDescription = "Localized description",
                     )
                 }

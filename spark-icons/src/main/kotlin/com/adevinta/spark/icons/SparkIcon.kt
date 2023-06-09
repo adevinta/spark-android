@@ -21,618 +21,2393 @@
  */
 package com.adevinta.spark.icons
 
-import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.vector.ImageVector
 
-public interface IconDrawableRes {
-    @get:DrawableRes
-    public val drawableId: Int
-}
-
-public interface IconVector {
-    public val imageVector: ImageVector
-}
-
 @Stable
-public interface SparkIcon : IconDrawableRes {
+public sealed class SparkIcon {
+    public data class DrawableRes(@androidx.annotation.DrawableRes val drawableId: Int) : SparkIcon()
+    public data class Vector(val imageVector: ImageVector) : SparkIcon()
 
-    public sealed class Account(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Account : SparkIcon.Account(R.drawable.spark_icons_account)
-        public object Activity : SparkIcon.Account(R.drawable.spark_icons_activity)
-        public object Booking : SparkIcon.Account(R.drawable.spark_icons_booking)
+    @Deprecated("Use SparkIcons instead.")
+    public object Account {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.BankFill", "com.adevinta.spark.icons"),
+        )
+        public val Account: DrawableRes = SparkIcons.BankFill
 
-        public object BurgerMenu : SparkIcon.Account(R.drawable.spark_icons_menu)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Activity", "com.adevinta.spark.icons"),
+        )
+        public val Activity: DrawableRes = SparkIcons.Activity
 
-        @Deprecated("This Icon is a part of Arrows", replaceWith = ReplaceWith("Arrows.Close.Full"))
-        public object Close : SparkIcon.Account(R.drawable.spark_icons_close_full)
-        public sealed class Cv(@DrawableRes override val drawableId: Int) : SparkIcon.Account(drawableId) {
-            public object Default : Cv(R.drawable.spark_icons_cv)
-            public object Outlined : Cv(R.drawable.spark_icons_cv_outline)
-            public object Disabled : Cv(R.drawable.spark_icons_sales_prospecting)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.HolidayFill", "com.adevinta.spark.icons"),
+        )
+        public val Booking: DrawableRes = SparkIcons.HolidayFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.BurgerMenu", "com.adevinta.spark.icons"),
+        )
+        public val BurgerMenu: DrawableRes = SparkIcons.BurgerMenu
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Close", "com.adevinta.spark.icons"),
+        )
+        public val Close: DrawableRes = SparkIcons.DeleteFill
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Cv {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.CvFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.CvFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.CvOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.CvOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.FileOffFill", "com.adevinta.spark.icons"),
+            )
+            public val Disabled: DrawableRes = SparkIcons.FileOffFill
         }
 
-        public object France : SparkIcon.Account(R.drawable.spark_icons_france)
-        public object House : SparkIcon.Account(R.drawable.spark_icons_house)
-        public object Identity : SparkIcon.Account(R.drawable.spark_icons_identity)
-        public object Key : SparkIcon.Account(R.drawable.spark_icons_key)
-        public object Listing : SparkIcon.Account(R.drawable.spark_icons_listing)
-        public sealed class Offers(@DrawableRes override val drawableId: Int) : SparkIcon.Account(drawableId) {
-            public object Default : Offers(R.drawable.spark_icons_offers)
-            public object Outlined : Offers(R.drawable.spark_icons_offers_outline)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CountryFill", "com.adevinta.spark.icons"),
+        )
+        public val France: DrawableRes = SparkIcons.CountryFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.House", "com.adevinta.spark.icons"),
+        )
+        public val House: DrawableRes = SparkIcons.House
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.IdentityOutline", "com.adevinta.spark.icons"),
+        )
+        public val Identity: DrawableRes = SparkIcons.IdentityOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.KeyFill", "com.adevinta.spark.icons"),
+        )
+        public val Key: DrawableRes = SparkIcons.KeyFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Listing", "com.adevinta.spark.icons"),
+        )
+        public val Listing: DrawableRes = SparkIcons.Listing
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Offers {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.OfferFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.OfferFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.OfferOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.OfferOutline
         }
 
-        public object SalesProspecting : SparkIcon.Account(R.drawable.spark_icons_sales_prospecting)
-        public sealed class SecurePayment(@DrawableRes override val drawableId: Int) : SparkIcon.Account(drawableId) {
-            public object Default : SecurePayment(R.drawable.spark_icons_secure_payment)
-            public object Outlined : SecurePayment(R.drawable.spark_icons_secure_payment_outline)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FileOffFill", "com.adevinta.spark.icons"),
+        )
+        public val SalesProspecting: DrawableRes = SparkIcons.FileOffFill
+
+        @Deprecated("Use SparkIcons instead.")
+        public object SecurePayment {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.SecurityFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.SecurityFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.SecurityOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.SecurityOutline
         }
 
-        public sealed class Shop(@DrawableRes override val drawableId: Int) : SparkIcon.Account(drawableId) {
-            public object Default : Shop(R.drawable.spark_icons_shop)
-            public object Outlined : Shop(R.drawable.spark_icons_shop_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object Shop {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ShopingCartFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.ShopingCartFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ShopingCartOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.ShopingCartOutline
         }
 
-        public object Store : SparkIcon.Account(R.drawable.spark_icons_store)
-        public object ThumbUp : SparkIcon.Account(R.drawable.spark_icons_thumbs_up)
-        public sealed class Work(@DrawableRes override val drawableId: Int) : SparkIcon.Account(drawableId) {
-            public object Default : Work(R.drawable.spark_icons_suitcase_filled)
-            public object Outlined : Work(R.drawable.spark_icons_suitcase)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Store", "com.adevinta.spark.icons"),
+        )
+        public val Store: DrawableRes = SparkIcons.Store
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FavoriteFill", "com.adevinta.spark.icons"),
+        )
+        public val ThumbUp: DrawableRes = SparkIcons.FavoriteFill
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Work {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.FavoriteOutline", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.FavoriteOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.WorkOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.WorkOutline
         }
     }
 
-    public sealed class Actions(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Calculate : Actions(R.drawable.spark_icons_calculate)
-        public object Copy : Actions(R.drawable.spark_icons_copy)
-        public sealed class Eyes(@DrawableRes override val drawableId: Int) : Actions(drawableId) {
-            public sealed class Filled(@DrawableRes override val drawableId: Int) : Eyes(drawableId) {
-                public object Enabled : Filled(R.drawable.spark_icons_eyes)
-                public object Disabled : Filled(R.drawable.spark_icons_eyes_disabled)
+    @Deprecated("Use SparkIcons instead.")
+    public object Actions {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CalculateFill", "com.adevinta.spark.icons"),
+        )
+        public val Calculate: DrawableRes = SparkIcons.CalculateFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CopyFill", "com.adevinta.spark.icons"),
+        )
+        public val Copy: DrawableRes = SparkIcons.CopyFill
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Eyes {
+            @Deprecated("Use SparkIcons instead.")
+            public object Filled {
+                @Deprecated(
+                    message = "Use SparkIcons instead.",
+                    replaceWith = ReplaceWith("SparkIcons.EyeFill", "com.adevinta.spark.icons"),
+                )
+                public val Enabled: DrawableRes = SparkIcons.EyeFill
+
+                @Deprecated(
+                    message = "Use SparkIcons instead.",
+                    replaceWith = ReplaceWith("SparkIcons.EyeOffFill", "com.adevinta.spark.icons"),
+                )
+                public val Disabled: DrawableRes = SparkIcons.EyeOffFill
             }
 
-            public sealed class Outlined(@DrawableRes override val drawableId: Int) : Eyes(drawableId) {
-                public object Enabled : Outlined(R.drawable.spark_icons_eyes_outline)
-                public object Disabled : Outlined(R.drawable.spark_icons_eyes_disabled_outline)
+            @Deprecated("Use SparkIcons instead.")
+            public object Outlined {
+                @Deprecated(
+                    message = "Use SparkIcons instead.",
+                    replaceWith = ReplaceWith("SparkIcons.EyeOutline", "com.adevinta.spark.icons"),
+                )
+                public val Enabled: DrawableRes = SparkIcons.EyeOutline
+
+                @Deprecated(
+                    message = "Use SparkIcons instead.",
+                    replaceWith = ReplaceWith("SparkIcons.EyeOffOutline", "com.adevinta.spark.icons"),
+                )
+                public val Disabled: DrawableRes = SparkIcons.EyeOffOutline
             }
         }
 
-        public sealed class Favorite(@DrawableRes override val drawableId: Int) : Actions(drawableId) {
-            public object Default : Favorite(R.drawable.spark_icons_heart)
-            public object Outlined : Favorite(R.drawable.spark_icons_heart_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object Favorite {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.LikeFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.LikeFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.LikeOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.LikeOutline
         }
 
-        public object Filter : Actions(R.drawable.spark_icons_filter)
-        public object Flashlight : Actions(R.drawable.spark_icons_flashlight)
-        public object More : Actions(R.drawable.spark_icons_more_menu)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Filter", "com.adevinta.spark.icons"),
+        )
+        public val Filter: DrawableRes = SparkIcons.Filter
 
-        public object Pause : Actions(R.drawable.spark_icons_pause)
-        public object Play : Actions(R.drawable.spark_icons_play)
-        public sealed class Pen(@DrawableRes override val drawableId: Int) : Actions(drawableId) {
-            public object Default : Pen(R.drawable.spark_icons_pen)
-            public object Outlined : Pen(R.drawable.spark_icons_pen_outline)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlashlightFill", "com.adevinta.spark.icons"),
+        )
+        public val Flashlight: DrawableRes = SparkIcons.FlashlightFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.MoreMenuVertical", "com.adevinta.spark.icons"),
+        )
+        public val More: DrawableRes = SparkIcons.MoreMenuVertical
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.PauseOutline", "com.adevinta.spark.icons"),
+        )
+        public val Pause: DrawableRes = SparkIcons.PauseOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.PlayOutline", "com.adevinta.spark.icons"),
+        )
+        public val Play: DrawableRes = SparkIcons.PlayOutline
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Pen {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.PenFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.PenFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.PenOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.PenOutline
         }
 
-        public object Print : Actions(R.drawable.spark_icons_print)
-        public object Refresh : Actions(R.drawable.spark_icons_refresh)
-        public object Scan : Actions(R.drawable.spark_icons_scan)
-        public object Search : Actions(R.drawable.spark_icons_search)
-        public sealed class Trash(@DrawableRes override val drawableId: Int) : Actions(drawableId) {
-            public object Default : Trash(R.drawable.spark_icons_trash)
-            public object Outlined : Trash(R.drawable.spark_icons_trash_outline)
-            public object Close : Trash(R.drawable.spark_icons_trash_close)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.PrintFill", "com.adevinta.spark.icons"),
+        )
+        public val Print: DrawableRes = SparkIcons.PrintFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Refresh", "com.adevinta.spark.icons"),
+        )
+        public val Refresh: DrawableRes = SparkIcons.Refresh
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Scan", "com.adevinta.spark.icons"),
+        )
+        public val Scan: DrawableRes = SparkIcons.Scan
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Search", "com.adevinta.spark.icons"),
+        )
+        public val Search: DrawableRes = SparkIcons.Search
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Trash {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.TrashFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.TrashFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.TrashOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.TrashOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.TrashCloseFill", "com.adevinta.spark.icons"),
+            )
+            public val Close: DrawableRes = SparkIcons.TrashCloseFill
         }
 
-        public sealed class Wheel(@DrawableRes override val drawableId: Int) : Actions(drawableId) {
-            public object Default : Wheel(R.drawable.spark_icons_wheel)
-            public object Outlined : Wheel(R.drawable.spark_icons_wheel_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object Wheel {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.WheelFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.WheelFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.WheelOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.WheelOutline
         }
     }
 
-    public sealed class Arrows(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public sealed class Arrow(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
-            public object Left : Arrow(R.drawable.spark_icons_arrow_left)
-            public object Right : Arrow(R.drawable.spark_icons_arrow_right)
+    @Deprecated("Use SparkIcons instead.")
+    public object Arrows {
+        @Deprecated("Use SparkIcons instead.")
+        public object Arrow {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ArrowLeft", "com.adevinta.spark.icons"),
+            )
+            public val Left: DrawableRes = SparkIcons.ArrowLeft
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ArrowRight", "com.adevinta.spark.icons"),
+            )
+            public val Right: DrawableRes = SparkIcons.ArrowRight
         }
 
-        public sealed class Chevron(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
-            public object Left : Chevron(R.drawable.spark_icons_chevron_left)
-            public object Right : Chevron(R.drawable.spark_icons_chevron_right)
-            public object Up : Chevron(R.drawable.spark_icons_chevron_up)
-            public object Down : Chevron(R.drawable.spark_icons_chevron_down)
+        @Deprecated("Use SparkIcons instead.")
+        public object Chevron {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ArrowVerticalLeft", "com.adevinta.spark.icons"),
+            )
+            public val Left: DrawableRes = SparkIcons.ArrowVerticalLeft
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ArrowVerticalRight", "com.adevinta.spark.icons"),
+            )
+            public val Right: DrawableRes = SparkIcons.ArrowVerticalRight
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ArrowHorizontalUp", "com.adevinta.spark.icons"),
+            )
+            public val Up: DrawableRes = SparkIcons.ArrowHorizontalUp
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ArrowHorizontalDown", "com.adevinta.spark.icons"),
+            )
+            public val Down: DrawableRes = SparkIcons.ArrowHorizontalDown
         }
 
-        public sealed class DoubleChevron(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
-            public object Left : Arrow(R.drawable.spark_icons_chevron_double_left)
-            public object Right : Arrow(R.drawable.spark_icons_chevron_double_right)
+        @Deprecated("Use SparkIcons instead.")
+        public object DoubleChevron {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ArrowDoubleLeft", "com.adevinta.spark.icons"),
+            )
+            public val Left: DrawableRes = SparkIcons.ArrowDoubleLeft
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ArrowDoubleRight", "com.adevinta.spark.icons"),
+            )
+            public val Right: DrawableRes = SparkIcons.ArrowDoubleRight
         }
 
-        public sealed class Close(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
-            public object Default : Close(R.drawable.spark_icons_close)
-            public object Full : Close(R.drawable.spark_icons_close_full)
+        @Deprecated("Use SparkIcons instead.")
+        public object Close {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Close", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.Close
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.DeleteFill", "com.adevinta.spark.icons"),
+            )
+            public val Full: DrawableRes = SparkIcons.DeleteFill
         }
 
-        public sealed class Chart(@DrawableRes override val drawableId: Int) : Arrows(drawableId) {
-            public object Up : Chevron(R.drawable.spark_icons_chart_up)
-            public object Down : Chevron(R.drawable.spark_icons_chart_down)
+        @Deprecated("Use SparkIcons instead.")
+        public object Chart {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.GraphArrowUp", "com.adevinta.spark.icons"),
+            )
+            public val Up: DrawableRes = SparkIcons.GraphArrowUp
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.GraphArrowDown", "com.adevinta.spark.icons"),
+            )
+            public val Down: DrawableRes = SparkIcons.GraphArrowDown
         }
     }
 
-    public sealed class Calendar(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Booking : Calendar(R.drawable.spark_icons_calendar_booking)
-        public object Default : Calendar(R.drawable.spark_icons_calendar_simple)
-        public object Valid : Calendar(R.drawable.spark_icons_calendar_valid)
+    @Deprecated("Use SparkIcons instead.")
+    public object Calendar {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CalendarDotFill", "com.adevinta.spark.icons"),
+        )
+        public val Booking: DrawableRes = SparkIcons.CalendarDotFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CalendarFill", "com.adevinta.spark.icons"),
+        )
+        public val Default: DrawableRes = SparkIcons.CalendarFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CalendarValidFill", "com.adevinta.spark.icons"),
+        )
+        public val Valid: DrawableRes = SparkIcons.CalendarValidFill
     }
 
-    public sealed class Categories(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Apartment : Categories(R.drawable.spark_icons_apartment)
-        public object Car : Categories(R.drawable.spark_icons_car)
-        public object Couch : Categories(R.drawable.spark_icons_couch)
-        public object Computer : Categories(R.drawable.spark_icons_computer)
-        public object Clothes : Categories(R.drawable.spark_icons_mode)
-        public object Equipment : Categories(R.drawable.spark_icons_equipment)
-        public object Family : Categories(R.drawable.spark_icons_family)
-        public object Ground : Categories(R.drawable.spark_icons_ground)
-        public object Hobbies : Categories(R.drawable.spark_icons_hobbies)
-        public object Holidays : Categories(R.drawable.spark_icons_holidays)
-        public object House : Categories(R.drawable.spark_icons_house)
-        public object Land : Categories(R.drawable.spark_icons_land)
-        public object Multimedia : Categories(R.drawable.spark_icons_multimedia)
-        public object Parking : Categories(R.drawable.spark_icons_parking)
-        public object Pending : Categories(R.drawable.spark_icons_pending)
-        public object Pets : Categories(R.drawable.spark_icons_pets)
-        public object Services : Categories(R.drawable.spark_icons_services)
-        public object Suitcase : Categories(R.drawable.spark_icons_suitcase)
+    @Deprecated("Use SparkIcons instead.")
+    public object Categories {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Apartment", "com.adevinta.spark.icons"),
+        )
+        public val Apartment: DrawableRes = SparkIcons.Apartment
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CarOutline", "com.adevinta.spark.icons"),
+        )
+        public val Car: DrawableRes = SparkIcons.CarOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Couch", "com.adevinta.spark.icons"),
+        )
+        public val Couch: DrawableRes = SparkIcons.Couch
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Computer", "com.adevinta.spark.icons"),
+        )
+        public val Computer: DrawableRes = SparkIcons.Computer
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Clothes", "com.adevinta.spark.icons"),
+        )
+        public val Clothes: DrawableRes = SparkIcons.Clothes
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Equipment", "com.adevinta.spark.icons"),
+        )
+        public val Equipment: DrawableRes = SparkIcons.Equipment
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Family", "com.adevinta.spark.icons"),
+        )
+        public val Family: DrawableRes = SparkIcons.Family
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Ground", "com.adevinta.spark.icons"),
+        )
+        public val Ground: DrawableRes = SparkIcons.Ground
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Hobby", "com.adevinta.spark.icons"),
+        )
+        public val Hobbies: DrawableRes = SparkIcons.Hobby
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Holidays", "com.adevinta.spark.icons"),
+        )
+        public val Holidays: DrawableRes = SparkIcons.Holidays
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.House", "com.adevinta.spark.icons"),
+        )
+        public val House: DrawableRes = SparkIcons.House
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Land", "com.adevinta.spark.icons"),
+        )
+        public val Land: DrawableRes = SparkIcons.Land
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Multimedia", "com.adevinta.spark.icons"),
+        )
+        public val Multimedia: DrawableRes = SparkIcons.Multimedia
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Parking", "com.adevinta.spark.icons"),
+        )
+        public val Parking: DrawableRes = SparkIcons.Parking
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.MoreMenuHorizontal", "com.adevinta.spark.icons"),
+        )
+        public val Pending: DrawableRes = SparkIcons.MoreMenuHorizontal
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Pets", "com.adevinta.spark.icons"),
+        )
+        public val Pets: DrawableRes = SparkIcons.Pets
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Service", "com.adevinta.spark.icons"),
+        )
+        public val Services: DrawableRes = SparkIcons.Service
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Job", "com.adevinta.spark.icons"),
+        )
+        public val Suitcase: DrawableRes = SparkIcons.Job
     }
 
-    public sealed class Contact(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public sealed class Mail(@DrawableRes override val drawableId: Int) : Contact(drawableId) {
-            public object Default : Mail(R.drawable.spark_icons_mail)
-            public object Outlined : Mail(R.drawable.spark_icons_mail_outline)
+    @Deprecated("Use SparkIcons instead.")
+    public object Contact {
+        @Deprecated("Use SparkIcons instead.")
+        public object Mail {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.MailFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.MailFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.MailOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.MailOutline
         }
 
-        public sealed class Micro(@DrawableRes override val drawableId: Int) : Contact(drawableId) {
-            public object Default : Micro(R.drawable.spark_icons_micro)
-            public object Outlined : Micro(R.drawable.spark_icons_micro_outline)
-            public object Disabled : Micro(R.drawable.spark_icons_micro_off)
+        @Deprecated("Use SparkIcons instead.")
+        public object Micro {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.VoiceFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.VoiceFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.VoiceOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.VoiceOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.VoiceOffFill", "com.adevinta.spark.icons"),
+            )
+            public val Disabled: DrawableRes = SparkIcons.VoiceOffFill
         }
 
-        public sealed class Message(@DrawableRes override val drawableId: Int) : Contact(drawableId) {
-            public object Default : Message(R.drawable.spark_icons_message)
-            public object Outlined : Message(R.drawable.spark_icons_message_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object Message {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.MessageFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.MessageFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.MessageOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.MessageOutline
         }
 
-        public sealed class Phone(@DrawableRes override val drawableId: Int) : Contact(drawableId) {
-            public object Default : Phone(R.drawable.spark_icons_phone)
-            public object Outlined : Phone(R.drawable.spark_icons_phone_outine)
-            public object Message : Phone(R.drawable.spark_icons_phone_message)
+        @Deprecated("Use SparkIcons instead.")
+        public object Phone {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.PhoneFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.PhoneFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.PhoneOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outlined: DrawableRes = SparkIcons.PhoneOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.CallOutline", "com.adevinta.spark.icons"),
+            )
+            public val Message: DrawableRes = SparkIcons.CallOutline
         }
 
-        public object SendMessage : Contact(R.drawable.spark_icons_send_message)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.SendHorizontal", "com.adevinta.spark.icons"),
+        )
+        public val SendMessage: DrawableRes = SparkIcons.SendHorizontal
     }
 
-    public sealed class Criterias(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public sealed class Animaux(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object Age : Animaux(R.drawable.spark_icons_animal_age)
-            public object Loof : Animaux(R.drawable.spark_icons_animal_race)
-            public object Offre : Animaux(R.drawable.spark_icons_animal_offer_nature)
-            public object Portee : Animaux(R.drawable.spark_icons_animal_litter)
-            public object Tatouage : Animaux(R.drawable.spark_icons_animal_identification)
-            public object TypeDeLOffre : Animaux(R.drawable.spark_icons_animal_type)
-            public object Vaccin : Animaux(R.drawable.spark_icons_animal_vaccinated)
+    @Deprecated("Use SparkIcons instead.")
+    public object Criterias {
+        @Deprecated("Use SparkIcons instead.")
+        public object Animaux {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Age", "com.adevinta.spark.icons"),
+            )
+            public val Age: DrawableRes = SparkIcons.Age
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Loof", "com.adevinta.spark.icons"),
+            )
+            public val Loof: DrawableRes = SparkIcons.Loof
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Offer", "com.adevinta.spark.icons"),
+            )
+            public val Offre: DrawableRes = SparkIcons.Offer
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Litter", "com.adevinta.spark.icons"),
+            )
+            public val Portee: DrawableRes = SparkIcons.Litter
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Tattoo", "com.adevinta.spark.icons"),
+            )
+            public val Tatouage: DrawableRes = SparkIcons.Tattoo
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Animals", "com.adevinta.spark.icons"),
+            )
+            public val TypeDeLOffre: DrawableRes = SparkIcons.Animals
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Vaccine", "com.adevinta.spark.icons"),
+            )
+            public val Vaccin: DrawableRes = SparkIcons.Vaccine
         }
 
-        public sealed class Automobile(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object Loof : Automobile(R.drawable.spark_icons_animal_race)
-            public object Bateau : Automobile(R.drawable.spark_icons_boat)
-            public object Carburant : Automobile(R.drawable.spark_icons_fuel)
-            public object Couleur : Automobile(R.drawable.spark_icons_color)
+        @Deprecated("Use SparkIcons instead.")
+        public object Automobile {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Loof", "com.adevinta.spark.icons"),
+            )
+            public val Loof: DrawableRes = SparkIcons.Loof
 
-            public object Cylindree : Automobile(R.drawable.spark_icons_engine)
-            public object Energie : Automobile(R.drawable.spark_icons_energy)
-            public object Puissance : Automobile(R.drawable.spark_icons_horse_power)
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Boat", "com.adevinta.spark.icons"),
+            )
+            public val Bateau: DrawableRes = SparkIcons.Boat
 
-            public object Kilometrage : Automobile(R.drawable.spark_icons_mileage)
-            public object Marque : Automobile(R.drawable.spark_icons_model)
-            public object Moto : Automobile(R.drawable.spark_icons_motobike)
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Fuel", "com.adevinta.spark.icons"),
+            )
+            public val Carburant: DrawableRes = SparkIcons.Fuel
 
-            public object Permis : Automobile(R.drawable.spark_icons_car_licence)
-            public object Places : Automobile(R.drawable.spark_icons_seats)
-            public object Portes : Automobile(R.drawable.spark_icons_doors)
-            public object Regdate : Automobile(R.drawable.spark_icons_date)
-            public object Type : Automobile(R.drawable.spark_icons_car_type)
-            public object Vitesse : Automobile(R.drawable.spark_icons_gearbox)
-            public object Coffre : Automobile(R.drawable.spark_icons_trunk)
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Color", "com.adevinta.spark.icons"),
+            )
+            public val Couleur: DrawableRes = SparkIcons.Color
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Cylindrical", "com.adevinta.spark.icons"),
+            )
+            public val Cylindree: DrawableRes = SparkIcons.Cylindrical
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Energy", "com.adevinta.spark.icons"),
+            )
+            public val Energie: DrawableRes = SparkIcons.Energy
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Power", "com.adevinta.spark.icons"),
+            )
+            public val Puissance: DrawableRes = SparkIcons.Power
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Mileage", "com.adevinta.spark.icons"),
+            )
+            public val Kilometrage: DrawableRes = SparkIcons.Mileage
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Moto", "com.adevinta.spark.icons"),
+            )
+            public val Moto: DrawableRes = SparkIcons.Moto
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.License", "com.adevinta.spark.icons"),
+            )
+            public val Permis: DrawableRes = SparkIcons.License
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Seats", "com.adevinta.spark.icons"),
+            )
+            public val Places: DrawableRes = SparkIcons.Seats
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Doors", "com.adevinta.spark.icons"),
+            )
+            public val Portes: DrawableRes = SparkIcons.Doors
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.CalendarCriterias", "com.adevinta.spark.icons"),
+            )
+            public val Regdate: DrawableRes = SparkIcons.CalendarCriterias
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Type", "com.adevinta.spark.icons"),
+            )
+            public val Type: DrawableRes = SparkIcons.Type
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Speed", "com.adevinta.spark.icons"),
+            )
+            public val Vitesse: DrawableRes = SparkIcons.Speed
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Trunk", "com.adevinta.spark.icons"),
+            )
+            public val Coffre: DrawableRes = SparkIcons.Trunk
         }
 
-        public sealed class Emploi(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object EducationalLevel : Emploi(R.drawable.spark_icons_job_study)
-            public object Experience : Emploi(R.drawable.spark_icons_job_experience)
-            public object Fonction : Emploi(R.drawable.spark_icons_job_duty)
-            public object Salaire : Emploi(R.drawable.spark_icons_job_salary)
-            public object Secteur : Emploi(R.drawable.spark_icons_job_field)
-            public object Temps : Emploi(R.drawable.spark_icons_job_time)
-            public object Type : Emploi(R.drawable.spark_icons_job_contract)
+        @Deprecated("Use SparkIcons instead.")
+        public object Emploi {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.EducationalLevel", "com.adevinta.spark.icons"),
+            )
+            public val EducationalLevel: DrawableRes = SparkIcons.EducationalLevel
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Experience", "com.adevinta.spark.icons"),
+            )
+            public val Experience: DrawableRes = SparkIcons.Experience
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Function", "com.adevinta.spark.icons"),
+            )
+            public val Fonction: DrawableRes = SparkIcons.Function
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Salary", "com.adevinta.spark.icons"),
+            )
+            public val Salaire: DrawableRes = SparkIcons.Salary
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Sector", "com.adevinta.spark.icons"),
+            )
+            public val Secteur: DrawableRes = SparkIcons.Sector
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Time", "com.adevinta.spark.icons"),
+            )
+            public val Temps: DrawableRes = SparkIcons.Time
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Type", "com.adevinta.spark.icons"),
+            )
+            public val Type: DrawableRes = SparkIcons.Type
         }
 
-        public sealed class Generique(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object Defaut1 : Generique(R.drawable.spark_icons_like)
-            public object Defaut2 : Generique(R.drawable.spark_icons_criteria)
-            public object Donate : Emploi(R.drawable.spark_icons_donate)
-            public object Smoking : Generique(R.drawable.spark_icons_smoking)
-            public object Localisation : Generique(R.drawable.spark_icons_localisation)
-            public object Delivery : Generique(R.drawable.spark_icons_delivery)
+        @Deprecated("Use SparkIcons instead.")
+        public object Generique {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.LikeOutline", "com.adevinta.spark.icons"),
+            )
+            public val Defaut1: DrawableRes = SparkIcons.LikeOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Listing", "com.adevinta.spark.icons"),
+            )
+            public val Defaut2: DrawableRes = SparkIcons.Listing
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Donate", "com.adevinta.spark.icons"),
+            )
+            public val Donate: DrawableRes = SparkIcons.Donate
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Smoking", "com.adevinta.spark.icons"),
+            )
+            public val Smoking: DrawableRes = SparkIcons.Smoking
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Localisation", "com.adevinta.spark.icons"),
+            )
+            public val Localisation: DrawableRes = SparkIcons.Localisation
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Delivery", "com.adevinta.spark.icons"),
+            )
+            public val Delivery: DrawableRes = SparkIcons.Delivery
         }
 
-        public sealed class Immobilier(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object Classe : Immobilier(R.drawable.spark_icons_energy_rate)
-            public object Ges : Immobilier(R.drawable.spark_icons_ges)
-            public object Honoraires : Immobilier(R.drawable.spark_icons_fai)
-            public object Meuble : Immobilier(R.drawable.spark_icons_furnished)
-            public object Pieces : Immobilier(R.drawable.spark_icons_rooms)
-            public object Reference : Immobilier(R.drawable.spark_icons_reference)
-            public object Surface : Immobilier(R.drawable.spark_icons_square)
-            public object TypeDeBien : Immobilier(R.drawable.spark_icons_real_estate_type)
-            public object TypeDeVente : Immobilier(R.drawable.spark_icons_real_estate_sale_type)
+        @Deprecated("Use SparkIcons instead.")
+        public object Immobilier {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Class", "com.adevinta.spark.icons"),
+            )
+            public val Classe: DrawableRes = SparkIcons.Class
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Class", "com.adevinta.spark.icons"),
+            )
+            public val Ges: DrawableRes = SparkIcons.Class
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Honoraria", "com.adevinta.spark.icons"),
+            )
+            public val Honoraires: DrawableRes = SparkIcons.Honoraria
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Furniture", "com.adevinta.spark.icons"),
+            )
+            public val Meuble: DrawableRes = SparkIcons.Furniture
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Pieces", "com.adevinta.spark.icons"),
+            )
+            public val Pieces: DrawableRes = SparkIcons.Pieces
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Reference", "com.adevinta.spark.icons"),
+            )
+            public val Reference: DrawableRes = SparkIcons.Reference
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Surface", "com.adevinta.spark.icons"),
+            )
+            public val Surface: DrawableRes = SparkIcons.Surface
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.HousingType", "com.adevinta.spark.icons"),
+            )
+            public val TypeDeBien: DrawableRes = SparkIcons.HousingType
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.SaleType", "com.adevinta.spark.icons"),
+            )
+            public val TypeDeVente: DrawableRes = SparkIcons.SaleType
         }
 
-        public sealed class ImmobilierNeuf(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object Balcon : ImmobilierNeuf(R.drawable.spark_icons_balcony)
-            public object Cave : ImmobilierNeuf(R.drawable.spark_icons_cellar)
-            public object Duplex : ImmobilierNeuf(R.drawable.spark_icons_duplex)
-            public object Etage : ImmobilierNeuf(R.drawable.spark_icons_floor)
-            public object Garage : ImmobilierNeuf(R.drawable.spark_icons_garage)
-            public object Jardin : ImmobilierNeuf(R.drawable.spark_icons_garden)
-            public object Loggia : ImmobilierNeuf(R.drawable.spark_icons_loggia)
-            public object Orientation : ImmobilierNeuf(R.drawable.spark_icons_direction)
-            public object Parking : ImmobilierNeuf(R.drawable.spark_icons_park_sign)
-            public object Terrasse : ImmobilierNeuf(R.drawable.spark_icons_terrace)
+        @Deprecated("Use SparkIcons instead.")
+        public object ImmobilierNeuf {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Balcony", "com.adevinta.spark.icons"),
+            )
+            public val Balcon: DrawableRes = SparkIcons.Balcony
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Cave", "com.adevinta.spark.icons"),
+            )
+            public val Cave: DrawableRes = SparkIcons.Cave
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Duplex", "com.adevinta.spark.icons"),
+            )
+            public val Duplex: DrawableRes = SparkIcons.Duplex
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Floor", "com.adevinta.spark.icons"),
+            )
+            public val Etage: DrawableRes = SparkIcons.Floor
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Garage", "com.adevinta.spark.icons"),
+            )
+            public val Garage: DrawableRes = SparkIcons.Garage
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Garden", "com.adevinta.spark.icons"),
+            )
+            public val Jardin: DrawableRes = SparkIcons.Garden
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Loggia", "com.adevinta.spark.icons"),
+            )
+            public val Loggia: DrawableRes = SparkIcons.Loggia
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.SunOrientation", "com.adevinta.spark.icons"),
+            )
+            public val Orientation: DrawableRes = SparkIcons.SunOrientation
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Parking", "com.adevinta.spark.icons"),
+            )
+            public val Parking: DrawableRes = SparkIcons.Parking
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Terrace", "com.adevinta.spark.icons"),
+            )
+            public val Terrasse: DrawableRes = SparkIcons.Terrace
         }
 
-        public sealed class Location(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object Cave : Location(R.drawable.spark_icons_location_cave)
-            public object Calme : Location(R.drawable.spark_icons_location_calme)
-            public object Cave2 : Location(R.drawable.spark_icons_location_cave_2)
-            public object Chemine : Location(R.drawable.spark_icons_location_chemine)
-            public object DernierEtage : Location(R.drawable.spark_icons_location_dernieretage)
-            public object Digicode : Location(R.drawable.spark_icons_location_digicode)
-            public object BaiesVitrees : Location(R.drawable.spark_icons_location_baiesvitrees)
-            public object Concierge : Location(R.drawable.spark_icons_location_concierge)
-            public object Combles : Location(R.drawable.spark_icons_location_combles)
-            public object BeauBatiment : Location(R.drawable.spark_icons_location_beaubatiment)
-            public object Interphone : Location(R.drawable.spark_icons_location_interphone)
-            public object Loft : Location(R.drawable.spark_icons_location_loft)
-            public object Lumineux : Location(R.drawable.spark_icons_location_lumineux)
-            public object Mitoyen : Location(R.drawable.spark_icons_location_mitoyen)
-            public object Mouture : Location(R.drawable.spark_icons_location_moulure)
-            public object Parquet : Location(R.drawable.spark_icons_location_parquet)
-            public object Penderie : Location(R.drawable.spark_icons_location_penderie)
-            public object Metro : Location(R.drawable.spark_icons_location_metro)
-            public object Magasin : Location(R.drawable.spark_icons_location_magasin)
-            public object Douche : Location(R.drawable.spark_icons_location_douche)
-            public object Renove : Location(R.drawable.spark_icons_location_renovee)
-            public object Baignoire : Location(R.drawable.spark_icons_location_baignoire)
-            public object Vue : Location(R.drawable.spark_icons_location_vue)
-            public object VueMer : Location(R.drawable.spark_icons_location_vue_mer)
-            public object Wc : Location(R.drawable.spark_icons_location_wc)
-            public object Ascenseur : Location(R.drawable.spark_icons_elevator)
-            public object ChargesComprises : Location(R.drawable.spark_icons_location_charges_comprises)
+        @Deprecated("Use SparkIcons instead.")
+        public object Location {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Cave", "com.adevinta.spark.icons"),
+            )
+            public val Cave: DrawableRes = SparkIcons.Cave
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Calm", "com.adevinta.spark.icons"),
+            )
+            public val Calme: DrawableRes = SparkIcons.Calm
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Cave", "com.adevinta.spark.icons"),
+            )
+            public val Cave2: DrawableRes = SparkIcons.Cave
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Fireplace", "com.adevinta.spark.icons"),
+            )
+            public val Chemine: DrawableRes = SparkIcons.Fireplace
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.LastFloor", "com.adevinta.spark.icons"),
+            )
+            public val DernierEtage: DrawableRes = SparkIcons.LastFloor
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Digicode", "com.adevinta.spark.icons"),
+            )
+            public val Digicode: DrawableRes = SparkIcons.Digicode
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.GlassWindows", "com.adevinta.spark.icons"),
+            )
+            public val BaiesVitrees: DrawableRes = SparkIcons.GlassWindows
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Janitor", "com.adevinta.spark.icons"),
+            )
+            public val Concierge: DrawableRes = SparkIcons.Janitor
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Attic", "com.adevinta.spark.icons"),
+            )
+            public val Combles: DrawableRes = SparkIcons.Attic
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.BeautifulBuilding", "com.adevinta.spark.icons"),
+            )
+            public val BeauBatiment: DrawableRes = SparkIcons.BeautifulBuilding
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Interphone", "com.adevinta.spark.icons"),
+            )
+            public val Interphone: DrawableRes = SparkIcons.Interphone
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Loft", "com.adevinta.spark.icons"),
+            )
+            public val Loft: DrawableRes = SparkIcons.Loft
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Light", "com.adevinta.spark.icons"),
+            )
+            public val Lumineux: DrawableRes = SparkIcons.Light
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Common", "com.adevinta.spark.icons"),
+            )
+            public val Mitoyen: DrawableRes = SparkIcons.Common
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Moulding", "com.adevinta.spark.icons"),
+            )
+            public val Mouture: DrawableRes = SparkIcons.Moulding
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Parquet", "com.adevinta.spark.icons"),
+            )
+            public val Parquet: DrawableRes = SparkIcons.Parquet
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Wardrobe", "com.adevinta.spark.icons"),
+            )
+            public val Penderie: DrawableRes = SparkIcons.Wardrobe
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Metro", "com.adevinta.spark.icons"),
+            )
+            public val Metro: DrawableRes = SparkIcons.Metro
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.StoreOutline", "com.adevinta.spark.icons"),
+            )
+            public val Magasin: DrawableRes = SparkIcons.StoreOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Shower", "com.adevinta.spark.icons"),
+            )
+            public val Douche: DrawableRes = SparkIcons.Shower
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Renovation", "com.adevinta.spark.icons"),
+            )
+            public val Renove: DrawableRes = SparkIcons.Renovation
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Bath", "com.adevinta.spark.icons"),
+            )
+            public val Baignoire: DrawableRes = SparkIcons.Bath
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.View", "com.adevinta.spark.icons"),
+            )
+            public val Vue: DrawableRes = SparkIcons.View
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.SeaView", "com.adevinta.spark.icons"),
+            )
+            public val VueMer: DrawableRes = SparkIcons.SeaView
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Wc", "com.adevinta.spark.icons"),
+            )
+            public val Wc: DrawableRes = SparkIcons.Wc
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Lift", "com.adevinta.spark.icons"),
+            )
+            public val Ascenseur: DrawableRes = SparkIcons.Lift
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ChargesIncluded", "com.adevinta.spark.icons"),
+            )
+            public val ChargesComprises: DrawableRes = SparkIcons.ChargesIncluded
         }
 
-        public sealed class Loisirs(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object Jouet : Loisirs(R.drawable.spark_icons_jouet)
-            public object BicycleType : Loisirs(R.drawable.spark_icons_bicycle)
-            public object ToysProduct : Loisirs(R.drawable.spark_icons_toy_product)
+        @Deprecated("Use SparkIcons instead.")
+        public object Loisirs {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Toy", "com.adevinta.spark.icons"),
+            )
+            public val Jouet: DrawableRes = SparkIcons.Toy
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.BicycleType", "com.adevinta.spark.icons"),
+            )
+            public val BicycleType: DrawableRes = SparkIcons.BicycleType
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ToysProduct", "com.adevinta.spark.icons"),
+            )
+            public val ToysProduct: DrawableRes = SparkIcons.ToysProduct
         }
 
-        public sealed class Maison(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object DiyProduct : Maison(R.drawable.spark_icons_maison_diy_product)
-            public object DiyType : Maison(R.drawable.spark_icons_maison_diy_type)
-            public object HomeAppliancesProduct : Maison(R.drawable.spark_icons_maison_homeappliance_product)
-            public object HomeAppliancesType : Maison(R.drawable.spark_icons_maison_homeappliance_type)
-            public object GardeningProduct : Maison(R.drawable.spark_icons_maison_gardening_product)
-            public object GardeningType : Maison(R.drawable.spark_icons_maison_gardening_type)
-            public object LinensProduct : Maison(R.drawable.spark_icons_linens_product)
-            public object LinensType : Maison(R.drawable.spark_icons_linens_type)
-            public object TableArtMaterial : Maison(R.drawable.spark_icons_maison_tableart_material)
-            public object TableArtProduct : Maison(R.drawable.spark_icons_maison_tableart_product)
-            public object FournitureType : Maison(R.drawable.spark_icons_furniture_type)
+        @Deprecated("Use SparkIcons instead.")
+        public object Maison {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.DiyProduct", "com.adevinta.spark.icons"),
+            )
+            public val DiyProduct: DrawableRes = SparkIcons.DiyProduct
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.DiyType", "com.adevinta.spark.icons"),
+            )
+            public val DiyType: DrawableRes = SparkIcons.DiyType
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.HomeappliancesProduct", "com.adevinta.spark.icons"),
+            )
+            public val HomeAppliancesProduct: DrawableRes = SparkIcons.HomeappliancesProduct
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.HomeappliancesType", "com.adevinta.spark.icons"),
+            )
+            public val HomeAppliancesType: DrawableRes = SparkIcons.HomeappliancesType
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.GardeningProduct", "com.adevinta.spark.icons"),
+            )
+            public val GardeningProduct: DrawableRes = SparkIcons.GardeningProduct
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.GardeningType", "com.adevinta.spark.icons"),
+            )
+            public val GardeningType: DrawableRes = SparkIcons.GardeningType
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.LinensProduct", "com.adevinta.spark.icons"),
+            )
+            public val LinensProduct: DrawableRes = SparkIcons.LinensProduct
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.LinensType", "com.adevinta.spark.icons"),
+            )
+            public val LinensType: DrawableRes = SparkIcons.LinensType
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.TableArtMaterial", "com.adevinta.spark.icons"),
+            )
+            public val TableArtMaterial: DrawableRes = SparkIcons.TableArtMaterial
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.TableArtProduct", "com.adevinta.spark.icons"),
+            )
+            public val TableArtProduct: DrawableRes = SparkIcons.TableArtProduct
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.FurnitureType", "com.adevinta.spark.icons"),
+            )
+            public val FournitureType: DrawableRes = SparkIcons.FurnitureType
         }
 
-        public sealed class Mode(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object EquipementBebe : Mode(R.drawable.spark_icons_baby_equipment_type)
-            public object Couleur : Mode(R.drawable.spark_icons_color)
-            public object Etat : Mode(R.drawable.spark_icons_clothing_condition)
-            public object Marque : Mode(R.drawable.spark_icons_brand)
-            public object Matiere : Mode(R.drawable.spark_icons_clothing_material)
-            public object Luxe : Mode(R.drawable.spark_icons_accessories_material)
-            public object Pointure : Mode(R.drawable.spark_icons_shoe_size)
-            public object Taille : Mode(R.drawable.spark_icons_clothing_size)
-            public object Bijoux : Mode(R.drawable.spark_icons_accessories_type_2)
-            public object Chaussure : Mode(R.drawable.spark_icons_shoe_type)
-            public object Vetements : Mode(R.drawable.spark_icons_clothing_type)
-            public object Univers : Mode(R.drawable.spark_icons_people)
+        @Deprecated("Use SparkIcons instead.")
+        public object Mode {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.EquipmentBaby", "com.adevinta.spark.icons"),
+            )
+            public val EquipementBebe: DrawableRes = SparkIcons.EquipmentBaby
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Color", "com.adevinta.spark.icons"),
+            )
+            public val Couleur: DrawableRes = SparkIcons.Color
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Condition", "com.adevinta.spark.icons"),
+            )
+            public val Etat: DrawableRes = SparkIcons.Condition
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.OfferOutline", "com.adevinta.spark.icons"),
+            )
+            public val Marque: DrawableRes = SparkIcons.OfferOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Material", "com.adevinta.spark.icons"),
+            )
+            public val Matiere: DrawableRes = SparkIcons.Material
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Luxe", "com.adevinta.spark.icons"),
+            )
+            public val Luxe: DrawableRes = SparkIcons.Luxe
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ShoeSize", "com.adevinta.spark.icons"),
+            )
+            public val Pointure: DrawableRes = SparkIcons.ShoeSize
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Size", "com.adevinta.spark.icons"),
+            )
+            public val Taille: DrawableRes = SparkIcons.Size
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Jewels", "com.adevinta.spark.icons"),
+            )
+            public val Bijoux: DrawableRes = SparkIcons.Jewels
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Shoes", "com.adevinta.spark.icons"),
+            )
+            public val Chaussure: DrawableRes = SparkIcons.Shoes
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Clothes", "com.adevinta.spark.icons"),
+            )
+            public val Vetements: DrawableRes = SparkIcons.Clothes
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Univers", "com.adevinta.spark.icons"),
+            )
+            public val Univers: DrawableRes = SparkIcons.Univers
         }
 
-        public sealed class Multimedia(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object Etat : Multimedia(R.drawable.spark_icons_item_condition)
-            public object Memoire : Multimedia(R.drawable.spark_icons_phone_memory)
-            public object Modele : Multimedia(R.drawable.spark_icons_phone_type)
-            public object Couleur : Multimedia(R.drawable.spark_icons_color)
-            public object Marque : Multimedia(R.drawable.spark_icons_phone_type)
-            public object Type : Multimedia(R.drawable.spark_icons_video_game_type)
+        @Deprecated("Use SparkIcons instead.")
+        public object Multimedia {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Condition", "com.adevinta.spark.icons"),
+            )
+            public val Etat: DrawableRes = SparkIcons.Condition
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Memory", "com.adevinta.spark.icons"),
+            )
+            public val Memoire: DrawableRes = SparkIcons.Memory
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Model", "com.adevinta.spark.icons"),
+            )
+            public val Modele: DrawableRes = SparkIcons.Model
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Color", "com.adevinta.spark.icons"),
+            )
+            public val Couleur: DrawableRes = SparkIcons.Color
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Model", "com.adevinta.spark.icons"),
+            )
+            public val Marque: DrawableRes = SparkIcons.Model
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Type", "com.adevinta.spark.icons"),
+            )
+            public val Type: DrawableRes = SparkIcons.Type
         }
 
-        public sealed class Vacances(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public object Animaux : Vacances(R.drawable.spark_icons_pet_accepted)
-            public object Capacite : Vacances(R.drawable.spark_icons_people)
-            public object Chambres : Vacances(R.drawable.spark_icons_bedrooms)
-            public object Arrive : Vacances(R.drawable.spark_icons_check_in_out)
-            public object Depart : Vacances(R.drawable.spark_icons_check_in_out)
-            public object NombreEtoiles : Vacances(R.drawable.spark_icons_housing_ranking)
-            public object Climatisation : Vacances(R.drawable.spark_icons_aircooler)
-            public object SalleSport : Vacances(R.drawable.spark_icons_gym)
-            public object PetitDejeune : Vacances(R.drawable.spark_icons_breakfast)
-            public object Spa : Vacances(R.drawable.spark_icons_spa)
-            public object Tv : Vacances(R.drawable.spark_icons_television)
-            public object Acceuil : Vacances(R.drawable.spark_icons_welcome)
-            public object Wifi : Vacances(R.drawable.spark_icons_wifi)
-            public object LabelSanitaire2 : Vacances(R.drawable.spark_icons_covid)
-            public object TypeLogement : Vacances(R.drawable.spark_icons_real_estate_type)
-            public object Jardin : Vacances(R.drawable.spark_icons_garden)
-            public object Parking : Vacances(R.drawable.spark_icons_park)
-            public object Piscine : Vacances(R.drawable.spark_icons_swimming_pool)
-            public object Accessories : Vacances(R.drawable.spark_icons_accessories_type)
-            public object Date : Vacances(R.drawable.spark_icons_date)
+        @Deprecated("Use SparkIcons instead.")
+        public object Vacances {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Animals", "com.adevinta.spark.icons"),
+            )
+            public val Animaux: DrawableRes = SparkIcons.Animals
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Capacity", "com.adevinta.spark.icons"),
+            )
+            public val Capacite: DrawableRes = SparkIcons.Capacity
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Rooms", "com.adevinta.spark.icons"),
+            )
+            public val Chambres: DrawableRes = SparkIcons.Rooms
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Arrival", "com.adevinta.spark.icons"),
+            )
+            public val Arrive: DrawableRes = SparkIcons.Arrival
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Start", "com.adevinta.spark.icons"),
+            )
+            public val Depart: DrawableRes = SparkIcons.Start
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Rating", "com.adevinta.spark.icons"),
+            )
+            public val NombreEtoiles: DrawableRes = SparkIcons.Rating
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.AirConditioning", "com.adevinta.spark.icons"),
+            )
+            public val Climatisation: DrawableRes = SparkIcons.AirConditioning
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Sport", "com.adevinta.spark.icons"),
+            )
+            public val SalleSport: DrawableRes = SparkIcons.Sport
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Breakfast", "com.adevinta.spark.icons"),
+            )
+            public val PetitDejeune: DrawableRes = SparkIcons.Breakfast
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Spa", "com.adevinta.spark.icons"),
+            )
+            public val Spa: DrawableRes = SparkIcons.Spa
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Tv", "com.adevinta.spark.icons"),
+            )
+            public val Tv: DrawableRes = SparkIcons.Tv
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Welcome", "com.adevinta.spark.icons"),
+            )
+            public val Acceuil: DrawableRes = SparkIcons.Welcome
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Wifi", "com.adevinta.spark.icons"),
+            )
+            public val Wifi: DrawableRes = SparkIcons.Wifi
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Clean", "com.adevinta.spark.icons"),
+            )
+            public val LabelSanitaire2: DrawableRes = SparkIcons.Clean
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.HousingType", "com.adevinta.spark.icons"),
+            )
+            public val TypeLogement: DrawableRes = SparkIcons.HousingType
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Garden", "com.adevinta.spark.icons"),
+            )
+            public val Jardin: DrawableRes = SparkIcons.Garden
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Parking", "com.adevinta.spark.icons"),
+            )
+            public val Parking: DrawableRes = SparkIcons.Parking
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Pool", "com.adevinta.spark.icons"),
+            )
+            public val Piscine: DrawableRes = SparkIcons.Pool
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.Accessories", "com.adevinta.spark.icons"),
+            )
+            public val Accessories: DrawableRes = SparkIcons.Accessories
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.CalendarCriterias", "com.adevinta.spark.icons"),
+            )
+            public val Date: DrawableRes = SparkIcons.CalendarCriterias
         }
 
-        public sealed class MaterialTools(@DrawableRes override val drawableId: Int) : Criterias(drawableId) {
-            public sealed class Tools(@DrawableRes override val drawableId: Int) : MaterialTools(drawableId) {
-                public object Agriculture : Tools(R.drawable.spark_icons_agriculture)
+        @Deprecated("Use SparkIcons instead.")
+        public object MaterialTools {
+            @Deprecated("Use SparkIcons instead.")
+            public object Tools {
+                @Deprecated(
+                    message = "Use SparkIcons instead.",
+                    replaceWith = ReplaceWith("SparkIcons.Tools", "com.adevinta.spark.icons"),
+                )
+                public val Agriculture: DrawableRes = SparkIcons.Tools
             }
         }
     }
 
-    public sealed class Flags(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object FlagAT : Flags(R.drawable.spark_icons_flag_at)
-        public object FlagBE : Flags(R.drawable.spark_icons_flag_be)
-        public object FlagBR : Flags(R.drawable.spark_icons_flag_br)
-        public object FlagBY : Flags(R.drawable.spark_icons_flag_by)
-        public object FlagCH : Flags(R.drawable.spark_icons_flag_ch)
-        public object FlagCL : Flags(R.drawable.spark_icons_flag_cl)
-        public object FlagCO : Flags(R.drawable.spark_icons_flag_co)
-        public object FlagDO : Flags(R.drawable.spark_icons_flag_do)
-        public object FlagES : Flags(R.drawable.spark_icons_flag_es)
-        public object FlagFI : Flags(R.drawable.spark_icons_flag_fi)
-        public object FlagFR : Flags(R.drawable.spark_icons_flag_fr)
-        public object FlagHU : Flags(R.drawable.spark_icons_flag_hu)
-        public object FlagID : Flags(R.drawable.spark_icons_flag_id)
-        public object FlagIE : Flags(R.drawable.spark_icons_flag_ie)
-        public object FlagIT : Flags(R.drawable.spark_icons_flag_it)
-        public object FlagMA : Flags(R.drawable.spark_icons_flag_ma)
-        public object FlagMX : Flags(R.drawable.spark_icons_flag_mx)
-        public object FlagMY : Flags(R.drawable.spark_icons_flag_my)
-        public object FlagPT : Flags(R.drawable.spark_icons_flag_pt)
-        public object FlagSE : Flags(R.drawable.spark_icons_flag_se)
-        public object FlagTN : Flags(R.drawable.spark_icons_flag_tn)
-        public object FlagVN : Flags(R.drawable.spark_icons_flag_vn)
+    @Deprecated("Use SparkIcons instead.")
+    public object Flags {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagAT", "com.adevinta.spark.icons"),
+        )
+        public val FlagAT: DrawableRes = SparkIcons.FlagAT
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagBE", "com.adevinta.spark.icons"),
+        )
+        public val FlagBE: DrawableRes = SparkIcons.FlagBE
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagBR", "com.adevinta.spark.icons"),
+        )
+        public val FlagBR: DrawableRes = SparkIcons.FlagBR
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagBY", "com.adevinta.spark.icons"),
+        )
+        public val FlagBY: DrawableRes = SparkIcons.FlagBY
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagCH", "com.adevinta.spark.icons"),
+        )
+        public val FlagCH: DrawableRes = SparkIcons.FlagCH
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagCL", "com.adevinta.spark.icons"),
+        )
+        public val FlagCL: DrawableRes = SparkIcons.FlagCL
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagCO", "com.adevinta.spark.icons"),
+        )
+        public val FlagCO: DrawableRes = SparkIcons.FlagCO
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagDO", "com.adevinta.spark.icons"),
+        )
+        public val FlagDO: DrawableRes = SparkIcons.FlagDO
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagES", "com.adevinta.spark.icons"),
+        )
+        public val FlagES: DrawableRes = SparkIcons.FlagES
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagFI", "com.adevinta.spark.icons"),
+        )
+        public val FlagFI: DrawableRes = SparkIcons.FlagFI
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagFR", "com.adevinta.spark.icons"),
+        )
+        public val FlagFR: DrawableRes = SparkIcons.FlagFR
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagHU", "com.adevinta.spark.icons"),
+        )
+        public val FlagHU: DrawableRes = SparkIcons.FlagHU
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagID", "com.adevinta.spark.icons"),
+        )
+        public val FlagID: DrawableRes = SparkIcons.FlagID
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagIE", "com.adevinta.spark.icons"),
+        )
+        public val FlagIE: DrawableRes = SparkIcons.FlagIE
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagIT", "com.adevinta.spark.icons"),
+        )
+        public val FlagIT: DrawableRes = SparkIcons.FlagIT
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagMA", "com.adevinta.spark.icons"),
+        )
+        public val FlagMA: DrawableRes = SparkIcons.FlagMA
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagMX", "com.adevinta.spark.icons"),
+        )
+        public val FlagMX: DrawableRes = SparkIcons.FlagMX
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagMY", "com.adevinta.spark.icons"),
+        )
+        public val FlagMY: DrawableRes = SparkIcons.FlagMY
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagPT", "com.adevinta.spark.icons"),
+        )
+        public val FlagPT: DrawableRes = SparkIcons.FlagPT
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagSE", "com.adevinta.spark.icons"),
+        )
+        public val FlagSE: DrawableRes = SparkIcons.FlagSE
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagTN", "com.adevinta.spark.icons"),
+        )
+        public val FlagTN: DrawableRes = SparkIcons.FlagTN
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagVN", "com.adevinta.spark.icons"),
+        )
+        public val FlagVN: DrawableRes = SparkIcons.FlagVN
     }
 
-    public sealed class Images(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public sealed class Camera(@DrawableRes override val drawableId: Int) : Images(drawableId) {
-            public object Default : Camera(R.drawable.spark_icons_camera)
-            public object Outline : Camera(R.drawable.spark_icons_camera_outline)
-            public object More : Camera(R.drawable.spark_icons_camera_more)
+    @Deprecated("Use SparkIcons instead.")
+    public object Images {
+        @Deprecated("Use SparkIcons instead.")
+        public object Camera {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.CameraFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.CameraFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.CameraOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.CameraOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.AddImageOutline", "com.adevinta.spark.icons"),
+            )
+            public val More: DrawableRes = SparkIcons.AddImageOutline
         }
 
-        public object Library : Images(R.drawable.spark_icons_library)
-        public sealed class NewAd(@DrawableRes override val drawableId: Int) : Images(drawableId) {
-            public object Default : NewAd(R.drawable.spark_icons_new_ad)
-            public object Outline : NewAd(R.drawable.spark_icons_new_ad_outline)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.GalleryFill", "com.adevinta.spark.icons"),
+        )
+        public val Library: DrawableRes = SparkIcons.GalleryFill
+
+        @Deprecated("Use SparkIcons instead.")
+        public object NewAd {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.AddSquareFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.AddSquareFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.AddSquareOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.AddSquareOutline
         }
 
-        public object NoPhoto : Images(R.drawable.spark_icons_no_photo1)
-        public object ErrorPhoto : Images(R.drawable.spark_icons_error_photo)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.NoPhoto", "com.adevinta.spark.icons"),
+        )
+        public val NoPhoto: DrawableRes = SparkIcons.NoPhoto
 
-        public object NoPhoto2 : Images(R.drawable.spark_icons_no_photo2)
-        public object Rotate : Images(R.drawable.spark_icons_photo_rotate)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.ErrorPhoto", "com.adevinta.spark.icons"),
+        )
+        public val ErrorPhoto: DrawableRes = SparkIcons.ErrorPhoto
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.NoPhoto", "com.adevinta.spark.icons"),
+        )
+        public val NoPhoto2: DrawableRes = SparkIcons.NoPhoto
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.RotateImage", "com.adevinta.spark.icons"),
+        )
+        public val Rotate: DrawableRes = SparkIcons.RotateImage
     }
 
-    public sealed class Infos(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Camera : Infos(R.drawable.spark_icons_camera)
+    @Deprecated("Use SparkIcons instead.")
+    public object Infos {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CameraFill", "com.adevinta.spark.icons"),
+        )
+        public val Camera: DrawableRes = SparkIcons.CameraFill
 
-        public object Block : Infos(R.drawable.spark_icons_block)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Block", "com.adevinta.spark.icons"),
+        )
+        public val Block: DrawableRes = SparkIcons.Block
 
-        public sealed class Alert(@DrawableRes override val drawableId: Int) : Infos(drawableId) {
-            public object Default : Alert(R.drawable.spark_icons_alerte)
-            public object Outline : Alert(R.drawable.spark_icons_alert_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object Alert {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.AlertFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.AlertFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.AlertOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.AlertOutline
         }
 
-        public sealed class Ask(@DrawableRes override val drawableId: Int) : Infos(drawableId) {
-            public object Default : Ask(R.drawable.spark_icons_ask)
-            public object Outline : Ask(R.drawable.spark_icons_ask_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object Ask {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.QuestionFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.QuestionFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.QuestionOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.QuestionOutline
         }
 
-        public sealed class Info(@DrawableRes override val drawableId: Int) : Infos(drawableId) {
-            public object Default : Info(R.drawable.spark_icons_info)
-            public object Outline : Info(R.drawable.spark_icons_info_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object Info {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.InfoFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.InfoFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.InfoOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.InfoOutline
         }
 
-        public sealed class LightBulb(@DrawableRes override val drawableId: Int) : Infos(drawableId) {
-            public object Default : LightBulb(R.drawable.spark_icons_lightbulb)
-            public object Outline : LightBulb(R.drawable.spark_icons_lightbulb_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object LightBulb {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.IdeaFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.IdeaFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.IdeaOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.IdeaOutline
         }
 
-        public sealed class Lock(@DrawableRes override val drawableId: Int) : Infos(drawableId) {
-            public object Default : Lock(R.drawable.spark_icons_lock)
-            public object Outline : Lock(R.drawable.spark_icons_lock_outline)
-            public object Open : Lock(R.drawable.spark_icons_open)
+        @Deprecated("Use SparkIcons instead.")
+        public object Lock {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.LockFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.LockFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.LockOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.LockOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.UnlockOutline", "com.adevinta.spark.icons"),
+            )
+            public val Open: DrawableRes = SparkIcons.UnlockOutline
         }
 
-        public object Warning : Infos(R.drawable.spark_icons_warning)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.WarningFill", "com.adevinta.spark.icons"),
+        )
+        public val Warning: DrawableRes = SparkIcons.WarningFill
     }
 
-    public sealed class Delivery(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object DeliveryHand : Delivery(R.drawable.spark_icons_delivery_hands)
-        public object DeliveryOutline : Delivery(R.drawable.spark_icons_box_outline)
-        public object Truck : Delivery(R.drawable.spark_icons_delivery_truck)
-        public sealed class Mailbox(@DrawableRes override val drawableId: Int) : Delivery(drawableId) {
-            public sealed class Close(@DrawableRes override val drawableId: Int) : Mailbox(drawableId) {
-                public object Down : Close(R.drawable.spark_icons_delivery_mailbox_closed_down)
-                public object Up : Close(R.drawable.spark_icons_delivery_mailbox_closed_up)
+    @Deprecated("Use SparkIcons instead.")
+    public object Delivery {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.DeliveryHandsOutline", "com.adevinta.spark.icons"),
+        )
+        public val DeliveryHand: DrawableRes = SparkIcons.DeliveryHandsOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.DeliveryOutline", "com.adevinta.spark.icons"),
+        )
+        public val DeliveryOutline: DrawableRes = SparkIcons.DeliveryOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.DeliveryTruckOutline", "com.adevinta.spark.icons"),
+        )
+        public val Truck: DrawableRes = SparkIcons.DeliveryTruckOutline
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Mailbox {
+            @Deprecated("Use SparkIcons instead.")
+            public object Close {
+                @Deprecated(
+                    message = "Use SparkIcons instead.",
+                    replaceWith = ReplaceWith("MailCloseFill", "com.adevinta.spark.icons"),
+                )
+                public val Down: DrawableRes = SparkIcons.MailCloseFill
+
+                @Deprecated(
+                    message = "Use SparkIcons instead.",
+                    replaceWith = ReplaceWith("MailCloseFill", "com.adevinta.spark.icons"),
+                )
+                public val Up: DrawableRes = SparkIcons.MailCloseFill
             }
 
-            public sealed class Open(@DrawableRes override val drawableId: Int) : Mailbox(drawableId) {
-                public object Down : Open(R.drawable.spark_icons_delivery_mailbox_open_down)
-                public object Up : Open(R.drawable.spark_icons_delivery_mailbox_open_up)
+            @Deprecated("Use SparkIcons instead.")
+            public object Open {
+                @Deprecated(
+                    message = "Use SparkIcons instead.",
+                    replaceWith = ReplaceWith("SparkIcons.MailOpenFill", "com.adevinta.spark.icons"),
+                )
+                public val Down: DrawableRes = SparkIcons.MailOpenFill
+
+                @Deprecated(
+                    message = "Use SparkIcons instead.",
+                    replaceWith = ReplaceWith("SparkIcons.MailOpenFill", "com.adevinta.spark.icons"),
+                )
+                public val Up: DrawableRes = SparkIcons.MailOpenFill
             }
         }
     }
 
-    public sealed class Map(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object ThreeSixty : Map(R.drawable.spark_icons_three_sixty)
-        public object Bike : Map(R.drawable.spark_icons_bike)
-        public object Drag : Map(R.drawable.spark_icons_drag)
-        public object Expand : Map(R.drawable.spark_icons_expand)
-        public object Geoloc : Map(R.drawable.spark_icons_geoloc)
-        public object Hotel : Map(R.drawable.spark_icons_hotel)
+    @Deprecated("Use SparkIcons instead.")
+    public object Map {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.ThreeSixty", "com.adevinta.spark.icons"),
+        )
+        public val ThreeSixty: DrawableRes = SparkIcons.ThreeSixty
 
-        public sealed class Marker(@DrawableRes override val drawableId: Int) : Map(drawableId) {
-            public object Default : Marker(R.drawable.spark_icons_marker)
-            public object Outline : Marker(R.drawable.spark_icons_marker_outline)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Bike", "com.adevinta.spark.icons"),
+        )
+        public val Bike: DrawableRes = SparkIcons.Bike
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AllDirection", "com.adevinta.spark.icons"),
+        )
+        public val Drag: DrawableRes = SparkIcons.AllDirection
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.MapExpand", "com.adevinta.spark.icons"),
+        )
+        public val Expand: DrawableRes = SparkIcons.MapExpand
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.TargetOutline", "com.adevinta.spark.icons"),
+        )
+        public val Geoloc: DrawableRes = SparkIcons.TargetOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.HotelFill", "com.adevinta.spark.icons"),
+        )
+        public val Hotel: DrawableRes = SparkIcons.HotelFill
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Marker {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.PinFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.PinFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.PinOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.PinOutline
         }
 
-        public sealed class Near(@DrawableRes override val drawableId: Int) : Map(drawableId) {
-            public object Default : Near(R.drawable.spark_icons_near)
-            public object Outline : Near(R.drawable.spark_icons_near_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object Near {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.MapCursorFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.MapCursorFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.MapCursorOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.MapCursorOutline
         }
 
-        public object SimpleExpand : Map(R.drawable.spark_icons_expand_simple)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.MapExpand", "com.adevinta.spark.icons"),
+        )
+        public val SimpleExpand: DrawableRes = SparkIcons.MapExpand
 
-        public sealed class Train(@DrawableRes override val drawableId: Int) : Map(drawableId) {
-            public object Default : Train(R.drawable.spark_icons_train)
-            public object Outline : Train(R.drawable.spark_icons_train_outline)
+        @Deprecated("Use SparkIcons instead.")
+        public object Train {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.TrainFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.TrainFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.TrainOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.TrainOutline
         }
 
-        public object Walker : Map(R.drawable.spark_icons_walker)
-        public object Car : Map(R.drawable.spark_icons_car)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.WalkerFill", "com.adevinta.spark.icons"),
+        )
+        public val Walker: DrawableRes = SparkIcons.WalkerFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CarOutline", "com.adevinta.spark.icons"),
+        )
+        public val Car: DrawableRes = SparkIcons.CarOutline
     }
 
-    public sealed class Navs(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Arrow : Navs(R.drawable.spark_icons_notif_actif)
-        public object Drawer : Navs(R.drawable.spark_icons_menu)
-        public object Close : Navs(R.drawable.spark_icons_close)
+    @Deprecated("Use SparkIcons instead.")
+    public object Navs {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AlarmOnFill", "com.adevinta.spark.icons"),
+        )
+        public val Arrow: DrawableRes = SparkIcons.AlarmOnFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.BurgerMenu", "com.adevinta.spark.icons"),
+        )
+        public val Drawer: DrawableRes = SparkIcons.BurgerMenu
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Close", "com.adevinta.spark.icons"),
+        )
+        public val Close: DrawableRes = SparkIcons.Close
     }
 
-    public sealed class Notifications(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Active : Notifications(R.drawable.spark_icons_notif_actif)
-        public object Default : Notifications(R.drawable.spark_icons_notif)
-        public object Disable : Notifications(R.drawable.spark_icons_no_notif)
-        public object Outline : Notifications(R.drawable.spark_icons_notif_outline)
+    @Deprecated("Use SparkIcons instead.")
+    public object Notifications {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AlarmOnFill", "com.adevinta.spark.icons"),
+        )
+        public val Active: DrawableRes = SparkIcons.AlarmOnFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AlarmFill", "com.adevinta.spark.icons"),
+        )
+        public val Default: DrawableRes = SparkIcons.AlarmFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AlarmOffFill", "com.adevinta.spark.icons"),
+        )
+        public val Disable: DrawableRes = SparkIcons.AlarmOffFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AlarmOutline", "com.adevinta.spark.icons"),
+        )
+        public val Outline: DrawableRes = SparkIcons.AlarmOutline
     }
 
-    public sealed class Options(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Booster : Options(R.drawable.spark_icons_booster)
-        public sealed class Clock(@DrawableRes override val drawableId: Int) : Options(drawableId) {
-            public object Arrow : Clock(R.drawable.spark_icons_clockarrow)
-            public object Default : Clock(R.drawable.spark_icons_clock_filled)
-            public object Outline : Clock(R.drawable.spark_icons_clock)
+    @Deprecated("Use SparkIcons instead.")
+    public object Options {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.BoosterFill", "com.adevinta.spark.icons"),
+        )
+        public val Booster: DrawableRes = SparkIcons.BoosterFill
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Clock {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ClockArrowOutline", "com.adevinta.spark.icons"),
+            )
+            public val Arrow: DrawableRes = SparkIcons.ClockArrowOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ClockFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.ClockFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ClockOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.ClockOutline
         }
 
-        public object Credit : Options(R.drawable.spark_icons_credit)
-        public object Flash : Options(R.drawable.spark_icons_flashlight)
-        public object MoveUp : Options(R.drawable.spark_icons_moveup)
-        public sealed class SpotLight(@DrawableRes override val drawableId: Int) : Options(drawableId) {
-            public object Default : SpotLight(R.drawable.spark_icons_spotlight)
-            public object Outline : SpotLight(R.drawable.spark_icons_spotlight_outline)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.MoneyFill", "com.adevinta.spark.icons"),
+        )
+        public val Credit: DrawableRes = SparkIcons.MoneyFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlashlightFill", "com.adevinta.spark.icons"),
+        )
+        public val Flash: DrawableRes = SparkIcons.FlashlightFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.MoveUp", "com.adevinta.spark.icons"),
+        )
+        public val MoveUp: DrawableRes = SparkIcons.MoveUp
+
+        @Deprecated("Use SparkIcons instead.")
+        public object SpotLight {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.BookmarkFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.BookmarkFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.BookmarkOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.BookmarkOutline
         }
 
-        public sealed class Star(@DrawableRes override val drawableId: Int) : Options(drawableId) {
-            public object Default : Star(R.drawable.spark_icons_star)
-            public object Outline : Star(R.drawable.spark_icons_star_outline)
-        }
-    }
+        @Deprecated("Use SparkIcons instead.")
+        public object Star {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.StarFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.StarFill
 
-    public sealed class Others(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public sealed class Megaphone(@DrawableRes override val drawableId: Int) : Others(drawableId) {
-            public object Default : Megaphone(R.drawable.spark_icons_demand_filled)
-            public object Outline : Megaphone(R.drawable.spark_icons_demand)
-        }
-
-        public object SpeedoMeter : Others(R.drawable.spark_icons_speedometer)
-        public object Dissatisfied : Others(R.drawable.spark_icons_dissatisfied)
-        public object Euro : Others(R.drawable.spark_icons_euro)
-        public object FlagOutline : Others(R.drawable.spark_icons_flag_outline)
-        public object Satisfied : Others(R.drawable.spark_icons_satisfied)
-        public object Package : Others(R.drawable.spark_icons_package)
-        public object Refund : Others(R.drawable.spark_icons_refund)
-    }
-
-    public sealed class Paiement(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object GarantiePanne : Paiement(R.drawable.spark_icons_garantie_panne)
-    }
-
-    public sealed class Pro(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Actions : Pro(R.drawable.spark_icons_actions)
-        public object Apparitions : Pro(R.drawable.spark_icons_apparitions)
-
-        public sealed class Download(@DrawableRes override val drawableId: Int) : Pro(drawableId) {
-            public object Default : Download(R.drawable.spark_icons_download)
-            public object Outline : Download(R.drawable.spark_icons_download_outline)
-        }
-
-        public object MyPro : Pro(R.drawable.spark_icons_my_pro)
-        public object SpaceShip : Pro(R.drawable.spark_icons_spaceship)
-    }
-
-    public sealed class Share(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object AttachFile : Share(R.drawable.spark_icons_attachment)
-        public object Facebook : Share(R.drawable.spark_icons_facebook)
-        public object Messenger : Share(R.drawable.spark_icons_messenger)
-        public object Pinterest : Share(R.drawable.spark_icons_pinterest)
-        public object Instagram : Share(R.drawable.spark_icons_instagram)
-        public object Goto : Share(R.drawable.spark_icons_goto)
-        public object Link : Share(R.drawable.spark_icons_link)
-        public object ShareDefault : Share(R.drawable.spark_icons_share)
-        public object ShareArrow : Share(R.drawable.spark_icons_share_arrow)
-        public object Twitter : Share(R.drawable.spark_icons_twitter)
-        public object WhatsApp : Share(R.drawable.spark_icons_whatsapp)
-        public object Upload : Share(R.drawable.spark_icons_upload)
-        public object Download : Share(R.drawable.spark_icons_share_download)
-    }
-
-    public sealed class Toggles(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Add : Toggles(R.drawable.spark_icons_add)
-
-        public sealed class Check(@DrawableRes override val drawableId: Int) : Toggles(drawableId) {
-            public object Default : Check(R.drawable.spark_icons_check)
-            public object Outline : Check(R.drawable.spark_icons_check_outline)
-            public object Simple : Toggles(R.drawable.spark_icons_check_simple)
-            public object Double : Toggles(R.drawable.spark_icons_check_double)
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.StarOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.StarOutline
         }
     }
 
-    public sealed class User(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Pro : User(R.drawable.spark_icons_profile_pro2)
-        public object Default : User(R.drawable.spark_icons_user)
-        public object Outline : User(R.drawable.spark_icons_user_outline)
-        public sealed class Group(@DrawableRes override val drawableId: Int) : User(drawableId) {
-            public object Default : Group(R.drawable.spark_icons_user_group)
-            public object Outline : Group(R.drawable.spark_icons_user_group_outline)
+    @Deprecated("Use SparkIcons instead.")
+    public object Others {
+        @Deprecated("Use SparkIcons instead.")
+        public object Megaphone {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.MegaphoneFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.MegaphoneFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.MegaphoneOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.MegaphoneOutline
         }
 
-        public object Verified : User(R.drawable.spark_icons_verified)
-        public object Avatar : User(R.drawable.spark_icons_avatar_part)
-        public object Store : User(R.drawable.spark_icons_profile_pro1_grey)
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.SpeedmeterOutline", "com.adevinta.spark.icons"),
+        )
+        public val SpeedoMeter: DrawableRes = SparkIcons.SpeedmeterOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.DissatisfiedOutline", "com.adevinta.spark.icons"),
+        )
+        public val Dissatisfied: DrawableRes = SparkIcons.DissatisfiedOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Euro", "com.adevinta.spark.icons"),
+        )
+        public val Euro: DrawableRes = SparkIcons.Euro
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FlagOutline", "com.adevinta.spark.icons"),
+        )
+        public val FlagOutline: DrawableRes = SparkIcons.FlagOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.SatisfiedOutline", "com.adevinta.spark.icons"),
+        )
+        public val Satisfied: DrawableRes = SparkIcons.SatisfiedOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.BoxOutline", "com.adevinta.spark.icons"),
+        )
+        public val Package: DrawableRes = SparkIcons.BoxOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Refund", "com.adevinta.spark.icons"),
+        )
+        public val Refund: DrawableRes = SparkIcons.Refund
     }
 
-    public sealed class Value(@DrawableRes override val drawableId: Int) : SparkIcon {
-        public object Minus : Value(R.drawable.spark_icons_minus_outline)
+    @Deprecated("Use SparkIcons instead.")
+    public object Paiement {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.CarWarrantyOutline", "com.adevinta.spark.icons"),
+        )
+        public val GarantiePanne: DrawableRes = SparkIcons.CarWarrantyOutline
+    }
 
-        public sealed class More(@DrawableRes override val drawableId: Int) : Value(drawableId) {
-            public object Default : More(R.drawable.spark_icons_more)
-            public object Outline : More(R.drawable.spark_icons_more_outline)
+    @Deprecated("Use SparkIcons instead.")
+    public object Pro {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.ProCursorOutline", "com.adevinta.spark.icons"),
+        )
+        public val Actions: DrawableRes = SparkIcons.ProCursorOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AppearanceFill", "com.adevinta.spark.icons"),
+        )
+        public val Apparitions: DrawableRes = SparkIcons.AppearanceFill
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Download {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.DownloadFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.DownloadFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.DownloadOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.DownloadOutline
+        }
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.GraphOutline", "com.adevinta.spark.icons"),
+        )
+        public val MyPro: DrawableRes = SparkIcons.GraphOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.RocketOutline", "com.adevinta.spark.icons"),
+        )
+        public val SpaceShip: DrawableRes = SparkIcons.RocketOutline
+    }
+
+    @Deprecated("Use SparkIcons instead.")
+    public object Share {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AttachFileOutline", "com.adevinta.spark.icons"),
+        )
+        public val AttachFile: DrawableRes = SparkIcons.AttachFileOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.FacebookFill", "com.adevinta.spark.icons"),
+        )
+        public val Facebook: DrawableRes = SparkIcons.FacebookFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Messenger", "com.adevinta.spark.icons"),
+        )
+        public val Messenger: DrawableRes = SparkIcons.Messenger
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Pinterest", "com.adevinta.spark.icons"),
+        )
+        public val Pinterest: DrawableRes = SparkIcons.Pinterest
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.InstagramOutline", "com.adevinta.spark.icons"),
+        )
+        public val Instagram: DrawableRes = SparkIcons.InstagramOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.ShareExpand", "com.adevinta.spark.icons"),
+        )
+        public val Goto: DrawableRes = SparkIcons.ShareExpand
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Link", "com.adevinta.spark.icons"),
+        )
+        public val Link: DrawableRes = SparkIcons.Link
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.ShareFill", "com.adevinta.spark.icons"),
+        )
+        public val ShareDefault: DrawableRes = SparkIcons.ShareFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.ForwardFill", "com.adevinta.spark.icons"),
+        )
+        public val ShareArrow: DrawableRes = SparkIcons.ForwardFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.TwitterFill", "com.adevinta.spark.icons"),
+        )
+        public val Twitter: DrawableRes = SparkIcons.TwitterFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Whatsapp", "com.adevinta.spark.icons"),
+        )
+        public val WhatsApp: DrawableRes = SparkIcons.Whatsapp
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Export", "com.adevinta.spark.icons"),
+        )
+        public val Upload: DrawableRes = SparkIcons.Export
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Import", "com.adevinta.spark.icons"),
+        )
+        public val Download: DrawableRes = SparkIcons.Import
+    }
+
+    @Deprecated("Use SparkIcons instead.")
+    public object Toggles {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Plus", "com.adevinta.spark.icons"),
+        )
+        public val Add: DrawableRes = SparkIcons.Plus
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Check {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ValidFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.ValidFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.ValidOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.ValidOutline
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.CheckFill", "com.adevinta.spark.icons"),
+            )
+            public val Simple: DrawableRes = SparkIcons.CheckFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.DoubleCheckFill", "com.adevinta.spark.icons"),
+            )
+            public val Double: DrawableRes = SparkIcons.DoubleCheckFill
         }
     }
 
-    public abstract class Custom(@DrawableRes override val drawableId: Int) : SparkIcon
+    @Deprecated("Use SparkIcons instead.")
+    public object User {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.ProOutline", "com.adevinta.spark.icons"),
+        )
+        public val Pro: DrawableRes = SparkIcons.ProOutline
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AccountFill", "com.adevinta.spark.icons"),
+        )
+        public val Default: DrawableRes = SparkIcons.AccountFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AccountOutline", "com.adevinta.spark.icons"),
+        )
+        public val Outline: DrawableRes = SparkIcons.AccountOutline
+
+        @Deprecated("Use SparkIcons instead.")
+        public object Group {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.GroupFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.GroupFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.GroupOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.GroupOutline
+        }
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.VerifiedFill", "com.adevinta.spark.icons"),
+        )
+        public val Verified: DrawableRes = SparkIcons.VerifiedFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.AvatarFill", "com.adevinta.spark.icons"),
+        )
+        public val Avatar: DrawableRes = SparkIcons.AvatarFill
+
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.Store", "com.adevinta.spark.icons"),
+        )
+        public val Store: DrawableRes = SparkIcons.Store
+    }
+
+    @Deprecated("Use SparkIcons instead.")
+    public object Value {
+        @Deprecated(
+            message = "Use SparkIcons instead.",
+            replaceWith = ReplaceWith("SparkIcons.RemoveOutline", "com.adevinta.spark.icons"),
+        )
+        public val Minus: DrawableRes = SparkIcons.RemoveOutline
+
+        @Deprecated("Use SparkIcons instead.")
+        public object More {
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.AddFill", "com.adevinta.spark.icons"),
+            )
+            public val Default: DrawableRes = SparkIcons.AddFill
+
+            @Deprecated(
+                message = "Use SparkIcons instead.",
+                replaceWith = ReplaceWith("SparkIcons.AddOutline", "com.adevinta.spark.icons"),
+            )
+            public val Outline: DrawableRes = SparkIcons.AddOutline
+        }
+    }
 }

@@ -22,8 +22,7 @@
   SOFTWARE.
   -->
 <lint>
-    <!-- We ignore it since criteria icons almost all have this issue and we have to wait for design to chnage these path to resolve it -->
     <issue id="VectorPath">
-        <ignore path="src/main/res-iconography/*/drawable/*.xml" />
+        <ignore path="src/main/res/drawable/*.xml" />
     </issue>
 </lint>

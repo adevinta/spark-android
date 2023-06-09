@@ -1,0 +1,78 @@
+<!--
+  Copyright (c) 2023 Adevinta
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:pathData="M24,5.61H0v-0.7c0,-0.23 0.18,-0.42 0.41,-0.42H23.6c0.23,0 0.41,0.19 0.41,0.41v0.71Z"
+      android:fillColor="#FF4B55"/>
+  <path
+      android:pathData="M0,5.61h24v1.12H0z"
+      android:fillColor="#F5F5F5"/>
+  <path
+      android:pathData="M0,6.74h24v1.12H0z"
+      android:fillColor="#FF4B55"/>
+  <path
+      android:pathData="M0,7.86h24v1.12H0z"
+      android:fillColor="#F5F5F5"/>
+  <path
+      android:pathData="M0,8.98h24v1.12H0z"
+      android:fillColor="#FF4B55"/>
+  <path
+      android:pathData="M0,10.1h24v1.13H0z"
+      android:fillColor="#F5F5F5"/>
+  <path
+      android:pathData="M0,11.23h24v1.12H0z"
+      android:fillColor="#FF4B55"/>
+  <path
+      android:pathData="M0,12.35h24v1.12H0z"
+      android:fillColor="#F5F5F5"/>
+  <path
+      android:pathData="M24,14.6H0v-1.83h0.41v0.7H24v1.13Z"
+      android:fillColor="#FF4B55"/>
+  <path
+      android:pathData="M0,14.6h24v1.12H0z"
+      android:fillColor="#F5F5F5"/>
+  <path
+      android:pathData="M0,15.72h24v1.12H0z"
+      android:fillColor="#FF4B55"/>
+  <path
+      android:pathData="M0,16.84h24v1.13H0z"
+      android:fillColor="#F5F5F5"/>
+  <path
+      android:pathData="M0,17.97h24v1.12H0z"
+      android:fillColor="#FF4B55"/>
+  <path
+      android:pathData="M23.59,20.21H0.4a0.41,0.41 0,0 1,-0.4 -0.41v-0.71h24v0.71a0.41,0.41 0,0 1,-0.41 0.41Z"
+      android:fillColor="#F5F5F5"/>
+  <path
+      android:pathData="M14.48,13.47H0.41a0.41,0.41 0,0 1,-0.41 -0.41V4.9c0,-0.22 0.18,-0.41 0.41,-0.41h14.07c0.23,0 0.42,0.19 0.42,0.41v8.16a0.41,0.41 0,0 1,-0.42 0.41Z"
+      android:fillColor="#41479B"/>
+  <path
+      android:pathData="M3.93,8.98a2.83,2.83 0,0 1,3.94 -2.61c0.05,0.02 0.08,-0.04 0.04,-0.07a3.23,3.23 0,0 0,-2 -0.56,3.25 3.25,0 0,0 -3.05,3.02 3.24,3.24 0,0 0,5.05 2.9c0.04,-0.03 0,-0.09 -0.04,-0.07a2.84,2.84 0,0 1,-3.94 -2.61Z"
+      android:fillColor="#FFE15A"/>
+  <path
+      android:pathData="m10.41,8.98 l1.2,-0.47c0.06,-0.02 0.04,-0.1 -0.03,-0.1l-1.28,0.1 0.88,-0.94c0.05,-0.05 -0.01,-0.12 -0.07,-0.08l-1.1,0.64 0.38,-1.22c0.02,-0.06 -0.07,-0.1 -0.1,-0.05l-0.72,1.07 -0.19,-1.28c0,-0.06 -0.1,-0.06 -0.1,0l-0.12,0.8 -0.05,0.35 -0.02,0.13 -0.72,-1.07c-0.04,-0.05 -0.12,-0.01 -0.1,0.05l0.39,1.22 -1.12,-0.65c-0.05,-0.03 -0.1,0.04 -0.06,0.09l0.88,0.94 -1.28,-0.1c-0.07,0 -0.09,0.08 -0.03,0.1l1.2,0.47 -1.2,0.46c-0.06,0.02 -0.04,0.11 0.03,0.1l1.28,-0.1 -0.88,0.95c-0.05,0.04 0.01,0.12 0.06,0.08l1.12,-0.65 -0.39,1.23c-0.02,0.06 0.06,0.1 0.1,0.05l0.72,-1.07 0.02,0.13 0.05,0.34 0.11,0.8c0.02,0.07 0.1,0.07 0.11,0l0.19,-1.27 0.72,1.07c0.03,0.05 0.12,0 0.1,-0.05L10,9.82l1.11,0.65c0.06,0.04 0.12,-0.04 0.07,-0.08l-0.88,-0.94 1.28,0.1c0.07,0 0.09,-0.09 0.03,-0.1l-1.2,-0.47Z"
+      android:fillColor="#FFE15A"/>
+</vector>

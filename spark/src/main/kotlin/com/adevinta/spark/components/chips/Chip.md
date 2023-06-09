@@ -105,7 +105,7 @@ if (selected.not())
         selected = !selected
     }
 else
-    ChipFilled("Chip", intent, leadingIcon = SparkIcon.Toggles.Check.Simple) {
+    ChipFilled("Chip", intent, leadingIcon = SparkIcons.CheckFill) {
         selected = !selected
     }
 // 2nd option
@@ -114,7 +114,7 @@ Chip(
     intent = if (selected) ChipIntent.Success else ChipIntent.Danger,
     onClick = { selected = !selected },
     text = "Chip",
-    leadingIcon = if (selected) SparkIcon.Toggles.Check.Simple else null
+    leadingIcon = if (selected) SparkIcons.CheckFill else null
 )
 ```
 

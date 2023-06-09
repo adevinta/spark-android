@@ -37,7 +37,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -227,7 +229,7 @@ internal fun PrimaryButtonPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        val icon = SparkIcon.Account.Identity
+        val icon = SparkIcons.IdentityOutline
         var isLoading by remember { mutableStateOf(false) }
         val buttonText = "Primary Button"
         ButtonFilled(
@@ -268,7 +270,7 @@ internal fun ButtonFilledIntentPreview(
         themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
-        val icon = SparkIcon.Account.Identity
+        val icon = SparkIcons.IdentityOutline
         ButtonIntent.values().forEach { intent ->
             ButtonFilled(
                 text = intent.name,
@@ -293,7 +295,7 @@ internal fun ButtonSizePreview(
         themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
-        val icon = SparkIcon.Account.Identity
+        val icon = SparkIcons.IdentityOutline
         ButtonSize.values().forEach { size ->
             ButtonFilled(
                 text = size.name,

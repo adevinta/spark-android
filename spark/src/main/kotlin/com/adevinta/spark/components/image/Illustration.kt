@@ -45,6 +45,8 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.rememberSparkIconPainter
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.Store
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -344,7 +346,7 @@ internal fun IllustrationPreview(
 ) {
     PreviewTheme(themeVariant = theme) {
         Illustration(
-            sparkIcon = SparkIcon.User.Store,
+            sparkIcon = SparkIcons.Store,
             contentDescription = null,
             modifier = Modifier.size(100.dp),
         )
