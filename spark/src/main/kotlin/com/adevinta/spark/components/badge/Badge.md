@@ -9,10 +9,10 @@ on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/8711ec-badge/b/98
 
 Badges convey dynamic information, such as counts or status. A badge can include labels or numbers.
 
-|       | Danger and Info                                                                                                                                                  |
-|-------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Light | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_light.png) |
-| Dark  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_dark.png)  |
+|       | Danger and Info                                                                                   |
+|-------|---------------------------------------------------------------------------------------------------|
+| Light | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_light.png) |
+| Dark  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_dark.png)         |
 
 The default value of overflowCount is 99. When count is larger than 99, a `+` is displayed.
 A badge can be used as a part of [`BadgedBox`](#layout) or as a standalone when it is not attached visually to
@@ -62,7 +62,7 @@ Badge(
 
 | Light                                                                                                                                                                 | Dark                                                                                                                                                                 |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badgedbox_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badgedbox_dark.png) |
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badgedbox_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badgedbox_dark.png) |
 
 ## Layout
 
