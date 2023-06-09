@@ -52,6 +52,7 @@ dependencies {
     compileOnly(libs.gradlePlugins.dependencyGuard)
     compileOnly(libs.gradlePlugins.dokka)
     compileOnly(libs.gradlePlugins.spotless)
+    implementation(libs.dokka.base)
 }
 
 gradlePlugin {
