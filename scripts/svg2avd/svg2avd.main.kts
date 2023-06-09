@@ -24,6 +24,7 @@ import kotlin.io.path.absolutePathString
 import kotlin.io.path.createTempDirectory
 import kotlin.io.path.extension
 import kotlin.io.path.isRegularFile
+import kotlin.io.path.name
 import kotlin.io.path.nameWithoutExtension
 import kotlin.io.path.outputStream
 import kotlin.io.path.readText
@@ -77,7 +78,7 @@ class SVG2AVD : CliktCommand(
 
     private fun Path.convert(output: Path) = output
         .resolve("$prefix${nameWithoutExtension.toSnakeCase()}.xml")
-        .also { if (!quiet) echo("⚙️ Converting $this to $it") }
+        .also { if (!quiet) echo("⚙️ Converting $name to $it") }
         .outputStream().use {
             copyright?.takeIf { it.isRegularFile() }?.readText()?.toByteArray()?.let(it::write)
             Svg2Vector.parseSvgToXml(this, it)
