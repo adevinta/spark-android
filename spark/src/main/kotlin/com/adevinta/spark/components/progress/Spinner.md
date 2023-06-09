@@ -1,4 +1,4 @@
-# Spinner component
+# Package com.adevinta.spark.components.progress
 
 ## Spinner design specs
 
@@ -11,10 +11,10 @@ Spinners express an unspecified amount of wait time. They should be used when pr
 
 |       | Part                                                                                                                                                                            | Pro                                                                                                                                                                            |
 |-------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Light | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_pro_light.png) |
-|       | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_part_light.png)  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_pro_light.png)  |
-| Dark  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_part_dark.png)  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_pro_dark.png)  |
-|       | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_part_dark.png)   | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_pro_dark.png)   |
+| Light | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_part_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_pro_light.png) |
+|       | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_part_light.png)  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_pro_light.png)  |
+| Dark  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_part_dark.png)  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnermedium_pro_dark.png)  |
+|       | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_part_dark.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_spinner_spinnersmall_pro_dark.png)   |
 
 
 ### Intents

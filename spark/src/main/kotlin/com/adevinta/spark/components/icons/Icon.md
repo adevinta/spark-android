@@ -1,4 +1,4 @@
-# Icon components
+# Package com.adevinta.spark.components.icons
 
 ## Icon design specs
 
@@ -7,7 +7,7 @@ You can find the design specs on [spark.adevinta.com](https://spark.adevinta.com
 ### Icon
 
 The Icon component display any Icon coming from either of these sources:
-- [SparkIcon](../../../../../../../../../spark-icons/src/main/kotlin/com/adevinta/spark/icons/SparkIcon.kt)
+- [SparkIcon](https://github.com/adevinta/spark-android/blob/main/spark-icons/src/main/kotlin/com/adevinta/spark/icons/SparkIcon.kt)
 - [ImageVector](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/vector/ImageVector)
 - [ImageBitmap](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/ImageBitmap)
 - [Painter](https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/painter/Painter)
@@ -20,5 +20,5 @@ It behaves like the Compose Foundation Icon component but it also accepts size p
 
 |       | Colors and sizes                                                                                                                                               |
 |-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Light | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_icon_icon_light.png) |
-| Dark  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_icon_icon_dark.png)  |
+| Light | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_icon_icon_light.png) |
+| Dark  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_icon_icon_dark.png)  |

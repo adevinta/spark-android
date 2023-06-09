@@ -70,6 +70,8 @@ Here is a list of Gradle tasks commonly used in this project:
 - Dokka: generate Dokka documentation [website](/build/dokka/index.html)
   ```bash
   ./gradlew dokkaHtmlMultiModule --no-configuration-cache
+  python3 -m http.server --directory build/dokka
+  # Open http://[::]:8000
   ```
 
 ## Pull Requests
