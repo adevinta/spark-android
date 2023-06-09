@@ -55,12 +55,12 @@ internal object SparkUnitTests {
             createAndroidCiUnitTestTask(project, globalTask)
         }
         project.pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-            createJcmCiUnitTestTask(project, globalTask)
+            createJvmCiUnitTestTask(project, globalTask)
         }
         configureTestTasks(project)
     }
 
-    private fun createJcmCiUnitTestTask(
+    private fun createJvmCiUnitTestTask(
         project: Project,
         globalTask: TaskProvider<Task>,
     ) {

@@ -21,20 +21,19 @@
  */
 package com.adevinta.spark
 
-import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
 
 internal class SparkAndroidLibraryPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             apply(plugin = "com.android.library")
             apply(plugin = "com.adevinta.spark.android")
-
-            configure<LibraryExtension> {
+            android {
                 resourcePrefix = "spark_"
+            }
+            androidLibrary {
                 defaultConfig {
                     consumerProguardFile("consumer-rules.pro")
                     aarMetadata.minCompileSdk = spark().versions.minCompileSdk.toString().toInt()

@@ -5,24 +5,8 @@
 You can find the design specs
 on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/98058f-radio-button/b/700a17).
 
-## Usage
-
 ### RadioButton
 
-| Light                                                                                                                                                                         | Dark                                                                                                                                                                         |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobutton_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobutton_part_dark.png) |
-
-```kotlin
-@Composable
-fun RadioButton(
-    selected: Boolean,
-    onClick: (() -> Unit)?,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-)
-```
 
 The primary radio button allow users to select one option from a set.
 
@@ -31,6 +15,11 @@ The primary radio button allow users to select one option from a set.
   more visually prominent than unselected items.
 - Present a list showing all available options. If available options can be collapsed, consider
   using a dropdown menu because it uses less space.
+
+| Light                                                                                                                                                                         | Dark                                                                                                                                                                         |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobutton_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobutton_part_dark.png) |
+
 
 The minimal usage of the component is the radio button in standalone but you can add a content at
 the end of the radio or customize it.
@@ -45,14 +34,6 @@ RadioButton(
 )
 ```
 
-| Parameters                                                                              | Descriptions                                                                                                                                                                                                                                                                                            |
-|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `selected: Boolean`                                                                     | whether this radio button is selected or not                                                                                                                                                                                                                                                            |
-| `onClick: (() -> Unit)?`                                                                | callback to be invoked when the RadioButton is clicked. If null, then this RadioButton will not handle input events, and only act as a visual indicator of selected state                                                                                                                               |
-| `modifier: Modifier = Modifier`                                                         | A Modifier for this RadioButton                                                                                                                                                                                                                                                                         |
-| `enabled: Boolean = true`                                                               | whether the component is enabled or grayed out                                                                                                                                                                                                                                                          |
-| `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the [MutableInteractionSource] representing the stream of [Interaction]s for this RadioButton. You can create and pass in your own remembered [MutableInteractionSource] if you want to observe [Interaction]s and customize the appearance / behavior of this RadioButton in different [Interaction]s. |
-
 ---
 
 ### CheckBoxLabelled
@@ -60,19 +41,6 @@ RadioButton(
 | Light                                                                                                                                                                                 | Dark                                                                                                                                                                                 |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_part_dark.png) |
-
-```kotlin
-@Composable
-public fun RadioButtonLabelled(
-    selected: Boolean,
-    onClick: (() -> Unit)?,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    contentSide: ContentSide = ContentSide.End,
-    content: @Composable RowScope.() -> Unit,
-)
-```
 
 The primary radio button allow users to select one option from a set.
 
@@ -94,16 +62,6 @@ RadioButtonLabelled(
     }
 ) { Text("RadioButton On") }
 ```
-
-| Parameters                                                                              | Descriptions                                                                                                                                                                                                                                                                                            |
-|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `selected: Boolean`                                                                     | whether this radio button is selected or not                                                                                                                                                                                                                                                            |
-| `onClick: (() -> Unit)?`                                                                | callback to be invoked when the RadioButton is clicked. If null, then this RadioButton will not handle input events, and only act as a visual indicator of selected state                                                                                                                               |
-| `modifier: Modifier = Modifier`                                                         | A Modifier for this text field                                                                                                                                                                                                                                                                          |
-| `enabled: Boolean = true`                                                               | whether the component is enabled or grayed out                                                                                                                                                                                                                                                          |
-| `interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }` | the [MutableInteractionSource] representing the stream of [Interaction]s for this RadioButton. You can create and pass in your own remembered [MutableInteractionSource] if you want to observe [Interaction]s and customize the appearance / behavior of this RadioButton in different [Interaction]s. |
-| `contentSide: ContentSide = ContentSide.End`                                            | The side where we want to show the label, default to [ContentSide.End].                                                                                                                                                                                                                                 |
-| `content: @Composable RowScope.() -> Unit`                                              | The content displayed after the radio button, usually a Text composable shown at the end.                                                                                                                                                                                                               |                                                                                                                                                                                                                                                                                                    |
 
 ## Layout
 
