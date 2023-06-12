@@ -1,13 +1,6 @@
 # Package com.adevinta.spark.components.chips
 
-## Chip design specs
-
-You can find the design specs
-on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/17568d-chip/b/98915d).
-
-### Chip
-
-Chips help users quickly recognize an important information that has been entered by them, 
+[Chips](https://spark.adevinta.com/1186e1705/p/17568d-chip/b/98915d) help users quickly recognize an important information that has been entered by them, 
 trigger actions, make selections, or filter content.
 
 |       | Part                                                                                                                                                                  | Pro                                                                                                                                                                  |
@@ -36,20 +29,22 @@ The color is set using one of the [ChipIntent](ChipIntent.kt)s:
 - Surface
 
 Part:
-| Style    | Light                                                                                                                                                                         | Dark                                                                                                                                                                         |
-|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+| Style    | Light                                                                                                        | Dark                                                                                                        |
+|----------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | Outlined | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_part_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_part_dark.png) |
 | Filled   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_part_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_part_dark.png)   |
 | Tinted   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_part_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_part_dark.png)   |
 | Dashed   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_part_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_part_dark.png)   |
 
 Pro:
-| Style | Light | Dark |
-|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+| Style    | Light                                                                                                       | Dark                                                                                                       |
+|----------|-------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
 | Outlined | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_pro_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_pro_dark.png) |
-| Filled | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_dark.png)   |
-| Tinted | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_dark.png)   |
-| Dashed | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_dark.png)   |
+| Filled   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_dark.png)   |
+| Tinted   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_dark.png)   |
+| Dashed   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_dark.png)   |
 
 To draw a chip with an optional leading icon and text.
 ```kotlin

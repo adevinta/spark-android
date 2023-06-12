@@ -1,18 +1,12 @@
 # Package com.adevinta.spark.components.badge
 
-## Badge design specs
+[Badges](https://spark.adevinta.com/1186e1705/p/8711ec-badge/b/98915dー convey dynamic information, 
+such as counts or status. A badge can include labels or numbers.
 
-You can find the design specs
-on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/8711ec-badge/b/98915d).
-
-### Badge
-
-Badges convey dynamic information, such as counts or status. A badge can include labels or numbers.
-
-|       | Danger and Info                                                                                   |
-|-------|---------------------------------------------------------------------------------------------------|
+|       | Danger and Info                                                                                 |
+|-------|-------------------------------------------------------------------------------------------------|
 | Light | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_light.png) |
-| Dark  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_dark.png)         |
+| Dark  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badge_dark.png)  |
 
 The default value of overflowCount is 99. When count is larger than 99, a `+` is displayed.
 A badge can be used as a part of [`BadgedBox`](#layout) or as a standalone when it is not attached visually to
@@ -60,8 +54,8 @@ Badge(
 )
 ```
 
-| Light                                                                                                                                                                 | Dark                                                                                                                                                                 |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Light                                                                                               | Dark                                                                                               |
+|-----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
 | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badgedbox_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_badge_badgedbox_dark.png) |
 
 ## Layout
