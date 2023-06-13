@@ -1,6 +1,6 @@
 # Package com.adevinta.spark.components.badge
 
-[Badges](https://spark.adevinta.com/1186e1705/p/8711ec-badge/b/98915dー convey dynamic information, 
+[Badges](https://spark.adevinta.com/1186e1705/p/8711ec-badge/b/98915d) convey dynamic information, 
 such as counts or status. A badge can include labels or numbers.
 
 |       | Danger and Info                                                                                 |
