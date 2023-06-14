@@ -35,7 +35,8 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.StarFill
 import com.adevinta.spark.tokens.DisabledAlpha
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -64,7 +65,7 @@ internal fun SparkRatingStar(
     CompositionLocalProvider(LocalContentColor provides color) {
         Icon(
             modifier = modifier.size(StarSize),
-            sparkIcon = SparkIcon.Options.Star.Default,
+            sparkIcon = SparkIcons.StarFill,
             contentDescription = null,
         )
     }

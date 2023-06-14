@@ -21,10 +21,8 @@
  */
 package com.adevinta.spark.components.toggles
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.triStateToggleable
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
@@ -68,11 +66,9 @@ internal fun SparkToggleLabelledContainer(
     }
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
             .clip(SparkTheme.shapes.small)
             .then(toggleableModifier)
-            .padding(horizontal = 8.dp)
             .sparkUsageOverlay(),
     ) {
         val label = movableContentOf {

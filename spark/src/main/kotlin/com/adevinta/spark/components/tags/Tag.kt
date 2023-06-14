@@ -49,7 +49,9 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.tags.TagDefaults.LeadingIconSize
 import com.adevinta.spark.components.tags.TagDefaults.MinHeight
+import com.adevinta.spark.icons.Accessories
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.modifiers.SlotArea
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
@@ -220,7 +222,7 @@ private fun SparkTagPreview() {
                 Text("À la une")
             }
         }
-        BaseSparkTag(leadingIcon = SparkIcon.Options.Booster, colors = colors) {
+        BaseSparkTag(leadingIcon = SparkIcons.Accessories, colors = colors) {
             SlotArea(color = LocalContentColor.current) {
                 Text("À la une")
             }

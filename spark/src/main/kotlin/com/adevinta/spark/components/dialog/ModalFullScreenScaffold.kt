@@ -58,7 +58,9 @@ import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.BicycleType
+import com.adevinta.spark.icons.Close
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.Layout
 import com.adevinta.spark.tokens.bodyWidth
 import com.adevinta.spark.tools.preview.DevicePreviews
@@ -202,7 +204,7 @@ private fun PhonePortraitModalScaffold(
                 navigationIcon = {
                     IconButton(onClick = onClose) {
                         Icon(
-                            sparkIcon = SparkIcon.Navs.Close,
+                            sparkIcon = SparkIcons.Close,
                             contentDescription = stringResource(id = R.string.spark_a11y_modal_fullscreen_close),
                         )
                     }
@@ -276,7 +278,7 @@ private fun PhoneLandscapeModalScaffold(
                 navigationIcon = {
                     IconButton(onClick = onClose) {
                         Icon(
-                            sparkIcon = SparkIcon.Navs.Close,
+                            sparkIcon = SparkIcons.Close,
                             contentDescription = null, // FIXME-scott.rayapoulle.ext (13-36-2023): Add description
                         )
                     }
@@ -349,7 +351,7 @@ private fun ModalPreview() {
     ) {
         ModalFullScreenScaffold(
             onClose = { /*TODO*/ },
-            illustration = SparkIcon.Criterias.Loisirs.BicycleType.drawableId,
+            illustration = SparkIcons.BicycleType.drawableId,
             primaryButton = {
                 ButtonFilled(modifier = it, onClick = { /*TODO*/ }, text = "Primary Action")
             },

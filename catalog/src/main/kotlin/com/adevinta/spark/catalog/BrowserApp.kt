@@ -79,7 +79,9 @@ import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
-import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.DeleteFill
+import com.adevinta.spark.icons.Search
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.sparkFontFamily
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.airbnb.android.showkase.ui.SemanticsUtils.lineCountVal
@@ -329,7 +331,7 @@ internal fun SearchField(
                 onClick = onCloseSearchFieldClick,
                 modifier = Modifier.testTag("close_search_bar_tag"),
             ) {
-                Icon(sparkIcon = SparkIcon.Actions.Search, contentDescription = "Search Icon")
+                Icon(sparkIcon = SparkIcons.Search, contentDescription = "Search Icon")
             }
         },
         trailingIcon = {
@@ -338,7 +340,7 @@ internal fun SearchField(
                 modifier = Modifier.testTag("clear_search_field"),
                 enabled = !searchQuery.isNullOrEmpty(),
             ) {
-                Icon(sparkIcon = SparkIcon.Arrows.Close.Full, contentDescription = "Clear Search Field")
+                Icon(sparkIcon = SparkIcons.DeleteFill, contentDescription = "Clear Search Field")
             }
         },
     )
@@ -366,7 +368,7 @@ private fun ShowkaseAppBarActions(
                         metadata.value = metadata.value.copy(isSearchActive = true)
                     },
                 ) {
-                    Icon(sparkIcon = SparkIcon.Actions.Search, contentDescription = "Search Icon")
+                    Icon(sparkIcon = SparkIcons.Search, contentDescription = "Search Icon")
                 }
                 IconButton(onClick = onThemeClick) {
                     Icon(

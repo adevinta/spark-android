@@ -21,7 +21,7 @@
  */
 package com.adevinta.spark.components.icons
 
-import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -40,9 +40,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.icons.IconDrawableRes
-import com.adevinta.spark.icons.IconVector
+import com.adevinta.spark.icons.CheckFill
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -179,18 +179,9 @@ public fun Icon(
 }
 
 @Composable
-public fun rememberSparkIconPainter(sparkIcon: SparkIcon): Painter {
-    @Suppress("USELESS_IS_CHECK") // Currently all icons are IconDrawableRes but that might not be true in the future
-    return when (sparkIcon) {
-        is IconVector -> rememberVectorPainter(sparkIcon.imageVector)
-
-        is IconDrawableRes -> {
-            val drawable = AppCompatResources.getDrawable(LocalContext.current, sparkIcon.drawableId)
-            rememberDrawablePainter(drawable)
-        }
-
-        else -> error("Can't found Painter for sparkIcon $sparkIcon")
-    }
+public fun rememberSparkIconPainter(sparkIcon: SparkIcon): Painter = when (sparkIcon) {
+    is SparkIcon.Vector -> rememberVectorPainter(sparkIcon.imageVector)
+    is SparkIcon.DrawableRes -> rememberDrawablePainter(getDrawable(LocalContext.current, sparkIcon.drawableId))
 }
 
 @Preview(
@@ -213,7 +204,7 @@ internal fun IconPreview(
                             },
                         ) {
                             Icon(
-                                sparkIcon = SparkIcon.Toggles.Check.Simple,
+                                sparkIcon = SparkIcons.CheckFill,
                                 tint = tints[index].color(),
                                 contentDescription = "Done",
                                 size = size,

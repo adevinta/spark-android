@@ -1,14 +1,7 @@
-# RadioButton components
+# Package com.adevinta.spark.components.toggles
 
-## RadioButton design specs
-
-You can find the design specs
-on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/98058f-radio-button/b/700a17).
-
-### RadioButton
-
-
-The primary radio button allow users to select one option from a set.
+The [radio button](https://spark.adevinta.com/1186e1705/p/98058f-radio-button/b/700a17) allow
+users to select one option from a set.
 
 - Use radio buttons to select a single option from a list
 - It should be visible at a glance if a radio button has been selected, and selected items should be
@@ -16,10 +9,9 @@ The primary radio button allow users to select one option from a set.
 - Present a list showing all available options. If available options can be collapsed, consider
   using a dropdown menu because it uses less space.
 
-| Light                                                                                                                                                                         | Dark                                                                                                                                                                         |
-|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobutton_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobutton_part_dark.png) |
-
+| Light                                                                                                        | Dark                                                                                                        |
+|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobutton_part_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobutton_part_dark.png) |
 
 The minimal usage of the component is the radio button in standalone but you can add a content at
 the end of the radio or customize it.
@@ -38,9 +30,9 @@ RadioButton(
 
 ### CheckBoxLabelled
 
-| Light                                                                                                                                                                                 | Dark                                                                                                                                                                                 |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_part_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_part_dark.png) |
+| Light                                                                                                                | Dark                                                                                                                |
+|----------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_part_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_part_dark.png) |
 
 The primary radio button allow users to select one option from a set.
 

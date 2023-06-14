@@ -41,7 +41,8 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.buttons.ButtonGhost
 import com.adevinta.spark.components.buttons.IconSide
-import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.CopyFill
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -176,7 +177,7 @@ internal fun AlertDialogPreview(
                             openDialog.value = false
                         },
                         text = "Confirm",
-                        icon = SparkIcon.Actions.Copy,
+                        icon = SparkIcons.CopyFill,
                         iconSide = IconSide.START,
                     )
                 },
@@ -186,7 +187,7 @@ internal fun AlertDialogPreview(
                             openDialog.value = false
                         },
                         text = "Dismiss",
-                        icon = SparkIcon.Actions.Copy,
+                        icon = SparkIcons.CopyFill,
                         iconSide = IconSide.START,
                     )
                 },

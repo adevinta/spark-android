@@ -37,7 +37,8 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.spacer.HorizontalSpacer
-import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.IdentityOutline
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -175,7 +176,7 @@ internal fun DimPreview(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier.size(24.dp),
-                sparkIcon = SparkIcon.Account.Identity,
+                sparkIcon = SparkIcons.IdentityOutline,
                 contentDescription = "Favorite",
             )
             HorizontalSpacer(8.dp)
@@ -185,7 +186,7 @@ internal fun DimPreview(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     modifier = Modifier.size(24.dp),
-                    sparkIcon = SparkIcon.Account.Identity,
+                    sparkIcon = SparkIcons.IdentityOutline,
                     contentDescription = "Favorite",
                 )
                 HorizontalSpacer(8.dp)
@@ -196,7 +197,7 @@ internal fun DimPreview(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     modifier = Modifier.size(24.dp),
-                    sparkIcon = SparkIcon.Account.Identity,
+                    sparkIcon = SparkIcons.IdentityOutline,
                     contentDescription = "Favorite",
                 )
                 HorizontalSpacer(8.dp)
@@ -207,7 +208,7 @@ internal fun DimPreview(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     modifier = Modifier.size(24.dp),
-                    sparkIcon = SparkIcon.Account.Identity,
+                    sparkIcon = SparkIcons.IdentityOutline,
                     contentDescription = "Favorite",
                 )
                 HorizontalSpacer(8.dp)
@@ -218,7 +219,7 @@ internal fun DimPreview(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     modifier = Modifier.size(24.dp),
-                    sparkIcon = SparkIcon.Account.Identity,
+                    sparkIcon = SparkIcons.IdentityOutline,
                     contentDescription = "Favorite",
                 )
                 HorizontalSpacer(8.dp)
@@ -229,7 +230,7 @@ internal fun DimPreview(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     modifier = Modifier.size(24.dp),
-                    sparkIcon = SparkIcon.Account.Identity,
+                    sparkIcon = SparkIcons.IdentityOutline,
                     contentDescription = "Favorite",
                 )
                 HorizontalSpacer(8.dp)

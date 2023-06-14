@@ -51,7 +51,9 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.icons.MoreMenuVertical
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -192,7 +194,7 @@ internal fun PreviewNavigationBar(
         NavigationBar {
             items.forEachIndexed { index, item ->
                 NavigationBarItem(
-                    icon = { Icon(SparkIcon.Actions.More, contentDescription = item) },
+                    icon = { Icon(SparkIcons.MoreMenuVertical, contentDescription = item) },
                     label = { Text(item) },
                     selected = selectedItem == index,
                     onClick = { selectedItem = index },

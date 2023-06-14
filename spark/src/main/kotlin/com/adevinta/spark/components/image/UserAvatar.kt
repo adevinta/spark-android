@@ -46,7 +46,10 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.icons.ProfileFill
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.Store
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -65,7 +68,7 @@ internal fun SparkUserAvatar(
 ) {
     val emptyIcon = @Composable {
         ImageIconState(
-            sparkIcon = if (isPro) SparkIcon.User.Store else SparkIcon.User.Avatar,
+            sparkIcon = if (isPro) SparkIcons.Store else SparkIcons.ProfileFill,
         )
     }
     Box(

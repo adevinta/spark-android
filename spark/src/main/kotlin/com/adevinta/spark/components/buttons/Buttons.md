@@ -1,28 +1,24 @@
-# Button components
+# Package com.adevinta.spark.components.buttons
 
-## Button design specs
+[Buttons](https://spark.adevinta.com/1186e1705/p/34b742-button/b/32e1a2) help people take action,
+such as sending an email, sharing a document, or liking a comment.
+Buttons communicate actions that users can take. They are typically placed throughout your UI, in
+places like:
 
-You can find the design specs
-on [spark.adevinta.com](https://spark.adevinta.com/1186e1705/p/34b742-button/b/32e1a2).
-
-### Button
-
-Buttons help people take action, such as sending an email, sharing a document, or liking a comment.
-Buttons communicate actions that users can take. They are typically placed throughout your UI, in places like:
 - Dialogs
 - Modal windows
 - Forms
 - Cards
 - Toolbars
 
-|       | Filled                                                                                                                                                                           | Outlined                                                                                                                                                                           | Tinted                                                                                                                                                                           | Ghost                                                                                                                                                                           | Contrast                                                                                                                                                                           |
-|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Light | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonfilledintents_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonoutlinedintents_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttontintedintents_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonghostintents_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttoncontrastintents_light.png) |
-| Dark  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonfilledintents_dark.png)  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonoutlinedintents_dark.png)  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttontintedintents_dark.png)  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonghostintents_dark.png)  | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttoncontrastintents_dark.png)  |
+|       | Filled                                                                                                          | Outlined                                                                                                          | Tinted                                                                                                          | Ghost                                                                                                          | Contrast                                                                                                          |
+|-------|-----------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| Light | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonfilledintents_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonoutlinedintents_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttontintedintents_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonghostintents_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttoncontrastintents_light.png) |
+| Dark  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonfilledintents_dark.png)  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonoutlinedintents_dark.png)  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttontintedintents_dark.png)  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonghostintents_dark.png)  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttoncontrastintents_dark.png)  |
 
 ### Sizes
 
-![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonsizes_light.png)
+![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonsizes_light.png)
 
 The minimal usage of the component is the text and the click action.
 
@@ -36,7 +32,7 @@ ButtonFilled(
 The buttons have an loading state that can be used to indicate that the button is loading some
 data and show/hide an indeterminate circular progress indicator on the start of the button.
 
-![](../../../../../../../../../art/components/button/loading-button.gif)
+![](../../images/loading-button.gif)
 
 ### All Styles
 
@@ -54,9 +50,9 @@ ButtonFilled(
 )
 ```
 
-| Light                                                                                                                                                                      | Dark                                                                                                                                                                      |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonfilled_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonfilled_dark.png) |
+| Light                                                                                                    | Dark                                                                                                    |
+|----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonfilled_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonfilled_dark.png) |
 
 #### ButtonOutlined
 
@@ -74,9 +70,9 @@ ButtonOutlined(
 )
 ```
 
-| Light                                                                                                                                                                        | Dark                                                                                                                                                                        |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonoutlined_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonoutlined_dark.png) |
+| Light                                                                                                      | Dark                                                                                                      |
+|------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonoutlined_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonoutlined_dark.png) |
 
 #### ButtonTinted
 
@@ -94,9 +90,9 @@ ButtonTinted(
 )
 ```
 
-| Light                                                                                                                                                                      | Dark                                                                                                                                                                      |
-|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttontinted_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttontinted_dark.png) |
+| Light                                                                                                    | Dark                                                                                                    |
+|----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttontinted_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttontinted_dark.png) |
 
 #### ButtonGhost
 
@@ -113,9 +109,9 @@ ButtonGhost(
 )
 ```
 
-| Light                                                                                                                                                                     | Dark                                                                                                                                                                     |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonghost_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonghost_dark.png) |
+| Light                                                                                                   | Dark                                                                                                   |
+|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonghost_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttonghost_dark.png) |
 
 #### ButtonContrast
 
@@ -129,6 +125,6 @@ ButtonContrast(
 )
 ```
 
-| Light                                                                                                                                                                        | Dark                                                                                                                                                                        |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttoncontrast_light.png) | ![](../../../../../../../../../spark-screenshot-testing/src/test/snapshots/images//com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttoncontrast_dark.png) |
+| Light                                                                                                      | Dark                                                                                                      |
+|------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttoncontrast_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_buttons_buttoncontrast_dark.png) |

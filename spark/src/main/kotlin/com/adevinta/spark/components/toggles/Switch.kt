@@ -40,7 +40,12 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.icons.AlarmOffFill
+import com.adevinta.spark.icons.AlarmOnFill
+import com.adevinta.spark.icons.CheckFill
+import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
@@ -180,8 +185,8 @@ public fun SwitchLabelled(
  * @property unchecked icon to be used for the thumb in unchecked state
  */
 public data class SwitchIcons(
-    val checked: SparkIcon = SparkIcon.Toggles.Check.Simple,
-    val unchecked: SparkIcon = SparkIcon.Arrows.Close.Default,
+    val checked: SparkIcon = SparkIcons.CheckFill,
+    val unchecked: SparkIcon = SparkIcons.Close,
 )
 
 @Preview(
@@ -208,8 +213,8 @@ internal fun AllStatesSwitchPreview(
         }
         Row {
             val icons = SwitchIcons(
-                checked = SparkIcon.Notifications.Active,
-                unchecked = SparkIcon.Notifications.Disable,
+                checked = SparkIcons.AlarmOnFill,
+                unchecked = SparkIcons.AlarmOffFill,
             )
             Switch(
                 checked = true,
