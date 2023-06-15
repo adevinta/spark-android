@@ -132,7 +132,6 @@ public fun SparkTheme(
         LocalHighlightToken provides useSparkTokensHighlighter,
         LocalHighlightComponents provides useSparkComponentsHighlighter,
         LocalLegacyStyle provides useLegacyStyle,
-        LocalFontFamilyResolver provides createFontFamilyResolver(LocalContext.current, fontFamily.fontHandler),
     ) {
         MaterialTheme(
             colorScheme = rememberedColors.asMaterial3Colors(),
