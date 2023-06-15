@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.tokens
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -29,7 +28,6 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.googlefonts.GoogleFont
 import com.adevinta.spark.R
 import kotlinx.coroutines.CoroutineExceptionHandler
 
