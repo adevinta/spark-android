@@ -278,7 +278,7 @@ private fun OutlinedBorderContainerBox(
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
 ) {
-    val shape = SparkTheme.shapes.extraSmall
+    val shape = SparkTheme.shapes.large
     val borderStroke = animateBorderStrokeAsState(
         enabled,
         isError,
@@ -363,11 +363,11 @@ internal fun TextFieldSlotsPreview() {
         }
 
         TextField(
-            value = "With suffix",
+            value = "din.djarin@adevinta.com",
             onValueChange = {},
             enabled = true,
             isError = false,
-            label = "With helper",
+            label = "Label",
             placeholder = "Placeholder",
             helper = "helper helper",
             leadingIcon = icon,
