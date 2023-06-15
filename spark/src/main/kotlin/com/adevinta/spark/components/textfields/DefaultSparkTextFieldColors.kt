@@ -47,26 +47,26 @@ internal fun sparkOutlinedTextFieldColors(
     errorCursorColor: Color = SparkTheme.colors.error,
     selectionColors: TextSelectionColors = LocalTextSelectionColors.current,
     focusedBorderColor: Color = SparkTheme.colors.onSurface,
-    unfocusedBorderColor: Color = SparkTheme.colors.neutral,
+    unfocusedBorderColor: Color = SparkTheme.colors.outline,
     errorBorderColor: Color = SparkTheme.colors.error,
-    disabledBorderColor: Color = unfocusedBorderColor.copy(DisabledOpacity),
+    disabledBorderColor: Color = focusedBorderColor.copy(DisabledOpacity),
     focusedLeadingIconColor: Color = SparkTheme.colors.onSurface,
-    unfocusedLeadingIconColor: Color = SparkTheme.colors.neutral,
+    unfocusedLeadingIconColor: Color = focusedLeadingIconColor.copy(alpha = SparkTheme.colors.dim2),
     disabledLeadingIconColor: Color = focusedLeadingIconColor.copy(DisabledOpacity),
     errorLeadingIconColor: Color = SparkTheme.colors.error,
     focusedTrailingIconColor: Color = SparkTheme.colors.onSurface,
-    unfocusedTrailingIconColor: Color = SparkTheme.colors.neutral,
+    unfocusedTrailingIconColor: Color = focusedTrailingIconColor.copy(alpha = SparkTheme.colors.dim2),
     disabledTrailingIconColor: Color = focusedTrailingIconColor.copy(DisabledOpacity),
     errorTrailingIconColor: Color = SparkTheme.colors.error,
     focusedLabelColor: Color = SparkTheme.colors.onSurface,
-    unfocusedLabelColor: Color = SparkTheme.colors.neutral,
+    unfocusedLabelColor: Color = focusedLabelColor.copy(alpha = SparkTheme.colors.dim1),
     disabledLabelColor: Color = focusedLabelColor.copy(DisabledOpacity),
     errorLabelColor: Color = SparkTheme.colors.error,
     placeholderColor: Color = SparkTheme.colors.neutral,
     disabledPlaceholderColor: Color = SparkTheme.colors.onSurface.copy(DisabledOpacity),
-    focusedSupportingTextColor: Color = SparkTheme.colors.neutral,
-    unfocusedSupportingTextColor: Color = SparkTheme.colors.neutral,
-    disabledSupportingTextColor: Color = SparkTheme.colors.onSurface.copy(DisabledOpacity),
+    focusedSupportingTextColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim1),
+    unfocusedSupportingTextColor: Color = focusedSupportingTextColor,
+    disabledSupportingTextColor: Color = focusedSupportingTextColor,
     errorSupportingTextColor: Color = SparkTheme.colors.error,
 ): DefaultSparkTextFieldColors = DefaultSparkTextFieldColors(
     textColor = textColor,
@@ -370,4 +370,6 @@ internal data class DefaultSparkTextFieldColors(
     }
 }
 
-private const val DisabledOpacity = 0.38f
+private val DisabledOpacity : Float
+    @Composable
+    get() = SparkTheme.colors.dim3
