@@ -18,7 +18,8 @@ The tags can also have a decorative start icon to better identify the context of
 ### Layout
 
 We don't provide any container for now but we recommend using a [`FlowRow`](https://developer.android.com/jetpack/compose/layouts/flow) to layout it in your screens.
- ```kotlin
+
+```kotlin
 FlowRow(modifier = Modifier.padding(8.dp)) {
     TagFilled("Price: High to Low")
     TagFilled("Avg rating: 4+")
