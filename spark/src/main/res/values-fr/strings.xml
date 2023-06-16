@@ -30,12 +30,10 @@
     <plurals name="spark_rating_with_comments_a11y">
         <item quantity="one">Note de %1$.1f pour %2$d avis</item>
         <item quantity="other">Note de %1$.1f pour %2$d avis</item>
-        <item quantity="many">Note de %1$.1f pour %2$d avis</item>
     </plurals>
     <plurals name="spark_rating_with_comments_count_label">
         <item quantity="one">%d avis</item>
         <item quantity="other">%d avis</item>
-        <item quantity="many">%d avis</item>
     </plurals>
     <string name="spark_rating_a11y">Note de %1$.1f</string>
 
@@ -47,9 +45,12 @@
     <plurals name="spark_badge_a11y">
         <item quantity="one">%d nouvelle notification</item>
         <item quantity="other">%d nouvelles notifications</item>
-        <item quantity="many">%d nouvelles notifications</item>
     </plurals>
 
     <string name="spark_annotatedStringResource_test">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> pour les textes sur <i><annotation color="primary">Android</annotation></i></string>
     <string name="spark_annotatedStringResource_test_args">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> <p dir="rtl">pour les %s sur</p> <p dir="ltrr"><i><annotation color="primary">Android</annotation></i></p></string>
+
+    <!--Rating-->
+    <string name="spark_textfield_content_description">Obligatoire</string>
+
 </resources>

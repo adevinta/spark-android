@@ -70,6 +70,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param readOnly controls the editable state of the [TextField]. When `true`, the text
  * field can not be modified, however, a user can focus it and copy text from it. Read-only text
  * fields are usually used to display pre-filled forms that user can not edit
+ * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory"
+ * but doesn't do anything else so it's up to the developer to handle the behavior.
  * @param label the optional label to be displayed inside the text field container. The default
  * text style for internal [Text] is [Typography.small] when the text field is in focus and
  * [Typography.large] when the text field is not in focus
@@ -107,6 +109,7 @@ public fun MultilineTextField(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
+    required: Boolean = false,
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
@@ -128,6 +131,7 @@ public fun MultilineTextField(
         modifier = modifier,
         enabled = enabled,
         readOnly = readOnly,
+        required = required,
         label = label,
         placeholder = placeholder,
         helper = helper,
@@ -198,6 +202,8 @@ private fun getTrailingIcon(
  * @param readOnly controls the editable state of the [TextField]. When `true`, the text
  * field can not be modified, however, a user can focus it and copy text from it. Read-only text
  * fields are usually used to display pre-filled forms that user can not edit
+ * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory"
+ * but doesn't do anything else so it's up to the developer to handle the behavior.
  * @param label the optional label to be displayed inside the text field container. The default
  * text style for internal [Text] is [Typography.small] when the text field is in focus and
  * [Typography.large] when the text field is not in focus
@@ -235,6 +241,7 @@ public fun MultilineTextField(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     readOnly: Boolean = false,
+    required: Boolean = false,
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
@@ -256,6 +263,7 @@ public fun MultilineTextField(
         modifier = modifier,
         enabled = enabled,
         readOnly = readOnly,
+        required = required,
         label = label,
         placeholder = placeholder,
         helper = helper,

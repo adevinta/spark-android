@@ -51,4 +51,8 @@
 
     <string name="spark_annotatedStringResource_test"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for text on</p> <i><annotation color="primary">Android</annotation></i></string>
     <string name="spark_annotatedStringResource_test_args"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for %s on</p> <i><annotation color="primary">Android</annotation></i></string>
+
+    <!--Rating-->
+    <string name="spark_textfield_content_description">Mandatory</string>
+
 </resources>

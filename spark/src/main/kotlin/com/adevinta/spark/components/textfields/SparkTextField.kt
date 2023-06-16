@@ -30,6 +30,7 @@ import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -55,6 +56,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
@@ -64,11 +67,13 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.LocalLegacyStyle
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.tokens.EmphasizeDim3
 import com.adevinta.spark.tools.modifiers.SlotArea
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
-// FIXME: Duplicate of Material OutlinedTextField while the helper, suffix & counter is not supported on their end
+// FIXME: Duplicate of Material OutlinedTextField while the counter is not supported on their end
 // b/236761202
 @InternalSparkApi
 @Composable
@@ -77,6 +82,7 @@ internal fun SparkTextField(
     onValueChange: (TextFieldValue) -> Unit,
     enabled: Boolean,
     readOnly: Boolean,
+    required: Boolean,
     label: String?,
     placeholder: String?,
     helper: String?,
@@ -140,7 +146,7 @@ internal fun SparkTextField(
                     value = value.text,
                     innerTextField = innerTextField,
                     visualTransformation = visualTransformation,
-                    label = { Label(text = label) },
+                    label = { Label(text = label, required = required) },
                     interactionSource = interactionSource,
                     colors = colors,
                     placeholder = { PlaceHolder(text = placeholder) },
@@ -172,6 +178,7 @@ internal fun SparkTextField(
     onValueChange: (String) -> Unit,
     enabled: Boolean,
     readOnly: Boolean,
+    required: Boolean,
     label: String?,
     placeholder: String?,
     helper: String?,
@@ -235,7 +242,7 @@ internal fun SparkTextField(
                     value = value,
                     innerTextField = innerTextField,
                     visualTransformation = visualTransformation,
-                    label = { Label(text = label) },
+                    label = { Label(text = label, required = required) },
                     interactionSource = interactionSource,
                     colors = colors,
                     placeholder = { PlaceHolder(text = placeholder) },
@@ -322,10 +329,23 @@ public data class TextFieldCharacterCounter(
 )
 
 @Composable
-private fun Label(text: String?) {
+private fun Label(text: String?, required: Boolean) {
     if (text != null) {
-        Box {
+        Row(modifier = Modifier.semantics(mergeDescendants = true) {}) {
             Text(text = text)
+            if (required) {
+                val mandatoryDescription = stringResource(id = R.string.spark_textfield_content_description)
+                EmphasizeDim3 {
+                    Text(
+                        text = "*",
+                        modifier = Modifier
+                            .semantics {
+                                contentDescription = mandatoryDescription
+                            }
+                            .padding(start = 4.dp),
+                    )
+                }
+            }
         }
     }
 }
@@ -367,6 +387,7 @@ internal fun TextFieldSlotsPreview() {
             value = "din.djarin@adevinta.com",
             onValueChange = {},
             enabled = true,
+            required = true,
             isError = false,
             label = "Label",
             placeholder = "Placeholder",
