@@ -62,6 +62,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
+import com.adevinta.spark.LocalLegacyStyle
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tools.modifiers.SlotArea
@@ -278,7 +279,7 @@ private fun OutlinedBorderContainerBox(
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
 ) {
-    val shape = SparkTheme.shapes.large
+    val shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.large
     val borderStroke = animateBorderStrokeAsState(
         enabled,
         isError,
