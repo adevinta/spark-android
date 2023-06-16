@@ -326,7 +326,7 @@ internal fun SearchField(
         modifier = Modifier
             .testTag("SearchTextField")
             .fillMaxWidth(),
-        leadingIcon = {
+        leadingContent = {
             IconButton(
                 onClick = onCloseSearchFieldClick,
                 modifier = Modifier.testTag("close_search_bar_tag"),
@@ -334,7 +334,7 @@ internal fun SearchField(
                 Icon(sparkIcon = SparkIcons.Search, contentDescription = "Search Icon")
             }
         },
-        trailingIcon = {
+        trailingContent = {
             IconButton(
                 onClick = onClearSearchField,
                 modifier = Modifier.testTag("clear_search_field"),

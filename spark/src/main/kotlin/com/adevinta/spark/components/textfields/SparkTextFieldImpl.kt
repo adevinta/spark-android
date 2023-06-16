@@ -89,7 +89,7 @@ internal fun SparkDecorationBox(
     trailingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean = false,
     enabled: Boolean = true,
-    isError: Boolean = false,
+    state: TextFieldState? = null,
     border: @Composable (() -> Unit)? = null,
 ) {
     val transformedText = remember(value, visualTransformation) {
@@ -109,7 +109,7 @@ internal fun SparkDecorationBox(
     }
 
     val labelColor: @Composable (InputPhase) -> Color = {
-        colors.labelColor(enabled, isError, interactionSource).value
+        colors.labelColor(enabled, state, interactionSource).value
     }
 
     val typography = SparkTheme.typography
@@ -165,7 +165,7 @@ internal fun SparkDecorationBox(
                     Decoration(
                         contentColor = colors.supportingTextColor(
                             enabled = enabled,
-                            isError = isError,
+                            state = state,
                             interactionSource = interactionSource,
                         ).value,
                         typography = SparkTheme.typography.caption,
@@ -181,14 +181,14 @@ internal fun SparkDecorationBox(
         // TODO-@soulcramer (01-30-2023): We should provide a semantic which tell the user the error state
         val decorationBoxModifier = Modifier
 
-        val leadingIconColor = colors.leadingIconColor(enabled, isError, interactionSource).value
+        val leadingIconColor = colors.leadingIconColor(enabled, state, interactionSource).value
         val decoratedLeading: @Composable (() -> Unit)? = leadingIcon?.let {
             @Composable {
                 Decoration(contentColor = leadingIconColor, content = it)
             }
         }
 
-        val trailingIconColor = colors.trailingIconColor(enabled, isError, interactionSource).value
+        val trailingIconColor = colors.trailingIconColor(enabled, state, interactionSource).value
         val decoratedTrailing: @Composable (() -> Unit)? = trailingIcon?.let {
             @Composable {
                 Decoration(contentColor = trailingIconColor, content = it)
@@ -209,7 +209,7 @@ internal fun SparkDecorationBox(
         }
 
         val supportingTextColor =
-            colors.supportingTextColor(enabled, isError, interactionSource).value
+            colors.supportingTextColor(enabled, state, interactionSource).value
         val decoratedSupporting: @Composable (() -> Unit)? = supportingText?.let {
             @Composable {
                 Decoration(

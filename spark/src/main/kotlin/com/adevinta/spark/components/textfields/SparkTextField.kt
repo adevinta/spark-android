@@ -42,7 +42,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
@@ -69,8 +68,15 @@ import com.adevinta.spark.LocalLegacyStyle
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.icons.IconSize
+import com.adevinta.spark.icons.Check
+import com.adevinta.spark.icons.InfoOutline
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.WarningOutline
 import com.adevinta.spark.tokens.EmphasizeDim3
 import com.adevinta.spark.tools.modifiers.SlotArea
+import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 // FIXME: Duplicate of Material OutlinedTextField while the counter is not supported on their end
@@ -87,10 +93,10 @@ internal fun SparkTextField(
     placeholder: String?,
     helper: String?,
     counter: TextFieldCharacterCounter?,
-    leadingIcon: @Composable (() -> Unit)?, // Should we rename it to leadingContent?
-    trailingIcon: @Composable (() -> Unit)?, // Should we rename it to trailingContent?
-    isError: Boolean,
-    error: String?,
+    leadingContent: @Composable (() -> Unit)?,
+    trailingContent: @Composable (() -> Unit)?,
+    state: TextFieldState?,
+    stateMessage: String?,
     visualTransformation: VisualTransformation,
     keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions,
@@ -104,15 +110,14 @@ internal fun SparkTextField(
         @OptIn(ExperimentalMaterial3Api::class)
         BasicTextField(
             value = value,
-            modifier = if (label != null) {
-                // Merge semantics at the beginning of the modifier chain to ensure padding is
-                // considered part of the text field.
-                modifier
-                    .semantics(mergeDescendants = true) {}
-                    .padding(top = OutlinedTextFieldTopPadding)
-            } else {
-                modifier
-            }
+            modifier = modifier
+                .ifNotNull(label) {
+                    // Merge semantics at the beginning of the modifier chain to ensure padding is
+                    // considered part of the text field.
+                    this
+                        .semantics(mergeDescendants = true) {}
+                        .padding(top = OutlinedTextFieldTopPadding)
+                }
                 .defaultMinSize(
                     minWidth = TextFieldDefaults.MinWidth,
                     minHeight = TextFieldDefaults.MinHeight,
@@ -122,7 +127,7 @@ internal fun SparkTextField(
             enabled = enabled,
             readOnly = readOnly,
             textStyle = SparkTheme.typography.body1.merge(TextStyle(colors.textColor(enabled).value)),
-            cursorBrush = SolidColor(colors.cursorColor(isError).value),
+            cursorBrush = SolidColor(colors.cursorColor(state).value),
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
@@ -134,10 +139,10 @@ internal fun SparkTextField(
                     { Text(text = "${counter.count}/${counter.maxCharacter}") }
                 }
                 val supportingTextComposable: @Composable (() -> Unit)? =
-                    if (helper != null) {
+                    if (stateMessage != null && state != null) {
+                        { Text(text = stateMessage) }
+                    } else if (helper != null) {
                         { Text(text = helper) }
-                    } else if (error != null && isError) {
-                        { Text(text = error) }
                     } else {
                         null
                     }
@@ -152,15 +157,15 @@ internal fun SparkTextField(
                     placeholder = { PlaceHolder(text = placeholder) },
                     supportingText = supportingTextComposable,
                     counter = counterComposable,
-                    leadingIcon = leadingIcon,
-                    trailingIcon = trailingIcon,
+                    leadingIcon = leadingContent,
+                    trailingIcon = trailingContent,
                     singleLine = singleLine,
                     enabled = enabled,
-                    isError = isError,
+                    state = state,
                 ) {
                     OutlinedBorderContainerBox(
                         enabled,
-                        isError,
+                        state,
                         interactionSource,
                         colors,
                     )
@@ -185,8 +190,8 @@ internal fun SparkTextField(
     counter: TextFieldCharacterCounter?,
     leadingIcon: @Composable (() -> Unit)?, // Should we rename it to leadingContent?
     trailingIcon: @Composable (() -> Unit)?, // Should we rename it to trailingContent?
-    isError: Boolean,
-    error: String?,
+    state: TextFieldState?,
+    stateMessage: String?,
     visualTransformation: VisualTransformation,
     keyboardOptions: KeyboardOptions,
     keyboardActions: KeyboardActions,
@@ -218,7 +223,7 @@ internal fun SparkTextField(
             enabled = enabled,
             readOnly = readOnly,
             textStyle = SparkTheme.typography.body1.merge(TextStyle(colors.textColor(enabled).value)),
-            cursorBrush = SolidColor(colors.cursorColor(isError).value),
+            cursorBrush = SolidColor(colors.cursorColor(state).value),
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
@@ -230,10 +235,10 @@ internal fun SparkTextField(
                     { Text(text = "${counter.count}/${counter.maxCharacter}") }
                 }
                 val supportingTextComposable: @Composable (() -> Unit)? =
-                    if (helper != null) {
+                    if (stateMessage != null && state != null) {
+                        { Text(text = stateMessage) }
+                    } else if (helper != null) {
                         { Text(text = helper) }
-                    } else if (error != null && isError) {
-                        { Text(text = error) }
                     } else {
                         null
                     }
@@ -252,11 +257,11 @@ internal fun SparkTextField(
                     trailingIcon = trailingIcon,
                     singleLine = singleLine,
                     enabled = enabled,
-                    isError = isError,
+                    state = state,
                 ) {
                     OutlinedBorderContainerBox(
                         enabled,
-                        isError,
+                        state,
                         interactionSource,
                         colors,
                     )
@@ -282,14 +287,14 @@ internal fun SparkTextField(
 @Composable
 private fun OutlinedBorderContainerBox(
     enabled: Boolean,
-    isError: Boolean,
+    state: TextFieldState?,
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
 ) {
     val shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.large
     val borderStroke = animateBorderStrokeAsState(
         enabled,
-        isError,
+        state,
         interactionSource,
         colors,
     )
@@ -304,14 +309,14 @@ private fun OutlinedBorderContainerBox(
 @Composable
 private fun animateBorderStrokeAsState(
     enabled: Boolean,
-    isError: Boolean,
+    state: TextFieldState?,
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
 ): State<BorderStroke> {
     val focused by interactionSource.collectIsFocusedAsState()
-    val indicatorColor = colors.indicatorColor(enabled, isError, interactionSource)
+    val indicatorColor = colors.indicatorColor(enabled, state, interactionSource)
     val targetThickness =
-        if (focused) TextFieldDefaults.FocusedBorderThickness else TextFieldDefaults.UnfocusedBorderThickness
+        if (focused || state != null) TextFieldDefaults.FocusedBorderThickness else TextFieldDefaults.UnfocusedBorderThickness
     val animatedThickness = if (enabled) {
         animateDpAsState(targetThickness, tween(durationMillis = 150))
     } else {
@@ -359,6 +364,35 @@ private fun PlaceHolder(text: String?) {
     }
 }
 
+internal object TextFieldDefault {
+    @Composable
+    internal fun getTrailingContent(
+        state: TextFieldState?,
+        value: String,
+        trailingIcon: (@Composable () -> Unit)?,
+    ): (@Composable () -> Unit)? = when {
+
+        state != null -> {
+            {
+                val icon = when (state) {
+                    TextFieldState.Error -> SparkIcons.InfoOutline
+                    TextFieldState.Alert -> SparkIcons.WarningOutline
+                    TextFieldState.Success -> SparkIcons.Check
+                }
+                Icon(
+                    sparkIcon = icon,
+                    contentDescription = null,
+                    size = IconSize.Medium,
+                )
+            }
+        }
+
+        value.isNotBlank() -> trailingIcon
+
+        else -> null
+    }
+}
+
 /*
 This padding is used to allow label not overlap with the content above it. This 8.dp will work
 for default cases when developers do not override the label's font size. If they do, they will
@@ -376,7 +410,7 @@ internal fun TextFieldSlotsPreview() {
         val icon = @Composable {
             SlotArea(color = LocalContentColor.current) {
                 Icon(
-                    Icons.Filled.Favorite,
+                    imageVector = Icons.Filled.Favorite,
                     contentDescription = null,
                     modifier = Modifier.size(ButtonDefaults.IconSize),
                 )
@@ -388,12 +422,11 @@ internal fun TextFieldSlotsPreview() {
             onValueChange = {},
             enabled = true,
             required = true,
-            isError = false,
             label = "Label",
             placeholder = "Placeholder",
             helper = "helper helper",
-            leadingIcon = icon,
-            trailingIcon = icon,
+            leadingContent = icon,
+            trailingContent = icon,
         )
     }
 }

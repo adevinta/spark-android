@@ -21,22 +21,19 @@
  */
 package com.adevinta.spark.components.textfields
 
+import androidx.compose.foundation.interaction.FocusInteraction
+import androidx.compose.foundation.interaction.HoverInteraction
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -44,10 +41,15 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.icons.IconSize
+import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+import kotlinx.coroutines.flow.flowOf
 
 /**
  * Outlined text input to get an input value from the user.
@@ -70,13 +72,13 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * the input text is empty. The default text style for internal [Text] is [Typography.large]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * information about expected text
- * @param leadingIcon the optional leading icon to be displayed at the beginning of the text field
+ * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
  * container
- * @param trailingIcon the optional trailing icon to be displayed at the end of the text field
+ * @param trailingContent the optional trailing icon to be displayed at the end of the text field
  * container
  * @param isError indicates if the text field's current value is in error. If set to true, the
  * label, bottom indicator and trailing icon by default will be displayed in error color
- * @param error The optional error text to be displayed at the helper position that give more informations
+ * @param stateMessage The optional error text to be displayed at the helper position that give more informations
  * about the error,  it's displayed only when [isError] is true
  * @param visualTransformation transforms the visual representation of the input [value]
  * For example, you can use [PasswordVisualTransformation][androidx.compose.ui.text.input.PasswordVisualTransformation]
@@ -102,15 +104,22 @@ public fun TextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
-    error: String? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    trailingContent: @Composable (() -> Unit)? = null,
+    state: TextFieldState? = null,
+    stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(capitalization = KeyboardCapitalization.Sentences),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
+
+    val trailingContentBasedOnState: (@Composable () -> Unit)? = TextFieldDefault.getTrailingContent(
+        state = state,
+        value = value.text,
+        trailingIcon = trailingContent,
+    )
+
     SparkTextField(
         value = value,
         onValueChange = onValueChange,
@@ -122,10 +131,10 @@ public fun TextField(
         placeholder = placeholder,
         helper = helper,
         counter = null, // Available only for MultilineTextField Variant
-        leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon,
-        isError = isError,
-        error = error,
+        leadingContent = leadingContent,
+        trailingContent = trailingContentBasedOnState,
+        state = state,
+        stateMessage = stateMessage,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
@@ -156,9 +165,9 @@ public fun TextField(
  * the input text is empty. The default text style for internal [Text] is [Typography.large]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * information about expected text
- * @param leadingIcon the optional leading icon to be displayed at the beginning of the text field
+ * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
  * container
- * @param trailingIcon the optional trailing icon to be displayed at the end of the text field
+ * @param trailingContent the optional trailing icon to be displayed at the end of the text field
  * container
  * @param isError indicates if the text field's current value is in error. If set to true, the
  * label, bottom indicator and trailing icon by default will be displayed in error color
@@ -188,15 +197,22 @@ public fun TextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
-    error: String? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    trailingContent: @Composable (() -> Unit)? = null,
+    state: TextFieldState? = null,
+    stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(capitalization = KeyboardCapitalization.Sentences),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
+
+    val trailingContentBasedOnState: (@Composable () -> Unit)? = TextFieldDefault.getTrailingContent(
+        state = state,
+        value = value,
+        trailingIcon = trailingContent,
+    )
+
     SparkTextField(
         value = value,
         onValueChange = onValueChange,
@@ -208,10 +224,10 @@ public fun TextField(
         placeholder = placeholder,
         helper = helper,
         counter = null, // Available only for MultilineTextField Variant
-        leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon,
-        isError = isError,
-        error = error,
+        leadingIcon = leadingContent,
+        trailingIcon = trailingContentBasedOnState,
+        state = state,
+        stateMessage = stateMessage,
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
@@ -223,62 +239,136 @@ public fun TextField(
 
 @Preview(
     group = "TextFields",
-    name = "TextField",
+    name = "TextField intents",
 )
 @Composable
-internal fun AllStatesTextFieldPreview(
+internal fun TextFieldIntentPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        val icon = @Composable {
-            Icon(
-                Icons.Filled.Favorite,
-                contentDescription = null,
-                modifier = Modifier.size(ButtonDefaults.IconSize),
-            )
-        }
+        PreviewTextFields(
+            state = null,
+            stateMessage = "Helper text",
+        )
+    }
+}
 
-        PreviewTextFields(enabled = true, isError = false, icon = icon)
-        PreviewTextFields(enabled = true, isError = true, icon = icon)
-        PreviewTextFields(enabled = false, isError = false, icon = icon)
+@Preview(
+    group = "TextFields",
+    name = "TextField intents error",
+)
+@Composable
+internal fun TextFieldIntentErrorPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        PreviewTextFields(
+            state = TextFieldState.Error,
+            stateMessage = "Error text",
+        )
+    }
+}
+
+@Preview(
+    group = "TextFields",
+    name = "TextField intents alert",
+)
+@Composable
+internal fun TextFieldIntentAlertPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        PreviewTextFields(
+            state = TextFieldState.Alert,
+            stateMessage = "Alert text",
+        )
+    }
+}
+
+@Preview(
+    group = "TextFields",
+    name = "TextField intents success",
+)
+@Composable
+internal fun TextFieldIntentSuccessPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        PreviewTextFields(
+            state = TextFieldState.Success,
+            stateMessage = "Success text",
+        )
     }
 }
 
 @Composable
-private fun PreviewTextFields(
-    enabled: Boolean,
-    isError: Boolean,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    icon: @Composable (() -> Unit),
+private fun ColumnScope.PreviewTextFields(
+    state: TextFieldState?,
+    stateMessage: String?,
 ) {
-    Column {
-        TextField(
-            value = "",
-            onValueChange = {},
-            enabled = enabled,
-            isError = isError,
-            label = "With helper",
-            placeholder = "Placeholder",
-            helper = "helper helper",
-            leadingIcon = icon,
-            trailingIcon = icon,
-            interactionSource = interactionSource,
+    val icon = @Composable {
+        Icon(
+            sparkIcon = SparkIcons.LikeFill,
+            contentDescription = null,
+            size = IconSize.Medium,
         )
-        Spacer(modifier = Modifier.size(16.dp))
-
-        TextField(
-            value = "With suffix",
-            onValueChange = {},
-            enabled = enabled,
-            isError = isError,
-            label = "With suffix",
-            placeholder = "Placeholder",
-            leadingIcon = icon,
-            trailingIcon = {
-                Text("Suffix", modifier = Modifier)
-            },
-            interactionSource = interactionSource,
-        )
-        Spacer(modifier = Modifier.size(16.dp))
     }
+
+    Text("Unfocused with value")
+
+    TextField(
+        value = "Input",
+        onValueChange = {},
+        enabled = true,
+        state = state,
+        stateMessage = stateMessage,
+        required = true,
+        label = "Label",
+        placeholder = "Placeholder",
+        helper = "Helper text",
+        leadingContent = icon,
+        trailingContent = icon,
+    )
+
+    Text("Focused without value")
+
+    TextField(
+        value = "",
+        onValueChange = {},
+        enabled = true,
+        state = state,
+        stateMessage = stateMessage,
+        required = true,
+        label = "Label",
+        placeholder = "Placeholder",
+        helper = "Helper text",
+        leadingContent = icon,
+        trailingContent = icon,
+        interactionSource = object : DefaultMutableInteractionSource() {
+            override val interactions = flowOf(FocusInteraction.Focus(), PressInteraction.Press(Offset.Zero))
+        },
+    )
+
+    Text("Unfocused without value")
+
+    TextField(
+        value = "",
+        onValueChange = {},
+        enabled = true,
+        state = state,
+        stateMessage = stateMessage,
+        required = true,
+        label = "Label",
+        placeholder = "Placeholder",
+        helper = "Helper text",
+        leadingContent = icon,
+        trailingContent = icon,
+    )
+}
+
+internal abstract class DefaultMutableInteractionSource : MutableInteractionSource {
+    override suspend fun emit(interaction: Interaction) {
+    }
+
+    override fun tryEmit(interaction: Interaction): Boolean = true
 }

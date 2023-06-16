@@ -21,19 +21,17 @@
  */
 package com.adevinta.spark.components.textfields
 
+import androidx.compose.foundation.interaction.FocusInteraction
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -43,6 +41,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -55,8 +54,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.icons.IconSize
+import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+import kotlinx.coroutines.flow.flowOf
 
 /**
  * Outlined text input to get an input value from a list of elements selectable through a dropdown by the user.
@@ -83,7 +87,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * the input text is empty. The default text style for internal [Text] is [Typography.large]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * informations about expected text
- * @param leadingIcon the optional leading icon to be displayed at the beginning of the text field
+ * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
  * container
  * @param isError indicates if the text field's current value is in error. If set to true, the
  * label, bottom indicator and trailing icon by default will be displayed in error color
@@ -119,9 +123,9 @@ public fun SelectTextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
-    error: String? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    state: TextFieldState? = null,
+    stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -140,14 +144,14 @@ public fun SelectTextField(
             label = label,
             placeholder = placeholder,
             helper = helper,
-            leadingIcon = leadingIcon,
-            trailingIcon = {
+            leadingContent = leadingContent,
+            trailingContent = {
                 SparkSelectTrailingIcon(
                     expanded = expanded,
                 )
             },
-            isError = isError,
-            error = error,
+            state = state,
+            stateMessage = stateMessage,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
@@ -190,7 +194,7 @@ public fun SelectTextField(
  * the input text is empty. The default text style for internal [Text] is [Typography.large]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * informations about expected text
- * @param leadingIcon the optional leading icon to be displayed at the beginning of the text field
+ * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
  * container
  * @param isError indicates if the text field's current value is in error. If set to true, the
  * label, bottom indicator and trailing icon by default will be displayed in error color
@@ -226,9 +230,9 @@ public fun SelectTextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
-    error: String? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    state: TextFieldState? = null,
+    stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Sentences),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -247,14 +251,14 @@ public fun SelectTextField(
             label = label,
             placeholder = placeholder,
             helper = helper,
-            leadingIcon = leadingIcon,
-            trailingIcon = {
+            leadingContent = leadingContent,
+            trailingContent = {
                 SparkSelectTrailingIcon(
                     expanded = expanded,
                 )
             },
-            isError = isError,
-            error = error,
+            state = state,
+            stateMessage = stateMessage,
             visualTransformation = visualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
@@ -290,7 +294,9 @@ public fun SparkSelectTrailingIcon(
     // action. When there's an API to check if Talkback is on, developer will be able to
     // expand the menu on icon click in a11y mode only esp. if using their own custom
     // trailing icon.
-    IconButton(onClick = onIconClick, modifier = modifier.clearAndSetSemantics { }.requiredSize(24.dp)) {
+    IconButton(onClick = onIconClick, modifier = modifier
+        .clearAndSetSemantics { }
+        .requiredSize(24.dp)) {
         Icon(
             // TODO scott.rayapoulle.ext-12/07/2022: Use or create ImageVector variant of this Spark icon
             Icons.Filled.KeyboardArrowDown,
@@ -306,67 +312,138 @@ public fun SparkSelectTrailingIcon(
 
 @Preview(
     group = "TextFields",
-    name = "SelectTextField",
+    name = "SelectTextField intents",
 )
 @Composable
-internal fun AllStatesSelectTextFieldPreview(
+internal fun SelectTextFieldIntentPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        val icon = @Composable {
-            Icon(
-                Icons.Filled.Favorite,
-                contentDescription = null,
-                modifier = Modifier.size(ButtonDefaults.IconSize),
-            )
-        }
+        PreviewTextFields(
+            state = null,
+            stateMessage = "Helper text",
+        )
+    }
+}
 
-        PreviewSelectTextFields(enabled = true, isError = false, icon = icon)
-        PreviewSelectTextFields(enabled = true, isError = true, icon = icon)
-        PreviewSelectTextFields(enabled = false, isError = false, icon = icon)
+@Preview(
+    group = "TextFields",
+    name = "SelectTextField intents error",
+)
+@Composable
+internal fun SelectTextFieldIntentErrorPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        PreviewTextFields(
+            state = TextFieldState.Error,
+            stateMessage = "Error text",
+        )
+    }
+}
+
+@Preview(
+    group = "TextFields",
+    name = "SelectTextField intents alert",
+)
+@Composable
+internal fun SelectTextFieldIntentAlertPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        PreviewTextFields(
+            state = TextFieldState.Alert,
+            stateMessage = "Alert text",
+        )
+    }
+}
+
+@Preview(
+    group = "TextFields",
+    name = "SelectTextField intents success",
+)
+@Composable
+internal fun SelectTextFieldIntentSuccessPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        PreviewTextFields(
+            state = TextFieldState.Success,
+            stateMessage = "Success text",
+        )
     }
 }
 
 @Composable
-internal fun PreviewSelectTextFields(
-    enabled: Boolean,
-    isError: Boolean,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    icon: @Composable (() -> Unit),
+private fun ColumnScope.PreviewTextFields(
+    state: TextFieldState?,
+    stateMessage: String?,
 ) {
-    Column {
-        SelectTextField(
-            value = "",
-            onValueChange = {},
-            enabled = enabled,
-            isError = isError,
-            label = "Label",
-            placeholder = "Placeholder",
-            helper = "helperhelperh elperhelperh elperhelp erhelperhelperhe lperhel perhelper helper helper",
-            leadingIcon = icon,
-            interactionSource = interactionSource,
-            expanded = false,
-            onExpandedChange = {},
-            onDismissRequest = {},
-            dropdownContent = {},
+    val icon = @Composable {
+        com.adevinta.spark.components.icons.Icon(
+            sparkIcon = SparkIcons.LikeFill,
+            contentDescription = null,
+            size = IconSize.Medium,
         )
-        Spacer(modifier = Modifier.size(16.dp))
-
-        SelectTextField(
-            value = "Value",
-            onValueChange = {},
-            enabled = enabled,
-            required = true,
-            isError = isError,
-            label = "Label",
-            placeholder = "Placeholder",
-            leadingIcon = icon,
-            interactionSource = interactionSource,
-            expanded = false,
-            onExpandedChange = {},
-            onDismissRequest = {},
-            dropdownContent = {},
-        )
-        Spacer(modifier = Modifier.size(16.dp))
     }
+
+    Text("Unfocused with value")
+
+    SelectTextField(
+        value = "Input",
+        onValueChange = {},
+        enabled = true,
+        state = state,
+        stateMessage = stateMessage,
+        required = true,
+        label = "Label",
+        placeholder = "Placeholder",
+        helper = "Helper text",
+        leadingContent = icon,
+        expanded = false,
+        onExpandedChange = {},
+        onDismissRequest = {},
+        dropdownContent = {},
+    )
+
+    Text("Focused without value")
+
+    SelectTextField(
+        value = "",
+        onValueChange = {},
+        enabled = true,
+        state = state,
+        stateMessage = stateMessage,
+        required = true,
+        label = "Label",
+        placeholder = "Placeholder",
+        helper = "Helper text",
+        leadingContent = icon,
+        interactionSource = object : DefaultMutableInteractionSource() {
+            override val interactions = flowOf(FocusInteraction.Focus(), PressInteraction.Press(Offset.Zero))
+        },
+        expanded = false,
+        onExpandedChange = {},
+        onDismissRequest = {},
+        dropdownContent = {},
+    )
+
+    Text("Unfocused without value")
+
+    SelectTextField(
+        value = "",
+        onValueChange = {},
+        enabled = true,
+        state = state,
+        stateMessage = stateMessage,
+        required = true,
+        label = "Label",
+        placeholder = "Placeholder",
+        helper = "Helper text",
+        leadingContent = icon,
+        expanded = false,
+        onExpandedChange = {},
+        onDismissRequest = {},
+        dropdownContent = {},
+    )
 }
