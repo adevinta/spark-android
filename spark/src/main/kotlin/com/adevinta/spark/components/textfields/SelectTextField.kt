@@ -26,6 +26,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -281,13 +282,13 @@ public fun SparkSelectTrailingIcon(
     // action. When there's an API to check if Talkback is on, developer will be able to
     // expand the menu on icon click in a11y mode only esp. if using their own custom
     // trailing icon.
-    IconButton(onClick = onIconClick, modifier = modifier.clearAndSetSemantics { }) {
+    IconButton(onClick = onIconClick, modifier = modifier.clearAndSetSemantics { }.requiredSize(24.dp)) {
         Icon(
             // TODO scott.rayapoulle.ext-12/07/2022: Use or create ImageVector variant of this Spark icon
             Icons.Filled.KeyboardArrowDown,
             "Trailing icon for exposed dropdown menu",
             Modifier
-                .size(ButtonDefaults.IconSize)
+                .size(24.dp)
                 .rotate(
                     if (expanded) 180f else 360f,
                 ),

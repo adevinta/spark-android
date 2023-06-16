@@ -67,7 +67,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.lerp
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 
@@ -97,7 +96,10 @@ internal fun SparkDecorationBox(
         visualTransformation.filter(AnnotatedString(value))
     }.text.text
 
-    val contentPadding = TextFieldDefaults.outlinedTextFieldPadding()
+    val contentPadding = TextFieldDefaults.outlinedTextFieldPadding(
+        top = 12.dp,
+        bottom = 12.dp,
+    )
 
     val isFocused = interactionSource.collectIsFocusedAsState().value
     val inputState = when {
@@ -115,7 +117,7 @@ internal fun SparkDecorationBox(
     val bodySmall = typography.body2
     val shouldOverrideTextStyleColor =
         (bodyLarge.color == Color.Unspecified && bodySmall.color != Color.Unspecified) ||
-            (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
+                (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
 
     TextFieldTransitionScope.Transition(
         inputState = inputState,
@@ -305,7 +307,8 @@ internal fun SparkTextFieldLayout(
                 Box(
                     modifier = Modifier
                         .layoutId(LeadingId)
-                        .then(IconDefaultSizeModifier),
+                        .then(IconDefaultSizeModifier)
+                        .padding(start = 16.dp),
                     contentAlignment = Alignment.Center,
                 ) {
                     leading()
@@ -315,7 +318,8 @@ internal fun SparkTextFieldLayout(
                 Box(
                     modifier = Modifier
                         .layoutId(TrailingId)
-                        .then(IconDefaultSizeModifier),
+                        .then(IconDefaultSizeModifier)
+                        .padding(end = 16.dp),
                     contentAlignment = Alignment.Center,
                 ) {
                     trailing()
@@ -325,18 +329,8 @@ internal fun SparkTextFieldLayout(
             val startTextFieldPadding = paddingValues.calculateStartPadding(layoutDirection)
             val endTextFieldPadding = paddingValues.calculateEndPadding(layoutDirection)
             val padding = Modifier.padding(
-                start = if (leading != null) {
-                    (startTextFieldPadding - HorizontalIconPadding).coerceAtLeast(
-                        0.dp,
-                    )
-                } else {
-                    startTextFieldPadding
-                },
-                end = if (trailing != null) {
-                    (endTextFieldPadding - HorizontalIconPadding).coerceAtLeast(0.dp)
-                } else {
-                    endTextFieldPadding
-                },
+                start = startTextFieldPadding,
+                end = endTextFieldPadding,
             )
             if (placeholder != null) {
                 placeholder(
@@ -524,11 +518,10 @@ internal const val AnimationDuration = 150
 private const val PlaceholderAnimationDuration = 83
 private const val PlaceholderAnimationDelayOrDuration = 67
 
-internal val TextFieldPadding = 16.dp
 internal val CounterPadding = 8.dp
-internal val HorizontalIconPadding = 12.dp
+internal val HorizontalIconPadding = 8.dp
 
-internal val IconDefaultSizeModifier = Modifier.defaultMinSize(48.dp, 48.dp)
+internal val IconDefaultSizeModifier = Modifier.defaultMinSize(24.dp, 24.dp)
 
 private val OutlinedTextFieldInnerPadding = 4.dp
 

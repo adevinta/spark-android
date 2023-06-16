@@ -42,7 +42,7 @@ import com.adevinta.spark.SparkTheme
 internal fun sparkOutlinedTextFieldColors(
     textColor: Color = SparkTheme.colors.onSurface,
     disabledTextColor: Color = textColor.copy(DisabledOpacity),
-    containerColor: Color = Color.Transparent,
+    containerColor: Color = SparkTheme.colors.surface,
     cursorColor: Color = SparkTheme.colors.onSurface,
     errorCursorColor: Color = SparkTheme.colors.error,
     selectionColors: TextSelectionColors = LocalTextSelectionColors.current,

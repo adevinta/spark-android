@@ -327,7 +327,6 @@ private fun PreviewTextFields(
             label = "Label",
             placeholder = "Placeholder",
             counter = TextFieldCharacterCounter(12, 24),
-            leadingIcon = icon,
             isError = isError,
             maxLines = 3,
             interactionSource = interactionSource,

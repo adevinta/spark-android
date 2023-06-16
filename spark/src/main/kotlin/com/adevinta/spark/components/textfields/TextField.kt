@@ -267,7 +267,7 @@ private fun PreviewTextFields(
             placeholder = "Placeholder",
             leadingIcon = icon,
             trailingIcon = {
-                Text("Suffix", modifier = Modifier.padding(end = 16.dp))
+                Text("Suffix", modifier = Modifier)
             },
             interactionSource = interactionSource,
         )

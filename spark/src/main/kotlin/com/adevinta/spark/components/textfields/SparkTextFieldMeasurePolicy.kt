@@ -404,8 +404,6 @@ private fun Placeable.PlacementScope.place(
     val topPadding = (paddingValues.calculateTopPadding().value * density).roundToInt()
     val startPadding =
         (paddingValues.calculateStartPadding(layoutDirection).value * density).roundToInt()
-    val endPadding =
-        (paddingValues.calculateEndPadding(layoutDirection).value * density).roundToInt()
 
     val iconPadding = HorizontalIconPadding.value * density
 
@@ -464,11 +462,11 @@ private fun Placeable.PlacementScope.place(
     }
 
     supportingPlaceable?.placeRelative(
-        x = startPadding,
+        x = 0,
         y = height,
     )
     counterPlaceable?.placeRelative(
-        x = width - counterPlaceable.width - endPadding,
+        x = width - counterPlaceable.width,
         y = height,
     )
 }
