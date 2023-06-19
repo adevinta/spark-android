@@ -43,7 +43,7 @@ public fun UpNavigationIcon(
         onClick = onClick,
     ) {
         Icon(
-            size = IconSize.Small,
+            size = IconSize.Medium,
             sparkIcon = SparkIcons.ArrowLeft,
             contentDescription = contentDescription,
         )
