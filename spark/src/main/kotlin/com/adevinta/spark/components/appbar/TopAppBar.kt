@@ -286,7 +286,7 @@ internal fun PreviewTopAppBar(
             title = { Text("Up TopAppBar") },
             navigationIcon = {
                 UpNavigationIcon(onClick = { /* doSomething() */ })
-            }
+            },
         )
 
         TopAppBar(
