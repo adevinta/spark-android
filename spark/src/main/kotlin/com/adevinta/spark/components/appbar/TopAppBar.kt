@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.navigation.UpNavigationIcon
 import com.adevinta.spark.icons.BurgerMenu
 import com.adevinta.spark.icons.CameraFill
 import com.adevinta.spark.icons.SparkIcons
@@ -281,6 +282,13 @@ internal fun PreviewTopAppBar(
         themeVariant = theme,
         padding = PaddingValues(0.dp),
     ) {
+        TopAppBar(
+            title = { Text("Up TopAppBar") },
+            navigationIcon = {
+                UpNavigationIcon(onClick = { /* doSomething() */ })
+            }
+        )
+
         TopAppBar(
             title = { Text("Simple TopAppBar") },
             navigationIcon = {
