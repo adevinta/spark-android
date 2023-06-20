@@ -1704,9 +1704,9 @@ public sealed class SparkIcon {
 
         @Deprecated(
             message = "Use SparkIcons instead.",
-            replaceWith = ReplaceWith("SparkIcons.ErrorPhoto", "com.adevinta.spark.icons"),
+            replaceWith = ReplaceWith("SparkIcons.ErrorPhotoOutline", "com.adevinta.spark.icons"),
         )
-        public val ErrorPhoto: DrawableRes = SparkIcons.ErrorPhoto
+        public val ErrorPhoto: DrawableRes = SparkIcons.ErrorPhotoOutline
 
         @Deprecated(
             message = "Use SparkIcons instead.",

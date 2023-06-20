@@ -55,7 +55,7 @@ import com.adevinta.spark.components.icons.rememberSparkIconPainter
 import com.adevinta.spark.components.placeholder.illustrationPlaceholder
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.icons.ErrorPhoto
+import com.adevinta.spark.icons.ErrorPhotoOutline
 import com.adevinta.spark.icons.NoPhoto
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
@@ -75,7 +75,7 @@ internal fun SparkImage(
     transform: (AsyncImagePainter.State) -> AsyncImagePainter.State = AsyncImagePainter.DefaultTransform,
     onState: ((State) -> Unit)? = null,
     emptyIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.NoPhoto) },
-    errorIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.ErrorPhoto) },
+    errorIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.ErrorPhotoOutline) },
     loadingPlaceholder: @Composable () -> Unit = ImageDefaults.placeholder,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
