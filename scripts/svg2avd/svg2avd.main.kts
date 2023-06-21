@@ -5,7 +5,7 @@
 
 @file:DependsOn("org.jetbrains.kotlin:kotlin-stdlib:1.9.0-Beta")
 @file:DependsOn("com.android.tools:sdk-common:31.0.2")
-@file:DependsOn("com.github.ajalt.clikt:clikt-jvm:3.5.3")
+@file:DependsOn("com.github.ajalt.clikt:clikt-jvm:3.5.4")
 
 import com.android.ide.common.vectordrawable.Svg2Vector
 import com.github.ajalt.clikt.core.CliktCommand
