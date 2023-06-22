@@ -2411,3 +2411,15 @@ public sealed class SparkIcon {
         }
     }
 }
+
+@Deprecated(
+    message = "Use SparkIcons.ClockArrow instead.",
+    replaceWith = ReplaceWith("SparkIcons.ClockArrow", "com.adevinta.spark.icons"),
+)
+public val SparkIcons.ClockArrowFill: DrawableRes get() = SparkIcons.ClockArrow
+
+@Deprecated(
+    message = "Use SparkIcons.ClockArrow instead.",
+    replaceWith = ReplaceWith("SparkIcons.ClockArrow", "com.adevinta.spark.icons"),
+)
+public val SparkIcons.ClockArrowOutline: DrawableRes get() = SparkIcons.ClockArrow
