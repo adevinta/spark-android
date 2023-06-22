@@ -2039,9 +2039,9 @@ public sealed class SparkIcon {
         public object Clock {
             @Deprecated(
                 message = "Use SparkIcons instead.",
-                replaceWith = ReplaceWith("SparkIcons.ClockArrowOutline", "com.adevinta.spark.icons"),
+                replaceWith = ReplaceWith("SparkIcons.ClockArrow", "com.adevinta.spark.icons"),
             )
-            public val Arrow: DrawableRes = SparkIcons.ClockArrowOutline
+            public val Arrow: DrawableRes = SparkIcons.ClockArrow
 
             @Deprecated(
                 message = "Use SparkIcons instead.",
