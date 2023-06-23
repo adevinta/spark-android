@@ -4,6 +4,17 @@
 
 ## [Unreleased]
 
+## [0.2.0]
+
+_2023-06-23_
+
+* 🆕 Migrate `Badges` to the new spark spec with multiple sizes, styles and intents.
+* 🆕 Migrate `Icons` to the new spark spec with multiple sizes, styles and intents.
+* 🆕 Migrate `Chips` to the new spark spec with multiple sizes, styles and intents.
+* 🆕 Migrate `Toggles` to the new spark spec with multiple sizes, styles and intents.
+* 🆕 Add fullscreen modal component as experimental
+* Update icon resources
+
 ## [0.1.1]
 
 _2023-05-23_
@@ -42,7 +53,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.1.1...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.2.0...HEAD
+
+[0.2.0]: https://github.com/adevinta/spark-android/releases/tag/0.2.0
 
 [0.1.1]: https://github.com/adevinta/spark-android/releases/tag/0.1.1
 
