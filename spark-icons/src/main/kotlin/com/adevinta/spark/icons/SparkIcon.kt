@@ -657,9 +657,9 @@ public sealed class SparkIcon {
 
         @Deprecated(
             message = "Use SparkIcons instead.",
-            replaceWith = ReplaceWith("SparkIcons.SendHorizontal", "com.adevinta.spark.icons"),
+            replaceWith = ReplaceWith("SparkIcons.SendFill", "com.adevinta.spark.icons"),
         )
-        public val SendMessage: DrawableRes = SparkIcons.SendHorizontal
+        public val SendMessage: DrawableRes = SparkIcons.SendFill
     }
 
     @Deprecated("Use SparkIcons instead.")
