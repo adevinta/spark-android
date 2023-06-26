@@ -87,7 +87,8 @@ internal fun SparkBadgedBox(
         val hasContent = badgePlaceable.width > BadgeWithNoContentSize.roundToPx()
         val offset = when {
             hasContent &&
-                badgePlaceable.width >= MediumBadgeWithContentOffset.roundToPx() -> MediumBadgeWithContentOffset
+                    badgePlaceable.width >= MediumBadgeWithContentOffset.roundToPx() -> MediumBadgeWithContentOffset
+
             hasContent -> SmallBadgeWithContentOffset
             else -> BadgeWithNoContentOffset
         }.roundToPx()
@@ -142,117 +143,96 @@ public fun BadgedBox(
 
 @Preview(
     group = "Badge",
-    name = "BadgedBox",
+    name = "BadgedBox No Stroke",
 )
 @Composable
-internal fun BadgedBoxPreview(
+internal fun BadgedBoxNoStrokePreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        BadgeStyle.values().forEach {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(32.dp),
-            ) {
-                BadgedBox(
-                    badge = {
-                        Badge(count = 1, badgeStyle = it)
-                    },
-                ) {
-                    Icon(
-                        SparkIcons.LikeOutline,
-                        modifier = Modifier.size(24.dp),
-                        contentDescription = "Favorite",
-                    )
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(count = 100, badgeStyle = it)
-                    },
-                ) {
-                    Icon(
-                        SparkIcons.MessageOutline,
-                        modifier = Modifier.size(24.dp),
-                        contentDescription = "Notifications",
-                    )
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(count = 1000, badgeStyle = it, overflowCount = 999)
-                    },
-                ) {
-                    Icon(
-                        SparkIcons.Search,
-                        modifier = Modifier.size(24.dp),
-                        contentDescription = "Search",
-                    )
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(badgeStyle = it)
-                    },
-                ) {
-                    Icon(
-                        SparkIcons.AccountOutline,
-                        modifier = Modifier.size(24.dp),
-                        contentDescription = "Notifications",
-                    )
-                }
+        BadgeIntent.values().forEach { intent ->
+            BadgeStyle.values().forEach { style ->
+                BadgedBoxIntentPreview(
+                    style, intent, hasStroke = false,
+                )
             }
 
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(32.dp),
-            ) {
-                BadgedBox(
-                    badge = {
-                        Badge(count = 1, badgeStyle = it, intent = BadgeIntent.Info, hasStroke = false)
-                    },
-                ) {
-                    Icon(
-                        SparkIcons.LikeOutline,
-                        modifier = Modifier.size(24.dp),
-                        contentDescription = "Favorite",
-                    )
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(count = 100, badgeStyle = it, intent = BadgeIntent.Info, hasStroke = false)
-                    },
-                ) {
-                    Icon(
-                        SparkIcons.MessageOutline,
-                        modifier = Modifier.size(24.dp),
-                        contentDescription = "Notifications",
-                    )
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(
-                            count = 1000,
-                            badgeStyle = it,
-                            overflowCount = 999,
-                            intent = BadgeIntent.Info,
-                            hasStroke = false,
-                        )
-                    },
-                ) {
-                    Icon(
-                        SparkIcons.Search,
-                        modifier = Modifier.size(24.dp),
-                        contentDescription = "Search",
-                    )
-                }
-                BadgedBox(
-                    badge = {
-                        Badge(badgeStyle = it, intent = BadgeIntent.Info, hasStroke = false)
-                    },
-                ) {
-                    Icon(
-                        SparkIcons.AccountOutline,
-                        modifier = Modifier.size(24.dp),
-                        contentDescription = "Account",
-                    )
-                }
+        }
+    }
+}
+
+@Preview(
+    group = "Badge",
+    name = "BadgedBox With Stroke",
+)
+@Composable
+internal fun BadgedBoxWithStrokePreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        BadgeIntent.values().forEach { intent ->
+            BadgeStyle.values().forEach { style ->
+                BadgedBoxIntentPreview(
+                    style, intent, hasStroke = true,
+                )
             }
+
+        }
+    }
+}
+
+@Composable
+private fun BadgedBoxIntentPreview(
+    style: BadgeStyle,
+    intent: BadgeIntent,
+    hasStroke: Boolean,
+) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(32.dp),
+    ) {
+        BadgedBox(
+            badge = {
+                Badge(count = 1, badgeStyle = style, intent = intent, hasStroke = hasStroke)
+            },
+        ) {
+            Icon(
+                SparkIcons.LikeOutline,
+                modifier = Modifier.size(24.dp),
+                contentDescription = "Favorite",
+            )
+        }
+        BadgedBox(
+            badge = {
+                Badge(count = 100, badgeStyle = style, intent = intent, hasStroke = hasStroke)
+            },
+        ) {
+            Icon(
+                SparkIcons.MessageOutline,
+                modifier = Modifier.size(24.dp),
+                contentDescription = "Notifications",
+            )
+        }
+        BadgedBox(
+            badge = {
+                Badge(count = 1000, badgeStyle = style, intent = intent, overflowCount = 999, hasStroke = hasStroke)
+            },
+        ) {
+            Icon(
+                SparkIcons.Search,
+                modifier = Modifier.size(24.dp),
+                contentDescription = "Search",
+            )
+        }
+        BadgedBox(
+            badge = {
+                Badge(badgeStyle = style, intent = intent, hasStroke = hasStroke)
+            },
+        ) {
+            Icon(
+                SparkIcons.AccountOutline,
+                modifier = Modifier.size(24.dp),
+                contentDescription = "Notifications",
+            )
         }
     }
 }
