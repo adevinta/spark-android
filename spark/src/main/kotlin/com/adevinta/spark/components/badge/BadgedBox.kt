@@ -87,7 +87,7 @@ internal fun SparkBadgedBox(
         val hasContent = badgePlaceable.width > BadgeWithNoContentSize.roundToPx()
         val offset = when {
             hasContent &&
-                    badgePlaceable.width >= MediumBadgeWithContentOffset.roundToPx() -> MediumBadgeWithContentOffset
+                badgePlaceable.width >= MediumBadgeWithContentOffset.roundToPx() -> MediumBadgeWithContentOffset
 
             hasContent -> SmallBadgeWithContentOffset
             else -> BadgeWithNoContentOffset
@@ -153,10 +153,11 @@ internal fun BadgedBoxNoStrokePreview(
         BadgeIntent.values().forEach { intent ->
             BadgeStyle.values().forEach { style ->
                 BadgedBoxIntentPreview(
-                    style, intent, hasStroke = false,
+                    style,
+                    intent,
+                    hasStroke = false,
                 )
             }
-
         }
     }
 }
@@ -173,10 +174,11 @@ internal fun BadgedBoxWithStrokePreview(
         BadgeIntent.values().forEach { intent ->
             BadgeStyle.values().forEach { style ->
                 BadgedBoxIntentPreview(
-                    style, intent, hasStroke = true,
+                    style,
+                    intent,
+                    hasStroke = true,
                 )
             }
-
         }
     }
 }

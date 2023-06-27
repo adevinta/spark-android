@@ -251,7 +251,6 @@ internal fun BadgeWithStrokeIntentPreview(
     }
 }
 
-
 @Composable
 private fun BadgeIntentPreview(intent: BadgeIntent, hasStroke: Boolean) {
     BadgeStyle.values().forEach {
