@@ -44,7 +44,7 @@ internal class SparkAndroidComposePlugin : Plugin<Project> {
             tasks.withType<KotlinCompile> {
                 compilerOptions.freeCompilerArgs.addAll(
                     "-P",
-                    "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.9.0-Beta",
+                    "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.9.0-RC",
                 )
             }
 
