@@ -96,8 +96,10 @@ import kotlinx.coroutines.flow.flowOf
  * @param keyboardActions when the input service emits an IME action, the corresponding callback
  * is called. Note that this IME action may be different from what you specified in
  * [KeyboardOptions.imeAction]
- * @param maxLines the maximum height in terms of maximum number of visible lines. Should be
- * equal or greater than 1
+ * @param maxLines the maximum height in terms of maximum number of visible lines. It is required
+ *  * that 1 <= [minLines] <= [maxLines].
+ * @param minLines the minimum height in terms of minimum number of visible lines. It is required
+ *  * that 1 <= [minLines] <= [maxLines].
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this TextField. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
@@ -122,7 +124,8 @@ public fun MultilineTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(capitalization = KeyboardCapitalization.Sentences),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    maxLines: Int = 1,
+    maxLines: Int = Int.MAX_VALUE,
+    minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val trailingIconComposable: (@Composable () -> Unit)? = getTrailingContent(
@@ -163,6 +166,7 @@ public fun MultilineTextField(
         keyboardActions = keyboardActions,
         singleLine = false,
         maxLines = maxLines,
+        minLines = minLines,
         interactionSource = interactionSource,
     )
 }
@@ -207,8 +211,10 @@ public fun MultilineTextField(
  * @param keyboardActions when the input service emits an IME action, the corresponding callback
  * is called. Note that this IME action may be different from what you specified in
  * [KeyboardOptions.imeAction]
- * @param maxLines the maximum height in terms of maximum number of visible lines. Should be
- * equal or greater than 1
+ * @param maxLines the maximum height in terms of maximum number of visible lines. It is required
+ *  * that 1 <= [minLines] <= [maxLines].
+ * @param minLines the minimum height in terms of minimum number of visible lines. It is required
+ *  * that 1 <= [minLines] <= [maxLines].
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this TextField. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
@@ -233,7 +239,8 @@ public fun MultilineTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(capitalization = KeyboardCapitalization.Sentences),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    maxLines: Int = 1,
+    maxLines: Int = Int.MAX_VALUE,
+    minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val trailingIconComposable: (@Composable () -> Unit)? = getTrailingContent(
@@ -273,6 +280,7 @@ public fun MultilineTextField(
         keyboardActions = keyboardActions,
         singleLine = false,
         maxLines = maxLines,
+        minLines = minLines,
         interactionSource = interactionSource,
     )
 }
@@ -393,7 +401,7 @@ private fun ColumnScope.PreviewTextFields(
     Text("Unfocused without value")
 
     MultilineTextField(
-        value = "",
+        value = "kejhfqlef",
         onValueChange = {},
         onCancelClick = {},
         enabled = true,
@@ -404,5 +412,6 @@ private fun ColumnScope.PreviewTextFields(
         placeholder = "Placeholder",
         helper = "Helper text",
         leadingContent = icon,
+        minLines = 3,
     )
 }

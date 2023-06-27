@@ -102,6 +102,7 @@ internal fun SparkTextField(
     keyboardActions: KeyboardActions,
     singleLine: Boolean,
     maxLines: Int,
+    minLines: Int,
     modifier: Modifier = Modifier,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -134,6 +135,7 @@ internal fun SparkTextField(
             interactionSource = interactionSource,
             singleLine = singleLine,
             maxLines = maxLines,
+            minLines = minLines,
             decorationBox = @Composable { innerTextField ->
                 val counterComposable: @Composable (() -> Unit)? = counter?.let {
                     { Text(text = "${counter.count}/${counter.maxCharacter}") }
@@ -197,6 +199,7 @@ internal fun SparkTextField(
     keyboardActions: KeyboardActions,
     singleLine: Boolean,
     maxLines: Int,
+    minLines: Int,
     modifier: Modifier = Modifier,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -230,6 +233,7 @@ internal fun SparkTextField(
             interactionSource = interactionSource,
             singleLine = singleLine,
             maxLines = maxLines,
+            minLines = minLines,
             decorationBox = @Composable { innerTextField ->
                 val counterComposable: @Composable (() -> Unit)? = counter?.let {
                     { Text(text = "${counter.count}/${counter.maxCharacter}") }

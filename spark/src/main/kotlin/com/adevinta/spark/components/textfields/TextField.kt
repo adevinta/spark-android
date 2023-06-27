@@ -140,6 +140,7 @@ public fun TextField(
         keyboardActions = keyboardActions,
         singleLine = true,
         maxLines = 1,
+        minLines = 1,
         interactionSource = interactionSource,
     )
 }
@@ -233,6 +234,7 @@ public fun TextField(
         keyboardActions = keyboardActions,
         singleLine = true,
         maxLines = 1,
+        minLines = 1,
         interactionSource = interactionSource,
     )
 }
