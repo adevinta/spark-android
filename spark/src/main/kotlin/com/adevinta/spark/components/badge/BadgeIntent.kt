@@ -29,6 +29,57 @@ import com.adevinta.spark.components.IntentColor
  * BadgeIntent is used to define the intent of the badge.
  */
 public enum class BadgeIntent {
+    /**
+     * Used for the most important information.
+     */
+    Primary {
+        @Composable
+        override fun colors() = IntentColor(
+            color = SparkTheme.colors.primary,
+            onColor = SparkTheme.colors.onPrimary,
+            containerColor = SparkTheme.colors.primaryContainer,
+            onContainerColor = SparkTheme.colors.onPrimaryContainer,
+        )
+    },
+
+    /**
+     * Used to highlight information.
+     */
+    Secondary {
+        @Composable
+        override fun colors() = IntentColor(
+            color = SparkTheme.colors.secondary,
+            onColor = SparkTheme.colors.onSecondary,
+            containerColor = SparkTheme.colors.secondaryContainer,
+            onContainerColor = SparkTheme.colors.onSecondaryContainer,
+        )
+    },
+
+    /**
+     * Used for feedbacks that are positive.
+     */
+    Success {
+        @Composable
+        override fun colors() = IntentColor(
+            color = SparkTheme.colors.success,
+            onColor = SparkTheme.colors.onSuccess,
+            containerColor = SparkTheme.colors.successContainer,
+            onContainerColor = SparkTheme.colors.onSuccessContainer,
+        )
+    },
+
+    /**
+     * Used for feedbacks that are negative.
+     */
+    Alert {
+        @Composable
+        override fun colors() = IntentColor(
+            color = SparkTheme.colors.alert,
+            onColor = SparkTheme.colors.onAlert,
+            containerColor = SparkTheme.colors.alertContainer,
+            onContainerColor = SparkTheme.colors.onAlertContainer,
+        )
+    },
 
     /**
      * Used for first level information
@@ -53,6 +104,32 @@ public enum class BadgeIntent {
             onColor = SparkTheme.colors.onInfo,
             containerColor = SparkTheme.colors.infoContainer,
             onContainerColor = SparkTheme.colors.onInfoContainer,
+        )
+    },
+
+    /**
+     * Used for feedbacks that are neutral.
+     */
+    Neutral {
+        @Composable
+        override fun colors() = IntentColor(
+            color = SparkTheme.colors.neutral,
+            onColor = SparkTheme.colors.onNeutral,
+            containerColor = SparkTheme.colors.neutralContainer,
+            onContainerColor = SparkTheme.colors.onNeutralContainer,
+        )
+    },
+
+    /**
+     * Badge on a color / image panel without on intent color.
+     */
+    Surface {
+        @Composable
+        override fun colors() = IntentColor(
+            color = SparkTheme.colors.surface,
+            onColor = SparkTheme.colors.onSurface,
+            containerColor = SparkTheme.colors.surface,
+            onContainerColor = SparkTheme.colors.onSurface,
         )
     },
     ;
