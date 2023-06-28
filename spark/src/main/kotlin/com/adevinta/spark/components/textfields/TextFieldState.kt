@@ -26,6 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.SparkTheme
 
+/**
+ *   State of a [TextField] that's used to change the highlight color to either [Success], [Alert] or [Error].
+ */
 public enum class TextFieldState {
     /**
      * Used for feedbacks that are positive.

@@ -76,10 +76,9 @@ import kotlinx.coroutines.flow.flowOf
  * container
  * @param trailingContent the optional trailing icon to be displayed at the end of the text field
  * container
- * @param isError indicates if the text field's current value is in error. If set to true, the
- * label, bottom indicator and trailing icon by default will be displayed in error color
- * @param stateMessage The optional error text to be displayed at the helper position that give more informations
- * about the error,  it's displayed only when [isError] is true
+ * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are tinted by the state color.
+ * @param stateMessage the optional state text to be displayed at the helper position that give more information about
+ * the state, it's displayed only when [state] is not null.
  * @param visualTransformation transforms the visual representation of the input [value]
  * For example, you can use [PasswordVisualTransformation][androidx.compose.ui.text.input.PasswordVisualTransformation]
  * to create a password text field. By default no visual transformation is applied
@@ -92,6 +91,9 @@ import kotlinx.coroutines.flow.flowOf
  * [Interaction]s for this TextField. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this TextField in different [Interaction]s.
+ *
+ * @see MultilineTextField
+ * @see SelectTextField
  */
 @Composable
 public fun TextField(
@@ -170,10 +172,9 @@ public fun TextField(
  * container
  * @param trailingContent the optional trailing icon to be displayed at the end of the text field
  * container
- * @param isError indicates if the text field's current value is in error. If set to true, the
- * label, bottom indicator and trailing icon by default will be displayed in error color
- * @param error The optional error text to be displayed at the helper position that give more informations
- * about the error,  it's displayed only when [isError] is true
+ * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are tinted by the state color.
+ * @param stateMessage the optional state text to be displayed at the helper position that give more information about
+ * the state, it's displayed only when [state] is not null.
  * @param visualTransformation transforms the visual representation of the input [value]
  * For example, you can use [PasswordVisualTransformation][androidx.compose.ui.text.input.PasswordVisualTransformation]
  * to create a password text field. By default no visual transformation is applied
@@ -186,6 +187,9 @@ public fun TextField(
  * [Interaction]s for this TextField. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this TextField in different [Interaction]s.
+ *
+ * @see MultilineTextField
+ * @see SelectTextField
  */
 @Composable
 public fun TextField(
