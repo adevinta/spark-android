@@ -19,36 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.samples.components
+@file:Suppress("COMPOSABLE_FUNCTION_REFERENCE")
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.padding
+package com.adevinta.spark.catalog.examples.model.example
+
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.adevinta.spark.components.buttons.ButtonFilled
-import com.adevinta.spark.components.buttons.ButtonIntent
-import com.adevinta.spark.components.buttons.IconSide
-import com.adevinta.spark.icons.SparkIcon
 
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-public fun ButtonSample() {
-    val icon = SparkIcon.Account.Identity
-    FlowRow(
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-    ) {
-        ButtonIntent.values().forEach { intent ->
-            ButtonFilled(
-                modifier = Modifier.padding(top = 10.dp),
-                text = intent.name,
-                onClick = { },
-                intent = intent,
-                icon = icon,
-                iconSide = IconSide.START,
-            )
-        }
-    }
-}
+public data class Example(
+    val name: String,
+    val description: String,
+    val sourceUrl: String,
+    val content: @Composable () -> Unit,
+)

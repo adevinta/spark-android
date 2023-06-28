@@ -19,12 +19,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.adevinta.spark.catalog.examples.model.example.buttons
 
-@file:Suppress("COMPOSABLE_FUNCTION_REFERENCE")
-
-package com.adevinta.spark.catalog.examples.model
-
-import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
+import com.adevinta.spark.catalog.examples.model.example.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonContrast
 import com.adevinta.spark.components.buttons.ButtonFilled
@@ -43,18 +41,11 @@ import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 
-public data class Example(
-    val name: String,
-    val description: String,
-    val sourceUrl: String,
-    val content: @Composable () -> Unit,
-)
-
 private const val ButtonsExampleDescription = "Button examples"
 private const val ButtonsExampleSourceUrl = "$SampleSourceUrl/ButtonSamples.kt"
 public val ButtonsExamples: List<Example> = listOf(
     Example(
-        name = "Filled Button Sample",
+        name = "Filled Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
     ) {
@@ -72,7 +63,7 @@ public val ButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
-        name = "Tinted Button Sample",
+        name = "Tinted Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
     ) {
@@ -90,7 +81,7 @@ public val ButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
-        name = "Outlined Button Sample",
+        name = "Outlined Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
     ) {
@@ -108,7 +99,7 @@ public val ButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
-        name = "Ghost Button Sample",
+        name = "Ghost Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
     ) {
@@ -126,7 +117,7 @@ public val ButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
-        name = "Contrast Button Sample",
+        name = "Contrast Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
     ) {
@@ -157,7 +148,7 @@ private fun ButtonSample(
     ) -> Unit,
 ) {
     Column(
-        verticalArrangement = spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         val icon = SparkIcons.LikeFill
         var isLoading by remember { mutableStateOf(false) }

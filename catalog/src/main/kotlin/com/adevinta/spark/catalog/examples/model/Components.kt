@@ -19,9 +19,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.examples.model
 
+import com.adevinta.spark.catalog.examples.model.example.Example
+import com.adevinta.spark.catalog.examples.model.example.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
 import com.adevinta.spark.catalog.util.PackageSummaryUrl
 import com.adevinta.spark.catalog.util.SparkSourceUrl
@@ -44,7 +45,7 @@ private val Buttons = Component(
     id = nextId(),
     name = "Buttons",
     description = "Buttons help people initiate actions, from sending an email, to sharing a " +
-            "document, to liking a post.",
+        "document, to liking a post.",
     // No buttons icon
     guidelinesUrl = "$ComponentGuidelinesUrl/buttons",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.buttons/-button-filled.html",

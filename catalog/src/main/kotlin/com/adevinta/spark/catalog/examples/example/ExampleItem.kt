@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.examples.example
 
 import androidx.compose.foundation.layout.Column
@@ -40,7 +39,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.adevinta.spark.catalog.examples.model.Example
+import com.adevinta.spark.catalog.examples.model.example.Example
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

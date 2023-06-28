@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.examples.component
 
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -39,7 +38,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.examples.example.ExampleItem
 import com.adevinta.spark.catalog.examples.model.Component
-import com.adevinta.spark.catalog.examples.model.Example
+import com.adevinta.spark.catalog.examples.model.example.Example
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
 

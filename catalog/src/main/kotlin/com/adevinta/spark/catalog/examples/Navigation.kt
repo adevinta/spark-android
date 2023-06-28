@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.examples
 
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,8 +27,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.adevinta.spark.catalog.examples.example.Example
 import com.adevinta.spark.catalog.examples.component.Component
+import com.adevinta.spark.catalog.examples.example.Example
 import com.adevinta.spark.catalog.examples.model.Component
 
 internal fun NavGraphBuilder.navGraph(
@@ -47,7 +46,7 @@ internal fun NavGraphBuilder.navGraph(
 
     composable(
         route = "$ComponentRoute/" +
-                "{$ComponentIdArgName}",
+            "{$ComponentIdArgName}",
         arguments = listOf(
             navArgument(ComponentIdArgName) { type = NavType.IntType },
         ),
@@ -68,8 +67,8 @@ internal fun NavGraphBuilder.navGraph(
     }
     composable(
         route = "$ExampleRoute/" +
-                "{$ComponentIdArgName}/" +
-                "{$ExampleIndexArgName}",
+            "{$ComponentIdArgName}/" +
+            "{$ExampleIndexArgName}",
         arguments = listOf(
             navArgument(ComponentIdArgName) { type = NavType.IntType },
             navArgument(ExampleIndexArgName) { type = NavType.IntType },

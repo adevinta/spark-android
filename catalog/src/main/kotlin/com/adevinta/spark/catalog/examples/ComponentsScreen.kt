@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.examples
 
 import androidx.compose.foundation.layout.Arrangement
@@ -108,8 +107,9 @@ internal fun ComponentsListScreen(
                     style = SparkTheme.typography.headline1,
                 )
                 Text(
-                    text = "These are the examples that that can be found in the samples in the javadoc or the README.md files." +
-                            "They show usages of the components in different scenarios that should represent real use cases.",
+                    text = "These are the examples that that can be found in the samples in the javadoc or the " +
+                        "README.md files. They show usages of the components in different scenarios that " +
+                        "should represent real use cases.",
                     style = SparkTheme.typography.body2,
                 )
             }

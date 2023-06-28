@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.tabbar
 
 import androidx.appcompat.content.res.AppCompatResources
@@ -158,7 +157,6 @@ private fun CatalogTabBarPreview() {
     PreviewTheme(
         padding = PaddingValues(0.dp),
     ) {
-
         CatalogTabBar(
             modifier = Modifier
                 .wrapContentWidth()

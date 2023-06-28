@@ -113,8 +113,8 @@ private fun HomeScreen(
                 )
                 Text(
                     text = "These are the previews that the developers have when working on components. " +
-                            "They are not exhaustive and are only meant to give you a quick idea of what the " +
-                            "component looks like.",
+                        "They are not exhaustive and are only meant to give you a quick idea of what the " +
+                        "component looks like.",
                     style = SparkTheme.typography.body2,
                 )
             }

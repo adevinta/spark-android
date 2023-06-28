@@ -113,7 +113,6 @@ public fun ThemePicker(
                         .height(48.dp),
                 )
                 AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
-
                     var expanded by remember { mutableStateOf(false) }
                     SelectTextField(
                         modifier = Modifier
@@ -144,7 +143,6 @@ public fun ThemePicker(
                     }
                 }
                 AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
-
                     SwitchLabelled(
                         modifier = Modifier
                             .fillMaxWidth()

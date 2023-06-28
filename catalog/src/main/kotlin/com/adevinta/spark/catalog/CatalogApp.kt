@@ -39,6 +39,7 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
@@ -117,7 +118,6 @@ internal fun CatalogApp(
         useLegacyStyle = isLegacy,
     ) {
         CompositionLocalProvider(LocalRippleTheme provides SparkRippleTheme) {
-
             val layoutDirection = when (theme.textDirection) {
                 TextDirection.LTR -> LayoutDirection.Ltr
                 TextDirection.RTL -> LayoutDirection.Rtl
@@ -180,6 +180,7 @@ internal fun CatalogApp(
                         HorizontalPager(
                             pageCount = homeScreenValues.size,
                             state = pagerState,
+                            flingBehavior = PagerDefaults.flingBehavior(state = pagerState, ),
                         ) {
                             when (homeScreenValues[it]) {
                                 CatalogHomeScreen.Exemples -> ComponentsScreen(
@@ -201,9 +202,9 @@ internal fun CatalogApp(
                                         contentAlignment = Alignment.TopCenter,
                                     ) {
                                         Text(
-                                            text = "The configurator will come in the future, it'll allow you to display a " +
-                                                    "component and set the properties that a developer use to se how the" +
-                                                    " component behave",
+                                            text = "The configurator will come in the future, it'll allow you to " +
+                                                "display a component and set the properties that a " +
+                                                "developer use to se how the component behave",
                                             modifier = Modifier
                                                 .padding(horizontal = 16.dp, vertical = 32.dp)
                                                 .padding(innerPadding),

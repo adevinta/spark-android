@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.util
 
 import android.content.Context
@@ -39,8 +38,8 @@ public const val DocsUrl: String = "https://adevinta.github.io/spark-android/"
 public const val SourceUrl: String = "https://github.com/adevinta/spark-android"
 public const val SparkSourceUrl: String = "https://github.com/adevinta/spark-android/"
 public const val SampleSourceUrl: String = "https://cs.android.com/androidx/platform/frameworks/support/+/" +
-        "androidx-main:compose/material3/" +
-        "material3/samples/src/main/java/androidx/compose/material3/samples"
+    "androidx-main:compose/material3/" +
+    "material3/samples/src/main/java/androidx/compose/material3/samples"
 public const val PackageSummaryUrl: String = "https://https://adevinta.github.io/spark-android/spark/"
 public const val IssueUrl: String =
     "https://github.com/adevinta/spark-android/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc"
