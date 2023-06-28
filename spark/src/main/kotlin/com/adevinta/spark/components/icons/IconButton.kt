@@ -62,8 +62,6 @@ import androidx.compose.material3.OutlinedIconButton as MaterialOutlinedIconButt
  * This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility
  * guidelines.
  *
- * @sample androidx.compose.material3.samples.IconButtonSample
- *
  * @param onClick called when this icon button is clicked
  * @param modifier the [Modifier] to be applied to this icon button
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
@@ -107,9 +105,6 @@ public fun IconButton(
  * custom icon, note that the typical size for the internal icon is 24 x 24 dp.
  * This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility
  * guidelines.
- *
- * Filled icon button sample:
- * @sample androidx.compose.material3.samples.FilledIconButtonSample
  *
  * @param onClick called when this icon button is clicked
  * @param modifier the [Modifier] to be applied to this icon button
@@ -163,9 +158,6 @@ public fun FilledIconButton(
  * custom icon, note that the typical size for the internal icon is 24 x 24 dp.
  * This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility
  * guidelines.
- *
- * Filled tonal icon button sample:
- * @sample androidx.compose.material3.samples.FilledTonalIconButtonSample
  *
  * @param onClick called when this icon button is clicked
  * @param modifier the [Modifier] to be applied to this icon button
@@ -222,8 +214,6 @@ public fun FilledTonalIconButton(
  * custom icon, note that the typical size for the internal icon is 24 x 24 dp.
  * The outlined icon button has an overall minimum touch target size of 48 x 48dp, to meet
  * accessibility guidelines.
- *
- * @sample androidx.compose.material3.samples.OutlinedIconButtonSample
  *
  * @param onClick called when this icon button is clicked
  * @param modifier the [Modifier] to be applied to this icon button

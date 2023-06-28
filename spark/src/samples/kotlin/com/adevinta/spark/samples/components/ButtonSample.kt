@@ -19,32 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.get
+package com.adevinta.spark.samples.components
 
-internal class SparkAndroidApplicationPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            apply(plugin = "com.android.application")
-            apply(plugin = "com.adevinta.spark.android")
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.components.buttons.ButtonFilled
+import com.adevinta.spark.components.buttons.ButtonIntent
+import com.adevinta.spark.components.buttons.IconSide
+import com.adevinta.spark.icons.SparkIcon
 
-            androidApplication {
-                defaultConfig {
-                    targetSdk = spark().versions.targetSdk.toString().toInt()
-                }
-                buildTypes {
-                    release {
-                        isMinifyEnabled = true
-                        isShrinkResources = true
-                        signingConfig = signingConfigs["debug"]
-                        proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-                    }
-                }
-            }
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+public fun ButtonSample() {
+    val icon = SparkIcon.Account.Identity
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        ButtonIntent.values().forEach { intent ->
+            ButtonFilled(
+                modifier = Modifier.padding(top = 10.dp),
+                text = intent.name,
+                onClick = { },
+                intent = intent,
+                icon = icon,
+                iconSide = IconSide.START,
+            )
         }
     }
 }

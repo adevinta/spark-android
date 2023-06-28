@@ -84,13 +84,6 @@ internal fun SparkTopAppBar(
  *
  * ![Small top app bar image](https://developer.android.com/images/reference/androidx/compose/material3/small-top-app-bar.png)
  *
- * A simple top app bar looks like:
- * @sample androidx.compose.material3.samples.SimpleTopAppBar
- * A top app bar that uses a [scrollBehavior] to customize its nested scrolling behavior when
- * working in conjunction with a scrolling content looks like:
- * @sample androidx.compose.material3.samples.PinnedTopAppBar
- * @sample androidx.compose.material3.samples.EnterAlwaysTopAppBar
- *
  * @param title the title to be displayed in the top app bar
  * @param modifier the [Modifier] to be applied to this top app bar
  * @param navigationIcon the navigation icon displayed at the start of the top app bar. This should
@@ -133,10 +126,6 @@ public fun TopAppBar(
  *
  * This MediumTopAppBar has slots for a title, navigation icon, and actions. In its default expanded
  * state, the title is displayed in a second row under the navigation and actions.
- *
- * A medium top app bar that uses a [scrollBehavior] to customize its nested scrolling behavior when
- * working in conjunction with scrolling content looks like:
- * @sample androidx.compose.material3.samples.ExitUntilCollapsedMediumTopAppBar
  *
  * @param title the title to be displayed in the top app bar. This title will be used in the app
  * bar's expanded and collapsed states, although in its collapsed state it will be composed with a
@@ -182,10 +171,6 @@ public fun MediumTopAppBar(
  *
  * This LargeTopAppBar has slots for a title, navigation icon, and actions. In its default expanded
  * state, the title is displayed in a second row under the navigation and actions.
- *
- * A large top app bar that uses a [scrollBehavior] to customize its nested scrolling behavior when
- * working in conjunction with scrolling content looks like:
- * @sample androidx.compose.material3.samples.ExitUntilCollapsedLargeTopAppBar
  *
  * @param title the title to be displayed in the top app bar. This title will be used in the app
  * bar's expanded and collapsed states, although in its collapsed state it will be composed with a
@@ -233,9 +218,6 @@ public fun LargeTopAppBar(
  *
  * This CenterAlignedTopAppBar has slots for a title, navigation icon, and actions.
  *
- * A center aligned top app bar that uses a [scrollBehavior] to customize its nested scrolling
- * behavior when working in conjunction with a scrolling content looks like:
- * @sample androidx.compose.material3.samples.SimpleCenterAlignedTopAppBar
  *
  * @param title the title to be displayed in the top app bar
  * @param modifier the [Modifier] to be applied to this top app bar

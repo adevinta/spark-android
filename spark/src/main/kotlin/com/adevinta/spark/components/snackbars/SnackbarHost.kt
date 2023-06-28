@@ -68,13 +68,6 @@ import kotlin.coroutines.resume
  * This component with default parameters comes build-in with [Scaffold], if you need to show a
  * default [Snackbar], use [SnackbarHostState.showSnackbar].
  *
- * @sample androidx.compose.material3.samples.ScaffoldWithSimpleSnackbar
- *
- * If you want to customize appearance of the [Snackbar], you can pass your own version as a child
- * of the [SnackbarHost] to the [Scaffold]:
- *
- * @sample androidx.compose.material3.samples.ScaffoldWithCustomSnackbar
- *
  * @param hostState state of this component to read and show [Snackbar]s accordingly
  * @param modifier the [Modifier] to be applied to this component
  * @param snackbar the instance of the [Snackbar] to be shown at the appropriate time with
@@ -135,10 +128,6 @@ public class SnackbarHostState {
      * shown and subsequently addressed. If the caller is cancelled, the snackbar will be removed
      * from display and/or the queue to be displayed.
      *
-     * All of this allows for granular control over the snackbar queue from within:
-     *
-     * @sample androidx.compose.material3.samples.ScaffoldWithCoroutinesSnackbar
-     *
      * To change the Snackbar appearance, change it in 'snackbarHost' on the [Scaffold].
      *
      * @param message text to be shown in the Snackbar
@@ -182,10 +171,6 @@ public class SnackbarHostState {
      * called while another snackbar is already visible, it will be suspended until this snackbar is
      * shown and subsequently addressed. If the caller is cancelled, the snackbar will be removed
      * from display and/or the queue to be displayed.
-     *
-     * All of this allows for granular control over the snackbar queue from within:
-     *
-     * @sample androidx.compose.material3.samples.ScaffoldWithCustomSnackbar
      *
      * @param visuals [SnackbarVisuals] that are used to create a Snackbar
      *

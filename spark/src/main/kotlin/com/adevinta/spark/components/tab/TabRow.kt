@@ -85,45 +85,10 @@ internal fun SparkTabRow(
  * taking up an equal amount of space. See [ScrollableTabRow] for a tab row that does not enforce
  * equal size, and allows scrolling to tabs that do not fit on screen.
  *
- * A simple example with text tabs looks like:
- *
- * @sample androidx.compose.material3.samples.TextTabs
- *
- * You can also provide your own custom tab, such as:
- *
- * @sample androidx.compose.material3.samples.FancyTabs
- *
- * Where the custom tab itself could look like:
- *
- * @sample androidx.compose.material3.samples.FancyTab
- *
  * As well as customizing the tab, you can also provide a custom [indicator], to customize
  * the indicator displayed for a tab. [indicator] will be placed to fill the entire TabRow, so it
  * should internally take care of sizing and positioning the indicator to match changes to
  * [selectedTabIndex].
- *
- * For example, given an indicator that draws a rounded rectangle near the edges of the [Tab]:
- *
- * @sample androidx.compose.material3.samples.FancyIndicator
- *
- * We can reuse [TabRowDefaults.tabIndicatorOffset] and just provide this indicator,
- * as we aren't changing how the size and position of the indicator changes between tabs:
- *
- * @sample androidx.compose.material3.samples.FancyIndicatorTabs
- *
- * You may also want to use a custom transition, to allow you to dynamically change the
- * appearance of the indicator as it animates between tabs, such as changing its color or size.
- * [indicator] is stacked on top of the entire TabRow, so you just need to provide a custom
- * transition that animates the offset of the indicator from the start of the TabRow. For
- * example, take the following example that uses a transition to animate the offset, width, and
- * color of the same FancyIndicator from before, also adding a physics based 'spring' effect to
- * the indicator in the direction of motion:
- *
- * @sample androidx.compose.material3.samples.FancyAnimatedIndicator
- *
- * We can now just pass this indicator directly to TabRow:
- *
- * @sample androidx.compose.material3.samples.FancyIndicatorContainerTabs
  *
  * @param selectedTabIndex the index of the currently selected tab
  * @param modifier the [Modifier] to be applied to this tab row

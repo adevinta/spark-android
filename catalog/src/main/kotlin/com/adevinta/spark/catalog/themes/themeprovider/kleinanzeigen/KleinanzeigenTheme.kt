@@ -19,25 +19,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.themes.themeprovider.polaris
+
+package com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinColorPartDark
+import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinColorPartLight
+import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinColorPartLightLegacy
+import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinColorProDark
+import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinColorProLight
+import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinColorProLightLegacy
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkShapes
 import com.adevinta.spark.tokens.SparkTypography
-import com.adevinta.spark.tokens.darkSparkColors
-import com.adevinta.spark.tokens.lightSparkColors
 import com.adevinta.spark.tokens.sparkShapes
 import com.adevinta.spark.tokens.sparkTypography
 
-public object PolarisTheme : ThemeProvider {
+public object KleinanzeigenTheme : ThemeProvider {
     @Composable
     override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
         return when {
-            useDarkColors -> darkSparkColors()
-            else -> lightSparkColors()
+            useDarkColors || isSystemInDarkTheme() -> {
+                if (isPro) LeboncoinColorProDark else LeboncoinColorPartDark
+            }
+
+            isLegacy -> {
+                if (isPro) LeboncoinColorProLightLegacy else LeboncoinColorPartLightLegacy
+            }
+
+            else -> {
+                if (isPro) LeboncoinColorProLight else LeboncoinColorPartLight
+            }
         }
     }
 
@@ -45,5 +59,7 @@ public object PolarisTheme : ThemeProvider {
     override fun shapes(isLegacy: Boolean): SparkShapes = sparkShapes()
 
     @Composable
-    override fun typography(isLegacy: Boolean): SparkTypography = sparkTypography()
+    override fun typography(isLegacy: Boolean): SparkTypography {
+        return sparkTypography()
+    }
 }

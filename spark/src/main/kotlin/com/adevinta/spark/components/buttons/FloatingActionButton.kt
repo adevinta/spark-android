@@ -66,8 +66,6 @@ import androidx.compose.material3.SmallFloatingActionButton as MaterialSmallFloa
  * FAB typically contains an icon, for a FAB with text and an icon, see
  * [ExtendedFloatingActionButton].
  *
- * @sample androidx.compose.material3.samples.FloatingActionButtonSample
- *
  * @param onClick called when this FAB is clicked
  * @param icon icon to show inside the FAB
  * @param contentDescription text used by accessibility services to describe what this icon
@@ -122,8 +120,6 @@ public fun FloatingActionButton(
  *
  * ![Small FAB image](https://developer.android.com/images/reference/androidx/compose/material3/small-fab.png)
  *
- * @sample androidx.compose.material3.samples.SmallFloatingActionButtonSample
- *
  * @param onClick called when this FAB is clicked
  * @param icon icon to show inside the FAB
  * @param contentDescription text used by accessibility services to describe what this icon
@@ -177,8 +173,6 @@ public fun SmallFloatingActionButton(
  * The FAB represents the most important action on a screen. It puts key actions within reach.
  *
  * ![Large FAB image](https://developer.android.com/images/reference/androidx/compose/material3/large-fab.png)
- *
- * @sample androidx.compose.material3.samples.LargeFloatingActionButtonSample
  *
  * @param onClick called when this FAB is clicked
  * @param icon icon to show inside the FAB
@@ -241,8 +235,6 @@ public fun LargeFloatingActionButton(
  *
  * The other extended floating action button overload supports a text label and icon.
  *
- * @sample androidx.compose.material3.samples.ExtendedFloatingActionButtonTextSample
- *
  * @param onClick called when this FAB is clicked
  * @param modifier the [Modifier] to be applied to this FAB
  * @param shape defines the shape of this FAB's container and shadow (when using [elevation])
@@ -295,9 +287,6 @@ public fun ExtendedFloatingActionButton(
  *
  * Default content description for accessibility is extended from the extended fabs icon. For custom
  * behavior, you can provide your own via [Modifier.semantics].
- *
- * @sample androidx.compose.material3.samples.ExtendedFloatingActionButtonSample
- * @sample androidx.compose.material3.samples.AnimatedExtendedFloatingActionButtonSample
  *
  * @param text label displayed inside this FAB
  * @param icon icon to show inside the FAB

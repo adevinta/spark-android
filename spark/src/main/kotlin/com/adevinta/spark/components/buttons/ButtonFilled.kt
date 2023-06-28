@@ -50,6 +50,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
  * after a click action for example.
  *
+ * @sample com.adevinta.spark.samples.components.ButtonSample
+ *
  * @param onClick Will be called when the user clicks the button
  * @param text The text to be displayed in the button
  * @param modifier Modifier to be applied to the button

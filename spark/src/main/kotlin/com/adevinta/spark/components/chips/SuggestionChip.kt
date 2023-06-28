@@ -53,9 +53,6 @@ import androidx.compose.material3.SuggestionChip as MaterialSuggestionChip
  * This suggestion chip is applied with a flat style. If you want an elevated style, use the
  * [ElevatedSuggestionChip].
  *
- * Example of a flat SuggestionChip with a trailing icon:
- * @sample androidx.compose.material3.samples.SuggestionChipSample
- *
  * @param onClick called when this chip is clicked
  * @param label text label for this chip
  * @param modifier the [Modifier] to be applied to this chip

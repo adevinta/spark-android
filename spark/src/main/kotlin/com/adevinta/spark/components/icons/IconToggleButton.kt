@@ -64,8 +64,6 @@ import androidx.compose.material3.OutlinedIconToggleButton as MaterialOutlinedIc
  * This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility
  * guidelines.
  *
- * @sample androidx.compose.material3.samples.IconToggleButtonSample
- *
  * @param checked whether this icon button is toggled on or off
  * @param onCheckedChange called when this icon button is clicked
  * @param modifier the [Modifier] to be applied to this icon button
@@ -112,9 +110,6 @@ public fun IconToggleButton(
  * custom icon, note that the typical size for the internal icon is 24 x 24 dp.
  * This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility
  * guidelines.
- *
- * Toggleable filled icon button sample:
- * @sample androidx.compose.material3.samples.FilledIconToggleButtonSample
  *
  * @param checked whether this icon button is toggled on or off
  * @param onCheckedChange called when this icon button is clicked
@@ -172,9 +167,6 @@ public fun FilledIconToggleButton(
  * This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility
  * guidelines.
  *
- * Toggleable filled tonal icon button sample:
- * @sample androidx.compose.material3.samples.FilledTonalIconToggleButtonSample
- *
  * @param checked whether this icon button is toggled on or off
  * @param onCheckedChange called when this icon button is clicked
  * @param modifier the [Modifier] to be applied to this icon button
@@ -228,8 +220,6 @@ public fun FilledTonalIconToggleButton(
  * custom icon, note that the typical size for the internal icon is 24 x 24 dp.
  * This icon button has an overall minimum touch target size of 48 x 48dp, to meet accessibility
  * guidelines.
- *
- * @sample androidx.compose.material3.samples.OutlinedIconToggleButtonSample
  *
  * @param checked whether this icon button is toggled on or off
  * @param onCheckedChange called when this icon button is clicked

@@ -32,7 +32,7 @@ public object LeBoncoinTheme : ThemeProvider {
     @Composable
     override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
         return when {
-            useDarkColors || isSystemInDarkTheme() -> {
+            useDarkColors -> {
                 if (isPro) LeboncoinColorProDark else LeboncoinColorPartDark
             }
 

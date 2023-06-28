@@ -77,8 +77,8 @@ public enum class ColorMode(public val label: String) {
 }
 
 public enum class FontScaleMode(public val label: String) {
-    Custom("Custom"),
     System("System"),
+    Custom("Custom"),
 }
 
 public enum class ThemeMode {
@@ -103,8 +103,8 @@ public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
         mapOf(
             ThemeModeKey to theme.themeMode.ordinal,
             ColorModeKey to theme.colorMode.ordinal,
-            BrandModeKey to theme.colorMode.ordinal,
-            UserModeKey to theme.colorMode.ordinal,
+            BrandModeKey to theme.brandMode.ordinal,
+            UserModeKey to theme.userMode.ordinal,
             FontScaleKey to theme.fontScale.toInt(),
             TextDirectionKey to theme.textDirection.ordinal,
         )

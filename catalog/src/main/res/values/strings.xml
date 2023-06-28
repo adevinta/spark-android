@@ -22,7 +22,7 @@
   SOFTWARE.
   -->
 <resources>
-    <string name="app_name">Spark</string>
+    <string name="app_name">Spark Catalog</string>
     <string name="search_label">Search</string>
     <string name="showkase_browser_show_documentation">Show Documentation</string>
     <string name="showkase_browser_hide_documentation">Hide Documentation</string>
@@ -36,4 +36,13 @@
     <string name="pro">Use the pro theme</string>
 
     <string name="scale">%.1f</string>
+
+    <string name="description">Description</string>
+    <string name="examples">Examples</string>
+    <string name="no_examples">No examples</string>
+
+    <string name="theme_picker_mode_title">Mode</string>
+    <string name="theme_picker_theme_title" description="Spark brand theme. [CHAR_LIMIT=NONE]">Theme</string>
+    <string name="theme_picker_text_direction_title" description="Simulate system text direction to be either LTR or RTL. [CHAR_LIMIT=NONE]">Text direction</string>
+    <string name="theme_picker_font_scale_title" description="Simulate a11y font scaling. [CHAR_LIMIT=NONE]">Font scale</string>
 </resources>

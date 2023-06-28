@@ -116,10 +116,6 @@ internal fun SparkIllustration(
  * background). Any unspecified dimension will leverage the [ImageBitmap]'s size as a minimum
  * constraint.
  *
- * The following sample shows basic usage of an Image composable to position and draw an
- * [ImageBitmap] on screen
- * @sample androidx.compose.foundation.samples.ImageSample
- *
  * @param bitmap The [ImageBitmap] to draw
  * @param contentDescription text used by accessibility services to describe what this image
  * represents. This should always be provided unless this image is used for decorative purposes,

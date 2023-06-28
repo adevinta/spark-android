@@ -19,16 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog
+package com.adevinta.spark.catalog.showkase
 
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import androidx.activity.compose.BackHandler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
@@ -48,14 +51,28 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 
+@Composable
+internal fun HomeScreen(
+    groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
+    showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
+    contentPadding: PaddingValues,
+    navController: NavHostController,
+) {
+    HomeScreen(
+        groupedTypographyMap = groupedComponentMap,
+        contentPadding = contentPadding,
+        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+        navController = navController,
+    )
+}
+
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
 @Composable
-internal fun GroupsScreen(
+private fun HomeScreen(
     groupedTypographyMap: Map<String, List<*>>,
     contentPadding: PaddingValues,
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
     navController: NavHostController,
-    onClick: () -> Unit,
 ) {
     val filteredMap = getFilteredSearchList(
         groupedTypographyMap.toSortedMap(),
@@ -63,7 +80,9 @@ internal fun GroupsScreen(
     )
 
     LazyVerticalGrid(
-        modifier = Modifier.consumeWindowInsets(contentPadding),
+        modifier = Modifier
+            .fillMaxSize()
+            .consumeWindowInsets(contentPadding),
         columns = GridCells.Fixed(Layout.columns / 2),
         contentPadding = PaddingValues(
             start = Layout.bodyMargin / 2 + contentPadding.calculateLeftPadding(LocalLayoutDirection.current),
@@ -72,10 +91,39 @@ internal fun GroupsScreen(
             bottom = contentPadding.calculateBottomPadding(),
         ),
     ) {
+        item(
+            key = -2,
+            contentType = HomeItemType.Header,
+            span = { GridItemSpan(2) },
+        ) {
+            Column(
+                modifier = Modifier.padding(
+                    horizontal = Layout.bodyMargin / 2,
+                    vertical = Layout.gutter,
+                ),
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                Text(
+                    text = "Showkase previews",
+                    style = SparkTheme.typography.headline1,
+                )
+                Text(
+                    text = "⚠️ Theming don't work on these!",
+                    style = SparkTheme.typography.subhead,
+                )
+                Text(
+                    text = "These are the previews that the developers have when working on components. " +
+                            "They are not exhaustive and are only meant to give you a quick idea of what the " +
+                            "component looks like.",
+                    style = SparkTheme.typography.body2,
+                )
+            }
+        }
         items(
             items = filteredMap.entries.toList(),
             key = { it.key },
             span = { GridItemSpan(1) },
+            contentType = { HomeItemType.Preview },
             itemContent = { (group, list) ->
                 val size = getNumOfUIElements(list)
 
@@ -92,7 +140,7 @@ internal fun GroupsScreen(
                                 searchQuery = null,
                             )
                         }
-                        onClick()
+                        navController.navigate(CurrentScreen.COMPONENTS_IN_A_GROUP)
                     },
                 ) {
                     Text(
@@ -104,21 +152,18 @@ internal fun GroupsScreen(
             },
         )
     }
-
     val activity = LocalContext.current.findActivity() as AppCompatActivity
     BackHandler {
         when {
             showkaseBrowserScreenMetadata.value.isSearchActive -> {
                 showkaseBrowserScreenMetadata.clearActiveSearch()
             }
-
             navController.currentDestination?.id == navController.graph.startDestinationId -> {
                 activity.finish()
             }
         }
     }
 }
-
 internal fun getNumOfUIElements(list: List<*>): Int {
     val isComponentList = list.filterIsInstance<ShowkaseBrowserComponent>()
     return when {
@@ -126,7 +171,6 @@ internal fun getNumOfUIElements(list: List<*>): Int {
         else -> list.size
     }
 }
-
 internal fun <T> getFilteredSearchList(
     map: Map<String, List<T>>,
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
@@ -141,35 +185,21 @@ internal fun <T> getFilteredSearchList(
                 )
             }
         }
-
         else -> map
     }
-
-@Composable
-internal fun ShowkaseComponentGroupsScreen(
-    groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
-    showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
-    contentPadding: PaddingValues,
-    navController: NavHostController,
-) {
-    GroupsScreen(
-        groupedTypographyMap = groupedComponentMap,
-        contentPadding = contentPadding,
-        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
-        navController = navController,
-    ) {
-        navController.navigate(CurrentScreen.COMPONENTS_IN_A_GROUP)
-    }
-}
 
 internal fun matchSearchQuery(
     searchQuery: String,
     vararg properties: String,
 ) = properties.any { it.contains(searchQuery, ignoreCase = true) }
-
 private tailrec fun Context.findActivity(): Activity =
     when (this) {
         is Activity -> this
         is ContextWrapper -> this.baseContext.findActivity()
         else -> throw IllegalArgumentException("Could not find activity!")
     }
+
+private enum class HomeItemType {
+    Header,
+    Preview,
+}

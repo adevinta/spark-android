@@ -80,9 +80,6 @@ import com.adevinta.spark.tokens.contentColorFor
  *
  * 5) Blocking touch propagation behind the surface.
  *
- * Surface sample:
- * @sample androidx.compose.material3.samples.SurfaceSample
- *
  * @param modifier Modifier to be applied to the layout corresponding to the surface
  * @param shape Defines the surface's shape as well its shadow.
  * @param color The background color. Use [Color.Transparent] to have no color.
@@ -161,9 +158,6 @@ public fun Surface(
  * [Modifier.semantics].
  *
  * To manually retrieve the content color inside a surface, use [LocalContentColor].
- *
- * Clickable surface sample:
- * @sample androidx.compose.material3.samples.ClickableSurfaceSample
  *
  * @param onClick callback to be called when the surface is clicked
  * @param modifier Modifier to be applied to the layout corresponding to the surface
@@ -255,9 +249,6 @@ public fun Surface(
  * [Modifier.semantics].
  *
  * To manually retrieve the content color inside a surface, use [LocalContentColor].
- *
- * Selectable surface sample:
- * @sample androidx.compose.material3.samples.SelectableSurfaceSample
  *
  * @param selected whether or not this Surface is selected
  * @param onClick callback to be called when the surface is clicked
@@ -352,9 +343,6 @@ public fun Surface(
  * a [Modifier.semantics].
  *
  * To manually retrieve the content color inside a surface, use [LocalContentColor].
- *
- * Toggleable surface sample:
- * @sample androidx.compose.material3.samples.ToggleableSurfaceSample
  *
  * @param checked whether or not this Surface is toggled on or off
  * @param onCheckedChange callback to be invoked when the toggleable Surface is clicked
