@@ -74,7 +74,3 @@ SelectTextField(
     // ...
 }
 ```
-
-
-
-

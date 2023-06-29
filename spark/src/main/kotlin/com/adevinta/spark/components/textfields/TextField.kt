@@ -22,7 +22,6 @@
 package com.adevinta.spark.components.textfields
 
 import androidx.compose.foundation.interaction.FocusInteraction
-import androidx.compose.foundation.interaction.HoverInteraction
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
@@ -30,7 +29,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -115,7 +113,6 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-
     val trailingContentBasedOnState: (@Composable () -> Unit)? = TextFieldDefault.getTrailingContent(
         state = state,
         value = value.text,
@@ -211,7 +208,6 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-
     val trailingContentBasedOnState: (@Composable () -> Unit)? = TextFieldDefault.getTrailingContent(
         state = state,
         value = value,

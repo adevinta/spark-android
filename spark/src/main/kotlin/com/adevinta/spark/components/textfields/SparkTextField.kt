@@ -319,8 +319,11 @@ private fun animateBorderStrokeAsState(
 ): State<BorderStroke> {
     val focused by interactionSource.collectIsFocusedAsState()
     val indicatorColor = colors.indicatorColor(enabled, state, interactionSource)
-    val targetThickness =
-        if (focused || state != null) TextFieldDefaults.FocusedBorderThickness else TextFieldDefaults.UnfocusedBorderThickness
+    val targetThickness = if (focused || state != null) {
+        TextFieldDefaults.FocusedBorderThickness
+    } else {
+        TextFieldDefaults.UnfocusedBorderThickness
+    }
     val animatedThickness = if (enabled) {
         animateDpAsState(targetThickness, tween(durationMillis = 150))
     } else {
@@ -375,7 +378,6 @@ internal object TextFieldDefault {
         value: String,
         trailingIcon: (@Composable () -> Unit)?,
     ): (@Composable () -> Unit)? = when {
-
         state != null -> {
             {
                 val icon = when (state) {

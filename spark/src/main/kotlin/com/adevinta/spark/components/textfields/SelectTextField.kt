@@ -295,9 +295,12 @@ public fun SparkSelectTrailingIcon(
     // action. When there's an API to check if Talkback is on, developer will be able to
     // expand the menu on icon click in a11y mode only esp. if using their own custom
     // trailing icon.
-    IconButton(onClick = onIconClick, modifier = modifier
-        .clearAndSetSemantics { }
-        .requiredSize(24.dp)) {
+    IconButton(
+        onClick = onIconClick,
+        modifier = modifier
+            .clearAndSetSemantics { }
+            .requiredSize(24.dp),
+    ) {
         Icon(
             // TODO scott.rayapoulle.ext-12/07/2022: Use or create ImageVector variant of this Spark icon
             Icons.Filled.KeyboardArrowDown,

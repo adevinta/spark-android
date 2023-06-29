@@ -32,7 +32,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
@@ -288,6 +287,7 @@ public fun MultilineTextField(
         interactionSource = interactionSource,
     )
 }
+
 @Preview(
     group = "TextFields",
     name = "MultilineTextField intents",

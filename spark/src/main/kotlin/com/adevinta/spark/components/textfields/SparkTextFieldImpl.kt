@@ -117,7 +117,7 @@ internal fun SparkDecorationBox(
     val bodySmall = typography.body2
     val shouldOverrideTextStyleColor =
         (bodyLarge.color == Color.Unspecified && bodySmall.color != Color.Unspecified) ||
-                (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
+            (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
 
     TextFieldTransitionScope.Transition(
         inputState = inputState,

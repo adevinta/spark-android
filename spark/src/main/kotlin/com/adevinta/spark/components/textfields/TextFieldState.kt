@@ -19,9 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.textfields
-
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.SparkTheme
@@ -52,7 +50,8 @@ public enum class TextFieldState {
     Error {
         @Composable
         override fun color(): Color = SparkTheme.colors.error
-    };
+    },
+    ;
 
     @Composable
     internal abstract fun color(): Color

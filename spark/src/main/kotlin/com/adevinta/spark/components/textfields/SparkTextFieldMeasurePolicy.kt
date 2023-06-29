@@ -75,7 +75,7 @@ internal class SparkTextFieldMeasurePolicy(
         val isLabelInMiddleSection = animationProgress < 1f
         val labelHorizontalPaddingOffset =
             paddingValues.calculateLeftPadding(layoutDirection).roundToPx() +
-                    paddingValues.calculateRightPadding(layoutDirection).roundToPx()
+                paddingValues.calculateRightPadding(layoutDirection).roundToPx()
         val labelConstraints = relaxedConstraints.offset(
             horizontal = if (isLabelInMiddleSection) {
                 -occupiedSpaceHorizontally - labelHorizontalPaddingOffset
@@ -116,7 +116,7 @@ internal class SparkTextFieldMeasurePolicy(
                 heightOrZero(textFieldPlaceable),
                 heightOrZero(placeholderPlaceable),
             ) +
-                    topPadding + bottomPadding,
+                topPadding + bottomPadding,
         )
 
         val width = calculateWidth(
@@ -324,9 +324,9 @@ private fun calculateWidth(
         if (!isLabelInMiddleSection) {
             // Actual LayoutDirection doesn't matter; we only need the sum
             val labelHorizontalPadding = (
-                    paddingValues.calculateLeftPadding(LayoutDirection.Ltr) +
-                            paddingValues.calculateRightPadding(LayoutDirection.Ltr)
-                    ).value * density
+                paddingValues.calculateLeftPadding(LayoutDirection.Ltr) +
+                    paddingValues.calculateRightPadding(LayoutDirection.Ltr)
+                ).value * density
             labelPlaceableWidth + labelHorizontalPadding.roundToInt()
         } else {
             0
@@ -362,8 +362,8 @@ private fun calculateHeight(
     val topPadding = paddingValues.calculateTopPadding().value * density
     val bottomPadding = paddingValues.calculateBottomPadding().value * density
     val middleSectionHeight = inputFieldHeight +
-            bottomPadding +
-            max(topPadding, labelPlaceableHeight / 2f)
+        bottomPadding +
+        max(topPadding, labelPlaceableHeight / 2f)
     return max(
         constraints.minHeight,
         maxOf(
@@ -438,12 +438,12 @@ private fun Placeable.PlacementScope.place(
         val positionY =
             startPositionY * (1 - animationProgress) - (it.height / 2) * animationProgress
         val positionX = (
-                if (leadingPlaceable == null) {
-                    0f
-                } else {
-                    (widthOrZero(leadingPlaceable) - iconPadding) * (1 - animationProgress)
-                }
-                ).roundToInt() + startPadding
+            if (leadingPlaceable == null) {
+                0f
+            } else {
+                (widthOrZero(leadingPlaceable) - iconPadding) * (1 - animationProgress)
+            }
+            ).roundToInt() + startPadding
         it.placeRelative(positionX, positionY.roundToInt())
     }
 
