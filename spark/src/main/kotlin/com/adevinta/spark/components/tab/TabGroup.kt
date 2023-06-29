@@ -317,7 +317,7 @@ internal fun TabGroupFixedSizePreview(
 ) {
     val tabs = mutableListOf(
         Pair("Home", null) to 0,
-        Pair("Message", SparkIcons.MessageOutline) to 100,
+        Pair("Message", SparkIcons.MessageOutline) to 1,
     )
     var selectedIndex by remember { mutableStateOf(0) }
     PreviewTheme(theme) {

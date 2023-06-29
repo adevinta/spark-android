@@ -35,6 +35,7 @@ public object TabDefaults {
     internal val Size = TabStyle.Medium
     internal val HorizontalArrangementSpace = 8.dp
     internal val HorizontalContentPadding = 16.dp
+    internal val VerticalContentPadding = 8.dp
     internal val IconSize: Dp = Small.size
 }
 

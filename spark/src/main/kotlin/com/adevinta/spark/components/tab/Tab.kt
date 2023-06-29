@@ -130,17 +130,21 @@ private fun TabLayout(
     trailingContent: @Composable (() -> Unit)?,
 ) {
     Row(
-        modifier = Modifier
-            .height(IntrinsicSize.Min)
-            .padding(TabDefaults.HorizontalContentPadding),
-        horizontalArrangement = Arrangement.spacedBy(
-            TabDefaults.HorizontalArrangementSpace,
-            alignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(
+            horizontal = TabDefaults.HorizontalContentPadding,
+            vertical = TabDefaults.VerticalContentPadding,
         ),
+        horizontalArrangement = Arrangement.spacedBy(TabDefaults.HorizontalArrangementSpace),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        icon?.let { it() }
-        text?.let { it() }
+        // use an extra Row to size icon depending on the text
+        Row(
+            modifier = Modifier.height(IntrinsicSize.Min),
+            horizontalArrangement = Arrangement.spacedBy(TabDefaults.HorizontalArrangementSpace),
+        ) {
+            icon?.let { it() }
+            text?.let { it() }
+        }
         trailingContent?.let { it() }
     }
 }
