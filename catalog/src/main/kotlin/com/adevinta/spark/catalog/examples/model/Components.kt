@@ -21,8 +21,7 @@
  */
 package com.adevinta.spark.catalog.examples.model
 
-import com.adevinta.spark.catalog.examples.model.example.Example
-import com.adevinta.spark.catalog.examples.model.example.buttons.ButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
 import com.adevinta.spark.catalog.util.PackageSummaryUrl
 import com.adevinta.spark.catalog.util.SparkSourceUrl

@@ -38,12 +38,6 @@ android {
             "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
         )
     }
-    sourceSets {
-        named("test") {
-            java.srcDirs("src/test/kotlin")
-            java.srcDirs("src/samples/kotlin")
-        }
-    }
 }
 
 dependencies {

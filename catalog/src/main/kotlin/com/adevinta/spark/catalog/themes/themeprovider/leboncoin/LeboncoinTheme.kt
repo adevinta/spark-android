@@ -19,15 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("COMPOSABLE_FUNCTION_REFERENCE")
-
-package com.adevinta.spark.catalog.examples.model.example
+package com.adevinta.spark.catalog.themes.themeprovider.leboncoin
 
 import androidx.compose.runtime.Composable
+import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkShapes
+import com.adevinta.spark.tokens.SparkTypography
 
-public data class Example(
-    val name: String,
-    val description: String,
-    val sourceUrl: String,
-    val content: @Composable () -> Unit,
-)
+public object LeboncoinTheme : ThemeProvider {
+    @Composable
+    override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
+        return when {
+            useDarkColors -> {
+                if (isPro) LeboncoinColorProDark else LeboncoinColorPartDark
+            }
+
+            isLegacy -> {
+                if (isPro) LeboncoinColorProLightLegacy else LeboncoinColorPartLightLegacy
+            }
+
+            else -> {
+                if (isPro) LeboncoinColorProLight else LeboncoinColorPartLight
+            }
+        }
+    }
+
+    @Composable
+    override fun shapes(isLegacy: Boolean): SparkShapes = LeboncoinShapes
+
+    @Composable
+    override fun typography(isLegacy: Boolean): SparkTypography {
+        return if (isLegacy) LeboncoinLegacyTypo else LeboncoinTypo
+    }
+}
