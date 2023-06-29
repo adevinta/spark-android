@@ -35,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.SparkButtonDefaults.disabled
 import com.adevinta.spark.icons.CameraFill
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcon
@@ -79,11 +80,11 @@ public fun ButtonOutlined(
         targetValue = intent.colors().color,
         label = "content color",
     )
-    val disabledContentColor = contentColor.copy(alpha = SparkTheme.colors.dim3)
+    val disabledContentColor = contentColor.disabled()
 
     val colors = ButtonDefaults.outlinedButtonColors(
         contentColor = contentColor,
-        disabledContentColor = disabledContentColor,
+        disabledContentColor = contentColor.disabled(),
     )
     SparkButton(
         onClick = onClick,

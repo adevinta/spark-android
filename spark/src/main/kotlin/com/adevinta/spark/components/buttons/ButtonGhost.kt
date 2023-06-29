@@ -41,6 +41,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.LocalHighlightToken
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.SparkButtonDefaults.disabled
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.Link
 import com.adevinta.spark.icons.SparkIcon
@@ -92,6 +93,7 @@ public fun ButtonGhost(
     } else {
         ButtonDefaults.textButtonColors(
             contentColor = contentColor,
+            disabledContentColor = contentColor.disabled(),
         )
     }
     SparkButton(
