@@ -27,16 +27,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -54,8 +49,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.ArrowHorizontalDown
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -303,13 +301,12 @@ public fun SparkSelectTrailingIcon(
     ) {
         Icon(
             // TODO scott.rayapoulle.ext-12/07/2022: Use or create ImageVector variant of this Spark icon
-            Icons.Filled.KeyboardArrowDown,
+            sparkIcon = SparkIcons.ArrowHorizontalDown,
             "Trailing icon for exposed dropdown menu",
-            Modifier
-                .size(24.dp)
-                .rotate(
-                    if (expanded) 180f else 360f,
-                ),
+            size = IconSize.Medium,
+            modifier = Modifier.rotate(
+                if (expanded) 180f else 360f,
+            ),
         )
     }
 }

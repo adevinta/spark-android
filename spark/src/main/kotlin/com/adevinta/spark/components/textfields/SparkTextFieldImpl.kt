@@ -97,8 +97,8 @@ internal fun SparkDecorationBox(
     }.text.text
 
     val contentPadding = TextFieldDefaults.outlinedTextFieldPadding(
-        top = 12.dp,
-        bottom = 12.dp,
+        top = VerticalContentPadding,
+        bottom = VerticalContentPadding,
     )
 
     val isFocused = interactionSource.collectIsFocusedAsState().value
@@ -520,6 +520,7 @@ private const val PlaceholderAnimationDelayOrDuration = 67
 
 internal val CounterPadding = 8.dp
 internal val HorizontalIconPadding = 8.dp
+internal val VerticalContentPadding = 12.dp
 
 internal val IconDefaultSizeModifier = Modifier.defaultMinSize(24.dp, 24.dp)
 
