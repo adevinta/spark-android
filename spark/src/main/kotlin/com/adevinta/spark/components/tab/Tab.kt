@@ -22,23 +22,132 @@
 package com.adevinta.spark.components.tab
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.Constraints
 import com.adevinta.spark.ExperimentalSparkApi
+import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.icons.IconSize
+import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.Tab as MaterialTab
 
+
+@InternalSparkApi
+@Composable
+internal fun SparkTab(
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    text: String? = null,
+    icon: SparkIcon? = null,
+    contentDescription: String? = null,
+    enabled: Boolean = true,
+    selectedContentColor: Color = TabDefaults.SelectedContentColor.color(),
+    unselectedContentColor: Color = LocalContentColor.current,
+    style: TabStyle = TabDefaults.Size,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    trailingContent: @Composable () -> Unit,
+) {
+    MaterialTab(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier.sparkUsageOverlay(),
+        enabled = enabled,
+        selectedContentColor = selectedContentColor,
+        unselectedContentColor = unselectedContentColor,
+        interactionSource = interactionSource,
+    ) {
+        TabLayout(
+            text = {
+                text?.let {
+                    Text(
+                        text = it,
+                        style = style.typography(),
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            },
+            icon = {
+                icon?.let {
+                    Icon(
+                        modifier = Modifier.then(
+                            if (text == null) {
+                                Modifier.size(IconSize.Small.size)
+                            } else {
+                                Modifier.layout { measurable, constraints ->
+                                    val placeable = measurable.measure(constraints)
+                                    if (constraints.maxHeight == Constraints.Infinity) {
+                                        layout(0, 0) {}
+                                    } else {
+                                        layout(constraints.maxHeight, constraints.maxHeight) {
+                                            placeable.place(0, 0)
+                                        }
+                                    }
+                                }
+                            },
+                        ), // Todo fix current text size
+                        sparkIcon = it,
+                        contentDescription = if (text == null) contentDescription else null,
+                    )
+                }
+            },
+            trailingContent = trailingContent,
+        )
+    }
+}
+
+/**
+ * A [Layout] that positions [text] and an optional [icon]
+ * and [trailingContent] with the correct baseline distances.
+ */
+@Composable
+private fun TabLayout(
+    icon: @Composable (() -> Unit)?,
+    text: @Composable (() -> Unit)?,
+    trailingContent: @Composable (() -> Unit)?,
+) {
+    Row(
+        modifier = Modifier
+            .height(IntrinsicSize.Min)
+            .padding(TabDefaults.HorizontalContentPadding),
+        horizontalArrangement = Arrangement.spacedBy(
+            TabDefaults.HorizontalArrangementSpace,
+            alignment = Alignment.CenterHorizontally,
+        ),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        icon?.let { it() }
+        text?.let { it() }
+        trailingContent?.let { it() }
+    }
+}
+
 @ExperimentalSparkApi
 @Composable
+//@Deprecated("") // TODO
 internal fun SparkTab(
     selected: Boolean,
     onClick: () -> Unit,
@@ -82,6 +191,7 @@ internal fun SparkTab(
  **/
 @ExperimentalSparkApi
 @Composable
+//@Deprecated("") // TODO
 public fun Tab(
     selected: Boolean,
     onClick: () -> Unit,

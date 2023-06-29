@@ -39,9 +39,9 @@ import androidx.compose.material3.Divider as MaterialDivider
 @ExperimentalSparkApi
 @Composable
 internal fun SparkDivider(
-    thickness: Dp,
-    color: Color,
     modifier: Modifier = Modifier,
+    color: Color = SparkTheme.colors.outline,
+    thickness: Dp = DividerDefaults.Thickness,
 ) {
     MaterialDivider(
         modifier,
