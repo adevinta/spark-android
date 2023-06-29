@@ -80,7 +80,7 @@ internal fun SparkBadge(
 
     Row(
         modifier = modifier
-            .ifTrue(hasStroke) { border(2.dp, SparkTheme.colors.surface, shape).padding(2.dp) }
+            .ifTrue(hasStroke) { border(2.dp, colors.onColor, shape).padding(2.dp) }
             .defaultMinSize(minWidth = size, minHeight = size)
             .background(
                 color = colors.color,
@@ -223,43 +223,51 @@ public fun Badge(
 
 @Preview(
     group = "Badge",
-    name = "Badge",
+    name = "Badge no stroke",
 )
 @Composable
-internal fun BadgePreview(
+internal fun BadgeNoStrokeIntentPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         BadgeIntent.values().forEach { intent ->
-            BadgeStyle.values().forEach {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Badge(badgeStyle = it, intent = intent, hasStroke = false)
-                    Badge(badgeStyle = it, intent = intent, hasStroke = false) { Text("56k") }
-                    Badge(badgeStyle = it, intent = intent, count = 3, hasStroke = false)
-                    Badge(badgeStyle = it, intent = intent, count = 99, hasStroke = false)
-                    Badge(badgeStyle = it, intent = intent, count = 200, overflowCount = 99, hasStroke = false)
-                    Badge(badgeStyle = it, intent = intent, count = 99, overflowCount = 999, hasStroke = false)
-                    Badge(badgeStyle = it, intent = intent, count = 1000, overflowCount = 999, hasStroke = false)
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(SparkTheme.colors.neutralContainer)
-                        .padding(4.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                ) {
-                    Badge(badgeStyle = it, intent = intent)
-                    Badge(badgeStyle = it, intent = intent) { Text("56k") }
-                    Badge(badgeStyle = it, intent = intent, count = 3)
-                    Badge(badgeStyle = it, intent = intent, count = 99)
-                    Badge(badgeStyle = it, intent = intent, count = 200, overflowCount = 99)
-                    Badge(badgeStyle = it, intent = intent, count = 99, overflowCount = 999)
-                    Badge(badgeStyle = it, intent = intent, count = 1000, overflowCount = 999)
-                }
-            }
+            BadgeIntentPreview(intent, hasStroke = false)
+        }
+    }
+}
+
+@Preview(
+    group = "Badge",
+    name = "Badge with stroke",
+)
+@Composable
+internal fun BadgeWithStrokeIntentPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        BadgeIntent.values().forEach { intent ->
+            BadgeIntentPreview(intent, hasStroke = true)
+        }
+    }
+}
+
+@Composable
+private fun BadgeIntentPreview(intent: BadgeIntent, hasStroke: Boolean) {
+    BadgeStyle.values().forEach {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(SparkTheme.colors.neutralContainer)
+                .padding(4.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Badge(badgeStyle = it, intent = intent, hasStroke = hasStroke)
+            Badge(badgeStyle = it, intent = intent, hasStroke = hasStroke) { Text("56k") }
+            Badge(badgeStyle = it, intent = intent, count = 3, hasStroke = hasStroke)
+            Badge(badgeStyle = it, intent = intent, count = 99, hasStroke = hasStroke)
+            Badge(badgeStyle = it, intent = intent, count = 200, overflowCount = 99, hasStroke = hasStroke)
+            Badge(badgeStyle = it, intent = intent, count = 99, overflowCount = 999, hasStroke = hasStroke)
+            Badge(badgeStyle = it, intent = intent, count = 1000, overflowCount = 999, hasStroke = hasStroke)
         }
     }
 }

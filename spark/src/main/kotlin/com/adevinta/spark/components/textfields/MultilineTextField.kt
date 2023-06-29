@@ -311,7 +311,7 @@ private fun PreviewTextFields(
             enabled = enabled,
             label = "Label",
             placeholder = "Placeholder",
-            helper = "helper helper helper helper helper helper helper helper helper=",
+            helper = "helper helper helper helper helper helper helper helper helper",
             counter = TextFieldCharacterCounter(12, 24),
             leadingIcon = icon,
             isError = isError,

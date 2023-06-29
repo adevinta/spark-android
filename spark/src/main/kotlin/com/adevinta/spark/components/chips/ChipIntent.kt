@@ -121,7 +121,7 @@ public enum class ChipIntent {
     },
 
     /**
-     * Badge on a color / image panel without on intent color.
+     * Chip on a color / image panel without on intent color.
      */
     Surface {
         @Composable

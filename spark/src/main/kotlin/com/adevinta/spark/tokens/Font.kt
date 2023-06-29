@@ -21,14 +21,13 @@
  */
 package com.adevinta.spark.tokens
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.googlefonts.Font
-import androidx.compose.ui.text.googlefonts.GoogleFont
 import com.adevinta.spark.R
 import kotlinx.coroutines.CoroutineExceptionHandler
 
@@ -44,12 +43,10 @@ public fun sparkFontFamily(
     fontFamily: FontFamily = nunitoFontFamily,
     useSparkTokensHighlighter: Boolean = false,
     isLegacy: Boolean = false,
-    fontHandler: CoroutineExceptionHandler = defaultFontHandler,
 ): SparkFontFamily = SparkFontFamily(
     isLegacy = isLegacy,
     useSparkTokensHighlighter = useSparkTokensHighlighter,
     fontFamily = fontFamily,
-    fontHandler = fontHandler,
 )
 
 /**
@@ -59,7 +56,6 @@ public class SparkFontFamily(
     private val isLegacy: Boolean,
     private val useSparkTokensHighlighter: Boolean,
     private val fontFamily: FontFamily,
-    public val fontHandler: CoroutineExceptionHandler,
 ) {
     /**
      * The [FontFamily] used globally inside the app.
@@ -74,23 +70,13 @@ public class SparkFontFamily(
         }
 }
 
-internal val nunitoFont = GoogleFont("Nunito")
-
-internal val sparkFontProvider = GoogleFont.Provider(
-    providerAuthority = "com.google.android.gms.fonts",
-    providerPackage = "com.google.android.gms",
-    certificates = R.array.com_google_android_gms_fonts_certs,
-)
-
 internal val nunitoFontFamily = FontFamily(
     fonts = listOf(
-        Font(googleFont = nunitoFont, fontProvider = sparkFontProvider, weight = FontWeight.Normal),
-        Font(googleFont = nunitoFont, fontProvider = sparkFontProvider, weight = FontWeight.SemiBold),
-        Font(googleFont = nunitoFont, fontProvider = sparkFontProvider, weight = FontWeight.Bold),
+        Font(resId = R.font.nunito_sans_regular, weight = FontWeight.Normal),
+        Font(resId = R.font.nunito_sans_italic, weight = FontWeight.Normal, style = FontStyle.Italic),
+        Font(resId = R.font.nunito_sans_semi_bold, weight = FontWeight.SemiBold),
+        Font(resId = R.font.nunito_sans_semi_bold_italic, weight = FontWeight.SemiBold, style = FontStyle.Italic),
+        Font(resId = R.font.nunito_sans_bold, weight = FontWeight.Bold),
+        Font(resId = R.font.nunito_sans_bold_italic, weight = FontWeight.Bold, style = FontStyle.Italic),
     ),
 )
-
-internal val defaultFontHandler = CoroutineExceptionHandler { _, throwable ->
-    // Log the Throwable
-    Log.e("Font Resolver", "", throwable)
-}
