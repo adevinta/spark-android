@@ -85,8 +85,8 @@ public fun ButtonContrast(
     val colors = ButtonDefaults.buttonColors(
         containerColor = containerColor,
         contentColor = contentColor,
-        disabledContainerColor = containerColor.disabled(),
-        disabledContentColor = contentColor.disabled(),
+        disabledContainerColor = containerColor.disabled,
+        disabledContentColor = contentColor.disabled,
     )
     SparkButton(
         onClick = onClick,

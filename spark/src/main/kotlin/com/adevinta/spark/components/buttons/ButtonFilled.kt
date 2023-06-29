@@ -89,7 +89,7 @@ public fun ButtonFilled(
     val colors = ButtonDefaults.buttonColors(
         containerColor = backgroundColor,
         contentColor = contentColor,
-        disabledContainerColor = backgroundColor.disabled(),
+        disabledContainerColor = backgroundColor.disabled,
         disabledContentColor = contentColor,
     )
     SparkButton(

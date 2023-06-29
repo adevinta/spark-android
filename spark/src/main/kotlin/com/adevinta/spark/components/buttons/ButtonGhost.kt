@@ -93,7 +93,7 @@ public fun ButtonGhost(
     } else {
         ButtonDefaults.textButtonColors(
             contentColor = contentColor,
-            disabledContentColor = contentColor.disabled(),
+            disabledContentColor = contentColor.disabled,
         )
     }
     SparkButton(

@@ -80,11 +80,11 @@ public fun ButtonOutlined(
         targetValue = intent.colors().color,
         label = "content color",
     )
-    val disabledContentColor = contentColor.disabled()
+    val disabledContentColor = contentColor.disabled
 
     val colors = ButtonDefaults.outlinedButtonColors(
         contentColor = contentColor,
-        disabledContentColor = contentColor.disabled(),
+        disabledContentColor = contentColor.disabled,
     )
     SparkButton(
         onClick = onClick,

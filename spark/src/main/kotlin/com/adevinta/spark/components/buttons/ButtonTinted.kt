@@ -88,8 +88,8 @@ public fun ButtonTinted(
     val colors = ButtonDefaults.buttonColors(
         containerColor = backgroundColor,
         contentColor = contentColor,
-        disabledContainerColor = backgroundColor.disabled(),
-        disabledContentColor = contentColor.disabled(),
+        disabledContainerColor = backgroundColor.disabled,
+        disabledContentColor = contentColor.disabled,
     )
     SparkButton(
         onClick = onClick,
