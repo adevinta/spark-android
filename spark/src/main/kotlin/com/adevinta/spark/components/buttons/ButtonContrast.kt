@@ -36,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.SparkButtonDefaults.disabled
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.Link
 import com.adevinta.spark.icons.SparkIcon
@@ -80,9 +81,12 @@ public fun ButtonContrast(
         targetValue = intent.colors().color,
         label = "content color",
     )
+    val containerColor = SparkTheme.colors.surface
     val colors = ButtonDefaults.buttonColors(
-        containerColor = SparkTheme.colors.surface,
+        containerColor = containerColor,
         contentColor = contentColor,
+        disabledContainerColor = containerColor.disabled,
+        disabledContentColor = contentColor.disabled,
     )
     SparkButton(
         onClick = onClick,
