@@ -31,7 +31,6 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.examples.model.Example
 import com.adevinta.spark.tokens.Layout
 

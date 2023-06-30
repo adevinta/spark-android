@@ -181,7 +181,7 @@ internal fun CatalogApp(
                         HorizontalPager(
                             pageCount = homeScreenValues.size,
                             state = pagerState,
-                            flingBehavior = PagerDefaults.flingBehavior(state = pagerState, ),
+                            flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
                         ) {
                             when (homeScreenValues[it]) {
                                 CatalogHomeScreen.Exemples -> ComponentsScreen(
