@@ -67,8 +67,9 @@ import com.adevinta.spark.catalog.backdrop.BackdropScaffold
 import com.adevinta.spark.catalog.backdrop.BackdropScaffoldDefaults
 import com.adevinta.spark.catalog.backdrop.BackdropValue
 import com.adevinta.spark.catalog.backdrop.rememberBackdropScaffoldState
+import com.adevinta.spark.catalog.configurator.ConfiguratorComponentsScreen
 import com.adevinta.spark.catalog.examples.ComponentsScreen
-import com.adevinta.spark.catalog.examples.model.Component
+import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.showkase.ShowkaseBrowserScreenMetadata
 import com.adevinta.spark.catalog.showkase.navGraph
 import com.adevinta.spark.catalog.tabbar.CatalogTabBar
@@ -197,20 +198,10 @@ internal fun CatalogApp(
                                     )
                                 }
 
-                                CatalogHomeScreen.Configurator -> {
-                                    Box(
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentAlignment = Alignment.TopCenter,
-                                    ) {
-                                        Text(
-                                            text = stringResource(R.string.configurator_wip_text),
-                                            modifier = Modifier
-                                                .padding(horizontal = 16.dp, vertical = 32.dp)
-                                                .padding(innerPadding),
-                                            textAlign = TextAlign.Center,
-                                        )
-                                    }
-                                }
+                                CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
+                                    components = components,
+                                    contentPadding = innerPadding,
+                                )
                             }
                         }
                     },

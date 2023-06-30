@@ -19,34 +19,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.examples.example
+package com.adevinta.spark.catalog.configurator.component
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.adevinta.spark.catalog.model.Example
-import com.adevinta.spark.tokens.Layout
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.catalog.model.Component
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-public fun Example(
-    example: Example,
-    contentPadding: PaddingValues,
+public fun ConfiguratorComponentComponentItem(
+    component: Component,
+    onClick: (component: Component) -> Unit,
 ) {
-    Box(
+    OutlinedCard(
+        onClick = { onClick(component) },
         modifier = Modifier
-            .fillMaxSize()
-            .consumeWindowInsets(WindowInsets.safeDrawing)
-            .padding(contentPadding)
-            .padding(horizontal = Layout.bodyMargin),
-        contentAlignment = Alignment.Center,
+            .height(ComponentItemHeight)
+            .padding(ComponentItemOuterPadding),
     ) {
-        example.content()
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(ComponentItemInnerPadding),
+        ) {
+            Text(
+                text = component.name,
+                modifier = Modifier.align(Alignment.BottomStart),
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
     }
 }
+
+private val ComponentItemHeight = 180.dp
+private val ComponentItemOuterPadding = 4.dp
+private val ComponentItemInnerPadding = 16.dp

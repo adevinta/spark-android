@@ -26,7 +26,7 @@
             <!-- endregion-->
 
             <!-- region Material-->
-            <name>androidx.compose.material.*</name>
+<!--            <name>androidx.compose.material.*</name>-->
             <name>androidx.compose.material3.AlertDialog</name>
             <name>androidx.compose.material3.AssistChip</name>
             <name>androidx.compose.material3.AssistChip</name>
