@@ -55,33 +55,33 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tokens.PaletteTokens.Apple20
-import com.adevinta.spark.tokens.PaletteTokens.Apple30
-import com.adevinta.spark.tokens.PaletteTokens.Apple40
-import com.adevinta.spark.tokens.PaletteTokens.Apple50
-import com.adevinta.spark.tokens.PaletteTokens.Apple80
-import com.adevinta.spark.tokens.PaletteTokens.Apple90
+import com.adevinta.spark.tokens.PaletteTokens.Apple800
+import com.adevinta.spark.tokens.PaletteTokens.Apple700
+import com.adevinta.spark.tokens.PaletteTokens.Apple600
+import com.adevinta.spark.tokens.PaletteTokens.Apple500
+import com.adevinta.spark.tokens.PaletteTokens.Apple200
+import com.adevinta.spark.tokens.PaletteTokens.Apple100
 import com.adevinta.spark.tokens.PaletteTokens.Black
-import com.adevinta.spark.tokens.PaletteTokens.Chili20
-import com.adevinta.spark.tokens.PaletteTokens.Chili30
-import com.adevinta.spark.tokens.PaletteTokens.Chili40
-import com.adevinta.spark.tokens.PaletteTokens.Chili50
-import com.adevinta.spark.tokens.PaletteTokens.Chili80
-import com.adevinta.spark.tokens.PaletteTokens.Chili90
+import com.adevinta.spark.tokens.PaletteTokens.Chili800
+import com.adevinta.spark.tokens.PaletteTokens.Chili700
+import com.adevinta.spark.tokens.PaletteTokens.Chili600
+import com.adevinta.spark.tokens.PaletteTokens.Chili500
+import com.adevinta.spark.tokens.PaletteTokens.Chili200
+import com.adevinta.spark.tokens.PaletteTokens.Chili100
 import com.adevinta.spark.tokens.PaletteTokens.Grey10
-import com.adevinta.spark.tokens.PaletteTokens.Kiwi20
-import com.adevinta.spark.tokens.PaletteTokens.Kiwi30
-import com.adevinta.spark.tokens.PaletteTokens.Kiwi50
-import com.adevinta.spark.tokens.PaletteTokens.Kiwi80
-import com.adevinta.spark.tokens.PaletteTokens.Kiwi90
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi800
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi700
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi500
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi200
+import com.adevinta.spark.tokens.PaletteTokens.Kiwi100
 import com.adevinta.spark.tokens.PaletteTokens.Orange40
 import com.adevinta.spark.tokens.PaletteTokens.Orange80
-import com.adevinta.spark.tokens.PaletteTokens.Sky20
-import com.adevinta.spark.tokens.PaletteTokens.Sky30
-import com.adevinta.spark.tokens.PaletteTokens.Sky40
-import com.adevinta.spark.tokens.PaletteTokens.Sky50
-import com.adevinta.spark.tokens.PaletteTokens.Sky80
-import com.adevinta.spark.tokens.PaletteTokens.Sky90
+import com.adevinta.spark.tokens.PaletteTokens.Sky800
+import com.adevinta.spark.tokens.PaletteTokens.Sky700
+import com.adevinta.spark.tokens.PaletteTokens.Sky600
+import com.adevinta.spark.tokens.PaletteTokens.Sky500
+import com.adevinta.spark.tokens.PaletteTokens.Sky200
+import com.adevinta.spark.tokens.PaletteTokens.Sky100
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton20
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton30
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton50
@@ -89,37 +89,37 @@ import com.adevinta.spark.tokens.PaletteTokens.SugarCotton60
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton70
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton80
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton90
-import com.adevinta.spark.tokens.PaletteTokens.Surfer10
-import com.adevinta.spark.tokens.PaletteTokens.Surfer20
-import com.adevinta.spark.tokens.PaletteTokens.Surfer30
+import com.adevinta.spark.tokens.PaletteTokens.Surfer900
+import com.adevinta.spark.tokens.PaletteTokens.Surfer800
+import com.adevinta.spark.tokens.PaletteTokens.Surfer700
+import com.adevinta.spark.tokens.PaletteTokens.Surfer500
+import com.adevinta.spark.tokens.PaletteTokens.Surfer200
+import com.adevinta.spark.tokens.PaletteTokens.Surfer100
 import com.adevinta.spark.tokens.PaletteTokens.Surfer50
-import com.adevinta.spark.tokens.PaletteTokens.Surfer80
-import com.adevinta.spark.tokens.PaletteTokens.Surfer90
-import com.adevinta.spark.tokens.PaletteTokens.Surfer975
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue20
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue30
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue50
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue80
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue90
+import com.adevinta.spark.tokens.PaletteTokens.TheBlue800
+import com.adevinta.spark.tokens.PaletteTokens.TheBlue700
+import com.adevinta.spark.tokens.PaletteTokens.TheBlue500
+import com.adevinta.spark.tokens.PaletteTokens.TheBlue200
+import com.adevinta.spark.tokens.PaletteTokens.TheBlue100
 import com.adevinta.spark.tokens.PaletteTokens.TheBlueV
 import com.adevinta.spark.tokens.PaletteTokens.White
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings20
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings30
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings40
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings50
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings80
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings90
+import com.adevinta.spark.tokens.PaletteTokens.Wiggings800
+import com.adevinta.spark.tokens.PaletteTokens.Wiggings700
+import com.adevinta.spark.tokens.PaletteTokens.Wiggings600
+import com.adevinta.spark.tokens.PaletteTokens.Wiggings500
+import com.adevinta.spark.tokens.PaletteTokens.Wiggings200
+import com.adevinta.spark.tokens.PaletteTokens.Wiggings100
 import com.adevinta.spark.tools.preview.SparkPreviewProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.UserType
 
 public fun lightSparkColors(
     isPro: Boolean = false,
-    primary: Color = if (isPro) Kiwi50 else TheBlue50,
+    primary: Color = if (isPro) Kiwi500 else TheBlue500,
     onPrimary: Color = if (isPro) Black else White,
-    primaryContainer: Color = if (isPro) Kiwi90 else TheBlue90,
-    onPrimaryContainer: Color = if (isPro) Kiwi30 else TheBlue30,
-    primaryVariant: Color = TheBlue30,
+    primaryContainer: Color = if (isPro) Kiwi100 else TheBlue100,
+    onPrimaryContainer: Color = if (isPro) Kiwi700 else TheBlue700,
+    primaryVariant: Color = TheBlue700,
     onPrimaryVariant: Color = White,
     secondary: Color = SugarCotton50,
     onSecondary: Color = White,
@@ -131,37 +131,37 @@ public fun lightSparkColors(
     onTertiary: Color = Color.Blue,
     tertiaryContainer: Color = Color.Magenta,
     onTertiaryContainer: Color = Color.Blue,
-    success: Color = Apple50,
+    success: Color = Apple500,
     onSuccess: Color = White,
-    successContainer: Color = Apple90,
-    onSuccessContainer: Color = Apple30,
-    alert: Color = Wiggings50,
+    successContainer: Color = Apple100,
+    onSuccessContainer: Color = Apple700,
+    alert: Color = Wiggings500,
     onAlert: Color = Black,
-    alertContainer: Color = Wiggings90,
-    onAlertContainer: Color = Wiggings30,
-    error: Color = Chili50,
+    alertContainer: Color = Wiggings100,
+    onAlertContainer: Color = Wiggings700,
+    error: Color = Chili500,
     onError: Color = White,
-    errorContainer: Color = Chili90,
-    onErrorContainer: Color = Chili30,
-    info: Color = Sky50,
+    errorContainer: Color = Chili100,
+    onErrorContainer: Color = Chili700,
+    info: Color = Sky500,
     onInfo: Color = White,
-    infoContainer: Color = Sky90,
-    onInfoContainer: Color = Sky30,
-    neutral: Color = Surfer50,
+    infoContainer: Color = Sky100,
+    onInfoContainer: Color = Sky700,
+    neutral: Color = Surfer500,
     onNeutral: Color = White,
-    neutralContainer: Color = Surfer90,
-    onNeutralContainer: Color = Surfer30,
+    neutralContainer: Color = Surfer100,
+    onNeutralContainer: Color = Surfer700,
     background: Color = White,
     onBackground: Color = Color.Black,
-    backgroundVariant: Color = Surfer975,
+    backgroundVariant: Color = Surfer50,
     onBackgroundVariant: Color = Color.Black,
     surface: Color = White,
     onSurface: Color = Color.Black,
-    surfaceInverse: Color = Surfer10,
+    surfaceInverse: Color = Surfer900,
     onSurfaceInverse: Color = White,
     surfaceTint: Color = primary,
     inversePrimary: Color = Orange80,
-    outline: Color = Surfer80,
+    outline: Color = Surfer200,
     outlineHigh: Color = Color.Black,
     scrim: Color = Black,
     dimContent1: Float = .72f,
@@ -237,11 +237,11 @@ public fun lightSparkColors(
 
 public fun darkSparkColors(
     isPro: Boolean = false,
-    primary: Color = if (isPro) Kiwi80 else TheBlueV,
-    onPrimary: Color = if (isPro) Kiwi20 else TheBlue20,
-    primaryContainer: Color = if (isPro) Kiwi30 else TheBlue30,
-    onPrimaryContainer: Color = if (isPro) Kiwi90 else TheBlue80,
-    primaryVariant: Color = TheBlue80,
+    primary: Color = if (isPro) Kiwi200 else TheBlueV,
+    onPrimary: Color = if (isPro) Kiwi800 else TheBlue800,
+    primaryContainer: Color = if (isPro) Kiwi700 else TheBlue700,
+    onPrimaryContainer: Color = if (isPro) Kiwi100 else TheBlue200,
+    primaryVariant: Color = TheBlue200,
     onPrimaryVariant: Color = Black,
     secondary: Color = SugarCotton60,
     onSecondary: Color = Black,
@@ -249,36 +249,36 @@ public fun darkSparkColors(
     onSecondaryContainer: Color = SugarCotton80,
     secondaryVariant: Color = SugarCotton70,
     onSecondaryVariant: Color = Black,
-    success: Color = Apple40,
+    success: Color = Apple600,
     onSuccess: Color = Black,
-    successContainer: Color = Apple20,
-    onSuccessContainer: Color = Apple80,
-    alert: Color = Wiggings40,
+    successContainer: Color = Apple800,
+    onSuccessContainer: Color = Apple200,
+    alert: Color = Wiggings600,
     onAlert: Color = Black,
-    alertContainer: Color = Wiggings20,
-    onAlertContainer: Color = Wiggings80,
-    error: Color = Chili40,
+    alertContainer: Color = Wiggings800,
+    onAlertContainer: Color = Wiggings200,
+    error: Color = Chili600,
     onError: Color = Black,
-    errorContainer: Color = Chili20,
-    onErrorContainer: Color = Chili80,
-    info: Color = Sky40,
+    errorContainer: Color = Chili800,
+    onErrorContainer: Color = Chili200,
+    info: Color = Sky600,
     onInfo: Color = Black,
-    infoContainer: Color = Sky20,
-    onInfoContainer: Color = Sky80,
-    neutral: Color = Surfer50,
+    infoContainer: Color = Sky800,
+    onInfoContainer: Color = Sky200,
+    neutral: Color = Surfer500,
     onNeutral: Color = Black,
-    neutralContainer: Color = Surfer20,
-    onNeutralContainer: Color = Surfer80,
+    neutralContainer: Color = Surfer800,
+    onNeutralContainer: Color = Surfer200,
     background: Color = Grey10,
     onBackground: Color = White,
-    backgroundVariant: Color = Surfer10,
+    backgroundVariant: Color = Surfer900,
     onBackgroundVariant: Color = Color.White,
     surface: Color = Grey10,
     onSurface: Color = White,
-    surfaceInverse: Color = Surfer50,
+    surfaceInverse: Color = Surfer500,
     onSurfaceInverse: Color = Black,
     surfaceTint: Color = primary,
-    outline: Color = Surfer30,
+    outline: Color = Surfer700,
     outlineHigh: Color = White,
     inversePrimary: Color = Orange40,
     scrim: Color = Black,
