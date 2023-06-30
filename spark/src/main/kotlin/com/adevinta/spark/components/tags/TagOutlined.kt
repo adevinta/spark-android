@@ -33,9 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 
 /**
  * Outlined tag represent secondary information
@@ -176,10 +175,9 @@ public fun TagPro(
 )
 @Composable
 internal fun TagOutlinedPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         TagIntent.values().forEach {
             TagOutlined("Tag ${it.name}", intent = it)
         }

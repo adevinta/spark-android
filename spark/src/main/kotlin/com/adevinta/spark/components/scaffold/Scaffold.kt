@@ -56,8 +56,8 @@ import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.icons.BurgerMenu
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
-import com.adevinta.spark.tools.preview.SparkPreviewParam
-import com.adevinta.spark.tools.preview.SparkPreviewParamProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
+import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.Scaffold as MaterialScaffold
 
 /**
@@ -133,12 +133,10 @@ public fun Scaffold(
 )
 @Composable
 private fun ScaffoldPreview(
-    @PreviewParameter(SparkPreviewParamProvider::class) param: SparkPreviewParam,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
     PreviewTheme(
         themeVariant = theme,
-        userType = userType,
         padding = PaddingValues(0.dp),
     ) {
         val colors = listOf(

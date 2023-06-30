@@ -43,9 +43,8 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.EmphasizeMedium
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 import java.lang.String.format
 import java.util.Locale
 
@@ -140,11 +139,10 @@ internal fun firstLocale(): Locale {
     name = "RatingSmall",
 )
 internal fun RatingSmallPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
     val frenchLocale = Locale("fr", "rFR")
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         RatingSmall(value = 3.0f, locale = frenchLocale)
         RatingSmall(value = 4.50f, locale = frenchLocale)
 

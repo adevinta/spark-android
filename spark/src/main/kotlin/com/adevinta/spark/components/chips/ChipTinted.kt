@@ -42,9 +42,8 @@ import com.adevinta.spark.icons.OfferOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.ifTrue
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 
 /**
  * A chip with lighter background and no border
@@ -164,10 +163,9 @@ public fun ChipTinted(
 )
 @Composable
 internal fun ChipTintedPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType, contentPadding = 0.dp) {
+    PreviewTheme(theme, contentPadding = 0.dp) {
         ChipIntent.values().forEach { intent ->
             listOf(true, false).forEach { enabled ->
                 Row(
