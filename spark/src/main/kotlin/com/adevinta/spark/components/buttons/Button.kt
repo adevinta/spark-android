@@ -230,6 +230,9 @@ public object SparkButtonDefaults {
         vertical = size.contentVerticalPadding,
     )
 
+    internal val Color.disabled: Color
+        @Composable get() = this.copy(alpha = SparkTheme.colors.dim3)
+
     /**
      * The default border of [ButtonOutlined]
      */
