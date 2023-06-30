@@ -37,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.SparkButtonDefaults.disabled
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
@@ -90,6 +91,8 @@ public fun ButtonFilled(
     val colors = ButtonDefaults.buttonColors(
         containerColor = backgroundColor,
         contentColor = contentColor,
+        disabledContainerColor = backgroundColor.disabled,
+        disabledContentColor = contentColor,
     )
     SparkButton(
         onClick = onClick,

@@ -37,7 +37,7 @@ jobs:
           distribution: 'temurin'
       - uses: ./.github/actions/setup-gradle-properties
       - name: Dokka
-        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629 # v2.4.2
+        uses: gradle/gradle-build-action@40b6781dcdec2762ad36556682ac74e31030cfe2 # v2.5.1
         with:
           # https://github.com/Kotlin/dokka/issues/1217
           arguments: dokkaHtmlMultiModule --no-configuration-cache --no-parallel --max-workers=1
