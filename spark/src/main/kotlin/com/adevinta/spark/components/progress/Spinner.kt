@@ -168,7 +168,6 @@ internal fun PreviewSpinnerMedium(
 internal fun PreviewSpinnerSmall(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-
     PreviewTheme(theme) {
         SpinnerPreview(size = SpinnerSize.Small)
     }

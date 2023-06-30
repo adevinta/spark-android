@@ -173,7 +173,6 @@ public fun RatingFull(
 internal fun RatingFullPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-
     PreviewTheme(theme) {
         RatingFull(value = 1.6f, commentCount = 1)
         RatingFull(value = 3.6f, commentCount = 23)

@@ -78,7 +78,6 @@ import com.adevinta.spark.tokens.PaletteTokens.SugarCotton100
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton200
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton300
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton400
-import com.adevinta.spark.tokens.PaletteTokens.SugarCotton50
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton500
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton700
 import com.adevinta.spark.tokens.PaletteTokens.SugarCotton800
@@ -537,7 +536,7 @@ public class SparkColors(
         "This property will be removed as it is not part of Spark Token",
         ReplaceWith("backgroundVariant"),
 
-        )
+    )
     public var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
         internal set
 
