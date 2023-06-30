@@ -35,11 +35,13 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.examples.component.ComponentItem
 import com.adevinta.spark.catalog.examples.model.Component
 import com.adevinta.spark.components.text.Text
@@ -103,13 +105,11 @@ internal fun ComponentsListScreen(
                 verticalArrangement = Arrangement.Absolute.spacedBy(4.dp),
             ) {
                 Text(
-                    text = "Components examples",
+                    text = stringResource(R.string.examples_component_screen_title),
                     style = SparkTheme.typography.headline1,
                 )
                 Text(
-                    text = "These are the examples that that can be found in the samples in the javadoc or the " +
-                        "README.md files. They show usages of the components in different scenarios that " +
-                        "should represent real use cases.",
+                    text = stringResource(R.string.examples_component_screen_description),
                     style = SparkTheme.typography.body2,
                 )
             }

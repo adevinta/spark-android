@@ -45,4 +45,10 @@
     <string name="theme_picker_theme_title" description="Spark brand theme. [CHAR_LIMIT=NONE]">Theme</string>
     <string name="theme_picker_text_direction_title" description="Simulate system text direction to be either LTR or RTL. [CHAR_LIMIT=NONE]">Text direction</string>
     <string name="theme_picker_font_scale_title" description="Simulate a11y font scaling. [CHAR_LIMIT=NONE]">Font scale</string>
+    <string name="configurator_wip_text">The configurator will come in the future, it\'ll allow you to display a component and set the properties that a developer use to se how the component behave</string>
+    <string name="examples_component_screen_description">These are the examples that that can be found in the samples in the javadoc or the README.md files. They show usages of the components in different scenarios that should represent real use cases.</string>
+    <string name="examples_component_screen_title">Components examples</string>
+    <string name="examples_component_button_description">Buttons help people initiate actions, from sending an email, to sharing a document, to liking a post.</string>
+    <string name="showkase_home_warning_description">These are the previews that the developers have when working on components. They are not exhaustive and are only meant to give you a quick idea of what the component looks like.</string>
+    <string name="showkase_home_warning_title">⚠️ Theming don\'t work on these!</string>
 </resources>

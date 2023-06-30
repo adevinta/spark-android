@@ -67,11 +67,7 @@ internal fun SegmentedButton(
     onOptionSelect: (String) -> Unit,
     modifier: Modifier = Modifier,
     selectedColor: Color = SparkTheme.colors.onSecondaryContainer,
-    unselectedcolor: Color = LocalContentColor.current,
-//    state: MultiSelectorState = rememberMultiSelectorState(
-//        options = options,
-//        selectedOption = selectedOption,
-//    ),
+    unSelectedColor: Color = LocalContentColor.current,
 ) {
     require(options.size >= 2) { "This composable requires at least 2 options" }
     require(options.size <= 5) { "This composable requires at most 5 options" }
@@ -100,7 +96,7 @@ internal fun SegmentedButton(
             options.forEachIndexed { index, option ->
                 val textColor by animateColorAsState(
                     label = "Button text color",
-                    targetValue = if (index == selectedIndex) selectedColor else unselectedcolor,
+                    targetValue = if (index == selectedIndex) selectedColor else unSelectedColor,
                 )
 
                 Box(

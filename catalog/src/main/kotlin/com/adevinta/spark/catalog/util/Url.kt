@@ -37,10 +37,10 @@ public const val ReleasesUrl: String = "https://github.com/adevinta/spark-androi
 public const val DocsUrl: String = "https://adevinta.github.io/spark-android/"
 public const val SourceUrl: String = "https://github.com/adevinta/spark-android"
 public const val SparkSourceUrl: String = "https://github.com/adevinta/spark-android/"
-public const val SampleSourceUrl: String = "https://cs.android.com/androidx/platform/frameworks/support/+/" +
-    "androidx-main:compose/material3/" +
-    "material3/samples/src/main/java/androidx/compose/material3/samples"
+// Use the real sample url from spark once we have our first ones
+/* ktlint-disable max-line-length */
+public const val SampleSourceUrl: String = "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/samples/src/main/java/androidx/compose/material3/samples"
 public const val PackageSummaryUrl: String = "https://https://adevinta.github.io/spark-android/spark/"
-public const val IssueUrl: String =
-    "https://github.com/adevinta/spark-android/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc"
+/* ktlint-disable max-line-length */
+public const val IssueUrl: String = "https://github.com/adevinta/spark-android/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc"
 public const val LicensesUrl: String = "https://github.com/adevinta/spark-android/blob/main/LICENSE"

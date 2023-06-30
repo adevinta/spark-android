@@ -29,12 +29,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.examples.example.ExampleItem
 import com.adevinta.spark.catalog.examples.model.Component
@@ -61,42 +61,22 @@ public fun Component(
             bottom = contentPadding.calculateBottomPadding(),
         ),
     ) {
-//            item {
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxWidth()
-//                        .padding(vertical = ComponentIconVerticalPadding),
-//                ) {
-//                    Image(
-//                        painter = painterResource(id = component.icon),
-//                        contentDescription = null,
-//                        modifier = Modifier
-//                            .size(ComponentIconSize)
-//                            .align(Alignment.Center),
-//                        colorFilter = if (component.tintIcon) {
-//                            ColorFilter.tint(LocalContentColor.current)
-//                        } else {
-//                            null
-//                        },
-//                    )
-//                }
-//            }
         item {
             Text(
                 text = stringResource(id = R.string.description),
-                style = MaterialTheme.typography.bodyLarge,
+                style = SparkTheme.typography.body1,
             )
             Spacer(modifier = Modifier.height(ComponentPadding))
             Text(
-                text = component.description,
-                style = MaterialTheme.typography.bodyMedium,
+                text = stringResource(id = component.description),
+                style = SparkTheme.typography.body2,
             )
             Spacer(modifier = Modifier.height(ComponentDescriptionPadding))
         }
         item {
             Text(
                 text = stringResource(id = R.string.examples),
-                style = MaterialTheme.typography.bodyLarge,
+                style = SparkTheme.typography.body1,
             )
             Spacer(modifier = Modifier.height(ComponentPadding))
         }
@@ -112,7 +92,7 @@ public fun Component(
             item {
                 Text(
                     text = stringResource(id = R.string.no_examples),
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = SparkTheme.typography.body2,
                 )
                 Spacer(modifier = Modifier.height(ComponentPadding))
             }

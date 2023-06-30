@@ -9,5 +9,7 @@
 -dontwarn org.openjsse.javax.net.ssl.SSLSocket
 -dontwarn org.openjsse.net.ssl.OpenJSSE
 -dontobfuscate
+-keepattributes LineNumberTable,SourceFile
+-renamesourcefileattribute SourceFile
 
 -keep class com.adevinta.spark.tools.preview.UserProProvider { *; }

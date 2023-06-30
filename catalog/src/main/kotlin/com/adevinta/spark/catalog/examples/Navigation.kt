@@ -62,7 +62,6 @@ internal fun NavGraphBuilder.navGraph(
                 val route = "$ExampleRoute/$componentId/$exampleIndex"
                 navController.navigate(route)
             },
-//            onBackClick = { navController.popBackStack() },
         )
     }
     composable(

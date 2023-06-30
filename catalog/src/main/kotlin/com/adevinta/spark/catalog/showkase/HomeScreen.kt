@@ -43,9 +43,11 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.R
 import com.adevinta.spark.components.card.OutlinedCard
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
@@ -108,13 +110,11 @@ private fun HomeScreen(
                     style = SparkTheme.typography.headline1,
                 )
                 Text(
-                    text = "⚠️ Theming don't work on these!",
+                    text = stringResource(R.string.showkase_home_warning_title),
                     style = SparkTheme.typography.subhead,
                 )
                 Text(
-                    text = "These are the previews that the developers have when working on components. " +
-                        "They are not exhaustive and are only meant to give you a quick idea of what the " +
-                        "component looks like.",
+                    text = stringResource(R.string.showkase_home_warning_description),
                     style = SparkTheme.typography.body2,
                 )
             }

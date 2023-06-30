@@ -33,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.examples.model.Example
+import com.adevinta.spark.tokens.Layout
 
 @Composable
 public fun Example(
@@ -44,7 +45,7 @@ public fun Example(
             .fillMaxSize()
             .consumeWindowInsets(WindowInsets.safeDrawing)
             .padding(contentPadding)
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = Layout.bodyMargin),
         contentAlignment = Alignment.Center,
     ) {
         example.content()

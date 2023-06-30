@@ -56,6 +56,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -202,9 +203,7 @@ internal fun CatalogApp(
                                         contentAlignment = Alignment.TopCenter,
                                     ) {
                                         Text(
-                                            text = "The configurator will come in the future, it'll allow you to " +
-                                                "display a component and set the properties that a " +
-                                                "developer use to se how the component behave",
+                                            text = stringResource(R.string.configurator_wip_text),
                                             modifier = Modifier
                                                 .padding(horizontal = 16.dp, vertical = 32.dp)
                                                 .padding(innerPadding),

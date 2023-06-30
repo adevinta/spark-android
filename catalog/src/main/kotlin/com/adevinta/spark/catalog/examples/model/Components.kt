@@ -21,6 +21,8 @@
  */
 package com.adevinta.spark.catalog.examples.model
 
+import androidx.annotation.StringRes
+import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
 import com.adevinta.spark.catalog.util.PackageSummaryUrl
@@ -29,7 +31,8 @@ import com.adevinta.spark.catalog.util.SparkSourceUrl
 public data class Component(
     val id: Int,
     val name: String,
-    val description: String,
+    @StringRes
+    val description: Int,
     val tintIcon: Boolean = true,
     val guidelinesUrl: String,
     val docsUrl: String,
@@ -43,8 +46,7 @@ private fun nextId(): Int = nextId.also { nextId += 1 }
 private val Buttons = Component(
     id = nextId(),
     name = "Buttons",
-    description = "Buttons help people initiate actions, from sending an email, to sharing a " +
-        "document, to liking a post.",
+    description = R.string.examples_component_button_description,
     // No buttons icon
     guidelinesUrl = "$ComponentGuidelinesUrl/buttons",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.buttons/-button-filled.html",
