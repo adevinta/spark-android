@@ -90,7 +90,7 @@ import kotlinx.coroutines.launch
 internal fun SparkTabGroup(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
-    spacedEvenly: Boolean = false,
+    spacedEvenly: Boolean = true,
     selectedContentColor: TabSelectedContentColor = TabSelectedContentColor.Primary,
     indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = @Composable { tabPositions ->
         TabGroupDefaults.Indicator(
@@ -133,10 +133,14 @@ internal fun SparkTabGroup(
             }
             val tabCount = tabMeasurables.size
             val tabWidth = (tabRowWidth / tabCount)
-            val tabConstraints = constraints.copy(minWidth = minTabWidth, minHeight = layoutHeight)
+            val tabConstraints = constraints.copy(
+                minWidth = minTabWidth,
+                minHeight = layoutHeight,
+                maxHeight = constraints.maxHeight.coerceAtLeast(layoutHeight),
+            )
 
             var tabWidthList = tabMeasurables.map{
-                maxOf(minTabWidth, it.maxIntrinsicWidth(Constraints.Infinity))
+                it.maxIntrinsicWidth(Constraints.Infinity).coerceAtLeast(minTabWidth)
             }
             val layoutWidth = tabWidthList.sum()
 
