@@ -42,61 +42,49 @@ import com.adevinta.spark.SparkTheme
 internal fun sparkOutlinedTextFieldColors(
     textColor: Color = SparkTheme.colors.onSurface,
     disabledTextColor: Color = textColor.copy(DisabledOpacity),
-    containerColor: Color = Color.Transparent,
+    containerColor: Color = SparkTheme.colors.surface,
     cursorColor: Color = SparkTheme.colors.onSurface,
-    errorCursorColor: Color = SparkTheme.colors.error,
     selectionColors: TextSelectionColors = LocalTextSelectionColors.current,
     focusedBorderColor: Color = SparkTheme.colors.onSurface,
-    unfocusedBorderColor: Color = SparkTheme.colors.neutral,
-    errorBorderColor: Color = SparkTheme.colors.error,
-    disabledBorderColor: Color = unfocusedBorderColor.copy(DisabledOpacity),
+    unfocusedBorderColor: Color = SparkTheme.colors.outline,
+    disabledBorderColor: Color = focusedBorderColor.copy(DisabledOpacity),
     focusedLeadingIconColor: Color = SparkTheme.colors.onSurface,
-    unfocusedLeadingIconColor: Color = SparkTheme.colors.neutral,
+    unfocusedLeadingIconColor: Color = focusedLeadingIconColor.copy(alpha = SparkTheme.colors.dim2),
     disabledLeadingIconColor: Color = focusedLeadingIconColor.copy(DisabledOpacity),
-    errorLeadingIconColor: Color = SparkTheme.colors.error,
     focusedTrailingIconColor: Color = SparkTheme.colors.onSurface,
-    unfocusedTrailingIconColor: Color = SparkTheme.colors.neutral,
+    unfocusedTrailingIconColor: Color = focusedTrailingIconColor.copy(alpha = SparkTheme.colors.dim2),
     disabledTrailingIconColor: Color = focusedTrailingIconColor.copy(DisabledOpacity),
-    errorTrailingIconColor: Color = SparkTheme.colors.error,
     focusedLabelColor: Color = SparkTheme.colors.onSurface,
-    unfocusedLabelColor: Color = SparkTheme.colors.neutral,
+    unfocusedLabelColor: Color = focusedLabelColor.copy(alpha = SparkTheme.colors.dim1),
     disabledLabelColor: Color = focusedLabelColor.copy(DisabledOpacity),
-    errorLabelColor: Color = SparkTheme.colors.error,
     placeholderColor: Color = SparkTheme.colors.neutral,
     disabledPlaceholderColor: Color = SparkTheme.colors.onSurface.copy(DisabledOpacity),
-    focusedSupportingTextColor: Color = SparkTheme.colors.neutral,
-    unfocusedSupportingTextColor: Color = SparkTheme.colors.neutral,
-    disabledSupportingTextColor: Color = SparkTheme.colors.onSurface.copy(DisabledOpacity),
-    errorSupportingTextColor: Color = SparkTheme.colors.error,
+    focusedSupportingTextColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim1),
+    unfocusedSupportingTextColor: Color = focusedSupportingTextColor,
+    disabledSupportingTextColor: Color = focusedSupportingTextColor,
 ): DefaultSparkTextFieldColors = DefaultSparkTextFieldColors(
     textColor = textColor,
     disabledTextColor = disabledTextColor,
+    containerColor = containerColor,
     cursorColor = cursorColor,
-    errorCursorColor = errorCursorColor,
     textSelectionColors = selectionColors,
     focusedIndicatorColor = focusedBorderColor,
     unfocusedIndicatorColor = unfocusedBorderColor,
-    errorIndicatorColor = errorBorderColor,
     disabledIndicatorColor = disabledBorderColor,
     focusedLeadingIconColor = focusedLeadingIconColor,
     unfocusedLeadingIconColor = unfocusedLeadingIconColor,
     disabledLeadingIconColor = disabledLeadingIconColor,
-    errorLeadingIconColor = errorLeadingIconColor,
     focusedTrailingIconColor = focusedTrailingIconColor,
     unfocusedTrailingIconColor = unfocusedTrailingIconColor,
     disabledTrailingIconColor = disabledTrailingIconColor,
-    errorTrailingIconColor = errorTrailingIconColor,
-    containerColor = containerColor,
     focusedLabelColor = focusedLabelColor,
     unfocusedLabelColor = unfocusedLabelColor,
     disabledLabelColor = disabledLabelColor,
-    errorLabelColor = errorLabelColor,
     placeholderColor = placeholderColor,
     disabledPlaceholderColor = disabledPlaceholderColor,
     focusedSupportingTextColor = focusedSupportingTextColor,
     unfocusedSupportingTextColor = unfocusedSupportingTextColor,
     disabledSupportingTextColor = disabledSupportingTextColor,
-    errorSupportingTextColor = errorSupportingTextColor,
 )
 
 /**
@@ -113,30 +101,24 @@ internal data class DefaultSparkTextFieldColors(
     private val disabledTextColor: Color,
     private val containerColor: Color,
     private val cursorColor: Color,
-    private val errorCursorColor: Color,
     private val textSelectionColors: TextSelectionColors,
     private val focusedIndicatorColor: Color,
     private val unfocusedIndicatorColor: Color,
-    private val errorIndicatorColor: Color,
     private val disabledIndicatorColor: Color,
     private val focusedLeadingIconColor: Color,
     private val unfocusedLeadingIconColor: Color,
     private val disabledLeadingIconColor: Color,
-    private val errorLeadingIconColor: Color,
     private val focusedTrailingIconColor: Color,
     private val unfocusedTrailingIconColor: Color,
     private val disabledTrailingIconColor: Color,
-    private val errorTrailingIconColor: Color,
     private val focusedLabelColor: Color,
     private val unfocusedLabelColor: Color,
     private val disabledLabelColor: Color,
-    private val errorLabelColor: Color,
     private val placeholderColor: Color,
     private val disabledPlaceholderColor: Color,
     private val focusedSupportingTextColor: Color,
     private val unfocusedSupportingTextColor: Color,
     private val disabledSupportingTextColor: Color,
-    private val errorSupportingTextColor: Color,
 ) {
     /**
      * Represents the color used for the leading icon of this text field.
@@ -149,7 +131,7 @@ internal data class DefaultSparkTextFieldColors(
     @Composable
     internal fun leadingIconColor(
         enabled: Boolean,
-        isError: Boolean,
+        state: TextFieldState?,
         interactionSource: InteractionSource,
     ): State<Color> {
         val focused by interactionSource.collectIsFocusedAsState()
@@ -157,7 +139,7 @@ internal data class DefaultSparkTextFieldColors(
         return rememberUpdatedState(
             when {
                 !enabled -> disabledLeadingIconColor
-                isError -> errorLeadingIconColor
+                state != null -> state.color()
                 focused -> focusedLeadingIconColor
                 else -> unfocusedLeadingIconColor
             },
@@ -175,7 +157,7 @@ internal data class DefaultSparkTextFieldColors(
     @Composable
     internal fun trailingIconColor(
         enabled: Boolean,
-        isError: Boolean,
+        state: TextFieldState?,
         interactionSource: InteractionSource,
     ): State<Color> {
         val focused by interactionSource.collectIsFocusedAsState()
@@ -183,7 +165,7 @@ internal data class DefaultSparkTextFieldColors(
         return rememberUpdatedState(
             when {
                 !enabled -> disabledTrailingIconColor
-                isError -> errorTrailingIconColor
+                state != null -> state.color()
                 focused -> focusedTrailingIconColor
                 else -> unfocusedTrailingIconColor
             },
@@ -201,14 +183,14 @@ internal data class DefaultSparkTextFieldColors(
     @Composable
     internal fun indicatorColor(
         enabled: Boolean,
-        isError: Boolean,
+        state: TextFieldState?,
         interactionSource: InteractionSource,
     ): State<Color> {
         val focused by interactionSource.collectIsFocusedAsState()
 
         val targetValue = when {
             !enabled -> disabledIndicatorColor
-            isError -> errorIndicatorColor
+            state != null -> state.color()
             focused -> focusedIndicatorColor
             else -> unfocusedIndicatorColor
         }
@@ -248,14 +230,14 @@ internal data class DefaultSparkTextFieldColors(
     @Composable
     internal fun labelColor(
         enabled: Boolean,
-        isError: Boolean,
+        state: TextFieldState?,
         interactionSource: InteractionSource,
     ): State<Color> {
         val focused by interactionSource.collectIsFocusedAsState()
 
         val targetValue = when {
             !enabled -> disabledLabelColor
-            isError -> errorLabelColor
+            state != null -> state.color()
             focused -> focusedLabelColor
             else -> unfocusedLabelColor
         }
@@ -270,7 +252,7 @@ internal data class DefaultSparkTextFieldColors(
     @Composable
     internal fun supportingTextColor(
         enabled: Boolean,
-        isError: Boolean,
+        state: TextFieldState?,
         interactionSource: InteractionSource,
     ): State<Color> {
         val focused by interactionSource.collectIsFocusedAsState()
@@ -278,7 +260,7 @@ internal data class DefaultSparkTextFieldColors(
         return rememberUpdatedState(
             when {
                 !enabled -> disabledSupportingTextColor
-                isError -> errorSupportingTextColor
+                state != null -> state.color()
                 focused -> focusedSupportingTextColor
                 else -> unfocusedSupportingTextColor
             },
@@ -291,8 +273,8 @@ internal data class DefaultSparkTextFieldColors(
      * @param isError whether the text field's current value is in error
      */
     @Composable
-    internal fun cursorColor(isError: Boolean): State<Color> {
-        return rememberUpdatedState(if (isError) errorCursorColor else cursorColor)
+    internal fun cursorColor(state: TextFieldState?): State<Color> {
+        return rememberUpdatedState(state?.color() ?: cursorColor)
     }
 
     /**
@@ -308,66 +290,54 @@ internal data class DefaultSparkTextFieldColors(
         if (textColor != other.textColor) return false
         if (disabledTextColor != other.disabledTextColor) return false
         if (cursorColor != other.cursorColor) return false
-        if (errorCursorColor != other.errorCursorColor) return false
         if (textSelectionColors != other.textSelectionColors) return false
         if (focusedIndicatorColor != other.focusedIndicatorColor) return false
         if (unfocusedIndicatorColor != other.unfocusedIndicatorColor) return false
-        if (errorIndicatorColor != other.errorIndicatorColor) return false
         if (disabledIndicatorColor != other.disabledIndicatorColor) return false
         if (focusedLeadingIconColor != other.focusedLeadingIconColor) return false
         if (unfocusedLeadingIconColor != other.unfocusedLeadingIconColor) return false
         if (disabledLeadingIconColor != other.disabledLeadingIconColor) return false
-        if (errorLeadingIconColor != other.errorLeadingIconColor) return false
         if (focusedTrailingIconColor != other.focusedTrailingIconColor) return false
         if (unfocusedTrailingIconColor != other.unfocusedTrailingIconColor) return false
         if (disabledTrailingIconColor != other.disabledTrailingIconColor) return false
-        if (errorTrailingIconColor != other.errorTrailingIconColor) return false
         if (containerColor != other.containerColor) return false
         if (focusedLabelColor != other.focusedLabelColor) return false
         if (unfocusedLabelColor != other.unfocusedLabelColor) return false
         if (disabledLabelColor != other.disabledLabelColor) return false
-        if (errorLabelColor != other.errorLabelColor) return false
         if (placeholderColor != other.placeholderColor) return false
         if (disabledPlaceholderColor != other.disabledPlaceholderColor) return false
         if (focusedSupportingTextColor != other.focusedSupportingTextColor) return false
         if (unfocusedSupportingTextColor != other.unfocusedSupportingTextColor) return false
-        if (disabledSupportingTextColor != other.disabledSupportingTextColor) return false
-        if (errorSupportingTextColor != other.errorSupportingTextColor) return false
-
-        return true
+        return disabledSupportingTextColor == other.disabledSupportingTextColor
     }
 
     override fun hashCode(): Int {
         var result = textColor.hashCode()
         result = 31 * result + disabledTextColor.hashCode()
         result = 31 * result + cursorColor.hashCode()
-        result = 31 * result + errorCursorColor.hashCode()
         result = 31 * result + textSelectionColors.hashCode()
         result = 31 * result + focusedIndicatorColor.hashCode()
         result = 31 * result + unfocusedIndicatorColor.hashCode()
-        result = 31 * result + errorIndicatorColor.hashCode()
         result = 31 * result + disabledIndicatorColor.hashCode()
         result = 31 * result + focusedLeadingIconColor.hashCode()
         result = 31 * result + unfocusedLeadingIconColor.hashCode()
         result = 31 * result + disabledLeadingIconColor.hashCode()
-        result = 31 * result + errorLeadingIconColor.hashCode()
         result = 31 * result + focusedTrailingIconColor.hashCode()
         result = 31 * result + unfocusedTrailingIconColor.hashCode()
         result = 31 * result + disabledTrailingIconColor.hashCode()
-        result = 31 * result + errorTrailingIconColor.hashCode()
         result = 31 * result + containerColor.hashCode()
         result = 31 * result + focusedLabelColor.hashCode()
         result = 31 * result + unfocusedLabelColor.hashCode()
         result = 31 * result + disabledLabelColor.hashCode()
-        result = 31 * result + errorLabelColor.hashCode()
         result = 31 * result + placeholderColor.hashCode()
         result = 31 * result + disabledPlaceholderColor.hashCode()
         result = 31 * result + focusedSupportingTextColor.hashCode()
         result = 31 * result + unfocusedSupportingTextColor.hashCode()
         result = 31 * result + disabledSupportingTextColor.hashCode()
-        result = 31 * result + errorSupportingTextColor.hashCode()
         return result
     }
 }
 
-private const val DisabledOpacity = 0.38f
+private val DisabledOpacity: Float
+    @Composable
+    get() = SparkTheme.colors.dim3

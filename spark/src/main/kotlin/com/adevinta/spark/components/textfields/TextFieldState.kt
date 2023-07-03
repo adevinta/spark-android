@@ -19,13 +19,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.icons
+package com.adevinta.spark.components.textfields
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import com.adevinta.spark.SparkTheme
 
-import androidx.compose.runtime.Stable
-import androidx.compose.ui.graphics.vector.ImageVector
+/**
+ *   State of a [TextField] that's used to change the highlight color to either [Success], [Alert] or [Error].
+ */
+public enum class TextFieldState {
+    /**
+     * Used for feedbacks that are positive.
+     */
+    Success {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.success
+    },
 
-@Stable
-public sealed class SparkIcon {
-    public data class DrawableRes(@androidx.annotation.DrawableRes val drawableId: Int) : SparkIcon()
-    public data class Vector(val imageVector: ImageVector) : SparkIcon()
+    /**
+     * Used for feedbacks that are negative.
+     */
+    Alert {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.alert
+    },
+
+    /**
+     * Used for feedbacks that are negative and dangerous. (required field not filled or a wrong input)
+     */
+    Error {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.error
+    },
+    ;
+
+    @Composable
+    internal abstract fun color(): Color
 }

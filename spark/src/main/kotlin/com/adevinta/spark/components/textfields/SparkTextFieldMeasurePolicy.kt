@@ -404,21 +404,27 @@ private fun Placeable.PlacementScope.place(
     val topPadding = (paddingValues.calculateTopPadding().value * density).roundToInt()
     val startPadding =
         (paddingValues.calculateStartPadding(layoutDirection).value * density).roundToInt()
-    val endPadding =
-        (paddingValues.calculateEndPadding(layoutDirection).value * density).roundToInt()
 
     val iconPadding = HorizontalIconPadding.value * density
 
     // placed center vertically and to the start edge horizontally
     leadingPlaceable?.placeRelative(
         0,
-        Alignment.CenterVertically.align(leadingPlaceable.height, height),
+        if (singleLine) {
+            Alignment.CenterVertically.align(leadingPlaceable.height, height)
+        } else {
+            topPadding
+        },
     )
 
     // placed center vertically and to the end edge horizontally
     trailingPlaceable?.placeRelative(
         width - trailingPlaceable.width,
-        Alignment.CenterVertically.align(trailingPlaceable.height, height),
+        if (singleLine) {
+            Alignment.CenterVertically.align(trailingPlaceable.height, height)
+        } else {
+            topPadding
+        },
     )
 
     // label position is animated
@@ -464,11 +470,11 @@ private fun Placeable.PlacementScope.place(
     }
 
     supportingPlaceable?.placeRelative(
-        x = startPadding,
+        x = 0,
         y = height,
     )
     counterPlaceable?.placeRelative(
-        x = width - counterPlaceable.width - endPadding,
+        x = width - counterPlaceable.width,
         y = height,
     )
 }

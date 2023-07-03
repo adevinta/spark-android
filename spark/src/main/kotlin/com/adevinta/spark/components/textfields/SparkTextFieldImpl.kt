@@ -67,7 +67,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.lerp
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 
@@ -90,14 +89,17 @@ internal fun SparkDecorationBox(
     trailingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean = false,
     enabled: Boolean = true,
-    isError: Boolean = false,
+    state: TextFieldState? = null,
     border: @Composable (() -> Unit)? = null,
 ) {
     val transformedText = remember(value, visualTransformation) {
         visualTransformation.filter(AnnotatedString(value))
     }.text.text
 
-    val contentPadding = TextFieldDefaults.outlinedTextFieldPadding()
+    val contentPadding = TextFieldDefaults.outlinedTextFieldPadding(
+        top = VerticalContentPadding,
+        bottom = VerticalContentPadding,
+    )
 
     val isFocused = interactionSource.collectIsFocusedAsState().value
     val inputState = when {
@@ -107,19 +109,19 @@ internal fun SparkDecorationBox(
     }
 
     val labelColor: @Composable (InputPhase) -> Color = {
-        colors.labelColor(enabled, isError, interactionSource).value
+        colors.labelColor(enabled, state, interactionSource).value
     }
 
     val typography = SparkTheme.typography
     val bodyLarge = typography.body1
-    val bodySmall = typography.caption
+    val bodySmall = typography.body2
     val shouldOverrideTextStyleColor =
         (bodyLarge.color == Color.Unspecified && bodySmall.color != Color.Unspecified) ||
             (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
 
     TextFieldTransitionScope.Transition(
         inputState = inputState,
-        focusedTextStyleColor = with(SparkTheme.typography.caption.color) {
+        focusedTextStyleColor = with(SparkTheme.typography.body2.color) {
             if (shouldOverrideTextStyleColor) this.takeOrElse { labelColor(inputState) } else this
         },
         unfocusedTextStyleColor = with(SparkTheme.typography.body1.color) {
@@ -133,7 +135,7 @@ internal fun SparkDecorationBox(
             @Composable {
                 val labelTextStyle = lerp(
                     SparkTheme.typography.body1,
-                    SparkTheme.typography.caption,
+                    SparkTheme.typography.body2,
                     labelProgress,
                 ).let {
                     if (shouldOverrideTextStyleColor) it.copy(color = labelTextStyleColor) else it
@@ -163,7 +165,7 @@ internal fun SparkDecorationBox(
                     Decoration(
                         contentColor = colors.supportingTextColor(
                             enabled = enabled,
-                            isError = isError,
+                            state = state,
                             interactionSource = interactionSource,
                         ).value,
                         typography = SparkTheme.typography.caption,
@@ -179,14 +181,14 @@ internal fun SparkDecorationBox(
         // TODO-@soulcramer (01-30-2023): We should provide a semantic which tell the user the error state
         val decorationBoxModifier = Modifier
 
-        val leadingIconColor = colors.leadingIconColor(enabled, isError, interactionSource).value
+        val leadingIconColor = colors.leadingIconColor(enabled, state, interactionSource).value
         val decoratedLeading: @Composable (() -> Unit)? = leadingIcon?.let {
             @Composable {
                 Decoration(contentColor = leadingIconColor, content = it)
             }
         }
 
-        val trailingIconColor = colors.trailingIconColor(enabled, isError, interactionSource).value
+        val trailingIconColor = colors.trailingIconColor(enabled, state, interactionSource).value
         val decoratedTrailing: @Composable (() -> Unit)? = trailingIcon?.let {
             @Composable {
                 Decoration(contentColor = trailingIconColor, content = it)
@@ -207,12 +209,12 @@ internal fun SparkDecorationBox(
         }
 
         val supportingTextColor =
-            colors.supportingTextColor(enabled, isError, interactionSource).value
+            colors.supportingTextColor(enabled, state, interactionSource).value
         val decoratedSupporting: @Composable (() -> Unit)? = supportingText?.let {
             @Composable {
                 Decoration(
                     contentColor = supportingTextColor,
-                    typography = bodySmall,
+                    typography = SparkTheme.typography.caption,
                     content = it,
                 )
             }
@@ -305,7 +307,8 @@ internal fun SparkTextFieldLayout(
                 Box(
                     modifier = Modifier
                         .layoutId(LeadingId)
-                        .then(IconDefaultSizeModifier),
+                        .then(IconDefaultSizeModifier)
+                        .padding(start = 16.dp),
                     contentAlignment = Alignment.Center,
                 ) {
                     leading()
@@ -315,7 +318,8 @@ internal fun SparkTextFieldLayout(
                 Box(
                     modifier = Modifier
                         .layoutId(TrailingId)
-                        .then(IconDefaultSizeModifier),
+                        .then(IconDefaultSizeModifier)
+                        .padding(end = 16.dp),
                     contentAlignment = Alignment.Center,
                 ) {
                     trailing()
@@ -325,18 +329,8 @@ internal fun SparkTextFieldLayout(
             val startTextFieldPadding = paddingValues.calculateStartPadding(layoutDirection)
             val endTextFieldPadding = paddingValues.calculateEndPadding(layoutDirection)
             val padding = Modifier.padding(
-                start = if (leading != null) {
-                    (startTextFieldPadding - HorizontalIconPadding).coerceAtLeast(
-                        0.dp,
-                    )
-                } else {
-                    startTextFieldPadding
-                },
-                end = if (trailing != null) {
-                    (endTextFieldPadding - HorizontalIconPadding).coerceAtLeast(0.dp)
-                } else {
-                    endTextFieldPadding
-                },
+                start = startTextFieldPadding,
+                end = endTextFieldPadding,
             )
             if (placeholder != null) {
                 placeholder(
@@ -524,11 +518,11 @@ internal const val AnimationDuration = 150
 private const val PlaceholderAnimationDuration = 83
 private const val PlaceholderAnimationDelayOrDuration = 67
 
-internal val TextFieldPadding = 16.dp
 internal val CounterPadding = 8.dp
-internal val HorizontalIconPadding = 12.dp
+internal val HorizontalIconPadding = 8.dp
+internal val VerticalContentPadding = 12.dp
 
-internal val IconDefaultSizeModifier = Modifier.defaultMinSize(48.dp, 48.dp)
+internal val IconDefaultSizeModifier = Modifier.defaultMinSize(24.dp, 24.dp)
 
 private val OutlinedTextFieldInnerPadding = 4.dp
 
