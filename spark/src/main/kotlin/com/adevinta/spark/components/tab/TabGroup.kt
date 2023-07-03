@@ -110,16 +110,22 @@ internal fun SparkTabGroup(
             val tabWidth = (tabRowWidth / tabCount)
             val tabConstraints = constraints.copy(minWidth = minTabWidth, minHeight = layoutHeight)
 
-            val layoutWidth = tabMeasurables.fold(initial = 0) { curr, measurable ->
-                curr + maxOf(minTabWidth, measurable.maxIntrinsicWidth(Constraints.Infinity))
+            var tabWidthList = tabMeasurables.map{
+                maxOf(minTabWidth, it.maxIntrinsicWidth(Constraints.Infinity))
             }
+            val layoutWidth = tabWidthList.sum()
 
             val scrollable = !(justified && tabRowWidth >= layoutWidth)
-            val tabPlaceables = tabMeasurables.map {
-                it.measure(
+            if (scrollable.not()) {
+                val oversizedTabs = tabWidthList.filter { it > tabWidth }
+                val maxEqualTabWidth = (tabRowWidth - oversizedTabs.sum()) / (tabCount - oversizedTabs.size)
+                tabWidthList = tabWidthList.map { maxOf(maxEqualTabWidth, it) }
+            }
+            val tabPlaceables = tabMeasurables.mapIndexed { i, tab ->
+                tab.measure(
                     if (scrollable) tabConstraints else tabConstraints.copy(
-                        minWidth = tabWidth,
-                        maxWidth = tabWidth,
+                        minWidth = tabWidthList[i],
+                        maxWidth = tabWidthList[i],
                     ),
                 )
             }
