@@ -29,6 +29,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.Tab
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -60,12 +62,35 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+/**
+ * Spark tabs.
+ *
+ * A TabGroup contains a row of [Tab]s, and displays an indicator underneath the currently
+ * selected tab. Depending on the available place and @param [spacedEvenly] a TabGroup
+ * places its tabs evenly spaced along the entire row, with each tab
+ * taking up an equal amount of space unless content cannot be fully displayed.
+ * In this case the each larger tab is attributed a needed space and the rest is distributed evenly among smaller tabs.
+ * if there is not enough screen space to display all content @param [spacedEvenly] is ignored and
+ * TabGroup does not enforce equal size, and allows scrolling to tabs that do not fit on screen.
+ * Each tab takes the needed space ensuring the minimum tab size constraint is met.
+ *
+ * @param selectedTabIndex the index of the currently selected tab
+ * @param modifier the [Modifier] to be applied to this tab row
+ * @param spacedEvenly determines whether the[tabs] should be measured and placed evenly across the group,
+ * each taking up equal space if enough space is available.
+ * @param selectedContentColor one of [TabSelectedContentColor] to be applied to the selected tab
+ * @param indicator to placed under the selected tab
+ * @param divider the divider displayed at the bottom of the tab row.
+ * This provides a layer of separation between the tab row and the content displayed underneath.
+ * @param tabs the tabs inside this tab group. Typically this will be multiple [Tab]s. Each element
+ * inside this lambda will be measured and placed evenly across the row, each taking up equal space.
+ */
 @InternalSparkApi
 @Composable
 internal fun SparkTabGroup(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
-    justified: Boolean = true,
+    spacedEvenly: Boolean = false,
     selectedContentColor: TabSelectedContentColor = TabSelectedContentColor.Primary,
     indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = @Composable { tabPositions ->
         TabGroupDefaults.Indicator(
@@ -73,7 +98,7 @@ internal fun SparkTabGroup(
             color = selectedContentColor.color(),
         )
     },
-    spaceEvenly: @Composable () -> Unit = @Composable {
+    divider: @Composable () -> Unit = @Composable {
         SparkDivider()
     },
     tabs: @Composable () -> Unit,
@@ -115,7 +140,7 @@ internal fun SparkTabGroup(
             }
             val layoutWidth = tabWidthList.sum()
 
-            val scrollable = !(justified && tabRowWidth >= layoutWidth)
+            val scrollable = !(spacedEvenly && tabRowWidth >= layoutWidth)
             if (scrollable.not()) {
                 val oversizedTabs = tabWidthList.filter { it > tabWidth }
                 val maxEqualTabWidth = (tabRowWidth - oversizedTabs.sum()) / (tabCount - oversizedTabs.size)
@@ -140,7 +165,7 @@ internal fun SparkTabGroup(
                     left += it.width
                 }
                 /* Divider */
-                subcompose(TabSlots.Divider, spaceEvenly).forEach {
+                subcompose(TabSlots.Divider, divider).forEach {
                     val placeable = it.measure(
                         constraints.copy(
                             minHeight = 0,
@@ -268,6 +293,43 @@ internal class TabPosition internal constructor(val left: Dp, val width: Dp) {
     }
 }
 
+/**
+ * Spark tabs.
+ *
+ * A TabGroup contains a row of [Tab]s, and displays an indicator underneath the currently
+ * selected tab. Depending on the available place and @param [spacedEvenly] a TabGroup
+ * places its tabs evenly spaced along the entire row, with each tab
+ * taking up an equal amount of space unless content cannot be fully displayed.
+ * In this case the each larger tab is attributed a needed space and the rest is distributed evenly among smaller tabs.
+ * if there is not enough screen space to display all content @param [spacedEvenly] is ignored and
+ * TabGroup does not enforce equal size, and allows scrolling to tabs that do not fit on screen.
+ * Each tab takes the needed space ensuring the minimum tab size constraint is met.
+ *
+ * @param selectedTabIndex the index of the currently selected tab
+ * @param modifier the [Modifier] to be applied to this tab row
+ * @param spacedEvenly determines whether the[tabs] should be measured and placed evenly across the group,
+ * each taking up equal space if enough space is available.
+ * @param selectedContentColor one of [TabSelectedContentColor] to be applied to the selected tab
+ * This provides a layer of separation between the tab row and the content displayed underneath.
+ * @param tabs the tabs inside this tab group. Typically this will be multiple [Tab]s. Each element
+ * inside this lambda will be measured and placed evenly across the row, each taking up equal space.
+ */
+@Composable
+public fun TabGroup(
+    modifier: Modifier = Modifier,
+    spacedEvenly: Boolean = false,
+    selectedTabIndex: Int = 0,
+    selectedContentColor: TabSelectedContentColor = TabSelectedContentColor.Primary,
+    tabs: @Composable () -> Unit,
+) {
+    SparkTabGroup(
+        selectedTabIndex = selectedTabIndex,
+        modifier = modifier,
+        spacedEvenly = spacedEvenly,
+        selectedContentColor = selectedContentColor,
+        tabs = tabs,
+    )
+}
 
 @Preview(
     group = "Tabs",
@@ -285,7 +347,7 @@ internal fun TabGroupPreview(
     )
     var selectedIndex by remember { mutableStateOf(0) }
     PreviewTheme(theme) {
-        TabStyle.values().forEach { tabStyle ->
+        TabGroupSize.values().forEach { tabStyle ->
             TabSelectedContentColor.values().forEach { color ->
                 SparkTabGroup(
                     selectedTabIndex = selectedIndex,
@@ -305,7 +367,7 @@ internal fun TabGroupPreview(
                                     Badge(count = unread)
                                 } else Unit
                             },
-                        )
+                            contentDescription = if (tab.first == null) "icon content description" else null)
                     }
                 }
             }
@@ -327,7 +389,7 @@ internal fun TabGroupFixedSizePreview(
     )
     var selectedIndex by remember { mutableStateOf(0) }
     PreviewTheme(theme) {
-        TabStyle.values().forEach { tabStyle ->
+        TabGroupSize.values().forEach { tabStyle ->
             TabSelectedContentColor.values().forEach { color ->
                 SparkTabGroup(
                     selectedTabIndex = selectedIndex,

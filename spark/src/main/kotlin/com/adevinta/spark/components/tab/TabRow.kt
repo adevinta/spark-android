@@ -88,6 +88,13 @@ internal fun SparkTabRow(
  */
 @ExperimentalSparkApi
 @Composable
+@Deprecated(
+    message = "This component is no longer compliant with Spark specs",
+    replaceWith = ReplaceWith(
+        expression = "TabGroup(tabs)",
+        imports = ["com.adevinta.spark.components.tab"],
+    ),
+)
 public fun TabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
@@ -133,7 +140,13 @@ public fun TabRow(
  */
 @ExperimentalSparkApi
 @Composable
-// TODO deprecated
+@Deprecated(
+    message = "This component is no longer compliant with Spark specs",
+    replaceWith = ReplaceWith(
+        expression = "TabGroup(tabs)",
+        imports = ["com.adevinta.spark.components.tab"],
+    ),
+)
 public fun ScrollableTabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
