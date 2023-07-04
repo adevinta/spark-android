@@ -48,12 +48,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
+import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.slider.Slider
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.toggles.RadioButtonLabelled
 import com.adevinta.spark.components.toggles.SwitchLabelled
+import com.adevinta.spark.icons.Check
+import com.adevinta.spark.icons.SparkIcons
 
 @Composable
 public fun ThemePicker(
@@ -114,12 +117,14 @@ public fun ThemePicker(
                 )
                 AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
                     var expanded by remember { mutableStateOf(false) }
+                    val selectedIcon = @Composable { Icon(SparkIcons.Check, contentDescription = null) }
                     SelectTextField(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(ThemePickerPadding),
                         value = theme.brandMode.name,
                         label = stringResource(id = R.string.brand),
+                        readOnly = true,
                         onValueChange = { onThemeChange(theme.copy(brandMode = BrandMode.valueOf(it))) },
                         onDismissRequest = {
                             expanded = false
@@ -134,6 +139,7 @@ public fun ThemePicker(
                                 text = {
                                     Text(text = brand.name)
                                 },
+                                trailingIcon = if(brand == theme.brandMode) selectedIcon else null,
                                 onClick = {
                                     onThemeChange(theme.copy(brandMode = brand))
                                     expanded = false
