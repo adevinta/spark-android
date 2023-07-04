@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.textfields
 
 import androidx.compose.runtime.Composable
@@ -32,7 +31,6 @@ import com.adevinta.spark.icons.EyeOffFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.sparkSnapshot
-import com.adevinta.spark.tools.preview.ThemeVariant
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.internal.R.attr.theme
 import org.junit.Rule
@@ -64,15 +62,14 @@ internal class TextFieldScreenshot(
     @Test
     fun TextFieldTest() {
         paparazzi.sparkSnapshot(
-            name = "_leadingIcon[${leadingIcon!=null}]" +
-                    "_trailingIcon[${trailingIcon!=null}]" +
-                    "_value[${value?.count()}]" +
-                    "_state[${state?.name ?: "basic"}]" +
-                    "_required[${required}]" +
-                    "_enabled[${enabled}]" +
-                    "_readOnly[${readOnly}]" +
-                    "_helper[${helper?.count()}]"
-            ,
+            name = "_leadingIcon[${leadingIcon != null}]" +
+                "_trailingIcon[${trailingIcon != null}]" +
+                "_value[${value?.count()}]" +
+                "_state[${state?.name ?: "basic"}]" +
+                "_required[$required]" +
+                "_enabled[$enabled]" +
+                "_readOnly[$readOnly]" +
+                "_helper[${helper?.count()}]",
         ) {
             val leadingContent: (@Composable () -> Unit)? = leadingIcon?.let {
                 @Composable {
@@ -144,7 +141,7 @@ internal class TextFieldScreenshot(
 
         private const val stubShortBody = "Lorem ipsum"
         private const val stubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
-                "pulvinar eu nulla sit amet, iaculis interdum."
+            "pulvinar eu nulla sit amet, iaculis interdum."
     }
 }
 
