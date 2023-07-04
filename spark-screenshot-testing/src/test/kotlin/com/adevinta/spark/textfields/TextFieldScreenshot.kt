@@ -32,7 +32,6 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
-import com.android.internal.R.attr.theme
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -40,14 +39,13 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class TextFieldScreenshot(
-//    private val theme: ThemeVariant,
-    private val leadingIcon: SparkIcon?,
-    private val trailingIcon: SparkIcon?,
-    private val value: String?,
     private val state: TextFieldState?,
+    private val value: String?,
+    private val required: Boolean,
+    private val trailingIcon: SparkIcon?,
+    private val leadingIcon: SparkIcon?,
     private val enabled: Boolean,
     private val readOnly: Boolean,
-    private val required: Boolean,
     private val helper: String?,
 ) {
 
@@ -62,14 +60,14 @@ internal class TextFieldScreenshot(
     @Test
     fun TextFieldTest() {
         paparazzi.sparkSnapshot(
-            name = "_leadingIcon[${leadingIcon != null}]" +
-                "_trailingIcon[${trailingIcon != null}]" +
-                "_value[${value?.count()}]" +
-                "_state[${state?.name ?: "basic"}]" +
-                "_required[$required]" +
-                "_enabled[$enabled]" +
-                "_readOnly[$readOnly]" +
-                "_helper[${helper?.count()}]",
+            name = "_state[${state?.name ?: "basic"}]" +
+                    "_value[${value?.count()}]" +
+                    "_required[$required]" +
+                    "_leadingIcon[${leadingIcon != null}]" +
+                    "_trailingIcon[${trailingIcon != null}]" +
+                    "_enabled[$enabled]" +
+                    "_readOnly[$readOnly]" +
+                    "_helper[${helper?.count()}]",
         ) {
             val leadingContent: (@Composable () -> Unit)? = leadingIcon?.let {
                 @Composable {
@@ -100,27 +98,27 @@ internal class TextFieldScreenshot(
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        internal fun params() = parameterizedParams()/*.combineWithParameters(
-            ThemeVariant.Light,
-            ThemeVariant.Dark,
-        )*/.combineWithParameters(
-            SparkIcons.Check,
+        internal fun params() = parameterizedParams().combineWithParameters(
+            // State
             null,
-        ).combineWithParameters(
-
-            SparkIcons.EyeOffFill,
-            null,
+            TextFieldState.Success,
+            TextFieldState.Alert,
+            TextFieldState.Error,
         ).combineWithParameters(
             // Value
             "",
             stubShortBody,
             stubBody,
         ).combineWithParameters(
-            // State
+            // Required
+            false,
+            true,
+        ).combineWithParameters(
+            SparkIcons.Check,
             null,
-            TextFieldState.Success,
-            TextFieldState.Alert,
-            TextFieldState.Error,
+        ).combineWithParameters(
+            SparkIcons.EyeOffFill,
+            null,
         ).combineWithParameters(
             // Enabled
             false,
@@ -130,18 +128,14 @@ internal class TextFieldScreenshot(
             false,
             true,
         ).combineWithParameters(
-            // Required
-            false,
-            true,
-        ).combineWithParameters(
-            // Value
+            // Helper
             null,
             stubBody,
         )
 
         private const val stubShortBody = "Lorem ipsum"
         private const val stubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
-            "pulvinar eu nulla sit amet, iaculis interdum."
+                "pulvinar eu nulla sit amet, iaculis interdum."
     }
 }
 
