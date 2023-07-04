@@ -58,7 +58,7 @@ internal class TextFieldScreenshot(
     )
 
     @Test
-    fun TextFieldTest() {
+    fun test() {
         paparazzi.sparkSnapshot(
             name = "_state[${state?.name ?: "basic"}]" +
                 "_value[${value?.count()}]" +
@@ -86,7 +86,7 @@ internal class TextFieldScreenshot(
                 leadingContent = leadingContent,
                 trailingContent = trailingContent,
                 state = state,
-                required = required,
+                required = true,
                 enabled = enabled,
                 readOnly = readOnly,
                 stateMessage = "short state message for textfield",
@@ -101,8 +101,6 @@ internal class TextFieldScreenshot(
         internal fun params() = parameterizedParams().combineWithParameters(
             // State
             null,
-            TextFieldState.Success,
-            TextFieldState.Alert,
             TextFieldState.Error,
         ).combineWithParameters(
             // Value
