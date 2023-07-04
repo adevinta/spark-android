@@ -61,13 +61,13 @@ internal class TextFieldScreenshot(
     fun TextFieldTest() {
         paparazzi.sparkSnapshot(
             name = "_state[${state?.name ?: "basic"}]" +
-                    "_value[${value?.count()}]" +
-                    "_required[$required]" +
-                    "_leadingIcon[${leadingIcon != null}]" +
-                    "_trailingIcon[${trailingIcon != null}]" +
-                    "_enabled[$enabled]" +
-                    "_readOnly[$readOnly]" +
-                    "_helper[${helper?.count()}]",
+                "_value[${value?.count()}]" +
+                "_required[$required]" +
+                "_leadingIcon[${leadingIcon != null}]" +
+                "_trailingIcon[${trailingIcon != null}]" +
+                "_enabled[$enabled]" +
+                "_readOnly[$readOnly]" +
+                "_helper[${helper?.count()}]",
         ) {
             val leadingContent: (@Composable () -> Unit)? = leadingIcon?.let {
                 @Composable {
@@ -135,7 +135,7 @@ internal class TextFieldScreenshot(
 
         private const val stubShortBody = "Lorem ipsum"
         private const val stubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
-                "pulvinar eu nulla sit amet, iaculis interdum."
+            "pulvinar eu nulla sit amet, iaculis interdum."
     }
 }
 
