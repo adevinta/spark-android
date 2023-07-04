@@ -19,32 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark
+package com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.get
+import androidx.compose.ui.graphics.Color
 
-internal class SparkAndroidApplicationPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            apply(plugin = "com.android.application")
-            apply(plugin = "com.adevinta.spark.android")
-
-            androidApplication {
-                defaultConfig {
-                    targetSdk = spark().versions.targetSdk.toString().toInt()
-                }
-                buildTypes {
-                    release {
-                        isMinifyEnabled = true
-                        isShrinkResources = true
-                        signingConfig = signingConfigs["debug"]
-                        proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-                    }
-                }
-            }
-        }
-    }
-}
+// region Green colors
+internal val Green10 = Color(0xFF112D00)
+internal val Green20 = Color(0xFF1D4B00)
+internal val Green30 = Color(0xFF326916)
+internal val Green40 = Color(0xFF609F28)
+internal val Green50 = Color(0xFF88CC28)
+internal val Green60 = Color(0xFFB5E941)
+internal val Green70 = Color(0xFFD3F28D)
+internal val Green80 = Color(0xFFE9F8C6)
+internal val Green90 = Color(0xFFF7FDEB)
+internal val Green95 = Color(0xFFFDEFE8)
+// endregion

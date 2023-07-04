@@ -31,11 +31,11 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,23 +44,28 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
-import com.adevinta.spark.components.divider.Divider
+import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.slider.Slider
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
-import com.adevinta.spark.components.toggles.RadioButton
 import com.adevinta.spark.components.toggles.RadioButtonLabelled
 import com.adevinta.spark.components.toggles.SwitchLabelled
+import com.adevinta.spark.icons.Check
+import com.adevinta.spark.icons.SparkIcons
 
 @Composable
 public fun ThemePicker(
+    modifier: Modifier = Modifier,
     theme: Theme,
     onThemeChange: (theme: Theme) -> Unit,
 ) {
     LazyColumn(
+        modifier = modifier,
         contentPadding = WindowInsets.safeDrawing
             .only(WindowInsetsSides.Horizontal + WindowInsetsSides.Bottom)
             .add(
@@ -73,206 +78,133 @@ public fun ThemePicker(
         verticalArrangement = Arrangement.spacedBy(ThemePickerPadding),
     ) {
         item {
-            Text(
-                text = stringResource(id = R.string.app_name),
-                style = SparkTheme.typography.body2,
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
-            )
-            // LazyVerticalGrid can't be used within LazyColumn due to nested scrolling
-            val themeModes = ThemeMode.values()
-            Column(
-                modifier = Modifier.padding(ThemePickerPadding),
-                verticalArrangement = Arrangement.spacedBy(ThemePickerPadding),
-            ) {
-                Row(horizontalArrangement = Arrangement.spacedBy(ThemePickerPadding)) {
-                    ThemeModeItem(
-                        modifier = Modifier.weight(1f),
-                        themeMode = themeModes[0],
-                        selected = themeModes[0] == theme.themeMode,
-                        onClick = { onThemeChange(theme.copy(themeMode = it)) },
-                    )
-                    ThemeModeItem(
-                        modifier = Modifier.weight(1f),
-                        themeMode = themeModes[1],
-                        selected = themeModes[1] == theme.themeMode,
-                        onClick = { onThemeChange(theme.copy(themeMode = it)) },
-                    )
-                }
-                Row {
-                    ThemeModeItem(
-                        modifier = Modifier.weight(1f),
-                        themeMode = themeModes[2],
-                        selected = themeModes[2] == theme.themeMode,
-                        onClick = { onThemeChange(theme.copy(themeMode = it)) },
-                    )
-                }
+            Column {
+                Text(
+                    text = stringResource(id = R.string.theme_picker_mode_title),
+                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
+                )
+                val themeModes = ThemeMode.values()
+                val themeModesLabel = themeModes.map { it.name }
+                SegmentedButton(
+                    options = themeModesLabel,
+                    selectedOption = theme.themeMode.name,
+                    onOptionSelect = { onThemeChange(theme.copy(themeMode = ThemeMode.valueOf(it))) },
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
+                        .height(48.dp),
+                )
             }
-            Divider(
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
-            )
         }
         item {
-            Text(
-                text = stringResource(id = R.string.color_mode),
-                style = SparkTheme.typography.body2,
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
-            )
-            // LazyVerticalGrid can't be used within LazyColumn due to nested scrolling
-            val colorModes = ColorMode.values()
-            Column(
-                modifier = Modifier.padding(ThemePickerPadding),
-                verticalArrangement = Arrangement.spacedBy(ThemePickerPadding),
-            ) {
-                Row(horizontalArrangement = Arrangement.spacedBy(ThemePickerPadding)) {
-                    ColorModeItem(
-                        modifier = Modifier.weight(1f),
-                        colorMode = colorModes[0],
-                        selected = colorModes[0] == theme.colorMode,
-                        onClick = { onThemeChange(theme.copy(colorMode = it)) },
-                    )
-                    ColorModeItem(
-                        modifier = Modifier.weight(1f),
-                        colorMode = colorModes[1],
-                        selected = colorModes[1] == theme.colorMode,
-                        onClick = { onThemeChange(theme.copy(colorMode = it)) },
-                    )
-                }
-                Row {
-                    ColorModeItem(
-                        modifier = Modifier.weight(1f),
-                        colorMode = colorModes[2],
-                        selected = colorModes[2] == theme.colorMode,
-                        onClick = { onThemeChange(theme.copy(colorMode = it)) },
-                    )
-                }
-            }
-
-            AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
-                var expanded by remember { mutableStateOf(false) }
-                SelectTextField(
+            Column {
+                Text(
+                    text = stringResource(id = R.string.theme_picker_theme_title),
+                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
+                )
+                val colorModes = ColorMode.values()
+                val colorModesLabel = colorModes.map { it.name }
+                SegmentedButton(
+                    options = colorModesLabel,
+                    selectedOption = theme.colorMode.name,
+                    onOptionSelect = { onThemeChange(theme.copy(colorMode = ColorMode.valueOf(it))) },
                     modifier = Modifier
+                        .padding(horizontal = 16.dp)
                         .fillMaxWidth()
-                        .padding(ThemePickerPadding),
-                    value = theme.brandMode.name,
-                    label = stringResource(id = R.string.brand),
-                    onValueChange = { onThemeChange(theme.copy(brandMode = BrandMode.valueOf(it))) },
-                    onDismissRequest = {
-                        expanded = false
-                    },
-                    expanded = expanded,
-                    onExpandedChange = {
-                        expanded = !expanded
-                    },
-                ) {
-                    BrandMode.values().forEach { brand ->
-                        DropdownMenuItem(
-                            text = {
-                                Text(text = brand.name)
-                            },
-                            onClick = {
-                                onThemeChange(theme.copy(brandMode = brand))
-                                expanded = false
-                            },
-                        )
+                        .height(48.dp),
+                )
+                AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
+                    var expanded by remember { mutableStateOf(false) }
+                    val selectedIcon = @Composable { Icon(SparkIcons.Check, contentDescription = null) }
+                    SelectTextField(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(ThemePickerPadding),
+                        value = theme.brandMode.name,
+                        label = stringResource(id = R.string.brand),
+                        readOnly = true,
+                        onValueChange = { onThemeChange(theme.copy(brandMode = BrandMode.valueOf(it))) },
+                        onDismissRequest = {
+                            expanded = false
+                        },
+                        expanded = expanded,
+                        onExpandedChange = {
+                            expanded = !expanded
+                        },
+                    ) {
+                        BrandMode.values().forEach { brand ->
+                            DropdownMenuItem(
+                                text = {
+                                    Text(text = brand.name)
+                                },
+                                trailingIcon = if (brand == theme.brandMode) selectedIcon else null,
+                                onClick = {
+                                    onThemeChange(theme.copy(brandMode = brand))
+                                    expanded = false
+                                },
+                            )
+                        }
+                    }
+                }
+                AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
+                    SwitchLabelled(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(ThemePickerPadding),
+                        checked = theme.userMode == UserMode.Pro,
+                        onCheckedChange = { checked ->
+                            onThemeChange(theme.copy(userMode = if (checked) UserMode.Pro else UserMode.Part))
+                        },
+                    ) {
+                        Text(text = stringResource(id = R.string.pro))
                     }
                 }
             }
-            AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
-                SwitchLabelled(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(ThemePickerPadding),
-                    checked = theme.userMode == UserMode.Pro,
-                    onCheckedChange = { checked ->
-                        onThemeChange(theme.copy(userMode = if (checked) UserMode.Pro else UserMode.Part))
-                    },
-                ) {
-                    Text(text = stringResource(id = R.string.pro))
-                }
-            }
-            Divider(
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
-            )
         }
+
         item {
-            Text(
-                text = stringResource(id = R.string.text_direction),
-                style = SparkTheme.typography.body2,
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
-            )
-            // LazyVerticalGrid can't be used within LazyColumn due to nested scrolling
-            val textDirections = TextDirection.values()
-            Column(
-                modifier = Modifier.padding(ThemePickerPadding),
-                verticalArrangement = Arrangement.spacedBy(ThemePickerPadding),
-            ) {
-                Row(horizontalArrangement = Arrangement.spacedBy(ThemePickerPadding)) {
-                    TextDirectionItem(
-                        modifier = Modifier.weight(1f),
-                        textDirection = textDirections[0],
-                        selected = textDirections[0] == theme.textDirection,
-                        onClick = { onThemeChange(theme.copy(textDirection = it)) },
-                    )
-                    TextDirectionItem(
-                        modifier = Modifier.weight(1f),
-                        textDirection = textDirections[1],
-                        selected = textDirections[1] == theme.textDirection,
-                        onClick = { onThemeChange(theme.copy(textDirection = it)) },
-                    )
-                }
-                Row {
-                    TextDirectionItem(
-                        modifier = Modifier.weight(1f),
-                        textDirection = textDirections[2],
-                        selected = textDirections[2] == theme.textDirection,
-                        onClick = { onThemeChange(theme.copy(textDirection = it)) },
-                    )
-                }
-            }
-            Divider(
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
-            )
-        }
-        item {
-            Text(
-                text = stringResource(id = R.string.font_scale),
-                style = SparkTheme.typography.body2,
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
-            )
             Column {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(ThemePickerPadding),
-                ) {
-                    RadioButton(
-                        selected = theme.fontScaleMode == FontScaleMode.System,
-                        onClick = {
-                            onThemeChange(theme.copy(fontScaleMode = FontScaleMode.System))
-                        },
-                    )
-                    Text(
-                        text = FontScaleMode.System.label,
-                        style = SparkTheme.typography.body2,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(ThemePickerPadding),
-                ) {
-                    RadioButton(
-                        selected = theme.fontScaleMode == FontScaleMode.Custom,
-                        onClick = {
-                            onThemeChange(theme.copy(fontScaleMode = FontScaleMode.Custom))
-                        },
-                    )
-                    Text(
-                        text = FontScaleMode.Custom.label,
-                        style = SparkTheme.typography.body2,
-                    )
-                }
-
-                var fontScale by remember { mutableStateOf(theme.fontScale) }
+                Text(
+                    text = stringResource(id = R.string.theme_picker_text_direction_title),
+                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
+                )
+                val textDirections = TextDirection.values()
+                val textDirectionsLabel = textDirections.map { it.name }
+                SegmentedButton(
+                    options = textDirectionsLabel,
+                    selectedOption = theme.textDirection.name,
+                    onOptionSelect = { onThemeChange(theme.copy(textDirection = TextDirection.valueOf(it))) },
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
+                        .height(48.dp),
+                )
+            }
+        }
+        item {
+            Column {
+                Text(
+                    text = stringResource(id = R.string.theme_picker_font_scale_title),
+                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                    modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
+                )
+                val fontScaleModes = FontScaleMode.values()
+                val colorModesLabel = fontScaleModes.map { it.name }
+                SegmentedButton(
+                    options = colorModesLabel,
+                    selectedOption = theme.fontScaleMode.name,
+                    onOptionSelect = { onThemeChange(theme.copy(fontScaleMode = FontScaleMode.valueOf(it))) },
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
+                        .height(48.dp),
+                )
+            }
+            var fontScale by remember { mutableStateOf(theme.fontScale) }
+            AnimatedVisibility(visible = theme.fontScaleMode == FontScaleMode.Custom) {
                 FontScaleItem(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -376,7 +308,7 @@ private fun FontScaleItem(
         )
         Text(
             text = stringResource(id = R.string.scale, fontScale),
-            style = SparkTheme.typography.body2,
+            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
         )
     }
 }

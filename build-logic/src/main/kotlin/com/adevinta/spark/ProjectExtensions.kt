@@ -34,6 +34,7 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -98,7 +99,7 @@ internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotli
             jvmTarget.set(JvmTarget.JVM_11)
             // kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
             this.allWarningsAsErrors.set(allWarningsAsErrors)
-            freeCompilerArgs.add("-Xexplicit-api=strict")
+            freeCompilerArgs.add(ExplicitApiMode.Strict.toCompilerArg())
         }
     }
 }

@@ -19,32 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark
+package com.adevinta.spark.catalog.themes.themeprovider.leboncoin
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.get
+import androidx.compose.runtime.Composable
+import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkShapes
+import com.adevinta.spark.tokens.SparkTypography
 
-internal class SparkAndroidApplicationPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            apply(plugin = "com.android.application")
-            apply(plugin = "com.adevinta.spark.android")
+public object LeboncoinTheme : ThemeProvider {
+    @Composable
+    override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
+        return when {
+            useDarkColors -> {
+                if (isPro) LeboncoinColorProDark else LeboncoinColorPartDark
+            }
 
-            androidApplication {
-                defaultConfig {
-                    targetSdk = spark().versions.targetSdk.toString().toInt()
-                }
-                buildTypes {
-                    release {
-                        isMinifyEnabled = true
-                        isShrinkResources = true
-                        signingConfig = signingConfigs["debug"]
-                        proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-                    }
-                }
+            isLegacy -> {
+                if (isPro) LeboncoinColorProLightLegacy else LeboncoinColorPartLightLegacy
+            }
+
+            else -> {
+                if (isPro) LeboncoinColorProLight else LeboncoinColorPartLight
             }
         }
+    }
+
+    @Composable
+    override fun shapes(isLegacy: Boolean): SparkShapes = LeboncoinShapes
+
+    @Composable
+    override fun typography(isLegacy: Boolean): SparkTypography {
+        return if (isLegacy) LeboncoinLegacyTypo else LeboncoinTypo
     }
 }

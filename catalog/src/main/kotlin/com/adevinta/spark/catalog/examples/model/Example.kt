@@ -19,32 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark
+@file:Suppress("COMPOSABLE_FUNCTION_REFERENCE")
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.get
+package com.adevinta.spark.catalog.examples.model
 
-internal class SparkAndroidApplicationPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            apply(plugin = "com.android.application")
-            apply(plugin = "com.adevinta.spark.android")
+import androidx.compose.runtime.Composable
 
-            androidApplication {
-                defaultConfig {
-                    targetSdk = spark().versions.targetSdk.toString().toInt()
-                }
-                buildTypes {
-                    release {
-                        isMinifyEnabled = true
-                        isShrinkResources = true
-                        signingConfig = signingConfigs["debug"]
-                        proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-                    }
-                }
-            }
-        }
-    }
-}
+public data class Example(
+    val name: String,
+    val description: String,
+    val sourceUrl: String,
+    val content: @Composable () -> Unit,
+)

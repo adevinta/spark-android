@@ -90,9 +90,6 @@ import androidx.compose.material3.DropdownMenuItem as MaterialDropdownMenuItem
  * the layout bounds of its parent do not coincide with its visual bounds. Note the offset will
  * be applied in the direction in which the menu will decide to expand.
  *
- * Example usage:
- * @sample androidx.compose.material3.samples.MenuSample
- *
  * @param expanded whether the menu is expanded or not
  * @param onDismissRequest called when the user requests to dismiss the menu, such as by tapping
  * outside the menu's bounds
@@ -124,9 +121,6 @@ public fun DropdownMenu(
  * button, action, or other control.
  *
  * ![Dropdown menu image](https://developer.android.com/images/reference/androidx/compose/material3/menu.png)
- *
- * Example usage:
- * @sample androidx.compose.material3.samples.MenuSample
  *
  * @param text text of the menu item
  * @param onClick called when this menu item is clicked

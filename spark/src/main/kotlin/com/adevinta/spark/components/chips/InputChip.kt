@@ -53,15 +53,6 @@ import androidx.compose.material3.InputChip as MaterialInputChip
  * An Input Chip can have a leading icon or an avatar at its start. In case both are provided, the
  * avatar will take precedence and will be displayed.
  *
- * Example of an InputChip with a trailing icon:
- * @sample androidx.compose.material3.samples.InputChipSample
- *
- * Example of an InputChip with an avatar and a trailing icon:
- * @sample androidx.compose.material3.samples.InputChipWithAvatarSample
- *
- * Input chips should appear in a set and can be horizontally scrollable:
- * @sample androidx.compose.material3.samples.ChipGroupSingleLineSample
- *
  * Alternatively, use Accompanist's [Flow Layouts](https://google.github.io/accompanist/flowlayout/)
  * to wrap chips to a new line.
  *

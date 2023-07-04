@@ -88,9 +88,7 @@ internal fun SparkNavigationBar(
  *
  * [NavigationBar] should contain three to five [NavigationBarItem]s, each representing a singular
  * destination.
- *
- * A simple example looks like:
- * @sample androidx.compose.material3.samples.NavigationBarSample
+
  *
  * See [NavigationBarItem] for configuration specific to each item, and not the overall
  * [NavigationBar] component.

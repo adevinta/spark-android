@@ -58,12 +58,6 @@ import androidx.compose.material3.FilterChip as MaterialFilterChip
  * Tapping on a filter chip toggles its selection state. A selection state [leadingIcon] can be
  * provided (e.g. a checkmark) to be appended at the starting edge of the chip's label.
  *
- * Example of a flat FilterChip with a trailing icon:
- * @sample androidx.compose.material3.samples.FilterChipSample
- *
- * Example of a FilterChip with both a leading icon and a selected icon:
- * @sample androidx.compose.material3.samples.FilterChipWithLeadingIconSample
- *
  * @param selected whether this chip is selected or not
  * @param onClick called when this chip is clicked
  * @param label text label for this chip
@@ -145,9 +139,6 @@ public fun FilterChip(
  *
  * Tapping on a filter chip toggles its selection state. A selection state [leadingIcon] can be
  * provided (e.g. a checkmark) to be appended at the starting edge of the chip's label.
- *
- * Example of an elevated FilterChip with a trailing icon:
- * @sample androidx.compose.material3.samples.ElevatedFilterChipSample
  *
  * @param selected whether this chip is selected or not
  * @param onClick called when this chip is clicked

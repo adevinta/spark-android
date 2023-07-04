@@ -69,14 +69,6 @@ import androidx.compose.material3.Scaffold as MaterialScaffold
  * screen, by ensuring proper layout strategy for them and collecting necessary data so these
  * components will work together correctly.
  *
- * Simple example of a Scaffold with [TopAppBar], [FloatingActionButton]:
- *
- * @sample androidx.compose.material3.samples.SimpleScaffoldWithTopBar
- *
- * To show a [Snackbar], use [SnackbarHostState.showSnackbar].
- *
- * @sample androidx.compose.material3.samples.ScaffoldWithSimpleSnackbar
- *
  * @param modifier the [Modifier] to be applied to this scaffold
  * @param topBar top app bar of the screen, typically a [TopAppBar]
  * @param bottomBar bottom bar of the screen, typically a [NavigationBar]

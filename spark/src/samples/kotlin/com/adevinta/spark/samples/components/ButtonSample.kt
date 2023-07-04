@@ -19,38 +19,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.themes.themeprovider.leboncoin
+package com.adevinta.spark.samples.components
 
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
-import com.adevinta.spark.tokens.SparkColors
-import com.adevinta.spark.tokens.SparkShapes
-import com.adevinta.spark.tokens.SparkTypography
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.components.buttons.ButtonFilled
+import com.adevinta.spark.components.buttons.ButtonIntent
+import com.adevinta.spark.components.buttons.IconSide
+import com.adevinta.spark.icons.SparkIcon
 
-public object LeBoncoinTheme : ThemeProvider {
-    @Composable
-    override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
-        return when {
-            useDarkColors || isSystemInDarkTheme() -> {
-                if (isPro) LeboncoinColorProDark else LeboncoinColorPartDark
-            }
-
-            isLegacy -> {
-                if (isPro) LeboncoinColorProLightLegacy else LeboncoinColorPartLightLegacy
-            }
-
-            else -> {
-                if (isPro) LeboncoinColorProLight else LeboncoinColorPartLight
-            }
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+public fun ButtonSample() {
+    val icon = SparkIcon.Account.Identity
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+    ) {
+        ButtonIntent.values().forEach { intent ->
+            ButtonFilled(
+                modifier = Modifier.padding(top = 10.dp),
+                text = intent.name,
+                onClick = { },
+                intent = intent,
+                icon = icon,
+                iconSide = IconSide.START,
+            )
         }
-    }
-
-    @Composable
-    override fun shapes(isLegacy: Boolean): SparkShapes = LeboncoinShapes
-
-    @Composable
-    override fun typography(isLegacy: Boolean): SparkTypography {
-        return if (isLegacy) LeboncoinLegacyTypo else LeboncoinTypo
     }
 }
