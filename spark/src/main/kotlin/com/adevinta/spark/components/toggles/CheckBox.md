@@ -8,9 +8,9 @@ one or more items from a set. Checkboxes can turn an option on or off.
 - In cases of a global activation in a indeterminate state where on and off states coexist in the
   children.
 
-| Light                                                                                                     | Dark                                                                                                     |
-|-----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
-| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_part_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_part_dark.png) |
+| Light                                                                                                | Dark                                                                                                |
+|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkbox_dark.png) |
 
 The minimal usage of the component is the checkbox in standalone but you can add a content at the
 end of the box or customize it.
@@ -29,9 +29,9 @@ Checkbox(
 
 ### CheckBoxLabelled
 
-| Light                                                                                                             | Dark                                                                                                             |
-|-------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkboxlabelled_part_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkboxlabelled_part_dark.png) |
+| Light                                                                                                        | Dark                                                                                                        |
+|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkboxlabelled_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_checkboxlabelled_dark.png) |
 
 The Checkbox allows users to select one or more items from a set. Checkboxes can turn an option on
 or off.

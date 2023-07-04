@@ -47,9 +47,8 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 
 /**
  * Spinners provide a visual clue that an action is processing awaiting a course of change or a result.
@@ -154,10 +153,9 @@ public fun Spinner(
 )
 @Composable
 internal fun PreviewSpinnerMedium(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         SpinnerPreview(size = SpinnerSize.Medium)
     }
 }
@@ -168,10 +166,9 @@ internal fun PreviewSpinnerMedium(
 )
 @Composable
 internal fun PreviewSpinnerSmall(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         SpinnerPreview(size = SpinnerSize.Small)
     }
 }

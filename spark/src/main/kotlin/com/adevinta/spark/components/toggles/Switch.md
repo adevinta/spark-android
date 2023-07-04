@@ -13,16 +13,16 @@ Switch component allows the user to activate or deactivate the state of an eleme
 It is usually used as an element to add services, activate functionalities or adjust settings.
 It is also used to control binary options (On/Off or True/False).
 
-| Light                                                                                                   | Dark                                                                                                   |
-|---------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switch_part_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switch_part_dark.png) |
+| Light                                                                                              | Dark                                                                                              |
+|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switch_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switch_dark.png) |
 
 ### SwitchLabelled
 
-|      | Light                                                                                                           | Dark                                                                                                           |
-|------|-----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| Part | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_part_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_part_dark.png) |
-| Pro  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_pro_light.png)  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_pro_dark.png)  |
+|      | Light                                                                                                      | Dark                                                                                                      |
+|------|------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| Part | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_dark.png) |
+| Pro  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_switchlabelled_dark.png) |
 
 The minimal usage of the component is a standalone checkbox but you can add a label
 using [SwitchLabelled](Switch.kt).

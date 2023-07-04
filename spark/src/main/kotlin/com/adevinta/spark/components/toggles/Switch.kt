@@ -48,9 +48,8 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.Switch as MaterialSwitch
 
 @Composable
@@ -195,10 +194,9 @@ public data class SwitchIcons(
 )
 @Composable
 internal fun AllStatesSwitchPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         Row {
             Switch(checked = true, onCheckedChange = {}, enabled = true, icons = SwitchDefaults.icons)
             Switch(checked = false, onCheckedChange = {}, enabled = true, icons = SwitchDefaults.icons)
@@ -250,14 +248,12 @@ internal fun AllStatesSwitchPreview(
 )
 @Composable
 internal fun AllStatesSwitchLabelledPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-
     @Suppress("ktlint:max-line-length")
     val text =
         "This is an example of a multi-line text which is very long and in which the user should read all the information."
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         SwitchLabelled(
             enabled = true,
             checked = true,

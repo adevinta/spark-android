@@ -56,9 +56,8 @@ import com.adevinta.spark.icons.MoreMenuVertical
 import com.adevinta.spark.icons.PenFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WheelOutline
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.DropdownMenu as MaterialDropdownMenu
 import androidx.compose.material3.DropdownMenuItem as MaterialDropdownMenuItem
 
@@ -170,12 +169,10 @@ public fun DropdownMenuItem(
 )
 @Composable
 internal fun DropdownMenuPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
     PreviewTheme(
         themeVariant = theme,
-        userType = userType,
     ) {
         var expanded by remember { mutableStateOf(true) }
 
