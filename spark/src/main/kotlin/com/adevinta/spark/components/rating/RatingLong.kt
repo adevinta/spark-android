@@ -41,9 +41,8 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 
 /**
  * Component that displays rating of an user with stars in the following form:
@@ -132,7 +131,7 @@ public fun RatingCompressed(
             id = R.plurals.spark_rating_with_comments_a11y,
             commentCount,
             value,
-            commentCount
+            commentCount,
         ),
         label = stringResource(id = R.string.spark_rating_label, commentCount),
     )
@@ -160,7 +159,7 @@ public fun RatingFull(
             id = R.plurals.spark_rating_with_comments_a11y,
             commentCount,
             value,
-            commentCount
+            commentCount,
         ),
         label = pluralStringResource(id = R.plurals.spark_rating_with_comments_count_label, commentCount, commentCount),
     )
@@ -172,10 +171,9 @@ public fun RatingFull(
     name = "RatingFull",
 )
 internal fun RatingFullPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         RatingFull(value = 1.6f, commentCount = 1)
         RatingFull(value = 3.6f, commentCount = 23)
         RatingFull(value = 5f, commentCount = 1000002)
@@ -188,10 +186,9 @@ internal fun RatingFullPreview(
     name = "RatingCompressed",
 )
 internal fun RatingCompressedPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         RatingCompressed(value = 1.6f, commentCount = 0)
         RatingCompressed(value = 2.8f, commentCount = 23)
         RatingCompressed(value = 4.2f, commentCount = 1000002)
@@ -204,10 +201,9 @@ internal fun RatingCompressedPreview(
     name = "RatingNaked",
 )
 internal fun RatingNakedPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         RatingNaked(value = 1f)
         RatingNaked(value = 2.1f)
         RatingNaked(value = 3.999999f)

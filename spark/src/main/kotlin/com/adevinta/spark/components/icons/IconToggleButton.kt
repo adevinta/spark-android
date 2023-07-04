@@ -43,9 +43,8 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WheelFill
 import com.adevinta.spark.icons.WheelOutline
 import com.adevinta.spark.tokens.contentColorFor
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.FilledIconToggleButton as MaterialFilledIconToggleButton
 import androidx.compose.material3.FilledTonalIconToggleButton as MaterialFilledTonalIconToggleButton
 import androidx.compose.material3.IconToggleButton as MaterialIconToggleButton
@@ -280,10 +279,9 @@ public fun OutlinedIconToggleButton(
 )
 @Composable
 internal fun IconToggleButtonPreview(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         Text("IconButton")
         Row {
             IconToggleButton(checked = false, onCheckedChange = { }) {

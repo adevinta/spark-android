@@ -32,7 +32,7 @@ public enum class IconTints {
      */
     Primary {
         @Composable
-        override fun color() = SparkTheme.colors.primary
+        override fun color(): Color = SparkTheme.colors.primary
     },
 
     /**
@@ -40,7 +40,7 @@ public enum class IconTints {
      */
     Secondary {
         @Composable
-        override fun color() = SparkTheme.colors.secondary
+        override fun color(): Color = SparkTheme.colors.secondary
     },
 
     /**
@@ -48,7 +48,7 @@ public enum class IconTints {
      */
     Surface {
         @Composable
-        override fun color() = SparkTheme.colors.surface
+        override fun color(): Color = SparkTheme.colors.surface
     },
 
     /**
@@ -56,7 +56,7 @@ public enum class IconTints {
      */
     Success {
         @Composable
-        override fun color() = SparkTheme.colors.success
+        override fun color(): Color = SparkTheme.colors.success
     },
 
     /**
@@ -64,7 +64,7 @@ public enum class IconTints {
      */
     Alert {
         @Composable
-        override fun color() = SparkTheme.colors.alert
+        override fun color(): Color = SparkTheme.colors.alert
     },
 
     /**
@@ -72,7 +72,7 @@ public enum class IconTints {
      */
     Danger {
         @Composable
-        override fun color() = SparkTheme.colors.error
+        override fun color(): Color = SparkTheme.colors.error
     },
 
     /**
@@ -80,7 +80,7 @@ public enum class IconTints {
      */
     Neutral {
         @Composable
-        override fun color() = SparkTheme.colors.neutral
+        override fun color(): Color = SparkTheme.colors.neutral
     },
 
     /**
@@ -88,7 +88,7 @@ public enum class IconTints {
      */
     Current {
         @Composable
-        override fun color() = LocalContentColor.current
+        public override fun color(): Color = LocalContentColor.current
     },
 
     /**
@@ -96,10 +96,10 @@ public enum class IconTints {
      */
     Unspecified {
         @Composable
-        override fun color() = Color.Unspecified
+        override fun color(): Color = Color.Unspecified
     },
     ;
 
     @Composable
-    internal abstract fun color(): Color
+    public abstract fun color(): Color
 }

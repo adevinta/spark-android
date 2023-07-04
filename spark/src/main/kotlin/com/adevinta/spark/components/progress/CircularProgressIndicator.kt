@@ -35,9 +35,8 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.progress.ProgressIndicatorDefaults.CircularSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.SparkPreviewProvider
+import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 import androidx.compose.material3.CircularProgressIndicator as MaterialCircularProgressIndicator
 
 @InternalSparkApi
@@ -120,10 +119,9 @@ public fun CircularProgressIndicatorIndeterminate(
 )
 @Composable
 internal fun PreviewCircularProgressIndicator(
-    @PreviewParameter(SparkPreviewProvider::class) param: Pair<ThemeVariant, UserType>,
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val (theme, userType) = param
-    PreviewTheme(theme, userType) {
+    PreviewTheme(theme) {
         CircularProgressIndicator(
             modifier = Modifier.size(48.dp),
             progress = 0f,
