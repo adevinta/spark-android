@@ -122,7 +122,7 @@ internal fun ComponentsListScreen(
             itemContent = { component ->
                 ComponentItem(component = component) {
                     val componentId = component.id
-                    val route = "${ComponentRoute}/$componentId"
+                    val route = "$ComponentRoute/$componentId"
                     navController.navigate(route)
                 }
             },

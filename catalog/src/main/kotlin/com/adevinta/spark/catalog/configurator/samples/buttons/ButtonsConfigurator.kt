@@ -318,5 +318,4 @@ private enum class ButtonStyle {
     Tinted,
     Ghost,
     Contrast,
-    ;
 }

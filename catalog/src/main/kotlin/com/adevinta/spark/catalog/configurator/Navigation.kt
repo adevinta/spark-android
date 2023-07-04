@@ -28,11 +28,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.adevinta.spark.catalog.configurator.component.ConfiguratorComponentScreen
-import com.adevinta.spark.catalog.examples.ComponentRoute
-import com.adevinta.spark.catalog.examples.ExampleIndexArgName
-import com.adevinta.spark.catalog.examples.ExampleRoute
 import com.adevinta.spark.catalog.examples.component.Component
-import com.adevinta.spark.catalog.examples.example.Example
 import com.adevinta.spark.catalog.model.Component
 
 internal fun NavGraphBuilder.navGraph(
@@ -57,7 +53,7 @@ internal fun NavGraphBuilder.navGraph(
     ) { navBackStackEntry ->
         val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
         val componentId = arguments.getInt(ComponentIdArgName)
-        val component = components.filter { it.configurator != null  }.first { component -> component.id == componentId }
+        val component = components.filter { it.configurator != null }.first { component -> component.id == componentId }
         ConfiguratorComponentScreen(
             component = component,
             configurator = requireNotNull(component.configurator),
