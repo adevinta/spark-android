@@ -339,7 +339,7 @@ public fun TabGroup(
 
 @Preview(
     group = "Tabs",
-    name = "TabGroup",
+    name = "Scrollable TabGroup",
 )
 @Composable
 internal fun TabGroupPreview(
@@ -385,7 +385,7 @@ internal fun TabGroupPreview(
 
 @Preview(
     group = "Tabs",
-    name = "TabGroup with Fixed Size",
+    name = "Fixed Size TabGroup",
 )
 @Composable
 internal fun TabGroupFixedSizePreview(
