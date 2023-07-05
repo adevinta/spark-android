@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.tab
 
 import androidx.compose.foundation.ScrollState
@@ -30,7 +29,6 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab as MaterialTab
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -154,10 +152,14 @@ internal fun SparkTabGroup(
             }
             val tabPlaceables = tabMeasurables.mapIndexed { i, tab ->
                 tab.measure(
-                    if (scrollable) tabConstraints else tabConstraints.copy(
-                        minWidth = tabWidthList[i],
-                        maxWidth = tabWidthList[i],
-                    ),
+                    if (scrollable) {
+                        tabConstraints
+                    } else {
+                        tabConstraints.copy(
+                            minWidth = tabWidthList[i],
+                            maxWidth = tabWidthList[i],
+                        )
+                    },
                 )
             }
 
@@ -203,9 +205,8 @@ internal fun SparkTabGroup(
 private enum class TabSlots {
     Tabs,
     Divider,
-    Indicator
+    Indicator,
 }
-
 
 /**
  * Class holding onto state needed for [ScrollableTabRow]
@@ -265,7 +266,6 @@ private class ScrollableTabData(
     }
 }
 
-
 /**
  * Data class that contains information about a tab's position on screen, used for calculating
  * where to place the indicator that shows which tab is selected.
@@ -323,7 +323,7 @@ internal class TabPosition internal constructor(val left: Dp, val width: Dp) {
 @Composable
 public fun TabGroup(
     modifier: Modifier = Modifier,
-    spacedEvenly: Boolean = false,
+    spacedEvenly: Boolean = true,
     selectedTabIndex: Int = 0,
     intent: TabIntent = TabDefaults.SelectedContentIntent,
     tabs: @Composable () -> Unit,
@@ -371,7 +371,9 @@ internal fun TabGroupPreview(
                             trailingContent = {
                                 if (unread > 0) {
                                     Badge(count = unread)
-                                } else Unit
+                                } else {
+                                    Unit
+                                }
                             },
                             contentDescription = if (tab.first == null) "icon content description" else null,
                         )
@@ -414,7 +416,9 @@ internal fun TabGroupFixedSizePreview(
                             trailingContent = {
                                 if (unread > 0) {
                                     Badge(count = unread)
-                                } else Unit
+                                } else {
+                                    Unit
+                                }
                             },
                         )
                     }

@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.tab
 
 import androidx.compose.runtime.Composable
@@ -48,13 +47,15 @@ public enum class TabIntent {
         @Composable
         override fun color(): Color = SparkTheme.colors.primary
     },
+
     /**
      * Used to highlight/accentuate.
      */
     Secondary {
         @Composable
         override fun color(): Color = SparkTheme.colors.secondary
-    };
+    },
+    ;
 
     @Composable
     public abstract fun color(): Color
@@ -72,7 +73,8 @@ public enum class TabSize {
     Medium {
         @Composable
         override fun typography(): TextStyle = SparkTheme.typography.body1
-    };
+    },
+    ;
 
     @Composable
     internal abstract fun typography(): TextStyle

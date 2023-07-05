@@ -276,7 +276,8 @@ public fun Tab(
 @Deprecated(
     message = "This component is no longer compliant with Spark specs",
     replaceWith = ReplaceWith(
-        expression = "Tab(selected, onClick, modifier, text, icon, contentDescription, enabled, intent, size, interactionSource, trailingContent)",
+        "Tab(selected, onClick, modifier, text, icon, contentDescription, enabled, intent, size, " +
+            "interactionSource, trailingContent)",
     ),
 )
 public fun Tab(

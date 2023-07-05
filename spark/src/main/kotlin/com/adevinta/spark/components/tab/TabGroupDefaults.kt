@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.tab
 
 import androidx.compose.animation.core.AnimationSpec
@@ -53,7 +52,6 @@ internal object TabGroupDefaults {
 
     val containerColor: Color
         @Composable get() = PrimaryNavigationTabTokens.ContainerColor
-
 
     /** Default content color of a tab row. */
     val contentColor: Color

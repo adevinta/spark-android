@@ -126,7 +126,7 @@ public fun Badge(
     badgeStyle: BadgeStyle = BadgeStyle.Medium,
     intent: BadgeIntent = BadgeIntent.Danger,
     overflowCount: Int = BADGE_MAX_COUNT,
-    hasStroke: Boolean = true,
+    hasStroke: Boolean = false,
 ) {
     val content: @Composable () -> Unit = {
         Text(
@@ -171,7 +171,7 @@ public fun Badge(
     modifier: Modifier = Modifier,
     badgeStyle: BadgeStyle = BadgeStyle.Medium,
     intent: BadgeIntent = BadgeIntent.Danger,
-    hasStroke: Boolean = true,
+    hasStroke: Boolean = false,
     contentDescription: String? = null,
     content: (@Composable () -> Unit)? = null,
 ) {
