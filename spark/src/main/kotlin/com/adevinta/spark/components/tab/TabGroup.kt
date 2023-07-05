@@ -30,7 +30,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.ScrollableTabRow
-import androidx.compose.material3.Tab
+import androidx.compose.material3.Tab as MaterialTab
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -70,9 +70,9 @@ import kotlinx.coroutines.launch
  * selected tab. Depending on the available place and @param [spacedEvenly] a TabGroup
  * places its tabs evenly spaced along the entire row, with each tab
  * taking up an equal amount of space unless content cannot be fully displayed.
- * In this case the each larger tab is attributed a needed space and the rest is distributed evenly among smaller tabs.
- * if there is not enough screen space to display all content @param [spacedEvenly] is ignored and
- * TabGroup does not enforce equal size, and allows scrolling to tabs that do not fit on screen.
+ * In this case each larger tab is attributed a needed space and the rest is distributed evenly among smaller tabs.
+ * If there is not enough screen space to display all content @param [spacedEvenly] is ignored and
+ * TabGroup does not enforce equal size and allows scrolling to tabs that do not fit on screen.
  * Each tab takes the needed space ensuring the minimum tab size constraint is met.
  *
  * @param selectedTabIndex the index of the currently selected tab
@@ -306,9 +306,9 @@ internal class TabPosition internal constructor(val left: Dp, val width: Dp) {
  * selected tab. Depending on the available place and @param [spacedEvenly] a TabGroup
  * places its tabs evenly spaced along the entire row, with each tab
  * taking up an equal amount of space unless content cannot be fully displayed.
- * In this case the each larger tab is attributed a needed space and the rest is distributed evenly among smaller tabs.
- * if there is not enough screen space to display all content @param [spacedEvenly] is ignored and
- * TabGroup does not enforce equal size, and allows scrolling to tabs that do not fit on screen.
+ * In this case each larger tab is attributed a needed space and the rest is distributed evenly among smaller tabs.
+ * If there is not enough screen space to display all content @param [spacedEvenly] is ignored and
+ * TabGroup does not enforce equal size and allows scrolling to tabs that do not fit on screen.
  * Each tab takes the needed space ensuring the minimum tab size constraint is met.
  *
  * @param selectedTabIndex the index of the currently selected tab
@@ -355,14 +355,13 @@ internal fun TabGroupPreview(
     PreviewTheme(theme) {
         TabSize.values().forEach { tabSize ->
             TabIntent.values().forEach { intent ->
-                val color = intent.color()
-                SparkTabGroup(
+                TabGroup(
                     selectedTabIndex = selectedIndex,
-                    selectedContentColor = intent.color(),
+                    intent = intent,
                 ) {
                     tabs.forEachIndexed { index, (tab, unread) ->
-                        SparkTab(
-                            selectedContentColor = color,
+                        Tab(
+                            intent = intent,
                             selected = selectedIndex == index,
                             onClick = { selectedIndex = index },
                             enabled = true,
@@ -399,14 +398,13 @@ internal fun TabGroupFixedSizePreview(
     PreviewTheme(theme) {
         TabSize.values().forEach { tabSize ->
             TabIntent.values().forEach { intent ->
-                val color = intent.color()
-                SparkTabGroup(
+                TabGroup(
                     selectedTabIndex = selectedIndex,
-                    selectedContentColor = color,
+                    intent = intent,
                 ) {
                     tabs.forEachIndexed { index, (tab, unread) ->
-                        SparkTab(
-                            selectedContentColor = color,
+                        Tab(
+                            intent = intent,
                             selected = selectedIndex == index,
                             onClick = { selectedIndex = index },
                             enabled = true,
