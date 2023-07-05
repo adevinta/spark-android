@@ -21,7 +21,10 @@
  */
 package com.adevinta.spark.textfields
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.textfields.TextField
@@ -39,13 +42,10 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 internal class TextFieldScreenshot(
-    private val state: TextFieldState?,
     private val value: String?,
-    private val required: Boolean,
     private val trailingIcon: SparkIcon?,
     private val leadingIcon: SparkIcon?,
     private val enabled: Boolean,
-    private val readOnly: Boolean,
     private val helper: String?,
 ) {
 
@@ -60,13 +60,10 @@ internal class TextFieldScreenshot(
     @Test
     fun test() {
         paparazzi.sparkSnapshot(
-            name = "_state[${state?.name ?: "basic"}]" +
-                "_value[${value?.count()}]" +
-                "_required[$required]" +
+            name = "_value[${value?.count()}]" +
                 "_leadingIcon[${leadingIcon != null}]" +
                 "_trailingIcon[${trailingIcon != null}]" +
                 "_enabled[$enabled]" +
-                "_readOnly[$readOnly]" +
                 "_helper[${helper?.count()}]",
         ) {
             val leadingContent: (@Composable () -> Unit)? = leadingIcon?.let {
@@ -79,19 +76,57 @@ internal class TextFieldScreenshot(
                     Icon(it, contentDescription = null)
                 }
             }
-            TextField(
-                value = value.orEmpty(),
-                onValueChange = {},
-                label = "Label",
-                leadingContent = leadingContent,
-                trailingContent = trailingContent,
-                state = state,
-                required = true,
-                enabled = enabled,
-                readOnly = readOnly,
-                stateMessage = "short state message for textfield",
-                helper = helper,
-            )
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                TextField(
+                    value = value.orEmpty(),
+                    onValueChange = {},
+                    label = "Label",
+                    leadingContent = leadingContent,
+                    trailingContent = trailingContent,
+                    required = true,
+                    enabled = enabled,
+                    stateMessage = "short state message for textfield",
+                    helper = helper,
+                )
+                TextField(
+                    value = value.orEmpty(),
+                    onValueChange = {},
+                    label = "Label",
+                    leadingContent = leadingContent,
+                    trailingContent = trailingContent,
+                    state = TextFieldState.Error,
+                    required = true,
+                    enabled = enabled,
+                    stateMessage = "short state message for textfield",
+                    helper = helper,
+                )
+                TextField(
+                    value = value.orEmpty(),
+                    onValueChange = {},
+                    label = "Label",
+                    leadingContent = leadingContent,
+                    trailingContent = trailingContent,
+                    state = TextFieldState.Alert,
+                    required = true,
+                    enabled = enabled,
+                    stateMessage = "short state message for textfield",
+                    helper = helper,
+                )
+                TextField(
+                    value = value.orEmpty(),
+                    onValueChange = {},
+                    label = "Label",
+                    leadingContent = leadingContent,
+                    trailingContent = trailingContent,
+                    state = TextFieldState.Success,
+                    required = true,
+                    enabled = enabled,
+                    stateMessage = "short state message for textfield",
+                    helper = helper,
+                )
+            }
         }
     }
 
@@ -99,18 +134,10 @@ internal class TextFieldScreenshot(
         @JvmStatic
         @Parameterized.Parameters
         internal fun params() = parameterizedParams().combineWithParameters(
-            // State
-            null,
-            TextFieldState.Error,
-        ).combineWithParameters(
             // Value
             "",
             stubShortBody,
             stubBody,
-        ).combineWithParameters(
-            // Required
-            false,
-            true,
         ).combineWithParameters(
             SparkIcons.Check,
             null,
@@ -119,10 +146,6 @@ internal class TextFieldScreenshot(
             null,
         ).combineWithParameters(
             // Enabled
-            false,
-            true,
-        ).combineWithParameters(
-            // ReadOnly
             false,
             true,
         ).combineWithParameters(
