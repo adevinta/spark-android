@@ -41,6 +41,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -78,7 +79,7 @@ import kotlinx.coroutines.launch
  * @param modifier the [Modifier] to be applied to this tab row
  * @param spacedEvenly determines whether the[tabs] should be measured and placed evenly across the group,
  * each taking up equal space if enough space is available.
- * @param selectedContentColor one of [TabSelectedContentColor] to be applied to the selected tab
+ * @param selectedContentColor [Color] to be applied to the selected tab
  * @param indicator to placed under the selected tab
  * @param divider the divider displayed at the bottom of the tab row.
  * This provides a layer of separation between the tab row and the content displayed underneath.
@@ -91,11 +92,12 @@ internal fun SparkTabGroup(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
     spacedEvenly: Boolean = true,
-    selectedContentColor: TabSelectedContentColor = TabSelectedContentColor.Primary,
+    selectedContentColor: Color = TabDefaults.SelectedContentIntent.color(),
     indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = @Composable { tabPositions ->
         TabGroupDefaults.Indicator(
             Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
-            color = selectedContentColor.color(),
+            color = selectedContentColor,
+            height = TabDefaults.ActiveIndicatorHeight,
         )
     },
     divider: @Composable () -> Unit = @Composable {
@@ -139,7 +141,7 @@ internal fun SparkTabGroup(
                 maxHeight = constraints.maxHeight.coerceAtLeast(layoutHeight),
             )
 
-            var tabWidthList = tabMeasurables.map{
+            var tabWidthList = tabMeasurables.map {
                 it.maxIntrinsicWidth(Constraints.Infinity).coerceAtLeast(minTabWidth)
             }
             val layoutWidth = tabWidthList.sum()
@@ -313,7 +315,7 @@ internal class TabPosition internal constructor(val left: Dp, val width: Dp) {
  * @param modifier the [Modifier] to be applied to this tab row
  * @param spacedEvenly determines whether the[tabs] should be measured and placed evenly across the group,
  * each taking up equal space if enough space is available.
- * @param selectedContentColor one of [TabSelectedContentColor] to be applied to the selected tab
+ * @param intent one of [TabIntent]s to be applied to the selected tab
  * This provides a layer of separation between the tab row and the content displayed underneath.
  * @param tabs the tabs inside this tab group. Typically this will be multiple [Tab]s. Each element
  * inside this lambda will be measured and placed evenly across the row, each taking up equal space.
@@ -323,14 +325,14 @@ public fun TabGroup(
     modifier: Modifier = Modifier,
     spacedEvenly: Boolean = false,
     selectedTabIndex: Int = 0,
-    selectedContentColor: TabSelectedContentColor = TabSelectedContentColor.Primary,
+    intent: TabIntent = TabDefaults.SelectedContentIntent,
     tabs: @Composable () -> Unit,
 ) {
     SparkTabGroup(
         selectedTabIndex = selectedTabIndex,
         modifier = modifier,
         spacedEvenly = spacedEvenly,
-        selectedContentColor = selectedContentColor,
+        selectedContentColor = intent.color(),
         tabs = tabs,
     )
 }
@@ -351,27 +353,29 @@ internal fun TabGroupPreview(
     )
     var selectedIndex by remember { mutableStateOf(0) }
     PreviewTheme(theme) {
-        TabGroupSize.values().forEach { tabStyle ->
-            TabSelectedContentColor.values().forEach { color ->
+        TabSize.values().forEach { tabSize ->
+            TabIntent.values().forEach { intent ->
+                val color = intent.color()
                 SparkTabGroup(
                     selectedTabIndex = selectedIndex,
-                    selectedContentColor = color,
+                    selectedContentColor = intent.color(),
                 ) {
                     tabs.forEachIndexed { index, (tab, unread) ->
                         SparkTab(
-                            selectedContentColor = color.color(),
+                            selectedContentColor = color,
                             selected = selectedIndex == index,
                             onClick = { selectedIndex = index },
                             enabled = true,
                             icon = tab.second,
                             text = tab.first,
-                            style = tabStyle,
+                            size = tabSize,
                             trailingContent = {
                                 if (unread > 0) {
                                     Badge(count = unread)
                                 } else Unit
                             },
-                            contentDescription = if (tab.first == null) "icon content description" else null)
+                            contentDescription = if (tab.first == null) "icon content description" else null,
+                        )
                     }
                 }
             }
@@ -393,21 +397,22 @@ internal fun TabGroupFixedSizePreview(
     )
     var selectedIndex by remember { mutableStateOf(0) }
     PreviewTheme(theme) {
-        TabGroupSize.values().forEach { tabStyle ->
-            TabSelectedContentColor.values().forEach { color ->
+        TabSize.values().forEach { tabSize ->
+            TabIntent.values().forEach { intent ->
+                val color = intent.color()
                 SparkTabGroup(
                     selectedTabIndex = selectedIndex,
                     selectedContentColor = color,
                 ) {
                     tabs.forEachIndexed { index, (tab, unread) ->
                         SparkTab(
-                            selectedContentColor = color.color(),
+                            selectedContentColor = color,
                             selected = selectedIndex == index,
                             onClick = { selectedIndex = index },
                             enabled = true,
                             icon = tab.second,
                             text = tab.first,
-                            style = tabStyle,
+                            size = tabSize,
                             trailingContent = {
                                 if (unread > 0) {
                                     Badge(count = unread)

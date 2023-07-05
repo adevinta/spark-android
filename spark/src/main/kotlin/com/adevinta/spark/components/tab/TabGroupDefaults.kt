@@ -73,7 +73,7 @@ internal object TabGroupDefaults {
     @Composable
     fun Indicator(
         modifier: Modifier = Modifier,
-        height: Dp = PrimaryNavigationTabTokens.ActiveIndicatorHeight,
+        height: Dp = TabDefaults.ActiveIndicatorHeight,
         color: Color = PrimaryNavigationTabTokens.ActiveIndicatorColor,
     ) {
         Box(

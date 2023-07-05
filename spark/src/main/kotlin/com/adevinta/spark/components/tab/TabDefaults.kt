@@ -31,19 +31,26 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.IconSize.Small
 
 public object TabDefaults {
-    internal val SelectedContentColor = TabSelectedContentColor.Primary
-    internal val Size = TabGroupSize.Medium
+    internal val SelectedContentIntent = TabIntent.Primary
+    internal val Size = TabSize.Medium
     internal val HorizontalArrangementSpace = 8.dp
     internal val HorizontalContentPadding = 16.dp
     internal val VerticalContentPadding = 8.dp
     internal val IconSize: Dp = Small.size
+    internal val ActiveIndicatorHeight = 2.0.dp
 }
 
-public enum class TabSelectedContentColor {
+public enum class TabIntent {
+    /**
+     * Used for the most important information.
+     */
     Primary {
         @Composable
         override fun color(): Color = SparkTheme.colors.primary
     },
+    /**
+     * Used to highlight/accentuate.
+     */
     Secondary {
         @Composable
         override fun color(): Color = SparkTheme.colors.secondary
@@ -53,7 +60,7 @@ public enum class TabSelectedContentColor {
     public abstract fun color(): Color
 }
 
-public enum class TabGroupSize {
+public enum class TabSize {
     ExtraSmall {
         @Composable
         override fun typography(): TextStyle = SparkTheme.typography.caption

@@ -76,11 +76,6 @@ internal fun SparkTabRow(
  * taking up an equal amount of space. See [ScrollableTabRow] for a tab row that does not enforce
  * equal size, and allows scrolling to tabs that do not fit on screen.
  *
- * As well as customizing the tab, you can also provide a custom [indicator], to customize
- * the indicator displayed for a tab. [indicator] will be placed to fill the entire TabRow, so it
- * should internally take care of sizing and positioning the indicator to match changes to
- * [selectedTabIndex].
- *
  * @param selectedTabIndex the index of the currently selected tab
  * @param modifier the [Modifier] to be applied to this tab row
  * @param tabs the tabs inside this tab row. Typically this will be multiple [Tab]s. Each element
@@ -91,8 +86,8 @@ internal fun SparkTabRow(
 @Deprecated(
     message = "This component is no longer compliant with Spark specs",
     replaceWith = ReplaceWith(
-        expression = "TabGroup(tabs)",
-        imports = ["com.adevinta.spark.components.tab"],
+        expression = "TabGroup(selectedTabIndex, modifier, intent, tabs)",
+        imports = ["com.adevinta.spark.components.tab.TabGroup"],
     ),
 )
 public fun TabRow(
@@ -143,8 +138,8 @@ public fun TabRow(
 @Deprecated(
     message = "This component is no longer compliant with Spark specs",
     replaceWith = ReplaceWith(
-        expression = "TabGroup(tabs)",
-        imports = ["com.adevinta.spark.components.tab"],
+        expression = "TabGroup(selectedTabIndex, modifier, intent, tabs)",
+        imports = ["com.adevinta.spark.components.tab.TabGroup"],
     ),
 )
 public fun ScrollableTabRow(

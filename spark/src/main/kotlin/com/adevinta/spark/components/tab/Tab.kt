@@ -75,9 +75,9 @@ import androidx.compose.material3.Tab as MaterialTab
  * as by using [androidx.compose.ui.res.stringResource] or similar
  * @param enabled controls the enabled state of this tab. When false, this component will not respond to user input,
  * and it will appear visually disabled and disabled to accessibility services.
- * @param selectedContentColor [TabSelectedContentColor] used to highlight the selected tab
+ * @param selectedContentColor [TabIntent] used to highlight the selected tab
  * @param unselectedContentColor a default color to use for a not selected tab
- * @param style [TabGroupSize] to apply to the tab
+ * @param size [TabSize] to apply to the tab
  * @param interactionSource the MutableInteractionSource representing the stream of Interactions for this tab.
  * You can create and pass in your own remembered instance to observe Interactions
  * and customize the appearance / behavior of this tab in different states.
@@ -93,9 +93,9 @@ internal fun SparkTab(
     icon: SparkIcon? = null,
     contentDescription: String? = null,
     enabled: Boolean = true,
-    selectedContentColor: Color = TabDefaults.SelectedContentColor.color(),
+    selectedContentColor: Color = TabDefaults.SelectedContentIntent.color(),
     unselectedContentColor: Color = LocalContentColor.current,
-    style: TabGroupSize = TabDefaults.Size,
+    size: TabSize = TabDefaults.Size,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingContent: @Composable () -> Unit = {},
 ) {
@@ -109,7 +109,7 @@ internal fun SparkTab(
         LocalContentColor provides if (enabled) {
             unselectedContentColor
         } else {
-            unselectedContentColor.copy(alpha = SparkTheme.colors.dim4)
+            unselectedContentColor.copy(alpha = SparkTheme.colors.dim3)
         },
     ) {
         MaterialTab(
@@ -132,7 +132,7 @@ internal fun SparkTab(
                     text?.let {
                         Text(
                             text = it,
-                            style = style.typography(),
+                            style = size.typography(),
                             maxLines = 1,
                             overflow = TextOverflow.Ellipsis,
                         )
@@ -213,8 +213,8 @@ private fun TabLayout(
  * as by using [androidx.compose.ui.res.stringResource] or similar
  * @param enabled controls the enabled state of this tab. When false, this component will not respond to user input,
  * and it will appear visually disabled and disabled to accessibility services.
- * @param selectedContentColor [TabSelectedContentColor] used to highlight the selected tab
- * @param style [TabGroupSize] to apply to the tab
+ * @param intent [TabIntent] used to highlight the selected tab
+ * @param size [TabSize] to apply to the tab
  * @param interactionSource the MutableInteractionSource representing the stream of Interactions for this tab.
  * You can create and pass in your own remembered instance to observe Interactions
  * and customize the appearance / behavior of this tab in different states.
@@ -230,8 +230,8 @@ public fun Tab(
     icon: SparkIcon? = null,
     contentDescription: String? = null,
     enabled: Boolean = true,
-    selectedContentColor: Color = TabDefaults.SelectedContentColor.color(),
-    style: TabGroupSize = TabDefaults.Size,
+    intent: TabIntent = TabDefaults.SelectedContentIntent,
+    size: TabSize = TabDefaults.Size,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingContent: @Composable () -> Unit = {},
 ) {
@@ -243,8 +243,8 @@ public fun Tab(
         icon = icon,
         contentDescription = contentDescription,
         enabled = enabled,
-        selectedContentColor = selectedContentColor,
-        style = style,
+        selectedContentColor = intent.color(),
+        size = size,
         interactionSource = interactionSource,
         trailingContent = trailingContent,
     )
