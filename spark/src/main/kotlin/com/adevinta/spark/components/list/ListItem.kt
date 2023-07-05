@@ -22,7 +22,6 @@
 package com.adevinta.spark.components.list
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Text
@@ -129,7 +128,7 @@ internal fun OneLineListItemPreview(
                         sparkIcon = SparkIcons.FavoriteFill,
                         contentDescription = "Localized description",
                     )
-                }
+                },
             )
             Divider()
         }
@@ -155,7 +154,7 @@ internal fun TwoLineListItemPreview(
                         sparkIcon = SparkIcons.FavoriteFill,
                         contentDescription = "Localized description",
                     )
-                }
+                },
             )
             Divider()
         }
@@ -182,13 +181,12 @@ internal fun ThreeLineListItemPreview(
                         contentDescription = "Localized description",
                     )
                 },
-                trailingContent = { Text("meta") }
+                trailingContent = { Text("meta") },
             )
             Divider()
         }
     }
 }
-
 
 @Preview(
     group = "List",
@@ -211,7 +209,7 @@ internal fun ThreeLineContentListItemPreview(
                         contentDescription = "Localized description",
                     )
                 },
-                trailingContent = { Text("meta") }
+                trailingContent = { Text("meta") },
             )
             Divider()
         }
