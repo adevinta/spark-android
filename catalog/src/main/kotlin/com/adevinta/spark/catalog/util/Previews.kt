@@ -36,7 +36,6 @@ import com.adevinta.spark.tokens.lightSparkColors
 import com.adevinta.spark.tokens.sparkShapes
 import com.adevinta.spark.tokens.sparkTypography
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 
 @Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
 @Composable
@@ -46,16 +45,14 @@ internal fun PreviewTheme(
     } else {
         ThemeVariant.Light
     },
-    userType: UserType = UserType.Part,
     padding: PaddingValues = PaddingValues(16.dp),
     contentPadding: Dp = 16.dp,
     color: @Composable () -> Color = { SparkTheme.colors.background },
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable() (ColumnScope.() -> Unit),
 ) {
     SparkTenantTheme(
         // We don't want to automatically support dark theme in the app but still want it in the previews
         useDarkColors = themeVariant == ThemeVariant.Dark,
-        isPro = userType == UserType.Pro,
     ) {
         PreviewWrapper(
             padding = padding,
@@ -73,13 +70,12 @@ internal fun SparkTenantTheme(
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
     useLegacyStyle: Boolean = false,
-    isPro: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val colors = if (useDarkColors) {
-        darkSparkColors(isPro = isPro)
+        darkSparkColors()
     } else {
-        lightSparkColors(isPro = isPro)
+        lightSparkColors()
     }
     SparkTheme(
         colors = colors,
