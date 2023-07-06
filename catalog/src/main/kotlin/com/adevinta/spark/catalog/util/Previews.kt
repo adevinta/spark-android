@@ -48,7 +48,7 @@ internal fun PreviewTheme(
     padding: PaddingValues = PaddingValues(16.dp),
     contentPadding: Dp = 16.dp,
     color: @Composable () -> Color = { SparkTheme.colors.background },
-    content: @Composable() (ColumnScope.() -> Unit),
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     SparkTenantTheme(
         // We don't want to automatically support dark theme in the app but still want it in the previews
