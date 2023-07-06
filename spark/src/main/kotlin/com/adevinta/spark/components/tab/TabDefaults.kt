@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.IconSize.Small
 
-public object TabDefaults {
+internal object TabDefaults {
     internal val SelectedContentIntent = TabIntent.Primary
     internal val Size = TabSize.Medium
     internal val HorizontalArrangementSpace = 8.dp

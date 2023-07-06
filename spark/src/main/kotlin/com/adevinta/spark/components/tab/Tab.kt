@@ -55,6 +55,7 @@ import com.adevinta.spark.icons.AccountFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.ifNotNull
+import com.adevinta.spark.tools.modifiers.ifNull
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -143,11 +144,10 @@ internal fun SparkTab(
                 icon = {
                     icon?.let {
                         Icon(
-                            modifier = Modifier.then(
-                                if (text == null) {
-                                    Modifier.size(IconSize.Small.size)
-                                } else {
-                                    Modifier.layout { measurable, constraints ->
+                            modifier = Modifier
+                                .ifNull(text) { size(IconSize.Small.size) }
+                                .ifNotNull(text) {
+                                    layout { measurable, constraints ->
                                         val placeable = measurable.measure(constraints)
                                         if (constraints.maxHeight == Constraints.Infinity) {
                                             layout(0, 0) {}
@@ -158,7 +158,6 @@ internal fun SparkTab(
                                         }
                                     }
                                 },
-                            ),
                             sparkIcon = it,
                             contentDescription = if (text == null) contentDescription else null,
                         )
