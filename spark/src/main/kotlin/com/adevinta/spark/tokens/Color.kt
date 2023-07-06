@@ -103,6 +103,7 @@ import com.adevinta.spark.tokens.PaletteTokens.Wiggings700
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings800
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+
 public fun lightSparkColors(
     primary: Color = TheBlue500,
     onPrimary: Color = White,
@@ -1239,3 +1240,14 @@ private fun ColorItem(color: Color, colorName: String) {
         }
     }
 }
+
+public val Color.dim1: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim1)
+public val Color.dim2: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim2)
+public val Color.dim3: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim3)
+public val Color.dim4: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim4)
+public val Color.dim5: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim5)
