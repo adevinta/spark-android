@@ -38,6 +38,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -67,7 +68,9 @@ internal fun BaseSparkTag(
     content: @Composable RowScope.() -> Unit,
 ) {
     Surface(
-        modifier = modifier.sparkUsageOverlay(),
+        modifier = modifier
+            .semantics(mergeDescendants = true) {}
+            .sparkUsageOverlay(),
         shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.full,
         color = colors.backgroundColor,
         contentColor = colors.contentColor.copy(1.0f),
