@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.tokens.dim4
 import androidx.compose.material3.SwitchDefaults as MaterialSwitchDefaults
 
 public object SwitchDefaults {
@@ -36,10 +37,10 @@ public object SwitchDefaults {
         checkedBorderColor: Color = Color.Transparent,
         checkedIconColor: Color = SparkTheme.colors.primary,
         uncheckedThumbColor: Color = SparkTheme.colors.surface,
-        uncheckedTrackColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim4)
+        uncheckedTrackColor: Color = SparkTheme.colors.onSurface.dim4
             .compositeOver(SparkTheme.colors.surface),
         uncheckedBorderColor: Color = Color.Transparent,
-        uncheckedIconColor: Color = SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim4)
+        uncheckedIconColor: Color = SparkTheme.colors.onSurface.dim4
             .compositeOver(SparkTheme.colors.surface),
         disabledCheckedThumbColor: Color = SparkTheme.colors.surface,
         disabledCheckedTrackColor: Color = SparkTheme.colors.primaryContainer,
