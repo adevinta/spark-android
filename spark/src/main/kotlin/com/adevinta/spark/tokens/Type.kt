@@ -411,5 +411,5 @@ private fun TextPreview(
     }
 }
 
-public val TextStyle.Highlight: TextStyle
+public val TextStyle.highlight: TextStyle
     @Composable get() = this.copy(fontWeight = FontWeight.Bold)
