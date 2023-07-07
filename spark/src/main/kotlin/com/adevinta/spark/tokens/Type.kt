@@ -411,5 +411,8 @@ private fun TextPreview(
     }
 }
 
+/**
+ * Extension property to get a [TextStyle] with [FontWeight.Bold] applied
+ */
 public val TextStyle.highlight: TextStyle
-    @Composable get() = this.copy(fontWeight = FontWeight.Bold)
+    get() = this.copy(fontWeight = FontWeight.Bold)
