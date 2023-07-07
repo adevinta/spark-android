@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.tokens.highlight
 
 /**
  * @param size size of the badge
@@ -40,7 +41,7 @@ public enum class BadgeStyle(public val size: Dp, public val contentPadding: Dp)
 internal fun BadgeStyle.getTextStyle() = when (this) {
     BadgeStyle.Small -> SparkTheme.typography.small
     BadgeStyle.Medium -> SparkTheme.typography.caption
-}.copy(fontWeight = FontWeight.Bold)
+}.highlight
 
 private val mediumBadgeSize = 24.dp
 private val mediumBadgeContentPadding = 8.dp

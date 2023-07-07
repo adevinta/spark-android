@@ -43,6 +43,7 @@ import com.adevinta.spark.icons.House
 import com.adevinta.spark.icons.Search
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.highlight
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.LeadingIconTab as MaterialLeadingIconTab
@@ -67,7 +68,7 @@ internal fun SparkLeadingIconTab(
         text = {
             Text(
                 text = text,
-                style = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold),
+                style = SparkTheme.typography.caption.highlight,
             )
         },
         icon = {

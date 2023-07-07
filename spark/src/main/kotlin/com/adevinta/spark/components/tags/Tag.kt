@@ -53,6 +53,7 @@ import com.adevinta.spark.icons.Accessories
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
+import com.adevinta.spark.tokens.highlight
 import com.adevinta.spark.tools.modifiers.SlotArea
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
@@ -74,7 +75,7 @@ internal fun BaseSparkTag(
         border = border,
     ) {
         ProvideTextStyle(
-            value = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold),
+            value = SparkTheme.typography.caption.highlight,
         ) {
             Row(
                 Modifier
