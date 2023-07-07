@@ -93,7 +93,7 @@ public fun SparkSnackbar(
         modifier = modifier
             .padding(16.dp)
             .sparkUsageOverlay(),
-        shape = SparkTheme.shapes.extraSmall,
+        shape = SparkTheme.shapes.small,
         actionOnNewLine = actionOnNewLine,
         containerColor = colors.baseColor,
         contentColor = contentColor,
