@@ -48,7 +48,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -57,6 +56,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.tokens.highlight
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -109,7 +109,7 @@ internal fun SegmentedButton(
                         text = option,
                         color = textColor,
                         maxLines = 1,
-                        style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                        style = SparkTheme.typography.body2.highlight,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.padding(horizontal = 4.dp),
                     )

@@ -44,7 +44,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
@@ -57,6 +56,7 @@ import com.adevinta.spark.components.toggles.RadioButtonLabelled
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.highlight
 
 @Composable
 public fun ThemePicker(
@@ -81,7 +81,7 @@ public fun ThemePicker(
             Column {
                 Text(
                     text = stringResource(id = R.string.theme_picker_mode_title),
-                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                    style = SparkTheme.typography.body2.highlight,
                     modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
                 )
                 val themeModes = ThemeMode.values()
@@ -101,7 +101,7 @@ public fun ThemePicker(
             Column {
                 Text(
                     text = stringResource(id = R.string.theme_picker_theme_title),
-                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                    style = SparkTheme.typography.body2.highlight,
                     modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
                 )
                 val colorModes = ColorMode.values()
@@ -168,7 +168,7 @@ public fun ThemePicker(
             Column {
                 Text(
                     text = stringResource(id = R.string.theme_picker_text_direction_title),
-                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                    style = SparkTheme.typography.body2.highlight,
                     modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
                 )
                 val textDirections = TextDirection.values()
@@ -188,7 +188,7 @@ public fun ThemePicker(
             Column {
                 Text(
                     text = stringResource(id = R.string.theme_picker_font_scale_title),
-                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                    style = SparkTheme.typography.body2.highlight,
                     modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
                 )
                 val fontScaleModes = FontScaleMode.values()
@@ -308,7 +308,7 @@ private fun FontScaleItem(
         )
         Text(
             text = stringResource(id = R.string.scale, fontScale),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.body2.highlight,
         )
     }
 }

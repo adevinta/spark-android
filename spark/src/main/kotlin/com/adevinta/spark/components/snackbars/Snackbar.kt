@@ -39,7 +39,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
@@ -51,6 +50,7 @@ import com.adevinta.spark.icons.FlashlightFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
+import com.adevinta.spark.tokens.highlight
 import com.adevinta.spark.tools.modifiers.SlotArea
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import androidx.compose.material3.Snackbar as MaterialSnackBar
@@ -100,7 +100,7 @@ public fun SparkSnackbar(
         action = actionComposable,
     ) {
         Column {
-            ProvideTextStyle(value = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold)) {
+            ProvideTextStyle(value = SparkTheme.typography.body2.highlight) {
                 titleComposable?.invoke()
                 Spacer(Modifier.height(4.dp))
             }
