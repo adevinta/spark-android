@@ -43,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
+import com.adevinta.spark.LocalLegacyStyle
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.BaseSparkButton
@@ -93,7 +94,7 @@ public fun SparkSnackbar(
         modifier = modifier
             .padding(16.dp)
             .sparkUsageOverlay(),
-        shape = SparkTheme.shapes.small,
+        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.small,
         actionOnNewLine = actionOnNewLine,
         containerColor = colors.baseColor,
         contentColor = contentColor,
