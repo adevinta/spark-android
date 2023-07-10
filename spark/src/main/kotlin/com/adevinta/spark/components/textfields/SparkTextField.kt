@@ -403,7 +403,7 @@ need to add additional padding themselves
 */
 internal val OutlinedTextFieldTopPadding = 8.dp
 
-// The dMaterial height is 56.dp with 16.dp vertical padding, since we want 12.dp for ours we subtract 8.dp
+// The default Material height is 56.dp with 16.dp vertical padding, since we want 12.dp for ours we subtract 8.dp
 private val TextFieldMinHeight = 44.dp
 
 @Preview(
