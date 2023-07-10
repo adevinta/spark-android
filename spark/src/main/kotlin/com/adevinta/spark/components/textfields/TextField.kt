@@ -115,7 +115,6 @@ public fun TextField(
 ) {
     val trailingContentBasedOnState: (@Composable () -> Unit)? = TextFieldDefault.getTrailingContent(
         state = state,
-        value = value.text,
         trailingIcon = trailingContent,
     )
 
@@ -210,7 +209,6 @@ public fun TextField(
 ) {
     val trailingContentBasedOnState: (@Composable () -> Unit)? = TextFieldDefault.getTrailingContent(
         state = state,
-        value = value,
         trailingIcon = trailingContent,
     )
 

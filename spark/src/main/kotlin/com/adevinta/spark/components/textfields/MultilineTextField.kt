@@ -131,20 +131,21 @@ public fun MultilineTextField(
 ) {
     val trailingIconComposable: (@Composable () -> Unit)? = getTrailingContent(
         state = state,
-        value = value.text,
-        trailingIcon = {
-            Icon(
-                modifier = Modifier
-                    .clickable {
-                        onCancelClick()
-                    }
-                    .semantics {
-                        role = Role.Button
-                    },
-                sparkIcon = SparkIcons.DeleteOutline,
-                contentDescription = "Cancel",
-            )
-        },
+        trailingIcon = if (value.text.isNotBlank()) {
+            {
+                Icon(
+                    modifier = Modifier
+                        .clickable {
+                            onCancelClick()
+                        }
+                        .semantics {
+                            role = Role.Button
+                        },
+                    sparkIcon = SparkIcons.DeleteOutline,
+                    contentDescription = "Cancel",
+                )
+            }
+        } else null,
     )
 
     SparkTextField(
@@ -248,20 +249,21 @@ public fun MultilineTextField(
 ) {
     val trailingIconComposable: (@Composable () -> Unit)? = getTrailingContent(
         state = state,
-        value = value,
-        trailingIcon = {
-            Icon(
-                modifier = Modifier
-                    .clickable {
-                        onCancelClick()
-                    }
-                    .semantics {
-                        role = Role.Button
-                    },
-                sparkIcon = SparkIcons.DeleteOutline,
-                contentDescription = "Cancel",
-            )
-        },
+        trailingIcon = if (value.isNotBlank()) {
+            {
+                Icon(
+                    modifier = Modifier
+                        .clickable {
+                            onCancelClick()
+                        }
+                        .semantics {
+                            role = Role.Button
+                        },
+                    sparkIcon = SparkIcons.DeleteOutline,
+                    contentDescription = "Cancel",
+                )
+            }
+        } else null,
     )
     SparkTextField(
         value = value,
