@@ -94,7 +94,7 @@ public fun SparkSnackbar(
         modifier = modifier
             .padding(16.dp)
             .sparkUsageOverlay(),
-        shape = if(LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.small,
+        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.small,
         actionOnNewLine = actionOnNewLine,
         containerColor = colors.baseColor,
         contentColor = contentColor,

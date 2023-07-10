@@ -997,6 +997,36 @@ public fun contentColorFor(backgroundColor: Color): Color {
 }
 
 /**
+ * Extension property to get a [Color] with dim1(a medium emphasis to text) applied
+ */
+public val Color.dim1: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim1)
+
+/**
+ * Extension property to get a [Color] with dim2(a medium emphasis to icons) applied
+ */
+public val Color.dim2: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim2)
+
+/**
+ * Extension property to get a [Color] with dim3(disabled emphasis to all components) applied
+ */
+public val Color.dim3: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim3)
+
+/**
+ * Extension property to get a [Color] with dim4(low element) applied
+ */
+public val Color.dim4: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim4)
+
+/**
+ * Extension property to get a [Color] with dim5(pressed/ripple visual but should not be used on Android) applied
+ */
+public val Color.dim5: Color
+    @Composable get() = this.copy(alpha = SparkTheme.colors.dim5)
+
+/**
  * Updates the internal values of the given [SparkColors] with values from the [other] [SparkColors]. This
  * allows efficiently updating a subset of [SparkColors], without recomposing every composable that
  * consumes values from [LocalSparkColors].
@@ -1240,33 +1270,3 @@ private fun ColorItem(color: Color, colorName: String) {
         }
     }
 }
-
-/**
- * Extension property to get a [Color] with dim1 applied
- */
-public val Color.dim1: Color
-    @Composable get() = this.copy(alpha = SparkTheme.colors.dim1)
-
-/**
- * Extension property to get a [Color] with dim2 applied
- */
-public val Color.dim2: Color
-    @Composable get() = this.copy(alpha = SparkTheme.colors.dim2)
-
-/**
- * Extension property to get a [Color] with dim3 applied
- */
-public val Color.dim3: Color
-    @Composable get() = this.copy(alpha = SparkTheme.colors.dim3)
-
-/**
- * Extension property to get a [Color] with dim4 applied
- */
-public val Color.dim4: Color
-    @Composable get() = this.copy(alpha = SparkTheme.colors.dim4)
-
-/**
- * Extension property to get a [Color] with dim5 applied
- */
-public val Color.dim5: Color
-    @Composable get() = this.copy(alpha = SparkTheme.colors.dim5)

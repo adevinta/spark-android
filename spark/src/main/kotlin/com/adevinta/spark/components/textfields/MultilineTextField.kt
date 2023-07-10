@@ -145,7 +145,9 @@ public fun MultilineTextField(
                     contentDescription = "Cancel",
                 )
             }
-        } else null,
+        } else {
+            null
+        },
     )
 
     SparkTextField(
@@ -263,7 +265,9 @@ public fun MultilineTextField(
                     contentDescription = "Cancel",
                 )
             }
-        } else null,
+        } else {
+            null
+        },
     )
     SparkTextField(
         value = value,

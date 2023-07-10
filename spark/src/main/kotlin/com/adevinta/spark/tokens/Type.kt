@@ -238,7 +238,7 @@ public data class SparkTypography(
         "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith(
             expression = "body1.highlight",
-            "androidx.compose.ui.text.font.FontWeight",
+            "com.adevinta.spark.tokens.highlight",
         ),
         level = DeprecationLevel.WARNING,
     )
@@ -257,7 +257,7 @@ public data class SparkTypography(
         "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith(
             expression = "body2.highlight",
-            "androidx.compose.ui.text.font.FontWeight",
+            "com.adevinta.spark.tokens.highlight",
         ),
         level = DeprecationLevel.WARNING,
     )
@@ -276,7 +276,7 @@ public data class SparkTypography(
         "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith(
             expression = "caption.highlight",
-            "androidx.compose.ui.text.font.FontWeight",
+            "com.adevinta.spark.tokens.highlight",
         ),
         level = DeprecationLevel.WARNING,
     )
@@ -295,7 +295,7 @@ public data class SparkTypography(
         "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith(
             expression = "small.highlight",
-            "androidx.compose.ui.text.font.FontWeight",
+            "com.adevinta.spark.tokens.highlight",
         ),
         level = DeprecationLevel.WARNING,
     )
@@ -338,6 +338,12 @@ public fun SparkTypography.asMaterial3Typography(): Typography = Typography(
     labelMedium = caption,
     labelSmall = small,
 )
+
+/**
+ * Extension property to get a [TextStyle] with [FontWeight.Bold] applied
+ */
+public val TextStyle.highlight: TextStyle
+    get() = this.copy(fontWeight = FontWeight.Bold)
 
 @Preview(
     group = "Tokens",
@@ -410,9 +416,3 @@ private fun TextPreview(
         )
     }
 }
-
-/**
- * Extension property to get a [TextStyle] with [FontWeight.Bold] applied
- */
-public val TextStyle.highlight: TextStyle
-    get() = this.copy(fontWeight = FontWeight.Bold)
