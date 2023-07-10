@@ -59,6 +59,7 @@ import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi
@@ -231,7 +232,7 @@ public object SparkButtonDefaults {
     )
 
     internal val Color.disabled: Color
-        @Composable get() = this.copy(alpha = SparkTheme.colors.dim3)
+        @Composable get() = this.dim3
 
     /**
      * The default border of [ButtonOutlined]

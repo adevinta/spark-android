@@ -30,7 +30,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -45,6 +44,7 @@ import com.adevinta.spark.icons.House
 import com.adevinta.spark.icons.Search
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.highlight
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.NavigationRailItem as MaterialNavigationRailItem
@@ -72,7 +72,7 @@ internal fun SparkNavigationRailItem(
         modifier = modifier,
         enabled = enabled,
         label = label?.let {
-            { Text(text = it, style = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold)) }
+            { Text(text = it, style = SparkTheme.typography.caption.highlight) }
         },
         alwaysShowLabel = alwaysShowLabel,
         colors = colors,

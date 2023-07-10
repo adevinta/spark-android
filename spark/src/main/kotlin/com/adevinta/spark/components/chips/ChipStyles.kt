@@ -27,6 +27,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.tokens.dim3
 
 public enum class ChipStyles {
     Outlined {
@@ -37,7 +38,7 @@ public enum class ChipStyles {
                 backgroundColor = Color.Transparent,
                 contentColor = contentColor,
                 disabledBackgroundColor = Color.Transparent,
-                disabledContentColor = contentColor.copy(alpha = SparkTheme.colors.dim3),
+                disabledContentColor = contentColor.dim3,
             )
         }
     },
@@ -49,9 +50,9 @@ public enum class ChipStyles {
             return ChipColors(
                 backgroundColor = backgroundColor,
                 contentColor = contentColor,
-                disabledBackgroundColor = backgroundColor.copy(alpha = SparkTheme.colors.dim3)
+                disabledBackgroundColor = backgroundColor.dim3
                     .compositeOver(SparkTheme.colors.surface),
-                disabledContentColor = contentColor.copy(alpha = SparkTheme.colors.dim3)
+                disabledContentColor = contentColor.dim3
                     .compositeOver(SparkTheme.colors.surface),
             )
         }
@@ -64,9 +65,9 @@ public enum class ChipStyles {
             return ChipColors(
                 backgroundColor = backgroundColor,
                 contentColor = contentColor,
-                disabledBackgroundColor = backgroundColor.copy(alpha = SparkTheme.colors.dim3)
+                disabledBackgroundColor = backgroundColor.dim3
                     .compositeOver(SparkTheme.colors.surface),
-                disabledContentColor = contentColor.copy(alpha = SparkTheme.colors.dim3)
+                disabledContentColor = contentColor.dim3
                     .compositeOver(SparkTheme.colors.surface),
             )
         }
@@ -79,7 +80,7 @@ public enum class ChipStyles {
                 backgroundColor = Color.Transparent,
                 contentColor = contentColor,
                 disabledBackgroundColor = Color.Transparent,
-                disabledContentColor = contentColor.copy(alpha = SparkTheme.colors.dim3),
+                disabledContentColor = contentColor.dim3,
             )
         }
     },

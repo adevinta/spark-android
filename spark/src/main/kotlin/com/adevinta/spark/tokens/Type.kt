@@ -237,12 +237,12 @@ public data class SparkTypography(
     @Deprecated(
         "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith(
-            expression = "body1.copy(fontWeight = FontWeight.Bold)",
+            expression = "body1.highlight",
             "androidx.compose.ui.text.font.FontWeight",
         ),
         level = DeprecationLevel.WARNING,
     )
-    val largeImportant: TextStyle = body1.copy(fontWeight = FontWeight.Bold)
+    val largeImportant: TextStyle = body1.highlight
 
     @Deprecated(
         "This property will be removed as it is not part of Spark Token",
@@ -256,12 +256,12 @@ public data class SparkTypography(
     @Deprecated(
         "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith(
-            expression = "body2.copy(fontWeight = FontWeight.Bold)",
+            expression = "body2.highlight",
             "androidx.compose.ui.text.font.FontWeight",
         ),
         level = DeprecationLevel.WARNING,
     )
-    val bodyImportant: TextStyle = body2.copy(fontWeight = FontWeight.Bold)
+    val bodyImportant: TextStyle = body2.highlight
 
     @Deprecated(
         "This property will be removed as it is not part of Spark Token",
@@ -275,12 +275,12 @@ public data class SparkTypography(
     @Deprecated(
         "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith(
-            expression = "caption.copy(fontWeight = FontWeight.Bold)",
+            expression = "caption.highlight",
             "androidx.compose.ui.text.font.FontWeight",
         ),
         level = DeprecationLevel.WARNING,
     )
-    val smallImportantLegacy: TextStyle = caption.copy(fontWeight = FontWeight.Bold)
+    val smallImportantLegacy: TextStyle = caption.highlight
 
     @Deprecated(
         "This property will be removed as it is not part of Spark Token",
@@ -294,12 +294,12 @@ public data class SparkTypography(
     @Deprecated(
         "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith(
-            expression = "small.copy(fontWeight = FontWeight.Bold)",
+            expression = "small.highlight",
             "androidx.compose.ui.text.font.FontWeight",
         ),
         level = DeprecationLevel.WARNING,
     )
-    val extraSmallImportant: TextStyle = small.copy(fontWeight = FontWeight.Bold)
+    val extraSmallImportant: TextStyle = small.highlight
 
     @Deprecated(
         "This property will be removed as it is not part of Spark Token",
@@ -334,7 +334,7 @@ public fun SparkTypography.asMaterial3Typography(): Typography = Typography(
     bodyLarge = body1,
     bodyMedium = body2,
     bodySmall = caption,
-    labelLarge = body2.copy(fontWeight = FontWeight.Bold),
+    labelLarge = body2.highlight,
     labelMedium = caption,
     labelSmall = small,
 )
@@ -378,7 +378,7 @@ private fun TextPreview(
         )
         Text(
             text = "This is font family text body1 highlight",
-            style = SparkTheme.typography.body1.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.body1.highlight,
         )
         Text(
             text = "This is font family text body2 (default)",
@@ -386,7 +386,7 @@ private fun TextPreview(
         )
         Text(
             text = "This is font family text body2 highlight",
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.body2.highlight,
         )
         Text(
             text = "This is font family text caption",
@@ -394,7 +394,7 @@ private fun TextPreview(
         )
         Text(
             text = "This is font family text caption highlight",
-            style = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.caption.highlight,
         )
         Text(
             text = "This is font family text small",
@@ -402,7 +402,7 @@ private fun TextPreview(
         )
         Text(
             text = "This is font family text small highlight",
-            style = SparkTheme.typography.small.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.small.highlight,
         )
         Text(
             text = "This is font family text callout",
@@ -410,3 +410,9 @@ private fun TextPreview(
         )
     }
 }
+
+/**
+ * Extension property to get a [TextStyle] with [FontWeight.Bold] applied
+ */
+public val TextStyle.highlight: TextStyle
+    get() = this.copy(fontWeight = FontWeight.Bold)

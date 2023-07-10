@@ -63,7 +63,7 @@ public fun EmphasizeHigh(content: @Composable () -> Unit) {
 @Composable
 public fun EmphasizeMedium(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalContentColor provides SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim1),
+        LocalContentColor provides SparkTheme.colors.onSurface.dim1,
         content = content,
     )
 }
@@ -76,7 +76,7 @@ public fun EmphasizeMedium(content: @Composable () -> Unit) {
 @Composable
 public fun EmphasizeDisable(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalContentColor provides SparkTheme.colors.onSurface.copy(alpha = SparkTheme.colors.dim3),
+        LocalContentColor provides SparkTheme.colors.onSurface.dim3,
         content = content,
     )
 }
@@ -89,7 +89,7 @@ public const val DisabledAlpha: Float = 0.38f
 @Composable
 public fun EmphasizeDim1(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim1),
+        LocalContentColor provides LocalContentColor.current.dim1,
         content = content,
     )
 }
@@ -100,7 +100,7 @@ public fun EmphasizeDim1(content: @Composable () -> Unit) {
 @Composable
 public fun EmphasizeDim2(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim2),
+        LocalContentColor provides LocalContentColor.current.dim2,
         content = content,
     )
 }
@@ -111,7 +111,7 @@ public fun EmphasizeDim2(content: @Composable () -> Unit) {
 @Composable
 public fun EmphasizeDim3(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim3),
+        LocalContentColor provides LocalContentColor.current.dim3,
         content = content,
     )
 }
@@ -122,7 +122,7 @@ public fun EmphasizeDim3(content: @Composable () -> Unit) {
 @Composable
 public fun EmphasizeDim4(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim4),
+        LocalContentColor provides LocalContentColor.current.dim4,
         content = content,
     )
 }
@@ -136,7 +136,7 @@ public fun EmphasizeDim4(content: @Composable () -> Unit) {
 @Composable
 public fun EmphasizeDim5(content: @Composable () -> Unit) {
     CompositionLocalProvider(
-        LocalContentColor provides LocalContentColor.current.copy(alpha = SparkTheme.colors.dim5),
+        LocalContentColor provides LocalContentColor.current.dim5,
         content = content,
     )
 }
