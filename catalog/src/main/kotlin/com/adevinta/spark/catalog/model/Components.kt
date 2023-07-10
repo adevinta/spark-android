@@ -24,6 +24,7 @@ package com.adevinta.spark.catalog.model
 import androidx.annotation.StringRes
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
 import com.adevinta.spark.catalog.util.PackageSummaryUrl
@@ -57,7 +58,20 @@ private val Buttons = Component(
     configurator = ButtonsConfigurator,
 )
 
+private val TextFields = Component(
+    id = nextId(),
+    name = "TextFields",
+    description = R.string.component_textfield_description,
+    // No buttons icon
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/773c60-input--text-field/b/0658e2",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.textfields/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/textfields/TextField.kt",
+    examples = emptyList(),
+    configurator = TextFieldsConfigurator,
+)
+
 /** Components for the catalog, ordered alphabetically by name. */
 public val Components: List<Component> = listOf(
     Buttons,
+    TextFields,
 )

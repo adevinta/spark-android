@@ -11,5 +11,6 @@
 -dontobfuscate
 -keepattributes LineNumberTable,SourceFile
 -renamesourcefileattribute SourceFile
+-verbose
 
 -keep class com.adevinta.spark.tools.preview.UserProProvider { *; }

@@ -182,7 +182,7 @@ private fun ButtonSample() {
         var expanded by remember { mutableStateOf(false) }
         SelectTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = "",
+            value = intent.name,
             onValueChange = {},
             readOnly = true,
             label = "Intent",
