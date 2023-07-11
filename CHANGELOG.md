@@ -4,6 +4,19 @@
 
 ## [Unreleased]
 
+## [0.3.0]
+
+_2023-07-11_
+
+* 🆕 Migrate `TextField` to the new spark spec with multiple sizes, styles and intents.
+* 🔧 Add extensions to make usage of dims and highlights simpler.
+* 💄 `Buttons` now have the correct color in disabled state.
+* 💄 `Badges` now have all intents instead of `error` and `info`.
+* 💄 `Snackbars` now have a bigger shape in new ui.
+* 🐛 `Tags` now correctly expose its children with semantics.
+* 🗑️ Deprecated `SparkIcons` are now removed.
+* Update icon resources
+
 ## [0.2.0]
 
 _2023-06-23_
@@ -53,7 +66,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.2.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.3.0...HEAD
+
+[0.3.0]: https://github.com/adevinta/spark-android/releases/tag/0.3.0
 
 [0.2.0]: https://github.com/adevinta/spark-android/releases/tag/0.2.0
 
