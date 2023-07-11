@@ -6,7 +6,7 @@
 
 ## [0.3.0]
 
-_2023-06-23_
+_2023-07-11_
 
 * 🆕 Migrate `TextField` to the new spark spec with multiple sizes, styles and intents.
 * 🔧 Add extensions to make usage of dims and highlights simpler.
