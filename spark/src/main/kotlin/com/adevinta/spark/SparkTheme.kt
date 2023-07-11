@@ -91,11 +91,14 @@ public fun SparkTheme(
     // We don't want to automatically support dark theme in the app but still want it in the previews
     colors: SparkColors = SparkTheme.colors,
     shapes: SparkShapes = SparkTheme.shapes,
-    fontFamily: SparkFontFamily = sparkFontFamily(),
     typography: SparkTypography = SparkTheme.typography,
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
     useLegacyStyle: Boolean = false,
+    fontFamily: SparkFontFamily = sparkFontFamily(
+        useSparkTokensHighlighter = useSparkTokensHighlighter,
+        isLegacy = useLegacyStyle,
+    ),
     content: @Composable () -> Unit,
 ) {
     val internalColors = if (useSparkTokensHighlighter) debugColors() else colors

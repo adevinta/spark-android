@@ -54,5 +54,6 @@
 
     <!--Rating-->
     <string name="spark_textfield_content_description">Mandatory</string>
+    <string name="spark_textfield_delete_a11y">Cancel</string>
 
 </resources>
