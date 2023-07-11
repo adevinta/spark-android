@@ -121,7 +121,7 @@ internal fun SparkTextField(
                 }
                 .defaultMinSize(
                     minWidth = TextFieldDefaults.MinWidth,
-                    minHeight = TextFieldDefaults.MinHeight,
+                    minHeight = if (LocalLegacyStyle.current) TextFieldDefaults.MinHeight else TextFieldMinHeight,
                 )
                 .sparkUsageOverlay(),
             onValueChange = onValueChange,
@@ -219,7 +219,7 @@ internal fun SparkTextField(
             }
                 .defaultMinSize(
                     minWidth = TextFieldDefaults.MinWidth,
-                    minHeight = TextFieldDefaults.MinHeight,
+                    minHeight = if (LocalLegacyStyle.current) TextFieldDefaults.MinHeight else TextFieldMinHeight,
                 )
                 .sparkUsageOverlay(),
             onValueChange = onValueChange,
@@ -375,7 +375,6 @@ internal object TextFieldDefault {
     @Composable
     internal fun getTrailingContent(
         state: TextFieldState?,
-        value: String,
         trailingIcon: (@Composable () -> Unit)?,
     ): (@Composable () -> Unit)? = when {
         state != null -> {
@@ -393,9 +392,7 @@ internal object TextFieldDefault {
             }
         }
 
-        value.isNotBlank() -> trailingIcon
-
-        else -> null
+        else -> trailingIcon
     }
 }
 
@@ -405,6 +402,9 @@ for default cases when developers do not override the label's font size. If they
 need to add additional padding themselves
 */
 internal val OutlinedTextFieldTopPadding = 8.dp
+
+// The default Material height is 56.dp with 16.dp vertical padding, since we want 12.dp for ours we subtract 8.dp
+private val TextFieldMinHeight = 44.dp
 
 @Preview(
     group = "TextFields",
@@ -431,6 +431,17 @@ internal fun TextFieldSlotsPreview() {
             label = "Label",
             placeholder = "Placeholder",
             helper = "helper helper",
+            leadingContent = icon,
+            trailingContent = icon,
+        )
+
+        TextField(
+            value = "din.djarin@adevinta.com",
+            onValueChange = {},
+            enabled = true,
+            required = true,
+            label = "Label",
+            placeholder = "Placeholder",
             leadingContent = icon,
             trailingContent = icon,
         )

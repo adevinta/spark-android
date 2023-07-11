@@ -33,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
@@ -44,6 +45,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.R
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.text.Text
@@ -131,19 +133,22 @@ public fun MultilineTextField(
 ) {
     val trailingIconComposable: (@Composable () -> Unit)? = getTrailingContent(
         state = state,
-        value = value.text,
-        trailingIcon = {
-            Icon(
-                modifier = Modifier
-                    .clickable {
-                        onCancelClick()
-                    }
-                    .semantics {
-                        role = Role.Button
-                    },
-                sparkIcon = SparkIcons.DeleteOutline,
-                contentDescription = "Cancel",
-            )
+        trailingIcon = if (value.text.isNotBlank()) {
+            {
+                Icon(
+                    modifier = Modifier
+                        .clickable {
+                            onCancelClick()
+                        }
+                        .semantics {
+                            role = Role.Button
+                        },
+                    sparkIcon = SparkIcons.DeleteOutline,
+                    contentDescription = stringResource(R.string.spark_textfield_delete_a11y),
+                )
+            }
+        } else {
+            null
         },
     )
 
@@ -248,19 +253,22 @@ public fun MultilineTextField(
 ) {
     val trailingIconComposable: (@Composable () -> Unit)? = getTrailingContent(
         state = state,
-        value = value,
-        trailingIcon = {
-            Icon(
-                modifier = Modifier
-                    .clickable {
-                        onCancelClick()
-                    }
-                    .semantics {
-                        role = Role.Button
-                    },
-                sparkIcon = SparkIcons.DeleteOutline,
-                contentDescription = "Cancel",
-            )
+        trailingIcon = if (value.isNotBlank()) {
+            {
+                Icon(
+                    modifier = Modifier
+                        .clickable {
+                            onCancelClick()
+                        }
+                        .semantics {
+                            role = Role.Button
+                        },
+                    sparkIcon = SparkIcons.DeleteOutline,
+                    contentDescription = "Cancel",
+                )
+            }
+        } else {
+            null
         },
     )
     SparkTextField(
