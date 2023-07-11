@@ -27,23 +27,14 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabPosition
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
-import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.divider.Divider
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
+import com.adevinta.spark.components.divider.SparkDivider
 import androidx.compose.material3.ScrollableTabRow as MaterialScrollableTabRow
 import androidx.compose.material3.TabRow as MaterialTabRow
 
@@ -59,7 +50,7 @@ internal fun SparkTabRow(
             Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
         )
     },
-    divider: @Composable () -> Unit = @Composable { Divider() },
+    divider: @Composable () -> Unit = @Composable { SparkDivider() },
     tabs: @Composable () -> Unit,
 ) {
     MaterialTabRow(
@@ -85,11 +76,6 @@ internal fun SparkTabRow(
  * taking up an equal amount of space. See [ScrollableTabRow] for a tab row that does not enforce
  * equal size, and allows scrolling to tabs that do not fit on screen.
  *
- * As well as customizing the tab, you can also provide a custom [indicator], to customize
- * the indicator displayed for a tab. [indicator] will be placed to fill the entire TabRow, so it
- * should internally take care of sizing and positioning the indicator to match changes to
- * [selectedTabIndex].
- *
  * @param selectedTabIndex the index of the currently selected tab
  * @param modifier the [Modifier] to be applied to this tab row
  * @param tabs the tabs inside this tab row. Typically this will be multiple [Tab]s. Each element
@@ -97,6 +83,13 @@ internal fun SparkTabRow(
  */
 @ExperimentalSparkApi
 @Composable
+@Deprecated(
+    message = "This component is no longer compliant with Spark specs",
+    replaceWith = ReplaceWith(
+        expression = "TabGroup(selectedTabIndex, modifier, intent, tabs)",
+        imports = ["com.adevinta.spark.components.tab.TabGroup"],
+    ),
+)
 public fun TabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
@@ -142,6 +135,13 @@ public fun TabRow(
  */
 @ExperimentalSparkApi
 @Composable
+@Deprecated(
+    message = "This component is no longer compliant with Spark specs",
+    replaceWith = ReplaceWith(
+        expression = "TabGroup(selectedTabIndex, modifier, intent, tabs)",
+        imports = ["com.adevinta.spark.components.tab.TabGroup"],
+    ),
+)
 public fun ScrollableTabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
@@ -173,32 +173,4 @@ public fun ScrollableTabRow(
 /**
  * The default padding from the starting edge before a tab in a [ScrollableTabRow].
  */
-private val ScrollableTabRowPadding = 52.dp
-
-@Preview(
-    group = "Tabs",
-    name = "TabRow",
-)
-@Composable
-internal fun TabRowPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    val tabs = mutableListOf("Home", "Search", "Messaging", "Account")
-    var selectedIndex by remember { mutableStateOf(0) }
-    PreviewTheme(theme) {
-        TabRow(
-            selectedTabIndex = 0,
-            tabs = {
-                tabs.forEachIndexed { index, title ->
-                    Tab(
-                        selected = selectedIndex == index,
-                        onClick = { selectedIndex = index },
-                        enabled = true,
-                    ) {
-                        Text(title)
-                    }
-                }
-            },
-        )
-    }
-}
+internal val ScrollableTabRowPadding = 52.dp

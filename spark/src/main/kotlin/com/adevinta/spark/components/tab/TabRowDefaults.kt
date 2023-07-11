@@ -43,7 +43,7 @@ public object TabRowDefaults {
     /** Default content color of a tab row. */
     public val contentColor: Color
         @Composable get() =
-            PrimaryNavigationTabTokens.ActiveLabelTextColor
+            PrimaryNavigationTabTokens.ActiveTabColor
 
     /**
      * Default indicator, which will be positioned at the bottom of the [TabRow], on top of the
@@ -71,9 +71,9 @@ public object TabRowDefaults {
 internal object PrimaryNavigationTabTokens {
     val ContainerColor
         @Composable get() = SparkTheme.colors.surface
-    val ActiveLabelTextColor
+    val ActiveTabColor
         @Composable get() = SparkTheme.colors.primary
-    val ActiveIndicatorHeight = 3.0.dp
+    val ActiveIndicatorHeight = 2.0.dp
     val ActiveIndicatorColor
-        @Composable get() = SparkTheme.colors.primary
+        @Composable get() = ActiveTabColor
 }
