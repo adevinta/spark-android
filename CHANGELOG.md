@@ -12,7 +12,7 @@ _2023-07-11_
 * 🔧 Add extensions to make usage of dims and highlights simpler.
 * 💄 `Buttons` now have the correct color in disabled state.
 * 💄 `Badges` now have all intents instead of `error` and `info`.
-* 💄 `Sncakbars` now have a bigger shape in new ui.
+* 💄 `Snackbars` now have a bigger shape in new ui.
 * 🐛 `Tags` now correctly expose its children with semantics.
 * 🗑️ Deprecated `SparkIcons` are now removed.
 * Update icon resources
