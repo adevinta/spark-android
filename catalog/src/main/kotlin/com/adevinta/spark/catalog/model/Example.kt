@@ -19,34 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.examples.example
+@file:Suppress("COMPOSABLE_FUNCTION_REFERENCE")
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
+package com.adevinta.spark.catalog.model
+
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import com.adevinta.spark.catalog.model.Example
-import com.adevinta.spark.tokens.Layout
 
-@Composable
-public fun Example(
-    example: Example,
-    contentPadding: PaddingValues,
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .consumeWindowInsets(WindowInsets.safeDrawing)
-            .padding(contentPadding)
-            .padding(horizontal = Layout.bodyMargin),
-        contentAlignment = Alignment.Center,
-    ) {
-        example.content()
-    }
-}
+public data class Example(
+    val name: String,
+    val description: String,
+    val sourceUrl: String,
+    val content: @Composable () -> Unit,
+)

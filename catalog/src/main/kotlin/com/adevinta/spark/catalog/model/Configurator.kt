@@ -21,11 +21,11 @@
  */
 @file:Suppress("COMPOSABLE_FUNCTION_REFERENCE")
 
-package com.adevinta.spark.catalog.examples.model
+package com.adevinta.spark.catalog.model
 
 import androidx.compose.runtime.Composable
 
-public data class Example(
+public data class Configurator(
     val name: String,
     val description: String,
     val sourceUrl: String,

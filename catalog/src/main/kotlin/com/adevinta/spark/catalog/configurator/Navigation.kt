@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.examples
+package com.adevinta.spark.catalog.configurator
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavGraphBuilder
@@ -27,8 +27,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.adevinta.spark.catalog.configurator.component.ConfiguratorComponentScreen
 import com.adevinta.spark.catalog.examples.component.Component
-import com.adevinta.spark.catalog.examples.example.Example
 import com.adevinta.spark.catalog.model.Component
 
 internal fun NavGraphBuilder.navGraph(
@@ -36,7 +36,7 @@ internal fun NavGraphBuilder.navGraph(
     components: List<Component>,
     contentPadding: PaddingValues,
 ) {
-    composable(route = ComponentRoute) {
+    composable(route = ConfiguratorRoute) {
         ComponentsListScreen(
             components = components,
             navController = navController,
@@ -45,7 +45,7 @@ internal fun NavGraphBuilder.navGraph(
     }
 
     composable(
-        route = "$ComponentRoute/" +
+        route = "$ConfiguratorRoute/" +
             "{$ComponentIdArgName}",
         arguments = listOf(
             navArgument(ComponentIdArgName) { type = NavType.IntType },
@@ -53,39 +53,14 @@ internal fun NavGraphBuilder.navGraph(
     ) { navBackStackEntry ->
         val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
         val componentId = arguments.getInt(ComponentIdArgName)
-        val component = components.first { component -> component.id == componentId }
-        Component(
+        val component = components.first { component -> component.configurator != null && component.id == componentId }
+        ConfiguratorComponentScreen(
             component = component,
+            configurator = requireNotNull(component.configurator),
             contentPadding = contentPadding,
-            onExampleClick = { example ->
-                val exampleIndex = component.examples.indexOf(example)
-                val route = "$ExampleRoute/$componentId/$exampleIndex"
-                navController.navigate(route)
-            },
-        )
-    }
-    composable(
-        route = "$ExampleRoute/" +
-            "{$ComponentIdArgName}/" +
-            "{$ExampleIndexArgName}",
-        arguments = listOf(
-            navArgument(ComponentIdArgName) { type = NavType.IntType },
-            navArgument(ExampleIndexArgName) { type = NavType.IntType },
-        ),
-    ) { navBackStackEntry ->
-        val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
-        val componentId = arguments.getInt(ComponentIdArgName)
-        val exampleIndex = arguments.getInt(ExampleIndexArgName)
-        val component = components.first { component -> component.id == componentId }
-        val example = component.examples[exampleIndex]
-        Example(
-            contentPadding = contentPadding,
-            example = example,
         )
     }
 }
 
-internal const val ComponentRoute = "component"
-internal const val ExampleRoute = "example"
+internal const val ConfiguratorRoute = "configurator"
 internal const val ComponentIdArgName = "componentId"
-internal const val ExampleIndexArgName = "exampleIndex"

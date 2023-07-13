@@ -25,15 +25,12 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -55,13 +52,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -71,8 +65,9 @@ import com.adevinta.spark.catalog.backdrop.BackdropScaffold
 import com.adevinta.spark.catalog.backdrop.BackdropScaffoldDefaults
 import com.adevinta.spark.catalog.backdrop.BackdropValue
 import com.adevinta.spark.catalog.backdrop.rememberBackdropScaffoldState
+import com.adevinta.spark.catalog.configurator.ConfiguratorComponentsScreen
 import com.adevinta.spark.catalog.examples.ComponentsScreen
-import com.adevinta.spark.catalog.examples.model.Component
+import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.showkase.ShowkaseBrowserScreenMetadata
 import com.adevinta.spark.catalog.showkase.navGraph
 import com.adevinta.spark.catalog.tabbar.CatalogTabBar
@@ -87,7 +82,6 @@ import com.adevinta.spark.catalog.themes.UserMode
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
 import com.adevinta.spark.catalog.themes.themeprovider.polaris.PolarisTheme
-import com.adevinta.spark.components.text.Text
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
@@ -201,20 +195,10 @@ internal fun CatalogApp(
                                     )
                                 }
 
-                                CatalogHomeScreen.Configurator -> {
-                                    Box(
-                                        modifier = Modifier.fillMaxSize(),
-                                        contentAlignment = Alignment.TopCenter,
-                                    ) {
-                                        Text(
-                                            text = stringResource(R.string.configurator_wip_text),
-                                            modifier = Modifier
-                                                .padding(horizontal = 16.dp, vertical = 32.dp)
-                                                .padding(innerPadding),
-                                            textAlign = TextAlign.Center,
-                                        )
-                                    }
-                                }
+                                CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
+                                    components = components,
+                                    contentPadding = innerPadding,
+                                )
                             }
                         }
                     },

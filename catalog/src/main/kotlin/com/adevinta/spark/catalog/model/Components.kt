@@ -19,10 +19,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.examples.model
+package com.adevinta.spark.catalog.model
 
 import androidx.annotation.StringRes
 import com.adevinta.spark.catalog.R
+import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
 import com.adevinta.spark.catalog.util.PackageSummaryUrl
@@ -38,6 +40,7 @@ public data class Component(
     val docsUrl: String,
     val sourceUrl: String,
     val examples: List<Example>,
+    val configurator: Configurator? = null,
 )
 
 private var nextId: Int = 1
@@ -46,15 +49,29 @@ private fun nextId(): Int = nextId.also { nextId += 1 }
 private val Buttons = Component(
     id = nextId(),
     name = "Buttons",
-    description = R.string.examples_component_button_description,
+    description = R.string.component_button_description,
     // No buttons icon
-    guidelinesUrl = "$ComponentGuidelinesUrl/buttons",
-    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.buttons/-button-filled.html",
-    sourceUrl = "$SparkSourceUrl/Button.kt",
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/34b742-button/b/32e1a2",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.buttons/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/buttons/Button.kt",
     examples = ButtonsExamples,
+    configurator = ButtonsConfigurator,
+)
+
+private val TextFields = Component(
+    id = nextId(),
+    name = "TextFields",
+    description = R.string.component_textfield_description,
+    // No buttons icon
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/773c60-input--text-field/b/0658e2",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.textfields/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/textfields/TextField.kt",
+    examples = emptyList(),
+    configurator = TextFieldsConfigurator,
 )
 
 /** Components for the catalog, ordered alphabetically by name. */
 public val Components: List<Component> = listOf(
     Buttons,
+    TextFields,
 )

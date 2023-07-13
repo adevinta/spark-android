@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.examples
+package com.adevinta.spark.catalog.configurator
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -42,13 +42,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
-import com.adevinta.spark.catalog.examples.component.ComponentItem
+import com.adevinta.spark.catalog.configurator.component.ConfiguratorComponentComponentItem
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
 
 @Composable
-public fun ComponentsScreen(
+public fun ConfiguratorComponentsScreen(
     modifier: Modifier = Modifier,
     components: List<Component>,
     contentPadding: PaddingValues,
@@ -58,7 +58,7 @@ public fun ComponentsScreen(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = ComponentRoute,
+        startDestination = ConfiguratorRoute,
         builder = {
             navGraph(
                 navController = navController,
@@ -105,11 +105,11 @@ internal fun ComponentsListScreen(
                 verticalArrangement = Arrangement.Absolute.spacedBy(4.dp),
             ) {
                 Text(
-                    text = stringResource(R.string.examples_component_screen_title),
+                    text = stringResource(R.string.configurator_component_screen_title),
                     style = SparkTheme.typography.headline1,
                 )
                 Text(
-                    text = stringResource(R.string.examples_component_screen_description),
+                    text = stringResource(R.string.configurator_component_screen_description),
                     style = SparkTheme.typography.body2,
                 )
             }
@@ -120,9 +120,9 @@ internal fun ComponentsListScreen(
             span = { GridItemSpan(1) },
             contentType = { ComponentsItemType.Component },
             itemContent = { component ->
-                ComponentItem(component = component) {
+                ConfiguratorComponentComponentItem(component = component) {
                     val componentId = component.id
-                    val route = "$ComponentRoute/$componentId"
+                    val route = "$ConfiguratorRoute/$componentId"
                     navController.navigate(route)
                 }
             },
