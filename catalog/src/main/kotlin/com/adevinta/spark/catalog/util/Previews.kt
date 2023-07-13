@@ -36,7 +36,6 @@ import com.adevinta.spark.tokens.lightSparkColors
 import com.adevinta.spark.tokens.sparkShapes
 import com.adevinta.spark.tokens.sparkTypography
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.UserType
 
 @Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
 @Composable

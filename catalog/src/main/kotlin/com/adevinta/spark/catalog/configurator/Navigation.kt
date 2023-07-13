@@ -53,7 +53,7 @@ internal fun NavGraphBuilder.navGraph(
     ) { navBackStackEntry ->
         val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
         val componentId = arguments.getInt(ComponentIdArgName)
-        val component = components.filter { it.configurator != null }.first { component -> component.id == componentId }
+        val component = components.first { component -> component.configurator != null && component.id == componentId }
         ConfiguratorComponentScreen(
             component = component,
             configurator = requireNotNull(component.configurator),

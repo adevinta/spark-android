@@ -44,7 +44,6 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
-import com.adevinta.spark.components.buttons.IconSide
 import com.adevinta.spark.components.icons.FilledIconToggleButton
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text

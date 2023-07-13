@@ -145,7 +145,7 @@ private fun ButtonSample() {
 
         Column {
             Text(
-                text = "IconSize",
+                text = "IconSide",
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
