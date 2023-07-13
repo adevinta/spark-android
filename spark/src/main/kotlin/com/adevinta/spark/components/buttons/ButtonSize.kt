@@ -34,7 +34,6 @@ public enum class ButtonSize {
      */
     Medium {
         override val height = 44.dp
-        override val verticalPadding = 0.dp
         override val contentVerticalPadding = 10.dp
     },
 
@@ -43,12 +42,10 @@ public enum class ButtonSize {
      */
     Large {
         override val height = 56.dp
-        override val verticalPadding = 0.dp
         override val contentVerticalPadding = 16.dp
     },
     ;
 
     internal abstract val height: Dp
-    internal abstract val verticalPadding: Dp
     internal abstract val contentVerticalPadding: Dp
 }
