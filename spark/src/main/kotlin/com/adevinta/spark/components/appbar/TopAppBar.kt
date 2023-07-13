@@ -112,7 +112,7 @@ public fun TopAppBar(
         navigationIcon = navigationIcon,
         actions = actions,
         windowInsets = windowInsets,
-        colors = TopAppBarDefaults.smallTopAppBarColors(),
+        colors = TopAppBarDefaults.topAppBarColors(),
         scrollBehavior = scrollBehavior,
     )
 }
