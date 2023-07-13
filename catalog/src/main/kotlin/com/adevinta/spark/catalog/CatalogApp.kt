@@ -50,6 +50,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -242,6 +246,12 @@ private fun HomeTabBar(
     onTabSelected: (CatalogHomeScreen) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val catalogScreens by remember { mutableStateOf(CatalogHomeScreen.values()) }
+    val catalogScreensName by remember {
+        derivedStateOf {
+            catalogScreens.map { it.name }
+        }
+    }
     CatalogTabBar(
         modifier = modifier
             .wrapContentWidth()
@@ -249,9 +259,9 @@ private fun HomeTabBar(
     ) { tabBarModifier ->
         CatalogTabs(
             modifier = tabBarModifier,
-            titles = CatalogHomeScreen.values().map { it.name },
+            titles = catalogScreensName,
             tabSelected = tabSelected,
-            onTabSelected = { newTab -> onTabSelected(CatalogHomeScreen.values()[newTab.ordinal]) },
+            onTabSelected = { newTab -> onTabSelected(catalogScreens[newTab.ordinal]) },
         )
     }
 }

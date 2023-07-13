@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.buttons
 
-import androidx.annotation.Discouraged
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -31,27 +30,10 @@ import androidx.compose.ui.unit.dp
 @Suppress("ktlint:max-line-length", "ktlint:trailing-comma-on-call-site")
 public enum class ButtonSize {
     /**
-     * Alternative small button size when is needed a low spacing/emphasis to the action.
-     *
-     * Try to use Ghost Medium Button instead size small when it's possible to avoid accessibility issues
-     *
-     * Note : The button takes 44dp of height for a11y but is drown with 32dp of height.
-     */
-    @Discouraged(
-        "The button small is not meant to be used on native apps, consider reviewing this usage with your designer to use more accessible size like Medium."
-    )
-    Small {
-        override val height = 32.dp
-        override val verticalPadding = 12.dp
-        override val contentVerticalPadding = 4.dp
-    },
-
-    /**
      * Medium button is the default button size (recommended).
      */
     Medium {
         override val height = 44.dp
-        override val verticalPadding = 0.dp
         override val contentVerticalPadding = 10.dp
     },
 
@@ -60,12 +42,10 @@ public enum class ButtonSize {
      */
     Large {
         override val height = 56.dp
-        override val verticalPadding = 0.dp
         override val contentVerticalPadding = 16.dp
     },
     ;
 
     internal abstract val height: Dp
-    internal abstract val verticalPadding: Dp
     internal abstract val contentVerticalPadding: Dp
 }
