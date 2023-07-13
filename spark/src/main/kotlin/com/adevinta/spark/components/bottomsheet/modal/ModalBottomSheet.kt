@@ -467,7 +467,7 @@ internal fun ModalBottomSheetSample() {
 
                 items(50) {
                     ListItem(
-                        headlineText = { Text("Item $it") },
+                        headlineContent = { Text("Item $it") },
                         leadingContent = {
                             Icon(
                                 SparkIcons.LikeFill,
