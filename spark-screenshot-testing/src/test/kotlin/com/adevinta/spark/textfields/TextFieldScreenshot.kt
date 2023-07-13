@@ -35,19 +35,22 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
+import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.runners.Parameterized
 
-@RunWith(Parameterized::class)
-internal class TextFieldScreenshot(
-    private val value: String?,
-    private val trailingIcon: SparkIcon?,
-    private val leadingIcon: SparkIcon?,
-    private val enabled: Boolean,
-    private val helper: String?,
-) {
+@RunWith(TestParameterInjector::class)
+internal class TextFieldScreenshot {
+
+    private val values: List<String> = listOf("", stubShortBody, stubBody)
+
+    private val leadingIcons: List<SparkIcon?> = listOf(SparkIcons.Check, null)
+
+    private val trailingIcons: List<SparkIcon?> = listOf(SparkIcons.EyeOffFill, null)
+
+    private val enableds: List<Boolean> = listOf(true, false)
+    private val helpers: List<String?> = listOf(null, stubBody)
 
     @get:Rule
     val paparazzi = Paparazzi(
@@ -59,124 +62,102 @@ internal class TextFieldScreenshot(
 
     @Test
     fun test() {
-        paparazzi.sparkSnapshot(
-            name = "_value[${value?.count()}]" +
-                "_leadingIcon[${leadingIcon != null}]" +
-                "_trailingIcon[${trailingIcon != null}]" +
-                "_enabled[$enabled]" +
-                "_helper[${helper?.count()}]",
-        ) {
-            val leadingContent: (@Composable () -> Unit)? = leadingIcon?.let {
-                @Composable {
-                    Icon(it, contentDescription = null)
+        values.forEach { value ->
+            leadingIcons.forEach { leadingIcon ->
+                trailingIcons.forEach { trailingIcon ->
+                    enableds.forEach { enabled ->
+                        helpers.forEach { helper ->
+                            paparazzi.sparkSnapshot(
+                                name = "_value.${value.count()}" +
+                                    leadingIcon?.let { "_leadingIcon" }.orEmpty() +
+                                    trailingIcon?.let { "_trailingIcon" }.orEmpty() +
+                                    "_enabled".takeIf { enabled }.orEmpty() +
+                                    helper?.let { "_helper.${helper.count()}" }.orEmpty(),
+                            ) {
+                                val leadingContent: (@Composable () -> Unit)? = leadingIcon?.let {
+                                    @Composable {
+                                        Icon(it, contentDescription = null)
+                                    }
+                                }
+                                val trailingContent: (@Composable () -> Unit)? = trailingIcon?.let {
+                                    @Composable {
+                                        Icon(it, contentDescription = null)
+                                    }
+                                }
+                                Column(
+                                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                                ) {
+                                    TextField(
+                                        value = value,
+                                        onValueChange = {},
+                                        label = "Label",
+                                        leadingContent = leadingContent,
+                                        trailingContent = trailingContent,
+                                        required = true,
+                                        enabled = enabled,
+                                        stateMessage = "short state message for textfield",
+                                        helper = helper,
+                                    )
+                                    TextField(
+                                        value = value,
+                                        onValueChange = {},
+                                        label = "Label",
+                                        leadingContent = leadingContent,
+                                        trailingContent = trailingContent,
+                                        state = TextFieldState.Error,
+                                        required = true,
+                                        enabled = enabled,
+                                        stateMessage = "short state message for textfield",
+                                        helper = helper,
+                                    )
+                                    TextField(
+                                        value = value,
+                                        onValueChange = {},
+                                        label = "Label",
+                                        leadingContent = leadingContent,
+                                        trailingContent = trailingContent,
+                                        state = TextFieldState.Alert,
+                                        required = true,
+                                        enabled = enabled,
+                                        stateMessage = "short state message for textfield",
+                                        helper = helper,
+                                    )
+                                    TextField(
+                                        value = value,
+                                        onValueChange = {},
+                                        label = "Label",
+                                        leadingContent = leadingContent,
+                                        trailingContent = trailingContent,
+                                        state = TextFieldState.Success,
+                                        required = true,
+                                        enabled = enabled,
+                                        stateMessage = "short state message for textfield",
+                                        helper = helper,
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
-            }
-            val trailingContent: (@Composable () -> Unit)? = trailingIcon?.let {
-                @Composable {
-                    Icon(it, contentDescription = null)
-                }
-            }
-            Column(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                TextField(
-                    value = value.orEmpty(),
-                    onValueChange = {},
-                    label = "Label",
-                    leadingContent = leadingContent,
-                    trailingContent = trailingContent,
-                    required = true,
-                    enabled = enabled,
-                    stateMessage = "short state message for textfield",
-                    helper = helper,
-                )
-                TextField(
-                    value = value.orEmpty(),
-                    onValueChange = {},
-                    label = "Label",
-                    leadingContent = leadingContent,
-                    trailingContent = trailingContent,
-                    state = TextFieldState.Error,
-                    required = true,
-                    enabled = enabled,
-                    stateMessage = "short state message for textfield",
-                    helper = helper,
-                )
-                TextField(
-                    value = value.orEmpty(),
-                    onValueChange = {},
-                    label = "Label",
-                    leadingContent = leadingContent,
-                    trailingContent = trailingContent,
-                    state = TextFieldState.Alert,
-                    required = true,
-                    enabled = enabled,
-                    stateMessage = "short state message for textfield",
-                    helper = helper,
-                )
-                TextField(
-                    value = value.orEmpty(),
-                    onValueChange = {},
-                    label = "Label",
-                    leadingContent = leadingContent,
-                    trailingContent = trailingContent,
-                    state = TextFieldState.Success,
-                    required = true,
-                    enabled = enabled,
-                    stateMessage = "short state message for textfield",
-                    helper = helper,
-                )
             }
         }
     }
 
     companion object {
-        @JvmStatic
-        @Parameterized.Parameters
-        internal fun params() = parameterizedParams().combineWithParameters(
-            // Value
-            "",
-            stubShortBody,
-            stubBody,
-        ).combineWithParameters(
-            SparkIcons.Check,
-            null,
-        ).combineWithParameters(
-            SparkIcons.EyeOffFill,
-            null,
-        ).combineWithParameters(
-            // Enabled
-            false,
-            true,
-        ).combineWithParameters(
-            // Helper
-            null,
-            stubBody,
-        )
-
         private const val stubShortBody = "Lorem ipsum"
         private const val stubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
             "pulvinar eu nulla sit amet, iaculis interdum."
     }
 }
 
-internal fun parameterizedParams(): List<Array<Any?>> = emptyList()
+public class LeadingIcon(public val icon: SparkIcon?) {
+    override fun toString(): String = icon?.let { "_leadingIcon" }.orEmpty()
+}
 
-internal inline fun <reified T : Any?> List<Array<T>>.combineWithParameters(
-    vararg values: T,
-): List<Array<T>> {
-    if (isEmpty()) {
-        return values.map { arrayOf(it) }
-    }
+public class TrailingIcon(public val icon: SparkIcon?) {
+    override fun toString(): String = icon?.let { "_trailingIcon" }.orEmpty()
+}
 
-    return fold(emptyList()) { acc, args ->
-        val result = acc.toMutableList()
-        values.forEach { v ->
-            result += ArrayList<T>().apply {
-                addAll(args)
-                add(v)
-            }.toTypedArray()
-        }
-        result.toList()
-    }
+public class StringValue(public val value: String?) {
+    override fun toString(): String = value?.let { "_string.${value.count()}" }.orEmpty()
 }
