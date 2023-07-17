@@ -43,7 +43,7 @@ import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.examples.component.ComponentItem
-import com.adevinta.spark.catalog.examples.model.Component
+import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
 

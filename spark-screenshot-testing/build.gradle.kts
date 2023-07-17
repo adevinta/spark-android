@@ -41,4 +41,5 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
+    testImplementation(libs.testParameterInjector)
 }

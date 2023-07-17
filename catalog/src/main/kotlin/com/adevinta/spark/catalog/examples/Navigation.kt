@@ -29,7 +29,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.adevinta.spark.catalog.examples.component.Component
 import com.adevinta.spark.catalog.examples.example.Example
-import com.adevinta.spark.catalog.examples.model.Component
+import com.adevinta.spark.catalog.model.Component
 
 internal fun NavGraphBuilder.navGraph(
     navController: NavHostController,

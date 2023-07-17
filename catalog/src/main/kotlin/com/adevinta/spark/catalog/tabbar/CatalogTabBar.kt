@@ -38,6 +38,7 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabPosition
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -69,21 +70,26 @@ public fun CatalogTabBar(
         modifier = modifier.padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        val drawable = AppCompatResources.getDrawable(LocalContext.current, R.mipmap.ic_launcher)
-        val painter = rememberDrawablePainter(drawable)
-        Illustration(
-            modifier = Modifier
-                .padding(start = 16.dp)
-                .size(24.dp),
-            painter = painter, // spark logo
-            contentDescription = null,
-        )
+        AppIcon()
         children(
             Modifier
                 .weight(1f)
                 .align(Alignment.CenterVertically),
         )
     }
+}
+
+@Composable
+private fun AppIcon() {
+    val drawable = AppCompatResources.getDrawable(LocalContext.current, R.mipmap.ic_launcher)
+    val painter = rememberDrawablePainter(drawable)
+    Illustration(
+        modifier = Modifier
+            .padding(start = 16.dp)
+            .size(24.dp),
+        painter = painter, // spark logo
+        contentDescription = null,
+    )
 }
 
 @Composable
@@ -111,23 +117,33 @@ internal fun CatalogTabs(
     ) {
         titles.forEachIndexed { index, title ->
             val selected = index == tabSelected.ordinal
-
-            Tab(
-                modifier = Modifier
-                    .padding(horizontal = 4.dp)
-                    .clip(SparkTheme.shapes.full),
-                selected = selected,
-                onClick = {
-                    onTabSelected(CatalogHomeScreen.values()[index])
-                },
-            ) {
-                Text(
-                    modifier = Modifier.padding(vertical = 8.dp, horizontal = 8.dp),
-                    text = title.capitalize(Locale.current),
-                    style = SparkTheme.typography.body2,
-                )
-            }
+            CatalogTab(selected, onTabSelected, index, title)
         }
+    }
+}
+
+@Composable
+private fun CatalogTab(
+    selected: Boolean,
+    onTabSelected: (CatalogHomeScreen) -> Unit,
+    index: Int,
+    title: String,
+) {
+    val catalogScreens by remember { mutableStateOf(CatalogHomeScreen.values()) }
+    Tab(
+        modifier = Modifier
+            .padding(horizontal = 4.dp)
+            .clip(SparkTheme.shapes.full),
+        selected = selected,
+        onClick = {
+            onTabSelected(catalogScreens[index])
+        },
+    ) {
+        Text(
+            modifier = Modifier.padding(vertical = 8.dp, horizontal = 8.dp),
+            text = title.capitalize(Locale.current),
+            style = SparkTheme.typography.body2,
+        )
     }
 }
 

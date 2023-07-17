@@ -31,17 +31,17 @@ public fun Context.openUrl(url: String) {
 }
 
 public const val GuidelinesUrl: String = "https://spark.adevinta.com"
-public const val ComponentGuidelinesUrl: String = "https://spark.adevinta.com/1186e1705/p/590121-components"
+public const val ComponentGuidelinesUrl: String = "https://spark.adevinta.com/1186e1705/"
 public const val StyleGuidelinesUrl: String = "https://m3.material.io/styles"
 public const val ReleasesUrl: String = "https://github.com/adevinta/spark-android/releases"
 public const val DocsUrl: String = "https://adevinta.github.io/spark-android/"
 public const val SourceUrl: String = "https://github.com/adevinta/spark-android"
-public const val SparkSourceUrl: String = "https://github.com/adevinta/spark-android/"
+public const val SparkSourceUrl: String = "https://github.com/adevinta/spark-android/tree/main/spark/src/main"
 
 // Use the real sample url from spark once we have our first ones
 /* ktlint-disable max-line-length */
 public const val SampleSourceUrl: String = "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/samples/src/main/java/androidx/compose/material3/samples"
-public const val PackageSummaryUrl: String = "https://https://adevinta.github.io/spark-android/spark/"
+public const val PackageSummaryUrl: String = "https://adevinta.github.io/spark-android/spark/"
 
 /* ktlint-disable max-line-length */
 public const val IssueUrl: String = "https://github.com/adevinta/spark-android/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc"
