@@ -134,7 +134,7 @@ internal fun CatalogApp(
             ) {
                 val coroutineScope = rememberCoroutineScope()
                 val homeScreenValues = CatalogHomeScreen.values()
-                val pagerState = rememberPagerState(initialPage = CatalogHomeScreen.Exemples.ordinal)
+                val pagerState = rememberPagerState(initialPage = CatalogHomeScreen.Examples.ordinal)
 
                 BackdropScaffold(
                     scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
@@ -182,7 +182,7 @@ internal fun CatalogApp(
                             flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
                         ) {
                             when (homeScreenValues[it]) {
-                                CatalogHomeScreen.Exemples -> ComponentsScreen(
+                                CatalogHomeScreen.Examples -> ComponentsScreen(
                                     components = components,
                                     contentPadding = innerPadding,
                                 )
@@ -281,5 +281,5 @@ private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
 internal const val HomeRoute = "home"
 
 public enum class CatalogHomeScreen {
-    Exemples, Showkase, Configurator
+    Examples, Showkase, Configurator
 }
