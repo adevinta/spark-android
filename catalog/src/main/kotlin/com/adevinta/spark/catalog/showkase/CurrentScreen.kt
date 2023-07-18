@@ -21,7 +21,9 @@
  */
 package com.adevinta.spark.catalog.showkase
 
+import android.os.Parcelable
 import androidx.compose.runtime.MutableState
+import kotlinx.parcelize.Parcelize
 
 internal enum class CurrentScreen {
     COMPONENT_GROUPS,
@@ -33,6 +35,7 @@ internal enum class CurrentScreen {
 
 internal fun String?.insideGroup() = this == CurrentScreen.COMPONENTS_IN_A_GROUP.name
 
+@Parcelize
 internal data class ShowkaseBrowserScreenMetadata(
     val currentGroup: String? = null,
     val currentComponentName: String? = null,
@@ -40,7 +43,7 @@ internal data class ShowkaseBrowserScreenMetadata(
     val currentComponentKey: String? = null,
     val isSearchActive: Boolean = false,
     val searchQuery: String? = null,
-)
+) : Parcelable
 
 internal fun MutableState<ShowkaseBrowserScreenMetadata>.clear() {
     update {
