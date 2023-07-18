@@ -57,7 +57,8 @@ public val CheckboxExamples: List<Example> = listOf(
         Row {
             Column {
                 Checkbox(
-                    enabled = true, state = checkboxState,
+                    enabled = true,
+                    state = checkboxState,
                     onClick = {
                         checkboxState = when (checkboxState) {
                             ToggleableState.On -> ToggleableState.Off
@@ -122,8 +123,12 @@ private fun LabeledCheckboxGroupVerticalExample() {
     val groupState by remember {
         derivedStateOf {
             when {
-                checkboxEmailState == ToggleableState.On && checkboxNotificationsState == ToggleableState.On -> ToggleableState.On
-                checkboxEmailState == ToggleableState.Off && checkboxNotificationsState == ToggleableState.Off -> ToggleableState.Off
+                checkboxEmailState == ToggleableState.On && checkboxNotificationsState == ToggleableState.On ->
+                    ToggleableState.On
+
+                checkboxEmailState == ToggleableState.Off && checkboxNotificationsState == ToggleableState.Off ->
+                    ToggleableState.Off
+
                 else -> ToggleableState.Indeterminate
             }
         }
