@@ -22,6 +22,7 @@
 plugins {
     id("com.adevinta.spark.android-application")
     id("com.adevinta.spark.android-compose")
+    id("kotlin-parcelize")
 }
 
 android {

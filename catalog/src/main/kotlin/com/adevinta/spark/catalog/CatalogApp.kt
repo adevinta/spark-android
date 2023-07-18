@@ -52,6 +52,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
@@ -258,6 +259,12 @@ internal fun BodyContent(
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
     val navController = rememberNavController()
+    val showkaseBrowserScreenMetadataState by rememberSaveable {
+        mutableStateOf(showkaseBrowserScreenMetadata)
+    }
+    val groupedComponentMapState by rememberSaveable {
+        mutableStateOf(groupedComponentMap)
+    }
 
     NavHost(
         modifier = modifier,
@@ -267,8 +274,8 @@ internal fun BodyContent(
             navGraph(
                 navController = navController,
                 contentPadding = contentPadding,
-                showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
-                groupedComponentMap = groupedComponentMap,
+                showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadataState,
+                groupedComponentMap = groupedComponentMapState,
             )
         },
     )
