@@ -41,7 +41,6 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -87,7 +86,7 @@ import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun CatalogApp(
     theme: Theme,
@@ -262,10 +261,6 @@ internal fun BodyContent(
     val showkaseBrowserScreenMetadataState by rememberSaveable {
         mutableStateOf(showkaseBrowserScreenMetadata)
     }
-    val groupedComponentMapState by rememberSaveable {
-        mutableStateOf(groupedComponentMap)
-    }
-
     NavHost(
         modifier = modifier,
         navController = navController,
@@ -275,7 +270,7 @@ internal fun BodyContent(
                 navController = navController,
                 contentPadding = contentPadding,
                 showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadataState,
-                groupedComponentMap = groupedComponentMapState,
+                groupedComponentMap = groupedComponentMap,
             )
         },
     )

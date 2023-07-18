@@ -24,8 +24,10 @@ package com.adevinta.spark.catalog.model
 import androidx.annotation.StringRes
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.checkboxes.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.checkbox.CheckboxExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
 import com.adevinta.spark.catalog.util.PackageSummaryUrl
 import com.adevinta.spark.catalog.util.SparkSourceUrl
@@ -58,6 +60,18 @@ private val Buttons = Component(
     configurator = ButtonsConfigurator,
 )
 
+private val Checkboxes = Component(
+    id = nextId(),
+    name = "Checkboxes",
+    description = R.string.component_checkbox_description,
+    // No buttons icon
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/76f5a8-checkbox/b/98915d",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.toggles/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/CheckBox.kt",
+    examples = CheckboxExamples,
+    configurator = CheckboxConfigurator,
+)
+
 private val TextFields = Component(
     id = nextId(),
     name = "TextFields",
@@ -73,5 +87,6 @@ private val TextFields = Component(
 /** Components for the catalog, ordered alphabetically by name. */
 public val Components: List<Component> = listOf(
     Buttons,
+    Checkboxes,
     TextFields,
 )
