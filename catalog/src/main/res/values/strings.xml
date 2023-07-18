@@ -42,12 +42,27 @@
     <string name="examples_component_screen_title">Components examples</string>
     <string name="examples_component_screen_description">These are the examples that that can be found in the samples in the javadoc or the README.md files. They show usages of the components in different scenarios that should represent real use cases.</string>
     <string name="component_button_description">Buttons help people initiate actions, from sending an email, to sharing a document, to liking a post.</string>
+    <!--Checkbox example-->
+    <string name="component_checkbox_description">Checkboxes are used when there are multiple items to select in a list. Users can select zero, one, or any number of items.</string>
+    <string name="component_checkbox_content_side_example_label">This is an example of a multi-line text which is very long and in which the user should read all the information.</string>
+    <string name="component_checkbox_group_example_group_label">Notifications and emails</string>
+    <string name="component_checkbox_group_example_option1_label">Notifications</string>
+    <string name="component_checkbox_group_example_option2_label">Email</string>
     <string name="component_textfield_description">The input / text-field  component allows users to write in the space provided for the content.</string>
+    <string name="component_checkbox_vertical_group_title">Checkbox grouping with vertical alignment</string>
+    <string name="component_checkbox_horizontal_group_title">Checkbox grouping with horizontal alignment</string>
     <string name="showkase_home_warning_title">⚠️ Theming don’t work on these!</string>
     <string name="showkase_home_warning_description">These are the previews that the developers have when working on components. They are not exhaustive and are only meant to give you a quick idea of what the component looks like.</string>
 
     <string name="configurator_component_screen_title">Components configurations</string>
     <string name="configurator_component_screen_description">The Configurator aim to allow you to visualize a component in every possible state available state by customizing every property for each component.</string>
+    <string name="configurator_component_screen_enabled_label">Enabled</string>
+    <string name="configurator_component_screen_textfield_label">Label</string>
+    <!--Checkbox configurator-->
+    <string name="configurator_component_checkbox_toggleable_state_label">Toggleable State</string>
+    <string name="configurator_component_checkbox_content_side_label">Content Side</string>
+    <string name="configurator_component_checkbox_placeholder_label">Checkbox label</string>
+
     <string name="component_menu_guidlines">View design guidelines</string>
     <string name="component_menu_dev_docs">View developer docs</string>
     <string name="component_menu_source">View source code</string>
