@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.text)
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.util)
+    implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.coilCompose)
 

@@ -21,12 +21,12 @@
  */
 package com.adevinta.spark.tools.modifiers
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.autofill.AutofillNode
 import androidx.compose.ui.autofill.AutofillType
-import androidx.compose.ui.composed
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
@@ -35,10 +35,10 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.node.LayoutModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.platform.InspectorInfo
-import androidx.compose.ui.platform.LocalAutofill
 import androidx.compose.ui.platform.LocalAutofillTree
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
+import kotlinx.collections.immutable.ImmutableList
 
 /**
  * Ignore the parent padding by [horizontalPadding].
@@ -89,25 +89,27 @@ private class IgnoreParentHorizontalPaddingModifierNode(
 /**
  * Add autofill support to a given Composable
  *
- * Taken from [Autofill with Jetpack Compose · Bryan Herbst](https://bryanherbst.com/2021/04/13/compose-autofill/)
- */
-// TODO-@Soulcramer (03-51-2023): Replace by official implementation on b/176949051
+ * Taken from:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui/integration-tests/ui-demos/src/main/java/androidx/compose/ui/demos/autofill/ExplicitAutofillTypesDemo.kt
+ * TODO-@Soulcramer (03-51-2023): Replace by official implementation on b/176949051
+*/
+@Composable
 @ExperimentalComposeUiApi
-public fun Modifier.autofill(
-    autofillTypes: List<AutofillType>,
+public fun Autofill(
+    autofillTypes: ImmutableList<AutofillType>,
     onFill: ((String) -> Unit),
-): Modifier = composed {
-    val autofill = LocalAutofill.current
+    content: @Composable (AutofillNode) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     val autofillNode = AutofillNode(onFill = onFill, autofillTypes = autofillTypes)
     LocalAutofillTree.current += autofillNode
 
-    onGloballyPositioned { coordinates ->
-        autofillNode.boundingBox = coordinates.boundsInWindow()
-    }.onFocusChanged { focusState ->
-        if (autofill == null) return@onFocusChanged
-        when (focusState.isFocused) {
-            true -> autofill.requestAutofillForNode(autofillNode)
-            false -> autofill.cancelAutofillForNode(autofillNode)
-        }
-    }
+    Box(
+        content = { content(autofillNode) },
+        modifier = modifier.then(
+            Modifier.onGloballyPositioned { coordinates ->
+                autofillNode.boundingBox = coordinates.boundsInWindow()
+            },
+        ),
+    )
 }
