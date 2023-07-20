@@ -44,6 +44,7 @@ import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.toggles.Checkbox
 import com.adevinta.spark.components.toggles.CheckboxLabelled
 import com.adevinta.spark.components.toggles.ContentSide
+import com.adevinta.spark.components.toggles.ToggleIntent
 
 private const val CheckboxExampleDescription = "Checkbox examples"
 private const val CheckboxExampleSourceUrl = "$SampleSourceUrl/CheckboxSamples.kt"
@@ -55,19 +56,22 @@ public val CheckboxExamples: List<Example> = listOf(
     ) {
         var checkboxState by remember { mutableStateOf(ToggleableState.Off) }
         Row {
-            Column {
-                Checkbox(
-                    enabled = true,
-                    state = checkboxState,
-                    onClick = {
-                        checkboxState = when (checkboxState) {
-                            ToggleableState.On -> ToggleableState.Off
-                            ToggleableState.Off -> ToggleableState.Indeterminate
-                            ToggleableState.Indeterminate -> ToggleableState.On
-                        }
-                    },
-                )
-                Checkbox(enabled = false, state = checkboxState, onClick = {})
+            ToggleIntent.values().forEach { intent ->
+                Column {
+                    Checkbox(
+                        enabled = true,
+                        state = checkboxState,
+                        intent = intent,
+                        onClick = {
+                            checkboxState = when (checkboxState) {
+                                ToggleableState.On -> ToggleableState.Off
+                                ToggleableState.Off -> ToggleableState.Indeterminate
+                                ToggleableState.Indeterminate -> ToggleableState.On
+                            }
+                        },
+                    )
+                    Checkbox(enabled = false, state = checkboxState, intent = intent, onClick = {})
+                }
             }
         }
     },
