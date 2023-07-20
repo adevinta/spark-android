@@ -45,12 +45,15 @@ import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.toggles.Checkbox
 import com.adevinta.spark.components.toggles.CheckboxLabelled
 import com.adevinta.spark.components.toggles.ContentSide
 import com.adevinta.spark.components.toggles.SwitchLabelled
+import com.adevinta.spark.components.toggles.ToggleIntent
 
 public val CheckboxConfigurator: Configurator = Configurator(
     name = "Checkbox",
@@ -75,6 +78,7 @@ private fun CheckboxSample() {
         var contentSide by remember { mutableStateOf(ContentSide.End) }
         var label: String? by remember { mutableStateOf(null) }
         var state by remember { mutableStateOf(ToggleableState.On) }
+        var intent by remember { mutableStateOf(ToggleIntent.Primary) }
         val onClick = {
             state = when (state) {
                 ToggleableState.On -> ToggleableState.Off
@@ -87,6 +91,7 @@ private fun CheckboxSample() {
             onClick = onClick,
             state = state,
             isEnabled = isEnabled,
+            intent = intent,
             contentSide = contentSide,
         )
         SwitchLabelled(
@@ -121,6 +126,29 @@ private fun CheckboxSample() {
                     .height(48.dp),
             )
         }
+        val intents = ToggleIntent.values()
+        var expanded by remember { mutableStateOf(false) }
+        SelectTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = intent.name,
+            onValueChange = {},
+            readOnly = true,
+            label = stringResource(id = R.string.configurator_component_screen_intent_label),
+            expanded = expanded,
+            onExpandedChange = {expanded = !expanded },
+            onDismissRequest = { expanded = false },
+            dropdownContent = {
+                intents.forEach {
+                    DropdownMenuItem(
+                        text = { Text(it.name) },
+                        onClick = {
+                            intent = it
+                            expanded = false
+                        },
+                    )
+                }
+            },
+        )
         Column {
             Text(
                 text = stringResource(id = R.string.configurator_component_checkbox_content_side_label),
@@ -161,6 +189,7 @@ private fun ConfigedCheckbox(
     state: ToggleableState,
     isEnabled: Boolean,
     contentSide: ContentSide,
+    intent: ToggleIntent,
 ) {
     if (label.isNullOrBlank().not()) {
         CheckboxLabelled(
@@ -169,6 +198,7 @@ private fun ConfigedCheckbox(
             state = state,
             onClick = onClick,
             contentSide = contentSide,
+            intent = intent,
         ) { Text(text = label!!) }
     } else {
         Checkbox(
@@ -176,6 +206,7 @@ private fun ConfigedCheckbox(
             enabled = isEnabled,
             state = state,
             onClick = onClick,
+            intent = intent,
         )
     }
 }
