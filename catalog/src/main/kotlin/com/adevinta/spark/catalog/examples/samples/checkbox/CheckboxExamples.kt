@@ -110,29 +110,34 @@ private fun LabeledCheckboxContentSideExample() {
 
 @Composable
 private fun LabeledCheckboxGroupExample() {
+    val labels = listOf(
+        stringResource(id = R.string.component_checkbox_group_example_option1_label),
+        stringResource(id = R.string.component_checkbox_group_example_option2_label),
+    )
     Column(verticalArrangement = Arrangement.spacedBy(24.dp)) {
-        LabeledCheckboxGroupHorizontalExample()
-        LabeledCheckboxGroupVerticalExample()
+        LabeledCheckboxGroupHorizontalExample(labels)
+        LabeledCheckboxGroupVerticalExample(labels)
     }
 }
 
 @Composable
-private fun LabeledCheckboxGroupVerticalExample() {
-    var checkboxEmailState by remember { mutableStateOf(ToggleableState.Off) }
-    var checkboxNotificationsState by remember { mutableStateOf(ToggleableState.Off) }
+private fun LabeledCheckboxGroupVerticalExample(labels: List<String>) {
+    var childrenStates by remember {
+        mutableStateOf(List(labels.size) { ToggleableState.Off })
+    }
     val groupState by remember {
         derivedStateOf {
             when {
-                checkboxEmailState == ToggleableState.On && checkboxNotificationsState == ToggleableState.On ->
-                    ToggleableState.On
+                childrenStates.all { it == ToggleableState.On } -> ToggleableState.On
 
-                checkboxEmailState == ToggleableState.Off && checkboxNotificationsState == ToggleableState.Off ->
+                childrenStates.all { it == ToggleableState.Off } ->
                     ToggleableState.Off
 
                 else -> ToggleableState.Indeterminate
             }
         }
     }
+
     Column {
         Text(
             text = stringResource(id = R.string.component_checkbox_vertical_group_title),
@@ -143,52 +148,43 @@ private fun LabeledCheckboxGroupVerticalExample() {
             enabled = true,
             state = groupState,
             onClick = {
-                when (groupState) {
-                    ToggleableState.Indeterminate, ToggleableState.Off -> {
-                        checkboxEmailState = ToggleableState.On
-                        checkboxNotificationsState = ToggleableState.On
-                    }
-
-                    ToggleableState.On -> {
-                        checkboxEmailState = ToggleableState.Off
-                        checkboxNotificationsState = ToggleableState.Off
+                childrenStates = childrenStates.map {
+                    when (groupState) {
+                        ToggleableState.Indeterminate, ToggleableState.Off -> ToggleableState.On
+                        ToggleableState.On -> ToggleableState.Off
                     }
                 }
             },
         ) { Text(text = stringResource(id = R.string.component_checkbox_group_example_group_label)) }
+
         Column(
             modifier = Modifier.padding(start = 32.dp),
         ) {
-            CheckboxLabelled(
-                enabled = true,
-                state = checkboxNotificationsState,
-                onClick = {
-                    checkboxNotificationsState = when (checkboxNotificationsState) {
-                        ToggleableState.Indeterminate, ToggleableState.Off -> ToggleableState.On
-                        ToggleableState.On -> ToggleableState.Off
-                    }
-                },
-            ) { Text(text = stringResource(id = R.string.component_checkbox_group_example_option1_label)) }
-            CheckboxLabelled(
-                enabled = true,
-                state = checkboxEmailState,
-                onClick = {
-                    checkboxEmailState = when (checkboxEmailState) {
-                        ToggleableState.Indeterminate, ToggleableState.Off -> ToggleableState.On
-                        ToggleableState.On -> ToggleableState.Off
-                    }
-                },
-            ) { Text(text = stringResource(id = R.string.component_checkbox_group_example_option2_label)) }
+            labels.forEachIndexed { index, label ->
+                val checkboxState = childrenStates.getOrElse(index) { ToggleableState.Off }
+                CheckboxLabelled(
+                    enabled = true,
+                    state = checkboxState,
+                    onClick = {
+                        childrenStates = childrenStates.mapIndexed { i, state ->
+                            if (i == index) {
+                                when (state) {
+                                    ToggleableState.Indeterminate, ToggleableState.Off -> ToggleableState.On
+                                    ToggleableState.On -> ToggleableState.Off
+                                }
+                            } else {
+                                state
+                            }
+                        }
+                    },
+                ) { Text(text = label) }
+            }
         }
     }
 }
 
 @Composable
-private fun LabeledCheckboxGroupHorizontalExample() {
-    val labels = listOf(
-        stringResource(id = R.string.component_checkbox_group_example_option1_label),
-        stringResource(id = R.string.component_checkbox_group_example_option2_label),
-    )
+private fun LabeledCheckboxGroupHorizontalExample(labels: List<String>) {
     Column {
         Text(
             text = stringResource(id = R.string.component_checkbox_horizontal_group_title),
