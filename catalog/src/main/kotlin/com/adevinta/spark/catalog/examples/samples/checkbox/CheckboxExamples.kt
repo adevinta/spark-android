@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -142,7 +143,7 @@ private fun LabeledCheckboxGroupVerticalExample(labels: List<String>) {
         }
     }
 
-    Column {
+    Column(modifier = Modifier.selectableGroup()) {
         Text(
             text = stringResource(id = R.string.component_checkbox_vertical_group_title),
             style = SparkTheme.typography.headline2,

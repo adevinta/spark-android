@@ -47,6 +47,18 @@ CheckboxLabelled(
 ) { Text("CheckBox On") }
 ```
 
+### Styles
+
+The `CheckBox` and `CheckboxLabelled` accept 7 [ToggleIntent](ToggleIntent.kt)s:
+
+- Primary (default)
+- Secondary
+- Success
+- Alert
+- Danger
+- Info
+- Neutral
+
 ## Layout
 
 ### CheckBoxGroup
