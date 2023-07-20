@@ -133,6 +133,7 @@ public fun CheckboxLabelled(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     contentSide: ContentSide = ContentSide.End,
+    intent: ToggleIntent = ToggleIntent.Primary,
     content: @Composable RowScope.() -> Unit,
 ) {
     SparkToggleLabelledContainer(
@@ -144,6 +145,7 @@ public fun CheckboxLabelled(
                 onClick = null,
                 interactionSource = interactionSource,
                 enabled = enabled,
+                intent = intent,
             )
         },
         role = Role.Checkbox,
