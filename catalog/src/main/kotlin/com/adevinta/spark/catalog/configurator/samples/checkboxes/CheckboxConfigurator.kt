@@ -135,7 +135,7 @@ private fun CheckboxSample() {
             readOnly = true,
             label = stringResource(id = R.string.configurator_component_screen_intent_label),
             expanded = expanded,
-            onExpandedChange = {expanded = !expanded },
+            onExpandedChange = { expanded = !expanded },
             onDismissRequest = { expanded = false },
             dropdownContent = {
                 intents.forEach {
