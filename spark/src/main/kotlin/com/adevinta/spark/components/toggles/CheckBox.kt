@@ -47,6 +47,7 @@ internal fun SparkCheckbox(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    intent: ToggleIntent = ToggleIntent.Primary,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     androidx.compose.material3.TriStateCheckbox(
@@ -55,6 +56,7 @@ internal fun SparkCheckbox(
         interactionSource = interactionSource,
         enabled = enabled,
         modifier = modifier.sparkUsageOverlay(),
+        colors = intent.toCheckboxDefaultsColors(),
     )
 }
 
@@ -86,14 +88,16 @@ public fun Checkbox(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    intent: ToggleIntent = ToggleIntent.Primary,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     SparkCheckbox(
         state = state,
         onClick = onClick,
-        interactionSource = interactionSource,
-        enabled = enabled,
         modifier = modifier,
+        enabled = enabled,
+        intent = intent,
+        interactionSource = interactionSource,
     )
 }
 
@@ -160,13 +164,15 @@ internal fun AllStatesCheckboxPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        Row {
-            Checkbox(enabled = true, state = ToggleableState.On, onClick = {})
-            Checkbox(enabled = false, state = ToggleableState.On, onClick = {})
-            Checkbox(enabled = true, state = ToggleableState.Indeterminate, onClick = {})
-            Checkbox(enabled = false, state = ToggleableState.Indeterminate, onClick = {})
-            Checkbox(enabled = true, state = ToggleableState.Off, onClick = {})
-            Checkbox(enabled = false, state = ToggleableState.Off, onClick = {})
+        ToggleIntent.values().forEach { intent ->
+            Row {
+                Checkbox(enabled = true, state = ToggleableState.On, onClick = {}, intent = intent)
+                Checkbox(enabled = false, state = ToggleableState.On, onClick = {}, intent = intent)
+                Checkbox(enabled = true, state = ToggleableState.Indeterminate, onClick = {}, intent = intent)
+                Checkbox(enabled = false, state = ToggleableState.Indeterminate, onClick = {}, intent = intent)
+                Checkbox(enabled = true, state = ToggleableState.Off, onClick = {}, intent = intent)
+                Checkbox(enabled = false, state = ToggleableState.Off, onClick = {}, intent = intent)
+            }
         }
     }
 }
