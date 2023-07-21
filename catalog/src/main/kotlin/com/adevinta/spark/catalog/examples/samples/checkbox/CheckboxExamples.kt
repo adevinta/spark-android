@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -44,6 +45,7 @@ import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.toggles.Checkbox
 import com.adevinta.spark.components.toggles.CheckboxLabelled
 import com.adevinta.spark.components.toggles.ContentSide
+import com.adevinta.spark.components.toggles.ToggleIntent
 
 private const val CheckboxExampleDescription = "Checkbox examples"
 private const val CheckboxExampleSourceUrl = "$SampleSourceUrl/CheckboxSamples.kt"
@@ -55,19 +57,22 @@ public val CheckboxExamples: List<Example> = listOf(
     ) {
         var checkboxState by remember { mutableStateOf(ToggleableState.Off) }
         Row {
-            Column {
-                Checkbox(
-                    enabled = true,
-                    state = checkboxState,
-                    onClick = {
-                        checkboxState = when (checkboxState) {
-                            ToggleableState.On -> ToggleableState.Off
-                            ToggleableState.Off -> ToggleableState.Indeterminate
-                            ToggleableState.Indeterminate -> ToggleableState.On
-                        }
-                    },
-                )
-                Checkbox(enabled = false, state = checkboxState, onClick = {})
+            ToggleIntent.values().forEach { intent ->
+                Column {
+                    Checkbox(
+                        enabled = true,
+                        state = checkboxState,
+                        intent = intent,
+                        onClick = {
+                            checkboxState = when (checkboxState) {
+                                ToggleableState.On -> ToggleableState.Off
+                                ToggleableState.Off -> ToggleableState.Indeterminate
+                                ToggleableState.Indeterminate -> ToggleableState.On
+                            }
+                        },
+                    )
+                    Checkbox(enabled = false, state = checkboxState, intent = intent, onClick = {})
+                }
             }
         }
     },
@@ -138,7 +143,7 @@ private fun LabeledCheckboxGroupVerticalExample(labels: List<String>) {
         }
     }
 
-    Column {
+    Column(modifier = Modifier.selectableGroup()) {
         Text(
             text = stringResource(id = R.string.component_checkbox_vertical_group_title),
             style = SparkTheme.typography.headline2,

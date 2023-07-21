@@ -58,6 +58,7 @@
     <string name="configurator_component_screen_description">The Configurator aim to allow you to visualize a component in every possible state available state by customizing every property for each component.</string>
     <string name="configurator_component_screen_enabled_label">Enabled</string>
     <string name="configurator_component_screen_textfield_label">Label</string>
+    <string name="configurator_component_screen_intent_label">Intent</string>
     <!--Checkbox configurator-->
     <string name="configurator_component_checkbox_toggleable_state_label">Toggleable State</string>
     <string name="configurator_component_checkbox_content_side_label">Content Side</string>
