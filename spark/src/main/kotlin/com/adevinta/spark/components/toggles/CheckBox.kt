@@ -35,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -77,6 +78,7 @@ internal fun SparkCheckbox(
  * and relies entirely on a higher-level component to control the "checked" state.
  * @param modifier Modifier to be applied to the layout of the checkbox
  * @param enabled whether the component is enabled or grayed out
+ * @param intent The [ToggleIntent] to use to draw the checkbox
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this Checkbox. You can create and pass in your own remembered
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
@@ -123,6 +125,7 @@ public fun Checkbox(
  * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
  * appearance / behavior of this Checkbox in different [Interaction]s.
  * @param contentSide The side where we want to show the label, default to [ContentSide.End].
+ * @param intent The [ToggleIntent] to use to draw the checkbox
  * @param content The content displayed after the checkbox, usually a Text composable shown at the end.
  */
 @Composable
