@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.textfields
 
 import androidx.compose.foundation.background
@@ -54,7 +53,6 @@ import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-
 
 @Composable
 public fun OtpTextField(
