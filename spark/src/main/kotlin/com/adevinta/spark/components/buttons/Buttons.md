@@ -24,7 +24,7 @@ The minimal usage of the component is the text and the click action.
 
 ```kotlin
 ButtonFilled(
-    text = "Primary",
+    text = "Main",
     onClick = { /*Click event*/ },
 )
 ```
@@ -45,7 +45,7 @@ emphasis and should be used for important, final actions.
 
 ```kotlin
 ButtonFilled(
-    text = "Primary",
+    text = "Main",
     onClick = { /*Click event*/ },
 )
 ```
@@ -56,8 +56,8 @@ ButtonFilled(
 
 #### ButtonOutlined
 
-Outlined buttons are used for secondary actions. The outlined styling places less emphasis on these
-actions that are important but not the primary ones.
+Outlined buttons are used for support actions. The outlined styling places less emphasis on these
+actions that are important but not the main ones.
 It is recommended to pair it with a button with more emphasis like the filled button or the tinted
 button.
 
@@ -65,7 +65,7 @@ Be aware that it's not advised to use it on top of images since it will be hard 
 
 ```kotlin
 ButtonOutlined(
-    text = "Primary",
+    text = "Main",
     onClick = { /*Click event*/ },
 )
 ```
@@ -85,7 +85,7 @@ It's best paired with either a filled button or an outlined button.
 
 ```kotlin
 ButtonTinted(
-    text = "Primary",
+    text = "Main",
     onClick = { /*Click event*/ },
 )
 ```
@@ -104,7 +104,7 @@ This button style is often used inside other components like snackbars, dialogs,
 
 ```kotlin
 ButtonGhost(
-    text = "Primary",
+    text = "Main",
     onClick = { /*Click event*/ },
 )
 ```
@@ -120,7 +120,7 @@ an image or a video.
 
 ```kotlin
 ButtonContrast(
-    text = "Primary",
+    text = "Main",
     onClick = { /*Click event*/ },
 )
 ```

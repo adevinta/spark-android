@@ -62,38 +62,41 @@ import com.adevinta.spark.tokens.PaletteTokens.Apple500
 import com.adevinta.spark.tokens.PaletteTokens.Apple700
 import com.adevinta.spark.tokens.PaletteTokens.Apple800
 import com.adevinta.spark.tokens.PaletteTokens.Black
+import com.adevinta.spark.tokens.PaletteTokens.BlackAdevinta100
+import com.adevinta.spark.tokens.PaletteTokens.BlackAdevinta300
+import com.adevinta.spark.tokens.PaletteTokens.BlackAdevinta50
+import com.adevinta.spark.tokens.PaletteTokens.BlackAdevinta700
+import com.adevinta.spark.tokens.PaletteTokens.BlackAdevinta800
+import com.adevinta.spark.tokens.PaletteTokens.BlackAdevinta900
+import com.adevinta.spark.tokens.PaletteTokens.BlueRibbon100
+import com.adevinta.spark.tokens.PaletteTokens.BlueRibbon200
+import com.adevinta.spark.tokens.PaletteTokens.BlueRibbon400
+import com.adevinta.spark.tokens.PaletteTokens.BlueRibbon500
+import com.adevinta.spark.tokens.PaletteTokens.BlueRibbon700
+import com.adevinta.spark.tokens.PaletteTokens.BlueRibbon800
 import com.adevinta.spark.tokens.PaletteTokens.Chili100
 import com.adevinta.spark.tokens.PaletteTokens.Chili200
 import com.adevinta.spark.tokens.PaletteTokens.Chili400
 import com.adevinta.spark.tokens.PaletteTokens.Chili500
 import com.adevinta.spark.tokens.PaletteTokens.Chili700
 import com.adevinta.spark.tokens.PaletteTokens.Chili800
+import com.adevinta.spark.tokens.PaletteTokens.PaleAdevinta100
+import com.adevinta.spark.tokens.PaletteTokens.PaleAdevinta50
+import com.adevinta.spark.tokens.PaletteTokens.PaleAdevinta700
+import com.adevinta.spark.tokens.PaletteTokens.PaleAdevinta800
+import com.adevinta.spark.tokens.PaletteTokens.PaleAdevinta900
 import com.adevinta.spark.tokens.PaletteTokens.Sky100
 import com.adevinta.spark.tokens.PaletteTokens.Sky200
 import com.adevinta.spark.tokens.PaletteTokens.Sky400
 import com.adevinta.spark.tokens.PaletteTokens.Sky500
 import com.adevinta.spark.tokens.PaletteTokens.Sky700
 import com.adevinta.spark.tokens.PaletteTokens.Sky800
-import com.adevinta.spark.tokens.PaletteTokens.SugarCotton100
-import com.adevinta.spark.tokens.PaletteTokens.SugarCotton200
-import com.adevinta.spark.tokens.PaletteTokens.SugarCotton300
-import com.adevinta.spark.tokens.PaletteTokens.SugarCotton400
-import com.adevinta.spark.tokens.PaletteTokens.SugarCotton500
-import com.adevinta.spark.tokens.PaletteTokens.SugarCotton700
-import com.adevinta.spark.tokens.PaletteTokens.SugarCotton800
-import com.adevinta.spark.tokens.PaletteTokens.Surfer100
-import com.adevinta.spark.tokens.PaletteTokens.Surfer200
-import com.adevinta.spark.tokens.PaletteTokens.Surfer50
-import com.adevinta.spark.tokens.PaletteTokens.Surfer500
-import com.adevinta.spark.tokens.PaletteTokens.Surfer700
-import com.adevinta.spark.tokens.PaletteTokens.Surfer800
-import com.adevinta.spark.tokens.PaletteTokens.Surfer900
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue100
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue200
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue500
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue700
-import com.adevinta.spark.tokens.PaletteTokens.TheBlue800
-import com.adevinta.spark.tokens.PaletteTokens.TheBlueV
+import com.adevinta.spark.tokens.PaletteTokens.Violet200
+import com.adevinta.spark.tokens.PaletteTokens.Violet300
+import com.adevinta.spark.tokens.PaletteTokens.Violet50
+import com.adevinta.spark.tokens.PaletteTokens.Violet500
+import com.adevinta.spark.tokens.PaletteTokens.Violet700
+import com.adevinta.spark.tokens.PaletteTokens.Violet800
 import com.adevinta.spark.tokens.PaletteTokens.White
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings100
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings200
@@ -105,18 +108,28 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 public fun lightSparkColors(
-    primary: Color = TheBlue500,
-    onPrimary: Color = White,
-    primaryContainer: Color = TheBlue100,
-    onPrimaryContainer: Color = TheBlue700,
-    primaryVariant: Color = TheBlue700,
-    onPrimaryVariant: Color = White,
-    secondary: Color = SugarCotton500,
-    onSecondary: Color = White,
-    secondaryContainer: Color = SugarCotton100,
-    onSecondaryContainer: Color = SugarCotton700,
-    secondaryVariant: Color = SugarCotton700,
-    onSecondaryVariant: Color = White,
+    accent: Color = Violet300,
+    onAccent: Color = BlackAdevinta900,
+    accentContainer: Color = Violet50,
+    onAccentContainer: Color = Violet800,
+    accentVariant: Color = Violet700,
+    onAccentVariant: Color = White,
+    basic: Color = PaleAdevinta800,
+    onBasic: Color = White,
+    basicContainer: Color = BlackAdevinta50,
+    onBasicContainer: Color = BlackAdevinta900,
+    main: Color = BlueRibbon500,
+    onMain: Color = White,
+    mainContainer: Color = BlueRibbon100,
+    onMainContainer: Color = BlueRibbon700,
+    mainVariant: Color = BlueRibbon700,
+    onMainVariant: Color = White,
+    support: Color = PaleAdevinta800,
+    onSupport: Color = White,
+    supportContainer: Color = PaleAdevinta100,
+    onSupportContainer: Color = PaleAdevinta900,
+    supportVariant: Color = PaleAdevinta700,
+    onSupportVariant: Color = White,
     tertiary: Color = Color.Magenta,
     onTertiary: Color = Color.Blue,
     tertiaryContainer: Color = Color.Magenta,
@@ -126,7 +139,7 @@ public fun lightSparkColors(
     successContainer: Color = Apple100,
     onSuccessContainer: Color = Apple700,
     alert: Color = Wiggings500,
-    onAlert: Color = Black,
+    onAlert: Color = BlackAdevinta900,
     alertContainer: Color = Wiggings100,
     onAlertContainer: Color = Wiggings700,
     error: Color = Chili500,
@@ -137,22 +150,22 @@ public fun lightSparkColors(
     onInfo: Color = White,
     infoContainer: Color = Sky100,
     onInfoContainer: Color = Sky700,
-    neutral: Color = Surfer500,
+    neutral: Color = BlackAdevinta800,
     onNeutral: Color = White,
-    neutralContainer: Color = Surfer100,
-    onNeutralContainer: Color = Surfer700,
+    neutralContainer: Color = BlackAdevinta100,
+    onNeutralContainer: Color = BlackAdevinta800,
     background: Color = White,
-    onBackground: Color = Black,
-    backgroundVariant: Color = Surfer50,
-    onBackgroundVariant: Color = Black,
+    onBackground: Color = BlackAdevinta900,
+    backgroundVariant: Color = BlackAdevinta50,
+    onBackgroundVariant: Color = BlackAdevinta900,
     surface: Color = White,
-    onSurface: Color = Color.Black,
-    surfaceInverse: Color = Surfer900,
+    onSurface: Color = BlackAdevinta900,
+    surfaceInverse: Color = BlackAdevinta800,
     onSurfaceInverse: Color = White,
-    surfaceTint: Color = primary,
-    inversePrimary: Color = Color.Magenta,
-    outline: Color = Surfer200,
-    outlineHigh: Color = Color.Black,
+    surfaceTint: Color = main,
+    inverseMain: Color = Color.Magenta,
+    outline: Color = BlackAdevinta100,
+    outlineHigh: Color = BlackAdevinta900,
     scrim: Color = Black,
     dimContent1: Float = .72f,
     dimContent2: Float = .56f,
@@ -160,18 +173,28 @@ public fun lightSparkColors(
     dimContent4: Float = .16f,
     dimContent5: Float = .08f,
 ): SparkColors = SparkColors(
-    primary = primary,
-    onPrimary = onPrimary,
-    primaryContainer = primaryContainer,
-    onPrimaryContainer = onPrimaryContainer,
-    primaryVariant = primaryVariant,
-    onPrimaryVariant = onPrimaryVariant,
-    secondary = secondary,
-    onSecondary = onSecondary,
-    secondaryContainer = secondaryContainer,
-    onSecondaryContainer = onSecondaryContainer,
-    secondaryVariant = secondaryVariant,
-    onSecondaryVariant = onSecondaryVariant,
+    accent = accent,
+    onAccent = onAccent,
+    accentContainer = accentContainer,
+    onAccentContainer = onAccentContainer,
+    accentVariant = accentVariant,
+    onAccentVariant = onAccentVariant,
+    basic = basic,
+    onBasic = onBasic,
+    basicContainer = basicContainer,
+    onBasicContainer = onBasicContainer,
+    main = main,
+    onMain = onMain,
+    mainContainer = mainContainer,
+    onMainContainer = onMainContainer,
+    mainVariant = mainVariant,
+    onMainVariant = onMainVariant,
+    support = support,
+    onSupport = onSupport,
+    supportContainer = supportContainer,
+    onSupportContainer = onSupportContainer,
+    supportVariant = supportVariant,
+    onSupportVariant = onSupportVariant,
     tertiary = tertiary,
     onTertiary = onTertiary,
     tertiaryContainer = tertiaryContainer,
@@ -215,7 +238,7 @@ public fun lightSparkColors(
     outlineHigh = outlineHigh,
     outlineVariant = outlineHigh,
     scrim = scrim,
-    inversePrimary = inversePrimary,
+    inverseMain = inverseMain,
     inverseSurface = surfaceInverse,
     inverseOnSurface = onSurfaceInverse,
     dimContent1 = dimContent1,
@@ -226,50 +249,60 @@ public fun lightSparkColors(
 )
 
 public fun darkSparkColors(
-    primary: Color = TheBlueV,
-    onPrimary: Color = Black,
-    primaryContainer: Color = TheBlue800,
-    onPrimaryContainer: Color = TheBlue200,
-    primaryVariant: Color = TheBlue200,
-    onPrimaryVariant: Color = Black,
-    secondary: Color = SugarCotton400,
-    onSecondary: Color = Black,
-    secondaryContainer: Color = SugarCotton800,
-    onSecondaryContainer: Color = SugarCotton200,
-    secondaryVariant: Color = SugarCotton300,
-    onSecondaryVariant: Color = Black,
+    accent: Color = Violet300,
+    onAccent: Color = BlackAdevinta900,
+    accentContainer: Color = Violet500,
+    onAccentContainer: Color = White,
+    accentVariant: Color = Violet200,
+    onAccentVariant: Color = PaleAdevinta900,
+    basic: Color = PaleAdevinta100,
+    onBasic: Color = BlackAdevinta900,
+    basicContainer: Color = PaleAdevinta700,
+    onBasicContainer: Color = White,
+    main: Color = BlueRibbon400,
+    onMain: Color = White,
+    mainContainer: Color = BlueRibbon800,
+    onMainContainer: Color = White,
+    mainVariant: Color = BlueRibbon200,
+    onMainVariant: Color = BlackAdevinta900,
+    support: Color = PaleAdevinta100,
+    onSupport: Color = BlackAdevinta900,
+    supportContainer: Color = PaleAdevinta700,
+    onSupportContainer: Color = White,
+    supportVariant: Color = PaleAdevinta50,
+    onSupportVariant: Color = BlackAdevinta900,
     success: Color = Apple400,
-    onSuccess: Color = Black,
+    onSuccess: Color = BlackAdevinta900,
     successContainer: Color = Apple800,
     onSuccessContainer: Color = Apple200,
     alert: Color = Wiggings400,
-    onAlert: Color = Black,
+    onAlert: Color = BlackAdevinta900,
     alertContainer: Color = Wiggings800,
     onAlertContainer: Color = Wiggings200,
     error: Color = Chili400,
-    onError: Color = Black,
+    onError: Color = BlackAdevinta900,
     errorContainer: Color = Chili800,
     onErrorContainer: Color = Chili200,
     info: Color = Sky400,
-    onInfo: Color = Black,
+    onInfo: Color = BlackAdevinta900,
     infoContainer: Color = Sky800,
     onInfoContainer: Color = Sky200,
-    neutral: Color = Surfer500,
-    onNeutral: Color = Black,
-    neutralContainer: Color = Surfer800,
-    onNeutralContainer: Color = Surfer200,
-    background: Color = Black,
+    neutral: Color = BlackAdevinta300,
+    onNeutral: Color = BlackAdevinta900,
+    neutralContainer: Color = BlackAdevinta800,
+    onNeutralContainer: Color = White,
+    background: Color = BlackAdevinta900,
     onBackground: Color = White,
-    backgroundVariant: Color = Surfer900,
-    onBackgroundVariant: Color = Color.White,
-    surface: Color = Black,
+    backgroundVariant: Color = Black,
+    onBackgroundVariant: Color = BlackAdevinta50,
+    surface: Color = BlackAdevinta900,
     onSurface: Color = White,
-    surfaceInverse: Color = Surfer50,
-    onSurfaceInverse: Color = Black,
-    surfaceTint: Color = primary,
-    outline: Color = Surfer700,
+    surfaceInverse: Color = BlackAdevinta50,
+    onSurfaceInverse: Color = BlackAdevinta800,
+    surfaceTint: Color = main,
+    outline: Color = BlackAdevinta700,
     outlineHigh: Color = White,
-    inversePrimary: Color = Color.Magenta,
+    inverseMain: Color = Color.Magenta,
     scrim: Color = Black,
     dimContent1: Float = .72f,
     dimContent2: Float = .56f,
@@ -277,18 +310,28 @@ public fun darkSparkColors(
     dimContent4: Float = .16f,
     dimContent5: Float = .08f,
 ): SparkColors = SparkColors(
-    primary = primary,
-    onPrimary = onPrimary,
-    primaryContainer = primaryContainer,
-    onPrimaryContainer = onPrimaryContainer,
-    primaryVariant = primaryVariant,
-    onPrimaryVariant = onPrimaryVariant,
-    secondary = secondary,
-    onSecondary = onSecondary,
-    secondaryContainer = secondaryContainer,
-    onSecondaryContainer = onSecondaryContainer,
-    secondaryVariant = secondaryVariant,
-    onSecondaryVariant = onSecondaryVariant,
+    accent = accent,
+    onAccent = onAccent,
+    accentContainer = accentContainer,
+    onAccentContainer = onAccentContainer,
+    accentVariant = accentVariant,
+    onAccentVariant = onAccentVariant,
+    basic = basic,
+    onBasic = onBasic,
+    basicContainer = basicContainer,
+    onBasicContainer = onBasicContainer,
+    main = main,
+    onMain = onMain,
+    mainContainer = mainContainer,
+    onMainContainer = onMainContainer,
+    mainVariant = mainVariant,
+    onMainVariant = onMainVariant,
+    support = support,
+    onSupport = onSupport,
+    supportContainer = supportContainer,
+    onSupportContainer = onSupportContainer,
+    supportVariant = supportVariant,
+    onSupportVariant = onSupportVariant,
     tertiary = Color.Magenta,
     onTertiary = Color.Blue,
     tertiaryContainer = Color.Magenta,
@@ -332,7 +375,7 @@ public fun darkSparkColors(
     outlineHigh = outlineHigh,
     outlineVariant = outlineHigh,
     scrim = scrim,
-    inversePrimary = inversePrimary,
+    inverseMain = inverseMain,
     inverseSurface = surfaceInverse,
     inverseOnSurface = onSurfaceInverse,
     dimContent1 = dimContent1,
@@ -352,28 +395,38 @@ public fun darkSparkColors(
  * To learn more about colors, see [Material Design colors](https://m3.material.io/styles/color/overview) and
  * [Spark colors](https://zeroheight.com/25c15666f/p/40105d-colors/b/77b3e7).
  *
- * @property primary The primary color is the color displayed most frequently across your app’s
+ * @property accent
+ * @property onAccent
+ * @property accentContainer
+ * @property onAccentContainer
+ * @property accentVariant
+ * @property onAccentVariant
+ * @property basic
+ * @property onBasic
+ * @property basicContainer
+ * @property onBasicContainer
+ * @property main The main color is the color displayed most frequently across your app’s
  * screens and components.
- * @property onPrimary Color used for text and icons displayed on top of the primary color.
- * @property primaryContainer The preferred tonal color of containers.
- * @property onPrimaryContainer The color (and state variants) that should be used for content on
- * top of [primaryContainer].
- * @property primaryVariant Darker variation of [primary] color.
- * @property onPrimaryVariant Color used for text and icons displayed on top of the [primaryVariant] color.
- * @property inversePrimary Color to be used as a "primary" color in places where the inverse color
+ * @property onMain Color used for text and icons displayed on top of the main color.
+ * @property mainContainer The preferred tonal color of containers.
+ * @property onMainContainer The color (and state variants) that should be used for content on
+ * top of [mainContainer].
+ * @property mainVariant Darker variation of [main] color.
+ * @property onMainVariant Color used for text and icons displayed on top of the [mainVariant] color.
+ * @property inverseMain Color to be used as a "main" color in places where the inverse color
  * scheme is needed.
- * @property secondary The secondary color provides more ways to accent and distinguish your
- * product. Secondary colors are best for:
+ * @property support The support color provides more ways to accent and distinguish your
+ * product. Support colors are best for:
  * - Floating action buttons
  * - Selection controls, like checkboxes and radio buttons
  * - Highlighting selected text
  * - Links and headlines
- * @property onSecondary Color used for text and icons displayed on top of the secondary color.
- * @property secondaryContainer A tonal color to be used in containers.
- * @property onSecondaryContainer The color (and state variants) that should be used for content on
- * top of [secondaryContainer].
- * @property secondaryVariant Darker variation of [secondary] color.
- * @property onSecondaryVariant Color used for text and icons displayed on top of the [secondaryVariant] color.
+ * @property onSupport Color used for text and icons displayed on top of the support color.
+ * @property supportContainer A tonal color to be used in containers.
+ * @property onSupportContainer The color (and state variants) that should be used for content on
+ * top of [supportContainer].
+ * @property supportVariant Darker variation of [support] color.
+ * @property onSupportVariant Color used for text and icons displayed on top of the [supportVariant] color.
  * @property success An emphasis color used to provide a positive feedback.
  * @property onSuccess Color used for text and icons displayed on top of the [success] color.
  * @property successContainer The preferred tonal color of success containers.
@@ -430,18 +483,28 @@ public fun darkSparkColors(
  */
 @Stable
 public class SparkColors(
-    primary: Color,
-    onPrimary: Color,
-    primaryContainer: Color,
-    onPrimaryContainer: Color,
-    primaryVariant: Color,
-    onPrimaryVariant: Color,
-    secondary: Color,
-    onSecondary: Color,
-    secondaryContainer: Color,
-    onSecondaryContainer: Color,
-    secondaryVariant: Color,
-    onSecondaryVariant: Color,
+    accent: Color,
+    onAccent: Color,
+    accentContainer: Color,
+    onAccentContainer: Color,
+    accentVariant: Color,
+    onAccentVariant: Color,
+    basic: Color,
+    onBasic: Color,
+    basicContainer: Color,
+    onBasicContainer: Color,
+    main: Color,
+    onMain: Color,
+    mainContainer: Color,
+    onMainContainer: Color,
+    mainVariant: Color,
+    onMainVariant: Color,
+    support: Color,
+    onSupport: Color,
+    supportContainer: Color,
+    onSupportContainer: Color,
+    supportVariant: Color,
+    onSupportVariant: Color,
     tertiary: Color,
     onTertiary: Color,
     tertiaryContainer: Color,
@@ -481,7 +544,7 @@ public class SparkColors(
     surfaceInverse: Color,
     onSurfaceInverse: Color,
     surfaceTint: Color,
-    inversePrimary: Color,
+    inverseMain: Color,
     inverseSurface: Color,
     inverseOnSurface: Color,
     outline: Color,
@@ -494,58 +557,52 @@ public class SparkColors(
     dimContent4: Float,
     dimContent5: Float,
 ) {
-    public var primary: Color by mutableStateOf(primary, structuralEqualityPolicy())
+    public var accent: Color by mutableStateOf(accent, structuralEqualityPolicy())
         internal set
-    public var onPrimary: Color by mutableStateOf(onPrimary, structuralEqualityPolicy())
+    public var onAccent: Color by mutableStateOf(onAccent, structuralEqualityPolicy())
         internal set
-    public var primaryContainer: Color by mutableStateOf(primaryContainer, structuralEqualityPolicy())
+    public var accentContainer: Color by mutableStateOf(accentContainer, structuralEqualityPolicy())
         internal set
-    public var onPrimaryContainer: Color by mutableStateOf(onPrimaryContainer, structuralEqualityPolicy())
+    public var onAccentContainer: Color by mutableStateOf(onAccentContainer, structuralEqualityPolicy())
         internal set
-    public var primaryVariant: Color by mutableStateOf(primaryVariant, structuralEqualityPolicy())
+    public var accentVariant: Color by mutableStateOf(accentVariant, structuralEqualityPolicy())
         internal set
-    public var onPrimaryVariant: Color by mutableStateOf(onPrimaryVariant, structuralEqualityPolicy())
-        internal set
-    public var secondary: Color by mutableStateOf(secondary, structuralEqualityPolicy())
-        internal set
-    public var onSecondary: Color by mutableStateOf(onSecondary, structuralEqualityPolicy())
-        internal set
-    public var secondaryContainer: Color by mutableStateOf(secondaryContainer, structuralEqualityPolicy())
-        internal set
-    public var onSecondaryContainer: Color by mutableStateOf(onSecondaryContainer, structuralEqualityPolicy())
-        internal set
-    public var secondaryVariant: Color by mutableStateOf(secondaryVariant, structuralEqualityPolicy())
-        internal set
-    public var onSecondaryVariant: Color by mutableStateOf(onSecondaryVariant, structuralEqualityPolicy())
+    public var onAccentVariant: Color by mutableStateOf(onAccentVariant, structuralEqualityPolicy())
         internal set
 
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        ReplaceWith("neutral"),
-    )
-    public var tertiary: Color by mutableStateOf(tertiary, structuralEqualityPolicy())
+    public var basic: Color by mutableStateOf(basic, structuralEqualityPolicy())
+        internal set
+    public var onBasic: Color by mutableStateOf(onBasic, structuralEqualityPolicy())
+        internal set
+    public var basicContainer: Color by mutableStateOf(basicContainer, structuralEqualityPolicy())
+        internal set
+    public var onBasicContainer: Color by mutableStateOf(onBasicContainer, structuralEqualityPolicy())
         internal set
 
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        ReplaceWith("onNeutral"),
-    )
-    public var onTertiary: Color by mutableStateOf(onTertiary, structuralEqualityPolicy())
+    public var main: Color by mutableStateOf(main, structuralEqualityPolicy())
+        internal set
+    public var onMain: Color by mutableStateOf(onMain, structuralEqualityPolicy())
+        internal set
+    public var mainContainer: Color by mutableStateOf(mainContainer, structuralEqualityPolicy())
+        internal set
+    public var onMainContainer: Color by mutableStateOf(onMainContainer, structuralEqualityPolicy())
+        internal set
+    public var mainVariant: Color by mutableStateOf(mainVariant, structuralEqualityPolicy())
+        internal set
+    public var onMainVariant: Color by mutableStateOf(onMainVariant, structuralEqualityPolicy())
         internal set
 
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        ReplaceWith("backgroundVariant"),
-
-    )
-    public var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
+    public var support: Color by mutableStateOf(support, structuralEqualityPolicy())
         internal set
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        ReplaceWith("onBackgroundVariant"),
-    )
-    public var onTertiaryContainer: Color by mutableStateOf(onTertiaryContainer, structuralEqualityPolicy())
+    public var onSupport: Color by mutableStateOf(onSupport, structuralEqualityPolicy())
+        internal set
+    public var supportContainer: Color by mutableStateOf(supportContainer, structuralEqualityPolicy())
+        internal set
+    public var onSupportContainer: Color by mutableStateOf(onSupportContainer, structuralEqualityPolicy())
+        internal set
+    public var supportVariant: Color by mutableStateOf(supportVariant, structuralEqualityPolicy())
+        internal set
+    public var onSupportVariant: Color by mutableStateOf(onSupportVariant, structuralEqualityPolicy())
         internal set
 
     public var background: Color by mutableStateOf(background, structuralEqualityPolicy())
@@ -556,6 +613,7 @@ public class SparkColors(
         internal set
     public var onBackgroundVariant: Color by mutableStateOf(onBackgroundVariant, structuralEqualityPolicy())
         internal set
+
     public var surface: Color by mutableStateOf(surface, structuralEqualityPolicy())
         internal set
     public var onSurface: Color by mutableStateOf(onSurface, structuralEqualityPolicy())
@@ -564,35 +622,11 @@ public class SparkColors(
         internal set
     public var onSurfaceInverse: Color by mutableStateOf(onSurfaceInverse, structuralEqualityPolicy())
         internal set
-
-    @Deprecated(
-        message = "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith("backgroundVariant"),
-    )
-    public var surfaceVariant: Color by mutableStateOf(surfaceVariant, structuralEqualityPolicy())
-        internal set
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith("onBackgroundVariant"),
-    )
-    public var onSurfaceVariant: Color by mutableStateOf(onSurfaceVariant, structuralEqualityPolicy())
-        internal set
-
     internal var surfaceTint: Color by mutableStateOf(surfaceTint, structuralEqualityPolicy())
     public var outline: Color by mutableStateOf(outline, structuralEqualityPolicy())
         internal set
     public var outlineHigh: Color by mutableStateOf(outlineHigh, structuralEqualityPolicy())
         internal set
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith("outlineHigh"),
-        level = DeprecationLevel.WARNING,
-    )
-    public var outlineVariant: Color by mutableStateOf(outlineVariant, structuralEqualityPolicy())
-        internal set
-
     public var scrim: Color by mutableStateOf(scrim, structuralEqualityPolicy())
         internal set
 
@@ -641,6 +675,131 @@ public class SparkColors(
     public var onNeutralContainer: Color by mutableStateOf(onNeutralContainer, structuralEqualityPolicy())
         internal set
 
+    public var dim1: Float by mutableStateOf(dimContent1, structuralEqualityPolicy())
+        internal set
+    public var dim2: Float by mutableStateOf(dimContent2, structuralEqualityPolicy())
+        internal set
+    public var dim3: Float by mutableStateOf(dimContent3, structuralEqualityPolicy())
+        internal set
+    public var dim4: Float by mutableStateOf(dimContent4, structuralEqualityPolicy())
+        internal set
+    public var dim5: Float by mutableStateOf(dimContent5, structuralEqualityPolicy())
+        internal set
+
+    // region @Deprecated
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("main"),
+    )
+    public var primary: Color by mutableStateOf(main, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("onMain"),
+    )
+    public var onPrimary: Color by mutableStateOf(onMain, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("mainContainer"),
+    )
+    public var primaryContainer: Color by mutableStateOf(mainContainer, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("onMainContainer"),
+    )
+    public var onPrimaryContainer: Color by mutableStateOf(onMainContainer, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("mainVariant"),
+    )
+    public var primaryVariant: Color by mutableStateOf(mainVariant, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("onMainVariant"),
+    )
+    public var onPrimaryVariant: Color by mutableStateOf(onMainVariant, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("support"),
+    )
+    public var secondary: Color by mutableStateOf(support, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("onSupport"),
+    )
+    public var onSecondary: Color by mutableStateOf(onSupport, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("supportContainer"),
+    )
+    public var secondaryContainer: Color by mutableStateOf(supportContainer, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("onSupportContainer"),
+    )
+    public var onSecondaryContainer: Color by mutableStateOf(onSupportContainer, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("supportVariant"),
+    )
+    public var secondaryVariant: Color by mutableStateOf(supportVariant, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("onSupportVariant"),
+    )
+    public var onSecondaryVariant: Color by mutableStateOf(onSupportVariant, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("neutral"),
+    )
+    public var tertiary: Color by mutableStateOf(tertiary, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("onNeutral"),
+    )
+    public var onTertiary: Color by mutableStateOf(onTertiary, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("backgroundVariant"),
+
+        )
+    public var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        ReplaceWith("onBackgroundVariant"),
+    )
+    public var onTertiaryContainer: Color by mutableStateOf(onTertiaryContainer, structuralEqualityPolicy())
+        internal set
+
     @Deprecated(
         "This property will be removed as it is not part of Spark Token",
         replaceWith = ReplaceWith("success"),
@@ -673,8 +832,22 @@ public class SparkColors(
     public var onValidContainer: Color by mutableStateOf(onValidContainer, structuralEqualityPolicy())
         internal set
 
+    @Deprecated(
+        message = "This property will be removed as it is not part of Spark Token",
+        replaceWith = ReplaceWith("backgroundVariant"),
+    )
+    public var surfaceVariant: Color by mutableStateOf(surfaceVariant, structuralEqualityPolicy())
+        internal set
+
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        replaceWith = ReplaceWith("onBackgroundVariant"),
+    )
+    public var onSurfaceVariant: Color by mutableStateOf(onSurfaceVariant, structuralEqualityPolicy())
+        internal set
+
     @Deprecated("This property will be removed as it is not part of Spark Token")
-    public var inversePrimary: Color by mutableStateOf(inversePrimary, structuralEqualityPolicy())
+    public var inverseMain: Color by mutableStateOf(inverseMain, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -693,33 +866,31 @@ public class SparkColors(
     public var inverseOnSurface: Color by mutableStateOf(inverseOnSurface, structuralEqualityPolicy())
         internal set
 
-    public var dim1: Float by mutableStateOf(dimContent1, structuralEqualityPolicy())
+    @Deprecated(
+        "This property will be removed as it is not part of Spark Token",
+        replaceWith = ReplaceWith("outlineHigh"),
+        level = DeprecationLevel.WARNING,
+    )
+    public var outlineVariant: Color by mutableStateOf(outlineVariant, structuralEqualityPolicy())
         internal set
-    public var dim2: Float by mutableStateOf(dimContent2, structuralEqualityPolicy())
-        internal set
-    public var dim3: Float by mutableStateOf(dimContent3, structuralEqualityPolicy())
-        internal set
-    public var dim4: Float by mutableStateOf(dimContent4, structuralEqualityPolicy())
-        internal set
-    public var dim5: Float by mutableStateOf(dimContent5, structuralEqualityPolicy())
-        internal set
+    // endregion
 
     /**
      * Returns a copy of this Colors, optionally overriding some of the values.
      */
     public fun copy(
-        primary: Color = this.primary,
-        onPrimary: Color = this.onPrimary,
-        primaryContainer: Color = this.primaryContainer,
-        onPrimaryContainer: Color = this.onPrimaryContainer,
-        primaryVariant: Color = this.primaryVariant,
-        onPrimaryVariant: Color = this.onPrimaryVariant,
-        secondary: Color = this.secondary,
-        onSecondary: Color = this.onSecondary,
-        secondaryContainer: Color = this.secondaryContainer,
-        onSecondaryContainer: Color = this.onSecondaryContainer,
-        secondaryVariant: Color = this.secondaryVariant,
-        onSecondaryVariant: Color = this.onSecondaryVariant,
+        main: Color = this.main,
+        onMain: Color = this.onMain,
+        mainContainer: Color = this.mainContainer,
+        onMainContainer: Color = this.onMainContainer,
+        mainVariant: Color = this.mainVariant,
+        onMainVariant: Color = this.onMainVariant,
+        support: Color = this.support,
+        onSupport: Color = this.onSupport,
+        supportContainer: Color = this.supportContainer,
+        onSupportContainer: Color = this.onSupportContainer,
+        supportVariant: Color = this.supportVariant,
+        onSupportVariant: Color = this.onSupportVariant,
         tertiary: Color = this.tertiary,
         onTertiary: Color = this.onTertiary,
         tertiaryContainer: Color = this.tertiaryContainer,
@@ -763,7 +934,7 @@ public class SparkColors(
         onValid: Color = this.onValid,
         validContainer: Color = this.validContainer,
         onValidContainer: Color = this.onValidContainer,
-        inversePrimary: Color = this.inversePrimary,
+        inverseMain: Color = this.inverseMain,
         inverseSurface: Color = this.inverseSurface,
         inverseOnSurface: Color = this.inverseOnSurface,
         dimContent1: Float = this.dim1,
@@ -772,18 +943,28 @@ public class SparkColors(
         dimContent4: Float = this.dim4,
         dimContent5: Float = this.dim5,
     ): SparkColors = SparkColors(
-        primary = primary,
-        onPrimary = onPrimary,
-        primaryContainer = primaryContainer,
-        onPrimaryContainer = onPrimaryContainer,
-        primaryVariant = primaryVariant,
-        onPrimaryVariant = onPrimaryVariant,
-        secondary = secondary,
-        onSecondary = onSecondary,
-        secondaryContainer = secondaryContainer,
-        onSecondaryContainer = onSecondaryContainer,
-        secondaryVariant = secondaryVariant,
-        onSecondaryVariant = onSecondaryVariant,
+        accent = accent,
+        onAccent = onAccent,
+        accentContainer = accentContainer,
+        onAccentContainer = onAccentContainer,
+        accentVariant = accentVariant,
+        onAccentVariant = onAccentVariant,
+        basic = basic,
+        onBasic = onBasic,
+        basicContainer = basicContainer,
+        onBasicContainer = onBasicContainer,
+        main = main,
+        onMain = onMain,
+        mainContainer = mainContainer,
+        onMainContainer = onMainContainer,
+        mainVariant = mainVariant,
+        onMainVariant = onMainVariant,
+        support = support,
+        onSupport = onSupport,
+        supportContainer = supportContainer,
+        onSupportContainer = onSupportContainer,
+        supportVariant = supportVariant,
+        onSupportVariant = onSupportVariant,
         tertiary = tertiary,
         onTertiary = onTertiary,
         tertiaryContainer = tertiaryContainer,
@@ -827,7 +1008,7 @@ public class SparkColors(
         onValid = onValid,
         validContainer = validContainer,
         onValidContainer = onValidContainer,
-        inversePrimary = inversePrimary,
+        inverseMain = inverseMain,
         inverseSurface = inverseSurface,
         inverseOnSurface = inverseOnSurface,
         dimContent1 = dimContent1,
@@ -839,14 +1020,14 @@ public class SparkColors(
 
     override fun toString(): String = buildString {
         append("SparkColors(")
-        append("primary=$primary, ")
-        append("onPrimary=$onPrimary, ")
-        append("primaryContainer=$primaryContainer, ")
-        append("onPrimaryContainer=$onPrimaryContainer, ")
-        append("secondary=$secondary, ")
-        append("onSecondary=$onSecondary, ")
-        append("secondaryContainer=$secondaryContainer, ")
-        append("onSecondaryContainer=$onSecondaryContainer, ")
+        append("main=$main, ")
+        append("onMain=$onMain, ")
+        append("mainContainer=$mainContainer, ")
+        append("onMainContainer=$onMainContainer, ")
+        append("support=$support, ")
+        append("onSupport=$onSupport, ")
+        append("supportContainer=$supportContainer, ")
+        append("onSupportContainer=$onSupportContainer, ")
         append("tertiary=$tertiary, ")
         append("onTertiary=$onTertiary, ")
         append("tertiaryContainer=$tertiaryContainer, ")
@@ -883,7 +1064,7 @@ public class SparkColors(
         append("onNeutral=$onNeutral, ")
         append("neutralContainer=$neutralContainer, ")
         append("onNeutralContainer=$onNeutralContainer, ")
-        append("inversePrimary=$inversePrimary, ")
+        append("inverseMain=$inverseMain, ")
         append("inverseSurface=$inverseSurface, ")
         append("dim1=$dim1, ")
         append("dim2=$dim2, ")
@@ -895,15 +1076,15 @@ public class SparkColors(
 }
 
 public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
-    primary = primary,
-    onPrimary = onPrimary,
-    primaryContainer = primaryContainer,
-    onPrimaryContainer = onPrimaryContainer,
-    inversePrimary = inversePrimary,
-    secondary = secondary,
-    onSecondary = onSecondary,
-    secondaryContainer = secondaryContainer,
-    onSecondaryContainer = onSecondaryContainer,
+    primary = main,
+    onPrimary = onMain,
+    primaryContainer = mainContainer,
+    onPrimaryContainer = onMainContainer,
+    inversePrimary = inverseMain,
+    secondary = support,
+    onSecondary = onSupport,
+    secondaryContainer = supportContainer,
+    onSecondaryContainer = onSupportContainer,
     tertiary = tertiary,
     onTertiary = onTertiary,
     tertiaryContainer = tertiaryContainer,
@@ -928,12 +1109,12 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
 
 /**
  * The Material color system contains pairs of colors that are typically used for the background
- * and content color inside a component. For example, a [Button] typically uses `primary` for its
- * background, and `onPrimary` for the color of its content (usually text or iconography).
+ * and content color inside a component. For example, a [Button] typically uses `main` for its
+ * background, and `onMain` for the color of its content (usually text or iconography).
  *
  * This function tries to match the provided [backgroundColor] to a 'background' color in this
  * [Colors], and then will return the corresponding color used for content. For example, when
- * [backgroundColor] is [Colors.primary], this will return [Colors.onPrimary].
+ * [backgroundColor] is [Colors.main], this will return [Colors.onMain].
  *
  * If [backgroundColor] does not match a background color in the theme, this will return
  * [Color.Unspecified].
@@ -944,12 +1125,12 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
  * @see contentColorFor
  */
 public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (backgroundColor) {
-    primary -> onPrimary
-    primaryContainer -> onPrimaryContainer
-    primaryVariant -> onPrimaryVariant
-    secondary -> onSecondary
-    secondaryContainer -> onSecondaryContainer
-    secondaryVariant -> onSecondaryVariant
+    main -> onMain
+    mainContainer -> onMainContainer
+    mainVariant -> onMainVariant
+    support -> onSupport
+    supportContainer -> onSupportContainer
+    supportVariant -> onSupportVariant
     tertiary -> onTertiary
     tertiaryContainer -> onTertiaryContainer
     background -> onBackground
@@ -973,12 +1154,12 @@ public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (ba
 
 /**
  * The Material color system contains pairs of colors that are typically used for the background
- * and content color inside a component. For example, a [Button] typically uses `primary` for its
- * background, and `onPrimary` for the color of its content (usually text or iconography).
+ * and content color inside a component. For example, a [Button] typically uses `main` for its
+ * background, and `onMain` for the color of its content (usually text or iconography).
  *
  * This function tries to match the provided [backgroundColor] to a 'background' color in this
  * [Colors], and then will return the corresponding color used for content. For example, when
- * [backgroundColor] is [Colors.primary], this will return [Colors.onPrimary].
+ * [backgroundColor] is [Colors.main], this will return [Colors.onMain].
  *
  * If [backgroundColor] does not match a background color in the theme, this will return
  * the current value of [LocalContentColor] as a best-effort color.
@@ -1040,14 +1221,14 @@ public val Color.dim5: Color
  * the specific changed value to recompose.
  */
 internal fun SparkColors.updateColorsFrom(other: SparkColors) {
-    primary = other.primary
-    onPrimary = other.onPrimary
-    primaryContainer = other.primaryContainer
-    onPrimaryContainer = other.onPrimaryContainer
-    secondary = other.secondary
-    onSecondary = other.onSecondary
-    secondaryContainer = other.secondaryContainer
-    onSecondaryContainer = other.onSecondaryContainer
+    main = other.main
+    onMain = other.onMain
+    mainContainer = other.mainContainer
+    onMainContainer = other.onMainContainer
+    support = other.support
+    onSupport = other.onSupport
+    supportContainer = other.supportContainer
+    onSupportContainer = other.onSupportContainer
     tertiary = other.tertiary
     onTertiary = other.onTertiary
     tertiaryContainer = other.tertiaryContainer
@@ -1087,7 +1268,7 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
     onNeutral = other.onNeutral
     neutralContainer = other.neutralContainer
     onNeutralContainer = other.onNeutralContainer
-    inversePrimary = other.inversePrimary
+    inverseMain = other.inverseMain
     inverseSurface = other.inverseSurface
     inverseOnSurface = other.inverseOnSurface
     dim1 = other.dim1
@@ -1116,18 +1297,28 @@ public fun debugColors(
     debugColor: Color = Color.Magenta,
     onDebugColor: Color = Color.Green,
 ): SparkColors = SparkColors(
-    primary = debugColor,
-    onPrimary = onDebugColor,
-    primaryContainer = debugColor,
-    onPrimaryContainer = onDebugColor,
-    primaryVariant = debugColor,
-    onPrimaryVariant = onDebugColor,
-    secondary = debugColor,
-    onSecondary = onDebugColor,
-    secondaryContainer = debugColor,
-    onSecondaryContainer = onDebugColor,
-    secondaryVariant = debugColor,
-    onSecondaryVariant = onDebugColor,
+    accent = debugColor,
+    onAccent = onDebugColor,
+    accentContainer = debugColor,
+    onAccentContainer = onDebugColor,
+    accentVariant = debugColor,
+    onAccentVariant = onDebugColor,
+    basic = debugColor,
+    onBasic = onDebugColor,
+    basicContainer = debugColor,
+    onBasicContainer = onDebugColor,
+    main = debugColor,
+    onMain = onDebugColor,
+    mainContainer = debugColor,
+    onMainContainer = onDebugColor,
+    mainVariant = debugColor,
+    onMainVariant = onDebugColor,
+    support = debugColor,
+    onSupport = onDebugColor,
+    supportContainer = debugColor,
+    onSupportContainer = onDebugColor,
+    supportVariant = debugColor,
+    onSupportVariant = onDebugColor,
     tertiary = debugColor,
     onTertiary = onDebugColor,
     tertiaryContainer = debugColor,
@@ -1171,7 +1362,7 @@ public fun debugColors(
     outlineHigh = debugColor,
     outlineVariant = debugColor,
     scrim = debugColor,
-    inversePrimary = debugColor,
+    inverseMain = debugColor,
     inverseSurface = Color.Blue,
     inverseOnSurface = onDebugColor,
     dimContent1 = .72f,
@@ -1195,14 +1386,14 @@ private fun ColorPreview(
         Row {
             Column {
                 Row {
-                    ColorItem(SparkTheme.colors.primary, "primary")
-                    ColorItem(SparkTheme.colors.primaryContainer, "primary Container")
-                    ColorItem(SparkTheme.colors.primaryVariant, "primary Variant")
+                    ColorItem(SparkTheme.colors.main, "main")
+                    ColorItem(SparkTheme.colors.mainContainer, "main Container")
+                    ColorItem(SparkTheme.colors.mainVariant, "main Variant")
                 }
                 Row {
-                    ColorItem(SparkTheme.colors.secondary, "secondary")
-                    ColorItem(SparkTheme.colors.secondaryContainer, "secondary Container")
-                    ColorItem(SparkTheme.colors.secondaryVariant, "secondary Variant")
+                    ColorItem(SparkTheme.colors.support, "support")
+                    ColorItem(SparkTheme.colors.supportContainer, "support Container")
+                    ColorItem(SparkTheme.colors.supportVariant, "support Variant")
                 }
                 Row {
                     ColorItem(SparkTheme.colors.background, "background")

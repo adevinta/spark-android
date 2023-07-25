@@ -235,7 +235,7 @@ internal fun ChipPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        val intent = ChipIntent.Primary
+        val intent = ChipIntent.Main
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             ChipOutlined("outlined", intent, leadingIcon = SparkIcons.OfferOutline)
             ChipFilled("filled", intent, leadingIcon = SparkIcons.OfferOutline)

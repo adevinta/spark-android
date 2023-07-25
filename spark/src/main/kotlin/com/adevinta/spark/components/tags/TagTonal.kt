@@ -36,7 +36,7 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- * Tinted tag represent secondary information like `OutlinedTag`
+ * Tinted tag represent support information like `OutlinedTag`
  * @param text The item label
  * @param modifier The [Modifier] to be applied to the component
  * @param intent The [TagIntent] color to use
@@ -47,7 +47,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 public fun TagTinted(
     text: String,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Primary,
+    intent: TagIntent = TagIntent.Main,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -61,7 +61,7 @@ public fun TagTinted(
 }
 
 /**
- * Tinted tag represent secondary information like `OutlinedTag`
+ * Tinted tag represent support information like `OutlinedTag`
  * @param text The item label
  * @param modifier The [Modifier] to be applied to the component
  * @param intent The [TagIntent] color to use
@@ -72,7 +72,7 @@ public fun TagTinted(
 public fun TagTinted(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Primary,
+    intent: TagIntent = TagIntent.Main,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -92,7 +92,7 @@ public fun TagTinted(
 @Composable
 public fun TagTonal(
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Primary,
+    intent: TagIntent = TagIntent.Main,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
     content: @Composable RowScope.() -> Unit,
@@ -127,7 +127,7 @@ public fun TagCriteria(
 }
 
 @Deprecated(
-    "Use TagTinted instead with primary intent",
+    "Use TagTinted instead with main intent",
     ReplaceWith("TagTinted"),
 )
 @Composable
@@ -139,7 +139,7 @@ public fun TagService(
 ) {
     TagTonal(
         modifier = modifier,
-        intent = TagIntent.Primary,
+        intent = TagIntent.Main,
         leadingIcon = leadingIcon,
         tint = tint,
         content = content,

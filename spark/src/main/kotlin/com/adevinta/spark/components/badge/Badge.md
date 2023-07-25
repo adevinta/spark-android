@@ -38,10 +38,16 @@ If no content is passed, an empty badge is drawn.
 A 2px stroke is displayed by default. But it can be removed if needed.
 When no count is displayed in the badge, the badge is smaller but still round.
 
-Badge accepts 2 colors defined :
+Badge accepts the following [BadgeIntent](BadgeIntent.kt)s :
 
-- Danger: First level information
-- Info: Give info with no emphasis
+- Main
+- Support
+- Success
+- Alert
+- Danger (default)
+- Info
+- Neutral
+- Surface
 
 Badge has two styles that defines its size and content padding. `BadgeStyle.MEDIUM` is used by
 default.

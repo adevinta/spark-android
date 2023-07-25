@@ -73,7 +73,7 @@ public fun ButtonFilled(
     text: String,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Primary,
+    intent: ButtonIntent = ButtonIntent.Main,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -136,7 +136,7 @@ public fun ButtonFilled(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Primary,
+    intent: ButtonIntent = ButtonIntent.Main,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -171,7 +171,7 @@ public fun ButtonFilled(
 }
 
 /**
- * The primary button should only be used once per view (not including a modal dialog),
+ * The main button should only be used once per view (not including a modal dialog),
  * these buttons have the most emphasis.
  *
  * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
@@ -190,11 +190,11 @@ public fun ButtonFilled(
  * these buttons have the most emphasis.
  */
 @Deprecated(
-    "Use ButtonFilled instead with Primary intent",
+    "Use ButtonFilled instead with Main intent",
     ReplaceWith("ButtonFilled(onClick, text, modifier, intent, enabled, icon, iconSide, isLoading)"),
 )
 @Composable
-public fun PrimaryButton(
+public fun MainButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -230,13 +230,13 @@ public fun PrimaryButton(
     name = "Button Filled",
 )
 @Composable
-internal fun PrimaryButtonPreview(
+internal fun MainButtonPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         val icon = SparkIcons.IdentityOutline
         var isLoading by remember { mutableStateOf(false) }
-        val buttonText = "Primary Button"
+        val buttonText = "Main Button"
         ButtonFilled(
             onClick = {
                 isLoading = !isLoading

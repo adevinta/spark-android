@@ -54,7 +54,7 @@ internal fun SparkRatingStar(
 ) {
     val color by animateColorAsState(
         targetValue = if (enabled) {
-            SparkTheme.colors.primary
+            SparkTheme.colors.main
         } else {
             SparkTheme.colors.onSurface.copy(DisabledAlpha)
         },

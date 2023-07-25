@@ -30,28 +30,28 @@ import com.adevinta.spark.components.IntentColor
  */
 public enum class TagIntent {
     /**
-     * Primary tags are used for the most important information.
+     * Main tags are used for the most important information.
      */
-    Primary {
+    Main {
         @Composable
         override fun colors() = IntentColor(
-            color = SparkTheme.colors.primary,
-            onColor = SparkTheme.colors.onPrimary,
-            containerColor = SparkTheme.colors.primaryContainer,
-            onContainerColor = SparkTheme.colors.onPrimaryContainer,
+            color = SparkTheme.colors.main,
+            onColor = SparkTheme.colors.onMain,
+            containerColor = SparkTheme.colors.mainContainer,
+            onContainerColor = SparkTheme.colors.onMainContainer,
         )
     },
 
     /**
-     * Secondary tags are used to highlight information.
+     * Support tags are used to highlight information.
      */
-    Secondary {
+    Support {
         @Composable
         override fun colors() = IntentColor(
-            color = SparkTheme.colors.secondary,
-            onColor = SparkTheme.colors.onSecondary,
-            containerColor = SparkTheme.colors.secondaryContainer,
-            onContainerColor = SparkTheme.colors.onSecondaryContainer,
+            color = SparkTheme.colors.support,
+            onColor = SparkTheme.colors.onSupport,
+            containerColor = SparkTheme.colors.supportContainer,
+            onContainerColor = SparkTheme.colors.onSupportContainer,
         )
     },
 

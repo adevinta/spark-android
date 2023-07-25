@@ -19,8 +19,8 @@ The chip can have one of the [ChipStyles](ChipStyles.kt):
 - [Dashed](ChipDashed.kt) - using a dashed border and no background
 
 The color is set using one of the [ChipIntent](ChipIntent.kt)s:
-- Primary
-- Secondary
+- Main
+- Support
 - Success
 - Alert
 - Danger

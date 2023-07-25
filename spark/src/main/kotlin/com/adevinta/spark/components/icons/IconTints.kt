@@ -30,17 +30,17 @@ public enum class IconTints {
     /**
      * Used for the most important information.
      */
-    Primary {
+    Main {
         @Composable
-        override fun color(): Color = SparkTheme.colors.primary
+        override fun color(): Color = SparkTheme.colors.main
     },
 
     /**
      * Used to highlight/accentuate.
      */
-    Secondary {
+    Support {
         @Composable
-        override fun color(): Color = SparkTheme.colors.secondary
+        override fun color(): Color = SparkTheme.colors.support
     },
 
     /**

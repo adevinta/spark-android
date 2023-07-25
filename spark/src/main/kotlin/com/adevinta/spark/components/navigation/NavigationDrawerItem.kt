@@ -137,11 +137,11 @@ private object NavigationDrawerItemDefaults {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun colors(
-        selectedContainerColor: Color = SparkTheme.colors.secondaryContainer,
+        selectedContainerColor: Color = SparkTheme.colors.supportContainer,
         unselectedContainerColor: Color = SparkTheme.colors.surface,
-        selectedIconColor: Color = SparkTheme.colors.onSecondaryContainer,
+        selectedIconColor: Color = SparkTheme.colors.onSupportContainer,
         unselectedIconColor: Color = SparkTheme.colors.neutral,
-        selectedTextColor: Color = SparkTheme.colors.onSecondaryContainer,
+        selectedTextColor: Color = SparkTheme.colors.onSupportContainer,
         unselectedTextColor: Color = SparkTheme.colors.neutral,
         selectedBadgeColor: Color = selectedTextColor,
         unselectedBadgeColor: Color = unselectedTextColor,
