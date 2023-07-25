@@ -784,7 +784,7 @@ public class SparkColors(
         "This property will be removed as it is not part of Spark Token",
         ReplaceWith("backgroundVariant"),
 
-        )
+    )
     public var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
         internal set
 

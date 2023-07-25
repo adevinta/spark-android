@@ -104,7 +104,6 @@ internal object PaletteTokens {
     internal val BlackAdevinta100 = Color(0xFFDCDCDE)
     internal val BlackAdevinta50 = Color(0xFFF4F4F4)
 
-
     internal val PaleAdevinta900 = Color(0xFF1D1F58)
     internal val PaleAdevinta800 = Color(0xFF35376A)
     internal val PaleAdevinta700 = Color(0xFF4D4E7B)

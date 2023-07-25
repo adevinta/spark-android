@@ -22,7 +22,6 @@
 package com.adevinta.spark.components.chips
 
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.components.IntentColors
 
