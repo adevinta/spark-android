@@ -47,8 +47,8 @@
     <!--Badge-->
     <string name="spark_exceed_max_badge_number_a11y">Plus de %1$d nouvelles notifications</string>
     <string name="spark_badge_numberless_a11y">Nouvelle notification</string>
-    <plurals name="spark_badge_a11y">
-        <item quantity="one" tools:ignore="UnusedQuantity">%d nouvelle notification</item>
+    <plurals name="spark_badge_a11y" tools:ignore="UnusedQuantity">
+        <item quantity="one">%d nouvelle notification</item>
         <item quantity="other">%d nouvelles notifications</item>
         <item quantity="many">%d nouvelles notifications</item>
     </plurals>
