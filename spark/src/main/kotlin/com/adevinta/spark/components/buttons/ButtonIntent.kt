@@ -32,7 +32,7 @@ public enum class ButtonIntent {
     /**
      * Used to match default color of such UI controls as toggles, Slider, etc.
      */
-    Default {
+    Basic {
         @Composable
         override fun colors(): IntentColor = IntentColors.Basic.colors()
     },

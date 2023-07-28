@@ -61,8 +61,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  */
 @Composable
 public fun ChipDashed(
-    intent: ChipIntent,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
@@ -97,8 +97,8 @@ public fun ChipDashed(
 @Composable
 public fun ChipDashed(
     text: String,
-    intent: ChipIntent,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     leadingIcon: SparkIcon? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -137,9 +137,9 @@ public fun ChipDashed(
 @Composable
 public fun ChipDashed(
     icon: SparkIcon,
-    intent: ChipIntent,
     contentDescription: String,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
@@ -179,8 +179,8 @@ internal fun ChipDashedPreview(
                         Text("Chip")
                         Badge(hasStroke = false, count = 1)
                     }
-                    ChipDashed(intent.name, intent, leadingIcon = SparkIcons.OfferOutline, enabled = enabled)
-                    ChipDashed(intent.name, intent, enabled = enabled)
+                    ChipDashed(intent.name, intent = intent, leadingIcon = SparkIcons.OfferOutline, enabled = enabled)
+                    ChipDashed(intent.name, intent = intent, enabled = enabled)
                     ChipDashed(
                         contentDescription = intent.name,
                         intent = intent,

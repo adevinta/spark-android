@@ -193,19 +193,19 @@ internal fun IconPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        IconSize.values().map { it to IconIntent.values() }.forEach { (size, tints) ->
+        IconSize.values().map { it to IconIntent.values() }.forEach { (size, intents) ->
             LazyRow {
                 items(
-                    tints.count(),
+                    intents.count(),
                     itemContent = { index ->
                         Box(
-                            modifier = Modifier.ifTrue(tints[index] == IconIntent.Surface) {
+                            modifier = Modifier.ifTrue(intents[index] == IconIntent.Surface) {
                                 background(SparkTheme.colors.neutralContainer)
                             },
                         ) {
                             Icon(
                                 sparkIcon = SparkIcons.CheckFill,
-                                tint = tints[index].color(),
+                                tint = intents[index].color(),
                                 contentDescription = "Done",
                                 size = size,
                             )

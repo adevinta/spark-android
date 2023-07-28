@@ -28,6 +28,22 @@ import com.adevinta.spark.SparkTheme
 
 public enum class IconIntent {
     /**
+     * Used to match default color of such UI controls as toggles, Slider, etc.
+     */
+    Basic {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.basic
+    },
+
+    /**
+     * Used to make icons visually accentuated.
+     */
+    Accent {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.accent
+    },
+
+    /**
      * Used for the most important information.
      */
     Main {
@@ -92,7 +108,7 @@ public enum class IconIntent {
     },
 
     /**
-     * Used for low importance information.
+     * To apply no tint and use original icon tint.
      */
     Unspecified {
         @Composable

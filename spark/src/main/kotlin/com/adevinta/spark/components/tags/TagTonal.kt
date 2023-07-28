@@ -47,7 +47,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 public fun TagTinted(
     text: String,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Main,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -72,7 +72,7 @@ public fun TagTinted(
 public fun TagTinted(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Main,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -92,7 +92,7 @@ public fun TagTinted(
 @Composable
 public fun TagTonal(
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Main,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
     content: @Composable RowScope.() -> Unit,

@@ -30,8 +30,25 @@ import com.adevinta.spark.components.IntentColors
  */
 public enum class ChipIntent {
     /**
+     * Used to match default color of such UI controls as toggles, Slider, etc.
+     */
+    Basic {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Basic.colors()
+    },
+
+    /**
+     * Used to make chips visually accentuated.
+     */
+    Accent {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Accent.colors()
+    },
+
+    /**
      * Used for the most important information.
      */
+
     Main {
         @Composable
         override fun colors(): IntentColor = IntentColors.Main.colors()

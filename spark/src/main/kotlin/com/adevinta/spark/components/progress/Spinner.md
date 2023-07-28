@@ -17,7 +17,7 @@ A visible background may be added to display a background behind the spinner.
 
 All intents from Spark are available for this component ([SpinnerIntent](SpinnerIntent.kt)).
 
-- Basic
+- Basic (default)
 - Accent
 - Main
 - Support

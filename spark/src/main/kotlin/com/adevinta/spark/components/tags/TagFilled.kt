@@ -49,7 +49,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 public fun TagFilled(
     text: String,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Main,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -72,7 +72,7 @@ public fun TagFilled(
 public fun TagFilled(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Main,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {

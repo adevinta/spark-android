@@ -48,7 +48,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 public fun TagOutlined(
     text: String,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Main,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -78,7 +78,7 @@ public fun TagOutlined(
 public fun TagOutlined(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Main,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -103,7 +103,7 @@ public fun TagOutlined(
 @Composable
 public fun TagOutlined(
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Main,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
     content: @Composable RowScope.() -> Unit,
