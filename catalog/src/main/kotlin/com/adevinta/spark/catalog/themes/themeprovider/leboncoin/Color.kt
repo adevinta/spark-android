@@ -193,6 +193,16 @@ internal val GreyBlue95 = Color(0xFFe6f2ff)
 internal val GreyBlue99 = Color(0xFFfcfcff)
 
 internal val LeboncoinColorPartLightLegacy: SparkColors = lightSparkColors(
+    accent = BrikkeOrange,
+    onAccent = Color.White,
+    accentContainer = BrikkeOrangeSurface,
+    onAccentContainer = Clementin900,
+    accentVariant = BrikkeOrangeDark,
+    onAccentVariant = Color.White,
+    basic = BrikkeBlack,
+    onBasic = Color.White,
+    basicContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
+    onBasicContainer = Blueberry900,
     main = BrikkeOrange,
     onMain = Color.White,
     mainContainer = BrikkeOrangeSurface,
@@ -248,6 +258,16 @@ internal val LeboncoinColorPartLightLegacy: SparkColors = lightSparkColors(
 )
 
 internal val LeboncoinColorProLightLegacy: SparkColors = lightSparkColors(
+    accent = BrikkeBlue,
+    onAccent = Color.White,
+    accentContainer = BrikkeBlueSurface,
+    onAccentContainer = Blueberry900,
+    accentVariant = BrikkeBlueDark,
+    onAccentVariant = Color.White,
+    basic = BrikkeBlack,
+    onBasic = Color.White,
+    basicContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
+    onBasicContainer = Blueberry900,
     main = BrikkeBlue,
     onMain = Color.White,
     mainContainer = BrikkeBlueSurface,
@@ -303,6 +323,16 @@ internal val LeboncoinColorProLightLegacy: SparkColors = lightSparkColors(
 )
 
 internal val LeboncoinColorPartLight: SparkColors = lightSparkColors(
+    accent = Plum500,
+    onAccent = Color.White,
+    accentContainer = Plum100,
+    onAccentContainer = Plum700,
+    accentVariant = Plum600,
+    onAccentVariant = Color.White,
+    basic = Blueberry900,
+    onBasic = Color.White,
+    basicContainer = Blueberry50,
+    onBasicContainer = Blueberry900,
     main = Clementin500,
     onMain = Color.White,
     mainContainer = Clementin50,
@@ -353,6 +383,16 @@ internal val LeboncoinColorPartLight: SparkColors = lightSparkColors(
 )
 
 internal val LeboncoinColorProLight: SparkColors = lightSparkColors(
+    accent = Plum500,
+    onAccent = Color.White,
+    accentContainer = Plum50,
+    onAccentContainer = Plum700,
+    accentVariant = Plum600,
+    onAccentVariant = Color.White,
+    basic = Blueberry900,
+    onBasic = Color.White,
+    basicContainer = Blueberry50,
+    onBasicContainer = Blueberry900,
     main = Blueberry600,
     onMain = Color.White,
     mainContainer = Blueberry50,

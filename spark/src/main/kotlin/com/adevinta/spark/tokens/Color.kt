@@ -56,7 +56,6 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.PaletteTokens.Apple100
-import com.adevinta.spark.tokens.PaletteTokens.Apple200
 import com.adevinta.spark.tokens.PaletteTokens.Apple400
 import com.adevinta.spark.tokens.PaletteTokens.Apple500
 import com.adevinta.spark.tokens.PaletteTokens.Apple700
@@ -75,7 +74,6 @@ import com.adevinta.spark.tokens.PaletteTokens.BlueRibbon500
 import com.adevinta.spark.tokens.PaletteTokens.BlueRibbon700
 import com.adevinta.spark.tokens.PaletteTokens.BlueRibbon800
 import com.adevinta.spark.tokens.PaletteTokens.Chili100
-import com.adevinta.spark.tokens.PaletteTokens.Chili200
 import com.adevinta.spark.tokens.PaletteTokens.Chili400
 import com.adevinta.spark.tokens.PaletteTokens.Chili500
 import com.adevinta.spark.tokens.PaletteTokens.Chili700
@@ -86,23 +84,20 @@ import com.adevinta.spark.tokens.PaletteTokens.PaleAdevinta700
 import com.adevinta.spark.tokens.PaletteTokens.PaleAdevinta800
 import com.adevinta.spark.tokens.PaletteTokens.PaleAdevinta900
 import com.adevinta.spark.tokens.PaletteTokens.Sky100
-import com.adevinta.spark.tokens.PaletteTokens.Sky200
 import com.adevinta.spark.tokens.PaletteTokens.Sky400
 import com.adevinta.spark.tokens.PaletteTokens.Sky500
 import com.adevinta.spark.tokens.PaletteTokens.Sky700
 import com.adevinta.spark.tokens.PaletteTokens.Sky800
+import com.adevinta.spark.tokens.PaletteTokens.Violet100
 import com.adevinta.spark.tokens.PaletteTokens.Violet200
 import com.adevinta.spark.tokens.PaletteTokens.Violet300
-import com.adevinta.spark.tokens.PaletteTokens.Violet50
 import com.adevinta.spark.tokens.PaletteTokens.Violet500
 import com.adevinta.spark.tokens.PaletteTokens.Violet700
 import com.adevinta.spark.tokens.PaletteTokens.Violet800
 import com.adevinta.spark.tokens.PaletteTokens.White
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings100
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings200
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings400
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings500
-import com.adevinta.spark.tokens.PaletteTokens.Wiggings700
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings800
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -110,14 +105,14 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 public fun lightSparkColors(
     accent: Color = Violet300,
     onAccent: Color = BlackAdevinta900,
-    accentContainer: Color = Violet50,
+    accentContainer: Color = Violet100,
     onAccentContainer: Color = Violet800,
     accentVariant: Color = Violet700,
     onAccentVariant: Color = White,
     basic: Color = PaleAdevinta800,
     onBasic: Color = White,
-    basicContainer: Color = BlackAdevinta50,
-    onBasicContainer: Color = BlackAdevinta900,
+    basicContainer: Color = PaleAdevinta100,
+    onBasicContainer: Color = PaleAdevinta900,
     main: Color = BlueRibbon500,
     onMain: Color = White,
     mainContainer: Color = BlueRibbon100,
@@ -141,7 +136,7 @@ public fun lightSparkColors(
     alert: Color = Wiggings500,
     onAlert: Color = BlackAdevinta900,
     alertContainer: Color = Wiggings100,
-    onAlertContainer: Color = Wiggings700,
+    onAlertContainer: Color = Wiggings800,
     error: Color = Chili500,
     onError: Color = White,
     errorContainer: Color = Chili100,
@@ -163,7 +158,7 @@ public fun lightSparkColors(
     surfaceInverse: Color = BlackAdevinta800,
     onSurfaceInverse: Color = White,
     surfaceTint: Color = main,
-    inverseMain: Color = Color.Magenta,
+    inversePrimary: Color = Color.Magenta,
     outline: Color = BlackAdevinta100,
     outlineHigh: Color = BlackAdevinta900,
     scrim: Color = Black,
@@ -238,7 +233,7 @@ public fun lightSparkColors(
     outlineHigh = outlineHigh,
     outlineVariant = outlineHigh,
     scrim = scrim,
-    inverseMain = inverseMain,
+    inversePrimary = inversePrimary,
     inverseSurface = surfaceInverse,
     inverseOnSurface = onSurfaceInverse,
     dimContent1 = dimContent1,
@@ -274,19 +269,19 @@ public fun darkSparkColors(
     success: Color = Apple400,
     onSuccess: Color = BlackAdevinta900,
     successContainer: Color = Apple800,
-    onSuccessContainer: Color = Apple200,
+    onSuccessContainer: Color = White,
     alert: Color = Wiggings400,
     onAlert: Color = BlackAdevinta900,
     alertContainer: Color = Wiggings800,
-    onAlertContainer: Color = Wiggings200,
+    onAlertContainer: Color = White,
     error: Color = Chili400,
     onError: Color = BlackAdevinta900,
     errorContainer: Color = Chili800,
-    onErrorContainer: Color = Chili200,
+    onErrorContainer: Color = White,
     info: Color = Sky400,
     onInfo: Color = BlackAdevinta900,
     infoContainer: Color = Sky800,
-    onInfoContainer: Color = Sky200,
+    onInfoContainer: Color = White,
     neutral: Color = BlackAdevinta300,
     onNeutral: Color = BlackAdevinta900,
     neutralContainer: Color = BlackAdevinta800,
@@ -375,7 +370,7 @@ public fun darkSparkColors(
     outlineHigh = outlineHigh,
     outlineVariant = outlineHigh,
     scrim = scrim,
-    inverseMain = inverseMain,
+    inversePrimary = inverseMain,
     inverseSurface = surfaceInverse,
     inverseOnSurface = onSurfaceInverse,
     dimContent1 = dimContent1,
@@ -413,7 +408,7 @@ public fun darkSparkColors(
  * top of [mainContainer].
  * @property mainVariant Darker variation of [main] color.
  * @property onMainVariant Color used for text and icons displayed on top of the [mainVariant] color.
- * @property inverseMain Color to be used as a "main" color in places where the inverse color
+ * @property inversePrimary Color to be used as a "main" color in places where the inverse color
  * scheme is needed.
  * @property support The support color provides more ways to accent and distinguish your
  * product. Support colors are best for:
@@ -544,7 +539,7 @@ public class SparkColors(
     surfaceInverse: Color,
     onSurfaceInverse: Color,
     surfaceTint: Color,
-    inverseMain: Color,
+    inversePrimary: Color,
     inverseSurface: Color,
     inverseOnSurface: Color,
     outline: Color,
@@ -847,7 +842,7 @@ public class SparkColors(
         internal set
 
     @Deprecated("This property will be removed as it is not part of Spark Token")
-    public var inverseMain: Color by mutableStateOf(inverseMain, structuralEqualityPolicy())
+    public var inversePrimary: Color by mutableStateOf(inversePrimary, structuralEqualityPolicy())
         internal set
 
     @Deprecated(
@@ -934,7 +929,7 @@ public class SparkColors(
         onValid: Color = this.onValid,
         validContainer: Color = this.validContainer,
         onValidContainer: Color = this.onValidContainer,
-        inverseMain: Color = this.inverseMain,
+        inverseMain: Color = this.inversePrimary,
         inverseSurface: Color = this.inverseSurface,
         inverseOnSurface: Color = this.inverseOnSurface,
         dimContent1: Float = this.dim1,
@@ -1008,7 +1003,7 @@ public class SparkColors(
         onValid = onValid,
         validContainer = validContainer,
         onValidContainer = onValidContainer,
-        inverseMain = inverseMain,
+        inversePrimary = inverseMain,
         inverseSurface = inverseSurface,
         inverseOnSurface = inverseOnSurface,
         dimContent1 = dimContent1,
@@ -1064,7 +1059,7 @@ public class SparkColors(
         append("onNeutral=$onNeutral, ")
         append("neutralContainer=$neutralContainer, ")
         append("onNeutralContainer=$onNeutralContainer, ")
-        append("inverseMain=$inverseMain, ")
+        append("inverseMain=$inversePrimary, ")
         append("inverseSurface=$inverseSurface, ")
         append("dim1=$dim1, ")
         append("dim2=$dim2, ")
@@ -1080,7 +1075,7 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
     onPrimary = onMain,
     primaryContainer = mainContainer,
     onPrimaryContainer = onMainContainer,
-    inversePrimary = inverseMain,
+    inversePrimary = inversePrimary,
     secondary = support,
     onSecondary = onSupport,
     secondaryContainer = supportContainer,
@@ -1268,7 +1263,7 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
     onNeutral = other.onNeutral
     neutralContainer = other.neutralContainer
     onNeutralContainer = other.onNeutralContainer
-    inverseMain = other.inverseMain
+    inversePrimary = other.inversePrimary
     inverseSurface = other.inverseSurface
     inverseOnSurface = other.inverseOnSurface
     dim1 = other.dim1
@@ -1362,7 +1357,7 @@ public fun debugColors(
     outlineHigh = debugColor,
     outlineVariant = debugColor,
     scrim = debugColor,
-    inverseMain = debugColor,
+    inversePrimary = debugColor,
     inverseSurface = Color.Blue,
     inverseOnSurface = onDebugColor,
     dimContent1 = .72f,
