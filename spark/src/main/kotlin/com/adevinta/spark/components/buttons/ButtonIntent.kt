@@ -22,37 +22,43 @@
 package com.adevinta.spark.components.buttons
 
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
+import com.adevinta.spark.components.IntentColors
 
 /**
  * ButtonIntent is used to define the intent of the buttons.
  */
 public enum class ButtonIntent {
     /**
-     * Primary buttons are used for the most important actions.
+     * Used to match default color of such UI controls as toggles, Slider, etc.
      */
-    Primary {
+    Basic {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.primary,
-            onColor = SparkTheme.colors.onPrimary,
-            containerColor = SparkTheme.colors.primaryContainer,
-            onContainerColor = SparkTheme.colors.onPrimaryContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Basic.colors()
     },
 
     /**
-     * Secondary buttons are used to highlight/accentuate actions.
+     * Used to make button visually accentuated.
      */
-    Secondary {
+    Accent {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.secondary,
-            onColor = SparkTheme.colors.onSecondary,
-            containerColor = SparkTheme.colors.secondaryContainer,
-            onContainerColor = SparkTheme.colors.onSecondaryContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Accent.colors()
+    },
+
+    /**
+     * Main buttons are used for the most important actions.
+     */
+    Main {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Main.colors()
+    },
+
+    /**
+     * Support buttons are used to highlight/accentuate actions.
+     */
+    Support {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Support.colors()
     },
 
     /**
@@ -60,12 +66,7 @@ public enum class ButtonIntent {
      */
     Surface {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.surface,
-            onColor = SparkTheme.colors.onSurface,
-            containerColor = SparkTheme.colors.surface,
-            onContainerColor = SparkTheme.colors.onSurface,
-        )
+        override fun colors(): IntentColor = IntentColors.Surface.colors()
     },
 
     /**
@@ -73,12 +74,7 @@ public enum class ButtonIntent {
      */
     Success {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.success,
-            onColor = SparkTheme.colors.onSuccess,
-            containerColor = SparkTheme.colors.successContainer,
-            onContainerColor = SparkTheme.colors.onSuccessContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Success.colors()
     },
 
     /**
@@ -86,12 +82,7 @@ public enum class ButtonIntent {
      */
     Alert {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.alert,
-            onColor = SparkTheme.colors.onAlert,
-            containerColor = SparkTheme.colors.alertContainer,
-            onContainerColor = SparkTheme.colors.onAlertContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Alert.colors()
     },
 
     /**
@@ -99,12 +90,7 @@ public enum class ButtonIntent {
      */
     Danger {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.error,
-            onColor = SparkTheme.colors.onError,
-            containerColor = SparkTheme.colors.errorContainer,
-            onContainerColor = SparkTheme.colors.onErrorContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Danger.colors()
     },
 
     /**
@@ -112,12 +98,25 @@ public enum class ButtonIntent {
      */
     Neutral {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.neutral,
-            onColor = SparkTheme.colors.onNeutral,
-            containerColor = SparkTheme.colors.neutralContainer,
-            onContainerColor = SparkTheme.colors.onNeutralContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Neutral.colors()
+    },
+
+    @Deprecated(
+        "Primary is replaced with Main Intent",
+        replaceWith = ReplaceWith("Main"),
+    )
+    Primary {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Main.colors()
+    },
+
+    @Deprecated(
+        "Secondary is replaced with Support Intent",
+        replaceWith = ReplaceWith("Support"),
+    )
+    Secondary {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Support.colors()
     },
     ;
 

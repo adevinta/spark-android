@@ -30,10 +30,10 @@ internal val SparkComponentsStub = kotlin(
     import androidx.compose.runtime.Composable
 
     @Composable
-    fun PrimaryButton() {}
+    fun MainButton() {}
 
     @Composable
-    fun SecondaryButton() {}
+    fun SupportButton() {}
 
     @Composable
     fun TextButton() {}

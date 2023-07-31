@@ -63,8 +63,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 @Composable
 public fun ChipFilled(
     text: String,
-    intent: ChipIntent,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     leadingIcon: SparkIcon? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -103,9 +103,9 @@ public fun ChipFilled(
 @Composable
 public fun ChipFilled(
     icon: SparkIcon,
-    intent: ChipIntent,
     contentDescription: String,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
@@ -139,8 +139,8 @@ public fun ChipFilled(
  */
 @Composable
 public fun ChipFilled(
-    intent: ChipIntent,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
@@ -179,8 +179,17 @@ internal fun ChipFilledPreview(
                         Text("Chip")
                         Badge(hasStroke = false, count = 1)
                     }
-                    ChipFilled(intent.name, intent, leadingIcon = SparkIcons.OfferOutline, enabled = enabled)
-                    ChipFilled(intent.name, intent, enabled = enabled)
+                    ChipFilled(
+                        text = intent.name,
+                        intent = intent,
+                        leadingIcon = SparkIcons.OfferOutline,
+                        enabled = enabled,
+                    )
+                    ChipFilled(
+                        text = intent.name,
+                        intent = intent,
+                        enabled = enabled,
+                    )
                     ChipFilled(
                         contentDescription = intent.name,
                         intent = intent,

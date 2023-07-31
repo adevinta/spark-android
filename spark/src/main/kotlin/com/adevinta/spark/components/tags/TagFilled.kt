@@ -49,7 +49,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 public fun TagFilled(
     text: String,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Primary,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -72,7 +72,7 @@ public fun TagFilled(
 public fun TagFilled(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Primary,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -93,7 +93,7 @@ public fun TagFilled(
 @Composable
 public fun TagFilled(
     modifier: Modifier = Modifier,
-    colors: TagColors = TagDefaults.filledColors(TagIntent.Primary),
+    colors: TagColors = TagDefaults.filledColors(TagIntent.Main),
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
     content: @Composable RowScope.() -> Unit,
@@ -116,7 +116,7 @@ internal fun TagFilledPreview(
 ) {
     PreviewTheme(theme) {
         TagIntent.values().forEach {
-            TagFilled("Tag information", intent = it)
+            TagFilled("Tag ${it.name}", intent = it)
         }
     }
 }

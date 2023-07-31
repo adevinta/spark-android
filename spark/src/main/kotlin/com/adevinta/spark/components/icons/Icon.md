@@ -16,6 +16,28 @@ the following values ([IconSize](IconDefaults.kt)):
 - Large (32.dp)
 - ExtraLarge (40.dp)
 
+Use [IconIntent](IconIntent.kt) to pass one of the accepted intents:
+- Basic
+- Accent
+- Main
+- Support
+- Surface
+- Success
+- Alert
+- Danger
+- Neutral
+- Current
+- Unspecified
+
+```kotlin
+Icon(
+    sparkIcon = SparkIcons.CheckFill,
+    tint = IconIntent.Main,
+    contentDescription = "Done",
+    size = IconSize.Large,
+)
+```
+
 |       | Colors and sizes                                                                              |
 |-------|-----------------------------------------------------------------------------------------------|
 | Light | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_icon_icon_light.png) |

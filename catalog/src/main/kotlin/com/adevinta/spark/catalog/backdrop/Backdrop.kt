@@ -278,7 +278,7 @@ public fun BackdropScaffold(
     headerHeight: Dp = BackdropScaffoldDefaults.HeaderHeight,
     persistentAppBar: Boolean = true,
     stickyFrontLayer: Boolean = true,
-    backLayerBackgroundColor: Color = SparkTheme.colors.primary,
+    backLayerBackgroundColor: Color = SparkTheme.colors.main,
     backLayerContentColor: Color = contentColorFor(backLayerBackgroundColor),
     frontLayerShape: Shape = BackdropScaffoldDefaults.frontLayerShape,
     frontLayerElevation: Dp = BackdropScaffoldDefaults.FrontLayerElevation,

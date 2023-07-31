@@ -63,8 +63,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 @Composable
 public fun ChipOutlined(
     text: String,
-    intent: ChipIntent,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     leadingIcon: SparkIcon? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -103,9 +103,9 @@ public fun ChipOutlined(
 @Composable
 public fun ChipOutlined(
     icon: SparkIcon,
-    intent: ChipIntent,
     contentDescription: String,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
@@ -139,8 +139,8 @@ public fun ChipOutlined(
  */
 @Composable
 public fun ChipOutlined(
-    intent: ChipIntent,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
@@ -180,12 +180,16 @@ internal fun ChipOutlinedPreview(
                         Badge(hasStroke = false, count = 1)
                     }
                     ChipOutlined(
-                        intent.name,
-                        intent,
+                        text = intent.name,
+                        intent = intent,
                         leadingIcon = SparkIcons.OfferOutline,
                         enabled = enabled,
                     )
-                    ChipOutlined(intent.name, intent, enabled = enabled)
+                    ChipOutlined(
+                        text = intent.name,
+                        intent = intent,
+                        enabled = enabled,
+                    )
                     ChipOutlined(
                         contentDescription = intent.name,
                         intent = intent,

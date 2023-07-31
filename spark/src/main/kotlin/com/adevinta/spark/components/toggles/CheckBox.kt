@@ -47,7 +47,7 @@ internal fun SparkCheckbox(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    intent: ToggleIntent = ToggleIntent.Primary,
+    intent: ToggleIntent = ToggleIntent.Basic,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     androidx.compose.material3.TriStateCheckbox(
@@ -88,7 +88,7 @@ public fun Checkbox(
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    intent: ToggleIntent = ToggleIntent.Primary,
+    intent: ToggleIntent = ToggleIntent.Basic,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     SparkCheckbox(
@@ -133,7 +133,7 @@ public fun CheckboxLabelled(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     contentSide: ContentSide = ContentSide.End,
-    intent: ToggleIntent = ToggleIntent.Primary,
+    intent: ToggleIntent = ToggleIntent.Basic,
     content: @Composable RowScope.() -> Unit,
 ) {
     SparkToggleLabelledContainer(

@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -56,24 +57,28 @@ public val CheckboxExamples: List<Example> = listOf(
         sourceUrl = CheckboxExampleSourceUrl,
     ) {
         var checkboxState by remember { mutableStateOf(ToggleableState.Off) }
-        Row {
-            ToggleIntent.values().forEach { intent ->
-                Column {
-                    Checkbox(
-                        enabled = true,
-                        state = checkboxState,
-                        intent = intent,
-                        onClick = {
-                            checkboxState = when (checkboxState) {
-                                ToggleableState.On -> ToggleableState.Off
-                                ToggleableState.Off -> ToggleableState.Indeterminate
-                                ToggleableState.Indeterminate -> ToggleableState.On
-                            }
-                        },
-                    )
-                    Checkbox(enabled = false, state = checkboxState, intent = intent, onClick = {})
-                }
-            }
+        LazyRow {
+            items(
+                ToggleIntent.values().count(),
+                itemContent = { index ->
+                    val intent = ToggleIntent.values()[index]
+                    Column {
+                        Checkbox(
+                            enabled = true,
+                            state = checkboxState,
+                            intent = intent,
+                            onClick = {
+                                checkboxState = when (checkboxState) {
+                                    ToggleableState.On -> ToggleableState.Off
+                                    ToggleableState.Off -> ToggleableState.Indeterminate
+                                    ToggleableState.Indeterminate -> ToggleableState.On
+                                }
+                            },
+                        )
+                        Checkbox(enabled = false, state = checkboxState, intent = intent, onClick = {})
+                    }
+                },
+            )
         }
     },
     Example(

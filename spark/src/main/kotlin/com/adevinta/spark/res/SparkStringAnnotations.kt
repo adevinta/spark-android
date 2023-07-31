@@ -51,8 +51,8 @@ public object SparkStringAnnotations {
      * Given a string representing annotation value of a spark color, returns the corresponding [SpanStyle] with the color token.
      */
     private fun String.toColorSpanStyle(token: SparkColors): SpanStyle? = when (this) {
-        "primary" -> token.primary
-        "secondary" -> token.secondary
+        "main" -> token.main
+        "support" -> token.support
         "success" -> token.success
         "alert" -> token.alert
         "error" -> token.error

@@ -101,7 +101,7 @@ internal fun SparkAlertDialog(
  * @param iconContentColor the content color used for the icon.
  * @param titleContentColor the content color used for the title.
  * @param textContentColor the content color used for the text.
- * @param tonalElevation when containerColor is ColorScheme.surface, a translucent primary color overlay is applied on top of the container. A higher tonal elevation value will result in a darker color in light theme and lighter color in dark theme. See also: Surface.
+ * @param tonalElevation when containerColor is ColorScheme.surface, a translucent main color overlay is applied on top of the container. A higher tonal elevation value will result in a darker color in light theme and lighter color in dark theme. See also: Surface.
  * @param properties typically platform specific properties to further configure the dialog.
  */
 @ExperimentalSparkApi

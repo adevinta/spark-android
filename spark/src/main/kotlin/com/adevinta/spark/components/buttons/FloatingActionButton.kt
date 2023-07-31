@@ -80,7 +80,7 @@ import androidx.compose.material3.SmallFloatingActionButton as MaterialSmallFloa
  * [containerColor] is not a color from the theme.
  * @param elevation [FloatingActionButtonElevation] used to resolve the elevation for this FAB in
  * different states. This controls the size of the shadow below the FAB. Additionally, when the
- * container color is [ColorScheme.surface], this controls the amount of primary color applied as an
+ * container color is [ColorScheme.surface], this controls the amount of main color applied as an
  * overlay. See also: [Surface].
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this FAB. You can create and pass in your own `remember`ed instance to observe [Interaction]s
@@ -134,7 +134,7 @@ public fun FloatingActionButton(
  * [containerColor] is not a color from the theme.
  * @param elevation [FloatingActionButtonElevation] used to resolve the elevation for this FAB in
  * different states. This controls the size of the shadow below the FAB. Additionally, when the
- * container color is [ColorScheme.surface], this controls the amount of primary color applied as an
+ * container color is [ColorScheme.surface], this controls the amount of main color applied as an
  * overlay. See also: [Surface].
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this FAB. You can create and pass in your own `remember`ed instance to observe [Interaction]s
@@ -188,7 +188,7 @@ public fun SmallFloatingActionButton(
  * [containerColor] is not a color from the theme.
  * @param elevation [FloatingActionButtonElevation] used to resolve the elevation for this FAB in
  * different states. This controls the size of the shadow below the FAB. Additionally, when the
- * container color is [ColorScheme.surface], this controls the amount of primary color applied as an
+ * container color is [ColorScheme.surface], this controls the amount of main color applied as an
  * overlay. See also: [Surface].
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this FAB. You can create and pass in your own `remember`ed instance to observe [Interaction]s
@@ -227,7 +227,7 @@ public fun LargeFloatingActionButton(
 /**
  * <a href="https://m3.material.io/components/extended-fab/overview" class="external" target="_blank">Material Design extended floating action button</a>.
  *
- * Extended FABs help people take primary actions. They're wider than FABs to accommodate a text
+ * Extended FABs help people take main actions. They're wider than FABs to accommodate a text
  * label and larger target area.
  *
  * ![Extended FAB image](https://developer.android.com/images/reference/androidx/compose/material3/extended-fab.png)
@@ -244,7 +244,7 @@ public fun LargeFloatingActionButton(
  * [containerColor] is not a color from the theme.
  * @param elevation [FloatingActionButtonElevation] used to resolve the elevation for this FAB in
  * different states. This controls the size of the shadow below the FAB. Additionally, when the
- * container color is [ColorScheme.surface], this controls the amount of primary color applied as an
+ * container color is [ColorScheme.surface], this controls the amount of main color applied as an
  * overlay. See also: [Surface].
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this FAB. You can create and pass in your own `remember`ed instance to observe [Interaction]s
@@ -277,7 +277,7 @@ public fun ExtendedFloatingActionButton(
 /**
  * <a href="https://m3.material.io/components/extended-fab/overview" class="external" target="_blank">Material Design extended floating action button</a>.
  *
- * Extended FABs help people take primary actions. They're wider than FABs to accommodate a text
+ * Extended FABs help people take main actions. They're wider than FABs to accommodate a text
  * label and larger target area.
  *
  * ![Extended FAB image](https://developer.android.com/images/reference/androidx/compose/material3/extended-fab.png)
@@ -301,7 +301,7 @@ public fun ExtendedFloatingActionButton(
  * [containerColor] is not a color from the theme.
  * @param elevation [FloatingActionButtonElevation] used to resolve the elevation for this FAB in
  * different states. This controls the size of the shadow below the FAB. Additionally, when the
- * container color is [ColorScheme.surface], this controls the amount of primary color applied as an
+ * container color is [ColorScheme.surface], this controls the amount of main color applied as an
  * overlay. See also: [Surface].
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this FAB. You can create and pass in your own `remember`ed instance to observe [Interaction]s

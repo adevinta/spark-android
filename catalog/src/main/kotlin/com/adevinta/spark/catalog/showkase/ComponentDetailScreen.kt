@@ -143,7 +143,7 @@ private fun DocumentationPanel(kDoc: String) {
         ProvideTextStyle(value = SparkTheme.typography.callout) {
             Text(
                 text = buttonText,
-                color = SparkTheme.colors.primary,
+                color = SparkTheme.colors.main,
             )
         }
         Icon(sparkIcon = icon, contentDescription = buttonText)
