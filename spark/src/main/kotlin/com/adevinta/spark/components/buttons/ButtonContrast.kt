@@ -70,7 +70,7 @@ public fun ButtonContrast(
     text: String,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Primary,
+    intent: ButtonIntent = ButtonIntent.Main,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -129,7 +129,7 @@ public fun ButtonContrast(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Primary,
+    intent: ButtonIntent = ButtonIntent.Main,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -177,7 +177,7 @@ internal fun ButtonContrastPreview(
     ) {
         val icon = SparkIcons.Link
         var isLoading by remember { mutableStateOf(false) }
-        val buttonText = "Primary Button"
+        val buttonText = "Main Button"
         ButtonContrast(
             onClick = {
                 isLoading = !isLoading

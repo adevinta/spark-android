@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [0.3.1]
+
+_2023-07-31_
+
+* 🆕 Added `Basic` and `Accent` intents to all released components.
+* 💄Updated the default color intents to `Basic` for `Tag`, `Chip`, `Spinner`. 
+* 🗑️ Deprecated `Primary` and `Secondary` intents, `Main` and `Support`should be used instead.
+
 ## [0.3.0]
 
 _2023-07-11_
@@ -66,7 +74,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.3.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.3.1...HEAD
+
+[0.3.1]: https://github.com/adevinta/spark-android/releases/tag/0.3.1
 
 [0.3.0]: https://github.com/adevinta/spark-android/releases/tag/0.3.0
 

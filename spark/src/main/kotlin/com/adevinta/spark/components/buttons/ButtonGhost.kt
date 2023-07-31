@@ -76,7 +76,7 @@ public fun ButtonGhost(
     text: String,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Primary,
+    intent: ButtonIntent = ButtonIntent.Main,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -138,7 +138,7 @@ public fun ButtonGhost(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Primary,
+    intent: ButtonIntent = ButtonIntent.Main,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -246,7 +246,7 @@ internal fun ButtonGhostPreview(
     PreviewTheme(theme) {
         val icon = SparkIcons.Link
         var isLoading by remember { mutableStateOf(false) }
-        val buttonText = "Primary Button"
+        val buttonText = "Main Button"
         ButtonGhost(
             onClick = {
                 isLoading = !isLoading

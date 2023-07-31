@@ -26,21 +26,37 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.SparkTheme
 
-public enum class IconTints {
+public enum class IconIntent {
+    /**
+     * Used to match default color of such UI controls as toggles, Slider, etc.
+     */
+    Basic {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.basic
+    },
+
+    /**
+     * Used to make icons visually accentuated.
+     */
+    Accent {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.accent
+    },
+
     /**
      * Used for the most important information.
      */
-    Primary {
+    Main {
         @Composable
-        override fun color(): Color = SparkTheme.colors.primary
+        override fun color(): Color = SparkTheme.colors.main
     },
 
     /**
      * Used to highlight/accentuate.
      */
-    Secondary {
+    Support {
         @Composable
-        override fun color(): Color = SparkTheme.colors.secondary
+        override fun color(): Color = SparkTheme.colors.support
     },
 
     /**
@@ -92,7 +108,7 @@ public enum class IconTints {
     },
 
     /**
-     * Used for low importance information.
+     * To apply no tint and use original icon tint.
      */
     Unspecified {
         @Composable

@@ -78,7 +78,7 @@ private fun CheckboxSample() {
         var contentSide by remember { mutableStateOf(ContentSide.End) }
         var label: String? by remember { mutableStateOf(null) }
         var state by remember { mutableStateOf(ToggleableState.On) }
-        var intent by remember { mutableStateOf(ToggleIntent.Primary) }
+        var intent by remember { mutableStateOf(ToggleIntent.Main) }
         val onClick = {
             state = when (state) {
                 ToggleableState.On -> ToggleableState.Off

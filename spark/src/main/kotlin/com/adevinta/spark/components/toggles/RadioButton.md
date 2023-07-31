@@ -34,7 +34,7 @@ RadioButton(
 |-----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_toggles_radiobuttonlabelled_dark.png) |
 
-The primary radio button allow users to select one option from a set.
+The main radio button allow users to select one option from a set.
 
 - Use radio buttons to select a single option from a list
 - It should be visible at a glance if a radio button has been selected, and selected items should be

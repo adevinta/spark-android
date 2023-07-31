@@ -45,7 +45,7 @@ public enum class TabIntent {
      */
     Primary {
         @Composable
-        override fun color(): Color = SparkTheme.colors.primary
+        override fun color(): Color = SparkTheme.colors.main
     },
 
     /**
@@ -53,7 +53,7 @@ public enum class TabIntent {
      */
     Secondary {
         @Composable
-        override fun color(): Color = SparkTheme.colors.secondary
+        override fun color(): Color = SparkTheme.colors.support
     },
     ;
 

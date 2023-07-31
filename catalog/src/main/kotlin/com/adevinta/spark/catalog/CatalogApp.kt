@@ -143,7 +143,7 @@ internal fun CatalogApp(
                         .calculateBottomPadding(),
                     peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
                         .calculateTopPadding(),
-                    backLayerBackgroundColor = SparkTheme.colors.primaryContainer,
+                    backLayerBackgroundColor = SparkTheme.colors.mainContainer,
                     appBar = {
                         HomeTabBar(
                             modifier = Modifier.statusBarsPadding(),

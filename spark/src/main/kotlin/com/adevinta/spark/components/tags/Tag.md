@@ -10,7 +10,7 @@
 The minimal usage of the component is the text.
 
 ```kotlin
-TagFilled(text = "Primary")
+TagFilled(text = "Main")
 ```
 
 The tags can also have a decorative start icon to better identify the context of the tag.
