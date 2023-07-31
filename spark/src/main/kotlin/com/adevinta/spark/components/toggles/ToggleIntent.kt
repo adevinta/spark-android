@@ -24,7 +24,6 @@ package com.adevinta.spark.components.toggles
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.components.IntentColors
 
