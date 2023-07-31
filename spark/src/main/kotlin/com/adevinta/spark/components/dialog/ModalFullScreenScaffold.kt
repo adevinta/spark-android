@@ -76,8 +76,8 @@ import com.adevinta.spark.tools.preview.DevicePreviews
  * @param snackbarHost Component to host Snackbars that are pushed to be shown
  * @param modifier applied to the root Scaffold
  * @param illustration whether the modal display a close icon, and its corresponding action
- * @param primaryButton the main actions for this modal (should be a [ButtonFilled])
- * @param secondaryButton the secondary or alternative actions for this modal (should any other button than [ButtonFilled])
+ * @param mainButton the main actions for this modal (should be a [ButtonFilled])
+ * @param supportButton the support or alternative actions for this modal (should any other button than [ButtonFilled])
  * @param content the center custom Composable for modal content
  */
 @ExperimentalSparkApi
@@ -87,8 +87,8 @@ public fun ModalFullScreenScaffold(
     modifier: Modifier = Modifier,
     snackbarHost: @Composable () -> Unit = {},
     @DrawableRes illustration: Int? = null,
-    primaryButton: @Composable (Modifier) -> Unit = {},
-    secondaryButton: @Composable (Modifier) -> Unit = {},
+    mainButton: @Composable (Modifier) -> Unit = {},
+    supportButton: @Composable (Modifier) -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val size = Layout.windowSize
@@ -104,8 +104,8 @@ public fun ModalFullScreenScaffold(
                 onClose = onClose,
                 snackbarHost = snackbarHost,
                 illustration = illustration,
-                primaryButton = primaryButton,
-                secondaryButton = secondaryButton,
+                mainButton = mainButton,
+                supportButton = supportButton,
                 content = content,
             )
         }
@@ -115,8 +115,8 @@ public fun ModalFullScreenScaffold(
                 modifier = modifier,
                 onClose = onClose,
                 illustration = illustration,
-                primaryButton = primaryButton,
-                secondaryButton = secondaryButton,
+                mainButton = mainButton,
+                supportButton = supportButton,
                 content = content,
             )
         }
@@ -124,8 +124,8 @@ public fun ModalFullScreenScaffold(
             modifier = modifier,
             onClose = onClose,
             illustration = illustration,
-            primaryButton = primaryButton,
-            secondaryButton = secondaryButton,
+            mainButton = mainButton,
+            supportButton = supportButton,
             content = content,
         )
     }
@@ -138,8 +138,8 @@ private fun ModalScaffold(
     modifier: Modifier = Modifier,
     snackbarHost: @Composable () -> Unit = {},
     @DrawableRes illustration: Int? = null,
-    primaryButton: @Composable (Modifier) -> Unit = {},
-    secondaryButton: @Composable (Modifier) -> Unit = {},
+    mainButton: @Composable (Modifier) -> Unit = {},
+    supportButton: @Composable (Modifier) -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Dialog(
@@ -177,8 +177,8 @@ private fun ModalScaffold(
                         .padding(top = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
                 ) {
-                    secondaryButton(Modifier)
-                    primaryButton(Modifier)
+                    supportButton(Modifier)
+                    mainButton(Modifier)
                 }
             }
         }
@@ -192,8 +192,8 @@ private fun PhonePortraitModalScaffold(
     modifier: Modifier = Modifier,
     snackbarHost: @Composable () -> Unit = {},
     @DrawableRes illustration: Int? = null,
-    primaryButton: @Composable (Modifier) -> Unit = {},
-    secondaryButton: @Composable (Modifier) -> Unit = {},
+    mainButton: @Composable (Modifier) -> Unit = {},
+    supportButton: @Composable (Modifier) -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -221,8 +221,8 @@ private fun PhonePortraitModalScaffold(
                         .padding(bottom = 16.dp),
                 ) {
                     val buttonModifier = Modifier.fillMaxWidth()
-                    secondaryButton(buttonModifier)
-                    primaryButton(buttonModifier)
+                    supportButton(buttonModifier)
+                    mainButton(buttonModifier)
                 }
             } else {
                 Row(
@@ -232,8 +232,8 @@ private fun PhonePortraitModalScaffold(
                         .padding(bottom = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
                 ) {
-                    secondaryButton(Modifier)
-                    primaryButton(Modifier)
+                    supportButton(Modifier)
+                    mainButton(Modifier)
                 }
             }
         },
@@ -266,8 +266,8 @@ private fun PhoneLandscapeModalScaffold(
     modifier: Modifier = Modifier,
     snackbarHost: @Composable () -> Unit = {},
     @DrawableRes illustration: Int? = null,
-    primaryButton: @Composable (Modifier) -> Unit = {},
-    secondaryButton: @Composable (Modifier) -> Unit = {},
+    mainButton: @Composable (Modifier) -> Unit = {},
+    supportButton: @Composable (Modifier) -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -322,8 +322,8 @@ private fun PhoneLandscapeModalScaffold(
                     horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End),
                 ) {
                     val buttonModifier = Modifier.weight(1f)
-                    secondaryButton(buttonModifier)
-                    primaryButton(buttonModifier)
+                    supportButton(buttonModifier)
+                    mainButton(buttonModifier)
                 }
             }
         }
@@ -352,10 +352,10 @@ private fun ModalPreview() {
         ModalFullScreenScaffold(
             onClose = { /*TODO*/ },
             illustration = SparkIcons.BicycleType.drawableId,
-            primaryButton = {
-                ButtonFilled(modifier = it, onClick = { /*TODO*/ }, text = "Primary Action")
+            mainButton = {
+                ButtonFilled(modifier = it, onClick = { /*TODO*/ }, text = "Main Action")
             },
-            secondaryButton = {
+            supportButton = {
                 ButtonGhost(modifier = it, onClick = { /*TODO*/ }, text = "Alternative Action")
             },
         ) { innerPadding ->

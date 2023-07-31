@@ -64,7 +64,7 @@ internal fun SparkNavigationRail(
 
 /**
  * Spark bottom navigation rail.
- * Navigation rails provide access to primary destinations in apps when using tablet and desktop screens.
+ * Navigation rails provide access to main destinations in apps when using tablet and desktop screens.
  *
  * The navigation rail should be used to display three to seven app destinations and, optionally,
  * a FloatingActionButton or a logo header.

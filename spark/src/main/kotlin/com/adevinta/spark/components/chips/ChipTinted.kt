@@ -63,8 +63,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 @Composable
 public fun ChipTinted(
     text: String,
-    intent: ChipIntent,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     leadingIcon: SparkIcon? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -103,9 +103,9 @@ public fun ChipTinted(
 @Composable
 public fun ChipTinted(
     icon: SparkIcon,
-    intent: ChipIntent,
     contentDescription: String,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
@@ -139,8 +139,8 @@ public fun ChipTinted(
  */
 @Composable
 public fun ChipTinted(
-    intent: ChipIntent,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
@@ -179,8 +179,8 @@ internal fun ChipTintedPreview(
                         Text("Chip")
                         Badge(hasStroke = false, count = 1)
                     }
-                    ChipTinted(intent.name, intent, leadingIcon = SparkIcons.OfferOutline, enabled = enabled)
-                    ChipTinted(intent.name, intent, enabled = enabled)
+                    ChipTinted(intent.name, intent = intent, leadingIcon = SparkIcons.OfferOutline, enabled = enabled)
+                    ChipTinted(intent.name, intent = intent, enabled = enabled)
                     ChipTinted(
                         contentDescription = intent.name,
                         intent = intent,

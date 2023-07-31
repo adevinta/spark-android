@@ -19,8 +19,10 @@ The chip can have one of the [ChipStyles](ChipStyles.kt):
 - [Dashed](ChipDashed.kt) - using a dashed border and no background
 
 The color is set using one of the [ChipIntent](ChipIntent.kt)s:
-- Primary
-- Secondary
+- Basic (default color)
+- Accent
+- Main
+- Support
 - Success
 - Alert
 - Danger
@@ -40,8 +42,8 @@ To draw a chip with an optional leading icon and text.
 ```kotlin
 fun ChipOutlined(
     text: String,
-    intent: ChipIntent,
     modifier: Modifier = Modifier,
+    intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
     leadingIcon: SparkIcon? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -54,7 +56,7 @@ To draw a chip that only contains an icon:
 ```kotlin
 fun ChipOutlined(
     icon: SparkIcon,
-    intent: ChipIntent,
+    intent: ChipIntent = ChipIntent.Basic,
     contentDescription: String,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -67,7 +69,7 @@ To pass a custom content:
 
 ```kotlin
 fun ChipOutlined(
-    intent: ChipIntent,
+    intent: ChipIntent = ChipIntent.Basic,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
