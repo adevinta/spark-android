@@ -40,11 +40,13 @@ When no count is displayed in the badge, the badge is smaller but still round.
 
 Badge accepts the following [BadgeIntent](BadgeIntent.kt)s :
 
+- Basic
+- Accent
 - Main
 - Support
 - Success
 - Alert
-- Danger (default)
+- Danger (by default)
 - Info
 - Neutral
 - Surface

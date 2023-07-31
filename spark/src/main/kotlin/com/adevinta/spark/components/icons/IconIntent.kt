@@ -26,7 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.SparkTheme
 
-public enum class IconTints {
+public enum class IconIntent {
     /**
      * Used for the most important information.
      */

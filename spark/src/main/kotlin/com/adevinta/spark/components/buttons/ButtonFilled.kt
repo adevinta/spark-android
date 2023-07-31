@@ -194,7 +194,7 @@ public fun ButtonFilled(
     ReplaceWith("ButtonFilled(onClick, text, modifier, intent, enabled, icon, iconSide, isLoading)"),
 )
 @Composable
-public fun MainButton(
+public fun PrimaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,

@@ -22,24 +22,36 @@
 package com.adevinta.spark.components.badge
 
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
+import com.adevinta.spark.components.IntentColors
 
 /**
  * BadgeIntent is used to define the intent of the badge.
  */
+
 public enum class BadgeIntent {
+    /**
+     * Used to match default color of such UI controls as toggles, Slider, etc.
+     */
+    Basic {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Basic.colors()
+    },
+
+    /**
+     * Used to make UI component visually accentuated.
+     */
+    Accent {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Accent.colors()
+    },
+
     /**
      * Used for the most important information.
      */
     Main {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.main,
-            onColor = SparkTheme.colors.onMain,
-            containerColor = SparkTheme.colors.mainContainer,
-            onContainerColor = SparkTheme.colors.onMainContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Main.colors()
     },
 
     /**
@@ -47,12 +59,7 @@ public enum class BadgeIntent {
      */
     Support {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.support,
-            onColor = SparkTheme.colors.onSupport,
-            containerColor = SparkTheme.colors.supportContainer,
-            onContainerColor = SparkTheme.colors.onSupportContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Support.colors()
     },
 
     /**
@@ -60,12 +67,7 @@ public enum class BadgeIntent {
      */
     Success {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.success,
-            onColor = SparkTheme.colors.onSuccess,
-            containerColor = SparkTheme.colors.successContainer,
-            onContainerColor = SparkTheme.colors.onSuccessContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Success.colors()
     },
 
     /**
@@ -73,12 +75,7 @@ public enum class BadgeIntent {
      */
     Alert {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.alert,
-            onColor = SparkTheme.colors.onAlert,
-            containerColor = SparkTheme.colors.alertContainer,
-            onContainerColor = SparkTheme.colors.onAlertContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Alert.colors()
     },
 
     /**
@@ -86,12 +83,7 @@ public enum class BadgeIntent {
      */
     Danger {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.error,
-            onColor = SparkTheme.colors.onError,
-            containerColor = SparkTheme.colors.errorContainer,
-            onContainerColor = SparkTheme.colors.onErrorContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Danger.colors()
     },
 
     /**
@@ -99,12 +91,7 @@ public enum class BadgeIntent {
      */
     Info {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.info,
-            onColor = SparkTheme.colors.onInfo,
-            containerColor = SparkTheme.colors.infoContainer,
-            onContainerColor = SparkTheme.colors.onInfoContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Info.colors()
     },
 
     /**
@@ -112,12 +99,7 @@ public enum class BadgeIntent {
      */
     Neutral {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.neutral,
-            onColor = SparkTheme.colors.onNeutral,
-            containerColor = SparkTheme.colors.neutralContainer,
-            onContainerColor = SparkTheme.colors.onNeutralContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Neutral.colors()
     },
 
     /**
@@ -125,12 +107,7 @@ public enum class BadgeIntent {
      */
     Surface {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.surface,
-            onColor = SparkTheme.colors.onSurface,
-            containerColor = SparkTheme.colors.surface,
-            onContainerColor = SparkTheme.colors.onSurface,
-        )
+        override fun colors(): IntentColor = IntentColors.Surface.colors()
     },
     ;
 

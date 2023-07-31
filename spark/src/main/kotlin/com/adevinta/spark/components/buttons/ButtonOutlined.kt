@@ -186,7 +186,7 @@ public fun ButtonOutlined(
     ),
 )
 @Composable
-public fun SupportButton(
+public fun SecondaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,

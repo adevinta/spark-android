@@ -69,7 +69,7 @@ public fun Icon(
     sparkIcon: SparkIcon,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: Color = IconDefaults.color.color(),
+    tint: Color = IconDefaults.intent.color(),
     size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
@@ -101,7 +101,7 @@ public fun Icon(
     imageVector: ImageVector,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: Color = IconDefaults.color.color(),
+    tint: Color = IconDefaults.intent.color(),
     size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
@@ -133,7 +133,7 @@ public fun Icon(
     bitmap: ImageBitmap,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: Color = IconDefaults.color.color(),
+    tint: Color = IconDefaults.intent.color(),
     size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
@@ -165,7 +165,7 @@ public fun Icon(
     painter: Painter,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    tint: Color = IconDefaults.color.color(),
+    tint: Color = IconDefaults.intent.color(),
     size: IconSize = IconDefaults.size,
 ) {
     MaterialIcon(
@@ -193,13 +193,13 @@ internal fun IconPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        IconSize.values().map { it to IconTints.values() }.forEach { (size, tints) ->
+        IconSize.values().map { it to IconIntent.values() }.forEach { (size, tints) ->
             LazyRow {
                 items(
                     tints.count(),
                     itemContent = { index ->
                         Box(
-                            modifier = Modifier.ifTrue(tints[index] == IconTints.Surface) {
+                            modifier = Modifier.ifTrue(tints[index] == IconIntent.Surface) {
                                 background(SparkTheme.colors.neutralContainer)
                             },
                         ) {

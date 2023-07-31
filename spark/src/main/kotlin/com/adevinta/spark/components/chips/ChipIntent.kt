@@ -24,6 +24,7 @@ package com.adevinta.spark.components.chips
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
+import com.adevinta.spark.components.IntentColors
 
 /**
  * ChipIntent is used to define the intent of the chip.
@@ -34,12 +35,7 @@ public enum class ChipIntent {
      */
     Main {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.main,
-            onColor = SparkTheme.colors.onMain,
-            containerColor = SparkTheme.colors.mainContainer,
-            onContainerColor = SparkTheme.colors.onMainContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Main.colors()
     },
 
     /**
@@ -47,12 +43,7 @@ public enum class ChipIntent {
      */
     Support {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.support,
-            onColor = SparkTheme.colors.onSupport,
-            containerColor = SparkTheme.colors.supportContainer,
-            onContainerColor = SparkTheme.colors.onSupportContainer,
-        )
+        override fun colors() = IntentColors.Support.colors()
     },
 
     /**
@@ -60,12 +51,7 @@ public enum class ChipIntent {
      */
     Success {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.success,
-            onColor = SparkTheme.colors.onSuccess,
-            containerColor = SparkTheme.colors.successContainer,
-            onContainerColor = SparkTheme.colors.onSuccessContainer,
-        )
+        override fun colors() = IntentColors.Success.colors()
     },
 
     /**
@@ -73,12 +59,7 @@ public enum class ChipIntent {
      */
     Alert {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.alert,
-            onColor = SparkTheme.colors.onAlert,
-            containerColor = SparkTheme.colors.alertContainer,
-            onContainerColor = SparkTheme.colors.onAlertContainer,
-        )
+        override fun colors() = IntentColors.Alert.colors()
     },
 
     /**
@@ -86,12 +67,7 @@ public enum class ChipIntent {
      */
     Danger {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.error,
-            onColor = SparkTheme.colors.onError,
-            containerColor = SparkTheme.colors.errorContainer,
-            onContainerColor = SparkTheme.colors.onErrorContainer,
-        )
+        override fun colors() = IntentColors.Danger.colors()
     },
 
     /**
@@ -99,12 +75,7 @@ public enum class ChipIntent {
      */
     Info {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.info,
-            onColor = SparkTheme.colors.onInfo,
-            containerColor = SparkTheme.colors.infoContainer,
-            onContainerColor = SparkTheme.colors.onInfoContainer,
-        )
+        override fun colors() = IntentColors.Info.colors()
     },
 
     /**
@@ -112,12 +83,7 @@ public enum class ChipIntent {
      */
     Neutral {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.neutral,
-            onColor = SparkTheme.colors.onNeutral,
-            containerColor = SparkTheme.colors.neutralContainer,
-            onContainerColor = SparkTheme.colors.onNeutralContainer,
-        )
+        override fun colors() = IntentColors.Neutral.colors()
     },
 
     /**
@@ -125,12 +91,7 @@ public enum class ChipIntent {
      */
     Surface {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.surface,
-            onColor = SparkTheme.colors.onSurface,
-            containerColor = SparkTheme.colors.surface,
-            onContainerColor = SparkTheme.colors.onSurface,
-        )
+        override fun colors() = IntentColors.Surface.colors()
     },
     ;
 
