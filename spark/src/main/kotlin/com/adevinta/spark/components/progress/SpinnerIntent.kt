@@ -21,7 +21,9 @@
  */
 package com.adevinta.spark.components.progress
 
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.components.IntentColors
 
@@ -107,6 +109,19 @@ public enum class SpinnerIntent {
     Surface {
         @Composable
         override fun colors(): IntentColor = IntentColors.Surface.colors()
+    },
+
+    /**
+     * Spinner taking color of LocalContentColor set by the nearest CompositionLocalProvider
+     */
+    Current {
+        @Composable
+        override fun colors(): IntentColor = IntentColor(
+            color = LocalContentColor.current,
+            onColor = Color.Transparent,
+            containerColor = Color.Transparent,
+            onContainerColor = Color.Transparent,
+        )
     },
     ;
 

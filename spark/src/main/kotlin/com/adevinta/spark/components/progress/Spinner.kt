@@ -135,7 +135,7 @@ private fun DrawScope.drawCircularIndicator(
 @Composable
 public fun Spinner(
     modifier: Modifier = Modifier,
-    intent: SpinnerIntent = SpinnerIntent.Basic,
+    intent: SpinnerIntent = SpinnerIntent.Current,
     size: SpinnerSize = SpinnerDefaults.Size,
     isBackgroundVisible: Boolean = false,
 ) {
