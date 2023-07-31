@@ -235,30 +235,30 @@ internal fun ChipPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        val intent = ChipIntent.Primary
+        val intent = ChipIntent.Main
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ChipOutlined("outlined", intent, leadingIcon = SparkIcons.OfferOutline)
-            ChipFilled("filled", intent, leadingIcon = SparkIcons.OfferOutline)
-            ChipTinted("tinted", intent, leadingIcon = SparkIcons.OfferOutline)
-            ChipDashed("dashed", intent, leadingIcon = SparkIcons.OfferOutline)
+            ChipOutlined("outlined", intent = intent, leadingIcon = SparkIcons.OfferOutline)
+            ChipFilled("filled", intent = intent, leadingIcon = SparkIcons.OfferOutline)
+            ChipTinted("tinted", intent = intent, leadingIcon = SparkIcons.OfferOutline)
+            ChipDashed("dashed", intent = intent, leadingIcon = SparkIcons.OfferOutline)
         }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ChipOutlined("outlined", intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
-            ChipFilled("filled", intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
-            ChipTinted("tinted", intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
-            ChipDashed("dashed", intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
+            ChipOutlined("outlined", intent = intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
+            ChipFilled("filled", intent = intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
+            ChipTinted("tinted", intent = intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
+            ChipDashed("dashed", intent = intent, leadingIcon = SparkIcons.OfferOutline, enabled = false)
         }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ChipOutlined("outlined", intent)
-            ChipFilled("filled", intent)
-            ChipTinted("tinted", intent)
-            ChipDashed("dashed", intent)
+            ChipOutlined("outlined", intent = intent)
+            ChipFilled("filled", intent = intent)
+            ChipTinted("tinted", intent = intent)
+            ChipDashed("dashed", intent = intent)
         }
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            ChipOutlined("outlined", intent, enabled = false)
-            ChipFilled("filled", intent, enabled = false)
-            ChipTinted("tinted", intent, enabled = false)
-            ChipDashed("dashed", intent, enabled = false)
+            ChipOutlined("outlined", intent = intent, enabled = false)
+            ChipFilled("filled", intent = intent, enabled = false)
+            ChipTinted("tinted", intent = intent, enabled = false)
+            ChipDashed("dashed", intent = intent, enabled = false)
         }
     }
 }

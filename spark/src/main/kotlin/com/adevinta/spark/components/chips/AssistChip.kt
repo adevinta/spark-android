@@ -70,7 +70,7 @@ import androidx.compose.material3.ElevatedAssistChip as MaterialElevatedAssistCh
  * different states. See [AssistChipDefaults.assistChipColors].
  * @param elevation [ChipElevation] used to resolve the elevation for this chip in different states.
  * This controls the size of the shadow below the chip. Additionally, when the container color is
- * [ColorScheme.surface], this controls the amount of primary color applied as an overlay. See
+ * [ColorScheme.surface], this controls the amount of main color applied as an overlay. See
  * [AssistChipDefaults.assistChipElevation].
  * @param border the border to draw around the container of this chip. Pass `null` for no border.
  * See [AssistChipDefaults.assistChipBorder].
@@ -147,7 +147,7 @@ public fun AssistChip(
  * different states. See [AssistChipDefaults.elevatedAssistChipColors].
  * @param elevation [ChipElevation] used to resolve the elevation for this chip in different states.
  * This controls the size of the shadow below the chip. Additionally, when the container color is
- * [ColorScheme.surface], this controls the amount of primary color applied as an overlay. See
+ * [ColorScheme.surface], this controls the amount of main color applied as an overlay. See
  * [AssistChipDefaults.elevatedAssistChipElevation].
  * @param border the border to draw around the container of this chip
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s

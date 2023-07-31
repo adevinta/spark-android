@@ -189,8 +189,8 @@ public fun FilledTonalIconToggleButton(
     enabled: Boolean = true,
     shape: Shape = SparkTheme.shapes.full,
     colors: IconToggleButtonColors = IconButtonDefaults.filledTonalIconToggleButtonColors(
-        checkedContainerColor = SparkTheme.colors.primaryContainer,
-        checkedContentColor = contentColorFor(backgroundColor = SparkTheme.colors.primaryContainer),
+        checkedContainerColor = SparkTheme.colors.mainContainer,
+        checkedContentColor = contentColorFor(backgroundColor = SparkTheme.colors.mainContainer),
     ),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,

@@ -85,7 +85,7 @@ internal fun SparkNavigationRailItem(
  *
  * A [NavigationRailItem] represents a destination within a [NavigationRail].
  *
- * Navigation rails provide access to primary destinations in apps when using tablet and desktop
+ * Navigation rails provide access to main destinations in apps when using tablet and desktop
  * screens.
  *
  * The text label is always shown (if it exists) when selected. Showing text labels if not selected
@@ -136,9 +136,9 @@ public fun NavigationRailItem(
 public object NavigationRailItemDefaults {
     @Composable
     public fun colors(
-        selectedIconColor: Color = SparkTheme.colors.onSecondaryContainer,
+        selectedIconColor: Color = SparkTheme.colors.onSupportContainer,
         selectedTextColor: Color = SparkTheme.colors.onSurface,
-        indicatorColor: Color = SparkTheme.colors.secondaryContainer,
+        indicatorColor: Color = SparkTheme.colors.supportContainer,
         unselectedIconColor: Color = SparkTheme.colors.neutral,
         unselectedTextColor: Color = SparkTheme.colors.neutral,
     ): NavigationRailItemColors = MaterialNavigationRailItemDefaults.colors(

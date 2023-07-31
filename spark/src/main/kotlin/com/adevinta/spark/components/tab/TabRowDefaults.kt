@@ -38,12 +38,12 @@ public object TabRowDefaults {
     /** Default container color of a tab row. */
 
     public val containerColor: Color
-        @Composable get() = PrimaryNavigationTabTokens.ContainerColor
+        @Composable get() = MainNavigationTabTokens.ContainerColor
 
     /** Default content color of a tab row. */
     public val contentColor: Color
         @Composable get() =
-            PrimaryNavigationTabTokens.ActiveLabelTextColor
+            MainNavigationTabTokens.ActiveLabelTextColor
 
     /**
      * Default indicator, which will be positioned at the bottom of the [TabRow], on top of the
@@ -56,8 +56,8 @@ public object TabRowDefaults {
     @Composable
     public fun Indicator(
         modifier: Modifier = Modifier,
-        height: Dp = PrimaryNavigationTabTokens.ActiveIndicatorHeight,
-        color: Color = PrimaryNavigationTabTokens.ActiveIndicatorColor,
+        height: Dp = MainNavigationTabTokens.ActiveIndicatorHeight,
+        color: Color = MainNavigationTabTokens.ActiveIndicatorColor,
     ) {
         Box(
             modifier
@@ -68,12 +68,12 @@ public object TabRowDefaults {
     }
 }
 
-internal object PrimaryNavigationTabTokens {
+internal object MainNavigationTabTokens {
     val ContainerColor
         @Composable get() = SparkTheme.colors.surface
     val ActiveLabelTextColor
-        @Composable get() = SparkTheme.colors.primary
+        @Composable get() = SparkTheme.colors.main
     val ActiveIndicatorHeight = 3.0.dp
     val ActiveIndicatorColor
-        @Composable get() = SparkTheme.colors.primary
+        @Composable get() = SparkTheme.colors.main
 }

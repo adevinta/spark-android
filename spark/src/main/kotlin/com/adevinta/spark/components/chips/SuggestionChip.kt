@@ -66,7 +66,7 @@ import androidx.compose.material3.SuggestionChip as MaterialSuggestionChip
  * different states. See [SuggestionChipDefaults.suggestionChipColors].
  * @param elevation [ChipElevation] used to resolve the elevation for this chip in different states.
  * This controls the size of the shadow below the chip. Additionally, when the container color is
- * [ColorScheme.surface], this controls the amount of primary color applied as an overlay. See
+ * [ColorScheme.surface], this controls the amount of main color applied as an overlay. See
  * [SuggestionChipDefaults.suggestionChipElevation].
  * @param border the border to draw around the container of this chip. Pass `null` for no border.
  * See [SuggestionChipDefaults.suggestionChipBorder].

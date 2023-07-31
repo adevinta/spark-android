@@ -35,9 +35,9 @@ public object SliderDefaults {
 
     @Composable
     public fun colors(
-        thumbColor: Color = SparkTheme.colors.primary,
-        activeTrackColor: Color = SparkTheme.colors.primary,
-        activeTickColor: Color = SparkTheme.colors.onPrimary.copy(alpha = TickMarksContainerOpacity),
+        thumbColor: Color = SparkTheme.colors.main,
+        activeTrackColor: Color = SparkTheme.colors.main,
+        activeTickColor: Color = SparkTheme.colors.onMain.copy(alpha = TickMarksContainerOpacity),
         inactiveTrackColor: Color = SparkTheme.colors.neutralContainer,
         inactiveTickColor: Color = SparkTheme.colors.onNeutralContainer.copy(alpha = TickMarksContainerOpacity),
         disabledThumbColor: Color = SparkTheme.colors.onSurface
