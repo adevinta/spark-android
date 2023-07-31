@@ -50,12 +50,7 @@ public enum class ToggleIntent {
      */
     Main {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.main,
-            onColor = SparkTheme.colors.onMain,
-            containerColor = SparkTheme.colors.mainContainer,
-            onContainerColor = SparkTheme.colors.onMainContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Main.colors()
     },
 
     /**
@@ -63,12 +58,7 @@ public enum class ToggleIntent {
      */
     Support {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.support,
-            onColor = SparkTheme.colors.onSupport,
-            containerColor = SparkTheme.colors.supportContainer,
-            onContainerColor = SparkTheme.colors.onSupportContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Support.colors()
     },
 
     /**
@@ -76,12 +66,7 @@ public enum class ToggleIntent {
      */
     Success {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.success,
-            onColor = SparkTheme.colors.onSuccess,
-            containerColor = SparkTheme.colors.successContainer,
-            onContainerColor = SparkTheme.colors.onSuccessContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Success.colors()
     },
 
     /**
@@ -89,12 +74,7 @@ public enum class ToggleIntent {
      */
     Alert {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.alert,
-            onColor = SparkTheme.colors.onAlert,
-            containerColor = SparkTheme.colors.alertContainer,
-            onContainerColor = SparkTheme.colors.onAlertContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Alert.colors()
     },
 
     /**
@@ -102,12 +82,7 @@ public enum class ToggleIntent {
      */
     Danger {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.error,
-            onColor = SparkTheme.colors.onError,
-            containerColor = SparkTheme.colors.errorContainer,
-            onContainerColor = SparkTheme.colors.onErrorContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Danger.colors()
     },
 
     /**
@@ -115,12 +90,7 @@ public enum class ToggleIntent {
      */
     Info {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.info,
-            onColor = SparkTheme.colors.onInfo,
-            containerColor = SparkTheme.colors.infoContainer,
-            onContainerColor = SparkTheme.colors.onInfoContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Info.colors()
     },
 
     /**
@@ -128,12 +98,7 @@ public enum class ToggleIntent {
      */
     Neutral {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.neutral,
-            onColor = SparkTheme.colors.onNeutral,
-            containerColor = SparkTheme.colors.neutralContainer,
-            onContainerColor = SparkTheme.colors.onNeutralContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Neutral.colors()
     },
     ;
 

@@ -51,7 +51,7 @@ internal object TabGroupDefaults {
     /** Default container color of a tab row. */
 
     val containerColor: Color
-        @Composable get() = MainNavigationTabTokens.ContainerColor
+        @Composable get() = TabIntent.Basic.color()
 
     /** Default content color of a tab row. */
     val contentColor: Color

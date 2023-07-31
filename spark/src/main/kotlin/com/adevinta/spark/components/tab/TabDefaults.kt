@@ -30,7 +30,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.IconSize.Small
 
 internal object TabDefaults {
-    internal val SelectedContentIntent = TabIntent.Primary
+    internal val SelectedContentIntent = TabIntent.Basic
     internal val Size = TabSize.Medium
     internal val HorizontalArrangementSpace = 8.dp
     internal val HorizontalContentPadding = 16.dp
@@ -40,10 +40,17 @@ internal object TabDefaults {
 }
 
 public enum class TabIntent {
+    /* The default color of such UI controls as toggles, Slider, etc.
+    */
+    Basic {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.basic
+    },
+
     /**
      * Used for the most important information.
      */
-    Primary {
+    Main {
         @Composable
         override fun color(): Color = SparkTheme.colors.main
     },
@@ -51,7 +58,7 @@ public enum class TabIntent {
     /**
      * Used to highlight/accentuate.
      */
-    Secondary {
+    Support {
         @Composable
         override fun color(): Color = SparkTheme.colors.support
     },

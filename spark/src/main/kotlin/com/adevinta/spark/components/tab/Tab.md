@@ -26,8 +26,9 @@ is `IconSize.Small`.
 
 The tabs accept 2 colors [TabIntent](TabDefaults.kt)s:
 
-- Primary
-- Secondary
+- Basic (default)
+- Main
+- Support
 
 Part:
 
