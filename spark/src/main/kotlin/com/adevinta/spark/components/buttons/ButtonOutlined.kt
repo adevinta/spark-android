@@ -44,7 +44,7 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- * Outlined buttons are used for secondary actions. The outlined styling places less emphasis on these actions that are important but not the primary ones.
+ * Outlined buttons are used for support actions. The outlined styling places less emphasis on these actions that are important but not the main ones.
  * It is recommended to pair it with a button wit more emphasis like the filled button or the tinted button.
  *
  * Be aware that it's not advised to use it on top of images since it will be hard to see.
@@ -69,7 +69,7 @@ public fun ButtonOutlined(
     text: String,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Secondary,
+    intent: ButtonIntent = ButtonIntent.Support,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -104,7 +104,7 @@ public fun ButtonOutlined(
 
 /**
  *
- * Outlined buttons are used for secondary actions. The outlined styling places less emphasis on these actions that are important but not the primary ones.
+ * Outlined buttons are used for support actions. The outlined styling places less emphasis on these actions that are important but not the main ones.
  * It is recommended to pair it with a button wit more emphasis like the filled button or the tinted button.
  *
  * Be aware that it's not advised to use it on top of images since it will be hard to see.
@@ -129,7 +129,7 @@ public fun ButtonOutlined(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Secondary,
+    intent: ButtonIntent = ButtonIntent.Support,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -160,7 +160,7 @@ public fun ButtonOutlined(
 }
 
 /**
- * The secondary button is the standard button for most use cases. The outlined styling
+ * The support button is the standard button for most use cases. The outlined styling
  * places less emphasis on these buttons
  *
  * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
@@ -179,9 +179,9 @@ public fun ButtonOutlined(
  * these buttons have the most emphasis.
  */
 @Deprecated(
-    "Use ButtonOutlined instead with secondary intent",
+    "Use ButtonOutlined instead with support intent",
     ReplaceWith(
-        "ButtonOutlined(onClick, text, modifier, ButtonIntent.Secondary, enabled, icon, iconSide, isLoading)",
+        "ButtonOutlined(onClick, text, modifier, ButtonIntent.Support, enabled, icon, iconSide, isLoading)",
         "com.adevinta.spark.components.buttons.ButtonIntent",
     ),
 )
@@ -229,7 +229,7 @@ internal fun ButtonOutlinedPreview(
 ) {
     PreviewTheme(theme) {
         val icon = SparkIcons.CameraFill
-        val buttonText = "Secondary Button"
+        val buttonText = "Support Button"
         ButtonOutlined(
             onClick = {},
             text = buttonText,

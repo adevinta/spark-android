@@ -45,7 +45,7 @@ internal fun SparkLinearProgressIndicator(
     isIndeterminate: Boolean,
     modifier: Modifier = Modifier,
 ) {
-    val color = ProgressIndicatorDefaults.linearColor // Primary
+    val color = ProgressIndicatorDefaults.linearColor // Main
     val trackColor = SparkTheme.colors.neutralContainer
     if (isIndeterminate) {
         MaterialLinearProgressIndicator(

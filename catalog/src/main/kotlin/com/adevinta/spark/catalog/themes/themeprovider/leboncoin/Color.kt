@@ -48,8 +48,8 @@ internal val BrikkeGreyLight = Color(0xFFE6EBEF) // Highlight Surface
 internal val BrikkeGreyMedium = Color(0xFFCAD1D9) // Disabled Content
 internal val BrikkeGrey = Color(0xFFA8B4C0) // Quarternary Content
 internal val BrikkeGreyDark = Color(0xFF8191A0) // Tertiary Content
-internal val BrikkeBlack = Color(0xFF1A1A1A) // Action Secondary / Primary Content
-internal val BrikkeWhite = Color(0xFFFFFFFF) // Secondary Content / Primary Surface
+internal val BrikkeBlack = Color(0xFF1A1A1A) // Action Support / Main Content
+internal val BrikkeWhite = Color(0xFFFFFFFF) // Support Content / Main Surface
 internal val BrikkeOpacityBlack = Color(0xFF707070) // Dark Surface Hilight
 internal val BrikkeRed = Color(0xFFDB4437) // Content Error
 internal val BrikkeRedLight = Color(0xFFE2695F) // Content Error Light
@@ -59,12 +59,12 @@ internal val BrikkeGreen = Color(0xFF4E9850) // Content Valid
 internal val BrikkeGreenLight = Color(0xFF71AC73) // Content Valid Light
 internal val BrikkeGreenDark = Color(0xFF3E7940) // Content Valid Dark
 internal val BrikkeGreenSurface = Color(0xFFEEF9EF) // Surface Valid
-internal val BrikkeBlue = Color(0xFF4183D7) // Primary Pro Action / Content / Surface
-internal val BrikkeBlueDark = Color(0xFF336999) // Primary Pro Action Dark
-internal val BrikkeBlueSurface = Color(0xFFD9E6F7) // Primary Action Light
-internal val BrikkeOrange = Color(0xFFFF6E14) // Primary Action / Content / Surface
-internal val BrikkeOrangeDark = Color(0xFFCB570F) // Primary Action Dark
-internal val BrikkeOrangeSurface = Color(0xFFFEF0E9) // Primary Action Light
+internal val BrikkeBlue = Color(0xFF4183D7) // Main Pro Action / Content / Surface
+internal val BrikkeBlueDark = Color(0xFF336999) // Main Pro Action Dark
+internal val BrikkeBlueSurface = Color(0xFFD9E6F7) // Main Action Light
+internal val BrikkeOrange = Color(0xFFFF6E14) // Main Action / Content / Surface
+internal val BrikkeOrangeDark = Color(0xFFCB570F) // Main Action Dark
+internal val BrikkeOrangeSurface = Color(0xFFFEF0E9) // Main Action Light
 // endregion
 
 // region Clementin colors
@@ -193,18 +193,28 @@ internal val GreyBlue95 = Color(0xFFe6f2ff)
 internal val GreyBlue99 = Color(0xFFfcfcff)
 
 internal val LeboncoinColorPartLightLegacy: SparkColors = lightSparkColors(
-    primary = BrikkeOrange,
-    onPrimary = Color.White,
-    primaryContainer = BrikkeOrangeSurface,
-    onPrimaryContainer = Clementin900,
-    primaryVariant = BrikkeOrangeDark,
-    onPrimaryVariant = Color.White,
-    secondary = BrikkeBlack,
-    onSecondary = Color.White,
-    secondaryContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
-    onSecondaryContainer = Blueberry900,
-    secondaryVariant = BrikkeGreyDark, // tertiary => neutral / Dim 1
-    onSecondaryVariant = Grey10,
+    accent = BrikkeOrange,
+    onAccent = Color.White,
+    accentContainer = BrikkeOrangeSurface,
+    onAccentContainer = Clementin900,
+    accentVariant = BrikkeOrangeDark,
+    onAccentVariant = Color.White,
+    basic = BrikkeBlack,
+    onBasic = Color.White,
+    basicContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
+    onBasicContainer = Blueberry900,
+    main = BrikkeOrange,
+    onMain = Color.White,
+    mainContainer = BrikkeOrangeSurface,
+    onMainContainer = Clementin900,
+    mainVariant = BrikkeOrangeDark,
+    onMainVariant = Color.White,
+    support = BrikkeBlack,
+    onSupport = Color.White,
+    supportContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
+    onSupportContainer = Blueberry900,
+    supportVariant = BrikkeGreyDark, // tertiary => neutral / Dim 1
+    onSupportVariant = Grey10,
     tertiary = BrikkeGrey,
     onTertiary = GreyBlue99,
     tertiaryContainer = BrikkeGreyExtraLight,
@@ -248,18 +258,28 @@ internal val LeboncoinColorPartLightLegacy: SparkColors = lightSparkColors(
 )
 
 internal val LeboncoinColorProLightLegacy: SparkColors = lightSparkColors(
-    primary = BrikkeBlue,
-    onPrimary = Color.White,
-    primaryContainer = BrikkeBlueSurface,
-    onPrimaryContainer = Blueberry900,
-    primaryVariant = BrikkeBlueDark,
-    onPrimaryVariant = Color.White,
-    secondary = BrikkeBlack,
-    onSecondary = Color.White,
-    secondaryContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
-    onSecondaryContainer = Blueberry900,
-    secondaryVariant = BrikkeGreyDark, // tertiary => neutral / Dim 1
-    onSecondaryVariant = Grey10,
+    accent = BrikkeBlue,
+    onAccent = Color.White,
+    accentContainer = BrikkeBlueSurface,
+    onAccentContainer = Blueberry900,
+    accentVariant = BrikkeBlueDark,
+    onAccentVariant = Color.White,
+    basic = BrikkeBlack,
+    onBasic = Color.White,
+    basicContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
+    onBasicContainer = Blueberry900,
+    main = BrikkeBlue,
+    onMain = Color.White,
+    mainContainer = BrikkeBlueSurface,
+    onMainContainer = Blueberry900,
+    mainVariant = BrikkeBlueDark,
+    onMainVariant = Color.White,
+    support = BrikkeBlack,
+    onSupport = Color.White,
+    supportContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
+    onSupportContainer = Blueberry900,
+    supportVariant = BrikkeGreyDark, // tertiary => neutral / Dim 1
+    onSupportVariant = Grey10,
     tertiary = BrikkeGrey,
     onTertiary = GreyBlue99,
     tertiaryContainer = BrikkeGreyExtraLight,
@@ -303,18 +323,28 @@ internal val LeboncoinColorProLightLegacy: SparkColors = lightSparkColors(
 )
 
 internal val LeboncoinColorPartLight: SparkColors = lightSparkColors(
-    primary = Clementin500,
-    onPrimary = Color.White,
-    primaryContainer = Clementin50,
-    onPrimaryContainer = Clementin700,
-    primaryVariant = Clementin600,
-    onPrimaryVariant = Color.White,
-    secondary = Blueberry900,
-    onSecondary = Color.White,
-    secondaryContainer = Blueberry50,
-    onSecondaryContainer = Blueberry900,
-    secondaryVariant = NightShade600, // tertiary => neutral / Dim 1
-    onSecondaryVariant = Color.White,
+    accent = Plum500,
+    onAccent = Color.White,
+    accentContainer = Plum100,
+    onAccentContainer = Plum700,
+    accentVariant = Plum600,
+    onAccentVariant = Color.White,
+    basic = Blueberry900,
+    onBasic = Color.White,
+    basicContainer = Blueberry50,
+    onBasicContainer = Blueberry900,
+    main = Clementin500,
+    onMain = Color.White,
+    mainContainer = Clementin50,
+    onMainContainer = Clementin700,
+    mainVariant = Clementin600,
+    onMainVariant = Color.White,
+    support = Blueberry900,
+    onSupport = Color.White,
+    supportContainer = Blueberry50,
+    onSupportContainer = Blueberry900,
+    supportVariant = NightShade600, // tertiary => neutral / Dim 1
+    onSupportVariant = Color.White,
     tertiary = Color.Magenta,
     onTertiary = Color.Blue,
     tertiaryContainer = Color.Magenta,
@@ -353,18 +383,28 @@ internal val LeboncoinColorPartLight: SparkColors = lightSparkColors(
 )
 
 internal val LeboncoinColorProLight: SparkColors = lightSparkColors(
-    primary = Blueberry600,
-    onPrimary = Color.White,
-    primaryContainer = Blueberry50,
-    onPrimaryContainer = Blueberry700,
-    primaryVariant = Blueberry700,
-    onPrimaryVariant = Color.White,
-    secondary = Blueberry900,
-    onSecondary = Color.White,
-    secondaryContainer = Blueberry50,
-    onSecondaryContainer = Blueberry900,
-    secondaryVariant = NightShade600, // tertiary => neutral / Dim 1
-    onSecondaryVariant = Color.White,
+    accent = Plum500,
+    onAccent = Color.White,
+    accentContainer = Plum50,
+    onAccentContainer = Plum700,
+    accentVariant = Plum600,
+    onAccentVariant = Color.White,
+    basic = Blueberry900,
+    onBasic = Color.White,
+    basicContainer = Blueberry50,
+    onBasicContainer = Blueberry900,
+    main = Blueberry600,
+    onMain = Color.White,
+    mainContainer = Blueberry50,
+    onMainContainer = Blueberry700,
+    mainVariant = Blueberry700,
+    onMainVariant = Color.White,
+    support = Blueberry900,
+    onSupport = Color.White,
+    supportContainer = Blueberry50,
+    onSupportContainer = Blueberry900,
+    supportVariant = NightShade600, // tertiary => neutral / Dim 1
+    onSupportVariant = Color.White,
     tertiary = Color.Magenta,
     onTertiary = Color.Blue,
     tertiaryContainer = Color.Magenta,
@@ -403,18 +443,18 @@ internal val LeboncoinColorProLight: SparkColors = lightSparkColors(
 )
 
 internal val LeboncoinColorPartDark: SparkColors = darkSparkColors(
-    primary = Clementin400,
-    onPrimary = NightShade900,
-    primaryContainer = Clementin800,
-    onPrimaryContainer = Clementin100,
-    primaryVariant = Clementin200,
-    onPrimaryVariant = NightShade900,
-    secondary = NightShade50,
-    onSecondary = NightShade900,
-    secondaryContainer = NightShade800,
-    onSecondaryContainer = NightShade100,
-    secondaryVariant = NightShade200,
-    onSecondaryVariant = NightShade900,
+    main = Clementin400,
+    onMain = NightShade900,
+    mainContainer = Clementin800,
+    onMainContainer = Clementin100,
+    mainVariant = Clementin200,
+    onMainVariant = NightShade900,
+    support = NightShade50,
+    onSupport = NightShade900,
+    supportContainer = NightShade800,
+    onSupportContainer = NightShade100,
+    supportVariant = NightShade200,
+    onSupportVariant = NightShade900,
     success = Avocado400,
     onSuccess = NightShade900,
     successContainer = Avocado800,
@@ -454,18 +494,18 @@ internal val LeboncoinColorPartDark: SparkColors = darkSparkColors(
 )
 
 internal val LeboncoinColorProDark: SparkColors = darkSparkColors(
-    primary = Blueberry400,
-    onPrimary = NightShade900,
-    primaryContainer = Blueberry800,
-    onPrimaryContainer = Blueberry100,
-    primaryVariant = Blueberry200,
-    onPrimaryVariant = NightShade900,
-    secondary = NightShade50,
-    onSecondary = NightShade900,
-    secondaryContainer = NightShade800,
-    onSecondaryContainer = NightShade100,
-    secondaryVariant = NightShade200,
-    onSecondaryVariant = NightShade900,
+    main = Blueberry400,
+    onMain = NightShade900,
+    mainContainer = Blueberry800,
+    onMainContainer = Blueberry100,
+    mainVariant = Blueberry200,
+    onMainVariant = NightShade900,
+    support = NightShade50,
+    onSupport = NightShade900,
+    supportContainer = NightShade800,
+    onSupportContainer = NightShade100,
+    supportVariant = NightShade200,
+    onSupportVariant = NightShade900,
     success = Avocado400,
     onSuccess = NightShade900,
     successContainer = Avocado800,

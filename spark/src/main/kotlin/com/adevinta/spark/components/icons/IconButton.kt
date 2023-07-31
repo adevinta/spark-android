@@ -179,7 +179,7 @@ public fun FilledTonalIconButton(
     enabled: Boolean = true,
     shape: Shape = SparkTheme.shapes.full,
     colors: IconButtonColors = IconButtonDefaults.filledTonalIconButtonColors(
-        containerColor = SparkTheme.colors.primaryContainer,
+        containerColor = SparkTheme.colors.mainContainer,
     ),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,

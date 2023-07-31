@@ -33,9 +33,9 @@ public object SwitchDefaults {
     @Composable
     internal fun colors(
         checkedThumbColor: Color = SparkTheme.colors.surface,
-        checkedTrackColor: Color = SparkTheme.colors.primary,
+        checkedTrackColor: Color = SparkTheme.colors.main,
         checkedBorderColor: Color = Color.Transparent,
-        checkedIconColor: Color = SparkTheme.colors.primary,
+        checkedIconColor: Color = SparkTheme.colors.main,
         uncheckedThumbColor: Color = SparkTheme.colors.surface,
         uncheckedTrackColor: Color = SparkTheme.colors.onSurface.dim4
             .compositeOver(SparkTheme.colors.surface),
@@ -43,9 +43,9 @@ public object SwitchDefaults {
         uncheckedIconColor: Color = SparkTheme.colors.onSurface.dim4
             .compositeOver(SparkTheme.colors.surface),
         disabledCheckedThumbColor: Color = SparkTheme.colors.surface,
-        disabledCheckedTrackColor: Color = SparkTheme.colors.primaryContainer,
+        disabledCheckedTrackColor: Color = SparkTheme.colors.mainContainer,
         disabledCheckedBorderColor: Color = Color.Transparent,
-        disabledCheckedIconColor: Color = SparkTheme.colors.primaryContainer,
+        disabledCheckedIconColor: Color = SparkTheme.colors.mainContainer,
         disabledUncheckedThumbColor: Color = SparkTheme.colors.surface,
         disabledUncheckedTrackColor: Color = SparkTheme.colors.neutralContainer,
         disabledUncheckedBorderColor: Color = Color.Transparent,

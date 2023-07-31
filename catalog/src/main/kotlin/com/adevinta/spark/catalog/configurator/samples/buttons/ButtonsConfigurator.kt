@@ -87,7 +87,7 @@ private fun ButtonSample() {
         var iconSide by remember { mutableStateOf(IconSide.START) }
         var style by remember { mutableStateOf(ButtonStyle.Filled) }
         var size by remember { mutableStateOf(ButtonSize.Medium) }
-        var intent by remember { mutableStateOf(ButtonIntent.Primary) }
+        var intent by remember { mutableStateOf(ButtonIntent.Main) }
         var buttonText by remember { mutableStateOf("Filled Button") }
 
         ConfigedButton(

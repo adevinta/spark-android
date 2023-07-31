@@ -81,7 +81,7 @@ import kotlin.math.roundToInt
  *
  * Standard bottom sheets co-exist with the screen’s main UI region and allow for simultaneously
  * viewing and interacting with both regions. They are commonly used to keep a feature or
- * secondary content visible on screen when content in main UI region is frequently scrolled or
+ * support content visible on screen when content in main UI region is frequently scrolled or
  * panned.
  *
  * ![Bottom sheet image](https://developer.android.com/images/reference/androidx/compose/material3/bottom_sheet.png)

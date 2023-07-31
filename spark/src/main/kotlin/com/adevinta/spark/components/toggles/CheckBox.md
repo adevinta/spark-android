@@ -51,8 +51,10 @@ CheckboxLabelled(
 
 The `CheckBox` and `CheckboxLabelled` accept 7 [ToggleIntent](ToggleIntent.kt)s:
 
-- Primary (default)
-- Secondary
+- Basic (default)
+- Accent
+- Main
+- Support
 - Success
 - Alert
 - Danger

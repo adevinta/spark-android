@@ -33,7 +33,7 @@ public sealed class SnackbarColors {
     public object Default : SnackbarColors() {
         override val baseColor: Color
             @Composable get() {
-                return SparkTheme.colors.secondaryContainer
+                return SparkTheme.colors.supportContainer
             }
     }
 

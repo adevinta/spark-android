@@ -70,7 +70,7 @@ public fun ButtonTinted(
     text: String,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Primary,
+    intent: ButtonIntent = ButtonIntent.Main,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -133,7 +133,7 @@ public fun ButtonTinted(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Primary,
+    intent: ButtonIntent = ButtonIntent.Main,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -170,7 +170,7 @@ internal fun ButtonTintedPreview(
     PreviewTheme(theme) {
         val icon = SparkIcons.IdentityOutline
         var isLoading by remember { mutableStateOf(false) }
-        val buttonText = "Primary Button"
+        val buttonText = "Main Button"
         ButtonTinted(
             onClick = {
                 isLoading = !isLoading
