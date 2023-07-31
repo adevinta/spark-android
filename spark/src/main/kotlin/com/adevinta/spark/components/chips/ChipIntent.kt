@@ -22,37 +22,44 @@
 package com.adevinta.spark.components.chips
 
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
+import com.adevinta.spark.components.IntentColors
 
 /**
  * ChipIntent is used to define the intent of the chip.
  */
 public enum class ChipIntent {
     /**
+     * Used to match default color of such UI controls as toggles, Slider, etc.
+     */
+    Basic {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Basic.colors()
+    },
+
+    /**
+     * Used to make chips visually accentuated.
+     */
+    Accent {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Accent.colors()
+    },
+
+    /**
      * Used for the most important information.
      */
-    Primary {
+
+    Main {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.primary,
-            onColor = SparkTheme.colors.onPrimary,
-            containerColor = SparkTheme.colors.primaryContainer,
-            onContainerColor = SparkTheme.colors.onPrimaryContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Main.colors()
     },
 
     /**
      * Used to highlight information.
      */
-    Secondary {
+    Support {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.secondary,
-            onColor = SparkTheme.colors.onSecondary,
-            containerColor = SparkTheme.colors.secondaryContainer,
-            onContainerColor = SparkTheme.colors.onSecondaryContainer,
-        )
+        override fun colors() = IntentColors.Support.colors()
     },
 
     /**
@@ -60,12 +67,7 @@ public enum class ChipIntent {
      */
     Success {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.success,
-            onColor = SparkTheme.colors.onSuccess,
-            containerColor = SparkTheme.colors.successContainer,
-            onContainerColor = SparkTheme.colors.onSuccessContainer,
-        )
+        override fun colors() = IntentColors.Success.colors()
     },
 
     /**
@@ -73,12 +75,7 @@ public enum class ChipIntent {
      */
     Alert {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.alert,
-            onColor = SparkTheme.colors.onAlert,
-            containerColor = SparkTheme.colors.alertContainer,
-            onContainerColor = SparkTheme.colors.onAlertContainer,
-        )
+        override fun colors() = IntentColors.Alert.colors()
     },
 
     /**
@@ -86,12 +83,7 @@ public enum class ChipIntent {
      */
     Danger {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.error,
-            onColor = SparkTheme.colors.onError,
-            containerColor = SparkTheme.colors.errorContainer,
-            onContainerColor = SparkTheme.colors.onErrorContainer,
-        )
+        override fun colors() = IntentColors.Danger.colors()
     },
 
     /**
@@ -99,12 +91,7 @@ public enum class ChipIntent {
      */
     Info {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.info,
-            onColor = SparkTheme.colors.onInfo,
-            containerColor = SparkTheme.colors.infoContainer,
-            onContainerColor = SparkTheme.colors.onInfoContainer,
-        )
+        override fun colors() = IntentColors.Info.colors()
     },
 
     /**
@@ -112,12 +99,7 @@ public enum class ChipIntent {
      */
     Neutral {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.neutral,
-            onColor = SparkTheme.colors.onNeutral,
-            containerColor = SparkTheme.colors.neutralContainer,
-            onContainerColor = SparkTheme.colors.onNeutralContainer,
-        )
+        override fun colors() = IntentColors.Neutral.colors()
     },
 
     /**
@@ -125,12 +107,7 @@ public enum class ChipIntent {
      */
     Surface {
         @Composable
-        override fun colors() = IntentColor(
-            color = SparkTheme.colors.surface,
-            onColor = SparkTheme.colors.onSurface,
-            containerColor = SparkTheme.colors.surface,
-            onContainerColor = SparkTheme.colors.onSurface,
-        )
+        override fun colors() = IntentColors.Surface.colors()
     },
     ;
 

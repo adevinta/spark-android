@@ -21,38 +21,46 @@
  */
 package com.adevinta.spark.components.progress
 
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.SparkTheme
+import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.components.IntentColor
+import com.adevinta.spark.components.IntentColors
 
 /**
  * SpinnerIntent is used to define the intent of the chip.
  */
 public enum class SpinnerIntent {
     /**
+     * Used to match default color of such UI controls as toggles, Slider, etc.
+     */
+    Basic {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Basic.colors()
+    },
+
+    /**
+     * Used to make UI component visually accentuated.
+     */
+    Accent {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Accent.colors()
+    },
+
+    /**
      * Used for the most important information.
      */
-    Primary {
+    Main {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.primary,
-            onColor = SparkTheme.colors.onPrimary,
-            containerColor = SparkTheme.colors.primaryContainer,
-            onContainerColor = SparkTheme.colors.onPrimaryContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Main.colors()
     },
 
     /**
      * Used to highlight information.
      */
-    Secondary {
+    Support {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.secondary,
-            onColor = SparkTheme.colors.onSecondary,
-            containerColor = SparkTheme.colors.secondaryContainer,
-            onContainerColor = SparkTheme.colors.onSecondaryContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Support.colors()
     },
 
     /**
@@ -60,12 +68,7 @@ public enum class SpinnerIntent {
      */
     Success {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.success,
-            onColor = SparkTheme.colors.onSuccess,
-            containerColor = SparkTheme.colors.successContainer,
-            onContainerColor = SparkTheme.colors.onSuccessContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Success.colors()
     },
 
     /**
@@ -73,12 +76,7 @@ public enum class SpinnerIntent {
      */
     Alert {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.alert,
-            onColor = SparkTheme.colors.onAlert,
-            containerColor = SparkTheme.colors.alertContainer,
-            onContainerColor = SparkTheme.colors.onAlertContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Alert.colors()
     },
 
     /**
@@ -86,12 +84,7 @@ public enum class SpinnerIntent {
      */
     Danger {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.error,
-            onColor = SparkTheme.colors.onError,
-            containerColor = SparkTheme.colors.errorContainer,
-            onContainerColor = SparkTheme.colors.onErrorContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Danger.colors()
     },
 
     /**
@@ -99,12 +92,7 @@ public enum class SpinnerIntent {
      */
     Info {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.info,
-            onColor = SparkTheme.colors.onInfo,
-            containerColor = SparkTheme.colors.infoContainer,
-            onContainerColor = SparkTheme.colors.onInfoContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Info.colors()
     },
 
     /**
@@ -112,12 +100,7 @@ public enum class SpinnerIntent {
      */
     Neutral {
         @Composable
-        override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.neutral,
-            onColor = SparkTheme.colors.onNeutral,
-            containerColor = SparkTheme.colors.neutralContainer,
-            onContainerColor = SparkTheme.colors.onNeutralContainer,
-        )
+        override fun colors(): IntentColor = IntentColors.Neutral.colors()
     },
 
     /**
@@ -125,11 +108,19 @@ public enum class SpinnerIntent {
      */
     Surface {
         @Composable
+        override fun colors(): IntentColor = IntentColors.Surface.colors()
+    },
+
+    /**
+     * Spinner taking color of LocalContentColor set by the nearest CompositionLocalProvider
+     */
+    Current {
+        @Composable
         override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.surface,
-            onColor = SparkTheme.colors.onSurface,
-            containerColor = SparkTheme.colors.surface,
-            onContainerColor = SparkTheme.colors.onSurface,
+            color = LocalContentColor.current,
+            onColor = Color.Transparent,
+            containerColor = Color.Transparent,
+            onContainerColor = Color.Transparent,
         )
     },
     ;

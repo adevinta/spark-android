@@ -26,31 +26,48 @@ import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
+import com.adevinta.spark.components.IntentColors
 
 public enum class ToggleIntent {
     /**
+     * The default color of such UI controls as toggles, Slider, etc.
+     */
+    Basic {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Basic.colors()
+    },
+
+    /**
+     * Used to make components visually accentuated.
+     */
+    Accent {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Accent.colors()
+    },
+
+    /**
      * Used for the most important information.
      */
-    Primary {
+    Main {
         @Composable
         override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.primary,
-            onColor = SparkTheme.colors.onPrimary,
-            containerColor = SparkTheme.colors.primaryContainer,
-            onContainerColor = SparkTheme.colors.onPrimaryContainer,
+            color = SparkTheme.colors.main,
+            onColor = SparkTheme.colors.onMain,
+            containerColor = SparkTheme.colors.mainContainer,
+            onContainerColor = SparkTheme.colors.onMainContainer,
         )
     },
 
     /**
      * Used to highlight information.
      */
-    Secondary {
+    Support {
         @Composable
         override fun colors(): IntentColor = IntentColor(
-            color = SparkTheme.colors.secondary,
-            onColor = SparkTheme.colors.onSecondary,
-            containerColor = SparkTheme.colors.secondaryContainer,
-            onContainerColor = SparkTheme.colors.onSecondaryContainer,
+            color = SparkTheme.colors.support,
+            onColor = SparkTheme.colors.onSupport,
+            containerColor = SparkTheme.colors.supportContainer,
+            onContainerColor = SparkTheme.colors.onSupportContainer,
         )
     },
 

@@ -37,7 +37,7 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- * Outlined tag represent secondary information
+ * Outlined tag represent support information
  * @param text The item label
  * @param modifier The [Modifier] to be applied to the component
  * @param intent The [TagIntent] color to use
@@ -48,7 +48,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 public fun TagOutlined(
     text: String,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Primary,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -67,7 +67,7 @@ public fun TagOutlined(
 }
 
 /**
- * Outlined tag represent secondary information
+ * Outlined tag represent support information
  * @param text The item label
  * @param modifier The [Modifier] to be applied to the component
  * @param intent The [TagIntent] color to use
@@ -78,7 +78,7 @@ public fun TagOutlined(
 public fun TagOutlined(
     text: AnnotatedString,
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Primary,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
@@ -103,7 +103,7 @@ public fun TagOutlined(
 @Composable
 public fun TagOutlined(
     modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Primary,
+    intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
     content: @Composable RowScope.() -> Unit,
@@ -139,7 +139,7 @@ public fun TagPromote(
 }
 
 @Deprecated(
-    "Use TagOutlined with primary intent instead",
+    "Use TagOutlined with main intent instead",
     ReplaceWith("TagOutlined(text, modifier, intent, leadingIcon, tint)"),
 )
 @Composable
@@ -149,13 +149,13 @@ public fun TagUrgent(
 ) {
     TagOutlined(
         modifier = modifier,
-        intent = TagIntent.Primary,
+        intent = TagIntent.Main,
         content = content,
     )
 }
 
 @Deprecated(
-    "Use TagOutlined with secondary intent instead",
+    "Use TagOutlined with support intent instead",
     ReplaceWith("TagOutlined(text, modifier, intent, leadingIcon, tint)"),
 )
 @Composable
@@ -165,7 +165,7 @@ public fun TagPro(
 ) {
     TagOutlined(
         modifier = modifier,
-        intent = TagIntent.Secondary,
+        intent = TagIntent.Support,
         content = content,
     )
 }

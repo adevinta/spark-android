@@ -147,7 +147,7 @@ internal fun LayoutPreview() {
                 modifier = Modifier
                     .bodyWidth()
                     .fillMaxHeight()
-                    .background(SparkTheme.colors.primaryContainer),
+                    .background(SparkTheme.colors.mainContainer),
             ) {
                 items(
                     count = 20,
@@ -164,7 +164,7 @@ private fun Item() {
     Surface(
         modifier = Modifier
             .aspectRatio(2 / 3f),
-        color = SparkTheme.colors.primary,
+        color = SparkTheme.colors.main,
         shape = SparkTheme.shapes.medium,
         shadowElevation = 4.dp,
         tonalElevation = 4.dp,

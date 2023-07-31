@@ -75,7 +75,7 @@ import androidx.compose.material3.FilterChip as MaterialFilterChip
  * in different states. See [FilterChipDefaults.filterChipColors].
  * @param elevation [SelectableChipElevation] used to resolve the elevation for this chip in
  * different states. This controls the size of the shadow below the chip. Additionally, when the
- * container color is [ColorScheme.surface], this controls the amount of primary color applied as an
+ * container color is [ColorScheme.surface], this controls the amount of main color applied as an
  * overlay. See [FilterChipDefaults.filterChipElevation].
  * @param border the border to draw around the container of this chip. Pass `null` for no border.
  * See [FilterChipDefaults.filterChipBorder].
@@ -157,7 +157,7 @@ public fun FilterChip(
  * in different states. See [FilterChipDefaults.elevatedFilterChipColors].
  * @param elevation [SelectableChipElevation] used to resolve the elevation for this chip in
  * different states. This controls the size of the shadow below the chip. Additionally, when the
- * container color is [ColorScheme.surface], this controls the amount of primary color applied as an
+ * container color is [ColorScheme.surface], this controls the amount of main color applied as an
  * overlay. See [FilterChipDefaults.filterChipElevation].
  * @param border the border to draw around the container of this chip. Pass `null` for no border.
  * See [FilterChipDefaults.filterChipBorder].

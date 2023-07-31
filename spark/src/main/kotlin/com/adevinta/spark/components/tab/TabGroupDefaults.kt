@@ -51,7 +51,7 @@ internal object TabGroupDefaults {
     /** Default container color of a tab row. */
 
     val containerColor: Color
-        @Composable get() = PrimaryNavigationTabTokens.ContainerColor
+        @Composable get() = MainNavigationTabTokens.ContainerColor
 
     /** Default content color of a tab row. */
     val contentColor: Color
@@ -72,7 +72,7 @@ internal object TabGroupDefaults {
     fun Indicator(
         modifier: Modifier = Modifier,
         height: Dp = TabDefaults.ActiveIndicatorHeight,
-        color: Color = PrimaryNavigationTabTokens.ActiveIndicatorColor,
+        color: Color = MainNavigationTabTokens.ActiveIndicatorColor,
     ) {
         Box(
             modifier

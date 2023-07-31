@@ -38,7 +38,7 @@
     </plurals>
     <string name="spark_rating_a11y">Rating of %1$.1f</string>
 
-    <string name="spark_user_avatar_content_description">Photo de profil</string>
+    <string name="spark_user_avatar_content_description">Profile photo</string>
 
     <!--Badge-->
     <string name="spark_exceed_max_badge_number_a11y" tools:ignore="PluralsCandidate"
@@ -49,8 +49,8 @@
         <item quantity="other"><xliff:g id="count">%d</xliff:g> new notifications</item>
     </plurals>
 
-    <string name="spark_annotatedStringResource_test"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for text on</p> <i><annotation color="primary">Android</annotation></i></string>
-    <string name="spark_annotatedStringResource_test_args"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for %s on</p> <i><annotation color="primary">Android</annotation></i></string>
+    <string name="spark_annotatedStringResource_test"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for text on</p> <i><annotation color="main">Android</annotation></i></string>
+    <string name="spark_annotatedStringResource_test_args"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for %s on</p> <i><annotation color="main">Android</annotation></i></string>
 
     <!--Rating-->
     <string name="spark_textfield_content_description">Mandatory</string>

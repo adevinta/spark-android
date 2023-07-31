@@ -81,7 +81,7 @@ internal fun SparkNavigationBar(
 /**
  * <a href="https://m3.material.io/components/navigation-bar/overview" class="external" target="_blank">Material Design bottom navigation bar</a>.
  *
- * Navigation bars offer a persistent and convenient way to switch between primary destinations in
+ * Navigation bars offer a persistent and convenient way to switch between main destinations in
  * an app.
  *
  * ![Navigation bar image](https://developer.android.com/images/reference/androidx/compose/material3/navigation-bar.png)
@@ -94,7 +94,7 @@ internal fun SparkNavigationBar(
  * [NavigationBar] component.
  *
  * @param modifier the [Modifier] to be applied to this navigation bar
- * @param tonalElevation when [containerColor] is [ColorScheme.surface], a translucent primary color
+ * @param tonalElevation when [containerColor] is [ColorScheme.surface], a translucent main color
  * overlay is applied on top of the container. A higher tonal elevation value will result in a
  * darker color in light theme and lighter color in dark theme. See also: [Surface].
  * @param windowInsets a window insets of the navigation bar.
@@ -119,7 +119,7 @@ public fun NavigationBar(
 /**
  * Material Design navigation bar item.
  *
- * Navigation bars offer a persistent and convenient way to switch between primary destinations in
+ * Navigation bars offer a persistent and convenient way to switch between main destinations in
  * an app.
  *
  * The recommended configuration for a [NavigationBarItem] depends on how many items there are
