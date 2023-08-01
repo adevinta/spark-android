@@ -35,7 +35,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
