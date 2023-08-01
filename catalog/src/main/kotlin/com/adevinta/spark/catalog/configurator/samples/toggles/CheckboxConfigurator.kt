@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.configurator.samples.checkboxes
+package com.adevinta.spark.catalog.configurator.samples.toggles
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -151,7 +151,7 @@ private fun CheckboxSample() {
         )
         Column {
             Text(
-                text = stringResource(id = R.string.configurator_component_checkbox_content_side_label),
+                text = stringResource(id = R.string.configurator_component_toggle_content_side_label),
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
@@ -176,7 +176,7 @@ private fun CheckboxSample() {
                 label = it
             },
             label = stringResource(id = R.string.configurator_component_screen_textfield_label),
-            placeholder = stringResource(id = R.string.configurator_component_checkbox_placeholder_label),
+            placeholder = stringResource(id = R.string.configurator_component_toggle_placeholder_label),
         )
     }
 }
