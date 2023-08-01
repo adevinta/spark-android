@@ -46,6 +46,7 @@ internal fun SparkRadioButton(
     selected: Boolean,
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
+    intent: ToggleIntent = ToggleIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -54,6 +55,7 @@ internal fun SparkRadioButton(
         onClick = onClick,
         interactionSource = interactionSource,
         enabled = enabled,
+        colors = intent.toRadioButtonDefaultsColors(),
         modifier = modifier.sparkUsageOverlay(),
     )
 }
@@ -75,6 +77,7 @@ internal fun SparkRadioButton(
  * @param onClick callback to be invoked when the RadioButton is clicked. If null, then this RadioButton will not
  * handle input events, and only act as a visual indicator of selected state
  * @param modifier Modifier to be applied to the layout of the radiobutton
+ * @param intent The [ToggleIntent] to use to draw the radio button
  * @param enabled whether the component is enabled or grayed out
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this RadioButton. You can create and pass in your own remembered
@@ -86,10 +89,12 @@ public fun RadioButton(
     selected: Boolean,
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
+    intent: ToggleIntent = ToggleIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     SparkRadioButton(
+        intent = intent,
         selected = selected,
         onClick = onClick,
         interactionSource = interactionSource,
@@ -115,6 +120,7 @@ public fun RadioButton(
  * @param onClick callback to be invoked when the RadioButton is clicked. If null, then this RadioButton will not
  * handle input events, and only act as a visual indicator of selected state
  * @param modifier Modifier to be applied to the layout of the checkbox
+ * @param intent The [ToggleIntent] to use to draw the radio button
  * @param enabled whether the component is enabled or grayed out
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this RadioButton. You can create and pass in your own remembered
@@ -128,6 +134,7 @@ public fun RadioButtonLabelled(
     selected: Boolean,
     onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
+    intent: ToggleIntent = ToggleIntent.Basic,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     contentSide: ContentSide = ContentSide.End,
@@ -138,6 +145,7 @@ public fun RadioButtonLabelled(
         toggle = {
             RadioButton(
                 modifier = it.minimumTouchTargetSize(),
+                intent = intent,
                 selected = selected,
                 onClick = null,
                 interactionSource = interactionSource,
@@ -162,11 +170,13 @@ internal fun AllStatesRadioButtonPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        Row {
-            RadioButton(enabled = true, selected = true, onClick = {})
-            RadioButton(enabled = false, selected = true, onClick = {})
-            RadioButton(enabled = true, selected = false, onClick = {})
-            RadioButton(enabled = false, selected = false, onClick = {})
+        ToggleIntent.values().forEach { intent ->
+            Row {
+                RadioButton(enabled = true, selected = true, onClick = {}, intent = intent)
+                RadioButton(enabled = false, selected = true, onClick = {}, intent = intent)
+                RadioButton(enabled = true, selected = false, onClick = {}, intent = intent)
+                RadioButton(enabled = false, selected = false, onClick = {}, intent = intent)
+            }
         }
     }
 }
