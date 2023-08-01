@@ -23,10 +23,14 @@ package com.adevinta.spark.components.toggles
 
 import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.RadioButtonColors
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.SwitchColors
 import androidx.compose.runtime.Composable
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.components.IntentColors
+import com.adevinta.spark.tokens.dim3
 
 public enum class ToggleIntent {
     /**
@@ -115,4 +119,12 @@ internal fun ToggleIntent.toCheckboxDefaultsColors(): CheckboxColors = CheckboxD
 internal fun ToggleIntent.toSwitchDefaultsColors(): SwitchColors = SwitchDefaults.colors(
     checkedTrackColor = this.colors().color,
     disabledCheckedTrackColor = this.colors().containerColor,
+)
+
+@Composable
+internal fun ToggleIntent.toRadioButtonDefaultsColors(): RadioButtonColors = RadioButtonDefaults.colors(
+    selectedColor = this.colors().color,
+    unselectedColor = SparkTheme.colors.outline,
+    disabledSelectedColor = this.colors().containerColor,
+    disabledUnselectedColor = SparkTheme.colors.outline.dim3,
 )
