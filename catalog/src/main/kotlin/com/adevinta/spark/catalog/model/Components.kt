@@ -24,8 +24,9 @@ package com.adevinta.spark.catalog.model
 import androidx.annotation.StringRes
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
-import com.adevinta.spark.catalog.configurator.samples.checkboxes.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
+import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.SwitchExamples
@@ -78,11 +79,11 @@ private val Switches = Component(
     name = "Switches",
     description = R.string.component_switch_description,
     // No buttons icon
-    guidelinesUrl = "$ComponentGuidelinesUrl/p/76f5a8-checkbox/b/98915d",
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/58a2c6-switch/b/700a17",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.toggles/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/CheckBox.kt",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/Switch.kt",
     examples = SwitchExamples,
-    configurator = CheckboxConfigurator,
+    configurator = SwitchConfigurator,
 )
 
 private val TextFields = Component(

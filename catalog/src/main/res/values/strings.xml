@@ -61,10 +61,10 @@
     <string name="configurator_component_screen_enabled_label">Enabled</string>
     <string name="configurator_component_screen_textfield_label">Label</string>
     <string name="configurator_component_screen_intent_label">Intent</string>
-    <!--Checkbox configurator-->
+    <!--Toggle configurator-->
     <string name="configurator_component_checkbox_toggleable_state_label">Toggleable State</string>
-    <string name="configurator_component_checkbox_content_side_label">Content Side</string>
-    <string name="configurator_component_checkbox_placeholder_label">Checkbox label</string>
+    <string name="configurator_component_toggle_content_side_label">Content Side</string>
+    <string name="configurator_component_toggle_placeholder_label">Toggle label</string>
 
     <string name="component_menu_guidlines">View design guidelines</string>
     <string name="component_menu_dev_docs">View developer docs</string>

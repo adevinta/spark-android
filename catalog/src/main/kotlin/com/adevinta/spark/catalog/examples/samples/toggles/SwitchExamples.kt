@@ -99,7 +99,7 @@ private fun LabeledSwitchGroupExample(
         stringResource(id = R.string.component_checkbox_group_example_option2_label),
         stringResource(id = R.string.component_checkbox_content_side_example_label),
 
-        )
+    )
 
     var childrenStates by remember {
         mutableStateOf(List(labels.size) { false })
@@ -131,14 +131,12 @@ private fun LabeledSwitchGroupExample(
     }
 }
 
-
 @Composable
 private fun ColumnScope.SwitchPair(
     checked: Boolean,
     icons: SwitchIcons? = null,
     onCheckedChange: (Boolean) -> Unit,
 ) {
-
     Switch(
         checked = checked,
         onCheckedChange = onCheckedChange,
