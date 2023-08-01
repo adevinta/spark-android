@@ -55,6 +55,20 @@ RadioButtonLabelled(
 ) { Text("RadioButton On") }
 ```
 
+### Styles
+
+The `RadioButton` and `RadioButtonLabelled` accept the following [ToggleIntent](ToggleIntent.kt)s:
+
+- Basic (default)
+- Accent
+- Main
+- Support
+- Success
+- Alert
+- Danger
+- Info
+- Neutral
+
 ## Layout
 
 ### RadioGroup

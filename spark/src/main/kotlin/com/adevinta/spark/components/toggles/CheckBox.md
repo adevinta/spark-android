@@ -49,7 +49,7 @@ CheckboxLabelled(
 
 ### Styles
 
-The `CheckBox` and `CheckboxLabelled` accept 7 [ToggleIntent](ToggleIntent.kt)s:
+The `CheckBox` and `CheckboxLabelled` accept the following [ToggleIntent](ToggleIntent.kt)s:
 
 - Basic (default)
 - Accent
