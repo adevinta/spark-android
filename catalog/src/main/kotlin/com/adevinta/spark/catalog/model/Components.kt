@@ -29,6 +29,7 @@ import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigura
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
+import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.SwitchExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
 import com.adevinta.spark.catalog.util.PackageSummaryUrl
@@ -74,6 +75,18 @@ private val Checkboxes = Component(
     configurator = CheckboxConfigurator,
 )
 
+private val RadioButtons = Component(
+    id = nextId(),
+    name = "Radio buttons",
+    description = R.string.component_radiobutton_description,
+    // No buttons icon
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/98058f-radio-button/b/700a17",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.toggles/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/RadioButton.kt",
+    examples = RadioButtonExamples,
+    configurator = CheckboxConfigurator,
+)
+
 private val Switches = Component(
     id = nextId(),
     name = "Switches",
@@ -102,6 +115,7 @@ private val TextFields = Component(
 public val Components: List<Component> = listOf(
     Buttons,
     Checkboxes,
+    RadioButtons,
     Switches,
     TextFields,
 )

@@ -150,7 +150,7 @@ private fun LabeledCheckboxGroupVerticalExample(labels: List<String>) {
 
     Column(modifier = Modifier.selectableGroup()) {
         Text(
-            text = stringResource(id = R.string.component_checkbox_vertical_group_title),
+            text = stringResource(id = R.string.component_toggle_vertical_group_title),
             style = SparkTheme.typography.headline2,
         )
         VerticalSpacer(space = 8.dp)
@@ -197,7 +197,7 @@ private fun LabeledCheckboxGroupVerticalExample(labels: List<String>) {
 private fun LabeledCheckboxGroupHorizontalExample(labels: List<String>) {
     Column {
         Text(
-            text = stringResource(id = R.string.component_checkbox_horizontal_group_title),
+            text = stringResource(id = R.string.component_toggle_horizontal_group_title),
             style = SparkTheme.typography.headline2,
         )
         VerticalSpacer(space = 8.dp)

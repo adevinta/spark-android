@@ -100,27 +100,15 @@ private fun LabeledSwitchGroupExample(
         stringResource(id = R.string.component_checkbox_content_side_example_label),
 
     )
-
-    var childrenStates by remember {
-        mutableStateOf(List(labels.size) { false })
-    }
     Column {
-        labels.forEachIndexed { index, label ->
-            val checked = childrenStates.getOrElse(index) { false }
+        labels.forEach { label ->
+            var checked by remember { mutableStateOf(false) }
             SwitchLabelled(
                 modifier = Modifier.fillMaxWidth(),
                 enabled = true,
                 checked = checked,
                 contentSide = contentSide,
-                onCheckedChange = {
-                    childrenStates = childrenStates.mapIndexed { i, state ->
-                        if (i == index) {
-                            !state
-                        } else {
-                            state
-                        }
-                    }
-                },
+                onCheckedChange = { checked = !checked },
             ) {
                 Text(
                     text = label,
