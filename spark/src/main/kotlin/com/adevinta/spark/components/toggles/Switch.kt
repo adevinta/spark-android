@@ -59,6 +59,7 @@ internal fun SparkSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    intent: ToggleIntent = ToggleIntent.Basic,
     icons: SwitchIcons? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -79,7 +80,7 @@ internal fun SparkSwitch(
         interactionSource = interactionSource,
         enabled = enabled,
         thumbContent = icon,
-        colors = SwitchDefaults.colors(),
+        colors = intent.toSwitchDefaultsColors(),
         modifier = modifier
             .minimumTouchTargetSize()
             .padding(horizontal = 8.dp)
@@ -97,6 +98,7 @@ internal fun SparkSwitch(
  * @param onCheckedChange callback to be invoked when Switch is being clicked, therefore the change of checked state is requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.
  * @param modifier Modifier to be applied to  switch layout
  * @param enabled whether the component is enabled or grayed out
+ * @param intent The [ToggleIntent] to use to draw the component
  * @param icons represents the pair of icons to use for check/unchecked states, you can use [SwitchDefaults.icons] if you want to use the default ones.
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this Switch. You can create and pass in your own remembered
@@ -109,6 +111,7 @@ public fun Switch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    intent: ToggleIntent = ToggleIntent.Basic,
     icons: SwitchIcons? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
@@ -117,6 +120,7 @@ public fun Switch(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
+        intent = intent,
         icons = icons,
         interactionSource = interactionSource,
     )
@@ -135,6 +139,7 @@ public fun Switch(
  * @param onCheckedChange callback to be invoked when Switch is being clicked, therefore the change of checked state is requested. If null, then this is passive and relies entirely on a higher-level component to control the "checked" state.
  * @param modifier Modifier to be applied to the layout of the switch layout
  * @param enabled whether the component is enabled or grayed out
+ * @param intent The [ToggleIntent] to use to draw the component
  * @param icons represents the pair of icons to use for check/unchecked states
  * @param interactionSource the [MutableInteractionSource] representing the stream of
  * [Interaction]s for this Switch. You can create and pass in your own remembered
@@ -149,6 +154,7 @@ public fun SwitchLabelled(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    intent: ToggleIntent = ToggleIntent.Basic,
     icons: SwitchIcons? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     contentSide: ContentSide = ContentSide.Start,
@@ -162,6 +168,7 @@ public fun SwitchLabelled(
                 onCheckedChange = null,
                 interactionSource = interactionSource,
                 enabled = enabled,
+                intent = intent,
                 icons = icons,
                 modifier = Modifier.minimumTouchTargetSize(),
             )
@@ -197,18 +204,22 @@ internal fun AllStatesSwitchPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
+        ToggleIntent.values().forEach { intent ->
+            Row {
+                Switch(checked = true, onCheckedChange = {}, enabled = true, intent = intent)
+                Switch(checked = false, onCheckedChange = {}, enabled = true, intent = intent)
+                Switch(checked = true, onCheckedChange = {}, enabled = false, intent = intent)
+                Switch(checked = false, onCheckedChange = {}, enabled = false, intent = intent)
+            }
+        }
+
         Row {
             Switch(checked = true, onCheckedChange = {}, enabled = true, icons = SwitchDefaults.icons)
             Switch(checked = false, onCheckedChange = {}, enabled = true, icons = SwitchDefaults.icons)
             Switch(checked = true, onCheckedChange = {}, enabled = false, icons = SwitchDefaults.icons)
             Switch(checked = false, onCheckedChange = {}, enabled = false, icons = SwitchDefaults.icons)
         }
-        Row {
-            Switch(checked = true, onCheckedChange = {}, enabled = true)
-            Switch(checked = false, onCheckedChange = {}, enabled = true)
-            Switch(checked = true, onCheckedChange = {}, enabled = false)
-            Switch(checked = false, onCheckedChange = {}, enabled = false)
-        }
+
         Row {
             val icons = SwitchIcons(
                 checked = SparkIcons.AlarmOnFill,

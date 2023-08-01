@@ -41,6 +41,18 @@ SwitchLabelled(
 ) { Text(text = "Switch On") }
 ```
 
+### Styles
+
+The `Switch` and `SwitchLabelled` accept 7 [ToggleIntent](ToggleIntent.kt)s:
+
+- Primary (default)
+- Secondary
+- Success
+- Alert
+- Danger
+- Info
+- Neutral
+
 ## Layout
 
 - The Switch respects the minimum touch size.
