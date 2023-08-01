@@ -43,10 +43,12 @@ SwitchLabelled(
 
 ### Styles
 
-The `Switch` and `SwitchLabelled` accept 7 [ToggleIntent](ToggleIntent.kt)s:
+The `Switch` and `SwitchLabelled` accept the following [ToggleIntent](ToggleIntent.kt)s:
 
-- Primary (default)
-- Secondary
+- Basic (default)
+- Accent
+- Main
+- Support
 - Success
 - Alert
 - Danger
