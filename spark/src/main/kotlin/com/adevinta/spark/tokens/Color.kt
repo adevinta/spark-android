@@ -874,6 +874,16 @@ public class SparkColors(
      * Returns a copy of this Colors, optionally overriding some of the values.
      */
     public fun copy(
+        accent: Color = this.accent,
+        onAccent: Color = this.onAccent,
+        accentContainer: Color = this.accentContainer,
+        onAccentContainer: Color = this.onAccentContainer,
+        accentVariant: Color = this.accentVariant,
+        onAccentVariant: Color = this.onAccentVariant,
+        basic: Color = this.basic,
+        onBasic: Color = this.onBasic,
+        basicContainer: Color = this.basicContainer,
+        onBasicContainer: Color = this.onBasicContainer,
         main: Color = this.main,
         onMain: Color = this.onMain,
         mainContainer: Color = this.mainContainer,
@@ -1120,6 +1130,11 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
  * @see contentColorFor
  */
 public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (backgroundColor) {
+    accent -> onAccent
+    accentContainer -> onAccentContainer
+    accentVariant -> onAccentVariant
+    basic -> onBasic
+    basicContainer -> onBasicContainer
     main -> onMain
     mainContainer -> onMainContainer
     mainVariant -> onMainVariant
@@ -1216,6 +1231,16 @@ public val Color.dim5: Color
  * the specific changed value to recompose.
  */
 internal fun SparkColors.updateColorsFrom(other: SparkColors) {
+    accent = other.accent
+    onAccent = other.onAccent
+    accentContainer = other.accentContainer
+    onAccentContainer = other.onAccentContainer
+    accentVariant = other.accentVariant
+    onAccentVariant = other.onAccentVariant
+    basic = other.basic
+    onBasic = other.onBasic
+    basicContainer = other.basicContainer
+    onBasicContainer = other.onBasicContainer
     main = other.main
     onMain = other.onMain
     mainContainer = other.mainContainer
