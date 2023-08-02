@@ -69,7 +69,7 @@ public fun EmphasizeMedium(content: @Composable () -> Unit) {
 }
 
 /**
- * This function is used to set the current value of [LocalContentColor] to onSurface with a disabled apha.
+ * This function is used to set the current value of [LocalContentColor] to onSurface with a disabled alpha.
  * Any [Text], Icons, other  components included in this component's [content] will be styled with this a content
  * color alpha that apply a disabled emphasis which is close to Gray or Light Gray.
  */
