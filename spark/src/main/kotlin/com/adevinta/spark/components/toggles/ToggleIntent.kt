@@ -27,6 +27,8 @@ import androidx.compose.material3.RadioButtonColors
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.SwitchColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.components.IntentColors
@@ -111,20 +113,35 @@ public enum class ToggleIntent {
 }
 
 @Composable
-internal fun ToggleIntent.toCheckboxDefaultsColors(): CheckboxColors = CheckboxDefaults.colors(
-    checkedColor = this.colors().color,
-)
+internal fun ToggleIntent.toCheckboxDefaultsColors(checked: Boolean): CheckboxColors = with(this.colors()) {
+    CheckboxDefaults.colors(
+        checkedColor = this.color,
+        uncheckedColor = UncheckedColor,
+        // FIXME: drop when fix released https://issuetracker.google.com/issues/291943198
+        disabledCheckedColor = if (checked) this.color.disabled else UncheckedColor.disabled,
+        disabledUncheckedColor = UncheckedColor.disabled,
+    )
+}
 
 @Composable
-internal fun ToggleIntent.toSwitchDefaultsColors(): SwitchColors = SwitchDefaults.colors(
-    checkedTrackColor = this.colors().color,
-    disabledCheckedTrackColor = this.colors().containerColor,
-)
+internal fun ToggleIntent.toSwitchDefaultsColors(): SwitchColors = with(this.colors()) {
+    SwitchDefaults.colors(
+        checkedTrackColor = this.color,
+    )
+}
 
 @Composable
-internal fun ToggleIntent.toRadioButtonDefaultsColors(): RadioButtonColors = RadioButtonDefaults.colors(
-    selectedColor = this.colors().color,
-    unselectedColor = SparkTheme.colors.outline,
-    disabledSelectedColor = this.colors().containerColor,
-    disabledUnselectedColor = SparkTheme.colors.outline.dim3,
-)
+internal fun ToggleIntent.toRadioButtonDefaultsColors(): RadioButtonColors = with(this.colors()) {
+    RadioButtonDefaults.colors(
+        selectedColor = this.color,
+        unselectedColor = UncheckedColor,
+        disabledSelectedColor = this.color.disabled,
+        disabledUnselectedColor = SparkTheme.colors.outline.disabled,
+    )
+}
+
+private val UncheckedColor
+    @Composable get() = SparkTheme.colors.outline
+
+private val Color.disabled: Color
+    @Composable get() = this.dim3.compositeOver(SparkTheme.colors.surface)

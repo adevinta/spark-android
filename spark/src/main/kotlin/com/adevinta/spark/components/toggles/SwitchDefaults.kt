@@ -23,33 +23,30 @@ package com.adevinta.spark.components.toggles
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.compositeOver
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tokens.dim4
+import com.adevinta.spark.components.buttons.SparkButtonDefaults.disabled
 import androidx.compose.material3.SwitchDefaults as MaterialSwitchDefaults
 
 public object SwitchDefaults {
 
     @Composable
     internal fun colors(
+        checkedTrackColor: Color,
         checkedThumbColor: Color = SparkTheme.colors.surface,
-        checkedTrackColor: Color = SparkTheme.colors.main,
         checkedBorderColor: Color = Color.Transparent,
         checkedIconColor: Color = checkedTrackColor,
         uncheckedThumbColor: Color = SparkTheme.colors.surface,
-        uncheckedTrackColor: Color = SparkTheme.colors.onSurface.dim4
-            .compositeOver(SparkTheme.colors.surface),
+        uncheckedTrackColor: Color = SparkTheme.colors.outline,
         uncheckedBorderColor: Color = Color.Transparent,
-        uncheckedIconColor: Color = SparkTheme.colors.onSurface.dim4
-            .compositeOver(SparkTheme.colors.surface),
-        disabledCheckedThumbColor: Color = SparkTheme.colors.surface,
-        disabledCheckedTrackColor: Color = SparkTheme.colors.mainContainer,
-        disabledCheckedBorderColor: Color = Color.Transparent,
-        disabledCheckedIconColor: Color = disabledCheckedTrackColor,
-        disabledUncheckedThumbColor: Color = SparkTheme.colors.surface,
-        disabledUncheckedTrackColor: Color = SparkTheme.colors.neutralContainer,
-        disabledUncheckedBorderColor: Color = Color.Transparent,
-        disabledUncheckedIconColor: Color = SparkTheme.colors.neutralContainer,
+        uncheckedIconColor: Color = uncheckedTrackColor,
+        disabledCheckedThumbColor: Color = checkedThumbColor,
+        disabledCheckedTrackColor: Color = checkedTrackColor.disabled,
+        disabledCheckedBorderColor: Color = checkedBorderColor,
+        disabledCheckedIconColor: Color = checkedIconColor.disabled,
+        disabledUncheckedThumbColor: Color = uncheckedThumbColor,
+        disabledUncheckedTrackColor: Color = uncheckedTrackColor.disabled,
+        disabledUncheckedBorderColor: Color = checkedBorderColor,
+        disabledUncheckedIconColor: Color = uncheckedIconColor.disabled,
     ) = MaterialSwitchDefaults.colors(
         checkedThumbColor = checkedThumbColor,
         checkedTrackColor = checkedTrackColor,
