@@ -33,6 +33,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.components.IntentColors
 import com.adevinta.spark.tokens.dim3
+import com.adevinta.spark.tokens.disabled
 
 public enum class ToggleIntent {
     /**
@@ -142,6 +143,3 @@ internal fun ToggleIntent.toRadioButtonDefaultsColors(): RadioButtonColors = wit
 
 private val UncheckedColor
     @Composable get() = SparkTheme.colors.outline
-
-private val Color.disabled: Color
-    @Composable get() = this.dim3.compositeOver(SparkTheme.colors.surface)
