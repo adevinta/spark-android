@@ -56,7 +56,7 @@ internal fun SparkCheckbox(
         interactionSource = interactionSource,
         enabled = enabled,
         modifier = modifier.sparkUsageOverlay(),
-        colors = intent.toCheckboxDefaultsColors(),
+        colors = intent.toCheckboxDefaultsColors(checked = state == ToggleableState.On),
     )
 }
 
