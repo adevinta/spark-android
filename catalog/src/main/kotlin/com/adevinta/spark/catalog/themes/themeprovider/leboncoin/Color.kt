@@ -81,16 +81,16 @@ internal val Clementin50 = Color(0xFFFDEFE8)
 // endregion
 
 // region Plum colors
-internal val Plum900 = Color(0xFF14050D)
-internal val Plum800 = Color(0xFF3D0F26)
-internal val Plum700 = Color(0xFF531534)
-internal val Plum600 = Color(0xFF7A1F4D)
-internal val Plum500 = Color(0xFF8E2459)
-internal val Plum400 = Color(0xFFA65980)
-internal val Plum300 = Color(0xFFB87C9A)
-internal val Plum200 = Color(0xFFDCBDCC)
-internal val Plum100 = Color(0xFFEDDEE5)
-internal val Plum50 = Color(0xFFF6EEF2)
+internal val Plum900 = Color(0xFF1B0033)
+internal val Plum800 = Color(0xFF370066)
+internal val Plum700 = Color(0xFF520099)
+internal val Plum600 = Color(0xFF6D00CC)
+internal val Plum500 = Color(0xFF8800FF)
+internal val Plum400 = Color(0xFFA038FA)
+internal val Plum300 = Color(0xFFB866FF)
+internal val Plum200 = Color(0xFFD099FF)
+internal val Plum100 = Color(0xFFE5C7FF)
+internal val Plum50 = Color(0xFFF3E5FF)
 // endregion
 
 // region Blueberry colors
@@ -325,7 +325,7 @@ internal val LeboncoinColorProLightLegacy: SparkColors = lightSparkColors(
 internal val LeboncoinColorPartLight: SparkColors = lightSparkColors(
     accent = Plum500,
     onAccent = Color.White,
-    accentContainer = Plum100,
+    accentContainer = Plum50,
     onAccentContainer = Plum700,
     accentVariant = Plum600,
     onAccentVariant = Color.White,
