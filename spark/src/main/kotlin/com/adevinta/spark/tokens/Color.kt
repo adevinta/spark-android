@@ -249,7 +249,7 @@ public fun darkSparkColors(
     accentContainer: Color = Violet500,
     onAccentContainer: Color = White,
     accentVariant: Color = Violet200,
-    onAccentVariant: Color = PaleAdevinta900,
+    onAccentVariant: Color = BlackAdevinta900,
     basic: Color = PaleAdevinta100,
     onBasic: Color = BlackAdevinta900,
     basicContainer: Color = PaleAdevinta700,
