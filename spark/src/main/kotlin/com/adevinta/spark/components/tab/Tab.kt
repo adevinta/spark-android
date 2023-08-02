@@ -276,7 +276,7 @@ public fun Tab(
     message = "This component is no longer compliant with Spark specs",
     replaceWith = ReplaceWith(
         "Tab(selected, onClick, modifier, text, icon, contentDescription, enabled, intent, size, " +
-                "interactionSource, trailingContent)",
+            "interactionSource, trailingContent)",
     ),
 )
 public fun Tab(

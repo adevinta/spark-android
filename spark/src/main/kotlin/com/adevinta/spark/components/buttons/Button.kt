@@ -45,7 +45,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
@@ -61,7 +60,6 @@ import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi

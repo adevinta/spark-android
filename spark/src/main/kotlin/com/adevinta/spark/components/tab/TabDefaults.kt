@@ -34,6 +34,7 @@ internal object TabDefaults {
     /** Default content color of a tab */
     val ContentColor: Color
         @Composable get() = LocalContentColor.current
+
     /** Default intent color of a selected tab */
     internal val SelectedContentIntent = TabIntent.Basic
     internal val Size = TabSize.Medium
