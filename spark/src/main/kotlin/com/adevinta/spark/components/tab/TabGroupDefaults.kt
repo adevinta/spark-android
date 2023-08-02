@@ -47,16 +47,6 @@ import androidx.compose.ui.unit.dp
  * Contains default implementations and values used for TabRow.
  */
 internal object TabGroupDefaults {
-
-    /** Default container color of a tab row. */
-
-    val containerColor: Color
-        @Composable get() = TabIntent.Basic.color()
-
-    /** Default content color of a tab row. */
-    val contentColor: Color
-        @Composable get() = LocalContentColor.current
-
     /** Minimum width of a tab */
     val minTabWidth = 48.dp
 

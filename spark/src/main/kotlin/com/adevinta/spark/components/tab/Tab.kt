@@ -47,13 +47,13 @@ import androidx.compose.ui.unit.Constraints
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.AccountFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifNull
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
@@ -97,7 +97,7 @@ internal fun SparkTab(
     contentDescription: String? = null,
     enabled: Boolean = true,
     selectedContentColor: Color = TabDefaults.SelectedContentIntent.color(),
-    unselectedContentColor: Color = LocalContentColor.current,
+    unselectedContentColor: Color = TabDefaults.ContentColor,
     size: TabSize = TabDefaults.Size,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     trailingContent: @Composable () -> Unit = {},
@@ -112,7 +112,7 @@ internal fun SparkTab(
         LocalContentColor provides if (enabled) {
             unselectedContentColor
         } else {
-            unselectedContentColor.copy(alpha = SparkTheme.colors.dim3)
+            unselectedContentColor.disabled
         },
     ) {
         MaterialTab(
@@ -276,7 +276,7 @@ public fun Tab(
     message = "This component is no longer compliant with Spark specs",
     replaceWith = ReplaceWith(
         "Tab(selected, onClick, modifier, text, icon, contentDescription, enabled, intent, size, " +
-            "interactionSource, trailingContent)",
+                "interactionSource, trailingContent)",
     ),
 )
 public fun Tab(
