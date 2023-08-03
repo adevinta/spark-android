@@ -306,7 +306,7 @@ private fun OutlinedBorderContainerBox(
     Box(
         Modifier
             .border(borderStroke.value, shape)
-            .background(colors.containerColor().value, shape),
+            .background(colors.containerColor(enabled).value, shape),
     )
 }
 
@@ -439,7 +439,7 @@ internal fun TextFieldSlotsPreview() {
         TextField(
             value = "din.djarin@adevinta.com",
             onValueChange = {},
-            enabled = true,
+            enabled = false,
             required = true,
             label = "Label",
             placeholder = "Placeholder",
