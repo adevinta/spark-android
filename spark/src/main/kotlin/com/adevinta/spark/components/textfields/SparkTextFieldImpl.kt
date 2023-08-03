@@ -38,8 +38,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposableOpenTarget
 import androidx.compose.runtime.CompositionLocalProvider
@@ -96,7 +96,7 @@ internal fun SparkDecorationBox(
         visualTransformation.filter(AnnotatedString(value))
     }.text.text
 
-    val contentPadding = TextFieldDefaults.outlinedTextFieldPadding(
+    val contentPadding = OutlinedTextFieldDefaults.contentPadding(
         top = VerticalContentPadding,
         bottom = VerticalContentPadding,
     )
@@ -254,7 +254,8 @@ internal fun SparkDecorationBox(
 internal fun Decoration(
     contentColor: Color,
     typography: TextStyle? = null,
-    content: @Composable @ComposableOpenTarget(index = 0) () -> Unit, // ktlint-disable annotation
+    content: @Composable
+    @ComposableOpenTarget(index = 0) () -> Unit, // ktlint-disable annotation
 ) {
     val colorAndEmphasis: @Composable () -> Unit = @Composable {
         CompositionLocalProvider(LocalContentColor provides contentColor, content = content)

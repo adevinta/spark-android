@@ -43,6 +43,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
@@ -320,14 +321,14 @@ private fun animateBorderStrokeAsState(
     val focused by interactionSource.collectIsFocusedAsState()
     val indicatorColor = colors.indicatorColor(enabled, state, interactionSource)
     val targetThickness = if (focused || state != null) {
-        TextFieldDefaults.FocusedBorderThickness
+        OutlinedTextFieldDefaults.FocusedBorderThickness
     } else {
-        TextFieldDefaults.UnfocusedBorderThickness
+        OutlinedTextFieldDefaults.UnfocusedBorderThickness
     }
     val animatedThickness = if (enabled) {
         animateDpAsState(targetThickness, tween(durationMillis = 150))
     } else {
-        rememberUpdatedState(TextFieldDefaults.UnfocusedBorderThickness)
+        rememberUpdatedState(OutlinedTextFieldDefaults.UnfocusedBorderThickness)
     }
     return rememberUpdatedState(
         BorderStroke(animatedThickness.value, SolidColor(indicatorColor.value)),

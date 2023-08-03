@@ -32,7 +32,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -47,16 +46,6 @@ import androidx.compose.ui.unit.dp
  * Contains default implementations and values used for TabRow.
  */
 internal object TabGroupDefaults {
-
-    /** Default container color of a tab row. */
-
-    val containerColor: Color
-        @Composable get() = TabIntent.Basic.color()
-
-    /** Default content color of a tab row. */
-    val contentColor: Color
-        @Composable get() = LocalContentColor.current
-
     /** Minimum width of a tab */
     val minTabWidth = 48.dp
 

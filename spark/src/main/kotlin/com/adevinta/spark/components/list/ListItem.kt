@@ -21,9 +21,9 @@
  */
 package com.adevinta.spark.components.list
 
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ListItem
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.ListItemColors
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,28 +32,32 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.divider.Divider
+import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.icons.FavoriteFill
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+import androidx.compose.material3.ListItem as MaterialListItem
 
-@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 internal fun SparkListItem(
-    headlineText: @Composable () -> Unit,
+    headlineContent: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    overlineText: (@Composable () -> Unit)? = null,
-    supportingText: (@Composable () -> Unit)? = null,
-    leadingContent: (@Composable () -> Unit)? = null,
-    trailingContent: (@Composable () -> Unit)? = null,
-    colors: ListItemColors = ListItemDefault.colors(),
-    tonalElevation: Dp = ListItemDefault.Elevation,
-    shadowElevation: Dp = ListItemDefault.Elevation,
+    overlineContent: @Composable (() -> Unit)? = null,
+    supportingContent: @Composable (() -> Unit)? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    trailingContent: @Composable (() -> Unit)? = null,
+    colors: ListItemColors = ListItemDefaults.colors(),
+    tonalElevation: Dp = ListItemDefaults.Elevation,
+    shadowElevation: Dp = ListItemDefaults.Elevation,
 ) {
-    ListItem(
-        headlineText = headlineText,
+    MaterialListItem(
+        headlineContent = headlineContent,
         modifier = modifier,
-        overlineText = overlineText,
-        supportingText = supportingText,
+        overlineContent = overlineContent,
+        supportingContent = supportingContent,
         leadingContent = leadingContent,
         trailingContent = trailingContent,
         colors = colors,
@@ -63,41 +67,42 @@ internal fun SparkListItem(
 }
 
 /**
- * Spark ListItem.
+ * Lists are continuous, vertical indexes of text or images.
  *
- * A ListItem is a simple list of items
+ * This component can be used to achieve the list item templates existing in the spec. One-line list
+ * items have a singular line of headline content. Two-line list items additionally have either
+ * supporting or overline content. Three-line list items have either both supporting and overline
+ * content, or extended (two-line) supporting text.
  *
- * ![ListItem image](https://developer.android.com/images/reference/androidx/compose/material3/lists.png)
- *
- * @param headlineText the headline text of the list item
- * @param modifier the [Modifier] to be applied to the list item
- * @param overlineText the text displayed above the headline text
- * @param supportingText the supporting text of the list item
- * @param leadingContent the leading supporting visual of the list item
+ * @param headlineContent the headline content of the list item
+ * @param modifier [Modifier] to be applied to the list item
+ * @param overlineContent the content displayed above the headline content
+ * @param supportingContent the supporting content of the list item
+ * @param leadingContent the leading content of the list item
  * @param trailingContent the trailing meta text, icon, switch or checkbox
- * @param colors ListItemColors that will be used to resolve the background and content color for this list item in different states. See ListItemDefaults.colors
+ * @param colors [ListItemColors] that will be used to resolve the background and content color for
+ * this list item in different states. See [ListItemDefaults.colors]
  * @param tonalElevation the tonal elevation of this list item
  * @param shadowElevation the shadow elevation of this list item
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 public fun ListItem(
-    headlineText: @Composable () -> Unit,
+    headlineContent: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    overlineText: (@Composable () -> Unit)? = null,
-    supportingText: (@Composable () -> Unit)? = null,
-    leadingContent: (@Composable () -> Unit)? = null,
-    trailingContent: (@Composable () -> Unit)? = null,
-    colors: ListItemColors = ListItemDefault.colors(),
-    tonalElevation: Dp = ListItemDefault.Elevation,
-    shadowElevation: Dp = ListItemDefault.Elevation,
+    overlineContent: @Composable (() -> Unit)? = null,
+    supportingContent: @Composable (() -> Unit)? = null,
+    leadingContent: @Composable (() -> Unit)? = null,
+    trailingContent: @Composable (() -> Unit)? = null,
+    colors: ListItemColors = ListItemDefaults.colors(),
+    tonalElevation: Dp = ListItemDefaults.Elevation,
+    shadowElevation: Dp = ListItemDefaults.Elevation,
 ) {
     SparkListItem(
-        headlineText = headlineText,
+        headlineContent = headlineContent,
         modifier = modifier,
-        overlineText = overlineText,
-        supportingText = supportingText,
+        overlineContent = overlineContent,
+        supportingContent = supportingContent,
         leadingContent = leadingContent,
         trailingContent = trailingContent,
         colors = colors,
@@ -106,20 +111,107 @@ public fun ListItem(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(
     group = "List",
-    name = "ListItem",
+    name = "One Line",
 )
 @Composable
-internal fun ListItemPreview(
+internal fun OneLineListItemPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        ListItem(
-            headlineText = {
-                Text(text = "Headline text")
-            },
-        )
+        Column {
+            ListItem(
+                headlineContent = { Text("One line list item with 24x24 icon") },
+                leadingContent = {
+                    Icon(
+                        sparkIcon = SparkIcons.FavoriteFill,
+                        contentDescription = "Localized description",
+                    )
+                },
+            )
+            Divider()
+        }
+    }
+}
+
+@Preview(
+    group = "List",
+    name = "Two Line",
+)
+@Composable
+internal fun TwoLineListItemPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        Column {
+            ListItem(
+                headlineContent = { Text("Two line list item with trailing") },
+                supportingContent = { Text("Secondary text") },
+                trailingContent = { Text("meta") },
+                leadingContent = {
+                    Icon(
+                        sparkIcon = SparkIcons.FavoriteFill,
+                        contentDescription = "Localized description",
+                    )
+                },
+            )
+            Divider()
+        }
+    }
+}
+
+@Preview(
+    group = "List",
+    name = "Three Line",
+)
+@Composable
+internal fun ThreeLineListItemPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        Column {
+            ListItem(
+                headlineContent = { Text("Three line list item") },
+                overlineContent = { Text("OVERLINE") },
+                supportingContent = { Text("Secondary text") },
+                leadingContent = {
+                    Icon(
+                        sparkIcon = SparkIcons.FavoriteFill,
+                        contentDescription = "Localized description",
+                    )
+                },
+                trailingContent = { Text("meta") },
+            )
+            Divider()
+        }
+    }
+}
+
+@Preview(
+    group = "List",
+    name = "Three Line Extended Content",
+)
+@Composable
+internal fun ThreeLineContentListItemPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        Column {
+            ListItem(
+                headlineContent = { Text("Three line list item") },
+                supportingContent = {
+                    Text("Secondary text that is long and perhaps goes onto another line")
+                },
+                leadingContent = {
+                    Icon(
+                        sparkIcon = SparkIcons.FavoriteFill,
+                        contentDescription = "Localized description",
+                    )
+                },
+                trailingContent = { Text("meta") },
+            )
+            Divider()
+        }
     }
 }
