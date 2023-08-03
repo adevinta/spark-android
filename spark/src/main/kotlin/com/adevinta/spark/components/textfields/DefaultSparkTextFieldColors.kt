@@ -40,18 +40,19 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tokens.dim2
 import com.adevinta.spark.tokens.dim3
+import com.adevinta.spark.tokens.dim5
 
 @Composable
 internal fun sparkOutlinedTextFieldColors(
     textColor: Color = SparkTheme.colors.onSurface,
     disabledTextColor: Color = textColor.dim3,
     containerColor: Color = Color.Transparent,
-    disabledContainerColor: Color = SparkTheme.colors.onSurface.dim3,
+    disabledContainerColor: Color = SparkTheme.colors.onSurface.dim5,
     cursorColor: Color = SparkTheme.colors.onSurface,
     selectionColors: TextSelectionColors = LocalTextSelectionColors.current,
     focusedBorderColor: Color = SparkTheme.colors.onSurface,
     unfocusedBorderColor: Color = SparkTheme.colors.outline,
-    disabledBorderColor: Color = focusedBorderColor.dim3,
+    disabledBorderColor: Color = SparkTheme.colors.outline,
     focusedLeadingIconColor: Color = SparkTheme.colors.onSurface,
     unfocusedLeadingIconColor: Color = focusedLeadingIconColor.dim2,
     disabledLeadingIconColor: Color = focusedLeadingIconColor.dim3,
@@ -201,7 +202,7 @@ internal data class DefaultSparkTextFieldColors(
             else -> unfocusedIndicatorColor
         }
         return if (enabled) {
-            animateColorAsState(targetValue, tween(durationMillis = 150))
+            animateColorAsState(targetValue, tween(durationMillis = 150), label = "Indicator Color")
         } else {
             rememberUpdatedState(targetValue)
         }
@@ -212,7 +213,11 @@ internal data class DefaultSparkTextFieldColors(
      */
     @Composable
     internal fun containerColor(enabled: Boolean): State<Color> {
-        return rememberUpdatedState(if (enabled) containerColor else disabledContainerColor)
+        return if (enabled) {
+            animateColorAsState(containerColor, tween(durationMillis = 150), label = "Container Color")
+        } else {
+            rememberUpdatedState(disabledContainerColor)
+        }
     }
 
     /**

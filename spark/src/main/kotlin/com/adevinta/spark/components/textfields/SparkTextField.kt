@@ -438,7 +438,7 @@ internal fun TextFieldSlotsPreview() {
         TextField(
             value = "din.djarin@adevinta.com",
             onValueChange = {},
-            enabled = true,
+            enabled = false,
             required = true,
             label = "Label",
             placeholder = "Placeholder",
