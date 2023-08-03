@@ -78,6 +78,7 @@ import com.adevinta.spark.tools.preview.DevicePreviews
  * @param illustration whether the modal display a close icon, and its corresponding action
  * @param mainButton the main actions for this modal (should be a [ButtonFilled])
  * @param supportButton the support or alternative actions for this modal (should any other button than [ButtonFilled])
+ * @param reverseButtonOrder inverse the order of the buttons, so the mainButton button is shown at the top in portrait mode
  * @param content the center custom Composable for modal content
  */
 @ExperimentalSparkApi
@@ -89,6 +90,7 @@ public fun ModalFullScreenScaffold(
     @DrawableRes illustration: Int? = null,
     mainButton: @Composable (Modifier) -> Unit = {},
     supportButton: @Composable (Modifier) -> Unit = {},
+    reverseButtonOrder: Boolean = false,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val size = Layout.windowSize
@@ -106,6 +108,7 @@ public fun ModalFullScreenScaffold(
                 illustration = illustration,
                 mainButton = mainButton,
                 supportButton = supportButton,
+                reverseButtonOrder = reverseButtonOrder,
                 content = content,
             )
         }
@@ -194,6 +197,7 @@ private fun PhonePortraitModalScaffold(
     @DrawableRes illustration: Int? = null,
     mainButton: @Composable (Modifier) -> Unit = {},
     supportButton: @Composable (Modifier) -> Unit = {},
+    reverseButtonOrder: Boolean = false,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -219,10 +223,13 @@ private fun PhonePortraitModalScaffold(
                         .fillMaxWidth()
                         .padding(horizontal = Layout.bodyMargin)
                         .padding(bottom = 16.dp),
+
+                    verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Bottom),
                 ) {
                     val buttonModifier = Modifier.fillMaxWidth()
+                    if (reverseButtonOrder) mainButton(buttonModifier)
                     supportButton(buttonModifier)
-                    mainButton(buttonModifier)
+                    if (!reverseButtonOrder) mainButton(buttonModifier)
                 }
             } else {
                 Row(
