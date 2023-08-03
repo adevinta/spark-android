@@ -45,7 +45,8 @@ import com.adevinta.spark.tokens.dim3
 internal fun sparkOutlinedTextFieldColors(
     textColor: Color = SparkTheme.colors.onSurface,
     disabledTextColor: Color = textColor.dim3,
-    containerColor: Color = SparkTheme.colors.surface,
+    containerColor: Color = Color.Transparent,
+    disabledContainerColor: Color = SparkTheme.colors.onSurface.dim3,
     cursorColor: Color = SparkTheme.colors.onSurface,
     selectionColors: TextSelectionColors = LocalTextSelectionColors.current,
     focusedBorderColor: Color = SparkTheme.colors.onSurface,
@@ -69,6 +70,7 @@ internal fun sparkOutlinedTextFieldColors(
     textColor = textColor,
     disabledTextColor = disabledTextColor,
     containerColor = containerColor,
+    disabledContainerColor = disabledContainerColor,
     cursorColor = cursorColor,
     textSelectionColors = selectionColors,
     focusedIndicatorColor = focusedBorderColor,
@@ -103,6 +105,7 @@ internal data class DefaultSparkTextFieldColors(
     private val textColor: Color,
     private val disabledTextColor: Color,
     private val containerColor: Color,
+    private val disabledContainerColor: Color,
     private val cursorColor: Color,
     private val textSelectionColors: TextSelectionColors,
     private val focusedIndicatorColor: Color,
@@ -208,8 +211,8 @@ internal data class DefaultSparkTextFieldColors(
      * Represents the container color for this text field.
      */
     @Composable
-    internal fun containerColor(): State<Color> {
-        return rememberUpdatedState(containerColor)
+    internal fun containerColor(enabled: Boolean): State<Color> {
+        return rememberUpdatedState(if (enabled) containerColor else disabledContainerColor)
     }
 
     /**

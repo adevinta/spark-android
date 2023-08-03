@@ -305,7 +305,7 @@ private fun OutlinedBorderContainerBox(
     Box(
         Modifier
             .border(borderStroke.value, shape)
-            .background(colors.containerColor().value, shape),
+            .background(colors.containerColor(enabled).value, shape),
     )
 }
 
