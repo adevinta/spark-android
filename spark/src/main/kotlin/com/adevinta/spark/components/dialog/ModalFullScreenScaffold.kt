@@ -78,7 +78,7 @@ import com.adevinta.spark.tools.preview.DevicePreviews
  * @param illustration whether the modal display a close icon, and its corresponding action
  * @param mainButton the main actions for this modal (should be a [ButtonFilled])
  * @param supportButton the support or alternative actions for this modal (should any other button than [ButtonFilled])
- * @param reverseButtonOrder inverse the order of the buttons, so the mainButton button is shown at the top in portrait mode
+ * @param reverseButtonOrder inverse the order of the buttons, so the [mainButton] button is shown at the top in portrait mode
  * @param content the center custom Composable for modal content
  */
 @ExperimentalSparkApi
