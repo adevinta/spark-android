@@ -35,6 +35,7 @@ internal class SparkAndroidApplicationPlugin : Plugin<Project> {
             androidApplication {
                 defaultConfig {
                     targetSdk = spark().versions.targetSdk.toString().toInt()
+                    resourceConfigurations.addAll(listOf("en", "fr"))
                 }
                 buildTypes {
                     release {
