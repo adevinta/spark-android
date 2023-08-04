@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.dialog
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.AlertDialog
@@ -28,8 +29,6 @@ import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -151,47 +150,47 @@ internal fun AlertDialogPreview(
     PreviewTheme(
         theme,
     ) {
-        val openDialog = remember { mutableStateOf(true) }
-
-        if (openDialog.value) {
-            AlertDialog(
-                onDismissRequest = {
-                    // Dismiss the dialog when the user clicks outside the dialog or on the back
-                    // button. If you want to disable that functionality, simply use an empty
-                    // onDismissRequest.
-                    openDialog.value = false
-                },
-                icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
-                title = {
-                    Text(text = "Title")
-                },
-                text = {
-                    Text(
-                        "This area typically contains the supportive text " +
-                            "which presents the details regarding the Dialog's purpose.",
-                    )
-                },
-                confirmButton = {
-                    ButtonGhost(
-                        onClick = {
-                            openDialog.value = false
-                        },
-                        text = "Confirm",
-                        icon = SparkIcons.CopyFill,
-                        iconSide = IconSide.START,
-                    )
-                },
-                dismissButton = {
-                    ButtonGhost(
-                        onClick = {
-                            openDialog.value = false
-                        },
-                        text = "Dismiss",
-                        icon = SparkIcons.CopyFill,
-                        iconSide = IconSide.START,
-                    )
-                },
-            )
-        }
+        AlertDialog(
+            modifier = Modifier.fillMaxWidth(),
+            onDismissRequest = {
+                // Dismiss the dialog when the user clicks outside the dialog or on the back
+                // button. If you want to disable that functionality, simply use an empty
+                // onDismissRequest.
+            },
+            icon = { Icon(Icons.Filled.Favorite, contentDescription = null) },
+            title = {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = "Title",
+                )
+            },
+            text = {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    text = "This area typically contains the supportive text " +
+                        "which presents the details regarding the Dialog's purpose.",
+                )
+            },
+            confirmButton = {
+                ButtonGhost(
+                    onClick = {
+                    },
+                    text = "Confirm",
+                    icon = SparkIcons.CopyFill,
+                    iconSide = IconSide.START,
+                )
+            },
+            dismissButton = {
+                ButtonGhost(
+                    onClick = {
+                    },
+                    text = "Dismiss",
+                    icon = SparkIcons.CopyFill,
+                    iconSide = IconSide.START,
+                )
+            },
+        )
     }
 }
