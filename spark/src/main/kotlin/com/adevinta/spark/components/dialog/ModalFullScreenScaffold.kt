@@ -31,14 +31,15 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -97,7 +98,7 @@ public fun ModalFullScreenScaffold(
     val isPhoneLandscape = size.heightSizeClass == WindowHeightSizeClass.Compact
     val isPhonePortraitOrFoldable =
         (size.widthSizeClass == WindowWidthSizeClass.Compact || size.widthSizeClass == WindowWidthSizeClass.Medium) &&
-            size.heightSizeClass == WindowHeightSizeClass.Medium
+                size.heightSizeClass == WindowHeightSizeClass.Medium
 
     when {
         isPhonePortraitOrFoldable -> {
@@ -123,6 +124,7 @@ public fun ModalFullScreenScaffold(
                 content = content,
             )
         }
+
         else -> ModalScaffold(
             modifier = modifier,
             onClose = onClose,
@@ -134,7 +136,6 @@ public fun ModalFullScreenScaffold(
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun ModalScaffold(
     onClose: () -> Unit,
@@ -153,12 +154,12 @@ private fun ModalScaffold(
     ) {
         Surface(
             modifier = modifier,
-            tonalElevation = 6.dp,
+            shadowElevation = 6.dp,
             shape = SparkTheme.shapes.large,
         ) {
             Column(
                 modifier = Modifier
-                    .sizeIn(minWidth = MinWidth, maxWidth = MaxWidth)
+                    .widthIn(min = MinWidth, max = MaxWidth)
                     .padding(DialogPadding),
             ) {
                 snackbarHost()
@@ -173,7 +174,9 @@ private fun ModalScaffold(
                         contentScale = ContentScale.Crop,
                     )
                 }
-                content(PaddingValues())
+                Box(modifier = Modifier.weight(1f, fill = false)) {
+                    content(PaddingValues())
+                }
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -323,9 +326,13 @@ private fun PhoneLandscapeModalScaffold(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween,
             ) {
-                content(innerPadding)
+                Box(modifier = Modifier.weight(1f, fill = false)) {
+                    content(innerPadding)
+                }
                 Row(
-                    modifier = Modifier.padding(bottom = 16.dp),
+                    modifier = Modifier
+                        .padding(bottom = 16.dp, top = 8.dp)
+                        .fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End),
                 ) {
                     val buttonModifier = Modifier.weight(1f)
@@ -367,12 +374,30 @@ private fun ModalPreview() {
             },
         ) { innerPadding ->
             Text(
-                modifier = Modifier.padding(innerPadding),
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .verticalScroll(rememberScrollState()),
                 text = "Modal content Modal content Modal content Modal content Modal content Modal content Modal " +
-                    "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                    "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                    "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                    "Modal content Modal content",
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
+                        "Modal content Modal content",
             )
         }
     }
