@@ -23,6 +23,7 @@ plugins {
     id("com.adevinta.spark.android-application")
     id("com.adevinta.spark.android-compose")
     id("kotlin-parcelize")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -60,4 +61,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appCompat)
     implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.androidx.datastore)
+    implementation(libs.kotlinx.serialization.json)
 }

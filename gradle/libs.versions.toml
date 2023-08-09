@@ -17,6 +17,7 @@ junit = "4.13.2"
 kotlin = "1.8.22"
 kotlinx-coroutines = "1.7.3"
 kotlinx-collections-immutable = "0.3.5"
+kotlinx-serialization-json = "1.5.1"
 ksp = "1.8.22-1.0.11"
 ktlint = "0.48.2"
 lint = "31.1.0"
@@ -27,6 +28,7 @@ slackLint = "1.2.0"
 spotless = "6.20.0"
 targetSdk = "33"
 testParameterInjector = "1.12"
+datastore = "1.0.0"
 
 [libraries]
 
@@ -71,6 +73,9 @@ androidx-savedstate = { module = "androidx.savedstate:savedstate-ktx", version.r
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coilCompose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 
+# https://developer.android.com/topic/libraries/architecture/datastore
+androidx-datastore = { module = "androidx.datastore:datastore" , version.ref = "datastore" }
+
 dokka-android-documentation-plugin = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
 
@@ -89,6 +94,7 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
 lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
@@ -112,3 +118,4 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
