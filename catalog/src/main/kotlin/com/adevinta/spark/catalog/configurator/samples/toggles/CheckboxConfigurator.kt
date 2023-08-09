@@ -29,19 +29,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
+import com.adevinta.spark.catalog.datastore.checkboxconfigurator.CheckboxConfiguratorProperties
+import com.adevinta.spark.catalog.datastore.checkboxconfigurator.CheckboxConfiguratorPropertiesHandler
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -54,6 +60,7 @@ import com.adevinta.spark.components.toggles.CheckboxLabelled
 import com.adevinta.spark.components.toggles.ContentSide
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.components.toggles.ToggleIntent
+import kotlinx.coroutines.launch
 
 public val CheckboxConfigurator: Configurator = Configurator(
     name = "Checkbox",
@@ -69,21 +76,38 @@ public val CheckboxConfigurator: Configurator = Configurator(
 @Composable
 private fun CheckboxSample() {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val propertiesHandler = remember { CheckboxConfiguratorPropertiesHandler(context) }
+    val properties by propertiesHandler
+        .properties
+        .collectAsState(initial = CheckboxConfiguratorProperties.DEFAULT)
+
+    fun updateProperties(block: (CheckboxConfiguratorProperties) -> CheckboxConfiguratorProperties) {
+        lifecycleOwner.lifecycleScope.launch {
+            propertiesHandler.updateProperties(block(properties))
+        }
+    }
+
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.verticalScroll(scrollState),
     ) {
-        var isEnabled by remember { mutableStateOf(true) }
-        var contentSide by remember { mutableStateOf(ContentSide.End) }
         var label: String? by remember { mutableStateOf(null) }
-        var state by remember { mutableStateOf(ToggleableState.On) }
-        var intent by remember { mutableStateOf(ToggleIntent.Main) }
+        val intent: ToggleIntent = remember(key1 = properties.intent, calculation = properties::intent)
+        val isEnabled: Boolean = remember(key1 = properties.isEnabled, calculation = properties::isEnabled)
+        val contentSide: ContentSide = remember(key1 = properties.contentSide, calculation = properties::contentSide)
+        val state: ToggleableState = remember(key1 = properties.state, calculation = properties::state)
         val onClick = {
-            state = when (state) {
-                ToggleableState.On -> ToggleableState.Off
-                ToggleableState.Off -> ToggleableState.Indeterminate
-                ToggleableState.Indeterminate -> ToggleableState.On
+            updateProperties {
+                it.copy(
+                    state = when (state) {
+                        ToggleableState.On -> ToggleableState.Off
+                        ToggleableState.Off -> ToggleableState.Indeterminate
+                        ToggleableState.Indeterminate -> ToggleableState.On
+                    }
+                )
             }
         }
         ConfigedCheckbox(
@@ -97,7 +121,7 @@ private fun CheckboxSample() {
         SwitchLabelled(
             checked = isEnabled,
             onCheckedChange = {
-                isEnabled = it
+                updateProperties { properties -> properties.copy(isEnabled = it) }
                 focusManager.clearFocus()
             },
         ) {
@@ -118,7 +142,7 @@ private fun CheckboxSample() {
                 options = contentSidesLabel,
                 selectedOption = state.name,
                 onOptionSelect = {
-                    state = ToggleableState.valueOf(it)
+                    updateProperties { properties -> properties.copy(state = ToggleableState.valueOf(it)) }
                     focusManager.clearFocus()
                 },
                 modifier = Modifier
@@ -138,11 +162,11 @@ private fun CheckboxSample() {
             onExpandedChange = { expanded = !expanded },
             onDismissRequest = { expanded = false },
             dropdownContent = {
-                intents.forEach {
+                intents.forEach { intent ->
                     DropdownMenuItem(
-                        text = { Text(it.name) },
+                        text = { Text(intent.name) },
                         onClick = {
-                            intent = it
+                            updateProperties { properties -> properties.copy(intent = intent) }
                             expanded = false
                         },
                     )
@@ -161,7 +185,9 @@ private fun CheckboxSample() {
                 options = contentSidesLabel,
                 selectedOption = contentSide.name,
                 onOptionSelect = {
-                    contentSide = ContentSide.valueOf(it)
+                    updateProperties { properties ->
+                        properties.copy(contentSide = ContentSide.valueOf(it))
+                    }
                     focusManager.clearFocus()
                 },
                 modifier = Modifier
