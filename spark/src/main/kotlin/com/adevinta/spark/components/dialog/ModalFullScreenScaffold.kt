@@ -42,6 +42,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -53,7 +54,7 @@ import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.buttons.ButtonFilled
-import com.adevinta.spark.components.buttons.ButtonGhost
+import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.image.Illustration
@@ -64,6 +65,7 @@ import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.Layout
 import com.adevinta.spark.tokens.bodyWidth
+import com.adevinta.spark.tokens.dim2
 import com.adevinta.spark.tools.preview.DevicePreviews
 
 /**
@@ -92,6 +94,7 @@ public fun ModalFullScreenScaffold(
     mainButton: @Composable (Modifier) -> Unit = {},
     supportButton: @Composable (Modifier) -> Unit = {},
     reverseButtonOrder: Boolean = false,
+    illustrationContentScale: ContentScale = ContentScale.Fit,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val size = Layout.windowSize
@@ -110,6 +113,7 @@ public fun ModalFullScreenScaffold(
                 mainButton = mainButton,
                 supportButton = supportButton,
                 reverseButtonOrder = reverseButtonOrder,
+                illustrationContentScale = illustrationContentScale,
                 content = content,
             )
         }
@@ -121,6 +125,7 @@ public fun ModalFullScreenScaffold(
                 illustration = illustration,
                 mainButton = mainButton,
                 supportButton = supportButton,
+                illustrationContentScale = illustrationContentScale,
                 content = content,
             )
         }
@@ -131,6 +136,7 @@ public fun ModalFullScreenScaffold(
             illustration = illustration,
             mainButton = mainButton,
             supportButton = supportButton,
+            illustrationContentScale = illustrationContentScale,
             content = content,
         )
     }
@@ -144,6 +150,7 @@ private fun ModalScaffold(
     @DrawableRes illustration: Int? = null,
     mainButton: @Composable (Modifier) -> Unit = {},
     supportButton: @Composable (Modifier) -> Unit = {},
+    illustrationContentScale: ContentScale = ContentScale.Fit,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Dialog(
@@ -153,7 +160,7 @@ private fun ModalScaffold(
         ),
     ) {
         Surface(
-            modifier = modifier,
+            modifier = modifier.padding(DialogWindowPadding),
             shadowElevation = 6.dp,
             shape = SparkTheme.shapes.large,
         ) {
@@ -168,10 +175,11 @@ private fun ModalScaffold(
                         drawableRes = it,
                         contentDescription = null,
                         modifier = Modifier
-                            .fillMaxWidth(.3f)
+                            .fillMaxHeight(.4f)
+                            .fillMaxWidth(.8f)
                             .align(Alignment.CenterHorizontally)
                             .padding(bottom = 24.dp),
-                        contentScale = ContentScale.Crop,
+                        contentScale = illustrationContentScale,
                     )
                 }
                 Box(modifier = Modifier.weight(1f, fill = false)) {
@@ -201,6 +209,7 @@ private fun PhonePortraitModalScaffold(
     mainButton: @Composable (Modifier) -> Unit = {},
     supportButton: @Composable (Modifier) -> Unit = {},
     reverseButtonOrder: Boolean = false,
+    illustrationContentScale: ContentScale = ContentScale.Fit,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -212,6 +221,7 @@ private fun PhonePortraitModalScaffold(
                     IconButton(onClick = onClose) {
                         Icon(
                             sparkIcon = SparkIcons.Close,
+                            tint = SparkTheme.colors.onSurface.dim2,
                             contentDescription = stringResource(id = R.string.spark_a11y_modal_fullscreen_close),
                         )
                     }
@@ -220,30 +230,31 @@ private fun PhonePortraitModalScaffold(
             )
         },
         bottomBar = {
-            if (Layout.windowSize.widthSizeClass == WindowWidthSizeClass.Compact) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = Layout.bodyMargin)
-                        .padding(bottom = 16.dp),
-
-                    verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Bottom),
-                ) {
-                    val buttonModifier = Modifier.fillMaxWidth()
-                    if (reverseButtonOrder) mainButton(buttonModifier)
-                    supportButton(buttonModifier)
-                    if (!reverseButtonOrder) mainButton(buttonModifier)
-                }
-            } else {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = Layout.bodyMargin)
-                        .padding(bottom = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
-                ) {
-                    supportButton(Modifier)
-                    mainButton(Modifier)
+            Surface {
+                if (Layout.windowSize.widthSizeClass == WindowWidthSizeClass.Compact) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = Layout.bodyMargin)
+                            .padding(bottom = 16.dp, top = 8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Bottom),
+                    ) {
+                        val buttonModifier = Modifier.fillMaxWidth()
+                        if (reverseButtonOrder) mainButton(buttonModifier)
+                        supportButton(buttonModifier)
+                        if (!reverseButtonOrder) mainButton(buttonModifier)
+                    }
+                } else {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = Layout.bodyMargin)
+                            .padding(bottom = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
+                    ) {
+                        supportButton(Modifier)
+                        mainButton(Modifier)
+                    }
                 }
             }
         },
@@ -258,13 +269,21 @@ private fun PhonePortraitModalScaffold(
                     drawableRes = it,
                     contentDescription = null,
                     modifier = Modifier
-                        .fillMaxWidth(.5f)
+                        .fillMaxHeight(.4f)
+                        .fillMaxWidth(.8f)
                         .align(Alignment.CenterHorizontally)
                         .padding(top = innerPadding.calculateTopPadding()),
-                    contentScale = ContentScale.Crop,
+                    contentScale = illustrationContentScale,
                 )
             }
-            content(innerPadding)
+            content(
+                PaddingValues(
+                    start = innerPadding.calculateLeftPadding(LocalLayoutDirection.current),
+                    end = innerPadding.calculateRightPadding(LocalLayoutDirection.current),
+                    top = 24.dp,
+                    bottom = innerPadding.calculateBottomPadding(),
+                ),
+            )
         }
     }
 }
@@ -278,6 +297,7 @@ private fun PhoneLandscapeModalScaffold(
     @DrawableRes illustration: Int? = null,
     mainButton: @Composable (Modifier) -> Unit = {},
     supportButton: @Composable (Modifier) -> Unit = {},
+    illustrationContentScale: ContentScale = ContentScale.Fit,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Scaffold(
@@ -289,7 +309,8 @@ private fun PhoneLandscapeModalScaffold(
                     IconButton(onClick = onClose) {
                         Icon(
                             sparkIcon = SparkIcons.Close,
-                            contentDescription = null, // FIXME-scott.rayapoulle.ext (13-36-2023): Add description
+                            tint = SparkTheme.colors.onSurface.dim2,
+                            contentDescription = stringResource(id = R.string.spark_a11y_modal_fullscreen_close),
                         )
                     }
                 },
@@ -301,21 +322,20 @@ private fun PhoneLandscapeModalScaffold(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = Layout.bodyMargin),
+            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(Layout.gutter),
         ) {
             illustration?.let {
                 Box(
                     modifier = Modifier
-                        .weight(.5f)
-                        .fillMaxHeight()
-                        .padding(top = innerPadding.calculateTopPadding()),
+                        .weight(.8f),
                     contentAlignment = Alignment.Center,
                 ) {
                     Illustration(
                         drawableRes = it,
                         contentDescription = null,
-                        modifier = Modifier.fillMaxSize(.7f),
-                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.fillMaxWidth(.8f),
+                        contentScale = illustrationContentScale,
                     )
                 }
             }
@@ -323,7 +343,6 @@ private fun PhoneLandscapeModalScaffold(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight(),
-                horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceBetween,
             ) {
                 Box(modifier = Modifier.weight(1f, fill = false)) {
@@ -348,6 +367,7 @@ private val MinWidth = 280.dp
 private val MaxWidth = 560.dp
 
 private val DialogPadding = PaddingValues(all = 24.dp)
+private val DialogWindowPadding = PaddingValues(all = 32.dp)
 
 @DevicePreviews
 @Preview(
@@ -370,34 +390,31 @@ private fun ModalPreview() {
                 ButtonFilled(modifier = it, onClick = { /*TODO*/ }, text = "Main Action")
             },
             supportButton = {
-                ButtonGhost(modifier = it, onClick = { /*TODO*/ }, text = "Alternative Action")
+                ButtonOutlined(modifier = it, onClick = { /*TODO*/ }, text = "Alternative Action")
             },
+            reverseButtonOrder = true,
         ) { innerPadding ->
             Text(
                 modifier = Modifier
                     .padding(innerPadding)
                     .verticalScroll(rememberScrollState()),
-                text = "Modal content Modal content Modal content Modal content Modal content Modal content Modal " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "content Modal content Modal content Modal content Modal content Modal content Modal content " +
-                        "Modal content Modal content",
+                text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
+                        "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
+                        "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
+                        "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
+                        "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
+                        "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
+                        "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
+                        "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
+                        " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
+                        "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
+                        "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
+                        "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
+                        "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
+                        "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
+                        "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
+                        "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
+                        "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
             )
         }
     }
