@@ -106,7 +106,7 @@ private fun CheckboxSample() {
                         ToggleableState.On -> ToggleableState.Off
                         ToggleableState.Off -> ToggleableState.Indeterminate
                         ToggleableState.Indeterminate -> ToggleableState.On
-                    }
+                    },
                 )
             }
         }
