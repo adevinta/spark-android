@@ -29,18 +29,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
+import com.adevinta.spark.catalog.datastore.switchconfigurator.SwitchConfiguratorProperties
+import com.adevinta.spark.catalog.datastore.switchconfigurator.SwitchConfiguratorPropertiesHandler
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -52,6 +58,7 @@ import com.adevinta.spark.components.toggles.ContentSide
 import com.adevinta.spark.components.toggles.Switch
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.components.toggles.ToggleIntent
+import kotlinx.coroutines.launch
 
 public val SwitchConfigurator: Configurator = Configurator(
     name = "Switch",
@@ -67,21 +74,37 @@ public val SwitchConfigurator: Configurator = Configurator(
 @Composable
 private fun SwitchSample() {
     val scrollState = rememberScrollState()
+    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+    val propertiesHandler = remember { SwitchConfiguratorPropertiesHandler(context) }
+    val properties by propertiesHandler
+        .properties
+        .collectAsState(initial = SwitchConfiguratorProperties.DEFAULT)
+
+    fun updateProperties(block: (SwitchConfiguratorProperties) -> SwitchConfiguratorProperties) {
+        lifecycleOwner.lifecycleScope.launch {
+            propertiesHandler.updateProperties(block(properties))
+        }
+    }
+
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.verticalScroll(scrollState),
     ) {
-        var isEnabled by remember { mutableStateOf(true) }
-        var contentSide by remember { mutableStateOf(ContentSide.End) }
         var label: String? by remember { mutableStateOf(null) }
-        var state by remember { mutableStateOf(false) }
-        var intent by remember { mutableStateOf(ToggleIntent.Main) }
-        val onClick = { checked: Boolean -> state = checked }
+        val isEnabled: Boolean = remember(key1 = properties.isEnabled, calculation = properties::isEnabled)
+        val isSwitched: Boolean = remember(key1 = properties.isSwitched, calculation = properties::isSwitched)
+        val contentSide: ContentSide = remember(key1 = properties.contentSide, calculation = properties::contentSide)
+        val intent: ToggleIntent = remember(key1 = properties.intent, calculation = properties::intent)
+
+        val onClick = { checked: Boolean ->
+            updateProperties { properties -> properties.copy(isSwitched = checked) }
+        }
         ConfigedSwitch(
             label = label,
             onClick = onClick,
-            checked = state,
+            checked = isSwitched,
             isEnabled = isEnabled,
             intent = intent,
             contentSide = contentSide,
@@ -89,7 +112,7 @@ private fun SwitchSample() {
         SwitchLabelled(
             checked = isEnabled,
             onCheckedChange = {
-                isEnabled = it
+                updateProperties { properties -> properties.copy(isEnabled = it) }
                 focusManager.clearFocus()
             },
         ) {
@@ -114,7 +137,7 @@ private fun SwitchSample() {
                     DropdownMenuItem(
                         text = { Text(it.name) },
                         onClick = {
-                            intent = it
+                            updateProperties { properties -> properties.copy(intent = it) }
                             expanded = false
                         },
                     )
@@ -133,7 +156,7 @@ private fun SwitchSample() {
                 options = contentSidesLabel,
                 selectedOption = contentSide.name,
                 onOptionSelect = {
-                    contentSide = ContentSide.valueOf(it)
+                    updateProperties { properties -> properties.copy(contentSide = ContentSide.valueOf(it)) }
                     focusManager.clearFocus()
                 },
                 modifier = Modifier
