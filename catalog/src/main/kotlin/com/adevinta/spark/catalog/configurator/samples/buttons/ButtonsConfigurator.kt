@@ -31,16 +31,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.lifecycleScope
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.datastore.buttonconfigurator.ButtonsConfiguratorProperties
+import com.adevinta.spark.catalog.datastore.buttonconfigurator.ButtonsConfiguratorPropertiesHandler
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -62,6 +69,7 @@ import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import kotlinx.coroutines.launch
 
 public val ButtonsConfigurator: Configurator = Configurator(
     name = "Button",
@@ -76,31 +84,51 @@ public val ButtonsConfigurator: Configurator = Configurator(
 )
 @Composable
 private fun ButtonSample() {
+    val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
     val scrollState = rememberScrollState()
+    val propertiesHandler = remember { ButtonsConfiguratorPropertiesHandler(context = context) }
+    val properties by propertiesHandler
+        .properties
+        .collectAsState(initial = ButtonsConfiguratorProperties.DEFAULT)
+
+    fun updateProperties(block: (ButtonsConfiguratorProperties) -> ButtonsConfiguratorProperties) {
+        lifecycleOwner.lifecycleScope.launch {
+            propertiesHandler.updateProperties(block(properties))
+        }
+    }
+
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.verticalScroll(scrollState),
     ) {
-        var icon: SparkIcon? by remember { mutableStateOf(null) }
-        var isLoading by remember { mutableStateOf(false) }
-        var isEnabled by remember { mutableStateOf(true) }
-        var iconSide by remember { mutableStateOf(IconSide.START) }
-        var style by remember { mutableStateOf(ButtonStyle.Filled) }
-        var size by remember { mutableStateOf(ButtonSize.Medium) }
-        var intent by remember { mutableStateOf(ButtonIntent.Main) }
-        var buttonText by remember { mutableStateOf("Filled Button") }
+        var buttonText: String by remember { mutableStateOf(value = "Filled button") }
+        val isLoading: Boolean = remember(key1 = properties.isLoading, calculation = properties::isLoading)
+        val isEnabled: Boolean = remember(key1 = properties.isEnabled, calculation = properties::isEnabled)
+        val iconSide: IconSide = remember(key1 = properties.iconSide, calculation = properties::iconSide)
+        val buttonSize: ButtonSize = remember(key1 = properties.size, calculation = properties::size)
+        val buttonStyle: ButtonStyle = remember(key1 = properties.style, calculation = properties::style)
+        val buttonIntent: ButtonIntent = remember(key1 = properties.intent, calculation = properties::intent)
+        val icon: SparkIcon? = remember(key1 = properties.iconId) {
+            if (properties.iconId == ResourcesCompat.ID_NULL) null else SparkIcon.DrawableRes(properties.iconId)
+        }
+        val isFilledIconToggleChecked = remember(key1 = icon) {
+            icon != null
+        }
 
         ConfigedButton(
             modifier = Modifier.fillMaxWidth(),
-            style = style,
+            style = buttonStyle,
             buttonText = buttonText,
-            onClick = { isLoading = !isLoading },
+            onClick = {
+                updateProperties { it.copy(isLoading = !it.isLoading) }
+            },
             isLoading = isLoading,
-            size = size,
-            intent = intent,
+            size = buttonSize,
+            intent = buttonIntent,
             isEnabled = isEnabled,
-            icon = icon,
             iconSide = iconSide,
+            icon = icon,
         )
 
         Row(
@@ -109,13 +137,17 @@ private fun ButtonSample() {
         ) {
             Text(
                 text = "With Icon",
-                modifier = Modifier.weight(1f).padding(bottom = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
             FilledIconToggleButton(
-                checked = icon != null,
-                onCheckedChange = {
-                    icon = if (it) SparkIcons.LikeFill else null
+                checked = isFilledIconToggleChecked,
+                onCheckedChange = { isChecked ->
+                    updateProperties {
+                        it.copy(iconId = if (isChecked) SparkIcons.LikeFill.drawableId else ResourcesCompat.ID_NULL)
+                    }
                 },
             ) {
                 Icon(
@@ -126,7 +158,9 @@ private fun ButtonSample() {
         }
         SwitchLabelled(
             checked = isLoading,
-            onCheckedChange = { isLoading = it },
+            onCheckedChange = { isChecked ->
+                updateProperties { it.copy(isLoading = isChecked) }
+            },
         ) {
             Text(
                 text = "Loading",
@@ -135,7 +169,9 @@ private fun ButtonSample() {
         }
         SwitchLabelled(
             checked = isEnabled,
-            onCheckedChange = { isEnabled = it },
+            onCheckedChange = { isChecked ->
+                updateProperties { it.copy(isEnabled = isChecked) }
+            },
         ) {
             Text(
                 text = "Enabled",
@@ -150,11 +186,13 @@ private fun ButtonSample() {
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
             val iconsSides = IconSide.values()
-            val iconsSidesLabel = iconsSides.map { it.name }
+            val iconsSidesLabel = iconsSides.map(IconSide::name)
             SegmentedButton(
                 options = iconsSidesLabel,
                 selectedOption = iconSide.name,
-                onOptionSelect = { iconSide = IconSide.valueOf(it) },
+                onOptionSelect = { iconSide ->
+                    updateProperties { it.copy(iconSide = IconSide.valueOf(iconSide)) }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -170,8 +208,10 @@ private fun ButtonSample() {
             val buttonStylesLabel = buttonStyles.map { it.name }
             SegmentedButton(
                 options = buttonStylesLabel,
-                selectedOption = style.name,
-                onOptionSelect = { style = ButtonStyle.valueOf(it) },
+                selectedOption = buttonStyle.name,
+                onOptionSelect = { buttonStyle ->
+                    updateProperties { it.copy(style = ButtonStyle.valueOf(buttonStyle)) }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -182,7 +222,7 @@ private fun ButtonSample() {
         var expanded by remember { mutableStateOf(false) }
         SelectTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = intent.name,
+            value = buttonIntent.name,
             onValueChange = {},
             readOnly = true,
             label = "Intent",
@@ -194,11 +234,11 @@ private fun ButtonSample() {
                 expanded = false
             },
             dropdownContent = {
-                intents.forEach {
+                intents.forEach { intent ->
                     DropdownMenuItem(
-                        text = { Text(it.name) },
+                        text = { Text(intent.name) },
                         onClick = {
-                            intent = it
+                            updateProperties { it.copy(intent = intent) }
                             expanded = false
                         },
                     )
@@ -216,8 +256,11 @@ private fun ButtonSample() {
             val sizesLabel = sizes.map { it.name }
             SegmentedButton(
                 options = sizesLabel,
-                selectedOption = size.name,
-                onOptionSelect = { size = ButtonSize.valueOf(it) },
+                selectedOption = buttonSize.name,
+                onOptionSelect = { buttonSize ->
+
+                    updateProperties { it.copy(size = ButtonSize.valueOf(buttonSize)) }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -225,11 +268,11 @@ private fun ButtonSample() {
         }
 
         TextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp),
             value = buttonText,
-            onValueChange = {
-                buttonText = it
-            },
+            onValueChange = { text -> buttonText = text },
             label = "Button text",
             placeholder = "Vérifier les Disponibilité",
         )
@@ -312,7 +355,7 @@ private fun ConfigedButton(
     }
 }
 
-private enum class ButtonStyle {
+internal enum class ButtonStyle {
     Filled,
     Outlined,
     Tinted,
