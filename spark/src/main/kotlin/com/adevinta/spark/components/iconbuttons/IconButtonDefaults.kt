@@ -104,7 +104,7 @@ internal object IconButtonDefaults {
     fun ghostIconButtonColors(
         intent: IntentColor,
         containerColor: Color = Color.Transparent,
-        contentColor: Color = intent.onContainerColor,
+        contentColor: Color = intent.color,
         disabledContainerColor: Color = Color.Transparent,
         disabledContentColor: Color = contentColor.disabled,
     ): IconButtonColors =
