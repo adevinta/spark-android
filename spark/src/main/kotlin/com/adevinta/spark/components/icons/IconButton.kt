@@ -69,8 +69,8 @@ import androidx.compose.material3.OutlinedIconButton as MaterialOutlinedIconButt
 @Deprecated(
     "Use styled icon button like from iconbuttons package",
     replaceWith = ReplaceWith(
-        "IconButtonFilled(icon = icon, onClick = onClick)",
-        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonFilled"),
+        "IconButtonGhost(icon = icon, onClick = onClick, contentDescription = contentDescription)",
+        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonGhost"),
     ),
 )
 public fun IconButton(
