@@ -29,20 +29,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.OutlinedIconButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.ExperimentalSparkApi
-import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.icons.WheelOutline
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.FilledIconButton as MaterialFilledIconButton
 import androidx.compose.material3.FilledTonalIconButton as MaterialFilledTonalIconButton
 import androidx.compose.material3.IconButton as MaterialIconButton
@@ -74,6 +66,13 @@ import androidx.compose.material3.OutlinedIconButton as MaterialOutlinedIconButt
  * @param content the content of this icon button, typically an [Icon]
  */
 @Composable
+@Deprecated(
+    "Use styled icon button like from iconbuttons package",
+    replaceWith = ReplaceWith(
+        "IconButtonFilled(icon = icon, onClick = onClick)",
+        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonFilled"),
+    ),
+)
 public fun IconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -118,6 +117,13 @@ public fun IconButton(
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
+@Deprecated(
+    "Use styled icon button like from iconbuttons package",
+    replaceWith = ReplaceWith(
+        "IconButtonFilled(icon = icon, onClick = onClick)",
+        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonFilled"),
+    ),
+)
 @ExperimentalSparkApi
 @Composable
 public fun FilledIconButton(
@@ -171,6 +177,13 @@ public fun FilledIconButton(
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
+@Deprecated(
+    "Use styled icon button from iconbuttons package",
+    replaceWith = ReplaceWith(
+        "IconButtonTinted(icon = icon, onClick = onClick)",
+        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonTinted"),
+    ),
+)
 @ExperimentalSparkApi
 @Composable
 public fun FilledTonalIconButton(
@@ -230,6 +243,13 @@ public fun FilledTonalIconButton(
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
+@Deprecated(
+    "Use styled icon button from iconbuttons package",
+    replaceWith = ReplaceWith(
+        "IconButtonOutlined(icon = icon, onClick = onClick)",
+        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonOutlined"),
+    ),
+)
 @ExperimentalSparkApi
 @Composable
 public fun OutlinedIconButton(
@@ -252,38 +272,4 @@ public fun OutlinedIconButton(
         interactionSource = interactionSource,
         content = content,
     )
-}
-
-@Preview(
-    group = "Icons",
-    name = "IconButtons",
-)
-@Composable
-internal fun IconButtonPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        val icon = SparkIcons.WheelOutline
-        val contentDescription = "Localized description"
-
-        Text("IconButton")
-        IconButton(onClick = { /* doSomething() */ }) {
-            Icon(icon, contentDescription = contentDescription)
-        }
-
-        Text("FilledIconButton")
-        FilledIconButton(onClick = { /* doSomething() */ }) {
-            Icon(icon, contentDescription = contentDescription)
-        }
-
-        Text("FilledTonalIconButton")
-        FilledTonalIconButton(onClick = { /* doSomething() */ }) {
-            Icon(icon, contentDescription = contentDescription)
-        }
-
-        Text("OutlinedIconButton")
-        OutlinedIconButton(onClick = { /* doSomething() */ }) {
-            Icon(icon, contentDescription = contentDescription)
-        }
-    }
 }
