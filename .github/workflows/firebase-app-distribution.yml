@@ -73,6 +73,12 @@ jobs:
       - name: '👷 Build'
         run: ./gradlew :catalog:assembleRelease
 
+      - name: '📦 Archive APKs'
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: '**/build/outputs/apk/**/*.apk'
+
       - name: '🔥 Publish'
         run: >-
           firebase appdistribution:distribute
