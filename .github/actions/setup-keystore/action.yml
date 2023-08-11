@@ -1,0 +1,19 @@
+name: 'Setup Keystore'
+description: 'Setup Keystore from base64 input'
+inputs:
+  base64:
+    description: 'The base64 encoded keystore'
+    required: true
+  output:
+    description: 'The keystore output file'
+    default: 'keystore.jks'
+    required: true
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        echo "$KEYSTORE_INPUT" | base64 --decode > "$KEYSTORE_OUTPUT"
+      with:
+        KEYSTORE_INPUT: ${{ inputs.base64 }}
+        KEYSTORE_OUTPUT: ${{ inputs.output }}
