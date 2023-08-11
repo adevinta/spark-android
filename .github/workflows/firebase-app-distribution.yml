@@ -75,7 +75,11 @@ jobs:
 
       - name: '🔥 Publish'
         id: publish
-        run: firebase
+        run: >-
+          firebase appdistribution:distribute
+          catalog/build/outputs/apk/release/catalog-release.apk
+          --app "1:559109812471:android:7aaf1a8ba28904f5f923f2"
+          --groups "all"
 
       - name: '♻️ Cleanup'
         if: ${{ success() || failure() }}
