@@ -1,3 +1,5 @@
+import java.util.Properties
+
 /*
  * Copyright (c) 2023 Adevinta
  *
@@ -35,9 +37,21 @@ android {
             "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
         )
     }
+    signingConfigs {
+        create("release") {
+            val keystore = rootProject.file("keystore.properties")
+            if (!keystore.exists()) return@create initWith(getByName("debug"))
+            Properties().apply { load(keystore.inputStream()) }.run {
+                keyAlias = getProperty("keyAlias")
+                keyPassword = getProperty("keyPassword")
+                storeFile = file(getProperty("storeFile"))
+                storePassword = getProperty("storePassword")
+            }
+        }
+    }
     buildTypes {
         getByName("release") {
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 }
