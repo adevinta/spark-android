@@ -43,10 +43,10 @@ android {
             "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
         )
     }
+    val keystore = rootProject.file("keystore.properties")
     signingConfigs {
         create("release") {
-            val keystore = rootProject.file("keystore.properties")
-            if (!keystore.exists()) return@create initWith(getByName("debug"))
+            if (!keystore.exists()) return@create
             Properties().apply { load(keystore.inputStream()) }.run {
                 keyAlias = getProperty("keyAlias")
                 keyPassword = getProperty("keyPassword")
@@ -57,7 +57,7 @@ android {
     }
     buildTypes {
         getByName("release") {
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = signingConfigs.getByName(if (keystore.exists()) "release" else "debug")
         }
     }
 }
