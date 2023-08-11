@@ -29,6 +29,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.PlainTooltipBox
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -41,6 +43,7 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
@@ -69,6 +72,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * for this icon button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
 internal fun SparkIconButton(
@@ -90,23 +94,31 @@ internal fun SparkIconButton(
             size = size.iconSize,
         )
     }
-    Surface(
-        onClick = onClick,
-        modifier = modifier
-            .minimumTouchTargetSize()
-            .sparkUsageOverlay(),
-        enabled = enabled,
-        shape = shape.shape,
-        color = colors.containerColor(enabled = enabled).value,
-        contentColor = colors.contentColor(enabled).value,
-        border = border,
-        interactionSource = interactionSource,
+    PlainTooltipBox(
+        tooltip = { Text(contentDescription.orEmpty()) },
+        shape = IconButtonDefaults.TooltipContainerShape,
+        containerColor = IconButtonDefaults.TooltipContainerColor,
+        contentColor = IconButtonDefaults.TooltipContentColor,
     ) {
-        Box(
-            modifier = Modifier.size(size.height),
-            contentAlignment = Alignment.Center,
+        Surface(
+            onClick = onClick,
+            modifier = modifier
+                .minimumTouchTargetSize()
+                .tooltipAnchor()
+                .sparkUsageOverlay(),
+            enabled = enabled,
+            shape = shape.shape,
+            color = colors.containerColor(enabled = enabled).value,
+            contentColor = colors.contentColor(enabled).value,
+            border = border,
+            interactionSource = interactionSource,
         ) {
-            content()
+            Box(
+                modifier = Modifier.size(size.height),
+                contentAlignment = Alignment.Center,
+            ) {
+                content()
+            }
         }
     }
 }

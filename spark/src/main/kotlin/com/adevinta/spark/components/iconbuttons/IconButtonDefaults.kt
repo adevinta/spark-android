@@ -23,11 +23,13 @@ package com.adevinta.spark.components.iconbuttons
 
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.OutlinedIconButton
+import androidx.compose.material3.PlainTooltipBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
@@ -54,6 +56,22 @@ internal object IconButtonDefaults {
      * The default shape of IconButton
      */
     internal val DefaultShape = IconButtonShape.Large
+
+    /**
+     * The [Color] for a PlainTooltipBox's container.
+     */
+    internal val TooltipContainerColor @Composable get() = SparkTheme.colors.surfaceInverse
+
+    /**
+     * The [Color] for the content within the PlainTooltipBox.
+     */
+    internal val TooltipContentColor @Composable get() = SparkTheme.colors.onSurfaceInverse
+
+    /**
+     * The [Shape] for a [PlainTooltipBox]'s container.
+     */
+    val TooltipContainerShape: Shape
+        @Composable get() = SparkTheme.shapes.large
 
     @Composable
     fun filledIconButtonColors(
