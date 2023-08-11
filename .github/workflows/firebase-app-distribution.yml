@@ -40,7 +40,18 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - uses: ./.github/actions/setup-gradle-properties
-      - uses: ./.github/actions/setup-keystore
+      - run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_FILE"
+          echo storeFile="$KEYSTORE_FILE" >> keystore.properties
+          echo storePassword="$KEYSTORE_PASSWORD" >> keystore.properties
+          echo keyAlias="$KEYSTORE_KEY_ALIAS" >> keystore.properties
+          echo keyPassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+        env:
+          KEYSTORE_FILE: ${{ github.workspace }}/keystore.jks
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_ALIAS_PASSWORD }}
       - uses: actions/setup-python@v4
         with:
           python-version: "3.11.4"
