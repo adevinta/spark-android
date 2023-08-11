@@ -1,7 +1,7 @@
 name: '🔥 Firebase App Distribution'
 
 on:
-  workflow:
+  workflow_dispatch:
   schedule:
     - cron: 0 0 * * *
   # To be removed after tests
