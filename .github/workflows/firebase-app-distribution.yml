@@ -76,3 +76,10 @@ jobs:
       - name: '🔥 Publish'
         id: publish
         run: firebase
+
+      - name: '♻️ Cleanup'
+        if: ${{ success() || failure() }}
+        allow-failure: true
+        run: |
+          rm keystore.jks
+          rm firebase-service-account.json
