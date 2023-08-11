@@ -72,11 +72,9 @@ jobs:
           gradle-home-cache-cleanup: true
 
       - name: '👷 Build'
-        id: build
         run: ./gradlew :catalog:assembleRelease
 
       - name: '🔥 Publish'
-        id: publish
         run: >-
           firebase appdistribution:distribute
           catalog/build/outputs/apk/release/catalog-release.apk
