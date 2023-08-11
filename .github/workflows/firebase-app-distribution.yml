@@ -55,7 +55,7 @@ jobs:
           KEYSTORE_FILE: ${{ github.workspace }}/keystore.jks
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE }}
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          KEYSTORE_KEY_ALIAS: spark
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_ALIAS_PASSWORD }}
       - uses: actions/setup-node@v3
         with:
