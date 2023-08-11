@@ -1,5 +1,3 @@
-import java.util.Properties
-
 /*
  * Copyright (c) 2023 Adevinta
  *
@@ -21,6 +19,8 @@ import java.util.Properties
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import java.util.Properties
+
 plugins {
     id("com.adevinta.spark.android-application")
     id("com.adevinta.spark.android-compose")
