@@ -30,6 +30,12 @@ plugins {
 android {
     namespace = "com.adevinta.spark.catalog"
     defaultConfig.applicationId = "com.adevinta.spark.catalog"
+    defaultConfig {
+        versionName = version.toString()
+        if (providers.environmentVariable("GITHUB_ACTION").isPresent) {
+            versionName += "-" + System.getenv("GITHUB_SHA").take(7)
+        }
+    }
 
     kotlinOptions {
         freeCompilerArgs += listOf(
