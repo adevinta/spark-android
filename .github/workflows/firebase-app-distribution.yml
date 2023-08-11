@@ -83,7 +83,7 @@ jobs:
 
       - name: '♻️ Cleanup'
         if: ${{ success() || failure() }}
-        allow-failure: true
+        continue-on-error: true
         run: |
           rm keystore.jks
           rm firebase-service-account.json
