@@ -13,27 +13,8 @@ env:
 
 jobs:
 
-  validation:
-    runs-on: ubuntu-latest
+  publish:
     if: github.repository == 'adevinta/spark-android'
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - uses: ./.github/actions/setup-gradle-properties
-      - uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4 # v1.1.0
-      - uses: actionsdesk/lfs-warning@e5f9a4c21f4bee104db7c0f23954dde59e5df909 # v3.2
-      - uses: gradle/gradle-build-action@a4cf152f482c7ca97ef56ead29bf08bcd953284c # v2.7.0
-        with:
-          gradle-home-cache-cleanup: true
-      - run: ./gradlew dependencyGuard --quiet
-      - run: ./gradlew spotlessCheck :build-logic:spotlessCheck
-
-  build-publish:
-    if: github.repository == 'adevinta/spark-android'
-    needs: validation
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -79,7 +60,7 @@ jobs:
           name: apk
           path: '**/build/outputs/apk/**/*.apk'
 
-      - name: '🔥 Publish'
+      - name: '🚀 Publish'
         run: >-
           firebase appdistribution:distribute
           catalog/build/outputs/apk/release/catalog-release.apk
