@@ -80,6 +80,7 @@ import com.adevinta.spark.catalog.themes.ThemeMode
 import com.adevinta.spark.catalog.themes.ThemePicker
 import com.adevinta.spark.catalog.themes.UserMode
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.KleinanzeigenTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
 import com.adevinta.spark.catalog.themes.themeprovider.polaris.PolarisTheme
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
@@ -99,6 +100,7 @@ internal fun CatalogApp(
         BrandMode.Polaris -> PolarisTheme
         BrandMode.Leboncoin -> LeboncoinTheme
         BrandMode.LeboncoinLegacy -> LeboncoinTheme
+        BrandMode.Kleinanzeigen -> KleinanzeigenTheme
     }
 
     val isLegacy = theme.brandMode == BrandMode.LeboncoinLegacy
