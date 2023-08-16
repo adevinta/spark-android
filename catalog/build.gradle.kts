@@ -33,7 +33,7 @@ android {
     defaultConfig {
         versionName = version.toString()
         if (providers.environmentVariable("GITHUB_ACTION").isPresent) {
-            versionName += "-" + System.getenv("GITHUB_SHA").take(7)
+            versionName = version.toString().replace("SNAPSHOT", System.getenv("GITHUB_SHA").take(7))
         }
     }
 
