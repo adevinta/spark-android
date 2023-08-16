@@ -100,4 +100,5 @@ jobs:
         continue-on-error: true
         run: |
           rm keystore.jks
+          rm keystore.properties
           rm firebase-service-account.json
