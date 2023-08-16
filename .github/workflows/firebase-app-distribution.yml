@@ -4,6 +4,12 @@ on:
   push:
     tags: ['*']
   workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch, tag, SHA, …'
+        required: true
+        default: 'main'
+        type: string
   schedule:
     - cron: 0 0 * * *
   # To be removed after tests
@@ -22,6 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          ref: ${{ inputs.ref || github.ref }}
           lfs: true
       - uses: actions/setup-java@v3
         with:
