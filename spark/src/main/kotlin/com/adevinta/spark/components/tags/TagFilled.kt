@@ -30,7 +30,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -44,7 +43,6 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param leadingIcon The spark icon shown at the start of the tag
  * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
  */
-@ExperimentalSparkApi
 @Composable
 public fun TagFilled(
     text: String,
@@ -63,11 +61,13 @@ public fun TagFilled(
 }
 
 /**
- * Filled tag can be used to identify your brand DNA inside a list.
+ * Filled tag represent main information
+ * @param text The styled item label
  * @param modifier The [Modifier] to be applied to the component
- * @param content The item label
+ * @param intent The [TagIntent] color to use
+ * @param leadingIcon The spark icon shown at the start of the tag
+ * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
  */
-@ExperimentalSparkApi
 @Composable
 public fun TagFilled(
     text: AnnotatedString,

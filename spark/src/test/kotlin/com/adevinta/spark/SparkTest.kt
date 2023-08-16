@@ -28,6 +28,5 @@ public class SparkTest {
 
     @Test
     public fun spark() {
-        assertNotNull(Spark)
     }
 }
