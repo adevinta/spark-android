@@ -62,12 +62,31 @@ jobs:
           name: apk
           path: '**/build/outputs/apk/**/*.apk'
 
+      - name: '📋 Prepare empty release note (default)'
+        run: touch release-notes.txt
+
+      - name: '📋 Prepare release note for workflow build'
+        if: github.event_name == 'workflow_dispatch'
+        run: git log -1 --format="%h ~ %s" > release-notes.txt
+
+      - name: '📋 Prepare release note for scheduled build'
+        if: github.event_name == 'schedule'
+        run: git log --topo-order --since="24 hours ago" --format="%h ~ %s" --no-merges > release-notes.txt
+
+      - name: '📋 Prepare release note for tagged build'
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        run: |
+          from="$(git for-each-ref --sort=-v:refname --count=2 --format='%(tag)' refs/tags | tail -n +2)"
+          to="$(git for-each-ref --sort=-v:refname --count=1 --format='%(tag)' refs/tags)"
+          git log --topo-order --format="%h ~ %s" "$from..$to" --no-merges > release-notes.txt
+
       - name: '🚀 Publish'
         run: >-
           firebase appdistribution:distribute
           catalog/build/outputs/apk/release/catalog-release.apk
           --app "1:559109812471:android:7aaf1a8ba28904f5f923f2"
           --groups "all"
+          --release-notes-file "release-notes.txt"
 
       - name: '♻️ Cleanup'
         if: ${{ success() || failure() }}
