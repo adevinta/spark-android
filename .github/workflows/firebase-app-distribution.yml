@@ -12,9 +12,6 @@ on:
         type: string
   schedule:
     - cron: 0 0 * * *
-  # To be removed after tests
-  pull_request:
-    branches: ["main"]
 
 env:
   GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase-service-account.json
