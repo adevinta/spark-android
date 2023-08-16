@@ -1,6 +1,8 @@
 name: '🔥 Firebase App Distribution'
 
 on:
+  push:
+    tags: ['*']
   workflow_dispatch:
   schedule:
     - cron: 0 0 * * *
