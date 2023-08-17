@@ -6,18 +6,20 @@
 
 ## [0.4.0]
 
+_2023-08-17_
+
 ### Spark
 * 🆕 Implement `Spark Tab` and `Tab Group` 
 * 💄 `Checkbox`, `Switch`, `RadioButton` now has intents support 
-* 💄 Disabled components now have use dim3
-* 💄 `Button Outline` border size is now 1dp instead of 2dp
-* 💄 `TextField` update TextField background color
+* 💄 Disabled components now have use `dim3`
+* 💄 `Button Outline` border size is now **1dp** instead of **2dp**
+* 💄 Update `TextField` background color
 * 💄 `TextField` leading content padding is adjusted
 * 💄 `TextField` addons content color is always `onSurface` even when unfocused
 * 💄 `ButtonContrast` in Surface intent is now readable
 * 💄 `ModalFullScreenScaffold` spaces and layout has been adjusted
 * 🗑️ Small size for `Button` has been removed
-* 🐛 Replace Modifier.autofill by Autofill Composable
+* 🐛 Replace `Modifier.autofill` by `Autofill` Composable
 
 
 ### Catalog App
@@ -25,7 +27,6 @@
 * 💄 The launcher icon now has a light and dark variant depending on the theme mode
 * 🐛 The app state is saved on configuration change
 * 🐛 Fix the link to component documentation
-* 
 
 ## [0.3.1]
 
@@ -97,7 +98,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.3.1...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.4.0...HEAD
+
+[0.4.0]: https://github.com/adevinta/spark-android/releases/tag/0.4.0
 
 [0.3.1]: https://github.com/adevinta/spark-android/releases/tag/0.3.1
 
