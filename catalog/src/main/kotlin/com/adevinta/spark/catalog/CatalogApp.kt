@@ -82,6 +82,8 @@ import com.adevinta.spark.catalog.themes.UserMode
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
+import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.tokens.dim5
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
@@ -181,24 +183,28 @@ internal fun CatalogApp(
                             state = pagerState,
                             flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
                         ) {
-                            when (homeScreenValues[it]) {
-                                CatalogHomeScreen.Examples -> ComponentsScreen(
-                                    components = components,
-                                    contentPadding = innerPadding,
-                                )
-
-                                CatalogHomeScreen.Showkase -> {
-                                    BodyContent(
+                            Surface(
+                                color = SparkTheme.colors.onSurface.dim5,
+                            ) {
+                                when (homeScreenValues[it]) {
+                                    CatalogHomeScreen.Examples -> ComponentsScreen(
+                                        components = components,
                                         contentPadding = innerPadding,
-                                        groupedComponentMap = groupedComponentMap,
-                                        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                                    )
+
+                                    CatalogHomeScreen.Showkase -> {
+                                        BodyContent(
+                                            contentPadding = innerPadding,
+                                            groupedComponentMap = groupedComponentMap,
+                                            showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                                        )
+                                    }
+
+                                    CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
+                                        components = components,
+                                        contentPadding = innerPadding,
                                     )
                                 }
-
-                                CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
-                                    components = components,
-                                    contentPadding = innerPadding,
-                                )
                             }
                         }
                     },
