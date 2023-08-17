@@ -38,6 +38,7 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -48,7 +49,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
-import com.adevinta.spark.components.card.OutlinedCard
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
@@ -158,12 +158,14 @@ private fun HomeScreen(
             showkaseBrowserScreenMetadata.value.isSearchActive -> {
                 showkaseBrowserScreenMetadata.clearActiveSearch()
             }
+
             navController.currentDestination?.id == navController.graph.startDestinationId -> {
                 activity.finish()
             }
         }
     }
 }
+
 internal fun getNumOfUIElements(list: List<*>): Int {
     val isComponentList = list.filterIsInstance<ShowkaseBrowserComponent>()
     return when {
@@ -171,6 +173,7 @@ internal fun getNumOfUIElements(list: List<*>): Int {
         else -> list.size
     }
 }
+
 internal fun <T> getFilteredSearchList(
     map: Map<String, List<T>>,
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
@@ -185,6 +188,7 @@ internal fun <T> getFilteredSearchList(
                 )
             }
         }
+
         else -> map
     }
 
@@ -192,6 +196,7 @@ internal fun matchSearchQuery(
     searchQuery: String,
     vararg properties: String,
 ) = properties.any { it.contains(searchQuery, ignoreCase = true) }
+
 private tailrec fun Context.findActivity(): Activity =
     when (this) {
         is Activity -> this
