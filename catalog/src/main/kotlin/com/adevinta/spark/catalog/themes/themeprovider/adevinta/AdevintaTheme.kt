@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.themes.themeprovider.polaris
+package com.adevinta.spark.catalog.themes.themeprovider.adevinta
 
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
@@ -31,7 +31,7 @@ import com.adevinta.spark.tokens.lightSparkColors
 import com.adevinta.spark.tokens.sparkShapes
 import com.adevinta.spark.tokens.sparkTypography
 
-public object PolarisTheme : ThemeProvider {
+public object AdevintaTheme : ThemeProvider {
     @Composable
     override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
         return when {

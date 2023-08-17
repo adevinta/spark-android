@@ -80,8 +80,8 @@ import com.adevinta.spark.catalog.themes.ThemeMode
 import com.adevinta.spark.catalog.themes.ThemePicker
 import com.adevinta.spark.catalog.themes.UserMode
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
-import com.adevinta.spark.catalog.themes.themeprovider.polaris.PolarisTheme
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
@@ -96,7 +96,7 @@ internal fun CatalogApp(
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
     val themeProvider: ThemeProvider = when (theme.brandMode) {
-        BrandMode.Polaris -> PolarisTheme
+        BrandMode.Adevinta -> AdevintaTheme
         BrandMode.Leboncoin -> LeboncoinTheme
         BrandMode.LeboncoinLegacy -> LeboncoinTheme
     }
