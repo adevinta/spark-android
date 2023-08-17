@@ -61,7 +61,7 @@ private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTarge
 @OptIn(ExperimentalComposeUiApi::class)
 private class MinimumTouchTargetModifierNode : Modifier.Node(), LayoutModifierNode {
 
-    private val minimumTouchTargetSize = DpSize(44.dp, 44.dp)
+    private val minimumTouchTargetSize = DpSize(48.dp, 48.dp)
     override fun MeasureScope.measure(
         measurable: Measurable,
         constraints: Constraints,
