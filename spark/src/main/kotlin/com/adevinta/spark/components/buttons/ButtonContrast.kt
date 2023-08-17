@@ -77,12 +77,14 @@ public fun ButtonContrast(
     isLoading: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
+    val containerColor = SparkTheme.colors.surface
+    val colors = intent.colors()
     val contentColor by animateColorAsState(
-        targetValue = intent.colors().color,
+        targetValue = if (colors.color == containerColor) colors.onColor else colors.color,
         label = "content color",
     )
-    val containerColor = SparkTheme.colors.surface
-    val colors = ButtonDefaults.buttonColors(
+
+    val buttonColors = ButtonDefaults.buttonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = containerColor.disabled,
@@ -95,7 +97,7 @@ public fun ButtonContrast(
         size = size,
         enabled = enabled,
         elevation = ButtonDefaults.buttonElevation(),
-        colors = colors,
+        colors = buttonColors,
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
