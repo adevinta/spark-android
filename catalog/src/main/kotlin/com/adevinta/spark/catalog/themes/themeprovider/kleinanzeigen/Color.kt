@@ -1,4 +1,4 @@
-package com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen/*
+/**
  * Copyright (c) 2023 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,6 +19,7 @@ package com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen/*
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen
 
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.tokens.SparkColors
