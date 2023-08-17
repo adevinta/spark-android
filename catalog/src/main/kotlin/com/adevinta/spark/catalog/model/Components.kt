@@ -24,11 +24,13 @@ package com.adevinta.spark.catalog.model
 import androidx.annotation.StringRes
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.SwitchExamples
@@ -76,6 +78,18 @@ private val Checkboxes = Component(
     configurator = CheckboxConfigurator,
 )
 
+private val IconButtons = Component(
+    id = nextId(),
+    name = "IconButtons",
+    description = R.string.component_iconbutton_description,
+    // No buttons icon
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/2352e9-icon-button/b/32e1a2",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.iconbuttons/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/iconbuttons/IconButton.kt",
+    examples = IconButtonsExamples,
+    configurator = IconButtonsConfigurator,
+)
+
 private val RadioButtons = Component(
     id = nextId(),
     name = "Radio buttons",
@@ -116,6 +130,7 @@ private val TextFields = Component(
 public val Components: List<Component> = listOf(
     Buttons,
     Checkboxes,
+    IconButtons,
     RadioButtons,
     Switches,
     TextFields,
