@@ -5,6 +5,7 @@
 ## [Unreleased]
 
 ## [0.4.0]
+_2023-08-17_
 
 ### Spark
 * 🆕 Implement `Spark Tab` and `Tab Group` 
@@ -97,7 +98,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.3.1...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.4.0...HEAD
+
+[0.3.1]: https://github.com/adevinta/spark-android/releases/tag/0.4.0
 
 [0.3.1]: https://github.com/adevinta/spark-android/releases/tag/0.3.1
 
