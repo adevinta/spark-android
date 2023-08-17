@@ -66,7 +66,7 @@ public fun TagFilled(
  * @param modifier The [Modifier] to be applied to the component
  * @param intent The [TagIntent] color to use
  * @param leadingIcon The spark icon shown at the start of the tag
- * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
+ * @param tint The tint color for the icon. Use [Color.Unspecified] to not apply tint.
  */
 @Composable
 public fun TagFilled(
