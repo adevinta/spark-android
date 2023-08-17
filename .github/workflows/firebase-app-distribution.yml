@@ -1,0 +1,101 @@
+name: '🔥 Firebase App Distribution'
+
+on:
+  push:
+    tags: ['*']
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch, tag, SHA, …'
+        required: true
+        default: 'main'
+        type: string
+  schedule:
+    - cron: 0 0 * * *
+
+env:
+  GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase-service-account.json
+
+jobs:
+
+  publish:
+    if: github.repository == 'adevinta/spark-android'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+          lfs: true
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: ./.github/actions/setup-gradle-properties
+      - run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_FILE"
+          echo storeFile="$KEYSTORE_FILE" >> keystore.properties
+          echo storePassword="$KEYSTORE_PASSWORD" >> keystore.properties
+          echo keyAlias="$KEYSTORE_KEY_ALIAS" >> keystore.properties
+          echo keyPassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+        env:
+          KEYSTORE_FILE: ${{ github.workspace }}/keystore.jks
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEYSTORE_KEY_ALIAS: spark
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_ALIAS_PASSWORD }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - run: npm install -g firebase-tools@12.4.7
+      - run: echo "$FIREBASE_SERVICE_ACCOUNT" > "firebase-service-account.json"
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - name: '🐘 Setup Gradle'
+        uses: gradle/gradle-build-action@a4cf152f482c7ca97ef56ead29bf08bcd953284c # v2.7.0
+        with:
+          gradle-home-cache-cleanup: true
+
+      - name: '👷 Build'
+        run: ./gradlew :catalog:assembleRelease
+
+      - name: '📦 Archive APKs'
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: '**/build/outputs/apk/**/*.apk'
+
+      - name: '📋 Prepare empty release note (default)'
+        run: touch release-notes.txt
+
+      - name: '📋 Prepare release note for workflow build'
+        if: github.event_name == 'workflow_dispatch'
+        run: git log -1 --format="%h ~ %s" > release-notes.txt
+
+      - name: '📋 Prepare release note for scheduled build'
+        if: github.event_name == 'schedule'
+        run: git log --topo-order --since="24 hours ago" --format="%h ~ %s" --no-merges > release-notes.txt
+
+      - name: '📋 Prepare release note for tagged build'
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        run: |
+          from="$(git for-each-ref --sort=-v:refname --count=2 --format='%(tag)' refs/tags | tail -n +2)"
+          to="$(git for-each-ref --sort=-v:refname --count=1 --format='%(tag)' refs/tags)"
+          git log --topo-order --format="%h ~ %s" "$from..$to" --no-merges > release-notes.txt
+
+      - name: '🚀 Publish'
+        run: >-
+          firebase appdistribution:distribute
+          catalog/build/outputs/apk/release/catalog-release.apk
+          --app "1:559109812471:android:7aaf1a8ba28904f5f923f2"
+          --groups "all"
+          --release-notes-file "release-notes.txt"
+
+      - name: '♻️ Cleanup'
+        if: ${{ success() || failure() }}
+        continue-on-error: true
+        run: |
+          rm keystore.jks
+          rm keystore.properties
+          rm firebase-service-account.json
