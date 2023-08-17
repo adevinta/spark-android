@@ -20,6 +20,7 @@
  * SOFTWARE.
  */
 @file:OptIn(ExperimentalMaterial3Api::class)
+@file:Suppress("DEPRECATION")
 
 package com.adevinta.spark.components.scaffold
 
