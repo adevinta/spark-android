@@ -22,7 +22,7 @@
   SOFTWARE.
   -->
 <resources>
-    <string name="app_name">Spark Catalog</string>
+    <string name="app_name">Spark</string>
     <string name="showkase_browser_show_documentation">Show Documentation</string>
     <string name="showkase_browser_hide_documentation">Hide Documentation</string>
 
