@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.icons
 
 import android.content.ClipData
@@ -158,7 +157,6 @@ public fun IconsScreen(
     }
 }
 
-
 /**
  * @return a [List] of [Pair]s of drawable res Int and String, representing formatted name of the resource
  */
@@ -169,9 +167,13 @@ private fun getAllIconsRes(context: Context) = IconR.drawable::class.java.declar
 
 private fun String.toPascalCase(): String = split("_").joinToString(separator = "") { str ->
     str.replaceFirstChar {
-        if (it.isLowerCase()) it.titlecase(
-            Locale.ROOT,
-        ) else it.toString()
+        if (it.isLowerCase()) {
+            it.titlecase(
+                Locale.ROOT,
+            )
+        } else {
+            it.toString()
+        }
     }
 }
 

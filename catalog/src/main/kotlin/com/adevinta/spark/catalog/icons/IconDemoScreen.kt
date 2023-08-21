@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.icons
 
 import androidx.compose.foundation.layout.PaddingValues
@@ -52,7 +51,7 @@ public fun IconDemoScreen(
             }
             composable(
                 route = "$IconDemoRoute/" +
-                        "{$IconIdArgName}/{$IconNameArgName}",
+                    "{$IconIdArgName}/{$IconNameArgName}",
                 arguments = listOf(
                     navArgument(IconIdArgName) { type = NavType.IntType },
                     navArgument(IconNameArgName) { type = NavType.StringType },
