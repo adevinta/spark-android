@@ -132,9 +132,8 @@ public fun IconsScreen(
                         .combinedClickable(
                             onLongClick = { copyToClipboard(context, iconWithNamePair.second) },
                             onClick = {
-                                val route = "$IconDemoRoute/${iconWithNamePair.first}/${iconWithNamePair.second}"
                                 navController.navigate(
-                                    route = route,
+                                    route = "$IconDemoRoute/${iconWithNamePair.first}/${iconWithNamePair.second}",
                                 )
                             },
                         )
