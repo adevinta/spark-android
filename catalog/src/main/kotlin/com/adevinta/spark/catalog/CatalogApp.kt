@@ -67,6 +67,7 @@ import com.adevinta.spark.catalog.backdrop.BackdropValue
 import com.adevinta.spark.catalog.backdrop.rememberBackdropScaffoldState
 import com.adevinta.spark.catalog.configurator.ConfiguratorComponentsScreen
 import com.adevinta.spark.catalog.examples.ComponentsScreen
+import com.adevinta.spark.catalog.icons.IconDemoScreen
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.showkase.ShowkaseBrowserScreenMetadata
 import com.adevinta.spark.catalog.showkase.navGraph
@@ -199,6 +200,10 @@ internal fun CatalogApp(
                                     components = components,
                                     contentPadding = innerPadding,
                                 )
+
+                                CatalogHomeScreen.Icons -> IconDemoScreen(
+                                    contentPadding = innerPadding,
+                                )
                             }
                         }
                     },
@@ -281,5 +286,5 @@ private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
 internal const val HomeRoute = "home"
 
 public enum class CatalogHomeScreen {
-    Examples, Showkase, Configurator
+    Examples, Showkase, Configurator, Icons
 }
