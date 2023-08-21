@@ -50,8 +50,7 @@ public fun IconDemoScreen(
                 )
             }
             composable(
-                route = "$IconDemoRoute/" +
-                    "{$IconIdArgName}/{$IconNameArgName}",
+                route = "$IconDemoRoute/{$IconIdArgName}/{$IconNameArgName}",
                 arguments = listOf(
                     navArgument(IconIdArgName) { type = NavType.IntType },
                     navArgument(IconNameArgName) { type = NavType.StringType },
