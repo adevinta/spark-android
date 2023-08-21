@@ -24,6 +24,7 @@ package com.adevinta.spark.catalog.icons
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -52,6 +53,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.getSystemService
 import androidx.navigation.NavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
@@ -82,7 +84,7 @@ public fun IconsScreen(
     var query: String by rememberSaveable { mutableStateOf("") }
     val filteredIcons by remember {
         derivedStateOf {
-            if (query.isEmpty()) icons else icons.filter { it.second.contains(query, ignoreCase = true) }
+            if (query.isEmpty()) icons else icons.filter { it.name.contains(query, ignoreCase = true) }
         }
     }
     Column(
@@ -125,15 +127,15 @@ public fun IconsScreen(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             items(filteredIcons.size) { index ->
-                val iconWithNamePair = filteredIcons[index]
+                val (drawableRes, iconName) = filteredIcons[index]
                 Column(
                     modifier = Modifier
                         .clip(SparkTheme.shapes.small)
                         .combinedClickable(
-                            onLongClick = { copyToClipboard(context, iconWithNamePair.second) },
+                            onLongClick = { copyToClipboard(context, iconName) },
                             onClick = {
                                 navController.navigate(
-                                    route = "$IconDemoRoute/${iconWithNamePair.first}/${iconWithNamePair.second}",
+                                    route = "$IconDemoRoute/$drawableRes/$iconName",
                                 )
                             },
                         )
@@ -142,12 +144,12 @@ public fun IconsScreen(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
                     Icon(
-                        sparkIcon = SparkIcon.DrawableRes(iconWithNamePair.first),
+                        sparkIcon = SparkIcon.DrawableRes(drawableRes),
                         contentDescription = null,
                         size = IconSize.Large,
                     )
                     Text(
-                        text = iconWithNamePair.second,
+                        text = iconName,
                         style = SparkTheme.typography.caption,
                     )
                 }
@@ -156,12 +158,20 @@ public fun IconsScreen(
     }
 }
 
-/**
- * @return a [List] of [Pair]s of drawable res Int and String, representing formatted name of the resource
- */
-private fun getAllIconsRes(context: Context) = IconR.drawable::class.java.declaredFields.map {
-    val icon = it.getInt(null)
-    icon to context.resources.getResourceEntryName(icon).removePrefix("spark_icons_").toPascalCase()
+private data class NamedIcon(
+    @DrawableRes val drawableRes: Int,
+    val name: String,
+)
+
+private fun getAllIconsRes(context: Context) = IconR.drawable::class.java.declaredFields.mapNotNull { field ->
+    val prefix = "spark_icons_"
+    val icon = field.getInt(null)
+    val name = context.resources.getResourceEntryName(icon)
+    if (name.contains(prefix)) {
+        NamedIcon(drawableRes = icon, name = name.removePrefix(prefix).toPascalCase())
+    } else {
+        null
+    }
 }
 
 private fun String.toPascalCase(): String = split("_").joinToString(separator = "") { str ->
@@ -175,8 +185,7 @@ private fun String.toPascalCase(): String = split("_").joinToString(separator = 
 }
 
 private fun copyToClipboard(context: Context, text: String) {
-    val clipboardManager =
-        context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clip = ClipData.newPlainText("password", text)
+    val clipboardManager = context.getSystemService<ClipboardManager>() ?: return
+    val clip = ClipData.newPlainText("spark_icon_name", text)
     clipboardManager.setPrimaryClip(clip)
 }
