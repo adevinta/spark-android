@@ -167,9 +167,7 @@ private fun getAllIconsRes(context: Context) = IconR.drawable::class.java.declar
 private fun String.toPascalCase(): String = split("_").joinToString(separator = "") { str ->
     str.replaceFirstChar {
         if (it.isLowerCase()) {
-            it.titlecase(
-                Locale.ROOT,
-            )
+            it.titlecase(Locale.ROOT)
         } else {
             it.toString()
         }
