@@ -94,7 +94,7 @@ public fun IconsScreen(
             value = query,
             onValueChange = { query = it },
             modifier = Modifier.fillMaxWidth(),
-            placeholder = stringResource(id = R.string.icons_screen_seraah_helper),
+            placeholder = stringResource(id = R.string.icons_screen_search_helper),
             leadingContent = {
                 Icon(sparkIcon = SparkIcons.Search, contentDescription = null)
             },
