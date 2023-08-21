@@ -167,11 +167,11 @@ private fun getAllIconsRes(context: Context) = IconR.drawable::class.java.declar
     val prefix = "spark_icons_"
     val icon = field.getInt(null)
     val name = context.resources.getResourceEntryName(icon)
-    if (name.contains(prefix)) {
-        NamedIcon(drawableRes = icon, name = name.removePrefix(prefix).toPascalCase())
-    } else {
-        null
-    }
+    if (!name.startsWith(prefix)) return@mapNotNull null
+    NamedIcon(
+        drawableRes = icon,
+        name = name.removePrefix(prefix).toPascalCase(),
+    )
 }
 
 private fun String.toPascalCase(): String = split("_").joinToString(separator = "") { str ->
