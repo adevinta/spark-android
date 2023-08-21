@@ -57,12 +57,9 @@ public fun IconDemoScreen(
                 ),
             ) { navBackStackEntry ->
                 val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
-                val iconId = arguments.getInt(IconIdArgName)
-                val icon = SparkIcon.DrawableRes(iconId)
-                val name = requireNotNull(arguments.getString(IconNameArgName)) { "No name provided for the Icon" }
                 IconExampleScreen(
-                    icon = icon,
-                    name = name,
+                    icon = SparkIcon.DrawableRes(arguments.getInt(IconIdArgName)),
+                    name = requireNotNull(arguments.getString(IconNameArgName)) { "No name provided for the Icon" },
                 )
             }
         },
