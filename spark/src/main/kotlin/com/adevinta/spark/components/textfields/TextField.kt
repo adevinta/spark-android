@@ -45,6 +45,7 @@ import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.SparkTypography
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.flow.flowOf
@@ -64,10 +65,10 @@ import kotlinx.coroutines.flow.flowOf
  * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory"
  * but doesn't do anything else so it's up to the developer to handle the behavior.
  * @param label the optional label to be displayed inside the text field container. The default
- * text style for internal [Text] is [Typography.small] when the text field is in focus and
- * [Typography.large] when the text field is not in focus
+ * text style for internal [Text] is [SparkTypography.small] when the text field is in focus and
+ * [SparkTypography.large] when the text field is not in focus
  * @param placeholder the optional placeholder to be displayed when the text field is in focus and
- * the input text is empty. The default text style for internal [Text] is [Typography.large]
+ * the input text is empty. The default text style for internal [Text] is [SparkTypography.large]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * information about expected text
  * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
@@ -158,10 +159,10 @@ public fun TextField(
  * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory"
  * but doesn't do anything else so it's up to the developer to handle the behavior.
  * @param label the optional label to be displayed inside the text field container. The default
- * text style for internal [Text] is [Typography.small] when the text field is in focus and
- * [Typography.large] when the text field is not in focus
+ * text style for internal [Text] is [SparkTypography.small] when the text field is in focus and
+ * [SparkTypography.large] when the text field is not in focus
  * @param placeholder the optional placeholder to be displayed when the text field is in focus and
- * the input text is empty. The default text style for internal [Text] is [Typography.large]
+ * the input text is empty. The default text style for internal [Text] is [SparkTypography.large]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * information about expected text
  * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
@@ -242,7 +243,7 @@ public fun TextField(
     name = "TextField intents",
 )
 @Composable
-internal fun TextFieldIntentPreview(
+private fun TextFieldIntentPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
@@ -258,7 +259,7 @@ internal fun TextFieldIntentPreview(
     name = "TextField intents error",
 )
 @Composable
-internal fun TextFieldIntentErrorPreview(
+private fun TextFieldIntentErrorPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
@@ -274,7 +275,7 @@ internal fun TextFieldIntentErrorPreview(
     name = "TextField intents alert",
 )
 @Composable
-internal fun TextFieldIntentAlertPreview(
+private fun TextFieldIntentAlertPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
@@ -290,7 +291,7 @@ internal fun TextFieldIntentAlertPreview(
     name = "TextField intents success",
 )
 @Composable
-internal fun TextFieldIntentSuccessPreview(
+private fun TextFieldIntentSuccessPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {

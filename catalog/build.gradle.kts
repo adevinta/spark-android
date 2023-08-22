@@ -19,6 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import java.util.Properties
+
 plugins {
     id("com.adevinta.spark.android-application")
     id("com.adevinta.spark.android-compose")
@@ -28,6 +30,12 @@ plugins {
 android {
     namespace = "com.adevinta.spark.catalog"
     defaultConfig.applicationId = "com.adevinta.spark.catalog"
+    defaultConfig {
+        versionName = version.toString()
+        if (providers.environmentVariable("GITHUB_ACTION").isPresent) {
+            versionName = version.toString().replace("SNAPSHOT", System.getenv("GITHUB_SHA").take(7))
+        }
+    }
 
     kotlinOptions {
         freeCompilerArgs += listOf(
@@ -35,10 +43,22 @@ android {
             "-opt-in=com.adevinta.spark.ExperimentalSparkApi",
         )
     }
-    buildTypes {
-        getByName("release") {
-            signingConfig = signingConfigs.getByName("debug")
-        }
+
+    val keystore = rootProject.file("keystore.properties")
+        .takeIf { it.exists() }
+        ?.let { Properties().apply { load(it.inputStream()) } }
+
+    val debug by signingConfigs.getting
+    val release by signingConfigs.creating {
+        if (keystore == null) return@creating
+        keyAlias = keystore.getProperty("keyAlias")
+        keyPassword = keystore.getProperty("keyPassword")
+        storeFile = file(keystore.getProperty("storeFile"))
+        storePassword = keystore.getProperty("storePassword")
+    }
+
+    buildTypes.named("release") {
+        signingConfig = if (keystore != null) release else debug
     }
 }
 

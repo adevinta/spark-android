@@ -405,8 +405,6 @@ private fun Placeable.PlacementScope.place(
     val startPadding =
         (paddingValues.calculateStartPadding(layoutDirection).value * density).roundToInt()
 
-    val iconPadding = HorizontalIconPadding.value * density
-
     // placed center vertically and to the start edge horizontally
     leadingPlaceable?.placeRelative(
         0,
@@ -441,7 +439,7 @@ private fun Placeable.PlacementScope.place(
             if (leadingPlaceable == null) {
                 0f
             } else {
-                (widthOrZero(leadingPlaceable) - iconPadding) * (1 - animationProgress)
+                (widthOrZero(leadingPlaceable) - startPadding) * (1 - animationProgress) + startPadding
             }
             ).roundToInt() + startPadding
         it.placeRelative(positionX, positionY.roundToInt())

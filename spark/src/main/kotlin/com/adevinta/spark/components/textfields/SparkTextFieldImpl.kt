@@ -38,8 +38,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposableOpenTarget
 import androidx.compose.runtime.CompositionLocalProvider
@@ -66,6 +66,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.lerp
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
@@ -96,9 +97,11 @@ internal fun SparkDecorationBox(
         visualTransformation.filter(AnnotatedString(value))
     }.text.text
 
-    val contentPadding = TextFieldDefaults.outlinedTextFieldPadding(
+    val contentPadding = OutlinedTextFieldDefaults.contentPadding(
         top = VerticalContentPadding,
         bottom = VerticalContentPadding,
+        start = if (leadingIcon != null) 8.dp else 16.dp,
+        end = if (trailingIcon != null) 8.dp else 16.dp,
     )
 
     val isFocused = interactionSource.collectIsFocusedAsState().value
@@ -201,7 +204,7 @@ internal fun SparkDecorationBox(
             Box(
                 Modifier
                     .layoutId(ContainerId)
-                    .outlineCutout(labelSize.value, contentPadding),
+                    .outlineCutout(labelSize.value, 16.dp),
                 propagateMinConstraints = true,
             ) {
                 border?.invoke()
@@ -254,7 +257,8 @@ internal fun SparkDecorationBox(
 internal fun Decoration(
     contentColor: Color,
     typography: TextStyle? = null,
-    content: @Composable @ComposableOpenTarget(index = 0) () -> Unit, // ktlint-disable annotation
+    content: @Composable
+    @ComposableOpenTarget(index = 0) () -> Unit, // ktlint-disable annotation
 ) {
     val colorAndEmphasis: @Composable () -> Unit = @Composable {
         CompositionLocalProvider(LocalContentColor provides contentColor, content = content)
@@ -377,12 +381,12 @@ internal fun SparkTextFieldLayout(
 internal fun widthOrZero(placeable: Placeable?) = placeable?.width ?: 0
 internal fun heightOrZero(placeable: Placeable?) = placeable?.height ?: 0
 
-internal fun Modifier.outlineCutout(labelSize: Size, paddingValues: PaddingValues) =
+internal fun Modifier.outlineCutout(labelSize: Size, leftPadding: Dp) =
     this.drawWithContent {
         val labelWidth = labelSize.width
         if (labelWidth > 0f) {
             val innerPadding = OutlinedTextFieldInnerPadding.toPx()
-            val leftLtr = paddingValues.calculateLeftPadding(layoutDirection).toPx() - innerPadding
+            val leftLtr = leftPadding.toPx() - innerPadding
             val rightLtr = leftLtr + labelWidth + 2 * innerPadding
             val left = when (layoutDirection) {
                 LayoutDirection.Rtl -> size.width - rightLtr
@@ -519,7 +523,7 @@ private const val PlaceholderAnimationDuration = 83
 private const val PlaceholderAnimationDelayOrDuration = 67
 
 internal val CounterPadding = 8.dp
-internal val HorizontalIconPadding = 8.dp
+internal val HorizontalIconPadding = 16.dp
 internal val VerticalContentPadding = 12.dp
 
 internal val IconDefaultSizeModifier = Modifier.defaultMinSize(24.dp, 24.dp)

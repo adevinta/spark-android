@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.tab
 
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -30,6 +31,11 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.IconSize.Small
 
 internal object TabDefaults {
+    /** Default content color of a tab */
+    val ContentColor: Color
+        @Composable get() = LocalContentColor.current
+
+    /** Default intent color of a selected tab */
     internal val SelectedContentIntent = TabIntent.Basic
     internal val Size = TabSize.Medium
     internal val HorizontalArrangementSpace = 8.dp

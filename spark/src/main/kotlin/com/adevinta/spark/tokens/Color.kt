@@ -47,6 +47,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
@@ -1230,6 +1231,13 @@ public val Color.dim4: Color
  */
 public val Color.dim5: Color
     @Composable get() = this.copy(alpha = SparkTheme.colors.dim5)
+
+/**
+ * Extension property to get a [Color] with dim3(disabled element) applied composite over SparkTheme.colors.surface
+ * to prevent the color being transparent
+ */
+public val Color.disabled: Color
+    @Composable get() = this.dim3.compositeOver(SparkTheme.colors.surface)
 
 /**
  * Updates the internal values of the given [SparkColors] with values from the [other] [SparkColors]. This

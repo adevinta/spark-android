@@ -24,7 +24,7 @@ package com.adevinta.spark.components.toggles
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.buttons.SparkButtonDefaults.disabled
+import com.adevinta.spark.tokens.disabled
 import androidx.compose.material3.SwitchDefaults as MaterialSwitchDefaults
 
 public object SwitchDefaults {

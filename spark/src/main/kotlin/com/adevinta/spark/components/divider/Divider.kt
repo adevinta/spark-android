@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.Dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tokens.DisabledAlpha
+import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.Divider as MaterialDivider
@@ -58,14 +58,18 @@ internal fun SparkDivider(
  * ![Divider image](https://developer.android.com/images/reference/androidx/compose/material3/divider.png)
  *
  * @param modifier the [Modifier] to be applied to this divider line.
+ * @param color the color of the divider, we recommend to use either outline or onSurface dim 3.
  */
 @ExperimentalSparkApi
 @Composable
-public fun Divider(modifier: Modifier = Modifier) {
+public fun Divider(
+    modifier: Modifier = Modifier,
+    color: Color = SparkTheme.colors.onSurface.dim3,
+) {
     SparkDivider(
         modifier = modifier,
         thickness = DividerDefaults.Thickness,
-        color = SparkTheme.colors.onSurface.copy(DisabledAlpha),
+        color = color,
     )
 }
 

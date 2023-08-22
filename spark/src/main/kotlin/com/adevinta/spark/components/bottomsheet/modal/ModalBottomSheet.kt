@@ -42,7 +42,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -60,7 +59,6 @@ import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.collapse
 import androidx.compose.ui.semantics.dismiss
@@ -87,10 +85,9 @@ import com.adevinta.spark.components.bottomsheet.swipeAnchors
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.list.ListItem
-import com.adevinta.spark.components.spacer.HorizontalSpacer
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.toggles.Checkbox
+import com.adevinta.spark.components.toggles.CheckboxLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
@@ -403,8 +400,8 @@ internal fun ModalBottomSheetPopup(
     name = "ModalBottomSheet",
 )
 @Composable
-internal fun ModalBottomSheetSample() {
-    var openBottomSheet by rememberSaveable { mutableStateOf(true) }
+private fun ModalBottomSheetSample() {
+    var openBottomSheet by rememberSaveable { mutableStateOf(false) }
     var skipPartiallyExpanded by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     val bottomSheetState = rememberModalBottomSheetState(
@@ -418,20 +415,10 @@ internal fun ModalBottomSheetSample() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Row(
-            Modifier.toggleable(
-                value = skipPartiallyExpanded,
-                role = Role.Checkbox,
-                onValueChange = { checked -> skipPartiallyExpanded = checked },
-            ),
+        CheckboxLabelled(
+            state = if (skipPartiallyExpanded) ToggleableState.On else ToggleableState.Off,
+            onClick = { skipPartiallyExpanded = !skipPartiallyExpanded },
         ) {
-            Checkbox(
-                state = if (skipPartiallyExpanded) ToggleableState.On else ToggleableState.Off,
-                onClick = null,
-            )
-
-            HorizontalSpacer(16.dp)
-
             Text("Skip Partially Expanded State")
         }
 
@@ -447,7 +434,7 @@ internal fun ModalBottomSheetSample() {
             onDismissRequest = { openBottomSheet = false },
             sheetState = bottomSheetState,
         ) {
-            LazyColumn {
+            LazyColumn(/*modifier = Modifier.fillMaxHeight()*/) {
                 stickyHeader {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                         // Note: If you provide logic outside of onDismissRequest to remove the sheet,
@@ -467,7 +454,7 @@ internal fun ModalBottomSheetSample() {
 
                 items(50) {
                     ListItem(
-                        headlineText = { Text("Item $it") },
+                        headlineContent = { Text("Item $it") },
                         leadingContent = {
                             Icon(
                                 SparkIcons.LikeFill,

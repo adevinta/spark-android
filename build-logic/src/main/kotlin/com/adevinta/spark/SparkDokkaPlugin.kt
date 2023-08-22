@@ -58,7 +58,7 @@ internal class SparkDokkaPlugin : Plugin<Project> {
 
     private fun Project.configureRootProject() = tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
         moduleName.set("Spark")
-        outputDirectory.set(buildDir.resolve("dokka"))
+        outputDirectory.set(layout.buildDirectory.dir("dokka"))
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
             fun File.recursiveFiles() = walk().filter(File::isFile).toList().toTypedArray()
             // https://kotlinlang.org/docs/dokka-html.html#customize-assets

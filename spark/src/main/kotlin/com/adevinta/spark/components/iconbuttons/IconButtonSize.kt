@@ -19,9 +19,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark
+package com.adevinta.spark.components.iconbuttons
 
-/**
- * Spark
- */
-public object Spark
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.components.icons.IconSize
+
+public enum class IconButtonSize {
+    /**
+     * Small button with min touch size still applied
+     */
+    Small {
+        override val height: Dp = 32.dp
+        override val iconSize: IconSize = IconSize.Small
+    },
+
+    /**
+     * Medium button is the default button size (recommended).
+     */
+    Medium {
+        override val height: Dp = 44.dp
+        override val iconSize: IconSize = IconSize.Small
+    },
+
+    /**
+     * Alternative large icon button size to give more emphasis to the action
+     */
+    Large {
+        override val height: Dp = 56.dp
+        override val iconSize: IconSize = IconSize.Medium
+    },
+    ;
+
+    internal abstract val height: Dp
+    internal abstract val iconSize: IconSize
+}

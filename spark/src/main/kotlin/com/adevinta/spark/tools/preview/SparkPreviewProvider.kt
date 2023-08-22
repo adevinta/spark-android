@@ -25,11 +25,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import kotlin.reflect.KClass
 
-public class SparkPreviewProvider : PreviewParameterProvider<Pair<ThemeVariant, UserType>> by compositeProvider(
-    ThemeProvider::class,
-    UserProProvider::class,
-)
-
 public class SparkPreviewParamProvider : CollectionPreviewParameterProvider<SparkPreviewParam>(
     listOf(
         SparkPreviewParam(ThemeVariant.Light, UserType.Part, isLegacy = false),

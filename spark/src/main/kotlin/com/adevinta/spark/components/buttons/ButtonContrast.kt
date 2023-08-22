@@ -36,11 +36,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.buttons.SparkButtonDefaults.disabled
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.Link
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -77,12 +77,14 @@ public fun ButtonContrast(
     isLoading: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
+    val containerColor = SparkTheme.colors.surface
+    val colors = intent.colors()
     val contentColor by animateColorAsState(
-        targetValue = intent.colors().color,
+        targetValue = if (colors.color == containerColor) colors.onColor else colors.color,
         label = "content color",
     )
-    val containerColor = SparkTheme.colors.surface
-    val colors = ButtonDefaults.buttonColors(
+
+    val buttonColors = ButtonDefaults.buttonColors(
         containerColor = containerColor,
         contentColor = contentColor,
         disabledContainerColor = containerColor.disabled,
@@ -95,7 +97,7 @@ public fun ButtonContrast(
         size = size,
         enabled = enabled,
         elevation = ButtonDefaults.buttonElevation(),
-        colors = colors,
+        colors = buttonColors,
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
