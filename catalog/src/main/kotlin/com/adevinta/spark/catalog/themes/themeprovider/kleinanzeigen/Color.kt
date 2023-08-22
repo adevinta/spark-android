@@ -168,7 +168,7 @@ internal val KleinanzeigenDark: SparkColors = lightSparkColors(
     onSupportVariant = White,
     success = Green100,
     onSuccess = Neutral900,
-    successContainer = Green600, // == surface disabled
+    successContainer = Green600,
     onSuccessContainer = Green50,
     alert = Yellow200,
     onAlert = Neutral900,
