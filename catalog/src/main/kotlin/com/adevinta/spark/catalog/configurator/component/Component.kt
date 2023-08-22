@@ -34,9 +34,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Code
 import androidx.compose.material.icons.rounded.Palette
-import androidx.compose.material.icons.twotone.BugReport
-import androidx.compose.material.icons.twotone.Code
-import androidx.compose.material.icons.twotone.Palette
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,8 +51,8 @@ import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.util.IssueUrl
 import com.adevinta.spark.catalog.util.openUrl
 import com.adevinta.spark.components.divider.Divider
+import com.adevinta.spark.components.iconbuttons.IconButtonGhost
 import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.menu.DropdownMenu
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
@@ -81,11 +78,11 @@ public fun ConfiguratorComponentScreen(
             modifier = Modifier.align(Alignment.End),
         ) {
             var expanded by remember { mutableStateOf(false) }
-            IconButton(
+            IconButtonGhost(
+                icon = SparkIcons.Link,
                 onClick = { expanded = true },
-            ) {
-                Icon(SparkIcons.Link, contentDescription = "Localized description")
-            }
+                contentDescription = "Localized description",
+            )
 
             ConfiguratorComponentMenu(
                 component = component,

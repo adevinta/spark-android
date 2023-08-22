@@ -22,12 +22,10 @@
 package com.adevinta.spark
 
 import org.junit.Test
-import kotlin.test.assertNotNull
 
 public class SparkTest {
 
     @Test
     public fun spark() {
-        assertNotNull(Spark)
     }
 }

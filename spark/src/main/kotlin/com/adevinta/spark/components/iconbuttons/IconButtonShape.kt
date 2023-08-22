@@ -19,30 +19,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.themes.themeprovider.polaris
+package com.adevinta.spark.components.iconbuttons
 
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
-import com.adevinta.spark.tokens.SparkColors
-import com.adevinta.spark.tokens.SparkShapes
-import com.adevinta.spark.tokens.SparkTypography
-import com.adevinta.spark.tokens.darkSparkColors
-import com.adevinta.spark.tokens.lightSparkColors
-import com.adevinta.spark.tokens.sparkShapes
-import com.adevinta.spark.tokens.sparkTypography
+import com.adevinta.spark.SparkTheme
 
-public object PolarisTheme : ThemeProvider {
-    @Composable
-    override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
-        return when {
-            useDarkColors -> darkSparkColors()
-            else -> lightSparkColors()
-        }
-    }
+public enum class IconButtonShape {
+    /**
+     * Small button with min touch size still applied
+     */
+    None {
+        override val shape: CornerBasedShape
+            @Composable
+            get() = SparkTheme.shapes.none
+    },
 
-    @Composable
-    override fun shapes(isLegacy: Boolean): SparkShapes = sparkShapes()
+    /**
+     * Medium button is the default button size (recommended).
+     */
+    Full {
+        override val shape: CornerBasedShape
+            @Composable
+            get() = SparkTheme.shapes.full
+    },
 
-    @Composable
-    override fun typography(isLegacy: Boolean): SparkTypography = sparkTypography()
+    /**
+     * Alternative large icon button size to give more emphasis to the action
+     */
+    Large {
+        override val shape: CornerBasedShape
+            @Composable
+            get() = SparkTheme.shapes.large
+    },
+    ;
+
+    internal abstract val shape: CornerBasedShape
+        @Composable get
 }

@@ -67,6 +67,7 @@ import com.adevinta.spark.catalog.backdrop.BackdropValue
 import com.adevinta.spark.catalog.backdrop.rememberBackdropScaffoldState
 import com.adevinta.spark.catalog.configurator.ConfiguratorComponentsScreen
 import com.adevinta.spark.catalog.examples.ComponentsScreen
+import com.adevinta.spark.catalog.icons.IconDemoScreen
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.showkase.ShowkaseBrowserScreenMetadata
 import com.adevinta.spark.catalog.showkase.navGraph
@@ -80,9 +81,9 @@ import com.adevinta.spark.catalog.themes.ThemeMode
 import com.adevinta.spark.catalog.themes.ThemePicker
 import com.adevinta.spark.catalog.themes.UserMode
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
 import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.KleinanzeigenTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
-import com.adevinta.spark.catalog.themes.themeprovider.polaris.PolarisTheme
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
@@ -97,7 +98,7 @@ internal fun CatalogApp(
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
     val themeProvider: ThemeProvider = when (theme.brandMode) {
-        BrandMode.Polaris -> PolarisTheme
+        BrandMode.Adevinta -> AdevintaTheme
         BrandMode.Leboncoin -> LeboncoinTheme
         BrandMode.LeboncoinLegacy -> LeboncoinTheme
         BrandMode.Kleinanzeigen -> KleinanzeigenTheme
@@ -201,6 +202,10 @@ internal fun CatalogApp(
                                     components = components,
                                     contentPadding = innerPadding,
                                 )
+
+                                CatalogHomeScreen.Icons -> IconDemoScreen(
+                                    contentPadding = innerPadding,
+                                )
                             }
                         }
                     },
@@ -283,5 +288,5 @@ private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
 internal const val HomeRoute = "home"
 
 public enum class CatalogHomeScreen {
-    Examples, Showkase, Configurator
+    Examples, Showkase, Configurator, Icons
 }
