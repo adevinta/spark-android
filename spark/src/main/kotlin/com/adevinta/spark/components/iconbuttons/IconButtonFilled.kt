@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.icons.Family
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WheelOutline
@@ -83,6 +84,55 @@ public fun IconButtonFilled(
     )
 }
 
+@Composable
+public fun IconToggleButtonFilled(
+    icon: SparkIcon,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    intent: IconButtonIntent = IconButtonDefaults.DefaultIntent,
+    checked: Boolean = true,
+    enabled: Boolean = true,
+    shape: IconButtonShape = IconButtonDefaults.DefaultShape,
+    size: IconButtonSize = IconButtonDefaults.DefaultSize,
+    contentDescription: String? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    val colors = IconButtonDefaults.filledIconToggleButtonColors(intent.colors())
+    SparkIconToggleButton(
+        icon = icon,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+        colors = colors,
+        checked = checked,
+        enabled = enabled,
+        shape = shape,
+        size = size,
+        contentDescription = contentDescription,
+        interactionSource = interactionSource,
+    )
+}
+
+@Preview(
+    group = "IconToggleButtonFilled",
+    name = "IconToggleButtonFilled Filled Small",
+)
+@Composable
+internal fun IconToggleButtonFilledPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        IconButtonPreview { intent, shape ->
+            IconToggleButtonFilled(
+                intent = intent,
+                checked = true,
+                icon = SparkIcons.Family,
+                onCheckedChange = {},
+                size = IconButtonSize.Small,
+                shape = shape,
+            )
+        }
+    }
+}
 @Preview(
     group = "IconButtons",
     name = "IconButton Filled Small",

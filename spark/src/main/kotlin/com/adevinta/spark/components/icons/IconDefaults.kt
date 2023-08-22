@@ -35,3 +35,5 @@ public enum class IconSize(public val size: Dp) {
     Large(32.dp),
     ExtraLarge(40.dp),
 }
+
+
