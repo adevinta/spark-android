@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.iconbuttons
 
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
@@ -32,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.tokens.disabled
-
 
 internal object IconButtonDefaults {
 
@@ -84,42 +82,6 @@ internal object IconButtonDefaults {
         contentColor = contentColor,
         disabledContainerColor = disabledContainerColor,
         disabledContentColor = disabledContentColor,
-    )
-
-    @Composable
-    internal fun filledIconToggleButtonColors(
-        intent: IntentColor,
-        containerColor: Color = Color.Transparent,
-        contentColor: Color = LocalContentColor.current,
-        disabledContainerColor: Color = containerColor.disabled,
-        disabledContentColor: Color = contentColor.disabled,
-        checkedContainerColor: Color = intent.color,
-        checkedContentColor: Color = intent.onColor,
-    ): IconToggleButtonColors = IconToggleButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-        checkedContainerColor = checkedContainerColor,
-        checkedContentColor = checkedContentColor,
-    )
-
-    @Composable
-    internal fun outlinedIconToggleButtonColors(
-        intent: IntentColor,
-        containerColor: Color = Color.Transparent,
-        contentColor: Color = LocalContentColor.current,
-        disabledContainerColor: Color = containerColor.disabled,
-        disabledContentColor: Color = contentColor.disabled,
-        checkedContainerColor: Color = intent.color,
-        checkedContentColor: Color = intent.onColor,
-    ): IconToggleButtonColors = IconToggleButtonColors(
-        containerColor = containerColor,
-        contentColor = contentColor,
-        disabledContainerColor = disabledContainerColor,
-        disabledContentColor = disabledContentColor,
-        checkedContainerColor = checkedContainerColor,
-        checkedContentColor = checkedContentColor,
     )
 
     @Composable
@@ -234,75 +196,6 @@ internal class IconButtonColors(
         result = 31 * result + contentColor.hashCode()
         result = 31 * result + disabledContainerColor.hashCode()
         result = 31 * result + disabledContentColor.hashCode()
-
-        return result
-    }
-
-
-}
-
-@Immutable
-internal class IconToggleButtonColors internal constructor(
-    private val containerColor: Color,
-    private val contentColor: Color,
-    private val disabledContainerColor: Color,
-    private val disabledContentColor: Color,
-    private val checkedContainerColor: Color,
-    private val checkedContentColor: Color,
-) {
-    /**
-     * Represents the container color for this icon button, depending on [enabled] and [checked].
-     *
-     * @param enabled whether the icon button is enabled
-     * @param checked whether the icon button is checked
-     */
-    @Composable
-    internal fun containerColor(enabled: Boolean, checked: Boolean): State<Color> {
-        val target = when {
-            !enabled -> disabledContainerColor
-            !checked -> containerColor
-            else -> checkedContainerColor
-        }
-        return rememberUpdatedState(target)
-    }
-
-    /**
-     * Represents the content color for this icon button, depending on [enabled] and [checked].
-     *
-     * @param enabled whether the icon button is enabled
-     * @param checked whether the icon button is checked
-     */
-    @Composable
-    internal fun contentColor(enabled: Boolean, checked: Boolean): State<Color> {
-        val target = when {
-            !enabled -> disabledContentColor
-            !checked -> contentColor
-            else -> checkedContentColor
-        }
-        return rememberUpdatedState(target)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other == null || other !is IconToggleButtonColors) return false
-
-        if (containerColor != other.containerColor) return false
-        if (contentColor != other.contentColor) return false
-        if (disabledContainerColor != other.disabledContainerColor) return false
-        if (disabledContentColor != other.disabledContentColor) return false
-        if (checkedContainerColor != other.checkedContainerColor) return false
-        if (checkedContentColor != other.checkedContentColor) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = containerColor.hashCode()
-        result = 31 * result + contentColor.hashCode()
-        result = 31 * result + disabledContainerColor.hashCode()
-        result = 31 * result + disabledContentColor.hashCode()
-        result = 31 * result + checkedContainerColor.hashCode()
-        result = 31 * result + checkedContentColor.hashCode()
 
         return result
     }

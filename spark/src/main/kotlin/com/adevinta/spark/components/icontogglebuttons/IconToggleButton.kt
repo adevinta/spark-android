@@ -19,46 +19,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.components.iconbuttons
+package com.adevinta.spark.components.icontogglebuttons
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.PlainTooltipBox
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.iconbuttons.IconButtonColors
+import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
+import com.adevinta.spark.components.iconbuttons.IconButtonIntent
+import com.adevinta.spark.components.iconbuttons.IconButtonShape
+import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.tools.modifiers.ifTrue
+import com.adevinta.spark.icons.FavoriteFill
+import com.adevinta.spark.icons.FavoriteOutline
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- * Icon buttons help people take supplementary actions with a single tap. They’re used when a
- * compact button is required, such as in a toolbar or image list.
+ * Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a
+ * compact toggle button is required, such as in a toolbar or image list.
  *
- * @param icon a content to be drawn inside the IconButton
+ * @param checked controls the check state of this icon toggle button. When `true`, this component will
+ * show icons.checked, and `true` will show icons.unchecked
+ * @param icons a content to be drawn inside the IconToggleButton,
+ * should show one of [IconToggleButtonIcons] values that sets checked and unchecked
  * @param colors [IconButtonColors] that will be used to resolve the colors used for this icon
  * button in different states.
- * @param onClick called when this icon button is clicked
+ * @param onCheckedChange responds to user interaction of checking/unchecking the icon toggle button
+ * and changes @param checked by `true` or `false`
  * @param modifier the [Modifier] to be applied to this icon button
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
@@ -72,13 +83,15 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * for this icon button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
-internal fun SparkIconButton(
-    icon: SparkIcon,
+internal fun SparkIconToggleButton(
+    checked: Boolean,
+    icons: IconToggleButtonIcons,
+    onCheckedChange: (Boolean) -> Unit,
     colors: IconButtonColors,
-    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     shape: IconButtonShape = IconButtonDefaults.DefaultShape,
@@ -89,11 +102,12 @@ internal fun SparkIconButton(
 ) {
     val content: @Composable () -> Unit = {
         Icon(
-            sparkIcon = icon,
+            sparkIcon = if (checked) icons.checked else icons.unchecked,
             contentDescription = contentDescription,
             size = size.iconSize,
         )
     }
+
     PlainTooltipBox(
         tooltip = { Text(contentDescription.orEmpty()) },
         shape = IconButtonDefaults.TooltipContainerShape,
@@ -101,16 +115,18 @@ internal fun SparkIconButton(
         contentColor = IconButtonDefaults.TooltipContentColor,
     ) {
         Surface(
-            onClick = onClick,
+            checked = checked,
+            onCheckedChange = onCheckedChange,
             modifier = modifier
                 .minimumTouchTargetSize()
                 .tooltipAnchor()
-                .sparkUsageOverlay(),
+                .sparkUsageOverlay()
+                .semantics { role = Role.Checkbox },
             enabled = enabled,
             shape = shape.shape,
-            color = colors.containerColor(enabled = enabled).value,
-            contentColor = colors.contentColor(enabled).value,
             border = border,
+            color = colors.containerColor(enabled).value,
+            contentColor = colors.contentColor(enabled).value,
             interactionSource = interactionSource,
         ) {
             Box(
@@ -124,43 +140,28 @@ internal fun SparkIconButton(
 }
 
 @Preview(
-    group = "IconButtons",
-    name = "IconButtons",
+    group = "IconToggleButtons",
+    name = "IconToggleButtons",
 )
 @Composable
-internal fun IconButtonPreview(
+internal fun IconToggleButtonPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         val intent = IconButtonIntent.Basic
+        var state by remember {
+            mutableStateOf(false)
+        }
         IconButtonSize.values().forEach { size ->
             IconButtonShape.values().forEach { shape ->
-                IconButtonFilledPair(
-                    intent = intent,
+                SparkIconToggleButton(
+                    checked = state,
+                    icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
+                    onCheckedChange = { state = !state },
+                    IconButtonDefaults.filledIconButtonColors(intent = intent.colors()),
                     size = size,
                     shape = shape,
                 )
-            }
-        }
-    }
-}
-
-@Composable
-internal fun IconButtonPreview(
-    content: @Composable (
-        intent: IconButtonIntent,
-        shape: IconButtonShape,
-    ) -> Unit,
-) {
-    IconButtonIntent.values().forEach { intent ->
-        Row(
-            modifier = Modifier.ifTrue(intent == IconButtonIntent.Surface) {
-                background(SparkTheme.colors.neutralContainer)
-            },
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            IconButtonShape.values().forEach { shape ->
-                content(intent = intent, shape = shape)
             }
         }
     }

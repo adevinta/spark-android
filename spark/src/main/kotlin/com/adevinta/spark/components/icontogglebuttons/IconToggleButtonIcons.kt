@@ -19,19 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.components.icons
+package com.adevinta.spark.components.icontogglebuttons
 
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import com.adevinta.spark.icons.SparkIcon
 
-public object IconDefaults {
-    public val size: IconSize = IconSize.Medium
-    public val intent: IconIntent = IconIntent.Current
-}
-
-public enum class IconSize(public val size: Dp) {
-    Small(16.dp),
-    Medium(24.dp),
-    Large(32.dp),
-    ExtraLarge(40.dp),
-}
+/**
+ * @property checked icon to be used for the checked state
+ * @property unchecked icon to be used for the unchecked state
+ */
+public data class IconToggleButtonIcons(
+    val checked: SparkIcon,
+    val unchecked: SparkIcon,
+)
