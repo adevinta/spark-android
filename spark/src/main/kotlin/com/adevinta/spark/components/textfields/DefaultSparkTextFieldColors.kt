@@ -130,7 +130,7 @@ internal data class DefaultSparkTextFieldColors(
      * Represents the color used for the leading icon of this text field.
      *
      * @param enabled whether the text field is enabled
-     * @param isError whether the text field's current value is in error
+     * @param state whether the text field's current value is in error, success or alert
      * @param interactionSource the [InteractionSource] of this text field. Helps to determine if
      * the text field is in focus or not
      */
@@ -156,7 +156,7 @@ internal data class DefaultSparkTextFieldColors(
      * Represents the color used for the trailing icon of this text field.
      *
      * @param enabled whether the text field is enabled
-     * @param isError whether the text field's current value is in error
+     * @param state whether the text field's current value is in error, success or alert
      * @param interactionSource the [InteractionSource] of this text field. Helps to determine if
      * the text field is in focus or not
      */
@@ -182,13 +182,15 @@ internal data class DefaultSparkTextFieldColors(
      * Represents the color used for the border indicator of this text field.
      *
      * @param enabled whether the text field is enabled
-     * @param isError whether the text field's current value is in error
+     * @param readOnly whether the text field's value can't be edited
+     * @param state whether the text field's current value is in error, success or alert
      * @param interactionSource the [InteractionSource] of this text field. Helps to determine if
      * the text field is in focus or not
      */
     @Composable
     internal fun indicatorColor(
         enabled: Boolean,
+        readOnly: Boolean,
         state: TextFieldState?,
         interactionSource: InteractionSource,
     ): State<Color> {
@@ -197,7 +199,7 @@ internal data class DefaultSparkTextFieldColors(
         val targetValue = when {
             !enabled -> disabledIndicatorColor
             state != null -> state.color()
-            focused -> focusedIndicatorColor
+            focused && !readOnly -> focusedIndicatorColor
             else -> unfocusedIndicatorColor
         }
         return if (enabled) {
@@ -233,7 +235,7 @@ internal data class DefaultSparkTextFieldColors(
      * Represents the color used for the label of this text field.
      *
      * @param enabled whether the text field is enabled
-     * @param isError whether the text field's current value is in error
+     * @param state whether the text field's current value is in error, success or alert
      * @param interactionSource the [InteractionSource] of this text field. Helps to determine if
      * the text field is in focus or not
      */
@@ -280,7 +282,7 @@ internal data class DefaultSparkTextFieldColors(
     /**
      * Represents the color used for the cursor of this text field.
      *
-     * @param isError whether the text field's current value is in error
+     * @param state whether the text field's current value is in error, success or alert
      */
     @Composable
     internal fun cursorColor(state: TextFieldState?): State<Color> {
