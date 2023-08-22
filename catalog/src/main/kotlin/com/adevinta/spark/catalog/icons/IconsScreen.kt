@@ -40,6 +40,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -66,6 +67,8 @@ import com.adevinta.spark.icons.DeleteFill
 import com.adevinta.spark.icons.Search
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.withContext
 import java.util.Locale
 import com.adevinta.spark.icons.R as IconR
 
@@ -78,8 +81,11 @@ public fun IconsScreen(
 ) {
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
-    val icons by remember {
-        mutableStateOf(getAllIconsRes(context))
+    var icons: List<NamedIcon> by remember {
+        mutableStateOf(emptyList())
+    }
+    LaunchedEffect(Unit) {
+        icons = getAllIconsRes(context)
     }
     var query: String by rememberSaveable { mutableStateOf("") }
     val filteredIcons by remember {
@@ -163,15 +169,17 @@ private data class NamedIcon(
     val name: String,
 )
 
-private fun getAllIconsRes(context: Context) = IconR.drawable::class.java.declaredFields.mapNotNull { field ->
-    val prefix = "spark_icons_"
-    val icon = field.getInt(null)
-    val name = context.resources.getResourceEntryName(icon)
-    if (!name.startsWith(prefix)) return@mapNotNull null
-    NamedIcon(
-        drawableRes = icon,
-        name = name.removePrefix(prefix).toPascalCase(),
-    )
+private suspend fun getAllIconsRes(context: Context) = withContext(Default) {
+    IconR.drawable::class.java.declaredFields.mapNotNull { field ->
+        val prefix = "spark_icons_"
+        val icon = field.getInt(null)
+        val name = context.resources.getResourceEntryName(icon)
+        if (!name.startsWith(prefix)) return@mapNotNull null
+        NamedIcon(
+            drawableRes = icon,
+            name = name.removePrefix(prefix).toPascalCase(),
+        )
+    }
 }
 
 private fun String.toPascalCase(): String = split("_").joinToString(separator = "") { str ->
