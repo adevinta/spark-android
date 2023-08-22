@@ -113,7 +113,7 @@ internal val KleinanzeigenLight: SparkColors = lightSparkColors(
     onSupport = White,
     supportContainer = Green200,
     onSupportContainer = Green700,
-    supportVariant = Green800, // tertiary => neutral / Dim 1
+    supportVariant = Green800,
     onSupportVariant = White,
     success = Green600,
     onSuccess = White,
@@ -168,7 +168,7 @@ internal val KleinanzeigenDark: SparkColors = lightSparkColors(
     onSupportVariant = White,
     success = Green100,
     onSuccess = Neutral900,
-    successContainer = Green600, // == surface disabled
+    successContainer = Green600,
     onSuccessContainer = Green50,
     alert = Yellow200,
     onAlert = Neutral900,
