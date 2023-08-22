@@ -91,6 +91,7 @@ public enum class BrandMode(public val label: String) {
     LeboncoinLegacy("Leboncoin (Legacy)"),
     Leboncoin("Leboncoin (New Ui)"),
     Adevinta("Adevinta"),
+    Kleinanzeigen("Kleinanzeigen"),
 }
 
 public enum class UserMode {
