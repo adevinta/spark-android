@@ -208,30 +208,3 @@ internal val KleinanzeigenTypo: SparkTypography = sparkTypography(
     small = smallType,
     callout = calloutType,
 )
-
-public fun brandTypography(
-    isLegacy: Boolean,
-    display1: TextStyle = display1Type,
-    display2: TextStyle = display2Type,
-    display3: TextStyle = (if (isLegacy) tile1Type else display3Type),
-    headline1: TextStyle = (if (isLegacy) title2Type else headline1Type),
-    headline2: TextStyle = (if (isLegacy) title3Type else headline2Type),
-    subhead: TextStyle = subheadType,
-    body1: TextStyle = (if (isLegacy) largeType else body1Type),
-    body2: TextStyle = (if (isLegacy) bodyType else body2Type),
-    caption: TextStyle = (if (isLegacy) smallLegacyType else captionType),
-    small: TextStyle = (if (isLegacy) extraSmallType else smallType),
-    callout: TextStyle = (if (isLegacy) buttonType else calloutType),
-): SparkTypography = sparkTypography(
-    display1 = display1,
-    display2 = display2,
-    display3 = display3,
-    headline1 = headline1,
-    headline2 = headline2,
-    subhead = subhead,
-    body1 = body1,
-    body2 = body2,
-    caption = caption,
-    small = small,
-    callout = callout,
-)
