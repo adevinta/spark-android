@@ -113,7 +113,7 @@ internal val KleinanzeigenLight: SparkColors = lightSparkColors(
     onSupport = White,
     supportContainer = Green200,
     onSupportContainer = Green700,
-    supportVariant = Green800, // tertiary => neutral / Dim 1
+    supportVariant = Green800,
     onSupportVariant = White,
     success = Green600,
     onSuccess = White,
