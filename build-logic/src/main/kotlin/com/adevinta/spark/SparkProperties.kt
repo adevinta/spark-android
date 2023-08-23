@@ -48,6 +48,7 @@ internal class SparkVersions(catalog: VersionCatalog) {
     val `compileSdk` by catalog
     val `kotlin` by catalog
     val `ktlint` by catalog
+    val `showkase` by catalog
 
     private operator fun VersionCatalog.getValue(
         thisRef: Any?,
