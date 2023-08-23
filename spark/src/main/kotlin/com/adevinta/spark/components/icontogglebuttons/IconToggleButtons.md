@@ -47,7 +47,7 @@ Icon Toggle Buttons support all intents:
 
 #### IconToggleButtonFilled
 
-Filled icon toggl buttons are the standard for most use cases. The filled styling places the most
+Filled icon toggle buttons are the standard for most use cases. The filled styling places the most
 emphasis and should be used for important actions.
 
 ```kotlin
