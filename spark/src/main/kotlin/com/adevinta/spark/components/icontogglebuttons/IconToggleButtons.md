@@ -98,7 +98,7 @@ fun IconToggleButtonTinted(
 
 #### IconToggleButtonGhost
 
-Ghost icon toggl buttons are used for the lowest priority actions, especially when presenting multiple options.
+Ghost icon toggle buttons are used for the lowest priority actions, especially when presenting multiple options.
 
 Ghost icon toggl buttons can be placed on a variety of backgrounds. Until the button is interacted with, its
 container isn’t visible.
