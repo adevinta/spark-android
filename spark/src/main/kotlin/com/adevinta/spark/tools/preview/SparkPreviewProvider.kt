@@ -63,8 +63,8 @@ private class CompositeParameterProvider<T1 : Any, T2 : Any>(
     kClass2: KClass<out PreviewParameterProvider<T2>>,
 ) : PreviewParameterProvider<Pair<T1, T2>> {
 
-    private val provider1 = kClass1.java.newInstance()
-    private val provider2 = kClass2.java.newInstance()
+    private val provider1 = kClass1.java.getDeclaredConstructor().newInstance()
+    private val provider2 = kClass2.java.getDeclaredConstructor().newInstance()
 
     override val values: Sequence<Pair<T1, T2>>
         get() = provider1.values union provider2.values
