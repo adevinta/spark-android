@@ -25,6 +25,7 @@ import androidx.annotation.StringRes
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
@@ -90,6 +91,18 @@ private val IconButtons = Component(
     configurator = IconButtonsConfigurator,
 )
 
+private val IconToggleButtons = Component(
+    id = nextId(),
+    name = "IconToggleButtons",
+    description = R.string.component_icontogglebutton_description,
+    // No buttons icon
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/2352e9-icon-button/b/32e1a2",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.iconbuttons/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/iconTogglebuttons/IconToggleButton.kt",
+    examples = IconButtonsExamples,
+    configurator = IconToggleButtonsConfigurator,
+)
+
 private val RadioButtons = Component(
     id = nextId(),
     name = "Radio buttons",
@@ -131,6 +144,7 @@ public val Components: List<Component> = listOf(
     Buttons,
     Checkboxes,
     IconButtons,
+    IconToggleButtons,
     RadioButtons,
     Switches,
     TextFields,

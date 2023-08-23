@@ -56,6 +56,8 @@
     <string name="showkase_home_warning_description">These are the previews that the developers have when working on components. They are not exhaustive and are only meant to give you a quick idea of what the component looks like.</string>
     <!--Icon button example-->
     <string name="component_iconbutton_description">Icon buttons help people take supplementary actions with a single tap. They’re used when a compact button is required, such as in a toolbar or image list.</string>
+    <!--Icon Toggle button example-->
+    <string name="component_icontogglebutton_description">Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a compact button is required, such as in a toolbar or image list.</string>
     <!--Radio button example-->
     <string name="component_radiobutton_description">Component used when only one choice may be selected in a series of options.</string>
     <!--Switch example-->
