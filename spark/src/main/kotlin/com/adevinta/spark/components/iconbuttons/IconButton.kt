@@ -125,15 +125,15 @@ internal fun SparkIconButton(
                 contentAlignment = Alignment.Center,
             ) {
                 AnimatedContent(targetState = isLoading, label = "loadingAnimation") { isLoading ->
-                    if (isLoading.not()) {
-                        content()
-                    } else {
+                    if (isLoading) {
                         Spinner(
                             size = when (size) {
                                 IconButtonSize.Small, IconButtonSize.Medium -> SpinnerSize.Small
                                 IconButtonSize.Large -> SpinnerSize.Medium
                             },
                         )
+                    } else {
+                        content()
                     }
                 }
             }
