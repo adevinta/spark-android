@@ -99,7 +99,7 @@ internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotli
             jvmTarget.set(JvmTarget.JVM_11)
             // kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
             this.allWarningsAsErrors.set(allWarningsAsErrors)
-            freeCompilerArgs.add(ExplicitApiMode.Strict.toCompilerArg())
+            explicitApiMode.set(ExplicitApiMode.Strict)
         }
     }
 }
