@@ -115,7 +115,10 @@ public fun ThemePicker(
                         .fillMaxWidth()
                         .height(48.dp),
                 )
-                AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
+                AnimatedVisibility(
+                    visible = theme.colorMode == ColorMode.Brand,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
                     var expanded by remember { mutableStateOf(false) }
                     val selectedIcon = @Composable { Icon(SparkIcons.Check, contentDescription = null) }
                     SelectTextField(
@@ -150,15 +153,16 @@ public fun ThemePicker(
                 }
                 AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
                     SwitchLabelled(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(ThemePickerPadding),
+                        modifier = Modifier.padding(ThemePickerPadding),
                         checked = theme.userMode == UserMode.Pro,
                         onCheckedChange = { checked ->
                             onThemeChange(theme.copy(userMode = if (checked) UserMode.Pro else UserMode.Part))
                         },
                     ) {
-                        Text(text = stringResource(id = R.string.pro))
+                        Text(
+                            text = stringResource(id = R.string.pro),
+                            modifier = Modifier.fillMaxWidth(),
+                        )
                     }
                 }
             }

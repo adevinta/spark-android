@@ -66,7 +66,7 @@ internal fun SegmentedButton(
     selectedOption: String,
     onOptionSelect: (String) -> Unit,
     modifier: Modifier = Modifier,
-    selectedColor: Color = SparkTheme.colors.onSupportContainer,
+    selectedColor: Color = SparkTheme.colors.onAccentContainer,
     unSelectedColor: Color = LocalContentColor.current,
 ) {
     require(options.size >= 2) { "This composable requires at least 2 options" }
@@ -135,7 +135,7 @@ internal fun SegmentedButton(
                             bottomEndPercent = endCornerShape,
                         ),
                     )
-                    .background(SparkTheme.colors.supportContainer),
+                    .background(SparkTheme.colors.accentContainer),
             )
         },
     ) { measurables, constraints ->
