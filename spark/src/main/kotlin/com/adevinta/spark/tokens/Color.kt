@@ -1164,8 +1164,8 @@ public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (ba
     surfaceVariant -> onSurfaceVariant
     surfaceInverse -> onSurfaceInverse
     inverseSurface -> inverseOnSurface
-    valid -> onValid
-    validContainer -> onValidContainer
+    success -> onSuccess
+    successContainer -> onSuccessContainer
     alert -> onAlert
     alertContainer -> onAlertContainer
     error -> onError
@@ -1267,10 +1267,14 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
     onMain = other.onMain
     mainContainer = other.mainContainer
     onMainContainer = other.onMainContainer
+    mainVariant = other.mainVariant
+    onMainVariant = other.onMainVariant
     support = other.support
     onSupport = other.onSupport
     supportContainer = other.supportContainer
     onSupportContainer = other.onSupportContainer
+    supportVariant = other.supportVariant
+    onSupportVariant = other.onSupportVariant
     tertiary = other.tertiary
     onTertiary = other.onTertiary
     tertiaryContainer = other.tertiaryContainer
@@ -1290,10 +1294,10 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
     outlineHigh = other.outlineHigh
     outlineVariant = other.outlineVariant
     scrim = other.scrim
-    valid = other.valid
-    onValid = other.onValid
-    validContainer = other.validContainer
-    onValidContainer = other.onValidContainer
+    success = other.success
+    onSuccess = other.onSuccess
+    successContainer = other.successContainer
+    onSuccessContainer = other.onSuccessContainer
     alert = other.alert
     onAlert = other.onAlert
     alertContainer = other.alertContainer

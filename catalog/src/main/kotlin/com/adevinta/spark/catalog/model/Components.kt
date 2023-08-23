@@ -34,6 +34,7 @@ import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.SwitchExamples
+import com.adevinta.spark.catalog.examples.samples.tokens.TokensExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
 import com.adevinta.spark.catalog.util.PackageSummaryUrl
 import com.adevinta.spark.catalog.util.SparkSourceUrl
@@ -126,8 +127,21 @@ private val TextFields = Component(
     configurator = TextFieldsConfigurator,
 )
 
+private val Tokens = Component(
+    id = nextId(),
+    name = "Tokens",
+    description = R.string.component_tokens_description,
+    // No buttons icon
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/3075e9-foundations",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.tokens/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/tokens/Color.kt",
+    examples = TokensExamples,
+    configurator = null,
+)
+
 /** Components for the catalog, ordered alphabetically by name. */
 public val Components: List<Component> = listOf(
+    Tokens,
     Buttons,
     Checkboxes,
     IconButtons,
