@@ -81,7 +81,7 @@ fun IconToggleButtonOutlined(
 
 #### IconToggleButtonTinted
 
-Tinted icon toggl buttons are medium-emphasis buttons that is an alternative middle ground between
+Tinted icon toggle buttons are medium-emphasis buttons that is an alternative middle ground between
 default filled icon toggl buttons and outlined icon toggl buttons. They can be used in contexts where lower-priority
 icon button requires slightly more emphasis than an outline would give.
 
