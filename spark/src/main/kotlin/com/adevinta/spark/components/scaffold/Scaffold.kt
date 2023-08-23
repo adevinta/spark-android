@@ -91,7 +91,6 @@ import androidx.compose.material3.Scaffold as MaterialScaffold
  * properly offset top and bottom bars. If using [Modifier.verticalScroll], apply this modifier to
  * the child of the scroll, and not on the scroll itself.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun Scaffold(
     modifier: Modifier = Modifier,

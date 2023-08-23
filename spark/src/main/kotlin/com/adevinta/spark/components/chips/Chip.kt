@@ -31,7 +31,6 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Surface
@@ -76,7 +75,6 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  * @param content a Composable to set as the chip's content,
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
 private fun SparkChip(

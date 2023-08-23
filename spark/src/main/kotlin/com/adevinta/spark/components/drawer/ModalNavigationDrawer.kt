@@ -34,7 +34,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -58,7 +57,6 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 internal fun SparkModalNavigationDrawer(
@@ -94,7 +92,6 @@ internal fun SparkModalNavigationDrawer(
  * @param scrimColor color of the scrim that obscures content when the drawer is open
  * @param content content of the rest of the UI
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 public fun ModalNavigationDrawer(
@@ -115,7 +112,6 @@ public fun ModalNavigationDrawer(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(
     group = "Drawer",
     name = "ModalNavigationDrawer",

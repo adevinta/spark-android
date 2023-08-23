@@ -25,7 +25,6 @@ import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.DismissibleNavigationDrawer
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -57,7 +56,6 @@ import androidx.compose.material3.NavigationDrawerItem as MaterialNavigationDraw
 import androidx.compose.material3.NavigationDrawerItemColors as MaterialNavigationDrawerItemColors
 import androidx.compose.material3.NavigationDrawerItemDefaults as MaterialNavigationDrawerItemDefaults
 
-@OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
 internal fun SparkNavigationDrawerItem(
@@ -108,7 +106,6 @@ internal fun SparkNavigationDrawerItem(
  * for this item. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this item in different states.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 public fun NavigationDrawerItem(
@@ -134,7 +131,6 @@ public fun NavigationDrawerItem(
 }
 
 private object NavigationDrawerItemDefaults {
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun colors(
         selectedContainerColor: Color = SparkTheme.colors.supportContainer,
