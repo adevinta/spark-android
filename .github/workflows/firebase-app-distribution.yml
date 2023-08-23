@@ -84,7 +84,7 @@ jobs:
           to="$(git for-each-ref --sort=-v:refname --count=1 --format='%(tag)' refs/tags)"
           git log --topo-order --format="%h ~ %s" "$from..$to" --no-merges > release-notes.txt
 
-      - name: '📦 Archive release note'
+      - name: '📦 Archive release-notes.txt'
         uses: actions/upload-artifact@v3
         with:
           name: release-notes.txt
