@@ -24,6 +24,10 @@ package com.adevinta.spark.catalog.examples.samples.buttons
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -45,12 +49,13 @@ public val IconButtonsExamples: List<Example> = listOf(
         sourceUrl = IconButtonsExampleSourceUrl,
     ) {
         IconButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { onClick, enabled, icon, contentDescription, isLoading ->
                 IconButtonFilled(
                     onClick = onClick,
                     enabled = enabled,
                     icon = icon,
                     contentDescription = contentDescription,
+                    isLoading = isLoading,
                 )
             },
         )
@@ -61,12 +66,13 @@ public val IconButtonsExamples: List<Example> = listOf(
         sourceUrl = IconButtonsExampleSourceUrl,
     ) {
         IconButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { onClick, enabled, icon, contentDescription, isLoading ->
                 IconButtonTinted(
                     onClick = onClick,
                     enabled = enabled,
                     icon = icon,
                     contentDescription = contentDescription,
+                    isLoading = isLoading,
                 )
             },
         )
@@ -77,12 +83,13 @@ public val IconButtonsExamples: List<Example> = listOf(
         sourceUrl = IconButtonsExampleSourceUrl,
     ) {
         IconButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { onClick, enabled, icon, contentDescription, isLoading ->
                 IconButtonOutlined(
                     onClick = onClick,
                     enabled = enabled,
                     icon = icon,
                     contentDescription = contentDescription,
+                    isLoading = isLoading,
                 )
             },
         )
@@ -93,12 +100,13 @@ public val IconButtonsExamples: List<Example> = listOf(
         sourceUrl = IconButtonsExampleSourceUrl,
     ) {
         IconButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { onClick, enabled, icon, contentDescription, isLoading ->
                 IconButtonGhost(
                     onClick = onClick,
                     enabled = enabled,
                     icon = icon,
                     contentDescription = contentDescription,
+                    isLoading = isLoading,
                 )
             },
         )
@@ -109,12 +117,13 @@ public val IconButtonsExamples: List<Example> = listOf(
         sourceUrl = IconButtonsExampleSourceUrl,
     ) {
         IconButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { onClick, enabled, icon, contentDescription, isLoading ->
                 IconButtonContrast(
                     onClick = onClick,
                     enabled = enabled,
                     icon = icon,
                     contentDescription = contentDescription,
+                    isLoading = isLoading,
                 )
             },
         )
@@ -128,6 +137,7 @@ private fun IconButtonSample(
         enabled: Boolean,
         icon: SparkIcon,
         contentDescription: String?,
+        isLoading: Boolean,
     ) -> Unit,
 ) {
     Column(
@@ -135,17 +145,20 @@ private fun IconButtonSample(
     ) {
         val icon = SparkIcons.LikeFill
         val contentDescription = "Localized Content Description"
+        var isLoading by remember { mutableStateOf(false) }
         button(
             /* onClick = */ { },
             /* enabled = */ true,
             /* icon = */ icon,
             /* contentDescription = */ contentDescription,
+            /* isLoading = */ isLoading,
         )
         button(
             /* onClick = */ { },
             /* enabled = */ false,
             /* icon = */ icon,
             /* contentDescription = */ contentDescription,
+            /* isLoading = */ isLoading,
         )
     }
 }

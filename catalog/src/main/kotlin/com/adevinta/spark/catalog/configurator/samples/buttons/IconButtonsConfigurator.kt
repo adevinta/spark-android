@@ -77,7 +77,8 @@ private fun IconButtonSample() {
         modifier = Modifier.verticalScroll(scrollState),
     ) {
         var style by remember { mutableStateOf(IconButtonStyle.Filled) }
-        var icon: SparkIcon by remember { mutableStateOf(SparkIcons.LikeFill) }
+        val icon: SparkIcon by remember { mutableStateOf(SparkIcons.LikeFill) }
+        var isLoading by remember { mutableStateOf(false) }
         var isEnabled by remember { mutableStateOf(true) }
         var shape by remember { mutableStateOf(IconButtonShape.Large) }
         var size by remember { mutableStateOf(IconButtonSize.Medium) }
@@ -92,8 +93,19 @@ private fun IconButtonSample() {
             size = size,
             intent = intent,
             isEnabled = isEnabled,
+            isLoading = isLoading,
             icon = icon,
         )
+
+        SwitchLabelled(
+            checked = isLoading,
+            onCheckedChange = { isLoading = it },
+        ) {
+            Text(
+                text = "Loading",
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
 
         SwitchLabelled(
             checked = isEnabled,
@@ -208,6 +220,7 @@ private fun ConfigedIconButton(
     size: IconButtonSize,
     intent: IconButtonIntent,
     isEnabled: Boolean,
+    isLoading: Boolean,
     icon: SparkIcon,
 ) {
     when (style) {
@@ -219,6 +232,7 @@ private fun ConfigedIconButton(
             shape = shape,
             intent = intent,
             enabled = isEnabled,
+            isLoading = isLoading,
             icon = icon,
         )
 
@@ -230,6 +244,7 @@ private fun ConfigedIconButton(
             shape = shape,
             intent = intent,
             enabled = isEnabled,
+            isLoading = isLoading,
             icon = icon,
         )
 
@@ -241,6 +256,7 @@ private fun ConfigedIconButton(
             shape = shape,
             intent = intent,
             enabled = isEnabled,
+            isLoading = isLoading,
             icon = icon,
         )
 
@@ -252,6 +268,7 @@ private fun ConfigedIconButton(
             shape = shape,
             intent = intent,
             enabled = isEnabled,
+            isLoading = isLoading,
             icon = icon,
         )
 
@@ -263,6 +280,7 @@ private fun ConfigedIconButton(
             shape = shape,
             intent = intent,
             enabled = isEnabled,
+            isLoading = isLoading,
             icon = icon,
         )
     }
