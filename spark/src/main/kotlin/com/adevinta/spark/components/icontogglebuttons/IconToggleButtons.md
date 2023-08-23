@@ -1,4 +1,4 @@
-# Package com.adevinta.spark.components.buttons
+# Package com.adevinta.spark.components.icontogglebuttons
 
 [IconToggleButtons](https://spark.adevinta.com/1186e1705/p/2352e9-icon-button/b/32e1a2) take supplementary
 actions with a single tap. They’re used when a compact button is required, such as in a toolbar or
