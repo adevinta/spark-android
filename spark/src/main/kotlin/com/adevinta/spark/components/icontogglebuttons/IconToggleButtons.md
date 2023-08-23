@@ -63,7 +63,7 @@ fun IconToggleButtonFilled(
 
 #### IconToggleButtonOutlined
 
-Outlined icon toggl buttons are used for support actions. The outlined styling places less emphasis on these
+Outlined icon toggle buttons are used for support actions. The outlined styling places less emphasis on these
 actions that are important but not the main ones.
 
 Be aware that it's not advised to use it on top of images since it will be hard to see.
