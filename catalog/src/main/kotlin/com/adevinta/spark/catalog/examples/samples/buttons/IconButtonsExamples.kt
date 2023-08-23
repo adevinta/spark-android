@@ -136,16 +136,16 @@ private fun IconButtonSample(
         val icon = SparkIcons.LikeFill
         val contentDescription = "Localized Content Description"
         button(
-            onClick = { },
-            enabled = true,
-            icon = icon,
-            contentDescription = contentDescription,
+            /* onClick = */ { },
+            /* enabled = */ true,
+            /* icon = */ icon,
+            /* contentDescription = */ contentDescription,
         )
         button(
-            onClick = { },
-            enabled = false,
-            icon = icon,
-            contentDescription = contentDescription,
+            /* onClick = */ { },
+            /* enabled = */ false,
+            /* icon = */ icon,
+            /* contentDescription = */ contentDescription,
         )
     }
 }

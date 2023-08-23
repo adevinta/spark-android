@@ -155,36 +155,36 @@ private fun ButtonSample(
         val buttonText = "Filled Button"
 
         button(
-            text = buttonText,
-            onClick = { isLoading = !isLoading },
-            isLoading = isLoading,
-            enabled = true,
-            icon = null,
-            iconSide = IconSide.START,
+            /* onClick = */ { isLoading = !isLoading },
+            /* text = */ buttonText,
+            /* enabled = */true,
+            /* icon = */ null,
+            /* iconSide = */ IconSide.START,
+            /* isLoading = */ isLoading,
         )
         button(
-            text = buttonText,
-            icon = icon,
-            onClick = { isLoading = !isLoading },
-            isLoading = isLoading,
-            enabled = true,
-            iconSide = IconSide.START,
+            /* onClick = */ { isLoading = !isLoading },
+            /* text = */ buttonText,
+            /* enabled = */true,
+            /* icon = */ icon,
+            /* iconSide = */ IconSide.START,
+            /* isLoading = */ isLoading,
         )
         button(
-            text = buttonText,
-            icon = icon,
-            iconSide = IconSide.END,
-            onClick = { isLoading = !isLoading },
-            isLoading = isLoading,
-            enabled = true,
+            /* onClick = */ { isLoading = !isLoading },
+            /* text = */ buttonText,
+            /* enabled = */true,
+            /* icon = */ icon,
+            /* iconSide = */ IconSide.END,
+            /* isLoading = */ isLoading,
         )
         button(
-            text = buttonText,
-            icon = icon,
-            enabled = false,
-            onClick = { isLoading = !isLoading },
-            isLoading = isLoading,
-            iconSide = IconSide.START,
+            /* onClick = */ { isLoading = !isLoading },
+            /* text = */ buttonText,
+            /* enabled = */false,
+            /* icon = */ icon,
+            /* iconSide = */ IconSide.START,
+            /* isLoading = */ isLoading,
         )
     }
 }

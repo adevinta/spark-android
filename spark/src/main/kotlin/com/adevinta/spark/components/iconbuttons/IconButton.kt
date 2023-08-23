@@ -160,7 +160,7 @@ internal fun IconButtonPreview(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             IconButtonShape.values().forEach { shape ->
-                content(intent = intent, shape = shape)
+                content(/*intent = */ intent, /*shape = */ shape)
             }
         }
     }
