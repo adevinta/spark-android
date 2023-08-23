@@ -24,7 +24,7 @@
 
 @file:Repository("https://repo1.maven.org/maven2/")
 @file:Repository("https://maven.google.com")
-@file:DependsOn("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0")
+@file:DependsOn("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10")
 @file:DependsOn("com.github.ajalt.clikt:clikt-jvm:4.2.0")
 
 import com.github.ajalt.clikt.core.CliktCommand
