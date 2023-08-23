@@ -117,7 +117,7 @@ fun IconToggleButtonGhost(
 
 #### IconToggleButtonContrast
 
-Contrast icon toggl buttons are used for the high to mid priority actions when the background is dark like on
+Contrast icon toggle buttons are used for the high to mid priority actions when the background is dark like on
 an image or a video.
 
 ```kotlin
