@@ -63,7 +63,6 @@ public val SparkIcons.ArrowVerticalRight: DrawableRes get() = DrawableRes(R.draw
 public val SparkIcons.AttachFileOutline: DrawableRes get() = DrawableRes(R.drawable.spark_icons_attach_file_outline)
 public val SparkIcons.Attic: DrawableRes get() = DrawableRes(R.drawable.spark_icons_attic)
 public val SparkIcons.Available: DrawableRes get() = DrawableRes(R.drawable.spark_icons_available)
-public val SparkIcons.AvatarFill: DrawableRes get() = DrawableRes(R.drawable.spark_icons_avatar_fill)
 public val SparkIcons.Axles: DrawableRes get() = DrawableRes(R.drawable.spark_icons_axles)
 public val SparkIcons.Baby: DrawableRes get() = DrawableRes(R.drawable.spark_icons_baby)
 public val SparkIcons.Balcony: DrawableRes get() = DrawableRes(R.drawable.spark_icons_balcony)
