@@ -51,3 +51,6 @@ internal fun Paparazzi.sparkSnapshot(
         }
     }
 }
+
+internal const val MaxPercentDifference: Double = 0.01
+internal const val PaparazziTheme: String = "android:Theme.MaterialComponent.Light.NoActionBar"

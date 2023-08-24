@@ -45,7 +45,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.takeOrElse
@@ -56,6 +55,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.tokens.PaletteTokens.Apple100
 import com.adevinta.spark.tokens.PaletteTokens.Apple400
 import com.adevinta.spark.tokens.PaletteTokens.Apple500
@@ -1164,8 +1164,8 @@ public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (ba
     surfaceVariant -> onSurfaceVariant
     surfaceInverse -> onSurfaceInverse
     inverseSurface -> inverseOnSurface
-    valid -> onValid
-    validContainer -> onValidContainer
+    success -> onSuccess
+    successContainer -> onSuccessContainer
     alert -> onAlert
     alertContainer -> onAlertContainer
     error -> onError
@@ -1267,10 +1267,14 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
     onMain = other.onMain
     mainContainer = other.mainContainer
     onMainContainer = other.onMainContainer
+    mainVariant = other.mainVariant
+    onMainVariant = other.onMainVariant
     support = other.support
     onSupport = other.onSupport
     supportContainer = other.supportContainer
     onSupportContainer = other.onSupportContainer
+    supportVariant = other.supportVariant
+    onSupportVariant = other.onSupportVariant
     tertiary = other.tertiary
     onTertiary = other.onTertiary
     tertiaryContainer = other.tertiaryContainer
@@ -1290,10 +1294,10 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
     outlineHigh = other.outlineHigh
     outlineVariant = other.outlineVariant
     scrim = other.scrim
-    valid = other.valid
-    onValid = other.onValid
-    validContainer = other.validContainer
-    onValidContainer = other.onValidContainer
+    success = other.success
+    onSuccess = other.onSuccess
+    successContainer = other.successContainer
+    onSuccessContainer = other.onSuccessContainer
     alert = other.alert
     onAlert = other.onAlert
     alertContainer = other.alertContainer
@@ -1438,16 +1442,13 @@ private fun ColorPreview(
                     ColorItem(SparkTheme.colors.supportVariant, "support Variant")
                 }
                 Row {
-                    ColorItem(SparkTheme.colors.background, "background")
-                    ColorItem(SparkTheme.colors.backgroundVariant, "backgroundVariant")
+                    ColorItem(SparkTheme.colors.accent, "accent")
+                    ColorItem(SparkTheme.colors.accentContainer, "accent Container")
+                    ColorItem(SparkTheme.colors.accentVariant, "accent Variant")
                 }
                 Row {
-                    ColorItem(SparkTheme.colors.surface, "surface")
-                    ColorItem(SparkTheme.colors.surfaceInverse, "surface inverse")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.outline, "outline")
-                    ColorItem(SparkTheme.colors.outlineHigh, "outline High")
+                    ColorItem(SparkTheme.colors.basic, "basic")
+                    ColorItem(SparkTheme.colors.basicContainer, "basic Container")
                 }
             }
             Column {
@@ -1472,6 +1473,20 @@ private fun ColorPreview(
                     ColorItem(SparkTheme.colors.neutralContainer, "neutral Container")
                 }
             }
+            Column {
+                Row {
+                    ColorItem(SparkTheme.colors.background, "background")
+                    ColorItem(SparkTheme.colors.backgroundVariant, "backgroundVariant")
+                }
+                Row {
+                    ColorItem(SparkTheme.colors.surface, "surface")
+                    ColorItem(SparkTheme.colors.surfaceInverse, "surface inverse")
+                }
+                Row {
+                    ColorItem(SparkTheme.colors.outline, "outline")
+                    ColorItem(SparkTheme.colors.outlineHigh, "outline High")
+                }
+            }
         }
     }
 }
@@ -1481,14 +1496,13 @@ private fun ColorItem(color: Color, colorName: String) {
     CompositionLocalProvider(
         LocalContentColor provides contentColorFor(backgroundColor = color),
     ) {
-        Box(
+        Surface(
             modifier = Modifier
                 .padding(8.dp)
-                .size(104.dp)
-                .clip(SparkTheme.shapes.extraLarge)
-                .border(BorderStroke(2.dp, SparkTheme.colors.onBackground), SparkTheme.shapes.extraLarge)
-                .background(color),
-            propagateMinConstraints = true,
+                .size(104.dp),
+            shape = SparkTheme.shapes.extraLarge,
+            border = BorderStroke(2.dp, SparkTheme.colors.onBackground),
+            color = color,
         ) {
             Box(
                 modifier = Modifier.padding(8.dp),
