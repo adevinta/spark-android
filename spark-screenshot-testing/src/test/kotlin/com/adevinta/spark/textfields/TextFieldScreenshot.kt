@@ -33,6 +33,7 @@ import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.EyeOffFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
@@ -58,6 +59,7 @@ internal class TextFieldScreenshot {
         theme = "android:Theme.MaterialComponent.Light.NoActionBar",
         renderingMode = SessionParams.RenderingMode.SHRINK,
         showSystemUi = false,
+        environment = patchedEnvironment(),
     )
 
     @Test

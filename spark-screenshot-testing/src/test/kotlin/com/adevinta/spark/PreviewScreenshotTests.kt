@@ -48,6 +48,7 @@ internal class PreviewScreenshotTests {
         theme = "android:Theme.MaterialComponent.Light.NoActionBar",
         renderingMode = SessionParams.RenderingMode.SHRINK,
         showSystemUi = false,
+        environment = patchedEnvironment(),
     )
 
     @Test
