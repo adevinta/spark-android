@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+
+## [0.4.2]
+_2023-08-24_
+
+* 🐛 Some color tokens were not updated on theme change
+
 ## [0.4.1]
 _2023-08-17_
 
@@ -97,7 +103,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.4.1...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.4.2...HEAD
+
+[0.4.2]: https://github.com/adevinta/spark-android/releases/tag/0.4.2
 
 [0.4.1]: https://github.com/adevinta/spark-android/releases/tag/0.4.1
 
