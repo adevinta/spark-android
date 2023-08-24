@@ -152,7 +152,7 @@ public fun IconsScreen(
                     Icon(
                         sparkIcon = SparkIcon.DrawableRes(drawableRes),
                         contentDescription = null,
-                        size = IconSize.Large,
+                        size = IconSize.ExtraLarge,
                     )
                     Text(
                         text = iconName,
