@@ -6,11 +6,13 @@
 
 
 ## [0.4.2]
+
 _2023-08-24_
 
 * 🐛 Some color tokens were not updated on theme change
 
 ## [0.4.1]
+
 _2023-08-17_
 
 ### Spark
