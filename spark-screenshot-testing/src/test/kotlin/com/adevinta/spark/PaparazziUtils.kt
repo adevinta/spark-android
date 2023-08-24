@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark
 
+import android.content.res.Resources.Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
@@ -51,3 +52,6 @@ internal fun Paparazzi.sparkSnapshot(
         }
     }
 }
+
+internal const val MaxPercentDifference: Double = 0.01
+internal const val PaparazziTheme: String = "android:Theme.MaterialComponent.Light.NoActionBar"

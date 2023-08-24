@@ -37,12 +37,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
+import com.adevinta.spark.MaxPercentDifference
+import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
@@ -58,8 +59,8 @@ internal class ColorsScreenshot {
 
     @get:Rule
     val paparazzi = Paparazzi(
-        maxPercentDifference = .01, // We can have in some cases 2/3 pixels being different for no apparent reasons :(
-        theme = "android:Theme.MaterialComponent.Light.NoActionBar",
+        maxPercentDifference = MaxPercentDifference,
+        theme = PaparazziTheme,
         renderingMode = SessionParams.RenderingMode.SHRINK,
         deviceConfig = DeviceConfig.PIXEL_C.copy(
             softButtons = false,
