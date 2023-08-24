@@ -69,7 +69,7 @@ internal class ColorsScreenshot {
         showSystemUi = true,
     )
 
-    val colors
+    private val colors
         @Composable
         get() = with(SparkTheme.colors) {
             listOf(
