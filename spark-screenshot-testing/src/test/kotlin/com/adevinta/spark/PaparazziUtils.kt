@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark
 
-import android.content.res.Resources.Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
