@@ -26,6 +26,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.Paparazzi
+import com.adevinta.spark.MaxPercentDifference
+import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
@@ -33,6 +35,7 @@ import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.EyeOffFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
@@ -54,10 +57,11 @@ internal class TextFieldScreenshot {
 
     @get:Rule
     val paparazzi = Paparazzi(
-        maxPercentDifference = .01, // We can have in some cases 2/3 pixels being different for no apparent reasons :(
-        theme = "android:Theme.MaterialComponent.Light.NoActionBar",
+        maxPercentDifference = MaxPercentDifference,
+        theme = PaparazziTheme,
         renderingMode = SessionParams.RenderingMode.SHRINK,
         showSystemUi = false,
+        environment = patchedEnvironment(),
     )
 
     @Test
