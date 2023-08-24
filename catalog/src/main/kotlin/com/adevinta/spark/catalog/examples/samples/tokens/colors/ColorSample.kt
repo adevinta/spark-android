@@ -24,14 +24,16 @@ package com.adevinta.spark.catalog.examples.samples.tokens.colors
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,56 +43,36 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.text.Text
+import kotlin.reflect.KProperty0
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun ColorSample() {
-    val scrollState = rememberScrollState()
-    FlowRow(
+    val tokens = tokensColors
+    LazyColumn(
         modifier = Modifier
-            .verticalScroll(scrollState)
             .fillMaxWidth(),
-        maxItemsInEachRow = 3,
     ) {
-        ColorItem(SparkTheme.colors.main, "main")
-        ColorItem(SparkTheme.colors.mainContainer, "main Container")
-        ColorItem(SparkTheme.colors.mainVariant, "main Variant")
-        ColorItem(SparkTheme.colors.support, "support")
-        ColorItem(SparkTheme.colors.supportContainer, "support Container")
-        ColorItem(SparkTheme.colors.supportVariant, "support Variant")
-        ColorItem(SparkTheme.colors.accent, "accent")
-        ColorItem(SparkTheme.colors.accentContainer, "accent Container")
-        ColorItem(SparkTheme.colors.accentVariant, "accent Variant")
-        ColorItem(SparkTheme.colors.basic, "basic")
-        ColorItem(SparkTheme.colors.basicContainer, "basic Container")
-        ColorItem(SparkTheme.colors.background, "background")
-        ColorItem(SparkTheme.colors.backgroundVariant, "backgroundVariant")
-        ColorItem(SparkTheme.colors.surface, "surface")
-        ColorItem(SparkTheme.colors.surfaceInverse, "surface inverse")
-        ColorItem(SparkTheme.colors.outline, "outline")
-        ColorItem(SparkTheme.colors.outlineHigh, "outline High")
-        ColorItem(SparkTheme.colors.success, "success")
-        ColorItem(SparkTheme.colors.successContainer, "success Container")
-        ColorItem(SparkTheme.colors.alert, "alert")
-        ColorItem(SparkTheme.colors.alertContainer, "alert Container")
-        ColorItem(SparkTheme.colors.error, "error")
-        ColorItem(SparkTheme.colors.errorContainer, "error Container")
-        ColorItem(SparkTheme.colors.info, "info")
-        ColorItem(SparkTheme.colors.infoContainer, "info Container")
-        ColorItem(SparkTheme.colors.neutral, "neutral")
-        ColorItem(SparkTheme.colors.neutralContainer, "neutral Container")
+        items(tokens) { token ->
+            Row {
+                token.forEach {
+                    ColorItem(it)
+                }
+            }
+        }
     }
 }
 
 @Composable
-private fun RowScope.ColorItem(color: Color, colorName: String) {
+private fun RowScope.ColorItem(color: KProperty0<Color>) {
     Surface(
         modifier = Modifier
             .padding(8.dp)
-            .sizeIn(minWidth = 104.dp, minHeight = 104.dp)
+            .heightIn(104.dp)
             .weight(1f),
+        color = color.get(),
         shape = SparkTheme.shapes.extraLarge,
-        color = color,
         border = BorderStroke(2.dp, SparkTheme.colors.onBackground),
     ) {
         Box(
@@ -98,13 +80,50 @@ private fun RowScope.ColorItem(color: Color, colorName: String) {
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = colorName,
+                text = color.name,
                 style = SparkTheme.typography.body2,
                 textAlign = TextAlign.Center,
             )
         }
     }
 }
+
+private val tokensColors
+    @Composable
+    get() = with(SparkTheme.colors) {
+        listOf(
+            ::main,
+            ::mainContainer,
+            ::mainVariant,
+            ::support,
+            ::supportContainer,
+            ::supportVariant,
+            ::accent,
+            ::accentContainer,
+            ::accentVariant,
+            ::basic,
+            ::basicContainer,
+            ::success,
+            ::successContainer,
+            ::alert,
+            ::alertContainer,
+            ::error,
+            ::errorContainer,
+            ::info,
+            ::infoContainer,
+            ::neutral,
+            ::neutralContainer,
+            ::background,
+            ::backgroundVariant,
+            ::surface,
+            ::surfaceInverse,
+            ::outline,
+            ::outlineHigh,
+        ).groupBy {
+            // Group by token name like "main",  "mainContainer" or "mainVariant"
+            it.name.takeWhile { !it.isUpperCase() }
+        }.values.toList()
+    }
 
 @Preview
 @Composable

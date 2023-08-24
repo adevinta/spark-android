@@ -24,8 +24,6 @@
 package com.adevinta.spark.tokens
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,9 +31,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -102,6 +98,7 @@ import com.adevinta.spark.tokens.PaletteTokens.Wiggings500
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings800
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+import kotlin.reflect.KProperty0
 
 public fun lightSparkColors(
     accent: Color = Violet300,
@@ -785,7 +782,7 @@ public class SparkColors(
         "This property will be removed as it is not part of Spark Token",
         ReplaceWith("backgroundVariant"),
 
-    )
+        )
     public var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
         internal set
 
@@ -1422,69 +1419,27 @@ public fun debugColors(
     group = "Tokens",
     name = "Colors",
     device = Devices.TABLET,
-    showSystemUi = true,
 )
 @Composable
 private fun ColorPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        Row {
+        Colors()
+    }
+}
+
+@Composable
+private fun Colors() {
+    Row {
+        previewColors.forEach { column ->
             Column {
-                Row {
-                    ColorItem(SparkTheme.colors.main, "main")
-                    ColorItem(SparkTheme.colors.mainContainer, "main Container")
-                    ColorItem(SparkTheme.colors.mainVariant, "main Variant")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.support, "support")
-                    ColorItem(SparkTheme.colors.supportContainer, "support Container")
-                    ColorItem(SparkTheme.colors.supportVariant, "support Variant")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.accent, "accent")
-                    ColorItem(SparkTheme.colors.accentContainer, "accent Container")
-                    ColorItem(SparkTheme.colors.accentVariant, "accent Variant")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.basic, "basic")
-                    ColorItem(SparkTheme.colors.basicContainer, "basic Container")
-                }
-            }
-            Column {
-                Row {
-                    ColorItem(SparkTheme.colors.success, "success")
-                    ColorItem(SparkTheme.colors.successContainer, "success Container")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.alert, "alert")
-                    ColorItem(SparkTheme.colors.alertContainer, "alert Container")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.error, "error")
-                    ColorItem(SparkTheme.colors.errorContainer, "error Container")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.info, "info")
-                    ColorItem(SparkTheme.colors.infoContainer, "info Container")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.neutral, "neutral")
-                    ColorItem(SparkTheme.colors.neutralContainer, "neutral Container")
-                }
-            }
-            Column {
-                Row {
-                    ColorItem(SparkTheme.colors.background, "background")
-                    ColorItem(SparkTheme.colors.backgroundVariant, "backgroundVariant")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.surface, "surface")
-                    ColorItem(SparkTheme.colors.surfaceInverse, "surface inverse")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.outline, "outline")
-                    ColorItem(SparkTheme.colors.outlineHigh, "outline High")
+                column.forEach { row ->
+                    Row {
+                        row.forEach { color ->
+                            ColorItem(color)
+                        }
+                    }
                 }
             }
         }
@@ -1492,28 +1447,49 @@ private fun ColorPreview(
 }
 
 @Composable
-private fun ColorItem(color: Color, colorName: String) {
-    CompositionLocalProvider(
-        LocalContentColor provides contentColorFor(backgroundColor = color),
+private fun ColorItem(color: KProperty0<Color>) {
+    Surface(
+        modifier = Modifier
+            .padding(8.dp)
+            .size(104.dp),
+        color = color.get(),
+        shape = SparkTheme.shapes.extraLarge,
+        border = BorderStroke(2.dp, SparkTheme.colors.onBackground),
     ) {
-        Surface(
-            modifier = Modifier
-                .padding(8.dp)
-                .size(104.dp),
-            shape = SparkTheme.shapes.extraLarge,
-            border = BorderStroke(2.dp, SparkTheme.colors.onBackground),
-            color = color,
+        Box(
+            modifier = Modifier.padding(8.dp),
+            contentAlignment = Alignment.Center,
         ) {
-            Box(
-                modifier = Modifier.padding(8.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(
-                    text = colorName,
-                    style = SparkTheme.typography.body,
-                    textAlign = TextAlign.Center,
-                )
-            }
+            com.adevinta.spark.components.text.Text(
+                text = color.name,
+                style = SparkTheme.typography.body2,
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }
+
+private val previewColors
+    @Composable
+    get() = with(SparkTheme.colors) {
+        listOf(
+            listOf(
+                listOf(::main, ::mainContainer, ::mainVariant),
+                listOf(::support, ::supportContainer, ::supportVariant),
+                listOf(::accent, ::accentContainer, ::accentVariant),
+                listOf(::basic, ::basicContainer),
+            ),
+            listOf(
+                listOf(::success, ::successContainer),
+                listOf(::alert, ::alertContainer),
+                listOf(::error, ::errorContainer),
+                listOf(::info, ::infoContainer),
+                listOf(::neutral, ::neutralContainer),
+            ),
+            listOf(
+                listOf(::background, ::backgroundVariant),
+                listOf(::surface, ::surfaceInverse),
+                listOf(::outline, ::outlineHigh),
+            ),
+        )
+    }
