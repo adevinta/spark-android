@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
 import app.cash.paparazzi.Paparazzi
+import app.cash.paparazzi.detectEnvironment
 
 internal fun Paparazzi.sparkSnapshot(
     name: String? = null,
@@ -50,4 +51,18 @@ internal fun Paparazzi.sparkSnapshot(
             }
         }
     }
+}
+
+/**
+ * Lower the current Paparazzi Environment from API level 34 to 33 to work around new resource conflicts:
+ *
+ * ```
+ * SEVERE: resources.format: Hexadecimal color expected, found Color State List for @android:color/system_bar_background_semi_transparent
+ * java.lang.NumberFormatException: Color value '/usr/local/lib/android/sdk/platforms/android-34/data/res/color/system_bar_background_semi_transparent.xml' has wrong size. Format is either#AARRGGBB, #RRGGBB, #RGB, or #ARGB
+ * ```
+ *
+ * GitHub issue: https://github.com/cashapp/paparazzi/issues/1025
+ */
+internal fun patchedEnvironment() = with(detectEnvironment()) {
+    copy(compileSdkVersion = 33, platformDir = platformDir.replace("34", "33"))
 }
