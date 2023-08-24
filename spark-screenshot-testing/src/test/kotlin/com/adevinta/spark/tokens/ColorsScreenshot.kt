@@ -94,7 +94,7 @@ internal class ColorsScreenshot {
         }
 
     @Test
-    fun adevintaColors() {
+    fun themesColors() {
         ThemeVariant.values().forEach {
             paparazzi.sparkSnapshot(name = it.name) {
                 SparkTheme(
