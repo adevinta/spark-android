@@ -1,4 +1,4 @@
-# Package com.adevinta.spark.components.buttons
+# Package com.adevinta.spark.components.icontogglebuttons
 
 [IconToggleButtons](https://spark.adevinta.com/1186e1705/p/2352e9-icon-button/b/32e1a2) take supplementary
 actions with a single tap. They’re used when a compact button is required, such as in a toolbar or
@@ -47,7 +47,7 @@ Icon Toggle Buttons support all intents:
 
 #### IconToggleButtonFilled
 
-Filled icon toggl buttons are the standard for most use cases. The filled styling places the most
+Filled icon toggle buttons are the standard for most use cases. The filled styling places the most
 emphasis and should be used for important actions.
 
 ```kotlin
@@ -63,7 +63,7 @@ fun IconToggleButtonFilled(
 
 #### IconToggleButtonOutlined
 
-Outlined icon toggl buttons are used for support actions. The outlined styling places less emphasis on these
+Outlined icon toggle buttons are used for support actions. The outlined styling places less emphasis on these
 actions that are important but not the main ones.
 
 Be aware that it's not advised to use it on top of images since it will be hard to see.
@@ -81,7 +81,7 @@ fun IconToggleButtonOutlined(
 
 #### IconToggleButtonTinted
 
-Tinted icon toggl buttons are medium-emphasis buttons that is an alternative middle ground between
+Tinted icon toggle buttons are medium-emphasis buttons that is an alternative middle ground between
 default filled icon toggl buttons and outlined icon toggl buttons. They can be used in contexts where lower-priority
 icon button requires slightly more emphasis than an outline would give.
 
@@ -98,7 +98,7 @@ fun IconToggleButtonTinted(
 
 #### IconToggleButtonGhost
 
-Ghost icon toggl buttons are used for the lowest priority actions, especially when presenting multiple options.
+Ghost icon toggle buttons are used for the lowest priority actions, especially when presenting multiple options.
 
 Ghost icon toggl buttons can be placed on a variety of backgrounds. Until the button is interacted with, its
 container isn’t visible.
@@ -117,7 +117,7 @@ fun IconToggleButtonGhost(
 
 #### IconToggleButtonContrast
 
-Contrast icon toggl buttons are used for the high to mid priority actions when the background is dark like on
+Contrast icon toggle buttons are used for the high to mid priority actions when the background is dark like on
 an image or a video.
 
 ```kotlin
