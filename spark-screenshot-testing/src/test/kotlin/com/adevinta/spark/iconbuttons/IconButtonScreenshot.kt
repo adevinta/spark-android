@@ -83,7 +83,7 @@ internal class IconButtonScreenshot {
             sizes.forEach { size ->
                 paparazzi.sparkSnapshot(
                     "_${shape}_shape" +
-                            "_${size}_size",
+                        "_${size}_size",
                 ) {
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -99,14 +99,6 @@ internal class IconButtonScreenshot {
                                     Row(
                                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                                     ) {
-                                        IconButtonGhost(
-                                            onClick = {},
-                                            icon = icon,
-                                            intent = intent,
-                                            shape = shape,
-                                            size = size,
-                                            enabled = isEnabled,
-                                        )
                                         IconButtonFilled(
                                             onClick = {},
                                             icon = icon,
@@ -123,6 +115,14 @@ internal class IconButtonScreenshot {
                                             size = size,
                                             enabled = isEnabled,
                                         )
+                                        IconButtonTinted(
+                                            onClick = {},
+                                            icon = icon,
+                                            intent = intent,
+                                            shape = shape,
+                                            size = size,
+                                            enabled = isEnabled,
+                                        )
                                         IconButtonContrast(
                                             onClick = {},
                                             icon = icon,
@@ -131,7 +131,7 @@ internal class IconButtonScreenshot {
                                             size = size,
                                             enabled = isEnabled,
                                         )
-                                        IconButtonTinted(
+                                        IconButtonGhost(
                                             onClick = {},
                                             icon = icon,
                                             intent = intent,
