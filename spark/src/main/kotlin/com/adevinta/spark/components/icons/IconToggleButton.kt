@@ -75,7 +75,6 @@ import androidx.compose.material3.OutlinedIconToggleButton as MaterialOutlinedIc
     ),
     level = DeprecationLevel.WARNING,
 )
-
 @Composable
 public fun IconToggleButton(
     checked: Boolean,
