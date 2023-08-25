@@ -25,7 +25,7 @@ import com.adevinta.spark.icons.SparkIcon
 
 /**
  * @property checked icon to be used for the checked state
- * @property unchecked icon to be used for the unchecked state
+ * @property unchecked [SparkIcon] to be used for the unchecked state
  */
 public data class IconToggleButtonIcons(
     val checked: SparkIcon,
