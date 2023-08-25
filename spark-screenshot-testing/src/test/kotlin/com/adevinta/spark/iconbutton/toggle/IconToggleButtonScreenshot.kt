@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.Paparazzi
+import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
@@ -71,6 +72,7 @@ internal class IconToggleButtonScreenshot {
         environment = patchedEnvironment(),
     )
 
+    @OptIn(ExperimentalSparkApi::class)
     @Test
     fun test() {
         shapes.forEach { shape ->
