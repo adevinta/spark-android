@@ -63,7 +63,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * compact toggle button is required, such as in a toolbar or image list.
  *
  * @param checked controls the check state of this icon toggle button. When `true`, this component will
- * show icons.checked, and `true` will show icons.unchecked
+ * show icons.checked, and `false` will show icons.unchecked
  * @param icons a content to be drawn inside the IconToggleButton,
  * should show one of [IconToggleButtonIcons] values that sets checked and unchecked
  * @param colors [IconButtonColors] that will be used to resolve the colors used for this icon
