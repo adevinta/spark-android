@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.progress.Spinner
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WheelOutline
@@ -49,6 +50,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
+ * @param isLoading show or hide a [Spinner] instead of the [icon] to indicate a
+ * loading state
  * @param shape to be applied to the IconButton background. It should be one of [IconButtonShape] values
  * @param size one of the [IconButtonSize] values that sets width and height of the IconButton
  * @param contentDescription text used by accessibility services to describe what this icon button
@@ -64,6 +67,7 @@ public fun IconButtonFilled(
     modifier: Modifier = Modifier,
     intent: IconButtonIntent = IconButtonDefaults.DefaultIntent,
     enabled: Boolean = true,
+    isLoading: Boolean = false,
     shape: IconButtonShape = IconButtonDefaults.DefaultShape,
     size: IconButtonSize = IconButtonDefaults.DefaultSize,
     contentDescription: String? = null,
@@ -76,6 +80,7 @@ public fun IconButtonFilled(
         modifier = modifier,
         colors = colors,
         enabled = enabled,
+        isLoading = isLoading,
         shape = shape,
         size = size,
         contentDescription = contentDescription,

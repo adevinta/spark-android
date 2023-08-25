@@ -21,6 +21,8 @@
  */
 package com.adevinta.spark.components.iconbuttons
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.Interaction
@@ -43,6 +45,8 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.progress.Spinner
+import com.adevinta.spark.components.progress.SpinnerSize
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.ifTrue
@@ -63,6 +67,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
+ * @param isLoading show or hide a [Spinner] instead of the [icon] to indicate a
+ * loading state
  * @param shape to be applied to the IconButton background. It should be one of [IconButtonShape] values
  * @param size one of the [IconButtonSize] values that sets width and height of the IconButton
  * @param border an optional [BorderStroke] to be applied to the IconButton
@@ -72,7 +78,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * for this icon button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  */
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @InternalSparkApi
 @Composable
 internal fun SparkIconButton(
@@ -81,6 +87,7 @@ internal fun SparkIconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    isLoading: Boolean = false,
     shape: IconButtonShape = IconButtonDefaults.DefaultShape,
     size: IconButtonSize = IconButtonDefaults.DefaultSize,
     border: BorderStroke? = null,
@@ -117,7 +124,18 @@ internal fun SparkIconButton(
                 modifier = Modifier.size(size.height),
                 contentAlignment = Alignment.Center,
             ) {
-                content()
+                AnimatedContent(targetState = isLoading, label = "loadingAnimation") { isLoading ->
+                    if (isLoading) {
+                        Spinner(
+                            size = when (size) {
+                                IconButtonSize.Small, IconButtonSize.Medium -> SpinnerSize.Small
+                                IconButtonSize.Large -> SpinnerSize.Medium
+                            },
+                        )
+                    } else {
+                        content()
+                    }
+                }
             }
         }
     }
