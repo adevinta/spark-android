@@ -46,11 +46,11 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 @ExperimentalSparkApi
 @Composable
 public fun IconToggleButtonOutlined(
-    icons: IconToggleButtonIcons,
+    checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
+    icons: IconToggleButtonIcons,
     modifier: Modifier = Modifier,
     intent: IconButtonIntent = IconButtonDefaults.DefaultIntent,
-    checked: Boolean = true,
     enabled: Boolean = true,
     shape: IconButtonShape = IconButtonDefaults.DefaultShape,
     size: IconButtonSize = IconButtonDefaults.DefaultSize,

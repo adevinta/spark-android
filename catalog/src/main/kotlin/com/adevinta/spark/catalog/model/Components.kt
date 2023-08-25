@@ -33,6 +33,7 @@ import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurato
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
+import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.SwitchExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
@@ -99,7 +100,7 @@ private val IconToggleButtons = Component(
     guidelinesUrl = "$ComponentGuidelinesUrl/p/2352e9-icon-button/b/32e1a2",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.iconbuttons/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/iconTogglebuttons/IconToggleButton.kt",
-    examples = IconButtonsExamples,
+    examples = IconToggleButtonsExamples,
     configurator = IconToggleButtonsConfigurator,
 )
 

@@ -1,0 +1,157 @@
+/*
+ * Copyright (c) 2023 Adevinta
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package com.adevinta.spark.catalog.examples.samples.toggles
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.catalog.model.Example
+import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.icontogglebuttons.IconToggleButtonContrast
+import com.adevinta.spark.components.icontogglebuttons.IconToggleButtonFilled
+import com.adevinta.spark.components.icontogglebuttons.IconToggleButtonGhost
+import com.adevinta.spark.components.icontogglebuttons.IconToggleButtonIcons
+import com.adevinta.spark.components.icontogglebuttons.IconToggleButtonOutlined
+import com.adevinta.spark.components.icontogglebuttons.IconToggleButtonTinted
+import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
+
+private const val IconToggleButtonsExampleDescription = "Icon Toggle Button examples"
+private const val IconToggleButtonsExampleSourceUrl = "$SampleSourceUrl/IconToggleButtonSamples.kt"
+public val IconToggleButtonsExamples: List<Example> = listOf(
+    Example(
+        name = "Filled Icon Toggle Button",
+        description = IconToggleButtonsExampleDescription,
+        sourceUrl = IconToggleButtonsExampleSourceUrl,
+    ) {
+        IconToggleButtonSample(
+            button = { onClick, enabled, icon, contentDescription ->
+                IconToggleButtonFilled(
+                    checked = true,
+                    enabled = enabled,
+                    onCheckedChange = {},
+                    icons = IconToggleButtonIcons(icon, icon),
+                    contentDescription = contentDescription,
+                )
+            },
+        )
+    },
+    Example(
+        name = "Tinted Icon Toggle Button",
+        description = IconToggleButtonsExampleDescription,
+        sourceUrl = IconToggleButtonsExampleSourceUrl,
+    ) {
+        IconToggleButtonSample(
+            button = { onClick, enabled, icon, contentDescription ->
+                IconToggleButtonTinted(
+                    checked = true,
+                    enabled = enabled,
+                    onCheckedChange = {},
+                    icons = IconToggleButtonIcons(icon, icon),
+                    contentDescription = contentDescription,
+                )
+            },
+        )
+    },
+    Example(
+        name = "Outlined Icon Toggle Button",
+        description = IconToggleButtonsExampleDescription,
+        sourceUrl = IconToggleButtonsExampleSourceUrl,
+    ) {
+        IconToggleButtonSample(
+            button = { onClick, enabled, icon, contentDescription ->
+                IconToggleButtonOutlined(
+                    checked = true,
+                    enabled = enabled,
+                    onCheckedChange = {},
+                    icons = IconToggleButtonIcons(icon, icon),
+                    contentDescription = contentDescription,
+                )
+            },
+        )
+    },
+    Example(
+        name = "Ghost Icon Toggle Button",
+        description = IconToggleButtonsExampleDescription,
+        sourceUrl = IconToggleButtonsExampleSourceUrl,
+    ) {
+        IconToggleButtonSample(
+            button = { onClick, enabled, icon, contentDescription ->
+                IconToggleButtonGhost(
+                    checked = true,
+                    enabled = enabled,
+                    onCheckedChange = {},
+                    icons = IconToggleButtonIcons(icon, icon),
+                    contentDescription = contentDescription,
+                )
+            },
+        )
+    },
+    Example(
+        name = "Contrast Icon Toggle Button",
+        description = IconToggleButtonsExampleDescription,
+        sourceUrl = IconToggleButtonsExampleSourceUrl,
+    ) {
+        IconToggleButtonSample(
+            button = { onClick, enabled, icon, contentDescription ->
+                IconToggleButtonContrast(
+                    checked = true,
+                    enabled = enabled,
+                    onCheckedChange = {},
+                    icons = IconToggleButtonIcons(icon, icon),
+                    contentDescription = contentDescription,
+                )
+            },
+        )
+    },
+)
+
+@Composable
+private fun IconToggleButtonSample(
+    button: @Composable (
+        onClick: () -> Unit,
+        enabled: Boolean,
+        icon: SparkIcon,
+        contentDescription: String?,
+    ) -> Unit,
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        val icon = SparkIcons.LikeFill
+        val contentDescription = "Localized Content Description"
+        button(
+            /* onClick = */ { },
+            /* enabled = */ true,
+            /* icon = */ icon,
+            /* contentDescription = */ contentDescription,
+        )
+        button(
+            /* onClick = */ { },
+            /* enabled = */ false,
+            /* icon = */ icon,
+            /* contentDescription = */ contentDescription,
+        )
+    }
+}
