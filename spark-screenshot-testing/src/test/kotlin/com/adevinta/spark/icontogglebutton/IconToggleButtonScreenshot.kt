@@ -80,10 +80,10 @@ internal class IconToggleButtonScreenshot {
                         intents.forEach { intent ->
                             paparazzi.sparkSnapshot(
                                 name = "_$shape" +
-                                        "_$size" +
-                                        "_checked".takeIf { isChecked }.orEmpty() +
-                                        "_enabled".takeIf { isEnabled }.orEmpty() +
-                                        "_$intent",
+                                    "_$size" +
+                                    "_checked".takeIf { isChecked }.orEmpty() +
+                                    "_enabled".takeIf { isEnabled }.orEmpty() +
+                                    "_$intent",
                             ) {
                                 Column(
                                     verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -136,7 +136,4 @@ internal class IconToggleButtonScreenshot {
             }
         }
     }
-
 }
-
-
