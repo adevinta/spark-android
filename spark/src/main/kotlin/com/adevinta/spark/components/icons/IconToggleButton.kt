@@ -71,7 +71,7 @@ import androidx.compose.material3.OutlinedIconToggleButton as MaterialOutlinedIc
     message = "This component is no longer used",
     replaceWith = ReplaceWith(
         expression = "IconToggleButtonGhost(icons, onCheckedChange, modifier, checked, enabled, interactionSource)",
-        imports = ["com.adevinta.spark.components.icontogglebuttons.IconToggleButtonGhost"],
+        imports = ["com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonGhost"],
     ),
     level = DeprecationLevel.WARNING,
 )
@@ -128,7 +128,7 @@ public fun IconToggleButton(
     message = "This component is no longer used",
     replaceWith = ReplaceWith(
         expression = "IconToggleButtonFilled(icons, onCheckedChange, modifier, checked, enabled, interactionSource)",
-        imports = ["com.adevinta.spark.components.icontogglebuttons.IconToggleButtonFilled"],
+        imports = ["com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled"],
     ),
     level = DeprecationLevel.WARNING,
 )
@@ -192,7 +192,7 @@ public fun FilledIconToggleButton(
     message = "This component is no longer used",
     replaceWith = ReplaceWith(
         expression = "IconToggleButtonTinted(icons, onCheckedChange, modifier, checked, enabled, interactionSource)",
-        imports = ["com.adevinta.spark.components.icontogglebuttons.IconToggleButtonTinted"],
+        imports = ["com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonTinted"],
     ),
     level = DeprecationLevel.WARNING,
 )
@@ -257,7 +257,7 @@ public fun FilledTonalIconToggleButton(
     message = "This component is no longer used",
     replaceWith = ReplaceWith(
         expression = "IconToggleButtonOutlined(icons, onCheckedChange, modifier, checked, enabled, interactionSource)",
-        imports = ["com.adevinta.spark.components.icontogglebuttons.IconToggleButtonOutlined"],
+        imports = ["com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonOutlined"],
     ),
     level = DeprecationLevel.WARNING,
 )
