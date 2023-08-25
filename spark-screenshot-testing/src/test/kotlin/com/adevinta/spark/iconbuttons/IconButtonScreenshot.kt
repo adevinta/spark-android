@@ -75,10 +75,10 @@ internal class IconButtonScreenshot {
                     intents.forEach { intent ->
                         paparazzi.sparkSnapshot(
                             name = "_${shape}_shape" +
-                                    "_${size}_size" +
-                                    "_${intent}_intent" +
-                                    "_enabled".takeIf { isEnabled }.orEmpty() +
-                                    "_disabled".takeIf { isEnabled.not() }.orEmpty(),
+                                "_${size}_size" +
+                                "_${intent}_intent" +
+                                "_enabled".takeIf { isEnabled }.orEmpty() +
+                                "_disabled".takeIf { isEnabled.not() }.orEmpty(),
                         ) {
                             Column(
                                 verticalArrangement = Arrangement.spacedBy(8.dp),
