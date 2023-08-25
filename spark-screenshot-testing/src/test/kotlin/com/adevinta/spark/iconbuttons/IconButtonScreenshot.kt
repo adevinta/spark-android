@@ -123,7 +123,7 @@ internal class IconButtonScreenshot {
                                             size = size,
                                             enabled = isEnabled,
                                         )
-                                        IconButtonContrast(
+                                        IconButtonGhost(
                                             onClick = {},
                                             icon = icon,
                                             intent = intent,
@@ -131,7 +131,7 @@ internal class IconButtonScreenshot {
                                             size = size,
                                             enabled = isEnabled,
                                         )
-                                        IconButtonGhost(
+                                        IconButtonContrast(
                                             onClick = {},
                                             icon = icon,
                                             intent = intent,
