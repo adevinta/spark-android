@@ -74,10 +74,11 @@ internal class IconButtonScreenshot {
                 enableList.forEach { isEnabled ->
                     intents.forEach { intent ->
                         paparazzi.sparkSnapshot(
-                            name = "_$shape" +
-                                "_$size" +
-                                "_enabled".takeIf { isEnabled }.orEmpty() +
-                                "_$intent",
+                            name = "_${shape}_shape" +
+                                    "_${size}_size" +
+                                    "_${intent}_intent" +
+                                    "_enabled".takeIf { isEnabled }.orEmpty() +
+                                    "_disabled".takeIf { isEnabled.not() }.orEmpty(),
                         ) {
                             Column(
                                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -85,6 +86,7 @@ internal class IconButtonScreenshot {
                                 IconButtonGhost(
                                     onClick = {},
                                     icon = icon,
+                                    intent = intent,
                                     shape = shape,
                                     size = size,
                                     enabled = isEnabled,
@@ -92,6 +94,7 @@ internal class IconButtonScreenshot {
                                 IconButtonFilled(
                                     onClick = {},
                                     icon = icon,
+                                    intent = intent,
                                     shape = shape,
                                     size = size,
                                     enabled = isEnabled,
@@ -99,6 +102,7 @@ internal class IconButtonScreenshot {
                                 IconButtonOutlined(
                                     onClick = {},
                                     icon = icon,
+                                    intent = intent,
                                     shape = shape,
                                     size = size,
                                     enabled = isEnabled,
@@ -106,6 +110,7 @@ internal class IconButtonScreenshot {
                                 IconButtonContrast(
                                     onClick = {},
                                     icon = icon,
+                                    intent = intent,
                                     shape = shape,
                                     size = size,
                                     enabled = isEnabled,
@@ -113,6 +118,7 @@ internal class IconButtonScreenshot {
                                 IconButtonTinted(
                                     onClick = {},
                                     icon = icon,
+                                    intent = intent,
                                     shape = shape,
                                     size = size,
                                     enabled = isEnabled,
