@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.iconbuttons.IconButtonColors
 import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonPreview
@@ -54,6 +55,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param icons a content to be drawn inside the IconToggleButton,
  * should show one of [IconToggleButtonIcons] values that sets checked and unchecked
  * @param modifier the [Modifier] to be applied to this icon button
+ * @param intent one of [IconButtonIntent] values that will be used to determine [IconButtonColors] to be applied*
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
