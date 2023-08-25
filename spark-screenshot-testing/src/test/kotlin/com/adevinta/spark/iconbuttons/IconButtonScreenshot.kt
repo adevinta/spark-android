@@ -21,14 +21,17 @@
  */
 package com.adevinta.spark.iconbuttons
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.iconbuttons.IconButtonContrast
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
 import com.adevinta.spark.components.iconbuttons.IconButtonGhost
@@ -41,6 +44,7 @@ import com.adevinta.spark.icons.FavoriteFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
+import com.adevinta.spark.tools.modifiers.ifTrue
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.ScreenOrientation
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
@@ -79,13 +83,16 @@ internal class IconButtonScreenshot {
             sizes.forEach { size ->
                 paparazzi.sparkSnapshot(
                     "_${shape}_shape" +
-                        "_${size}_size",
+                            "_${size}_size",
                 ) {
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp),
                     ) {
                         intents.forEach { intent ->
                             Row(
+                                modifier = Modifier.ifTrue(intent == IconButtonIntent.Surface) {
+                                    background(SparkTheme.colors.neutralContainer)
+                                },
                                 horizontalArrangement = Arrangement.spacedBy(4.dp),
                             ) {
                                 enableList.forEach { isEnabled ->
