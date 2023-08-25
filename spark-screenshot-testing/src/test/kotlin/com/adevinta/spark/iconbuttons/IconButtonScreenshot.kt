@@ -23,6 +23,7 @@ package com.adevinta.spark.iconbuttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.ui.Modifier
@@ -131,14 +132,18 @@ internal class IconButtonScreenshot {
                                             size = size,
                                             enabled = isEnabled,
                                         )
-                                        IconButtonContrast(
-                                            onClick = {},
-                                            icon = icon,
-                                            intent = intent,
-                                            shape = shape,
-                                            size = size,
-                                            enabled = isEnabled,
-                                        )
+                                        Box(
+                                            modifier = Modifier.background(SparkTheme.colors.neutralContainer),
+                                        ) {
+                                            IconButtonContrast(
+                                                onClick = {},
+                                                icon = icon,
+                                                intent = intent,
+                                                shape = shape,
+                                                size = size,
+                                                enabled = isEnabled,
+                                            )
+                                        }
                                     }
                                 }
                             }
