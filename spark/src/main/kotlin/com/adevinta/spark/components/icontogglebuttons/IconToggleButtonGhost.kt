@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.icontogglebuttons
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.Composable
@@ -34,7 +33,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.iconbuttons.IconButtonColors
 import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonPreview
@@ -51,26 +49,24 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * compact toggle button is required, such as in a toolbar or image list.
  *
  * @param checked controls the check state of this icon toggle button. When `true`, this component will
- * show icons.checked, and `true` will show icons.unchecked
- * @param icons a content to be drawn inside the IconToggleButton,
- * should show one of [IconToggleButtonIcons] values that sets checked and unchecked
- * @param colors [IconButtonColors] that will be used to resolve the colors used for this icon
- * button in different states.
+ * show icons.checked, and `false` will show icons.unchecked
  * @param onCheckedChange responds to user interaction of checking/unchecking the icon toggle button
  * and changes @param checked by `true` or `false`
+ * @param icons a content to be drawn inside the IconToggleButton,
+ * should show one of [IconToggleButtonIcons] values that sets checked and unchecked
  * @param modifier the [Modifier] to be applied to this icon button
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
  * @param shape to be applied to the IconButton background. It should be one of [IconButtonShape] values
  * @param size one of the [IconButtonSize] values that sets width and height of the IconButton
- * @param border an optional [BorderStroke] to be applied to the IconButton
  * @param contentDescription text used by accessibility services to describe what this icon button
  * represents. This text should be localized, such as by using [androidx.compose.ui.res.stringResource] or similar
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this icon button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  */
+
 @ExperimentalSparkApi
 @Composable
 public fun IconToggleButtonGhost(

@@ -64,12 +64,12 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  *
  * @param checked controls the check state of this icon toggle button. When `true`, this component will
  * show icons.checked, and `false` will show icons.unchecked
+ * @param onCheckedChange responds to user interaction of checking/unchecking the icon toggle button
+ * and changes @param checked by `true` or `false`
  * @param icons a content to be drawn inside the IconToggleButton,
  * should show one of [IconToggleButtonIcons] values that sets checked and unchecked
  * @param colors [IconButtonColors] that will be used to resolve the colors used for this icon
  * button in different states.
- * @param onCheckedChange responds to user interaction of checking/unchecking the icon toggle button
- * and changes @param checked by `true` or `false`
  * @param modifier the [Modifier] to be applied to this icon button
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
@@ -89,8 +89,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 @Composable
 internal fun SparkIconToggleButton(
     checked: Boolean,
-    icons: IconToggleButtonIcons,
     onCheckedChange: (Boolean) -> Unit,
+    icons: IconToggleButtonIcons,
     colors: IconButtonColors,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -156,9 +156,9 @@ internal fun IconToggleButtonPreview(
             IconButtonShape.values().forEach { shape ->
                 SparkIconToggleButton(
                     checked = state,
-                    icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
                     onCheckedChange = { state = !state },
-                    IconButtonDefaults.filledIconButtonColors(intent = intent.colors()),
+                    icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
+                    colors = IconButtonDefaults.filledIconButtonColors(intent = intent.colors()),
                     size = size,
                     shape = shape,
                 )
