@@ -40,8 +40,8 @@
     <string name="theme_picker_text_direction_title" description="Simulate system text direction to be either LTR or RTL. [CHAR_LIMIT=NONE]">Text direction</string>
     <string name="theme_picker_font_scale_title" description="Simulate a11y font scaling. [CHAR_LIMIT=NONE]">Font scale</string>
     <string name="examples_component_screen_title">Components examples</string>
-    <string name="examples_component_screen_description">These are the examples that that can be found in the samples in the javadoc or the README.md files. They show usages of the components in different scenarios that should represent real use cases.</string>
-    <string name="component_button_description">Buttons help people initiate actions, from sending an email, to sharing a document, to liking a post.</string>
+    <string name="examples_component_screen_description">These are the examples that can be found in the samples in the javadoc or the README.md files. They show usages of the components with the default params in different scenarios that should represent real use cases.</string>
+    <string name="component_button_description">Buttons help people initiate actions, like sending an email, sharing a document,or liking a post.</string>
     <!--Toggle example-->
     <string name="component_toggle_vertical_group_title">Toggle grouping with vertical alignment</string>
     <string name="component_toggle_horizontal_group_title">Toggle grouping with horizontal alignment</string>
@@ -64,7 +64,7 @@
     <string name="component_switch_description">Switch component allows the user to activate or deactivate the state of an element or concept. It is also used to control binary options (On/Off or True/False).</string>
 
     <string name="configurator_component_screen_title">Components configurations</string>
-    <string name="configurator_component_screen_description">The Configurator aim to allow you to visualize a component in every possible state available state by customizing every property for each component.</string>
+    <string name="configurator_component_screen_description">The Configurator allows to visualize a component in every possible state available by customizing every property for each component.</string>
     <string name="configurator_component_screen_enabled_label">Enabled</string>
     <string name="configurator_component_screen_textfield_label">Label</string>
     <string name="configurator_component_screen_intent_label">Intent</string>
