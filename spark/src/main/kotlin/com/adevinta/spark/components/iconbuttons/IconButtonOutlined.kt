@@ -93,25 +93,6 @@ public fun IconButtonOutlined(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Outlined Small",
-)
-@Composable
-internal fun IconButtonOutlinedSmallPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonOutlinedPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
     name = "IconButton Outlined Medium",
 )
 @Composable
@@ -123,25 +104,6 @@ internal fun IconButtonOutlinedMediumPreview(
             IconButtonOutlinedPair(
                 intent = intent,
                 size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Outlined Large",
-)
-@Composable
-internal fun IconButtonOutlinedLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonOutlinedPair(
-                intent = intent,
-                size = IconButtonSize.Large,
                 shape = shape,
             )
         }

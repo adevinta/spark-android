@@ -90,25 +90,6 @@ public fun IconButtonFilled(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Filled Small",
-)
-@Composable
-internal fun IconButtonFilledSmallPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonFilledPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
     name = "IconButton Filled Medium",
 )
 @Composable
@@ -120,25 +101,6 @@ internal fun IconButtonFilledMediumPreview(
             IconButtonFilledPair(
                 intent = intent,
                 size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Filled Large",
-)
-@Composable
-internal fun IconButtonFilledLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonFilledPair(
-                intent = intent,
-                size = IconButtonSize.Large,
                 shape = shape,
             )
         }

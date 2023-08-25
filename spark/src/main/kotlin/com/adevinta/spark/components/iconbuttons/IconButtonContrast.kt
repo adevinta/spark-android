@@ -88,25 +88,6 @@ public fun IconButtonContrast(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Contrast Small",
-)
-@Composable
-internal fun IconButtonContrastSmallPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonContrastPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
     name = "IconButton Contrast Medium",
 )
 @Composable
@@ -118,25 +99,6 @@ internal fun IconButtonContrastMediumPreview(
             IconButtonContrastPair(
                 intent = intent,
                 size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Contrast Large",
-)
-@Composable
-internal fun IconButtonContrastLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonContrastPair(
-                intent = intent,
-                size = IconButtonSize.Large,
                 shape = shape,
             )
         }

@@ -88,25 +88,6 @@ public fun IconButtonTinted(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Tinted Small",
-)
-@Composable
-internal fun IconButtonTintedSmallPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonFilledPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
     name = "IconButton Tinted Medium",
 )
 @Composable
@@ -118,25 +99,6 @@ internal fun IconButtonTintedMediumPreview(
             IconButtonTintedPair(
                 intent = intent,
                 size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Tinted Large",
-)
-@Composable
-internal fun IconButtonTintedLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonTintedPair(
-                intent = intent,
-                size = IconButtonSize.Large,
                 shape = shape,
             )
         }

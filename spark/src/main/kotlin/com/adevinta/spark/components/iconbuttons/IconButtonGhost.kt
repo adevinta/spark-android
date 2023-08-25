@@ -88,25 +88,6 @@ public fun IconButtonGhost(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Ghost Small",
-)
-@Composable
-internal fun IconButtonGhostSmallPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonGhostPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
     name = "IconButton Ghost Medium",
 )
 @Composable
@@ -118,25 +99,6 @@ internal fun IconButtonGhostMediumPreview(
             IconButtonGhostPair(
                 intent = intent,
                 size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Ghost Large",
-)
-@Composable
-internal fun IconButtonGhostLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonGhostPair(
-                intent = intent,
-                size = IconButtonSize.Large,
                 shape = shape,
             )
         }
