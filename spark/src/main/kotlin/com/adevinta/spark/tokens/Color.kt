@@ -51,7 +51,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.PaletteTokens.Apple100
 import com.adevinta.spark.tokens.PaletteTokens.Apple400
 import com.adevinta.spark.tokens.PaletteTokens.Apple500
@@ -1126,18 +1128,18 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
 
 /**
  * The Material color system contains pairs of colors that are typically used for the background
- * and content color inside a component. For example, a [Button] typically uses `main` for its
+ * and content color inside a component. For example, a [ButtonFilled] typically uses `main` for its
  * background, and `onMain` for the color of its content (usually text or iconography).
  *
  * This function tries to match the provided [backgroundColor] to a 'background' color in this
- * [Colors], and then will return the corresponding color used for content. For example, when
- * [backgroundColor] is [Colors.main], this will return [Colors.onMain].
+ * [SparkColors], and then will return the corresponding color used for content. For example, when
+ * [backgroundColor] is [SparkColors.main], this will return [SparkColors.onMain].
  *
  * If [backgroundColor] does not match a background color in the theme, this will return
  * [Color.Unspecified].
  *
  * @return the matching content color for [backgroundColor]. If [backgroundColor] is not present in
- * the theme's [Colors], then returns [Color.Unspecified].
+ * the theme's [SparkColors], then returns [Color.Unspecified].
  *
  * @see contentColorFor
  */
@@ -1176,12 +1178,12 @@ public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (ba
 
 /**
  * The Material color system contains pairs of colors that are typically used for the background
- * and content color inside a component. For example, a [Button] typically uses `main` for its
+ * and content color inside a component. For example, a [ButtonFilled] typically uses `main` for its
  * background, and `onMain` for the color of its content (usually text or iconography).
  *
  * This function tries to match the provided [backgroundColor] to a 'background' color in this
- * [Colors], and then will return the corresponding color used for content. For example, when
- * [backgroundColor] is [Colors.main], this will return [Colors.onMain].
+ * [SparkColors], and then will return the corresponding color used for content. For example, when
+ * [backgroundColor] is [SparkColors.main], this will return [SparkColors.onMain].
  *
  * If [backgroundColor] does not match a background color in the theme, this will return
  * the current value of [LocalContentColor] as a best-effort color.
@@ -1189,7 +1191,7 @@ public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (ba
  * @return the matching content color for [backgroundColor]. If [backgroundColor] is not present in
  * the theme's [Colors], then returns the current value of [LocalContentColor].
  *
- * @see Colors.contentColorFor
+ * @see SparkColors.contentColorFor
  */
 @Composable
 @ReadOnlyComposable
@@ -1460,7 +1462,7 @@ private fun ColorItem(color: KProperty0<Color>) {
             modifier = Modifier.padding(8.dp),
             contentAlignment = Alignment.Center,
         ) {
-            com.adevinta.spark.components.text.Text(
+            Text(
                 text = color.name,
                 style = SparkTheme.typography.body2,
                 textAlign = TextAlign.Center,

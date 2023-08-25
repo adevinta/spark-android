@@ -29,11 +29,8 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,7 +41,11 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.tokens.SparkColors
 import kotlin.reflect.KProperty0
+import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.hasAnnotation
+import kotlin.reflect.full.memberProperties
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -90,40 +91,13 @@ private fun RowScope.ColorItem(color: KProperty0<Color>) {
 
 private val tokensColors
     @Composable
-    get() = with(SparkTheme.colors) {
-        listOf(
-            ::main,
-            ::mainContainer,
-            ::mainVariant,
-            ::support,
-            ::supportContainer,
-            ::supportVariant,
-            ::accent,
-            ::accentContainer,
-            ::accentVariant,
-            ::basic,
-            ::basicContainer,
-            ::success,
-            ::successContainer,
-            ::alert,
-            ::alertContainer,
-            ::error,
-            ::errorContainer,
-            ::info,
-            ::infoContainer,
-            ::neutral,
-            ::neutralContainer,
-            ::background,
-            ::backgroundVariant,
-            ::surface,
-            ::surfaceInverse,
-            ::outline,
-            ::outlineHigh,
-        ).groupBy {
+    get() = SparkColors::class.memberProperties.filterIsInstance<KProperty0<Color>>()
+        .filterNot { field ->
+            field.hasAnnotation<Deprecated>()
+        }.groupBy {
             // Group by token name like "main",  "mainContainer" or "mainVariant"
             it.name.takeWhile { !it.isUpperCase() }
         }.values.toList()
-    }
 
 @Preview
 @Composable
