@@ -23,7 +23,9 @@ package com.adevinta.spark.iconbuttons
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.ui.unit.dp
+import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
@@ -40,6 +42,7 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
+import com.android.resources.ScreenOrientation
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.junit.Rule
 import org.junit.Test
@@ -60,6 +63,9 @@ internal class IconButtonScreenshot {
 
     @get:Rule
     val paparazzi = Paparazzi(
+        deviceConfig = DeviceConfig.PIXEL_C.copy(
+            orientation = ScreenOrientation.LANDSCAPE,
+        ),
         maxPercentDifference = MaxPercentDifference,
         theme = PaparazziTheme,
         renderingMode = SessionParams.RenderingMode.SHRINK,
@@ -71,58 +77,63 @@ internal class IconButtonScreenshot {
     fun test() {
         shapes.forEach { shape ->
             sizes.forEach { size ->
-                enableList.forEach { isEnabled ->
-                    intents.forEach { intent ->
-                        paparazzi.sparkSnapshot(
-                            name = "_${shape}_shape" +
-                                "_${size}_size" +
-                                "_${intent}_intent" +
-                                "_enabled".takeIf { isEnabled }.orEmpty() +
-                                "_disabled".takeIf { isEnabled.not() }.orEmpty(),
-                        ) {
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(8.dp),
+                paparazzi.sparkSnapshot(
+                    "_${shape}_shape" +
+                        "_${size}_size",
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        intents.forEach { intent ->
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(4.dp),
                             ) {
-                                IconButtonGhost(
-                                    onClick = {},
-                                    icon = icon,
-                                    intent = intent,
-                                    shape = shape,
-                                    size = size,
-                                    enabled = isEnabled,
-                                )
-                                IconButtonFilled(
-                                    onClick = {},
-                                    icon = icon,
-                                    intent = intent,
-                                    shape = shape,
-                                    size = size,
-                                    enabled = isEnabled,
-                                )
-                                IconButtonOutlined(
-                                    onClick = {},
-                                    icon = icon,
-                                    intent = intent,
-                                    shape = shape,
-                                    size = size,
-                                    enabled = isEnabled,
-                                )
-                                IconButtonContrast(
-                                    onClick = {},
-                                    icon = icon,
-                                    intent = intent,
-                                    shape = shape,
-                                    size = size,
-                                    enabled = isEnabled,
-                                )
-                                IconButtonTinted(
-                                    onClick = {},
-                                    icon = icon,
-                                    intent = intent,
-                                    shape = shape,
-                                    size = size,
-                                    enabled = isEnabled,
-                                )
+                                enableList.forEach { isEnabled ->
+                                    Row(
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                    ) {
+                                        IconButtonGhost(
+                                            onClick = {},
+                                            icon = icon,
+                                            intent = intent,
+                                            shape = shape,
+                                            size = size,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonFilled(
+                                            onClick = {},
+                                            icon = icon,
+                                            intent = intent,
+                                            shape = shape,
+                                            size = size,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonOutlined(
+                                            onClick = {},
+                                            icon = icon,
+                                            intent = intent,
+                                            shape = shape,
+                                            size = size,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonContrast(
+                                            onClick = {},
+                                            icon = icon,
+                                            intent = intent,
+                                            shape = shape,
+                                            size = size,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonTinted(
+                                            onClick = {},
+                                            icon = icon,
+                                            intent = intent,
+                                            shape = shape,
+                                            size = size,
+                                            enabled = isEnabled,
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
