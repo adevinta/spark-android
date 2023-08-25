@@ -24,7 +24,7 @@ package com.adevinta.spark.components.icontogglebuttons
 import com.adevinta.spark.icons.SparkIcon
 
 /**
- * @property checked icon to be used for the checked state
+ * @property checked [SparkIcon] to be used for the checked state
  * @property unchecked [SparkIcon] to be used for the unchecked state
  */
 public data class IconToggleButtonIcons(
