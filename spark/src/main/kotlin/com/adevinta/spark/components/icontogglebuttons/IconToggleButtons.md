@@ -52,8 +52,9 @@ emphasis and should be used for important actions.
 
 ```kotlin
 fun IconToggleButtonFilled(
-    icon: SparkIcon,
-    onClick: () -> Unit,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    icons: IconToggleButtonIcons,
 )
 ```
 
@@ -70,8 +71,9 @@ Be aware that it's not advised to use it on top of images since it will be hard 
 
 ```kotlin
 fun IconToggleButtonOutlined(
-    icon: SparkIcon,
-    onClick: () -> Unit,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    icons: IconToggleButtonIcons,
 )
 ```
 
@@ -82,13 +84,14 @@ fun IconToggleButtonOutlined(
 #### IconToggleButtonTinted
 
 Tinted icon toggle buttons are medium-emphasis buttons that is an alternative middle ground between
-default filled icon toggl buttons and outlined icon toggl buttons. They can be used in contexts where lower-priority
+default filled icon toggle buttons and outlined icon toggle buttons. They can be used in contexts where lower-priority
 icon button requires slightly more emphasis than an outline would give.
 
 ```kotlin
 fun IconToggleButtonTinted(
-    icon: SparkIcon,
-    onClick: () -> Unit,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    icons: IconToggleButtonIcons,
 )
 ```
 
@@ -100,14 +103,15 @@ fun IconToggleButtonTinted(
 
 Ghost icon toggle buttons are used for the lowest priority actions, especially when presenting multiple options.
 
-Ghost icon toggl buttons can be placed on a variety of backgrounds. Until the button is interacted with, its
+Ghost icon toggle buttons can be placed on a variety of backgrounds. Until the button is interacted with, its
 container isn’t visible.
 This button style is often used inside other components like snackbars, dialogs, and cards.
 
 ```kotlin
 fun IconToggleButtonGhost(
-    icon: SparkIcon,
-    onClick: () -> Unit,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    icons: IconToggleButtonIcons,
 )
 ```
 
@@ -122,8 +126,9 @@ an image or a video.
 
 ```kotlin
 fun IconToggleButtonContrast(
-    icon: SparkIcon,
-    onClick: () -> Unit,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    icons: IconToggleButtonIcons,
 )
 ```
 
