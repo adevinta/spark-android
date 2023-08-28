@@ -122,7 +122,6 @@ public val SparkIcons.Clothes: DrawableRes get() = DrawableRes(R.drawable.spark_
 public val SparkIcons.ClothesBrand: DrawableRes get() = DrawableRes(R.drawable.spark_icons_clothes_brand)
 public val SparkIcons.ClothesCondition: DrawableRes get() = DrawableRes(R.drawable.spark_icons_clothes_condition)
 public val SparkIcons.Color: DrawableRes get() = DrawableRes(R.drawable.spark_icons_color)
-public val SparkIcons.Colors: DrawableRes get() = DrawableRes(R.drawable.spark_icons_colors)
 public val SparkIcons.Common: DrawableRes get() = DrawableRes(R.drawable.spark_icons_common)
 public val SparkIcons.Computer: DrawableRes get() = DrawableRes(R.drawable.spark_icons_computer)
 public val SparkIcons.Condition: DrawableRes get() = DrawableRes(R.drawable.spark_icons_condition)
