@@ -66,7 +66,8 @@ internal fun ColorSample() {
                     it.returnType == Color::class.starProjectedType
                 } // remove dims and any non color tokens
                 .map {
-                    @Suppress("UNCHECKED_CAST") // we use this to cast the type otherwise we get a star type instead of Color
+                    // we use this to cast the type otherwise we get a star type instead of Color
+                    @Suppress("UNCHECKED_CAST")
                     it as KProperty1<SparkColors, Long>
                 }
                 .filterNot { it.name.startsWith("on") } // remove content co
@@ -117,7 +118,6 @@ private fun RowScope.ColorItem(color: KProperty1<SparkColors, Long>) {
         }
     }
 }
-
 
 @Preview
 @Composable

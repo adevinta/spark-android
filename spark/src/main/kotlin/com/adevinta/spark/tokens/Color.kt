@@ -624,6 +624,7 @@ public class SparkColors(
     public var onSurfaceInverse: Color by mutableStateOf(onSurfaceInverse, structuralEqualityPolicy())
         internal set
     internal var surfaceTint: Color by mutableStateOf(surfaceTint, structuralEqualityPolicy())
+
     @Order(6)
     public var outline: Color by mutableStateOf(outline, structuralEqualityPolicy())
         internal set
@@ -796,7 +797,7 @@ public class SparkColors(
         "This property will be removed as it is not part of Spark Token",
         ReplaceWith("backgroundVariant"),
 
-        )
+    )
     public var tertiaryContainer: Color by mutableStateOf(tertiaryContainer, structuralEqualityPolicy())
         internal set
 

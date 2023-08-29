@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.util
 
 public fun String.splitCamelInSpaces(): String = CamelRegex.replace(this, " $0").lowercase()
