@@ -552,6 +552,7 @@ public class SparkColors(
     dimContent4: Float,
     dimContent5: Float,
 ) {
+    @Order(2)
     public var accent: Color by mutableStateOf(accent, structuralEqualityPolicy())
         internal set
     public var onAccent: Color by mutableStateOf(onAccent, structuralEqualityPolicy())
@@ -565,6 +566,7 @@ public class SparkColors(
     public var onAccentVariant: Color by mutableStateOf(onAccentVariant, structuralEqualityPolicy())
         internal set
 
+    @Order(3)
     public var basic: Color by mutableStateOf(basic, structuralEqualityPolicy())
         internal set
     public var onBasic: Color by mutableStateOf(onBasic, structuralEqualityPolicy())
@@ -574,6 +576,7 @@ public class SparkColors(
     public var onBasicContainer: Color by mutableStateOf(onBasicContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(0)
     public var main: Color by mutableStateOf(main, structuralEqualityPolicy())
         internal set
     public var onMain: Color by mutableStateOf(onMain, structuralEqualityPolicy())
@@ -587,6 +590,7 @@ public class SparkColors(
     public var onMainVariant: Color by mutableStateOf(onMainVariant, structuralEqualityPolicy())
         internal set
 
+    @Order(1)
     public var support: Color by mutableStateOf(support, structuralEqualityPolicy())
         internal set
     public var onSupport: Color by mutableStateOf(onSupport, structuralEqualityPolicy())
@@ -600,6 +604,7 @@ public class SparkColors(
     public var onSupportVariant: Color by mutableStateOf(onSupportVariant, structuralEqualityPolicy())
         internal set
 
+    @Order(4)
     public var background: Color by mutableStateOf(background, structuralEqualityPolicy())
         internal set
     public var onBackground: Color by mutableStateOf(onBackground, structuralEqualityPolicy())
@@ -609,6 +614,7 @@ public class SparkColors(
     public var onBackgroundVariant: Color by mutableStateOf(onBackgroundVariant, structuralEqualityPolicy())
         internal set
 
+    @Order(5)
     public var surface: Color by mutableStateOf(surface, structuralEqualityPolicy())
         internal set
     public var onSurface: Color by mutableStateOf(onSurface, structuralEqualityPolicy())
@@ -618,6 +624,7 @@ public class SparkColors(
     public var onSurfaceInverse: Color by mutableStateOf(onSurfaceInverse, structuralEqualityPolicy())
         internal set
     internal var surfaceTint: Color by mutableStateOf(surfaceTint, structuralEqualityPolicy())
+    @Order(6)
     public var outline: Color by mutableStateOf(outline, structuralEqualityPolicy())
         internal set
     public var outlineHigh: Color by mutableStateOf(outlineHigh, structuralEqualityPolicy())
@@ -625,6 +632,7 @@ public class SparkColors(
     public var scrim: Color by mutableStateOf(scrim, structuralEqualityPolicy())
         internal set
 
+    @Order(7)
     public var success: Color by mutableStateOf(success, structuralEqualityPolicy())
         internal set
     public var onSuccess: Color by mutableStateOf(onSuccess, structuralEqualityPolicy())
@@ -634,6 +642,7 @@ public class SparkColors(
     public var onSuccessContainer: Color by mutableStateOf(onSuccessContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(8)
     public var alert: Color by mutableStateOf(alert, structuralEqualityPolicy())
         internal set
     public var onAlert: Color by mutableStateOf(onAlert, structuralEqualityPolicy())
@@ -643,6 +652,7 @@ public class SparkColors(
     public var onAlertContainer: Color by mutableStateOf(onAlertContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(9)
     public var error: Color by mutableStateOf(error, structuralEqualityPolicy())
         internal set
     public var onError: Color by mutableStateOf(onError, structuralEqualityPolicy())
@@ -652,6 +662,7 @@ public class SparkColors(
     public var onErrorContainer: Color by mutableStateOf(onErrorContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(10)
     public var info: Color by mutableStateOf(info, structuralEqualityPolicy())
         internal set
     public var onInfo: Color by mutableStateOf(onInfo, structuralEqualityPolicy())
@@ -661,6 +672,7 @@ public class SparkColors(
     public var onInfoContainer: Color by mutableStateOf(onInfoContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(11)
     public var neutral: Color by mutableStateOf(neutral, structuralEqualityPolicy())
         internal set
     public var onNeutral: Color by mutableStateOf(onNeutral, structuralEqualityPolicy())

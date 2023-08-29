@@ -95,16 +95,16 @@ internal val Plum50 = Color(0xFFF3E5FF)
 
 // region Blueberry colors
 internal val Blueberry1000 = Color(0xFF010509)
-internal val Blueberry900 = Color(0xFF06233D)
-internal val Blueberry800 = Color(0xFF08365D)
-internal val Blueberry700 = Color(0xFF0B518E)
-internal val Blueberry600 = Color(0xFF0F6CBD)
+internal val Blueberry900 = Color(0xFF152233)
+internal val Blueberry800 = Color(0xFF094171)
+internal val Blueberry700 = Color(0xFF0C5291)
+internal val Blueberry600 = Color(0xFF0F69B9)
 internal val Blueberry500 = Color(0xFF1388EC)
-internal val Blueberry400 = Color(0xFF429FF0)
-internal val Blueberry300 = Color(0xFF71B7F4)
-internal val Blueberry200 = Color(0xFFA0CFF7)
-internal val Blueberry100 = Color(0xFFCFE6FB)
-internal val Blueberry50 = Color(0xFFE7F3FD)
+internal val Blueberry400 = Color(0xFF69B2F3)
+internal val Blueberry300 = Color(0xFF9FCEF7)
+internal val Blueberry200 = Color(0xFFC2E0FA)
+internal val Blueberry100 = Color(0xFFE6F2FD)
+internal val Blueberry50 = Color(0xFFF4F9FE)
 // endregion
 
 // region Avocado colors
@@ -147,16 +147,16 @@ internal val Banana50 = Color(0xFFFFF6E5)
 // endregion
 
 // region NightShade colors
-internal val NightShade900 = Color(0xFF14191F)
-internal val NightShade800 = Color(0xFF2B3640)
-internal val NightShade700 = Color(0xFF3D4D5C)
-internal val NightShade600 = Color(0xFF4E6579)
+internal val NightShade900 = Color(0xFF202730)
+internal val NightShade800 = Color(0xFF2B3441)
+internal val NightShade700 = Color(0xFF3A4757)
+internal val NightShade600 = Color(0xFF4F6076)
 internal val NightShade500 = Color(0xFF627C93)
-internal val NightShade400 = Color(0xFF7F95A9)
-internal val NightShade300 = Color(0xFFA3B4C2)
-internal val NightShade200 = Color(0xFFBBCDDD)
-internal val NightShade100 = Color(0xFFDAE6F1)
-internal val NightShade50 = Color(0xFFF0F5FA)
+internal val NightShade400 = Color(0xFFACB8C7)
+internal val NightShade300 = Color(0xFFD0D7DF)
+internal val NightShade200 = Color(0xFFE4E8ED)
+internal val NightShade100 = Color(0xFFF0F2F5)
+internal val NightShade50 = Color(0xFFF6F8F9)
 internal val NightShade25 = Color(0xFFF7FAFD)
 // endregion
 
@@ -343,7 +343,7 @@ internal val LeboncoinColorPartLight: SparkColors = lightSparkColors(
     onSupport = Color.White,
     supportContainer = Blueberry100,
     onSupportContainer = Blueberry900,
-    supportVariant = NightShade700, // tertiary => neutral / Dim 1
+    supportVariant = Blueberry700, // tertiary => neutral / Dim 1
     onSupportVariant = Color.White,
     tertiary = Color.Magenta,
     onTertiary = Color.Blue,
@@ -363,22 +363,22 @@ internal val LeboncoinColorPartLight: SparkColors = lightSparkColors(
     onErrorContainer = Cherry700,
     info = Blueberry500,
     onInfo = Color.White,
-    infoContainer = Blueberry100,
+    infoContainer = Blueberry200,
     onInfoContainer = Blueberry700,
     neutral = NightShade500,
     onNeutral = Color.White,
-    neutralContainer = NightShade50,
+    neutralContainer = NightShade100,
     onNeutralContainer = NightShade700,
     background = Color.White,
     onBackground = Blueberry900,
-    backgroundVariant = NightShade50,
+    backgroundVariant = Blueberry50,
     onBackgroundVariant = Blueberry900,
     surface = Color.White,
     onSurface = Blueberry900,
     surfaceInverse = NightShade800,
     onSurfaceInverse = Color.White,
     surfaceTint = Clementin500,
-    outline = NightShade100,
+    outline = NightShade400,
     outlineHigh = NightShade900,
 )
 
@@ -403,7 +403,7 @@ internal val LeboncoinColorProLight: SparkColors = lightSparkColors(
     onSupport = Color.White,
     supportContainer = Blueberry100,
     onSupportContainer = Blueberry900,
-    supportVariant = NightShade700, // tertiary => neutral / Dim 1
+    supportVariant = Blueberry700, // tertiary => neutral / Dim 1
     onSupportVariant = Color.White,
     tertiary = Color.Magenta,
     onTertiary = Color.Blue,
@@ -423,22 +423,22 @@ internal val LeboncoinColorProLight: SparkColors = lightSparkColors(
     onErrorContainer = Cherry700,
     info = Blueberry500,
     onInfo = Color.White,
-    infoContainer = Blueberry100,
+    infoContainer = Blueberry200,
     onInfoContainer = Blueberry700,
     neutral = NightShade500,
     onNeutral = Color.White,
-    neutralContainer = NightShade50,
+    neutralContainer = NightShade100,
     onNeutralContainer = NightShade700,
     background = Color.White,
     onBackground = Blueberry900,
-    backgroundVariant = NightShade50,
+    backgroundVariant = Blueberry50,
     onBackgroundVariant = Blueberry900,
     surface = Color.White,
     onSurface = Blueberry900,
     surfaceInverse = NightShade800,
     onSurfaceInverse = Color.White,
-    surfaceTint = Blueberry600,
-    outline = NightShade100,
+    surfaceTint = Clementin500,
+    outline = NightShade400,
     outlineHigh = NightShade900,
 )
 

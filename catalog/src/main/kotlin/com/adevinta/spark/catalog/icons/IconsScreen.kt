@@ -26,6 +26,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -53,11 +54,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import androidx.navigation.NavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
+import com.adevinta.spark.catalog.util.splitCamelInSpaces
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.spacer.VerticalSpacer
@@ -155,8 +159,9 @@ public fun IconsScreen(
                         size = IconSize.ExtraLarge,
                     )
                     Text(
-                        text = iconName,
+                        text = iconName.splitCamelInSpaces(),
                         style = SparkTheme.typography.caption,
+                        textAlign = TextAlign.Center,
                     )
                 }
             }
