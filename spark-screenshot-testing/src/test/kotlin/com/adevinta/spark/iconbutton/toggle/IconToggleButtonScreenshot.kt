@@ -23,11 +23,14 @@ package com.adevinta.spark.iconbutton.toggle
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.ui.unit.dp
+import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
@@ -37,6 +40,8 @@ import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonGhost
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonOutlined
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonTinted
+import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.AccountFill
 import com.adevinta.spark.icons.AccountOutline
 import com.adevinta.spark.icons.SparkIcons
@@ -53,23 +58,27 @@ internal class IconToggleButtonScreenshot {
 
     private val icons: IconToggleButtonIcons = IconToggleButtonIcons(SparkIcons.AccountOutline, SparkIcons.AccountFill)
 
-    private val shapes = IconButtonShape.values()
+    private val shapes = IconButtonShape.entries.toTypedArray()
 
-    private val sizes = IconButtonSize.values()
+    private val sizes = IconButtonSize.entries.toTypedArray()
 
     private val checkList: List<Boolean> = listOf(true, false)
 
     private val enableList: List<Boolean> = listOf(true, false)
 
-    private val intents = IconButtonIntent.values()
+    private val intents = IconButtonIntent.entries.toTypedArray()
 
     @get:Rule
     val paparazzi = Paparazzi(
         maxPercentDifference = MaxPercentDifference,
         theme = PaparazziTheme,
         renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = false,
+        showSystemUi = true,
         environment = patchedEnvironment(),
+        deviceConfig = DeviceConfig.PIXEL_C.copy(
+            softButtons = false,
+            locale = "fr-rFR",
+        ),
     )
 
     @OptIn(ExperimentalSparkApi::class)
@@ -77,59 +86,76 @@ internal class IconToggleButtonScreenshot {
     fun test() {
         shapes.forEach { shape ->
             sizes.forEach { size ->
-                checkList.forEach { isChecked ->
-                    enableList.forEach { isEnabled ->
-                        intents.forEach { intent ->
-                            paparazzi.sparkSnapshot(
-                                name = "_$shape" +
-                                    "_$size" +
-                                    "_checked".takeIf { isChecked }.orEmpty() +
-                                    "_enabled".takeIf { isEnabled }.orEmpty() +
-                                    "_$intent",
-                            ) {
+                paparazzi.sparkSnapshot(
+                    name = "$shape" +
+                        "_$size",
+                ) {
+                    Row {
+                        enableList.forEach { isEnabled ->
+                            checkList.forEach { isChecked ->
                                 Column(
                                     verticalArrangement = Arrangement.spacedBy(8.dp),
                                 ) {
-                                    IconToggleButtonGhost(
-                                        checked = isChecked,
-                                        onCheckedChange = {},
-                                        icons = icons,
-                                        shape = shape,
-                                        size = size,
-                                        enabled = isEnabled,
+                                    Text(
+                                        text = "Enabled: $isEnabled, Checked: $isChecked",
                                     )
-                                    IconToggleButtonFilled(
-                                        checked = isChecked,
-                                        onCheckedChange = {},
-                                        icons = icons,
-                                        shape = shape,
-                                        size = size,
-                                        enabled = isEnabled,
-                                    )
-                                    IconToggleButtonOutlined(
-                                        checked = isChecked,
-                                        onCheckedChange = {},
-                                        icons = icons,
-                                        shape = shape,
-                                        size = size,
-                                        enabled = isEnabled,
-                                    )
-                                    IconToggleButtonContrast(
-                                        checked = isChecked,
-                                        onCheckedChange = {},
-                                        icons = icons,
-                                        shape = shape,
-                                        size = size,
-                                        enabled = isEnabled,
-                                    )
-                                    IconToggleButtonTinted(
-                                        checked = isChecked,
-                                        onCheckedChange = {},
-                                        icons = icons,
-                                        shape = shape,
-                                        size = size,
-                                        enabled = isEnabled,
-                                    )
+                                    intents.forEach { intent ->
+                                        Surface(
+                                            color = if (intent == IconButtonIntent.Surface) {
+                                                SparkTheme.colors.surfaceInverse
+                                            } else {
+                                                SparkTheme.colors.surface
+                                            },
+                                        ) {
+                                            Row {
+                                                IconToggleButtonFilled(
+                                                    checked = isChecked,
+                                                    onCheckedChange = {},
+                                                    icons = icons,
+                                                    shape = shape,
+                                                    size = size,
+                                                    intent = intent,
+                                                    enabled = isEnabled,
+                                                )
+                                                IconToggleButtonOutlined(
+                                                    checked = isChecked,
+                                                    onCheckedChange = {},
+                                                    icons = icons,
+                                                    shape = shape,
+                                                    size = size,
+                                                    intent = intent,
+                                                    enabled = isEnabled,
+                                                )
+                                                IconToggleButtonTinted(
+                                                    checked = isChecked,
+                                                    onCheckedChange = {},
+                                                    icons = icons,
+                                                    shape = shape,
+                                                    size = size,
+                                                    intent = intent,
+                                                    enabled = isEnabled,
+                                                )
+                                                IconToggleButtonContrast(
+                                                    checked = isChecked,
+                                                    onCheckedChange = {},
+                                                    icons = icons,
+                                                    shape = shape,
+                                                    size = size,
+                                                    intent = intent,
+                                                    enabled = isEnabled,
+                                                )
+                                                IconToggleButtonGhost(
+                                                    checked = isChecked,
+                                                    onCheckedChange = {},
+                                                    icons = icons,
+                                                    shape = shape,
+                                                    size = size,
+                                                    intent = intent,
+                                                    enabled = isEnabled,
+                                                )
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

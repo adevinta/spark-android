@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.iconbuttons.toggle
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.Composable
@@ -92,6 +93,10 @@ public fun IconToggleButtonOutlined(
         enabled = enabled,
         shape = shape,
         size = size,
+        border = BorderStroke(
+            width = IconButtonDefaults.OutlinedBorderSize,
+            color = colors.contentColor(enabled = enabled).value,
+        ),
         contentDescription = contentDescription,
         interactionSource = interactionSource,
     )
