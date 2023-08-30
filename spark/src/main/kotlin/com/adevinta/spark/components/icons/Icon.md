@@ -31,7 +31,7 @@ Use [IconIntent](IconIntent.kt) to pass one of the accepted intents:
 
 ```kotlin
 Icon(
-    sparkIcon = SparkIcons.CheckFill,
+    sparkIcon = SparkIcons.Check,
     tint = IconIntent.Main,
     contentDescription = "Done",
     size = IconSize.Large,
