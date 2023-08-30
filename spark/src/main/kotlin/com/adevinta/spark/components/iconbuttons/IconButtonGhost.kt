@@ -124,25 +124,6 @@ internal fun IconButtonGhostMediumPreview(
     }
 }
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Ghost Large",
-)
-@Composable
-internal fun IconButtonGhostLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonGhostPair(
-                intent = intent,
-                size = IconButtonSize.Large,
-                shape = shape,
-            )
-        }
-    }
-}
-
 @Composable
 internal fun IconButtonGhostPair(
     intent: IconButtonIntent,
@@ -160,6 +141,25 @@ internal fun IconButtonGhostPair(
                 enabled = enabled,
                 contentDescription = contentDescription,
                 size = size,
+                shape = shape,
+            )
+        }
+    }
+}
+
+@Preview(
+    group = "IconButtons",
+    name = "IconButton Ghost Large",
+)
+@Composable
+internal fun IconButtonGhostLargePreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        IconButtonPreview { intent, shape ->
+            IconButtonGhostPair(
+                intent = intent,
+                size = IconButtonSize.Large,
                 shape = shape,
             )
         }

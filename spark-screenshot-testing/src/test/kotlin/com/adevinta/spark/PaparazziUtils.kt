@@ -66,3 +66,6 @@ internal fun Paparazzi.sparkSnapshot(
 internal fun patchedEnvironment() = with(detectEnvironment()) {
     copy(compileSdkVersion = 33, platformDir = platformDir.replace("34", "33"))
 }
+
+internal const val MaxPercentDifference: Double = 0.01
+internal const val PaparazziTheme: String = "android:Theme.MaterialComponent.Light.NoActionBar"

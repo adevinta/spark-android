@@ -19,13 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark
+package com.adevinta.spark.catalog.util
 
-import org.junit.Test
+public fun String.splitCamelWithSpaces(): String = CamelCaseRegex.replace(this, " $0").lowercase()
 
-public class SparkTest {
-
-    @Test
-    public fun spark() {
-    }
-}
+private val CamelCaseRegex = "(?<=.)[A-Z]".toRegex()

@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,7 +45,6 @@ import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.toggles.Checkbox
 import com.adevinta.spark.components.toggles.CheckboxLabelled
 import com.adevinta.spark.components.toggles.ContentSide
-import com.adevinta.spark.components.toggles.ToggleIntent
 
 private const val CheckboxExampleDescription = "Checkbox examples"
 private const val CheckboxExampleSourceUrl = "$SampleSourceUrl/CheckboxSamples.kt"
@@ -57,28 +55,19 @@ public val CheckboxExamples: List<Example> = listOf(
         sourceUrl = CheckboxExampleSourceUrl,
     ) {
         var checkboxState by remember { mutableStateOf(ToggleableState.Off) }
-        LazyRow {
-            items(
-                ToggleIntent.values().count(),
-                itemContent = { index ->
-                    val intent = ToggleIntent.values()[index]
-                    Column {
-                        Checkbox(
-                            enabled = true,
-                            state = checkboxState,
-                            intent = intent,
-                            onClick = {
-                                checkboxState = when (checkboxState) {
-                                    ToggleableState.On -> ToggleableState.Off
-                                    ToggleableState.Off -> ToggleableState.Indeterminate
-                                    ToggleableState.Indeterminate -> ToggleableState.On
-                                }
-                            },
-                        )
-                        Checkbox(enabled = false, state = checkboxState, intent = intent, onClick = {})
+        Column {
+            Checkbox(
+                enabled = true,
+                state = checkboxState,
+                onClick = {
+                    checkboxState = when (checkboxState) {
+                        ToggleableState.On -> ToggleableState.Off
+                        ToggleableState.Off -> ToggleableState.Indeterminate
+                        ToggleableState.Indeterminate -> ToggleableState.On
                     }
                 },
             )
+            Checkbox(enabled = false, state = checkboxState, onClick = {})
         }
     },
     Example(

@@ -33,6 +33,9 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
@@ -76,6 +79,9 @@ internal fun ComponentsListScreen(
     navController: NavController,
     contentPadding: PaddingValues,
 ) {
+    val examplesComponents by remember(components) {
+        mutableStateOf(components.filter { it.examples.isNotEmpty() })
+    }
     LazyVerticalGrid(
         modifier = Modifier
             .fillMaxSize()
@@ -115,7 +121,7 @@ internal fun ComponentsListScreen(
             }
         }
         items(
-            items = components,
+            items = examplesComponents,
             key = { it.id },
             span = { GridItemSpan(1) },
             contentType = { ComponentsItemType.Component },
