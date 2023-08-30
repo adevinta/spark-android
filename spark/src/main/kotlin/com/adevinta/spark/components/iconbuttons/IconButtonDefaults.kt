@@ -21,9 +21,6 @@
  */
 package com.adevinta.spark.components.iconbuttons
 
-import androidx.compose.material3.IconButtonDefaults
-import androidx.compose.material3.OutlinedIconButton
-import androidx.compose.material3.PlainTooltipBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
@@ -80,13 +77,12 @@ internal object IconButtonDefaults {
         contentColor: Color = intent.onColor,
         disabledContainerColor: Color = containerColor.disabled,
         disabledContentColor: Color = contentColor.disabled,
-    ): IconButtonColors =
-        IconButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): IconButtonColors = IconButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun outlinedIconButtonColors(
@@ -95,13 +91,12 @@ internal object IconButtonDefaults {
         contentColor: Color = intent.color,
         disabledContainerColor: Color = Color.Transparent,
         disabledContentColor: Color = contentColor.disabled,
-    ): IconButtonColors =
-        IconButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): IconButtonColors = IconButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun tintedIconButtonColors(
@@ -110,13 +105,12 @@ internal object IconButtonDefaults {
         contentColor: Color = intent.onContainerColor,
         disabledContainerColor: Color = containerColor.disabled,
         disabledContentColor: Color = contentColor.disabled,
-    ): IconButtonColors =
-        IconButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): IconButtonColors = IconButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun ghostIconButtonColors(
@@ -125,13 +119,12 @@ internal object IconButtonDefaults {
         contentColor: Color = intent.color,
         disabledContainerColor: Color = Color.Transparent,
         disabledContentColor: Color = contentColor.disabled,
-    ): IconButtonColors =
-        IconButtonColors(
-            containerColor = containerColor,
-            contentColor = contentColor,
-            disabledContainerColor = disabledContainerColor,
-            disabledContentColor = disabledContentColor,
-        )
+    ): IconButtonColors = IconButtonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = disabledContainerColor,
+        disabledContentColor = disabledContentColor,
+    )
 
     @Composable
     fun contrastIconButtonColors(
