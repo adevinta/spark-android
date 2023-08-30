@@ -75,8 +75,6 @@ androidx.vectordrawable:vectordrawable:1.1.0
 androidx.versionedparcelable:versionedparcelable:1.1.1
 androidx.window:window:1.0.0
 com.google.accompanist:accompanist-drawablepainter:0.32.0
-com.google.accompanist:accompanist-placeholder-material:0.32.0
-com.google.accompanist:accompanist-placeholder:0.32.0
 com.google.guava:listenablefuture:1.0
 com.squareup.okhttp3:okhttp:4.11.0
 com.squareup.okio:okio-jvm:3.3.0
@@ -85,8 +83,8 @@ io.coil-kt:coil-base:2.4.0
 io.coil-kt:coil-compose-base:2.4.0
 io.coil-kt:coil-compose:2.4.0
 io.coil-kt:coil:2.4.0
-io.github.aakira:napier-android:1.4.1
-io.github.aakira:napier:1.4.1
+io.github.fornewid:placeholder-foundation:1.0.1
+io.github.fornewid:placeholder-material3:1.0.1
 org.jetbrains.kotlin:kotlin-bom:1.9.0
 org.jetbrains.kotlin:kotlin-stdlib-common:1.9.0
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0
