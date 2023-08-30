@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "daily"
     registries: "*"
-    labels: [ "version update" ]
+    labels: [ ]
     groups:
       kotlin-ksp-compose:
         patterns:
