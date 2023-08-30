@@ -35,6 +35,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -683,15 +684,15 @@ public class SparkColors(
     public var onNeutralContainer: Color by mutableStateOf(onNeutralContainer, structuralEqualityPolicy())
         internal set
 
-    public var dim1: Float by mutableStateOf(dimContent1, structuralEqualityPolicy())
+    public var dim1: Float by mutableFloatStateOf(dimContent1)
         internal set
-    public var dim2: Float by mutableStateOf(dimContent2, structuralEqualityPolicy())
+    public var dim2: Float by mutableFloatStateOf(dimContent2)
         internal set
-    public var dim3: Float by mutableStateOf(dimContent3, structuralEqualityPolicy())
+    public var dim3: Float by mutableFloatStateOf(dimContent3)
         internal set
-    public var dim4: Float by mutableStateOf(dimContent4, structuralEqualityPolicy())
+    public var dim4: Float by mutableFloatStateOf(dimContent4)
         internal set
-    public var dim5: Float by mutableStateOf(dimContent5, structuralEqualityPolicy())
+    public var dim5: Float by mutableFloatStateOf(dimContent5)
         internal set
 
     // region @Deprecated

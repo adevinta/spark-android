@@ -39,6 +39,7 @@ import androidx.compose.material3.TabPosition
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -152,7 +153,7 @@ public fun ToolbarTitle(
     string: String,
     modifier: Modifier,
 ) {
-    val lineCount = remember { mutableStateOf(0) }
+    val lineCount = remember { mutableIntStateOf(0) }
 
     Text(
         text = string,

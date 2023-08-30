@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.text
 
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
@@ -28,6 +29,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.Paragraph
 import androidx.compose.ui.text.TextLayoutResult
@@ -40,7 +42,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import com.adevinta.spark.InternalSparkApi
-import androidx.compose.material3.Text as MaterialText
 
 @InternalSparkApi
 @Composable
@@ -59,26 +60,36 @@ internal fun SparkText(
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
-    onTextLayout: (TextLayoutResult) -> Unit = {},
+    minLines: Int = 1,
+    onTextLayout: ((TextLayoutResult) -> Unit)? = null,
     style: TextStyle = LocalTextStyle.current,
 ) {
-    MaterialText(
-        text = text,
-        modifier = modifier,
-        color = color,
-        fontSize = fontSize,
-        fontStyle = fontStyle,
-        fontWeight = fontWeight,
-        fontFamily = fontFamily,
-        letterSpacing = letterSpacing,
-        textDecoration = textDecoration,
-        textAlign = textAlign,
-        lineHeight = lineHeight,
+    val textColor = color.takeOrElse {
+        style.color.takeOrElse {
+            LocalContentColor.current
+        }
+    }
+
+    BasicText(
+        text,
+        modifier,
+        style.merge(
+            color = textColor,
+            fontSize = fontSize,
+            fontWeight = fontWeight,
+            textAlign = textAlign,
+            lineHeight = lineHeight,
+            fontFamily = fontFamily,
+            textDecoration = textDecoration,
+            fontStyle = fontStyle,
+            letterSpacing = letterSpacing,
+        ),
+        onTextLayout = onTextLayout,
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
-        onTextLayout = onTextLayout,
-        style = style,
+        minLines = minLines,
+        color = { textColor },
     )
 }
 
@@ -99,28 +110,38 @@ internal fun SparkText(
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
+    minLines: Int = 1,
     inlineContent: Map<String, InlineTextContent> = mapOf(),
     onTextLayout: (TextLayoutResult) -> Unit = {},
     style: TextStyle = LocalTextStyle.current,
 ) {
-    MaterialText(
+    val textColor = color.takeOrElse {
+        style.color.takeOrElse {
+            LocalContentColor.current
+        }
+    }
+
+    BasicText(
         text = text,
         modifier = modifier,
-        color = color,
-        fontSize = fontSize,
-        fontStyle = fontStyle,
-        fontWeight = fontWeight,
-        fontFamily = fontFamily,
-        letterSpacing = letterSpacing,
-        textDecoration = textDecoration,
-        textAlign = textAlign,
-        lineHeight = lineHeight,
+        style = style.merge(
+            color = textColor,
+            fontSize = fontSize,
+            fontWeight = fontWeight,
+            textAlign = textAlign,
+            lineHeight = lineHeight,
+            fontFamily = fontFamily,
+            textDecoration = textDecoration,
+            fontStyle = fontStyle,
+            letterSpacing = letterSpacing,
+        ),
+        onTextLayout = onTextLayout,
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
+        minLines = minLines,
         inlineContent = inlineContent,
-        onTextLayout = onTextLayout,
-        style = style,
+        color = { textColor },
     )
 }
 
@@ -166,6 +187,8 @@ internal fun SparkText(
  * @param maxLines an optional maximum number of lines for the text to span, wrapping if
  * necessary. If the text exceeds the given number of lines, it will be truncated according to
  * [overflow] and [softWrap]. If it is not null, then it must be greater than zero.
+ * @param minLines The minimum height in terms of minimum number of visible lines. It is required
+ * that 1 <= [minLines] <= [maxLines].
  * @param onTextLayout callback that is executed when a new text layout is calculated. A
  * [TextLayoutResult] object that callback provides contains paragraph information, size of the
  * text, baselines and other details. The callback can be used to add additional decoration or
@@ -188,7 +211,8 @@ public fun Text(
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
-    onTextLayout: (TextLayoutResult) -> Unit = {},
+    minLines: Int = 1,
+    onTextLayout: ((TextLayoutResult) -> Unit)? = null,
     style: TextStyle = LocalTextStyle.current,
 ) {
     SparkText(
@@ -205,6 +229,7 @@ public fun Text(
         lineHeight = lineHeight,
         overflow = overflow,
         softWrap = softWrap,
+        minLines = minLines,
         maxLines = maxLines,
         onTextLayout = onTextLayout,
         style = style,
@@ -253,6 +278,8 @@ public fun Text(
  * @param maxLines an optional maximum number of lines for the text to span, wrapping if
  * necessary. If the text exceeds the given number of lines, it will be truncated according to
  * [overflow] and [softWrap]. If it is not null, then it must be greater than zero.
+ * @param minLines The minimum height in terms of minimum number of visible lines. It is required
+ * that 1 <= [minLines] <= [maxLines].
  * @param inlineContent a map storing composables that replaces certain ranges of the text, used to
  * insert composables into text layout. See [InlineTextContent].
  * @param onTextLayout callback that is executed when a new text layout is calculated. A
@@ -277,6 +304,7 @@ public fun Text(
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
+    minLines: Int = 1,
     inlineContent: Map<String, InlineTextContent> = mapOf(),
     onTextLayout: (TextLayoutResult) -> Unit = {},
     style: TextStyle = LocalTextStyle.current,
@@ -296,6 +324,7 @@ public fun Text(
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
+        minLines = minLines,
         inlineContent = inlineContent,
         onTextLayout = onTextLayout,
         style = style,

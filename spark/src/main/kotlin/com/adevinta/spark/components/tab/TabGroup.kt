@@ -32,7 +32,7 @@ import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -114,7 +114,7 @@ internal fun SparkTabGroup(
                 coroutineScope = coroutineScope,
             )
         }
-        var tabRowWidth by remember { mutableStateOf(Int.MAX_VALUE) }
+        var tabRowWidth by remember { mutableIntStateOf(Int.MAX_VALUE) }
         BoxWithConstraints {
             tabRowWidth = constraints.maxWidth
         }
@@ -351,7 +351,7 @@ internal fun TabGroupPreview(
         Pair("Message", SparkIcons.MessageOutline) to 0,
         Pair(null, SparkIcons.AccountFill) to 0,
     )
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(0) }
     PreviewTheme(theme) {
         TabSize.values().forEach { tabSize ->
             TabIntent.values().forEach { intent ->
@@ -396,7 +396,7 @@ internal fun TabGroupFixedSizePreview(
         Pair("Home", null) to 0,
         Pair("Message", SparkIcons.MessageOutline) to 1,
     )
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(0) }
     PreviewTheme(theme) {
         TabSize.values().forEach { tabSize ->
             TabIntent.values().forEach { intent ->
