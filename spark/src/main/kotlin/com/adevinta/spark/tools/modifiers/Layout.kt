@@ -56,7 +56,7 @@ private data class IgnoreParentHorizontalPaddingModifier(
 
     override fun create() = IgnoreParentHorizontalPaddingModifierNode(horizontalPadding)
 
-    override fun update(node: IgnoreParentHorizontalPaddingModifierNode) = node.apply {
+    override fun update(node: IgnoreParentHorizontalPaddingModifierNode) {
         node.horizontalPadding = horizontalPadding
     }
 

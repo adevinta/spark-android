@@ -49,7 +49,7 @@ private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTarge
 
     override fun hashCode(): Int = 0
 
-    override fun update(node: MinimumTouchTargetModifierNode) = node
+    override fun update(node: MinimumTouchTargetModifierNode) = Unit
 
     override fun InspectorInfo.inspectableProperties() {
         name = "minimumTouchTargetSize"
