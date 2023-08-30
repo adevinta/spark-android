@@ -65,6 +65,8 @@ android {
 dependencies {
     implementation(projects.spark)
 
+    implementation(libs.kotlin.reflect)
+
     implementation(libs.airbnb.showkase)
 
     implementation(libs.accompanist.testharness)

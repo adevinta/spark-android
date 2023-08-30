@@ -53,11 +53,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
 import androidx.navigation.NavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
+import com.adevinta.spark.catalog.util.splitCamelWithSpaces
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.spacer.VerticalSpacer
@@ -155,8 +157,9 @@ public fun IconsScreen(
                         size = IconSize.ExtraLarge,
                     )
                     Text(
-                        text = iconName,
+                        text = iconName.splitCamelWithSpaces(),
                         style = SparkTheme.typography.caption,
+                        textAlign = TextAlign.Center,
                     )
                 }
             }
