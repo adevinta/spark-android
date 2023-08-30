@@ -31,8 +31,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,7 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.catalog.util.splitCamelInSpaces
+import com.adevinta.spark.catalog.util.splitCamelWithSpaces
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Order
@@ -54,33 +52,7 @@ import kotlin.reflect.full.starProjectedType
 
 @Composable
 internal fun ColorSample() {
-    val colors = SparkTheme.colors::class.declaredMemberProperties
-    // Don't recompute this on every composition, only when colors are changing
-    val tokensColorsGroups by remember(colors) {
-        derivedStateOf {
-            colors
-                .filterNot { field ->
-                    field.hasAnnotation<Deprecated>()
-                }
-                .filter {
-                    it.returnType == Color::class.starProjectedType
-                } // remove dims and any non color tokens
-                .map {
-                    // we use this to cast the type otherwise we get a star type instead of Color
-                    @Suppress("UNCHECKED_CAST")
-                    it as KProperty1<SparkColors, Long>
-                }
-                .filterNot { it.name.startsWith("on") } // remove content co
-                .sortedBy {
-                    // Use the same order than the one in the specs
-                    it.findAnnotation<Order>()?.value ?: Int.MAX_VALUE
-                }
-                .groupBy {
-                    // Group by token name like "main",  "mainContainer" or "mainVariant"
-                    it.name.takeWhile { char -> !char.isUpperCase() }
-                }.values.toList()
-        }
-    }
+    val tokensColorsGroups = rememberColorTokens(SparkTheme.colors)
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
@@ -111,12 +83,32 @@ private fun RowScope.ColorItem(color: KProperty1<SparkColors, Long>) {
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = color.name.splitCamelInSpaces(),
+                text = color.name.splitCamelWithSpaces(),
                 style = SparkTheme.typography.body2,
                 textAlign = TextAlign.Center,
             )
         }
     }
+}
+
+/**
+ * Avoid computing these tokens on each recomposition but do it only when colors changes.
+ */
+@Composable
+private fun rememberColorTokens(colors: SparkColors): List<List<KProperty1<SparkColors, Long>>> = remember(colors) {
+    colors::class.declaredMemberProperties
+        .filterNot { field -> field.hasAnnotation<Deprecated>() }
+        // Remove dims and any non color tokens
+        .filter { it.returnType == Color::class.starProjectedType }
+        // Cast the type otherwise we get a star type instead of Long
+        .map { it as KProperty1<SparkColors, Long> }
+        // Remove content colors
+        .filterNot { it.name.startsWith("on") }
+        // Use the same order than the one in the specs
+        .sortedBy { it.findAnnotation<Order>()?.value ?: Int.MAX_VALUE }
+        // Group by token name like "main", "mainContainer" or "mainVariant"
+        .groupBy { it.name.takeWhile { char -> !char.isUpperCase() } }
+        .values.toList()
 }
 
 @Preview

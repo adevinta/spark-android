@@ -21,6 +21,6 @@
  */
 package com.adevinta.spark.catalog.util
 
-public fun String.splitCamelInSpaces(): String = CamelRegex.replace(this, " $0").lowercase()
+public fun String.splitCamelWithSpaces(): String = CamelCaseRegex.replace(this, " $0").lowercase()
 
-private val CamelRegex = "(?<=.)[A-Z]".toRegex()
+private val CamelCaseRegex = "(?<=.)[A-Z]".toRegex()

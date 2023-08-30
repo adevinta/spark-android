@@ -25,7 +25,7 @@ import com.adevinta.spark.catalog.examples.samples.tokens.colors.ColorSample
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 
-private const val TokensExampleSourceUrl = "$SampleSourceUrl/TokensSamples.kt"
+private const val TokensExampleSourceUrl = "$SampleSourceUrl/TokensExamples.kt"
 public val TokensExamples: List<Example> = listOf(
     Example(
         name = "Colors",

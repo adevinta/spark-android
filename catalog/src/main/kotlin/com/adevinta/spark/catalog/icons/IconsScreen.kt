@@ -59,7 +59,7 @@ import androidx.core.content.getSystemService
 import androidx.navigation.NavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
-import com.adevinta.spark.catalog.util.splitCamelInSpaces
+import com.adevinta.spark.catalog.util.splitCamelWithSpaces
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.spacer.VerticalSpacer
@@ -157,7 +157,7 @@ public fun IconsScreen(
                         size = IconSize.ExtraLarge,
                     )
                     Text(
-                        text = iconName.splitCamelInSpaces(),
+                        text = iconName.splitCamelWithSpaces(),
                         style = SparkTheme.typography.caption,
                         textAlign = TextAlign.Center,
                     )
