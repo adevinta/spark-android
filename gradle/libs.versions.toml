@@ -8,7 +8,7 @@ androidx-compose-compiler = "1.5.1"
 androidx-lifecycle = "2.6.1"
 androidx-navigation = "2.6.0"
 androidx-savedstate = "1.2.1"
-androidx-core = "1.9.0"
+androidx-core = "1.10.1"
 coil = "2.4.0"
 compileSdk = "34"
 dependencyGuard = "0.4.3"
@@ -47,6 +47,7 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-appCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appCompat" }
 androidx-appCompat-resources = { module = "androidx.appcompat:appcompat-resources", version.ref = "androidx-appCompat" }
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
+androidx-compose-compiler = { group = "androidx.compose.compiler", name = "compiler", version.ref = "androidx-compose-compiler" }
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }
 androidx-compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended" }
