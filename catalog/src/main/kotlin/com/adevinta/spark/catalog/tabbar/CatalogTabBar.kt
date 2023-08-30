@@ -42,6 +42,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -153,17 +154,17 @@ public fun ToolbarTitle(
     string: String,
     modifier: Modifier,
 ) {
-    val lineCount = remember { mutableIntStateOf(0) }
+    var lineCount by remember { mutableIntStateOf(0) }
 
     Text(
         text = string,
         modifier = modifier.semantics {
-            lineCountVal = lineCount.value
+            lineCountVal = lineCount
         },
         maxLines = 3,
         overflow = TextOverflow.Ellipsis,
         onTextLayout = {
-            lineCount.value = it.lineCount
+            lineCount = it.lineCount
         },
     )
 }
