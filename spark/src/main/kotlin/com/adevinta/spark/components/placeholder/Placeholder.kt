@@ -40,14 +40,14 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.google.accompanist.placeholder.PlaceholderDefaults
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.fade
-import com.google.accompanist.placeholder.material.color
-import com.google.accompanist.placeholder.material.fadeHighlightColor
-import com.google.accompanist.placeholder.material.placeholder
-import com.google.accompanist.placeholder.material.shimmerHighlightColor
-import com.google.accompanist.placeholder.shimmer
+import io.github.fornewid.placeholder.foundation.PlaceholderDefaults
+import io.github.fornewid.placeholder.foundation.PlaceholderHighlight
+import io.github.fornewid.placeholder.foundation.fade
+import io.github.fornewid.placeholder.foundation.shimmer
+import io.github.fornewid.placeholder.material3.color
+import io.github.fornewid.placeholder.material3.fadeHighlightColor
+import io.github.fornewid.placeholder.material3.placeholder
+import io.github.fornewid.placeholder.material3.shimmerHighlightColor
 
 @Composable
 private fun PlaceholderDefaults.sparkColor() = color(
