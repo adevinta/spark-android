@@ -26,7 +26,6 @@ import android.view.View
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.compose.runtime.PausableMonotonicFrameClock
 import androidx.compose.runtime.Recomposer
-import androidx.compose.ui.InternalComposeUiApi
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.platform.AndroidUiDispatcher
 import androidx.compose.ui.platform.compositionContext
@@ -101,7 +100,7 @@ private class ComposeLayoutPreviewHelper(val view: AbstractComposeView) {
         view.setViewTreeViewModelStoreOwner(viewModelStoreOwner)
     }
 
-    @OptIn(DelicateCoroutinesApi::class, InternalComposeUiApi::class)
+    @OptIn(DelicateCoroutinesApi::class)
     fun createAndInstallWindowRecomposer(
         rootView: View = view,
         lifecycleOwner: LifecycleOwner = fakeSavedStateRegistryOwner,

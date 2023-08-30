@@ -97,7 +97,6 @@ internal fun SparkSlider(
  * You can create and pass in your own remembered instance to observe Interactions
  * and customize the appearance / behavior of this slider in different states.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 public fun Slider(

@@ -137,7 +137,10 @@ internal fun CatalogApp(
             ) {
                 val coroutineScope = rememberCoroutineScope()
                 val homeScreenValues = CatalogHomeScreen.values()
-                val pagerState = rememberPagerState(initialPage = CatalogHomeScreen.Examples.ordinal)
+                val pagerState = rememberPagerState(
+                    initialPage = CatalogHomeScreen.Examples.ordinal,
+                    pageCount = { homeScreenValues.size },
+                )
 
                 BackdropScaffold(
                     scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
@@ -180,7 +183,6 @@ internal fun CatalogApp(
                             start = insetsPadding.calculateStartPadding(LocalLayoutDirection.current),
                         )
                         HorizontalPager(
-                            pageCount = homeScreenValues.size,
                             state = pagerState,
                             flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
                         ) {
