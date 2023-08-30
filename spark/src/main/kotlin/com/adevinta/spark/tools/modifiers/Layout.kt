@@ -49,7 +49,6 @@ import kotlinx.collections.immutable.ImmutableList
 public fun Modifier.ignoreParentHorizontalPadding(horizontalPadding: Dp): Modifier =
     this then IgnoreParentHorizontalPaddingModifier(horizontalPadding)
 
-@OptIn(ExperimentalComposeUiApi::class)
 private data class IgnoreParentHorizontalPaddingModifier(
     private val horizontalPadding: Dp,
 ) : ModifierNodeElement<IgnoreParentHorizontalPaddingModifierNode>() {
@@ -66,7 +65,6 @@ private data class IgnoreParentHorizontalPaddingModifier(
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 private class IgnoreParentHorizontalPaddingModifierNode(
     var horizontalPadding: Dp,
 ) : Modifier.Node(),

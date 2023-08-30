@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -78,7 +79,7 @@ internal fun IconExampleScreen(icon: SparkIcon, name: String) {
             Pair("Home", null),
             Pair(name, icon),
         )
-        var selectedIndex by remember { mutableStateOf(1) }
+        var selectedIndex by remember { mutableIntStateOf(1) }
         TabGroup(
             selectedTabIndex = selectedIndex,
         ) {

@@ -19,8 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.adevinta.spark.components.appbar
 
 import androidx.compose.foundation.interaction.Interaction
@@ -29,7 +27,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
@@ -38,7 +35,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -186,7 +183,7 @@ internal fun PreviewNavigationBar(
         themeVariant = theme,
         padding = PaddingValues(0.dp),
     ) {
-        var selectedItem by remember { mutableStateOf(0) }
+        var selectedItem by remember { mutableIntStateOf(0) }
         val items = listOf("Songs", "Artists", "Playlists")
 
         NavigationBar {

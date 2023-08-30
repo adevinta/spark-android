@@ -55,7 +55,6 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.launch
 import androidx.compose.material3.rememberDrawerState as rememberMaterialDrawerState
 
-@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 internal fun SparkDismissibleNavigationDrawer(

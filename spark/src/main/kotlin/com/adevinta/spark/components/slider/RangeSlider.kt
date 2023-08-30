@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.slider
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SliderColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -34,7 +33,6 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.RangeSlider as MaterialRangeSlider
 
-@OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
 internal fun SparkRangeSlider(
