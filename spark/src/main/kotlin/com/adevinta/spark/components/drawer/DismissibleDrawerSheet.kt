@@ -55,7 +55,6 @@ import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
-@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 internal fun SparkDismissibleDrawerSheet(
@@ -114,7 +113,6 @@ public fun DismissibleDrawerSheet(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(
     group = "Drawer",
     name = "DismissibleDrawerSheet",

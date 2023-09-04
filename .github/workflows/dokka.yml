@@ -27,7 +27,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref }}
           lfs: true
@@ -37,7 +37,7 @@ jobs:
           distribution: 'temurin'
       - uses: ./.github/actions/setup-gradle-properties
       - name: Dokka
-        uses: gradle/gradle-build-action@243af859f8ca30903d9d7f7936897ca0358ba691 # v2.7.1
+        uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
         with:
           # https://github.com/Kotlin/dokka/issues/1217
           arguments: dokkaHtmlMultiModule --no-configuration-cache --no-parallel --max-workers=1

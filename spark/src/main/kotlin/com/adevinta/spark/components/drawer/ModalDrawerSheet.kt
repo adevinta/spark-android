@@ -31,7 +31,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
@@ -54,7 +53,6 @@ import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
-@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 internal fun SparkModalDrawerSheet(
@@ -112,7 +110,6 @@ public fun ModalDrawerSheet(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(
     group = "Drawer",
     name = "ModalDrawerSheet",

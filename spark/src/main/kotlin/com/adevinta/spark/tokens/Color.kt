@@ -24,8 +24,6 @@
 package com.adevinta.spark.tokens
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,12 +31,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -55,7 +52,9 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.PaletteTokens.Apple100
 import com.adevinta.spark.tokens.PaletteTokens.Apple400
 import com.adevinta.spark.tokens.PaletteTokens.Apple500
@@ -102,6 +101,7 @@ import com.adevinta.spark.tokens.PaletteTokens.Wiggings500
 import com.adevinta.spark.tokens.PaletteTokens.Wiggings800
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+import kotlin.reflect.KProperty0
 
 public fun lightSparkColors(
     accent: Color = Violet300,
@@ -553,6 +553,7 @@ public class SparkColors(
     dimContent4: Float,
     dimContent5: Float,
 ) {
+    @Order(2)
     public var accent: Color by mutableStateOf(accent, structuralEqualityPolicy())
         internal set
     public var onAccent: Color by mutableStateOf(onAccent, structuralEqualityPolicy())
@@ -566,6 +567,7 @@ public class SparkColors(
     public var onAccentVariant: Color by mutableStateOf(onAccentVariant, structuralEqualityPolicy())
         internal set
 
+    @Order(3)
     public var basic: Color by mutableStateOf(basic, structuralEqualityPolicy())
         internal set
     public var onBasic: Color by mutableStateOf(onBasic, structuralEqualityPolicy())
@@ -575,6 +577,7 @@ public class SparkColors(
     public var onBasicContainer: Color by mutableStateOf(onBasicContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(0)
     public var main: Color by mutableStateOf(main, structuralEqualityPolicy())
         internal set
     public var onMain: Color by mutableStateOf(onMain, structuralEqualityPolicy())
@@ -588,6 +591,7 @@ public class SparkColors(
     public var onMainVariant: Color by mutableStateOf(onMainVariant, structuralEqualityPolicy())
         internal set
 
+    @Order(1)
     public var support: Color by mutableStateOf(support, structuralEqualityPolicy())
         internal set
     public var onSupport: Color by mutableStateOf(onSupport, structuralEqualityPolicy())
@@ -601,6 +605,7 @@ public class SparkColors(
     public var onSupportVariant: Color by mutableStateOf(onSupportVariant, structuralEqualityPolicy())
         internal set
 
+    @Order(4)
     public var background: Color by mutableStateOf(background, structuralEqualityPolicy())
         internal set
     public var onBackground: Color by mutableStateOf(onBackground, structuralEqualityPolicy())
@@ -610,6 +615,7 @@ public class SparkColors(
     public var onBackgroundVariant: Color by mutableStateOf(onBackgroundVariant, structuralEqualityPolicy())
         internal set
 
+    @Order(5)
     public var surface: Color by mutableStateOf(surface, structuralEqualityPolicy())
         internal set
     public var onSurface: Color by mutableStateOf(onSurface, structuralEqualityPolicy())
@@ -619,6 +625,8 @@ public class SparkColors(
     public var onSurfaceInverse: Color by mutableStateOf(onSurfaceInverse, structuralEqualityPolicy())
         internal set
     internal var surfaceTint: Color by mutableStateOf(surfaceTint, structuralEqualityPolicy())
+
+    @Order(6)
     public var outline: Color by mutableStateOf(outline, structuralEqualityPolicy())
         internal set
     public var outlineHigh: Color by mutableStateOf(outlineHigh, structuralEqualityPolicy())
@@ -626,6 +634,7 @@ public class SparkColors(
     public var scrim: Color by mutableStateOf(scrim, structuralEqualityPolicy())
         internal set
 
+    @Order(7)
     public var success: Color by mutableStateOf(success, structuralEqualityPolicy())
         internal set
     public var onSuccess: Color by mutableStateOf(onSuccess, structuralEqualityPolicy())
@@ -635,6 +644,7 @@ public class SparkColors(
     public var onSuccessContainer: Color by mutableStateOf(onSuccessContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(8)
     public var alert: Color by mutableStateOf(alert, structuralEqualityPolicy())
         internal set
     public var onAlert: Color by mutableStateOf(onAlert, structuralEqualityPolicy())
@@ -644,6 +654,7 @@ public class SparkColors(
     public var onAlertContainer: Color by mutableStateOf(onAlertContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(9)
     public var error: Color by mutableStateOf(error, structuralEqualityPolicy())
         internal set
     public var onError: Color by mutableStateOf(onError, structuralEqualityPolicy())
@@ -653,6 +664,7 @@ public class SparkColors(
     public var onErrorContainer: Color by mutableStateOf(onErrorContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(10)
     public var info: Color by mutableStateOf(info, structuralEqualityPolicy())
         internal set
     public var onInfo: Color by mutableStateOf(onInfo, structuralEqualityPolicy())
@@ -662,6 +674,7 @@ public class SparkColors(
     public var onInfoContainer: Color by mutableStateOf(onInfoContainer, structuralEqualityPolicy())
         internal set
 
+    @Order(11)
     public var neutral: Color by mutableStateOf(neutral, structuralEqualityPolicy())
         internal set
     public var onNeutral: Color by mutableStateOf(onNeutral, structuralEqualityPolicy())
@@ -671,15 +684,15 @@ public class SparkColors(
     public var onNeutralContainer: Color by mutableStateOf(onNeutralContainer, structuralEqualityPolicy())
         internal set
 
-    public var dim1: Float by mutableStateOf(dimContent1, structuralEqualityPolicy())
+    public var dim1: Float by mutableFloatStateOf(dimContent1)
         internal set
-    public var dim2: Float by mutableStateOf(dimContent2, structuralEqualityPolicy())
+    public var dim2: Float by mutableFloatStateOf(dimContent2)
         internal set
-    public var dim3: Float by mutableStateOf(dimContent3, structuralEqualityPolicy())
+    public var dim3: Float by mutableFloatStateOf(dimContent3)
         internal set
-    public var dim4: Float by mutableStateOf(dimContent4, structuralEqualityPolicy())
+    public var dim4: Float by mutableFloatStateOf(dimContent4)
         internal set
-    public var dim5: Float by mutableStateOf(dimContent5, structuralEqualityPolicy())
+    public var dim5: Float by mutableFloatStateOf(dimContent5)
         internal set
 
     // region @Deprecated
@@ -1129,18 +1142,18 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
 
 /**
  * The Material color system contains pairs of colors that are typically used for the background
- * and content color inside a component. For example, a [Button] typically uses `main` for its
+ * and content color inside a component. For example, a [ButtonFilled] typically uses `main` for its
  * background, and `onMain` for the color of its content (usually text or iconography).
  *
  * This function tries to match the provided [backgroundColor] to a 'background' color in this
- * [Colors], and then will return the corresponding color used for content. For example, when
- * [backgroundColor] is [Colors.main], this will return [Colors.onMain].
+ * [SparkColors], and then will return the corresponding color used for content. For example, when
+ * [backgroundColor] is [SparkColors.main], this will return [SparkColors.onMain].
  *
  * If [backgroundColor] does not match a background color in the theme, this will return
  * [Color.Unspecified].
  *
  * @return the matching content color for [backgroundColor]. If [backgroundColor] is not present in
- * the theme's [Colors], then returns [Color.Unspecified].
+ * the theme's [SparkColors], then returns [Color.Unspecified].
  *
  * @see contentColorFor
  */
@@ -1179,12 +1192,12 @@ public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (ba
 
 /**
  * The Material color system contains pairs of colors that are typically used for the background
- * and content color inside a component. For example, a [Button] typically uses `main` for its
+ * and content color inside a component. For example, a [ButtonFilled] typically uses `main` for its
  * background, and `onMain` for the color of its content (usually text or iconography).
  *
  * This function tries to match the provided [backgroundColor] to a 'background' color in this
- * [Colors], and then will return the corresponding color used for content. For example, when
- * [backgroundColor] is [Colors.main], this will return [Colors.onMain].
+ * [SparkColors], and then will return the corresponding color used for content. For example, when
+ * [backgroundColor] is [SparkColors.main], this will return [SparkColors.onMain].
  *
  * If [backgroundColor] does not match a background color in the theme, this will return
  * the current value of [LocalContentColor] as a best-effort color.
@@ -1192,7 +1205,7 @@ public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (ba
  * @return the matching content color for [backgroundColor]. If [backgroundColor] is not present in
  * the theme's [Colors], then returns the current value of [LocalContentColor].
  *
- * @see Colors.contentColorFor
+ * @see SparkColors.contentColorFor
  */
 @Composable
 @ReadOnlyComposable
@@ -1422,69 +1435,27 @@ public fun debugColors(
     group = "Tokens",
     name = "Colors",
     device = Devices.TABLET,
-    showSystemUi = true,
 )
 @Composable
 private fun ColorPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        Row {
+        Colors()
+    }
+}
+
+@Composable
+private fun Colors() {
+    Row {
+        previewColors.forEach { column ->
             Column {
-                Row {
-                    ColorItem(SparkTheme.colors.main, "main")
-                    ColorItem(SparkTheme.colors.mainContainer, "main Container")
-                    ColorItem(SparkTheme.colors.mainVariant, "main Variant")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.support, "support")
-                    ColorItem(SparkTheme.colors.supportContainer, "support Container")
-                    ColorItem(SparkTheme.colors.supportVariant, "support Variant")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.accent, "accent")
-                    ColorItem(SparkTheme.colors.accentContainer, "accent Container")
-                    ColorItem(SparkTheme.colors.accentVariant, "accent Variant")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.basic, "basic")
-                    ColorItem(SparkTheme.colors.basicContainer, "basic Container")
-                }
-            }
-            Column {
-                Row {
-                    ColorItem(SparkTheme.colors.success, "success")
-                    ColorItem(SparkTheme.colors.successContainer, "success Container")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.alert, "alert")
-                    ColorItem(SparkTheme.colors.alertContainer, "alert Container")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.error, "error")
-                    ColorItem(SparkTheme.colors.errorContainer, "error Container")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.info, "info")
-                    ColorItem(SparkTheme.colors.infoContainer, "info Container")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.neutral, "neutral")
-                    ColorItem(SparkTheme.colors.neutralContainer, "neutral Container")
-                }
-            }
-            Column {
-                Row {
-                    ColorItem(SparkTheme.colors.background, "background")
-                    ColorItem(SparkTheme.colors.backgroundVariant, "backgroundVariant")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.surface, "surface")
-                    ColorItem(SparkTheme.colors.surfaceInverse, "surface inverse")
-                }
-                Row {
-                    ColorItem(SparkTheme.colors.outline, "outline")
-                    ColorItem(SparkTheme.colors.outlineHigh, "outline High")
+                column.forEach { row ->
+                    Row {
+                        row.forEach { color ->
+                            ColorItem(color)
+                        }
+                    }
                 }
             }
         }
@@ -1492,28 +1463,49 @@ private fun ColorPreview(
 }
 
 @Composable
-private fun ColorItem(color: Color, colorName: String) {
-    CompositionLocalProvider(
-        LocalContentColor provides contentColorFor(backgroundColor = color),
+private fun ColorItem(color: KProperty0<Color>) {
+    Surface(
+        modifier = Modifier
+            .padding(8.dp)
+            .size(104.dp),
+        color = color.get(),
+        shape = SparkTheme.shapes.extraLarge,
+        border = BorderStroke(2.dp, SparkTheme.colors.onBackground),
     ) {
-        Surface(
-            modifier = Modifier
-                .padding(8.dp)
-                .size(104.dp),
-            shape = SparkTheme.shapes.extraLarge,
-            border = BorderStroke(2.dp, SparkTheme.colors.onBackground),
-            color = color,
+        Box(
+            modifier = Modifier.padding(8.dp),
+            contentAlignment = Alignment.Center,
         ) {
-            Box(
-                modifier = Modifier.padding(8.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(
-                    text = colorName,
-                    style = SparkTheme.typography.body,
-                    textAlign = TextAlign.Center,
-                )
-            }
+            Text(
+                text = color.name,
+                style = SparkTheme.typography.body2,
+                textAlign = TextAlign.Center,
+            )
         }
     }
 }
+
+private val previewColors
+    @Composable
+    get() = with(SparkTheme.colors) {
+        listOf(
+            listOf(
+                listOf(::main, ::mainContainer, ::mainVariant),
+                listOf(::support, ::supportContainer, ::supportVariant),
+                listOf(::accent, ::accentContainer, ::accentVariant),
+                listOf(::basic, ::basicContainer),
+            ),
+            listOf(
+                listOf(::success, ::successContainer),
+                listOf(::alert, ::alertContainer),
+                listOf(::error, ::errorContainer),
+                listOf(::info, ::infoContainer),
+                listOf(::neutral, ::neutralContainer),
+            ),
+            listOf(
+                listOf(::background, ::backgroundVariant),
+                listOf(::surface, ::surfaceInverse),
+                listOf(::outline, ::outlineHigh),
+            ),
+        )
+    }

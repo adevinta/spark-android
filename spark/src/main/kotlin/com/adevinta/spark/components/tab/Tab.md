@@ -63,7 +63,7 @@ screen. Each tab will take the needed space ensuring the minimum tab size constr
 To draw tabs
 
 ```kotlin
-var selectedIndex by remember { mutableStateOf(0) }
+var selectedIndex by remember { mutableIntStateOf(0) }
 
 TabGroup(
     selectedTabIndex = selectedIndex,
