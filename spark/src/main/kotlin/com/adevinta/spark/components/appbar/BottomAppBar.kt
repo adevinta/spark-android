@@ -23,19 +23,24 @@
 
 package com.adevinta.spark.components.appbar
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.BottomAppBarDefaults
-import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,8 +48,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.FloatingActionButton
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.icons.CheckFill
 import com.adevinta.spark.icons.PenOutline
 import com.adevinta.spark.icons.Plus
@@ -53,7 +61,6 @@ import com.adevinta.spark.icons.WheelOutline
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import androidx.compose.material3.BottomAppBar as MaterialBottomAppBar
 
 /**
  * <a href="https://m3.material.io/components/bottom-app-bar/overview" class="external" target="_blank">Material Design bottom app bar</a>.
@@ -75,7 +82,7 @@ import androidx.compose.material3.BottomAppBar as MaterialBottomAppBar
  * @param contentColor the preferred color for content inside this BottomAppBar. Defaults to either
  * the matching content color for [containerColor], or to the current [LocalContentColor] if
  * [containerColor] is not a color from the theme.
- * @param tonalElevation when [containerColor] is [ColorScheme.surface], a translucent main color
+ * @param elevation when [containerColor] is [ColorScheme.surface], a translucent main color
  * overlay is applied on top of the container. A higher tonal elevation value will result in a
  * darker color in light theme and lighter color in dark theme. See also: [Surface].
  * @param contentPadding the padding applied to the content of this BottomAppBar
@@ -88,20 +95,32 @@ public fun BottomAppBar(
     floatingActionButton: @Composable (() -> Unit)? = null,
     containerColor: Color = BottomAppBarDefaults.containerColor,
     contentColor: Color = androidx.compose.material3.contentColorFor(containerColor),
-    tonalElevation: Dp = BottomAppBarDefaults.ContainerElevation,
+    elevation: Dp = BottomAppBarDefaults.ContainerElevation,
     contentPadding: PaddingValues = BottomAppBarDefaults.ContentPadding,
     windowInsets: WindowInsets = BottomAppBarDefaults.windowInsets,
+): Unit = BottomAppBar(
+    modifier = modifier,
+    containerColor = containerColor,
+    contentColor = contentColor,
+    elevation = elevation,
+    windowInsets = windowInsets,
+    contentPadding = contentPadding,
 ) {
-    MaterialBottomAppBar(
-        actions = actions,
-        modifier = modifier,
-        floatingActionButton = floatingActionButton,
-        containerColor = containerColor,
-        contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        contentPadding = contentPadding,
-        windowInsets = windowInsets,
-    )
+    actions()
+    if (floatingActionButton != null) {
+        Spacer(Modifier.weight(1f, true))
+        Box(
+            Modifier
+                .fillMaxHeight()
+                .padding(
+                    top = FABVerticalPadding,
+                    end = FABHorizontalPadding,
+                ),
+            contentAlignment = Alignment.TopStart,
+        ) {
+            floatingActionButton()
+        }
+    }
 }
 
 /**
@@ -121,7 +140,7 @@ public fun BottomAppBar(
  * @param contentColor the preferred color for content inside this BottomAppBar. Defaults to either
  * the matching content color for [containerColor], or to the current [LocalContentColor] if
  * [containerColor] is not a color from the theme.
- * @param tonalElevation when [containerColor] is [ColorScheme.surface], a translucent main color
+ * @param elevation when [containerColor] is [ColorScheme.surface], a translucent main color
  * overlay is applied on top of the container. A higher tonal elevation value will result in a
  * darker color in light theme and lighter color in dark theme. See also: [Surface].
  * @param contentPadding the padding applied to the content of this BottomAppBar
@@ -134,21 +153,39 @@ public fun BottomAppBar(
     modifier: Modifier = Modifier,
     containerColor: Color = BottomAppBarDefaults.containerColor,
     contentColor: Color = contentColorFor(containerColor),
-    tonalElevation: Dp = BottomAppBarDefaults.ContainerElevation,
+    elevation: Dp = BottomAppBarDefaults.ContainerElevation,
     contentPadding: PaddingValues = BottomAppBarDefaults.ContentPadding,
     windowInsets: WindowInsets = BottomAppBarDefaults.windowInsets,
     content: @Composable RowScope.() -> Unit,
 ) {
-    MaterialBottomAppBar(
-        modifier = modifier,
-        containerColor = containerColor,
+    Surface(
+        color = containerColor,
         contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        contentPadding = contentPadding,
-        windowInsets = windowInsets,
-        content = content,
-    )
+        elevation = elevation,
+        shape = SparkTheme.shapes.none,
+        modifier = modifier,
+    ) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(windowInsets)
+                .height(ContainerHeight)
+                .padding(contentPadding),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            content = content,
+        )
+    }
 }
+
+// Padding minus IconButton's min touch target expansion
+private val BottomAppBarHorizontalPadding = 16.dp - 12.dp
+internal val BottomAppBarVerticalPadding = 16.dp - 12.dp
+
+// Padding minus content padding
+private val FABHorizontalPadding = 16.dp - BottomAppBarHorizontalPadding
+private val FABVerticalPadding = 12.dp - BottomAppBarVerticalPadding
+private val ContainerHeight = 80.0.dp
 
 @Preview(
     group = "AppBar",
@@ -189,9 +226,9 @@ internal fun BottomAppBarPreview(
                     onClick = { /* do something */ },
                     containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
                     elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation(),
-                ) {
-                    Icon(SparkIcons.Plus, "Localized description")
-                }
+                    icon = SparkIcons.Plus,
+                    contentDescription = "Localized description",
+                )
             },
         )
     }

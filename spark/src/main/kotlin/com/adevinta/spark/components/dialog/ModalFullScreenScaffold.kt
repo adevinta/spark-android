@@ -35,7 +35,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -60,6 +59,7 @@ import com.adevinta.spark.components.iconbuttons.IconButtonColors
 import com.adevinta.spark.components.iconbuttons.SparkIconButton
 import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.scaffold.Scaffold
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.BicycleType
 import com.adevinta.spark.icons.Close
@@ -163,7 +163,7 @@ private fun ModalScaffold(
     ) {
         Surface(
             modifier = modifier.padding(DialogWindowPadding),
-            shadowElevation = 6.dp,
+            elevation = 6.dp,
             shape = SparkTheme.shapes.large,
         ) {
             Column(
