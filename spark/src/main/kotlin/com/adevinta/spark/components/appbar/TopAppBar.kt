@@ -769,9 +769,9 @@ private fun TwoRowsTopAppBar(
                     .windowInsetsPadding(windowInsets.only(WindowInsetsSides.Horizontal))
                     .clipToBounds(),
                 heightPx = maxHeightPx - pinnedHeightPx + (
-                        scrollBehavior?.state?.heightOffset
-                            ?: 0f
-                        ),
+                    scrollBehavior?.state?.heightOffset
+                        ?: 0f
+                    ),
                 navigationIconContentColor = colors.navigationIconContentColor,
                 titleContentColor = colors.titleContentColor,
                 actionIconContentColor = colors.actionIconContentColor,
