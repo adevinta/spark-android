@@ -42,7 +42,7 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.AlarmOffFill
 import com.adevinta.spark.icons.AlarmOnFill
-import com.adevinta.spark.icons.CheckFill
+import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
@@ -191,7 +191,7 @@ public fun SwitchLabelled(
  * @property unchecked icon to be used for the thumb in unchecked state
  */
 public data class SwitchIcons(
-    val checked: SparkIcon = SparkIcons.CheckFill,
+    val checked: SparkIcon = SparkIcons.Check,
     val unchecked: SparkIcon = SparkIcons.Close,
 )
 
