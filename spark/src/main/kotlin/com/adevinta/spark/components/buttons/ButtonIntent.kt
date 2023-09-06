@@ -29,21 +29,6 @@ import com.adevinta.spark.components.IntentColors
  * ButtonIntent is used to define the intent of the buttons.
  */
 public enum class ButtonIntent {
-    /**
-     * Used to match default color of such UI controls as toggles, Slider, etc.
-     */
-    Basic {
-        @Composable
-        override fun colors(): IntentColor = IntentColors.Basic.colors()
-    },
-
-    /**
-     * Used to make button visually accentuated.
-     */
-    Accent {
-        @Composable
-        override fun colors(): IntentColor = IntentColors.Accent.colors()
-    },
 
     /**
      * Main buttons are used for the most important actions.
@@ -59,6 +44,22 @@ public enum class ButtonIntent {
     Support {
         @Composable
         override fun colors(): IntentColor = IntentColors.Support.colors()
+    },
+
+    /**
+     * Used to make button visually accentuated.
+     */
+    Accent {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Accent.colors()
+    },
+
+    /**
+     * Used to match default color of such UI controls as toggles, Slider, etc.
+     */
+    Basic {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Basic.colors()
     },
 
     /**
@@ -94,29 +95,19 @@ public enum class ButtonIntent {
     },
 
     /**
+     * Used informational valuable actions.
+     */
+    Info {
+        @Composable
+        override fun colors(): IntentColor = IntentColors.Info.colors()
+    },
+
+    /**
      * Used for low or irrelevant actions.
      */
     Neutral {
         @Composable
         override fun colors(): IntentColor = IntentColors.Neutral.colors()
-    },
-
-    @Deprecated(
-        "Primary is replaced with Main Intent",
-        replaceWith = ReplaceWith("Main"),
-    )
-    Primary {
-        @Composable
-        override fun colors(): IntentColor = IntentColors.Main.colors()
-    },
-
-    @Deprecated(
-        "Secondary is replaced with Support Intent",
-        replaceWith = ReplaceWith("Support"),
-    )
-    Secondary {
-        @Composable
-        override fun colors(): IntentColor = IntentColors.Support.colors()
     },
     ;
 
