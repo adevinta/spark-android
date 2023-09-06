@@ -151,14 +151,12 @@ internal fun IconButtonPreview(
 ) {
     PreviewTheme(theme) {
         val intent = IconButtonIntent.Basic
-        IconButtonSize.values().forEach { size ->
-            IconButtonShape.values().forEach { shape ->
-                IconButtonFilledPair(
-                    intent = intent,
-                    size = size,
-                    shape = shape,
-                )
-            }
+        IconButtonSize.entries.forEach { size ->
+            IconButtonFilledPair(
+                intent = intent,
+                size = size,
+                shape = IconButtonShape.Full
+            )
         }
     }
 }
@@ -170,14 +168,14 @@ internal fun IconButtonPreview(
         shape: IconButtonShape,
     ) -> Unit,
 ) {
-    IconButtonIntent.values().forEach { intent ->
+    IconButtonIntent.entries.forEach { intent ->
         Row(
             modifier = Modifier.ifTrue(intent == IconButtonIntent.Surface) {
-                background(SparkTheme.colors.neutralContainer)
+                background(SparkTheme.colors.surfaceInverse)
             },
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            IconButtonShape.values().forEach { shape ->
+            IconButtonShape.entries.forEach { shape ->
                 content(/*intent = */ intent, /*shape = */ shape)
             }
         }
