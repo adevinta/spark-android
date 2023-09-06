@@ -26,11 +26,11 @@
     android:viewportHeight="24">
   <path
       android:fillColor="#FF000000"
-      android:pathData="M15.05,10.85a1.35,1.35 0,1 0,0 -2.7,1.35 1.35,0 0,0 0,2.7ZM16.85,14.45h-9.7a1,1 0,0 0,-1 1,1 1,0 0,0 1,1h9.7a1,1 0,0 0,1 -1,1 1,0 0,0 -1,-1Z"
+      android:pathData="M15.05,10.85a1.35,1.35 0,1 0,0 -2.7,1.35 1.35,0 0,0 0,2.7ZM16.85,14.46h-9.7c-0.55,0 -1,0.45 -1,1s0.45,1 1,1h9.69c0.55,0 1,-0.45 1,-1s-0.45,-1 -1,-1Z"
       android:fillType="evenOdd"/>
   <path
       android:fillColor="#FF000000"
-      android:pathData="M12,2a10,10 0,1 0,0 20,10 10,0 0,0 0,-20ZM12,20a8,8 0,1 1,0 -16,8 8,0 0,1 0,16Z"
+      android:pathData="M12,2a10,10 0,1 0,-0.02 19.98A10,10 0,0 0,12 2ZM12,20a8,8 0,1 1,0 -16,8 8,0 0,1 0,16Z"
       android:fillType="evenOdd"/>
   <path
       android:fillColor="#FF000000"

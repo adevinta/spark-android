@@ -53,7 +53,7 @@ import com.adevinta.spark.components.buttons.FloatingActionButton
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.surface.Surface
-import com.adevinta.spark.icons.CheckFill
+import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.PenOutline
 import com.adevinta.spark.icons.Plus
 import com.adevinta.spark.icons.SparkIcons
@@ -210,7 +210,7 @@ internal fun BottomAppBarPreview(
                 IconButton(onClick = { /* doSomething() */ }) {
                     Icon(
                         modifier = Modifier.size(24.dp),
-                        sparkIcon = SparkIcons.CheckFill,
+                        sparkIcon = SparkIcons.Check,
                         contentDescription = "Localized description",
                     )
                 }
