@@ -155,7 +155,7 @@ internal fun IconButtonPreview(
             IconButtonFilledPair(
                 intent = intent,
                 size = size,
-                shape = IconButtonShape.Full
+                shape = IconButtonShape.Full,
             )
         }
     }
