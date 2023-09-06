@@ -22,21 +22,21 @@
 package com.adevinta.spark.components.card
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.material3.CardColors
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.surfaceColorAtElevation
+import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.card.CardDefaults.OutlinedCardTokens.DisabledContainerElevation
 import com.adevinta.spark.components.card.CardDefaults.OutlinedCardTokens.DisabledOutlineOpacity
 import com.adevinta.spark.components.card.CardDefaults.OutlinedCardTokens.OutlineWidth
 import com.adevinta.spark.tokens.DisabledAlpha
+import com.adevinta.spark.tokens.ElevationTokens
 import com.adevinta.spark.tokens.contentColorFor
-import androidx.compose.material3.CardDefaults as MaterialCardDefaults
+import com.adevinta.spark.tokens.surfaceColorAtElevation
 
 public object CardDefaults {
     @Composable
@@ -46,7 +46,7 @@ public object CardDefaults {
             .copy(alpha = DisabledAlpha)
             .compositeOver(SparkTheme.colors.surface),
         disabledContentColor: Color = SparkTheme.colors.contentColorFor(containerColor).copy(DisabledAlpha),
-    ): CardColors = MaterialCardDefaults.cardColors(
+    ): CardColors = CardColors(
         containerColor = containerColor,
         contentColor = SparkTheme.colors.contentColorFor(containerColor),
         disabledContainerColor = disabledContainerColor,
@@ -61,11 +61,11 @@ public object CardDefaults {
             SparkTheme.colors.surface
                 .copy(alpha = DisabledAlpha)
                 .compositeOver(
-                    MaterialTheme.colorScheme.surfaceColorAtElevation(ElevationTokens.Level1),
+                    SparkTheme.colors.surfaceColorAtElevation(ElevationTokens.Level1),
                 ),
         disabledContentColor: Color = contentColor.copy(DisabledAlpha),
     ): CardColors =
-        MaterialCardDefaults.cardColors(
+        CardColors(
             containerColor = containerColor,
             contentColor = contentColor,
             disabledContainerColor = disabledContainerColor,
@@ -79,7 +79,7 @@ public object CardDefaults {
         disabledContainerColor: Color = containerColor,
         disabledContentColor: Color = contentColor.copy(DisabledAlpha),
     ): CardColors =
-        MaterialCardDefaults.cardColors(
+        CardColors(
             containerColor = containerColor,
             contentColor = contentColor,
             disabledContainerColor = disabledContainerColor,
@@ -94,7 +94,7 @@ public object CardDefaults {
             SparkTheme.colors.outline
                 .copy(alpha = DisabledOutlineOpacity)
                 .compositeOver(
-                    MaterialTheme.colorScheme.surfaceColorAtElevation(
+                    SparkTheme.colors.surfaceColorAtElevation(
                         DisabledContainerElevation,
                     ),
                 )
@@ -102,10 +102,88 @@ public object CardDefaults {
         return remember(color) { BorderStroke(OutlineWidth, color) }
     }
 
-    internal object ElevationTokens {
-        val Level0 = 0.0.dp
-        val Level1 = 1.0.dp
-    }
+    /**
+     * Creates a [CardElevation] that will animate between the provided values according to the
+     * Material specification for a [Card].
+     *
+     * @param defaultElevation the elevation used when the [Card] is has no other [Interaction]s.
+     * @param pressedElevation the elevation used when the [Card] is pressed.
+     * @param focusedElevation the elevation used when the [Card] is focused.
+     * @param hoveredElevation the elevation used when the [Card] is hovered.
+     * @param draggedElevation the elevation used when the [Card] is dragged.
+     */
+    @Composable
+    public fun cardElevation(
+        defaultElevation: Dp = ElevationTokens.Level0,
+        pressedElevation: Dp = ElevationTokens.Level0,
+        focusedElevation: Dp = ElevationTokens.Level0,
+        hoveredElevation: Dp = ElevationTokens.Level1,
+        draggedElevation: Dp = ElevationTokens.Level3,
+        disabledElevation: Dp = ElevationTokens.Level0,
+    ): CardElevation = CardElevation(
+        defaultElevation = defaultElevation,
+        pressedElevation = pressedElevation,
+        focusedElevation = focusedElevation,
+        hoveredElevation = hoveredElevation,
+        draggedElevation = draggedElevation,
+        disabledElevation = disabledElevation,
+    )
+
+    /**
+     * Creates a [CardElevation] that will animate between the provided values according to the
+     * Material specification for an [ElevatedCard].
+     *
+     * @param defaultElevation the elevation used when the [ElevatedCard] is has no other
+     * [Interaction]s.
+     * @param pressedElevation the elevation used when the [ElevatedCard] is pressed.
+     * @param focusedElevation the elevation used when the [ElevatedCard] is focused.
+     * @param hoveredElevation the elevation used when the [ElevatedCard] is hovered.
+     * @param draggedElevation the elevation used when the [ElevatedCard] is dragged.
+     */
+    @Composable
+    public fun elevatedCardElevation(
+        defaultElevation: Dp = ElevationTokens.Level1,
+        pressedElevation: Dp = ElevationTokens.Level1,
+        focusedElevation: Dp = ElevationTokens.Level1,
+        hoveredElevation: Dp = ElevationTokens.Level2,
+        draggedElevation: Dp = ElevationTokens.Level4,
+        disabledElevation: Dp = ElevationTokens.Level1,
+    ): CardElevation = CardElevation(
+        defaultElevation = defaultElevation,
+        pressedElevation = pressedElevation,
+        focusedElevation = focusedElevation,
+        hoveredElevation = hoveredElevation,
+        draggedElevation = draggedElevation,
+        disabledElevation = disabledElevation,
+    )
+
+    /**
+     * Creates a [CardElevation] that will animate between the provided values according to the
+     * Material specification for an [OutlinedCard].
+     *
+     * @param defaultElevation the elevation used when the [OutlinedCard] is has no other
+     * [Interaction]s.
+     * @param pressedElevation the elevation used when the [OutlinedCard] is pressed.
+     * @param focusedElevation the elevation used when the [OutlinedCard] is focused.
+     * @param hoveredElevation the elevation used when the [OutlinedCard] is hovered.
+     * @param draggedElevation the elevation used when the [OutlinedCard] is dragged.
+     */
+    @Composable
+    public fun outlinedCardElevation(
+        defaultElevation: Dp = ElevationTokens.Level0,
+        pressedElevation: Dp = defaultElevation,
+        focusedElevation: Dp = defaultElevation,
+        hoveredElevation: Dp = defaultElevation,
+        draggedElevation: Dp = ElevationTokens.Level3,
+        disabledElevation: Dp = ElevationTokens.Level0,
+    ): CardElevation = CardElevation(
+        defaultElevation = defaultElevation,
+        pressedElevation = pressedElevation,
+        focusedElevation = focusedElevation,
+        hoveredElevation = hoveredElevation,
+        draggedElevation = draggedElevation,
+        disabledElevation = disabledElevation,
+    )
 
     internal object OutlinedCardTokens {
         const val DisabledOutlineOpacity = 0.12f

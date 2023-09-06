@@ -23,16 +23,18 @@ package com.adevinta.spark.components.appbar
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.NavigationBar
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -48,31 +50,40 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.MoreMenuVertical
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import androidx.compose.material3.NavigationBar as MaterialNavigationBar
 
 @Composable
 internal fun SparkNavigationBar(
-    tonalElevation: Dp,
+    elevation: Dp,
     modifier: Modifier = Modifier,
     containerColor: Color = SparkTheme.colors.surface,
     contentColor: Color = contentColorFor(containerColor),
     windowInsets: WindowInsets = NavigationBarDefaults.windowInsets,
     content: @Composable RowScope.() -> Unit,
 ) {
-    MaterialNavigationBar(
-        modifier = modifier,
-        containerColor = containerColor,
+    Surface(
+        color = containerColor,
         contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        windowInsets = windowInsets,
-        content = content,
-    )
+        elevation = elevation,
+        modifier = modifier,
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(windowInsets)
+                .height(NavigationBarHeight)
+                .selectableGroup(),
+            horizontalArrangement = Arrangement.spacedBy(NavigationBarItemHorizontalPadding),
+            content = content,
+        )
+    }
 }
 
 /**
@@ -91,7 +102,7 @@ internal fun SparkNavigationBar(
  * [NavigationBar] component.
  *
  * @param modifier the [Modifier] to be applied to this navigation bar
- * @param tonalElevation when [containerColor] is [ColorScheme.surface], a translucent main color
+ * @param elevation when [containerColor] is [ColorScheme.surface], a translucent main color
  * overlay is applied on top of the container. A higher tonal elevation value will result in a
  * darker color in light theme and lighter color in dark theme. See also: [Surface].
  * @param windowInsets a window insets of the navigation bar.
@@ -102,13 +113,13 @@ internal fun SparkNavigationBar(
 public fun NavigationBar(
     modifier: Modifier = Modifier,
     windowInsets: WindowInsets = NavigationBarDefaults.windowInsets,
-    tonalElevation: Dp = NavigationBarDefaults.Elevation,
+    elevation: Dp = NavigationBarDefaults.Elevation,
     content: @Composable RowScope.() -> Unit,
 ) {
     SparkNavigationBar(
         modifier = modifier,
         windowInsets = windowInsets,
-        tonalElevation = tonalElevation,
+        elevation = elevation,
         content = content,
     )
 }
@@ -171,6 +182,9 @@ public fun RowScope.NavigationBarItem(
     )
 }
 
+private val NavigationBarHeight: Dp = 80.dp
+private val NavigationBarItemHorizontalPadding: Dp = 8.dp
+
 @Preview(
     group = "AppBar",
     name = "NavigationBar",
@@ -181,7 +195,7 @@ internal fun PreviewNavigationBar(
 ) {
     PreviewTheme(
         themeVariant = theme,
-        padding = PaddingValues(0.dp),
+        padding = PaddingValues(start = 0.dp, top = 16.dp, end = 0.dp, bottom = 0.dp),
     ) {
         var selectedItem by remember { mutableIntStateOf(0) }
         val items = listOf("Songs", "Artists", "Playlists")
