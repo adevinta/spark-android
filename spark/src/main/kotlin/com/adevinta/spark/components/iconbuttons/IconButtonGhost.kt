@@ -23,7 +23,6 @@ package com.adevinta.spark.components.iconbuttons
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -88,80 +87,27 @@ public fun IconButtonGhost(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Ghost Small",
+    name = "IconButton Ghost",
 )
 @Composable
-internal fun IconButtonGhostSmallPreview(
+private fun IconButtonGhostPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonGhostPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
+        val icon = SparkIcons.WheelOutline
+        val contentDescription = "Localized description"
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Ghost Medium",
-)
-@Composable
-internal fun IconButtonGhostMediumPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonGhostPair(
-                intent = intent,
-                size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
+        IconButtonGhost(
+            icon = icon,
+            onClick = {},
+            contentDescription = contentDescription,
+        )
 
-@Composable
-internal fun IconButtonGhostPair(
-    intent: IconButtonIntent,
-    size: IconButtonSize,
-    shape: IconButtonShape,
-) {
-    val icon = SparkIcons.WheelOutline
-    val contentDescription = "Localized description"
-    Row {
-        listOf(true, false).forEach { enabled ->
-            IconButtonGhost(
-                icon = icon,
-                onClick = {},
-                intent = intent,
-                enabled = enabled,
-                contentDescription = contentDescription,
-                size = size,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Ghost Large",
-)
-@Composable
-internal fun IconButtonGhostLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonGhostPair(
-                intent = intent,
-                size = IconButtonSize.Large,
-                shape = shape,
-            )
-        }
+        IconButtonGhost(
+            icon = icon,
+            onClick = {},
+            enabled = false,
+            contentDescription = contentDescription,
+        )
     }
 }
