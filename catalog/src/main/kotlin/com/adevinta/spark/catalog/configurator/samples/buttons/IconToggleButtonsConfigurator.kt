@@ -42,7 +42,6 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
-import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
@@ -89,7 +88,7 @@ private fun IconToggleButtonSample() {
         var icons by remember { mutableStateOf(IconToggleButtonIcons(SparkIcons.CarOutline, SparkIcons.CarFill)) }
         var contentDescription by remember { mutableStateOf("Content Description") }
 
-        ConfigedIconToggleButton(
+        ConfiguredIconToggleButton(
             style = style,
             shape = shape,
             contentDescription = contentDescription,
@@ -205,7 +204,7 @@ private fun IconToggleButtonSample() {
 }
 
 @Composable
-private fun ConfigedIconToggleButton(
+private fun ConfiguredIconToggleButton(
     modifier: Modifier = Modifier,
     style: IconToggleButtonStyle,
     shape: IconButtonShape,

@@ -87,7 +87,7 @@ private fun IconButtonSample() {
         var intent by remember { mutableStateOf(IconButtonIntent.Main) }
         var contentDescription by remember { mutableStateOf("Content Description") }
 
-        ConfiggedIconButton(
+        ConfiguredIconButton(
             style = style,
             shape = shape,
             contentDescription = contentDescription,
@@ -213,7 +213,7 @@ private fun IconButtonSample() {
 }
 
 @Composable
-private fun ConfiggedIconButton(
+private fun ConfiguredIconButton(
     modifier: Modifier = Modifier,
     style: IconButtonStyle,
     shape: IconButtonShape,

@@ -92,7 +92,7 @@ private fun ButtonSample() {
         var intent by remember { mutableStateOf(ButtonIntent.Main) }
         var buttonText by remember { mutableStateOf("Filled Button") }
 
-        ConfiggedButton(
+        ConfiguredButton(
             modifier = Modifier.fillMaxWidth(),
             style = style,
             buttonText = buttonText,
@@ -241,7 +241,7 @@ private fun ButtonSample() {
 }
 
 @Composable
-private fun ConfiggedButton(
+private fun ConfiguredButton(
     modifier: Modifier = Modifier,
     style: ButtonStyle,
     buttonText: String,
