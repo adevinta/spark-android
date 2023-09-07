@@ -32,6 +32,7 @@ import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfig
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
@@ -124,6 +125,17 @@ private val Switches = Component(
     configurator = SwitchConfigurator,
 )
 
+private val Tabs = Component(
+    id = nextId(),
+    name = "Tabs",
+    description = R.string.component_tab_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/7461a4-tabs/b/98915d",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.tab/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tab/Tab.kt",
+    examples = TabsExamples,
+    configurator = null,
+)
+
 private val TextFields = Component(
     id = nextId(),
     name = "TextFields",
@@ -155,5 +167,6 @@ public val Components: List<Component> = listOf(
     IconToggleButtons,
     RadioButtons,
     Switches,
+    Tabs,
     TextFields,
 )
