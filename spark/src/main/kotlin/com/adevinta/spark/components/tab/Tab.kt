@@ -193,7 +193,7 @@ private fun TabLayout(
         Row(
             modifier = Modifier.height(IntrinsicSize.Min),
             horizontalArrangement = Arrangement.spacedBy(TabDefaults.HorizontalArrangementSpace),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             icon?.let { it() }
             text?.let { it() }
