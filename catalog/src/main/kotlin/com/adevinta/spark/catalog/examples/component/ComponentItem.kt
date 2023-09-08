@@ -26,20 +26,33 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Component
+import com.adevinta.spark.catalog.model.Configurator
+import com.adevinta.spark.catalog.util.PreviewTheme
+import com.adevinta.spark.catalog.util.drawForegroundGradientScrim
+import com.adevinta.spark.components.image.Illustration
+import com.adevinta.spark.components.tags.TagIntent
+import com.adevinta.spark.components.tags.TagTinted
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun ComponentItem(
     component: Component,
     onClick: (component: Component) -> Unit,
+    showExampleCount: Boolean = true,
 ) {
     OutlinedCard(
         onClick = { onClick(component) },
@@ -48,15 +61,34 @@ public fun ComponentItem(
             .padding(ComponentItemOuterPadding),
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(ComponentItemInnerPadding),
+            modifier = Modifier.fillMaxSize(),
         ) {
+            val tint = ColorFilter.tint(LocalContentColor.current).takeIf { component.tintIcon }
+            Illustration(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .drawForegroundGradientScrim(
+                        color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
+                    ),
+                drawableRes = component.illustration,
+                contentDescription = null,
+                colorFilter = tint,
+            )
             Text(
                 text = component.name,
-                modifier = Modifier.align(Alignment.BottomStart),
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(ComponentItemInnerPadding),
                 style = MaterialTheme.typography.bodySmall,
             )
+            if (showExampleCount) {
+                TagTinted(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(ComponentItemInnerPadding),
+                    text = component.examples.count().toString(),
+                )
+            }
         }
     }
 }
@@ -64,3 +96,48 @@ public fun ComponentItem(
 private val ComponentItemHeight = 180.dp
 private val ComponentItemOuterPadding = 4.dp
 private val ComponentItemInnerPadding = 16.dp
+
+@Preview
+@Composable
+private fun ComponentItemPreview() {
+    PreviewTheme {
+        ComponentItem(
+            component = Component(
+                0,
+                name = "Tokens",
+                description = R.string.component_tokens_description,
+                guidelinesUrl = "https://www.google.com/#q=constituto",
+                docsUrl = "https://www.google.com/#q=dictas",
+                sourceUrl = "http://www.bing.com/search?q=inani",
+                examples = listOf(),
+                configurator = Configurator(
+                    name = "Ronny Bowman",
+                    description = "singulis",
+                    sourceUrl = "https://www.google.com/#q=tempor",
+                    content = {},
+                ),
+            ),
+            onClick = {},
+        )
+        ComponentItem(
+            component = Component(
+                0,
+                name = "Tokens",
+                description = R.string.component_tokens_description,
+                illustration = R.drawable.illu_component_tokens,
+                tintIcon = false,
+                guidelinesUrl = "https://www.google.com/#q=constituto",
+                docsUrl = "https://www.google.com/#q=dictas",
+                sourceUrl = "http://www.bing.com/search?q=inani",
+                examples = listOf(),
+                configurator = Configurator(
+                    name = "Ronny Bowman",
+                    description = "singulis",
+                    sourceUrl = "https://www.google.com/#q=tempor",
+                    content = {},
+                ),
+            ),
+            onClick = {},
+        )
+    }
+}
