@@ -37,14 +37,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.drawForegroundGradientScrim
 import com.adevinta.spark.components.image.Illustration
-import com.adevinta.spark.components.tags.TagIntent
 import com.adevinta.spark.components.tags.TagTinted
 
 @OptIn(ExperimentalMaterial3Api::class)

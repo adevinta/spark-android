@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.util
 
 import androidx.compose.foundation.background
@@ -77,16 +76,18 @@ public fun Modifier.drawForegroundGradientScrim(
 @Composable
 private fun GradientScrimPreview() {
     PreviewTheme {
-        Box(modifier = Modifier.size(100.dp)
-            .background(SparkTheme.colors.surfaceInverse)
-            .drawForegroundGradientScrim(SparkTheme.colors.surface)
+        Box(
+            modifier = Modifier.size(100.dp)
+                .background(SparkTheme.colors.surfaceInverse)
+                .drawForegroundGradientScrim(SparkTheme.colors.surface),
         )
-        Box(modifier = Modifier.size(100.dp)
-            .background(SparkTheme.colors.surfaceInverse)
-            .drawForegroundGradientScrim(
-                color = SparkTheme.colors.surface,
-                decay = 1.5f,
-            )
+        Box(
+            modifier = Modifier.size(100.dp)
+                .background(SparkTheme.colors.surfaceInverse)
+                .drawForegroundGradientScrim(
+                    color = SparkTheme.colors.surface,
+                    decay = 1.5f,
+                ),
         )
     }
 }
