@@ -276,7 +276,7 @@ private fun PhonePortraitModalScaffold(
                 PaddingValues(
                     start = innerPadding.calculateLeftPadding(LocalLayoutDirection.current),
                     end = innerPadding.calculateRightPadding(LocalLayoutDirection.current),
-                    top =  if (illustration == null) innerPadding.calculateTopPadding() else 24.dp,
+                    top = if (illustration == null) innerPadding.calculateTopPadding() else 24.dp,
                     bottom = innerPadding.calculateBottomPadding(),
                 ),
             )
