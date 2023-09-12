@@ -25,6 +25,15 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+
+        // Pre-release artifacts of compose-compiler
+        // https://androidx.dev/storage/compose-compiler/repository
+        maven("https://androidx.dev/storage/compose-compiler/repository/") {
+            name = "compose-compiler-dev"
+            content {
+                includeGroup("androidx.compose.compiler")
+            }
+        }
     }
 }
 
