@@ -25,6 +25,14 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
 
         // Pre-release artifacts of compose-compiler
         // https://androidx.dev/storage/compose-compiler/repository
@@ -34,14 +42,6 @@ pluginManagement {
                 includeGroup("androidx.compose.compiler")
             }
         }
-    }
-}
-
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
     }
 }
 
