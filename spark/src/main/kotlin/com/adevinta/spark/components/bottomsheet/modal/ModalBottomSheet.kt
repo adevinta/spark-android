@@ -218,7 +218,7 @@ public fun ModalBottomSheet(
                 shape = shape,
                 color = containerColor,
                 contentColor = contentColor,
-                tonalElevation = tonalElevation,
+                elevation = tonalElevation,
             ) {
                 Column(Modifier.fillMaxWidth()) {
                     if (dragHandle != null) {

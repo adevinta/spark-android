@@ -33,7 +33,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.PlainTooltipBox
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -47,6 +46,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.progress.Spinner
 import com.adevinta.spark.components.progress.SpinnerSize
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.ifTrue
@@ -151,14 +151,12 @@ internal fun IconButtonPreview(
 ) {
     PreviewTheme(theme) {
         val intent = IconButtonIntent.Basic
-        IconButtonSize.values().forEach { size ->
-            IconButtonShape.values().forEach { shape ->
-                IconButtonFilledPair(
-                    intent = intent,
-                    size = size,
-                    shape = shape,
-                )
-            }
+        IconButtonSize.entries.forEach { size ->
+            IconButtonFilledPair(
+                intent = intent,
+                size = size,
+                shape = IconButtonShape.Full,
+            )
         }
     }
 }
@@ -170,14 +168,14 @@ internal fun IconButtonPreview(
         shape: IconButtonShape,
     ) -> Unit,
 ) {
-    IconButtonIntent.values().forEach { intent ->
+    IconButtonIntent.entries.forEach { intent ->
         Row(
             modifier = Modifier.ifTrue(intent == IconButtonIntent.Surface) {
-                background(SparkTheme.colors.neutralContainer)
+                background(SparkTheme.colors.surfaceInverse)
             },
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            IconButtonShape.values().forEach { shape ->
+            IconButtonShape.entries.forEach { shape ->
                 content(/*intent = */ intent, /*shape = */ shape)
             }
         }

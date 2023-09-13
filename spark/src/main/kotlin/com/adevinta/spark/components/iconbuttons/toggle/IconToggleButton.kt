@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.PlainTooltipBox
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,6 +48,7 @@ import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.FavoriteFill
 import com.adevinta.spark.icons.FavoriteOutline

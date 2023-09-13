@@ -66,13 +66,7 @@ import androidx.compose.material3.OutlinedIconButton as MaterialOutlinedIconButt
  * @param content the content of this icon button, typically an [Icon]
  */
 @Composable
-@Deprecated(
-    "Use styled icon button like from iconbuttons package",
-    replaceWith = ReplaceWith(
-        "IconButtonGhost(icon = icon, onClick = onClick, contentDescription = contentDescription)",
-        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonGhost"),
-    ),
-)
+@ExperimentalSparkApi
 public fun IconButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -117,13 +111,6 @@ public fun IconButton(
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
-@Deprecated(
-    "Use styled icon button like from iconbuttons package",
-    replaceWith = ReplaceWith(
-        "IconButtonFilled(icon = icon, onClick = onClick)",
-        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonFilled"),
-    ),
-)
 @ExperimentalSparkApi
 @Composable
 public fun FilledIconButton(
@@ -177,13 +164,6 @@ public fun FilledIconButton(
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
-@Deprecated(
-    "Use styled icon button from iconbuttons package",
-    replaceWith = ReplaceWith(
-        "IconButtonTinted(icon = icon, onClick = onClick)",
-        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonTinted"),
-    ),
-)
 @ExperimentalSparkApi
 @Composable
 public fun FilledTonalIconButton(
@@ -243,13 +223,6 @@ public fun FilledTonalIconButton(
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
-@Deprecated(
-    "Use styled icon button from iconbuttons package",
-    replaceWith = ReplaceWith(
-        "IconButtonOutlined(icon = icon, onClick = onClick)",
-        imports = arrayOf("com.adevinta.spark.components.iconbuttons.IconButtonOutlined"),
-    ),
-)
 @ExperimentalSparkApi
 @Composable
 public fun OutlinedIconButton(

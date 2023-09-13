@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
+import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.disabled
 
 internal object IconButtonDefaults {
@@ -118,7 +119,7 @@ internal object IconButtonDefaults {
         containerColor: Color = Color.Transparent,
         contentColor: Color = intent.color,
         disabledContainerColor: Color = Color.Transparent,
-        disabledContentColor: Color = contentColor.disabled,
+        disabledContentColor: Color = contentColor.dim3,
     ): IconButtonColors = IconButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,

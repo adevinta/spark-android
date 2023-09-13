@@ -40,7 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.icons.CheckFill
+import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.ifTrue
@@ -204,7 +204,7 @@ internal fun IconPreview(
                             },
                         ) {
                             Icon(
-                                sparkIcon = SparkIcons.CheckFill,
+                                sparkIcon = SparkIcons.Check,
                                 tint = intents[index].color(),
                                 contentDescription = "Done",
                                 size = size,
