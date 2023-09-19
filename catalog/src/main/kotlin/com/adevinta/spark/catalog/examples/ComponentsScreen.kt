@@ -82,11 +82,12 @@ internal fun ComponentsListScreen(
     val examplesComponents by remember(components) {
         mutableStateOf(components.filter { it.examples.isNotEmpty() })
     }
+    val columns = Layout.columns / 2
     LazyVerticalGrid(
         modifier = Modifier
             .fillMaxSize()
             .consumeWindowInsets(contentPadding),
-        columns = GridCells.Fixed(Layout.columns / 2),
+        columns = GridCells.Fixed(columns),
         contentPadding = PaddingValues(
             start = Layout.bodyMargin / 2 + contentPadding.calculateLeftPadding(
                 LocalLayoutDirection.current,
@@ -101,7 +102,7 @@ internal fun ComponentsListScreen(
         item(
             key = -2,
             contentType = ComponentsItemType.Header,
-            span = { GridItemSpan(2) },
+            span = { GridItemSpan(columns) },
         ) {
             Column(
                 modifier = Modifier.padding(
@@ -126,11 +127,14 @@ internal fun ComponentsListScreen(
             span = { GridItemSpan(1) },
             contentType = { ComponentsItemType.Component },
             itemContent = { component ->
-                ComponentItem(component = component) {
-                    val componentId = component.id
-                    val route = "$ComponentRoute/$componentId"
-                    navController.navigate(route)
-                }
+                ComponentItem(
+                    component = component,
+                    onClick = {
+                        val componentId = component.id
+                        val route = "$ComponentRoute/$componentId"
+                        navController.navigate(route)
+                    },
+                )
             },
         )
     }

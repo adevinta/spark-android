@@ -23,6 +23,7 @@ package com.adevinta.spark.catalog.examples.samples.tokens.colors
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -51,11 +52,12 @@ import kotlin.reflect.full.hasAnnotation
 import kotlin.reflect.full.starProjectedType
 
 @Composable
-internal fun ColorSample() {
+internal fun ColorSample(paddingValues: PaddingValues) {
     val tokensColorsGroups = rememberColorTokens(SparkTheme.colors)
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
+        contentPadding = paddingValues,
     ) {
         items(tokensColorsGroups) { tokens ->
             Row {
@@ -115,6 +117,6 @@ private fun rememberColorTokens(colors: SparkColors): List<List<KProperty1<Spark
 @Composable
 private fun ColorSamplePreview() {
     SparkTheme {
-        ColorSample()
+        ColorSample(PaddingValues(0.dp))
     }
 }

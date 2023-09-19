@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.catalog.model
 
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
@@ -32,6 +33,7 @@ import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfig
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
@@ -47,6 +49,8 @@ public data class Component(
     @StringRes
     val description: Int,
     val tintIcon: Boolean = true,
+    @DrawableRes
+    val illustration: Int = R.drawable.illu_component_placeholder,
     val guidelinesUrl: String,
     val docsUrl: String,
     val sourceUrl: String,
@@ -60,6 +64,8 @@ private fun nextId(): Int = nextId.also { nextId += 1 }
 private val Buttons = Component(
     id = nextId(),
     name = "Buttons",
+    illustration = R.drawable.illu_component_button,
+    tintIcon = false,
     description = R.string.component_button_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/34b742-button/b/32e1a2",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.buttons/index.html",
@@ -71,6 +77,8 @@ private val Buttons = Component(
 private val Checkboxes = Component(
     id = nextId(),
     name = "Checkboxes",
+    illustration = R.drawable.illu_component_checkbox,
+    tintIcon = false,
     description = R.string.component_checkbox_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/76f5a8-checkbox/b/98915d",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.toggles/index.html",
@@ -82,6 +90,8 @@ private val Checkboxes = Component(
 private val IconButtons = Component(
     id = nextId(),
     name = "IconButtons",
+    illustration = R.drawable.illu_component_iconbutton,
+    tintIcon = false,
     description = R.string.component_iconbutton_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/2352e9-icon-button/b/32e1a2",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.iconbuttons/index.html",
@@ -94,7 +104,8 @@ private val IconToggleButtons = Component(
     id = nextId(),
     name = "IconToggleButtons",
     description = R.string.component_icontogglebutton_description,
-    // No buttons icon
+    illustration = R.drawable.illu_component_icontogglebutton,
+    tintIcon = false,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/2352e9-icon-button/b/32e1a2",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.iconbuttons/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/iconTogglebuttons/IconToggleButton.kt",
@@ -105,6 +116,8 @@ private val IconToggleButtons = Component(
 private val RadioButtons = Component(
     id = nextId(),
     name = "Radio buttons",
+    illustration = R.drawable.illu_component_radiobutton,
+    tintIcon = false,
     description = R.string.component_radiobutton_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/98058f-radio-button/b/700a17",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.toggles/index.html",
@@ -116,12 +129,25 @@ private val RadioButtons = Component(
 private val Switches = Component(
     id = nextId(),
     name = "Switches",
+    illustration = R.drawable.illu_component_switch,
+    tintIcon = false,
     description = R.string.component_switch_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/58a2c6-switch/b/700a17",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.toggles/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/Switch.kt",
     examples = SwitchExamples,
     configurator = SwitchConfigurator,
+)
+
+private val Tabs = Component(
+    id = nextId(),
+    name = "Tabs",
+    description = R.string.component_tab_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/7461a4-tabs/b/98915d",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.tab/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tab/Tab.kt",
+    examples = TabsExamples,
+    configurator = null,
 )
 
 private val TextFields = Component(
@@ -138,6 +164,8 @@ private val TextFields = Component(
 private val Tokens = Component(
     id = nextId(),
     name = "Tokens",
+    illustration = R.drawable.illu_component_tokens,
+    tintIcon = false,
     description = R.string.component_tokens_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/3075e9-foundations",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.tokens/index.html",
@@ -155,5 +183,6 @@ public val Components: List<Component> = listOf(
     IconToggleButtons,
     RadioButtons,
     Switches,
+    Tabs,
     TextFields,
 )

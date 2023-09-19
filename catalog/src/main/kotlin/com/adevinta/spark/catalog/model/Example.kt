@@ -23,11 +23,12 @@
 
 package com.adevinta.spark.catalog.model
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 
 public data class Example(
     val name: String,
     val description: String,
     val sourceUrl: String,
-    val content: @Composable () -> Unit,
+    val content: @Composable (paddingValues: PaddingValues) -> Unit,
 )

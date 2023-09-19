@@ -38,6 +38,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -207,7 +208,7 @@ public fun ThemePicker(
                         .height(48.dp),
                 )
             }
-            var fontScale by remember { mutableStateOf(theme.fontScale) }
+            var fontScale by remember { mutableFloatStateOf(theme.fontScale) }
             AnimatedVisibility(visible = theme.fontScaleMode == FontScaleMode.Custom) {
                 FontScaleItem(
                     modifier = Modifier

@@ -32,6 +32,6 @@ public val TokensExamples: List<Example> = listOf(
         description = "Showcase the color tokens with their container and on color variants",
         sourceUrl = TokensExampleSourceUrl,
     ) {
-        ColorSample()
+        ColorSample(it)
     },
 )
