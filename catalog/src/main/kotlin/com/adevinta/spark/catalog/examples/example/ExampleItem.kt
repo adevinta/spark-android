@@ -32,14 +32,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Example
+import com.adevinta.spark.components.card.CardDefaults
+import com.adevinta.spark.components.card.ElevatedCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,20 +48,23 @@ public fun ExampleItem(
     example: Example,
     onClick: (example: Example) -> Unit,
 ) {
-    OutlinedCard(
+    ElevatedCard(
         onClick = { onClick(example) },
         modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = SparkTheme.colors.surface,
+        ),
     ) {
         Row(modifier = Modifier.padding(ExampleItemPadding)) {
             Column(modifier = Modifier.weight(1f, fill = true)) {
                 Text(
                     text = example.name,
-                    style = MaterialTheme.typography.titleSmall,
+                    style = SparkTheme.typography.display3,
                 )
                 Spacer(modifier = Modifier.height(ExampleItemTextPadding))
                 Text(
                     text = example.description,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = SparkTheme.typography.body2,
                 )
             }
             Spacer(modifier = Modifier.width(ExampleItemPadding))

@@ -247,7 +247,7 @@ private fun SparkButtonPreview() {
     PreviewTheme(
         color = { SparkTheme.colors.backgroundVariant },
     ) {
-        ButtonSize.values().forEach { size ->
+        ButtonSize.entries.forEach { size ->
             SparkButton(
                 text = "Button",
                 onClick = { },

@@ -131,8 +131,7 @@ public fun BottomSheetScaffold(
     sheetShape: Shape = BottomSheetDefaults.ExpandedShape,
     sheetContainerColor: Color = BottomSheetDefaults.ContainerColor,
     sheetContentColor: Color = contentColorFor(sheetContainerColor),
-    sheetTonalElevation: Dp = 0.dp,
-    sheetShadowElevation: Dp = BottomSheetDefaults.Elevation,
+    sheetTonalElevation: Dp = BottomSheetDefaults.Elevation,
     sheetDragHandle: @Composable (() -> Unit)? = {
         BottomSheetDefaults.DragHandle(Modifier.padding(vertical = 8.dp))
     },
@@ -165,7 +164,6 @@ public fun BottomSheetScaffold(
                 containerColor = sheetContainerColor,
                 contentColor = sheetContentColor,
                 tonalElevation = sheetTonalElevation,
-                shadowElevation = sheetShadowElevation,
                 dragHandle = sheetDragHandle,
                 content = sheetContent,
             )
@@ -234,7 +232,6 @@ private fun StandardBottomSheet(
     containerColor: Color,
     contentColor: Color,
     tonalElevation: Dp,
-    shadowElevation: Dp,
     dragHandle: @Composable (() -> Unit)?,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -302,8 +299,7 @@ private fun StandardBottomSheet(
         shape = shape,
         color = containerColor,
         contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        shadowElevation = shadowElevation,
+        elevation = tonalElevation,
     ) {
         Column(Modifier.fillMaxWidth()) {
             if (dragHandle != null) {
