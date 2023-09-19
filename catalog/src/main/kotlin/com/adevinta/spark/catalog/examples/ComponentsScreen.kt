@@ -127,11 +127,14 @@ internal fun ComponentsListScreen(
             span = { GridItemSpan(1) },
             contentType = { ComponentsItemType.Component },
             itemContent = { component ->
-                ComponentItem(component = component) {
-                    val componentId = component.id
-                    val route = "$ComponentRoute/$componentId"
-                    navController.navigate(route)
-                }
+                ComponentItem(
+                    component = component,
+                    onClick = {
+                        val componentId = component.id
+                        val route = "$ComponentRoute/$componentId"
+                        navController.navigate(route)
+                    },
+                )
             },
         )
     }
