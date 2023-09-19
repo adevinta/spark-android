@@ -29,8 +29,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -42,6 +40,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.Shapes as Material3Shapes
@@ -180,8 +180,7 @@ private fun ShapeItem(
         modifier = modifier
             .size(96.dp)
             .padding(8.dp),
-        shadowElevation = 6.dp,
-        tonalElevation = 6.dp,
+        elevation = 6.dp,
         shape = shape,
     ) {
         Box(contentAlignment = Alignment.Center) {

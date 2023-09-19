@@ -30,7 +30,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,6 +45,7 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.icons.ProfileFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons

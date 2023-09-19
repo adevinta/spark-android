@@ -30,8 +30,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
@@ -48,8 +46,10 @@ import com.adevinta.spark.LocalLegacyStyle
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.tags.TagDefaults.LeadingIconSize
 import com.adevinta.spark.components.tags.TagDefaults.MinHeight
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.Accessories
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
