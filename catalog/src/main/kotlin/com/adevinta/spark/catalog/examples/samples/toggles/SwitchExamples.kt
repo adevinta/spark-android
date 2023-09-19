@@ -120,7 +120,7 @@ private fun LabeledSwitchGroupExample(
 }
 
 @Composable
-private fun ColumnScope.SwitchPair(
+private fun SwitchPair(
     checked: Boolean,
     icons: SwitchIcons? = null,
     onCheckedChange: (Boolean) -> Unit,

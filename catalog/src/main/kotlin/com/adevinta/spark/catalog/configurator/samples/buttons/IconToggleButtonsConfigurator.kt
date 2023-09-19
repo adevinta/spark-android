@@ -83,7 +83,7 @@ private fun IconToggleButtonSample() {
         var shape by remember { mutableStateOf(IconButtonShape.Large) }
         var size by remember { mutableStateOf(IconButtonSize.Medium) }
         var intent by remember { mutableStateOf(IconButtonIntent.Main) }
-        var icons by remember { mutableStateOf(IconToggleButtonIcons(SparkIcons.CarOutline, SparkIcons.CarFill)) }
+        val icons by remember { mutableStateOf(IconToggleButtonIcons(SparkIcons.CarOutline, SparkIcons.CarFill)) }
         var contentDescription by remember { mutableStateOf("Content Description") }
 
         ConfigedIconToggleButton(

@@ -210,7 +210,7 @@ private fun TextFieldSample() {
             modifier = Modifier.fillMaxWidth(),
             value = addonText ?: "",
             onValueChange = {
-                addonText = if (it.isBlank()) null else it
+                addonText = it.ifBlank { null }
             },
             label = "Prefix",
             placeholder = "State message of the TextField",
