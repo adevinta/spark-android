@@ -145,7 +145,7 @@ private fun IconButtonSample(
     ) {
         val icon = SparkIcons.LikeFill
         val contentDescription = "Localized Content Description"
-        var isLoading by remember { mutableStateOf(false) }
+        val isLoading by remember { mutableStateOf(false) }
         button(
             /* onClick = */ { },
             /* enabled = */ true,

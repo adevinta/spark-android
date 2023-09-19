@@ -45,7 +45,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
-import com.adevinta.spark.catalog.configurator.component.ConfiguratorComponentComponentItem
+import com.adevinta.spark.catalog.examples.component.ComponentItem
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
@@ -82,11 +82,12 @@ internal fun ComponentsListScreen(
     val configuratorsComponents by remember(components) {
         mutableStateOf(components.filter { it.configurator != null })
     }
+    val columns = Layout.columns / 2
     LazyVerticalGrid(
         modifier = Modifier
             .fillMaxSize()
             .consumeWindowInsets(contentPadding),
-        columns = GridCells.Fixed(Layout.columns / 2),
+        columns = GridCells.Fixed(columns),
         contentPadding = PaddingValues(
             start = Layout.bodyMargin / 2 + contentPadding.calculateLeftPadding(
                 LocalLayoutDirection.current,
@@ -101,7 +102,7 @@ internal fun ComponentsListScreen(
         item(
             key = -2,
             contentType = ComponentsItemType.Header,
-            span = { GridItemSpan(2) },
+            span = { GridItemSpan(columns) },
         ) {
             Column(
                 modifier = Modifier.padding(
@@ -126,11 +127,15 @@ internal fun ComponentsListScreen(
             span = { GridItemSpan(1) },
             contentType = { ComponentsItemType.Component },
             itemContent = { component ->
-                ConfiguratorComponentComponentItem(component = component) {
-                    val componentId = component.id
-                    val route = "$ConfiguratorRoute/$componentId"
-                    navController.navigate(route)
-                }
+                ComponentItem(
+                    component = component,
+                    showExampleCount = false,
+                    onClick = {
+                        val componentId = component.id
+                        val route = "$ConfiguratorRoute/$componentId"
+                        navController.navigate(route)
+                    },
+                )
             },
         )
     }

@@ -22,7 +22,6 @@
 package com.adevinta.spark.catalog.examples.samples.toggles
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -120,7 +119,7 @@ private fun LabeledSwitchGroupExample(
 }
 
 @Composable
-private fun ColumnScope.SwitchPair(
+private fun SwitchPair(
     checked: Boolean,
     icons: SwitchIcons? = null,
     onCheckedChange: (Boolean) -> Unit,
