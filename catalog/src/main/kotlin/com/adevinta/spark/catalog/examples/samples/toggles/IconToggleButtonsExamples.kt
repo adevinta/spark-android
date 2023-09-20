@@ -46,7 +46,7 @@ public val IconToggleButtonsExamples: List<Example> = listOf(
         sourceUrl = IconToggleButtonsExampleSourceUrl,
     ) {
         IconToggleButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { _, enabled, icon, contentDescription ->
                 IconToggleButtonFilled(
                     checked = true,
                     enabled = enabled,
@@ -63,7 +63,7 @@ public val IconToggleButtonsExamples: List<Example> = listOf(
         sourceUrl = IconToggleButtonsExampleSourceUrl,
     ) {
         IconToggleButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { _, enabled, icon, contentDescription ->
                 IconToggleButtonTinted(
                     checked = true,
                     enabled = enabled,
@@ -80,7 +80,7 @@ public val IconToggleButtonsExamples: List<Example> = listOf(
         sourceUrl = IconToggleButtonsExampleSourceUrl,
     ) {
         IconToggleButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { _, enabled, icon, contentDescription ->
                 IconToggleButtonOutlined(
                     checked = true,
                     enabled = enabled,
@@ -97,7 +97,7 @@ public val IconToggleButtonsExamples: List<Example> = listOf(
         sourceUrl = IconToggleButtonsExampleSourceUrl,
     ) {
         IconToggleButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { _, enabled, icon, contentDescription ->
                 IconToggleButtonGhost(
                     checked = true,
                     enabled = enabled,
@@ -114,7 +114,7 @@ public val IconToggleButtonsExamples: List<Example> = listOf(
         sourceUrl = IconToggleButtonsExampleSourceUrl,
     ) {
         IconToggleButtonSample(
-            button = { onClick, enabled, icon, contentDescription ->
+            button = { _, enabled, icon, contentDescription ->
                 IconToggleButtonContrast(
                     checked = true,
                     enabled = enabled,

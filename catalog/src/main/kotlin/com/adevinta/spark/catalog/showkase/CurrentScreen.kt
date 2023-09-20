@@ -33,8 +33,6 @@ internal enum class CurrentScreen {
     CATEGORIES,
 }
 
-internal fun String?.insideGroup() = this == CurrentScreen.COMPONENTS_IN_A_GROUP.name
-
 @Parcelize
 internal data class ShowkaseBrowserScreenMetadata(
     val currentGroup: String? = null,

@@ -30,6 +30,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -44,6 +45,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 @Composable
 internal fun SparkCard(
     modifier: Modifier = Modifier,
+    shape: Shape = SparkTheme.shapes.medium,
     colors: CardColors = CardDefaults.cardColors(),
     elevation: CardElevation = CardDefaults.cardElevation(),
     border: BorderStroke? = null,
@@ -51,7 +53,7 @@ internal fun SparkCard(
 ) {
     Surface(
         modifier = modifier,
-        shape = SparkTheme.shapes.medium,
+        shape = shape,
         color = colors.containerColor(enabled = true).value,
         contentColor = colors.contentColor(enabled = true).value,
         elevation = elevation.tonalElevation(enabled = true, interactionSource = null).value,
@@ -66,6 +68,7 @@ internal fun SparkCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    shape: Shape = SparkTheme.shapes.medium,
     colors: CardColors = CardDefaults.cardColors(),
     elevation: CardElevation = CardDefaults.cardElevation(),
     border: BorderStroke? = null,
@@ -76,7 +79,7 @@ internal fun SparkCard(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
-        shape = SparkTheme.shapes.medium,
+        shape = shape,
         color = colors.containerColor(enabled).value,
         contentColor = colors.contentColor(enabled).value,
         elevation = elevation.tonalElevation(enabled, interactionSource).value,
@@ -108,12 +111,14 @@ internal fun SparkCard(
 @Composable
 public fun Card(
     modifier: Modifier = Modifier,
+    shape: Shape = SparkTheme.shapes.medium,
     colors: CardColors = CardDefaults.cardColors(),
     border: BorderStroke? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     SparkCard(
         modifier = modifier,
+        shape = shape,
         colors = colors,
         border = border,
         content = content,
@@ -147,6 +152,7 @@ public fun Card(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    shape: Shape = SparkTheme.shapes.medium,
     colors: CardColors = CardDefaults.cardColors(),
     border: BorderStroke? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -156,6 +162,7 @@ public fun Card(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
+        shape = shape,
         colors = colors,
         border = border,
         interactionSource = interactionSource,
@@ -183,12 +190,14 @@ public fun Card(
 @Composable
 public fun OutlinedCard(
     modifier: Modifier = Modifier,
+    shape: Shape = SparkTheme.shapes.medium,
     colors: CardColors = CardDefaults.outlinedCardColors(),
     border: BorderStroke = CardDefaults.outlinedCardBorder(),
     content: @Composable ColumnScope.() -> Unit,
 ) {
     SparkCard(
         modifier = modifier,
+        shape = shape,
         colors = colors,
         elevation = CardDefaults.outlinedCardElevation(),
         border = border,
@@ -224,6 +233,7 @@ public fun OutlinedCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    shape: Shape = SparkTheme.shapes.medium,
     colors: CardColors = CardDefaults.outlinedCardColors(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable ColumnScope.() -> Unit,
@@ -232,6 +242,7 @@ public fun OutlinedCard(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
+        shape = shape,
         colors = colors,
         elevation = CardDefaults.outlinedCardElevation(),
         interactionSource = interactionSource,
@@ -259,11 +270,13 @@ public fun OutlinedCard(
 @Composable
 public fun ElevatedCard(
     modifier: Modifier = Modifier,
+    shape: Shape = SparkTheme.shapes.medium,
     colors: CardColors = CardDefaults.elevatedCardColors(),
     content: @Composable ColumnScope.() -> Unit,
 ) {
     SparkCard(
         modifier = modifier,
+        shape = shape,
         colors = colors,
         elevation = CardDefaults.elevatedCardElevation(),
         content = content,
@@ -300,6 +313,7 @@ public fun ElevatedCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    shape: Shape = SparkTheme.shapes.medium,
     colors: CardColors = CardDefaults.elevatedCardColors(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable ColumnScope.() -> Unit,
@@ -308,6 +322,7 @@ public fun ElevatedCard(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
+        shape = shape,
         colors = colors,
         elevation = CardDefaults.elevatedCardElevation(),
         interactionSource = interactionSource,

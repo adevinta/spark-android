@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.LocalContentColor
@@ -44,6 +45,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -183,7 +185,7 @@ private fun TabLayout(
         modifier = Modifier.padding(
             horizontal = TabDefaults.HorizontalContentPadding,
             vertical = TabDefaults.VerticalContentPadding,
-        ),
+        ).heightIn(min = 32.dp),
         horizontalArrangement = Arrangement.spacedBy(TabDefaults.HorizontalArrangementSpace),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -191,6 +193,7 @@ private fun TabLayout(
         Row(
             modifier = Modifier.height(IntrinsicSize.Min),
             horizontalArrangement = Arrangement.spacedBy(TabDefaults.HorizontalArrangementSpace),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             icon?.let { it() }
             text?.let { it() }
@@ -290,7 +293,7 @@ public fun Tab(
     MaterialTab(
         selected = selected,
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.heightIn(min = 48.dp),
         enabled = enabled,
         selectedContentColor = LocalContentColor.current,
         unselectedContentColor = LocalContentColor.current,

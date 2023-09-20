@@ -53,8 +53,8 @@ import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.ButtonTinted
 import com.adevinta.spark.components.buttons.IconSide
-import com.adevinta.spark.components.icons.FilledIconToggleButton
-import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
@@ -62,6 +62,7 @@ import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 
@@ -116,17 +117,16 @@ private fun ButtonSample() {
                     .padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            FilledIconToggleButton(
+            IconToggleButtonFilled(
                 checked = icon != null,
                 onCheckedChange = {
                     icon = if (it) SparkIcons.LikeFill else null
                 },
-            ) {
-                Icon(
-                    sparkIcon = SparkIcons.LikeFill,
-                    contentDescription = null,
-                )
-            }
+                icons = IconToggleButtonIcons(
+                    checked = SparkIcons.LikeFill,
+                    unchecked = SparkIcons.LikeOutline,
+                ),
+            )
         }
         SwitchLabelled(
             checked = isLoading,

@@ -44,13 +44,15 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
-import com.adevinta.spark.components.icons.FilledIconToggleButton
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 
@@ -111,17 +113,16 @@ private fun TextFieldSample() {
                     .padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            FilledIconToggleButton(
+            IconToggleButtonFilled(
                 checked = icon != null,
                 onCheckedChange = {
                     icon = if (it) SparkIcons.LikeFill else null
                 },
-            ) {
-                Icon(
-                    sparkIcon = SparkIcons.LikeFill,
-                    contentDescription = null,
-                )
-            }
+                icons = IconToggleButtonIcons(
+                    checked = SparkIcons.LikeFill,
+                    unchecked = SparkIcons.LikeOutline,
+                ),
+            )
         }
         SwitchLabelled(
             checked = isRequired,
@@ -210,7 +211,7 @@ private fun TextFieldSample() {
             modifier = Modifier.fillMaxWidth(),
             value = addonText ?: "",
             onValueChange = {
-                addonText = if (it.isBlank()) null else it
+                addonText = it.ifBlank { null }
             },
             label = "Prefix",
             placeholder = "State message of the TextField",
