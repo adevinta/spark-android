@@ -80,8 +80,10 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param typography A set of text styles to be used as this hierarchy's typography system.
  * @param shapes A set of corner shapes to be used as this hierarchy's shape system.
  * @param fontFamily the font family to be applied on [typography].
- * @param useSparkTokensHighlighter flag that use for typography, colors and shapes exaggerated values to find which part of a screen is themed or not.
- * @param useSparkComponentsHighlighter flag to highlight the spark components with an overlay to recognize which component is from spark or not.
+ * @param useSparkTokensHighlighter flag that use for typography, colors and shapes exaggerated values to find
+ * which part of a screen is themed or not.
+ * @param useSparkComponentsHighlighter flag to highlight the spark components with an overlay to recognize
+ * which component is from spark or not.
  * @param useLegacyStyle enabling this will makes the components use the visual from the previous DS of LBC.
  */
 @Composable
@@ -261,7 +263,7 @@ internal val LocalHighlightToken = staticCompositionLocalOf { false }
 internal val LocalHighlightComponents = staticCompositionLocalOf { false }
 
 /**
- * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the Adevinta Platform teams
- * to migrate their screens to spark.
+ * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the
+ * Adevinta Platform teams to migrate their screens to spark.
  */
 internal val LocalLegacyStyle = staticCompositionLocalOf { false }
