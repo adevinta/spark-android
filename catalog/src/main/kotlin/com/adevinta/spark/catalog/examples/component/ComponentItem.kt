@@ -42,7 +42,6 @@ import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.drawForegroundGradientScrim
-import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.image.Image
 import com.adevinta.spark.components.tags.TagTinted
 
