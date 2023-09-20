@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.tab
 
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.TabPosition
@@ -183,6 +182,7 @@ public fun ScrollableTabRow(
  */
 internal val ScrollableTabRowPadding = 52.dp
 
+@Suppress("DEPRECATION")
 @Preview(
     group = "Tabs",
     name = "TabRow",
