@@ -40,6 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.util.cast
 import com.adevinta.spark.catalog.util.splitCamelWithSpaces
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
@@ -103,7 +104,7 @@ private fun rememberColorTokens(colors: SparkColors): List<List<KProperty1<Spark
         // Remove dims and any non color tokens
         .filter { it.returnType == Color::class.starProjectedType }
         // Cast the type otherwise we get a star type instead of Long
-        .map { it as KProperty1<SparkColors, Long> }
+        .map { it.cast<KProperty1<SparkColors, Long>>() }
         // Remove content colors
         .filterNot { it.name.startsWith("on") }
         // Use the same order than the one in the specs
