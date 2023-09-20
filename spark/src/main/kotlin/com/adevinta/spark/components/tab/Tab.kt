@@ -293,7 +293,7 @@ public fun Tab(
     MaterialTab(
         selected = selected,
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.heightIn(min = 48.dp),
         enabled = enabled,
         selectedContentColor = LocalContentColor.current,
         unselectedContentColor = LocalContentColor.current,
