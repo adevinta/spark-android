@@ -60,7 +60,7 @@ public class MainActivity : AppCompatActivity() {
 
     private fun getShowkaseProviderElements(): List<ShowkaseBrowserComponent> = try {
         val showkaseComponentProvider =
-            Class.forName("com.adevinta.spark.SparkShowkaseRootModuleCodegen").newInstance()
+            Class.forName("com.adevinta.spark.SparkShowkaseRootModuleCodegen").getDeclaredConstructor().newInstance()
 
         val showkaseMetadata = (showkaseComponentProvider as ShowkaseProvider).metadata()
 
