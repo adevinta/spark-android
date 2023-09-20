@@ -43,6 +43,7 @@ import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.drawForegroundGradientScrim
 import com.adevinta.spark.components.image.Illustration
+import com.adevinta.spark.components.image.Image
 import com.adevinta.spark.components.tags.TagTinted
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,13 +63,13 @@ public fun ComponentItem(
             modifier = Modifier.fillMaxSize(),
         ) {
             val tint = ColorFilter.tint(LocalContentColor.current).takeIf { component.tintIcon }
-            Illustration(
+            Image(
                 modifier = Modifier
                     .fillMaxSize()
                     .drawForegroundGradientScrim(
                         color = MaterialTheme.colorScheme.surfaceColorAtElevation(1.dp),
                     ),
-                drawableRes = component.illustration,
+                model = component.illustration,
                 contentDescription = null,
                 colorFilter = tint,
             )
