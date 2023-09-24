@@ -49,6 +49,7 @@ import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.buttons.ButtonGhost
 import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.buttons.ButtonOutlined
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.ButtonTinted
 import com.adevinta.spark.components.buttons.IconSide
@@ -88,6 +89,7 @@ private fun ButtonSample() {
         var iconSide by remember { mutableStateOf(IconSide.START) }
         var style by remember { mutableStateOf(ButtonStyle.Filled) }
         var size by remember { mutableStateOf(ButtonSize.Medium) }
+        var shape by remember { mutableStateOf(ButtonShape.Pill) }
         var intent by remember { mutableStateOf(ButtonIntent.Main) }
         var buttonText by remember { mutableStateOf("Filled Button") }
 
@@ -98,6 +100,7 @@ private fun ButtonSample() {
             onClick = { isLoading = !isLoading },
             isLoading = isLoading,
             size = size,
+            shape = shape,
             intent = intent,
             isEnabled = isEnabled,
             icon = icon,
@@ -178,6 +181,24 @@ private fun ButtonSample() {
             )
         }
 
+        Column {
+            Text(
+                text = "Shape",
+                modifier = Modifier.padding(bottom = 8.dp),
+                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            )
+            val buttonShapes = ButtonShape.values()
+            val buttonShapesLabel = buttonShapes.map { it.name }
+            SegmentedButton(
+                options = buttonShapesLabel,
+                selectedOption = shape.name,
+                onOptionSelect = { shape = ButtonShape.valueOf(it) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+            )
+        }
+
         val intents = ButtonIntent.values()
         var expanded by remember { mutableStateOf(false) }
         SelectTextField(
@@ -244,6 +265,7 @@ private fun ConfigedButton(
     onClick: () -> Unit,
     isLoading: Boolean,
     size: ButtonSize,
+    shape: ButtonShape,
     intent: ButtonIntent,
     isEnabled: Boolean,
     icon: SparkIcon?,
@@ -256,6 +278,7 @@ private fun ConfigedButton(
             onClick = onClick,
             isLoading = isLoading,
             size = size,
+            shape = shape,
             intent = intent,
             enabled = isEnabled,
             icon = icon,
@@ -268,6 +291,7 @@ private fun ConfigedButton(
             onClick = onClick,
             isLoading = isLoading,
             size = size,
+            shape = shape,
             intent = intent,
             enabled = isEnabled,
             icon = icon,
@@ -280,6 +304,7 @@ private fun ConfigedButton(
             onClick = onClick,
             isLoading = isLoading,
             size = size,
+            shape = shape,
             intent = intent,
             enabled = isEnabled,
             icon = icon,
@@ -292,6 +317,7 @@ private fun ConfigedButton(
             onClick = onClick,
             isLoading = isLoading,
             size = size,
+            shape = shape,
             intent = intent,
             enabled = isEnabled,
             icon = icon,
@@ -304,6 +330,7 @@ private fun ConfigedButton(
             onClick = onClick,
             isLoading = isLoading,
             size = size,
+            shape = shape,
             intent = intent,
             enabled = isEnabled,
             icon = icon,
