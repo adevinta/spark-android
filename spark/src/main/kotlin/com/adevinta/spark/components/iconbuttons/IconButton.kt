@@ -46,7 +46,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.progress.Spinner
 import com.adevinta.spark.components.progress.SpinnerSize
-import com.adevinta.spark.components.surface.Surface
+import androidx.compose.material3.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.tools.modifiers.ifTrue
