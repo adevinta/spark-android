@@ -1,27 +1,29 @@
-## 📋 Changes description
+<!--
+  Please remove sections wisely!
+  And checkout the contribution docs at https://github.com/adevinta/spark-android/blob/main/docs/contributing.md
+-->
 
-<!--- Describe your changes in detail -->
+## 📋 Changes
+
+<!-- Describe your changes in details -->
 
 ## 🤔 Context
 
-<!--- Why is this change required? What problem does it solve? -->
-<!--- If it is solving an issue… How can it be reproduced in order to compare between both behaviors? -->
+<!-- Why is this change required? What problem does it solve? -->
+<!-- If it solves an issue, add the steps to reproduce it. -->
 
 ## ✅ Checklist
 
-<!--- Feel free to add other steps if needed -->
-- [ ] Link to GitHub issues it solves. <!--- closes #1234 -->
+<!-- Feel free to add or remove entries -->
+<!-- - [X] Closes #1234 -->
 - [ ] I have reviewed the submitted code.
 - [ ] I have tested on a phone device/emulator.
 - [ ] If it includes design changes, please ask for a review `spark-design` GitHub team.
 
 ## 📸 Screenshots
 
-<!--- Put your screenshots here -->
+<!-- Insert your screenshots here -->
 
 ## 🗒️ Other info
 
-<!--- Feel free to add another major info here if needed -->
-<!--- You can also remove this section -->
-
-[Contributing](https://github.com/adevinta/spark-android/blob/main/docs/contributing.md) has more information and tips for a great pull request.
+<!-- Feel free to add any other info here if needed -->
