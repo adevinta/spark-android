@@ -11,11 +11,11 @@
 
 <!-- Why is this change required? What problem does it solve? -->
 <!-- If it solves an issue, add the steps to reproduce it. -->
+<!-- Closes #1234 -->
 
 ## ✅ Checklist
 
 <!-- Feel free to add or remove entries -->
-<!-- - [X] Closes #1234 -->
 - [ ] I have reviewed the submitted code.
 - [ ] I have tested on a phone device/emulator.
 - [ ] If it includes design changes, please ask for a review `spark-design` GitHub team.
