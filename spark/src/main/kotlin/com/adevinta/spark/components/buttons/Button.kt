@@ -238,7 +238,7 @@ public object SparkButtonDefaults {
     /**
      * The default shape of Button
      */
-    internal val DefaultShape = ButtonShape.Pill
+    internal val DefaultShape = ButtonShape.Rounded
 
     /**
      * The default border of [ButtonOutlined]

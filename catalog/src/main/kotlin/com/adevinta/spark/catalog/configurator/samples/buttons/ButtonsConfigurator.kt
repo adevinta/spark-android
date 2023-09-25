@@ -89,7 +89,7 @@ private fun ButtonSample() {
         var iconSide by remember { mutableStateOf(IconSide.START) }
         var style by remember { mutableStateOf(ButtonStyle.Filled) }
         var size by remember { mutableStateOf(ButtonSize.Medium) }
-        var shape by remember { mutableStateOf(ButtonShape.Pill) }
+        var shape by remember { mutableStateOf(ButtonShape.Rounded) }
         var intent by remember { mutableStateOf(ButtonIntent.Main) }
         var buttonText by remember { mutableStateOf("Filled Button") }
 
