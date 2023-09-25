@@ -11,15 +11,15 @@ _2023-09-20_
 
 ### Spark
 
-* 🆕 Add IconButtons with all intents, shapes and sizes
-* 🆕 Add loading state to the IconButton component
-* 🆕 Add icon toggle button
+* 🆕 Add `IconButtons` with all intents, shapes and sizes
+* 🆕 Add loading state to the `IconButton` component
+* 🆕 Add `IconToggleButton`
 * 💄 Use M2 elevation system instead of the M3 one
-* ⬆️[Bump `compileSdk` and `targetSdk` to 34
+* ⬆️ Bump `compileSdk` and `targetSdk` to 34
 * 🎨 Change colors from LBC & KA
-* 🐛 Make the readonly Textfields not take the focus look when focused
-* 📝 Replace onliner with two distinct commands
-* 🐛 ModalFullScreenScaffold top padding issue when no illustration
+* 🐛 Make the readonly `Textfields` not take the focus look when focused
+* 📝 Replace oneliner with two distinct commands
+* 🐛 `ModalFullScreenScaffold` top padding issue when no illustration
 
 
 ### Catalog App
