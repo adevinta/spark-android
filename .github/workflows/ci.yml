@@ -26,7 +26,7 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
       - uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4 # v1.1.0
       - uses: actionsdesk/lfs-warning@e5f9a4c21f4bee104db7c0f23954dde59e5df909 # v3.2
-      - uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
+      - uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
         with:
           gradle-home-cache-cleanup: true
       - run: ./gradlew dependencyGuard --quiet
@@ -47,13 +47,13 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
 
       - name: '🐘 Setup Gradle'
-        uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
+        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
         with:
           gradle-home-cache-cleanup: true
 
       - name: '👷 Build'
         id: build
-        uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
+        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
         with:
           arguments: assembleRelease
       - name: '📦 Archive APKs'
@@ -72,7 +72,7 @@ jobs:
 
       - name: '🧑‍🔬 Test'
         id: test
-        uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
+        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
         with:
           arguments: globalCiUnitTest verifyPaparazziRelease
       - name: '📦 Archive JUnit reports'
@@ -94,7 +94,7 @@ jobs:
 
       - name: '🕵️ Lint'
         id: lint
-        uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
+        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
         with:
           arguments: lintRelease
       - name: '📦 Archive Lint reports'
@@ -119,7 +119,7 @@ jobs:
       - uses: ./.github/actions/setup-gradle-properties
 
       - name: '📋 Build Dokka'
-        uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
+        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
         with:
           # https://github.com/Kotlin/dokka/issues/1217
           arguments: dokkaHtmlMultiModule --no-configuration-cache --no-parallel --max-workers=1

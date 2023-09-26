@@ -23,7 +23,6 @@ package com.adevinta.spark.components.iconbuttons
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -88,80 +87,27 @@ public fun IconButtonContrast(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Contrast Small",
+    name = "IconButton Contrast",
 )
 @Composable
-internal fun IconButtonContrastSmallPreview(
+private fun IconButtonContrastPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonContrastPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
+        val icon = SparkIcons.WheelOutline
+        val contentDescription = "Localized description"
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Contrast Medium",
-)
-@Composable
-internal fun IconButtonContrastMediumPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonContrastPair(
-                intent = intent,
-                size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
+        IconButtonContrast(
+            icon = icon,
+            onClick = {},
+            contentDescription = contentDescription,
+        )
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Contrast Large",
-)
-@Composable
-internal fun IconButtonContrastLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonContrastPair(
-                intent = intent,
-                size = IconButtonSize.Large,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Composable
-internal fun IconButtonContrastPair(
-    intent: IconButtonIntent,
-    size: IconButtonSize,
-    shape: IconButtonShape,
-) {
-    val icon = SparkIcons.WheelOutline
-    val contentDescription = "Localized description"
-    Row {
-        listOf(true, false).forEach { enabled ->
-            IconButtonContrast(
-                icon = icon,
-                onClick = {},
-                intent = intent,
-                enabled = enabled,
-                contentDescription = contentDescription,
-                size = size,
-                shape = shape,
-            )
-        }
+        IconButtonContrast(
+            icon = icon,
+            onClick = {},
+            enabled = false,
+            contentDescription = contentDescription,
+        )
     }
 }

@@ -231,7 +231,7 @@ public fun Surface(
                         absoluteElevation = absoluteElevation,
                     ),
                     border = border,
-                    elevation = absoluteElevation,
+                    elevation = elevation,
                 )
                 .clickable(
                     interactionSource = interactionSource,
@@ -338,7 +338,7 @@ public fun Surface(
                         absoluteElevation = absoluteElevation,
                     ),
                     border = border,
-                    elevation = absoluteElevation,
+                    elevation = elevation,
                 )
                 .selectable(
                     selected = selected,
@@ -446,7 +446,7 @@ public fun Surface(
                         absoluteElevation = absoluteElevation,
                     ),
                     border = border,
-                    elevation = absoluteElevation,
+                    elevation = elevation,
                 )
                 .toggleable(
                     value = checked,

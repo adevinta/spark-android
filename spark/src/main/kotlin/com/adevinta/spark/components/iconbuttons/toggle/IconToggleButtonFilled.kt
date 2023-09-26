@@ -36,7 +36,6 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.iconbuttons.IconButtonColors
 import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
-import com.adevinta.spark.components.iconbuttons.IconButtonPreview
 import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.icons.FavoriteFill
@@ -44,6 +43,7 @@ import com.adevinta.spark.icons.FavoriteOutline
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+
 /**
  * Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a
  * compact toggle button is required, such as in a toolbar or image list.
@@ -99,24 +99,19 @@ public fun IconToggleButtonFilled(
 
 @Preview(
     group = "IconToggleButton",
-    name = "IconToggleButtonFilled Small",
+    name = "IconToggleButton Filled",
 )
 @Composable
-internal fun IconToggleButtonFilledPreview(
+private fun IconToggleButtonFilledPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         var isChecked by remember { mutableStateOf(false) }
 
-        IconButtonPreview { intent, shape ->
-            IconToggleButtonFilled(
-                intent = intent,
-                checked = isChecked,
-                icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
-                onCheckedChange = { isChecked = !isChecked },
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
+        IconToggleButtonFilled(
+            checked = isChecked,
+            icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
+            onCheckedChange = { isChecked = !isChecked },
+        )
     }
 }

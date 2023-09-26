@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.tokens.dim3
-import com.adevinta.spark.tokens.disabled
 
 internal object IconButtonDefaults {
 
@@ -76,8 +75,8 @@ internal object IconButtonDefaults {
         intent: IntentColor,
         containerColor: Color = intent.color,
         contentColor: Color = intent.onColor,
-        disabledContainerColor: Color = containerColor.disabled,
-        disabledContentColor: Color = contentColor.disabled,
+        disabledContainerColor: Color = containerColor.dim3,
+        disabledContentColor: Color = contentColor.dim3,
     ): IconButtonColors = IconButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
@@ -91,7 +90,7 @@ internal object IconButtonDefaults {
         containerColor: Color = Color.Transparent,
         contentColor: Color = intent.color,
         disabledContainerColor: Color = Color.Transparent,
-        disabledContentColor: Color = contentColor.disabled,
+        disabledContentColor: Color = contentColor.dim3,
     ): IconButtonColors = IconButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
@@ -104,8 +103,8 @@ internal object IconButtonDefaults {
         intent: IntentColor,
         containerColor: Color = intent.containerColor,
         contentColor: Color = intent.onContainerColor,
-        disabledContainerColor: Color = containerColor.disabled,
-        disabledContentColor: Color = contentColor.disabled,
+        disabledContainerColor: Color = containerColor.dim3,
+        disabledContentColor: Color = contentColor.dim3,
     ): IconButtonColors = IconButtonColors(
         containerColor = containerColor,
         contentColor = contentColor,
@@ -132,13 +131,13 @@ internal object IconButtonDefaults {
         intent: IntentColor,
         containerColor: Color = SparkTheme.colors.surface,
         contentColor: Color = intent.color,
-        disabledContainerColor: Color = containerColor.disabled,
+        disabledContainerColor: Color = containerColor.dim3,
     ): IconButtonColors = with(if (containerColor != contentColor) contentColor else SparkTheme.colors.onSurface) {
         IconButtonColors(
             containerColor = containerColor,
             contentColor = this,
             disabledContainerColor = disabledContainerColor,
-            disabledContentColor = this.disabled,
+            disabledContentColor = this.dim3,
         )
     }
 }

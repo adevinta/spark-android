@@ -46,7 +46,7 @@ internal class SparkDokkaPlugin : Plugin<Project> {
                 else -> configureSubProject()
             }
 
-            tasks.withType<DokkaTask> {
+            tasks.withType<DokkaTask>().configureEach {
                 notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
             }
 
@@ -71,7 +71,7 @@ internal class SparkDokkaPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.configureSubProject() = tasks.withType<DokkaTaskPartial> {
+    private fun Project.configureSubProject() = tasks.withType<DokkaTaskPartial>().configureEach {
         dokkaSourceSets.configureEach {
             // Parse Module and Package docs
             // https://kotlinlang.org/docs/dokka-module-and-package-docs.html
