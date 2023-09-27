@@ -11,22 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
       - uses: ./.github/actions/setup-gradle-properties
 
-      - name: '🐘 Setup Gradle'
-        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
-        with:
-          gradle-home-cache-cleanup: true
-      - uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4 # v1.1.0
-
       - name: '📦 Publish'
-        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
-        with:
-          arguments: publish --no-configuration-cache
+        run: ./gradlew publish --no-configuration-cache
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
