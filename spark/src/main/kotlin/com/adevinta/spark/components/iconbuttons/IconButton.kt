@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.progress.Spinner
 import com.adevinta.spark.components.progress.SpinnerSize
@@ -69,7 +70,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * services.
  * @param isLoading show or hide a [Spinner] instead of the [icon] to indicate a
  * loading state
- * @param shape to be applied to the IconButton background. It should be one of [IconButtonShape] values
+ * @param shape to be applied to the IconButton background. It should be one of [ButtonShape] values
  * @param size one of the [IconButtonSize] values that sets width and height of the IconButton
  * @param border an optional [BorderStroke] to be applied to the IconButton
  * @param contentDescription text used by accessibility services to describe what this icon button
@@ -88,7 +89,7 @@ internal fun SparkIconButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     isLoading: Boolean = false,
-    shape: IconButtonShape = IconButtonDefaults.DefaultShape,
+    shape: ButtonShape = IconButtonDefaults.DefaultShape,
     size: IconButtonSize = IconButtonDefaults.DefaultSize,
     border: BorderStroke? = null,
     contentDescription: String? = null,
@@ -155,7 +156,7 @@ internal fun IconButtonPreview(
             IconButtonFilledPair(
                 intent = intent,
                 size = size,
-                shape = IconButtonShape.Full,
+                shape = ButtonShape.Square,
             )
         }
     }
@@ -165,7 +166,7 @@ internal fun IconButtonPreview(
 internal fun IconButtonPreview(
     content: @Composable (
         intent: IconButtonIntent,
-        shape: IconButtonShape,
+        shape: ButtonShape,
     ) -> Unit,
 ) {
     IconButtonIntent.entries.forEach { intent ->
@@ -175,9 +176,7 @@ internal fun IconButtonPreview(
             },
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            IconButtonShape.entries.forEach { shape ->
-                content(/*intent = */ intent, /*shape = */ shape)
-            }
+            ButtonShape.entries.forEach { shape -> content(intent, shape) }
         }
     }
 }

@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.disabled
 
@@ -53,7 +54,7 @@ internal object IconButtonDefaults {
     /**
      * The default shape of IconButton
      */
-    internal val DefaultShape = IconButtonShape.Large
+    internal val DefaultShape = ButtonShape.Rounded
 
     /**
      * The [Color] for a PlainTooltipBox's container.

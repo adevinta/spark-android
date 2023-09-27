@@ -41,8 +41,8 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
-import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonContrast
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
@@ -80,7 +80,7 @@ private fun IconToggleButtonSample() {
         var style by remember { mutableStateOf(IconToggleButtonStyle.Filled) }
         var isEnabled by remember { mutableStateOf(true) }
         var isChecked by remember { mutableStateOf(true) }
-        var shape by remember { mutableStateOf(IconButtonShape.Large) }
+        var shape by remember { mutableStateOf(ButtonShape.Rounded) }
         var size by remember { mutableStateOf(IconButtonSize.Medium) }
         var intent by remember { mutableStateOf(IconButtonIntent.Main) }
         val icons by remember { mutableStateOf(IconToggleButtonIcons(SparkIcons.CarOutline, SparkIcons.CarFill)) }
@@ -160,12 +160,12 @@ private fun IconToggleButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonShapes = IconButtonShape.values()
+            val buttonShapes = ButtonShape.values()
             val buttonShapesLabel = buttonShapes.map { it.name }
             SegmentedButton(
                 options = buttonShapesLabel,
                 selectedOption = shape.name,
-                onOptionSelect = { shape = IconButtonShape.valueOf(it) },
+                onOptionSelect = { shape = ButtonShape.valueOf(it) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -205,7 +205,7 @@ private fun IconToggleButtonSample() {
 private fun ConfigedIconToggleButton(
     modifier: Modifier = Modifier,
     style: IconToggleButtonStyle,
-    shape: IconButtonShape,
+    shape: ButtonShape,
     contentDescription: String?,
     onCheckedChange: (Boolean) -> Unit = {},
     size: IconButtonSize,

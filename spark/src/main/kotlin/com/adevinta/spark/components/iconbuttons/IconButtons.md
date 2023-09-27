@@ -32,7 +32,7 @@ for `IconButtonSize.Large`
 ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_iconbuttons_iconbuttons_light.png)
 
 ### Shapes
-Icon buttons come in 3 shapes [IconButtonShape](IconButtonShape.kt) :
+Icon buttons come in 3 shapes [ButtonShape](ButtonShape.kt) :
 - None 
 - Full (default)
 - Large

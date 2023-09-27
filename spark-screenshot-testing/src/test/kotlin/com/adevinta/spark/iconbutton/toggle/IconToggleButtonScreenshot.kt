@@ -31,8 +31,8 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
-import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonContrast
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
@@ -58,7 +58,7 @@ internal class IconToggleButtonScreenshot {
 
     private val icons: IconToggleButtonIcons = IconToggleButtonIcons(SparkIcons.AccountOutline, SparkIcons.AccountFill)
 
-    private val shapes = IconButtonShape.entries.toTypedArray()
+    private val shapes = ButtonShape.entries.toTypedArray()
 
     private val sizes = IconButtonSize.entries.toTypedArray()
 
