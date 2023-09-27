@@ -144,7 +144,7 @@ internal fun SparkIconToggleButton(
     name = "IconToggleButtons",
 )
 @Composable
-internal fun IconToggleButtonPreview(
+private fun IconToggleButtonPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
@@ -152,17 +152,14 @@ internal fun IconToggleButtonPreview(
         var state by remember {
             mutableStateOf(false)
         }
-        IconButtonSize.values().forEach { size ->
-            ButtonShape.values().forEach { shape ->
-                SparkIconToggleButton(
-                    checked = state,
-                    onCheckedChange = { state = !state },
-                    icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
-                    colors = IconButtonDefaults.filledIconButtonColors(intent = intent.colors()),
-                    size = size,
-                    shape = shape,
-                )
-            }
+        IconButtonSize.entries.forEach { size ->
+            SparkIconToggleButton(
+                checked = state,
+                onCheckedChange = { state = !state },
+                icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
+                colors = IconButtonDefaults.filledIconButtonColors(intent = intent.colors()),
+                size = size,
+            )
         }
     }
 }

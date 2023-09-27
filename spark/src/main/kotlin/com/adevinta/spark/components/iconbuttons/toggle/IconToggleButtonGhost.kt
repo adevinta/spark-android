@@ -38,6 +38,7 @@ import com.adevinta.spark.components.iconbuttons.IconButtonColors
 import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonPreview
+import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.icons.FavoriteFill
 import com.adevinta.spark.icons.FavoriteOutline
@@ -100,24 +101,19 @@ public fun IconToggleButtonGhost(
 
 @Preview(
     group = "IconToggleButton",
-    name = "IconToggleButtonGhost Small",
+    name = "IconToggleButton Ghost",
 )
 @Composable
-internal fun IconToggleButtonGhostPreview(
+private fun IconToggleButtonGhostPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         var isChecked by remember { mutableStateOf(false) }
 
-        IconButtonPreview { intent, shape ->
-            IconToggleButtonGhost(
-                intent = intent,
-                checked = isChecked,
-                icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
-                onCheckedChange = { isChecked = !isChecked },
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
+        IconToggleButtonGhost(
+            checked = isChecked,
+            icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
+            onCheckedChange = { isChecked = !isChecked },
+        )
     }
 }

@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.buttons
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -51,6 +52,7 @@ import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonOutlined
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonTinted
 import com.adevinta.spark.components.menu.DropdownMenuItem
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.textfields.TextField
@@ -86,7 +88,7 @@ private fun IconToggleButtonSample() {
         val icons by remember { mutableStateOf(IconToggleButtonIcons(SparkIcons.CarOutline, SparkIcons.CarFill)) }
         var contentDescription by remember { mutableStateOf("Content Description") }
 
-        ConfigedIconToggleButton(
+        ConfiguredIconToggleButton(
             style = style,
             shape = shape,
             contentDescription = contentDescription,
@@ -202,7 +204,7 @@ private fun IconToggleButtonSample() {
 }
 
 @Composable
-private fun ConfigedIconToggleButton(
+private fun ConfiguredIconToggleButton(
     modifier: Modifier = Modifier,
     style: IconToggleButtonStyle,
     shape: ButtonShape,
@@ -214,66 +216,78 @@ private fun ConfigedIconToggleButton(
     isEnabled: Boolean,
     icons: IconToggleButtonIcons,
 ) {
-    when (style) {
-        IconToggleButtonStyle.Filled -> IconToggleButtonFilled(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onCheckedChange = onCheckedChange,
-            size = size,
-            shape = shape,
-            intent = intent,
-            checked = isChecked,
-            enabled = isEnabled,
-            icons = icons,
-        )
+    val containerColor by animateColorAsState(
+        targetValue = if (intent != IconButtonIntent.Surface) {
+            SparkTheme.colors.surface
+        } else {
+            SparkTheme.colors.surfaceInverse
+        },
+        label = "Button container color",
+    )
+    Surface(
+        color = containerColor,
+    ) {
+        when (style) {
+            IconToggleButtonStyle.Filled -> IconToggleButtonFilled(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onCheckedChange = onCheckedChange,
+                size = size,
+                shape = shape,
+                intent = intent,
+                checked = isChecked,
+                enabled = isEnabled,
+                icons = icons,
+            )
 
-        IconToggleButtonStyle.Outlined -> IconToggleButtonOutlined(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onCheckedChange = onCheckedChange,
-            size = size,
-            shape = shape,
-            intent = intent,
-            checked = isChecked,
-            enabled = isEnabled,
-            icons = icons,
-        )
+            IconToggleButtonStyle.Outlined -> IconToggleButtonOutlined(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onCheckedChange = onCheckedChange,
+                size = size,
+                shape = shape,
+                intent = intent,
+                checked = isChecked,
+                enabled = isEnabled,
+                icons = icons,
+            )
 
-        IconToggleButtonStyle.Tinted -> IconToggleButtonTinted(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onCheckedChange = onCheckedChange,
-            size = size,
-            shape = shape,
-            intent = intent,
-            checked = isChecked,
-            enabled = isEnabled,
-            icons = icons,
-        )
+            IconToggleButtonStyle.Tinted -> IconToggleButtonTinted(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onCheckedChange = onCheckedChange,
+                size = size,
+                shape = shape,
+                intent = intent,
+                checked = isChecked,
+                enabled = isEnabled,
+                icons = icons,
+            )
 
-        IconToggleButtonStyle.Ghost -> IconToggleButtonGhost(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onCheckedChange = onCheckedChange,
-            size = size,
-            shape = shape,
-            intent = intent,
-            checked = isChecked,
-            enabled = isEnabled,
-            icons = icons,
-        )
+            IconToggleButtonStyle.Ghost -> IconToggleButtonGhost(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onCheckedChange = onCheckedChange,
+                size = size,
+                shape = shape,
+                intent = intent,
+                checked = isChecked,
+                enabled = isEnabled,
+                icons = icons,
+            )
 
-        IconToggleButtonStyle.Contrast -> IconToggleButtonContrast(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onCheckedChange = onCheckedChange,
-            size = size,
-            shape = shape,
-            intent = intent,
-            checked = isChecked,
-            enabled = isEnabled,
-            icons = icons,
-        )
+            IconToggleButtonStyle.Contrast -> IconToggleButtonContrast(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onCheckedChange = onCheckedChange,
+                size = size,
+                shape = shape,
+                intent = intent,
+                checked = isChecked,
+                enabled = isEnabled,
+                icons = icons,
+            )
+        }
     }
 }
 

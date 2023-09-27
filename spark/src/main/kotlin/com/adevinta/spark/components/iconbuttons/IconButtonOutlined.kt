@@ -24,7 +24,6 @@ package com.adevinta.spark.components.iconbuttons
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -94,80 +93,27 @@ public fun IconButtonOutlined(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Outlined Small",
+    name = "IconButton Outlined",
 )
 @Composable
-internal fun IconButtonOutlinedSmallPreview(
+private fun IconButtonOutlinedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonOutlinedPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
+        val icon = SparkIcons.WheelOutline
+        val contentDescription = "Localized description"
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Outlined Medium",
-)
-@Composable
-internal fun IconButtonOutlinedMediumPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonOutlinedPair(
-                intent = intent,
-                size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
+        IconButtonOutlined(
+            icon = icon,
+            onClick = {},
+            contentDescription = contentDescription,
+        )
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Outlined Large",
-)
-@Composable
-internal fun IconButtonOutlinedLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonOutlinedPair(
-                intent = intent,
-                size = IconButtonSize.Large,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Composable
-internal fun IconButtonOutlinedPair(
-    intent: IconButtonIntent,
-    size: IconButtonSize,
-    shape: ButtonShape,
-) {
-    val icon = SparkIcons.WheelOutline
-    val contentDescription = "Localized description"
-    Row {
-        listOf(true, false).forEach { enabled ->
-            IconButtonOutlined(
-                icon = icon,
-                onClick = {},
-                intent = intent,
-                enabled = enabled,
-                contentDescription = contentDescription,
-                size = size,
-                shape = shape,
-            )
-        }
+        IconButtonOutlined(
+            icon = icon,
+            onClick = {},
+            enabled = false,
+            contentDescription = contentDescription,
+        )
     }
 }

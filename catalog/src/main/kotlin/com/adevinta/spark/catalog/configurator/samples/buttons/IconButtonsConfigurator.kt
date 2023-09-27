@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.buttons
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -50,6 +51,7 @@ import com.adevinta.spark.components.iconbuttons.IconButtonOutlined
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.iconbuttons.IconButtonTinted
 import com.adevinta.spark.components.menu.DropdownMenuItem
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.textfields.TextField
@@ -85,7 +87,7 @@ private fun IconButtonSample() {
         var intent by remember { mutableStateOf(IconButtonIntent.Main) }
         var contentDescription by remember { mutableStateOf("Content Description") }
 
-        ConfigedIconButton(
+        ConfiguredIconButton(
             style = style,
             shape = shape,
             contentDescription = contentDescription,
@@ -211,7 +213,7 @@ private fun IconButtonSample() {
 }
 
 @Composable
-private fun ConfigedIconButton(
+private fun ConfiguredIconButton(
     modifier: Modifier = Modifier,
     style: IconButtonStyle,
     shape: ButtonShape,
@@ -223,66 +225,78 @@ private fun ConfigedIconButton(
     isLoading: Boolean,
     icon: SparkIcon,
 ) {
-    when (style) {
-        IconButtonStyle.Filled -> IconButtonFilled(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+    val containerColor by animateColorAsState(
+        targetValue = if (intent != IconButtonIntent.Surface) {
+            SparkTheme.colors.surface
+        } else {
+            SparkTheme.colors.surfaceInverse
+        },
+        label = "Button container color",
+    )
+    Surface(
+        color = containerColor,
+    ) {
+        when (style) {
+            IconButtonStyle.Filled -> IconButtonFilled(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onClick = onClick,
+                size = size,
+                shape = shape,
+                intent = intent,
+                enabled = isEnabled,
+                isLoading = isLoading,
+                icon = icon,
+            )
 
-        IconButtonStyle.Outlined -> IconButtonOutlined(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+            IconButtonStyle.Outlined -> IconButtonOutlined(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onClick = onClick,
+                size = size,
+                shape = shape,
+                intent = intent,
+                enabled = isEnabled,
+                isLoading = isLoading,
+                icon = icon,
+            )
 
-        IconButtonStyle.Tinted -> IconButtonTinted(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+            IconButtonStyle.Tinted -> IconButtonTinted(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onClick = onClick,
+                size = size,
+                shape = shape,
+                intent = intent,
+                enabled = isEnabled,
+                isLoading = isLoading,
+                icon = icon,
+            )
 
-        IconButtonStyle.Ghost -> IconButtonGhost(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+            IconButtonStyle.Ghost -> IconButtonGhost(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onClick = onClick,
+                size = size,
+                shape = shape,
+                intent = intent,
+                enabled = isEnabled,
+                isLoading = isLoading,
+                icon = icon,
+            )
 
-        IconButtonStyle.Contrast -> IconButtonContrast(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+            IconButtonStyle.Contrast -> IconButtonContrast(
+                modifier = modifier,
+                contentDescription = contentDescription,
+                onClick = onClick,
+                size = size,
+                shape = shape,
+                intent = intent,
+                enabled = isEnabled,
+                isLoading = isLoading,
+                icon = icon,
+            )
+        }
     }
 }
 

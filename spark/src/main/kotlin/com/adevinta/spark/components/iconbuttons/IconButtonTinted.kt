@@ -23,7 +23,6 @@ package com.adevinta.spark.components.iconbuttons
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -89,80 +88,27 @@ public fun IconButtonTinted(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Tinted Small",
+    name = "IconButton Tinted",
 )
 @Composable
-internal fun IconButtonTintedSmallPreview(
+private fun IconButtonTintedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonFilledPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
+        val icon = SparkIcons.WheelOutline
+        val contentDescription = "Localized description"
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Tinted Medium",
-)
-@Composable
-internal fun IconButtonTintedMediumPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonTintedPair(
-                intent = intent,
-                size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
+        IconButtonFilled(
+            icon = icon,
+            onClick = {},
+            contentDescription = contentDescription,
+        )
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Tinted Large",
-)
-@Composable
-internal fun IconButtonTintedLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonTintedPair(
-                intent = intent,
-                size = IconButtonSize.Large,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Composable
-internal fun IconButtonTintedPair(
-    intent: IconButtonIntent,
-    size: IconButtonSize,
-    shape: ButtonShape,
-) {
-    val icon = SparkIcons.WheelOutline
-    val contentDescription = "Localized description"
-    Row {
-        listOf(true, false).forEach { enabled ->
-            IconButtonTinted(
-                icon = icon,
-                onClick = {},
-                intent = intent,
-                enabled = enabled,
-                contentDescription = contentDescription,
-                size = size,
-                shape = shape,
-            )
-        }
+        IconButtonFilled(
+            icon = icon,
+            onClick = {},
+            enabled = false,
+            contentDescription = contentDescription,
+        )
     }
 }
