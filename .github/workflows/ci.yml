@@ -19,16 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - uses: ./.github/actions/setup-gradle-properties
-      - uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4 # v1.1.0
       - uses: actionsdesk/lfs-warning@e5f9a4c21f4bee104db7c0f23954dde59e5df909 # v3.2
-      - uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
-        with:
-          gradle-home-cache-cleanup: true
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+      - uses: ./.github/actions/setup-gradle-properties
       - run: ./gradlew dependencyGuard --quiet
       - run: ./gradlew spotlessCheck :build-logic:spotlessCheck
 
@@ -40,22 +34,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
       - uses: ./.github/actions/setup-gradle-properties
-
-      - name: '🐘 Setup Gradle'
-        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
-        with:
-          gradle-home-cache-cleanup: true
 
       - name: '👷 Build'
         id: build
-        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
-        with:
-          arguments: assembleRelease
+        run: ./gradlew assembleRelease
       - name: '📦 Archive APKs'
         uses: actions/upload-artifact@v3
         with:
@@ -72,9 +57,7 @@ jobs:
 
       - name: '🧑‍🔬 Test'
         id: test
-        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
-        with:
-          arguments: globalCiUnitTest verifyPaparazziRelease
+        run: ./gradlew globalCiUnitTest verifyPaparazziRelease
       - name: '📦 Archive JUnit reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports
@@ -94,9 +77,7 @@ jobs:
 
       - name: '🕵️ Lint'
         id: lint
-        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
-        with:
-          arguments: lintRelease
+        run: ./gradlew lintRelease
       - name: '📦 Archive Lint reports'
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
@@ -112,18 +93,13 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
       - uses: ./.github/actions/setup-gradle-properties
 
       - name: '📋 Build Dokka'
-        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
-        with:
-          # https://github.com/Kotlin/dokka/issues/1217
-          arguments: dokkaHtmlMultiModule --no-configuration-cache --no-parallel --max-workers=1
-          gradle-home-cache-cleanup: true
+        # https://github.com/Kotlin/dokka/issues/1217
+        run: ./gradlew dokkaHtmlMultiModule --no-configuration-cache --no-parallel --max-workers=1
       - name: '📦 Archive Dokka'
         uses: actions/upload-artifact@v3
         with:
