@@ -7,4 +7,4 @@ jobs:
     if: ${{ !github.event.pull_request.head.repo.fork }}
     runs-on: ubuntu-latest
     steps:
-      - uses: toshimaru/auto-author-assign@293cfe93d5edcadd7354d954519f3bb441d9d695 # v2.0.0
+      - uses: toshimaru/auto-author-assign@c1ffd6f64e20f8f5f61f4620a1e5f0b0908790ef # v2.0.1
