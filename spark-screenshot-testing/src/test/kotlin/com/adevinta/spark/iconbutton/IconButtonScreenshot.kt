@@ -30,12 +30,12 @@ import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonContrast
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
 import com.adevinta.spark.components.iconbuttons.IconButtonGhost
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonOutlined
-import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.iconbuttons.IconButtonTinted
 import com.adevinta.spark.components.surface.Surface
@@ -53,7 +53,7 @@ import org.junit.runner.RunWith
 @RunWith(TestParameterInjector::class)
 internal class IconButtonScreenshot {
 
-    private val shapes = IconButtonShape.entries.toTypedArray()
+    private val shapes = ButtonShape.entries.toTypedArray()
 
     private val sizes = IconButtonSize.entries.toTypedArray()
 
