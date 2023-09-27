@@ -33,9 +33,9 @@ for `IconButtonSize.Large`
 
 ### Shapes
 Icon buttons come in 3 shapes [ButtonShape](ButtonShape.kt) :
-- None 
-- Full (default)
-- Large
+- Square
+- Rounded (default)
+- Pill
 
 The buttons have an loading state that can be used to indicate that the button is loading some
 data and show/hide an indeterminate circular progress indicator on the start of the button.

@@ -31,6 +31,7 @@ import androidx.compose.material3.IconToggleButtonColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.ButtonShape
@@ -139,7 +140,7 @@ public fun FilledIconToggleButton(
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shape: ButtonShape = ButtonShape.Rounded,
+    shape: Shape = ButtonShape.Rounded.shape,
     colors: IconToggleButtonColors = IconButtonDefaults.filledIconToggleButtonColors(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,
@@ -149,7 +150,7 @@ public fun FilledIconToggleButton(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
-        shape = shape.shape,
+        shape = shape,
         colors = colors,
         interactionSource = interactionSource,
         content = content,
@@ -268,7 +269,7 @@ public fun OutlinedIconToggleButton(
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shape: ButtonShape = ButtonShape.Rounded,
+    shape: Shape = ButtonShape.Rounded.shape,
     colors: IconToggleButtonColors = IconButtonDefaults.outlinedIconToggleButtonColors(),
     border: BorderStroke? = IconButtonDefaults.outlinedIconToggleButtonBorder(enabled, checked),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -279,7 +280,7 @@ public fun OutlinedIconToggleButton(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
-        shape = shape.shape,
+        shape = shape,
         colors = colors,
         border = border,
         interactionSource = interactionSource,

@@ -44,6 +44,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
@@ -70,7 +71,7 @@ internal fun BaseSparkButton(
     size: ButtonSize = ButtonSize.Medium,
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
-    shape: ButtonShape = SparkButtonDefaults.DefaultShape,
+    shape: Shape = SparkButtonDefaults.DefaultShape.shape,
     border: BorderStroke? = null,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -85,7 +86,7 @@ internal fun BaseSparkButton(
             .sparkUsageOverlay(),
         enabled = enabled,
         elevation = elevation,
-        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else shape.shape,
+        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else shape,
         border = border,
         colors = colors,
         interactionSource = interactionSource,
@@ -148,7 +149,7 @@ internal fun SparkButton(
         onClick = onClick,
         modifier = modifier,
         size = size,
-        shape = shape,
+        shape = shape.shape,
         enabled = enabled,
         elevation = elevation,
         border = border,
@@ -186,7 +187,7 @@ internal fun SparkButton(
         onClick = onClick,
         modifier = modifier,
         size = size,
-        shape = shape,
+        shape = shape.shape,
         enabled = enabled,
         elevation = elevation,
         border = border,
