@@ -28,10 +28,8 @@ jobs:
           ref: ${{ inputs.ref || github.ref }}
           fetch-depth: 0
           lfs: true
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
       - uses: ./.github/actions/setup-gradle-properties
       - run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_FILE"
@@ -52,11 +50,6 @@ jobs:
       - run: echo "$FIREBASE_SERVICE_ACCOUNT" > "firebase-service-account.json"
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-
-      - name: '🐘 Setup Gradle'
-        uses: gradle/gradle-build-action@b5126f31dbc19dd434c3269bf8c28c315e121da2 # v2.8.1
-        with:
-          gradle-home-cache-cleanup: true
 
       - name: '👷 Build'
         run: ./gradlew :catalog:assembleRelease
