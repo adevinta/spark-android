@@ -29,8 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.icons.IconDefaults.intent
 import com.adevinta.spark.components.buttons.ButtonShape
+import com.adevinta.spark.components.icons.IconDefaults.intent
 import com.adevinta.spark.components.progress.Spinner
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons

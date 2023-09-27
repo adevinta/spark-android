@@ -37,8 +37,6 @@ import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonColors
 import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
-import com.adevinta.spark.components.iconbuttons.IconButtonPreview
-import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.icons.FavoriteFill
 import com.adevinta.spark.icons.FavoriteOutline
