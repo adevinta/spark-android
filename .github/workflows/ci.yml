@@ -10,7 +10,7 @@ on:
     branches: ["main", "hotfix/*", "chore-updated-icons"]
 
 concurrency:
-  group: ${{ github.head_ref || github.run_id }}
+  group: '${{ github.workflow }}-${{ github.event.merge_group.head_ref || github.head_ref }}'
   cancel-in-progress: true
 
 jobs:
@@ -82,7 +82,7 @@ jobs:
         if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
         with:
-          analysis: ${{ github.event_name != 'merge_group' && './' || '' }}
+          analysis: './'
           html: '**/build/reports/lint-results-*.html'
           sarif: '**/build/reports/lint-results-*.sarif'
           xml: '**/build/reports/lint-results-*.xml'
