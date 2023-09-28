@@ -16,6 +16,7 @@ runs:
     - uses: actions/checkout@v3
       with:
         lfs: true
+        token: ${{ secrets.PAT_SPARK || secrets.GITHUB_TOKEN }}
     - if: ${{ inputs.pr-number }} != ''
       run: gh pr checkout "${{ inputs.pr-number }}"
       shell: bash
