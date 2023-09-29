@@ -19,40 +19,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.components.iconbuttons
+package com.adevinta.spark.components.buttons
 
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.SparkTheme
 
-public enum class IconButtonShape {
-    /**
-     * Small button with min touch size still applied
-     */
-    None {
+@Suppress("ktlint:no-semi", "ktlint:trailing-comma-on-declaration-site")
+public enum class ButtonShape {
+    Square {
         override val shape: CornerBasedShape
-            @Composable
-            get() = SparkTheme.shapes.none
+            @Composable get() = SparkTheme.shapes.none
     },
 
-    /**
-     * Medium button is the default button size (recommended).
-     */
-    Full {
+    Pill {
         override val shape: CornerBasedShape
-            @Composable
-            get() = SparkTheme.shapes.full
+            @Composable get() = SparkTheme.shapes.full
     },
 
-    /**
-     * Alternative large icon button size to give more emphasis to the action
-     */
-    Large {
+    Rounded {
         override val shape: CornerBasedShape
-            @Composable
-            get() = SparkTheme.shapes.large
-    },
-    ;
+            @Composable get() = SparkTheme.shapes.large
+    };
 
     internal abstract val shape: CornerBasedShape
         @Composable get

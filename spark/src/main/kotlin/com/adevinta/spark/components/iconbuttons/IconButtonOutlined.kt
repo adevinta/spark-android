@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.progress.Spinner
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
@@ -50,7 +51,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * services.
  * @param isLoading show or hide a [Spinner] instead of the [icon] to indicate a
  * loading state
- * @param shape to be applied to the IconButton background. It should be one of [IconButtonShape] values
+ * @param shape to be applied to the IconButton background. It should be one of [ButtonShape] values
  * @param size one of the [IconButtonSize] values that sets width and height of the IconButton
  * @param contentDescription text used by accessibility services to describe what this icon button
  * represents. This text should be localized, such as by using [androidx.compose.ui.res.stringResource] or similar
@@ -66,7 +67,7 @@ public fun IconButtonOutlined(
     intent: IconButtonIntent = IconButtonDefaults.DefaultIntent,
     enabled: Boolean = true,
     isLoading: Boolean = false,
-    shape: IconButtonShape = IconButtonDefaults.DefaultShape,
+    shape: ButtonShape = IconButtonDefaults.DefaultShape,
     size: IconButtonSize = IconButtonDefaults.DefaultSize,
     contentDescription: String? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
