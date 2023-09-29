@@ -30,12 +30,12 @@ import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonContrast
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
 import com.adevinta.spark.components.iconbuttons.IconButtonGhost
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonOutlined
-import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.iconbuttons.IconButtonTinted
 import com.adevinta.spark.components.surface.Surface
@@ -53,7 +53,7 @@ import org.junit.runner.RunWith
 @RunWith(TestParameterInjector::class)
 internal class IconButtonScreenshot {
 
-    private val shapes = IconButtonShape.entries.toTypedArray()
+    private val shapes: Array<ButtonShape> = ButtonShape.entries.toTypedArray()
 
     private val sizes = IconButtonSize.entries.toTypedArray()
 
@@ -76,67 +76,61 @@ internal class IconButtonScreenshot {
 
     @Test
     fun test() {
-        shapes.forEach { shape ->
-            sizes.forEach { size ->
-                paparazzi.sparkSnapshot(name = "${shape}_$size") {
-                    Row {
-                        enableList.forEach { isEnabled ->
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(8.dp),
-                            ) {
-                                Text(
-                                    text = "Enabled: $isEnabled",
-                                )
-                                intents.forEach { intent ->
-                                    Surface(
-                                        color = if (intent == IconButtonIntent.Surface) {
-                                            SparkTheme.colors.surfaceInverse
-                                        } else {
-                                            SparkTheme.colors.surface
-                                        },
-                                    ) {
-                                        Row {
-                                            IconButtonFilled(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                shape = shape,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                            IconButtonOutlined(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                shape = shape,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                            IconButtonTinted(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                shape = shape,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                            IconButtonContrast(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                shape = shape,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                            IconButtonGhost(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                shape = shape,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                        }
+        //      shapes.forEach { shape -> TODO: Uncomment after POlaris app adapt new @ButtonShape class
+        sizes.forEach { size ->
+            paparazzi.sparkSnapshot(name = "$size") {
+                Row {
+                    enableList.forEach { isEnabled ->
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            Text(
+                                text = "Enabled: $isEnabled",
+                            )
+                            intents.forEach { intent ->
+                                Surface(
+                                    color = if (intent == IconButtonIntent.Surface) {
+                                        SparkTheme.colors.surfaceInverse
+                                    } else {
+                                        SparkTheme.colors.surface
+                                    },
+                                ) {
+                                    Row {
+                                        IconButtonFilled(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonOutlined(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonTinted(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonContrast(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonGhost(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
                                     }
                                 }
                             }
