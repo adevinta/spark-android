@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.iconbutton
 
+import android.graphics.drawable.shapes.Shape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -53,7 +54,7 @@ import org.junit.runner.RunWith
 @RunWith(TestParameterInjector::class)
 internal class IconButtonScreenshot {
 
-    private val shapes = ButtonShape.entries.toTypedArray()
+    private val shapes: Array<ButtonShape> = ButtonShape.entries.toTypedArray()
 
     private val sizes = IconButtonSize.entries.toTypedArray()
 
@@ -76,9 +77,9 @@ internal class IconButtonScreenshot {
 
     @Test
     fun test() {
-        shapes.forEach { shape ->
+    //      shapes.forEach { shape -> TODO: Uncomment after POlaris app adapt new @ButtonShape class
             sizes.forEach { size ->
-                paparazzi.sparkSnapshot(name = "${shape}_$size") {
+                paparazzi.sparkSnapshot(name = "$size") {
                     Row {
                         enableList.forEach { isEnabled ->
                             Column(
@@ -99,7 +100,6 @@ internal class IconButtonScreenshot {
                                             IconButtonFilled(
                                                 onClick = {},
                                                 icon = SparkIcons.AccountOutline,
-                                                shape = shape,
                                                 size = size,
                                                 intent = intent,
                                                 enabled = isEnabled,
@@ -107,7 +107,6 @@ internal class IconButtonScreenshot {
                                             IconButtonOutlined(
                                                 onClick = {},
                                                 icon = SparkIcons.AccountOutline,
-                                                shape = shape,
                                                 size = size,
                                                 intent = intent,
                                                 enabled = isEnabled,
@@ -115,7 +114,6 @@ internal class IconButtonScreenshot {
                                             IconButtonTinted(
                                                 onClick = {},
                                                 icon = SparkIcons.AccountOutline,
-                                                shape = shape,
                                                 size = size,
                                                 intent = intent,
                                                 enabled = isEnabled,
@@ -123,7 +121,6 @@ internal class IconButtonScreenshot {
                                             IconButtonContrast(
                                                 onClick = {},
                                                 icon = SparkIcons.AccountOutline,
-                                                shape = shape,
                                                 size = size,
                                                 intent = intent,
                                                 enabled = isEnabled,
@@ -131,7 +128,6 @@ internal class IconButtonScreenshot {
                                             IconButtonGhost(
                                                 onClick = {},
                                                 icon = SparkIcons.AccountOutline,
-                                                shape = shape,
                                                 size = size,
                                                 intent = intent,
                                                 enabled = isEnabled,
@@ -144,6 +140,5 @@ internal class IconButtonScreenshot {
                     }
                 }
             }
-        }
     }
 }
