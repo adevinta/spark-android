@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.iconbutton
 
-import android.graphics.drawable.shapes.Shape
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -77,62 +76,61 @@ internal class IconButtonScreenshot {
 
     @Test
     fun test() {
-    //      shapes.forEach { shape -> TODO: Uncomment after POlaris app adapt new @ButtonShape class
-            sizes.forEach { size ->
-                paparazzi.sparkSnapshot(name = "$size") {
-                    Row {
-                        enableList.forEach { isEnabled ->
-                            Column(
-                                verticalArrangement = Arrangement.spacedBy(8.dp),
-                            ) {
-                                Text(
-                                    text = "Enabled: $isEnabled",
-                                )
-                                intents.forEach { intent ->
-                                    Surface(
-                                        color = if (intent == IconButtonIntent.Surface) {
-                                            SparkTheme.colors.surfaceInverse
-                                        } else {
-                                            SparkTheme.colors.surface
-                                        },
-                                    ) {
-                                        Row {
-                                            IconButtonFilled(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                            IconButtonOutlined(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                            IconButtonTinted(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                            IconButtonContrast(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                            IconButtonGhost(
-                                                onClick = {},
-                                                icon = SparkIcons.AccountOutline,
-                                                size = size,
-                                                intent = intent,
-                                                enabled = isEnabled,
-                                            )
-                                        }
+        //      shapes.forEach { shape -> TODO: Uncomment after POlaris app adapt new @ButtonShape class
+        sizes.forEach { size ->
+            paparazzi.sparkSnapshot(name = "$size") {
+                Row {
+                    enableList.forEach { isEnabled ->
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            Text(
+                                text = "Enabled: $isEnabled",
+                            )
+                            intents.forEach { intent ->
+                                Surface(
+                                    color = if (intent == IconButtonIntent.Surface) {
+                                        SparkTheme.colors.surfaceInverse
+                                    } else {
+                                        SparkTheme.colors.surface
+                                    },
+                                ) {
+                                    Row {
+                                        IconButtonFilled(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonOutlined(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonTinted(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonContrast(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
+                                        IconButtonGhost(
+                                            onClick = {},
+                                            icon = SparkIcons.AccountOutline,
+                                            size = size,
+                                            intent = intent,
+                                            enabled = isEnabled,
+                                        )
                                     }
                                 }
                             }
@@ -140,5 +138,6 @@ internal class IconButtonScreenshot {
                     }
                 }
             }
+        }
     }
 }
