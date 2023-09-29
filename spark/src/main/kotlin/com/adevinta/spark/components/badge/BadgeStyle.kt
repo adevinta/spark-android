@@ -43,6 +43,6 @@ internal fun BadgeStyle.getTextStyle() = when (this) {
 }.highlight
 
 private val mediumBadgeSize = 24.dp
-private val mediumBadgeContentPadding = 8.dp
+private val mediumBadgeContentPadding = 0.dp
 private val smallBadgeSize = 14.dp
-private val smallBadgeContentPadding = 4.dp
+private val smallBadgeContentPadding = 0.dp
