@@ -1,0 +1,40 @@
+name: '✨ SpotlessApply'
+description: 'Apply spotless code format'
+
+inputs:
+  github-token:
+    description: 'GitHub token'
+    required: true
+  pr-number:
+    description: 'PR number'
+    required: false
+    type: number
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ inputs.ref }}
+        token: ${{ inputs.github-token }}
+    - if: ${{ inputs.pr-number }} != ''
+      run: gh pr checkout "${{ inputs.pr-number }}"
+      shell: bash
+    - uses: ./.github/actions/setup-java
+    - uses: ./.github/actions/setup-gradle
+    - uses: ./.github/actions/setup-gradle-properties
+    - run: ./gradlew spotlessApply
+      shell: bash
+    - run: |
+        if ! git diff --quiet --exit-code ;
+        then
+          git config user.name 'spark-ui-bot'
+          git config user.email 'spark-ui-bot@users.noreply.github.com'
+          git commit * -am "✨ Spotless"
+          git show
+          git push
+          echo "::notice::UPDATED"
+        else
+          echo "::notice::UP-TO-DATE"
+        fi
+      shell: bash

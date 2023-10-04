@@ -17,17 +17,12 @@ jobs:
       NUMBER: ${{ github.event.issue.number }}
       COMMENT: ${{ github.event.comment.body }}
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
       - uses: actions/checkout@v4
       - if: github.event.issue.pull_request
         run: gh pr checkout $NUMBER
 
       - name: Paparazzi golden images
-        if: github.event.issue.pull_request && contains(github.event.comment.body, 'paparazzi golden images')
+        if: github.event.issue.pull_request && contains(github.event.comment.body, 'paparazzi')
         uses: ./.github/actions/paparazzi-golden-images
         with:
           github-token: ${{ secrets.PAT_SPARK || secrets.GITHUB_TOKEN }}
@@ -36,6 +31,13 @@ jobs:
       - name: DependencyGuardBaseline
         if: github.event.issue.pull_request && contains(github.event.comment.body, 'dependencyGuardBaseline')
         uses: ./.github/actions/dependencyguard-baseline
+        with:
+          github-token: ${{ secrets.PAT_SPARK || secrets.GITHUB_TOKEN }}
+          pr-number: ${{ github.event.issue.number }}
+
+      - name: SpotlessApply
+        if: github.event.issue.pull_request && contains(github.event.comment.body, 'spotless')
+        uses: ./.github/actions/spotless-apply
         with:
           github-token: ${{ secrets.PAT_SPARK || secrets.GITHUB_TOKEN }}
           pr-number: ${{ github.event.issue.number }}
