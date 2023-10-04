@@ -10,12 +10,11 @@ concurrency:
 
 env:
   FILE: 'spark-icons/src/main/kotlin/com/adevinta/spark/icons/SparkIcons.kt'
-  COMMIT_MSG: '🎨 Update `SparkIcons.kt`'
 
 jobs:
   pr-icon-updates:
     # Detect recursive calls based on last commit message
-    if: ${{ github.event.head_commit.message != env.COMMIT_MSG }}
+    if: ${{ github.event.head_commit.message != '🎨 Update `SparkIcons.kt`' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -31,7 +30,7 @@ jobs:
           then
             git config user.name 'spark-ui-bot'
             git config user.email 'spark-ui-bot@users.noreply.github.com'
-            git commit "$FILE" -m "$COMMIT_MSG"
+            git commit "$FILE" -m '🎨 Update `SparkIcons.kt`'
             git show
             git push
             echo "::notice::UPDATED"
