@@ -94,8 +94,8 @@ internal fun SparkTextField(
     placeholder: String?,
     helper: String?,
     counter: TextFieldCharacterCounter?,
-    leadingContent: @Composable (() -> Unit)?,
-    trailingContent: @Composable (() -> Unit)?,
+    leadingContent: @Composable (AddonScope.() -> Unit)?,
+    trailingContent: @Composable (AddonScope.() -> Unit)?,
     state: TextFieldState?,
     stateMessage: String?,
     visualTransformation: VisualTransformation,
@@ -193,8 +193,8 @@ internal fun SparkTextField(
     placeholder: String?,
     helper: String?,
     counter: TextFieldCharacterCounter?,
-    leadingIcon: @Composable (() -> Unit)?, // Should we rename it to leadingContent?
-    trailingIcon: @Composable (() -> Unit)?, // Should we rename it to trailingContent?
+    leadingIcon: @Composable() (AddonScope.() -> Unit)?, // Should we rename it to leadingContent?
+    trailingIcon: @Composable() (AddonScope.() -> Unit)?, // Should we rename it to trailingContent?
     state: TextFieldState?,
     stateMessage: String?,
     visualTransformation: VisualTransformation,
@@ -383,8 +383,8 @@ internal object TextFieldDefault {
     @Composable
     internal fun getTrailingContent(
         state: TextFieldState?,
-        trailingIcon: (@Composable () -> Unit)?,
-    ): (@Composable () -> Unit)? = when {
+        trailingIcon: (@Composable AddonScope.() -> Unit)?,
+    ): (@Composable AddonScope.() -> Unit)? = when {
         state != null -> {
             {
                 val icon = when (state) {
@@ -421,7 +421,7 @@ private val TextFieldMinHeight = 44.dp
 @Composable
 internal fun TextFieldSlotsPreview() {
     PreviewTheme {
-        val icon = @Composable {
+        val icon: @Composable (AddonScope.() -> Unit) = @Composable {
             SlotArea(color = LocalContentColor.current) {
                 Icon(
                     imageVector = Icons.Filled.Favorite,

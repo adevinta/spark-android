@@ -55,6 +55,7 @@ import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+import com.adevinta.spark.tokens.SparkTypography
 import kotlinx.coroutines.flow.flowOf
 
 /**
@@ -76,16 +77,17 @@ import kotlinx.coroutines.flow.flowOf
  * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory"
  * but doesn't do anything else so it's up to the developer to handle the behavior.
  * @param label the optional label to be displayed inside the text field container. The default
- * text style for internal [Text] is [Typography.small] when the text field is in focus and
- * [Typography.large] when the text field is not in focus
+ * text style for internal [Text] is [SparkTypography.small] when the text field is in focus and
+ * [SparkTypography.large] when the text field is not in focus
  * @param placeholder the optional placeholder to be displayed when the text field is in focus and
- * the input text is empty. The default text style for internal [Text] is [Typography.large]
+ * the input text is empty. The default text style for internal [Text] is [SparkTypography.large]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * informations about expected text
  * @param counter The optional counter to be displayed the the end bottom outside the text input container
  * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
  * container
- * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are tinted by the state color.
+ * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are
+ * tinted by the state color.
  * @param stateMessage the optional state text to be displayed at the helper position that give more information about
  * the state, it's displayed only when [state] is not null.
  * @param visualTransformation transforms the visual representation of the input [value]
@@ -121,7 +123,7 @@ public fun MultilineTextField(
     placeholder: String? = null,
     helper: String? = null,
     counter: TextFieldCharacterCounter? = null,
-    leadingContent: @Composable (() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -131,7 +133,7 @@ public fun MultilineTextField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingIconComposable: (@Composable () -> Unit)? = getTrailingContent(
+    val trailingIconComposable: (@Composable AddonScope.() -> Unit)? = getTrailingContent(
         state = state,
         trailingIcon = if (value.text.isNotBlank()) {
             {
@@ -196,16 +198,17 @@ public fun MultilineTextField(
  * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory"
  * but doesn't do anything else so it's up to the developer to handle the behavior.
  * @param label the optional label to be displayed inside the text field container. The default
- * text style for internal [Text] is [Typography.small] when the text field is in focus and
- * [Typography.large] when the text field is not in focus
+ * text style for internal [Text] is [SparkTypography.small] when the text field is in focus and
+ * [SparkTypography.large] when the text field is not in focus
  * @param placeholder the optional placeholder to be displayed when the text field is in focus and
- * the input text is empty. The default text style for internal [Text] is [Typography.large]
+ * the input text is empty. The default text style for internal [Text] is [SparkTypography.large]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * informations about expected text
  * @param counter The optional counter to be displayed the the end bottom outside the text input container
  * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
  * container
- * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are tinted by the state color.
+ * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are
+ * tinted by the state color.
  * @param stateMessage the optional state text to be displayed at the helper position that give more information about
  * the state, it's displayed only when [state] is not null.
  * @param visualTransformation transforms the visual representation of the input [value]
@@ -241,7 +244,7 @@ public fun MultilineTextField(
     placeholder: String? = null,
     helper: String? = null,
     counter: TextFieldCharacterCounter? = null,
-    leadingContent: @Composable (() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -251,7 +254,7 @@ public fun MultilineTextField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingIconComposable: (@Composable () -> Unit)? = getTrailingContent(
+    val trailingIconComposable: (@Composable AddonScope.() -> Unit)? = getTrailingContent(
         state = state,
         trailingIcon = if (value.isNotBlank()) {
             {
@@ -365,7 +368,7 @@ private fun ColumnScope.PreviewTextFields(
     state: TextFieldState?,
     stateMessage: String?,
 ) {
-    val icon = @Composable {
+    val icon: @Composable (AddonScope.() -> Unit) = @Composable {
         Icon(
             sparkIcon = SparkIcons.LikeFill,
             contentDescription = null,

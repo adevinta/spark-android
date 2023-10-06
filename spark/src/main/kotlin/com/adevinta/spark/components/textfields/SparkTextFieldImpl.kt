@@ -85,8 +85,8 @@ internal fun SparkDecorationBox(
     placeholder: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
     counter: @Composable (() -> Unit)? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (AddonScope.() -> Unit)? = null,
+    trailingIcon: @Composable (AddonScope.() -> Unit)? = null,
     singleLine: Boolean = false,
     enabled: Boolean = true,
     state: TextFieldState? = null,
@@ -119,7 +119,7 @@ internal fun SparkDecorationBox(
     val bodySmall = typography.body2
     val shouldOverrideTextStyleColor =
         (bodyLarge.color == Color.Unspecified && bodySmall.color != Color.Unspecified) ||
-            (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
+                (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
 
     TextFieldTransitionScope.Transition(
         inputState = inputState,
@@ -186,14 +186,14 @@ internal fun SparkDecorationBox(
         val leadingIconColor = colors.leadingIconColor(enabled, state, interactionSource).value
         val decoratedLeading: @Composable (() -> Unit)? = leadingIcon?.let {
             @Composable {
-                Decoration(contentColor = leadingIconColor, content = it)
+                Decoration(contentColor = leadingIconColor, content = { AddonScopeInstance.it() })
             }
         }
 
         val trailingIconColor = colors.trailingIconColor(enabled, state, interactionSource).value
         val decoratedTrailing: @Composable (() -> Unit)? = trailingIcon?.let {
             @Composable {
-                Decoration(contentColor = trailingIconColor, content = it)
+                Decoration(contentColor = trailingIconColor, content =  { AddonScopeInstance.it() })
             }
         }
 
@@ -258,7 +258,7 @@ internal fun Decoration(
     typography: TextStyle? = null,
     content: @Composable
     @ComposableOpenTarget(index = 0)
-    () -> Unit,
+        () -> Unit,
 ) {
     val colorAndEmphasis: @Composable () -> Unit =
         @Composable {
