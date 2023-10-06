@@ -24,6 +24,7 @@ package com.adevinta.spark.catalog.configurator.samples.buttons
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -277,81 +279,85 @@ private fun ConfiguredButton(
 ) {
     val containerColor by animateColorAsState(
         targetValue = if (intent != ButtonIntent.Surface) {
-            SparkTheme.colors.surface
+            Color.Transparent
         } else {
             SparkTheme.colors.surfaceInverse
         },
         label = "Button container color",
     )
     Surface(
-        modifier = Modifier.padding(4.dp),
         color = containerColor,
     ) {
-        when (style) {
-            ButtonStyle.Filled -> ButtonFilled(
-                modifier = modifier,
-                text = buttonText,
-                onClick = onClick,
-                isLoading = isLoading,
-                size = size,
-                shape = shape,
-                intent = intent,
-                enabled = isEnabled,
-                icon = icon,
-                iconSide = iconSide,
-            )
+        Box(
+            modifier = Modifier.padding(4.dp),
+        ) {
 
-            ButtonStyle.Outlined -> ButtonOutlined(
-                modifier = modifier,
-                text = buttonText,
-                onClick = onClick,
-                isLoading = isLoading,
-                size = size,
-                shape = shape,
-                intent = intent,
-                enabled = isEnabled,
-                icon = icon,
-                iconSide = iconSide,
-            )
+            when (style) {
+                ButtonStyle.Filled -> ButtonFilled(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
 
-            ButtonStyle.Tinted -> ButtonTinted(
-                modifier = modifier,
-                text = buttonText,
-                onClick = onClick,
-                isLoading = isLoading,
-                size = size,
-                shape = shape,
-                intent = intent,
-                enabled = isEnabled,
-                icon = icon,
-                iconSide = iconSide,
-            )
+                ButtonStyle.Outlined -> ButtonOutlined(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
 
-            ButtonStyle.Ghost -> ButtonGhost(
-                modifier = modifier,
-                text = buttonText,
-                onClick = onClick,
-                isLoading = isLoading,
-                size = size,
-                shape = shape,
-                intent = intent,
-                enabled = isEnabled,
-                icon = icon,
-                iconSide = iconSide,
-            )
+                ButtonStyle.Tinted -> ButtonTinted(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
 
-            ButtonStyle.Contrast -> ButtonContrast(
-                modifier = modifier,
-                text = buttonText,
-                onClick = onClick,
-                isLoading = isLoading,
-                size = size,
-                shape = shape,
-                intent = intent,
-                enabled = isEnabled,
-                icon = icon,
-                iconSide = iconSide,
-            )
+                ButtonStyle.Ghost -> ButtonGhost(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
+
+                ButtonStyle.Contrast -> ButtonContrast(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
+            }
         }
     }
 }
