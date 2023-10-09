@@ -291,7 +291,6 @@ private fun ConfiguredButton(
         Box(
             modifier = Modifier.padding(4.dp),
         ) {
-
             when (style) {
                 ButtonStyle.Filled -> ButtonFilled(
                     modifier = modifier,
