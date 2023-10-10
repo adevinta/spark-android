@@ -31,7 +31,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
@@ -45,6 +44,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
@@ -71,6 +71,7 @@ internal fun BaseSparkButton(
     size: ButtonSize = ButtonSize.Medium,
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
+    shape: Shape = SparkButtonDefaults.DefaultShape.shape,
     border: BorderStroke? = null,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -85,7 +86,7 @@ internal fun BaseSparkButton(
             .sparkUsageOverlay(),
         enabled = enabled,
         elevation = elevation,
-        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.large,
+        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else shape,
         border = border,
         colors = colors,
         interactionSource = interactionSource,
@@ -135,6 +136,7 @@ internal fun SparkButton(
     colors: ButtonColors,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
+    shape: ButtonShape = SparkButtonDefaults.DefaultShape,
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
@@ -147,6 +149,7 @@ internal fun SparkButton(
         onClick = onClick,
         modifier = modifier,
         size = size,
+        shape = shape.shape,
         enabled = enabled,
         elevation = elevation,
         border = border,
@@ -171,6 +174,7 @@ internal fun SparkButton(
     colors: ButtonColors,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
+    shape: ButtonShape = SparkButtonDefaults.DefaultShape,
     enabled: Boolean = true,
     elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
     border: BorderStroke? = null,
@@ -183,6 +187,7 @@ internal fun SparkButton(
         onClick = onClick,
         modifier = modifier,
         size = size,
+        shape = shape.shape,
         enabled = enabled,
         elevation = elevation,
         border = border,
@@ -230,6 +235,11 @@ public object SparkButtonDefaults {
         horizontal = 16.dp,
         vertical = size.contentVerticalPadding,
     )
+
+    /**
+     * The default shape of Button
+     */
+    internal val DefaultShape = ButtonShape.Rounded
 
     /**
      * The default border of [ButtonOutlined]
