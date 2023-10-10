@@ -147,6 +147,7 @@ public val SparkIcons.DeliveryOutline: DrawableRes get() = DrawableRes(R.drawabl
 public val SparkIcons.DeliveryTruckFill: DrawableRes get() = DrawableRes(R.drawable.spark_icons_delivery_truck_fill)
 public val SparkIcons.DeliveryTruckOutline: DrawableRes get() = DrawableRes(R.drawable.spark_icons_delivery_truck_outline)
 public val SparkIcons.Digicode: DrawableRes get() = DrawableRes(R.drawable.spark_icons_digicode)
+public val SparkIcons.Directory: DrawableRes get() = DrawableRes(R.drawable.spark_icons_directory)
 public val SparkIcons.DissatisfiedFill: DrawableRes get() = DrawableRes(R.drawable.spark_icons_dissatisfied_fill)
 public val SparkIcons.DissatisfiedOutline: DrawableRes get() = DrawableRes(R.drawable.spark_icons_dissatisfied_outline)
 public val SparkIcons.DiyProduct: DrawableRes get() = DrawableRes(R.drawable.spark_icons_diy_product)
