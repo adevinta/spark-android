@@ -24,6 +24,8 @@ jobs:
           token: ${{ secrets.PAT_SPARK || secrets.GITHUB_TOKEN }}
       - run: gh pr create --fill
         continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
       - run: |
           ./scripts/spark-icons-kt/spark-icons-kt.main.kts --input=spark-icons/src/main/res/drawable --output="$FILE" --copyright=scripts/spark-icons-kt/COPYRIGHT.kt
           if ! git diff --quiet --exit-code -- "$FILE" ;
