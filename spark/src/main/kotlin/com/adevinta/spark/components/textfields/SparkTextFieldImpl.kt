@@ -256,9 +256,8 @@ internal fun SparkDecorationBox(
 internal fun Decoration(
     contentColor: Color,
     typography: TextStyle? = null,
-    content: @Composable
-    @ComposableOpenTarget(index = 0)
-    () -> Unit,
+    @Suppress("ktlint:standard:annotation")
+    content: @Composable @ComposableOpenTarget(index = 0) () -> Unit,
 ) {
     val colorAndEmphasis: @Composable () -> Unit =
         @Composable {

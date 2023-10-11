@@ -6,9 +6,14 @@ insert_final_newline=true
 max_line_length=120
 
 [*.{kt,kts}]
-ij_kotlin_code_style_defaults = kotlin_official
 ij_kotlin_allow_trailing_comma = true
 ij_kotlin_allow_trailing_comma_on_call_site = true
+ktlint_code_style = intellij_idea
+ktlint_standard_comment-wrapping = disabled # A block comment may not be followed by any other element on that same line
+ktlint_standard_discouraged-comment-location = disabled # Trailing comments (A comment in a 'value_argument_list' is only allowed when placed on a separate line)
+ktlint_standard_function-naming = disabled # Because of Compose rules
+ktlint_standard_function-signature = disabled # Seems to incorrectly reformat parameter lists in function signatures
+ktlint_standard_property-naming = disabled # Multiple top-level const vals (and Companion vals) are using PascalCase
 
 [*.md]
 indent_style = space

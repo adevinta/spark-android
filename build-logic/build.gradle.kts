@@ -90,13 +90,13 @@ spotless {
     }
     kotlin {
         target("src/**/*.kt")
-        ktlint(libs.versions.ktlint.get())
+        ktlint()
         trimTrailingWhitespace()
         endWithNewline()
         licenseHeaderFile(licenseHeader)
     }
     kotlinGradle {
-        ktlint(libs.versions.ktlint.get())
+        ktlint()
         trimTrailingWhitespace()
         endWithNewline()
         licenseHeaderFile(

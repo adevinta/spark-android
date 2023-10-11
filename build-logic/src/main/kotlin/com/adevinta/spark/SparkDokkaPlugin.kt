@@ -86,7 +86,6 @@ internal class SparkDokkaPlugin : Plugin<Project> {
 
             // https://kotlinlang.org/docs/dokka-gradle.html#source-link-configuration
             // FIXME(android): https://github.com/Kotlin/dokka/issues/2876
-            @Suppress("ktlint:max-line-length", "ktlint:trailing-comma-on-call-site")
             sourceLink {
                 val url = "https://github.com/Adevinta/spark-android/tree/main/${project.name}/src/main/kotlin"
                 localDirectory.set(projectDir.resolve("src"))

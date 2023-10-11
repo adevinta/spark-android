@@ -46,8 +46,9 @@ internal object TabDefaults {
 }
 
 public enum class TabIntent {
-    /* The default color of such UI controls as toggles, Slider, etc.
-    */
+    /**
+     * The default color of such UI controls as toggles, Slider, etc.
+     */
     Basic {
         @Composable
         override fun color(): Color = SparkTheme.colors.basic

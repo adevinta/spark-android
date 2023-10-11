@@ -289,6 +289,4 @@ private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
 
 internal const val HomeRoute = "home"
 
-public enum class CatalogHomeScreen {
-    Examples, Showkase, Configurator, Icons
-}
+public enum class CatalogHomeScreen { Examples, Showkase, Configurator, Icons }
