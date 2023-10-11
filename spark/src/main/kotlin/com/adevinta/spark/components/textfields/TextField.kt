@@ -167,7 +167,7 @@ public fun TextField(
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * information about expected text
  * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
- * container
+ * container, note that
  * @param trailingContent the optional trailing icon to be displayed at the end of the text field
  * container
  * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are

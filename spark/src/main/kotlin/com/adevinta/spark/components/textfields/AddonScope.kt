@@ -30,8 +30,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ButtonDefaults
@@ -39,6 +39,9 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.IconButtonColors
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.IconToggleButtonColors
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,7 +52,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.node.LayoutModifierNode
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -59,14 +61,31 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.SparkButtonDefaults
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.icons.IconButton
+import com.adevinta.spark.components.icons.IconIntent
+import com.adevinta.spark.components.icons.IconToggleButton
 import com.adevinta.spark.components.menu.DropdownMenuItem
+import com.adevinta.spark.components.spacer.Spacer
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.EyeFill
+import com.adevinta.spark.icons.EyeOffFill
+import com.adevinta.spark.icons.QuestionOutline
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.SparkColors
+import kotlin.random.Random
 import androidx.compose.material3.FilledTonalButton as MaterialButton
 
+/**
+ * Scope that provide pre-made addons for leading and trailing contents of [TextField].
+ */
 public interface AddonScope {
 
+    /**
+     * A Button that can be used as trailing content for a [TextField]. The button is a custom one as a regular
+     * one doesn't fit so it has a more limited api than a Spark button.
+     */
     @ExperimentalSparkApi
     @Composable
     public fun Button(
@@ -115,55 +134,111 @@ public interface AddonScope {
         }
     }
 
+    /**
+     * An icon that can be used as leading or trailing content for a [TextField].
+     * Its size is fixed to 16dp to not change the height of the TextField.
+     * Its color is fixed to neutral.
+     */
     @ExperimentalSparkApi
     @Composable
-    public fun Button(
-        text: String,
-        onClick: () -> Unit
+    public fun TextFieldIcon(
+        icon: SparkIcon,
+        contentDescription: String?,
+        modifier: Modifier = Modifier,
+    ) {
+        Icon(
+            modifier = modifier.size(16.dp),
+            sparkIcon = icon,
+            contentDescription = contentDescription,
+            tint = IconIntent.Neutral.color(),
+        )
+    }
+
+    /**
+     * An icon ghost button that can be used as leading or trailing content for a [TextField].
+     * It's color is fixed to neutral.
+     */
+    @ExperimentalSparkApi
+    @Composable
+    public fun TextFieldIconButton(
+        onClick: () -> Unit,
+        icon: SparkIcon,
+        contentDescription: String?,
         modifier: Modifier = Modifier,
         enabled: Boolean = true,
-        icon: SparkIcon? = null,
-        isLoading: Boolean = false,
+        colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
         interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     ) {
-        LayoutModifierNode
-        MaterialButton(
+        IconButton(
             onClick = onClick,
-            modifier = modifier,
+            modifier = modifier.requiredWidth(40.dp),
             enabled = enabled,
-            elevation = ButtonDefaults.buttonElevation(),
-            shape = SparkTheme.shapes.full,
-            colors = ButtonDefaults.filledTonalButtonColors(
-                containerColor = SparkTheme.colors.mainContainer,
-            ),
+            colors = colors,
             interactionSource = interactionSource,
         ) {
-            Text(
-                text = text,
-                style = SparkTheme.typography.callout,
+            Icon(
+                sparkIcon = icon,
+                contentDescription = contentDescription,
+                tint = IconIntent.Neutral.color(),
             )
-            if (icon != null) {
-                Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
-                Icon(
-                    sparkIcon = icon,
-                    modifier = Modifier.size(SparkButtonDefaults.IconSize),
-                    contentDescription = null, // button text should be enough for context
-                )
-            }
-            AnimatedVisibility(visible = isLoading) {
-                Row {
-                    Spacer(Modifier.width(8.dp))
-                    Box(Modifier.size(SparkButtonDefaults.IconSize)) {
-                        CircularProgressIndicator(
-                            color = LocalContentColor.current,
-                            strokeWidth = 2.dp,
-                        )
-                    }
-                }
-            }
         }
     }
 
+    /**
+     * An icon ghost toggle button that can be used as leading or trailing content for a [TextField].
+     * It's color is fixed to neutral.
+     */
+    @ExperimentalSparkApi
+    @Composable
+    public fun TextFieldIconToggleButton(
+        checked: Boolean,
+        onCheckedChange: (Boolean) -> Unit,
+        unCheckedIcon: SparkIcon,
+        checkedIcon: SparkIcon,
+        contentDescription: String?,
+        modifier: Modifier = Modifier,
+        enabled: Boolean = true,
+        colors: IconToggleButtonColors = IconButtonDefaults.iconToggleButtonColors(),
+        interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    ) {
+        IconToggleButton(
+            checked = checked,
+            onCheckedChange = onCheckedChange,
+            modifier = modifier.requiredWidth(40.dp),
+            enabled = enabled,
+            colors = colors,
+            interactionSource = interactionSource,
+        ) {
+            Icon(
+                sparkIcon = if (checked) checkedIcon else unCheckedIcon,
+                contentDescription = contentDescription,
+                tint = IconIntent.Neutral.color(),
+            )
+        }
+    }
+
+    /**
+     * A text that can be used as a prefix or suffix for a [TextField].
+     * Only use [SparkColors.onSurface] color.
+     */
+    @ExperimentalSparkApi
+    @Composable
+    public fun TextFieldText(
+        text: String,
+        modifier: Modifier = Modifier,
+    ) {
+        Text(
+            modifier = modifier,
+            text = text,
+            color = SparkTheme.colors.onSurface,
+            style = SparkTheme.typography.body1,
+            maxLines = 1,
+        )
+    }
+
+    /**
+     * A dropdown that can be used as a leading or trailing content for a [TextField] that show a dropdown on touch.
+     */
     @OptIn(ExperimentalMaterial3Api::class)
     @ExperimentalSparkApi
     @Composable
@@ -173,8 +248,7 @@ public interface AddonScope {
         onDismissRequest: () -> Unit,
         dropdownLabel: @Composable RowScope.() -> Unit,
         modifier: Modifier = Modifier,
-        properties: PopupProperties= PopupProperties(),
-        interactionSource: MutableInteractionSource= remember { MutableInteractionSource() },
+        properties: PopupProperties = PopupProperties(),
         popupDropdownContent: @Composable ColumnScope.() -> Unit,
     ) {
         ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = onExpandedChange) {
@@ -225,7 +299,6 @@ private fun TextFieldWithDropdownPreview() {
                             expanded = false
                         },
                         properties = PopupProperties(),
-                        interactionSource = MutableInteractionSource(),
                         dropdownLabel = {
                             Canvas(
                                 modifier = Modifier.size(width = 24.dp, height = 14.dp),
@@ -258,22 +331,126 @@ private fun TextFieldWithDropdownPreview() {
 
 @Preview
 @Composable
-private fun TextFieldWithPrefixPreview() {
+private fun TextFieldWithButtonPreview() {
     var isLoading by remember { mutableStateOf(false) }
     PreviewTheme {
-            TextField(
-                value = "AA-123-BB",
-                label = "Plate number",
-                onValueChange = {},
-                trailingContent = {
-                    Button(
-                        text = "Validate",
-                        modifier = Modifier,
-                        onClick = { isLoading = !isLoading },
-                        isLoading = isLoading,
-                    )
-                },
-            )
+        TextField(
+            value = "AA-123-BB",
+            label = "Plate number",
+            onValueChange = {},
+            trailingContent = {
+                Button(
+                    text = "Validate",
+                    modifier = Modifier,
+                    onClick = { isLoading = !isLoading },
+                    isLoading = isLoading,
+                )
+            },
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun TextFieldWithIconPreview() {
+    PreviewTheme {
+        TextField(
+            value = "AA-123-BB",
+            label = "Plate number",
+            onValueChange = {},
+            trailingContent = {
+                TextFieldIcon(
+                    icon = SparkIcons.QuestionOutline,
+                    modifier = Modifier,
+                    contentDescription = "",
+                )
+            },
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun TextFieldWithIconButtonPreview() {
+    PreviewTheme {
+        var value by remember {
+            mutableStateOf("AA-123-BB")
+        }
+        TextField(
+            value = value,
+            label = "Plate number",
+            onValueChange = {},
+            trailingContent = {
+                TextFieldIconButton(
+                    modifier = Modifier,
+                    icon = SparkIcons.EyeOffFill,
+                    contentDescription = "",
+                    onClick = { value = Random.nextInt(0, 8000).toString() },
+                )
+            },
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun TextFieldWithIconToggleButtonPreview() {
+    PreviewTheme {
+        var checked by remember {
+            mutableStateOf(false)
+        }
+        TextField(
+            value = "AA-123-BB",
+            label = "Plate number",
+            onValueChange = {},
+            trailingContent = {
+                TextFieldIconToggleButton(
+                    modifier = Modifier,
+                    checked = checked,
+                    checkedIcon = SparkIcons.EyeFill,
+                    unCheckedIcon = SparkIcons.EyeOffFill,
+                    contentDescription = "",
+                    onCheckedChange = { checked = it },
+                )
+            },
+        )
+        TextField(
+            value = "AA-123-BB",
+            label = "Plate number",
+            onValueChange = {},
+            trailingContent = {
+                TextFieldIconToggleButton(
+                    modifier = Modifier,
+                    checked = !checked,
+                    checkedIcon = SparkIcons.EyeFill,
+                    unCheckedIcon = SparkIcons.EyeOffFill,
+                    contentDescription = "",
+                    onCheckedChange = { checked = it },
+                )
+            },
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun TextFieldWithPrefixSuffixButtonPreview() {
+    PreviewTheme {
+        TextField(
+            value = "www.adevinta.com",
+            label = "Url",
+            onValueChange = {},
+            leadingContent = {
+                TextFieldText(
+                    text = "https://",
+                )
+            },
+            trailingContent = {
+                TextFieldText(
+                    text = ".com",
+                )
+            },
+        )
     }
 }
 
