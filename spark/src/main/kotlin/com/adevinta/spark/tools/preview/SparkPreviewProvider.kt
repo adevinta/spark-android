@@ -88,10 +88,6 @@ public class UserProProvider : PreviewParameterProvider<UserType> {
     )
 }
 
-public enum class ThemeVariant {
-    Light, Dark
-}
+public enum class ThemeVariant { Light, Dark }
 
-public enum class UserType {
-    Part, Pro
-}
+public enum class UserType { Part, Pro }

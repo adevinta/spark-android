@@ -25,7 +25,7 @@ import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.SparkTheme
 
-@Suppress("ktlint:no-semi", "ktlint:trailing-comma-on-declaration-site")
+@Suppress("ktlint:standard:no-semi", "ktlint:standard:trailing-comma-on-declaration-site")
 public enum class ButtonShape {
     Square {
         override val shape: CornerBasedShape

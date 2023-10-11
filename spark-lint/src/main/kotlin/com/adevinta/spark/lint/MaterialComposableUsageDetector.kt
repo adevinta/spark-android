@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("UnstableApiUsage")
+@file:Suppress("UnstableApiUsage", "ktlint:standard:max-line-length")
 
 package com.adevinta.spark.lint
 
@@ -83,7 +83,6 @@ public class MaterialComposableUsageDetector : Detector(), SourceCodeScanner {
             ),
         )
 
-        /* ktlint-disable max-line-length */
         private val REPLACEMENTS: Map<String, String> = mapOf(
             //region Material3
             "androidx.compose.material3.Button" to "com.adevinta.spark.components.buttons.ButtonFilled",
@@ -111,7 +110,6 @@ public class MaterialComposableUsageDetector : Detector(), SourceCodeScanner {
             //endregion
         )
 
-        /* ktlint-enable max-line-length */
         private val METHOD_NAMES = REPLACEMENTS.keys.map { it.methodName() }
         private fun String.methodName() = substringAfterLast(".")
     }

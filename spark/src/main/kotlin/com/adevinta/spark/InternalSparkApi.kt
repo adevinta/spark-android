@@ -26,7 +26,7 @@ package com.adevinta.spark
  * `com.adevinta.spark`, because their signatures and semantics will change between future releases without
  * any warnings and without providing any migration guide.
  */
-@Suppress("ktlint:max-line-length")
+@Suppress("ktlint:standard:max-line-length")
 @Retention(value = AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.TYPEALIAS, AnnotationTarget.PROPERTY)
 @RequiresOptIn(
