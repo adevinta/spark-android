@@ -161,7 +161,7 @@ private fun ConfiguratorComponentMenuPreview() {
     ) {
         ConfiguratorComponentScreen(
             Components.first(),
-            Configurator("aaaa", "aaaa","") {},
+            Configurator("aaaa", "aaaa", "") {},
             PaddingValues(),
         )
     }
