@@ -193,8 +193,8 @@ internal fun SparkTextField(
     placeholder: String?,
     helper: String?,
     counter: TextFieldCharacterCounter?,
-    leadingIcon: @Composable() (AddonScope.() -> Unit)?, // Should we rename it to leadingContent?
-    trailingIcon: @Composable() (AddonScope.() -> Unit)?, // Should we rename it to trailingContent?
+    leadingIcon: @Composable (AddonScope.() -> Unit)?, // Should we rename it to leadingContent?
+    trailingIcon: @Composable (AddonScope.() -> Unit)?, // Should we rename it to trailingContent?
     state: TextFieldState?,
     stateMessage: String?,
     visualTransformation: VisualTransformation,
