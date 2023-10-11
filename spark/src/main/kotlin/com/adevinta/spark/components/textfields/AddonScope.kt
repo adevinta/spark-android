@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.textfields
 
 import androidx.compose.animation.AnimatedVisibility
@@ -277,7 +276,6 @@ public interface AddonScope {
 
 internal object AddonScopeInstance : AddonScope
 
-
 @Preview(device = Devices.PIXEL_4_XL)
 @Composable
 private fun TextFieldWithDropdownPreview() {
@@ -453,4 +451,3 @@ private fun TextFieldWithPrefixSuffixButtonPreview() {
         )
     }
 }
-

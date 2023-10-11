@@ -119,7 +119,7 @@ internal fun SparkDecorationBox(
     val bodySmall = typography.body2
     val shouldOverrideTextStyleColor =
         (bodyLarge.color == Color.Unspecified && bodySmall.color != Color.Unspecified) ||
-                (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
+            (bodyLarge.color != Color.Unspecified && bodySmall.color == Color.Unspecified)
 
     TextFieldTransitionScope.Transition(
         inputState = inputState,
@@ -193,7 +193,7 @@ internal fun SparkDecorationBox(
         val trailingIconColor = colors.trailingIconColor(enabled, state, interactionSource).value
         val decoratedTrailing: @Composable (() -> Unit)? = trailingIcon?.let {
             @Composable {
-                Decoration(contentColor = trailingIconColor, content =  { AddonScopeInstance.it() })
+                Decoration(contentColor = trailingIconColor, content = { AddonScopeInstance.it() })
             }
         }
 
@@ -258,7 +258,7 @@ internal fun Decoration(
     typography: TextStyle? = null,
     content: @Composable
     @ComposableOpenTarget(index = 0)
-        () -> Unit,
+    () -> Unit,
 ) {
     val colorAndEmphasis: @Composable () -> Unit =
         @Composable {

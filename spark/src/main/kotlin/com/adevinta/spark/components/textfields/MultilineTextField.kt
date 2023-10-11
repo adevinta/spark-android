@@ -53,9 +53,9 @@ import com.adevinta.spark.components.textfields.TextFieldDefault.getTrailingCont
 import com.adevinta.spark.icons.DeleteOutline
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.SparkTypography
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tokens.SparkTypography
 import kotlinx.coroutines.flow.flowOf
 
 /**
