@@ -23,6 +23,7 @@ package com.adevinta.spark.catalog.configurator.samples.buttons
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -35,6 +36,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -218,7 +220,7 @@ private fun ConfiguredIconToggleButton(
 ) {
     val containerColor by animateColorAsState(
         targetValue = if (intent != IconButtonIntent.Surface) {
-            SparkTheme.colors.surface
+            Color.Transparent
         } else {
             SparkTheme.colors.surfaceInverse
         },
@@ -227,66 +229,70 @@ private fun ConfiguredIconToggleButton(
     Surface(
         color = containerColor,
     ) {
-        when (style) {
-            IconToggleButtonStyle.Filled -> IconToggleButtonFilled(
-                modifier = modifier,
-                contentDescription = contentDescription,
-                onCheckedChange = onCheckedChange,
-                size = size,
-                shape = shape,
-                intent = intent,
-                checked = isChecked,
-                enabled = isEnabled,
-                icons = icons,
-            )
+        Box(
+            modifier = Modifier.padding(4.dp),
+        ) {
+            when (style) {
+                IconToggleButtonStyle.Filled -> IconToggleButtonFilled(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onCheckedChange = onCheckedChange,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    checked = isChecked,
+                    enabled = isEnabled,
+                    icons = icons,
+                )
 
-            IconToggleButtonStyle.Outlined -> IconToggleButtonOutlined(
-                modifier = modifier,
-                contentDescription = contentDescription,
-                onCheckedChange = onCheckedChange,
-                size = size,
-                shape = shape,
-                intent = intent,
-                checked = isChecked,
-                enabled = isEnabled,
-                icons = icons,
-            )
+                IconToggleButtonStyle.Outlined -> IconToggleButtonOutlined(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onCheckedChange = onCheckedChange,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    checked = isChecked,
+                    enabled = isEnabled,
+                    icons = icons,
+                )
 
-            IconToggleButtonStyle.Tinted -> IconToggleButtonTinted(
-                modifier = modifier,
-                contentDescription = contentDescription,
-                onCheckedChange = onCheckedChange,
-                size = size,
-                shape = shape,
-                intent = intent,
-                checked = isChecked,
-                enabled = isEnabled,
-                icons = icons,
-            )
+                IconToggleButtonStyle.Tinted -> IconToggleButtonTinted(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onCheckedChange = onCheckedChange,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    checked = isChecked,
+                    enabled = isEnabled,
+                    icons = icons,
+                )
 
-            IconToggleButtonStyle.Ghost -> IconToggleButtonGhost(
-                modifier = modifier,
-                contentDescription = contentDescription,
-                onCheckedChange = onCheckedChange,
-                size = size,
-                shape = shape,
-                intent = intent,
-                checked = isChecked,
-                enabled = isEnabled,
-                icons = icons,
-            )
+                IconToggleButtonStyle.Ghost -> IconToggleButtonGhost(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onCheckedChange = onCheckedChange,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    checked = isChecked,
+                    enabled = isEnabled,
+                    icons = icons,
+                )
 
-            IconToggleButtonStyle.Contrast -> IconToggleButtonContrast(
-                modifier = modifier,
-                contentDescription = contentDescription,
-                onCheckedChange = onCheckedChange,
-                size = size,
-                shape = shape,
-                intent = intent,
-                checked = isChecked,
-                enabled = isEnabled,
-                icons = icons,
-            )
+                IconToggleButtonStyle.Contrast -> IconToggleButtonContrast(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onCheckedChange = onCheckedChange,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    checked = isChecked,
+                    enabled = isEnabled,
+                    icons = icons,
+                )
+            }
         }
     }
 }
