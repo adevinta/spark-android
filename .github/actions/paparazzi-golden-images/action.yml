@@ -16,20 +16,16 @@ runs:
     - uses: actions/checkout@v3
       with:
         lfs: true
+        token: ${{ inputs.github-token }}
     - if: ${{ inputs.pr-number }} != ''
       run: gh pr checkout "${{ inputs.pr-number }}"
       shell: bash
-    - uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    - uses: ./.github/actions/setup-gradle-properties
-    - uses: gradle/wrapper-validation-action@56b90f209b02bf6d1deae490e9ef18b21a389cd4 # v1.1.0
     - uses: actionsdesk/lfs-warning@e5f9a4c21f4bee104db7c0f23954dde59e5df909 # v3.2
-    - uses: gradle/gradle-build-action@ef76a971e2fa3f867b617efd72f2fbd72cf6f8bc # v2.8.0
-      with:
-        arguments: recordPaparazziRelease
-        gradle-home-cache-cleanup: true
+    - uses: ./.github/actions/setup-java
+    - uses: ./.github/actions/setup-gradle
+    - uses: ./.github/actions/setup-gradle-properties
+    - run: ./gradlew recordPaparazziRelease
+      shell: bash
     - run: |
         if ! git diff --quiet --exit-code -- **/src/test/snapshots/**/*.png ;
         then

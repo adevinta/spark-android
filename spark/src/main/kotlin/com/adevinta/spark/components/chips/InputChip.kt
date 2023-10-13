@@ -80,7 +80,7 @@ import androidx.compose.material3.InputChip as MaterialInputChip
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
-@Suppress("ktlint:max-line-length")
+@Suppress("ktlint:standard:max-line-length")
 @Deprecated(
     message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
     replaceWith = ReplaceWith(

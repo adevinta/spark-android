@@ -30,7 +30,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-tasks.withType<KotlinCompile> {
+tasks.withType<KotlinCompile>().configureEach {
     compilerOptions.allWarningsAsErrors.set(true)
     kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
 }
@@ -90,13 +90,13 @@ spotless {
     }
     kotlin {
         target("src/**/*.kt")
-        ktlint(libs.versions.ktlint.get())
+        ktlint()
         trimTrailingWhitespace()
         endWithNewline()
         licenseHeaderFile(licenseHeader)
     }
     kotlinGradle {
-        ktlint(libs.versions.ktlint.get())
+        ktlint()
         trimTrailingWhitespace()
         endWithNewline()
         licenseHeaderFile(

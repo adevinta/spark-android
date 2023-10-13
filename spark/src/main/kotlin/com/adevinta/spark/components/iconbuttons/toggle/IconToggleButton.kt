@@ -42,10 +42,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonColors
 import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
-import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.surface.Surface
@@ -74,7 +74,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
- * @param shape to be applied to the IconButton background. It should be one of [IconButtonShape] values
+ * @param shape to be applied to the IconButton background. It should be one of [ButtonShape] values
  * @param size one of the [IconButtonSize] values that sets width and height of the IconButton
  * @param border an optional [BorderStroke] to be applied to the IconButton
  * @param contentDescription text used by accessibility services to describe what this icon button
@@ -94,7 +94,7 @@ internal fun SparkIconToggleButton(
     colors: IconButtonColors,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shape: IconButtonShape = IconButtonDefaults.DefaultShape,
+    shape: ButtonShape = IconButtonDefaults.DefaultShape,
     size: IconButtonSize = IconButtonDefaults.DefaultSize,
     border: BorderStroke? = null,
     contentDescription: String? = null,
@@ -144,7 +144,7 @@ internal fun SparkIconToggleButton(
     name = "IconToggleButtons",
 )
 @Composable
-internal fun IconToggleButtonPreview(
+private fun IconToggleButtonPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
@@ -152,17 +152,14 @@ internal fun IconToggleButtonPreview(
         var state by remember {
             mutableStateOf(false)
         }
-        IconButtonSize.values().forEach { size ->
-            IconButtonShape.values().forEach { shape ->
-                SparkIconToggleButton(
-                    checked = state,
-                    onCheckedChange = { state = !state },
-                    icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
-                    colors = IconButtonDefaults.filledIconButtonColors(intent = intent.colors()),
-                    size = size,
-                    shape = shape,
-                )
-            }
+        IconButtonSize.entries.forEach { size ->
+            SparkIconToggleButton(
+                checked = state,
+                onCheckedChange = { state = !state },
+                icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
+                colors = IconButtonDefaults.filledIconButtonColors(intent = intent.colors()),
+                size = size,
+            )
         }
     }
 }

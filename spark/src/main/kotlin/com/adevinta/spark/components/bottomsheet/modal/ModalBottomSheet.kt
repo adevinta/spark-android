@@ -434,7 +434,7 @@ private fun ModalBottomSheetSample() {
             onDismissRequest = { openBottomSheet = false },
             sheetState = bottomSheetState,
         ) {
-            LazyColumn(/*modifier = Modifier.fillMaxHeight()*/) {
+            LazyColumn {
                 stickyHeader {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                         // Note: If you provide logic outside of onDismissRequest to remove the sheet,
