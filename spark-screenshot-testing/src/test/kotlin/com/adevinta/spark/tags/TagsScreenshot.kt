@@ -104,7 +104,7 @@ internal class TagsScreenshot {
     private fun Tags() {
         FlowRow(
             horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically,
+            verticalArrangement = Arrangement.Center,
         ) {
             TagIntent.entries.forEach { intent ->
                 Row {

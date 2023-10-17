@@ -214,5 +214,5 @@ private fun ConfigedTag(
 private enum class TagStyle {
     Filled,
     Outlined,
-    Tinted;
+    Tinted,
 }

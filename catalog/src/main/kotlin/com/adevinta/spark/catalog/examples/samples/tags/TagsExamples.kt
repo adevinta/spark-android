@@ -89,7 +89,8 @@ public val TagsExamples: List<Example> = listOf(
     },
     Example(
         name = "Tag layouts",
-        description = "Showcase how to layout tags sao that they don't clip on parent width but can go to a new line if they don't fit",
+        description = "Showcase how to layout tags sao that they don't clip on parent width but can go to a new " +
+                "line if they don't fit",
         sourceUrl = TagsExampleSourceUrl,
     ) {
         FlowRow(
