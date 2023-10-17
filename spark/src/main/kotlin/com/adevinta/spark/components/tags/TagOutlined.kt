@@ -32,7 +32,9 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.icons.Booster
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -178,8 +180,9 @@ internal fun TagOutlinedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        TagIntent.values().forEach {
-            TagOutlined("Tag ${it.name}", intent = it)
-        }
+        val icon = SparkIcons.Booster
+        TagOutlined("", leadingIcon = icon)
+        TagOutlined("Tag Basic")
+        TagOutlined("Tag Basic", leadingIcon = icon)
     }
 }
