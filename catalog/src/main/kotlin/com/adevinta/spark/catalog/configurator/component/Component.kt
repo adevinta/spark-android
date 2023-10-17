@@ -159,10 +159,9 @@ private fun ConfiguratorComponentMenuPreview() {
             .fillMaxSize()
             .wrapContentSize(Alignment.Center),
     ) {
-        ConfiguratorComponentScreen(
-            Components.first(),
-            Configurator("aaaa", "aaaa", "") {},
-            PaddingValues(),
-        )
+        ConfiguratorComponentMenu(
+            component = Components.first(),
+            expanded = true,
+        ) {}
     }
 }

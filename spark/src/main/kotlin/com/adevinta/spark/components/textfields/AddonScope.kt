@@ -187,6 +187,7 @@ public interface AddonScope {
      * An icon ghost toggle button that can be used as leading or trailing content for a [TextField].
      * It's color is fixed to neutral.
      */
+    @Suppress("DEPRECATION") // we don't want to use the spark button for this yet
     @ExperimentalSparkApi
     @Composable
     public fun TextFieldIconToggleButton(
