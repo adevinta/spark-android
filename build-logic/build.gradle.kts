@@ -31,7 +31,7 @@ java {
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions.allWarningsAsErrors.set(true)
+    compilerOptions.allWarningsAsErrors = true
     kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
 }
 
