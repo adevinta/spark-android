@@ -65,6 +65,17 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.launch
 
+/**
+ * Popover is kinda similar to Plain tooltip from Compose UI
+ * Provides a descriptive message or Info for an Anchor.
+ * Popover that is invoked when the anchor is pressed/long pressed:
+ *
+ * Params:
+ * @param popoverContent the composable that will be used to populate the Popover's content.
+ * @param isDismissButtonEnabled [Boolean] that determines if we show a dismiss iconbutton on the Popover,
+ * @param popoverState handles the state of the Popover's visibility.
+ * @param actionContent the composable that the Popover will anchor to.
+ */
 @InternalSparkApi
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
