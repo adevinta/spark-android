@@ -119,7 +119,6 @@ internal fun SparkIconToggleButton(
             onCheckedChange = onCheckedChange,
             modifier = modifier
                 .minimumTouchTargetSize()
-                .tooltipAnchor()
                 .sparkUsageOverlay()
                 .semantics { role = Role.Checkbox },
             enabled = enabled,

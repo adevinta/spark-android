@@ -26,6 +26,7 @@ slackLint = "1.2.0"
 spotless = "6.22.0"
 targetSdk = "34"
 testParameterInjector = "1.13"
+material3 = "1.2.0-alpha09"
 
 [libraries]
 
@@ -50,8 +51,8 @@ androidx-compose-compiler = { group = "androidx.compose.compiler", name = "compi
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation" }
 androidx-compose-foundation-layout = { module = "androidx.compose.foundation:foundation-layout" }
 androidx-compose-material-iconsExtended = { module = "androidx.compose.material:material-icons-extended" }
-androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
-androidx-compose-material3-windowSizeClass = { module = "androidx.compose.material3:material3-window-size-class" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+androidx-compose-material3-windowSizeClass = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "material3" }
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" }

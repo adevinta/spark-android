@@ -108,7 +108,6 @@ internal fun SparkIconButton(
             onClick = onClick,
             modifier = modifier
                 .minimumTouchTargetSize()
-                .tooltipAnchor()
                 .sparkUsageOverlay(),
             enabled = enabled,
             shape = shape.shape,
