@@ -76,7 +76,7 @@ internal class IconButtonScreenshot {
 
     @Test
     fun test() {
-        //      shapes.forEach { shape -> TODO: Uncomment after POlaris app adapt new @ButtonShape class
+        //      shapes.forEach { shape -> TODO: Uncomment after Polaris app adapt new @ButtonShape class
         sizes.forEach { size ->
             paparazzi.sparkSnapshot(name = "$size") {
                 Row {

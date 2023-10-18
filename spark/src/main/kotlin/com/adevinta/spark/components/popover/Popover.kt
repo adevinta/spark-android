@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.popover
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,7 +47,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.adevinta.spark.InternalSparkApi
+import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.SparkTheme.colors
@@ -76,10 +77,12 @@ import kotlinx.coroutines.launch
  * @param popoverState handles the state of the Popover's visibility.
  * @param actionContent the composable that the Popover will anchor to.
  */
-@InternalSparkApi
+
+@SuppressLint("ComposeModifierMissing")
+@ExperimentalSparkApi
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-internal fun SparkPopover(
+public fun Popover(
     popoverContent: @Composable () -> Unit,
     isDismissButtonEnabled: Boolean = false,
     popoverState: TooltipState = rememberTooltipState(isPersistent = true),
@@ -144,7 +147,7 @@ private fun PopoverPreview(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            SparkPopover(
+            Popover(
                 isDismissButtonEnabled = true,
                 popoverContent = {
                     Column {
