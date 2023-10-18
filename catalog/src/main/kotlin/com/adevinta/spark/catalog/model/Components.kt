@@ -34,6 +34,7 @@ import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfig
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
@@ -175,6 +176,19 @@ private val Tokens = Component(
     configurator = null,
 )
 
+private val Popovers = Component(
+    id = nextId(),
+    name = "Popovers",
+    illustration = R.drawable.illu_component_tokens,
+    tintIcon = false,
+    description = R.string.component_popovers_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/88a08c-popover/b/904ceb",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.popover/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/popover/Color.kt",
+    examples = PopoverExamples,
+    configurator = null,
+)
+
 /** Components for the catalog, ordered alphabetically by name. */
 public val Components: List<Component> = listOf(
     Tokens,
@@ -186,4 +200,5 @@ public val Components: List<Component> = listOf(
     Switches,
     Tabs,
     TextFields,
+    Popovers,
 )

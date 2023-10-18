@@ -172,7 +172,7 @@ private fun PopoverPreview(
                 popoverState = state,
             ) {
                 ButtonOutlined(
-                    text = "Display Tooltip",
+                    text = "Display Popover",
                     onClick = { scope.launch { state.show() } },
                 )
             }

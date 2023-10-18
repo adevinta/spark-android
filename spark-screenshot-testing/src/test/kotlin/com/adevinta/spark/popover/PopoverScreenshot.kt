@@ -110,7 +110,7 @@ internal class PopoverScreenshot {
 
                             ) {
                                 ButtonOutlined(
-                                    text = "Display Tooltip",
+                                    text = "Display Popover",
                                     onClick = { scope.launch { state.show() } },
                                 )
                             }
