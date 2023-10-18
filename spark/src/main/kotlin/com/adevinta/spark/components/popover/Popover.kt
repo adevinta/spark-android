@@ -148,7 +148,6 @@ private fun PopoverPreview(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Popover(
-                isDismissButtonEnabled = true,
                 popoverContent = {
                     Column {
                         Text(
@@ -169,6 +168,7 @@ private fun PopoverPreview(
                         )
                     }
                 },
+                isDismissButtonEnabled = true,
                 popoverState = state,
             ) {
                 ButtonOutlined(

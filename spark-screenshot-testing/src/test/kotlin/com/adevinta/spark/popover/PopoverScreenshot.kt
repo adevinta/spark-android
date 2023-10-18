@@ -85,7 +85,6 @@ internal class PopoverScreenshot {
                         )
                         Row {
                             Popover(
-                                isDismissButtonEnabled = isEnabled,
                                 popoverContent = {
                                     Column {
                                         Text(
@@ -106,6 +105,7 @@ internal class PopoverScreenshot {
                                         )
                                     }
                                 },
+                                isDismissButtonEnabled = isEnabled,
                                 popoverState = state,
 
                             ) {
