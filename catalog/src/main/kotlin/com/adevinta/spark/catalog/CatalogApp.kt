@@ -25,12 +25,15 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -38,6 +41,8 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
@@ -52,8 +57,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
@@ -84,6 +92,12 @@ import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
 import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.KleinanzeigenTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
+import com.adevinta.spark.components.buttons.ButtonFilled
+import com.adevinta.spark.components.buttons.ButtonOutlined
+import com.adevinta.spark.components.dialog.ModalFullScreenScaffold
+import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.BicycleType
+import com.adevinta.spark.icons.SparkIcons
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
@@ -126,6 +140,8 @@ internal fun CatalogApp(
                 TextDirection.System -> LocalLayoutDirection.current
             }
 
+            var showDialog by remember { mutableStateOf(false) }
+
             TestHarness(
                 darkMode = useDark,
                 layoutDirection = layoutDirection,
@@ -135,83 +151,131 @@ internal fun CatalogApp(
                     theme.fontScale
                 },
             ) {
-                val coroutineScope = rememberCoroutineScope()
-                val homeScreenValues = CatalogHomeScreen.values()
-                val pagerState = rememberPagerState(
-                    initialPage = CatalogHomeScreen.Examples.ordinal,
-                    pageCount = { homeScreenValues.size },
-                )
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    val coroutineScope = rememberCoroutineScope()
+                    val homeScreenValues = CatalogHomeScreen.values()
+                    val pagerState = rememberPagerState(
+                        initialPage = CatalogHomeScreen.Examples.ordinal,
+                        pageCount = { homeScreenValues.size },
+                    )
 
-                BackdropScaffold(
-                    scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
-                    frontLayerScrimColor = Color.Unspecified,
-                    headerHeight = BackdropScaffoldDefaults.HeaderHeight + WindowInsets.navigationBars.asPaddingValues()
-                        .calculateBottomPadding(),
-                    peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
-                        .calculateTopPadding(),
-                    backLayerBackgroundColor = SparkTheme.colors.mainContainer,
-                    appBar = {
-                        HomeTabBar(
-                            modifier = Modifier.statusBarsPadding(),
-                            tabSelected = homeScreenValues[pagerState.currentPage],
-                            onTabSelected = {
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(
-                                        it.ordinal,
-                                        animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
-                                    )
-                                }
-                            },
-                        )
-                    },
-                    backLayerContent = {
-                        ThemePicker(
-                            theme = theme,
-                            onThemeChange = { theme ->
-                                coroutineScope.launch {
-                                    onThemeChange(theme)
-                                }
-                            },
-                        )
-                    },
-                    frontLayerContent = {
-                        val insetsPadding = WindowInsets.navigationBars.asPaddingValues()
-                        val innerPadding = PaddingValues(
-                            top = 16.dp + insetsPadding.calculateTopPadding(),
-                            end = insetsPadding.calculateEndPadding(LocalLayoutDirection.current),
-                            bottom = insetsPadding.calculateBottomPadding(),
-                            start = insetsPadding.calculateStartPadding(LocalLayoutDirection.current),
-                        )
-                        HorizontalPager(
-                            state = pagerState,
-                            flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
-                        ) {
-                            when (homeScreenValues[it]) {
-                                CatalogHomeScreen.Examples -> ComponentsScreen(
-                                    components = components,
-                                    contentPadding = innerPadding,
-                                )
-
-                                CatalogHomeScreen.Showkase -> {
-                                    BodyContent(
+                    BackdropScaffold(
+                        scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
+                        frontLayerScrimColor = Color.Unspecified,
+                        headerHeight = BackdropScaffoldDefaults.HeaderHeight + WindowInsets.navigationBars.asPaddingValues()
+                            .calculateBottomPadding(),
+                        peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
+                            .calculateTopPadding(),
+                        backLayerBackgroundColor = SparkTheme.colors.mainContainer,
+                        appBar = {
+                            HomeTabBar(
+                                modifier = Modifier.statusBarsPadding(),
+                                tabSelected = homeScreenValues[pagerState.currentPage],
+                                onTabSelected = {
+                                    showDialog = true
+                                    coroutineScope.launch {
+                                        pagerState.animateScrollToPage(
+                                            it.ordinal,
+                                            animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
+                                        )
+                                    }
+                                },
+                            )
+                        },
+                        backLayerContent = {
+                            ThemePicker(
+                                theme = theme,
+                                onThemeChange = { theme ->
+                                    coroutineScope.launch {
+                                        onThemeChange(theme)
+                                    }
+                                },
+                            )
+                        },
+                        frontLayerContent = {
+                            val insetsPadding = WindowInsets.navigationBars.asPaddingValues()
+                            val innerPadding = PaddingValues(
+                                top = 16.dp + insetsPadding.calculateTopPadding(),
+                                end = insetsPadding.calculateEndPadding(LocalLayoutDirection.current),
+                                bottom = insetsPadding.calculateBottomPadding(),
+                                start = insetsPadding.calculateStartPadding(LocalLayoutDirection.current),
+                            )
+                            HorizontalPager(
+                                state = pagerState,
+                                flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
+                            ) {
+                                when (homeScreenValues[it]) {
+                                    CatalogHomeScreen.Examples -> ComponentsScreen(
+                                        components = components,
                                         contentPadding = innerPadding,
-                                        groupedComponentMap = groupedComponentMap,
-                                        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                                    )
+
+                                    CatalogHomeScreen.Showkase -> {
+                                        BodyContent(
+                                            contentPadding = innerPadding,
+                                            groupedComponentMap = groupedComponentMap,
+                                            showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                                        )
+                                    }
+
+                                    CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
+                                        components = components,
+                                        contentPadding = innerPadding,
+                                    )
+
+                                    CatalogHomeScreen.Icons -> IconDemoScreen(
+                                        contentPadding = innerPadding,
                                     )
                                 }
-
-                                CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
-                                    components = components,
-                                    contentPadding = innerPadding,
-                                )
-
-                                CatalogHomeScreen.Icons -> IconDemoScreen(
-                                    contentPadding = innerPadding,
-                                )
                             }
+                        },
+                    )
+
+                    if (showDialog) {
+                        ModalFullScreenScaffold(
+                            onClose = { showDialog = false },
+                            illustration = SparkIcons.BicycleType.drawableId,
+                            mainButton = {
+                                ButtonFilled(modifier = it, onClick = { showDialog = false }, text = "Main Action")
+                            },
+                            supportButton = {
+                                ButtonOutlined(
+                                    modifier = it,
+                                    onClick = { showDialog = false },
+                                    text = "Alternative Action",
+                                )
+                            },
+                            reverseButtonOrder = true,
+                            illustrationContentScale = ContentScale.FillWidth,
+                        ) { innerPadding ->
+                            Text(
+                                modifier = Modifier
+                                    .padding(innerPadding)
+                                    .verticalScroll(rememberScrollState()),
+                                text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
+                                        "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
+                                        "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
+                                        "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
+                                        "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
+                                        "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
+                                        "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
+                                        "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
+                                        " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
+                                        "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
+                                        "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
+                                        "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
+                                        "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
+                                        "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
+                                        "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
+                                        "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
+                                        "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
+                            )
                         }
-                    },
-                )
+                    }
+                }
             }
         }
     }
