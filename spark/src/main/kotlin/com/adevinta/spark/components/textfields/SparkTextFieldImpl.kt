@@ -36,7 +36,6 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.ProvideTextStyle
@@ -74,7 +73,6 @@ import com.adevinta.spark.SparkTheme
 /**
  * Implementation of the [TextField]
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SparkDecorationBox(
     value: String,
@@ -83,6 +81,7 @@ internal fun SparkDecorationBox(
     label: @Composable (() -> Unit)?,
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
+    readOnly: Boolean,
     placeholder: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
     counter: @Composable (() -> Unit)? = null,
@@ -106,7 +105,7 @@ internal fun SparkDecorationBox(
 
     val isFocused = interactionSource.collectIsFocusedAsState().value
     val inputState = when {
-        isFocused -> InputPhase.Focused
+        isFocused && !readOnly -> InputPhase.Focused
         transformedText.isEmpty() -> InputPhase.UnfocusedEmpty
         else -> InputPhase.UnfocusedNotEmpty
     }
@@ -257,12 +256,13 @@ internal fun SparkDecorationBox(
 internal fun Decoration(
     contentColor: Color,
     typography: TextStyle? = null,
-    content: @Composable
-    @ComposableOpenTarget(index = 0) () -> Unit, // ktlint-disable annotation
+    @Suppress("ktlint:standard:annotation")
+    content: @Composable @ComposableOpenTarget(index = 0) () -> Unit,
 ) {
-    val colorAndEmphasis: @Composable () -> Unit = @Composable {
-        CompositionLocalProvider(LocalContentColor provides contentColor, content = content)
-    }
+    val colorAndEmphasis: @Composable () -> Unit =
+        @Composable {
+            CompositionLocalProvider(LocalContentColor provides contentColor, content = content)
+        }
     if (typography != null) ProvideTextStyle(typography, colorAndEmphasis) else colorAndEmphasis()
 }
 

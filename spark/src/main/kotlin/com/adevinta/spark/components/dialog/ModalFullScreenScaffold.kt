@@ -35,12 +35,12 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
@@ -55,10 +55,11 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.buttons.ButtonOutlined
-import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.icons.IconButton
+import com.adevinta.spark.components.iconbuttons.IconButtonColors
+import com.adevinta.spark.components.iconbuttons.SparkIconButton
 import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.scaffold.Scaffold
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.BicycleType
 import com.adevinta.spark.icons.Close
@@ -66,6 +67,7 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.Layout
 import com.adevinta.spark.tokens.bodyWidth
 import com.adevinta.spark.tokens.dim2
+import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tools.preview.DevicePreviews
 
 /**
@@ -161,7 +163,7 @@ private fun ModalScaffold(
     ) {
         Surface(
             modifier = modifier.padding(DialogWindowPadding),
-            shadowElevation = 6.dp,
+            elevation = 6.dp,
             shape = SparkTheme.shapes.large,
         ) {
             Column(
@@ -218,13 +220,7 @@ private fun PhonePortraitModalScaffold(
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = onClose) {
-                        Icon(
-                            sparkIcon = SparkIcons.Close,
-                            tint = SparkTheme.colors.onSurface.dim2,
-                            contentDescription = stringResource(id = R.string.spark_a11y_modal_fullscreen_close),
-                        )
-                    }
+                    CloseIconButton(onClose = onClose)
                 },
                 title = { },
             )
@@ -280,7 +276,7 @@ private fun PhonePortraitModalScaffold(
                 PaddingValues(
                     start = innerPadding.calculateLeftPadding(LocalLayoutDirection.current),
                     end = innerPadding.calculateRightPadding(LocalLayoutDirection.current),
-                    top = 24.dp,
+                    top = if (illustration == null) innerPadding.calculateTopPadding() else 24.dp,
                     bottom = innerPadding.calculateBottomPadding(),
                 ),
             )
@@ -306,13 +302,7 @@ private fun PhoneLandscapeModalScaffold(
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = onClose) {
-                        Icon(
-                            sparkIcon = SparkIcons.Close,
-                            tint = SparkTheme.colors.onSurface.dim2,
-                            contentDescription = stringResource(id = R.string.spark_a11y_modal_fullscreen_close),
-                        )
-                    }
+                    CloseIconButton(onClose = onClose)
                 },
                 title = { },
             )
@@ -363,6 +353,27 @@ private fun PhoneLandscapeModalScaffold(
     }
 }
 
+@Composable
+private fun CloseIconButton(
+    onClose: () -> Unit,
+) {
+    val contentColor = SparkTheme.colors.onSurface.dim2
+    val colors = IconButtonColors(
+        containerColor = Color.Transparent,
+        contentColor = contentColor,
+        disabledContainerColor = Color.Transparent,
+        disabledContentColor = contentColor.disabled,
+    )
+    SparkIconButton(
+        icon = SparkIcons.Close,
+        onClick = onClose,
+        contentDescription = stringResource(
+            id = R.string.spark_a11y_modal_fullscreen_close,
+        ),
+        colors = colors,
+    )
+}
+
 private val MinWidth = 280.dp
 private val MaxWidth = 560.dp
 
@@ -393,6 +404,7 @@ private fun ModalPreview() {
                 ButtonOutlined(modifier = it, onClick = { /*TODO*/ }, text = "Alternative Action")
             },
             reverseButtonOrder = true,
+            illustrationContentScale = ContentScale.FillWidth,
         ) { innerPadding ->
             Text(
                 modifier = Modifier

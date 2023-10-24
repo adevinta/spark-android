@@ -25,11 +25,6 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.tooling.preview.datasource.CollectionPreviewParameterProvider
 import kotlin.reflect.KClass
 
-public class SparkPreviewProvider : PreviewParameterProvider<Pair<ThemeVariant, UserType>> by compositeProvider(
-    ThemeProvider::class,
-    UserProProvider::class,
-)
-
 public class SparkPreviewParamProvider : CollectionPreviewParameterProvider<SparkPreviewParam>(
     listOf(
         SparkPreviewParam(ThemeVariant.Light, UserType.Part, isLegacy = false),
@@ -68,8 +63,8 @@ private class CompositeParameterProvider<T1 : Any, T2 : Any>(
     kClass2: KClass<out PreviewParameterProvider<T2>>,
 ) : PreviewParameterProvider<Pair<T1, T2>> {
 
-    private val provider1 = kClass1.java.newInstance()
-    private val provider2 = kClass2.java.newInstance()
+    private val provider1 = kClass1.java.getDeclaredConstructor().newInstance()
+    private val provider2 = kClass2.java.getDeclaredConstructor().newInstance()
 
     override val values: Sequence<Pair<T1, T2>>
         get() = provider1.values union provider2.values
@@ -93,10 +88,6 @@ public class UserProProvider : PreviewParameterProvider<UserType> {
     )
 }
 
-public enum class ThemeVariant {
-    Light, Dark
-}
+public enum class ThemeVariant { Light, Dark }
 
-public enum class UserType {
-    Part, Pro
-}
+public enum class UserType { Part, Pro }

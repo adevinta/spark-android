@@ -96,7 +96,7 @@ internal object SparkUnitTests {
     }
 
     private fun configureTestTasks(project: Project) {
-        project.tasks.withType<Test> {
+        project.tasks.withType<Test>().configureEach {
             testLogging {
                 showStandardStreams = true
                 showStackTraces = true

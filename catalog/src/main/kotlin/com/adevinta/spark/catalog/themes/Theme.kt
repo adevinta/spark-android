@@ -26,7 +26,7 @@ import androidx.compose.runtime.saveable.Saver
 public data class Theme(
     val themeMode: ThemeMode = ThemeMode.System,
     val colorMode: ColorMode = ColorMode.Baseline,
-    val brandMode: BrandMode = BrandMode.Polaris,
+    val brandMode: BrandMode = BrandMode.Adevinta,
     val userMode: UserMode = UserMode.Part,
     val fontScale: Float = 1.0f,
     val fontScaleMode: FontScaleMode = FontScaleMode.System,
@@ -90,7 +90,8 @@ public enum class ThemeMode {
 public enum class BrandMode(public val label: String) {
     LeboncoinLegacy("Leboncoin (Legacy)"),
     Leboncoin("Leboncoin (New Ui)"),
-    Polaris("Polaris"),
+    Adevinta("Adevinta"),
+    Kleinanzeigen("Kleinanzeigen"),
 }
 
 public enum class UserMode {

@@ -67,6 +67,7 @@ import com.adevinta.spark.catalog.backdrop.BackdropValue
 import com.adevinta.spark.catalog.backdrop.rememberBackdropScaffoldState
 import com.adevinta.spark.catalog.configurator.ConfiguratorComponentsScreen
 import com.adevinta.spark.catalog.examples.ComponentsScreen
+import com.adevinta.spark.catalog.icons.IconDemoScreen
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.showkase.ShowkaseBrowserScreenMetadata
 import com.adevinta.spark.catalog.showkase.navGraph
@@ -80,8 +81,9 @@ import com.adevinta.spark.catalog.themes.ThemeMode
 import com.adevinta.spark.catalog.themes.ThemePicker
 import com.adevinta.spark.catalog.themes.UserMode
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
+import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.KleinanzeigenTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
-import com.adevinta.spark.catalog.themes.themeprovider.polaris.PolarisTheme
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
@@ -96,9 +98,10 @@ internal fun CatalogApp(
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
     val themeProvider: ThemeProvider = when (theme.brandMode) {
-        BrandMode.Polaris -> PolarisTheme
+        BrandMode.Adevinta -> AdevintaTheme
         BrandMode.Leboncoin -> LeboncoinTheme
         BrandMode.LeboncoinLegacy -> LeboncoinTheme
+        BrandMode.Kleinanzeigen -> KleinanzeigenTheme
     }
 
     val isLegacy = theme.brandMode == BrandMode.LeboncoinLegacy
@@ -134,7 +137,10 @@ internal fun CatalogApp(
             ) {
                 val coroutineScope = rememberCoroutineScope()
                 val homeScreenValues = CatalogHomeScreen.values()
-                val pagerState = rememberPagerState(initialPage = CatalogHomeScreen.Examples.ordinal)
+                val pagerState = rememberPagerState(
+                    initialPage = CatalogHomeScreen.Examples.ordinal,
+                    pageCount = { homeScreenValues.size },
+                )
 
                 BackdropScaffold(
                     scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
@@ -177,7 +183,6 @@ internal fun CatalogApp(
                             start = insetsPadding.calculateStartPadding(LocalLayoutDirection.current),
                         )
                         HorizontalPager(
-                            pageCount = homeScreenValues.size,
                             state = pagerState,
                             flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
                         ) {
@@ -197,6 +202,10 @@ internal fun CatalogApp(
 
                                 CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
                                     components = components,
+                                    contentPadding = innerPadding,
+                                )
+
+                                CatalogHomeScreen.Icons -> IconDemoScreen(
                                     contentPadding = innerPadding,
                                 )
                             }
@@ -280,6 +289,4 @@ private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
 
 internal const val HomeRoute = "home"
 
-public enum class CatalogHomeScreen {
-    Examples, Showkase, Configurator
-}
+public enum class CatalogHomeScreen { Examples, Showkase, Configurator, Icons }

@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -342,13 +343,15 @@ public fun BackdropScaffold(
                         collapse {
                             if (scaffoldState.confirmStateChange(Revealed)) {
                                 scope.launch { scaffoldState.reveal() }
-                            }; true
+                            }
+                            true
                         }
                     } else {
                         expand {
                             if (scaffoldState.confirmStateChange(Concealed)) {
                                 scope.launch { scaffoldState.conceal() }
-                            }; true
+                            }
+                            true
                         }
                     }
                 }

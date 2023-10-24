@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.list
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ListItemColors
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.runtime.Composable
@@ -36,7 +35,6 @@ public object ListItemDefault {
 
     public val Elevation: Dp = 0.0.dp
 
-    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     public fun colors(): ListItemColors = ListItemDefaults.colors(
         containerColor = SparkTheme.colors.surface,

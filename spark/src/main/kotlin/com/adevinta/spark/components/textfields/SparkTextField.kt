@@ -157,6 +157,7 @@ internal fun SparkTextField(
                     label = { Label(text = label, required = required) },
                     interactionSource = interactionSource,
                     colors = colors,
+                    readOnly = readOnly,
                     placeholder = { PlaceHolder(text = placeholder) },
                     supportingText = supportingTextComposable,
                     counter = counterComposable,
@@ -168,6 +169,7 @@ internal fun SparkTextField(
                 ) {
                     OutlinedBorderContainerBox(
                         enabled,
+                        readOnly,
                         state,
                         interactionSource,
                         colors,
@@ -255,6 +257,7 @@ internal fun SparkTextField(
                     label = { Label(text = label, required = required) },
                     interactionSource = interactionSource,
                     colors = colors,
+                    readOnly = readOnly,
                     placeholder = { PlaceHolder(text = placeholder) },
                     supportingText = supportingTextComposable,
                     counter = counterComposable,
@@ -266,6 +269,7 @@ internal fun SparkTextField(
                 ) {
                     OutlinedBorderContainerBox(
                         enabled,
+                        readOnly,
                         state,
                         interactionSource,
                         colors,
@@ -283,7 +287,8 @@ internal fun SparkTextField(
  * [OutlinedBorderContainerBox]. The [SparkTextField] applies it automatically.
  *
  * @param enabled whether the text field is enabled
- * @param isError whether the text field's current value is in error
+ * @param readOnly whether the text field's value can't be edited
+ * @param state whether the text field's current value is in error, success or alert
  * @param interactionSource the [InteractionSource] of this text field. Helps to determine if
  * the text field is in focus or not
  * @param colors [TextFieldColors] used to resolve colors of the text field
@@ -292,6 +297,7 @@ internal fun SparkTextField(
 @Composable
 private fun OutlinedBorderContainerBox(
     enabled: Boolean,
+    readOnly: Boolean,
     state: TextFieldState?,
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
@@ -299,6 +305,7 @@ private fun OutlinedBorderContainerBox(
     val shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.large
     val borderStroke = animateBorderStrokeAsState(
         enabled,
+        readOnly,
         state,
         interactionSource,
         colors,
@@ -310,23 +317,23 @@ private fun OutlinedBorderContainerBox(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun animateBorderStrokeAsState(
     enabled: Boolean,
+    readOnly: Boolean,
     state: TextFieldState?,
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
 ): State<BorderStroke> {
     val focused by interactionSource.collectIsFocusedAsState()
-    val indicatorColor = colors.indicatorColor(enabled, state, interactionSource)
-    val targetThickness = if (focused || state != null) {
+    val indicatorColor = colors.indicatorColor(enabled, readOnly, state, interactionSource)
+    val targetThickness = if ((focused || state != null) && !readOnly) {
         OutlinedTextFieldDefaults.FocusedBorderThickness
     } else {
         OutlinedTextFieldDefaults.UnfocusedBorderThickness
     }
-    val animatedThickness = if (enabled) {
-        animateDpAsState(targetThickness, tween(durationMillis = 150))
+    val animatedThickness = if (enabled && !readOnly) {
+        animateDpAsState(targetThickness, tween(durationMillis = 150), label = "borderThickness")
     } else {
         rememberUpdatedState(OutlinedTextFieldDefaults.UnfocusedBorderThickness)
     }

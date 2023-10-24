@@ -119,3 +119,8 @@ Temporary Items
 
 # IDEA Code completion exclusion
 !.idea/codeInsightSettings.xml
+
+# CI secrets
+keystore.jks
+keystore.properties
+firebase-service-account.json

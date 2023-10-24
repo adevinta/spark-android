@@ -37,7 +37,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -67,6 +66,8 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.bottomsheet.ModalBottomSheetValue.Expanded
 import com.adevinta.spark.components.bottomsheet.ModalBottomSheetValue.HalfExpanded
 import com.adevinta.spark.components.bottomsheet.ModalBottomSheetValue.Hidden
+import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.res.resources
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.coroutines.CancellationException
@@ -378,7 +379,7 @@ public fun ModalBottomSheetLayout(
                     }
                 },
             shape = sheetShape,
-            shadowElevation = sheetElevation,
+            elevation = sheetElevation,
             // tonalElevation = sheetElevation, Only use shadow elevation
             // for now as brikke doesn't support tonal elevation yet
             color = sheetBackgroundColor,
@@ -442,13 +443,16 @@ private fun Scrim(
             targetValue = if (visible) 1f else 0f,
             animationSpec = TweenSpec(),
         )
-        val closeSheet = /*getString(BiometricManager.Strings.CloseSheet)*/ "Fermez la Feuille"
+        val closeSheet = resources().getString(androidx.compose.ui.R.string.close_sheet)
         val dismissModifier = if (visible) {
             Modifier
                 .pointerInput(onDismiss) { detectTapGestures { onDismiss() } }
                 .semantics(mergeDescendants = true) {
                     contentDescription = closeSheet
-                    onClick { onDismiss(); true }
+                    onClick {
+                        onDismiss()
+                        true
+                    }
                 }
         } else {
             Modifier

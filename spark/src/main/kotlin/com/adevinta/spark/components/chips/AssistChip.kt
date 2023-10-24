@@ -19,8 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.adevinta.spark.components.chips
 
 import androidx.compose.foundation.interaction.Interaction
@@ -78,7 +76,7 @@ import androidx.compose.material3.ElevatedAssistChip as MaterialElevatedAssistCh
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
-@Suppress("ktlint:max-line-length")
+@Suppress("ktlint:standard:max-line-length")
 @Deprecated(
     message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
     replaceWith = ReplaceWith(
@@ -154,7 +152,7 @@ public fun AssistChip(
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
-@Suppress("ktlint:max-line-length")
+@Suppress("ktlint:standard:max-line-length")
 @Deprecated(
     message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
     replaceWith = ReplaceWith(
@@ -163,7 +161,6 @@ public fun AssistChip(
     ),
     level = DeprecationLevel.WARNING,
 )
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun ElevatedAssistChip(
     onClick: () -> Unit,

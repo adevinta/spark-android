@@ -22,31 +22,38 @@
 package com.adevinta.spark.components.surface
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.tokens.contentColorFor
+import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 
 /**
  * Material surface is the central metaphor in material design. Each surface exists at a given
@@ -101,21 +108,36 @@ public fun Surface(
     shape: Shape = SparkTheme.shapes.none,
     color: Color = SparkTheme.colors.surface,
     contentColor: Color = contentColorFor(color),
-    tonalElevation: Dp = 0.dp,
-    shadowElevation: Dp = 0.dp,
+    elevation: Dp = 0.dp,
     border: BorderStroke? = null,
     content: @Composable () -> Unit,
 ) {
-    Surface(
-        modifier = modifier,
-        shape = shape,
-        color = color,
-        contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        shadowElevation = shadowElevation,
-        border = border,
-        content = content,
-    )
+    val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalAbsoluteTonalElevation provides absoluteElevation,
+    ) {
+        Box(
+            modifier = modifier
+                .surface(
+                    shape = shape,
+                    backgroundColor = surfaceColorAtElevation(
+                        color = color,
+                        elevationOverlay = LocalElevationOverlay.current,
+                        absoluteElevation = absoluteElevation,
+                    ),
+                    border = border,
+                    elevation = elevation,
+                )
+                .semantics(mergeDescendants = false) {
+                    isTraversalGroup = true
+                }
+                .pointerInput(Unit) {},
+            propagateMinConstraints = true,
+        ) {
+            content()
+        }
+    }
 }
 
 /**
@@ -179,7 +201,6 @@ public fun Surface(
  * you want to observe [Interaction]s and customize the appearance / behavior of this Surface in
  * different [Interaction]s.
  */
-@ExperimentalMaterial3Api
 @Composable
 @NonRestartableComposable
 public fun Surface(
@@ -189,25 +210,40 @@ public fun Surface(
     shape: Shape = SparkTheme.shapes.none,
     color: Color = SparkTheme.colors.surface,
     contentColor: Color = contentColorFor(color),
-    tonalElevation: Dp = 0.dp,
-    shadowElevation: Dp = 0.dp,
+    elevation: Dp = 0.dp,
     border: BorderStroke? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,
 ) {
-    Surface(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        shape = shape,
-        color = color,
-        contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        shadowElevation = shadowElevation,
-        border = border,
-        interactionSource = interactionSource,
-        content = content,
-    )
+    val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalAbsoluteTonalElevation provides absoluteElevation,
+    ) {
+        Box(
+            modifier = modifier
+                .minimumTouchTargetSize()
+                .surface(
+                    shape = shape,
+                    backgroundColor = surfaceColorAtElevation(
+                        color = color,
+                        elevationOverlay = LocalElevationOverlay.current,
+                        absoluteElevation = absoluteElevation,
+                    ),
+                    border = border,
+                    elevation = elevation,
+                )
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(),
+                    enabled = enabled,
+                    onClick = onClick,
+                ),
+            propagateMinConstraints = true,
+        ) {
+            content()
+        }
+    }
 }
 
 /**
@@ -271,7 +307,6 @@ public fun Surface(
  * you want to observe [Interaction]s and customize the appearance / behavior of this Surface in
  * different [Interaction]s.
  */
-@ExperimentalMaterial3Api
 @Composable
 @NonRestartableComposable
 public fun Surface(
@@ -282,26 +317,41 @@ public fun Surface(
     shape: Shape = SparkTheme.shapes.none,
     color: Color = SparkTheme.colors.surface,
     contentColor: Color = contentColorFor(color),
-    tonalElevation: Dp = 0.dp,
-    shadowElevation: Dp = 0.dp,
+    elevation: Dp = 0.dp,
     border: BorderStroke? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,
 ) {
-    Surface(
-        selected = selected,
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        shape = shape,
-        color = color,
-        contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        shadowElevation = shadowElevation,
-        border = border,
-        interactionSource = interactionSource,
-        content = content,
-    )
+    val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalAbsoluteTonalElevation provides absoluteElevation,
+    ) {
+        Box(
+            modifier = modifier
+                .minimumTouchTargetSize()
+                .surface(
+                    shape = shape,
+                    backgroundColor = surfaceColorAtElevation(
+                        color = color,
+                        elevationOverlay = LocalElevationOverlay.current,
+                        absoluteElevation = absoluteElevation,
+                    ),
+                    border = border,
+                    elevation = elevation,
+                )
+                .selectable(
+                    selected = selected,
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(),
+                    enabled = enabled,
+                    onClick = onClick,
+                ),
+            propagateMinConstraints = true,
+        ) {
+            content()
+        }
+    }
 }
 
 /**
@@ -365,7 +415,6 @@ public fun Surface(
  * you want to observe [Interaction]s and customize the appearance / behavior of this Surface in
  * different [Interaction]s.
  */
-@ExperimentalMaterial3Api
 @Composable
 @NonRestartableComposable
 public fun Surface(
@@ -376,24 +425,63 @@ public fun Surface(
     shape: Shape = SparkTheme.shapes.none,
     color: Color = SparkTheme.colors.surface,
     contentColor: Color = contentColorFor(color),
-    tonalElevation: Dp = 0.dp,
-    shadowElevation: Dp = 0.dp,
+    elevation: Dp = 0.dp,
     border: BorderStroke? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,
 ) {
-    Surface(
-        checked = checked,
-        onCheckedChange = onCheckedChange,
-        modifier = modifier,
-        enabled = enabled,
-        shape = shape,
-        color = color,
-        contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        shadowElevation = shadowElevation,
-        border = border,
-        interactionSource = interactionSource,
-        content = content,
-    )
+    val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalAbsoluteTonalElevation provides absoluteElevation,
+    ) {
+        Box(
+            modifier = modifier
+                .minimumTouchTargetSize()
+                .surface(
+                    shape = shape,
+                    backgroundColor = surfaceColorAtElevation(
+                        color = color,
+                        elevationOverlay = LocalElevationOverlay.current,
+                        absoluteElevation = absoluteElevation,
+                    ),
+                    border = border,
+                    elevation = elevation,
+                )
+                .toggleable(
+                    value = checked,
+                    interactionSource = interactionSource,
+                    indication = rememberRipple(),
+                    enabled = enabled,
+                    onValueChange = onCheckedChange,
+                ),
+            propagateMinConstraints = true,
+        ) {
+            content()
+        }
+    }
+}
+
+private fun Modifier.surface(
+    shape: Shape,
+    backgroundColor: Color,
+    border: BorderStroke?,
+    elevation: Dp,
+) = this
+    .shadow(elevation, shape, clip = false)
+    .then(if (border != null) Modifier.border(border, shape) else Modifier)
+    .background(color = backgroundColor, shape = shape)
+    .clip(shape)
+
+@Composable
+private fun surfaceColorAtElevation(
+    color: Color,
+    elevationOverlay: ElevationOverlay?,
+    absoluteElevation: Dp,
+): Color {
+    return if (color == SparkTheme.colors.surface && elevationOverlay != null) {
+        elevationOverlay.apply(color, absoluteElevation)
+    } else {
+        color
+    }
 }

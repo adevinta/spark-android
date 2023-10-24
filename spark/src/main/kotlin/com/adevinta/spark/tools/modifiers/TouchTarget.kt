@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.tools.modifiers
 
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
@@ -41,7 +40,6 @@ import kotlin.math.roundToInt
  */
 public fun Modifier.minimumTouchTargetSize(): Modifier = this then MinimumTouchTargetModifier()
 
-@OptIn(ExperimentalComposeUiApi::class)
 private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTargetModifierNode>() {
 
     override fun create() = MinimumTouchTargetModifierNode()
@@ -49,7 +47,7 @@ private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTarge
 
     override fun hashCode(): Int = 0
 
-    override fun update(node: MinimumTouchTargetModifierNode) = node
+    override fun update(node: MinimumTouchTargetModifierNode) = Unit
 
     override fun InspectorInfo.inspectableProperties() {
         name = "minimumTouchTargetSize"
@@ -58,10 +56,9 @@ private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTarge
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 private class MinimumTouchTargetModifierNode : Modifier.Node(), LayoutModifierNode {
 
-    private val minimumTouchTargetSize = DpSize(48.dp, 48.dp)
+    private val minimumTouchTargetSize = DpSize(44.dp, 44.dp)
     override fun MeasureScope.measure(
         measurable: Measurable,
         constraints: Constraints,

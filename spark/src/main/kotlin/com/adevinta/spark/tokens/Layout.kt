@@ -39,8 +39,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
@@ -55,6 +53,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.isFinite
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tools.preview.ThemesPreviews
 
 public object Layout {
@@ -166,8 +166,7 @@ private fun Item() {
             .aspectRatio(2 / 3f),
         color = SparkTheme.colors.main,
         shape = SparkTheme.shapes.medium,
-        shadowElevation = 4.dp,
-        tonalElevation = 4.dp,
+        elevation = 4.dp,
     ) {
         Box(
             modifier = Modifier.padding(8.dp),

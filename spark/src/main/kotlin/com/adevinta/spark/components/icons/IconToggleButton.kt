@@ -24,27 +24,18 @@ package com.adevinta.spark.components.icons
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.FilledIconToggleButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.IconToggleButtonColors
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.ExperimentalSparkApi
-import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.icons.WheelFill
-import com.adevinta.spark.icons.WheelOutline
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.tokens.contentColorFor
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.FilledIconToggleButton as MaterialFilledIconToggleButton
 import androidx.compose.material3.FilledTonalIconToggleButton as MaterialFilledTonalIconToggleButton
 import androidx.compose.material3.IconToggleButton as MaterialIconToggleButton
@@ -76,6 +67,15 @@ import androidx.compose.material3.OutlinedIconToggleButton as MaterialOutlinedIc
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
+
+@Deprecated(
+    message = "This component is no longer used",
+    replaceWith = ReplaceWith(
+        expression = "IconToggleButtonGhost(icons, onCheckedChange, modifier, checked, enabled, interactionSource)",
+        imports = ["com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonGhost"],
+    ),
+    level = DeprecationLevel.WARNING,
+)
 @Composable
 public fun IconToggleButton(
     checked: Boolean,
@@ -124,6 +124,15 @@ public fun IconToggleButton(
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
+
+@Deprecated(
+    message = "This component is no longer used",
+    replaceWith = ReplaceWith(
+        expression = "IconToggleButtonFilled(icons, onCheckedChange, modifier, checked, enabled, interactionSource)",
+        imports = ["com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled"],
+    ),
+    level = DeprecationLevel.WARNING,
+)
 @ExperimentalSparkApi
 @Composable
 public fun FilledIconToggleButton(
@@ -131,7 +140,7 @@ public fun FilledIconToggleButton(
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shape: Shape = SparkTheme.shapes.full,
+    shape: Shape = ButtonShape.Rounded.shape,
     colors: IconToggleButtonColors = IconButtonDefaults.filledIconToggleButtonColors(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable () -> Unit,
@@ -180,6 +189,14 @@ public fun FilledIconToggleButton(
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
+@Deprecated(
+    message = "This component is no longer used",
+    replaceWith = ReplaceWith(
+        expression = "IconToggleButtonTinted(icons, onCheckedChange, modifier, checked, enabled, interactionSource)",
+        imports = ["com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonTinted"],
+    ),
+    level = DeprecationLevel.WARNING,
+)
 @ExperimentalSparkApi
 @Composable
 public fun FilledTonalIconToggleButton(
@@ -187,7 +204,7 @@ public fun FilledTonalIconToggleButton(
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shape: Shape = SparkTheme.shapes.full,
+    shape: ButtonShape = ButtonShape.Rounded,
     colors: IconToggleButtonColors = IconButtonDefaults.filledTonalIconToggleButtonColors(
         checkedContainerColor = SparkTheme.colors.mainContainer,
         checkedContentColor = contentColorFor(backgroundColor = SparkTheme.colors.mainContainer),
@@ -200,7 +217,7 @@ public fun FilledTonalIconToggleButton(
         onCheckedChange = onCheckedChange,
         modifier = modifier,
         enabled = enabled,
-        shape = shape,
+        shape = shape.shape,
         colors = colors,
         interactionSource = interactionSource,
         content = content,
@@ -237,6 +254,14 @@ public fun FilledTonalIconToggleButton(
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  * @param content the content of this icon button, typically an [Icon]
  */
+@Deprecated(
+    message = "This component is no longer used",
+    replaceWith = ReplaceWith(
+        expression = "IconToggleButtonOutlined(icons, onCheckedChange, modifier, checked, enabled, interactionSource)",
+        imports = ["com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonOutlined"],
+    ),
+    level = DeprecationLevel.WARNING,
+)
 @ExperimentalSparkApi
 @Composable
 public fun OutlinedIconToggleButton(
@@ -244,7 +269,7 @@ public fun OutlinedIconToggleButton(
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    shape: Shape = SparkTheme.shapes.full,
+    shape: Shape = ButtonShape.Rounded.shape,
     colors: IconToggleButtonColors = IconButtonDefaults.outlinedIconToggleButtonColors(),
     border: BorderStroke? = IconButtonDefaults.outlinedIconToggleButtonBorder(enabled, checked),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -261,67 +286,4 @@ public fun OutlinedIconToggleButton(
         interactionSource = interactionSource,
         content = content,
     )
-}
-
-@Preview(
-    group = "Icons",
-    name = "IconToggleButtons",
-)
-@Composable
-internal fun IconToggleButtonPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        Text("IconButton")
-        Row {
-            IconToggleButton(checked = false, onCheckedChange = { }) {
-                ToggledIcon(false)
-            }
-            IconToggleButton(checked = true, onCheckedChange = { }) {
-                ToggledIcon(true)
-            }
-        }
-
-        Text("FilledIconButton")
-        Row {
-            FilledIconToggleButton(checked = false, onCheckedChange = { }) {
-                ToggledIcon(false)
-            }
-            FilledIconToggleButton(checked = true, onCheckedChange = { }) {
-                ToggledIcon(true)
-            }
-        }
-
-        Text("FilledTonalIconButton")
-        Row {
-            FilledTonalIconToggleButton(checked = false, onCheckedChange = { }) {
-                ToggledIcon(false)
-            }
-            FilledTonalIconToggleButton(checked = true, onCheckedChange = { }) {
-                ToggledIcon(true)
-            }
-        }
-
-        Text("OutlinedIconButton")
-        Row {
-            OutlinedIconToggleButton(checked = false, onCheckedChange = { }) {
-                ToggledIcon(false)
-            }
-            OutlinedIconToggleButton(checked = true, onCheckedChange = { }) {
-                ToggledIcon(true)
-            }
-        }
-    }
-}
-
-@Composable
-private fun ToggledIcon(checked: Boolean) {
-    val icon = SparkIcons.WheelOutline
-    val selectedIcon = SparkIcons.WheelFill
-    val contentDescription = "Localized description"
-    if (checked) {
-        Icon(selectedIcon, contentDescription = contentDescription)
-    } else {
-        Icon(icon, contentDescription = contentDescription)
-    }
 }

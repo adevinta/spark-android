@@ -31,36 +31,30 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.lifecycleScope
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.catalog.datastore.textfieldsconfigurator.TextFieldsConfiguratorProperties
-import com.adevinta.spark.catalog.datastore.textfieldsconfigurator.TextFieldsConfiguratorPropertiesHandler
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
-import com.adevinta.spark.components.icons.FilledIconToggleButton
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
-import kotlinx.coroutines.launch
 
 public val TextFieldsConfigurator: Configurator = Configurator(
     name = "TextFields",
@@ -75,39 +69,16 @@ public val TextFieldsConfigurator: Configurator = Configurator(
 )
 @Composable
 private fun TextFieldSample() {
-    val context = LocalContext.current
-    val lifecycleOwner = LocalLifecycleOwner.current
     val scrollState = rememberScrollState()
-    val propertiesHandler = remember { TextFieldsConfiguratorPropertiesHandler(context) }
-    val properties by propertiesHandler
-        .properties
-        .collectAsState(initial = TextFieldsConfiguratorProperties.DEFAULT)
-
-    fun updateProperties(block: (TextFieldsConfiguratorProperties) -> TextFieldsConfiguratorProperties) {
-        lifecycleOwner.lifecycleScope.launch {
-            propertiesHandler.updateProperties(block(properties))
-        }
-    }
-
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.verticalScroll(scrollState),
     ) {
-        val state: TextFieldState? = remember(key1 = properties.state, calculation = properties::state)
-        val isEnabled: Boolean = remember(key1 = properties.isEnabled, calculation = properties::isEnabled)
-        val isReadOnly: Boolean = remember(key1 = properties.isReadOnly, calculation = properties::isReadOnly)
-        val isRequired: Boolean = remember(key1 = properties.isRequired, calculation = properties::isRequired)
-        val isFilledIconToggleChecked = remember(key1 = properties.iconId) {
-            properties.iconId != ResourcesCompat.ID_NULL
-        }
-        val trailingContent: @Composable (() -> Unit) = remember(key1 = properties.iconId) {
-            {
-                if (properties.iconId != ResourcesCompat.ID_NULL) {
-                    Icon(sparkIcon = SparkIcon.DrawableRes(properties.iconId), contentDescription = null)
-                }
-            }
-        }
-
+        var icon: SparkIcon? by remember { mutableStateOf(null) }
+        var isReadOnly by remember { mutableStateOf(false) }
+        var isEnabled by remember { mutableStateOf(true) }
+        var isRequired by remember { mutableStateOf(true) }
+        var state: TextFieldState? by remember { mutableStateOf(null) }
         var labelText by remember { mutableStateOf("Label") }
         var valueText by remember { mutableStateOf("Value") }
         var placeHolderText by remember { mutableStateOf("Placeholder") }
@@ -126,7 +97,7 @@ private fun TextFieldSample() {
             placeholder = placeHolderText,
             helper = helperText,
             leadingContent = addonText?.let { { Text(it) } },
-            trailingContent = trailingContent,
+            trailingContent = icon?.let { { Icon(it, contentDescription = null) } },
             state = state,
             stateMessage = stateMessageText,
         )
@@ -142,25 +113,20 @@ private fun TextFieldSample() {
                     .padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            FilledIconToggleButton(
-                checked = isFilledIconToggleChecked,
-                onCheckedChange = { isChecked ->
-                    updateProperties {
-                        it.copy(iconId = if (isChecked) SparkIcons.LikeFill.drawableId else ResourcesCompat.ID_NULL)
-                    }
+            IconToggleButtonFilled(
+                checked = icon != null,
+                onCheckedChange = {
+                    icon = if (it) SparkIcons.LikeFill else null
                 },
-            ) {
-                Icon(
-                    sparkIcon = SparkIcons.LikeFill,
-                    contentDescription = null,
-                )
-            }
+                icons = IconToggleButtonIcons(
+                    checked = SparkIcons.LikeFill,
+                    unchecked = SparkIcons.LikeOutline,
+                ),
+            )
         }
         SwitchLabelled(
             checked = isRequired,
-            onCheckedChange = {
-                updateProperties { properties -> properties.copy(isRequired = it) }
-            },
+            onCheckedChange = { isRequired = it },
         ) {
             Text(
                 text = "Required",
@@ -169,9 +135,7 @@ private fun TextFieldSample() {
         }
         SwitchLabelled(
             checked = isReadOnly,
-            onCheckedChange = {
-                updateProperties { properties -> properties.copy(isReadOnly = it) }
-            },
+            onCheckedChange = { isReadOnly = it },
         ) {
             Text(
                 text = "Read Only",
@@ -180,9 +144,7 @@ private fun TextFieldSample() {
         }
         SwitchLabelled(
             checked = isEnabled,
-            onCheckedChange = {
-                updateProperties { properties -> properties.copy(isEnabled = it) }
-            },
+            onCheckedChange = { isEnabled = it },
         ) {
             Text(
                 text = "Enabled",
@@ -202,13 +164,7 @@ private fun TextFieldSample() {
             SegmentedButton(
                 options = buttonStylesLabel,
                 selectedOption = state?.name ?: "Default",
-                onOptionSelect = {
-                    updateProperties { properties ->
-                        properties.copy(
-                            state = if (it == "Default") null else TextFieldState.valueOf(it),
-                        )
-                    }
-                },
+                onOptionSelect = { state = if (it == "Default") null else TextFieldState.valueOf(it) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),

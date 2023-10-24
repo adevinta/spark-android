@@ -295,7 +295,10 @@ private fun FadeInFadeOutWithScale(
                         )
                         .semantics {
                             liveRegion = LiveRegionMode.Polite
-                            dismiss { key.dismiss(); true }
+                            dismiss {
+                                key.dismiss()
+                                true
+                            }
                         },
                 ) {
                     children()

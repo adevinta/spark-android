@@ -33,7 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
     device = "id:pixel_6",
     uiMode = UI_MODE_NIGHT_NO or UI_MODE_TYPE_NORMAL,
 )
-public annotation class SparkBasePreview
+internal annotation class SparkBasePreview
 
 @Preview(
     name = "small font",
@@ -49,7 +49,7 @@ public annotation class SparkBasePreview
     locale = "fr-rFR",
     fontScale = 1.5f,
 )
-public annotation class FontScalePreviews
+internal annotation class FontScalePreviews
 
 @Preview(
     name = "phone",
@@ -83,7 +83,7 @@ public annotation class FontScalePreviews
     locale = "fr-rFR",
     device = Devices.DESKTOP,
 )
-public annotation class DevicePreviews
+internal annotation class DevicePreviews
 
 @Preview(
     name = "light",
@@ -97,8 +97,8 @@ public annotation class DevicePreviews
     locale = "fr-rFR",
     uiMode = UI_MODE_NIGHT_YES,
 )
-public annotation class ThemesPreviews
+internal annotation class ThemesPreviews
 
 @DevicePreviews
 @ThemesPreviews
-public annotation class SparkPreviews
+internal annotation class SparkPreviews

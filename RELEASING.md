@@ -33,7 +33,8 @@ Hotfixes can sometimes be a bit tricky to do right. Please follow these steps ca
 
 1. Create the hotfix remote branch (the `hotfix` prefix is important)
    ```bash
-   git push origin refs/tags/X.Y.Z:refs/heads/hotfix/X.Y.Z+1
+   git branch hotfix/X.Y.Z+1 refs/tags/X.Y.Z
+   git push origin hotfix/X.Y.Z+1
    ```
 2. Create a local hotfix PR branch
    ```bash

@@ -4,6 +4,68 @@
 
 ## [Unreleased]
 
+
+## [0.5.0]
+
+_2023-09-26_
+
+### Spark
+
+* 🆕 Add `IconButtons` with all intents, shapes and sizes
+* 🆕 Add loading state to the `IconButton` component
+* 🆕 Add `IconToggleButton`
+* 💄 Use M2 elevation system instead of the M3 one
+* ⬆️ Bump `compileSdk` and `targetSdk` to 34
+* 🎨 Change colors from LBC & KA
+* 🐛 Make the readonly `Textfields` not take the focus look when focused
+* 📝 Replace oneliner with two distinct commands
+* 🐛 `ModalFullScreenScaffold` top padding issue when no illustration
+
+
+### Catalog App
+
+* 🆕 Add Icons demo to CatalogApp
+* 🆕 Add examples for tab component
+* 💄 Add Kleinanzeigen theme
+* 🎨 Add illustrations for components item
+* 🚀 Fetch icon resources in coroutines
+* 🐛 Shorten catalog app name
+* 🐛 Add proguard rules to keep the names of spark icons resources
+* 🐛 Component Illustrations are too big
+* 🐛 Minor fixes in CatalogApp
+* 💄 Modify Segmented color to be more visible and make switch take full width
+* 💄 Update catalog app to show `ExtraLarge` icons
+
+## [0.4.2]
+
+_2023-08-24_
+
+* 🐛 Some color tokens were not updated on theme change
+
+## [0.4.1]
+
+_2023-08-17_
+
+### Spark
+* 🆕 Implement `Spark Tab` and `Tab Group`
+* 💄 `Checkbox`, `Switch`, `RadioButton` now has intents support
+* 💄 Disabled components now have use `dim3`
+* 💄 `Button Outline` border size is now **1dp** instead of **2dp**
+* 💄 Update `TextField` background color
+* 💄 `TextField` leading content padding is adjusted
+* 💄 `TextField` addons content color is always `onSurface` even when unfocused
+* 💄 `ButtonContrast` in Surface intent is now readable
+* 💄 `ModalFullScreenScaffold` spaces and layout has been adjusted
+* 🗑️ Small size for `Button` has been removed
+* 🐛 Replace `Modifier.autofill` by `Autofill` Composable
+
+
+### Catalog App
+* 🆕 Now have examples and a configurator for `Button`, `Checkbox`, `Switch`, `RadioButton` `TextField`
+* 💄 The launcher icon now has a light and dark variant depending on the theme mode
+* 🐛 The app state is saved on configuration change
+* 🐛 Fix the link to component documentation
+
 ## [0.3.1]
 
 _2023-07-31_
@@ -74,7 +136,13 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.3.1...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.5.0...HEAD
+
+[0.5.0]: https://github.com/adevinta/spark-android/releases/tag/0.5.0
+
+[0.4.2]: https://github.com/adevinta/spark-android/releases/tag/0.4.2
+
+[0.4.1]: https://github.com/adevinta/spark-android/releases/tag/0.4.1
 
 [0.3.1]: https://github.com/adevinta/spark-android/releases/tag/0.3.1
 

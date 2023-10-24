@@ -2,8 +2,8 @@
 
 @file:Repository("https://repo1.maven.org/maven2/")
 @file:Repository("https://maven.google.com")
-@file:DependsOn("org.jetbrains.kotlin:kotlin-stdlib:1.8.22")
-@file:DependsOn("com.android.tools:sdk-common:31.1.0")
+@file:DependsOn("org.jetbrains.kotlin:kotlin-stdlib:1.9.10")
+@file:DependsOn("com.android.tools:sdk-common:31.1.1")
 @file:DependsOn("com.github.ajalt.clikt:clikt-jvm:4.2.0")
 
 import com.android.ide.common.vectordrawable.Svg2Vector

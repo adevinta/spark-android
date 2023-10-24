@@ -28,12 +28,9 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -44,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.tokens.LocalSparkColors
 import com.adevinta.spark.tokens.LocalSparkShapes
 import com.adevinta.spark.tokens.LocalSparkTypography
@@ -82,8 +80,10 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param typography A set of text styles to be used as this hierarchy's typography system.
  * @param shapes A set of corner shapes to be used as this hierarchy's shape system.
  * @param fontFamily the font family to be applied on [typography].
- * @param useSparkTokensHighlighter flag that use for typography, colors and shapes exaggerated values to find which part of a screen is themed or not.
- * @param useSparkComponentsHighlighter flag to highlight the spark components with an overlay to recognize which component is from spark or not.
+ * @param useSparkTokensHighlighter flag that use for typography, colors and shapes exaggerated values to find
+ * which part of a screen is themed or not.
+ * @param useSparkComponentsHighlighter flag to highlight the spark components with an overlay to recognize
+ * which component is from spark or not.
  * @param useLegacyStyle enabling this will makes the components use the visual from the previous DS of LBC.
  */
 @Composable
@@ -263,7 +263,7 @@ internal val LocalHighlightToken = staticCompositionLocalOf { false }
 internal val LocalHighlightComponents = staticCompositionLocalOf { false }
 
 /**
- * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the Adevinta Platform teams
- * to migrate their screens to spark.
+ * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the
+ * Adevinta Platform teams to migrate their screens to spark.
  */
 internal val LocalLegacyStyle = staticCompositionLocalOf { false }

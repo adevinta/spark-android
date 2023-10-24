@@ -39,6 +39,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -66,14 +67,14 @@ internal fun SegmentedButton(
     selectedOption: String,
     onOptionSelect: (String) -> Unit,
     modifier: Modifier = Modifier,
-    selectedColor: Color = SparkTheme.colors.onSupportContainer,
+    selectedColor: Color = SparkTheme.colors.onAccentContainer,
     unSelectedColor: Color = LocalContentColor.current,
 ) {
     require(options.size >= 2) { "This composable requires at least 2 options" }
     require(options.size <= 5) { "This composable requires at most 5 options" }
     require(options.contains(selectedOption)) { "Invalid selected option [$selectedOption]" }
 
-    val selectedIndex by remember(options, selectedOption) { mutableStateOf(options.indexOf(selectedOption)) }
+    val selectedIndex by remember(options, selectedOption) { mutableIntStateOf(options.indexOf(selectedOption)) }
 
     val backgroundProgress by animateFloatAsState(
         label = "Background Position Progress",
@@ -135,7 +136,7 @@ internal fun SegmentedButton(
                             bottomEndPercent = endCornerShape,
                         ),
                     )
-                    .background(SparkTheme.colors.supportContainer),
+                    .background(SparkTheme.colors.accentContainer),
             )
         },
     ) { measurables, constraints ->

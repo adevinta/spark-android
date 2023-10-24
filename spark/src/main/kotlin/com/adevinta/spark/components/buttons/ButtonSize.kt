@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 /**
  * ButtonSize is used to define the height of the buttons.
  */
-@Suppress("ktlint:max-line-length", "ktlint:trailing-comma-on-call-site")
+@Suppress("ktlint:standard:max-line-length", "ktlint:standard:trailing-comma-on-call-site")
 public enum class ButtonSize {
     /**
      * Medium button is the default button size (recommended).

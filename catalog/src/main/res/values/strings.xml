@@ -22,7 +22,7 @@
   SOFTWARE.
   -->
 <resources>
-    <string name="app_name">Spark Catalog</string>
+    <string name="app_name">Spark</string>
     <string name="showkase_browser_show_documentation">Show Documentation</string>
     <string name="showkase_browser_hide_documentation">Hide Documentation</string>
 
@@ -40,8 +40,8 @@
     <string name="theme_picker_text_direction_title" description="Simulate system text direction to be either LTR or RTL. [CHAR_LIMIT=NONE]">Text direction</string>
     <string name="theme_picker_font_scale_title" description="Simulate a11y font scaling. [CHAR_LIMIT=NONE]">Font scale</string>
     <string name="examples_component_screen_title">Components examples</string>
-    <string name="examples_component_screen_description">These are the examples that that can be found in the samples in the javadoc or the README.md files. They show usages of the components in different scenarios that should represent real use cases.</string>
-    <string name="component_button_description">Buttons help people initiate actions, from sending an email, to sharing a document, to liking a post.</string>
+    <string name="examples_component_screen_description">These are the examples that can be found in the samples in the javadoc or the README.md files. They show usages of the components with the default params in different scenarios that should represent real use cases.</string>
+    <string name="component_button_description">Buttons help people initiate actions, like sending an email, sharing a document,or liking a post.</string>
     <!--Toggle example-->
     <string name="component_toggle_vertical_group_title">Toggle grouping with vertical alignment</string>
     <string name="component_toggle_horizontal_group_title">Toggle grouping with horizontal alignment</string>
@@ -51,16 +51,22 @@
     <string name="component_checkbox_group_example_group_label">Notifications and emails</string>
     <string name="component_checkbox_group_example_option1_label">Notifications</string>
     <string name="component_checkbox_group_example_option2_label">Email</string>
-    <string name="component_textfield_description">The input / text-field  component allows users to write in the space provided for the content.</string>
+    <string name="component_tab_description">Tabs are used to group different but related content, allowing users to navigate views without leaving the page. They always contain at least two items and one tab is active at a time.</string>
+    <string name="component_textfield_description">The input / text-field component allows users to write in the space provided for the content.</string>
+    <string name="component_tokens_description">The tokens are the basis of this Design System and allow each brand to choose its colors, shapes, typos and icons.</string>
     <string name="showkase_home_warning_title">⚠️ Theming don’t work on these!</string>
     <string name="showkase_home_warning_description">These are the previews that the developers have when working on components. They are not exhaustive and are only meant to give you a quick idea of what the component looks like.</string>
+    <!--Icon button example-->
+    <string name="component_iconbutton_description">Icon buttons help people take supplementary actions with a single tap. They’re used when a compact button is required, such as in a toolbar or image list.</string>
+    <!--Icon Toggle button example-->
+    <string name="component_icontogglebutton_description">Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a compact button is required, such as in a toolbar or image list.</string>
     <!--Radio button example-->
     <string name="component_radiobutton_description">Component used when only one choice may be selected in a series of options.</string>
     <!--Switch example-->
     <string name="component_switch_description">Switch component allows the user to activate or deactivate the state of an element or concept. It is also used to control binary options (On/Off or True/False).</string>
 
     <string name="configurator_component_screen_title">Components configurations</string>
-    <string name="configurator_component_screen_description">The Configurator aim to allow you to visualize a component in every possible state available state by customizing every property for each component.</string>
+    <string name="configurator_component_screen_description">The Configurator allows to visualize a component in every possible state available by customizing every property for each component.</string>
     <string name="configurator_component_screen_enabled_label">Enabled</string>
     <string name="configurator_component_screen_textfield_label">Label</string>
     <string name="configurator_component_screen_intent_label">Intent</string>
@@ -73,4 +79,6 @@
     <string name="component_menu_dev_docs">View developer docs</string>
     <string name="component_menu_source">View source code</string>
     <string name="component_menu_issue">Report an issue</string>
-</resources>
+
+    <string name="icons_screen_search_helper">Search Spark Icon</string>
+    </resources>

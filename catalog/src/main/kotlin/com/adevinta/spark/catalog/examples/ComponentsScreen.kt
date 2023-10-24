@@ -33,6 +33,9 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
@@ -76,11 +79,15 @@ internal fun ComponentsListScreen(
     navController: NavController,
     contentPadding: PaddingValues,
 ) {
+    val examplesComponents by remember(components) {
+        mutableStateOf(components.filter { it.examples.isNotEmpty() })
+    }
+    val columns = Layout.columns / 2
     LazyVerticalGrid(
         modifier = Modifier
             .fillMaxSize()
             .consumeWindowInsets(contentPadding),
-        columns = GridCells.Fixed(Layout.columns / 2),
+        columns = GridCells.Fixed(columns),
         contentPadding = PaddingValues(
             start = Layout.bodyMargin / 2 + contentPadding.calculateLeftPadding(
                 LocalLayoutDirection.current,
@@ -95,7 +102,7 @@ internal fun ComponentsListScreen(
         item(
             key = -2,
             contentType = ComponentsItemType.Header,
-            span = { GridItemSpan(2) },
+            span = { GridItemSpan(columns) },
         ) {
             Column(
                 modifier = Modifier.padding(
@@ -115,16 +122,19 @@ internal fun ComponentsListScreen(
             }
         }
         items(
-            items = components,
+            items = examplesComponents,
             key = { it.id },
             span = { GridItemSpan(1) },
             contentType = { ComponentsItemType.Component },
             itemContent = { component ->
-                ComponentItem(component = component) {
-                    val componentId = component.id
-                    val route = "$ComponentRoute/$componentId"
-                    navController.navigate(route)
-                }
+                ComponentItem(
+                    component = component,
+                    onClick = {
+                        val componentId = component.id
+                        val route = "$ComponentRoute/$componentId"
+                        navController.navigate(route)
+                    },
+                )
             },
         )
     }

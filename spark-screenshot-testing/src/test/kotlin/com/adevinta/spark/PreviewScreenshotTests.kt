@@ -44,10 +44,11 @@ internal class PreviewScreenshotTests {
 
     @get:Rule
     val paparazzi = Paparazzi(
-        maxPercentDifference = .01, // We can have in some cases 2/3 pixels being different for no apparent reasons :(
-        theme = "android:Theme.MaterialComponent.Light.NoActionBar",
+        maxPercentDifference = MaxPercentDifference,
+        theme = PaparazziTheme,
         renderingMode = SessionParams.RenderingMode.SHRINK,
         showSystemUi = false,
+        environment = patchedEnvironment(),
     )
 
     @Test

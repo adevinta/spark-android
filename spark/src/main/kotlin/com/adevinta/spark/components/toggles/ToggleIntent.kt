@@ -114,6 +114,7 @@ public enum class ToggleIntent {
 internal fun ToggleIntent.toCheckboxDefaultsColors(checked: Boolean): CheckboxColors = with(this.colors()) {
     CheckboxDefaults.colors(
         checkedColor = this.color,
+        checkmarkColor = this.onColor,
         uncheckedColor = UncheckedColor,
         // FIXME: drop when fix released https://issuetracker.google.com/issues/291943198
         disabledCheckedColor = if (checked) this.color.disabled else UncheckedColor.disabled,

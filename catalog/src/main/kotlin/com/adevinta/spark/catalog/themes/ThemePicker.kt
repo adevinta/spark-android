@@ -38,6 +38,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -115,7 +116,10 @@ public fun ThemePicker(
                         .fillMaxWidth()
                         .height(48.dp),
                 )
-                AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
+                AnimatedVisibility(
+                    visible = theme.colorMode == ColorMode.Brand,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
                     var expanded by remember { mutableStateOf(false) }
                     val selectedIcon = @Composable { Icon(SparkIcons.Check, contentDescription = null) }
                     SelectTextField(
@@ -150,15 +154,16 @@ public fun ThemePicker(
                 }
                 AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
                     SwitchLabelled(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(ThemePickerPadding),
+                        modifier = Modifier.padding(ThemePickerPadding),
                         checked = theme.userMode == UserMode.Pro,
                         onCheckedChange = { checked ->
                             onThemeChange(theme.copy(userMode = if (checked) UserMode.Pro else UserMode.Part))
                         },
                     ) {
-                        Text(text = stringResource(id = R.string.pro))
+                        Text(
+                            text = stringResource(id = R.string.pro),
+                            modifier = Modifier.fillMaxWidth(),
+                        )
                     }
                 }
             }
@@ -203,7 +208,7 @@ public fun ThemePicker(
                         .height(48.dp),
                 )
             }
-            var fontScale by remember { mutableStateOf(theme.fontScale) }
+            var fontScale by remember { mutableFloatStateOf(theme.fontScale) }
             AnimatedVisibility(visible = theme.fontScaleMode == FontScaleMode.Custom) {
                 FontScaleItem(
                     modifier = Modifier
