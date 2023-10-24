@@ -19,8 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("DEPRECATION")
-// TODO: Revisit after upgrading material3 library to 1.2.0
 
 package com.adevinta.spark.components.iconbuttons.toggle
 

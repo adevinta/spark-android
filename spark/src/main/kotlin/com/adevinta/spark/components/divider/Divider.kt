@@ -22,7 +22,7 @@
 package com.adevinta.spark.components.divider
 
 import androidx.compose.material3.DividerDefaults
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Divider as MaterialDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,7 +43,7 @@ internal fun SparkDivider(
     color: Color = SparkTheme.colors.outline,
     thickness: Dp = DividerDefaults.Thickness,
 ) {
-    HorizontalDivider(
+    MaterialDivider(
         modifier,
         thickness,
         color,

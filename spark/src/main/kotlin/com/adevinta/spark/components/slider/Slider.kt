@@ -24,6 +24,7 @@ package com.adevinta.spark.components.slider
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SliderColors
+import androidx.compose.material3.SliderPositions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -35,6 +36,7 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.Slider as MaterialSlider
+import androidx.compose.material3.SliderDefaults as MaterialSliderDefaults
 
 @OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
@@ -50,7 +52,16 @@ internal fun SparkSlider(
     onValueChangeFinished: (() -> Unit)? = null,
     colors: SliderColors = SliderDefaults.colors(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-) {
+    thumb: @Composable (SliderPositions) -> Unit = remember(interactionSource, colors, enabled) {
+        {
+            MaterialSliderDefaults.Thumb(
+                interactionSource = interactionSource,
+                colors = colors,
+                enabled = enabled,
+            )
+        }},
+
+    ) {
     MaterialSlider(
         value = value,
         onValueChange = onValueChange,
@@ -61,7 +72,7 @@ internal fun SparkSlider(
         onValueChangeFinished = onValueChangeFinished,
         colors = colors,
         interactionSource = interactionSource,
-        // thumb = thumb, TODO: Revisit after upgrading material3 library to 1.2.0
+        thumb = thumb
     )
 }
 
