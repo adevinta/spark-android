@@ -22,7 +22,6 @@
 package com.adevinta.spark.components.iconbuttons
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource

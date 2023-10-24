@@ -59,9 +59,10 @@ internal fun SparkSlider(
                 colors = colors,
                 enabled = enabled,
             )
-        }},
+        }
+    },
 
-    ) {
+) {
     MaterialSlider(
         value = value,
         onValueChange = onValueChange,
@@ -72,7 +73,7 @@ internal fun SparkSlider(
         onValueChangeFinished = onValueChangeFinished,
         colors = colors,
         interactionSource = interactionSource,
-        thumb = thumb
+        thumb = thumb,
     )
 }
 
