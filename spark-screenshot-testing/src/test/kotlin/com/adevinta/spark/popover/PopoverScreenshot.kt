@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -40,6 +39,7 @@ import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.popover.Popover
+import com.adevinta.spark.components.popover.newapi.rememberTooltipState
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
