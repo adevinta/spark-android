@@ -44,7 +44,7 @@ internal data class ThemeProperties(
             fontScale = 1.0f,
             userMode = UserMode.Part,
             themeMode = ThemeMode.System,
-            brandMode = BrandMode.Polaris,
+            brandMode = BrandMode.Adevinta,
             colorMode = ColorMode.Baseline,
             textDirection = TextDirection.System,
             fontScaleMode = FontScaleMode.System,
