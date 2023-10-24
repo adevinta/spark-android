@@ -61,7 +61,6 @@ internal fun SparkSlider(
             )
         }
     },
-
 ) {
     MaterialSlider(
         value = value,
