@@ -281,7 +281,7 @@ internal object AddonScopeInstance : AddonScope
 @Composable
 private fun TextFieldWithDropdownPreview() {
     var expanded by remember { mutableStateOf(false) }
-    PreviewTheme() {
+    PreviewTheme {
         Box(modifier = Modifier.fillMaxSize()) {
             TextField(
                 value = "+33 0123456789",
