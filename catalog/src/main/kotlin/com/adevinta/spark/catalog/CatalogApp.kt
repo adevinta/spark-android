@@ -21,17 +21,23 @@
  */
 package com.adevinta.spark.catalog
 
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
@@ -47,8 +53,10 @@ import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
@@ -59,11 +67,15 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -102,9 +114,9 @@ import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalComposeUiApi::class, ExperimentalLayoutApi::class)
 @Composable
-internal fun CatalogApp(
+internal fun ComponentActivity.CatalogApp(
     theme: Theme,
     onThemeChange: (theme: Theme) -> Unit,
     components: List<Component>,
@@ -141,6 +153,24 @@ internal fun CatalogApp(
             }
 
             var showDialog by remember { mutableStateOf(false) }
+
+            // Update the edge to edge configuration to match the theme
+            // This is the same parameters as the default enableEdgeToEdge call, but we manually
+            // resolve whether or not to show dark theme using uiState, since it can be different
+            // than the configuration's dark theme value based on the user preference.
+            DisposableEffect(useDark) {
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(
+                        android.graphics.Color.TRANSPARENT,
+                        android.graphics.Color.TRANSPARENT,
+                    ) { useDark },
+                    navigationBarStyle = SystemBarStyle.auto(
+                        lightScrim,
+                        darkScrim,
+                    ) { useDark },
+                )
+                onDispose {}
+            }
 
             TestHarness(
                 darkMode = useDark,
@@ -235,6 +265,8 @@ internal fun CatalogApp(
                     )
 
                     if (showDialog) {
+                        val controler = LocalSoftwareKeyboardController.current
+                        val focusRequester = remember { FocusRequester() }
                         ModalFullScreenScaffold(
                             onClose = { showDialog = false },
                             illustration = SparkIcons.BicycleType.drawableId,
@@ -244,35 +276,48 @@ internal fun CatalogApp(
                             supportButton = {
                                 ButtonOutlined(
                                     modifier = it,
-                                    onClick = { showDialog = false },
+                                    onClick = {
+                                        focusRequester.requestFocus()
+                                        controler?.show()
+                                    },
                                     text = "Alternative Action",
                                 )
                             },
                             reverseButtonOrder = true,
                             illustrationContentScale = ContentScale.FillWidth,
                         ) { innerPadding ->
-                            Text(
+                            Column(
                                 modifier = Modifier
                                     .padding(innerPadding)
+                                    .imePadding()
                                     .verticalScroll(rememberScrollState()),
-                                text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
-                                        "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
-                                        "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
-                                        "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
-                                        "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
-                                        "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
-                                        "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
-                                        "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
-                                        " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
-                                        "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
-                                        "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
-                                        "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
-                                        "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
-                                        "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
-                                        "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
-                                        "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
-                                        "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
-                            )
+                            ) {
+
+                                Text(
+                                    text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
+                                            "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
+                                            "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
+                                            "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
+                                            "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
+                                            "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
+                                            "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
+                                            "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
+                                            " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
+                                            "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
+                                            "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
+                                            "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
+                                            "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
+                                            "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
+                                            "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
+                                            "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
+                                            "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
+                                )
+                                TextField(
+                                    value = "",
+                                    onValueChange = {},
+                                    modifier = Modifier.focusRequester(focusRequester),
+                                )
+                            }
                         }
                     }
                 }
@@ -354,3 +399,15 @@ private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
 internal const val HomeRoute = "home"
 
 public enum class CatalogHomeScreen { Examples, Showkase, Configurator, Icons }
+
+/**
+ * The default light scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=35-38;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val lightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+
+/**
+ * The default dark scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=40-44;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)

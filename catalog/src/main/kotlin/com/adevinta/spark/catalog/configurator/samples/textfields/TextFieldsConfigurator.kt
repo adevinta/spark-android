@@ -24,9 +24,11 @@ package com.adevinta.spark.catalog.configurator.samples.textfields
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -64,6 +66,7 @@ public val TextFieldsConfigurator: Configurator = Configurator(
     TextFieldSample()
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Preview(
     showBackground = true,
 )
@@ -72,7 +75,9 @@ private fun TextFieldSample() {
     val scrollState = rememberScrollState()
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.verticalScroll(scrollState),
+        modifier = Modifier
+            .verticalScroll(scrollState)
+            .imePadding(),
     ) {
         var icon: SparkIcon? by remember { mutableStateOf(null) }
         var isReadOnly by remember { mutableStateOf(false) }

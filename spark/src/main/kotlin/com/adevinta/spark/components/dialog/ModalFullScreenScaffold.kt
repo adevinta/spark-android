@@ -21,16 +21,27 @@
  */
 package com.adevinta.spark.components.dialog
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
@@ -38,18 +49,25 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.OutlinedTextFieldDefaults.MinWidth
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.compose.ui.window.DialogWindowProvider
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
@@ -87,7 +105,24 @@ import com.adevinta.spark.tokens.bodyWidth
  * portrait mode
  * @param content the center custom Composable for modal content
  */
-@ExperimentalSparkApi
+@OptIn(ExperimentalMaterial3Api::class)
+@Deprecated(
+    message = "Use ModalFullScreenScaffold instead",
+    replaceWith = ReplaceWith(
+        expression = "ModalFullScreenScaffold(" +
+                "onClose = onClose," +
+                "modifier = modifier," +
+                "snackbarHost = snackbarHost," +
+                "illustration = illustration," +
+                "mainButton = mainButton," +
+                "supportButton = supportButton," +
+                "reverseButtonOrder = reverseButtonOrder," +
+                "illustrationContentScale = illustrationContentScale," +
+                "content = content," +
+                ")",
+        imports = ["com.adevinta.spark.components.dialog.ModalFullScreenScaffold"],
+    ),
+)
 @Composable
 public fun ModalFullScreenScaffold(
     onClose: () -> Unit,
@@ -96,8 +131,46 @@ public fun ModalFullScreenScaffold(
     @DrawableRes illustration: Int? = null,
     mainButton: @Composable (Modifier) -> Unit = {},
     supportButton: @Composable (Modifier) -> Unit = {},
+    title: @Composable () -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {},
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+    body: String? = null,
     reverseButtonOrder: Boolean = false,
     illustrationContentScale: ContentScale = ContentScale.Fit,
+    content: @Composable (PaddingValues) -> Unit,
+) {
+
+}
+
+/**
+ * A composable function that creates a full-screen modal scaffold, adapting its layout based on the device's screen
+ * size and orientation.
+ *
+ * The scaffold provides different layouts for phone portrait, phone landscape, and other
+ * devices (e.g., tablets or foldables) where it'll show a modal instead.
+ *
+ * @param onClose callback that will be invoked when the modal is dismissed
+ * @param snackbarHost Component to host Snackbars that are pushed to be shown
+ * @param modifier applied to the root Scaffold
+ * @param illustration whether the modal display a close icon, and its corresponding action
+ * @param mainButton the main actions for this modal (should be a [ButtonFilled])
+ * @param supportButton the support or alternative actions for this modal (should any other button than [ButtonFilled])
+ * @param reverseButtonOrder inverse the order of the buttons, so the [mainButton] button is shown at the top in
+ * portrait mode
+ * @param content the center custom Composable for modal content
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@ExperimentalSparkApi
+@Composable
+public fun ModalScaffold(
+    onClose: () -> Unit,
+    modifier: Modifier = Modifier,
+    snackbarHost: @Composable () -> Unit = {},
+    mainButton: @Composable (Modifier) -> Unit = {},
+    supportButton: @Composable (Modifier) -> Unit = {},
+    title: @Composable () -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {},
+    scrollBehavior: TopAppBarScrollBehavior? = null,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val size = Layout.windowSize
@@ -107,32 +180,46 @@ public fun ModalFullScreenScaffold(
                 size.heightSizeClass == WindowHeightSizeClass.Medium
 
     val properties = DialogProperties(
-        usePlatformDefaultWidth = false,
+        usePlatformDefaultWidth = true,
         decorFitsSystemWindows = false,
     )
+    val navigationBarPadding = WindowInsets.navigationBars.asPaddingValues()
+
+    illustration?.let {
+        Illustration(
+            drawableRes = it,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxHeight(.4f)
+                .fillMaxWidth(.8f)
+                .align(Alignment.CenterHorizontally)
+                .padding(top = innerPadding.calculateTopPadding(), bottom = 24.dp),
+            contentScale = illustrationContentScale,
+        )
+    }
 
     when {
         isPhonePortraitOrFoldable -> PhonePortraitModalScaffold(
             modifier = modifier,
             properties = properties,
+            navigationBarPadding = navigationBarPadding,
             onClose = onClose,
             snackbarHost = snackbarHost,
-            illustration = illustration,
             mainButton = mainButton,
             supportButton = supportButton,
-            reverseButtonOrder = reverseButtonOrder,
-            illustrationContentScale = illustrationContentScale,
+            title = title,
+            actions = actions,
+            scrollBehavior = scrollBehavior,
             content = content,
         )
 
         isPhoneLandscape -> PhoneLandscapeModalScaffold(
             modifier = modifier,
             properties = properties,
+            navigationBarPadding = navigationBarPadding,
             onClose = onClose,
-            illustration = illustration,
             mainButton = mainButton,
             supportButton = supportButton,
-            illustrationContentScale = illustrationContentScale,
             content = content,
         )
 
@@ -140,10 +227,8 @@ public fun ModalFullScreenScaffold(
             modifier = modifier,
             properties = properties,
             onClose = onClose,
-            illustration = illustration,
             mainButton = mainButton,
             supportButton = supportButton,
-            illustrationContentScale = illustrationContentScale,
             content = content,
         )
     }
@@ -205,26 +290,63 @@ private fun ModalScaffold(
     }
 }
 
+@Composable
+private fun getDialogWindow(): Window? = (LocalView.current.parent as? DialogWindowProvider)?.window
+
+@Composable
+private fun getActivityWindow(): Window? = LocalView.current.context.getActivityWindow()
+
+private tailrec fun Context.getActivityWindow(): Window? =
+    when (this) {
+        is Activity -> window
+        is ContextWrapper -> baseContext.getActivityWindow()
+        else -> null
+    }
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun PhonePortraitModalScaffold(
     onClose: () -> Unit,
     properties: DialogProperties,
+    navigationBarPadding: PaddingValues,
     modifier: Modifier = Modifier,
     snackbarHost: @Composable () -> Unit = {},
-    @DrawableRes illustration: Int? = null,
+    title: @Composable () -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {},
+    scrollBehavior: TopAppBarScrollBehavior? = null,
     mainButton: @Composable (Modifier) -> Unit = {},
     supportButton: @Composable (Modifier) -> Unit = {},
-    reverseButtonOrder: Boolean = false,
-    illustrationContentScale: ContentScale = ContentScale.Fit,
     content: @Composable (PaddingValues) -> Unit,
 ) {
+
     Dialog(
         onDismissRequest = onClose,
         properties = properties,
     ) {
+        // Work around for b/246909281 as for now Dialog doesn't pass the drawing insets to its content
+        val activityWindow = getActivityWindow()
+        val dialogWindow = getDialogWindow()
+        val parentView = LocalView.current.parent as View
+        SideEffect {
+            if (activityWindow != null && dialogWindow != null) {
+                val attributes = WindowManager.LayoutParams()
+                attributes.copyFrom(activityWindow.attributes)
+                attributes.type = dialogWindow.attributes.type
+                dialogWindow.attributes = attributes
+                parentView.layoutParams =
+                    FrameLayout.LayoutParams(activityWindow.decorView.width, activityWindow.decorView.height)
+            }
+        }
+
+        LaunchedEffect(Unit) {
+            dialogWindow?.statusBarColor = Color.Transparent.toArgb()
+            dialogWindow?.navigationBarColor = Color.Transparent.toArgb()
+        }
+
         Scaffold(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .fillMaxSize()
+                .imePadding(),
             snackbarHost = snackbarHost,
             contentWindowInsets = WindowInsets(0.dp),
             topBar = {
@@ -232,31 +354,30 @@ private fun PhonePortraitModalScaffold(
                     navigationIcon = {
                         CloseIconButton(onClose = onClose)
                     },
-                    title = { },
+                    title = title,
+                    actions = actions,
+                    scrollBehavior = scrollBehavior,
                 )
             },
             bottomBar = {
                 Surface {
+                    val buttonsLayoutModifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp)
+                        .padding(navigationBarPadding)
                     if (Layout.windowSize.widthSizeClass == WindowWidthSizeClass.Compact) {
                         Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = Layout.bodyMargin)
-                                .padding(bottom = 16.dp, top = 8.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Bottom),
+                            modifier = buttonsLayoutModifier.padding(vertical = 16.dp),
+                            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Bottom),
                         ) {
                             val buttonModifier = Modifier.fillMaxWidth()
-                            if (reverseButtonOrder) mainButton(buttonModifier)
+                            mainButton(buttonModifier)
                             supportButton(buttonModifier)
-                            if (!reverseButtonOrder) mainButton(buttonModifier)
                         }
                     } else {
                         Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = Layout.bodyMargin)
-                                .padding(bottom = 16.dp),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End),
+                            modifier = buttonsLayoutModifier.padding(bottom = 16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End),
                         ) {
                             supportButton(Modifier)
                             mainButton(Modifier)
@@ -268,25 +389,13 @@ private fun PhonePortraitModalScaffold(
             Column(
                 modifier = Modifier
                     .bodyWidth()
-                    .padding(horizontal = Layout.bodyMargin),
+                    .padding(horizontal = 24.dp),
             ) {
-                illustration?.let {
-                    Illustration(
-                        drawableRes = it,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxHeight(.4f)
-                            .fillMaxWidth(.8f)
-                            .align(Alignment.CenterHorizontally)
-                            .padding(top = innerPadding.calculateTopPadding()),
-                        contentScale = illustrationContentScale,
-                    )
-                }
                 content(
                     PaddingValues(
                         start = innerPadding.calculateLeftPadding(LocalLayoutDirection.current),
                         end = innerPadding.calculateRightPadding(LocalLayoutDirection.current),
-                        top = if (illustration == null) innerPadding.calculateTopPadding() else 24.dp,
+                        top = innerPadding.calculateTopPadding(),
                         bottom = innerPadding.calculateBottomPadding(),
                     ),
                 )
@@ -300,6 +409,7 @@ private fun PhonePortraitModalScaffold(
 private fun PhoneLandscapeModalScaffold(
     onClose: () -> Unit,
     properties: DialogProperties,
+    navigationBarPadding: PaddingValues,
     modifier: Modifier = Modifier,
     snackbarHost: @Composable () -> Unit = {},
     @DrawableRes illustration: Int? = null,
@@ -358,6 +468,7 @@ private fun PhoneLandscapeModalScaffold(
                     Row(
                         modifier = Modifier
                             .padding(bottom = 16.dp, top = 8.dp)
+                            .padding(navigationBarPadding)
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End),
                     ) {
@@ -401,6 +512,7 @@ private val DialogWindowPadding = PaddingValues(all = 32.dp)
 //    heightDp = 411,
 //    widthDp = 891,
 //)
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 private fun ModalPreview() {
@@ -418,6 +530,7 @@ private fun ModalPreview() {
             },
             reverseButtonOrder = true,
             illustrationContentScale = ContentScale.FillWidth,
+            body = "Body with description. An optional accessible description to be announced when the dialog is opened.",
         ) { innerPadding ->
             Text(
                 modifier = Modifier
