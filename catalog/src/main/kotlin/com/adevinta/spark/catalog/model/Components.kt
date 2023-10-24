@@ -28,6 +28,7 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurat
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
@@ -35,6 +36,7 @@ import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurato
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
+import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
@@ -151,6 +153,19 @@ private val Tabs = Component(
     configurator = TabsConfigurator,
 )
 
+private val Tags = Component(
+    id = nextId(),
+    name = "Tags",
+    description = R.string.component_tag_description,
+    illustration = R.drawable.illu_component_tags,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/295e88-tag/b/86ead2",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.tags/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tags/Tag.kt",
+    examples = TagsExamples,
+    configurator = TagsConfigurator,
+)
+
 private val TextFields = Component(
     id = nextId(),
     name = "TextFields",
@@ -185,5 +200,6 @@ public val Components: List<Component> = listOf(
     RadioButtons,
     Switches,
     Tabs,
+    Tags,
     TextFields,
 )

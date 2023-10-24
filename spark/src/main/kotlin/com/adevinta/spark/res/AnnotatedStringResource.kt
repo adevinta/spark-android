@@ -272,7 +272,9 @@ private fun TypefaceSpan.toSpanStyle() = SpanStyle(
 @Composable
 private fun AnnotatedStringResourcePreview() {
     PreviewTheme {
-        Text(annotatedStringResource(R.string.spark_annotatedStringResource_test))
+        Text(
+            text = annotatedStringResource(R.string.spark_annotatedStringResource_test),
+        )
         Text(annotatedStringResource(R.string.spark_annotatedStringResource_test_args, "Spark"))
     }
 }
