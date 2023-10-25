@@ -1,4 +1,4 @@
-# Package com.adevinta.spark.components.iconbuttons.toggle
+# Package com.adevinta.spark.components.popover
 
 [Popover](https://spark.adevinta.com/1186e1705/p/88a08c-popover/b/904ceb)
 Popover is kinda similar to Plain tooltip from Compose UI
