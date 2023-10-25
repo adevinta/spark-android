@@ -57,6 +57,7 @@ import com.adevinta.spark.components.toggles.RadioButtonLabelled
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.Layout
 import com.adevinta.spark.tokens.highlight
 
 @Composable
@@ -73,6 +74,8 @@ public fun ThemePicker(
                 WindowInsets(
                     top = ThemePickerPadding,
                     bottom = ThemePickerPadding,
+                    left = Layout.bodyMargin,
+                    right = Layout.bodyMargin,
                 ),
             )
             .asPaddingValues(),
@@ -83,7 +86,7 @@ public fun ThemePicker(
                 Text(
                     text = stringResource(id = R.string.theme_picker_mode_title),
                     style = SparkTheme.typography.body2.highlight,
-                    modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
+                    modifier = Modifier.padding(vertical = 8.dp),
                 )
                 val themeModes = ThemeMode.values()
                 val themeModesLabel = themeModes.map { it.name }
@@ -103,7 +106,7 @@ public fun ThemePicker(
                 Text(
                     text = stringResource(id = R.string.theme_picker_theme_title),
                     style = SparkTheme.typography.body2.highlight,
-                    modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
+                    modifier = Modifier.padding(vertical = 8.dp),
                 )
                 val colorModes = ColorMode.values()
                 val colorModesLabel = colorModes.map { it.name }
@@ -174,7 +177,7 @@ public fun ThemePicker(
                 Text(
                     text = stringResource(id = R.string.theme_picker_text_direction_title),
                     style = SparkTheme.typography.body2.highlight,
-                    modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
+                    modifier = Modifier.padding(vertical = 8.dp),
                 )
                 val textDirections = TextDirection.values()
                 val textDirectionsLabel = textDirections.map { it.name }
@@ -194,7 +197,7 @@ public fun ThemePicker(
                 Text(
                     text = stringResource(id = R.string.theme_picker_font_scale_title),
                     style = SparkTheme.typography.body2.highlight,
-                    modifier = Modifier.padding(horizontal = ThemePickerPadding, vertical = 8.dp),
+                    modifier = Modifier.padding(vertical = 8.dp),
                 )
                 val fontScaleModes = FontScaleMode.values()
                 val colorModesLabel = fontScaleModes.map { it.name }
@@ -211,83 +214,13 @@ public fun ThemePicker(
             var fontScale by remember { mutableFloatStateOf(theme.fontScale) }
             AnimatedVisibility(visible = theme.fontScaleMode == FontScaleMode.Custom) {
                 FontScaleItem(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = ThemePickerPadding),
+                    modifier = Modifier.fillMaxWidth(),
                     enabled = theme.fontScaleMode == FontScaleMode.Custom,
                     fontScale = fontScale,
                     onValueChange = { fontScale = it },
                     onValueChangeFinished = { onThemeChange(theme.copy(fontScale = fontScale)) },
                 )
             }
-        }
-    }
-}
-
-@Composable
-private fun ThemeModeItem(
-    modifier: Modifier = Modifier,
-    themeMode: ThemeMode,
-    selected: Boolean,
-    onClick: (ThemeMode) -> Unit,
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(ThemePickerPadding),
-    ) {
-        RadioButtonLabelled(
-            selected = selected,
-            onClick = { onClick(themeMode) },
-        ) {
-            Text(text = themeMode.toString())
-        }
-    }
-}
-
-@Composable
-private fun ColorModeItem(
-    modifier: Modifier = Modifier,
-    colorMode: ColorMode,
-    selected: Boolean,
-    onClick: (ColorMode) -> Unit,
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(ThemePickerPadding),
-    ) {
-        val enabled = when {
-            colorMode == ColorMode.Dynamic && Build.VERSION.SDK_INT < Build.VERSION_CODES.S -> false
-            else -> true
-        }
-        RadioButtonLabelled(
-            selected = selected,
-            enabled = enabled,
-            onClick = { onClick(colorMode) },
-        ) {
-            Text(text = colorMode.label)
-        }
-    }
-}
-
-@Composable
-private fun TextDirectionItem(
-    modifier: Modifier = Modifier,
-    textDirection: TextDirection,
-    selected: Boolean,
-    onClick: (TextDirection) -> Unit,
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(ThemePickerPadding),
-    ) {
-        RadioButtonLabelled(
-            selected = selected,
-            onClick = { onClick(textDirection) },
-        ) {
-            Text(text = textDirection.toString())
         }
     }
 }

@@ -36,11 +36,13 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,54 +57,31 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.tools.preview.ThemesPreviews
+import com.adevinta.spark.tools.preview.DevicePreviews
 
 public object Layout {
 
-    // TODO: Use M3 WindowHeightSizeClass instead of our custom size ranges
-
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     public val windowSize: WindowSizeClass
-        @Composable get() {
-            // Observe view configuration changes and recalculate the size class on each change. We can't
-            // use Activity#onConfigurationChanged as this will sometimes fail to be called on different
-            // API levels, hence why this function needs to be @Composable so we can observe the
-            // ComposeView's configuration changes.
-            val config = LocalConfiguration.current
-            return WindowSizeClass.calculateFromSize(DpSize(config.screenWidthDp.dp, config.screenHeightDp.dp))
-        }
+        @Composable get() = LocalWindowSizeClass.current
 
     public val bodyMargin: Dp
-        @Composable get() = when (LocalConfiguration.current.screenWidthDp) {
-            in 0..599 -> 16.dp
-            in 600..904 -> 32.dp
-            in 905..1239 -> 0.dp
-            in 1240..1439 -> 200.dp
-            else -> 0.dp
+        @Composable get() = when (LocalWindowSizeClass.current.widthSizeClass) {
+            WindowWidthSizeClass.Compact -> 16.dp
+            WindowWidthSizeClass.Medium -> 32.dp
+            else -> 64.dp
         }
 
     public val gutter: Dp
-        @Composable get() = when (LocalConfiguration.current.screenWidthDp) {
-            in 0..599 -> 8.dp
-            in 600..904 -> 16.dp
-            in 905..1239 -> 16.dp
-            in 1240..1439 -> 32.dp
-            else -> 32.dp
-        }
-
-    public val bodyMaxWidth: Dp
-        @Composable get() = when (LocalConfiguration.current.screenWidthDp) {
-            in 0..599 -> Dp.Infinity
-            in 600..904 -> Dp.Infinity
-            in 905..1239 -> 840.dp
-            in 1240..1439 -> Dp.Infinity
-            else -> 1040.dp
+        @Composable get() = when (LocalWindowSizeClass.current.widthSizeClass) {
+            WindowWidthSizeClass.Compact -> 8.dp
+            WindowWidthSizeClass.Medium -> 16.dp
+            else -> 24.dp
         }
 
     public val columns: Int
-        @Composable get() = when (LocalConfiguration.current.screenWidthDp) {
-            in 0..599 -> 4
-            in 600..904 -> 8
+        @Composable get() = when (LocalWindowSizeClass.current.widthSizeClass) {
+            WindowWidthSizeClass.Compact -> 4
+            WindowWidthSizeClass.Medium -> 8
             else -> 12
         }
 }
@@ -111,21 +90,15 @@ public object Layout {
  * Support wide screen by making the content width max 840dp, centered horizontally.
  */
 public fun Modifier.bodyWidth(): Modifier = fillMaxWidth()
-    .wrapContentWidth(align = Alignment.CenterHorizontally)
     .composed {
-        val bodyMaxWidth = Layout.bodyMaxWidth
-        if (bodyMaxWidth.isFinite) widthIn(max = bodyMaxWidth) else this
-    }
-    .composed {
-        padding(
+        windowInsetsPadding(
             WindowInsets.systemBars
-                .only(WindowInsetsSides.Horizontal)
-                .asPaddingValues(),
+                .only(WindowInsetsSides.Horizontal),
         )
     }
 
 @Composable
-@ThemesPreviews
+@DevicePreviews
 internal fun LayoutPreview() {
     PreviewTheme(
         padding = PaddingValues(0.dp),
