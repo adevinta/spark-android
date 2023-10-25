@@ -75,7 +75,8 @@ import kotlinx.coroutines.flow.flowOf
  * container
  * @param trailingContent the optional trailing icon to be displayed at the end of the text field
  * container
- * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are tinted by the state color.
+ * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are
+ * tinted by the state color.
  * @param stateMessage the optional state text to be displayed at the helper position that give more information about
  * the state, it's displayed only when [state] is not null.
  * @param visualTransformation transforms the visual representation of the input [value]
@@ -105,8 +106,8 @@ public fun TextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingContent: @Composable (() -> Unit)? = null,
-    trailingContent: @Composable (() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
+    trailingContent: @Composable (AddonScope.() -> Unit)? = null,
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -114,7 +115,7 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingContentBasedOnState: (@Composable () -> Unit)? = TextFieldDefault.getTrailingContent(
+    val trailingContentBasedOnState: (@Composable AddonScope.() -> Unit)? = TextFieldDefault.getTrailingContent(
         state = state,
         trailingIcon = trailingContent,
     )
@@ -166,10 +167,11 @@ public fun TextField(
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * information about expected text
  * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
- * container
+ * container, note that
  * @param trailingContent the optional trailing icon to be displayed at the end of the text field
  * container
- * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are tinted by the state color.
+ * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are
+ * tinted by the state color.
  * @param stateMessage the optional state text to be displayed at the helper position that give more information about
  * the state, it's displayed only when [state] is not null.
  * @param visualTransformation transforms the visual representation of the input [value]
@@ -199,8 +201,8 @@ public fun TextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingContent: @Composable (() -> Unit)? = null,
-    trailingContent: @Composable (() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
+    trailingContent: @Composable (AddonScope.() -> Unit)? = null,
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -208,7 +210,7 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingContentBasedOnState: (@Composable () -> Unit)? = TextFieldDefault.getTrailingContent(
+    val trailingContentBasedOnState: (@Composable AddonScope.() -> Unit)? = TextFieldDefault.getTrailingContent(
         state = state,
         trailingIcon = trailingContent,
     )
@@ -307,7 +309,7 @@ private fun ColumnScope.PreviewTextFields(
     state: TextFieldState?,
     stateMessage: String?,
 ) {
-    val icon = @Composable {
+    val icon: @Composable (AddonScope.() -> Unit) = @Composable {
         Icon(
             sparkIcon = SparkIcons.LikeFill,
             contentDescription = null,
