@@ -24,7 +24,7 @@ package com.adevinta.spark.components.popover
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-public object PopoverDefaults {
+internal object PopoverDefaults {
     internal val PopoverAnchorPadding: Dp = 8.dp
     internal val PopoverContentPadding: Dp = 16.dp
     internal val PopoverDismissButtonPadding: Dp = 8.dp
