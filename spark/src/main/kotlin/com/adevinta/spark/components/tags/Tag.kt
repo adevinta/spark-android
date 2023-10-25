@@ -21,10 +21,12 @@
  */
 package com.adevinta.spark.components.tags
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -87,18 +89,24 @@ internal fun BaseSparkTag(
                 horizontalArrangement = Arrangement.spacedBy(LeadingIconEndSpacing, Alignment.Start),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                if (leadingIcon != null) {
-                    CompositionLocalProvider(
-                        LocalContentColor provides colors.contentColor,
-                    ) {
-                        Icon(
-                            sparkIcon = leadingIcon,
-                            modifier = Modifier.size(LeadingIconSize),
-                            contentDescription = null, // The tag is associated with a mandatory label so it's okay
-                            tint = tint ?: LocalContentColor.current,
-                        )
+                AnimatedVisibility(visible = leadingIcon != null) {
+                    if (leadingIcon != null) {
+                        CompositionLocalProvider(
+                            LocalContentColor provides colors.contentColor,
+                        ) {
+                            Icon(
+                                sparkIcon = leadingIcon,
+                                modifier = Modifier.size(LeadingIconSize),
+                                contentDescription = null, // The tag is associated with a mandatory label so it's okay
+                                tint = tint ?: LocalContentColor.current,
+                            )
+                        }
+                    } else {
+                        // Placeholder so that the animation doesn't breaks when the icon disappears
+                        Spacer(Modifier.size(LeadingIconSize))
                     }
                 }
+
                 ProvideTextStyle(value = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold)) {
                     content()
                 }
@@ -117,6 +125,9 @@ internal fun SparkTag(
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
+    require(text.isNotBlank() || leadingIcon != null) {
+        "text can be blank only when there is an icon"
+    }
     BaseSparkTag(
         colors = colors,
         modifier = modifier,
@@ -124,7 +135,9 @@ internal fun SparkTag(
         leadingIcon = leadingIcon,
         tint = tint,
     ) {
-        Text(text = text)
+        if (text.isNotBlank()) {
+            Text(text = text)
+        }
     }
 }
 
@@ -138,6 +151,9 @@ internal fun SparkTag(
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
 ) {
+    require(text.isNotBlank() || leadingIcon != null) {
+        "text can be blank only when there is an icon"
+    }
     BaseSparkTag(
         colors = colors,
         modifier = modifier,
@@ -145,7 +161,9 @@ internal fun SparkTag(
         leadingIcon = leadingIcon,
         tint = tint,
     ) {
-        Text(text = text)
+        if (text.isNotBlank()) {
+            Text(text = text)
+        }
     }
 }
 
@@ -230,6 +248,8 @@ private fun SparkTagPreview() {
             SlotArea(color = LocalContentColor.current) {
                 Text("À la une")
             }
+        }
+        BaseSparkTag(leadingIcon = SparkIcons.Accessories, colors = colors) {
         }
     }
 }
