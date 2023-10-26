@@ -30,7 +30,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
@@ -58,6 +57,7 @@ import com.adevinta.spark.components.popover.newapi.TooltipBox
 import com.adevinta.spark.components.popover.newapi.TooltipDefaults
 import com.adevinta.spark.components.popover.newapi.TooltipState
 import com.adevinta.spark.components.popover.newapi.rememberTooltipState
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.SparkIcons
@@ -78,10 +78,10 @@ import kotlinx.coroutines.launch
  * @param actionContent the composable that the Popover will anchor to.
  */
 
-@SuppressLint("ComposeModifierMissing")
 @ExperimentalSparkApi
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("ComposeModifierMissing")
 public fun Popover(
     popoverContent: @Composable () -> Unit,
     isDismissButtonEnabled: Boolean = false,
@@ -100,8 +100,6 @@ public fun Popover(
                     .padding(bottom = PopoverAnchorPadding),
                 shape = shape,
                 color = colors.containerColor,
-                shadowElevation = ElevationTokens.Level2,
-                tonalElevation = ElevationTokens.Level2,
             ) {
                 Row {
                     Box(

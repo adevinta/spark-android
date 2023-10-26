@@ -21,13 +21,19 @@
  */
 package com.adevinta.spark.popover
 
+import android.annotation.SuppressLint
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.ExperimentalComposeApi
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -45,6 +51,7 @@ import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.junit.Rule
 import org.junit.Test
@@ -69,11 +76,14 @@ internal class PopoverScreenshot {
         ),
     )
 
+    @SuppressLint("CoroutineCreationDuringComposition")
+    @OptIn(ExperimentalComposeApi::class)
     @Test
     fun test() {
-        paparazzi.sparkSnapshot(name = "Popover") {
+        paparazzi.sparkSnapshot(name = "Popover", true) {
             val state = rememberTooltipState(isPersistent = true)
             val scope = rememberCoroutineScope()
+            val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 
             Row {
                 enableList.forEach { isEnabled ->
@@ -106,17 +116,30 @@ internal class PopoverScreenshot {
                                     }
                                 },
                                 isDismissButtonEnabled = isEnabled,
-                                popoverState = state,
-
+                                popoverState = state.apply {
+                                    scope.launch {
+                                        show()
+                                    }
+                                },
                             ) {
                                 ButtonOutlined(
                                     text = "Display Popover",
                                     onClick = { scope.launch { state.show() } },
+                                    interactionSource = interactionSource,
                                 )
+
                             }
                         }
                     }
                 }
+            }
+
+            scope.launch {
+                val press = PressInteraction.Press(Offset.Zero)
+                interactionSource.emit(press)
+                state.show()
+                delay(300)
+                interactionSource.emit(PressInteraction.Release(press))
             }
         }
     }
