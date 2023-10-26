@@ -89,7 +89,8 @@ import kotlinx.coroutines.flow.flowOf
  * informations about expected text
  * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
  * container
- * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are tinted by the state color.
+ * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are
+ * tinted by the state color.
  * @param stateMessage the optional state text to be displayed at the helper position that give more information about
  * the state, it's displayed only when [state] is not null.
  * @param visualTransformation transforms the visual representation of the input [value]
@@ -125,7 +126,7 @@ public fun SelectTextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingContent: @Composable (() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -231,7 +232,7 @@ public fun SelectTextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingContent: @Composable (() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -289,6 +290,7 @@ public fun SelectTextField(
 public fun SparkSelectTrailingIcon(
     expanded: Boolean,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onIconClick: () -> Unit = {},
 ) {
     // Clear semantics here as otherwise icon will be a11y focusable but without an
@@ -297,6 +299,7 @@ public fun SparkSelectTrailingIcon(
     // trailing icon.
     IconButton(
         onClick = onIconClick,
+        enabled = enabled,
         modifier = modifier
             .clearAndSetSemantics { }
             .requiredSize(24.dp),
@@ -382,8 +385,8 @@ private fun ColumnScope.PreviewTextFields(
     state: TextFieldState?,
     stateMessage: String?,
 ) {
-    val icon = @Composable {
-        com.adevinta.spark.components.icons.Icon(
+    val icon: @Composable (AddonScope.() -> Unit) = @Composable {
+        Icon(
             sparkIcon = SparkIcons.LikeFill,
             contentDescription = null,
             size = IconSize.Medium,

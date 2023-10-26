@@ -29,6 +29,7 @@ import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.textfields.AddonScope
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.icons.Check
@@ -78,12 +79,12 @@ internal class TextFieldScreenshot {
                                     "_enabled".takeIf { enabled }.orEmpty() +
                                     helper?.let { "_helper.${helper.count()}" }.orEmpty(),
                             ) {
-                                val leadingContent: (@Composable () -> Unit)? = leadingIcon?.let {
+                                val leadingContent: (@Composable AddonScope.() -> Unit)? = leadingIcon?.let {
                                     @Composable {
                                         Icon(it, contentDescription = null)
                                     }
                                 }
-                                val trailingContent: (@Composable () -> Unit)? = trailingIcon?.let {
+                                val trailingContent: (@Composable AddonScope.() -> Unit)? = trailingIcon?.let {
                                     @Composable {
                                         Icon(it, contentDescription = null)
                                     }
