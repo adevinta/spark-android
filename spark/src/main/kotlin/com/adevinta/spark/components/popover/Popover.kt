@@ -99,6 +99,7 @@ public fun Popover(
                     .sizeIn(minWidth = PopoverMinWidth, minHeight = PopoverMinHeight)
                     .padding(bottom = PopoverAnchorPadding),
                 shape = shape,
+                elevation = ElevationTokens.Level2,
                 color = colors.containerColor,
             ) {
                 Row {
