@@ -43,6 +43,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -70,14 +71,16 @@ public fun Icon(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     tint: Color = IconDefaults.intent.color(),
-    size: IconSize = IconDefaults.size,
+    size: IconSize? = null,
 ) {
     MaterialIcon(
         painter = rememberSparkIconPainter(sparkIcon),
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(size.size),
+            .ifNotNull(size) {
+                size(it.size)
+            },
         tint = tint,
     )
 }
@@ -102,14 +105,16 @@ public fun Icon(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     tint: Color = IconDefaults.intent.color(),
-    size: IconSize = IconDefaults.size,
+    size: IconSize? = null,
 ) {
     MaterialIcon(
         imageVector = imageVector,
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(size.size),
+            .ifNotNull(size) {
+                size(it.size)
+            },
         tint = tint,
     )
 }
@@ -134,14 +139,16 @@ public fun Icon(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     tint: Color = IconDefaults.intent.color(),
-    size: IconSize = IconDefaults.size,
+    size: IconSize? = null,
 ) {
     MaterialIcon(
         bitmap = bitmap,
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(size.size),
+            .ifNotNull(size) {
+                size(it.size)
+            },
         tint = tint,
     )
 }
@@ -166,14 +173,16 @@ public fun Icon(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     tint: Color = IconDefaults.intent.color(),
-    size: IconSize = IconDefaults.size,
+    size: IconSize? = null,
 ) {
     MaterialIcon(
         painter = painter,
         contentDescription = contentDescription,
         modifier = modifier
             .sparkUsageOverlay()
-            .size(size.size),
+            .ifNotNull(size) {
+                size(it.size)
+            },
         tint = tint,
     )
 }
@@ -193,7 +202,7 @@ internal fun IconPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        IconSize.values().map { it to IconIntent.values() }.forEach { (size, intents) ->
+        IconSize.entries.map { it to IconIntent.entries.toTypedArray() }.forEach { (size, intents) ->
             LazyRow {
                 items(
                     intents.count(),
