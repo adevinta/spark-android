@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.popover
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -77,6 +78,7 @@ import kotlinx.coroutines.launch
  * @param actionContent the composable that the Popover will anchor to.
  */
 
+@SuppressLint("ComposeModifierMissing")
 @ExperimentalSparkApi
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
