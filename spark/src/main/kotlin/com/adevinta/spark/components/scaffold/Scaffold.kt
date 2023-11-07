@@ -116,6 +116,7 @@ public fun Scaffold(
         contentColor = contentColor,
         contentWindowInsets = contentWindowInsets,
     ) { innerPadding ->
+        // Wrapping it in a surface since the scaffold use the M3 Surface that apply a tint overlay
         Surface {
             content(innerPadding)
         }
