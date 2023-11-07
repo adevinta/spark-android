@@ -31,8 +31,8 @@ import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.badge.Badge
 import com.adevinta.spark.components.tab.Tab
 import com.adevinta.spark.components.tab.TabGroup
-import com.adevinta.spark.icons.AlarmOnFill
 import com.adevinta.spark.icons.AccountFill
+import com.adevinta.spark.icons.AlarmOnFill
 import com.adevinta.spark.icons.MessageOutline
 import com.adevinta.spark.icons.SparkIcons
 
