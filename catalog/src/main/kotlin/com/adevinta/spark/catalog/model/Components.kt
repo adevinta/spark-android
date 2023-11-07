@@ -35,6 +35,7 @@ import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfig
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
@@ -88,6 +89,17 @@ private val Checkboxes = Component(
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/CheckBox.kt",
     examples = CheckboxExamples,
     configurator = CheckboxConfigurator,
+)
+
+private val Dialogs = Component(
+    id = nextId(),
+    name = "Dialogs",
+    description = R.string.component_dialog_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/2427e1-modaldialog/b/02a6bc",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.dialog/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/dialog/ModalScaffold.kt",
+    examples = DialogsExamples,
+    configurator = null,
 )
 
 private val IconButtons = Component(
@@ -195,6 +207,7 @@ public val Components: List<Component> = listOf(
     Tokens,
     Buttons,
     Checkboxes,
+    Dialogs,
     IconButtons,
     IconToggleButtons,
     RadioButtons,

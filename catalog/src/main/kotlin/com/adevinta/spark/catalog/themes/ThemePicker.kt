@@ -21,11 +21,9 @@
  */
 package com.adevinta.spark.catalog.themes
 
-import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.add
@@ -42,7 +40,6 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -53,7 +50,6 @@ import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.slider.Slider
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
-import com.adevinta.spark.components.toggles.RadioButtonLabelled
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.SparkIcons

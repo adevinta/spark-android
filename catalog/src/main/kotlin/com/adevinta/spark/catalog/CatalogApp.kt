@@ -29,7 +29,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -37,7 +36,6 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -45,14 +43,10 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
@@ -68,12 +62,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -102,17 +93,6 @@ import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
 import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.KleinanzeigenTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
-import com.adevinta.spark.components.buttons.ButtonFilled
-import com.adevinta.spark.components.buttons.ButtonOutlined
-import com.adevinta.spark.components.dialog.ModalScaffold
-import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.icons.IconButton
-import com.adevinta.spark.components.snackbars.SnackbarHost
-import com.adevinta.spark.components.snackbars.SnackbarHostState
-import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.icons.ImageFill
-import com.adevinta.spark.icons.MoreMenuVertical
-import com.adevinta.spark.icons.SparkIcons
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
@@ -158,8 +138,6 @@ internal fun ComponentActivity.CatalogApp(
                 TextDirection.System -> LocalLayoutDirection.current
             }
 
-            var showDialog by rememberSaveable { mutableStateOf(false) }
-
             // Update the edge to edge configuration to match the theme
             // This is the same parameters as the default enableEdgeToEdge call, but we manually
             // resolve whether or not to show dark theme using uiState, since it can be different
@@ -192,7 +170,7 @@ internal fun ComponentActivity.CatalogApp(
                     contentAlignment = Alignment.Center,
                 ) {
                     val coroutineScope = rememberCoroutineScope()
-                    val homeScreenValues = CatalogHomeScreen.values()
+                    val homeScreenValues = CatalogHomeScreen.entries
                     val pagerState = rememberPagerState(
                         initialPage = CatalogHomeScreen.Examples.ordinal,
                         pageCount = { homeScreenValues.size },
@@ -201,8 +179,8 @@ internal fun ComponentActivity.CatalogApp(
                     BackdropScaffold(
                         scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
                         frontLayerScrimColor = Color.Unspecified,
-                        headerHeight = BackdropScaffoldDefaults.HeaderHeight + WindowInsets.navigationBars.asPaddingValues()
-                            .calculateBottomPadding(),
+                        headerHeight = BackdropScaffoldDefaults.HeaderHeight +
+                            WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
                         peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
                             .calculateTopPadding(),
                         backLayerBackgroundColor = SparkTheme.colors.mainContainer,
@@ -211,7 +189,6 @@ internal fun ComponentActivity.CatalogApp(
                                 modifier = Modifier.statusBarsPadding(),
                                 tabSelected = homeScreenValues[pagerState.currentPage],
                                 onTabSelected = {
-                                    showDialog = true
                                     coroutineScope.launch {
                                         pagerState.animateScrollToPage(
                                             it.ordinal,
@@ -269,104 +246,6 @@ internal fun ComponentActivity.CatalogApp(
                             }
                         },
                     )
-
-                    if (showDialog) {
-                        val controler = LocalSoftwareKeyboardController.current
-                        val focusRequester = remember { FocusRequester() }
-                        val snackbarHostState = remember { SnackbarHostState() }
-
-                        @Suppress("DEPRECATION")
-                        ModalScaffold(
-                            onClose = { showDialog = false },
-//        illustration = SparkIcons.BicycleType.drawableId,
-                            mainButton = {
-                                ButtonFilled(
-                                    modifier = it,
-                                    onClick = {
-                                        coroutineScope.launch {
-                                            snackbarHostState.showSnackbar(
-                                                message = "Snackbar",
-                                                actionLabel = "Action",
-                                                duration = SnackbarDuration.Short,
-                                            )
-                                        }
-
-                                    },
-                                    text = "Main Action",
-                                )
-                            },
-                            snackbarHost = {
-                                SnackbarHost(snackbarHostState)
-                            },
-                            supportButton = {
-                                ButtonOutlined(
-                                    modifier = it,
-                                    onClick = {
-                                        focusRequester.requestFocus()
-                                        controler?.show()
-                                    },
-                                    text = "Alternative Action",
-                                )
-                            },
-                            title = {
-                                Text(text = "Title")
-                            },
-                            actions = {
-                                IconButton(onClick = { /*TODO*/ }) {
-                                    Icon(sparkIcon = SparkIcons.ImageFill, contentDescription = "")
-                                }
-                                IconButton(onClick = { /*TODO*/ }) {
-                                    Icon(sparkIcon = SparkIcons.ImageFill, contentDescription = "")
-                                }
-                                IconButton(onClick = { /*TODO*/ }) {
-                                    Icon(sparkIcon = SparkIcons.MoreMenuVertical, contentDescription = "")
-                                }
-                            },
-//        illustrationContentScale = ContentScale.FillWidth,
-                        ) { innerPadding ->
-                            Column(
-                                modifier = Modifier
-                                    .padding(innerPadding)
-                                    .verticalScroll(rememberScrollState()),
-                            ) {
-
-                                Text(
-                                    text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
-                                            "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
-                                            "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
-                                            "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
-                                            "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
-                                            "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
-                                            "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
-                                            "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
-                                            " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
-                                            "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
-                                            "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
-                                            "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
-                                            "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
-                                            " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
-                                            "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
-                                            "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
-                                            "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
-                                            "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
-                                            " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
-                                            "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
-                                            "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
-                                            "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
-                                            "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
-                                            "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
-                                            "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
-                                            "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
-                                            "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
-                                )
-                                TextField(
-                                    value = "",
-                                    onValueChange = {},
-                                    modifier = Modifier.focusRequester(focusRequester),
-                                )
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -395,7 +274,7 @@ private fun HomeTabBar(
     onTabSelected: (CatalogHomeScreen) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val catalogScreens by remember { mutableStateOf(CatalogHomeScreen.values()) }
+    val catalogScreens by remember { mutableStateOf(CatalogHomeScreen.entries) }
     val catalogScreensName by remember {
         derivedStateOf {
             catalogScreens.map { it.name }

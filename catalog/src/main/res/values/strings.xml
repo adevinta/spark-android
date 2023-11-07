@@ -51,6 +51,7 @@
     <string name="component_checkbox_group_example_group_label">Notifications and emails</string>
     <string name="component_checkbox_group_example_option1_label">Notifications</string>
     <string name="component_checkbox_group_example_option2_label">Email</string>
+    <string name="component_dialog_description">A dialog is a modal window that appears in front of content to provide critical information or ask for a decision.</string>
     <string name="component_tab_description">Tabs are used to group different but related content, allowing users to navigate views without leaving the page. They always contain at least two items and one tab is active at a time.</string>
     <string name="component_textfield_description">The input / text-field component allows users to write in the space provided for the content.</string>
     <string name="component_tokens_description">The tokens are the basis of this Design System and allow each brand to choose its colors, shapes, typos and icons.</string>

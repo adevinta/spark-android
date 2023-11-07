@@ -54,6 +54,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.icons.BurgerMenu
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
@@ -114,8 +115,11 @@ public fun Scaffold(
         containerColor = containerColor,
         contentColor = contentColor,
         contentWindowInsets = contentWindowInsets,
-        content = content,
-    )
+    ) { innerPadding ->
+        Surface {
+            content(innerPadding)
+        }
+    }
 }
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterial3Api::class)
