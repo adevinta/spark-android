@@ -95,7 +95,6 @@ private fun TabSample() {
             selectedTabIndex = selectedIndex,
             intent = intent,
         ) {
-
             tabs.forEachIndexed { index, (tab, unread) ->
                 Tab(
                     intent = intent,
