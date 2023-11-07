@@ -78,10 +78,11 @@ import kotlinx.coroutines.launch
  * @param actionContent the composable that the Popover will anchor to.
  */
 
+@SuppressLint("ComposeModifierMissing")
 @ExperimentalSparkApi
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("ComposeModifierMissing")
+// noinspection ComposeModifierMissing
 public fun Popover(
     popoverContent: @Composable () -> Unit,
     isDismissButtonEnabled: Boolean = false,
