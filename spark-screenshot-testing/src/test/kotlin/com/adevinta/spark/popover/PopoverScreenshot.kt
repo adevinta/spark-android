@@ -127,7 +127,6 @@ internal class PopoverScreenshot {
                                     onClick = { scope.launch { state.show() } },
                                     interactionSource = interactionSource,
                                 )
-
                             }
                         }
                     }
