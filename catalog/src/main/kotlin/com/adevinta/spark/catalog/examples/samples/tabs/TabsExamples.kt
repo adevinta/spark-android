@@ -31,8 +31,8 @@ import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.badge.Badge
 import com.adevinta.spark.components.tab.Tab
 import com.adevinta.spark.components.tab.TabGroup
+import com.adevinta.spark.icons.AccountFill
 import com.adevinta.spark.icons.AlarmOnFill
-import com.adevinta.spark.icons.Garage
 import com.adevinta.spark.icons.MessageOutline
 import com.adevinta.spark.icons.SparkIcons
 
@@ -48,21 +48,21 @@ public val TabsExamples: List<Example> = listOf(
     },
     Example(
         name = "Tabs with badge",
-        description = "3 tabs and the middle one contain a badge",
+        description = "3 tabs and the middle one contains a badge",
         sourceUrl = TabsExampleSourceUrl,
     ) {
         TabWithBadgeSample()
     },
     Example(
         name = "Scrollable tabs",
-        description = "Display 3 tabs with a long one that overflow to showcase the",
+        description = "Display 3 tabs with a long one that overflows to showcase the scrolling",
         sourceUrl = TabsExampleSourceUrl,
     ) {
         ScrollableTabsSample()
     },
     Example(
         name = "Icons tabs",
-        description = "tabs with no label, only icons",
+        description = "Tabs with no label, only icons",
         sourceUrl = TabsExampleSourceUrl,
     ) {
         IconsTabsSample()
@@ -160,7 +160,7 @@ private fun IconsTabsSample() {
     val tabs = mutableListOf(
         SparkIcons.AlarmOnFill to 0,
         SparkIcons.MessageOutline to 1,
-        SparkIcons.Garage to 0,
+        SparkIcons.AccountFill to 0,
     )
     var selectedIndex by remember { mutableIntStateOf(0) }
     TabGroup(
