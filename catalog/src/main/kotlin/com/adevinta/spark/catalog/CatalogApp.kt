@@ -85,6 +85,7 @@ import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
 import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.KleinanzeigenTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
 import com.adevinta.spark.catalog.themes.themeprovider.milanuncios.MilanunciosTheme
+import com.adevinta.spark.catalog.themes.themeprovider.subito.SubitoTheme
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
@@ -101,25 +102,23 @@ internal fun CatalogApp(
     val themeProvider: ThemeProvider = when (theme.brandMode) {
         BrandMode.Adevinta -> AdevintaTheme
         BrandMode.Leboncoin -> LeboncoinTheme
-        BrandMode.LeboncoinLegacy -> LeboncoinTheme
+        BrandMode.Subito -> SubitoTheme
         BrandMode.Kleinanzeigen -> KleinanzeigenTheme
         BrandMode.Milanuncios -> MilanunciosTheme
     }
 
-    val isLegacy = theme.brandMode == BrandMode.LeboncoinLegacy
-
     val useDark = (theme.themeMode == ThemeMode.System && isSystemInDarkTheme()) || theme.themeMode == ThemeMode.Dark
 
     val colors =
-        themeProvider.colors(useDarkColors = useDark, isPro = theme.userMode == UserMode.Pro, isLegacy = isLegacy)
-    val shapes = themeProvider.shapes(isLegacy = isLegacy)
-    val typography = themeProvider.typography(isLegacy = isLegacy)
+        themeProvider.colors(useDarkColors = useDark, isPro = theme.userMode == UserMode.Pro, isLegacy = false)
+    val shapes = themeProvider.shapes(isLegacy = false)
+    val typography = themeProvider.typography(isLegacy = false)
 
     SparkTheme(
         colors = colors,
         shapes = shapes,
         typography = typography,
-        useLegacyStyle = isLegacy,
+        useLegacyStyle = false,
     ) {
         CompositionLocalProvider(LocalRippleTheme provides SparkRippleTheme) {
             val layoutDirection = when (theme.textDirection) {

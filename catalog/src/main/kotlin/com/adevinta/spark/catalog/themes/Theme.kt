@@ -88,11 +88,11 @@ public enum class ThemeMode {
 }
 
 public enum class BrandMode(public val label: String) {
-    LeboncoinLegacy("Leboncoin (Legacy)"),
     Leboncoin("Leboncoin (New Ui)"),
     Adevinta("Adevinta"),
     Kleinanzeigen("Kleinanzeigen"),
     Milanuncios("Milanuncios"),
+    Subito("Subito"),
 }
 
 public enum class UserMode {
