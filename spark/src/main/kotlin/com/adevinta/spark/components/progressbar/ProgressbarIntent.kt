@@ -1,4 +1,4 @@
-package com.adevinta.spark.components.progressbar/*
+/*
  * Copyright (c) 2023 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,6 +19,7 @@ package com.adevinta.spark.components.progressbar/*
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.adevinta.spark.components.progressbar
 
 import androidx.compose.runtime.Composable
 import com.adevinta.spark.components.IntentColor
