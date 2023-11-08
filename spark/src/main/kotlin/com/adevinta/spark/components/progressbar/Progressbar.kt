@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
@@ -44,6 +45,7 @@ import androidx.compose.material3.LinearProgressIndicator as MaterialProgressbar
 internal fun SparkProgressbar(
     @FloatRange(from = 0.0, to = 1.0) progress: Float,
     isIndeterminate: Boolean,
+    isRounded: Boolean,
     intent: ProgressbarIntent,
     modifier: Modifier = Modifier,
 ) {
@@ -54,6 +56,7 @@ internal fun SparkProgressbar(
             modifier = modifier.sparkUsageOverlay(),
             color = color,
             trackColor = trackColor,
+            strokeCap = if (isRounded) StrokeCap.Round else StrokeCap.Butt,
         )
     } else {
         MaterialProgressbar(
@@ -61,6 +64,7 @@ internal fun SparkProgressbar(
             progress = progress,
             color = color,
             trackColor = trackColor,
+            strokeCap = if (isRounded) StrokeCap.Round else StrokeCap.Butt,
         )
     }
 }
@@ -83,12 +87,14 @@ public fun Progressbar(
     @FloatRange(from = 0.0, to = 1.0) progress: Float,
     intent: ProgressbarIntent,
     modifier: Modifier = Modifier,
+    isRounded: Boolean = false,
 ) {
     SparkProgressbar(
         progress = progress.coerceIn(0.0f, 1.0f),
         isIndeterminate = false,
         intent = intent,
         modifier = modifier,
+        isRounded = isRounded,
     )
 }
 
@@ -101,12 +107,14 @@ public fun Progressbar(
 public fun ProgressbarIndeterminate(
     intent: ProgressbarIntent,
     modifier: Modifier = Modifier,
+    isRounded: Boolean = false,
 ) {
     SparkProgressbar(
         progress = 0f,
         isIndeterminate = true,
         intent = intent,
         modifier = modifier,
+        isRounded = isRounded,
     )
 }
 
@@ -125,6 +133,7 @@ internal fun PreviewProgressbar(
                 intent = intent,
                 modifier = Modifier.fillMaxWidth(),
                 progress = progress.toFloat(),
+                isRounded = Random.nextBoolean(),
             )
         }
     }
@@ -144,6 +153,7 @@ internal fun PreviewProgressbarIndeterminate(
                 ProgressbarIndeterminate(
                     intent = intent,
                     modifier = Modifier.fillMaxWidth(),
+                    isRounded = Random.nextBoolean(),
                 )
             }
         }
