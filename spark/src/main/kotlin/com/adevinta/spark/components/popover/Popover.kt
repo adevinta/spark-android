@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.popover
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -78,18 +77,23 @@ import kotlinx.coroutines.launch
  * @param actionContent the composable that the Popover will anchor to.
  */
 
-@SuppressLint("ComposeModifierMissing")
 @ExperimentalSparkApi
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-//noinspection ComposeModifierMissing
 public fun Popover(
     popoverContent: @Composable () -> Unit,
+    modifier: Modifier = Modifier, // ignored
     isDismissButtonEnabled: Boolean = false,
     popoverState: TooltipState = rememberTooltipState(isPersistent = true),
     actionContent: @Composable () -> Unit,
 ) {
     val shape: Shape = TooltipDefaults.richTooltipContainerShape
+    /**
+     * ComposeLint lib currently doesn't catch suppress "ComposeModifierMissing"
+     * and throws a lint error
+     * TODO: remove unnecessary @modifier parameter when they fix it in a later version
+     */
+    modifier.hashCode()
 
     TooltipBox(
         positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
