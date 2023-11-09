@@ -84,6 +84,7 @@ import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
 import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.KleinanzeigenTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
+import com.adevinta.spark.catalog.themes.themeprovider.milanuncios.MilanunciosTheme
 import com.adevinta.spark.catalog.themes.themeprovider.subito.SubitoTheme
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
@@ -103,6 +104,7 @@ internal fun CatalogApp(
         BrandMode.Leboncoin -> LeboncoinTheme
         BrandMode.Subito -> SubitoTheme
         BrandMode.Kleinanzeigen -> KleinanzeigenTheme
+        BrandMode.Milanuncios -> MilanunciosTheme
     }
 
     val useDark = (theme.themeMode == ThemeMode.System && isSystemInDarkTheme()) || theme.themeMode == ThemeMode.Dark
