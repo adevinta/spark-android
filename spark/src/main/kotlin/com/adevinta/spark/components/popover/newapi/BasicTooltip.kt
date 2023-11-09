@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.popover.newapi
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.MutatePriority
 import androidx.compose.foundation.MutatorMutex
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -80,10 +79,10 @@ public fun BasicTooltipBox(
     positionProvider: PopupPositionProvider,
     tooltip: @Composable () -> Unit,
     state: BasicTooltipState,
-    @SuppressLint("ComposeModifierWithoutDefault") modifier: Modifier,
     focusable: Boolean,
     enableUserInput: Boolean,
     content: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     val scope = rememberCoroutineScope()
     Box {
