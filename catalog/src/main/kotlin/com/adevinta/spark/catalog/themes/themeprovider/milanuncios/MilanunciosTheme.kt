@@ -19,41 +19,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-pluginManagement {
-    includeBuild("build-logic")
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
+package com.adevinta.spark.catalog.themes.themeprovider.milanuncios
 
-dependencyResolutionManagement {
-    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
-    repositories {
-        google()
-        mavenCentral()
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.Composable
+import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
+import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkShapes
+import com.adevinta.spark.tokens.SparkTypography
+import com.adevinta.spark.tokens.sparkTypography
 
-        // Pre-release artifacts of compose-compiler
-        // https://androidx.dev/storage/compose-compiler/repository
-        maven("https://androidx.dev/storage/compose-compiler/repository/") {
-            name = "compose-compiler-dev"
-            content {
-                includeGroup("androidx.compose.compiler")
-            }
+public object MilanunciosTheme : ThemeProvider {
+    @Composable
+    override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
+        return when {
+            useDarkColors || isSystemInDarkTheme() -> MilanunciosDark
+            else -> MilanunciosLight
         }
     }
+
+    @Composable
+    override fun shapes(isLegacy: Boolean): SparkShapes = MilanunciosShapes
+
+    @Composable
+    override fun typography(isLegacy: Boolean): SparkTypography {
+        return sparkTypography()
+    }
 }
-
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":spark-bom")
-include(":spark-icons")
-include(":spark-lint")
-include(":spark-screenshot-testing")
-include(":catalog")
