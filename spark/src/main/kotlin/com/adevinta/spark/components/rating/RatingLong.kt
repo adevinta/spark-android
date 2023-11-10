@@ -43,26 +43,42 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.highlight
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+import java.util.Locale
 
 /**
  * Component that displays rating of an user with stars in the following form:
  *  - ***** (5)
  *  - ***** 5 avis
  * @param value rating value as a float, should be between 1.0 and 5.0
- * @param contentDescription description indicate wha is the rating and how many comments are associated with it
  * @param label the nb of comments to be displayed after the rating stars.
+ * @param commentCount the nb of comments to be displayed after the rating stars.
+ * @param locale the local used to format the rating value.
  * @param modifier to apply
  */
 @InternalSparkApi
 @Composable
-internal fun SparkRatingLong(
+internal fun SparkRating(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
-    contentDescription: String,
     label: String?,
+    commentCount: Int?,
+    locale: Locale?,
     modifier: Modifier = Modifier,
 ) {
     if (value !in 1f..5f) return
+
+    val labelText = locale?.let { formattedRatingValue(locale, value) }
+
+    val contentDescription = if (commentCount != null) {
+        pluralStringResource(
+            id = R.plurals.spark_rating_with_comments_a11y,
+            count = commentCount,
+            value,
+            commentCount,
+        )
+    } else {
+        stringResource(id = R.string.spark_rating_a11y, value)
+    }
 
     Row(
         modifier = modifier.semantics(mergeDescendants = true) {
@@ -71,12 +87,15 @@ internal fun SparkRatingLong(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        repeat(5) {
-            SparkRatingStar(
-                modifier = Modifier,
-                enabled = value >= (it + 1),
+        if (labelText != null) {
+            Text(
+                text = labelText,
+                textAlign = TextAlign.Center,
+                style = SparkTheme.typography.caption.highlight,
             )
         }
+
+        RatingDisplay(value = value)
 
         if (label != null) {
             Text(
@@ -84,6 +103,13 @@ internal fun SparkRatingLong(
                 text = label,
                 textAlign = TextAlign.Center,
                 style = SparkTheme.typography.body2.highlight,
+            )
+        }
+        if (commentCount != null) {
+            Text(
+                text = stringResource(id = R.string.spark_rating_label, commentCount),
+                textAlign = TextAlign.Center,
+                style = SparkTheme.typography.caption,
             )
         }
     }
@@ -95,17 +121,27 @@ internal fun SparkRatingLong(
  * @param value rating value as a float, should be between 0.0 and 5.0
  * @param modifier to be applied to this rating
  */
+@Deprecated(
+    message = "Use RatingFull instead as the label is not the same anymore",
+    replaceWith = ReplaceWith(
+        expression = "RatingFull(value = value, modifier = modifier, locale = null)",
+        imports = [
+            "com.adevinta.spark.components.rating.RatingFull",
+        ],
+    ),
+)
 @Composable
 public fun RatingNaked(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     modifier: Modifier = Modifier,
 ) {
-    SparkRatingLong(
+    SparkRating(
         modifier = modifier,
         value = value,
-        contentDescription = stringResource(id = R.string.spark_rating_a11y, value),
         label = null,
+        commentCount = null,
+        locale = null,
     )
 }
 
@@ -117,23 +153,28 @@ public fun RatingNaked(
  * @param modifier to apply
  */
 @Composable
-@Suppress("ktlint:standard:trailing-comma-on-call-site")
+@Deprecated(
+    message = "Use RatingFull instead as the label is not the same anymore",
+    replaceWith = ReplaceWith(
+        expression = "RatingFull(value = value, modifier = modifier, commentCount = commentCount, locale = null)",
+        imports = [
+            "com.adevinta.spark.components.rating.RatingFull",
+            "com.adevinta.spark.components.rating.firstLocale",
+        ],
+    ),
+)
 public fun RatingCompressed(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     commentCount: Int,
     modifier: Modifier = Modifier,
 ) {
-    SparkRatingLong(
+    SparkRating(
         modifier = modifier,
         value = value,
-        contentDescription = pluralStringResource(
-            id = R.plurals.spark_rating_with_comments_a11y,
-            commentCount,
-            value,
-            commentCount,
-        ),
-        label = stringResource(id = R.string.spark_rating_label, commentCount),
+        commentCount = commentCount,
+        label = null,
+        locale = null,
     )
 }
 
@@ -144,70 +185,133 @@ public fun RatingCompressed(
  * @param commentCount the nb of comments to be displayed after the rating stars.
  * @param modifier to apply
  */
+@Deprecated(
+    message = "Use RatingFull instead as the label is not the same anymore",
+    replaceWith = ReplaceWith(
+        expression = "RatingFull(value = value, modifier = modifier, commentCount = null, locale = null," +
+                " label = pluralStringResource(R.plurals.spark_rating_with_comments_count_label, commentCount, commentCount))",
+        imports = [
+            "com.adevinta.spark.components.rating.RatingFull",
+            "com.adevinta.spark.components.rating.firstLocale",
+            "androidx.compose.ui.res.pluralStringResource",
+            "com.adevinta.spark.R",
+        ],
+    ),
+)
 @Composable
-@Suppress("ktlint:standard:trailing-comma-on-call-site")
 public fun RatingFull(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     commentCount: Int,
     modifier: Modifier = Modifier,
 ) {
-    SparkRatingLong(
+    SparkRating(
         modifier = modifier,
         value = value,
-        contentDescription = pluralStringResource(
-            id = R.plurals.spark_rating_with_comments_a11y,
-            commentCount,
-            value,
-            commentCount,
-        ),
         label = pluralStringResource(id = R.plurals.spark_rating_with_comments_count_label, commentCount, commentCount),
+        commentCount = null,
+        locale = null,
     )
 }
 
+/**
+ * Display the [value] rating of an user with stars optionally followed by a label and/or
+ * [commentCount] in the following form **`3,4 ***** Communication (5)`**
+ *
+ * @param value rating value as a float, should be between 0.0 and 5.0
+ * @param modifier to apply
+ * @param commentCount the nb of comments to be displayed after the rating stars.
+ * @param label the nb of comments to be displayed after the rating stars.
+ * @param locale the local used to format the rating value, use the first available Locale by default.
+ * Use `null` to hide the rating value before the stars
+ */
+@Composable
+public fun RatingFull(
+    @FloatRange(from = 0.0, to = 5.0)
+    value: Float,
+    modifier: Modifier = Modifier,
+    commentCount: Int? = null,
+    label: String? = null,
+    locale: Locale? = firstLocale(),
+) {
+    SparkRating(
+        modifier = modifier,
+        value = value,
+        label = label,
+        commentCount = commentCount,
+        locale = locale,
+    )
+}
+
+@Suppress("DEPRECATION")
 @Composable
 @Preview(
     group = "Ratings",
     name = "RatingFull",
 )
-internal fun RatingFullPreview(
+private fun RatingFullPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         RatingFull(value = 1.6f, commentCount = 1)
-        RatingFull(value = 3.6f, commentCount = 23)
+        RatingFull(
+            value = 3.6f,
+            commentCount = null,
+            locale = null,
+            label = pluralStringResource(R.plurals.spark_rating_with_comments_count_label, count = 23, 23)
+        )
         RatingFull(value = 5f, commentCount = 1000002)
     }
 }
 
+@Suppress("DEPRECATION")
 @Composable
 @Preview(
     group = "Ratings",
     name = "RatingCompressed",
 )
-internal fun RatingCompressedPreview(
+private fun RatingCompressedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         RatingCompressed(value = 1.6f, commentCount = 0)
-        RatingCompressed(value = 2.8f, commentCount = 23)
+        RatingFull(value = 2.8f, modifier = Modifier, commentCount = 23, locale = null)
         RatingCompressed(value = 4.2f, commentCount = 1000002)
     }
 }
 
+@Suppress("DEPRECATION")
 @Composable
 @Preview(
     group = "Ratings",
     name = "RatingNaked",
 )
-internal fun RatingNakedPreview(
+private fun RatingNakedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         RatingNaked(value = 1f)
         RatingNaked(value = 2.1f)
-        RatingNaked(value = 3.999999f)
+        RatingFull(value = 3.999999f, locale = null)
         RatingNaked(value = 4.2f)
         RatingNaked(value = 5f)
+    }
+}
+
+@Suppress("DEPRECATION")
+@Composable
+@Preview(
+    group = "Ratings",
+    name = "SparkRatingFull",
+)
+private fun SparkRatingFullPreview(
+    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
+) {
+    PreviewTheme(theme) {
+        RatingFull(value = 1f, label = "Communication")
+        RatingFull(value = 2.1f, label = "Communication", commentCount = 5)
+        RatingFull(value = 3.999999f, commentCount = 5)
+        RatingFull(value = 4.2f)
+        RatingFull(value = 5f)
     }
 }

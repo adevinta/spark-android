@@ -22,14 +22,18 @@
 package com.adevinta.spark.components.rating
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -37,40 +41,59 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.StarFill
-import com.adevinta.spark.tokens.DisabledAlpha
+import com.adevinta.spark.icons.StarOutline
+import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * RatingStar is the atomic element of rating components
  * @param modifier to be applied
+ * @param size of the star, can be any size but preferably
+ * use [RatingDefault.StarSize] or [RatingDefault.SmallStarSize].
  * @param enabled whether the star should be colored
  */
 @Composable
 @InternalSparkApi
 internal fun SparkRatingStar(
     modifier: Modifier = Modifier,
+    size: Dp = RatingDefault.SmallStarSize,
     enabled: Boolean = true,
 ) {
     val color by animateColorAsState(
         targetValue = if (enabled) {
-            SparkTheme.colors.main
+            SparkTheme.colors.mainVariant
         } else {
-            SparkTheme.colors.onSurface.copy(DisabledAlpha)
+            SparkTheme.colors.onSurface.dim3
         },
         label = "star color",
     )
+    val icon = if (enabled) SparkIcons.StarFill else SparkIcons.StarOutline
 
     CompositionLocalProvider(LocalContentColor provides color) {
         Icon(
-            modifier = modifier.size(StarSize),
-            sparkIcon = SparkIcons.StarFill,
+            modifier = modifier.size(size),
+            sparkIcon = icon,
             contentDescription = null,
         )
     }
+    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
+    Box(modifier = modifier) {
+        FilledStar(
+            fraction,
+            style,
+            isRtl,
+            painterFilled
+        )
+        EmptyStar(fraction, style, isRtl, painterEmpty)
+    }
 }
 
-private val StarSize = 12.dp
+public object RatingDefault {
+    public val StarSize: Dp = 16.dp
+    public val SmallStarSize: Dp = 12.dp
+    public val LabelSide: RatingLabelSide = RatingLabelSide.End
+}
 
 @Composable
 @Preview
