@@ -19,41 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-pluginManagement {
-    includeBuild("build-logic")
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
+package com.adevinta.spark.catalog.themes.themeprovider.subito
 
-dependencyResolutionManagement {
-    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
-    repositories {
-        google()
-        mavenCentral()
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.tokens.sparkShapes
 
-        // Pre-release artifacts of compose-compiler
-        // https://androidx.dev/storage/compose-compiler/repository
-        maven("https://androidx.dev/storage/compose-compiler/repository/") {
-            name = "compose-compiler-dev"
-            content {
-                includeGroup("androidx.compose.compiler")
-            }
-        }
-    }
-}
-
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":spark-bom")
-include(":spark-icons")
-include(":spark-lint")
-include(":spark-screenshot-testing")
-include(":catalog")
+internal val SubitoShapes = sparkShapes(
+    none = RoundedCornerShape(0.dp),
+    extraSmall = RoundedCornerShape(4.0.dp),
+    small = RoundedCornerShape(8.0.dp),
+    medium = RoundedCornerShape(12.0.dp),
+    large = RoundedCornerShape(16.0.dp),
+    extraLarge = RoundedCornerShape(28.0.dp),
+    full = CircleShape,
+)

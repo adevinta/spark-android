@@ -19,41 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-pluginManagement {
-    includeBuild("build-logic")
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+package com.adevinta.spark.components.popover
+
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+
+internal object PopoverDefaults {
+    internal val PopoverAnchorPadding: Dp = 8.dp
+    internal val PopoverContentPadding: Dp = 16.dp
+    internal val PopoverDismissButtonPadding: Dp = 8.dp
+    internal val PopoverMinHeight = 24.dp
+    internal val PopoverMinWidth = 40.dp
 }
-
-dependencyResolutionManagement {
-    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
-    repositories {
-        google()
-        mavenCentral()
-
-        // Pre-release artifacts of compose-compiler
-        // https://androidx.dev/storage/compose-compiler/repository
-        maven("https://androidx.dev/storage/compose-compiler/repository/") {
-            name = "compose-compiler-dev"
-            content {
-                includeGroup("androidx.compose.compiler")
-            }
-        }
-    }
-}
-
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":spark-bom")
-include(":spark-icons")
-include(":spark-lint")
-include(":spark-screenshot-testing")
-include(":catalog")
