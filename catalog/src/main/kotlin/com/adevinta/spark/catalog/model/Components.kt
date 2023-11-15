@@ -35,8 +35,8 @@ import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfig
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
-import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
+import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
