@@ -1,6 +1,6 @@
 # Package com.adevinta.spark.components.textfields
 
-[SelectTextFields](https://zeroheight.com/25c15666f/p/29d201-textfield-) allow users to select an
+[SelectTextFields](https://spark.adevinta.com/1186e1705/p/773c60-input--text-field/b/0658e2) allow users to select an
 option from a dropdown and optionally enter text to filter the options available in the dropdown.
 
 They typically appear in forms and dialogs.
