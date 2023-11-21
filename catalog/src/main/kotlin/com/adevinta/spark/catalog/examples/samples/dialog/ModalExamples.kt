@@ -19,41 +19,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-pluginManagement {
-    includeBuild("build-logic")
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
+package com.adevinta.spark.catalog.examples.samples.dialog
 
-dependencyResolutionManagement {
-    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
-    repositories {
-        google()
-        mavenCentral()
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.catalog.examples.samples.dialog.modal.ModalSample
+import com.adevinta.spark.catalog.model.Example
+import com.adevinta.spark.catalog.util.SampleSourceUrl
 
-        // Pre-release artifacts of compose-compiler
-        // https://androidx.dev/storage/compose-compiler/repository
-        maven("https://androidx.dev/storage/compose-compiler/repository/") {
-            name = "compose-compiler-dev"
-            content {
-                includeGroup("androidx.compose.compiler")
-            }
-        }
-    }
-}
-
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-rootProject.name = "spark-android"
-
-include(":spark")
-include(":spark-bom")
-include(":spark-icons")
-include(":spark-lint")
-include(":spark-screenshot-testing")
-include(":catalog")
+private const val ModalsExampleSourceUrl = "$SampleSourceUrl/ModalExamples.kt"
+public val DialogsExamples: List<Example> = listOf(
+    Example(
+        name = "Modal",
+        description = "Showcase the modal component with different",
+        sourceUrl = ModalsExampleSourceUrl,
+    ) {
+        ModalSample()
+    },
+    Example(
+        name = "Modal with no content padding",
+        description = "Showcase the modal component with not start and end padding on the content placeholder",
+        sourceUrl = ModalsExampleSourceUrl,
+    ) {
+        ModalSample(PaddingValues(0.dp))
+    },
+)

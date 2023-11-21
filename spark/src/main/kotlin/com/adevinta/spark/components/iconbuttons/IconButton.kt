@@ -22,7 +22,6 @@
 package com.adevinta.spark.components.iconbuttons
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -75,7 +74,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * for this icon button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  */
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
 internal fun SparkIconButton(
