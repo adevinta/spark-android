@@ -392,7 +392,7 @@ public fun darkSparkColors(
  * [lightSparkColors] and a [darkSparkColors], that can be used as-is or customized.
  *
  * To learn more about colors, see [Material Design colors](https://m3.material.io/styles/color/overview) and
- * [Spark colors](https://zeroheight.com/25c15666f/p/40105d-colors/b/77b3e7).
+ * [Spark colors](https://spark.adevinta.com/1186e1705/p/0879a9-colors/b/27d7a3).
  *
  * @property accent
  * @property onAccent
