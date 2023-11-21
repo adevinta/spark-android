@@ -19,13 +19,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.rating
 
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
@@ -43,7 +43,7 @@ public fun RatingDisplay(
     value: Float,
     modifier: Modifier = Modifier,
 ) {
-    if (value !in 1f..5f) return
+    if (value !in .5f..5f) return
     Row(
         modifier = modifier
             .semantics(mergeDescendants = true) {}
@@ -51,10 +51,27 @@ public fun RatingDisplay(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
+        var remainingValue = remember {
+            value
+        }
         repeat(5) {
+            val starRating = when {
+                remainingValue == 0f -> 0f
+                remainingValue >= 1 -> {
+                    remainingValue -= 1
+                    1f
+                }
+
+                else -> {
+                    val fraction = remainingValue / 1
+                    remainingValue = 0f
+                    fraction
+                }
+            }
+
             SparkRatingStar(
                 modifier = Modifier,
-                enabled = value >= (it + 1),
+                state = RatingStarState(starRating),
             )
         }
     }
@@ -69,10 +86,15 @@ internal fun RatingDisplayPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
+        RatingDisplay(value = 0.5f)
         RatingDisplay(value = 1f)
+        RatingDisplay(value = 1.5f)
         RatingDisplay(value = 2.1f)
-        RatingDisplay(value = 3.999999f)
-        RatingDisplay(value = 4.2f)
+        RatingDisplay(value = 2.5f)
+        RatingDisplay(value = 3.2f)
+        RatingDisplay(value = 3.666f)
+        RatingDisplay(value = 4.1f)
+        RatingDisplay(value = 4.26f)
         RatingDisplay(value = 5f)
     }
 }

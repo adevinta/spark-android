@@ -25,7 +25,6 @@ import android.icu.text.NumberFormat
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.movableContentOf
@@ -156,7 +155,7 @@ internal fun formattedRatingValue(locale: Locale, value: Float): String = rememb
     message = "Use RatingSimple instead",
     replaceWith = ReplaceWith(
         expression = "RatingSimple(value = value, modifier = modifier, commentCount = commentCount," +
-                " locale = locale, labelSide = LabelSide.End)",
+            " locale = locale, labelSide = LabelSide.End)",
         imports = [
             "com.adevinta.spark.components.rating.RatingSimple",
             "com.adevinta.spark.components.rating.LabelSide",
@@ -205,7 +204,7 @@ public fun RatingSimple(
         commentCount = commentCount,
         locale = locale,
         labelSide = labelSide,
-        size = RatingSize.Medium
+        size = RatingSize.Medium,
     )
 }
 
@@ -232,7 +231,7 @@ public fun RatingSimpleLarge(
         commentCount = null,
         locale = locale,
         labelSide = labelSide,
-        size = RatingSize.Large
+        size = RatingSize.Large,
     )
 }
 
@@ -257,7 +256,7 @@ internal fun firstLocale(): Locale {
     group = "Ratings",
     name = "RatingSmall",
 )
-private fun RatingSmallPreview(
+internal fun RatingSmallPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     val frenchLocale = Locale.FRANCE

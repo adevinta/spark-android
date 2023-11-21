@@ -189,7 +189,8 @@ public fun RatingCompressed(
     message = "Use RatingFull instead as the label is not the same anymore",
     replaceWith = ReplaceWith(
         expression = "RatingFull(value = value, modifier = modifier, commentCount = null, locale = null," +
-                " label = pluralStringResource(R.plurals.spark_rating_with_comments_count_label, commentCount, commentCount))",
+            " label = pluralStringResource(R.plurals.spark_rating_with_comments_count_label," +
+            " commentCount, commentCount))",
         imports = [
             "com.adevinta.spark.components.rating.RatingFull",
             "com.adevinta.spark.components.rating.firstLocale",
@@ -249,7 +250,7 @@ public fun RatingFull(
     group = "Ratings",
     name = "RatingFull",
 )
-private fun RatingFullPreview(
+internal fun RatingFullPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
@@ -258,7 +259,7 @@ private fun RatingFullPreview(
             value = 3.6f,
             commentCount = null,
             locale = null,
-            label = pluralStringResource(R.plurals.spark_rating_with_comments_count_label, count = 23, 23)
+            label = pluralStringResource(R.plurals.spark_rating_with_comments_count_label, count = 23, 23),
         )
         RatingFull(value = 5f, commentCount = 1000002)
     }
@@ -270,7 +271,7 @@ private fun RatingFullPreview(
     group = "Ratings",
     name = "RatingCompressed",
 )
-private fun RatingCompressedPreview(
+internal fun RatingCompressedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
@@ -286,7 +287,7 @@ private fun RatingCompressedPreview(
     group = "Ratings",
     name = "RatingNaked",
 )
-private fun RatingNakedPreview(
+internal fun RatingNakedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {

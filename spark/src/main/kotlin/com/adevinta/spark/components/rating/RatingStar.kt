@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.rating
 
+import androidx.annotation.FloatRange
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -29,16 +30,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.rating.RatingStarState.Empty
+import com.adevinta.spark.components.rating.RatingStarState.Full
+import com.adevinta.spark.components.rating.RatingStarState.Half
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.StarFill
 import com.adevinta.spark.icons.StarOutline
@@ -60,32 +63,125 @@ internal fun SparkRatingStar(
     size: Dp = RatingDefault.SmallStarSize,
     enabled: Boolean = true,
 ) {
+    SparkRatingStar(modifier, size, RatingStarState(enabled))
+}
+
+/**
+ * RatingStar is the atomic element of rating components
+ * @param modifier to be applied
+ * @param size of the star, can be any size but preferably
+ * use [RatingDefault.StarSize] or [RatingDefault.SmallStarSize].
+ * @param enabled whether the star should be colored
+ */
+@Composable
+@InternalSparkApi
+internal fun SparkRatingStar(
+    modifier: Modifier = Modifier,
+    size: Dp = RatingDefault.SmallStarSize,
+    state: RatingStarState = RatingStarState(true),
+) {
     val color by animateColorAsState(
-        targetValue = if (enabled) {
+        targetValue = if (state == Full) {
             SparkTheme.colors.mainVariant
         } else {
             SparkTheme.colors.onSurface.dim3
         },
         label = "star color",
     )
-    val icon = if (enabled) SparkIcons.StarFill else SparkIcons.StarOutline
+    val icon = if (state == Full) SparkIcons.StarFill else SparkIcons.StarOutline
 
-    CompositionLocalProvider(LocalContentColor provides color) {
-        Icon(
-            modifier = modifier.size(size),
-            sparkIcon = icon,
-            contentDescription = null,
-        )
+    when (state) {
+        Full,
+        Empty,
+        -> {
+            CompositionLocalProvider(LocalContentColor provides color) {
+                Icon(
+                    modifier = modifier.size(size),
+                    sparkIcon = icon,
+                    contentDescription = null,
+                )
+            }
+        }
+
+        Half -> {
+            Box(modifier = modifier) {
+                Icon(
+                    modifier = Modifier
+                        .size(size)
+                        .clip(
+                            FractionalRectangleShape(startFraction = 0f, endFraction = 0.5f),
+                        ),
+                    sparkIcon = SparkIcons.StarFill,
+                    tint = SparkTheme.colors.mainVariant,
+                    contentDescription = null,
+                )
+                Icon(
+                    modifier = Modifier
+                        .size(size)
+                        .clip(
+                            FractionalRectangleShape(startFraction = 0.5f, endFraction = 1f),
+                        ),
+                    sparkIcon = SparkIcons.StarOutline,
+                    tint = SparkTheme.colors.onSurface.dim3,
+                    contentDescription = null,
+                )
+            }
+        }
     }
-    val isRtl = LocalLayoutDirection.current == LayoutDirection.Rtl
-    Box(modifier = modifier) {
-        FilledStar(
-            fraction,
-            style,
-            isRtl,
-            painterFilled
-        )
-        EmptyStar(fraction, style, isRtl, painterEmpty)
+}
+
+/**
+ * Enum that represents possible star states.
+ */
+internal enum class RatingStarState {
+    /**
+     * State that means a component is on
+     */
+    Full,
+
+    /**
+     * State that means a component is off
+     */
+    Empty,
+
+    /**
+     * State that means that on/off value of a component cannot be determined
+     */
+    Half,
+}
+
+/**
+ * Return corresponding ToggleableState based on a Boolean representation
+ *
+ * @param value whether the ToggleableState is on or off
+ */
+internal fun RatingStarState(value: Boolean) = if (value) Full else Empty
+
+/**
+ * Return corresponding ToggleableState based on a Boolean representation
+ *
+ * @param starValue whether the ToggleableState is on or off
+ */
+internal fun RatingStarState(@FloatRange(0.0, 1.0) starValue: Float): RatingStarState {
+    check(starValue in 0.0f..1.0f) { "RatingStarState value must be between 0.0 and 1.0" }
+    return when (starValue) {
+        in 0.0f..0.25f -> Empty
+        in 0.25f..0.75f -> Half
+        else -> Full
+    }
+}
+
+/**
+ * Return corresponding ToggleableState based on a Boolean representation
+ *
+ * @param starValue whether the ToggleableState is on or off
+ */
+internal fun RatingStarState(@FloatRange(0.0, 1.0) starValue: Double): RatingStarState {
+    check(starValue in 0.0..1.0) { "RatingStarState value must be between 0.0 and 1.0" }
+    return when (starValue) {
+        in 0.0..0.25 -> Empty
+        in 0.25..0.75 -> Half
+        else -> Full
     }
 }
 
@@ -103,5 +199,9 @@ private fun RatingStarPreview(
     PreviewTheme(theme) {
         SparkRatingStar(enabled = true)
         SparkRatingStar(enabled = false)
+        SparkRatingStar(state = RatingStarState(0.1))
+        SparkRatingStar(state = RatingStarState(0.3))
+        SparkRatingStar(state = RatingStarState(0.6))
+        SparkRatingStar(state = RatingStarState(0.8))
     }
 }
