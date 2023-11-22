@@ -109,7 +109,7 @@ internal fun SparkRatingSmall(
         if (labelSide == RatingLabelSide.Start) {
             label()
         }
-        SparkRatingStar(
+        RatingStar(
             enabled = true,
             size = if (size == RatingSize.Large) 24.dp else RatingDefault.SmallStarSize,
         )

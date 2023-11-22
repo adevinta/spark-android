@@ -311,7 +311,7 @@ private fun SparkRatingFullPreview(
     PreviewTheme(theme) {
         RatingFull(value = 1f, label = "Communication")
         RatingFull(value = 2.1f, label = "Communication", commentCount = 5)
-        RatingFull(value = 3.999999f, commentCount = 5)
+        RatingFull(value = 3.999999f, commentCount = 5, locale = null)
         RatingFull(value = 4.2f)
         RatingFull(value = 5f)
     }
