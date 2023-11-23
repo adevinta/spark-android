@@ -87,7 +87,7 @@ public fun Progressbar(
     @FloatRange(from = 0.0, to = 1.0) progress: Float,
     intent: ProgressbarIntent,
     modifier: Modifier = Modifier,
-    isRounded: Boolean = false,
+    isRounded: Boolean = true,
 ) {
     SparkProgressbar(
         progress = progress.coerceIn(0.0f, 1.0f),

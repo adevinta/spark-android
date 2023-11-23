@@ -25,14 +25,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.progressbar.Progressbar
-import com.adevinta.spark.components.progressbar.ProgressbarIndeterminate
 import com.adevinta.spark.components.progressbar.ProgressbarIntent
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
@@ -56,10 +58,10 @@ internal class ProgressScreenshot {
     val paparazzi = Paparazzi(
         maxPercentDifference = MaxPercentDifference,
         theme = PaparazziTheme,
-        renderingMode = SessionParams.RenderingMode.SHRINK,
+        renderingMode = SessionParams.RenderingMode.FULL_EXPAND,
         showSystemUi = true,
         environment = patchedEnvironment(),
-        deviceConfig = app.cash.paparazzi.DeviceConfig.PIXEL_C.copy(
+        deviceConfig = app.cash.paparazzi.DeviceConfig.PIXEL_6_PRO.copy(
             softButtons = false,
             locale = "fr-rFR",
         ),
@@ -68,34 +70,28 @@ internal class ProgressScreenshot {
     @Test
     fun test() {
         isRoundedList.forEach { isRounded ->
-            isIntermediateList.forEach { isIntermediate ->
+            intents.forEach { intent ->
                 paparazzi.sparkSnapshot(
-                    name = "$isRounded" +
-                        "_$isIntermediate",
+                    name = "Intent_${intent.name}" +
+                        "_Rounded_Border_$isRounded",
                 ) {
-                    Row {
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
-                        ) {
-                            Text(
-                                text = "isRounded: $isRounded, isIntermediate: $isIntermediate",
-                            )
-                            intents.forEach { intent ->
+                    Surface(
+                        color = SparkTheme.colors.surface,
+                    ) {
+                        Row(modifier = Modifier.padding(24.dp)) {
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(8.dp),
+                            ) {
+                                Text(
+                                    text = "Intent: ${intent.name}, Rounded_Border: $isRounded",
+                                )
                                 val progress: Double = Random.nextDouble(0.0, 1.0)
-
-                                Column {
-                                    Progressbar(
-                                        intent = intent,
-                                        modifier = Modifier.fillMaxWidth(),
-                                        progress = progress.toFloat(),
-                                        isRounded = Random.nextBoolean(),
-                                    )
-                                    ProgressbarIndeterminate(
-                                        intent = intent,
-                                        modifier = Modifier.fillMaxWidth(),
-                                        isRounded = Random.nextBoolean(),
-                                    )
-                                }
+                                Progressbar(
+                                    intent = intent,
+                                    modifier = Modifier.fillMaxWidth(),
+                                    progress = progress.toFloat(),
+                                    isRounded = isRounded,
+                                )
                             }
                         }
                     }
