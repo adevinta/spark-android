@@ -50,15 +50,13 @@ internal class ProgressScreenshot {
 
     private val isRoundedList: List<Boolean> = listOf(true, false)
 
-    private val isIntermediateList: List<Boolean> = listOf(true, false)
-
     private val intents = ProgressbarIntent.entries.toTypedArray()
 
     @get:Rule
     val paparazzi = Paparazzi(
         maxPercentDifference = MaxPercentDifference,
         theme = PaparazziTheme,
-        renderingMode = SessionParams.RenderingMode.FULL_EXPAND,
+        renderingMode = SessionParams.RenderingMode.SHRINK,
         showSystemUi = true,
         environment = patchedEnvironment(),
         deviceConfig = app.cash.paparazzi.DeviceConfig.PIXEL_6_PRO.copy(
