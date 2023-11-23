@@ -22,9 +22,7 @@
 package com.adevinta.spark.components.progressbar
 
 import androidx.annotation.FloatRange
-import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
@@ -70,18 +68,17 @@ internal fun SparkProgressbar(
 }
 
 /**
- * Determinate
+ * Determinate Progressbar
  *
- * Progress indicators express an unspecified wait time or display the duration of a process.
- *
- * By default there is no animation between [progress] values. You can use
- * [ProgressIndicatorDefaults.ProgressAnimationSpec] as the default recommended [AnimationSpec] when
- * animating progress
+ * Progressbar express a specified progress.
  *
  * @param progress the progress of this progress indicator, where 0.0 represents no progress and 1.0
  * represents full progress. Values outside of this range are coerced into the range.
- * @param modifier the [Modifier] to be applied to this progress indicator
+ * @param intent The intent color for the Progressbar.
+ * @param modifier Modifier to be applied to the Progressbar
+ * @param isRounded Controls the border shape of the progressbar. When `true`, this progressbar will have rounded border shape, & the default is rounded
  */
+
 @Composable
 public fun Progressbar(
     @FloatRange(from = 0.0, to = 1.0) progress: Float,
@@ -99,10 +96,15 @@ public fun Progressbar(
 }
 
 /**
- * Progress indicators express an unspecified wait time or display the duration of a process.
+ * Intermediate Progressbar
  *
- * @param modifier the [Modifier] to be applied to this progress indicator
+ * Progressbar express an unspecified wait time or display the duration of a process.
+ *
+ * @param intent The intent color for the Progressbar.
+ * @param modifier Modifier to be applied to the Progressbar
+ * @param isRounded Controls the border shape of the progressbar. When `true`, this progressbar will have rounded border shape, & the default is rounded
  */
+
 @Composable
 public fun ProgressbarIndeterminate(
     intent: ProgressbarIntent,
