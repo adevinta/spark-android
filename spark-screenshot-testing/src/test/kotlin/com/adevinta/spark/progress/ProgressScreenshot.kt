@@ -43,7 +43,6 @@ import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.random.Random
 
 @RunWith(TestParameterInjector::class)
 internal class ProgressScreenshot {
@@ -70,8 +69,7 @@ internal class ProgressScreenshot {
         isRoundedList.forEach { isRounded ->
             intents.forEach { intent ->
                 paparazzi.sparkSnapshot(
-                    name = "Intent_${intent.name}" +
-                        "_Rounded_Border_$isRounded",
+                    name = "Intent_${intent.name}" + "_Rounded_Border_$isRounded",
                 ) {
                     Surface(
                         color = SparkTheme.colors.surface,
@@ -83,11 +81,11 @@ internal class ProgressScreenshot {
                                 Text(
                                     text = "Intent: ${intent.name}, Rounded_Border: $isRounded",
                                 )
-                                val progress: Double = Random.nextDouble(0.0, 1.0)
+                                val progress = 1.5f
                                 Progressbar(
                                     intent = intent,
                                     modifier = Modifier.fillMaxWidth(),
-                                    progress = progress.toFloat(),
+                                    progress = progress,
                                     isRounded = isRounded,
                                 )
                             }
