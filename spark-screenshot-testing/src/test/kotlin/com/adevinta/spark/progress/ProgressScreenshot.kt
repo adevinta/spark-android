@@ -81,11 +81,10 @@ internal class ProgressScreenshot {
                                 Text(
                                     text = "Intent: ${intent.name}, Rounded_Border: $isRounded",
                                 )
-                                val progress = 1.5f
                                 Progressbar(
                                     intent = intent,
                                     modifier = Modifier.fillMaxWidth(),
-                                    progress = progress,
+                                    progress = 0.5f,
                                     isRounded = isRounded,
                                 )
                             }

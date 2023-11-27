@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.progressbar
 
+import android.annotation.SuppressLint
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
@@ -35,7 +36,6 @@ import com.adevinta.spark.tokens.dim4
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import kotlin.random.Random
 import androidx.compose.material3.LinearProgressIndicator as MaterialProgressbar
 
 @InternalSparkApi
@@ -120,6 +120,7 @@ public fun ProgressbarIndeterminate(
     )
 }
 
+@SuppressLint("Range")
 @Preview(
     group = "Progressbar",
     name = "Progressbar",
@@ -130,12 +131,11 @@ internal fun PreviewProgressbar(
 ) {
     PreviewTheme(theme) {
         ProgressbarIntent.entries.forEach { intent ->
-            val progress: Double = Random.nextDouble(0.0, 1.0)
             Progressbar(
                 intent = intent,
                 modifier = Modifier.fillMaxWidth(),
-                progress = progress.toFloat(),
-                isRounded = Random.nextBoolean(),
+                progress = 0.5f,
+                isRounded = true,
             )
         }
     }
@@ -155,7 +155,7 @@ internal fun PreviewProgressbarIndeterminate(
                 ProgressbarIndeterminate(
                     intent = intent,
                     modifier = Modifier.fillMaxWidth(),
-                    isRounded = Random.nextBoolean(),
+                    isRounded = false,
                 )
             }
         }
