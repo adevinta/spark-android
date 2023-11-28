@@ -23,7 +23,6 @@ package com.adevinta.spark.catalog.configurator.samples.rating
 
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -48,9 +47,11 @@ import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.rating.RatingDefault
 import com.adevinta.spark.components.rating.RatingDisplay
+import com.adevinta.spark.components.rating.RatingInput
 import com.adevinta.spark.components.slider.Slider
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.tokens.highlight
 
 public val RatingsConfigurator: Configurator = Configurator(
@@ -74,11 +75,14 @@ private fun RatingSample() {
     ) {
         var value by remember { mutableFloatStateOf(3.5f) }
         var size by remember { mutableStateOf(RatingSize.Small) }
+        var enabled by remember { mutableStateOf(true) }
 
         ConfiguredRating(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             value = value,
             size = size.size,
+            onRatingChanged = { value = it.toFloat() },
+            enabled = enabled,
         )
 
         Column {
@@ -99,6 +103,16 @@ private fun RatingSample() {
             )
         }
 
+        SwitchLabelled(
+            checked = enabled,
+            onCheckedChange = { enabled = it },
+        ) {
+            Text(
+                text = "Enabled",
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+
         Column {
             Text(
                 text = "Rating value: $value",
@@ -106,7 +120,9 @@ private fun RatingSample() {
                 style = SparkTheme.typography.body2.highlight,
             )
             Slider(
-                modifier = Modifier.fillMaxWidth().safeGesturesPadding(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .safeGesturesPadding(),
                 value = value,
                 onValueChange = { value = it },
                 enabled = true,
@@ -127,25 +143,27 @@ private fun ConfiguredRating(
     modifier: Modifier = Modifier,
     @FloatRange(from = 0.5, to = 5.0)
     value: Float,
+    onRatingChanged: (Int) -> Unit,
     size: Dp = RatingDefault.SmallStarSize,
+    enabled: Boolean = true,
 ) {
     Surface(
         modifier = modifier,
         color = SparkTheme.colors.backgroundVariant,
     ) {
-        Box(
+        Column(
             modifier = Modifier.padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             RatingDisplay(
                 value = value.coerceIn(0.5f, 5f),
                 size = size,
             )
+            RatingInput(
+                value = value.toInt(),
+                enabled = enabled,
+                onRatingChanged = onRatingChanged,
+            )
         }
     }
-}
-
-private enum class TagStyle {
-    Filled,
-    Outlined,
-    Tinted,
 }
