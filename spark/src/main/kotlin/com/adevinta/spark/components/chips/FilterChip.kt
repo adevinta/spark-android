@@ -83,7 +83,7 @@ import androidx.compose.material3.FilterChip as MaterialFilterChip
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
-@Suppress("ktlint:max-line-length", "ktlint:trailing-comma-on-call-site")
+@Suppress("ktlint:standard:max-line-length", "ktlint:standard:trailing-comma-on-call-site")
 @Deprecated(
     "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
     ReplaceWith(
@@ -165,7 +165,7 @@ public fun FilterChip(
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
-@Suppress("ktlint:max-line-length")
+@Suppress("ktlint:standard:max-line-length")
 @Deprecated(
     message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
     replaceWith = ReplaceWith(

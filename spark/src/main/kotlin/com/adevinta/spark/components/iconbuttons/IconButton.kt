@@ -22,14 +22,10 @@
 package com.adevinta.spark.components.iconbuttons
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.PlainTooltipBox
@@ -39,17 +35,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.progress.Spinner
 import com.adevinta.spark.components.progress.SpinnerSize
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.tools.modifiers.ifTrue
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.WheelOutline
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -69,7 +65,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * services.
  * @param isLoading show or hide a [Spinner] instead of the [icon] to indicate a
  * loading state
- * @param shape to be applied to the IconButton background. It should be one of [IconButtonShape] values
+ * @param shape to be applied to the IconButton background. It should be one of [ButtonShape] values
  * @param size one of the [IconButtonSize] values that sets width and height of the IconButton
  * @param border an optional [BorderStroke] to be applied to the IconButton
  * @param contentDescription text used by accessibility services to describe what this icon button
@@ -78,7 +74,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * for this icon button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this icon button in different states.
  */
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
 internal fun SparkIconButton(
@@ -88,7 +84,7 @@ internal fun SparkIconButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     isLoading: Boolean = false,
-    shape: IconButtonShape = IconButtonDefaults.DefaultShape,
+    shape: ButtonShape = IconButtonDefaults.DefaultShape,
     size: IconButtonSize = IconButtonDefaults.DefaultSize,
     border: BorderStroke? = null,
     contentDescription: String? = null,
@@ -146,38 +142,23 @@ internal fun SparkIconButton(
     name = "IconButtons",
 )
 @Composable
-internal fun IconButtonPreview(
+private fun IconButtonPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        val intent = IconButtonIntent.Basic
-        IconButtonSize.entries.forEach { size ->
-            IconButtonFilledPair(
-                intent = intent,
-                size = size,
-                shape = IconButtonShape.Full,
-            )
-        }
-    }
-}
+        val icon = SparkIcons.WheelOutline
+        val contentDescription = "Localized description"
 
-@Composable
-internal fun IconButtonPreview(
-    content: @Composable (
-        intent: IconButtonIntent,
-        shape: IconButtonShape,
-    ) -> Unit,
-) {
-    IconButtonIntent.entries.forEach { intent ->
-        Row(
-            modifier = Modifier.ifTrue(intent == IconButtonIntent.Surface) {
-                background(SparkTheme.colors.surfaceInverse)
-            },
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            IconButtonShape.entries.forEach { shape ->
-                content(/*intent = */ intent, /*shape = */ shape)
-            }
-        }
+        IconButtonFilled(
+            icon = icon,
+            onClick = {},
+            contentDescription = contentDescription,
+        )
+
+        IconButtonFilled(
+            icon = icon,
+            onClick = {},
+            contentDescription = contentDescription,
+        )
     }
 }

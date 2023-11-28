@@ -22,14 +22,13 @@
 package com.adevinta.spark.tokens
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,6 +37,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig
@@ -98,11 +98,13 @@ internal class ColorsScreenshot {
     fun themesColors() {
         ThemeVariant.values().forEach {
             paparazzi.sparkSnapshot(name = it.name) {
-                SparkTheme(
-                    colors = if (it == Light) lightSparkColors() else darkSparkColors(),
-                ) {
-                    Surface {
-                        Colors()
+                CompositionLocalProvider(LocalInspectionMode provides true) {
+                    SparkTheme(
+                        colors = if (it == Light) lightSparkColors() else darkSparkColors(),
+                    ) {
+                        Surface {
+                            Colors()
+                        }
                     }
                 }
             }
@@ -116,13 +118,15 @@ internal class ColorsScreenshot {
                 var debugColors by remember {
                     mutableStateOf(if (it == Light) lightSparkColors() else darkSparkColors())
                 }
-                SparkTheme(
-                    colors = debugColors,
-                ) {
-                    Surface {
-                        Colors()
-                        LaunchedEffect(key1 = Unit) {
-                            debugColors = debugColors()
+                CompositionLocalProvider(LocalInspectionMode provides true) {
+                    SparkTheme(
+                        colors = debugColors,
+                    ) {
+                        Surface {
+                            Colors()
+                            LaunchedEffect(key1 = Unit) {
+                                debugColors = debugColors()
+                            }
                         }
                     }
                 }

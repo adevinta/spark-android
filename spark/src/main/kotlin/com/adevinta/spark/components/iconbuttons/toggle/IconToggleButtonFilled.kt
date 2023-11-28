@@ -33,17 +33,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonColors
 import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
-import com.adevinta.spark.components.iconbuttons.IconButtonPreview
-import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.icons.FavoriteFill
 import com.adevinta.spark.icons.FavoriteOutline
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+
 /**
  * Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a
  * compact toggle button is required, such as in a toolbar or image list.
@@ -59,7 +59,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param enabled controls the enabled state of this icon button. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
- * @param shape to be applied to the IconButton background. It should be one of [IconButtonShape] values
+ * @param shape to be applied to the IconButton background. It should be one of [ButtonShape] values
  * @param size one of the [IconButtonSize] values that sets width and height of the IconButton
  * @param contentDescription text used by accessibility services to describe what this icon button
  * represents. This text should be localized, such as by using [androidx.compose.ui.res.stringResource] or similar
@@ -77,7 +77,7 @@ public fun IconToggleButtonFilled(
     modifier: Modifier = Modifier,
     intent: IconButtonIntent = IconButtonDefaults.DefaultIntent,
     enabled: Boolean = true,
-    shape: IconButtonShape = IconButtonDefaults.DefaultShape,
+    shape: ButtonShape = IconButtonDefaults.DefaultShape,
     size: IconButtonSize = IconButtonDefaults.DefaultSize,
     contentDescription: String? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -99,24 +99,19 @@ public fun IconToggleButtonFilled(
 
 @Preview(
     group = "IconToggleButton",
-    name = "IconToggleButtonFilled Small",
+    name = "IconToggleButton Filled",
 )
 @Composable
-internal fun IconToggleButtonFilledPreview(
+private fun IconToggleButtonFilledPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         var isChecked by remember { mutableStateOf(false) }
 
-        IconButtonPreview { intent, shape ->
-            IconToggleButtonFilled(
-                intent = intent,
-                checked = isChecked,
-                icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
-                onCheckedChange = { isChecked = !isChecked },
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
+        IconToggleButtonFilled(
+            checked = isChecked,
+            icons = IconToggleButtonIcons(SparkIcons.FavoriteOutline, SparkIcons.FavoriteFill),
+            onCheckedChange = { isChecked = !isChecked },
+        )
     }
 }

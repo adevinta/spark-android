@@ -21,8 +21,10 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.buttons
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -49,17 +51,20 @@ import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.buttons.ButtonGhost
 import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.buttons.ButtonOutlined
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.ButtonTinted
 import com.adevinta.spark.components.buttons.IconSide
-import com.adevinta.spark.components.icons.FilledIconToggleButton
-import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
 import com.adevinta.spark.components.menu.DropdownMenuItem
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 
@@ -87,16 +92,18 @@ private fun ButtonSample() {
         var iconSide by remember { mutableStateOf(IconSide.START) }
         var style by remember { mutableStateOf(ButtonStyle.Filled) }
         var size by remember { mutableStateOf(ButtonSize.Medium) }
+        var shape by remember { mutableStateOf(ButtonShape.Rounded) }
         var intent by remember { mutableStateOf(ButtonIntent.Main) }
         var buttonText by remember { mutableStateOf("Filled Button") }
 
-        ConfigedButton(
+        ConfiguredButton(
             modifier = Modifier.fillMaxWidth(),
             style = style,
             buttonText = buttonText,
             onClick = { isLoading = !isLoading },
             isLoading = isLoading,
             size = size,
+            shape = shape,
             intent = intent,
             isEnabled = isEnabled,
             icon = icon,
@@ -109,20 +116,21 @@ private fun ButtonSample() {
         ) {
             Text(
                 text = "With Icon",
-                modifier = Modifier.weight(1f).padding(bottom = 8.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            FilledIconToggleButton(
+            IconToggleButtonFilled(
                 checked = icon != null,
                 onCheckedChange = {
                     icon = if (it) SparkIcons.LikeFill else null
                 },
-            ) {
-                Icon(
-                    sparkIcon = SparkIcons.LikeFill,
-                    contentDescription = null,
-                )
-            }
+                icons = IconToggleButtonIcons(
+                    checked = SparkIcons.LikeFill,
+                    unchecked = SparkIcons.LikeOutline,
+                ),
+            )
         }
         SwitchLabelled(
             checked = isLoading,
@@ -145,11 +153,11 @@ private fun ButtonSample() {
 
         Column {
             Text(
-                text = "IconSide",
+                text = "Icon side",
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val iconsSides = IconSide.values()
+            val iconsSides = IconSide.entries.toTypedArray()
             val iconsSidesLabel = iconsSides.map { it.name }
             SegmentedButton(
                 options = iconsSidesLabel,
@@ -166,7 +174,7 @@ private fun ButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonStyles = ButtonStyle.values()
+            val buttonStyles = ButtonStyle.entries.toTypedArray()
             val buttonStylesLabel = buttonStyles.map { it.name }
             SegmentedButton(
                 options = buttonStylesLabel,
@@ -178,7 +186,25 @@ private fun ButtonSample() {
             )
         }
 
-        val intents = ButtonIntent.values()
+        Column {
+            Text(
+                text = "Shape",
+                modifier = Modifier.padding(bottom = 8.dp),
+                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            )
+            val buttonShapes = ButtonShape.values()
+            val buttonShapesLabel = buttonShapes.map { it.name }
+            SegmentedButton(
+                options = buttonShapesLabel,
+                selectedOption = shape.name,
+                onOptionSelect = { shape = ButtonShape.valueOf(it) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+            )
+        }
+
+        val intents = ButtonIntent.entries.toTypedArray()
         var expanded by remember { mutableStateOf(false) }
         SelectTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -208,11 +234,11 @@ private fun ButtonSample() {
 
         Column {
             Text(
-                text = "IconSize",
+                text = "Button size",
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val sizes = ButtonSize.values()
+            val sizes = ButtonSize.entries.toTypedArray()
             val sizesLabel = sizes.map { it.name }
             SegmentedButton(
                 options = sizesLabel,
@@ -237,78 +263,100 @@ private fun ButtonSample() {
 }
 
 @Composable
-private fun ConfigedButton(
+private fun ConfiguredButton(
     modifier: Modifier = Modifier,
     style: ButtonStyle,
     buttonText: String,
     onClick: () -> Unit,
     isLoading: Boolean,
     size: ButtonSize,
+    shape: ButtonShape,
     intent: ButtonIntent,
     isEnabled: Boolean,
     icon: SparkIcon?,
     iconSide: IconSide,
 ) {
-    when (style) {
-        ButtonStyle.Filled -> ButtonFilled(
-            modifier = modifier,
-            text = buttonText,
-            onClick = onClick,
-            isLoading = isLoading,
-            size = size,
-            intent = intent,
-            enabled = isEnabled,
-            icon = icon,
-            iconSide = iconSide,
-        )
+    val containerColor by animateColorAsState(
+        targetValue = if (intent != ButtonIntent.Surface) {
+            SparkTheme.colors.backgroundVariant
+        } else {
+            SparkTheme.colors.surfaceInverse
+        },
+        label = "Button container color",
+    )
+    Surface(
+        color = containerColor,
+    ) {
+        Box(
+            modifier = Modifier.padding(8.dp),
+        ) {
+            when (style) {
+                ButtonStyle.Filled -> ButtonFilled(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
 
-        ButtonStyle.Outlined -> ButtonOutlined(
-            modifier = modifier,
-            text = buttonText,
-            onClick = onClick,
-            isLoading = isLoading,
-            size = size,
-            intent = intent,
-            enabled = isEnabled,
-            icon = icon,
-            iconSide = iconSide,
-        )
+                ButtonStyle.Outlined -> ButtonOutlined(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
 
-        ButtonStyle.Tinted -> ButtonTinted(
-            modifier = modifier,
-            text = buttonText,
-            onClick = onClick,
-            isLoading = isLoading,
-            size = size,
-            intent = intent,
-            enabled = isEnabled,
-            icon = icon,
-            iconSide = iconSide,
-        )
+                ButtonStyle.Tinted -> ButtonTinted(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
 
-        ButtonStyle.Ghost -> ButtonGhost(
-            modifier = modifier,
-            text = buttonText,
-            onClick = onClick,
-            isLoading = isLoading,
-            size = size,
-            intent = intent,
-            enabled = isEnabled,
-            icon = icon,
-            iconSide = iconSide,
-        )
+                ButtonStyle.Ghost -> ButtonGhost(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
 
-        ButtonStyle.Contrast -> ButtonContrast(
-            modifier = modifier,
-            text = buttonText,
-            onClick = onClick,
-            isLoading = isLoading,
-            size = size,
-            intent = intent,
-            enabled = isEnabled,
-            icon = icon,
-            iconSide = iconSide,
-        )
+                ButtonStyle.Contrast -> ButtonContrast(
+                    modifier = modifier,
+                    text = buttonText,
+                    onClick = onClick,
+                    isLoading = isLoading,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    icon = icon,
+                    iconSide = iconSide,
+                )
+            }
+        }
     }
 }
 

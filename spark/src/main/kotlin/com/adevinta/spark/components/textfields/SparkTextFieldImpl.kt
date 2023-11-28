@@ -85,8 +85,8 @@ internal fun SparkDecorationBox(
     placeholder: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
     counter: @Composable (() -> Unit)? = null,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (AddonScope.() -> Unit)? = null,
+    trailingIcon: @Composable (AddonScope.() -> Unit)? = null,
     singleLine: Boolean = false,
     enabled: Boolean = true,
     state: TextFieldState? = null,
@@ -186,14 +186,14 @@ internal fun SparkDecorationBox(
         val leadingIconColor = colors.leadingIconColor(enabled, state, interactionSource).value
         val decoratedLeading: @Composable (() -> Unit)? = leadingIcon?.let {
             @Composable {
-                Decoration(contentColor = leadingIconColor, content = it)
+                Decoration(contentColor = leadingIconColor, content = { AddonScopeInstance.it() })
             }
         }
 
         val trailingIconColor = colors.trailingIconColor(enabled, state, interactionSource).value
         val decoratedTrailing: @Composable (() -> Unit)? = trailingIcon?.let {
             @Composable {
-                Decoration(contentColor = trailingIconColor, content = it)
+                Decoration(contentColor = trailingIconColor, content = { AddonScopeInstance.it() })
             }
         }
 
@@ -256,9 +256,8 @@ internal fun SparkDecorationBox(
 internal fun Decoration(
     contentColor: Color,
     typography: TextStyle? = null,
-    content: @Composable
-    @ComposableOpenTarget(index = 0)
-    () -> Unit,
+    @Suppress("ktlint:standard:annotation")
+    content: @Composable @ComposableOpenTarget(index = 0) () -> Unit,
 ) {
     val colorAndEmphasis: @Composable () -> Unit =
         @Composable {

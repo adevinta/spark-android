@@ -46,7 +46,7 @@ internal class SparkDokkaPlugin : Plugin<Project> {
                 else -> configureSubProject()
             }
 
-            tasks.withType<DokkaTask> {
+            tasks.withType<DokkaTask>().configureEach {
                 notCompatibleWithConfigurationCache("https://github.com/Kotlin/dokka/issues/1217")
             }
 
@@ -71,7 +71,7 @@ internal class SparkDokkaPlugin : Plugin<Project> {
         }
     }
 
-    private fun Project.configureSubProject() = tasks.withType<DokkaTaskPartial> {
+    private fun Project.configureSubProject() = tasks.withType<DokkaTaskPartial>().configureEach {
         dokkaSourceSets.configureEach {
             // Parse Module and Package docs
             // https://kotlinlang.org/docs/dokka-module-and-package-docs.html
@@ -86,7 +86,6 @@ internal class SparkDokkaPlugin : Plugin<Project> {
 
             // https://kotlinlang.org/docs/dokka-gradle.html#source-link-configuration
             // FIXME(android): https://github.com/Kotlin/dokka/issues/2876
-            @Suppress("ktlint:max-line-length", "ktlint:trailing-comma-on-call-site")
             sourceLink {
                 val url = "https://github.com/Adevinta/spark-android/tree/main/${project.name}/src/main/kotlin"
                 localDirectory.set(projectDir.resolve("src"))

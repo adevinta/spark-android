@@ -24,9 +24,11 @@ package com.adevinta.spark.catalog.configurator.samples.textfields
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -44,13 +46,15 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
-import com.adevinta.spark.components.icons.FilledIconToggleButton
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
+import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 
@@ -62,6 +66,7 @@ public val TextFieldsConfigurator: Configurator = Configurator(
     TextFieldSample()
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Preview(
     showBackground = true,
 )
@@ -70,7 +75,9 @@ private fun TextFieldSample() {
     val scrollState = rememberScrollState()
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.verticalScroll(scrollState),
+        modifier = Modifier
+            .verticalScroll(scrollState)
+            .imePadding(),
     ) {
         var icon: SparkIcon? by remember { mutableStateOf(null) }
         var isReadOnly by remember { mutableStateOf(false) }
@@ -111,17 +118,16 @@ private fun TextFieldSample() {
                     .padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            FilledIconToggleButton(
+            IconToggleButtonFilled(
                 checked = icon != null,
                 onCheckedChange = {
                     icon = if (it) SparkIcons.LikeFill else null
                 },
-            ) {
-                Icon(
-                    sparkIcon = SparkIcons.LikeFill,
-                    contentDescription = null,
-                )
-            }
+                icons = IconToggleButtonIcons(
+                    checked = SparkIcons.LikeFill,
+                    unchecked = SparkIcons.LikeOutline,
+                ),
+            )
         }
         SwitchLabelled(
             checked = isRequired,

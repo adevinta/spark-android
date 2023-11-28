@@ -343,13 +343,15 @@ public fun BackdropScaffold(
                         collapse {
                             if (scaffoldState.confirmStateChange(Revealed)) {
                                 scope.launch { scaffoldState.reveal() }
-                            }; true
+                            }
+                            true
                         }
                     } else {
                         expand {
                             if (scaffoldState.confirmStateChange(Concealed)) {
                                 scope.launch { scaffoldState.conceal() }
-                            }; true
+                            }
+                            true
                         }
                     }
                 }

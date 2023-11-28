@@ -23,15 +23,14 @@ package com.adevinta.spark.components.iconbuttons
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.buttons.ButtonShape
+import com.adevinta.spark.components.icons.IconDefaults.intent
 import com.adevinta.spark.components.progress.Spinner
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
@@ -52,7 +51,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * services.
  * @param isLoading show or hide a [Spinner] instead of the [icon] to indicate a
  * loading state
- * @param shape to be applied to the IconButton background. It should be one of [IconButtonShape] values
+ * @param shape to be applied to the IconButton background. It should be one of [ButtonShape] values
  * @param size one of the [IconButtonSize] values that sets width and height of the IconButton
  * @param contentDescription text used by accessibility services to describe what this icon button
  * represents. This text should be localized, such as by using [androidx.compose.ui.res.stringResource] or similar
@@ -68,7 +67,7 @@ public fun IconButtonFilled(
     intent: IconButtonIntent = IconButtonDefaults.DefaultIntent,
     enabled: Boolean = true,
     isLoading: Boolean = false,
-    shape: IconButtonShape = IconButtonDefaults.DefaultShape,
+    shape: ButtonShape = IconButtonDefaults.DefaultShape,
     size: IconButtonSize = IconButtonDefaults.DefaultSize,
     contentDescription: String? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -90,80 +89,27 @@ public fun IconButtonFilled(
 
 @Preview(
     group = "IconButtons",
-    name = "IconButton Filled Small",
+    name = "IconButton Filled",
 )
 @Composable
-internal fun IconButtonFilledSmallPreview(
+private fun IconButtonFilledPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonFilledPair(
-                intent = intent,
-                size = IconButtonSize.Small,
-                shape = shape,
-            )
-        }
-    }
-}
+        val icon = SparkIcons.WheelOutline
+        val contentDescription = "Localized description"
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Filled Medium",
-)
-@Composable
-internal fun IconButtonFilledMediumPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonFilledPair(
-                intent = intent,
-                size = IconButtonSize.Medium,
-                shape = shape,
-            )
-        }
-    }
-}
+        IconButtonFilled(
+            icon = icon,
+            onClick = {},
+            contentDescription = contentDescription,
+        )
 
-@Preview(
-    group = "IconButtons",
-    name = "IconButton Filled Large",
-)
-@Composable
-internal fun IconButtonFilledLargePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        IconButtonPreview { intent, shape ->
-            IconButtonFilledPair(
-                intent = intent,
-                size = IconButtonSize.Large,
-                shape = shape,
-            )
-        }
-    }
-}
-
-@Composable
-internal fun IconButtonFilledPair(
-    intent: IconButtonIntent,
-    size: IconButtonSize,
-    shape: IconButtonShape,
-) {
-    val icon = SparkIcons.WheelOutline
-    val contentDescription = "Localized description"
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        listOf(true, false).forEach { enabled ->
-            IconButtonFilled(
-                icon = icon,
-                onClick = {},
-                intent = intent,
-                enabled = enabled,
-                contentDescription = contentDescription,
-                size = size,
-                shape = shape,
-            )
-        }
+        IconButtonFilled(
+            icon = icon,
+            onClick = {},
+            enabled = false,
+            contentDescription = contentDescription,
+        )
     }
 }

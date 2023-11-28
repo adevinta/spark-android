@@ -261,7 +261,7 @@ internal fun AllStatesSwitchPreview(
 internal fun AllStatesSwitchLabelledPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    @Suppress("ktlint:max-line-length")
+    @Suppress("ktlint:standard:max-line-length")
     val text =
         "This is an example of a multi-line text which is very long and in which the user should read all the information."
     PreviewTheme(theme) {

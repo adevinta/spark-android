@@ -83,7 +83,7 @@ internal fun Project.getVersionsCatalog(): VersionCatalog = runCatching {
 }.getOrThrow()
 
 internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotlin(
-    @Suppress("UNUSED_PARAMETER") allWarningsAsErrors: Boolean = true,
+    allWarningsAsErrors: Boolean = true,
     crossinline configure: T.() -> Unit = {},
 ) {
     configure<JavaPluginExtension> {
@@ -94,22 +94,11 @@ internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotli
         explicitApi()
         configure()
     }
-    tasks.withType<KotlinCompile> {
+    tasks.withType<KotlinCompile>().configureEach {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
             // kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
-            with(spark().versions.showkase) {
-                if (toString() == "1.0.0-beta17") return@with
-                error(
-                    """
-                    Check if the following fix has been released in version `$this`: https://github.com/airbnb/Showkase/pull/344
-                    > 'newInstance(): T!' is deprecated
-                    If it has been fixed, please remove this check and restore the `allWarningsAsErrors` configuration.
-                    Otherwise, update the version check to `$this`.
-                    """.trimIndent(),
-                )
-            }
-            this.allWarningsAsErrors.set(false /*allWarningsAsErrors*/)
+            this.allWarningsAsErrors.set(allWarningsAsErrors)
             explicitApiMode.set(ExplicitApiMode.Strict)
         }
     }

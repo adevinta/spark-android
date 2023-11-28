@@ -21,15 +21,20 @@
  */
 package com.adevinta.spark.catalog
 
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.statusBars
@@ -44,6 +49,7 @@ import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
@@ -52,6 +58,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
@@ -84,13 +93,18 @@ import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
 import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
 import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.KleinanzeigenTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
+import com.adevinta.spark.catalog.themes.themeprovider.milanuncios.MilanunciosTheme
+import com.adevinta.spark.catalog.themes.themeprovider.subito.SubitoTheme
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(
+    ExperimentalFoundationApi::class,
+    ExperimentalComposeUiApi::class,
+)
 @Composable
-internal fun CatalogApp(
+internal fun ComponentActivity.CatalogApp(
     theme: Theme,
     onThemeChange: (theme: Theme) -> Unit,
     components: List<Component>,
@@ -100,30 +114,47 @@ internal fun CatalogApp(
     val themeProvider: ThemeProvider = when (theme.brandMode) {
         BrandMode.Adevinta -> AdevintaTheme
         BrandMode.Leboncoin -> LeboncoinTheme
-        BrandMode.LeboncoinLegacy -> LeboncoinTheme
+        BrandMode.Subito -> SubitoTheme
         BrandMode.Kleinanzeigen -> KleinanzeigenTheme
+        BrandMode.Milanuncios -> MilanunciosTheme
     }
-
-    val isLegacy = theme.brandMode == BrandMode.LeboncoinLegacy
 
     val useDark = (theme.themeMode == ThemeMode.System && isSystemInDarkTheme()) || theme.themeMode == ThemeMode.Dark
 
     val colors =
-        themeProvider.colors(useDarkColors = useDark, isPro = theme.userMode == UserMode.Pro, isLegacy = isLegacy)
-    val shapes = themeProvider.shapes(isLegacy = isLegacy)
-    val typography = themeProvider.typography(isLegacy = isLegacy)
+        themeProvider.colors(useDarkColors = useDark, isPro = theme.userMode == UserMode.Pro, isLegacy = false)
+    val shapes = themeProvider.shapes(isLegacy = false)
+    val typography = themeProvider.typography(isLegacy = false)
 
     SparkTheme(
         colors = colors,
         shapes = shapes,
         typography = typography,
-        useLegacyStyle = isLegacy,
+        useLegacyStyle = false,
     ) {
         CompositionLocalProvider(LocalRippleTheme provides SparkRippleTheme) {
             val layoutDirection = when (theme.textDirection) {
                 TextDirection.LTR -> LayoutDirection.Ltr
                 TextDirection.RTL -> LayoutDirection.Rtl
                 TextDirection.System -> LocalLayoutDirection.current
+            }
+
+            // Update the edge to edge configuration to match the theme
+            // This is the same parameters as the default enableEdgeToEdge call, but we manually
+            // resolve whether or not to show dark theme using uiState, since it can be different
+            // than the configuration's dark theme value based on the user preference.
+            DisposableEffect(useDark) {
+                enableEdgeToEdge(
+                    statusBarStyle = SystemBarStyle.auto(
+                        android.graphics.Color.TRANSPARENT,
+                        android.graphics.Color.TRANSPARENT,
+                    ) { useDark },
+                    navigationBarStyle = SystemBarStyle.auto(
+                        lightScrim,
+                        darkScrim,
+                    ) { useDark },
+                )
+                onDispose {}
             }
 
             TestHarness(
@@ -135,83 +166,88 @@ internal fun CatalogApp(
                     theme.fontScale
                 },
             ) {
-                val coroutineScope = rememberCoroutineScope()
-                val homeScreenValues = CatalogHomeScreen.values()
-                val pagerState = rememberPagerState(
-                    initialPage = CatalogHomeScreen.Examples.ordinal,
-                    pageCount = { homeScreenValues.size },
-                )
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    val coroutineScope = rememberCoroutineScope()
+                    val homeScreenValues = CatalogHomeScreen.entries
+                    val pagerState = rememberPagerState(
+                        initialPage = CatalogHomeScreen.Examples.ordinal,
+                        pageCount = { homeScreenValues.size },
+                    )
 
-                BackdropScaffold(
-                    scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
-                    frontLayerScrimColor = Color.Unspecified,
-                    headerHeight = BackdropScaffoldDefaults.HeaderHeight + WindowInsets.navigationBars.asPaddingValues()
-                        .calculateBottomPadding(),
-                    peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
-                        .calculateTopPadding(),
-                    backLayerBackgroundColor = SparkTheme.colors.mainContainer,
-                    appBar = {
-                        HomeTabBar(
-                            modifier = Modifier.statusBarsPadding(),
-                            tabSelected = homeScreenValues[pagerState.currentPage],
-                            onTabSelected = {
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(
-                                        it.ordinal,
-                                        animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
-                                    )
-                                }
-                            },
-                        )
-                    },
-                    backLayerContent = {
-                        ThemePicker(
-                            theme = theme,
-                            onThemeChange = { theme ->
-                                coroutineScope.launch {
-                                    onThemeChange(theme)
-                                }
-                            },
-                        )
-                    },
-                    frontLayerContent = {
-                        val insetsPadding = WindowInsets.navigationBars.asPaddingValues()
-                        val innerPadding = PaddingValues(
-                            top = 16.dp + insetsPadding.calculateTopPadding(),
-                            end = insetsPadding.calculateEndPadding(LocalLayoutDirection.current),
-                            bottom = insetsPadding.calculateBottomPadding(),
-                            start = insetsPadding.calculateStartPadding(LocalLayoutDirection.current),
-                        )
-                        HorizontalPager(
-                            state = pagerState,
-                            flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
-                        ) {
-                            when (homeScreenValues[it]) {
-                                CatalogHomeScreen.Examples -> ComponentsScreen(
-                                    components = components,
-                                    contentPadding = innerPadding,
-                                )
-
-                                CatalogHomeScreen.Showkase -> {
-                                    BodyContent(
+                    BackdropScaffold(
+                        scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
+                        frontLayerScrimColor = Color.Unspecified,
+                        headerHeight = BackdropScaffoldDefaults.HeaderHeight +
+                            WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
+                        peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
+                            .calculateTopPadding(),
+                        backLayerBackgroundColor = SparkTheme.colors.mainContainer,
+                        appBar = {
+                            HomeTabBar(
+                                modifier = Modifier.statusBarsPadding(),
+                                tabSelected = homeScreenValues[pagerState.currentPage],
+                                onTabSelected = {
+                                    coroutineScope.launch {
+                                        pagerState.animateScrollToPage(
+                                            it.ordinal,
+                                            animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
+                                        )
+                                    }
+                                },
+                            )
+                        },
+                        backLayerContent = {
+                            ThemePicker(
+                                theme = theme,
+                                onThemeChange = { theme ->
+                                    coroutineScope.launch {
+                                        onThemeChange(theme)
+                                    }
+                                },
+                            )
+                        },
+                        frontLayerContent = {
+                            val insetsPadding = WindowInsets.navigationBars.asPaddingValues()
+                            val innerPadding = PaddingValues(
+                                top = 16.dp + insetsPadding.calculateTopPadding(),
+                                end = insetsPadding.calculateEndPadding(LocalLayoutDirection.current),
+                                bottom = insetsPadding.calculateBottomPadding(),
+                                start = insetsPadding.calculateStartPadding(LocalLayoutDirection.current),
+                            )
+                            HorizontalPager(
+                                state = pagerState,
+                                flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
+                            ) {
+                                when (homeScreenValues[it]) {
+                                    CatalogHomeScreen.Examples -> ComponentsScreen(
+                                        components = components,
                                         contentPadding = innerPadding,
-                                        groupedComponentMap = groupedComponentMap,
-                                        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                                    )
+
+                                    CatalogHomeScreen.Showkase -> {
+                                        BodyContent(
+                                            contentPadding = innerPadding,
+                                            groupedComponentMap = groupedComponentMap,
+                                            showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                                        )
+                                    }
+
+                                    CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
+                                        components = components,
+                                        contentPadding = innerPadding,
+                                    )
+
+                                    CatalogHomeScreen.Icons -> IconDemoScreen(
+                                        contentPadding = innerPadding,
                                     )
                                 }
-
-                                CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
-                                    components = components,
-                                    contentPadding = innerPadding,
-                                )
-
-                                CatalogHomeScreen.Icons -> IconDemoScreen(
-                                    contentPadding = innerPadding,
-                                )
                             }
-                        }
-                    },
-                )
+                        },
+                    )
+                }
             }
         }
     }
@@ -239,7 +275,7 @@ private fun HomeTabBar(
     onTabSelected: (CatalogHomeScreen) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val catalogScreens by remember { mutableStateOf(CatalogHomeScreen.values()) }
+    val catalogScreens by remember { mutableStateOf(CatalogHomeScreen.entries) }
     val catalogScreensName by remember {
         derivedStateOf {
             catalogScreens.map { it.name }
@@ -289,6 +325,16 @@ private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
 
 internal const val HomeRoute = "home"
 
-public enum class CatalogHomeScreen {
-    Examples, Showkase, Configurator, Icons
-}
+public enum class CatalogHomeScreen { Examples, Showkase, Configurator, Icons }
+
+/**
+ * The default light scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=35-38;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val lightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+
+/**
+ * The default dark scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=40-44;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)

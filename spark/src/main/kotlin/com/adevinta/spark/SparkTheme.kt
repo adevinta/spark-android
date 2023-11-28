@@ -31,6 +31,7 @@ import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -45,6 +46,7 @@ import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.tokens.LocalSparkColors
 import com.adevinta.spark.tokens.LocalSparkShapes
 import com.adevinta.spark.tokens.LocalSparkTypography
+import com.adevinta.spark.tokens.LocalWindowSizeClass
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkFontFamily
 import com.adevinta.spark.tokens.SparkShapes
@@ -52,6 +54,7 @@ import com.adevinta.spark.tokens.SparkTypography
 import com.adevinta.spark.tokens.asMaterial3Colors
 import com.adevinta.spark.tokens.asMaterial3Shapes
 import com.adevinta.spark.tokens.asMaterial3Typography
+import com.adevinta.spark.tokens.calculateWindowSizeClass
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.debugColors
 import com.adevinta.spark.tokens.lightSparkColors
@@ -80,10 +83,13 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param typography A set of text styles to be used as this hierarchy's typography system.
  * @param shapes A set of corner shapes to be used as this hierarchy's shape system.
  * @param fontFamily the font family to be applied on [typography].
- * @param useSparkTokensHighlighter flag that use for typography, colors and shapes exaggerated values to find which part of a screen is themed or not.
- * @param useSparkComponentsHighlighter flag to highlight the spark components with an overlay to recognize which component is from spark or not.
+ * @param useSparkTokensHighlighter flag that use for typography, colors and shapes exaggerated values to find
+ * which part of a screen is themed or not.
+ * @param useSparkComponentsHighlighter flag to highlight the spark components with an overlay to recognize
+ * which component is from spark or not.
  * @param useLegacyStyle enabling this will makes the components use the visual from the previous DS of LBC.
  */
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 public fun SparkTheme(
     // We don't want to automatically support dark theme in the app but still want it in the previews
@@ -129,6 +135,7 @@ public fun SparkTheme(
         LocalHighlightToken provides useSparkTokensHighlighter,
         LocalHighlightComponents provides useSparkComponentsHighlighter,
         LocalLegacyStyle provides useLegacyStyle,
+        LocalWindowSizeClass provides calculateWindowSizeClass(),
     ) {
         MaterialTheme(
             colorScheme = rememberedColors.asMaterial3Colors(),
@@ -261,7 +268,7 @@ internal val LocalHighlightToken = staticCompositionLocalOf { false }
 internal val LocalHighlightComponents = staticCompositionLocalOf { false }
 
 /**
- * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the Adevinta Platform teams
- * to migrate their screens to spark.
+ * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the
+ * Adevinta Platform teams to migrate their screens to spark.
  */
 internal val LocalLegacyStyle = staticCompositionLocalOf { false }

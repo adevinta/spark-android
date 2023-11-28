@@ -29,10 +29,19 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
     repositories {
         google()
         mavenCentral()
+
+        // Pre-release artifacts of compose-compiler
+        // https://androidx.dev/storage/compose-compiler/repository
+        maven("https://androidx.dev/storage/compose-compiler/repository/") {
+            name = "compose-compiler-dev"
+            content {
+                includeGroup("androidx.compose.compiler")
+            }
+        }
     }
 }
 

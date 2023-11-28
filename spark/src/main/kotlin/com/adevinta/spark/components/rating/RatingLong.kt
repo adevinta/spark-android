@@ -117,7 +117,7 @@ public fun RatingNaked(
  * @param modifier to apply
  */
 @Composable
-@Suppress("ktlint:trailing-comma-on-call-site")
+@Suppress("ktlint:standard:trailing-comma-on-call-site")
 public fun RatingCompressed(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
@@ -145,7 +145,7 @@ public fun RatingCompressed(
  * @param modifier to apply
  */
 @Composable
-@Suppress("ktlint:trailing-comma-on-call-site")
+@Suppress("ktlint:standard:trailing-comma-on-call-site")
 public fun RatingFull(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,

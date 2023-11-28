@@ -25,7 +25,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import androidx.activity.compose.BackHandler
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -41,7 +40,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -152,14 +150,13 @@ private fun HomeScreen(
             },
         )
     }
-    val activity = LocalContext.current.findActivity() as AppCompatActivity
     BackHandler {
         when {
             showkaseBrowserScreenMetadata.value.isSearchActive -> {
                 showkaseBrowserScreenMetadata.clearActiveSearch()
             }
             navController.currentDestination?.id == navController.graph.startDestinationId -> {
-                activity.finish()
+                navController.popBackStack()
             }
         }
     }

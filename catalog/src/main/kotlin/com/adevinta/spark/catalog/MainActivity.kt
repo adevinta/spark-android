@@ -23,13 +23,13 @@ package com.adevinta.spark.catalog
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.core.view.WindowCompat
 import com.adevinta.spark.catalog.model.Components
 import com.adevinta.spark.catalog.showkase.ShowkaseBrowserScreenMetadata
 import com.adevinta.spark.catalog.themes.Theme
@@ -40,7 +40,10 @@ import com.airbnb.android.showkase.models.ShowkaseProvider
 public class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        // Turn off the decor fitting system windows, which allows us to handle insets,
+        // including IME animations, and go edge-to-edge
+        // This also sets up the initial system bar style based on the platform theme
+        enableEdgeToEdge()
         setContent {
             val groupedComponentsList = getShowkaseProviderElements()
             val showkaseBrowserScreenMetadata = remember { mutableStateOf(ShowkaseBrowserScreenMetadata()) }
@@ -60,7 +63,7 @@ public class MainActivity : AppCompatActivity() {
 
     private fun getShowkaseProviderElements(): List<ShowkaseBrowserComponent> = try {
         val showkaseComponentProvider =
-            Class.forName("com.adevinta.spark.SparkShowkaseRootModuleCodegen").newInstance()
+            Class.forName("com.adevinta.spark.SparkShowkaseRootModuleCodegen").getDeclaredConstructor().newInstance()
 
         val showkaseMetadata = (showkaseComponentProvider as ShowkaseProvider).metadata()
 

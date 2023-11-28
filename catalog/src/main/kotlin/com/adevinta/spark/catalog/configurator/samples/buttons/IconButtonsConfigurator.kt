@@ -21,7 +21,9 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.buttons
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -34,6 +36,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,15 +44,16 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonContrast
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
 import com.adevinta.spark.components.iconbuttons.IconButtonGhost
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.iconbuttons.IconButtonOutlined
-import com.adevinta.spark.components.iconbuttons.IconButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.iconbuttons.IconButtonTinted
 import com.adevinta.spark.components.menu.DropdownMenuItem
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.textfields.TextField
@@ -80,12 +84,12 @@ private fun IconButtonSample() {
         val icon: SparkIcon by remember { mutableStateOf(SparkIcons.LikeFill) }
         var isLoading by remember { mutableStateOf(false) }
         var isEnabled by remember { mutableStateOf(true) }
-        var shape by remember { mutableStateOf(IconButtonShape.Large) }
+        var shape by remember { mutableStateOf(ButtonShape.Pill) }
         var size by remember { mutableStateOf(IconButtonSize.Medium) }
         var intent by remember { mutableStateOf(IconButtonIntent.Main) }
         var contentDescription by remember { mutableStateOf("Content Description") }
 
-        ConfigedIconButton(
+        ConfiguredIconButton(
             style = style,
             shape = shape,
             contentDescription = contentDescription,
@@ -169,12 +173,12 @@ private fun IconButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonShapes = IconButtonShape.values()
+            val buttonShapes = ButtonShape.values()
             val buttonShapesLabel = buttonShapes.map { it.name }
             SegmentedButton(
                 options = buttonShapesLabel,
                 selectedOption = shape.name,
-                onOptionSelect = { shape = IconButtonShape.valueOf(it) },
+                onOptionSelect = { shape = ButtonShape.valueOf(it) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
@@ -211,10 +215,10 @@ private fun IconButtonSample() {
 }
 
 @Composable
-private fun ConfigedIconButton(
+private fun ConfiguredIconButton(
     modifier: Modifier = Modifier,
     style: IconButtonStyle,
-    shape: IconButtonShape,
+    shape: ButtonShape,
     contentDescription: String?,
     onClick: () -> Unit = {},
     size: IconButtonSize,
@@ -223,66 +227,82 @@ private fun ConfigedIconButton(
     isLoading: Boolean,
     icon: SparkIcon,
 ) {
-    when (style) {
-        IconButtonStyle.Filled -> IconButtonFilled(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+    val containerColor by animateColorAsState(
+        targetValue = if (intent != IconButtonIntent.Surface) {
+            Color.Transparent
+        } else {
+            SparkTheme.colors.surfaceInverse
+        },
+        label = "Button container color",
+    )
+    Surface(
+        color = containerColor,
+    ) {
+        Box(
+            modifier = Modifier.padding(4.dp),
+        ) {
+            when (style) {
+                IconButtonStyle.Filled -> IconButtonFilled(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onClick = onClick,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    isLoading = isLoading,
+                    icon = icon,
+                )
 
-        IconButtonStyle.Outlined -> IconButtonOutlined(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+                IconButtonStyle.Outlined -> IconButtonOutlined(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onClick = onClick,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    isLoading = isLoading,
+                    icon = icon,
+                )
 
-        IconButtonStyle.Tinted -> IconButtonTinted(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+                IconButtonStyle.Tinted -> IconButtonTinted(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onClick = onClick,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    isLoading = isLoading,
+                    icon = icon,
+                )
 
-        IconButtonStyle.Ghost -> IconButtonGhost(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+                IconButtonStyle.Ghost -> IconButtonGhost(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onClick = onClick,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    isLoading = isLoading,
+                    icon = icon,
+                )
 
-        IconButtonStyle.Contrast -> IconButtonContrast(
-            modifier = modifier,
-            contentDescription = contentDescription,
-            onClick = onClick,
-            size = size,
-            shape = shape,
-            intent = intent,
-            enabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
+                IconButtonStyle.Contrast -> IconButtonContrast(
+                    modifier = modifier,
+                    contentDescription = contentDescription,
+                    onClick = onClick,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = isEnabled,
+                    isLoading = isLoading,
+                    icon = icon,
+                )
+            }
+        }
     }
 }
 

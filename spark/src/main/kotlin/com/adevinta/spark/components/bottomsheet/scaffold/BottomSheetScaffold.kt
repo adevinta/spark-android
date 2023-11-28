@@ -314,13 +314,15 @@ private fun StandardBottomSheet(
                                     if (currentValue == PartiallyExpanded) {
                                         if (swipeableState.confirmValueChange(Expanded)) {
                                             expand {
-                                                scope.launch { expand() }; true
+                                                scope.launch { expand() }
+                                                true
                                             }
                                         }
                                     } else {
                                         if (swipeableState.confirmValueChange(PartiallyExpanded)) {
                                             collapse {
-                                                scope.launch { partialExpand() }; true
+                                                scope.launch { partialExpand() }
+                                                true
                                             }
                                         }
                                     }

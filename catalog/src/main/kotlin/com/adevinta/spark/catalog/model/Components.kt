@@ -27,13 +27,18 @@ import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
+import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
+import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
@@ -85,6 +90,17 @@ private val Checkboxes = Component(
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/CheckBox.kt",
     examples = CheckboxExamples,
     configurator = CheckboxConfigurator,
+)
+
+private val Dialogs = Component(
+    id = nextId(),
+    name = "Dialogs",
+    description = R.string.component_dialog_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/2427e1-modaldialog/b/02a6bc",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.dialog/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/dialog/ModalScaffold.kt",
+    examples = DialogsExamples,
+    configurator = null,
 )
 
 private val IconButtons = Component(
@@ -147,7 +163,20 @@ private val Tabs = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.tab/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tab/Tab.kt",
     examples = TabsExamples,
-    configurator = null,
+    configurator = TabsConfigurator,
+)
+
+private val Tags = Component(
+    id = nextId(),
+    name = "Tags",
+    description = R.string.component_tag_description,
+    illustration = R.drawable.illu_component_tags,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/295e88-tag/b/86ead2",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.tags/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tags/Tag.kt",
+    examples = TagsExamples,
+    configurator = TagsConfigurator,
 )
 
 private val TextFields = Component(
@@ -174,15 +203,31 @@ private val Tokens = Component(
     configurator = null,
 )
 
+private val Popovers = Component(
+    id = nextId(),
+    name = "Popovers",
+    illustration = R.drawable.illu_component_tokens,
+    tintIcon = false,
+    description = R.string.component_popovers_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/88a08c-popover/b/904ceb",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.popover/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/popover/Color.kt",
+    examples = PopoverExamples,
+    configurator = null,
+)
+
 /** Components for the catalog, ordered alphabetically by name. */
 public val Components: List<Component> = listOf(
     Tokens,
     Buttons,
     Checkboxes,
+    Dialogs,
     IconButtons,
     IconToggleButtons,
     RadioButtons,
     Switches,
     Tabs,
+    Tags,
     TextFields,
+    Popovers,
 )
