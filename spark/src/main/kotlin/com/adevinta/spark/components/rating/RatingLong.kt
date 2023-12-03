@@ -47,11 +47,11 @@ import java.util.Locale
 
 /**
  * Component that displays rating of an user with stars in the following form:
- *  - ***** (5)
- *  - ***** 5 avis
+ *  - ★★★★★ (5)
+ *  - ★★★★★ 5 avis
  * @param value rating value as a float, should be between 1.0 and 5.0
- * @param label the nb of comments to be displayed after the rating stars.
- * @param commentCount the nb of comments to be displayed after the rating stars.
+ * @param label the nb of reviews to be displayed after the rating stars.
+ * @param commentCount the nb of reviews to be displayed after the rating stars.
  * @param locale the local used to format the rating value.
  * @param modifier to apply
  */
@@ -146,10 +146,10 @@ public fun RatingNaked(
 }
 
 /**
- * Display the [value] rating of an user with stars followed by the [commentCount] in the following form `***** (5)`
+ * Display the [value] rating of an user with stars followed by the [commentCount] in the following form `★★★★★ (5)`
  *
  * @param value rating value as a float, should be between 0.0 and 5.0
- * @param commentCount the nb of comments to be displayed after the rating stars.
+ * @param commentCount the nb of reviews to be displayed after the rating stars.
  * @param modifier to apply
  */
 @Composable
@@ -179,10 +179,10 @@ public fun RatingCompressed(
 }
 
 /**
- * Display the [value] rating of an user with stars followed by the [commentCount] in the following form `***** 5 avis`
+ * Display the [value] rating of an user with stars followed by the [commentCount] in the following form `★★★★★ 5 avis`
  *
  * @param value rating value as a float, should be between 0.0 and 5.0
- * @param commentCount the nb of comments to be displayed after the rating stars.
+ * @param commentCount the nb of reviews to be displayed after the rating stars.
  * @param modifier to apply
  */
 @Deprecated(
@@ -217,12 +217,12 @@ public fun RatingFull(
 
 /**
  * Display the [value] rating of an user with stars optionally followed by a label and/or
- * [commentCount] in the following form **`3,4 ***** Communication (5)`**
+ * [commentCount] in the following form **`3,4 ★★★☆☆ Communication (5)`**
  *
  * @param value rating value as a float, should be between 0.0 and 5.0
  * @param modifier to apply
- * @param commentCount the nb of comments to be displayed after the rating stars.
- * @param label the nb of comments to be displayed after the rating stars.
+ * @param commentCount the nb of reviews to be displayed after the rating stars.
+ * @param label the nb of reviews to be displayed after the rating stars.
  * @param locale the local used to format the rating value, use the first available Locale by default.
  * Use `null` to hide the rating value before the stars
  */

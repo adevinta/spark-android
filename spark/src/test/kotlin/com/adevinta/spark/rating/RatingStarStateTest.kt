@@ -22,41 +22,43 @@
 package com.adevinta.spark.rating
 
 import com.adevinta.spark.components.rating.RatingStarState
+import com.adevinta.spark.components.rating.RatingStarState.Empty
+import com.adevinta.spark.components.rating.RatingStarState.Full
+import com.adevinta.spark.components.rating.RatingStarState.Half
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 
-@RunWith(TestParameterInjector::class)
 class RatingStarStateTest {
 
     @Test
     fun testBooleanInput() {
-        assertEquals(RatingStarState(true), RatingStarState.Full)
-        assertEquals(RatingStarState(false), RatingStarState.Empty)
+        assertEquals(RatingStarState(true), Full)
+        assertEquals(RatingStarState(false), Empty)
     }
 
     @Test
     fun testFloatRangeInput() {
-        assertEquals(RatingStarState(0.0f), RatingStarState.Empty)
-        assertEquals(RatingStarState(0.1f), RatingStarState.Empty)
-        assertEquals(RatingStarState(0.25f), RatingStarState.Empty)
-        assertEquals(RatingStarState(0.3f), RatingStarState.Half)
-        assertEquals(RatingStarState(0.5f), RatingStarState.Half)
-        assertEquals(RatingStarState(0.75f), RatingStarState.Half)
-        assertEquals(RatingStarState(0.8f), RatingStarState.Full)
-        assertEquals(RatingStarState(1.0f), RatingStarState.Full)
+        assertEquals(RatingStarState(0.0f), Empty)
+        assertEquals(RatingStarState(0.1f), Empty)
+        assertEquals(RatingStarState(0.25f), Empty)
+        assertEquals(RatingStarState(0.3f), Half)
+        assertEquals(RatingStarState(0.5f), Half)
+        assertEquals(RatingStarState(0.75f), Half)
+        assertEquals(RatingStarState(0.8f), Full)
+        assertEquals(RatingStarState(1.0f), Full)
     }
 
     @Test
     fun testDoubleRangeInput() {
-        assertEquals(RatingStarState(0.0), RatingStarState.Empty)
-        assertEquals(RatingStarState(0.1), RatingStarState.Empty)
-        assertEquals(RatingStarState(0.25), RatingStarState.Empty)
-        assertEquals(RatingStarState(0.3), RatingStarState.Half)
-        assertEquals(RatingStarState(0.5), RatingStarState.Half)
-        assertEquals(RatingStarState(0.75), RatingStarState.Half)
-        assertEquals(RatingStarState(0.8), RatingStarState.Full)
-        assertEquals(RatingStarState(1.0), RatingStarState.Full)
+        assertEquals(RatingStarState(0.0), Empty)
+        assertEquals(RatingStarState(0.1), Empty)
+        assertEquals(RatingStarState(0.25), Empty)
+        assertEquals(RatingStarState(0.3), Half)
+        assertEquals(RatingStarState(0.5), Half)
+        assertEquals(RatingStarState(0.75), Half)
+        assertEquals(RatingStarState(0.8), Full)
+        assertEquals(RatingStarState(1.0), Full)
     }
 }

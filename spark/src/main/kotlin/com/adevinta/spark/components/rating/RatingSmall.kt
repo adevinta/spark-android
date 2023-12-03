@@ -54,8 +54,8 @@ import java.util.Locale
 
 /**
  * Component that displays rating of an user with a star in the following form:
- *  - * 3,4
- *  - * 3,4 (5)
+ *  - ★ 3,4
+ *  - ★ 3,4 (5)
  * @param value rating value as a float, should be between 1.0 and 5.0
  * @param modifier to apply
  * @param commentCount the count of comments are associated with this rating
@@ -72,8 +72,6 @@ internal fun SparkRatingSmall(
     locale: Locale = firstLocale(),
 ) {
     if (value !in 1f..5f) return
-// TODO scott.rayapoulle.ext-21/12/2022: Use NumberFormat instead
-//    val format = if (value / value.toInt() == 1f) "%.0f" else "%.1f"
     val contentDescription: String = if (commentCount != null) {
         pluralStringResource(
             id = R.plurals.spark_rating_with_comments_a11y,
