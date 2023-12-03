@@ -25,9 +25,7 @@ import com.adevinta.spark.components.rating.RatingStarState
 import com.adevinta.spark.components.rating.RatingStarState.Empty
 import com.adevinta.spark.components.rating.RatingStarState.Full
 import com.adevinta.spark.components.rating.RatingStarState.Half
-import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.junit.Test
-import org.junit.runner.RunWith
 import kotlin.test.assertEquals
 
 class RatingStarStateTest {
