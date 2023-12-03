@@ -26,7 +26,7 @@
     android:viewportHeight="24">
   <path
       android:fillColor="#FF000000"
-      android:pathData="M10.5,3.95a6.55,6.55 0,1 0,0 13.1,6.55 6.55,0 0,0 0,-13.1ZM2,10.5a8.5,8.5 0,1 1,17.01 0.01A8.5,8.5 0,0 1,2 10.5Z"
+      android:pathData="M10.5,3.95a6.55,6.55 0,1 0,0 13.1,6.55 6.55,0 0,0 0,-13.1M2,10.5a8.5,8.5 0,1 1,17.01 0.01A8.5,8.5 0,0 1,2 10.5"
       android:fillType="evenOdd"/>
   <path
       android:fillColor="#FF000000"
