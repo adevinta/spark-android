@@ -24,7 +24,7 @@ minCompileSdk = "24"
 paparazzi = "1.3.1"
 showkase = "1.0.2"
 slackLint = "1.2.0"
-spotless = "6.23.2"
+spotless = "6.23.3"
 targetSdk = "34"
 testParameterInjector = "1.14"
 
