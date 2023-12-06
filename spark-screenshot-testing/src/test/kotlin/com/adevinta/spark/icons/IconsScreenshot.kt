@@ -60,7 +60,7 @@ internal class IconsScreenshot {
     @Suppress("JUnitMalformedDeclaration")
     fun render(
         @TestParameter(valuesProvider = SparkIconProvider::class) icon: SparkIcon,
-    ) = paparazzi.sparkSnapshot {
+    ) = paparazzi.snapshot {
         Icon(
             sparkIcon = icon,
             contentDescription = icon.toString(),
