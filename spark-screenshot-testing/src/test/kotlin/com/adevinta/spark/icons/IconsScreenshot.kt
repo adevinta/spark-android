@@ -37,7 +37,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(TestParameterInjector::class)
 internal class IconsScreenshot {
 
@@ -68,5 +67,4 @@ internal class IconsScreenshot {
             size = IconSize.ExtraLarge,
         )
     }
-
 }
