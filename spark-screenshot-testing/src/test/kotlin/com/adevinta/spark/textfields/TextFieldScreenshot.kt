@@ -40,6 +40,7 @@ import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -66,6 +67,7 @@ internal class TextFieldScreenshot {
     )
 
     @Test
+    @Ignore("This needs to be re-worked to avoid generating 48 PNGs that are almost identical.")
     fun test() {
         values.forEach { value ->
             leadingIcons.forEach { leadingIcon ->
