@@ -28,7 +28,6 @@ import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.patchedEnvironment
-import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams.RenderingMode.SHRINK
 import com.google.testing.junit.testparameterinjector.TestParameter
 import com.google.testing.junit.testparameterinjector.TestParameter.TestParameterValuesProvider
