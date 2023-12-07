@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.text
 
 import android.annotation.SuppressLint
@@ -29,7 +28,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -38,6 +39,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.text.Paragraph
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
@@ -63,9 +65,62 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.launch
 
 /**
+ * Component that displays an underlined text link
+ * As per specs only one link per instance is allowed,
+ * If you want a paragraph with 2 links, just break them into two separate paragraphs
  *
+ * The default [style] uses the [LocalTextStyle] provided by the [MaterialTheme] / components. If
+ * you are setting your own style, you may want to consider first retrieving [LocalTextStyle],
+ * and using [TextStyle.copy] to keep any theme defined attributes, only modifying the specific
+ * attributes you want to override.
+ *
+ * For ease of use, commonly used parameters from [TextStyle] are also present here. The order of
+ * precedence is as follows:
+ * - If a parameter is explicitly set here (i.e, it is _not_ `null` or [TextUnit.Unspecified]),
+ * then this parameter will always be used.
+ * - If a parameter is _not_ set, (`null` or [TextUnit.Unspecified]), then the corresponding value
+ * from [style] will be used instead.
+ *
+ * Additionally, for [color], if [color] is not set, and [style] does not have a color, then
+ * [LocalContentColor] will be used.
+ *
+ * @param textFull the full text to be displayed
+ * @param textLink the text to be underlined as link (it will be the clickable part
  * WARNING if textFull does not include textLink it will @throws IndexOutOfBoundsException
+ *
+ * @param modifier the [Modifier] to be applied to this layout node
+ * @param colorText [Color] to apply to the text. If [Color.Unspecified], and [style] has no color set,
+ * this will be [LocalContentColor].
+ * @param colorLink [Color] to apply to the link. by default if no color specified it will
+ * be assigned to the value of @param colorText
+ * @param fontSize the size of glyphs to use when painting the text. See [TextStyle.fontSize].
+ * @param fontStyle the typeface variant to use when drawing the letters (e.g., italic).
+ * See [TextStyle.fontStyle].
+ * @param fontWeight the typeface thickness to use when painting the text (e.g., [FontWeight.Bold]).
+ * @param fontFamily the font family to be used when rendering the text. See [TextStyle.fontFamily].
+ * @param letterSpacing the amount of space to add between each letter.
+ * See [TextStyle.letterSpacing].
+ * @param textAlign the alignment of the text within the lines of the paragraph.
+ * See [TextStyle.textAlign].
+ * @param lineHeight line height for the [Paragraph] in [TextUnit] unit, e.g. SP or EM.
+ * See [TextStyle.lineHeight].
+ * @param overflow how visual overflow should be handled.
+ * @param softWrap whether the text should break at soft line breaks. If false, the glyphs in the
+ * text will be positioned as if there was unlimited horizontal space. If [softWrap] is false,
+ * [overflow] and TextAlign may have unexpected effects.
+ * @param maxLines an optional maximum number of lines for the text to span, wrapping if
+ * necessary. If the text exceeds the given number of lines, it will be truncated according to
+ * [overflow] and [softWrap]. If it is not null, then it must be greater than zero.
+ * @param minLines The minimum height in terms of minimum number of visible lines. It is required
+ * that 1 <= [minLines] <= [maxLines].
+ * @param onTextLayout callback that is executed when a new text layout is calculated. A
+ * [TextLayoutResult] object that callback provides contains paragraph information, size of the
+ * text, baselines and other details. The callback can be used to add additional decoration or
+ * functionality to the text. For example, to draw selection around the text.
+ * @param style style configuration for the text such as color, font, line height etc.
+ * @param onClick callback when textLink part is clicked.
  */
+
 @Composable
 public fun TextLink(
     textFull: String,
@@ -100,7 +155,8 @@ public fun TextLink(
                 fontWeight = FontWeight.Bold,
                 textDecoration = TextDecoration.Underline,
             ),
-            start, end,
+            start,
+            end,
         )
     }
 
@@ -136,9 +192,7 @@ public fun TextLink(
             onTextLayout(it)
         },
     )
-
 }
-
 
 @Preview(
     group = "Text",
@@ -148,8 +202,6 @@ public fun TextLink(
 private fun SparkTagPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-
-
     PreviewTheme(
         themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
@@ -163,12 +215,11 @@ private fun SparkTagPreview(
                 SnackbarHost(snackbarHostState)
             },
 
-            ) {
-
+        ) {
             Column {
-
                 TextLink(
-                    textFull = "Know more about the management of my personal data and other RGPD details. (wordings to come)",
+                    textFull = "Know more about the management of my personal data and other " +
+                        "RGPD details. (wordings to come)",
                     textLink = "Know more",
                     style = SparkTheme.typography.headline1,
                     colorText = Color.Cyan,
@@ -181,7 +232,6 @@ private fun SparkTagPreview(
                                 duration = SnackbarDuration.Short,
                             )
                         }
-
                     },
                 )
                 Spacer(
@@ -190,7 +240,8 @@ private fun SparkTagPreview(
                         .sparkUsageOverlay(Color.Green),
                 )
                 TextLink(
-                    textFull = "Know more about the management of my personal data and other RGPD details. (wordings to come)",
+                    textFull = "Know more about the management of my personal data and other " +
+                        "RGPD details. (wordings to come)",
                     textLink = "Know more",
                     style = SparkTheme.typography.body2,
                     onClick = {
@@ -201,7 +252,6 @@ private fun SparkTagPreview(
                                 duration = SnackbarDuration.Short,
                             )
                         }
-
                     },
                 )
                 Spacer(
@@ -212,7 +262,8 @@ private fun SparkTagPreview(
 
                 TextLink(
                     style = SparkTheme.typography.display2,
-                    textFull = "Know more about the management of my personal data and other RGPD details. (wordings to come)",
+                    textFull = "Know more about the management of my personal data and other" +
+                        " RGPD details. (wordings to come)",
                     textLink = "Know more",
                     colorLink = Color.Blue,
                     onClick = {
@@ -223,7 +274,6 @@ private fun SparkTagPreview(
                                 duration = SnackbarDuration.Short,
                             )
                         }
-
                     },
                 )
             }
