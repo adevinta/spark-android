@@ -37,9 +37,9 @@ jobs:
       - name: Dokka
         # https://github.com/Kotlin/dokka/issues/1217
         run: ./gradlew dokkaHtmlMultiModule --no-configuration-cache --no-parallel --max-workers=1
-      - uses: actions/configure-pages@v3.0.6
+      - uses: actions/configure-pages@v4.0.0
       - uses: actions/upload-pages-artifact@v2.0.0
         with:
           path: 'build/dokka'
       - id: deployment
-        uses: actions/deploy-pages@v2.0.4
+        uses: actions/deploy-pages@v3.0.0

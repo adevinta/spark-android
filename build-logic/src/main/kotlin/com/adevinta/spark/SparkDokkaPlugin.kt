@@ -33,6 +33,7 @@ import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import java.io.File
+import java.net.URI
 import java.net.URL
 import java.time.Year
 
@@ -60,12 +61,15 @@ internal class SparkDokkaPlugin : Plugin<Project> {
         moduleName.set("Spark")
         outputDirectory.set(layout.buildDirectory.dir("dokka"))
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-            fun File.recursiveFiles() = walk().filter(File::isFile).toList().toTypedArray()
+            fun File.recursiveAssets() = walk().filter(File::isFile)
+                // https://github.com/Kotlin/dokka/issues/3400
+                .filter { runCatching { URI(it.name) }.isSuccess }
+                .toList().toTypedArray()
             // https://kotlinlang.org/docs/dokka-html.html#customize-assets
             customAssets = listOf(
                 file("art/logo-icon.svg"), // https://kotlinlang.org/docs/dokka-html.html#change-the-logo
-                *rootDir.resolve("art").recursiveFiles(),
-                *rootDir.resolve("spark-screenshot-testing/src/test/snapshots/images").recursiveFiles(),
+                *rootDir.resolve("art").recursiveAssets(),
+                *rootDir.resolve("spark-screenshot-testing/src/test/snapshots/images").recursiveAssets(),
             )
             configureFooterMessage()
         }
