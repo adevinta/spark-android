@@ -39,6 +39,7 @@ import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
 import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
+import com.adevinta.spark.catalog.examples.samples.text.TextLinksExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
@@ -51,11 +52,9 @@ import com.adevinta.spark.catalog.util.SparkSourceUrl
 public data class Component(
     val id: Int,
     val name: String,
-    @StringRes
-    val description: Int,
+    @StringRes val description: Int,
     val tintIcon: Boolean = true,
-    @DrawableRes
-    val illustration: Int = R.drawable.illu_component_placeholder,
+    @DrawableRes val illustration: Int = R.drawable.illu_component_placeholder,
     val guidelinesUrl: String,
     val docsUrl: String,
     val sourceUrl: String,
@@ -179,6 +178,19 @@ private val Tags = Component(
     configurator = TagsConfigurator,
 )
 
+private val TextLinks = Component(
+    id = nextId(),
+    name = "TextLinks",
+    description = R.string.component_textlink_description,
+    illustration = R.drawable.text_link,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/75ed11-textlink/b/403107",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tetx/TextLink.kt",
+    examples = TextLinksExamples,
+    configurator = TagsConfigurator, // TODO
+)
+
 private val TextFields = Component(
     id = nextId(),
     name = "TextFields",
@@ -228,6 +240,7 @@ public val Components: List<Component> = listOf(
     Switches,
     Tabs,
     Tags,
+    TextLinks,
     TextFields,
     Popovers,
 )

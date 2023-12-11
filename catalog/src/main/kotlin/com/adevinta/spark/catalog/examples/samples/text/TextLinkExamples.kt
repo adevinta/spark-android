@@ -27,7 +27,6 @@ import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.text.TextLink
 
-private const val TextLinksExampleDescription = "TextLink examples"
 private const val TextLinksExampleSourceUrl = "$SampleSourceUrl/TextLinkExamples.kt"
 public val TextLinksExamples: List<Example> = listOf(
     Example(
@@ -35,6 +34,7 @@ public val TextLinksExamples: List<Example> = listOf(
         description = "Link inside title",
         sourceUrl = TextLinksExampleSourceUrl,
     ) {
+
         TextLink(
             textFull = "Learn Kotlin Programming https://kotlinlang.org",
             textLink = "https://kotlinlang.org",
