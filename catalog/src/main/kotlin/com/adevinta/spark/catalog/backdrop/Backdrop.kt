@@ -153,6 +153,7 @@ public class BackdropScaffoldState(
         /**
          * The default [Saver] implementation for [BackdropScaffoldState].
          */
+        @Suppress("ktlint:standard:function-naming")
         public fun Saver(
             animationSpec: AnimationSpec<Float>,
             confirmStateChange: (BackdropValue) -> Boolean,

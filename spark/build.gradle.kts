@@ -69,4 +69,8 @@ dependencies {
 
     compileOnly(libs.airbnb.showkase)
     ksp(libs.airbnb.showkase.processor)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.testParameterInjector)
 }

@@ -499,6 +499,7 @@ internal class SwipeableV2State<T>(
          * The default [Saver] implementation for [SwipeableV2State].
          */
         @ExperimentalMaterial3Api
+        @Suppress("ktlint:standard:function-naming")
         fun <T : Any> Saver(
             animationSpec: AnimationSpec<Float>,
             confirmValueChange: (T) -> Boolean,
@@ -617,6 +618,7 @@ internal object SwipeableV2Defaults {
      * @param snap A lambda that gets invoked to snap to a new target
      */
     @ExperimentalMaterial3Api
+    @Suppress("ktlint:standard:function-naming")
     internal fun <T> ReconcileAnimationOnAnchorChangeHandler(
         state: SwipeableV2State<T>,
         animate: (target: T, velocity: Float) -> Unit,
