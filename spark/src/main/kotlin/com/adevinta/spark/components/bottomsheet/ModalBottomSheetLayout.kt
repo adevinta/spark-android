@@ -196,6 +196,7 @@ public class ModalBottomSheetState(
         /**
          * The default [Saver] implementation for [ModalBottomSheetState].
          */
+        @Suppress("ktlint:standard:function-naming")
         public fun Saver(
             animationSpec: AnimationSpec<Float>,
             skipHalfExpanded: Boolean,

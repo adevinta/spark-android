@@ -352,6 +352,7 @@ private fun Modifier.modalBottomSheetSwipeable(
     }
 
 @ExperimentalMaterial3Api
+@Suppress("ktlint:standard:function-naming")
 private fun ModalBottomSheetAnchorChangeHandler(
     state: SheetState,
     animateTo: (target: SheetValue, velocity: Float) -> Unit,

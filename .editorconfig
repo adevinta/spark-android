@@ -9,9 +9,9 @@ max_line_length=120
 ij_kotlin_allow_trailing_comma = true
 ij_kotlin_allow_trailing_comma_on_call_site = true
 ktlint_code_style = intellij_idea
+ktlint_function_naming_ignore_when_annotated_with=Composable
 ktlint_standard_comment-wrapping = disabled # A block comment may not be followed by any other element on that same line
 ktlint_standard_discouraged-comment-location = disabled # Trailing comments (A comment in a 'value_argument_list' is only allowed when placed on a separate line)
-ktlint_standard_function-naming = disabled # Because of Compose rules
 ktlint_standard_function-signature = disabled # Seems to incorrectly reformat parameter lists in function signatures
 ktlint_standard_property-naming = disabled # Multiple top-level const vals (and Companion vals) are using PascalCase
 
