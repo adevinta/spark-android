@@ -234,6 +234,7 @@ public class SheetState(
         /**
          * The default [Saver] implementation for [SheetState].
          */
+        @Suppress("ktlint:standard:function-naming")
         public fun Saver(
             skipPartiallyExpanded: Boolean,
             confirmValueChange: (SheetValue) -> Boolean,
@@ -310,6 +311,7 @@ public object BottomSheetDefaults {
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Suppress("ktlint:standard:function-naming")
 internal fun ConsumeSwipeWithinBottomSheetBoundsNestedScrollConnection(
     sheetState: SheetState,
     orientation: Orientation,
