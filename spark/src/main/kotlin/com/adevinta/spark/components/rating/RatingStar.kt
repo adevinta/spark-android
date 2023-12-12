@@ -152,6 +152,7 @@ public enum class RatingStarState {
  *
  * @param value whether the ToggleableState is on or off
  */
+@Suppress("ktlint:standard:function-naming")
 public fun RatingStarState(value: Boolean): RatingStarState = if (value) Full else Empty
 
 /**

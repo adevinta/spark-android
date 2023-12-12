@@ -435,6 +435,7 @@ public open class SwipeableState<T>(
         /**
          * The default [Saver] implementation for [SwipeableState].
          */
+        @Suppress("ktlint:standard:function-naming")
         public fun <T : Any> Saver(
             animationSpec: AnimationSpec<Float>,
             confirmStateChange: (T) -> Boolean,
