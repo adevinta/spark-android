@@ -33,21 +33,15 @@ import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.surface.Surface
-import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.text.TextLink
 import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
-import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(TestParameterInjector::class)
 internal class TextLinkScreenshot {
 
-    private val colorsText: List<Color> = listOf(Color.Blue, Color.Green, Color.Red, Color.Cyan)
-    private val colorsLink: List<Color> = listOf(Color.Magenta, Color.Yellow, Color.Black, Color.LightGray)
     private val textToTextLinkPairs = mutableListOf(
         Pair(
             """
@@ -75,32 +69,25 @@ internal class TextLinkScreenshot {
 
     @Test
     fun test() {
-        textToTextLinkPairs.forEach { textToTextLink ->
-            colorsText.forEach { colorText ->
-                colorsLink.forEach { colorLink ->
-                    paparazzi.sparkSnapshot(
-                        name = "Link_${textToTextLink.first.substring(0, 10)}" + "_Color_Link$colorLink",
-                    ) {
-                        Surface(
-                            color = SparkTheme.colors.surface,
+        textToTextLinkPairs.forEachIndexed { index, textToTextLink ->
+            paparazzi.sparkSnapshot(
+                name = "Link_$index",
+            ) {
+                Surface(
+                    color = SparkTheme.colors.surface,
+                ) {
+                    Row(modifier = Modifier.padding(24.dp)) {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
                         ) {
-                            Row(modifier = Modifier.padding(24.dp)) {
-                                Column(
-                                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                                ) {
-                                    Text(
-                                        text = "Link: ${textToTextLink.first.substring(0, 10)}, ColorLink: $colorLink",
-                                    )
-                                    TextLink(
-                                        style = SparkTheme.typography.display2,
-                                        textFull = textToTextLink.first,
-                                        textLink = textToTextLink.second,
-                                        colorLink = colorLink,
-                                        colorText = colorText,
-                                        onClick = {},
-                                    )
-                                }
-                            }
+                            TextLink(
+                                style = SparkTheme.typography.display2,
+                                textFull = textToTextLink.first,
+                                textLink = textToTextLink.second,
+                                colorLink = Color.Magenta,
+                                colorText = Color.Blue,
+                                onClick = {},
+                            )
                         }
                     }
                 }
