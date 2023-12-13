@@ -15,8 +15,7 @@ fun TextLink(
     colorText: Color = Color.Unspecified,
     colorLink: Color = colorText,
     onClick: () -> Unit,
-
-    )
+)
 ```
 
 | Light                                                                                                                                        | 
