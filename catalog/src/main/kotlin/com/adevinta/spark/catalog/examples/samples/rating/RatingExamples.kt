@@ -24,6 +24,10 @@ package com.adevinta.spark.catalog.examples.samples.rating
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
@@ -31,6 +35,7 @@ import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.rating.RatingDefault
 import com.adevinta.spark.components.rating.RatingDisplay
 import com.adevinta.spark.components.rating.RatingFull
+import com.adevinta.spark.components.rating.RatingInput
 import com.adevinta.spark.components.rating.RatingLabelSide
 import com.adevinta.spark.components.rating.RatingSimple
 import com.adevinta.spark.components.rating.RatingSimpleLarge
@@ -53,6 +58,13 @@ public val RatingExamples: List<Example> = listOf(
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",
     ) {
         RatingDisplaySample(starSize = RatingDefault.StarSize)
+    },
+    Example(
+        name = "Rating Input",
+        description = "Rating input example that le the user select a rating value",
+        sourceUrl = "$SampleSourceUrl/RatingInputSample.kt",
+    ) {
+        RatingInputSample()
     },
     Example(
         name = "Rating Full",
@@ -96,6 +108,18 @@ private fun RatingDisplaySample(
         RatingDisplay(value = 4.1f, size = starSize)
         RatingDisplay(value = 4.26f, size = starSize)
         RatingDisplay(value = 5f, size = starSize)
+    }
+}
+
+@Composable
+private fun RatingInputSample() {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        var rating by remember {
+            mutableIntStateOf(2)
+        }
+        RatingInput(value = rating, onRatingChanged = { rating = it })
     }
 }
 
