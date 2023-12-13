@@ -179,7 +179,7 @@ public object TooltipDefaults {
      * The default [Color] for a [PlainTooltip]'s container.
      */
     public val plainTooltipContainerColor: Color
-        @Composable get() = SparkTheme.colors.accentContainer
+        @Composable get() = SparkTheme.colors.surfaceInverse
 
     /**
      * The default [Color] for the content within the [PlainTooltip].

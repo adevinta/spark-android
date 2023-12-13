@@ -64,6 +64,8 @@
     <string name="component_icontogglebutton_description">Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a compact button is required, such as in a toolbar or image list.</string>
     <!--Radio button example-->
     <string name="component_radiobutton_description">Component used when only one choice may be selected in a series of options.</string>
+    <!--rating example-->
+    <string name="component_ratingdisplay_description">Ratings let users see and/or set a star rating for a user or experience.</string>
     <!--Switch example-->
     <string name="component_switch_description">Switch component allows the user to activate or deactivate the state of an element or concept. It is also used to control binary options (On/Off or True/False).</string>
     <!--Switch example-->

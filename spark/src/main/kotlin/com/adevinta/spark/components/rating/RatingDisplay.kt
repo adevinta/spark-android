@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
@@ -42,6 +43,7 @@ public fun RatingDisplay(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
     modifier: Modifier = Modifier,
+    size: Dp = RatingDefault.SmallStarSize,
 ) {
     if (value !in .5f..5f) return
     Row(
@@ -51,7 +53,7 @@ public fun RatingDisplay(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
-        var remainingValue = remember {
+        var remainingValue = remember(value) {
             value
         }
         repeat(5) {
@@ -69,9 +71,10 @@ public fun RatingDisplay(
                 }
             }
 
-            SparkRatingStar(
+            RatingStar(
                 modifier = Modifier,
                 state = RatingStarState(starRating),
+                size = size,
             )
         }
     }
