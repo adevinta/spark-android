@@ -55,7 +55,7 @@ jobs:
         run: ./gradlew :catalog:assembleRelease
 
       - name: '📦 Archive APKs'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: '**/build/outputs/apk/**/*.apk'
@@ -79,7 +79,7 @@ jobs:
           git log --topo-order --format="• %s" "$from..$to" --no-merges > release-notes.txt
 
       - name: '📦 Archive release-notes.txt'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-notes.txt
           path: 'release-notes.txt'
