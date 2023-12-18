@@ -72,6 +72,7 @@ dependencies {
 
     implementation(libs.accompanist.testharness)
     implementation(libs.accompanist.drawablepainter)
+    implementation(libs.colorpicker)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.ui)

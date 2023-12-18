@@ -30,6 +30,7 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtons
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.text.TextLinksConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
@@ -214,7 +215,7 @@ private val TextLinks = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tetx/TextLink.kt",
     examples = TextLinksExamples,
-    configurator = TagsConfigurator, // TODO
+    configurator = TextLinksConfigurator
 )
 
 private val TextFields = Component(

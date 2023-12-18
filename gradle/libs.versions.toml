@@ -1,5 +1,6 @@
 [versions]
 accompanist = "0.30.1"
+colorPicker = "1.0.0"
 android-gradlePlugin = "8.2.0"
 androidx-activity = "1.8.1"
 androidx-appCompat = "1.6.1"
@@ -37,6 +38,8 @@ accompanist-permissions = { module = "com.google.accompanist:accompanist-permiss
 accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-testharness = { module = "com.google.accompanist:accompanist-testharness", version.ref = "accompanist" }
+
+colorpicker = { module = "io.mhssn:colorpicker", version.ref = "colorPicker" }
 
 airbnb-showkase = { module = "com.airbnb.android:showkase", version.ref = "showkase" }
 airbnb-showkase-processor = { module = "com.airbnb.android:showkase-processor", version.ref = "showkase" }
