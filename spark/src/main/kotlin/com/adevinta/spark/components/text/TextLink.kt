@@ -213,7 +213,6 @@ private fun SparkTextLinkPreview(
             },
         ) {
             Column {
-
                 TextLink(
                     style = SparkTheme.typography.display2,
                     textFull = "Know more about the management",
