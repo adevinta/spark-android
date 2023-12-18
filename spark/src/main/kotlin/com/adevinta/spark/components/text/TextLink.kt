@@ -23,10 +23,7 @@ package com.adevinta.spark.components.text
 
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
@@ -53,18 +50,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
-import com.adevinta.spark.components.spacer.HorizontalSpacer
-import com.adevinta.spark.components.spacer.Spacer
-import com.adevinta.spark.icons.FavoriteOutline
-import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.collections.immutable.ImmutableMap
@@ -223,60 +213,10 @@ private fun SparkTextLinkPreview(
             },
         ) {
             Column {
-                Row {
-                    Icon(
-                        modifier = Modifier.size(30.dp),
-                        sparkIcon = SparkIcons.FavoriteOutline,
-                        contentDescription = "Favorite",
-                    )
-                    HorizontalSpacer(8.dp)
-                    TextLink(
-
-                        textFull = "Know more about the management of my personal data and other " + "RGPD details. (wordings to come)",
-                        textLink = "Know more",
-                        style = SparkTheme.typography.headline1,
-                        colorText = Color.Cyan,
-                        colorLink = Color.Magenta,
-                        onClick = {
-                            scope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "Know more Clicked",
-                                    actionLabel = "Action",
-                                    duration = SnackbarDuration.Short,
-                                )
-                            }
-                        },
-                    )
-
-                }
-                Spacer(
-                    modifier = Modifier
-                        .height(8.dp)
-                        .sparkUsageOverlay(Color.Green),
-                )
-                TextLink(
-                    textFull = "Know more about the management of my personal data and other " + "RGPD details. (wordings to come)",
-                    textLink = "Know more",
-                    style = SparkTheme.typography.body2,
-                    onClick = {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = "Know more Clicked",
-                                actionLabel = "Action",
-                                duration = SnackbarDuration.Short,
-                            )
-                        }
-                    },
-                )
-                Spacer(
-                    modifier = Modifier
-                        .height(8.dp)
-                        .sparkUsageOverlay(Color.Green),
-                )
 
                 TextLink(
                     style = SparkTheme.typography.display2,
-                    textFull = "Know more about the management of my personal data and other" + " RGPD details. (wordings to come)",
+                    textFull = "Know more about the management",
                     textLink = "Know more",
                     colorLink = Color.Blue,
                     onClick = {
