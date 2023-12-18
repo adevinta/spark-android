@@ -215,7 +215,7 @@ private val TextLinks = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tetx/TextLink.kt",
     examples = TextLinksExamples,
-    configurator = TextLinksConfigurator
+    configurator = TextLinksConfigurator,
 )
 
 private val TextFields = Component(

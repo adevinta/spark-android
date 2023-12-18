@@ -100,12 +100,10 @@ private fun TextLinkSample() {
             SnackbarHost(snackbarHostState)
         },
     ) {
-
         Column(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.verticalScroll(scrollState),
         ) {
-
             when (iconAlignment) {
                 IconAlignment.Right -> Row {
                     if (isIconAdded) {
@@ -118,7 +116,6 @@ private fun TextLinkSample() {
                         )
                         HorizontalSpacer(5.dp)
                     }
-
 
                     TextLink(
                         textFull = "This is Adevinta Privacy & Policy details.",
@@ -133,7 +130,6 @@ private fun TextLinkSample() {
                                     duration = SnackbarDuration.Short,
                                 )
                             }
-
                         },
                     )
                 }
@@ -152,7 +148,6 @@ private fun TextLinkSample() {
                                     duration = SnackbarDuration.Short,
                                 )
                             }
-
                         },
                     )
                     if (isIconAdded) {
@@ -196,10 +191,10 @@ private fun TextLinkSample() {
                 )
             }
 
-
             Row(verticalAlignment = Alignment.CenterVertically) {
                 ButtonOutlined(
-                    size = ButtonSize.Medium, text = "Change Text Color",
+                    size = ButtonSize.Medium,
+                    text = "Change Text Color",
                     onClick = {
                         shouldShowTextColorDialog = true
                     },
@@ -217,7 +212,8 @@ private fun TextLinkSample() {
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 ButtonOutlined(
-                    size = ButtonSize.Medium, text = "Change Link Color",
+                    size = ButtonSize.Medium,
+                    text = "Change Link Color",
                     onClick = { shouldShowLinkColorDialog = true },
                 )
 
@@ -263,11 +259,11 @@ private fun TextLinkSample() {
                     colorLink = it
                 },
             )
-
         }
     }
 }
 
 private enum class IconAlignment {
-    Right, Left
+    Right,
+    Left,
 }
