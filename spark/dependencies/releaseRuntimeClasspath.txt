@@ -77,7 +77,6 @@ androidx.versionedparcelable:versionedparcelable:1.1.1
 androidx.window.extensions.core:core:1.0.0
 androidx.window:window:1.2.0
 com.google.accompanist:accompanist-drawablepainter:0.32.0
-io.mhssn:colorpicker:1.0.0
 com.google.accompanist:accompanist-placeholder-material:0.30.1
 com.google.accompanist:accompanist-placeholder:0.30.1
 com.google.guava:listenablefuture:1.0
