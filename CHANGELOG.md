@@ -4,6 +4,32 @@
 
 ## [Unreleased]
 
+## [0.6.0]
+
+_2023-12-19_
+
+### Spark
+
+* 🆕 Add `TextField addons` api with premade addons
+* 🆕 Add `Popover` component
+* 🆕 Add new `Modal` Component
+* 🆕 Add `Progressbar` Component
+* 🆕 Update rating specs
+* 🆕 Add `Rating` Input
+* 💄 Add `Button Shapes` and unify the api for all button types
+* 🐛 `Checkbox` checkmark was using `onPrimary` instead of `onColor` from intent
+* 🎨 Screenshot tests for all `SparkIcon`s
+
+
+### Catalog App
+
+* 💄 Add `Subito` theme to catalog app
+* 💄 Add `Milanuncios` theme to catalog app
+* 🎨 Add examples ad configurator for `Rating`
+* 🎨 Add a configurator for the `Tab`
+* 🎨 Add missing test, examples, configurator for `Tag` component
+* 🐛 Fix typos in `TabsExamples` and replace one icon to fit the style
+* 📝 Replace `zeroheight` links with `spark.adevinta.com`
 
 ## [0.5.0]
 
@@ -136,7 +162,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.5.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.6.0...HEAD
+
+[0.6.0]: https://github.com/adevinta/spark-android/releases/tag/0.6.0
 
 [0.5.0]: https://github.com/adevinta/spark-android/releases/tag/0.5.0
 
