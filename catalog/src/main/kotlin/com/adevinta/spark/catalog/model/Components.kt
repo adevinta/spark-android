@@ -27,6 +27,7 @@ import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
@@ -38,6 +39,7 @@ import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
 import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
+import com.adevinta.spark.catalog.examples.samples.progressbar.ProgressbarExamples
 import com.adevinta.spark.catalog.examples.samples.rating.RatingExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
@@ -53,11 +55,9 @@ import com.adevinta.spark.catalog.util.SparkSourceUrl
 public data class Component(
     val id: Int,
     val name: String,
-    @StringRes
-    val description: Int,
+    @StringRes val description: Int,
     val tintIcon: Boolean = true,
-    @DrawableRes
-    val illustration: Int = R.drawable.illu_component_placeholder,
+    @DrawableRes val illustration: Int = R.drawable.illu_component_placeholder,
     val guidelinesUrl: String,
     val docsUrl: String,
     val sourceUrl: String,
@@ -205,6 +205,19 @@ private val Tags = Component(
     configurator = TagsConfigurator,
 )
 
+private val Progressbars = Component(
+    id = nextId(),
+    name = "Progressbars",
+    description = R.string.component_progressbar_description,
+    illustration = R.drawable.ic_progressbar,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/89544a-progress-bar/b/2873c8",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progressbar/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progressbar/Progressbar.kt",
+    examples = ProgressbarExamples,
+    configurator = ProgressbarConfigurator,
+)
+
 private val TextFields = Component(
     id = nextId(),
     name = "TextFields",
@@ -243,5 +256,6 @@ public val Components: List<Component> = listOf(
     Switches,
     Tabs,
     Tags,
+    Progressbars,
     TextFields,
 )
