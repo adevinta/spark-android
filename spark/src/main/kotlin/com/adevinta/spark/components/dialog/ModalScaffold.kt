@@ -55,7 +55,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -79,6 +78,7 @@ import com.adevinta.spark.components.IntentColors
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.buttons.ButtonOutlined
+import com.adevinta.spark.components.chips.ChipDefaults.MaxWidth
 import com.adevinta.spark.components.dialog.ModalDefault.DialogPadding
 import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
 import com.adevinta.spark.components.iconbuttons.SparkIconButton
@@ -144,8 +144,8 @@ public fun ModalFullScreenScaffold(
         onClose = onClose,
         modifier = modifier,
         snackbarHost = snackbarHost,
-        mainButton = if (!reverseButtonOrder) mainButton else supportButton,
-        supportButton = if (!reverseButtonOrder) supportButton else mainButton,
+        mainButton = if (!reverseButtonOrder) mainButton else mainButton,
+        supportButton = if (!reverseButtonOrder) supportButton else supportButton,
     ) { innerPadding ->
         Column {
             illustration?.let {
@@ -160,7 +160,14 @@ public fun ModalFullScreenScaffold(
                     contentScale = illustrationContentScale,
                 )
             }
-            content(PaddingValues())
+            content(
+                PaddingValues(
+                    start = innerPadding.calculateLeftPadding(LocalLayoutDirection.current),
+                    end = innerPadding.calculateRightPadding(LocalLayoutDirection.current),
+                    top = if (illustration == null) innerPadding.calculateTopPadding() else 0.dp,
+                    bottom = innerPadding.calculateBottomPadding(),
+                ),
+            )
         }
     }
 }
@@ -200,10 +207,17 @@ public fun ModalScaffold(
     val isPhoneLandscape = size.heightSizeClass == WindowHeightSizeClass.Compact
     val isPhonePortraitOrFoldable =
         (size.widthSizeClass == WindowWidthSizeClass.Compact || size.widthSizeClass == WindowWidthSizeClass.Medium) &&
-            size.heightSizeClass == WindowHeightSizeClass.Medium
+            (
+                size.heightSizeClass == WindowHeightSizeClass.Medium ||
+                    size.heightSizeClass == WindowHeightSizeClass.Expanded
+                )
+    val activityWindow = getActivityWindow()
 
+    @Suppress("DEPRECATION")
+    val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
+        activityWindow?.navigationBarColor == Color.Transparent.toArgb()
     val properties = DialogProperties(
-        usePlatformDefaultWidth = true,
+        usePlatformDefaultWidth = isEdgeToEdge,
         decorFitsSystemWindows = false,
     )
     val navigationBarPadding = WindowInsets.navigationBars.asPaddingValues()
@@ -334,11 +348,20 @@ private fun PhonePortraitModalScaffold(
         properties = properties,
     ) {
         // Work around for b/246909281 as for now Dialog doesn't pass the drawing insets to its content
+        val parentView = LocalView.current.parent as View
         val activityWindow = getActivityWindow()
         val dialogWindow = getDialogWindow()
-        val parentView = LocalView.current.parent as View
+
+        @Suppress("DEPRECATION")
+        val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
+            activityWindow?.navigationBarColor == Color.Transparent.toArgb()
+
         SideEffect {
-            if (activityWindow != null && dialogWindow != null) {
+            if (
+                activityWindow != null &&
+                dialogWindow != null &&
+                isEdgeToEdge
+            ) {
                 val attributes = WindowManager.LayoutParams()
                 attributes.copyFrom(activityWindow.attributes)
                 attributes.type = dialogWindow.attributes.type
@@ -348,10 +371,6 @@ private fun PhonePortraitModalScaffold(
             }
         }
 
-        LaunchedEffect(Unit) {
-            dialogWindow?.statusBarColor = Color.Transparent.toArgb()
-            dialogWindow?.navigationBarColor = Color.Transparent.toArgb()
-        }
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
         Scaffold(
@@ -438,11 +457,20 @@ private fun PhoneLandscapeModalScaffold(
         properties = properties,
     ) {
         // Work around for b/246909281 as for now Dialog doesn't pass the drawing insets to its content
+        val parentView = LocalView.current.parent as View
         val activityWindow = getActivityWindow()
         val dialogWindow = getDialogWindow()
-        val parentView = LocalView.current.parent as View
+
+        @Suppress("DEPRECATION")
+        val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
+            activityWindow?.navigationBarColor == Color.Transparent.toArgb()
+
         SideEffect {
-            if (activityWindow != null && dialogWindow != null) {
+            if (
+                activityWindow != null &&
+                dialogWindow != null &&
+                isEdgeToEdge
+            ) {
                 val attributes = WindowManager.LayoutParams()
                 attributes.copyFrom(activityWindow.attributes)
                 attributes.type = dialogWindow.attributes.type
@@ -450,11 +478,6 @@ private fun PhoneLandscapeModalScaffold(
                 parentView.layoutParams =
                     FrameLayout.LayoutParams(activityWindow.decorView.width, activityWindow.decorView.height)
             }
-        }
-
-        LaunchedEffect(Unit) {
-            dialogWindow?.statusBarColor = Color.Transparent.toArgb()
-            dialogWindow?.navigationBarColor = Color.Transparent.toArgb()
         }
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
