@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [0.6.1]
+
+_2023-12-21_
+
+### Fix Modal reported issues
+*  Fix the content padding not being passed to it's children.
+* Invert the position of buttons.
+* Inset for non edge to edge app was broken and displaying the content bellow the system bars.
+*  Add the support for WindowHeightSizeClass.Expanded to show the fullscreen modal in portrait
+
 ## [0.6.0]
 
 _2023-12-19_
@@ -162,7 +172,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.6.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.6.1...HEAD
+
+[0.6.1]: https://github.com/adevinta/spark-android/releases/tag/0.6.1
 
 [0.6.0]: https://github.com/adevinta/spark-android/releases/tag/0.6.0
 
