@@ -50,8 +50,8 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- * The filled button should only be used once per view (not including a modal dialog),
- * these buttons have the most emphasis.
+ * The ghost button is the button for non important actions. The mandatory icon help to indicate that it's a
+ * clickable text
  *
  * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
  * after a click action for example.
@@ -63,7 +63,74 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param intent The intent color for the button.
  * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
  * @param icon The optional icon to be displayed at the start or the end of the button container.
- * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
+ * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
+ * loading state
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
+ */
+@Composable
+public fun ButtonGhost(
+    onClick: () -> Unit,
+    text: String,
+    modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
+    shape: ButtonShape = SparkButtonDefaults.DefaultShape,
+    intent: ButtonIntent = ButtonIntent.Main,
+    enabled: Boolean = true,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.() -> Unit,
+) {
+    val contentColor by animateColorAsState(
+        targetValue = intent.colors().color,
+        label = "content color",
+    )
+
+    val colors = if (LocalHighlightToken.current) {
+        ButtonDefaults.filledTonalButtonColors()
+    } else {
+        ButtonDefaults.textButtonColors(
+            contentColor = contentColor,
+            disabledContentColor = contentColor.disabled,
+        )
+    }
+    BaseSparkButton(
+        onClick = onClick,
+        modifier = modifier,
+        size = size,
+        shape = shape.shape,
+        enabled = enabled,
+        elevation = ButtonDefaults.buttonElevation(),
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+        interactionSource = interactionSource,
+        content = content,
+    )
+}
+
+/**
+ * The ghost button is the button for non important actions. The mandatory icon help to indicate that it's a
+ * clickable text
+ *
+ * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
+ * after a click action for example.
+ *
+ * @param onClick Will be called when the user clicks the button
+ * @param text The text to be displayed in the button
+ * @param modifier Modifier to be applied to the button
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
  * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
  * loading state
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
@@ -114,8 +181,8 @@ public fun ButtonGhost(
 }
 
 /**
- * The filled button should only be used once per view (not including a modal dialog),
- * these buttons have the most emphasis.
+ * The ghost button is the button for non important actions. The mandatory icon help to indicate that it's a
+ * clickable text
  *
  * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
  * after a click action for example.
@@ -127,7 +194,8 @@ public fun ButtonGhost(
  * @param intent The intent color for the button.
  * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
  * @param icon The optional icon to be displayed at the start or the end of the button container.
- * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
  * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
  * loading state
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
@@ -290,7 +358,7 @@ internal fun ButtonGhostIntentPreview(
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline
-        ButtonIntent.values().forEach { intent ->
+        ButtonIntent.entries.forEach { intent ->
             ButtonGhost(
                 text = intent.name,
                 onClick = { },

@@ -21,27 +21,27 @@
  */
 package com.adevinta.spark.components.buttons
 
-import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Shape
 import com.adevinta.spark.SparkTheme
 
 @Suppress("ktlint:standard:no-semi", "ktlint:standard:trailing-comma-on-declaration-site")
 public enum class ButtonShape {
     Square {
-        override val shape: CornerBasedShape
+        override val shape: Shape
             @Composable get() = SparkTheme.shapes.none
     },
 
     Pill {
-        override val shape: CornerBasedShape
+        override val shape: Shape
             @Composable get() = SparkTheme.shapes.full
     },
 
     Rounded {
-        override val shape: CornerBasedShape
+        override val shape: Shape
             @Composable get() = SparkTheme.shapes.large
-    };
+    }, ;
 
-    internal abstract val shape: CornerBasedShape
+    internal abstract val shape: Shape
         @Composable get
 }
