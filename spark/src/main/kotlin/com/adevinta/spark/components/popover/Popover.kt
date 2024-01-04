@@ -74,7 +74,7 @@ import kotlinx.coroutines.launch
  * @param popoverContent the composable that will be used to populate the Popover's content.
  * @param isDismissButtonEnabled [Boolean] that determines if we show a dismiss iconbutton on the Popover,
  * @param popoverState handles the state of the Popover's visibility.
- * @param actionContent the composable that the Popover will anchor to.
+ * @param anchorContent the composable that the Popover will anchor to.
  */
 
 @ExperimentalSparkApi
@@ -85,7 +85,7 @@ public fun Popover(
     modifier: Modifier = Modifier, // ignored
     isDismissButtonEnabled: Boolean = false,
     popoverState: TooltipState = rememberTooltipState(isPersistent = true),
-    actionContent: @Composable () -> Unit,
+    anchorContent: @Composable () -> Unit,
 ) {
     val shape: Shape = TooltipDefaults.richTooltipContainerShape
     /**
@@ -109,7 +109,9 @@ public fun Popover(
             ) {
                 Row {
                     Box(
-                        modifier = Modifier.padding(all = PopoverContentPadding),
+                        modifier = Modifier
+                            .padding(all = PopoverContentPadding)
+                            .weight(1.0f, false),
                     ) {
                         CompositionLocalProvider(
                             content = popoverContent,
@@ -117,10 +119,12 @@ public fun Popover(
                     }
                     if (isDismissButtonEnabled) {
                         IconButtonGhost(
-                            modifier = Modifier.padding(
-                                top = PopoverDismissButtonPadding,
-                                end = PopoverDismissButtonPadding,
-                            ),
+                            modifier = Modifier
+                                .padding(
+                                    top = PopoverDismissButtonPadding,
+                                    end = PopoverDismissButtonPadding,
+                                )
+                                .weight(2.0f, true),
                             icon = SparkIcons.Close,
                             onClick = { popoverState.dismiss() },
                         )
@@ -129,7 +133,7 @@ public fun Popover(
             }
         },
         state = popoverState,
-        content = actionContent,
+        content = anchorContent,
     )
 }
 
@@ -143,7 +147,7 @@ private fun PopoverPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        val state = rememberTooltipState(isPersistent = true)
+        val popoverState = rememberTooltipState(isPersistent = true)
         val scope = rememberCoroutineScope()
 
         Column(
@@ -173,11 +177,11 @@ private fun PopoverPreview(
                     }
                 },
                 isDismissButtonEnabled = true,
-                popoverState = state,
+                popoverState = popoverState,
             ) {
                 ButtonOutlined(
                     text = "Display Popover",
-                    onClick = { scope.launch { state.show() } },
+                    onClick = { scope.launch { popoverState.show() } },
                 )
             }
         }

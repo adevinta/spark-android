@@ -71,6 +71,7 @@ dependencies {
 
     implementation(libs.accompanist.testharness)
     implementation(libs.accompanist.drawablepainter)
+    implementation(libs.coilCompose)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.ui)
