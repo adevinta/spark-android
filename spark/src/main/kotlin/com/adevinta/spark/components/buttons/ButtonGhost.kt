@@ -74,7 +74,6 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 @Composable
 public fun ButtonGhost(
     onClick: () -> Unit,
-    text: String,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
     shape: ButtonShape = SparkButtonDefaults.DefaultShape,
