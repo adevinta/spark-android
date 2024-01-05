@@ -21,9 +21,13 @@
  */
 package com.adevinta.spark.components.text
 
-import androidx.compose.foundation.gestures.detectTapGestures
+import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
@@ -35,26 +39,31 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.text.Paragraph
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.IconSide
+import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
+import com.adevinta.spark.icons.InfoOutline
+import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.collections.immutable.ImmutableMap
@@ -81,26 +90,8 @@ import kotlinx.coroutines.launch
  * Additionally, for [color], if [color] is not set, and [style] does not have a color, then
  * [LocalContentColor] will be used.
  *
- * @param textFull the full text to be displayed
- * @param textLink the text to be underlined as link (it will be the clickable part
- * WARNING if textFull does not include textLink it will @throws IndexOutOfBoundsException
- *
+ * @param text the text to be displayed that has link, should be provided as Anottated string, with colors & underlined link parts
  * @param modifier the [Modifier] to be applied to this layout node
- * @param colorText [Color] to apply to the text. If [Color.Unspecified], and [style] has no color set,
- * this will be [LocalContentColor].
- * @param colorLink [Color] to apply to the link. by default if no color specified it will
- * be assigned to the value of @param colorText
- * @param fontSize the size of glyphs to use when painting the text. See [TextStyle.fontSize].
- * @param fontStyle the typeface variant to use when drawing the letters (e.g., italic).
- * See [TextStyle.fontStyle].
- * @param fontWeight the typeface thickness to use when painting the text (e.g., [FontWeight.Bold]).
- * @param fontFamily the font family to be used when rendering the text. See [TextStyle.fontFamily].
- * @param letterSpacing the amount of space to add between each letter.
- * See [TextStyle.letterSpacing].
- * @param textAlign the alignment of the text within the lines of the paragraph.
- * See [TextStyle.textAlign].
- * @param lineHeight line height for the [Paragraph] in [TextUnit] unit, e.g. SP or EM.
- * See [TextStyle.lineHeight].
  * @param overflow how visual overflow should be handled.
  * @param softWrap whether the text should break at soft line breaks. If false, the glyphs in the
  * text will be positioned as if there was unlimited horizontal space. If [softWrap] is false,
@@ -115,80 +106,80 @@ import kotlinx.coroutines.launch
  * text, baselines and other details. The callback can be used to add additional decoration or
  * functionality to the text. For example, to draw selection around the text.
  * @param style style configuration for the text such as color, font, line height etc.
- * @param onClick callback when textLink part is clicked.
+ * @param icon The optional icon to be displayed at the start or the end of the Text.
+ * @param iconColor [Color] to applied to the icon. If [Color.Unspecified], and [style] has no color set,
+ * this will be [LocalContentColor]. usually should be set to the color of the text not links
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param onClick callback when textLink container is clicked.
  */
 
+@SuppressLint("VisibleForTests")
 @Composable
 public fun TextLink(
-    textFull: String,
-    textLink: String,
+    text: AnnotatedString,
+    onClickLabel: String,
     modifier: Modifier = Modifier,
-    colorText: Color = Color.Unspecified,
-    colorLink: Color = colorText,
-    fontSize: TextUnit = TextUnit.Unspecified,
-    fontStyle: FontStyle? = null,
-    fontWeight: FontWeight? = null,
-    fontFamily: FontFamily? = null,
-    letterSpacing: TextUnit = TextUnit.Unspecified,
-    textAlign: TextAlign? = null,
-    lineHeight: TextUnit = TextUnit.Unspecified,
+    style: TextStyle = LocalTextStyle.current,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
     inlineContent: ImmutableMap<String, InlineTextContent> = persistentMapOf(),
     onTextLayout: (TextLayoutResult) -> Unit = {},
-    style: TextStyle = LocalTextStyle.current,
+    icon: SparkIcon? = null,
+    iconColor: Color = Color.Unspecified,
+    iconSide: IconSide = IconSide.END,
     onClick: () -> Unit,
 ) {
-    val start = textFull.indexOf(textLink)
-    val end = start + textLink.length
-
-    val annotatedText = buildAnnotatedString {
-        append(textFull)
-        addStyle(
-            style = SpanStyle(
-                color = colorLink,
-                fontWeight = FontWeight.Bold,
-                textDecoration = TextDecoration.Underline,
-            ),
-            start,
-            end,
-        )
-    }
-
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
-    val pressIndicator = Modifier.pointerInput(onClick) {
-        detectTapGestures { pos ->
-            layoutResult.value?.let { layoutResult ->
-                val offset = layoutResult.getOffsetForPosition(pos)
-                if (offset in start..end) onClick()
-            }
-        }
-    }
+    val measuredIconSize = style.fontSize.value
+    val measuredIconPadding = measuredIconSize / 2.5
 
-    SparkText(
-        text = annotatedText,
-        modifier = modifier.then(pressIndicator),
-        style = style,
-        color = colorText,
-        fontSize = fontSize,
-        fontStyle = fontStyle,
-        fontWeight = fontWeight,
-        fontFamily = fontFamily,
-        letterSpacing = letterSpacing,
-        textAlign = textAlign,
-        lineHeight = lineHeight,
-        overflow = overflow,
-        softWrap = softWrap,
-        maxLines = maxLines,
-        minLines = minLines,
-        inlineContent = inlineContent,
-        onTextLayout = {
-            layoutResult.value = it
-            onTextLayout(it)
-        },
-    )
+    Row(
+        modifier = modifier.clickable(onClickLabel = onClickLabel) { onClick() },
+    ) {
+        if (icon != null && iconSide == IconSide.START) {
+            Icon(
+                sparkIcon = icon,
+                tint = iconColor,
+                modifier = Modifier
+                    .alignByBaseline()
+                    .padding(top = measuredIconPadding.dp / 2, end = measuredIconPadding.dp)
+                    .size(measuredIconSize.dp)
+                    .testTag("TextLinkIcon"),
+                contentDescription = null, // Text link text should be enough for context
+            )
+        }
+        SparkText(
+            text = text,
+            modifier = Modifier
+                .weight(1F, false)
+                .alignByBaseline(),
+            style = style.copy(platformStyle = PlatformTextStyle(includeFontPadding = false)),
+            overflow = overflow,
+            softWrap = softWrap,
+            maxLines = maxLines,
+            minLines = minLines,
+            inlineContent = inlineContent,
+            onTextLayout = {
+                layoutResult.value = it
+                onTextLayout(it)
+            },
+        )
+        if (icon != null && iconSide == IconSide.END) {
+            Icon(
+                sparkIcon = icon,
+                tint = iconColor,
+                modifier = Modifier
+                    .alignByBaseline()
+                    .padding(top = measuredIconPadding.dp / 2, start = measuredIconPadding.dp)
+                    .size(measuredIconSize.dp)
+                    .testTag("TextLinkIcon"),
+                contentDescription = null, // Text link text should be enough for context
+            )
+        }
+
+    }
 }
 
 @Preview(
@@ -213,11 +204,32 @@ private fun SparkTextLinkPreview(
             },
         ) {
             Column {
+                val annotatedString = buildAnnotatedString {
+                    append("Know more about the ")
+                    withStyle(
+                        style = SpanStyle(
+                            color = Color.Blue,
+                            fontWeight = FontWeight.Bold,
+                            textDecoration = TextDecoration.Underline,
+                        ),
+                    ) {
+                        append("Privacy & Policy")
+                    }
+                    append(
+                        """
+                         also lots of that that you may be interested in,
+                        it's really necessary
+                        to know them or i will have to tell your mom
+                        """.trimIndent(),
+                    )
+                }
+
                 TextLink(
-                    style = SparkTheme.typography.display2,
-                    textFull = "Know more about the management",
-                    textLink = "Know more",
-                    colorLink = Color.Blue,
+                    style = SparkTheme.typography.body2,
+                    text = annotatedString,
+                    iconSide = IconSide.START,
+                    onClickLabel = "Privacy & Policy",
+                    icon = SparkIcons.InfoOutline,
                     onClick = {
                         scope.launch {
                             snackbarHostState.showSnackbar(
