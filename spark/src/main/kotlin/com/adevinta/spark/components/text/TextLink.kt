@@ -128,7 +128,7 @@ public fun TextLink(
     onTextLayout: (TextLayoutResult) -> Unit = {},
     icon: SparkIcon? = null,
     iconColor: Color = Color.Unspecified,
-    iconSide: IconSide = IconSide.END,
+    iconSide: IconSide = IconSide.START,
     onClick: () -> Unit,
 ) {
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
@@ -232,7 +232,7 @@ private fun SparkTextLinkPreview(
                     onClick = {
                         scope.launch {
                             snackbarHostState.showSnackbar(
-                                message = "Know more Clicked",
+                                message = "Privacy & Policy Clicked",
                                 actionLabel = "Action",
                                 duration = SnackbarDuration.Short,
                             )
