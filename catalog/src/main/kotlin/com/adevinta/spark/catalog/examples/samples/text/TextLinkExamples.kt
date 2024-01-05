@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.examples.samples.text
 
 import androidx.compose.foundation.layout.Box
@@ -46,7 +45,6 @@ import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcons
 import kotlinx.coroutines.launch
 
-
 private const val TextLinksExampleSourceUrl = "$SampleSourceUrl/TextLinkExamples.kt"
 
 private val annotatedString1 = buildAnnotatedString {
@@ -61,7 +59,9 @@ private val annotatedString1 = buildAnnotatedString {
         append("Privacy & Policy")
     }
     append(
-        "also lots of that that you may " + "be interested in, it's really necessary" + " to know them or i will have to tell your mom",
+        "also lots of that that you may " +
+            "be interested in, it's really necessary" +
+            " to know them or i will have to tell your mom",
     )
 }
 
@@ -121,7 +121,6 @@ public val TextLinksExamples: List<Example> = listOf(
                                 duration = SnackbarDuration.Short,
                             )
                         }
-
                     },
                 )
             }
@@ -180,7 +179,6 @@ public val TextLinksExamples: List<Example> = listOf(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.fillMaxSize(),
             ) {
-
 
                 TextLink(
                     style = SparkTheme.typography.subhead,
