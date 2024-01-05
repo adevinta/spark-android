@@ -22,6 +22,7 @@
 package com.adevinta.spark.catalog.configurator.samples.text
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -45,7 +46,11 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
@@ -55,8 +60,7 @@ import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.buttons.ButtonSize
-import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.icons.IconSize
+import com.adevinta.spark.components.buttons.IconSide
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
@@ -64,8 +68,7 @@ import com.adevinta.spark.components.spacer.HorizontalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.text.TextLink
 import com.adevinta.spark.components.toggles.SwitchLabelled
-import com.adevinta.spark.icons.LikeOutline
-import com.adevinta.spark.icons.Link
+import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcons
 import io.mhssn.colorpicker.ColorPickerDialog
 import io.mhssn.colorpicker.ColorPickerType
@@ -89,9 +92,11 @@ private fun TextLinkSample() {
     var isIconAdded by remember { mutableStateOf(true) }
     var shouldShowTextColorDialog by remember { mutableStateOf(false) }
     var shouldShowLinkColorDialog by remember { mutableStateOf(false) }
-    var iconAlignment by remember { mutableStateOf(IconAlignment.Right) }
+    var shouldShowIconColorDialog by remember { mutableStateOf(false) }
+    var iconSide by remember { mutableStateOf(IconSide.START) }
     var colorText by remember { mutableStateOf(Color.Magenta) }
     var colorLink by remember { mutableStateOf(Color.Cyan) }
+    var colorIcon by remember { mutableStateOf(Color.LightGray) }
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -104,71 +109,62 @@ private fun TextLinkSample() {
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.verticalScroll(scrollState),
         ) {
-            when (iconAlignment) {
-                IconAlignment.Right -> Row {
-                    if (isIconAdded) {
-                        Icon(
-                            modifier = Modifier.padding(top = 1.5.dp),
-                            sparkIcon = SparkIcons.Link,
-                            tint = colorText,
-                            contentDescription = "Link",
-                            size = IconSize.Small,
-                        )
-                        HorizontalSpacer(5.dp)
-                    }
-
-                    TextLink(
-                        textFull = "This is Adevinta Privacy & Policy details.",
-                        textLink = "Privacy & Policy",
-                        colorText = colorText,
-                        colorLink = colorLink,
-                        onClick = {
-                            coroutineScope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "Privacy & Policy Clicked",
-                                    actionLabel = "Action",
-                                    duration = SnackbarDuration.Short,
-                                )
-                            }
-                        },
-                    )
+            val annotatedString = buildAnnotatedString {
+                withStyle(
+                    style = SpanStyle(
+                        color = colorText,
+                    ),
+                ) {
+                    append("This is Adevinta ")
                 }
-
-                IconAlignment.Left -> Row {
-                    TextLink(
-                        textFull = "This is Adevinta Privacy & Policy details.",
-                        textLink = "Privacy & Policy",
-                        colorText = colorText,
-                        colorLink = colorLink,
-                        onClick = {
-                            coroutineScope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "Privacy & Policy Clicked",
-                                    actionLabel = "Action",
-                                    duration = SnackbarDuration.Short,
-                                )
-                            }
-                        },
+                withStyle(
+                    style = SpanStyle(
+                        color = colorLink,
+                        fontWeight = FontWeight.Bold,
+                        textDecoration = TextDecoration.Underline,
+                    ),
+                ) {
+                    append("Privacy & Policy ")
+                }
+                withStyle(
+                    style = SpanStyle(
+                        color = colorText,
+                    ),
+                ) {
+                    append(
+                        """
+                        also lots of that that you may be interested in,
+                        it's really necessary
+                        to know them or i will have to tell your mom
+                    """.trimIndent(),
                     )
-                    if (isIconAdded) {
-                        HorizontalSpacer(5.dp)
-                        Icon(
-                            modifier = Modifier.padding(top = 1.5.dp),
-                            sparkIcon = SparkIcons.LikeOutline,
-                            tint = colorText,
-                            contentDescription = "Heart",
-                            size = IconSize.Small,
-                        )
-                    }
                 }
             }
+
+            TextLink(
+                text = annotatedString,
+                style = SparkTheme.typography.subhead,
+                icon = if (isIconAdded) SparkIcons.InfoOutline else null,
+                iconSide = iconSide,
+                onClickLabel = "Privacy & Policy",
+                iconColor = colorIcon,
+                onClick = {
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "Privacy & Policy Clicked",
+                            actionLabel = "Action",
+                            duration = SnackbarDuration.Short,
+                        )
+                    }
+                },
+            )
 
             SwitchLabelled(
                 checked = isIconAdded,
                 onCheckedChange = { isIconAdded = it },
             ) {
                 Text(
-                    text = "Add Icon component next to TextLink",
+                    text = "Enable Icon",
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
@@ -179,19 +175,22 @@ private fun TextLinkSample() {
                     modifier = Modifier.padding(bottom = 8.dp),
                     style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
                 )
-                val iconAlignmentStyles = IconAlignment.entries.toTypedArray()
-                val iconAlignmentStylesLabel = iconAlignmentStyles.map { it.name }
+                val iconSides = IconSide.entries.toTypedArray()
+                val iconSideLabel = iconSides.map { it.name }
                 SegmentedButton(
-                    options = iconAlignmentStylesLabel,
-                    selectedOption = iconAlignment.name,
-                    onOptionSelect = { iconAlignment = IconAlignment.valueOf(it) },
+                    options = iconSideLabel,
+                    selectedOption = iconSide.name,
+                    onOptionSelect = { iconSide = IconSide.valueOf(it) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
                 )
             }
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.clickable { shouldShowTextColorDialog = true },
+            ) {
                 ButtonOutlined(
                     size = ButtonSize.Medium,
                     text = "Change Text Color",
@@ -199,7 +198,6 @@ private fun TextLinkSample() {
                         shouldShowTextColorDialog = true
                     },
                 )
-
                 HorizontalSpacer(5.dp)
                 Box(
                     modifier = Modifier
@@ -210,13 +208,15 @@ private fun TextLinkSample() {
                 )
             }
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.clickable { shouldShowLinkColorDialog = true },
+            ) {
                 ButtonOutlined(
                     size = ButtonSize.Medium,
                     text = "Change Link Color",
                     onClick = { shouldShowLinkColorDialog = true },
                 )
-
                 HorizontalSpacer(5.dp)
                 Box(
                     modifier = Modifier
@@ -224,6 +224,24 @@ private fun TextLinkSample() {
                         .height(44.dp)
                         .clip(RoundedCornerShape(12.dp))
                         .background(colorLink),
+                )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.clickable { shouldShowIconColorDialog = true },
+            ) {
+                ButtonOutlined(
+                    size = ButtonSize.Medium,
+                    text = "Change Icon Color",
+                    onClick = { shouldShowIconColorDialog = true },
+                )
+                HorizontalSpacer(5.dp)
+                Box(
+                    modifier = Modifier
+                        .width(44.dp)
+                        .height(44.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(colorIcon),
                 )
             }
 
@@ -259,11 +277,22 @@ private fun TextLinkSample() {
                     colorLink = it
                 },
             )
+            ColorPickerDialog(
+                show = shouldShowIconColorDialog,
+                type = ColorPickerType.SimpleRing(
+                    colorWidth = 20.dp,
+                    tracksCount = 5,
+                    sectorsCount = 24,
+                ),
+                properties = DialogProperties(),
+                onDismissRequest = {
+                    shouldShowIconColorDialog = false
+                },
+                onPickedColor = {
+                    shouldShowIconColorDialog = false
+                    colorIcon = it
+                },
+            )
         }
     }
-}
-
-private enum class IconAlignment {
-    Right,
-    Left,
 }

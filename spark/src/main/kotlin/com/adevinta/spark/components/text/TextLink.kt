@@ -54,6 +54,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.IconSide
@@ -61,6 +62,7 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
+import com.adevinta.spark.icons.InfoFill
 import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
@@ -133,7 +135,7 @@ public fun TextLink(
 ) {
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
     val measuredIconSize = style.fontSize.value
-    val measuredIconPadding = measuredIconSize / 2.5
+    val measuredIconPadding = measuredIconSize / 3
 
     Row(
         modifier = modifier.clickable(onClickLabel = onClickLabel) { onClick() },
@@ -225,11 +227,11 @@ private fun SparkTextLinkPreview(
                 }
 
                 TextLink(
-                    style = SparkTheme.typography.body2,
+                    style = SparkTheme.typography.subhead,
                     text = annotatedString,
                     iconSide = IconSide.START,
                     onClickLabel = "Privacy & Policy",
-                    icon = SparkIcons.InfoOutline,
+                    icon = SparkIcons.InfoFill,
                     onClick = {
                         scope.launch {
                             snackbarHostState.showSnackbar(
