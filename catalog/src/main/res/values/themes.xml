@@ -33,6 +33,6 @@
 
     <style name="ThemeOverlay.Catalog.Dialog" parent="@android:style/ThemeOverlay.Material.Dialog">
         <item name="android:windowIsFloating">false</item>
-
     </style>
+
 </resources>
