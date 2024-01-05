@@ -54,7 +54,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.IconSide
@@ -63,7 +62,6 @@ import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.icons.InfoFill
-import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -180,7 +178,6 @@ public fun TextLink(
                 contentDescription = null, // Text link text should be enough for context
             )
         }
-
     }
 }
 

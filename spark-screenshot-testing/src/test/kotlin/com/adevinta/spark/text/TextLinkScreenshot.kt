@@ -21,19 +21,27 @@
  */
 package com.adevinta.spark.text
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.IconSide
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.TextLink
+import com.adevinta.spark.icons.InfoOutline
+import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.patchedEnvironment
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
@@ -42,16 +50,55 @@ import org.junit.Test
 
 internal class TextLinkScreenshot {
 
-    private val textToTextLinkPairs = mutableListOf(
-        Pair(
-            """
-            Know more about the management of my personal data and other
-            RGPD details. (wordings to come)
-            """.trimIndent(),
-            "Know more",
-        ),
-        Pair("Try out Android Development", "Try out Android Development"),
-        Pair("Learn Kotlin Programming https://kotlinlang.org", "https://kotlinlang.org"),
+    private val iconValues: List<SparkIcon?> = listOf(SparkIcons.InfoOutline, null)
+
+    private val annotatedString1 = buildAnnotatedString {
+        append("Know more about the ")
+        withStyle(
+            style = SpanStyle(
+                color = Color.Green,
+                fontWeight = FontWeight.Bold,
+                textDecoration = TextDecoration.Underline,
+            ),
+        ) {
+            append("Privacy & Policy")
+        }
+        append(
+            "also lots of that that you may " +
+                "be interested in, it's really necessary" +
+                " to know them or i will have to tell your mom",
+        )
+    }
+
+    private val annotatedString2 = buildAnnotatedString {
+        withStyle(
+            style = SpanStyle(
+                color = Color.Magenta,
+                fontWeight = FontWeight.Bold,
+                textDecoration = TextDecoration.Underline,
+            ),
+        ) {
+            append("Try out Android Development")
+        }
+    }
+
+    private val annotatedString3 = buildAnnotatedString {
+        append("Learn Kotlin Programming  ")
+        withStyle(
+            style = SpanStyle(
+                color = Color.Blue,
+                fontWeight = FontWeight.Bold,
+                textDecoration = TextDecoration.Underline,
+            ),
+        ) {
+            append("https://kotlinlang.org")
+        }
+    }
+
+    private val textLinks = mutableListOf(
+        annotatedString1,
+        annotatedString2,
+        annotatedString3,
     )
 
     @get:Rule
@@ -63,31 +110,34 @@ internal class TextLinkScreenshot {
         environment = patchedEnvironment(),
         deviceConfig = app.cash.paparazzi.DeviceConfig.PIXEL_6_PRO.copy(
             softButtons = false,
-            locale = "fr-rFR",
+            locale = "en-rUS",
         ),
     )
 
     @Test
     fun test() {
-        textToTextLinkPairs.forEachIndexed { index, textToTextLink ->
-            paparazzi.sparkSnapshot(
-                name = "Link_$index",
-            ) {
-                Surface(
-                    color = SparkTheme.colors.surface,
+        iconValues.forEach { icon ->
+            textLinks.forEachIndexed { index, textLink ->
+                paparazzi.sparkSnapshot(
+                    name = "Link_${index}_IconExists${icon == null}",
                 ) {
-                    Row(modifier = Modifier.padding(24.dp)) {
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
-                        ) {
-                            TextLink(
-                                style = SparkTheme.typography.display2,
-                                textFull = textToTextLink.first,
-                                textLink = textToTextLink.second,
-                                colorLink = Color.Magenta,
-                                colorText = Color.Blue,
-                                onClick = {},
-                            )
+                    Surface(
+                        color = SparkTheme.colors.surface,
+                    ) {
+                        Column {
+                            IconSide.entries.forEach { iconSide ->
+                                Row(modifier = Modifier.padding(24.dp)) {
+                                    TextLink(
+                                        style = SparkTheme.typography.subhead,
+                                        text = textLink,
+                                        icon = icon,
+                                        iconColor = Color.Magenta,
+                                        onClickLabel = "textLink",
+                                        iconSide = iconSide,
+                                        onClick = {},
+                                    )
+                                }
+                            }
                         }
                     }
                 }
