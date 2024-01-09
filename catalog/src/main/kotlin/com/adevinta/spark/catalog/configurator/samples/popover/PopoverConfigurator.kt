@@ -41,7 +41,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -83,7 +82,6 @@ public val PopoverConfigurator: Configurator = Configurator(
 @Composable
 private fun PopoverSample() {
     val scrollState = rememberScrollState()
-    val focusManager = LocalFocusManager.current
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.verticalScroll(scrollState),
@@ -98,7 +96,6 @@ private fun PopoverSample() {
             checked = isDismissButtonEnabled,
             onCheckedChange = {
                 isDismissButtonEnabled = it
-                focusManager.clearFocus()
             },
         ) {
             Text(
@@ -143,7 +140,6 @@ private fun PopoverSample() {
                 selectedOption = popoverTriggerExample.name,
                 onOptionSelect = {
                     popoverTriggerExample = PopoverTriggerExamples.valueOf(it)
-                    focusManager.clearFocus()
                 },
                 modifier = Modifier
                     .fillMaxWidth()
