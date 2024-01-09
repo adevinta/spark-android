@@ -94,14 +94,6 @@ public enum class IconButtonIntent {
     },
 
     /**
-     * Used informational valuable actions.
-     */
-    Info {
-        @Composable
-        override fun colors(): IntentColor = IntentColors.Info.colors()
-    },
-
-    /**
      * Used for low or irrelevant actions.
      */
     Neutral {
