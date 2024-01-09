@@ -27,6 +27,7 @@ import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
@@ -134,14 +135,14 @@ private val IconToggleButtons = Component(
 private val Popovers = Component(
     id = nextId(),
     name = "Popovers",
-    illustration = R.drawable.illu_component_tokens,
+    illustration = R.drawable.illustration_popover,
     tintIcon = false,
     description = R.string.component_popovers_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/88a08c-popover/b/904ceb",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.popover/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/popover/Color.kt",
     examples = PopoverExamples,
-    configurator = null,
+    configurator = PopoverConfigurator,
 )
 
 private val RadioButtons = Component(
