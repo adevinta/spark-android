@@ -21,11 +21,14 @@
  */
 package com.adevinta.spark.components.rating
 
+import android.icu.text.NumberFormat
 import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.movableContentOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -38,11 +41,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tokens.EmphasizeMedium
+import com.adevinta.spark.tokens.highlight
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import java.lang.String.format
@@ -50,8 +54,8 @@ import java.util.Locale
 
 /**
  * Component that displays rating of an user with a star in the following form:
- *  - * 3,4
- *  - * 3,4 (5)
+ *  - ★ 3,4
+ *  - ★ 3,4 (5)
  * @param value rating value as a float, should be between 1.0 and 5.0
  * @param modifier to apply
  * @param commentCount the count of comments are associated with this rating
@@ -61,13 +65,13 @@ import java.util.Locale
 internal fun SparkRatingSmall(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
+    labelSide: RatingLabelSide,
+    size: RatingSize,
     modifier: Modifier = Modifier,
     commentCount: Int? = null,
     locale: Locale = firstLocale(),
 ) {
     if (value !in 1f..5f) return
-// TODO scott.rayapoulle.ext-21/12/2022: Use NumberFormat instead
-    val format = if (value / value.toInt() == 1f) "%.0f" else "%.1f"
     val contentDescription: String = if (commentCount != null) {
         pluralStringResource(
             id = R.plurals.spark_rating_with_comments_a11y,
@@ -79,6 +83,22 @@ internal fun SparkRatingSmall(
         stringResource(id = R.string.spark_rating_a11y, value)
     }
 
+    val labelText = formattedRatingValue(locale, value)
+
+    val label = remember {
+        movableContentOf {
+            Text(
+                text = labelText,
+                textAlign = TextAlign.Center,
+                style = if (size == RatingSize.Large) {
+                    SparkTheme.typography.display3
+                } else {
+                    SparkTheme.typography.caption.highlight
+                },
+            )
+        }
+    }
+
     Row(
         modifier = modifier.semantics(mergeDescendants = true) {
             this.contentDescription = contentDescription
@@ -86,22 +106,39 @@ internal fun SparkRatingSmall(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = spacedBy(4.dp),
     ) {
-        SparkRatingStar(enabled = true)
-        Text(
-            text = format(locale, format, value),
-            textAlign = TextAlign.Center,
-            style = SparkTheme.typography.caption,
+        if (labelSide == RatingLabelSide.Start) {
+            label()
+        }
+        RatingStar(
+            enabled = true,
+            size = if (size == RatingSize.Large) 24.dp else RatingDefault.SmallStarSize,
         )
+        if (labelSide == RatingLabelSide.End) {
+            label()
+        }
         if (commentCount != null) {
-            EmphasizeMedium {
-                Text(
-                    text = format(locale, "(%d)", commentCount),
-                    textAlign = TextAlign.Center,
-                    style = SparkTheme.typography.caption,
-                )
-            }
+            Text(
+                text = format(locale, "(%d)", commentCount),
+                textAlign = TextAlign.Center,
+                style = SparkTheme.typography.caption,
+            )
+        }
+        if (size == RatingSize.Large) {
+            Text(
+                text = "/5",
+                modifier = Modifier.align(Alignment.Bottom),
+                textAlign = TextAlign.Center,
+                style = SparkTheme.typography.body1.highlight,
+            )
         }
     }
+}
+
+@Composable
+internal fun formattedRatingValue(locale: Locale, value: Float): String = remember(locale, value) {
+    val numberFormat = NumberFormat.getInstance(locale)
+    numberFormat.maximumFractionDigits = 1
+    numberFormat.format(value)
 }
 
 /**
@@ -112,6 +149,17 @@ internal fun SparkRatingSmall(
  * @param commentCount number of collected ratings
  */
 @Composable
+@Deprecated(
+    message = "Use RatingSimple instead",
+    replaceWith = ReplaceWith(
+        expression = "RatingSimple(value = value, modifier = modifier, commentCount = commentCount," +
+            " locale = locale, labelSide = LabelSide.End)",
+        imports = [
+            "com.adevinta.spark.components.rating.RatingSimple",
+            "com.adevinta.spark.components.rating.LabelSide",
+        ],
+    ),
+)
 public fun RatingSmall(
     @FloatRange(from = 0.0, to = 5.0)
     value: Float,
@@ -124,13 +172,81 @@ public fun RatingSmall(
         modifier = modifier,
         commentCount = commentCount,
         locale = locale,
+        labelSide = RatingDefault.LabelSide,
+        size = RatingSize.Medium,
     )
+}
+
+/**
+ * Component that displays a compressed version of user rating
+ *
+ * @param value the rating value included between [1..5]
+ * @param modifier to be applied to this rating
+ * @param commentCount number of collected ratings
+ * @param locale the locale to use to format the rating value
+ * @param labelSide the side of the label
+ */
+@Composable
+@ExperimentalSparkApi
+public fun RatingSimple(
+    @FloatRange(from = 0.0, to = 5.0)
+    value: Float,
+    modifier: Modifier = Modifier,
+    commentCount: Int? = null,
+    locale: Locale = firstLocale(),
+    labelSide: RatingLabelSide = RatingDefault.LabelSide,
+) {
+    SparkRatingSmall(
+        value = value,
+        modifier = modifier,
+        commentCount = commentCount,
+        locale = locale,
+        labelSide = labelSide,
+        size = RatingSize.Medium,
+    )
+}
+
+/**
+ * Component that displays a compressed version of user rating
+ *
+ * @param value the rating value included between [1..5]
+ * @param modifier to be applied to this rating
+ * @param locale the locale to use to format the rating value
+ * @param labelSide the side of the label
+ */
+@Composable
+@ExperimentalSparkApi
+public fun RatingSimpleLarge(
+    @FloatRange(from = 0.0, to = 5.0)
+    value: Float,
+    modifier: Modifier = Modifier,
+    locale: Locale = firstLocale(),
+    labelSide: RatingLabelSide = RatingDefault.LabelSide,
+) {
+    SparkRatingSmall(
+        value = value,
+        modifier = modifier,
+        commentCount = null,
+        locale = locale,
+        labelSide = labelSide,
+        size = RatingSize.Large,
+    )
+}
+
+public enum class RatingLabelSide {
+    Start,
+    End,
+}
+
+internal enum class RatingSize {
+    Medium,
+    Large,
 }
 
 @Composable
 internal fun firstLocale(): Locale {
     LocalConfiguration.current
-    return LocalContext.current.resources.configuration.locales.get(0)
+    return LocalContext.current.resources.configuration.locales[0]
 }
 
 @Composable
@@ -141,12 +257,21 @@ internal fun firstLocale(): Locale {
 internal fun RatingSmallPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
-    val frenchLocale = Locale("fr", "rFR")
+    val frenchLocale = Locale.FRANCE
+    val germanLocale = Locale.GERMANY
     PreviewTheme(theme) {
-        RatingSmall(value = 3.0f, locale = frenchLocale)
-        RatingSmall(value = 4.50f, locale = frenchLocale)
+        RatingSimple(value = 3.0f, locale = frenchLocale, labelSide = RatingLabelSide.End)
+        RatingSimple(value = 4.50f, locale = frenchLocale, labelSide = RatingLabelSide.End)
 
-        RatingSmall(value = 3.0f, commentCount = 8, locale = frenchLocale)
-        RatingSmall(value = 4.50f, commentCount = 12, locale = frenchLocale)
+        RatingSimple(value = 3.0f, commentCount = 8, locale = frenchLocale, labelSide = RatingLabelSide.End)
+        RatingSimple(value = 4.50f, commentCount = 12, locale = frenchLocale, labelSide = RatingLabelSide.End)
+        RatingSimple(value = 4.50f, commentCount = 12, locale = germanLocale, labelSide = RatingLabelSide.End)
+        RatingSimpleLarge(value = 4.50f, locale = germanLocale, labelSide = RatingLabelSide.End)
+        RatingSimpleLarge(value = 4.50f, locale = Locale.US, labelSide = RatingLabelSide.End)
+        RatingSimple(value = 4.50f, commentCount = 12, locale = Locale.US, labelSide = RatingLabelSide.End)
+        RatingSimple(value = 4.51f, commentCount = 12, locale = Locale.US, labelSide = RatingLabelSide.End)
+        RatingSimple(value = 4.501f, commentCount = 12, locale = Locale.US, labelSide = RatingLabelSide.End)
+        RatingSimple(value = 3.01f, commentCount = 12, locale = Locale.US, labelSide = RatingLabelSide.End)
+        RatingSimple(value = 3.001f, commentCount = 12, locale = Locale.US, labelSide = RatingLabelSide.End)
     }
 }

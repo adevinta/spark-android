@@ -10,6 +10,11 @@ on:
         required: true
         default: 'main'
         type: string
+      groups:
+        description: 'Groups (comma-separated aliases)'
+        required: true
+        default: 'all'
+        type: string
   schedule:
     - cron: 0 0 * * *
 
@@ -55,7 +60,7 @@ jobs:
         run: ./gradlew :catalog:assembleRelease
 
       - name: '📦 Archive APKs'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: '**/build/outputs/apk/**/*.apk'
@@ -79,7 +84,7 @@ jobs:
           git log --topo-order --format="• %s" "$from..$to" --no-merges > release-notes.txt
 
       - name: '📦 Archive release-notes.txt'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-notes.txt
           path: 'release-notes.txt'
@@ -89,8 +94,10 @@ jobs:
           firebase appdistribution:distribute
           catalog/build/outputs/apk/release/catalog-release.apk
           --app "1:559109812471:android:7aaf1a8ba28904f5f923f2"
-          --groups "all"
+          --groups "$GROUPS"
           --release-notes-file "release-notes.txt"
+        env:
+          GROUPS: ${{ inputs.groups }}
 
       - name: '♻️ Cleanup'
         if: ${{ success() || failure() }}
