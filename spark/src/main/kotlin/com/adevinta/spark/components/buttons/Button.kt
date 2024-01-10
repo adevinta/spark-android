@@ -39,6 +39,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -92,38 +93,40 @@ internal fun BaseSparkButton(
         interactionSource = interactionSource,
         contentPadding = SparkButtonDefaults.buttonContentPadding(size),
     ) {
-        AnimatedVisibility(visible = isLoading) {
-            Row {
-                Box(Modifier.size(SparkButtonDefaults.IconSize)) {
-                    CircularProgressIndicator(
-                        Modifier.testTag(TAG_PROGRESS_INDICATOR),
-                        color = LocalContentColor.current,
-                        strokeWidth = 2.dp,
-                    )
+        ProvideTextStyle(value = SparkTheme.typography.callout) {
+            AnimatedVisibility(visible = isLoading) {
+                Row {
+                    Box(Modifier.size(SparkButtonDefaults.IconSize)) {
+                        CircularProgressIndicator(
+                            Modifier.testTag(TAG_PROGRESS_INDICATOR),
+                            color = LocalContentColor.current,
+                            strokeWidth = 2.dp,
+                        )
+                    }
+                    Spacer(Modifier.width(8.dp))
                 }
-                Spacer(Modifier.width(8.dp))
             }
-        }
-        if (icon != null && iconSide == IconSide.START) {
-            Icon(
-                sparkIcon = icon,
-                modifier = Modifier
-                    .size(SparkButtonDefaults.IconSize)
-                    .testTag("buttonIcon"),
-                contentDescription = null, // button text should be enough for context
-            )
-            Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
-        }
-        content()
-        if (icon != null && iconSide == IconSide.END) {
-            Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
-            Icon(
-                sparkIcon = icon,
-                modifier = Modifier
-                    .size(SparkButtonDefaults.IconSize)
-                    .testTag("buttonIcon"),
-                contentDescription = null, // button text should be enough for context
-            )
+            if (icon != null && iconSide == IconSide.START) {
+                Icon(
+                    sparkIcon = icon,
+                    modifier = Modifier
+                        .size(SparkButtonDefaults.IconSize)
+                        .testTag("buttonIcon"),
+                    contentDescription = null, // button text should be enough for context
+                )
+                Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
+            }
+            content()
+            if (icon != null && iconSide == IconSide.END) {
+                Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
+                Icon(
+                    sparkIcon = icon,
+                    modifier = Modifier
+                        .size(SparkButtonDefaults.IconSize)
+                        .testTag("buttonIcon"),
+                    contentDescription = null, // button text should be enough for context
+                )
+            }
         }
     }
 }
