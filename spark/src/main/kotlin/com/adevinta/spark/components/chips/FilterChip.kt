@@ -47,7 +47,6 @@ import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
-
 /**
  * A chip that is selectable for content filtering.
  *
