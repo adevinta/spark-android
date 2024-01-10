@@ -19,188 +19,127 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.adevinta.spark.components.chips
 
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.ElevatedFilterChip
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FilterChip
-import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.SelectableChipBorder
-import androidx.compose.material3.SelectableChipColors
-import androidx.compose.material3.SelectableChipElevation
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.material3.ElevatedFilterChip as MaterialElevatedFilterChip
-import androidx.compose.material3.FilterChip as MaterialFilterChip
+import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.tags.TagDefaults
+import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.tools.modifiers.dashedBorder
+import com.adevinta.spark.tools.modifiers.ifTrue
+import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
+
 
 /**
- * <a href="https://m3.material.io/components/chips/overview" class="external" target="_blank">Material Design filter chip</a>.
+ * A chip that is selectable for content filtering.
  *
- * Chips help people enter information, make selections, filter content, or trigger actions. Chips
- * can show multiple interactive elements together in the same area, such as a list of selectable
- * movie times, or a series of email contacts.
- *
- * Filter chips use tags or descriptive words to filter content. They can be a good alternative to
- * toggle buttons or checkboxes.
- *
- * ![Filter chip image](https://developer.android.com/images/reference/androidx/compose/material3/filter-chip.png)
- *
- * This filter chip is applied with a flat style. If you want an elevated style, use the
- * [ElevatedFilterChip].
- *
- * Tapping on a filter chip toggles its selection state. A selection state [leadingIcon] can be
- * provided (e.g. a checkmark) to be appended at the starting edge of the chip's label.
- *
- * @param selected whether this chip is selected or not
+ * @param style one of [ChipStyles] that defines chips background and border.
+ * @param intent The [ChipIntent] colors that will be used for the content and background of this chip in
+ * different states.
  * @param onClick called when this chip is clicked
- * @param label text label for this chip
+ * @param text label for this chip, set `null` if no label is needed
  * @param modifier the [Modifier] to be applied to this chip
  * @param enabled controls the enabled state of this chip. When `false`, this component will not
  * respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
- * @param leadingIcon optional icon at the start of the chip, preceding the [label] text. When
- * [selected] is true, this icon may visually indicate that the chip is selected (for example, via a
- * checkmark icon).
- * @param trailingIcon optional icon at the end of the chip
- * @param shape defines the shape of this chip's container, border (when [border] is not null), and
- * shadow (when using [elevation])
- * @param colors [SelectableChipColors] that will be used to resolve the colors used for this chip
- * in different states. See [FilterChipDefaults.filterChipColors].
- * @param elevation [SelectableChipElevation] used to resolve the elevation for this chip in
- * different states. This controls the size of the shadow below the chip. Additionally, when the
- * container color is [ColorScheme.surface], this controls the amount of main color applied as an
- * overlay. See [FilterChipDefaults.filterChipElevation].
- * @param border the border to draw around the container of this chip. Pass `null` for no border.
- * See [FilterChipDefaults.filterChipBorder].
+ * @param selected whether or not this component is selected
+ * @param leadingIcon optional icon at the start of the chip, preceding the [text]
+ * @param contentDescription text used by accessibility services to describe what this icon
+ * represents. This should always be provided unless this icon is used for decorative purposes,
+ * and does not represent a meaningful action that a user can take. This text should be
+ * localized, such as by using [androidx.compose.ui.res.stringResource] or similar.
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this chip. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this chip in different states.
  */
-@Suppress("ktlint:standard:max-line-length", "ktlint:standard:trailing-comma-on-call-site")
-@Deprecated(
-    "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
-    ReplaceWith(
-        "ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)"
-    ),
-)
-@ExperimentalMaterial3Api
 @Composable
 public fun FilterChip(
-    selected: Boolean,
+    text: String?,
+    style: ChipStyles,
+    intent: ChipIntent,
     onClick: () -> Unit,
-    label: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    shape: Shape = FilterChipDefaults.shape,
-    colors: SelectableChipColors = FilterChipDefaults.filterChipColors(),
-    elevation: SelectableChipElevation? = FilterChipDefaults.filterChipElevation(),
-    border: SelectableChipBorder? = FilterChipDefaults.filterChipBorder(),
+    selected: Boolean = false,
+    leadingIcon: SparkIcon? = null,
+    contentDescription: String? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    MaterialFilterChip(
-        selected = selected,
-        onClick = onClick,
-        label = label,
-        modifier = modifier,
-        enabled = enabled,
-        leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon,
-        shape = shape,
-        colors = colors,
-        elevation = elevation,
-        border = border,
-        interactionSource = interactionSource,
-    )
-}
+    val colors = style.colors(intent = intent)
+    val border = style.border(intent = intent, enabled = enabled)
 
-/**
- * <a href="https://m3.material.io/components/chips/overview" class="external" target="_blank">Material Design elevated filter chip</a>.
- *
- * Chips help people enter information, make selections, filter content, or trigger actions. Chips
- * can show multiple interactive elements together in the same area, such as a list of selectable
- * movie times, or a series of email contacts.
- *
- * Filter chips use tags or descriptive words to filter content. They can be a good alternative to
- * toggle buttons or checkboxes.
- *
- * ![Filter chip image](https://developer.android.com/images/reference/androidx/compose/material3/elevated-filter-chip.png)
- *
- * This filter chip is applied with an elevated style. If you want a flat style, use the
- * [FilterChip].
- *
- * Tapping on a filter chip toggles its selection state. A selection state [leadingIcon] can be
- * provided (e.g. a checkmark) to be appended at the starting edge of the chip's label.
- *
- * @param selected whether this chip is selected or not
- * @param onClick called when this chip is clicked
- * @param label text label for this chip
- * @param modifier the [Modifier] to be applied to this chip
- * @param enabled controls the enabled state of this chip. When `false`, this component will not
- * respond to user input, and it will appear visually disabled and disabled to accessibility
- * services.
- * @param leadingIcon optional icon at the start of the chip, preceding the [label] text. When
- * [selected] is true, this icon may visually indicate that the chip is selected (for example, via a
- * checkmark icon).
- * @param trailingIcon optional icon at the end of the chip
- * @param shape defines the shape of this chip's container, border (when [border] is not null), and
- * shadow (when using [elevation])
- * @param colors [SelectableChipColors] that will be used to resolve the colors used for this chip
- * in different states. See [FilterChipDefaults.elevatedFilterChipColors].
- * @param elevation [SelectableChipElevation] used to resolve the elevation for this chip in
- * different states. This controls the size of the shadow below the chip. Additionally, when the
- * container color is [ColorScheme.surface], this controls the amount of main color applied as an
- * overlay. See [FilterChipDefaults.filterChipElevation].
- * @param border the border to draw around the container of this chip. Pass `null` for no border.
- * See [FilterChipDefaults.filterChipBorder].
- * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
- * for this chip. You can create and pass in your own `remember`ed instance to observe
- * [Interaction]s and customize the appearance / behavior of this chip in different states.
- */
-@Suppress("ktlint:standard:max-line-length")
-@Deprecated(
-    message = "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
-    replaceWith = ReplaceWith(
-        expression = "ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)",
-        imports = ["com.adevinta.spark.components.chips.ChipFilled"],
-    ),
-    level = DeprecationLevel.WARNING,
-)
-@Composable
-public fun ElevatedFilterChip(
-    selected: Boolean,
-    onClick: () -> Unit,
-    label: @Composable () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-    shape: Shape = FilterChipDefaults.shape,
-    colors: SelectableChipColors = FilterChipDefaults.elevatedFilterChipColors(),
-    elevation: SelectableChipElevation? = FilterChipDefaults.elevatedFilterChipElevation(),
-    border: SelectableChipBorder? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-) {
-    MaterialElevatedFilterChip(
-        selected = selected,
+    val (backgroundColor, contentColor) =
+        when {
+            !enabled -> colors.disabledBackgroundColor to colors.disabledContentColor
+            selected -> colors.selectedBackgroundColor to colors.selectedContentColor
+            else -> colors.backgroundColor to colors.contentColor
+        }
+
+    Surface(
         onClick = onClick,
-        label = label,
-        modifier = modifier,
+        modifier = modifier
+            .minimumTouchTargetSize()
+            .sparkUsageOverlay(),
         enabled = enabled,
-        leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon,
-        shape = shape,
-        colors = colors,
-        elevation = elevation,
+        selected = selected,
+        shape = SparkTheme.shapes.small,
+        color = backgroundColor,
         border = border,
+        contentColor = contentColor,
         interactionSource = interactionSource,
-    )
+    ) {
+        CompositionLocalProvider(
+            LocalContentColor provides contentColor,
+            LocalTextStyle provides SparkTheme.typography.body2,
+        ) {
+            Row(
+                Modifier
+                    .ifTrue(style == ChipStyles.Dashed) {
+                        dashedBorder(
+                            width = ChipDefaults.BorderStrokeWidth,
+                            radius = ChipDefaults.DashedBorderRadius,
+                            color = if (enabled) colors.contentColor else colors.disabledContentColor,
+                        )
+                    }
+                    .defaultMinSize(minHeight = ChipDefaults.MinHeight)
+                    .sizeIn(maxWidth = ChipDefaults.MaxWidth)
+                    .padding(ChipDefaults.ChipPadding),
+                horizontalArrangement = Arrangement.spacedBy(
+                    ChipDefaults.LeadingIconEndSpacing,
+                    Alignment.CenterHorizontally,
+                ),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                if (leadingIcon != null) {
+                    Icon(
+                        sparkIcon = leadingIcon,
+                        modifier = Modifier.size(TagDefaults.LeadingIconSize),
+                        contentDescription = contentDescription,
+                        tint = LocalContentColor.current,
+                    )
+                }
+                if (text != null) {
+                    Text(text = text)
+                }
+            }
+        }
+    }
 }

@@ -45,6 +45,7 @@ fun ChipOutlined(
     modifier: Modifier = Modifier,
     intent: ChipIntent = ChipIntent.Basic,
     enabled: Boolean = true,
+    selected: Boolean = false,
     leadingIcon: SparkIcon? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
@@ -60,6 +61,7 @@ fun ChipOutlined(
     contentDescription: String,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    selected: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
 )
@@ -72,6 +74,7 @@ fun ChipOutlined(
     intent: ChipIntent = ChipIntent.Basic,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    selected: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
     content: @Composable RowScope.() -> Unit,
@@ -105,7 +108,24 @@ Chip(
 )
 ```
 
-To correctly handle selectable state, pass the following modifier to components 
+To correctly handle selectable state prefer using:
+
+```kotlin
+fun FilterChip(
+    text: String?,
+    style: ChipStyles,
+    intent: ChipIntent,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    selected: Boolean = false,
+    leadingIcon: SparkIcon? = null,
+    contentDescription: String? = null,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+)
+```
+
+or pass the following modifier to components 
  ```kotlin
 fun Modifier.semantics {
     this.selected = selected

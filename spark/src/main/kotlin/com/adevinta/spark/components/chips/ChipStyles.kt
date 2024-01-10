@@ -32,50 +32,62 @@ public enum class ChipStyles {
     Outlined {
         @Composable
         override fun colors(intent: ChipIntent): ChipColors {
-            val contentColor = intent.colors().color
+            val colors = intent.colors()
+            val contentColor = colors.color
             return ChipColors(
                 backgroundColor = Color.Transparent,
                 contentColor = contentColor,
                 disabledBackgroundColor = Color.Transparent,
                 disabledContentColor = contentColor.disabled,
+                selectedBackgroundColor = colors.containerColor,
+                selectedContentColor = colors.onContainerColor,
             )
         }
     },
     Filled {
         @Composable
         override fun colors(intent: ChipIntent): ChipColors {
-            val backgroundColor = intent.colors().color
-            val contentColor = intent.colors().onColor
+            val colors = intent.colors()
+            val backgroundColor = colors.color
+            val contentColor = colors.onColor
             return ChipColors(
                 backgroundColor = backgroundColor,
                 contentColor = contentColor,
                 disabledBackgroundColor = backgroundColor.disabled,
                 disabledContentColor = contentColor.disabled,
+                selectedBackgroundColor = colors.containerColor,
+                selectedContentColor = colors.onContainerColor,
             )
         }
     },
     Tinted {
         @Composable
         override fun colors(intent: ChipIntent): ChipColors {
-            val backgroundColor = intent.colors().containerColor
-            val contentColor = intent.colors().onContainerColor
+            val colors = intent.colors()
+            val backgroundColor = colors.containerColor
+            val contentColor = colors.onContainerColor
             return ChipColors(
                 backgroundColor = backgroundColor,
                 contentColor = contentColor,
                 disabledBackgroundColor = backgroundColor.disabled,
                 disabledContentColor = contentColor.disabled,
+                selectedBackgroundColor = colors.color,
+                selectedContentColor = colors.onColor,
             )
         }
     },
     Dashed {
         @Composable
         override fun colors(intent: ChipIntent): ChipColors {
-            val contentColor = intent.colors().color
+            val colors = intent.colors()
+            val contentColor = colors.color
             return ChipColors(
                 backgroundColor = Color.Transparent,
                 contentColor = contentColor,
                 disabledBackgroundColor = Color.Transparent,
                 disabledContentColor = contentColor.dim3,
+                selectedBackgroundColor = colors.containerColor,
+                selectedContentColor = colors.onContainerColor,
             )
         }
     },
@@ -91,6 +103,8 @@ internal data class ChipColors(
     val contentColor: Color,
     val disabledBackgroundColor: Color,
     val disabledContentColor: Color,
+    val selectedBackgroundColor: Color,
+    val selectedContentColor: Color,
 )
 
 @Composable
