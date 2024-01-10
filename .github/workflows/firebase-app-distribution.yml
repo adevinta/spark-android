@@ -10,11 +10,13 @@ on:
         required: true
         default: 'main'
         type: string
-      groups:
-        description: 'Groups (comma-separated aliases)'
+      group:
+        description: 'Group'
         required: true
-        default: 'all'
-        type: string
+        type: choice
+        options: 
+          - all
+          - qa
   schedule:
     - cron: 0 0 * * *
 
@@ -97,7 +99,7 @@ jobs:
           --groups "$GROUPS"
           --release-notes-file "release-notes.txt"
         env:
-          GROUPS: ${{ inputs.groups }}
+          GROUPS: ${{ inputs.group || 'all' }}
 
       - name: '♻️ Cleanup'
         if: ${{ success() || failure() }}
