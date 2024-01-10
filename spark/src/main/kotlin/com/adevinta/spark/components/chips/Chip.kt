@@ -258,5 +258,11 @@ internal fun ChipPreview(
             ChipTinted("tinted", intent = intent, enabled = false)
             ChipDashed("dashed", intent = intent, enabled = false)
         }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(text = "outlined", intent = intent, style = ChipStyles.Outlined, selected = true, onClick = {})
+            FilterChip(text = "filled", intent = intent, style = ChipStyles.Filled, selected = true, onClick = {})
+            FilterChip(text = "tinted", intent = intent, style = ChipStyles.Tinted, selected = true, onClick = {})
+            FilterChip(text = "dashed", intent = intent, style = ChipStyles.Dashed, selected = true, onClick = {})
+        }
     }
 }
