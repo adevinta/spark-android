@@ -54,7 +54,7 @@
     </plurals>
 
     <string name="spark_annotatedStringResource_test">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> pour les textes sur <i><annotation color="main">Android</annotation></i></string>
-    <string name="spark_annotatedStringResource_test_args">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> <p dir="rtl">pour les %s sur</p> <p dir="ltrr"><i><annotation color="main">Android</annotation></i></p></string>
+    <string name="spark_annotatedStringResource_test_args">Salut, <b><annotation variable="who" typography="large" color="main">who</annotation></b>!</string>
 
     <!--Rating-->
     <string name="spark_textfield_content_description">Obligatoire</string>
