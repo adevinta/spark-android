@@ -46,6 +46,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -193,9 +194,8 @@ private fun ConfiguredPopover(
                 }
 
                 PopoverContentExamples.Image -> Image(
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.height(500.dp),
-                    model = "https://t.ly/gio0G",
+                    contentScale = ContentScale.Inside,
+                    model = R.drawable.flower,
                     contentDescription = null,
                 )
 
