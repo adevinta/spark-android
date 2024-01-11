@@ -49,7 +49,7 @@ internal class ProgressScreenshot {
 
     private val isRoundedList: List<Boolean> = listOf(true, false)
 
-    private val intents = ProgressbarIntent.entries.toTypedArray()
+    private val intents = ProgressbarIntent.entries
 
     @get:Rule
     val paparazzi = Paparazzi(
