@@ -1,0 +1,164 @@
+/*
+ * Copyright (c) 2023 Adevinta
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+package com.adevinta.spark.catalog.configurator.samples.progressbar
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.adevinta.spark.catalog.R
+import com.adevinta.spark.catalog.model.Configurator
+import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.menu.DropdownMenuItem
+import com.adevinta.spark.components.progressbar.Progressbar
+import com.adevinta.spark.components.progressbar.ProgressbarIndeterminate
+import com.adevinta.spark.components.progressbar.ProgressbarIntent
+import com.adevinta.spark.components.slider.Slider
+import com.adevinta.spark.components.spacer.VerticalSpacer
+import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.TextField
+import com.adevinta.spark.components.textfields.TextFieldState
+import com.adevinta.spark.components.toggles.SwitchLabelled
+
+public val ProgressbarConfigurator: Configurator = Configurator(
+    name = "Progressbar",
+    description = "Progressbar configuration",
+    sourceUrl = "$SampleSourceUrl/ProgressbarSamples.kt",
+) {
+    ProgressbarSample()
+}
+
+@Preview(
+    showBackground = true,
+)
+@Composable
+private fun ProgressbarSample() {
+    val scrollState = rememberScrollState()
+
+    Column(
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier.verticalScroll(scrollState),
+    ) {
+        var isRounded by remember { mutableStateOf(false) }
+        var intent by remember { mutableStateOf(ProgressbarIntent.Main) }
+        var progress by remember { mutableFloatStateOf(0.5f) }
+        val state: TextFieldState? by remember { mutableStateOf(null) }
+        val stateMessageText by remember { mutableStateOf("State Message") }
+        var expanded by remember { mutableStateOf(false) }
+
+        Text(text = "Progressbar")
+
+        Progressbar(
+            intent = intent,
+            modifier = Modifier.fillMaxWidth(),
+            progress = progress,
+            isRounded = isRounded,
+        )
+
+        Text(text = "ProgressbarIndeterminate")
+
+        ProgressbarIndeterminate(
+            intent = intent,
+            modifier = Modifier.fillMaxWidth(),
+            isRounded = isRounded,
+        )
+
+        val intents = ProgressbarIntent.entries
+        VerticalSpacer(8.dp)
+
+        SelectTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = intent.name,
+            onValueChange = {},
+            readOnly = true,
+            label = stringResource(id = R.string.configurator_component_screen_intent_label),
+            expanded = expanded,
+            onExpandedChange = { expanded = !expanded },
+            onDismissRequest = { expanded = false },
+            dropdownContent = {
+                intents.forEach {
+                    DropdownMenuItem(
+                        text = { Text(it.name) },
+                        onClick = {
+                            intent = it
+                            expanded = false
+                        },
+                    )
+                }
+            },
+        )
+        VerticalSpacer(8.dp)
+
+        SwitchLabelled(
+            checked = isRounded,
+            onCheckedChange = {
+                isRounded = it
+            },
+        ) {
+            Text(
+                text = stringResource(id = R.string.configurator_component_screen_rounded_label),
+                modifier = Modifier.fillMaxWidth(),
+            )
+        }
+        VerticalSpacer(8.dp)
+
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = progress.toString(),
+            onValueChange = { progress = it.toFloat() },
+            label = "Change progress",
+            helper = "Type to change progress",
+            state = state,
+            keyboardOptions = KeyboardOptions().copy(keyboardType = KeyboardType.Number),
+            stateMessage = stateMessageText,
+        )
+
+        VerticalSpacer(8.dp)
+        Text(
+            text = "Slide to change progress",
+            modifier = Modifier.fillMaxWidth(),
+        )
+
+        Slider(
+            value = progress,
+            onValueChange = { value ->
+                progress = value
+            },
+            enabled = true,
+            steps = 7,
+        )
+    }
+}
