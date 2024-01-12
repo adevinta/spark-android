@@ -17,6 +17,7 @@ on:
         options: 
           - all
           - qa
+          - 🤖
       message:
         description: 'Message'
         required: false
