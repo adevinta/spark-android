@@ -59,6 +59,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import androidx.core.text.buildSpannedString
 import androidx.core.text.parseAsHtml
 import androidx.core.text.toHtml
 import com.adevinta.spark.PreviewTheme
@@ -66,9 +67,8 @@ import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
-
-// FIXME: There is no official way to do this yet so we're waiting for
-//   https://issuetracker.google.com/issues/139320238 to be fixed
+import kotlinx.collections.immutable.PersistentMap
+import kotlinx.collections.immutable.persistentMapOf
 
 /**
  * Load a annotated string resource with formatting.
@@ -80,15 +80,23 @@ import com.adevinta.spark.tokens.SparkTypography
  * @return the [AnnotatedString] data associated with the resource
  */
 @Composable
-public fun annotatedStringResource(@StringRes id: Int, vararg formatArgs: Any): AnnotatedString {
+public fun annotatedStringResource(@StringRes id: Int, formatArgs: PersistentMap<String, String>): AnnotatedString {
     val resources = resources()
     val density = LocalDensity.current
     val colors = SparkTheme.colors
     val typography = SparkTheme.typography
     return remember(id, formatArgs) {
-        val text = resources.getText(id, *formatArgs)
-        text.asAnnotatedString(density, colors, typography)
+        resources.buildSpannedStringWithArgs(id, formatArgs).asAnnotatedString(density, colors, typography)
     }
+}
+
+private fun Resources.buildSpannedStringWithArgs(
+    @StringRes id: Int,
+    args: PersistentMap<String, String>,
+): SpannedString = buildSpannedString {
+    append(getText(id))
+    getSpans(0, length, Annotation::class.java).filterIsInstance<Annotation>().filter { it.key == "variable" }
+        .forEach { replace(getSpanStart(it), getSpanEnd(it), args.getValue(it.value)) }
 }
 
 /**
@@ -161,22 +169,6 @@ public fun annotatedPluralStringResource(
 internal fun resources(): Resources {
     LocalConfiguration.current
     return LocalContext.current.resources
-}
-
-/**
- * The framework `getText()` method doesn't support formatting arguments, so we need to do it ourselves.
- *
- * Unfortunately `toHtml()` doesn't support the `<annotation>` tag so we loose this span as we need to convert it to a
- * [String] to be able to use `String.format()`.
- */
-internal fun Resources.getText(@StringRes id: Int, vararg args: Any): CharSequence {
-    val escapedArgs = args.map {
-        if (it is Spanned) it.toHtmlWithoutParagraphs() else it
-    }.toTypedArray()
-    val spannedString = SpannedString(getText(id))
-    val htmlResource = spannedString.toHtmlWithoutParagraphs()
-    val formattedHtml = String.format(htmlResource, *escapedArgs)
-    return formattedHtml.parseAsHtml()
 }
 
 internal fun Resources.getQuantityText(@PluralsRes id: Int, quantity: Int, vararg args: Any): CharSequence {
@@ -275,6 +267,11 @@ private fun AnnotatedStringResourcePreview() {
         Text(
             text = annotatedStringResource(R.string.spark_annotatedStringResource_test),
         )
-        Text(annotatedStringResource(R.string.spark_annotatedStringResource_test_args, "Spark"))
+        Text(
+            text = annotatedStringResource(
+                R.string.spark_annotatedStringResource_test_args,
+                persistentMapOf("who" to "Bob"),
+            ),
+        )
     }
 }
