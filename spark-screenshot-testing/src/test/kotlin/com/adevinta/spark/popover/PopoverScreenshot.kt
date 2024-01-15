@@ -51,6 +51,7 @@ import com.android.ide.common.rendering.api.SessionParams
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -77,20 +78,20 @@ internal class PopoverScreenshot {
     @SuppressLint("CoroutineCreationDuringComposition")
     @OptIn(ExperimentalComposeApi::class)
     @Test
-    fun test() {
+    fun test() = runBlocking {
+        val state = rememberTooltipState(isPersistent = true)
+        val scope = rememberCoroutineScope()
+        val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
+
+        val press = PressInteraction.Press(Offset.Zero)
+        interactionSource.emit(press)
+        state.show()
+        delay(300)
+        interactionSource.emit(PressInteraction.Release(press))
+
         enableList.forEach { isEnabled ->
             paparazzi.sparkSnapshot(name = "Popover_isDismissEnabled_$isEnabled", true) {
-                val state = rememberTooltipState(isPersistent = true)
-                val scope = rememberCoroutineScope()
-                val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 
-                scope.launch {
-                    val press = PressInteraction.Press(Offset.Zero)
-                    interactionSource.emit(press)
-                    state.show()
-                    delay(300)
-                    interactionSource.emit(PressInteraction.Release(press))
-                }
 
                 Column {
                     Popover(

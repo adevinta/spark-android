@@ -195,7 +195,7 @@ private fun ConfiguredPopover(
 
                 PopoverContentExamples.Image -> Image(
                     contentScale = ContentScale.Inside,
-                    model = R.drawable.flower,
+                    model = "https://images.unsplash.com/photo-1606041008023-472dfb5e530f",
                     contentDescription = null,
                 )
 
