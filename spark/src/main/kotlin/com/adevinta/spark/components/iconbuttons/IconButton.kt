@@ -97,39 +97,41 @@ internal fun SparkIconButton(
             size = size.iconSize,
         )
     }
-    PlainTooltipBox(
-        tooltip = { Text(contentDescription.orEmpty()) },
-        shape = IconButtonDefaults.TooltipContainerShape,
-        containerColor = IconButtonDefaults.TooltipContainerColor,
-        contentColor = IconButtonDefaults.TooltipContentColor,
-    ) {
-        Surface(
-            onClick = onClick,
-            modifier = modifier
-                .minimumTouchTargetSize()
-                .tooltipAnchor()
-                .sparkUsageOverlay(),
-            enabled = enabled,
-            shape = shape.shape,
-            color = colors.containerColor(enabled = enabled).value,
-            contentColor = colors.contentColor(enabled).value,
-            border = border,
-            interactionSource = interactionSource,
+    Box(modifier = modifier) {
+        PlainTooltipBox(
+            tooltip = { Text(contentDescription.orEmpty()) },
+            shape = IconButtonDefaults.TooltipContainerShape,
+            containerColor = IconButtonDefaults.TooltipContainerColor,
+            contentColor = IconButtonDefaults.TooltipContentColor,
         ) {
-            Box(
-                modifier = Modifier.size(size.height),
-                contentAlignment = Alignment.Center,
+            Surface(
+                onClick = onClick,
+                modifier = Modifier
+                    .minimumTouchTargetSize()
+                    .tooltipAnchor()
+                    .sparkUsageOverlay(),
+                enabled = enabled,
+                shape = shape.shape,
+                color = colors.containerColor(enabled = enabled).value,
+                contentColor = colors.contentColor(enabled).value,
+                border = border,
+                interactionSource = interactionSource,
             ) {
-                AnimatedContent(targetState = isLoading, label = "loadingAnimation") { isLoading ->
-                    if (isLoading) {
-                        Spinner(
-                            size = when (size) {
-                                IconButtonSize.Small, IconButtonSize.Medium -> SpinnerSize.Small
-                                IconButtonSize.Large -> SpinnerSize.Medium
-                            },
-                        )
-                    } else {
-                        content()
+                Box(
+                    modifier = Modifier.size(size.height),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    AnimatedContent(targetState = isLoading, label = "loadingAnimation") { isLoading ->
+                        if (isLoading) {
+                            Spinner(
+                                size = when (size) {
+                                    IconButtonSize.Small, IconButtonSize.Medium -> SpinnerSize.Small
+                                    IconButtonSize.Large -> SpinnerSize.Medium
+                                },
+                            )
+                        } else {
+                            content()
+                        }
                     }
                 }
             }

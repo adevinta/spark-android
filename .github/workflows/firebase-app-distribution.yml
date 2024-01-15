@@ -10,6 +10,18 @@ on:
         required: true
         default: 'main'
         type: string
+      group:
+        description: 'Group'
+        required: true
+        type: choice
+        options: 
+          - all
+          - qa
+          - 🤖
+      message:
+        description: 'Message'
+        required: false
+        type: string
   schedule:
     - cron: 0 0 * * *
 
@@ -63,20 +75,26 @@ jobs:
       - name: '📋 Prepare empty release note (default)'
         run: touch release-notes.txt
 
+      - name: '📋 Prepare release note message'
+        if: inputs.message != ''
+        run: echo -e "$MESSAGE\n" > release-notes.txt
+        env:
+          MESSAGE: ${{ inputs.message }}
+
       - name: '📋 Prepare release note for workflow build'
         if: github.event_name == 'workflow_dispatch'
-        run: git log -1 --format="• %s" > release-notes.txt
+        run: git log -1 --format="• %s" >> release-notes.txt
 
       - name: '📋 Prepare release note for scheduled build'
         if: github.event_name == 'schedule'
-        run: git log --topo-order --since="24 hours ago" --format="• %s" --no-merges > release-notes.txt
+        run: git log --topo-order --since="24 hours ago" --format="• %s" --no-merges >> release-notes.txt
 
       - name: '📋 Prepare release note for tagged build'
         if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         run: |
           from="$(git for-each-ref --sort=-v:refname --count=2 --format='%(tag)' refs/tags | tail -n +2)"
           to="$(git for-each-ref --sort=-v:refname --count=1 --format='%(tag)' refs/tags)"
-          git log --topo-order --format="• %s" "$from..$to" --no-merges > release-notes.txt
+          git log --topo-order --format="• %s" "$from..$to" --no-merges >> release-notes.txt
 
       - name: '📦 Archive release-notes.txt'
         uses: actions/upload-artifact@v4
@@ -89,8 +107,10 @@ jobs:
           firebase appdistribution:distribute
           catalog/build/outputs/apk/release/catalog-release.apk
           --app "1:559109812471:android:7aaf1a8ba28904f5f923f2"
-          --groups "all"
+          --groups "$GROUPS"
           --release-notes-file "release-notes.txt"
+        env:
+          GROUPS: ${{ inputs.group || 'all' }}
 
       - name: '♻️ Cleanup'
         if: ${{ success() || failure() }}

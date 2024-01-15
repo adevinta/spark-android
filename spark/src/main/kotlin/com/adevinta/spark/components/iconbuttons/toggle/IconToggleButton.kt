@@ -108,32 +108,34 @@ internal fun SparkIconToggleButton(
         )
     }
 
-    PlainTooltipBox(
-        tooltip = { Text(contentDescription.orEmpty()) },
-        shape = IconButtonDefaults.TooltipContainerShape,
-        containerColor = IconButtonDefaults.TooltipContainerColor,
-        contentColor = IconButtonDefaults.TooltipContentColor,
-    ) {
-        Surface(
-            checked = checked,
-            onCheckedChange = onCheckedChange,
-            modifier = modifier
-                .minimumTouchTargetSize()
-                .tooltipAnchor()
-                .sparkUsageOverlay()
-                .semantics { role = Role.Checkbox },
-            enabled = enabled,
-            shape = shape.shape,
-            border = border,
-            color = colors.containerColor(enabled).value,
-            contentColor = colors.contentColor(enabled).value,
-            interactionSource = interactionSource,
+    Box(modifier = modifier) {
+        PlainTooltipBox(
+            tooltip = { Text(contentDescription.orEmpty()) },
+            shape = IconButtonDefaults.TooltipContainerShape,
+            containerColor = IconButtonDefaults.TooltipContainerColor,
+            contentColor = IconButtonDefaults.TooltipContentColor,
         ) {
-            Box(
-                modifier = Modifier.size(size.height),
-                contentAlignment = Alignment.Center,
+            Surface(
+                checked = checked,
+                onCheckedChange = onCheckedChange,
+                modifier = Modifier
+                    .minimumTouchTargetSize()
+                    .tooltipAnchor()
+                    .sparkUsageOverlay()
+                    .semantics { role = Role.Checkbox },
+                enabled = enabled,
+                shape = shape.shape,
+                border = border,
+                color = colors.containerColor(enabled).value,
+                contentColor = colors.contentColor(enabled).value,
+                interactionSource = interactionSource,
             ) {
-                content()
+                Box(
+                    modifier = Modifier.size(size.height),
+                    contentAlignment = Alignment.Center,
+                ) {
+                    content()
+                }
             }
         }
     }
