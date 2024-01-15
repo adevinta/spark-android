@@ -24,6 +24,7 @@ package com.adevinta.spark.components.buttons
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,7 +48,72 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 /**
  * Ghost buttons are used for the lowest priority actions, especially when presenting multiple options.
  *
- * Ghost buttons can be placed on a variety of backgrounds. Until the button is interacted with, its container isn’t visible.
+ * Ghost buttons can be placed on a variety of backgrounds. Until the button is interacted with, its container
+ * isn’t visible.
+ * This button style is often used inside other components like snackbars, dialogs, and cards.
+ *
+ * @param onClick Will be called when the user clicks the button
+ * @param modifier Modifier to be applied to the button
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
+ * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
+ * loading state
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
+ */
+@Composable
+public fun ButtonContrast(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
+    shape: ButtonShape = SparkButtonDefaults.DefaultShape,
+    intent: ButtonIntent = ButtonIntent.Main,
+    enabled: Boolean = true,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.() -> Unit,
+) {
+    val containerColor = SparkTheme.colors.surface
+    val colors = intent.colors()
+    val contentColor by animateColorAsState(
+        targetValue = if (colors.color == containerColor) colors.onColor else colors.color,
+        label = "content color",
+    )
+
+    val buttonColors = ButtonDefaults.buttonColors(
+        containerColor = containerColor,
+        contentColor = contentColor,
+        disabledContainerColor = containerColor.disabled,
+        disabledContentColor = contentColor.disabled,
+    )
+    BaseSparkButton(
+        onClick = onClick,
+        content = content,
+        modifier = modifier,
+        size = size,
+        shape = shape.shape,
+        enabled = enabled,
+        elevation = ButtonDefaults.buttonElevation(),
+        colors = buttonColors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+        interactionSource = interactionSource,
+    )
+}
+
+/**
+ * Ghost buttons are used for the lowest priority actions, especially when presenting multiple options.
+ *
+ * Ghost buttons can be placed on a variety of backgrounds. Until the button is interacted with, its container
+ * isn’t visible.
  * This button style is often used inside other components like snackbars, dialogs, and cards.
  *
  * @param onClick Will be called when the user clicks the button
@@ -57,7 +123,8 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param intent The intent color for the button.
  * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
  * @param icon The optional icon to be displayed at the start or the end of the button container.
- * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
  * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
  * loading state
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
@@ -110,7 +177,8 @@ public fun ButtonContrast(
 /**
  * Ghost buttons are used for the lowest priority actions, especially when presenting multiple options.
  *
- * Ghost buttons can be placed on a variety of backgrounds. Until the button is interacted with, its container isn’t visible.
+ * Ghost buttons can be placed on a variety of backgrounds. Until the button is interacted with, its container
+ * isn’t visible.
  * This button style is often used inside other components like snackbars, dialogs, and cards.
  *
  * @param onClick Will be called when the user clicks the button
@@ -120,7 +188,8 @@ public fun ButtonContrast(
  * @param intent The intent color for the button.
  * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
  * @param icon The optional icon to be displayed at the start or the end of the button container.
- * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
  * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
  * loading state
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
@@ -221,7 +290,7 @@ internal fun ButtonContrastIntentPreview(
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline
-        ButtonIntent.values().forEach { intent ->
+        ButtonIntent.entries.forEach { intent ->
             ButtonContrast(
                 text = intent.name,
                 onClick = { },

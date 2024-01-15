@@ -39,6 +39,30 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * Filled tag represent main information
+ * @param modifier The [Modifier] to be applied to the component
+ * @param intent The [TagIntent] color to use
+ * @param leadingIcon The spark icon shown at the start of the tag
+ * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
+ */
+@Composable
+public fun TagFilled(
+    modifier: Modifier = Modifier,
+    intent: TagIntent = TagIntent.Basic,
+    leadingIcon: SparkIcon? = null,
+    tint: Color? = null,
+    content: @Composable RowScope.() -> Unit,
+) {
+    SparkTag(
+        colors = TagDefaults.filledColors(intent),
+        modifier = modifier,
+        leadingIcon = leadingIcon,
+        tint = tint,
+        content = content,
+    )
+}
+
+/**
+ * Filled tag represent main information
  * @param text The item label
  * @param modifier The [Modifier] to be applied to the component
  * @param intent The [TagIntent] color to use
