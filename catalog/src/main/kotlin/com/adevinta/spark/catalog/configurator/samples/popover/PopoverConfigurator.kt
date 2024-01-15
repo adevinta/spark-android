@@ -211,8 +211,7 @@ private fun ConfiguredPopover(
     ) {
         Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(4.dp),
+                .fillMaxWidth(),
             contentAlignment = Alignment.Center,
         ) {
             when (popoverTriggerExample) {
