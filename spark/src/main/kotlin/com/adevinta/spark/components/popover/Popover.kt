@@ -46,6 +46,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.SparkTheme.colors
 import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.iconbuttons.IconButtonGhost
+import com.adevinta.spark.components.iconbuttons.IconButtonIntent
 import com.adevinta.spark.components.popover.PopoverDefaults.PopoverAnchorPadding
 import com.adevinta.spark.components.popover.PopoverDefaults.PopoverContentPadding
 import com.adevinta.spark.components.popover.PopoverDefaults.PopoverDismissButtonPadding
@@ -110,8 +111,7 @@ public fun Popover(
                 Row {
                     Box(
                         modifier = Modifier
-                            .padding(all = PopoverContentPadding)
-                            .weight(1.0f, false),
+                            .padding(all = PopoverContentPadding),
                     ) {
                         CompositionLocalProvider(
                             content = popoverContent,
@@ -123,8 +123,8 @@ public fun Popover(
                                 .padding(
                                     top = PopoverDismissButtonPadding,
                                     end = PopoverDismissButtonPadding,
-                                )
-                                .weight(2.0f, true),
+                                ),
+                            intent = IconButtonIntent.Neutral,
                             icon = SparkIcons.Close,
                             onClick = { popoverState.dismiss() },
                         )
