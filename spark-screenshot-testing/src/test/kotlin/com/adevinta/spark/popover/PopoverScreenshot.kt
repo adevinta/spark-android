@@ -91,8 +91,6 @@ internal class PopoverScreenshot {
 
         enableList.forEach { isEnabled ->
             paparazzi.sparkSnapshot(name = "Popover_isDismissEnabled_$isEnabled", true) {
-
-
                 Column {
                     Popover(
                         popoverContent = {
