@@ -27,7 +27,6 @@ import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -51,7 +50,6 @@ import com.android.ide.common.rendering.api.SessionParams
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -76,21 +74,22 @@ internal class PopoverScreenshot {
     )
 
     @SuppressLint("CoroutineCreationDuringComposition")
-    @OptIn(ExperimentalComposeApi::class)
     @Test
-    fun test() = runBlocking {
-        val state = rememberTooltipState(isPersistent = true)
-        val scope = rememberCoroutineScope()
-        val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
-
-        val press = PressInteraction.Press(Offset.Zero)
-        interactionSource.emit(press)
-        state.show()
-        delay(300)
-        interactionSource.emit(PressInteraction.Release(press))
-
+    fun test() {
         enableList.forEach { isEnabled ->
             paparazzi.sparkSnapshot(name = "Popover_isDismissEnabled_$isEnabled", true) {
+                val state = rememberTooltipState(isPersistent = true)
+                val scope = rememberCoroutineScope()
+                val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
+
+                scope.launch {
+                    val press = PressInteraction.Press(Offset.Zero)
+                    interactionSource.emit(press)
+                    state.show()
+                    delay(300)
+                    interactionSource.emit(PressInteraction.Release(press))
+                }
+
                 Column {
                     Popover(
                         popoverContent = {
