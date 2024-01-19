@@ -32,6 +32,6 @@ runs:
         path: ${{ inputs.xml }}
     - name: 'Analyse Lint SARIF report'
       if: inputs.analysis != ''
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: ${{ inputs.analysis }}
