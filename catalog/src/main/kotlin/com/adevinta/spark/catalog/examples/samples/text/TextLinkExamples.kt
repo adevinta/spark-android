@@ -41,8 +41,6 @@ import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.text.TextLink
-import com.adevinta.spark.icons.InfoOutline
-import com.adevinta.spark.icons.SparkIcons
 import kotlinx.coroutines.launch
 
 private const val TextLinksExampleSourceUrl = "$SampleSourceUrl/TextLinkExamples.kt"
@@ -111,7 +109,6 @@ public val TextLinksExamples: List<Example> = listOf(
                 TextLink(
                     style = SparkTheme.typography.subhead,
                     text = annotatedString3,
-                    iconColor = Color.Magenta,
                     onClickLabel = "textLink",
                     onClick = {
                         scope.launch {
@@ -147,7 +144,6 @@ public val TextLinksExamples: List<Example> = listOf(
                 TextLink(
                     style = SparkTheme.typography.subhead,
                     text = annotatedString1,
-                    iconColor = Color.Magenta,
                     onClickLabel = "textLink",
                     onClick = {
                         scope.launch {
@@ -183,7 +179,6 @@ public val TextLinksExamples: List<Example> = listOf(
                 TextLink(
                     style = SparkTheme.typography.subhead,
                     text = annotatedString2,
-                    iconColor = Color.Magenta,
                     onClickLabel = "textLink",
                     onClick = {
                         scope.launch {
@@ -219,8 +214,6 @@ public val TextLinksExamples: List<Example> = listOf(
                 TextLink(
                     style = SparkTheme.typography.subhead,
                     text = annotatedString2,
-                    icon = SparkIcons.InfoOutline,
-                    iconColor = Color.Magenta,
                     onClickLabel = "textLink",
                     onClick = {
                         scope.launch {

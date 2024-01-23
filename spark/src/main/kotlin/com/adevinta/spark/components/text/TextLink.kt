@@ -23,25 +23,22 @@ package com.adevinta.spark.components.text
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.InlineTextContent
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
@@ -53,15 +50,19 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
+import com.adevinta.spark.LocalHighlightToken
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.BaseSparkButton
+import com.adevinta.spark.components.buttons.ButtonIntent
+import com.adevinta.spark.components.buttons.ButtonShape
+import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.IconSide
-import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.buttons.SparkButtonDefaults
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
-import com.adevinta.spark.icons.InfoFill
+import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -106,10 +107,6 @@ import kotlinx.coroutines.launch
  * text, baselines and other details. The callback can be used to add additional decoration or
  * functionality to the text. For example, to draw selection around the text.
  * @param style style configuration for the text such as color, font, line height etc.
- * @param icon The optional icon to be displayed at the start or the end of the Text.
- * @param iconColor [Color] to applied to the icon. If [Color.Unspecified], and [style] has no color set,
- * this will be [LocalContentColor]. usually should be set to the color of the text not links
- * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
  * @param onClick callback when textLink container is clicked.
  */
 
@@ -126,58 +123,78 @@ public fun TextLink(
     minLines: Int = 1,
     inlineContent: ImmutableMap<String, InlineTextContent> = persistentMapOf(),
     onTextLayout: (TextLayoutResult) -> Unit = {},
-    icon: SparkIcon? = null,
-    iconColor: Color = Color.Unspecified,
-    iconSide: IconSide = IconSide.START,
     onClick: () -> Unit,
 ) {
-    val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
-    val measuredIconSize = style.fontSize.value
-    val measuredIconPadding = measuredIconSize / 3
-
     Row(
         modifier = modifier.clickable(onClickLabel = onClickLabel) { onClick() },
     ) {
-        if (icon != null && iconSide == IconSide.START) {
-            Icon(
-                sparkIcon = icon,
-                tint = iconColor,
-                modifier = Modifier
-                    .alignByBaseline()
-                    .padding(top = measuredIconPadding.dp / 2, end = measuredIconPadding.dp)
-                    .size(measuredIconSize.dp)
-                    .testTag("TextLinkIcon"),
-                contentDescription = null, // Text link text should be enough for context
-            )
-        }
         SparkText(
             text = text,
             modifier = Modifier
                 .weight(1F, false)
                 .alignByBaseline(),
-            style = style.copy(platformStyle = PlatformTextStyle(includeFontPadding = false)),
+            style = style,
             overflow = overflow,
             softWrap = softWrap,
             maxLines = maxLines,
             minLines = minLines,
             inlineContent = inlineContent,
-            onTextLayout = {
-                layoutResult.value = it
-                onTextLayout(it)
-            },
+            onTextLayout = { onTextLayout(it) },
         )
-        if (icon != null && iconSide == IconSide.END) {
-            Icon(
-                sparkIcon = icon,
-                tint = iconColor,
-                modifier = Modifier
-                    .alignByBaseline()
-                    .padding(top = measuredIconPadding.dp / 2, start = measuredIconPadding.dp)
-                    .size(measuredIconSize.dp)
-                    .testTag("TextLinkIcon"),
-                contentDescription = null, // Text link text should be enough for context
-            )
-        }
+    }
+}
+
+/**
+ * Component that displays an underlined text link Button
+ *
+ *
+ * @param text the text to be displayed as a link
+ * @param modifier the [Modifier] to be applied to this layout node
+ * @param icon The optional icon to be displayed at the start or the end of the Text.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param onClick callback when textLink container is clicked.
+ */
+
+@SuppressLint("VisibleForTests")
+@Composable
+public fun TextLinkButton(
+    onClick: () -> Unit,
+    text: String,
+    modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
+    shape: ButtonShape = SparkButtonDefaults.DefaultShape,
+    intent: ButtonIntent = ButtonIntent.Danger,
+    enabled: Boolean = true,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    val colors = if (LocalHighlightToken.current) {
+        ButtonDefaults.filledTonalButtonColors()
+    } else {
+        ButtonDefaults.textButtonColors(
+            contentColor = intent.colors().color,
+        )
+    }
+
+    BaseSparkButton(
+        onClick = onClick,
+        modifier = modifier,
+        size = size,
+        shape = shape.shape,
+        enabled = enabled,
+        elevation = ButtonDefaults.buttonElevation(),
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+        interactionSource = interactionSource,
+    ) {
+        Text(
+            text = text,
+            style = SparkTheme.typography.callout.copy(textDecoration = TextDecoration.Underline),
+        )
     }
 }
 
@@ -223,22 +240,35 @@ private fun SparkTextLinkPreview(
                     )
                 }
 
-                TextLink(
-                    style = SparkTheme.typography.subhead,
-                    text = annotatedString,
-                    iconSide = IconSide.START,
-                    onClickLabel = "Privacy & Policy",
-                    icon = SparkIcons.InfoFill,
-                    onClick = {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = "Privacy & Policy Clicked",
-                                actionLabel = "Action",
-                                duration = SnackbarDuration.Short,
-                            )
-                        }
-                    },
-                )
+                Column {
+                    TextLink(
+                        style = SparkTheme.typography.subhead,
+                        text = annotatedString,
+                        onClickLabel = "Privacy & Policy",
+                        onClick = {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "Privacy & Policy Clicked",
+                                    actionLabel = "Action",
+                                    duration = SnackbarDuration.Short,
+                                )
+                            }
+                        },
+                    )
+                    TextLinkButton(
+                        text = "Click me",
+                        icon = SparkIcons.InfoOutline,
+                        onClick = {
+                            scope.launch {
+                                snackbarHostState.showSnackbar(
+                                    message = "Privacy & Policy Clicked",
+                                    actionLabel = "Action",
+                                    duration = SnackbarDuration.Short,
+                                )
+                            }
+                        },
+                    )
+                }
             }
         }
     }
