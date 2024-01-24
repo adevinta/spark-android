@@ -68,7 +68,7 @@
     <string name="component_ratingdisplay_description">Ratings let users see and/or set a star rating for a user or experience.</string>
     <!--Switch example-->
     <string name="component_switch_description">Switch component allows the user to activate or deactivate the state of an element or concept. It is also used to control binary options (On/Off or True/False).</string>
-    <!--Switch example-->
+    <string name="component_progressbar_description">The progress bar component is used to display the length and your progression inside the process or to express a waiting time. This waiting time can be either determinate or indeterminate..</string>
     <string name="component_tag_description">Tags are used to label content and help users quickly recognize info about them: Categories, Status… Can be applied with different colors and designs that are associated with a content due to its characteristics: new content, unvisited content, featured content… Users can’t interact with Tags.</string>
 
     <string name="component_textlink_description">A textlink is a reference to a resource. It can be external (e.g. a different web page) or internal (e.g. a specific element in the current page).</string>
@@ -76,6 +76,7 @@
     <string name="configurator_component_screen_title">Components configurations</string>
     <string name="configurator_component_screen_description">The Configurator allows to visualize a component in every possible state available by customizing every property for each component.</string>
     <string name="configurator_component_screen_enabled_label">Enabled</string>
+    <string name="configurator_component_screen_rounded_label">Rounded Corners</string>
     <string name="configurator_component_screen_textfield_label">Label</string>
     <string name="configurator_component_screen_intent_label">Intent</string>
     <!--Toggle configurator-->

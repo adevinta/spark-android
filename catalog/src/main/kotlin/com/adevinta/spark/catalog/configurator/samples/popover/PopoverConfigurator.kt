@@ -193,9 +193,8 @@ private fun ConfiguredPopover(
                 }
 
                 PopoverContentExamples.Image -> Image(
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.height(500.dp),
-                    model = "https://t.ly/gio0G",
+                    contentScale = ContentScale.Inside,
+                    model = "https://images.unsplash.com/photo-1606041008023-472dfb5e530f",
                     contentDescription = null,
                 )
 

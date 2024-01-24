@@ -60,7 +60,76 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param intent The intent color for the button.
  * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
  * @param icon The optional icon to be displayed at the start or the end of the button container.
- * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
+ * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
+ * loading state
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
+ */
+@Composable
+public fun ButtonFilled(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
+    shape: ButtonShape = SparkButtonDefaults.DefaultShape,
+    intent: ButtonIntent = ButtonIntent.Main,
+    enabled: Boolean = true,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.() -> Unit,
+) {
+    val backgroundColor by animateColorAsState(
+        targetValue = intent.colors().color,
+        label = "background color",
+    )
+    val contentColor by animateColorAsState(
+        targetValue = intent.colors().onColor,
+        label = "content color",
+    )
+    val colors = ButtonDefaults.buttonColors(
+        containerColor = backgroundColor,
+        contentColor = contentColor,
+        disabledContainerColor = backgroundColor.disabled,
+        disabledContentColor = contentColor,
+    )
+    BaseSparkButton(
+        onClick = onClick,
+        modifier = modifier,
+        size = size,
+        shape = shape.shape,
+        enabled = enabled,
+        elevation = ButtonDefaults.buttonElevation(),
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+        interactionSource = interactionSource,
+        content = content,
+    )
+}
+
+/**
+ * The filled button should only be used once per view (not including a modal dialog),
+ * these buttons have the most emphasis.
+ *
+ * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
+ * after a click action for example.
+ *
+ * @sample com.adevinta.spark.samples.components.ButtonSample
+ *
+ * @param onClick Will be called when the user clicks the button
+ * @param text The text to be displayed in the button
+ * @param modifier Modifier to be applied to the button
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
  * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
  * loading state
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
@@ -125,7 +194,8 @@ public fun ButtonFilled(
  * @param intent The intent color for the button.
  * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
  * @param icon The optional icon to be displayed at the start or the end of the button container.
- * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
  * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
  * loading state
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
@@ -278,7 +348,7 @@ internal fun ButtonFilledIntentPreview(
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline
-        ButtonIntent.values().forEach { intent ->
+        ButtonIntent.entries.forEach { intent ->
             ButtonFilled(
                 text = intent.name,
                 onClick = { },
@@ -303,7 +373,7 @@ internal fun ButtonSizePreview(
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline
-        ButtonSize.values().forEach { size ->
+        ButtonSize.entries.forEach { size ->
             ButtonFilled(
                 text = size.name,
                 onClick = { },

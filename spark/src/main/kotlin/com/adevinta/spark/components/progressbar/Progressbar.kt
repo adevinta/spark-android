@@ -146,9 +146,7 @@ internal fun PreviewProgressbar(
     name = "ProgressbarIndeterminate",
 )
 @Composable
-internal fun PreviewProgressbarIndeterminate(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun PreviewProgressbarIndeterminate(@PreviewParameter(ThemeProvider::class) theme: ThemeVariant) {
     PreviewTheme(theme) {
         PreviewTheme(theme) {
             ProgressbarIntent.entries.forEach { intent ->
