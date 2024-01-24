@@ -39,7 +39,6 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.IconToggleButtonColors
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
@@ -68,13 +67,8 @@ import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.spacer.Spacer
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.icons.EyeFill
-import com.adevinta.spark.icons.EyeOffFill
-import com.adevinta.spark.icons.QuestionOutline
 import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.SparkColors
-import kotlin.random.Random
 import androidx.compose.material3.FilledTonalButton as MaterialButton
 
 /**
@@ -92,11 +86,11 @@ public abstract class AddonScope {
     public fun Button(
         text: String,
         onClick: () -> Unit,
-        modifier: Modifier = Modifier,
-        enabled: Boolean = true,
-        icon: SparkIcon? = null,
-        isLoading: Boolean = false,
-        interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+        modifier: Modifier,
+        enabled: Boolean,
+        icon: SparkIcon?,
+        isLoading: Boolean,
+        interactionSource: MutableInteractionSource,
     ) {
         MaterialButton(
             onClick = onClick,
@@ -145,7 +139,7 @@ public abstract class AddonScope {
     public fun TextFieldIcon(
         icon: SparkIcon,
         contentDescription: String?,
-        modifier: Modifier = Modifier,
+        modifier: Modifier,
     ) {
         Icon(
             modifier = modifier.size(16.dp),
@@ -165,10 +159,10 @@ public abstract class AddonScope {
         onClick: () -> Unit,
         icon: SparkIcon,
         contentDescription: String?,
-        modifier: Modifier = Modifier,
-        enabled: Boolean = true,
-        colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
-        interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+        modifier: Modifier,
+        enabled: Boolean,
+        colors: IconButtonColors,
+        interactionSource: MutableInteractionSource,
     ) {
         IconButton(
             onClick = onClick,
@@ -198,10 +192,10 @@ public abstract class AddonScope {
         unCheckedIcon: SparkIcon,
         checkedIcon: SparkIcon,
         contentDescription: String?,
-        modifier: Modifier = Modifier,
-        enabled: Boolean = true,
-        colors: IconToggleButtonColors = IconButtonDefaults.iconToggleButtonColors(),
-        interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+        modifier: Modifier,
+        enabled: Boolean,
+        colors: IconToggleButtonColors,
+        interactionSource: MutableInteractionSource,
     ) {
         IconToggleButton(
             checked = checked,
@@ -227,7 +221,7 @@ public abstract class AddonScope {
     @Composable
     public fun TextFieldText(
         text: String,
-        modifier: Modifier = Modifier,
+        modifier: Modifier,
     ) {
         Text(
             modifier = modifier,
@@ -249,8 +243,8 @@ public abstract class AddonScope {
         onExpandedChange: (Boolean) -> Unit,
         onDismissRequest: () -> Unit,
         dropdownLabel: @Composable RowScope.() -> Unit,
-        modifier: Modifier = Modifier,
-        properties: PopupProperties = PopupProperties(),
+        modifier: Modifier,
+        properties: PopupProperties,
         popupDropdownContent: @Composable ColumnScope.() -> Unit,
     ) {
         ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = onExpandedChange) {
@@ -327,130 +321,5 @@ private fun TextFieldWithDropdownPreview() {
                 },
             )
         }
-    }
-}
-
-@Preview
-@Composable
-private fun TextFieldWithButtonPreview() {
-    var isLoading by remember { mutableStateOf(false) }
-    PreviewTheme {
-        TextField(
-            value = "AA-123-BB",
-            label = "Plate number",
-            onValueChange = {},
-            trailingContent = {
-                Button(
-                    text = "Validate",
-                    modifier = Modifier,
-                    onClick = { isLoading = !isLoading },
-                    isLoading = isLoading,
-                )
-            },
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun TextFieldWithIconPreview() {
-    PreviewTheme {
-        TextField(
-            value = "AA-123-BB",
-            label = "Plate number",
-            onValueChange = {},
-            trailingContent = {
-                TextFieldIcon(
-                    icon = SparkIcons.QuestionOutline,
-                    modifier = Modifier,
-                    contentDescription = "",
-                )
-            },
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun TextFieldWithIconButtonPreview() {
-    PreviewTheme {
-        var value by remember {
-            mutableStateOf("AA-123-BB")
-        }
-        TextField(
-            value = value,
-            label = "Plate number",
-            onValueChange = {},
-            trailingContent = {
-                TextFieldIconButton(
-                    modifier = Modifier,
-                    icon = SparkIcons.EyeOffFill,
-                    contentDescription = "",
-                    onClick = { value = Random.nextInt(0, 8000).toString() },
-                )
-            },
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun TextFieldWithIconToggleButtonPreview() {
-    PreviewTheme {
-        var checked by remember {
-            mutableStateOf(false)
-        }
-        TextField(
-            value = "AA-123-BB",
-            label = "Plate number",
-            onValueChange = {},
-            trailingContent = {
-                TextFieldIconToggleButton(
-                    modifier = Modifier,
-                    checked = checked,
-                    checkedIcon = SparkIcons.EyeFill,
-                    unCheckedIcon = SparkIcons.EyeOffFill,
-                    contentDescription = "",
-                    onCheckedChange = { checked = it },
-                )
-            },
-        )
-        TextField(
-            value = "AA-123-BB",
-            label = "Plate number",
-            onValueChange = {},
-            trailingContent = {
-                TextFieldIconToggleButton(
-                    modifier = Modifier,
-                    checked = !checked,
-                    checkedIcon = SparkIcons.EyeFill,
-                    unCheckedIcon = SparkIcons.EyeOffFill,
-                    contentDescription = "",
-                    onCheckedChange = { checked = it },
-                )
-            },
-        )
-    }
-}
-
-@Preview
-@Composable
-private fun TextFieldWithPrefixSuffixButtonPreview() {
-    PreviewTheme {
-        TextField(
-            value = "www.adevinta.com",
-            label = "Url",
-            onValueChange = {},
-            leadingContent = {
-                TextFieldText(
-                    text = "https://",
-                )
-            },
-            trailingContent = {
-                TextFieldText(
-                    text = ".com",
-                )
-            },
-        )
     }
 }
