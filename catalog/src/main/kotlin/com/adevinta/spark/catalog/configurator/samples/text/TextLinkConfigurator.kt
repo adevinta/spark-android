@@ -160,7 +160,7 @@ private fun TextLinkSample() {
             )
             VerticalSpacer(8.dp)
             TextLinkButton(
-                text = "Privacy & Policy",
+                text = annotatedString.text,
                 intent = ButtonIntent.Accent,
                 icon = if (isIconAdded) SparkIcons.InfoOutline else null,
                 iconSide = iconSide,
