@@ -28,10 +28,6 @@ updates:
           - "androidx.compose.compiler:compiler"
       android-build-tools:
         patterns:
-          - "com.android.application"
-          - "com.android.library"
-          - "com.android.lint"
-          - "com.android.test"
           - "com.android.tools.build:*"
           - "com.android.tools.lint:*"
     open-pull-requests-limit: 20
