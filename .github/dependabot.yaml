@@ -26,6 +26,10 @@ updates:
           - "org.jetbrains.kotlin.jvm"
           - "com.google.devtools.ksp"
           - "androidx.compose.compiler:compiler"
+      android-build-tools:
+        patterns:
+          - "com.android.tools.build:*"
+          - "com.android.tools.lint:*"
     open-pull-requests-limit: 20
 registries:
   maven-google:
