@@ -28,68 +28,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.sp
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.text.TextLink
+import com.adevinta.spark.components.text.TextLinkButton
+import com.adevinta.spark.icons.Link
+import com.adevinta.spark.icons.SparkIcons
 import kotlinx.coroutines.launch
 
 private const val TextLinksExampleSourceUrl = "$SampleSourceUrl/TextLinkExamples.kt"
 
-private val annotatedString1 = buildAnnotatedString {
-    append("Know more about the ")
-    withStyle(
-        style = SpanStyle(
-            color = Color.Green,
-            fontWeight = FontWeight.Bold,
-            textDecoration = TextDecoration.Underline,
-        ),
-    ) {
-        append("Privacy & Policy")
-    }
-    append(
-        "also lots of that that you may " +
-            "be interested in, it's really necessary" +
-            " to know them or i will have to tell your mom",
-    )
-}
-
-private val annotatedString2 = buildAnnotatedString {
-    withStyle(
-        style = SpanStyle(
-            color = Color.Magenta,
-            fontWeight = FontWeight.Bold,
-            textDecoration = TextDecoration.Underline,
-        ),
-    ) {
-        append("Try out Android Development")
-    }
-}
-
-private val annotatedString3 = buildAnnotatedString {
-    append("Learn Kotlin Programming  ")
-    withStyle(
-        style = SpanStyle(
-            color = Color.Blue,
-            fontWeight = FontWeight.Bold,
-            textDecoration = TextDecoration.Underline,
-        ),
-    ) {
-        append("https://kotlinlang.org")
-    }
-}
 public val TextLinksExamples: List<Example> = listOf(
     Example(
-        name = "Link inside title no icon",
+        name = "Link inside title",
         description = "Link inside title no icon",
         sourceUrl = TextLinksExampleSourceUrl,
     ) {
@@ -108,12 +65,13 @@ public val TextLinksExamples: List<Example> = listOf(
 
                 TextLink(
                     style = SparkTheme.typography.subhead,
-                    text = annotatedString3,
-                    onClickLabel = "textLink",
+                    text = R.string.spark_text_link_short_example,
+                    lineHeight = 40.sp,
+                    onClickLabel = "https://kotlinlang.org",
                     onClick = {
                         scope.launch {
                             snackbarHostState.showSnackbar(
-                                message = "Link Clicked",
+                                message = "https://kotlinlang.org",
                                 actionLabel = "Action",
                                 duration = SnackbarDuration.Short,
                             )
@@ -124,7 +82,7 @@ public val TextLinksExamples: List<Example> = listOf(
         }
     },
     Example(
-        name = "Link inside paragraph no icon",
+        name = "Link inside paragraph",
         description = "Link inside paragraph no icon",
         sourceUrl = TextLinksExampleSourceUrl,
     ) {
@@ -143,7 +101,7 @@ public val TextLinksExamples: List<Example> = listOf(
 
                 TextLink(
                     style = SparkTheme.typography.subhead,
-                    text = annotatedString1,
+                    text = R.string.spark_text_link_paragraph_example,
                     onClickLabel = "textLink",
                     onClick = {
                         scope.launch {
@@ -160,7 +118,7 @@ public val TextLinksExamples: List<Example> = listOf(
     },
     Example(
         name = "Entire text as link no icon",
-        description = "Entire text as link no icon",
+        description = "Entire text as link no icon using Text Link Button",
         sourceUrl = TextLinksExampleSourceUrl,
     ) {
         val snackbarHostState = remember { SnackbarHostState() }
@@ -176,14 +134,12 @@ public val TextLinksExamples: List<Example> = listOf(
                 modifier = Modifier.fillMaxSize(),
             ) {
 
-                TextLink(
-                    style = SparkTheme.typography.subhead,
-                    text = annotatedString2,
-                    onClickLabel = "textLink",
+                TextLinkButton(
+                    text = "Try out Android Development",
                     onClick = {
                         scope.launch {
                             snackbarHostState.showSnackbar(
-                                message = "Link Clicked",
+                                message = "Try out Android Development Clicked",
                                 actionLabel = "Action",
                                 duration = SnackbarDuration.Short,
                             )
@@ -195,7 +151,7 @@ public val TextLinksExamples: List<Example> = listOf(
     },
     Example(
         name = "Entire text as link with icon",
-        description = "Entire text as link with icon",
+        description = "Entire text as link with icon using Text Link Button",
         sourceUrl = TextLinksExampleSourceUrl,
     ) {
         val snackbarHostState = remember { SnackbarHostState() }
@@ -211,14 +167,13 @@ public val TextLinksExamples: List<Example> = listOf(
                 modifier = Modifier.fillMaxSize(),
             ) {
 
-                TextLink(
-                    style = SparkTheme.typography.subhead,
-                    text = annotatedString2,
-                    onClickLabel = "textLink",
+                TextLinkButton(
+                    text = "Try out Android Development",
+                    icon = SparkIcons.Link,
                     onClick = {
                         scope.launch {
                             snackbarHostState.showSnackbar(
-                                message = "Link Clicked",
+                                message = "Try out Android Development Clicked",
                                 actionLabel = "Action",
                                 duration = SnackbarDuration.Short,
                             )

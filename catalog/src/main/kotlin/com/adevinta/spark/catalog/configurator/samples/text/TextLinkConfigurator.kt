@@ -21,18 +21,12 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.text
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.runtime.Composable
@@ -41,40 +35,31 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.DialogProperties
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonIntent
-import com.adevinta.spark.components.buttons.ButtonOutlined
-import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.IconSide
+import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
-import com.adevinta.spark.components.spacer.HorizontalSpacer
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.text.TextLink
 import com.adevinta.spark.components.text.TextLinkButton
+import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.toggles.SwitchLabelled
-import com.adevinta.spark.icons.InfoOutline
+import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
-import io.mhssn.colorpicker.ColorPickerDialog
-import io.mhssn.colorpicker.ColorPickerType
 import kotlinx.coroutines.launch
 
 public val TextLinksConfigurator: Configurator = Configurator(
@@ -85,23 +70,18 @@ public val TextLinksConfigurator: Configurator = Configurator(
     TextLinkSample()
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
-@Preview(
-    showBackground = true,
-)
+@Preview(showBackground = true)
 @Composable
 private fun TextLinkSample() {
     val scrollState = rememberScrollState()
     var isIconAdded by remember { mutableStateOf(true) }
-    var shouldShowTextColorDialog by remember { mutableStateOf(false) }
-    var shouldShowLinkColorDialog by remember { mutableStateOf(false) }
-    var shouldShowIconColorDialog by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
     var iconSide by remember { mutableStateOf(IconSide.START) }
-    var colorText by remember { mutableStateOf(Color.Magenta) }
-    var colorLink by remember { mutableStateOf(Color.Cyan) }
-    var colorIcon by remember { mutableStateOf(Color.LightGray) }
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
+    var intent by remember { mutableStateOf(ButtonIntent.Main) }
+    val intents = ButtonIntent.entries
+    var expanded by remember { mutableStateOf(false) }
 
     Scaffold(
         snackbarHost = {
@@ -112,40 +92,10 @@ private fun TextLinkSample() {
             verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.verticalScroll(scrollState),
         ) {
-            val annotatedString = buildAnnotatedString {
-                withStyle(
-                    style = SpanStyle(
-                        color = colorText,
-                    ),
-                ) {
-                    append("This is Adevinta ")
-                }
-                withStyle(
-                    style = SpanStyle(
-                        color = colorLink,
-                        fontWeight = FontWeight.Bold,
-                        textDecoration = TextDecoration.Underline,
-                    ),
-                ) {
-                    append("Privacy & Policy ")
-                }
-                withStyle(
-                    style = SpanStyle(
-                        color = colorText,
-                    ),
-                ) {
-                    append(
-                        """
-                        also lots of that that you may be interested in,
-                        it's really necessary
-                        to know them or i will have to tell your mom
-                        """.trimIndent(),
-                    )
-                }
-            }
+            Text(text = "Text Link Component", style = SparkTheme.typography.headline1)
 
             TextLink(
-                text = annotatedString,
+                text = R.string.spark_text_link_paragraph_example,
                 style = SparkTheme.typography.subhead,
                 onClickLabel = "Privacy & Policy",
                 onClick = {
@@ -159,12 +109,17 @@ private fun TextLinkSample() {
                 },
             )
             VerticalSpacer(8.dp)
+            Text(text = "Text Link Button Component", style = SparkTheme.typography.headline1)
+
             TextLinkButton(
-                text = annotatedString.text,
-                intent = ButtonIntent.Accent,
-                icon = if (isIconAdded) SparkIcons.InfoOutline else null,
+                text = "Click me",
+                intent = intent,
+                icon = if (isIconAdded) SparkIcons.LikeFill else null,
                 iconSide = iconSide,
+                isLoading = isLoading,
                 onClick = {
+                    isLoading = !isLoading
+
                     coroutineScope.launch {
                         snackbarHostState.showSnackbar(
                             message = "Privacy & Policy Clicked",
@@ -203,110 +158,25 @@ private fun TextLinkSample() {
                 )
             }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.clickable { shouldShowTextColorDialog = true },
-            ) {
-                ButtonOutlined(
-                    size = ButtonSize.Medium,
-                    text = "Change Text Color",
-                    onClick = {
-                        shouldShowTextColorDialog = true
-                    },
-                )
-                HorizontalSpacer(5.dp)
-                Box(
-                    modifier = Modifier
-                        .width(44.dp)
-                        .height(44.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(colorText),
-                )
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.clickable { shouldShowLinkColorDialog = true },
-            ) {
-                ButtonOutlined(
-                    size = ButtonSize.Medium,
-                    text = "Change Link Color",
-                    onClick = { shouldShowLinkColorDialog = true },
-                )
-                HorizontalSpacer(5.dp)
-                Box(
-                    modifier = Modifier
-                        .width(44.dp)
-                        .height(44.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(colorLink),
-                )
-            }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.clickable { shouldShowIconColorDialog = true },
-            ) {
-                ButtonOutlined(
-                    size = ButtonSize.Medium,
-                    text = "Change Icon Color",
-                    onClick = { shouldShowIconColorDialog = true },
-                )
-                HorizontalSpacer(5.dp)
-                Box(
-                    modifier = Modifier
-                        .width(44.dp)
-                        .height(44.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(colorIcon),
-                )
-            }
-
-            ColorPickerDialog(
-                show = shouldShowTextColorDialog,
-                type = ColorPickerType.SimpleRing(
-                    colorWidth = 20.dp,
-                    tracksCount = 5,
-                    sectorsCount = 24,
-                ),
-                properties = DialogProperties(),
-                onDismissRequest = {
-                    shouldShowTextColorDialog = false
-                },
-                onPickedColor = {
-                    shouldShowTextColorDialog = false
-                    colorText = it
-                },
-            )
-            ColorPickerDialog(
-                show = shouldShowLinkColorDialog,
-                type = ColorPickerType.SimpleRing(
-                    colorWidth = 20.dp,
-                    tracksCount = 5,
-                    sectorsCount = 24,
-                ),
-                properties = DialogProperties(),
-                onDismissRequest = {
-                    shouldShowLinkColorDialog = false
-                },
-                onPickedColor = {
-                    shouldShowLinkColorDialog = false
-                    colorLink = it
-                },
-            )
-            ColorPickerDialog(
-                show = shouldShowIconColorDialog,
-                type = ColorPickerType.SimpleRing(
-                    colorWidth = 20.dp,
-                    tracksCount = 5,
-                    sectorsCount = 24,
-                ),
-                properties = DialogProperties(),
-                onDismissRequest = {
-                    shouldShowIconColorDialog = false
-                },
-                onPickedColor = {
-                    shouldShowIconColorDialog = false
-                    colorIcon = it
+            SelectTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = intent.name,
+                onValueChange = {},
+                readOnly = true,
+                label = stringResource(id = R.string.configurator_component_screen_intent_label),
+                expanded = expanded,
+                onExpandedChange = { expanded = !expanded },
+                onDismissRequest = { expanded = false },
+                dropdownContent = {
+                    intents.forEach {
+                        DropdownMenuItem(
+                            text = { Text(it.name) },
+                            onClick = {
+                                intent = it
+                                expanded = false
+                            },
+                        )
+                    }
                 },
             )
         }
