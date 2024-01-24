@@ -58,6 +58,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.IconSide
@@ -65,8 +66,10 @@ import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.spacer.HorizontalSpacer
+import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.text.TextLink
+import com.adevinta.spark.components.text.TextLinkButton
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcons
@@ -144,10 +147,23 @@ private fun TextLinkSample() {
             TextLink(
                 text = annotatedString,
                 style = SparkTheme.typography.subhead,
+                onClickLabel = "Privacy & Policy",
+                onClick = {
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "Privacy & Policy Clicked",
+                            actionLabel = "Action",
+                            duration = SnackbarDuration.Short,
+                        )
+                    }
+                },
+            )
+            VerticalSpacer(8.dp)
+            TextLinkButton(
+                text = "Privacy & Policy",
+                intent = ButtonIntent.Accent,
                 icon = if (isIconAdded) SparkIcons.InfoOutline else null,
                 iconSide = iconSide,
-                onClickLabel = "Privacy & Policy",
-                iconColor = colorIcon,
                 onClick = {
                     coroutineScope.launch {
                         snackbarHostState.showSnackbar(
