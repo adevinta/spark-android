@@ -10,14 +10,64 @@ page).
 
 ```kotlin
 fun TextLink(
-    textFull: String,
-    textLink: String,
-    colorText: Color = Color.Unspecified,
-    colorLink: Color = colorText,
+    text: Int,
+    onClickLabel: String,
     onClick: () -> Unit,
 )
 ```
 
-| Light                                                                                                                                        | 
-|----------------------------------------------------------------------------------------------------------------------------------------------|
-| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_test_link_learn_kotl_color_linkcolor(1.0,_1.0,_0.0,_1.0,_srgb_iec61966-2.1).png) |
+| TextLink                                                                               | 
+|----------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLink_textlink.png) |
+
+#### TextLinkButton
+
+```kotlin
+fun TextLinkButton(
+    text: String,
+    onClick: () -> Unit,
+    intent: ButtonIntent,
+    enabled: Boolean = true,
+    isLoading: Boolean = false,
+)
+```
+
+| accent                                                                                                    | 
+|-----------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_accent.png) |
+
+| alert                                                                                                    | 
+|----------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_alert.png) |
+
+| basic                                                                                                    | 
+|----------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_basic.png) |
+
+| danger                                                                                                    | 
+|-----------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_danger.png) |
+
+| info                                                                                                      | 
+|-----------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_accent.png) |
+
+| main                                                                                                    | 
+|---------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_main.png) |
+
+| neutral                                                                                                    | 
+|------------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_neutral.png) |
+
+| success                                                                                                    | 
+|------------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_success.png) |
+
+| support                                                                                                    | 
+|------------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_support.png) |
+
+| surface                                                                                                    | 
+|------------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.text_TextLinkScreenshot_testTextLinkButton_textlinkbutton_surface.png) |
