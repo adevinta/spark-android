@@ -88,7 +88,7 @@ private fun ProgressbarSample() {
             isRounded = isRounded,
         )
 
-        Text(text = "ProgressbarIndeterminate")
+        Text(text = "Progressbar Indeterminate")
 
         ProgressbarIndeterminate(
             intent = intent,
