@@ -22,14 +22,15 @@
 package com.adevinta.spark.components.text
 
 import android.annotation.SuppressLint
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
@@ -37,34 +38,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.TextUnit
-import com.adevinta.spark.LocalHighlightToken
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.BaseSparkButton
 import com.adevinta.spark.components.buttons.ButtonIntent
-import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.IconSide
-import com.adevinta.spark.components.buttons.SparkButtonDefaults
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.res.annotatedStringResource
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.collections.immutable.ImmutableMap
@@ -73,8 +67,6 @@ import kotlinx.coroutines.launch
 
 /**
  * Component that displays an underlined text link
- * As per specs only one link per instance is allowed,
- * If you want a paragraph with 2 links, just break them into two separate paragraphs
  *
  * The default [style] uses the [LocalTextStyle] provided by the [MaterialTheme] / components. If
  * you are setting your own style, you may want to consider first retrieving [LocalTextStyle],
@@ -88,10 +80,11 @@ import kotlinx.coroutines.launch
  * - If a parameter is _not_ set, (`null` or [TextUnit.Unspecified]), then the corresponding value
  * from [style] will be used instead.
  *
- * Additionally, for [color], if [color] is not set, and [style] does not have a color, then
- * [LocalContentColor] will be used.
  *
- * @param text the text to be displayed that has link, should be provided as Anottated string, with colors & underlined link parts
+ * @param text the text to be displayed that has link, should be provided as AnnotatedStringResource, with colors & underlined link parts
+ * We support Spark color intents & Typography to be added within annotations
+ *     <string name="example"><annotation typography="display3" color="success"><u><b>link Sample</b></u></annotation></string>
+ * @param onClickLabel label to be used for accessibility screen readers
  * @param modifier the [Modifier] to be applied to this layout node
  * @param overflow how visual overflow should be handled.
  * @param softWrap whether the text should break at soft line breaks. If false, the glyphs in the
@@ -110,10 +103,9 @@ import kotlinx.coroutines.launch
  * @param onClick callback when textLink container is clicked.
  */
 
-@SuppressLint("VisibleForTests")
 @Composable
 public fun TextLink(
-    text: AnnotatedString,
+    @StringRes text: Int,
     onClickLabel: String,
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
@@ -121,6 +113,7 @@ public fun TextLink(
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
+    lineHeight: TextUnit = TextUnit.Unspecified,
     inlineContent: ImmutableMap<String, InlineTextContent> = persistentMapOf(),
     onTextLayout: (TextLayoutResult) -> Unit = {},
     onClick: () -> Unit,
@@ -129,13 +122,14 @@ public fun TextLink(
         modifier = modifier.clickable(onClickLabel = onClickLabel) { onClick() },
     ) {
         SparkText(
-            text = text,
+            text = annotatedStringResource(text),
             modifier = Modifier
                 .weight(1F, false)
                 .alignByBaseline(),
             style = style,
             overflow = overflow,
             softWrap = softWrap,
+            lineHeight = lineHeight,
             maxLines = maxLines,
             minLines = minLines,
             inlineContent = inlineContent,
@@ -144,25 +138,31 @@ public fun TextLink(
     }
 }
 
+
 /**
  * Component that displays an underlined text link Button
- *
- *
- * @param text the text to be displayed as a link
+ * @param text the text to be displayed as a underlined link
+ * @param onClick callback when textLink button is clicked.
  * @param modifier the [Modifier] to be applied to this layout node
- * @param icon The optional icon to be displayed at the start or the end of the Text.
- * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start or end of the button
- * @param onClick callback when textLink container is clicked.
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
+ * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
+ * loading state
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
  */
-
 @SuppressLint("VisibleForTests")
 @Composable
 public fun TextLinkButton(
-    onClick: () -> Unit,
     text: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    shape: ButtonShape = SparkButtonDefaults.DefaultShape,
     intent: ButtonIntent = ButtonIntent.Danger,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
@@ -170,19 +170,12 @@ public fun TextLinkButton(
     isLoading: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val colors = if (LocalHighlightToken.current) {
-        ButtonDefaults.filledTonalButtonColors()
-    } else {
-        ButtonDefaults.textButtonColors(
-            contentColor = intent.colors().color,
-        )
-    }
+    val colors = ButtonDefaults.textButtonColors(contentColor = intent.colors().color)
 
     BaseSparkButton(
         onClick = onClick,
         modifier = modifier,
         size = size,
-        shape = shape.shape,
         enabled = enabled,
         elevation = ButtonDefaults.buttonElevation(),
         colors = colors,
@@ -220,30 +213,10 @@ private fun SparkTextLinkPreview(
             },
         ) {
             Column {
-                val annotatedString = buildAnnotatedString {
-                    append("Know more about the ")
-                    withStyle(
-                        style = SpanStyle(
-                            color = Color.Blue,
-                            fontWeight = FontWeight.Bold,
-                            textDecoration = TextDecoration.Underline,
-                        ),
-                    ) {
-                        append("Privacy & Policy")
-                    }
-                    append(
-                        """
-                         also lots of that that you may be interested in,
-                        it's really necessary
-                        to know them or i will have to tell your mom
-                        """.trimIndent(),
-                    )
-                }
-
                 Column {
                     TextLink(
                         style = SparkTheme.typography.subhead,
-                        text = annotatedString,
+                        text = R.string.spark_text_link_paragraph_example,
                         onClickLabel = "Privacy & Policy",
                         onClick = {
                             scope.launch {
