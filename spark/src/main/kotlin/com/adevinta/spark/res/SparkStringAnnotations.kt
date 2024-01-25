@@ -58,6 +58,7 @@ public object SparkStringAnnotations {
         "error" -> token.error
         "info" -> token.info
         "neutral" -> token.neutral
+        "accent" -> token.accent
         else -> null.also { _ ->
             Log.d("StringResources", "Spark color annotation : $this is not supported")
         }
