@@ -94,7 +94,7 @@ private fun TextLinkSample() {
             Text(text = "Text Link Component", style = SparkTheme.typography.headline1)
 
             TextLink(
-                text = R.string.spark_text_link_paragraph_example,
+                text = R.string.spark_text_link_paragraph_example_,
                 style = SparkTheme.typography.subhead,
                 onClickLabel = "Privacy & Policy",
                 onClick = {

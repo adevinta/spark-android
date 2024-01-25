@@ -65,7 +65,7 @@ public val TextLinksExamples: List<Example> = listOf(
 
                 TextLink(
                     style = SparkTheme.typography.subhead,
-                    text = R.string.spark_text_link_short_example,
+                    text = R.string.spark_text_link_short_example_,
                     lineHeight = 40.sp,
                     onClickLabel = "https://kotlinlang.org",
                     onClick = {
@@ -101,7 +101,7 @@ public val TextLinksExamples: List<Example> = listOf(
 
                 TextLink(
                     style = SparkTheme.typography.subhead,
-                    text = R.string.spark_text_link_paragraph_example,
+                    text = R.string.spark_text_link_paragraph_example_,
                     onClickLabel = "textLink",
                     onClick = {
                         scope.launch {
