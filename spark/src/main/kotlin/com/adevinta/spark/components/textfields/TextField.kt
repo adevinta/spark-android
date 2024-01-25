@@ -106,8 +106,8 @@ public fun TextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
-    trailingContent: @Composable (AddonScope.() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit) = {},
+    trailingContent: @Composable (AddonScope.() -> Unit) = {},
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -115,7 +115,7 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingContentBasedOnState: (@Composable AddonScope.() -> Unit)? = TextFieldDefault.getTrailingContent(
+    val trailingContentBasedOnState: (@Composable AddonScope.() -> Unit) = TextFieldDefault.getTrailingContent(
         state = state,
         trailingIcon = trailingContent,
     )
@@ -201,8 +201,8 @@ public fun TextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
-    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
-    trailingContent: @Composable (AddonScope.() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit) = {},
+    trailingContent: @Composable (AddonScope.() -> Unit) = {},
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -210,7 +210,7 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingContentBasedOnState: (@Composable AddonScope.() -> Unit)? = TextFieldDefault.getTrailingContent(
+    val trailingContentBasedOnState: (@Composable AddonScope.() -> Unit) = TextFieldDefault.getTrailingContent(
         state = state,
         trailingIcon = trailingContent,
     )

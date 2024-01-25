@@ -142,7 +142,11 @@ public fun ThemePicker(
                                 text = {
                                     Text(text = brand.name)
                                 },
-                                trailingIcon = if (brand == theme.brandMode) selectedIcon else null,
+                                trailingIcon = if (brand == theme.brandMode) {
+                                    selectedIcon
+                                } else {
+                                    {}
+                                },
                                 onClick = {
                                     onThemeChange(theme.copy(brandMode = brand))
                                     expanded = false

@@ -123,7 +123,7 @@ public fun MultilineTextField(
     placeholder: String? = null,
     helper: String? = null,
     counter: TextFieldCharacterCounter? = null,
-    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit) = {},
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -133,7 +133,7 @@ public fun MultilineTextField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingIconComposable: (@Composable AddonScope.() -> Unit)? = getTrailingContent(
+    val trailingIconComposable: (@Composable AddonScope.() -> Unit) = getTrailingContent(
         state = state,
         trailingIcon = if (value.text.isNotBlank()) {
             {
@@ -150,7 +150,7 @@ public fun MultilineTextField(
                 )
             }
         } else {
-            null
+            {}
         },
     )
 
@@ -244,7 +244,7 @@ public fun MultilineTextField(
     placeholder: String? = null,
     helper: String? = null,
     counter: TextFieldCharacterCounter? = null,
-    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit) = {},
     state: TextFieldState? = null,
     stateMessage: String? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -254,7 +254,7 @@ public fun MultilineTextField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingIconComposable: (@Composable AddonScope.() -> Unit)? = getTrailingContent(
+    val trailingIconComposable: (@Composable AddonScope.() -> Unit) = getTrailingContent(
         state = state,
         trailingIcon = if (value.isNotBlank()) {
             {
@@ -271,7 +271,7 @@ public fun MultilineTextField(
                 )
             }
         } else {
-            null
+            {}
         },
     )
     SparkTextField(

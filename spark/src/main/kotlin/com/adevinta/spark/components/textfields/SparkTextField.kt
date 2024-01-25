@@ -94,8 +94,8 @@ internal fun SparkTextField(
     placeholder: String?,
     helper: String?,
     counter: TextFieldCharacterCounter?,
-    leadingContent: @Composable (AddonScope.() -> Unit)?,
-    trailingContent: @Composable (AddonScope.() -> Unit)?,
+    leadingContent: @Composable (AddonScope.() -> Unit),
+    trailingContent: @Composable (AddonScope.() -> Unit),
     state: TextFieldState?,
     stateMessage: String?,
     visualTransformation: VisualTransformation,
@@ -193,8 +193,8 @@ internal fun SparkTextField(
     placeholder: String?,
     helper: String?,
     counter: TextFieldCharacterCounter?,
-    leadingIcon: @Composable (AddonScope.() -> Unit)?, // Should we rename it to leadingContent?
-    trailingIcon: @Composable (AddonScope.() -> Unit)?, // Should we rename it to trailingContent?
+    leadingIcon: @Composable (AddonScope.() -> Unit), // Should we rename it to leadingContent?
+    trailingIcon: @Composable (AddonScope.() -> Unit), // Should we rename it to trailingContent?
     state: TextFieldState?,
     stateMessage: String?,
     visualTransformation: VisualTransformation,
@@ -383,8 +383,8 @@ internal object TextFieldDefault {
     @Composable
     internal fun getTrailingContent(
         state: TextFieldState?,
-        trailingIcon: (@Composable AddonScope.() -> Unit)?,
-    ): (@Composable AddonScope.() -> Unit)? = when {
+        trailingIcon: (@Composable AddonScope.() -> Unit),
+    ): (@Composable AddonScope.() -> Unit) = when {
         state != null -> {
             {
                 val icon = when (state) {
