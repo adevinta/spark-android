@@ -229,7 +229,7 @@ private val TextLinks = Component(
     tintIcon = false,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/75ed11-textlink/b/403107",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tetx/TextLink.kt",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/text/TextLink.kt",
     examples = TextLinksExamples,
     configurator = TextLinksConfigurator,
 )

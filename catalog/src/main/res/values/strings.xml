@@ -71,7 +71,7 @@
     <string name="component_progressbar_description">The progress bar component is used to display the length and your progression inside the process or to express a waiting time. This waiting time can be either determinate or indeterminate..</string>
     <string name="component_tag_description">Tags are used to label content and help users quickly recognize info about them: Categories, Status… Can be applied with different colors and designs that are associated with a content due to its characteristics: new content, unvisited content, featured content… Users can’t interact with Tags.</string>
 
-    <string name="component_textlink_description">A textlink is a reference to a resource. It can be external (e.g. a different web page) or internal (e.g. a specific element in the current page).</string>
+    <string name="component_textlink_description">A TextLink is a reference to a resource. It can be external (e.g. a different web page) or internal (e.g. a specific element in the current page).</string>
 
     <string name="configurator_component_screen_title">Components configurations</string>
     <string name="configurator_component_screen_description">The Configurator allows to visualize a component in every possible state available by customizing every property for each component.</string>
@@ -91,8 +91,8 @@
 
     <string name="icons_screen_search_helper">Search Spark Icon</string>
 
-    <string name="spark_text_link_paragraph_example_"><annotation typography="body1" color="neutral">This is Adevinta </annotation><annotation typography="body1" color="main"><u><b>Privacy &amp; Policy</b></u></annotation><annotation typography="body1" color="neutral">also lots of extra information you maybe interested in or should I inform you about that extra information. you might be not knowing it</annotation> </string>
+    <string name="spark_text_link_paragraph_example_"><annotation typography="body1" color="neutral">This is Adevinta </annotation><annotation typography="body1" color="main"><u><b>Privacy &amp; Policy</b></u></annotation><annotation typography="body1" color="neutral">also lots of extra information you maybe interested in or should I inform you about that extra information. you might be not knowing it</annotation></string>
 
-    <string name="spark_text_link_short_example_"><annotation typography="display2" color="neutral">Learn Kotlin Programming </annotation><annotation typography="display3" color="success"><u><b>https://kotlinlang.org</b></u></annotation> </string>
+    <string name="spark_text_link_short_example_"><annotation typography="display2" color="neutral">Learn Kotlin Programming </annotation><annotation typography="display3" color="success"><u><b>https://kotlinlang.org</b></u></annotation></string>
 
 </resources>

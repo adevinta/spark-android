@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.Row
 import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
-import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.buttons.IconSide
@@ -36,14 +35,13 @@ import com.adevinta.spark.components.text.TextLinkButton
 import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.patchedEnvironment
+import com.adevinta.spark.screenshot.testing.R
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
 import org.junit.Rule
 import org.junit.Test
 
 internal class TextLinkScreenshot {
-
-    private val intents = ButtonIntent.entries
 
     @get:Rule
     val paparazzi = Paparazzi(
@@ -78,24 +76,22 @@ internal class TextLinkScreenshot {
 
     @Test
     fun testTextLinkButton() {
-        intents.forEachIndexed { _, intent ->
-            paparazzi.sparkSnapshot(
-                name = "TextLinkButton_${intent.name}",
+        paparazzi.sparkSnapshot(
+            name = "TextLinkButton",
+        ) {
+            Surface(
+                color = SparkTheme.colors.backgroundVariant,
             ) {
-                Surface(
-                    color = SparkTheme.colors.backgroundVariant,
-                ) {
-                    Column {
-                        IconSide.entries.forEach { iconSide ->
-                            Row {
-                                TextLinkButton(
-                                    text = "Click me",
-                                    icon = SparkIcons.InfoOutline,
-                                    intent = intent,
-                                    iconSide = iconSide,
-                                    onClick = {},
-                                )
-                            }
+                Column {
+                    IconSide.entries.forEach { iconSide ->
+                        Row {
+                            TextLinkButton(
+                                text = "Click me",
+                                icon = SparkIcons.InfoOutline,
+                                intent = ButtonIntent.Accent,
+                                iconSide = iconSide,
+                                onClick = {},
+                            )
                         }
                     }
                 }

@@ -215,7 +215,7 @@ private fun SparkTextLinkPreview(
                 Column {
                     TextLink(
                         style = SparkTheme.typography.subhead,
-                        text = R.string.spark_text_link_paragraph_example,
+                        text = R.string.spark_annotatedStringResource_test_args,
                         onClickLabel = "Privacy & Policy",
                         onClick = {
                             scope.launch {
