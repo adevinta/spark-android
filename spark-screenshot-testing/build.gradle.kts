@@ -37,7 +37,6 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
     implementation(libs.kotlinx.collections.immutable)
-    implementation(files("build/intermediates/compile_r_class_jar/debug/R.jar"))
 
     implementation(libs.airbnb.showkase)
     ksp(libs.airbnb.showkase.processor)
