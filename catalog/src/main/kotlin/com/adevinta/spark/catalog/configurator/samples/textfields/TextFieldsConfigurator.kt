@@ -164,7 +164,7 @@ private fun TextFieldSample() {
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
             val textFieldStates: MutableSet<TextFieldState?> =
-                TextFieldState.values().toMutableSet<TextFieldState?>().apply { add(null) }
+                TextFieldState.entries.toMutableSet<TextFieldState?>().apply { add(null) }
             val buttonStylesLabel = textFieldStates.map { it?.run { name } ?: "Default" }
             SegmentedButton(
                 options = buttonStylesLabel,
