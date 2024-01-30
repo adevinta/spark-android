@@ -66,6 +66,7 @@ dependencies {
     implementation(projects.spark)
 
     implementation(libs.kotlin.reflect)
+    implementation(libs.kotlinx.collections.immutable)
 
     implementation(libs.airbnb.showkase)
 

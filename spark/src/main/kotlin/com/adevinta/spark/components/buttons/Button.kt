@@ -93,40 +93,40 @@ internal fun BaseSparkButton(
         interactionSource = interactionSource,
         contentPadding = SparkButtonDefaults.buttonContentPadding(size),
     ) {
-        ProvideTextStyle(value = SparkTheme.typography.callout) {
-            AnimatedVisibility(visible = isLoading) {
-                Row {
-                    Box(Modifier.size(SparkButtonDefaults.IconSize)) {
-                        CircularProgressIndicator(
-                            Modifier.testTag(TAG_PROGRESS_INDICATOR),
-                            color = LocalContentColor.current,
-                            strokeWidth = 2.dp,
-                        )
-                    }
-                    Spacer(Modifier.width(8.dp))
+        AnimatedVisibility(visible = isLoading) {
+            Row {
+                Box(Modifier.size(SparkButtonDefaults.IconSize)) {
+                    CircularProgressIndicator(
+                        Modifier.testTag(TAG_PROGRESS_INDICATOR),
+                        color = LocalContentColor.current,
+                        strokeWidth = 2.dp,
+                    )
                 }
+                Spacer(Modifier.width(8.dp))
             }
-            if (icon != null && iconSide == IconSide.START) {
-                Icon(
-                    sparkIcon = icon,
-                    modifier = Modifier
-                        .size(SparkButtonDefaults.IconSize)
-                        .testTag("buttonIcon"),
-                    contentDescription = null, // button text should be enough for context
-                )
-                Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
-            }
+        }
+        if (icon != null && iconSide == IconSide.START) {
+            Icon(
+                sparkIcon = icon,
+                modifier = Modifier
+                    .size(SparkButtonDefaults.IconSize)
+                    .testTag("buttonIcon"),
+                contentDescription = null, // button text should be enough for context
+            )
+            Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
+        }
+        ProvideTextStyle(value = SparkTheme.typography.callout) {
             content()
-            if (icon != null && iconSide == IconSide.END) {
-                Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
-                Icon(
-                    sparkIcon = icon,
-                    modifier = Modifier
-                        .size(SparkButtonDefaults.IconSize)
-                        .testTag("buttonIcon"),
-                    contentDescription = null, // button text should be enough for context
-                )
-            }
+        }
+        if (icon != null && iconSide == IconSide.END) {
+            Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
+            Icon(
+                sparkIcon = icon,
+                modifier = Modifier
+                    .size(SparkButtonDefaults.IconSize)
+                    .testTag("buttonIcon"),
+                contentDescription = null, // button text should be enough for context
+            )
         }
     }
 }
@@ -162,10 +162,7 @@ internal fun SparkButton(
         isLoading = isLoading,
         interactionSource = interactionSource,
     ) {
-        Text(
-            text = text,
-            style = SparkTheme.typography.callout,
-        )
+        Text(text = text)
     }
 }
 
@@ -200,10 +197,7 @@ internal fun SparkButton(
         isLoading = isLoading,
         interactionSource = interactionSource,
     ) {
-        Text(
-            text = text,
-            style = SparkTheme.typography.callout,
-        )
+        Text(text = text)
     }
 }
 

@@ -24,6 +24,7 @@ package com.adevinta.spark.components.buttons
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,6 +43,72 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+
+/**
+ * Tinted buttons are medium-emphasis buttons that is an alternative middle ground between
+ * default Buttons (filled) and Outlined buttons. They can be used in contexts where lower-priority
+ * button requires slightly more emphasis than an outline would give, such as "Next" in an onboarding flow.
+ *
+ * It's best paired with either a filled button or a outlined button.
+ *
+ * @param onClick Will be called when the user clicks the button
+ * @param text The text to be displayed in the button
+ * @param modifier Modifier to be applied to the button
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
+ * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
+ * loading state
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
+ */
+@Composable
+public fun ButtonTinted(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
+    shape: ButtonShape = SparkButtonDefaults.DefaultShape,
+    intent: ButtonIntent = ButtonIntent.Main,
+    enabled: Boolean = true,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.() -> Unit,
+) {
+    val backgroundColor by animateColorAsState(
+        targetValue = intent.colors().containerColor,
+        label = "background color",
+    )
+    val contentColor by animateColorAsState(
+        targetValue = intent.colors().onContainerColor,
+        label = "content color",
+    )
+    val colors = ButtonDefaults.buttonColors(
+        containerColor = backgroundColor,
+        contentColor = contentColor,
+        disabledContainerColor = backgroundColor.disabled,
+        disabledContentColor = contentColor.disabled,
+    )
+    BaseSparkButton(
+        onClick = onClick,
+        modifier = modifier,
+        size = size,
+        shape = shape.shape,
+        enabled = enabled,
+        elevation = ButtonDefaults.filledTonalButtonElevation(),
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+        interactionSource = interactionSource,
+        content = content,
+    )
+}
 
 /**
  * Tinted buttons are medium-emphasis buttons that is an alternative middle ground between
@@ -99,7 +166,7 @@ public fun ButtonTinted(
         size = size,
         shape = shape,
         enabled = enabled,
-        elevation = ButtonDefaults.buttonElevation(),
+        elevation = ButtonDefaults.filledTonalButtonElevation(),
         colors = colors,
         icon = icon,
         iconSide = iconSide,
@@ -154,7 +221,7 @@ public fun ButtonTinted(
         size = size,
         shape = shape,
         enabled = enabled,
-        elevation = ButtonDefaults.buttonElevation(),
+        elevation = ButtonDefaults.filledTonalButtonElevation(),
         colors = colors,
         icon = icon,
         iconSide = iconSide,

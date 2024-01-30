@@ -119,6 +119,26 @@ internal fun BaseSparkTag(
 @Composable
 internal fun SparkTag(
     colors: TagColors,
+    modifier: Modifier = Modifier,
+    border: BorderStroke? = null,
+    leadingIcon: SparkIcon? = null,
+    tint: Color? = null,
+    content: @Composable RowScope.() -> Unit,
+) {
+    BaseSparkTag(
+        colors = colors,
+        modifier = modifier,
+        border = border,
+        leadingIcon = leadingIcon,
+        tint = tint,
+        content = content,
+    )
+}
+
+@InternalSparkApi
+@Composable
+internal fun SparkTag(
+    colors: TagColors,
     text: String,
     modifier: Modifier = Modifier,
     border: BorderStroke? = null,

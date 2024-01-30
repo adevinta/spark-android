@@ -32,6 +32,7 @@ import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarCo
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.text.TextLinksConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
@@ -44,6 +45,7 @@ import com.adevinta.spark.catalog.examples.samples.progressbar.ProgressbarExampl
 import com.adevinta.spark.catalog.examples.samples.rating.RatingExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
+import com.adevinta.spark.catalog.examples.samples.text.TextLinksExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
@@ -219,6 +221,19 @@ private val Progressbars = Component(
     configurator = ProgressbarConfigurator,
 )
 
+private val TextLinks = Component(
+    id = nextId(),
+    name = "TextLinks",
+    description = R.string.component_textlink_description,
+    illustration = R.drawable.icon_textlink,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/75ed11-textlink/b/403107",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/text/TextLink.kt",
+    examples = TextLinksExamples,
+    configurator = TextLinksConfigurator,
+)
+
 private val TextFields = Component(
     id = nextId(),
     name = "TextFields",
@@ -257,6 +272,7 @@ public val Components: List<Component> = listOf(
     Switches,
     Tabs,
     Tags,
+    TextLinks,
     Progressbars,
     TextFields,
 )

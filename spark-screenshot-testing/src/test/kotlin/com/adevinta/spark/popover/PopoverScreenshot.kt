@@ -24,12 +24,9 @@ package com.adevinta.spark.popover
 import android.annotation.SuppressLint
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -43,7 +40,7 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.MaxPercentDifference
 import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.buttons.ButtonOutlined
+import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.popover.Popover
 import com.adevinta.spark.components.popover.newapi.rememberTooltipState
 import com.adevinta.spark.components.text.Text
@@ -77,68 +74,59 @@ internal class PopoverScreenshot {
     )
 
     @SuppressLint("CoroutineCreationDuringComposition")
-    @OptIn(ExperimentalComposeApi::class)
     @Test
     fun test() {
-        paparazzi.sparkSnapshot(name = "Popover", true) {
-            val state = rememberTooltipState(isPersistent = true)
-            val scope = rememberCoroutineScope()
-            val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
+        enableList.forEach { isEnabled ->
+            paparazzi.sparkSnapshot(name = "Popover_isDismissEnabled_$isEnabled", true) {
+                val state = rememberTooltipState(isPersistent = true)
+                val scope = rememberCoroutineScope()
+                val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 
-            Row {
-                enableList.forEach { isEnabled ->
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                    ) {
-                        Text(
-                            text = "isDismissButtonEnabled: $isEnabled",
-                        )
-                        Row {
-                            Popover(
-                                popoverContent = {
-                                    Column {
-                                        Text(
-                                            text = "Title",
-                                            modifier = Modifier.padding(bottom = 16.dp),
-                                            style = SparkTheme.typography.headline1.copy(fontWeight = FontWeight.Bold),
-                                        )
-                                        Text(
-                                            text = "Do you want to have this cookie now?",
-                                            modifier = Modifier.padding(bottom = 16.dp),
-                                            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-                                        )
-                                        Text(
-                                            text = "Text Link",
-                                            textDecoration = TextDecoration.Underline,
-                                            style = SparkTheme.typography.body1.copy(fontWeight = FontWeight.Bold)
-                                                .copy(color = SparkTheme.colors.accent),
-                                        )
-                                    }
-                                },
-                                isDismissButtonEnabled = isEnabled,
-                                popoverState = state.apply {
-                                    scope.launch {
-                                        show()
-                                    }
-                                },
-                            ) {
-                                ButtonOutlined(
-                                    text = "Display Popover",
-                                    onClick = { scope.launch { state.show() } },
-                                    interactionSource = interactionSource,
+                scope.launch {
+                    val press = PressInteraction.Press(Offset.Zero)
+                    interactionSource.emit(press)
+                    state.show()
+                    delay(300)
+                    interactionSource.emit(PressInteraction.Release(press))
+                }
+
+                Column {
+                    Popover(
+                        popoverContent = {
+                            Column {
+                                Text(
+                                    text = "Title",
+                                    modifier = Modifier.padding(bottom = 16.dp),
+                                    style = SparkTheme.typography.headline1.copy(fontWeight = FontWeight.Bold),
+                                )
+                                Text(
+                                    text = "Do you want to have this cookie now?",
+                                    modifier = Modifier.padding(bottom = 16.dp),
+                                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                                )
+                                Text(
+                                    text = "Text Link",
+                                    textDecoration = TextDecoration.Underline,
+                                    style = SparkTheme.typography.body1.copy(fontWeight = FontWeight.Bold)
+                                        .copy(color = SparkTheme.colors.accent),
                                 )
                             }
-                        }
+                        },
+                        isDismissButtonEnabled = isEnabled,
+                        popoverState = state.apply {
+                            scope.launch {
+                                show()
+                            }
+                        },
+                    ) {
+                        scope.launch { state.show() }
+                        ButtonFilled(
+                            text = "Display Popover",
+                            onClick = { scope.launch { state.show() } },
+                            interactionSource = interactionSource,
+                        )
                     }
                 }
-            }
-
-            scope.launch {
-                val press = PressInteraction.Press(Offset.Zero)
-                interactionSource.emit(press)
-                state.show()
-                delay(300)
-                interactionSource.emit(PressInteraction.Release(press))
             }
         }
     }
