@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-java
+      - uses: ./.github/actions/setup-gradle
+      - uses: ./.github/actions/setup-gradle-properties
       - uses: gradle-update/update-gradle-wrapper-action@0407394b9d173dfc9cf5695f9f560fef6d61a5fe # v1.0.20
         with:
           repo-token: ${{ secrets.PAT_SPARK }}
