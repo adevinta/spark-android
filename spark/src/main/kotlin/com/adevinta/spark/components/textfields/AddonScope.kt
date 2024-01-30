@@ -79,7 +79,7 @@ import androidx.compose.material3.FilledTonalButton as MaterialButton
 /**
  * Scope that provide pre-made addons for leading and trailing contents of [TextField].
  */
-public interface AddonScope {
+public abstract class AddonScope {
 
     /**
      * A Button that can be used as trailing content for a [TextField]. The button is a custom one as a regular
@@ -275,7 +275,7 @@ public interface AddonScope {
     }
 }
 
-internal object AddonScopeInstance : AddonScope
+internal object AddonScopeInstance : AddonScope()
 
 @Preview(device = Devices.PIXEL_4_XL)
 @Composable
