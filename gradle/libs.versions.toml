@@ -98,6 +98,9 @@ lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "lint" }
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 
+# https://github.com/robolectric/robolectric
+robolectric = { module = "org.robolectric:robolectric", version = "4.11.1" }
+
 slack-lint-compose = { module = "com.slack.lint.compose:compose-lint-checks", version.ref = "slackLint" }
 
 # https://github.com/google/TestParameterInjector

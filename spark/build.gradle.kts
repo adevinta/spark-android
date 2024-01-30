@@ -32,6 +32,11 @@ android {
     namespace = "com.adevinta.spark"
     resourcePrefix = "spark_"
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
+    }
+
     kotlinOptions {
         freeCompilerArgs += listOf(
             "-opt-in=com.adevinta.spark.InternalSparkApi",
@@ -73,4 +78,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.testParameterInjector)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.compose.ui.test)
+    testImplementation(libs.androidx.compose.ui.testManifest)
 }

@@ -23,13 +23,13 @@ package com.adevinta.spark.iconbutton
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.Row
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
+import com.adevinta.spark.DefaultTestDevices
 import com.adevinta.spark.ExperimentalSparkApi
-import com.adevinta.spark.MaxPercentDifference
-import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
@@ -40,127 +40,178 @@ import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonGhost
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonOutlined
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonTinted
+import com.adevinta.spark.components.icons.IconDefaults.intent
 import com.adevinta.spark.components.surface.Surface
-import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.AccountFill
 import com.adevinta.spark.icons.AccountOutline
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.patchedEnvironment
+import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
-import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(TestParameterInjector::class)
 internal class IconToggleButtonScreenshot {
 
     private val icons: IconToggleButtonIcons = IconToggleButtonIcons(SparkIcons.AccountOutline, SparkIcons.AccountFill)
 
-    private val shapes = ButtonShape.entries.toTypedArray()
+    private val shapes = ButtonShape.entries
 
-    private val sizes = IconButtonSize.entries.toTypedArray()
+    private val sizes = IconButtonSize.entries
 
-    private val checkList: List<Boolean> = listOf(true, false)
-
-    private val enableList: List<Boolean> = listOf(true, false)
-
-    private val intents = IconButtonIntent.entries.toTypedArray()
+    private val intents = IconButtonIntent.entries
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        maxPercentDifference = MaxPercentDifference,
-        theme = PaparazziTheme,
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = true,
-        environment = patchedEnvironment(),
-        deviceConfig = DeviceConfig.PIXEL_C.copy(
-            softButtons = false,
-            locale = "fr-rFR",
-        ),
+    val paparazzi = paparazziRule(
+        renderingMode = SessionParams.RenderingMode.H_SCROLL,
+        deviceConfig = DefaultTestDevices.Tablet,
     )
 
-    @OptIn(ExperimentalSparkApi::class)
+    @OptIn(ExperimentalLayoutApi::class)
     @Test
-    fun test() {
-        shapes.forEach { shape ->
-            sizes.forEach { size ->
-                paparazzi.sparkSnapshot(
-                    name = "$shape" +
-                        "_$size",
-                ) {
-                    Row {
-                        enableList.forEach { isEnabled ->
-                            checkList.forEach { isChecked ->
-                                Column(
-                                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                                ) {
-                                    Text(
-                                        text = "Enabled: $isEnabled, Checked: $isChecked",
-                                    )
-                                    intents.forEach { intent ->
-                                        Surface(
-                                            color = if (intent == IconButtonIntent.Surface) {
-                                                SparkTheme.colors.surfaceInverse
-                                            } else {
-                                                SparkTheme.colors.surface
-                                            },
-                                        ) {
-                                            Row {
-                                                IconToggleButtonFilled(
-                                                    checked = isChecked,
-                                                    onCheckedChange = {},
-                                                    icons = icons,
-                                                    shape = shape,
-                                                    size = size,
-                                                    intent = intent,
-                                                    enabled = isEnabled,
-                                                )
-                                                IconToggleButtonOutlined(
-                                                    checked = isChecked,
-                                                    onCheckedChange = {},
-                                                    icons = icons,
-                                                    shape = shape,
-                                                    size = size,
-                                                    intent = intent,
-                                                    enabled = isEnabled,
-                                                )
-                                                IconToggleButtonTinted(
-                                                    checked = isChecked,
-                                                    onCheckedChange = {},
-                                                    icons = icons,
-                                                    shape = shape,
-                                                    size = size,
-                                                    intent = intent,
-                                                    enabled = isEnabled,
-                                                )
-                                                IconToggleButtonContrast(
-                                                    checked = isChecked,
-                                                    onCheckedChange = {},
-                                                    icons = icons,
-                                                    shape = shape,
-                                                    size = size,
-                                                    intent = intent,
-                                                    enabled = isEnabled,
-                                                )
-                                                IconToggleButtonGhost(
-                                                    checked = isChecked,
-                                                    onCheckedChange = {},
-                                                    icons = icons,
-                                                    shape = shape,
-                                                    size = size,
-                                                    intent = intent,
-                                                    enabled = isEnabled,
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+    fun shape() {
+        paparazzi.sparkSnapshot {
+            FlowColumn {
+                shapes.forEach { shape ->
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        sizes.forEach { size ->
+                            IconToggleButtons(
+                                checked = true,
+                                size = size,
+                                shape = shape,
+                                enabled = true,
+                            )
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalLayoutApi::class)
+    @Test
+    fun enabled() {
+        paparazzi.sparkSnapshot {
+            FlowColumn {
+                intents.forEach { intent ->
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        sizes.forEach { size ->
+                            IconToggleButtons(
+                                checked = true,
+                                size = size,
+                                intent = intent,
+                                enabled = true,
+                            )
+                            IconToggleButtons(
+                                checked = false,
+                                size = size,
+                                intent = intent,
+                                enabled = true,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalLayoutApi::class)
+    @Test
+    fun disabled() {
+        paparazzi.sparkSnapshot {
+            FlowColumn {
+                intents.forEach { intent ->
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        sizes.forEach { size ->
+                            IconToggleButtons(
+                                checked = true,
+                                size = size,
+                                intent = intent,
+                                enabled = false,
+                            )
+                            IconToggleButtons(
+                                checked = false,
+                                size = size,
+                                intent = intent,
+                                enabled = false,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalSparkApi::class)
+    @Composable
+    private fun IconToggleButtons(
+        checked: Boolean,
+        size: IconButtonSize,
+        shape: ButtonShape = ButtonShape.Rounded,
+        intent: IconButtonIntent = IconButtonIntent.Main,
+        enabled: Boolean,
+    ) {
+        Surface(
+            color = if (intent == IconButtonIntent.Surface) {
+                SparkTheme.colors.surfaceInverse
+            } else {
+                SparkTheme.colors.surface
+            },
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                IconToggleButtonFilled(
+                    checked = checked,
+                    onCheckedChange = {},
+                    icons = icons,
+                    shape = shape,
+                    size = size,
+                    intent = intent,
+                    enabled = enabled,
+                )
+                IconToggleButtonOutlined(
+                    checked = checked,
+                    onCheckedChange = {},
+                    icons = icons,
+                    shape = shape,
+                    size = size,
+                    intent = intent,
+                    enabled = enabled,
+                )
+                IconToggleButtonTinted(
+                    checked = checked,
+                    onCheckedChange = {},
+                    icons = icons,
+                    shape = shape,
+                    size = size,
+                    intent = intent,
+                    enabled = enabled,
+                )
+                IconToggleButtonContrast(
+                    checked = checked,
+                    onCheckedChange = {},
+                    icons = icons,
+                    shape = shape,
+                    size = size,
+                    intent = intent,
+                    enabled = enabled,
+                )
+                IconToggleButtonGhost(
+                    checked = checked,
+                    onCheckedChange = {},
+                    icons = icons,
+                    shape = shape,
+                    size = size,
+                    intent = intent,
+                    enabled = enabled,
+                )
             }
         }
     }

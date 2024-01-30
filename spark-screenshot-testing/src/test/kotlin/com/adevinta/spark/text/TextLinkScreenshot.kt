@@ -23,47 +23,42 @@ package com.adevinta.spark.text
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import app.cash.paparazzi.Paparazzi
-import com.adevinta.spark.MaxPercentDifference
-import com.adevinta.spark.PaparazziTheme
+import androidx.compose.ui.res.stringResource
+import com.adevinta.spark.DefaultTestDevices
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.buttons.IconSide
-import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.TextLink
 import com.adevinta.spark.components.text.TextLinkButton
 import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.patchedEnvironment
+import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.screenshot.testing.R
-import com.adevinta.spark.sparkSnapshot
-import com.android.ide.common.rendering.api.SessionParams
+import com.adevinta.spark.sparkSnapshotNightMode
 import org.junit.Rule
 import org.junit.Test
+import java.util.Locale
 
 internal class TextLinkScreenshot {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        maxPercentDifference = MaxPercentDifference,
-        theme = PaparazziTheme,
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = true,
-        environment = patchedEnvironment(),
-        deviceConfig = app.cash.paparazzi.DeviceConfig.PIXEL_6_PRO.copy(
-            softButtons = false,
-            locale = "en-rUS",
-        ),
-    )
+    val paparazzi = paparazziRule()
 
     @Test
     fun testTextLink() {
-        paparazzi.sparkSnapshot(
-            name = "TextLink",
-        ) {
-            Surface(
-                color = SparkTheme.colors.surface,
-            ) {
+        paparazzi.sparkSnapshotNightMode {
+            Column {
+                IconSide.entries.forEach { iconSide ->
+                    Row {
+                        TextLinkButton(
+                            text = "Click me",
+                            icon = SparkIcons.InfoOutline,
+                            intent = ButtonIntent.Accent,
+                            iconSide = iconSide,
+                            onClick = {},
+                        )
+                    }
+                }
                 TextLink(
                     style = SparkTheme.typography.subhead,
                     text = R.string.spark_text_link_short_example,
@@ -75,26 +70,31 @@ internal class TextLinkScreenshot {
     }
 
     @Test
-    fun testTextLinkButton() {
-        paparazzi.sparkSnapshot(
-            name = "TextLinkButton",
-        ) {
-            Surface(
-                color = SparkTheme.colors.backgroundVariant,
-            ) {
-                Column {
-                    IconSide.entries.forEach { iconSide ->
-                        Row {
-                            TextLinkButton(
-                                text = "Click me",
-                                icon = SparkIcons.InfoOutline,
-                                intent = ButtonIntent.Accent,
-                                iconSide = iconSide,
-                                onClick = {},
-                            )
-                        }
+    fun frenchVariant() {
+        paparazzi.unsafeUpdateConfig(
+            deviceConfig = DefaultTestDevices.Phone.copy(
+                locale = Locale.FRENCH.toLanguageTag(),
+            ),
+        )
+        paparazzi.sparkSnapshotNightMode {
+            Column {
+                IconSide.entries.forEach { iconSide ->
+                    Row {
+                        TextLinkButton(
+                            text = stringResource(id = R.string.spark_text_link_button_example),
+                            icon = SparkIcons.InfoOutline,
+                            intent = ButtonIntent.Accent,
+                            iconSide = iconSide,
+                            onClick = {},
+                        )
                     }
                 }
+                TextLink(
+                    style = SparkTheme.typography.subhead,
+                    text = R.string.spark_text_link_short_example,
+                    onClickLabel = "textLink",
+                    onClick = {},
+                )
             }
         }
     }

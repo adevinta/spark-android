@@ -40,17 +40,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
-import com.adevinta.spark.MaxPercentDifference
-import com.adevinta.spark.PaparazziTheme
+import com.adevinta.spark.DefaultTestDevices
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshot
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.ThemeVariant.Light
-import com.android.ide.common.rendering.api.SessionParams
 import org.junit.Rule
 import org.junit.Test
 import kotlin.reflect.KProperty0
@@ -58,15 +55,8 @@ import kotlin.reflect.KProperty0
 internal class ColorsScreenshot {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        maxPercentDifference = MaxPercentDifference,
-        theme = PaparazziTheme,
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        deviceConfig = DeviceConfig.PIXEL_C.copy(
-            softButtons = false,
-            locale = "fr-rFR",
-        ),
-        showSystemUi = true,
+    val paparazzi = paparazziRule(
+        deviceConfig = DefaultTestDevices.Tablet,
     )
 
     private val colors

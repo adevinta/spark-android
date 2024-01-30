@@ -342,7 +342,7 @@ public fun TabGroup(
     name = "Scrollable TabGroup",
 )
 @Composable
-internal fun TabGroupPreview(
+private fun TabGroupPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     val tabs = mutableListOf(
@@ -353,32 +353,25 @@ internal fun TabGroupPreview(
     )
     var selectedIndex by remember { mutableIntStateOf(0) }
     PreviewTheme(theme) {
-        TabSize.values().forEach { tabSize ->
-            TabIntent.values().forEach { intent ->
-                TabGroup(
-                    selectedTabIndex = selectedIndex,
-                    intent = intent,
-                ) {
-                    tabs.forEachIndexed { index, (tab, unread) ->
-                        Tab(
-                            intent = intent,
-                            selected = selectedIndex == index,
-                            onClick = { selectedIndex = index },
-                            enabled = true,
-                            icon = tab.second,
-                            text = tab.first,
-                            size = tabSize,
-                            trailingContent = {
-                                if (unread > 0) {
-                                    Badge(count = unread)
-                                } else {
-                                    Unit
-                                }
-                            },
-                            contentDescription = if (tab.first == null) "icon content description" else null,
-                        )
-                    }
-                }
+        TabGroup(
+            selectedTabIndex = selectedIndex,
+        ) {
+            tabs.forEachIndexed { index, (tab, unread) ->
+                Tab(
+                    selected = selectedIndex == index,
+                    onClick = { selectedIndex = index },
+                    enabled = true,
+                    icon = tab.second,
+                    text = tab.first,
+                    trailingContent = {
+                        if (unread > 0) {
+                            Badge(count = unread)
+                        } else {
+                            Unit
+                        }
+                    },
+                    contentDescription = if (tab.first == null) "icon content description" else null,
+                )
             }
         }
     }
@@ -389,7 +382,7 @@ internal fun TabGroupPreview(
     name = "Fixed Size TabGroup",
 )
 @Composable
-internal fun TabGroupFixedSizePreview(
+private fun TabGroupFixedSizePreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     val tabs = mutableListOf(
@@ -398,31 +391,24 @@ internal fun TabGroupFixedSizePreview(
     )
     var selectedIndex by remember { mutableIntStateOf(0) }
     PreviewTheme(theme) {
-        TabSize.values().forEach { tabSize ->
-            TabIntent.values().forEach { intent ->
-                TabGroup(
-                    selectedTabIndex = selectedIndex,
-                    intent = intent,
-                ) {
-                    tabs.forEachIndexed { index, (tab, unread) ->
-                        Tab(
-                            intent = intent,
-                            selected = selectedIndex == index,
-                            onClick = { selectedIndex = index },
-                            enabled = true,
-                            icon = tab.second,
-                            text = tab.first,
-                            size = tabSize,
-                            trailingContent = {
-                                if (unread > 0) {
-                                    Badge(count = unread)
-                                } else {
-                                    Unit
-                                }
-                            },
-                        )
-                    }
-                }
+        TabGroup(
+            selectedTabIndex = selectedIndex,
+        ) {
+            tabs.forEachIndexed { index, (tab, unread) ->
+                Tab(
+                    selected = selectedIndex == index,
+                    onClick = { selectedIndex = index },
+                    enabled = true,
+                    icon = tab.second,
+                    text = tab.first,
+                    trailingContent = {
+                        if (unread > 0) {
+                            Badge(count = unread)
+                        } else {
+                            Unit
+                        }
+                    },
+                )
             }
         }
     }

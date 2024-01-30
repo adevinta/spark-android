@@ -29,16 +29,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
 import app.cash.paparazzi.Paparazzi
-import app.cash.paparazzi.detectEnvironment
+import com.adevinta.spark.tokens.darkSparkColors
+import com.adevinta.spark.tokens.lightSparkColors
+import com.adevinta.spark.tools.preview.ThemeVariant
 
 internal fun Paparazzi.sparkSnapshot(
     name: String? = null,
     drawBackground: Boolean = true,
+    isDark: Boolean = false,
     composable: @Composable () -> Unit,
 ): Unit = snapshot(name) {
     // Behave like in Android Studio Preview renderer
     CompositionLocalProvider(LocalInspectionMode provides true) {
-        SparkTheme(useLegacyStyle = false) {
+        SparkTheme(
+            useLegacyStyle = false,
+            colors = if (isDark) darkSparkColors() else lightSparkColors(),
+        ) {
             // The first box acts as a shield from ComposeView which forces the first layout node
             // to match it's size. This allows the content below to wrap as needed.
             Box {
@@ -54,18 +60,31 @@ internal fun Paparazzi.sparkSnapshot(
 }
 
 /**
- * Lower the current Paparazzi Environment from API level 34 to 33 to work around new resource conflicts:
- *
- * ```
- * SEVERE: resources.format: Hexadecimal color expected, found Color State List for @android:color/system_bar_background_semi_transparent
- * java.lang.NumberFormatException: Color value '/usr/local/lib/android/sdk/platforms/android-34/data/res/color/system_bar_background_semi_transparent.xml' has wrong size. Format is either#AARRGGBB, #RRGGBB, #RGB, or #ARGB
- * ```
- *
- * GitHub issue: https://github.com/cashapp/paparazzi/issues/1025
+ * Generate 3 screenshots for each device: phone, tablet and foldable
  */
-internal fun patchedEnvironment() = with(detectEnvironment()) {
-    copy(compileSdkVersion = 33, platformDir = platformDir.replace("34", "33"))
+internal fun Paparazzi.sparkSnapshotDevices(
+    name: String? = null,
+    drawBackground: Boolean = true,
+    isDark: Boolean = false,
+    composable: @Composable () -> Unit,
+) {
+    DefaultTestDevices.devices.forEach { deviceConfig ->
+        unsafeUpdateConfig(
+            deviceConfig = deviceConfig,
+        )
+        sparkSnapshot(name.orEmpty() + "_${deviceConfig.screenWidth}", drawBackground, isDark, composable)
+    }
 }
 
-internal const val MaxPercentDifference: Double = 0.01
-internal const val PaparazziTheme: String = "android:Theme.MaterialComponent.Light.NoActionBar"
+/**
+ * Generate 2 screenshots for each theme: light and dark
+ */
+internal fun Paparazzi.sparkSnapshotNightMode(
+    name: String? = null,
+    drawBackground: Boolean = true,
+    composable: @Composable () -> Unit,
+) {
+    ThemeVariant.entries.forEach {
+        sparkSnapshot(name.orEmpty() + "_${it.name}", drawBackground, it == ThemeVariant.Dark, composable)
+    }
+}
