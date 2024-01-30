@@ -39,6 +39,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonElevation
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -114,7 +115,9 @@ internal fun BaseSparkButton(
             )
             Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
         }
-        content()
+        ProvideTextStyle(value = SparkTheme.typography.callout) {
+            content()
+        }
         if (icon != null && iconSide == IconSide.END) {
             Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
             Icon(
@@ -159,10 +162,7 @@ internal fun SparkButton(
         isLoading = isLoading,
         interactionSource = interactionSource,
     ) {
-        Text(
-            text = text,
-            style = SparkTheme.typography.callout,
-        )
+        Text(text = text)
     }
 }
 
@@ -197,10 +197,7 @@ internal fun SparkButton(
         isLoading = isLoading,
         interactionSource = interactionSource,
     ) {
-        Text(
-            text = text,
-            style = SparkTheme.typography.callout,
-        )
+        Text(text = text)
     }
 }
 

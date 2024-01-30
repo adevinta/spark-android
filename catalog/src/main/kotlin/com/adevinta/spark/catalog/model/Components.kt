@@ -27,14 +27,25 @@ import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
+import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
+import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.text.TextLinksConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
+import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
+import com.adevinta.spark.catalog.examples.samples.progressbar.ProgressbarExamples
+import com.adevinta.spark.catalog.examples.samples.rating.RatingExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
+import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
+import com.adevinta.spark.catalog.examples.samples.text.TextLinksExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
@@ -47,11 +58,9 @@ import com.adevinta.spark.catalog.util.SparkSourceUrl
 public data class Component(
     val id: Int,
     val name: String,
-    @StringRes
-    val description: Int,
+    @StringRes val description: Int,
     val tintIcon: Boolean = true,
-    @DrawableRes
-    val illustration: Int = R.drawable.illu_component_placeholder,
+    @DrawableRes val illustration: Int = R.drawable.illu_component_placeholder,
     val guidelinesUrl: String,
     val docsUrl: String,
     val sourceUrl: String,
@@ -88,6 +97,17 @@ private val Checkboxes = Component(
     configurator = CheckboxConfigurator,
 )
 
+private val Dialogs = Component(
+    id = nextId(),
+    name = "Dialogs",
+    description = R.string.component_dialog_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/2427e1-modaldialog/b/02a6bc",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.dialog/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/dialog/ModalScaffold.kt",
+    examples = DialogsExamples,
+    configurator = null,
+)
+
 private val IconButtons = Component(
     id = nextId(),
     name = "IconButtons",
@@ -114,6 +134,19 @@ private val IconToggleButtons = Component(
     configurator = IconToggleButtonsConfigurator,
 )
 
+private val Popovers = Component(
+    id = nextId(),
+    name = "Popovers",
+    illustration = R.drawable.illustration_popover,
+    tintIcon = false,
+    description = R.string.component_popovers_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/88a08c-popover/b/904ceb",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.popover/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/popover/Color.kt",
+    examples = PopoverExamples,
+    configurator = PopoverConfigurator,
+)
+
 private val RadioButtons = Component(
     id = nextId(),
     name = "Radio buttons",
@@ -125,6 +158,17 @@ private val RadioButtons = Component(
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/RadioButton.kt",
     examples = RadioButtonExamples,
     configurator = RadioButtonConfigurator,
+)
+
+private val Rating = Component(
+    id = nextId(),
+    name = "Ratings",
+    description = R.string.component_ratingdisplay_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/63e136-rating/b/51f5d8",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.rating/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/rating/RatingDisplay.kt",
+    examples = RatingExamples,
+    configurator = RatingsConfigurator,
 )
 
 private val Switches = Component(
@@ -149,6 +193,45 @@ private val Tabs = Component(
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tab/Tab.kt",
     examples = TabsExamples,
     configurator = TabsConfigurator,
+)
+
+private val Tags = Component(
+    id = nextId(),
+    name = "Tags",
+    description = R.string.component_tag_description,
+    illustration = R.drawable.illu_component_tags,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/295e88-tag/b/86ead2",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.tags/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tags/Tag.kt",
+    examples = TagsExamples,
+    configurator = TagsConfigurator,
+)
+
+private val Progressbars = Component(
+    id = nextId(),
+    name = "Progressbars",
+    description = R.string.component_progressbar_description,
+    illustration = R.drawable.ic_progressbar,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/89544a-progress-bar/b/2873c8",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progressbar/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progressbar/Progressbar.kt",
+    examples = ProgressbarExamples,
+    configurator = ProgressbarConfigurator,
+)
+
+private val TextLinks = Component(
+    id = nextId(),
+    name = "TextLinks",
+    description = R.string.component_textlink_description,
+    illustration = R.drawable.icon_textlink,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/75ed11-textlink/b/403107",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/text/TextLink.kt",
+    examples = TextLinksExamples,
+    configurator = TextLinksConfigurator,
 )
 
 private val TextFields = Component(
@@ -180,10 +263,16 @@ public val Components: List<Component> = listOf(
     Tokens,
     Buttons,
     Checkboxes,
+    Dialogs,
     IconButtons,
     IconToggleButtons,
+    Popovers,
     RadioButtons,
+    Rating,
     Switches,
     Tabs,
+    Tags,
+    TextLinks,
+    Progressbars,
     TextFields,
 )

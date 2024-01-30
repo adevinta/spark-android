@@ -32,9 +32,41 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.components.icons.IconDefaults.intent
+import com.adevinta.spark.icons.Booster
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+
+/**
+ * Outlined tag represent support information
+ * @param modifier The [Modifier] to be applied to the component
+ * @param intent The [TagIntent] color to use
+ * @param leadingIcon The spark icon shown at the start of the tag
+ * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
+ */
+@Composable
+public fun TagOutlined(
+    modifier: Modifier = Modifier,
+    intent: TagIntent = TagIntent.Basic,
+    leadingIcon: SparkIcon? = null,
+    tint: Color? = null,
+    content: @Composable RowScope.() -> Unit,
+) {
+    val colors = TagDefaults.outlinedColors(intent)
+    SparkTag(
+        colors = colors,
+        modifier = modifier,
+        border = BorderStroke(
+            TagDefaults.OutlinedBorderSize,
+            colors.contentColor,
+        ),
+        leadingIcon = leadingIcon,
+        tint = tint,
+        content = content,
+    )
+}
 
 /**
  * Outlined tag represent support information
@@ -97,32 +129,6 @@ public fun TagOutlined(
 }
 
 @Deprecated(
-    "Use TagOutlined with text param instead",
-    ReplaceWith("TagOutlined(text, modifier, intent, leadingIcon, tint)"),
-)
-@Composable
-public fun TagOutlined(
-    modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Basic,
-    leadingIcon: SparkIcon? = null,
-    tint: Color? = null,
-    content: @Composable RowScope.() -> Unit,
-) {
-    val colors = TagDefaults.outlinedColors(intent)
-    BaseSparkTag(
-        colors = colors,
-        modifier = modifier,
-        border = BorderStroke(
-            TagDefaults.OutlinedBorderSize,
-            colors.contentColor,
-        ),
-        leadingIcon = leadingIcon,
-        tint = tint,
-        content = content,
-    )
-}
-
-@Deprecated(
     "Use TagOutlined with neutral intent instead",
     ReplaceWith("TagOutlined(text, modifier, intent, leadingIcon, tint)"),
 )
@@ -178,8 +184,9 @@ internal fun TagOutlinedPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        TagIntent.values().forEach {
-            TagOutlined("Tag ${it.name}", intent = it)
-        }
+        val icon = SparkIcons.Booster
+        TagOutlined("", leadingIcon = icon)
+        TagOutlined("Tag Basic")
+        TagOutlined("Tag Basic", leadingIcon = icon)
     }
 }

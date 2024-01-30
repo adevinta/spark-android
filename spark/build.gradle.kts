@@ -50,9 +50,11 @@ dependencies {
     implementation(libs.accompanist.placeholder)
 
     implementation(libs.androidx.appCompat.resources)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.savedstate)
+    implementation(libs.androidx.window)
 
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
@@ -67,4 +69,8 @@ dependencies {
 
     compileOnly(libs.airbnb.showkase)
     ksp(libs.airbnb.showkase.processor)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.testParameterInjector)
 }

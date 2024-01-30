@@ -403,6 +403,7 @@ private fun BottomSheetScaffoldLayout(
 }
 
 @ExperimentalMaterial3Api
+@Suppress("ktlint:standard:function-naming")
 private fun BottomSheetScaffoldAnchorChangeHandler(
     state: SheetState,
     animateTo: (target: SheetValue, velocity: Float) -> Unit,

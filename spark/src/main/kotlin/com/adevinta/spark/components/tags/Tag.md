@@ -20,11 +20,16 @@ The tags can also have a decorative start icon to better identify the context of
 We don't provide any container for now but we recommend using a [`FlowRow`](https://developer.android.com/jetpack/compose/layouts/flow) to layout it in your screens.
 
 ```kotlin
-FlowRow(modifier = Modifier.padding(8.dp)) {
-    TagFilled("Price: High to Low")
-    TagFilled("Avg rating: 4+")
-    TagFilled("Free breakfast")
-    TagFilled("Free cancellation")
-    TagFilled("£50 pn")
+FlowRow(
+    horizontalArrangement = Arrangement.spacedBy(8.dp),
+    verticalArrangement = Arrangement.spacedBy(8.dp),
+    maxItemsInEachRow = 4,
+) {
+    TagFilled(text = "Tag 1", intent = TagIntent.Main)
+    TagFilled(text = "Tag longer 2", intent = TagIntent.Accent)
+    TagFilled(text = "Tag a bit longer 3", intent = TagIntent.Info)
+    TagTinted(text = "Tag way more longer 4", intent = TagIntent.Main)
+    TagTinted(text = "Tag small 5", intent = TagIntent.Main)
+    TagOutlined(text = "Tag 6", intent = TagIntent.Main)
 }
 ````

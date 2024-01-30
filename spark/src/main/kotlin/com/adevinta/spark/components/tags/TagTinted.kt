@@ -31,9 +31,35 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.icons.Booster
 import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
+
+/**
+ * Tinted tag represent support information like `OutlinedTag`
+ * @param modifier The [Modifier] to be applied to the component
+ * @param intent The [TagIntent] color to use
+ * @param leadingIcon The spark icon shown at the start of the tag
+ * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
+ */
+@Composable
+public fun TagTinted(
+    modifier: Modifier = Modifier,
+    intent: TagIntent = TagIntent.Basic,
+    leadingIcon: SparkIcon? = null,
+    tint: Color? = null,
+    content: @Composable RowScope.() -> Unit,
+) {
+    SparkTag(
+        colors = TagDefaults.tintedColors(intent),
+        modifier = modifier,
+        leadingIcon = leadingIcon,
+        tint = tint,
+        content = content,
+    )
+}
 
 /**
  * Tinted tag represent support information like `OutlinedTag`
@@ -154,11 +180,9 @@ internal fun TagTonalPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        TagIntent.values().forEach { intent ->
-            TagTinted(
-                text = "Tag ${intent.name}",
-                intent = intent,
-            )
-        }
+        val icon = SparkIcons.Booster
+        TagTinted("", leadingIcon = icon)
+        TagTinted("Tag Basic")
+        TagTinted("Tag Basic", leadingIcon = icon)
     }
 }
