@@ -17,3 +17,4 @@ jobs:
         with:
           repo-token: ${{ secrets.PAT_SPARK }}
           pr-title-template: 'chore(deps): bump Gradle Wrapper from %sourceVersion% to %targetVersion%'
+          set-distribution-checksum: false
