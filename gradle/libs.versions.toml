@@ -36,7 +36,6 @@ accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-dra
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
-accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-testharness = { module = "com.google.accompanist:accompanist-testharness", version.ref = "accompanist" }
 
@@ -70,7 +69,9 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 androidx-savedstate = { module = "androidx.savedstate:savedstate-ktx", version.ref = "androidx-savedstate" }
 androidx-window = { module = "androidx.window:window", version.ref = "androidx-window" }
-
+# https://mvnrepository.com/artifact/androidx.test.ext/truth
+androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
+androidx-test-truth = { module = "androidx.test.ext:truth", version = "1.5.0" }
 # https://coil-kt.github.io/coil/
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coilCompose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
@@ -103,6 +104,9 @@ lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "lint" }
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+
+# https://github.com/robolectric/robolectric
+robolectric = { module = "org.robolectric:robolectric", version = "4.11.1" }
 
 slack-lint-compose = { module = "com.slack.lint.compose:compose-lint-checks", version.ref = "slackLint" }
 
