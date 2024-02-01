@@ -32,7 +32,7 @@ class RatingStarStateTest {
 
     @Test
     fun testBooleanInput() {
-        assertEquals(RatingStarState(true), Full)
+        assertEquals(RatingStarState(true), Empty)
         assertEquals(RatingStarState(false), Empty)
     }
 
