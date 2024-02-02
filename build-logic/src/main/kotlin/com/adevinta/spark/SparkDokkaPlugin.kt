@@ -92,7 +92,7 @@ internal class SparkDokkaPlugin : Plugin<Project> {
             sourceLink {
                 val url = "https://github.com/Adevinta/spark-android/tree/main/${project.name}/src/main/kotlin"
                 localDirectory.set(projectDir.resolve("src"))
-                remoteUrl.set(URI(url).toUrl())
+                remoteUrl.set(URI(url).toURL())
                 remoteLineSuffix.set("#L")
             }
         }
