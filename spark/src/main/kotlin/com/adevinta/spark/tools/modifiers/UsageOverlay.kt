@@ -47,7 +47,8 @@ internal fun Modifier.sparkUsageOverlay(overlayColor: Color = Color.Red): Modifi
 
 private class SparkUsageOverlay(
     var overlayColor: Color = Color.Red,
-) : Modifier.Node(), DrawModifierNode,
+) : Modifier.Node(),
+    DrawModifierNode,
     CompositionLocalConsumerModifierNode {
     override fun ContentDrawScope.draw() {
         drawContent()

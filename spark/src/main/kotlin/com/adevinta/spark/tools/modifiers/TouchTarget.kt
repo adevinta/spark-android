@@ -21,19 +21,8 @@
  */
 package com.adevinta.spark.tools.modifiers
 
-import androidx.compose.material3.LocalMinimumTouchTargetEnforcement
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.Measurable
-import androidx.compose.ui.layout.MeasureResult
-import androidx.compose.ui.layout.MeasureScope
-import androidx.compose.ui.node.LayoutModifierNode
-import androidx.compose.ui.node.ModifierNodeElement
-import androidx.compose.ui.platform.InspectorInfo
-import androidx.compose.ui.unit.Constraints
-import androidx.compose.ui.unit.DpSize
-import androidx.compose.ui.unit.dp
-import kotlin.math.roundToInt
 
 /**
  * Reserves at least 48.dp in size to disambiguate touch interactions if the element would measure

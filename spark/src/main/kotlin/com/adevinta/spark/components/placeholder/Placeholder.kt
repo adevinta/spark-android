@@ -21,6 +21,7 @@
  */
 @file:Suppress("ComposeModifierComposed") // These modifiers will be forked so the
 // work will be done when it happens
+
 package com.adevinta.spark.components.placeholder
 
 import androidx.compose.foundation.layout.Arrangement.spacedBy
