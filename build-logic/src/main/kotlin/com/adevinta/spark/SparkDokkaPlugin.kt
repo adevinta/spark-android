@@ -34,7 +34,6 @@ import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 import java.io.File
 import java.net.URI
-import java.net.URL
 import java.time.Year
 
 internal class SparkDokkaPlugin : Plugin<Project> {
@@ -93,7 +92,7 @@ internal class SparkDokkaPlugin : Plugin<Project> {
             sourceLink {
                 val url = "https://github.com/Adevinta/spark-android/tree/main/${project.name}/src/main/kotlin"
                 localDirectory.set(projectDir.resolve("src"))
-                remoteUrl.set(URL(url))
+                remoteUrl.set(URI(url).toUrl())
                 remoteLineSuffix.set("#L")
             }
         }
