@@ -26,9 +26,14 @@ import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
+import androidx.compose.ui.node.DrawModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.node.currentValueOf
+import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.LocalHighlightComponents
@@ -37,14 +42,30 @@ import com.adevinta.spark.LocalHighlightComponents
  * A [Modifier.Element] that adds a draw layer to identify spark components easily.
  */
 @Stable
-internal fun Modifier.sparkUsageOverlay(overlayColor: Color = Color.Red): Modifier = composed {
-    this then if (LocalHighlightComponents.current) {
-        Modifier.drawWithContent {
-            drawContent()
+internal fun Modifier.sparkUsageOverlay(overlayColor: Color = Color.Red): Modifier =
+    this then SparkUsageOverlayElement(overlayColor)
+
+private class SparkUsageOverlay(
+    var overlayColor: Color = Color.Red,
+) : Modifier.Node(), DrawModifierNode,
+    CompositionLocalConsumerModifierNode {
+    override fun ContentDrawScope.draw() {
+        drawContent()
+        if (currentValueOf(LocalHighlightComponents)) {
             drawRect(color = overlayColor, alpha = 0.5f)
         }
-    } else {
-        Modifier
+    }
+}
+
+private class SparkUsageOverlayElement(val overlayColor: Color) : ModifierNodeElement<SparkUsageOverlay>() {
+    override fun create() = SparkUsageOverlay(overlayColor)
+    override fun update(node: SparkUsageOverlay) {
+        node.overlayColor = overlayColor
+    }
+    override fun hashCode() = System.identityHashCode(this)
+    override fun equals(other: Any?) = (other === this)
+    override fun InspectorInfo.inspectableProperties() {
+        name = "Spark Component"
     }
 }
 

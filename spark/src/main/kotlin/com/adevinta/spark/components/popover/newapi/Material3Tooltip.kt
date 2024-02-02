@@ -458,6 +458,7 @@ private fun Modifier.textVerticalPadding(
     }
 }
 
+@Suppress("ComposeModifierComposed") // Fork from M3 Tooltip that will be removed once the api is stable
 private fun Modifier.animateTooltip(
     transition: Transition<Boolean>,
 ): Modifier = composed(

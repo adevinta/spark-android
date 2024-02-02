@@ -19,6 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+@file:Suppress("ComposeModifierComposed") // These modifiers will be forked so the
+// work will be done when it happens
 package com.adevinta.spark.components.placeholder
 
 import androidx.compose.foundation.layout.Arrangement.spacedBy
@@ -49,6 +51,7 @@ import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.material.shimmerHighlightColor
 import com.google.accompanist.placeholder.shimmer
 
+@Suppress("ComposeUnstableReceiver")
 @Composable
 private fun PlaceholderDefaults.sparkColor() = color(
     backgroundColor = SparkTheme.colors.surface,
@@ -56,12 +59,14 @@ private fun PlaceholderDefaults.sparkColor() = color(
     contentAlpha = 0.25f,
 )
 
+@Suppress("ComposeUnstableReceiver")
 @Composable
 private fun PlaceholderHighlight.Companion.sparkFade() = fade(
     highlightColor = PlaceholderDefaults.fadeHighlightColor(alpha = 0.3f),
     animationSpec = PlaceholderDefaults.fadeAnimationSpec,
 )
 
+@Suppress("ComposeUnstableReceiver")
 @Composable
 private fun PlaceholderHighlight.Companion.sparkShimmer() = shimmer(
     highlightColor = PlaceholderDefaults.shimmerHighlightColor(alpha = 0.3f),
@@ -69,7 +74,7 @@ private fun PlaceholderHighlight.Companion.sparkShimmer() = shimmer(
 )
 
 public fun Modifier.defaultPlaceholder(visible: Boolean): Modifier =
-    composed {
+    this then composed {
         placeholder(
             visible = visible,
             highlight = PlaceholderHighlight.sparkFade(),
@@ -78,7 +83,7 @@ public fun Modifier.defaultPlaceholder(visible: Boolean): Modifier =
         )
     }
 
-public fun Modifier.textPlaceholder(visible: Boolean): Modifier = composed {
+public fun Modifier.textPlaceholder(visible: Boolean): Modifier = this then composed {
     placeholder(
         visible = visible,
         highlight = PlaceholderHighlight.sparkFade(),
@@ -90,7 +95,7 @@ public fun Modifier.textPlaceholder(visible: Boolean): Modifier = composed {
 public fun Modifier.illustrationPlaceholder(
     visible: Boolean,
     shape: Shape,
-): Modifier = composed {
+): Modifier = this then composed {
     placeholder(
         visible = visible,
         highlight = PlaceholderHighlight.sparkShimmer(),
