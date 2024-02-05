@@ -157,8 +157,7 @@ private fun ButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val iconsSides = IconSide.entries.toTypedArray()
-            val iconsSidesLabel = iconsSides.map { it.name }
+            val iconsSidesLabel = IconSide.entries.map(IconSide::name)
             SegmentedButton(
                 options = iconsSidesLabel,
                 selectedOption = iconSide.name,
@@ -174,8 +173,7 @@ private fun ButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonStyles = ButtonStyle.entries.toTypedArray()
-            val buttonStylesLabel = buttonStyles.map { it.name }
+            val buttonStylesLabel = ButtonStyle.entries.map(ButtonStyle::name)
             SegmentedButton(
                 options = buttonStylesLabel,
                 selectedOption = style.name,
@@ -192,8 +190,7 @@ private fun ButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonShapes = ButtonShape.values()
-            val buttonShapesLabel = buttonShapes.map { it.name }
+            val buttonShapesLabel = ButtonShape.entries.map(ButtonShape::name)
             SegmentedButton(
                 options = buttonShapesLabel,
                 selectedOption = shape.name,
@@ -238,8 +235,7 @@ private fun ButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val sizes = ButtonSize.entries.toTypedArray()
-            val sizesLabel = sizes.map { it.name }
+            val sizesLabel = ButtonSize.entries.map(ButtonSize::name)
             SegmentedButton(
                 options = sizesLabel,
                 selectedOption = size.name,

@@ -155,6 +155,7 @@ public fun UserAvatar(
 public enum class UserAvatarStyle(public val imageSize: Dp, public val badgeSize: Dp, public val badgeOffset: Dp) {
     SMALL(imageSize = 32.dp, badgeSize = 9.dp, badgeOffset = (-1).dp),
     MEDIUM(imageSize = 40.dp, badgeSize = 9.dp, badgeOffset = (-1).dp),
+    LARGE(imageSize = 64.dp, badgeSize = 12.dp, badgeOffset = (-4).dp),
 }
 
 @Preview(
@@ -167,6 +168,13 @@ internal fun UserAvatarPreview(
 ) {
     PreviewTheme(theme) {
         SparkUserAvatar(
+            style = UserAvatarStyle.LARGE,
+            model = "",
+            isPro = false,
+            isOnline = true,
+            transform = { AsyncImagePainter.State.Empty },
+        )
+        SparkUserAvatar(
             style = UserAvatarStyle.MEDIUM,
             model = "",
             isPro = false,
@@ -178,6 +186,13 @@ internal fun UserAvatarPreview(
             model = "",
             isPro = false,
             isOnline = true,
+            transform = { AsyncImagePainter.State.Empty },
+        )
+        SparkUserAvatar(
+            style = UserAvatarStyle.LARGE,
+            model = "",
+            isPro = true,
+            isOnline = false,
             transform = { AsyncImagePainter.State.Empty },
         )
         SparkUserAvatar(

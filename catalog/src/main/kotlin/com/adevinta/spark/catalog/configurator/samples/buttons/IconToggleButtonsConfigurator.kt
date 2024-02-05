@@ -118,8 +118,7 @@ private fun IconToggleButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonStyles = IconToggleButtonStyle.values()
-            val buttonStylesLabel = buttonStyles.map { it.name }
+            val buttonStylesLabel = IconToggleButtonStyle.entries.map { it.name }
             SegmentedButton(
                 options = buttonStylesLabel,
                 selectedOption = style.name,
@@ -130,7 +129,6 @@ private fun IconToggleButtonSample() {
             )
         }
 
-        val intents = IconButtonIntent.values()
         var expanded by remember { mutableStateOf(false) }
         SelectTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -146,7 +144,7 @@ private fun IconToggleButtonSample() {
                 expanded = false
             },
             dropdownContent = {
-                intents.forEach {
+                IconButtonIntent.entries.forEach {
                     DropdownMenuItem(
                         text = { Text(it.name) },
                         onClick = {
@@ -164,8 +162,7 @@ private fun IconToggleButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonShapes = ButtonShape.values()
-            val buttonShapesLabel = buttonShapes.map { it.name }
+            val buttonShapesLabel = ButtonShape.entries.map { it.name }
             SegmentedButton(
                 options = buttonShapesLabel,
                 selectedOption = shape.name,
@@ -181,8 +178,7 @@ private fun IconToggleButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonSizes = IconButtonSize.values()
-            val buttonSizesLabel = buttonSizes.map { it.name }
+            val buttonSizesLabel = IconButtonSize.entries.map { it.name }
             SegmentedButton(
                 options = buttonSizesLabel,
                 selectedOption = size.name,
