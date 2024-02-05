@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.components.snackbars
 
-import androidx.compose.material3.SnackbarData
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
@@ -70,19 +69,5 @@ public fun SnackbarDefault(
         actionLabel = actionLabel,
         onActionClick = onActionClick,
         content = content,
-    )
-}
-
-@Composable
-public fun SnackbarDefault(
-    data: SnackbarData,
-    modifier: Modifier = Modifier,
-    actionOnNewLine: Boolean = false,
-) {
-    Snackbar(
-        data = data,
-        colors = SnackbarColors.Default,
-        modifier = modifier,
-        actionOnNewLine = actionOnNewLine,
     )
 }

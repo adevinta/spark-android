@@ -321,61 +321,13 @@ public fun SparkSelectTrailingIcon(
     name = "SelectTextField intents",
 )
 @Composable
-internal fun SelectTextFieldIntentPreview(
+private fun SelectTextFieldIntentPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         PreviewTextFields(
             state = null,
             stateMessage = "Helper text",
-        )
-    }
-}
-
-@Preview(
-    group = "TextFields",
-    name = "SelectTextField intents error",
-)
-@Composable
-internal fun SelectTextFieldIntentErrorPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTextFields(
-            state = TextFieldState.Error,
-            stateMessage = "Error text",
-        )
-    }
-}
-
-@Preview(
-    group = "TextFields",
-    name = "SelectTextField intents alert",
-)
-@Composable
-internal fun SelectTextFieldIntentAlertPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTextFields(
-            state = TextFieldState.Alert,
-            stateMessage = "Alert text",
-        )
-    }
-}
-
-@Preview(
-    group = "TextFields",
-    name = "SelectTextField intents success",
-)
-@Composable
-internal fun SelectTextFieldIntentSuccessPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTextFields(
-            state = TextFieldState.Success,
-            stateMessage = "Success text",
         )
     }
 }

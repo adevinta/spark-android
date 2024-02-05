@@ -5,10 +5,7 @@ related content, allowing users to navigate views without leaving the page. They
 least two items and one tab is active at a time. Tabs can be used on full page layouts or in
 components such as modals, cards, or side panels.
 
-|       | Scrollable tabs                                                                                        | Fixed Size Tabs                                                                                       |
-|-------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
-| Light | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_scrollabletabgroup_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_fixedsizetabgroup_light.png) |
-| Dark  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_scrollabletabgroup_dark.png)  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_fixedsizetabgroup_dark.png)  |
+![](../../images/com.adevinta.spark.tab_TabsDocScreenshot_tabsIntentShowcase__light.png)
 
 Most commonly chip contains an `leadingIcon` and/ or the `text`, but you can also provide a
 custom `trailingContent`. It is mandatory to provide `contentDescription` for `icon` only tabs.
@@ -21,6 +18,8 @@ The tab can have one of the [TabSize](TabDefaults.kt), that will affect the Tabs
 - `Small`
 - `Medium` (default size)
 
+![](../../images/com.adevinta.spark.tab_TabsDocScreenshot_tabsSizeShowcase.png)
+
 The size of the icon is the same as the size of the text. For icon-only tabs the icon size
 is `IconSize.Small`.
 
@@ -30,23 +29,9 @@ The tabs accept 2 colors [TabIntent](TabDefaults.kt)s:
 - Main
 - Support
 
-Part:
-
-| Style    | Light                                                                                                        | Dark                                                                                                        |
-|----------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| Outlined | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_part_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_part_dark.png) |
-| Filled   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_part_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_part_dark.png)   |
-| Tinted   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_part_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_part_dark.png)   |
-| Dashed   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_part_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_part_dark.png)   |
-
-Pro:
-
-| Style    | Light                                                                                                       | Dark                                                                                                       |
-|----------|-------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| Outlined | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_pro_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_pro_dark.png) |
-| Filled   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_pro_dark.png)   |
-| Tinted   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_pro_dark.png)   |
-| Dashed   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_pro_dark.png)   |
+| Light                                                                                    | Dark                                                                                                   |
+|------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.tab_TabsDocScreenshot_tabsIntentShowcase__light.png) | ![](../../images/com.adevinta.spark.tab_TabsDocScreenshot_tabsIntentShowcase__dark.png) |
 
 ### TabGroup
 
