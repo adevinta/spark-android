@@ -25,29 +25,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.SparkTheme
 
-public sealed class SnackbarColors {
+public enum class SnackbarColors {
 
-    @get:Composable
-    public abstract val baseColor: Color
-
-    public object Default : SnackbarColors() {
+    Default {
         override val baseColor: Color
             @Composable get() {
                 return SparkTheme.colors.supportContainer
             }
-    }
+    },
 
-    public object Error : SnackbarColors() {
+    Error {
         override val baseColor: Color
             @Composable get() {
                 return SparkTheme.colors.errorContainer
             }
-    }
+    },
 
-    public object Valid : SnackbarColors() {
+    Valid {
         override val baseColor: Color
             @Composable get() {
                 return SparkTheme.colors.successContainer
             }
-    }
+    }, ;
+
+    @get:Composable
+    public abstract val baseColor: Color
 }
