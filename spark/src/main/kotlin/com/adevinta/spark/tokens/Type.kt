@@ -26,6 +26,7 @@ import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +43,10 @@ internal val display1Type = TextStyle(
     fontSize = 40.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 56.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val display2Type = TextStyle(
@@ -49,6 +54,10 @@ internal val display2Type = TextStyle(
     fontSize = 32.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 44.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val display3Type = TextStyle(
@@ -56,6 +65,10 @@ internal val display3Type = TextStyle(
     fontSize = 24.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 32.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val headline1Type = TextStyle(
@@ -63,6 +76,10 @@ internal val headline1Type = TextStyle(
     fontSize = 20.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 28.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val headline2Type = TextStyle(
@@ -70,6 +87,10 @@ internal val headline2Type = TextStyle(
     fontSize = 18.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 24.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val subheadType = TextStyle(
@@ -77,6 +98,10 @@ internal val subheadType = TextStyle(
     fontSize = 16.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 24.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val body1Type = TextStyle(
@@ -84,6 +109,10 @@ internal val body1Type = TextStyle(
     fontSize = 16.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 24.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val body2Type = TextStyle(
@@ -91,6 +120,10 @@ internal val body2Type = TextStyle(
     fontSize = 14.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 20.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val captionType = TextStyle(
@@ -98,6 +131,10 @@ internal val captionType = TextStyle(
     fontSize = 12.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 16.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val smallType = TextStyle(
@@ -105,6 +142,10 @@ internal val smallType = TextStyle(
     fontSize = 10.sp,
     fontWeight = FontWeight.Normal,
     lineHeight = 14.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 internal val calloutType = TextStyle(
@@ -112,6 +153,10 @@ internal val calloutType = TextStyle(
     fontSize = 16.sp,
     fontWeight = FontWeight.Bold,
     lineHeight = 24.sp,
+    platformStyle = PlatformTextStyle(
+        includeFontPadding = false,
+    ),
+
 )
 
 public fun sparkTypography(
