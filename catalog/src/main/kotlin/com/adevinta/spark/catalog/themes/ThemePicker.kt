@@ -84,7 +84,7 @@ public fun ThemePicker(
                     style = SparkTheme.typography.body2.highlight,
                     modifier = Modifier.padding(vertical = 8.dp),
                 )
-                val themeModes = ThemeMode.values()
+                val themeModes = ThemeMode.entries.toTypedArray()
                 val themeModesLabel = themeModes.map { it.name }
                 SegmentedButton(
                     options = themeModesLabel,
@@ -104,7 +104,7 @@ public fun ThemePicker(
                     style = SparkTheme.typography.body2.highlight,
                     modifier = Modifier.padding(vertical = 8.dp),
                 )
-                val colorModes = ColorMode.values()
+                val colorModes = ColorMode.entries.toTypedArray()
                 val colorModesLabel = colorModes.map { it.name }
                 SegmentedButton(
                     options = colorModesLabel,
@@ -137,7 +137,7 @@ public fun ThemePicker(
                             expanded = !expanded
                         },
                     ) {
-                        BrandMode.values().forEach { brand ->
+                        BrandMode.entries.forEach { brand ->
                             DropdownMenuItem(
                                 text = {
                                     Text(text = brand.name)
@@ -175,7 +175,7 @@ public fun ThemePicker(
                     style = SparkTheme.typography.body2.highlight,
                     modifier = Modifier.padding(vertical = 8.dp),
                 )
-                val textDirections = TextDirection.values()
+                val textDirections = TextDirection.entries.toTypedArray()
                 val textDirectionsLabel = textDirections.map { it.name }
                 SegmentedButton(
                     options = textDirectionsLabel,
@@ -195,7 +195,7 @@ public fun ThemePicker(
                     style = SparkTheme.typography.body2.highlight,
                     modifier = Modifier.padding(vertical = 8.dp),
                 )
-                val fontScaleModes = FontScaleMode.values()
+                val fontScaleModes = FontScaleMode.entries.toTypedArray()
                 val colorModesLabel = fontScaleModes.map { it.name }
                 SegmentedButton(
                     options = colorModesLabel,

@@ -28,14 +28,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
+import com.adevinta.spark.catalog.datastore.theme.ThemePropertiesHandler
+import com.adevinta.spark.catalog.datastore.theme.collectAsStateWithDefault
 import com.adevinta.spark.catalog.model.Components
 import com.adevinta.spark.catalog.showkase.ShowkaseBrowserScreenMetadata
-import com.adevinta.spark.catalog.themes.Theme
-import com.adevinta.spark.catalog.themes.ThemeSaver
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.airbnb.android.showkase.models.ShowkaseProvider
+import kotlinx.coroutines.launch
 
 public class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,9 +45,13 @@ public class MainActivity : AppCompatActivity() {
         // This also sets up the initial system bar style based on the platform theme
         enableEdgeToEdge()
         setContent {
+            val coroutineScope = rememberCoroutineScope()
             val groupedComponentsList = getShowkaseProviderElements()
             val showkaseBrowserScreenMetadata = remember { mutableStateOf(ShowkaseBrowserScreenMetadata()) }
-            var theme by rememberSaveable(stateSaver = ThemeSaver) { mutableStateOf(Theme()) }
+            val propertiesHandler = ThemePropertiesHandler(context = this@MainActivity)
+            val theme by propertiesHandler
+                .properties
+                .collectAsStateWithDefault()
 
             if (groupedComponentsList.isNotEmpty()) {
                 CatalogApp(
@@ -55,7 +59,9 @@ public class MainActivity : AppCompatActivity() {
                     components = Components,
                     groupedComponentMap = groupedComponentsList.groupBy { it.group },
                     showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
-                    onThemeChange = { theme = it },
+                    onThemeChange = {
+                        coroutineScope.launch { propertiesHandler.updateProperties(it) }
+                    },
                 )
             }
         }

@@ -21,14 +21,9 @@
  */
 package com.adevinta.spark.icons
 
-import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_6_PRO
-import app.cash.paparazzi.Paparazzi
-import com.adevinta.spark.MaxPercentDifference
-import com.adevinta.spark.PaparazziTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
-import com.adevinta.spark.patchedEnvironment
-import com.android.ide.common.rendering.api.SessionParams.RenderingMode.SHRINK
+import com.adevinta.spark.paparazziRule
 import com.google.testing.junit.testparameterinjector.TestParameter
 import com.google.testing.junit.testparameterinjector.TestParameter.TestParameterValuesProvider
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
@@ -40,13 +35,7 @@ import org.junit.runner.RunWith
 internal class IconsScreenshot {
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        maxPercentDifference = MaxPercentDifference,
-        theme = PaparazziTheme,
-        renderingMode = SHRINK,
-        deviceConfig = PIXEL_6_PRO,
-        environment = patchedEnvironment(),
-    )
+    val paparazzi = paparazziRule()
 
     internal object SparkIconProvider : TestParameterValuesProvider {
         override fun provideValues() = Class.forName("com.adevinta.spark.icons.SparkIconsKt")

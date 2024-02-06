@@ -70,6 +70,7 @@ public val CheckboxConfigurator: Configurator = Configurator(
 private fun CheckboxSample() {
     val scrollState = rememberScrollState()
     val focusManager = LocalFocusManager.current
+
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.verticalScroll(scrollState),
@@ -112,10 +113,9 @@ private fun CheckboxSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val states = ToggleableState.values()
-            val contentSidesLabel = states.map { it.name }
+            val toggleStateLabel = ToggleableState.entries.map(ToggleableState::name)
             SegmentedButton(
-                options = contentSidesLabel,
+                options = toggleStateLabel,
                 selectedOption = state.name,
                 onOptionSelect = {
                     state = ToggleableState.valueOf(it)
@@ -126,7 +126,6 @@ private fun CheckboxSample() {
                     .height(48.dp),
             )
         }
-        val intents = ToggleIntent.values()
         var expanded by remember { mutableStateOf(false) }
         SelectTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -138,11 +137,11 @@ private fun CheckboxSample() {
             onExpandedChange = { expanded = !expanded },
             onDismissRequest = { expanded = false },
             dropdownContent = {
-                intents.forEach {
+                ToggleIntent.entries.forEach { availableIntent ->
                     DropdownMenuItem(
-                        text = { Text(it.name) },
+                        text = { Text(intent.name) },
                         onClick = {
-                            intent = it
+                            intent = availableIntent
                             expanded = false
                         },
                     )
@@ -155,8 +154,7 @@ private fun CheckboxSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val contentSides = ContentSide.values()
-            val contentSidesLabel = contentSides.map { it.name }
+            val contentSidesLabel = ContentSide.entries.map(ContentSide::name)
             SegmentedButton(
                 options = contentSidesLabel,
                 selectedOption = contentSide.name,

@@ -127,8 +127,7 @@ private fun IconButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonStyles = IconButtonStyle.values()
-            val buttonStylesLabel = buttonStyles.map { it.name }
+            val buttonStylesLabel = IconButtonStyle.entries.map(IconButtonStyle::name)
             SegmentedButton(
                 options = buttonStylesLabel,
                 selectedOption = style.name,
@@ -173,8 +172,7 @@ private fun IconButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonShapes = ButtonShape.values()
-            val buttonShapesLabel = buttonShapes.map { it.name }
+            val buttonShapesLabel = ButtonShape.entries.map(ButtonShape::name)
             SegmentedButton(
                 options = buttonShapesLabel,
                 selectedOption = shape.name,
@@ -190,8 +188,7 @@ private fun IconButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val buttonSizes = IconButtonSize.values()
-            val buttonSizesLabel = buttonSizes.map { it.name }
+            val buttonSizesLabel = IconButtonSize.entries.map(IconButtonSize::name)
             SegmentedButton(
                 options = buttonSizesLabel,
                 selectedOption = size.name,
