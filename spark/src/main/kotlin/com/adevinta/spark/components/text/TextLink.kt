@@ -162,7 +162,7 @@ public fun TextLinkButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Danger,
+    intent: ButtonIntent = ButtonIntent.Basic,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
