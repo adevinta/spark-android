@@ -30,6 +30,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
@@ -96,10 +97,10 @@ internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotli
     }
     tasks.withType<KotlinCompile>().configureEach {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget = JvmTarget.JVM_11
             // kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
-            this.allWarningsAsErrors.set(allWarningsAsErrors)
-            explicitApiMode.set(ExplicitApiMode.Strict)
+            this.allWarningsAsErrors = allWarningsAsErrors
+            explicitApiMode = ExplicitApiMode.Strict
         }
     }
 }
