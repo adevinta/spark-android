@@ -444,6 +444,7 @@ private fun Scrim(
             targetValue = if (visible) 1f else 0f,
             animationSpec = TweenSpec(),
         )
+
         @Suppress("PrivateResource")
         val closeSheet = resources().getString(androidx.compose.ui.R.string.close_sheet)
         val dismissModifier = if (visible) {
