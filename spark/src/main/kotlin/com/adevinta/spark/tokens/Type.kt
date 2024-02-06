@@ -395,7 +395,7 @@ public val TextStyle.highlight: TextStyle
     name = "Spark Typography",
 )
 @Composable
-internal fun TextPreview(
+private fun TextPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
