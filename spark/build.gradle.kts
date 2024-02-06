@@ -32,6 +32,10 @@ android {
     namespace = "com.adevinta.spark"
     resourcePrefix = "spark_"
 
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
     testOptions {
         unitTests.isIncludeAndroidResources = true
         unitTests.isReturnDefaultValues = true
@@ -52,7 +56,6 @@ dependencies {
     api(projects.sparkIcons)
 
     implementation(libs.accompanist.drawablepainter)
-    implementation(libs.accompanist.placeholder)
 
     implementation(libs.androidx.appCompat.resources)
     implementation(libs.androidx.activity.compose)
@@ -77,8 +80,17 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
+    testImplementation(libs.androidx.test.truth)
+    testImplementation(libs.androidx.test.runner)
     testImplementation(libs.testParameterInjector)
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.compose.ui.test)
     testImplementation(libs.androidx.compose.ui.testManifest)
+
+    androidTestImplementation(libs.junit)
+    androidTestImplementation(libs.kotlin.test)
+    androidTestImplementation(libs.androidx.test.truth)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.compose.ui.test)
+    androidTestImplementation(libs.androidx.compose.ui.testManifest)
 }
