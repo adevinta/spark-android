@@ -113,12 +113,12 @@ public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
     },
     restore = { map ->
         Theme(
-            themeMode = ThemeMode.values()[map.getValue(ThemeModeKey)],
-            colorMode = ColorMode.values()[map.getValue(ColorModeKey)],
-            brandMode = BrandMode.values()[map.getValue(BrandModeKey)],
-            userMode = UserMode.values()[map.getValue(UserModeKey)],
+            themeMode = ThemeMode.entries[map.getValue(ThemeModeKey)],
+            colorMode = ColorMode.entries[map.getValue(ColorModeKey)],
+            brandMode = BrandMode.entries[map.getValue(BrandModeKey)],
+            userMode = UserMode.entries[map.getValue(UserModeKey)],
             fontScale = map.getValue(FontScaleKey).toFloat(),
-            textDirection = TextDirection.values()[map.getValue(TextDirectionKey)],
+            textDirection = TextDirection.entries[map.getValue(TextDirectionKey)],
         )
     },
 )

@@ -172,24 +172,23 @@ public fun Snackbar(
 public fun Snackbar(
     data: SnackbarData,
     modifier: Modifier = Modifier,
-    colors: SnackbarColors = SnackbarColors.Default,
     actionOnNewLine: Boolean = false,
 ) {
     val visuals = data.visuals
-    val brikkeVisuals = data.visuals as? SnackbarSparkVisuals
+    val sparkVisuals = data.visuals as? SnackbarSparkVisuals
 
-    val iconComposable: (@Composable (iconModifier: Modifier) -> Unit)? = brikkeVisuals?.icon?.let { icon ->
+    val iconComposable: (@Composable (iconModifier: Modifier) -> Unit)? = sparkVisuals?.icon?.let { icon ->
         @Composable {
             Icon(icon, modifier = it, contentDescription = null)
         }
     }
 
     SparkSnackbar(
-        colors = colors,
+        colors = sparkVisuals?.colors ?: SnackbarColors.Default,
         modifier = modifier,
         actionOnNewLine = actionOnNewLine,
         icon = iconComposable,
-        title = brikkeVisuals?.title,
+        title = sparkVisuals?.title,
         actionLabel = visuals.actionLabel,
         onActionClick = { data.performAction() },
     ) { Text(visuals.message) }

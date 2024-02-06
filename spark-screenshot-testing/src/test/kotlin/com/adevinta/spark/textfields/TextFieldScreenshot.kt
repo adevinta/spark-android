@@ -23,130 +23,202 @@ package com.adevinta.spark.textfields
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import app.cash.paparazzi.Paparazzi
-import com.adevinta.spark.MaxPercentDifference
-import com.adevinta.spark.PaparazziTheme
+import com.adevinta.spark.DefaultTestDevices
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.textfields.AddonScope
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.icons.Check
-import com.adevinta.spark.icons.EyeOffFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.patchedEnvironment
+import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshot
-import com.android.ide.common.rendering.api.SessionParams
-import com.google.testing.junit.testparameterinjector.TestParameterInjector
-import org.junit.Ignore
+import com.android.ide.common.rendering.api.SessionParams.RenderingMode.SHRINK
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(TestParameterInjector::class)
 internal class TextFieldScreenshot {
 
-    private val values: List<String> = listOf("", stubShortBody, stubBody)
+    private val icons: List<SparkIcon?> = listOf(SparkIcons.Check, null)
 
-    private val leadingIcons: List<SparkIcon?> = listOf(SparkIcons.Check, null)
-
-    private val trailingIcons: List<SparkIcon?> = listOf(SparkIcons.EyeOffFill, null)
-
-    private val enableds: List<Boolean> = listOf(true, false)
     private val helpers: List<String?> = listOf(null, stubBody)
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        maxPercentDifference = MaxPercentDifference,
-        theme = PaparazziTheme,
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = false,
-        environment = patchedEnvironment(),
+    val paparazzi = paparazziRule(
+        deviceConfig = DefaultTestDevices.Tablet,
+        renderingMode = SHRINK,
     )
 
+    @OptIn(ExperimentalLayoutApi::class)
     @Test
-    @Ignore("This needs to be re-worked to avoid generating 48 PNGs that are almost identical.")
-    fun test() {
-        values.forEach { value ->
-            leadingIcons.forEach { leadingIcon ->
-                trailingIcons.forEach { trailingIcon ->
-                    enableds.forEach { enabled ->
-                        helpers.forEach { helper ->
-                            paparazzi.sparkSnapshot(
-                                name = "_value.${value.count()}" +
-                                    leadingIcon?.let { "_leadingIcon" }.orEmpty() +
-                                    trailingIcon?.let { "_trailingIcon" }.orEmpty() +
-                                    "_enabled".takeIf { enabled }.orEmpty() +
-                                    helper?.let { "_helper.${helper.count()}" }.orEmpty(),
-                            ) {
-                                val leadingContent: (@Composable AddonScope.() -> Unit)? = leadingIcon?.let {
-                                    @Composable {
-                                        Icon(it, contentDescription = null)
-                                    }
-                                }
-                                val trailingContent: (@Composable AddonScope.() -> Unit)? = trailingIcon?.let {
-                                    @Composable {
-                                        Icon(it, contentDescription = null)
-                                    }
-                                }
-                                Column(
-                                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                                ) {
-                                    TextField(
-                                        value = value,
-                                        onValueChange = {},
-                                        label = "Label",
-                                        leadingContent = leadingContent,
-                                        trailingContent = trailingContent,
-                                        required = true,
-                                        enabled = enabled,
-                                        stateMessage = "short state message for textfield",
-                                        helper = helper,
-                                    )
-                                    TextField(
-                                        value = value,
-                                        onValueChange = {},
-                                        label = "Label",
-                                        leadingContent = leadingContent,
-                                        trailingContent = trailingContent,
-                                        state = TextFieldState.Error,
-                                        required = true,
-                                        enabled = enabled,
-                                        stateMessage = "short state message for textfield",
-                                        helper = helper,
-                                    )
-                                    TextField(
-                                        value = value,
-                                        onValueChange = {},
-                                        label = "Label",
-                                        leadingContent = leadingContent,
-                                        trailingContent = trailingContent,
-                                        state = TextFieldState.Alert,
-                                        required = true,
-                                        enabled = enabled,
-                                        stateMessage = "short state message for textfield",
-                                        helper = helper,
-                                    )
-                                    TextField(
-                                        value = value,
-                                        onValueChange = {},
-                                        label = "Label",
-                                        leadingContent = leadingContent,
-                                        trailingContent = trailingContent,
-                                        state = TextFieldState.Success,
-                                        required = true,
-                                        enabled = enabled,
-                                        stateMessage = "short state message for textfield",
-                                        helper = helper,
-                                    )
-                                }
-                            }
-                        }
+    fun bigValue() {
+        paparazzi.sparkSnapshot {
+            FlowColumn(
+                modifier = Modifier.padding(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                icons.forEach { icon ->
+                    helpers.forEach { helper ->
+                        TextFields(
+                            modifier = Modifier.widthIn(max = 400.dp),
+                            icon = icon,
+                            value = stubBody,
+                            enabled = true,
+                            helper = helper,
+                        )
                     }
                 }
             }
+        }
+    }
+
+    @OptIn(ExperimentalLayoutApi::class)
+    @Test
+    fun smallValue() {
+        paparazzi.sparkSnapshot {
+            FlowColumn(
+                modifier = Modifier.padding(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                icons.forEach { icon ->
+                    helpers.forEach { helper ->
+                        TextFields(
+                            icon = icon,
+                            value = stubShortBody,
+                            enabled = true,
+                            helper = helper,
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalLayoutApi::class)
+    @Test
+    fun enabled() {
+        paparazzi.sparkSnapshot {
+            FlowColumn(
+                modifier = Modifier.padding(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                icons.forEach { icon ->
+                    helpers.forEach { helper ->
+                        TextFields(
+                            icon = icon,
+                            enabled = true,
+                            helper = helper,
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalLayoutApi::class)
+    @Test
+    fun disabled() {
+        paparazzi.sparkSnapshot {
+            FlowColumn(
+                modifier = Modifier.padding(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                icons.forEach { icon ->
+                    helpers.forEach { helper ->
+                        TextFields(
+                            icon = icon,
+                            enabled = false,
+                            helper = helper,
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun TextFields(
+        modifier: Modifier = Modifier,
+        icon: SparkIcon?,
+        value: String = "",
+        enabled: Boolean,
+        helper: String?,
+    ) {
+        val leadingContent: (@Composable AddonScope.() -> Unit)? = icon?.let {
+            @Composable {
+                Icon(icon, contentDescription = null)
+            }
+        }
+        val trailingContent: (@Composable AddonScope.() -> Unit)? = icon?.let {
+            @Composable {
+                Icon(icon, contentDescription = null)
+            }
+        }
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            TextField(
+                modifier = modifier,
+                value = value,
+                onValueChange = {},
+                label = "Label",
+                leadingContent = leadingContent,
+                trailingContent = trailingContent,
+                required = true,
+                enabled = enabled,
+                stateMessage = "short state message for textfield",
+                helper = helper,
+            )
+            TextField(
+                modifier = modifier,
+                value = value,
+                onValueChange = {},
+                label = "Label",
+                leadingContent = leadingContent,
+                trailingContent = trailingContent,
+                state = TextFieldState.Error,
+                required = true,
+                enabled = enabled,
+                stateMessage = "short state message for textfield",
+                helper = helper,
+            )
+            TextField(
+                modifier = modifier,
+                value = value,
+                onValueChange = {},
+                label = "Label",
+                leadingContent = leadingContent,
+                trailingContent = trailingContent,
+                state = TextFieldState.Alert,
+                required = true,
+                enabled = enabled,
+                stateMessage = "short state message for textfield",
+                helper = helper,
+            )
+            TextField(
+                modifier = modifier,
+                value = value,
+                onValueChange = {},
+                label = "Label",
+                leadingContent = leadingContent,
+                trailingContent = trailingContent,
+                state = TextFieldState.Success,
+                required = true,
+                enabled = enabled,
+                stateMessage = "short state message for textfield",
+                helper = helper,
+            )
         }
     }
 
@@ -155,16 +227,4 @@ internal class TextFieldScreenshot {
         private const val stubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
             "pulvinar eu nulla sit amet, iaculis interdum."
     }
-}
-
-public class LeadingIcon(public val icon: SparkIcon?) {
-    override fun toString(): String = icon?.let { "_leadingIcon" }.orEmpty()
-}
-
-public class TrailingIcon(public val icon: SparkIcon?) {
-    override fun toString(): String = icon?.let { "_trailingIcon" }.orEmpty()
-}
-
-public class StringValue(public val value: String?) {
-    override fun toString(): String = value?.let { "_string.${value.count()}" }.orEmpty()
 }

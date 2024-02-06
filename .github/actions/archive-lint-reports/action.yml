@@ -14,24 +14,24 @@ runs:
   steps:
     - name: 'Archive Lint HTML report'
       if: inputs.html != ''
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: lint-html
         path: ${{ inputs.html }}
     - name: 'Archive Lint SARIF report'
       if: inputs.sarif != ''
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: lint-sarif
         path: ${{ inputs.sarif }}
     - name: 'Archive Lint XML report'
       if: inputs.xml != ''
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: lint-xml
         path: ${{ inputs.xml }}
     - name: 'Analyse Lint SARIF report'
       if: inputs.analysis != ''
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: ${{ inputs.analysis }}

@@ -1,25 +1,27 @@
 [versions]
 accompanist = "0.30.1"
-android-gradlePlugin = "8.2.1"
+android-gradlePlugin = "8.2.2"
 androidx-activity = "1.8.2"
 androidx-appCompat = "1.6.1"
 androidx-compose-bom = "2023.10.01"
-androidx-compose-compiler = "1.5.4"
-androidx-lifecycle = "2.6.2"
+androidx-compose-compiler = "1.5.8"
+androidx-lifecycle = "2.7.0"
 androidx-navigation = "2.7.6"
 androidx-savedstate = "1.2.1"
 androidx-core = "1.12.0"
 androidx-window = "1.2.0"
 coil = "2.5.0"
 compileSdk = "34"
-dependencyGuard = "0.4.3"
+datastore = "1.0.0"
+dependencyGuard = "0.5.0"
 dokka = "1.9.10"
 junit = "4.13.2"
-kotlin = "1.9.20"
+kotlin = "1.9.22"
 kotlinx-coroutines = "1.7.3"
 kotlinx-collections-immutable = "0.3.7"
-ksp = "1.9.20-1.0.14"
-lint = "31.2.1"
+kotlinx-serialization-json = "1.6.2"
+ksp = "1.9.22-1.0.17"
+lint = "31.2.2"
 minCompileSdk = "24"
 paparazzi = "1.3.1"
 showkase = "1.0.2"
@@ -34,7 +36,6 @@ accompanist-drawablepainter = { module = "com.google.accompanist:accompanist-dra
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
-accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-testharness = { module = "com.google.accompanist:accompanist-testharness", version.ref = "accompanist" }
 
@@ -68,10 +69,15 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 androidx-savedstate = { module = "androidx.savedstate:savedstate-ktx", version.ref = "androidx-savedstate" }
 androidx-window = { module = "androidx.window:window", version.ref = "androidx-window" }
-
+# https://mvnrepository.com/artifact/androidx.test.ext/truth
+androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
+androidx-test-truth = { module = "androidx.test.ext:truth", version = "1.5.0" }
 # https://coil-kt.github.io/coil/
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 coilCompose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+
+# https://developer.android.com/topic/libraries/architecture/datastore
+androidx-datastore = { module = "androidx.datastore:datastore" , version.ref = "datastore" }
 
 dokka-android-documentation-plugin = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
@@ -92,11 +98,15 @@ kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 
 lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }
 lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "lint" }
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
+
+# https://github.com/robolectric/robolectric
+robolectric = { module = "org.robolectric:robolectric", version = "4.11.1" }
 
 slack-lint-compose = { module = "com.slack.lint.compose:compose-lint-checks", version.ref = "slackLint" }
 
@@ -115,3 +125,4 @@ dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

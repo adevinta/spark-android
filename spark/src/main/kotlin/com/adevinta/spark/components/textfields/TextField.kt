@@ -256,54 +256,6 @@ private fun TextFieldIntentPreview(
     }
 }
 
-@Preview(
-    group = "TextFields",
-    name = "TextField intents error",
-)
-@Composable
-private fun TextFieldIntentErrorPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTextFields(
-            state = TextFieldState.Error,
-            stateMessage = "Error text",
-        )
-    }
-}
-
-@Preview(
-    group = "TextFields",
-    name = "TextField intents alert",
-)
-@Composable
-private fun TextFieldIntentAlertPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTextFields(
-            state = TextFieldState.Alert,
-            stateMessage = "Alert text",
-        )
-    }
-}
-
-@Preview(
-    group = "TextFields",
-    name = "TextField intents success",
-)
-@Composable
-private fun TextFieldIntentSuccessPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTextFields(
-            state = TextFieldState.Success,
-            stateMessage = "Success text",
-        )
-    }
-}
-
 @Composable
 private fun ColumnScope.PreviewTextFields(
     state: TextFieldState?,

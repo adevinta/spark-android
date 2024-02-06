@@ -69,6 +69,7 @@ public val RadioButtonConfigurator: Configurator = Configurator(
 private fun RadioButtonSample() {
     val scrollState = rememberScrollState()
     val focusManager = LocalFocusManager.current
+
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier.verticalScroll(scrollState),
@@ -79,6 +80,7 @@ private fun RadioButtonSample() {
         var selected by remember { mutableStateOf(false) }
         var intent by remember { mutableStateOf(ToggleIntent.Main) }
         val onClick = { selected = !selected }
+
         ConfigedRadioButton(
             label = label,
             onClick = onClick,
@@ -99,7 +101,6 @@ private fun RadioButtonSample() {
                 modifier = Modifier.fillMaxWidth(),
             )
         }
-        val intents = ToggleIntent.values()
         var expanded by remember { mutableStateOf(false) }
         SelectTextField(
             modifier = Modifier.fillMaxWidth(),
@@ -111,7 +112,7 @@ private fun RadioButtonSample() {
             onExpandedChange = { expanded = !expanded },
             onDismissRequest = { expanded = false },
             dropdownContent = {
-                intents.forEach {
+                ToggleIntent.entries.forEach {
                     DropdownMenuItem(
                         text = { Text(it.name) },
                         onClick = {
@@ -128,8 +129,7 @@ private fun RadioButtonSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            val contentSides = ContentSide.values()
-            val contentSidesLabel = contentSides.map { it.name }
+            val contentSidesLabel = ContentSide.entries.map(ContentSide::name)
             SegmentedButton(
                 options = contentSidesLabel,
                 selectedOption = contentSide.name,

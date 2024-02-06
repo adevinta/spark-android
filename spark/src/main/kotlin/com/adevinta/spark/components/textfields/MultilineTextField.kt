@@ -304,61 +304,13 @@ public fun MultilineTextField(
     name = "MultilineTextField intents",
 )
 @Composable
-internal fun MultilineTextFieldIntentPreview(
+private fun MultilineTextFieldIntentPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
         PreviewTextFields(
             state = null,
             stateMessage = "Helper text",
-        )
-    }
-}
-
-@Preview(
-    group = "TextFields",
-    name = "MultilineTextField intents error",
-)
-@Composable
-internal fun MultilineTextFieldIntentErrorPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTextFields(
-            state = TextFieldState.Error,
-            stateMessage = "Error text",
-        )
-    }
-}
-
-@Preview(
-    group = "TextFields",
-    name = "MultilineTextField intents alert",
-)
-@Composable
-internal fun MultilineTextFieldIntentAlertPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTextFields(
-            state = TextFieldState.Alert,
-            stateMessage = "Alert text",
-        )
-    }
-}
-
-@Preview(
-    group = "TextFields",
-    name = "MultilineTextField intents success",
-)
-@Composable
-internal fun MultilineTextFieldIntentSuccessPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTextFields(
-            state = TextFieldState.Success,
-            stateMessage = "Success text",
         )
     }
 }

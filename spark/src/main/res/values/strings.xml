@@ -50,7 +50,7 @@
     </plurals>
 
     <string name="spark_annotatedStringResource_test"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for text on</p> <i><annotation color="main">Android</annotation></i></string>
-    <string name="spark_annotatedStringResource_test_args">Hello, <b><annotation variable="who" typography="large" color="main">who</annotation></b>!</string>
+    <string name="spark_annotatedStringResource_test_args">Hello, <b><annotation color="main" typography="large" variable="who">who</annotation></b>!</string>
 
     <!--Rating-->
     <string name="spark_textfield_content_description">Mandatory</string>

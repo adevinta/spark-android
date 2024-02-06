@@ -32,10 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
-import com.adevinta.spark.MaxPercentDifference
-import com.adevinta.spark.PaparazziTheme
+import com.adevinta.spark.DefaultTestDevices
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.tags.TagFilled
@@ -46,6 +43,7 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.FireFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshot
 import com.adevinta.spark.tags.TagsScreenshot.Style.Filled
 import com.adevinta.spark.tags.TagsScreenshot.Style.Outlined
@@ -54,7 +52,7 @@ import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
 import com.adevinta.spark.tools.preview.ThemeVariant
 import com.adevinta.spark.tools.preview.ThemeVariant.Light
-import com.android.ide.common.rendering.api.SessionParams
+import com.android.ide.common.rendering.api.SessionParams.RenderingMode.V_SCROLL
 import org.junit.Rule
 import org.junit.Test
 
@@ -70,15 +68,9 @@ internal class TagsScreenshot {
     }
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        maxPercentDifference = MaxPercentDifference,
-        theme = PaparazziTheme,
-        renderingMode = SessionParams.RenderingMode.V_SCROLL,
-        deviceConfig = DeviceConfig.PIXEL_C.copy(
-            softButtons = false,
-            locale = "fr-rFR",
-        ),
-        showSystemUi = true,
+    val paparazzi = paparazziRule(
+        deviceConfig = DefaultTestDevices.Tablet,
+        renderingMode = V_SCROLL,
     )
 
     @Test

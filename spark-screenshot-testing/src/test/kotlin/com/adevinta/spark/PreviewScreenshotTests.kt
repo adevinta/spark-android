@@ -22,10 +22,8 @@
 package com.adevinta.spark
 
 import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
 import com.airbnb.android.showkase.models.Showkase
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
-import com.android.ide.common.rendering.api.SessionParams
 import org.junit.Rule
 import org.junit.Test
 
@@ -43,13 +41,7 @@ internal class PreviewScreenshotTests {
     }
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        maxPercentDifference = MaxPercentDifference,
-        theme = PaparazziTheme,
-        renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = false,
-        environment = patchedEnvironment(),
-    )
+    val paparazzi = paparazziRule()
 
     @Test
     fun preview_tests() {
