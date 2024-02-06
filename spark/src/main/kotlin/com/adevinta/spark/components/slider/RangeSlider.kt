@@ -21,8 +21,15 @@
  */
 package com.adevinta.spark.components.slider
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SliderColors
+import androidx.compose.material3.SliderPositions
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -33,19 +40,42 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.RangeSlider as MaterialRangeSlider
 
+@OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
 internal fun SparkRangeSlider(
+    intent: SliderIntent,
     value: ClosedFloatingPointRange<Float>,
     onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     /*@IntRange(from = 0)*/
     steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
     colors: SliderColors = SliderDefaults.colors(),
-) {
+    enabled: Boolean = true,
+    startInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    endInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    startHandle: @Composable (SliderPositions) -> Unit = remember(startInteractionSource, enabled) {
+        {
+            Handle(
+                interactionSource = startInteractionSource,
+                intent = intent,
+                enabled = enabled,
+            )
+        }
+    },
+    endHandle: @Composable (SliderPositions) -> Unit = remember(endInteractionSource, enabled) {
+        {
+            Handle(
+                interactionSource = endInteractionSource,
+                intent = intent,
+                enabled = enabled,
+            )
+        }
+    },
+
+    ) {
     MaterialRangeSlider(
         value = value,
         onValueChange = onValueChange,
@@ -55,6 +85,18 @@ internal fun SparkRangeSlider(
         steps = steps,
         onValueChangeFinished = onValueChangeFinished,
         colors = colors,
+
+        startThumb = startHandle,
+        endThumb = endHandle,
+        startInteractionSource = startInteractionSource,
+        endInteractionSource = endInteractionSource,
+        track = { sliderPositions ->
+            Track(
+                intent = intent,
+                enabled = enabled,
+                sliderPositions = sliderPositions,
+            )
+        },
     )
 }
 
@@ -93,6 +135,7 @@ public fun RangeSlider(
         enabled = enabled,
         valueRange = valueRange,
         steps = steps,
+        intent = SliderIntent.Accent,
         onValueChangeFinished = onValueChangeFinished,
     )
 }
@@ -105,10 +148,12 @@ public fun RangeSlider(
 internal fun RangeSliderPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
+    var progress by remember { mutableStateOf(0.1f..0.5f) }
+
     PreviewTheme(theme) {
         RangeSlider(
-            value = 0.1f..0.5f,
-            onValueChange = {},
+            value = progress,
+            onValueChange = { progress = it },
             enabled = true,
             steps = 3,
         )
