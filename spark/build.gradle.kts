@@ -69,11 +69,12 @@ dependencies {
     implementation(libs.androidx.compose.material3.windowSizeClass)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.text)
-    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.ui.util)
+    implementation(libs.coilCompose)
     implementation(libs.kotlinx.collections.immutable)
 
-    implementation(libs.coilCompose)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 
     compileOnly(libs.airbnb.showkase)
     ksp(libs.airbnb.showkase.processor)
