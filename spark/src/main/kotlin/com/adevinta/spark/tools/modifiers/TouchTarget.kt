@@ -41,7 +41,7 @@ import kotlin.math.roundToInt
  *
  * This uses the Spark recommended minimum size of 44.dp x 44.dp, which may not be the same as the
  * system enforced minimum size. The minimum clickable / touch target size (44.dp by default) is
- * controlled by the system via ViewConfiguration` and automatically expanded at the touch input layer.
+ * controlled by the system via ViewConfiguration and automatically expanded at the touch input layer.
  *
  * This modifier is not needed for touch target expansion to happen. It only affects layout, to make
  * sure there is adequate space for touch target expansion.
