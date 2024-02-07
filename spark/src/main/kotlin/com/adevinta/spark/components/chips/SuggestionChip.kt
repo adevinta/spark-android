@@ -21,9 +21,9 @@
  */
 package com.adevinta.spark.components.chips
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.ChipBorder
 import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.ColorScheme
@@ -92,7 +92,7 @@ public fun SuggestionChip(
     shape: Shape = SuggestionChipDefaults.shape,
     colors: ChipColors = SuggestionChipDefaults.suggestionChipColors(),
     elevation: ChipElevation? = SuggestionChipDefaults.suggestionChipElevation(),
-    border: ChipBorder? = SuggestionChipDefaults.suggestionChipBorder(),
+    border: BorderStroke? = SuggestionChipDefaults.suggestionChipBorder(enabled),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     MaterialSuggestionChip(

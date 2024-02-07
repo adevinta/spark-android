@@ -36,7 +36,6 @@ import com.adevinta.spark.components.spacer.VerticalSpacer
 private const val ProgressbarExampleDescription = "Progressbar examples"
 private const val ProgressbarExampleSourceUrl = "$SampleSourceUrl/ProgressbarSamples.kt"
 
-@OptIn(ExperimentalMaterial3Api::class)
 public val ProgressbarExamples: List<Example> = listOf(
     Example(
         name = "Progressbar",
@@ -47,9 +46,9 @@ public val ProgressbarExamples: List<Example> = listOf(
 
             ProgressbarIntent.entries.forEach { intent ->
                 Progressbar(
-                    intent = intent,
+                    progress = { 0.5f },
                     modifier = Modifier.fillMaxWidth(),
-                    progress = 0.5f,
+                    intent = intent,
                     isRounded = true,
                 )
                 VerticalSpacer(8.dp)

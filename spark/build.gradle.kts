@@ -64,16 +64,16 @@ dependencies {
     implementation(libs.androidx.savedstate)
     implementation(libs.androidx.window)
 
-    implementation(libs.androidx.compose.foundation)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.windowSizeClass)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.text)
+    api(libs.androidx.compose.foundation)
+    api(libs.androidx.compose.material3)
+    api(libs.androidx.compose.material3.windowSizeClass)
+    api(libs.androidx.compose.ui)
+    api(libs.androidx.compose.ui.text)
     implementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.util)
     implementation(libs.kotlinx.collections.immutable)
 
-    implementation(libs.coilCompose)
+    api(libs.coilCompose)
 
     compileOnly(libs.airbnb.showkase)
     ksp(libs.airbnb.showkase.processor)

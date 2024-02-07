@@ -82,9 +82,9 @@ private fun ProgressbarSample() {
         Text(text = "Progressbar")
 
         Progressbar(
-            intent = intent,
+            progress = { progress },
             modifier = Modifier.fillMaxWidth(),
-            progress = progress,
+            intent = intent,
             isRounded = isRounded,
         )
 

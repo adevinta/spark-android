@@ -90,23 +90,23 @@ internal class ProgressScreenshot {
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Progressbar(
+                progress = { 0.001f },
                 intent = intent,
-                progress = 0.001f,
                 isRounded = isRounded,
             )
             Progressbar(
+                progress = { 0.25f },
                 intent = intent,
-                progress = 0.25f,
                 isRounded = isRounded,
             )
             Progressbar(
+                progress = { 0.9f },
                 intent = intent,
-                progress = 0.9f,
                 isRounded = isRounded,
             )
             Progressbar(
+                progress = { 1f },
                 intent = intent,
-                progress = 1f,
                 isRounded = isRounded,
             )
         }

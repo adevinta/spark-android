@@ -23,6 +23,7 @@
 
 package com.adevinta.spark.components.chips
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.ColorScheme
@@ -30,7 +31,6 @@ import androidx.compose.material3.ElevatedFilterChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
-import androidx.compose.material3.SelectableChipBorder
 import androidx.compose.material3.SelectableChipColors
 import androidx.compose.material3.SelectableChipElevation
 import androidx.compose.runtime.Composable
@@ -87,7 +87,7 @@ import androidx.compose.material3.FilterChip as MaterialFilterChip
 @Deprecated(
     "Use one of the options: ChipOutlined, ChipFilled, ChipTinted, ChipDashed",
     ReplaceWith(
-        "ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)"
+        "ChipFilled(text: String, intent: ChipIntent, modifier, enabled, leadingIcon, interactionSource, onClick)",
     ),
 )
 @ExperimentalMaterial3Api
@@ -103,7 +103,7 @@ public fun FilterChip(
     shape: Shape = FilterChipDefaults.shape,
     colors: SelectableChipColors = FilterChipDefaults.filterChipColors(),
     elevation: SelectableChipElevation? = FilterChipDefaults.filterChipElevation(),
-    border: SelectableChipBorder? = FilterChipDefaults.filterChipBorder(),
+    border: BorderStroke? = FilterChipDefaults.filterChipBorder(enabled, selected),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     MaterialFilterChip(
@@ -186,7 +186,7 @@ public fun ElevatedFilterChip(
     shape: Shape = FilterChipDefaults.shape,
     colors: SelectableChipColors = FilterChipDefaults.elevatedFilterChipColors(),
     elevation: SelectableChipElevation? = FilterChipDefaults.elevatedFilterChipElevation(),
-    border: SelectableChipBorder? = null,
+    border: BorderStroke? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     MaterialElevatedFilterChip(
