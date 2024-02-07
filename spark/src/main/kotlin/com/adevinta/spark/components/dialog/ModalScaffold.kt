@@ -78,6 +78,7 @@ import com.adevinta.spark.components.IntentColors
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.buttons.ButtonOutlined
+import com.adevinta.spark.components.chips.ChipDefaults.MaxWidth
 import com.adevinta.spark.components.dialog.ModalDefault.DialogPadding
 import com.adevinta.spark.components.iconbuttons.IconButtonDefaults
 import com.adevinta.spark.components.iconbuttons.SparkIconButton

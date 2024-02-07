@@ -24,6 +24,7 @@ package com.adevinta.spark.components.surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
@@ -56,6 +57,7 @@ public val LocalElevationOverlay: ProvidableCompositionLocal<ElevationOverlay?> 
  * See [LocalElevationOverlay] to provide your own [ElevationOverlay]. You can provide `null`
  * to have no ElevationOverlay applied.
  */
+@Stable
 public fun interface ElevationOverlay {
     /**
      * Returns the new background [Color] to use, representing the original background [color]
