@@ -39,7 +39,7 @@ import kotlin.math.roundToInt
  *
  * https://m3.material.io/foundations/accessible-design/accessibility-basics#28032e45-c598-450c-b355-f9fe737b1cd8
  *
- * This uses the Spark recommended minimum size of 44.dp x 44.dp, which may not the same as the
+ * This uses the Spark recommended minimum size of 44.dp x 44.dp, which may not be the same as the
  * system enforced minimum size. The minimum clickable / touch target size (44.dp by default) is
  * controlled by the system via ViewConfiguration` and automatically expanded at the touch input layer.
  *
