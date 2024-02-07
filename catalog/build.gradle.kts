@@ -87,4 +87,6 @@ dependencies {
 
     implementation(libs.androidx.datastore)
     implementation(libs.kotlinx.serialization.json)
+
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }
