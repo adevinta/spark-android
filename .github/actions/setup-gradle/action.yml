@@ -7,4 +7,4 @@ runs:
       with:
         gradle-home-cache-cleanup: true
         add-job-summary-as-pr-comment: on-failure
-    - uses: gradle/wrapper-validation-action@a494d935f4b56874c4a5a87d19af7afcf3a163d0 # v2.0.1
+    - uses: gradle/wrapper-validation-action@85cde3f5a1033b2adc2442631c24b530f1183a1a # v2.1.0
