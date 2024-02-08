@@ -98,6 +98,8 @@ public fun TooltipBox(
  * @param content the composable that will be used to populate the tooltip's content.
  */
 @Composable
+@Suppress("ComposeUnstableReceiver") // We don't have access to this api however it's considered stable
+// by the compiler
 @ExperimentalMaterial3Api
 public fun CaretScope.PlainTooltip(
     modifier: Modifier = Modifier,
