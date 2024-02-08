@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-// FIXME-scott.rayapoulle.ext (08-40-2024): This Modifier needs to be migrated to the Modifier.Node api
 @file:Suppress("ComposeModifierComposed")
+
 package com.adevinta.spark.components.placeholder
 
 import androidx.compose.animation.core.FiniteAnimationSpec
@@ -134,6 +134,7 @@ internal fun Modifier.placeholder(
         properties["shape"] = shape
     },
 ) {
+    // FIXME-scott.rayapoulle.ext (08-40-2024): This Modifier needs to be migrated to the Modifier.Node api
     // Values used for caching purposes
     val lastSize = remember { Ref<Size>() }
     val lastLayoutDirection = remember { Ref<LayoutDirection>() }
