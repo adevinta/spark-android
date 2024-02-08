@@ -34,40 +34,57 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 
 /**
- * Ensure that the composable has a minimum touch target size
+ * Reserves at least 44.dp in size to disambiguate touch interactions if the element would measure
+ * smaller.
  *
- * Duplicate of Material minimumTouchTargetSize() since it's internal on their side
+ * https://m3.material.io/foundations/accessible-design/accessibility-basics#28032e45-c598-450c-b355-f9fe737b1cd8
+ *
+ * This uses the Spark recommended minimum size of 44.dp x 44.dp, which may not be the same as the
+ * system enforced minimum size. The minimum clickable / touch target size (44.dp by default) is
+ * controlled by the system via ViewConfiguration and automatically expanded at the touch input layer.
+ *
+ * This modifier is not needed for touch target expansion to happen. It only affects layout, to make
+ * sure there is adequate space for touch target expansion.
  */
 public fun Modifier.minimumTouchTargetSize(): Modifier = this then MinimumTouchTargetModifier()
 
 private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTargetModifierNode>() {
 
     override fun create() = MinimumTouchTargetModifierNode()
-    override fun equals(other: Any?): Boolean = true
+    override fun equals(other: Any?) = (other === this)
 
-    override fun hashCode(): Int = 0
+    override fun hashCode(): Int = System.identityHashCode(this)
 
     override fun update(node: MinimumTouchTargetModifierNode) = Unit
 
     override fun InspectorInfo.inspectableProperties() {
         name = "minimumTouchTargetSize"
-        properties["README"] = "Adds outer padding to measure at least 48.dp (default) in " +
+        properties["README"] = "Adds outer padding to measure at least 44.dp (default) in " +
             "size to disambiguate touch interactions if the element would measure smaller"
     }
 }
 
 private class MinimumTouchTargetModifierNode : Modifier.Node(), LayoutModifierNode {
 
-    private val minimumTouchTargetSize = DpSize(44.dp, 44.dp)
     override fun MeasureScope.measure(
         measurable: Measurable,
         constraints: Constraints,
     ): MeasureResult {
+        val size = minimumTouchTargetSize
         val placeable = measurable.measure(constraints)
+        val enforcement = isAttached
 
         // Be at least as big as the minimum dimension in both dimensions
-        val width = maxOf(placeable.width, minimumTouchTargetSize.width.roundToPx())
-        val height = maxOf(placeable.height, minimumTouchTargetSize.height.roundToPx())
+        val width = if (enforcement) {
+            maxOf(placeable.width, size.width.roundToPx())
+        } else {
+            placeable.width
+        }
+        val height = if (enforcement) {
+            maxOf(placeable.height, size.height.roundToPx())
+        } else {
+            placeable.height
+        }
 
         return layout(width, height) {
             val centerX = ((width - placeable.width) / 2f).roundToInt()
@@ -76,3 +93,5 @@ private class MinimumTouchTargetModifierNode : Modifier.Node(), LayoutModifierNo
         }
     }
 }
+
+private val minimumTouchTargetSize = DpSize(44.dp, 44.dp)

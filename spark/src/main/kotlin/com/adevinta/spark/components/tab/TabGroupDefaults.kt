@@ -86,9 +86,10 @@ internal object TabGroupDefaults {
      * @param currentTabPosition [TabPosition] of the currently selected tab. This is used to
      * calculate the offset of the indicator this modifier is applied to, as well as its width.
      */
+    @Suppress("ComposeModifierComposed") // Fork from M3 Tab that will be removed once the api is stable
     internal fun Modifier.tabIndicatorOffset(
         currentTabPosition: TabPosition,
-    ): Modifier = composed(
+    ): Modifier = this then composed(
         inspectorInfo = debugInspectorInfo {
             name = "tabIndicatorOffset"
             value = currentTabPosition

@@ -595,6 +595,7 @@ public fun <T : Any> rememberSwipeableStateFor(
  */
 @ExperimentalMaterial3Api
 @InternalSparkApi
+@Suppress("ComposeModifierComposed") // Fork from M3 swipeable that will be removed once the api is stable
 // This is a copy from Material 3 Swipeable until b/163132293 is closed
 // Until this is fixed use it when you really cannot use a BottomSheetDialogFragment
 public fun <T> Modifier.swipeable(
@@ -607,7 +608,7 @@ public fun <T> Modifier.swipeable(
     thresholds: (from: T, to: T) -> ThresholdConfig = { _, _ -> FixedThreshold(56.dp) },
     resistance: ResistanceConfig? = resistanceConfig(anchors.keys),
     velocityThreshold: Dp = VelocityThreshold,
-): Modifier = composed(
+): Modifier = this then composed(
     inspectorInfo = debugInspectorInfo {
         name = "swipeable"
         properties["state"] = state

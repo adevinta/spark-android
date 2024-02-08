@@ -19,6 +19,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+@file:Suppress("ComposeModifierComposed") // These modifiers will be forked so the
+// work will be done when it happens
+
 package com.adevinta.spark.components.placeholder
 
 import androidx.compose.foundation.layout.Arrangement.spacedBy

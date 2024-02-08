@@ -445,6 +445,7 @@ public interface TooltipState : BasicTooltipState {
     public val transition: MutableTransitionState<Boolean>
 }
 
+@Suppress("ComposeModifierComposed") // Fork from M3 Tooltip that will be removed once the api is stable
 private fun Modifier.textVerticalPadding(
     subheadExists: Boolean,
     actionExists: Boolean,
@@ -458,6 +459,7 @@ private fun Modifier.textVerticalPadding(
     }
 }
 
+@Suppress("ComposeModifierComposed") // Fork from M3 Tooltip that will be removed once the api is stable
 private fun Modifier.animateTooltip(
     transition: Transition<Boolean>,
 ): Modifier = composed(
