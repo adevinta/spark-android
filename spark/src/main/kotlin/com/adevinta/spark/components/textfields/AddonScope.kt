@@ -43,6 +43,7 @@ import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.IconToggleButtonColors
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -79,6 +80,7 @@ import androidx.compose.material3.FilledTonalButton as MaterialButton
 /**
  * Scope that provide pre-made addons for leading and trailing contents of [TextField].
  */
+@Stable
 public abstract class AddonScope {
 
     /**
