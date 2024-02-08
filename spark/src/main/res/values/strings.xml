@@ -41,7 +41,7 @@
     <string name="spark_user_avatar_content_description">Profile photo</string>
 
     <!--Badge-->
-    <string name="spark_exceed_max_badge_number_a11y" description="Plural form content description for when the number of new notifications exceeds a maximum count[CHAR_LIMIT=NONE]" tools:ignore="PluralsCandidate">More than <xliff:g example="999" id="maximum number">%1$d</xliff:g> new notifications</string>
+    <string name="spark_exceed_max_badge_number_a11y" tools:ignore="PluralsCandidate" description="Plural form content description for when the number of new notifications exceeds a maximum count[CHAR_LIMIT=NONE]">More than <xliff:g example="999" id="maximum number">%1$d</xliff:g> new notifications</string>
     <string name="spark_badge_numberless_a11y" description="Content description for new notification (no number count) [CHAR_LIMIT=NONE]">New notification</string>
     <plurals name="spark_badge_a11y" description="Plural form content description for number of new notifications [CHAR_LIMIT=NONE]">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> new notification</item>

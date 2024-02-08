@@ -40,67 +40,81 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import com.google.accompanist.placeholder.PlaceholderDefaults
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.fade
-import com.google.accompanist.placeholder.material.color
-import com.google.accompanist.placeholder.material.fadeHighlightColor
-import com.google.accompanist.placeholder.material.placeholder
-import com.google.accompanist.placeholder.material.shimmerHighlightColor
-import com.google.accompanist.placeholder.shimmer
 
-@Suppress("ComposeUnstableReceiver")
-@Composable
-private fun PlaceholderDefaults.sparkColor() = color(
-    backgroundColor = SparkTheme.colors.surface,
-    contentColor = contentColorFor(backgroundColor = SparkTheme.colors.surface),
-    contentAlpha = 0.25f,
+@Deprecated(
+    message = "Use the placeholder modifier instead",
+    replaceWith = ReplaceWith("placeholder(visible)"),
 )
+public fun Modifier.defaultPlaceholder(visible: Boolean): Modifier = this then placeholder(visible = visible)
 
-@Suppress("ComposeUnstableReceiver")
-@Composable
-private fun PlaceholderHighlight.Companion.sparkFade() = fade(
-    highlightColor = PlaceholderDefaults.fadeHighlightColor(alpha = 0.3f),
-    animationSpec = PlaceholderDefaults.fadeAnimationSpec,
-)
+/**
+ * Draws some skeleton UI which is typically used whilst content is 'loading'.
+ *
+ * To customize the shape of the placeholder, you can use the clip modifier after this one if it match your needs.
+ *
+ * A cross-fade transition will be applied to the content and placeholder UI when the [visible]
+ * value changes.
+ *
+ * This placeholder display a fade animation.
+ *
+ * You can find more information on the pattern at the Material Theming
+ * [Placeholder UI](https://material.io/design/communication/launch-screen.html#placeholder-ui)
+ * guidelines.
+ *
+ * @param visible whether the placeholder should be visible or not.
+ */
+public fun Modifier.placeholder(visible: Boolean): Modifier = this then basePlaceholder(visible = visible)
 
-@Suppress("ComposeUnstableReceiver")
-@Composable
-private fun PlaceholderHighlight.Companion.sparkShimmer() = shimmer(
-    highlightColor = PlaceholderDefaults.shimmerHighlightColor(alpha = 0.3f),
-    animationSpec = PlaceholderDefaults.shimmerAnimationSpec,
-)
-
-public fun Modifier.defaultPlaceholder(visible: Boolean): Modifier =
-    this then composed {
-        placeholder(
-            visible = visible,
-            highlight = PlaceholderHighlight.sparkFade(),
-            color = PlaceholderDefaults.sparkColor(),
-            shape = SparkTheme.shapes.small,
-        )
-    }
-
+/**
+ * Draws some skeleton UI which is typically used whilst content is 'loading'.
+ *
+ * The shape is not customizable as it's meant to display the same style for each text placeholders.
+ *
+ * A cross-fade transition will be applied to the content and placeholder UI when the [visible]
+ * value changes.
+ *
+ * This placeholder display a fade animation.
+ *
+ * You can find more information on the pattern at the Material Theming
+ * [Placeholder UI](https://material.io/design/communication/launch-screen.html#placeholder-ui)
+ * guidelines.
+ *
+ * @param visible whether the placeholder should be visible or not.
+ */
 public fun Modifier.textPlaceholder(visible: Boolean): Modifier = this then composed {
-    placeholder(
+    basePlaceholder(
         visible = visible,
-        highlight = PlaceholderHighlight.sparkFade(),
-        color = PlaceholderDefaults.sparkColor(),
         shape = SparkTheme.shapes.full,
     )
 }
 
+/**
+ * Draws a skeleton UI for illustrations which is typically used whilst a image is 'loading'.
+ *
+ * To customize the shape of the placeholder, you can use the shape parameter.
+ *
+ * A cross-fade transition will be applied to the content and placeholder UI when the [visible]
+ * value changes.
+ *
+ * This placeholder display a shimmer animation.
+ *
+ * You can find more information on the pattern at the Material Theming
+ * [Placeholder UI](https://material.io/design/communication/launch-screen.html#placeholder-ui)
+ * guidelines.
+ *
+ * @param visible whether the placeholder should be visible or not.
+ * @param shape desired shape of the placeholder. If null is provided the placeholder
+ * will use the small shape set in [SparkTheme.shapes].
+ */
 public fun Modifier.illustrationPlaceholder(
     visible: Boolean,
     shape: Shape,
 ): Modifier = this then composed {
-    placeholder(
+    basePlaceholder(
         visible = visible,
-        highlight = PlaceholderHighlight.sparkShimmer(),
-        color = PlaceholderDefaults.sparkColor(),
+        highlight = PlaceholderHighlight.shimmer(),
         shape = shape,
     )
 }
@@ -126,7 +140,7 @@ internal fun PreviewPlaceHolder(
                 modifier = Modifier
                     .height(48.dp)
                     .fillMaxWidth()
-                    .defaultPlaceholder(true),
+                    .placeholder(true),
             )
         }
         Column(verticalArrangement = spacedBy(4.dp)) {

@@ -23,12 +23,12 @@ package com.adevinta.spark.iconbutton
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.Row
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.Paparazzi
-import com.adevinta.spark.MaxPercentDifference
-import com.adevinta.spark.PaparazziTheme
+import com.adevinta.spark.DefaultTestDevices
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonContrast
@@ -39,104 +39,139 @@ import com.adevinta.spark.components.iconbuttons.IconButtonOutlined
 import com.adevinta.spark.components.iconbuttons.IconButtonSize
 import com.adevinta.spark.components.iconbuttons.IconButtonTinted
 import com.adevinta.spark.components.surface.Surface
-import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.AccountOutline
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.patchedEnvironment
+import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams
-import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(TestParameterInjector::class)
 internal class IconButtonScreenshot {
 
-    private val shapes: Array<ButtonShape> = ButtonShape.entries.toTypedArray()
+    private val shapes = ButtonShape.entries
 
-    private val sizes = IconButtonSize.entries.toTypedArray()
+    private val sizes = IconButtonSize.entries
 
-    private val enableList: List<Boolean> = listOf(true, false)
-
-    private val intents = IconButtonIntent.entries.toTypedArray()
+    private val intents = IconButtonIntent.entries
 
     @get:Rule
-    val paparazzi = Paparazzi(
-        maxPercentDifference = MaxPercentDifference,
-        theme = PaparazziTheme,
+    val paparazzi = paparazziRule(
         renderingMode = SessionParams.RenderingMode.SHRINK,
-        showSystemUi = true,
-        environment = patchedEnvironment(),
-        deviceConfig = DeviceConfig.PIXEL_C.copy(
-            softButtons = false,
-            locale = "fr-rFR",
-        ),
+        deviceConfig = DefaultTestDevices.Tablet,
     )
 
+    @OptIn(ExperimentalLayoutApi::class)
     @Test
-    fun test() {
-        //      shapes.forEach { shape -> TODO: Uncomment after Polaris app adapt new @ButtonShape class
-        sizes.forEach { size ->
-            paparazzi.sparkSnapshot(name = "$size") {
-                Row {
-                    enableList.forEach { isEnabled ->
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
-                        ) {
-                            Text(
-                                text = "Enabled: $isEnabled",
-                            )
-                            intents.forEach { intent ->
-                                Surface(
-                                    color = if (intent == IconButtonIntent.Surface) {
-                                        SparkTheme.colors.surfaceInverse
-                                    } else {
-                                        SparkTheme.colors.surface
-                                    },
-                                ) {
-                                    Row {
-                                        IconButtonFilled(
-                                            onClick = {},
-                                            icon = SparkIcons.AccountOutline,
-                                            size = size,
-                                            intent = intent,
-                                            enabled = isEnabled,
-                                        )
-                                        IconButtonOutlined(
-                                            onClick = {},
-                                            icon = SparkIcons.AccountOutline,
-                                            size = size,
-                                            intent = intent,
-                                            enabled = isEnabled,
-                                        )
-                                        IconButtonTinted(
-                                            onClick = {},
-                                            icon = SparkIcons.AccountOutline,
-                                            size = size,
-                                            intent = intent,
-                                            enabled = isEnabled,
-                                        )
-                                        IconButtonContrast(
-                                            onClick = {},
-                                            icon = SparkIcons.AccountOutline,
-                                            size = size,
-                                            intent = intent,
-                                            enabled = isEnabled,
-                                        )
-                                        IconButtonGhost(
-                                            onClick = {},
-                                            icon = SparkIcons.AccountOutline,
-                                            size = size,
-                                            intent = intent,
-                                            enabled = isEnabled,
-                                        )
-                                    }
-                                }
-                            }
+    fun shape() {
+        paparazzi.sparkSnapshot {
+            FlowColumn {
+                shapes.forEach { shape ->
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        sizes.forEach { size ->
+                            Buttons(size = size, shape = shape, enabled = true)
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalLayoutApi::class)
+    @Test
+    fun enabled() {
+        paparazzi.sparkSnapshot {
+            FlowColumn {
+                intents.forEach { intent ->
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        sizes.forEach { size ->
+                            Buttons(size = size, intent = intent, enabled = true)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalLayoutApi::class)
+    @Test
+    fun disabled() {
+        paparazzi.sparkSnapshot {
+            FlowColumn {
+                intents.forEach { intent ->
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        sizes.forEach { size ->
+                            Buttons(size = size, intent = intent, enabled = false)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun Buttons(
+        size: IconButtonSize,
+        shape: ButtonShape = ButtonShape.Rounded,
+        intent: IconButtonIntent = IconButtonIntent.Main,
+        enabled: Boolean,
+    ) {
+        Surface(
+            color = if (intent == IconButtonIntent.Surface) {
+                SparkTheme.colors.surfaceInverse
+            } else {
+                SparkTheme.colors.surface
+            },
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+            ) {
+                IconButtonFilled(
+                    onClick = {},
+                    icon = SparkIcons.AccountOutline,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = enabled,
+                )
+                IconButtonOutlined(
+                    onClick = {},
+                    icon = SparkIcons.AccountOutline,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = enabled,
+                )
+                IconButtonTinted(
+                    onClick = {},
+                    icon = SparkIcons.AccountOutline,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = enabled,
+                )
+                IconButtonContrast(
+                    onClick = {},
+                    icon = SparkIcons.AccountOutline,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = enabled,
+                )
+                IconButtonGhost(
+                    onClick = {},
+                    icon = SparkIcons.AccountOutline,
+                    size = size,
+                    shape = shape,
+                    intent = intent,
+                    enabled = enabled,
+                )
             }
         }
     }

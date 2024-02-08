@@ -307,7 +307,7 @@ public fun Tab(
     name = "Tab",
 )
 @Composable
-internal fun TabPreview(
+private fun TabPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {

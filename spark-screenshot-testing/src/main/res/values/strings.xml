@@ -22,5 +22,6 @@
   SOFTWARE.
   -->
 <resources>
+    <string name="spark_text_link_button_example">Tap me 👁️🫦👁️</string>
     <string name="spark_text_link_short_example"><annotation color="neutral" typography="display2">Learn Kotlin Programming </annotation><annotation color="success" typography="display3"><u><b>https://kotlinlang.org</b></u></annotation></string>
 </resources>
