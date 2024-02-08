@@ -63,6 +63,7 @@ public interface PlaceholderHighlight {
     @FloatRange(from = 0.0, to = 1.0)
     public fun alpha(progress: Float): Float
 
+    @Stable
     public companion object
 }
 
