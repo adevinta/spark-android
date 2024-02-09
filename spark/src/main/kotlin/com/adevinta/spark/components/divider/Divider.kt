@@ -34,7 +34,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import androidx.compose.material3.Divider as MaterialDivider
+import androidx.compose.material3.HorizontalDivider as MaterialDivider
 
 @ExperimentalSparkApi
 @Composable

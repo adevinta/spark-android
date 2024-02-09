@@ -85,7 +85,8 @@
             <name>androidx.compose.material3.OutlinedIconToggleButton</name>
             <name>androidx.compose.material3.OutlinedTextField</name>
             <name>androidx.compose.material3.PermanentDrawerSheet</name>
-            <name>androidx.compose.material3.PermanentNavigationDrawer</name>
+            <name>androidx.compose.material3.PermanentDrawerSheet</name>
+            <name>androidx.compose.material3.PlainTooltip</name>
             <name>androidx.compose.material3.RadioButton</name>
             <name>androidx.compose.material3.RadioButtonColors</name>
             <name>androidx.compose.material3.RadioButtonDefaults</name>
@@ -110,6 +111,7 @@
             <name>androidx.compose.material3.TextButton</name>
             <name>androidx.compose.material3.TextFieldDefaults</name>
             <name>androidx.compose.material3.TextFiled</name>
+            <name>androidx.compose.material3.TooltipBox</name>
             <name>androidx.compose.material3.TopAppBar</name>
             <name>androidx.compose.material3.TriStateCheckbox</name>
             <!-- endregion-->
