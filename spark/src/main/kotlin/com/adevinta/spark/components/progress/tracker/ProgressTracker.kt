@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.adevinta.spark.components.progress.tracker
 
 import androidx.compose.animation.AnimatedContent
@@ -70,6 +71,14 @@ import com.adevinta.spark.tokens.highlight
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
+/**
+ * Composable function for creating a horizontal layout for the [ProgressTrackerRow].
+ *
+ * @param style The style of the [JetLimeEvent].
+ * @param jetLimeStyle The [JetLimeEvent] style configuration.
+ * @param modifier The modifier to be applied to the event.
+ * @param content The composable content inside the event.
+ */
 @Composable
 internal fun ProgressTrackerRow(
     items: ImmutableList<ProgressStep>,
@@ -164,16 +173,18 @@ internal fun ProgressTrackerRow(
                     x = stepsWidth * index,
                     y = indicatorPlaceable.height + labelTopPadding, // centered
                 )
-                if (index < indicatorPlaceables.size - 1) {
+                if(index < indicatorPlaceables.size - 1) {
                     trackPlaceables[index].placeRelative(
                         x = indicatorX + indicatorPlaceable.width + 8.dp.roundToPx(),
                         y = indicatorPlaceable.width / 2,
                     )
                 }
+
             }
         }
     }
 }
+
 
 @Composable
 private fun StepLabel(
