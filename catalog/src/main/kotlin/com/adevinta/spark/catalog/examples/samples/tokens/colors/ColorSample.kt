@@ -54,30 +54,52 @@ import kotlin.reflect.full.starProjectedType
 
 @Composable
 internal fun ColorSample(paddingValues: PaddingValues) {
-    val tokensColorsGroups = rememberColorTokens(SparkTheme.colors)
+    val tokensColorsAsColorsGroups = rememberColorTokens<Color>(SparkTheme.colors)
 
-    LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
-        contentPadding = paddingValues,
-    ) {
-        items(tokensColorsGroups) { tokens ->
-            Row {
-                tokens.forEach { token ->
-                    ColorItem(token)
+    if (tokensColorsAsColorsGroups.isNotEmpty()) {
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = paddingValues,
+        ) {
+            items(tokensColorsAsColorsGroups) { tokens ->
+                Row {
+                    tokens.forEach { token ->
+                        val longOrColor = LongOrColor(token.get(SparkTheme.colors))
+                        ColorItem(longOrColor, token.name)
+                    }
                 }
             }
         }
+
+    } else {
+        val tokensColorsAsLongGroups = rememberColorTokens<Long>(SparkTheme.colors)
+
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = paddingValues,
+        ) {
+            items(tokensColorsAsLongGroups) { tokens ->
+                Row {
+                    tokens.forEach { token ->
+                        val longOrColor = LongOrColor(token.get(SparkTheme.colors))
+                        ColorItem(longOrColor, token.name)
+                    }
+                }
+            }
+        }
+
     }
 }
 
+
 @Composable
-private fun RowScope.ColorItem(color: KProperty1<SparkColors, Color>) {
+private fun RowScope.ColorItem(color: LongOrColor, name: String) {
     Surface(
         modifier = Modifier
             .padding(8.dp)
             .heightIn(104.dp)
             .weight(1f),
-        color = color.get(SparkTheme.colors),
+        color = color.get(),
         shape = SparkTheme.shapes.extraLarge,
         border = BorderStroke(2.dp, SparkTheme.colors.onBackground),
     ) {
@@ -86,7 +108,7 @@ private fun RowScope.ColorItem(color: KProperty1<SparkColors, Color>) {
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = color.name.splitCamelWithSpaces(),
+                text = name.splitCamelWithSpaces(),
                 style = SparkTheme.typography.body2,
                 textAlign = TextAlign.Center,
             )
@@ -98,26 +120,41 @@ private fun RowScope.ColorItem(color: KProperty1<SparkColors, Color>) {
  * Avoid computing these tokens on each recomposition but do it only when colors changes.
  */
 @Composable
-private fun rememberColorTokens(colors: SparkColors): List<List<KProperty1<SparkColors, Color>>> = remember(colors) {
-    colors::class.declaredMemberProperties
-        .filterNot { field -> field.hasAnnotation<Deprecated>() }
-        // Remove dims and any non color tokens
-        .filter { it.returnType == Color::class.starProjectedType }
-        // Cast the type otherwise we get a star type instead of Long
-        .map { it.cast<KProperty1<SparkColors, Color>>() }
-        // Remove content colors
-        .filterNot { it.name.startsWith("on") }
-        // Use the same order than the one in the specs
-        .sortedBy { it.findAnnotation<Order>()?.value ?: Int.MAX_VALUE }
-        // Group by token name like "main", "mainContainer" or "mainVariant"
-        .groupBy { it.name.takeWhile { char -> !char.isUpperCase() } }
-        .values.toList()
-}
+private inline fun <reified T> rememberColorTokens(colors: SparkColors): List<List<KProperty1<SparkColors, T>>> =
+    remember(colors) {
+        colors::class.declaredMemberProperties
+            .filterNot { field -> field.hasAnnotation<Deprecated>() }
+            // Remove dims and any non color tokens
+            .filter { it.returnType == Color::class.starProjectedType }
+            // Cast the type otherwise we get a star type instead of Color
+            .map { it.cast<KProperty1<SparkColors, T>>() }
+            // Remove content colors
+            .filterNot { it.name.startsWith("on") }
+            // Use the same order than the one in the specs
+            .sortedBy { it.findAnnotation<Order>()?.value ?: Int.MAX_VALUE }
+            // Group by token name like "main", "mainContainer" or "mainVariant"
+            .groupBy { it.name.takeWhile { char -> !char.isUpperCase() } }
+            .values.toList()
+    }
 
 @Preview
 @Composable
 private fun ColorSamplePreview() {
     SparkTheme {
         ColorSample(PaddingValues(0.dp))
+    }
+}
+
+
+@JvmInline
+private value class LongOrColor(private val value: Any) {
+    val isLong: Boolean get() = value is Long
+    val isColor: Boolean get() = value is Color
+
+    fun asLong(): Long = value as Long
+    fun asColor(): Color = value as Color
+
+    fun get(): Color {
+        return if (isColor) asColor() else Color(asLong().toULong())
     }
 }
