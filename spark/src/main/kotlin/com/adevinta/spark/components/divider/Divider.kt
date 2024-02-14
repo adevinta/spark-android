@@ -35,6 +35,7 @@ import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.HorizontalDivider as MaterialDivider
+import androidx.compose.material3.VerticalDivider as MaterialVerticalDivider
 
 @ExperimentalSparkApi
 @Composable
@@ -67,6 +68,29 @@ public fun Divider(
     color: Color = SparkTheme.colors.onSurface.dim3,
 ) {
     SparkDivider(
+        modifier = modifier,
+        thickness = DividerDefaults.Thickness,
+        color = color,
+    )
+}
+
+/**
+ * Spark divider.
+ *
+ * A divider is a thin line that groups content in lists and layouts.
+ *
+ * ![Divider image](https://developer.android.com/images/reference/androidx/compose/material3/divider.png)
+ *
+ * @param modifier the [Modifier] to be applied to this divider line.
+ * @param color the color of the divider, we recommend to use either outline or onSurface dim 3.
+ */
+@ExperimentalSparkApi
+@Composable
+public fun VerticalDivider(
+    modifier: Modifier = Modifier,
+    color: Color = SparkTheme.colors.onSurface.dim3,
+) {
+    MaterialVerticalDivider(
         modifier = modifier,
         thickness = DividerDefaults.Thickness,
         color = color,
