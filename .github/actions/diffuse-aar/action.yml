@@ -34,7 +34,7 @@ runs:
         <details><summary>📢 Diffuse reports…</summary>
 
         \`\`\`
-        $(find . -path "*/build/outputs/aar/*-release.aar" -exec "./$HOME/.spark/diffuse/$DIFFUSE_BIN" info --aar {} \;)
+        $(find . -path "*/build/outputs/aar/*-release.aar" -exec "$HOME/.spark/diffuse/$DIFFUSE_BIN" info --aar {} \;)
         \`\`\`
 
         </details>
