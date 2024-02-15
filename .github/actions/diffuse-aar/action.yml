@@ -4,7 +4,7 @@ inputs:
   diffuse-version:
     description: 'Diffuse version'
     required: true
-    default: '0.1.0'
+    default: '0.2.0'
 runs:
   using: composite
   steps:
