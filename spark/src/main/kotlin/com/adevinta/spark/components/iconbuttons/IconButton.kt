@@ -28,7 +28,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.PlainTooltipBox
+import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -39,6 +40,8 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.popover.PlainTooltip
+import com.adevinta.spark.components.popover.TooltipBox
 import com.adevinta.spark.components.progress.Spinner
 import com.adevinta.spark.components.progress.SpinnerSize
 import com.adevinta.spark.components.surface.Surface
@@ -98,17 +101,19 @@ internal fun SparkIconButton(
         )
     }
     Box(modifier = modifier) {
-        PlainTooltipBox(
-            tooltip = { Text(contentDescription.orEmpty()) },
-            shape = IconButtonDefaults.TooltipContainerShape,
-            containerColor = IconButtonDefaults.TooltipContainerColor,
-            contentColor = IconButtonDefaults.TooltipContentColor,
+        TooltipBox(
+            positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+            tooltip = {
+                PlainTooltip {
+                    Text(contentDescription.orEmpty())
+                }
+            },
+            state = rememberTooltipState(),
         ) {
             Surface(
                 onClick = onClick,
                 modifier = Modifier
                     .minimumTouchTargetSize()
-                    .tooltipAnchor()
                     .sparkUsageOverlay(),
                 enabled = enabled,
                 shape = shape.shape,

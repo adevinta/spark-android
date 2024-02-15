@@ -31,7 +31,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.minimumInteractiveComponentSize
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -46,10 +48,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.popover.newapi.PlainTooltip
-import com.adevinta.spark.components.popover.newapi.TooltipBox
-import com.adevinta.spark.components.popover.newapi.TooltipDefaults
-import com.adevinta.spark.components.popover.newapi.rememberTooltipState
+import com.adevinta.spark.components.popover.PlainTooltip
+import com.adevinta.spark.components.popover.TooltipBox
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider

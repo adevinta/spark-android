@@ -21,8 +21,6 @@
  */
 package com.adevinta.spark.components.progressbar
 
-import android.annotation.SuppressLint
-import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -41,7 +39,7 @@ import androidx.compose.material3.LinearProgressIndicator as MaterialProgressbar
 @InternalSparkApi
 @Composable
 internal fun SparkProgressbar(
-    @FloatRange(from = 0.0, to = 1.0) progress: Float,
+    progress: () -> Float,
     isIndeterminate: Boolean,
     isRounded: Boolean,
     intent: ProgressbarIntent,
@@ -78,16 +76,54 @@ internal fun SparkProgressbar(
  * @param modifier Modifier to be applied to the Progressbar
  * @param isRounded Controls the border shape of the progressbar. When `true`, this progressbar will have rounded border shape, & the default is rounded
  */
-
+@Deprecated(
+    message = "Use the overload that takes `progress` as a lambda",
+    replaceWith = ReplaceWith(
+        "Progressbar(\n" +
+            "progress = { progress },\n" +
+            "modifier = modifier,\n" +
+            "intent = intent,\n" +
+            "isRounded = isRounded,\n" +
+            ")",
+    ),
+)
 @Composable
 public fun Progressbar(
-    @FloatRange(from = 0.0, to = 1.0) progress: Float,
+    progress: Float,
     intent: ProgressbarIntent,
     modifier: Modifier = Modifier,
     isRounded: Boolean = true,
 ) {
     SparkProgressbar(
-        progress = progress.coerceIn(0.0f, 1.0f),
+        progress = { progress },
+        isIndeterminate = false,
+        intent = intent,
+        modifier = modifier,
+        isRounded = isRounded,
+    )
+}
+
+/**
+ * Determinate Progressbar
+ *
+ * Progressbar express a specified progress.
+ *
+ * @param progress the progress of this progress indicator, where 0.0 represents no progress and 1.0
+ * represents full progress. Values outside of this range are coerced into the range.
+ * @param intent The intent color for the Progressbar.
+ * @param modifier Modifier to be applied to the Progressbar
+ * @param isRounded Controls the border shape of the progressbar. When `true`, this progressbar will have rounded border shape, & the default is rounded
+ */
+
+@Composable
+public fun Progressbar(
+    progress: () -> Float,
+    modifier: Modifier = Modifier,
+    intent: ProgressbarIntent = ProgressbarIntent.Basic,
+    isRounded: Boolean = true,
+) {
+    SparkProgressbar(
+        progress = progress,
         isIndeterminate = false,
         intent = intent,
         modifier = modifier,
@@ -107,12 +143,12 @@ public fun Progressbar(
 
 @Composable
 public fun ProgressbarIndeterminate(
-    intent: ProgressbarIntent,
     modifier: Modifier = Modifier,
+    intent: ProgressbarIntent = ProgressbarIntent.Basic,
     isRounded: Boolean = false,
 ) {
     SparkProgressbar(
-        progress = 0f,
+        progress = { 0f },
         isIndeterminate = true,
         intent = intent,
         modifier = modifier,
@@ -120,42 +156,28 @@ public fun ProgressbarIndeterminate(
     )
 }
 
-@SuppressLint("Range")
 @Preview(
     group = "Progressbar",
     name = "Progressbar",
 )
 @Composable
-internal fun PreviewProgressbar(
+private fun PreviewProgressbar(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        ProgressbarIntent.entries.forEach { intent ->
-            Progressbar(
-                intent = intent,
-                modifier = Modifier.fillMaxWidth(),
-                progress = 0.5f,
-                isRounded = true,
-            )
-        }
-    }
-}
-
-@Preview(
-    group = "Progressbar",
-    name = "ProgressbarIndeterminate",
-)
-@Composable
-internal fun PreviewProgressbarIndeterminate(@PreviewParameter(ThemeProvider::class) theme: ThemeVariant) {
-    PreviewTheme(theme) {
-        PreviewTheme(theme) {
-            ProgressbarIntent.entries.forEach { intent ->
-                ProgressbarIndeterminate(
-                    intent = intent,
-                    modifier = Modifier.fillMaxWidth(),
-                    isRounded = false,
-                )
-            }
-        }
+        Progressbar(
+            modifier = Modifier.fillMaxWidth(),
+            progress = { 0.5f },
+            isRounded = true,
+        )
+        Progressbar(
+            modifier = Modifier.fillMaxWidth(),
+            progress = { 0.5f },
+            isRounded = false,
+        )
+        ProgressbarIndeterminate(
+            modifier = Modifier.fillMaxWidth(),
+            isRounded = false,
+        )
     }
 }

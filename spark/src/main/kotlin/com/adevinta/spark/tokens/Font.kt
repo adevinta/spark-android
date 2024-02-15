@@ -22,6 +22,7 @@
 package com.adevinta.spark.tokens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.text.font.Font
@@ -52,6 +53,7 @@ public fun sparkFontFamily(
 /**
  * Utility class to handle the change of font family for the SparkTheme.
  */
+@Immutable
 public class SparkFontFamily(
     private val isLegacy: Boolean,
     private val useSparkTokensHighlighter: Boolean,

@@ -40,8 +40,7 @@ import androidx.compose.material3.LinearProgressIndicator as MaterialLinearProgr
 @InternalSparkApi
 @Composable
 internal fun SparkLinearProgressIndicator(
-    @FloatRange(from = 0.0, to = 1.0)
-    progress: Float,
+    progress: () -> Float,
     isIndeterminate: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -74,6 +73,15 @@ internal fun SparkLinearProgressIndicator(
  * represents full progress. Values outside of this range are coerced into the range.
  * @param modifier the [Modifier] to be applied to this progress indicator
  */
+@Deprecated(
+    message = "Use the overload that takes `progress` as a lambda",
+    replaceWith = ReplaceWith(
+        "LinearProgressIndicator(\n" +
+            "progress = { progress },\n" +
+            "modifier = modifier,\n" +
+            ")",
+    ),
+)
 @Composable
 public fun LinearProgressIndicator(
     @FloatRange(from = 0.0, to = 1.0)
@@ -81,7 +89,30 @@ public fun LinearProgressIndicator(
     modifier: Modifier = Modifier,
 ) {
     SparkLinearProgressIndicator(
-        progress = progress.coerceIn(0.0f, 1.0f),
+        progress = { progress },
+        isIndeterminate = false,
+        modifier = modifier,
+    )
+}
+
+/**
+ * Progress indicators express an unspecified wait time or display the duration of a process.
+ *
+ * By default there is no animation between [progress] values. You can use
+ * [ProgressIndicatorDefaults.ProgressAnimationSpec] as the default recommended [AnimationSpec] when
+ * animating progress
+ *
+ * @param progress the progress of this progress indicator, where 0.0 represents no progress and 1.0
+ * represents full progress. Values outside of this range are coerced into the range.
+ * @param modifier the [Modifier] to be applied to this progress indicator
+ */
+@Composable
+public fun LinearProgressIndicator(
+    progress: () -> Float,
+    modifier: Modifier = Modifier,
+) {
+    SparkLinearProgressIndicator(
+        progress = progress,
         isIndeterminate = false,
         modifier = modifier,
     )
@@ -97,7 +128,7 @@ public fun LinearProgressIndicatorIndeterminate(
     modifier: Modifier = Modifier,
 ) {
     SparkLinearProgressIndicator(
-        progress = 0f,
+        progress = { 0f },
         isIndeterminate = true,
         modifier = modifier,
     )
@@ -113,16 +144,16 @@ internal fun PreviewLinearProgressIndicator(
 ) {
     PreviewTheme(theme) {
         LinearProgressIndicator(
+            progress = { 0f },
             modifier = Modifier.fillMaxWidth(),
-            progress = 0f,
         )
         LinearProgressIndicator(
+            progress = { 0.5f },
             modifier = Modifier.fillMaxWidth(),
-            progress = 0.5f,
         )
         LinearProgressIndicator(
+            progress = { 1f },
             modifier = Modifier.fillMaxWidth(),
-            progress = 1f,
         )
     }
 }

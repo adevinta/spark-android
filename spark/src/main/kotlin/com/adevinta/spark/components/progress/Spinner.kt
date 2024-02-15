@@ -21,25 +21,11 @@
  */
 package com.adevinta.spark.components.progress
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.progressSemantics
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -55,7 +41,6 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * @param intentColor The [IntentColor] to use to draw the spinner
  * @param modifier the [Modifier] to be applied to this component
  * @param size one of the [SpinnerSize]s that defines the size of the component
- * @param isBackgroundVisible whether a background should be added
  */
 @InternalSparkApi
 @Composable
@@ -63,65 +48,11 @@ internal fun SparkSpinner(
     intentColor: IntentColor,
     modifier: Modifier = Modifier,
     size: SpinnerSize = SpinnerDefaults.Size,
-    isBackgroundVisible: Boolean = false,
 ) {
-    val stroke = with(LocalDensity.current) {
-        Stroke(width = SpinnerDefaults.IndicatorStrokeWidth.toPx(), cap = StrokeCap.Square)
-    }
-    val transition = rememberInfiniteTransition(label = "Spinner transition")
-    val rotation = transition.animateFloat(
-        0f,
-        SpinnerDefaults.BaseRotationAngle,
-        infiniteRepeatable(
-            animation = tween(
-                durationMillis = SpinnerDefaults.RotationDurationInMillis,
-                easing = LinearEasing,
-            ),
-        ),
-        label = "Spinner Base Rotation",
-    )
-    Canvas(
-        modifier
-            .progressSemantics()
-            .size(size.dp),
-    ) {
-        val sweep = 180f
-        val offset = SpinnerDefaults.StartAngleOffset + rotation.value
-        if (isBackgroundVisible) {
-            drawCircularIndicator(
-                startAngle = 0f,
-                sweep = 360f,
-                color = intentColor.containerColor,
-                stroke = stroke,
-            )
-        }
-        drawCircularIndicator(
-            startAngle = offset,
-            sweep = sweep,
-            color = intentColor.color,
-            stroke = stroke,
-        )
-    }
-}
-
-private fun DrawScope.drawCircularIndicator(
-    startAngle: Float,
-    sweep: Float,
-    color: Color,
-    stroke: Stroke,
-) {
-    // To draw this circle we need a rect with edges that line up with the midpoint of the stroke.
-    // To do this we need to remove half the stroke width from the total diameter for both sides.
-    val diameterOffset = stroke.width / 2
-    val arcDimen = size.width - 2 * diameterOffset
-    drawArc(
-        color = color,
-        startAngle = startAngle,
-        sweepAngle = sweep,
-        useCenter = false,
-        topLeft = Offset(diameterOffset, diameterOffset),
-        size = Size(arcDimen, arcDimen),
-        style = stroke,
+    androidx.compose.material3.CircularProgressIndicator(
+        color = intentColor.color,
+        trackColor = intentColor.containerColor,
+        modifier = modifier.size(size.dp),
     )
 }
 
@@ -137,13 +68,11 @@ public fun Spinner(
     modifier: Modifier = Modifier,
     intent: SpinnerIntent = SpinnerIntent.Current,
     size: SpinnerSize = SpinnerDefaults.Size,
-    isBackgroundVisible: Boolean = false,
 ) {
     SparkSpinner(
         intentColor = intent.colors(),
         modifier = modifier.sparkUsageOverlay(),
         size = size,
-        isBackgroundVisible = isBackgroundVisible,
     )
 }
 
@@ -175,11 +104,9 @@ internal fun PreviewSpinnerSmall(
 
 @Composable
 private fun SpinnerPreview(size: SpinnerSize) {
-    SpinnerIntent.values().forEach { intent ->
+    SpinnerIntent.entries.forEach { intent ->
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            listOf(false, true).forEach { isBackgroundVisible ->
-                Spinner(intent = intent, size = size, isBackgroundVisible = isBackgroundVisible)
-            }
+            Spinner(intent = intent, size = size)
         }
     }
 }

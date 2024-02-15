@@ -19,6 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+@file:Suppress("ComposeModifierComposed")
+
 package com.adevinta.spark.components.placeholder
 
 import androidx.compose.animation.core.FiniteAnimationSpec
@@ -33,6 +35,7 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.updateTransition
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
@@ -61,6 +64,7 @@ import com.adevinta.spark.tokens.contentColorFor
 /**
  * Contains default values used by [Modifier.placeholder] and [PlaceholderHighlight].
  */
+@Stable
 public object PlaceholderDefaults {
     /**
      * The default [InfiniteRepeatableSpec] to use for [fade].
@@ -130,6 +134,7 @@ internal fun Modifier.placeholder(
         properties["shape"] = shape
     },
 ) {
+    // FIXME-scott.rayapoulle.ext (08-40-2024): This Modifier needs to be migrated to the Modifier.Node api
     // Values used for caching purposes
     val lastSize = remember { Ref<Size>() }
     val lastLayoutDirection = remember { Ref<LayoutDirection>() }

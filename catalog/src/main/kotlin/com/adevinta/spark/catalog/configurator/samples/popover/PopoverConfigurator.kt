@@ -32,6 +32,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TooltipState
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -55,8 +57,6 @@ import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.image.Image
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.popover.Popover
-import com.adevinta.spark.components.popover.newapi.TooltipState
-import com.adevinta.spark.components.popover.newapi.rememberTooltipState
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
@@ -153,6 +153,7 @@ private fun PopoverSample() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ConfiguredPopover(
     scope: CoroutineScope,

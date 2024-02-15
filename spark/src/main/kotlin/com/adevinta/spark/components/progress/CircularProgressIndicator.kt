@@ -42,8 +42,7 @@ import androidx.compose.material3.CircularProgressIndicator as MaterialCircularP
 @InternalSparkApi
 @Composable
 internal fun SparkCircularProgressIndicator(
-    @FloatRange(from = 0.0, to = 1.0)
-    progress: Float,
+    progress: () -> Float,
     isIndeterminate: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -76,6 +75,19 @@ internal fun SparkCircularProgressIndicator(
  * represents full progress. Values outside of this range are coerced into the range.
  * @param modifier the [Modifier] to be applied to this progress indicator
  */
+@Deprecated(
+    message = "Use the overload that takes `progress` as a lambda",
+    replaceWith = ReplaceWith(
+        "CircularProgressIndicator(\n" +
+            "progress = { progress },\n" +
+            "modifier = modifier,\n" +
+            "color = color,\n" +
+            "strokeWidth = strokeWidth,\n" +
+            "trackColor = trackColor,\n" +
+            "strokeCap = strokeCap,\n" +
+            ")",
+    ),
+)
 @Composable
 public fun CircularProgressIndicator(
     @FloatRange(from = 0.0, to = 1.0)
@@ -83,7 +95,31 @@ public fun CircularProgressIndicator(
     modifier: Modifier = Modifier,
 ) {
     SparkCircularProgressIndicator(
-        progress = progress.coerceIn(0.0f, 1.0f),
+        progress = { progress },
+        isIndeterminate = false,
+        modifier = modifier,
+    )
+}
+
+/**
+ * Progress indicators express an unspecified wait time or display the duration of a process.
+ *
+ * By default there is no animation between [progress] values. You can use
+ * [ProgressIndicatorDefaults.ProgressAnimationSpec] as the default recommended [AnimationSpec] when
+ * animating progress
+ *
+ * @param progress the progress of this progress indicator, where 0.0 represents no progress and 1.0
+ * represents full progress. Values outside of this range are coerced into the range.
+ * @param modifier the [Modifier] to be applied to this progress indicator
+ */
+@Composable
+public fun CircularProgressIndicator(
+    @FloatRange(from = 0.0, to = 1.0)
+    progress: () -> Float,
+    modifier: Modifier = Modifier,
+) {
+    SparkCircularProgressIndicator(
+        progress = progress,
         isIndeterminate = false,
         modifier = modifier,
     )
@@ -107,7 +143,7 @@ public fun CircularProgressIndicatorIndeterminate(
     modifier: Modifier = Modifier,
 ) {
     SparkCircularProgressIndicator(
-        progress = 0f,
+        progress = { 0f },
         isIndeterminate = true,
         modifier = modifier,
     )
@@ -123,16 +159,16 @@ internal fun PreviewCircularProgressIndicator(
 ) {
     PreviewTheme(theme) {
         CircularProgressIndicator(
+            progress = { 0f },
             modifier = Modifier.size(48.dp),
-            progress = 0f,
         )
         CircularProgressIndicator(
+            progress = { 0.5f },
             modifier = Modifier.size(48.dp),
-            progress = 0.5f,
         )
         CircularProgressIndicator(
+            progress = { 1f },
             modifier = Modifier.size(48.dp),
-            progress = 1f,
         )
     }
 }

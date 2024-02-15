@@ -23,6 +23,7 @@
 
 package com.adevinta.spark.components.chips
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.ChipColors
@@ -30,7 +31,6 @@ import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.InputChipDefaults
-import androidx.compose.material3.SelectableChipBorder
 import androidx.compose.material3.SelectableChipColors
 import androidx.compose.material3.SelectableChipElevation
 import androidx.compose.runtime.Composable
@@ -103,7 +103,7 @@ public fun InputChip(
     shape: Shape = InputChipDefaults.shape,
     colors: SelectableChipColors = InputChipDefaults.inputChipColors(),
     elevation: SelectableChipElevation? = InputChipDefaults.inputChipElevation(),
-    border: SelectableChipBorder? = InputChipDefaults.inputChipBorder(),
+    border: BorderStroke? = InputChipDefaults.inputChipBorder(enabled, selected),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     MaterialInputChip(
