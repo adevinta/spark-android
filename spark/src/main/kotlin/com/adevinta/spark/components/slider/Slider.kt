@@ -72,14 +72,14 @@ import androidx.compose.material3.Slider as MaterialSlider
 internal fun SparkSlider(
     value: Float,
     intent: SliderIntent,
+    steps: Int,
     onValueChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
-    steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    handle: @Composable (SliderPositions) -> Unit = remember(interactionSource, enabled) {
+    handle: @Composable (SliderPositions) -> Unit = remember(interactionSource, enabled, intent, steps) {
         {
             Handle(
                 interactionSource = interactionSource,
@@ -88,6 +88,16 @@ internal fun SparkSlider(
             )
         }
     },
+    track: @Composable (SliderPositions) -> Unit = remember(interactionSource, enabled, intent, steps) {
+        {
+            Track(
+                intent = intent,
+                enabled = enabled,
+                sliderPositions = it,
+            )
+        }
+    },
+
 ) {
     MaterialSlider(
         value = value,
@@ -99,13 +109,7 @@ internal fun SparkSlider(
         onValueChangeFinished = onValueChangeFinished,
         interactionSource = interactionSource,
         thumb = handle,
-        track = { sliderPositions ->
-            Track(
-                intent = intent,
-                enabled = enabled,
-                sliderPositions = sliderPositions,
-            )
-        },
+        track = track,
     )
 }
 
@@ -116,11 +120,12 @@ private val DefaultHandleSize = DpSize(DefaultHandleSizeWidth, DefaultHandleSize
 
 @Composable
 internal fun Handle(
-    intent: SliderIntent = SliderIntent.Accent,
+    intent: SliderIntent = remember { SliderIntent.Accent },
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     enabled: Boolean = true,
     handleSize: DpSize = DefaultHandleSize,
 ) {
+    enabled.toString()
     val interactions = remember { mutableStateListOf<Interaction>() }
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
@@ -135,23 +140,9 @@ internal fun Handle(
         }
     }
 
-    val handleColor = rememberUpdatedState(
-        if (enabled) {
-            intent.colors().color
-        } else intent.colors().color.dim3,
-    ).value
-
-    val handleColorBg = rememberUpdatedState(
-        if (interactions.isNotEmpty()) {
-            SparkTheme.colors.basicContainer
-        } else Color.Unspecified,
-    ).value
-
-    val handleColorBorder = rememberUpdatedState(
-        if (interactions.isNotEmpty()) {
-            intent.colors().color
-        } else Color.Unspecified,
-    ).value
+    val handleColor = if (enabled) intent.colors().color else intent.colors().color.dim3
+    val handleColorBg = if (interactions.isNotEmpty()) SparkTheme.colors.basicContainer else Color.Unspecified
+    val handleColorBorder = if (interactions.isNotEmpty()) intent.colors().color else Color.Unspecified
 
     Box(contentAlignment = Alignment.Center) {
         Box(
@@ -181,7 +172,7 @@ internal fun Handle(
                     .size(handleSize)
                     .hoverable(interactionSource = interactionSource),
 
-                )
+            )
         }
     }
 }
@@ -189,13 +180,13 @@ internal fun Handle(
 internal val TrackHeight = 4.dp
 private val TickSize = 2.dp
 
-
 /**
  * The Default track for [Slider] and [RangeSlider]
  *
  * @param sliderPositions [SliderPositions] which is used to obtain the current active track
  * and the tick positions if the slider is discrete.
  * @param modifier the [Modifier] to be applied to the track.
+ * @param intent The intent color for the Track.
  * @param enabled controls the enabled state of this slider. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to
  * accessibility services.
@@ -210,13 +201,15 @@ internal fun Track(
     val indicatorColor = rememberUpdatedState(
         if (enabled) {
             intent.colors().color
-        } else intent.colors().color.dim3,
+        } else {
+            intent.colors().color.dim3
+        },
     ).value
 
     val trackColor = SparkTheme.colors.onBackground.dim4
 
-    val tickActiveColor = intent.colors().onColor
-    val tickInactiveColor = intent.colors().color
+    val stepActiveColor = intent.colors().onColor
+    val stepInactiveColor = intent.colors().color
 
     Canvas(
         modifier
@@ -260,7 +253,7 @@ internal fun Track(
             drawPoints(
                 list.map { Offset(lerp(sliderStart, sliderEnd, it).x, center.y) },
                 PointMode.Points,
-                (if (outsideFraction) tickInactiveColor else tickActiveColor),
+                (if (outsideFraction) stepInactiveColor else stepActiveColor),
                 tickSize,
                 StrokeCap.Round,
             )
@@ -278,13 +271,14 @@ internal fun Track(
  * value will be coerced to this range.
  * @param onValueChange callback in which value should be updated
  * @param modifier the Modifier to be applied to this slider
- * @param enabled controls the enabled state of this slider. When false, this component will not respond to user input,
- * and it will appear visually disabled and disabled to accessibility services.
  * @param valueRange range of values that this slider can take. The passed value will be coerced to this range.
- * @param steps if greater than 0, specifies the amount of discrete allowable values, evenly distributed across the whole value range.
- * If 0, the slider will behave continuously and allow any value from the range specified. Must not be negative.
  * @param onValueChangeFinished called when value change has ended. This should not be used to update the slider value
  * (use onValueChange instead), but rather to know when the user has completed selecting a new value by ending a drag or a click.
+ * @param enabled controls the enabled state of this slider. When false, this component will not respond to user input,
+ * and it will appear visually disabled and disabled to accessibility services.
+ * @param steps if greater than 0, specifies the amount of discrete allowable values, evenly distributed across the whole value range.
+ * If 0, the slider will behave continuously and allow any value from the range specified. Must not be negative.
+ * @param intent The intent color for the Slider.
  * @param interactionSource the MutableInteractionSource representing the stream of Interactions for this slider.
  * You can create and pass in your own remembered instance to observe Interactions
  * and customize the appearance / behavior of this slider in different states.
@@ -295,11 +289,11 @@ public fun Slider(
     value: Float,
     onValueChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
+    onValueChangeFinished: (() -> Unit)? = null,
+    enabled: Boolean = true,
     steps: Int = 0,
     intent: SliderIntent = SliderIntent.Basic,
-    onValueChangeFinished: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     SparkSlider(
@@ -309,8 +303,8 @@ public fun Slider(
         intent = intent,
         enabled = enabled,
         valueRange = valueRange,
-        steps = steps,
         onValueChangeFinished = onValueChangeFinished,
+        steps = steps,
         interactionSource = interactionSource,
     )
 }
@@ -326,14 +320,13 @@ internal fun SliderPreview(
     var progress by remember { mutableFloatStateOf(0.75f) }
 
     PreviewTheme(theme) {
-
         Slider(
             value = progress,
-            intent = SliderIntent.Success,
+            intent = SliderIntent.Error,
             onValueChange = { progress = it },
             enabled = true,
             valueRange = 0f..1f,
-            steps = 3,
+            steps = 4,
         )
         Slider(
             value = 0.5f,

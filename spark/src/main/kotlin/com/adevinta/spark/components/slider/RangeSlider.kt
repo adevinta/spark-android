@@ -23,7 +23,6 @@ package com.adevinta.spark.components.slider
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SliderColors
 import androidx.compose.material3.SliderPositions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -52,11 +51,10 @@ internal fun SparkRangeSlider(
     /*@IntRange(from = 0)*/
     steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
-    colors: SliderColors = SliderDefaults.colors(),
     enabled: Boolean = true,
     startInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     endInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    startHandle: @Composable (SliderPositions) -> Unit = remember(startInteractionSource, enabled) {
+    startHandle: @Composable (SliderPositions) -> Unit = remember(startInteractionSource, enabled, intent) {
         {
             Handle(
                 interactionSource = startInteractionSource,
@@ -65,7 +63,7 @@ internal fun SparkRangeSlider(
             )
         }
     },
-    endHandle: @Composable (SliderPositions) -> Unit = remember(endInteractionSource, enabled) {
+    endHandle: @Composable (SliderPositions) -> Unit = remember(endInteractionSource, enabled, intent) {
         {
             Handle(
                 interactionSource = endInteractionSource,
@@ -75,7 +73,7 @@ internal fun SparkRangeSlider(
         }
     },
 
-    ) {
+) {
     MaterialRangeSlider(
         value = value,
         onValueChange = onValueChange,
@@ -84,8 +82,6 @@ internal fun SparkRangeSlider(
         valueRange = valueRange,
         steps = steps,
         onValueChangeFinished = onValueChangeFinished,
-        colors = colors,
-
         startThumb = startHandle,
         endThumb = endHandle,
         startInteractionSource = startInteractionSource,
@@ -108,6 +104,7 @@ internal fun SparkRangeSlider(
  * @param value current values of the RangeSlider. If either value is outside of valueRange provided, it will be coerced to this range.
  * @param onValueChange lambda in which values should be updated
  * @param modifier modifiers for the Range Slider layout
+ * @param intent The intent color for the Slider.
  * @param enabled whether or not component is enabled and can we interacted with or not
  * @param valueRange range of values that Range Slider values can take. Passed value will be coerced to this range
  * @param steps if greater than 0, specifies the amounts of discrete values, evenly distributed between across the whole value range.
@@ -122,6 +119,7 @@ public fun RangeSlider(
     value: ClosedFloatingPointRange<Float>,
     onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
     modifier: Modifier = Modifier,
+    intent: SliderIntent = SliderIntent.Basic,
     enabled: Boolean = true,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     /*@IntRange(from = 0)*/
@@ -135,7 +133,7 @@ public fun RangeSlider(
         enabled = enabled,
         valueRange = valueRange,
         steps = steps,
-        intent = SliderIntent.Accent,
+        intent = intent,
         onValueChangeFinished = onValueChangeFinished,
     )
 }
