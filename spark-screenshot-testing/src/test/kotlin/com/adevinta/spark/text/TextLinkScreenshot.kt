@@ -33,6 +33,7 @@ import com.adevinta.spark.components.text.TextLinkButton
 import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.paparazziRule
+import com.adevinta.spark.res.annotatedStringResource
 import com.adevinta.spark.screenshot.testing.R
 import com.adevinta.spark.sparkSnapshotNightMode
 import org.junit.Rule
@@ -61,7 +62,7 @@ internal class TextLinkScreenshot {
                 }
                 TextLink(
                     style = SparkTheme.typography.subhead,
-                    text = R.string.spark_text_link_short_example,
+                    text = annotatedStringResource(id = R.string.spark_text_link_short_example),
                     onClickLabel = "textLink",
                     onClick = {},
                 )
@@ -91,7 +92,7 @@ internal class TextLinkScreenshot {
                 }
                 TextLink(
                     style = SparkTheme.typography.subhead,
-                    text = R.string.spark_text_link_short_example,
+                    text = annotatedStringResource(id = R.string.spark_text_link_short_example),
                     onClickLabel = "textLink",
                     onClick = {},
                 )

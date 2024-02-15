@@ -60,6 +60,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.core.text.buildSpannedString
+import androidx.core.text.getSpans
 import androidx.core.text.parseAsHtml
 import androidx.core.text.toHtml
 import com.adevinta.spark.PreviewTheme
@@ -90,12 +91,47 @@ public fun annotatedStringResource(@StringRes id: Int, formatArgs: PersistentMap
     }
 }
 
+/**
+ * Load a annotated string resource with formatting.
+ *
+ * Be aware that using this method you'll loose the annotations support.
+ *
+ * @param id the resource identifier
+ * @param formatArgs the format arguments
+ * @return the [AnnotatedString] data associated with the resource
+ */
+@Deprecated(
+    message = "Use the annotatedStringResource with PersistentMap overload instead",
+    replaceWith = ReplaceWith("annotatedStringResource(id, persistentMapOf(formatArgs))"),
+)
+@Composable
+public fun annotatedStringResource(@StringRes id: Int, vararg formatArgs: Any): AnnotatedString {
+    val resources = resources()
+    val density = LocalDensity.current
+    val colors = SparkTheme.colors
+    val typography = SparkTheme.typography
+    return remember(id, formatArgs) {
+        val text = resources.getText(id, *formatArgs)
+        text.asAnnotatedString(density, colors, typography)
+    }
+}
+
 private fun Resources.buildSpannedStringWithArgs(
     @StringRes id: Int,
     args: PersistentMap<String, String>,
 ): SpannedString = buildSpannedString {
     append(getText(id))
-    getSpans(0, length, Annotation::class.java).filterIsInstance<Annotation>().filter { it.key == "variable" }
+    getSpans<Annotation>().filter { it.key == "variable" }
+        .forEach { replace(getSpanStart(it), getSpanEnd(it), args.getValue(it.value)) }
+}
+
+private fun Resources.buildSpannedStringWithArgs(
+    @PluralsRes id: Int,
+    count: Int,
+    args: PersistentMap<String, String>,
+): SpannedString = buildSpannedString {
+    append(getQuantityText(id, count))
+    getSpans<Annotation>().filter { it.key == "variable" }
         .forEach { replace(getSpanStart(it), getSpanEnd(it), args.getValue(it.value)) }
 }
 
@@ -152,6 +188,34 @@ public fun annotatedPluralStringResource(
 public fun annotatedPluralStringResource(
     @PluralsRes id: Int,
     count: Int,
+    formatArgs: PersistentMap<String, String>,
+): AnnotatedString {
+    val resources = resources()
+    val density = LocalDensity.current
+    val colors = SparkTheme.colors
+    val typography = SparkTheme.typography
+    return remember(id) {
+        val text = resources.buildSpannedStringWithArgs(id, count, formatArgs)
+        text.asAnnotatedString(density, colors, typography)
+    }
+}
+
+/**
+ * Load a styled plurals resource with provided format arguments.
+ *
+ * @param id the resource identifier
+ * @param count the count
+ * @param formatArgs arguments used in the format string
+ * @return the pluralized string data associated with the resource
+ */
+@Deprecated(
+    message = "Use the annotatedPluralStringResource with PersistentMap overload instead",
+    replaceWith = ReplaceWith("annotatedPluralStringResource(id, count, persistentMapOf(formatArgs))"),
+)
+@Composable
+public fun annotatedPluralStringResource(
+    @PluralsRes id: Int,
+    count: Int,
     vararg formatArgs: Any,
 ): AnnotatedString {
     val resources = resources()
@@ -169,6 +233,22 @@ public fun annotatedPluralStringResource(
 internal fun resources(): Resources {
     LocalConfiguration.current
     return LocalContext.current.resources
+}
+
+/**
+ * The framework `getText()` method doesn't support formatting arguments, so we need to do it ourselves.
+ *
+ * Unfortunately `toHtml()` doesn't support the `<annotation>` tag so we loose this span as we need to convert it to a
+ * [String] to be able to use `String.format()`.
+ */
+private fun Resources.getText(@StringRes id: Int, vararg args: Any): CharSequence {
+    val escapedArgs = args.map {
+        if (it is Spanned) it.toHtmlWithoutParagraphs() else it
+    }.toTypedArray()
+    val spannedString = SpannedString(getText(id))
+    val htmlResource = spannedString.toHtmlWithoutParagraphs()
+    val formattedHtml = String.format(htmlResource, *escapedArgs)
+    return formattedHtml.parseAsHtml()
 }
 
 internal fun Resources.getQuantityText(@PluralsRes id: Int, quantity: Int, vararg args: Any): CharSequence {
