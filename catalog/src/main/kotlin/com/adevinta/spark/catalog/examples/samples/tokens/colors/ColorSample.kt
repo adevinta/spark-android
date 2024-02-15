@@ -70,7 +70,6 @@ internal fun ColorSample(paddingValues: PaddingValues) {
                 }
             }
         }
-
     } else {
         val tokensColorsAsLongGroups = rememberColorTokens<Long>(SparkTheme.colors)
 
@@ -87,10 +86,8 @@ internal fun ColorSample(paddingValues: PaddingValues) {
                 }
             }
         }
-
     }
 }
-
 
 @Composable
 private fun RowScope.ColorItem(color: LongOrColor, name: String) {
@@ -144,7 +141,6 @@ private fun ColorSamplePreview() {
         ColorSample(PaddingValues(0.dp))
     }
 }
-
 
 @JvmInline
 private value class LongOrColor(private val value: Any) {
