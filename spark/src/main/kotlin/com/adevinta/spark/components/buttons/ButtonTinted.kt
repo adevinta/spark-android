@@ -52,7 +52,6 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * It's best paired with either a filled button or a outlined button.
  *
  * @param onClick Will be called when the user clicks the button
- * @param text The text to be displayed in the button
  * @param modifier Modifier to be applied to the button
  * @param size The size of the button
  * @param intent The intent color for the button.

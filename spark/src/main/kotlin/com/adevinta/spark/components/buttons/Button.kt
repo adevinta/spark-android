@@ -77,6 +77,7 @@ internal fun BaseSparkButton(
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
+    contentPadding: PaddingValues = SparkButtonDefaults.buttonContentPadding(size),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
@@ -91,7 +92,7 @@ internal fun BaseSparkButton(
         border = border,
         colors = colors,
         interactionSource = interactionSource,
-        contentPadding = SparkButtonDefaults.buttonContentPadding(size),
+        contentPadding = contentPadding,
     ) {
         AnimatedVisibility(visible = isLoading) {
             Row {
@@ -230,6 +231,14 @@ public object SparkButtonDefaults {
      */
     internal fun buttonContentPadding(size: ButtonSize) = PaddingValues(
         horizontal = 16.dp,
+        vertical = size.contentVerticalPadding,
+    )
+
+    /**
+     * The default content padding used by [TextButton]
+     */
+    internal fun textlinkButtonContentPadding(size: ButtonSize) = PaddingValues(
+        horizontal = 0.dp,
         vertical = size.contentVerticalPadding,
     )
 
