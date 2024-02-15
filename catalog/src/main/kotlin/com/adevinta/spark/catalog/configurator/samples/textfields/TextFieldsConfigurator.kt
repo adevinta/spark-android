@@ -101,8 +101,8 @@ private fun TextFieldSample() {
             label = labelText,
             placeholder = placeHolderText,
             helper = helperText,
-            leadingContent = addonText?.let { { Text(it) } } ?: {},
-            trailingContent = icon?.let { { Icon(it, contentDescription = null) } } ?: {},
+            leadingContent = addonText?.let { { Text(it) } },
+            trailingContent = icon?.let { { Icon(it, contentDescription = null) } },
             state = state,
             stateMessage = stateMessageText,
         )

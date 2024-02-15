@@ -78,15 +78,15 @@ internal fun SparkDecorationBox(
     value: String,
     innerTextField: @Composable () -> Unit,
     visualTransformation: VisualTransformation,
-    label: @Composable (() -> Unit),
+    label: @Composable (() -> Unit)?,
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
     readOnly: Boolean,
     placeholder: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
     counter: @Composable (() -> Unit)? = null,
-    leadingIcon: @Composable (AddonScope.() -> Unit) = {},
-    trailingIcon: @Composable (AddonScope.() -> Unit) = {},
+    leadingIcon: @Composable (AddonScope.() -> Unit)? = null,
+    trailingIcon: @Composable (AddonScope.() -> Unit)? = null,
     singleLine: Boolean = false,
     enabled: Boolean = true,
     state: TextFieldState? = null,
@@ -99,8 +99,8 @@ internal fun SparkDecorationBox(
     val contentPadding = OutlinedTextFieldDefaults.contentPadding(
         top = VerticalContentPadding,
         bottom = VerticalContentPadding,
-        start = 8.dp,
-        end = 8.dp,
+        start = if (leadingIcon != null) 8.dp else 16.dp,
+        end = if (trailingIcon != null) 8.dp else 16.dp,
     )
 
     val isFocused = interactionSource.collectIsFocusedAsState().value
@@ -130,10 +130,10 @@ internal fun SparkDecorationBox(
             if (shouldOverrideTextStyleColor) this.takeOrElse { labelColor(inputState) } else this
         },
         contentColor = labelColor,
-        showLabel = true,
+        showLabel = label != null,
     ) { labelProgress, labelTextStyleColor, labelContentColor, placeholderAlphaProgress ->
 
-        val decoratedLabel: @Composable (() -> Unit)? = label.let {
+        val decoratedLabel: @Composable (() -> Unit)? = label?.let {
             @Composable {
                 val labelTextStyle = lerp(
                     SparkTheme.typography.body1,
