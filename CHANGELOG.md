@@ -14,7 +14,7 @@ _2024-02-15_
 * 🆕 Add new `TextLink` Component
 * 🆕 Add Large `UserAvatarStyle` Component
 * 🐛 Add `Info` as `IconButton` intent color
-* 🐛 Fix `ConstraintLayout` Constraint not being applied to `IconButtons`  & `IconToggleButton`
+* 🐛 Fix `ConstraintLayout` Constraint not being applied to `IconButtons` & `IconToggleButton`
 * 🐛 Fix `annotatedStringResource` with args don't render annotation style
 * 🐛 Remove unexpected Compose tooling dependency on runtime classpath
 * 🐛 Attempt to reduce letter spacing on callout typo
