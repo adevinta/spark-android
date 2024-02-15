@@ -71,13 +71,13 @@ internal fun ColorSample(paddingValues: PaddingValues) {
 }
 
 @Composable
-private fun RowScope.ColorItem(color: KProperty1<SparkColors, Long>) {
+private fun RowScope.ColorItem(color: KProperty1<SparkColors, Color>) {
     Surface(
         modifier = Modifier
             .padding(8.dp)
             .heightIn(104.dp)
             .weight(1f),
-        color = Color(color.get(SparkTheme.colors).toULong()),
+        color = color.get(SparkTheme.colors),
         shape = SparkTheme.shapes.extraLarge,
         border = BorderStroke(2.dp, SparkTheme.colors.onBackground),
     ) {
@@ -98,13 +98,15 @@ private fun RowScope.ColorItem(color: KProperty1<SparkColors, Long>) {
  * Avoid computing these tokens on each recomposition but do it only when colors changes.
  */
 @Composable
-private fun rememberColorTokens(colors: SparkColors): List<List<KProperty1<SparkColors, Long>>> = remember(colors) {
+private fun rememberColorTokens(colors: SparkColors): List<List<KProperty1<SparkColors, Color>>> = remember(colors) {
     colors::class.declaredMemberProperties
         .filterNot { field -> field.hasAnnotation<Deprecated>() }
         // Remove dims and any non color tokens
         .filter { it.returnType == Color::class.starProjectedType }
         // Cast the type otherwise we get a star type instead of Long
-        .map { it.cast<KProperty1<SparkColors, Long>>() }
+        .map { it.cast<KProperty1<SparkColors, Color>>() }
+        // Convert property to always return a Color type
+        .map { it.asColorProperty() }
         // Remove content colors
         .filterNot { it.name.startsWith("on") }
         // Use the same order than the one in the specs
@@ -113,6 +115,19 @@ private fun rememberColorTokens(colors: SparkColors): List<List<KProperty1<Spark
         .groupBy { it.name.takeWhile { char -> !char.isUpperCase() } }
         .values.toList()
 }
+
+/**
+ * @return [this] property value as [Color] even when the compiler (or R8) inlines the value as [ULong] in release mode.
+ */
+private fun KProperty1<SparkColors, Color>.asColorProperty(): KProperty1<SparkColors, Color> =
+    object : KProperty1<SparkColors, Color> by this {
+        @Suppress("KotlinConstantConditions")
+        override fun get(receiver: SparkColors): Color = when (val any: Any = this@asColorProperty.get(receiver)) {
+            is Color -> any // in debug builds
+            is Long -> Color(any.toULong()) // in release builds
+            else -> error("Unexpected type: ${any::class}")
+        }
+    }
 
 @Preview
 @Composable
