@@ -70,14 +70,6 @@ import com.adevinta.spark.tokens.highlight
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
-/**
- * Composable function for creating a horizontal layout for the [ProgressTrackerRow].
- *
- * @param style The style of the [JetLimeEvent].
- * @param jetLimeStyle The [JetLimeEvent] style configuration.
- * @param modifier The modifier to be applied to the event.
- * @param content The composable content inside the event.
- */
 @Composable
 internal fun ProgressTrackerRow(
     items: ImmutableList<ProgressStep>,
