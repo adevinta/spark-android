@@ -76,8 +76,8 @@ public val SlidersConfigurator: Configurator = Configurator(
 @Composable
 private fun SliderSample() {
     val scrollState = rememberScrollState()
-    var isEnabled by remember { mutableStateOf(true) }
-    var isRounded by remember { mutableStateOf(false) }
+    var enabled by remember { mutableStateOf(true) }
+    var rounded by remember { mutableStateOf(true) }
     val snackbarHostState = remember { SnackbarHostState() }
     var intent by remember { mutableStateOf(SliderIntent.Main) }
     val intents = SliderIntent.entries
@@ -101,7 +101,8 @@ private fun SliderSample() {
                 value = progress,
                 intent = intent,
                 onValueChange = { progress = it },
-                enabled = isEnabled,
+                enabled = enabled,
+                rounded = rounded,
                 valueRange = 0f..1f,
                 steps = sliderSteps,
             )
@@ -113,13 +114,14 @@ private fun SliderSample() {
                 intent = intent,
                 value = rangeProgress,
                 onValueChange = { rangeProgress = it },
-                enabled = isEnabled,
+                enabled = enabled,
+                rounded = rounded,
                 steps = sliderSteps,
             )
 
             SwitchLabelled(
-                checked = isEnabled,
-                onCheckedChange = { isEnabled = it },
+                checked = enabled,
+                onCheckedChange = { enabled = it },
             ) {
                 Text(
                     text = "Enabled",
@@ -128,8 +130,8 @@ private fun SliderSample() {
             }
 
             SwitchLabelled(
-                checked = isRounded,
-                onCheckedChange = { isRounded = it },
+                checked = rounded,
+                onCheckedChange = { rounded = it },
             ) {
                 Text(
                     text = "Rounded",

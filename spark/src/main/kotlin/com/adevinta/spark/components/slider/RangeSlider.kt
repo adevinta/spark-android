@@ -71,13 +71,15 @@ internal fun SparkRangeSlider(
             )
         }
     },
-    track: @Composable (RangeSliderState) -> Unit = { rangeSliderState ->
-        Track(
-            intent = intent,
-            enabled = enabled,
-            rounded = rounded,
-            rangeSliderState = rangeSliderState,
-        )
+    track: @Composable (RangeSliderState) -> Unit = remember(enabled, rounded, intent) {
+        { rangeSliderState ->
+            Track(
+                intent = intent,
+                enabled = enabled,
+                rounded = rounded,
+                rangeSliderState = rangeSliderState,
+            )
+        }
     },
     steps: Int = 0,
 ) {

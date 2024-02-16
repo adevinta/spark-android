@@ -82,7 +82,7 @@ internal fun SparkSlider(
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     onValueChangeFinished: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    handle: @Composable (SliderState) -> Unit = remember(interactionSource, enabled, intent, steps) {
+    handle: @Composable (SliderState) -> Unit = remember(interactionSource, enabled, rounded, intent, steps) {
         {
             Handle(
                 interactionSource = interactionSource,
@@ -91,7 +91,7 @@ internal fun SparkSlider(
             )
         }
     },
-    track: @Composable (SliderState) -> Unit = remember(interactionSource, enabled, intent, steps) {
+    track: @Composable (SliderState) -> Unit = remember(interactionSource, enabled, rounded, intent, steps) {
         {
             Track(
                 intent = intent,
@@ -129,7 +129,6 @@ internal fun Handle(
     enabled: Boolean = true,
     handleSize: DpSize = DefaultHandleSize,
 ) {
-    enabled.toString()
     val interactions = remember { mutableStateListOf<Interaction>() }
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
@@ -245,8 +244,6 @@ internal fun Track(
 
     val trackColor = SparkTheme.colors.onBackground.dim4
 
-    val stepActiveColor = intent.colors().onColor
-    val stepInactiveColor = intent.colors().color
     val tickFractions = stepsToTickFractions(sliderState.steps)
 
     Canvas(
@@ -260,8 +257,8 @@ internal fun Track(
             getCoercedValueAsFraction(sliderState.valueRange, sliderState.value),
             trackColor,
             indicatorColor,
-            stepInactiveColor,
-            stepActiveColor,
+            Color.Transparent,
+            Color.Transparent,
             rounded = rounded,
         )
     }
@@ -338,8 +335,6 @@ internal fun Track(
 
     val trackColor = SparkTheme.colors.onBackground.dim4
 
-    val stepActiveColor = intent.colors().onColor
-    val stepInactiveColor = intent.colors().color
     val tickFractions = stepsToTickFractions(rangeSliderState.steps)
 
     Canvas(
@@ -353,8 +348,8 @@ internal fun Track(
             getCoercedActiveRangeEndAsFraction(rangeSliderState.valueRange, rangeSliderState.activeRangeEnd),
             trackColor,
             indicatorColor,
-            stepInactiveColor,
-            stepActiveColor,
+            Color.Transparent,
+            Color.Transparent,
             rounded = rounded,
         )
     }
