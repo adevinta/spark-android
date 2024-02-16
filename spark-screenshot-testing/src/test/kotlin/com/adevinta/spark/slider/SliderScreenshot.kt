@@ -57,7 +57,7 @@ internal class SliderScreenshot {
                 verticalArrangement = spacedBy(16.dp),
             ) {
                 intents.forEach { intent ->
-                    sliders(
+                    Sliders(
                         intent = intent,
                         rounded = false,
                     )
@@ -74,7 +74,7 @@ internal class SliderScreenshot {
                 verticalArrangement = spacedBy(16.dp),
             ) {
                 intents.forEach { intent ->
-                    sliders(
+                    Sliders(
                         intent = intent,
                         rounded = true,
                     )
@@ -91,7 +91,7 @@ internal class SliderScreenshot {
                 verticalArrangement = spacedBy(16.dp),
             ) {
                 intents.forEach { intent ->
-                    sliders(
+                    Sliders(
                         intent = intent,
                         enabled = false,
                         rounded = true,
@@ -109,7 +109,7 @@ internal class SliderScreenshot {
                 verticalArrangement = spacedBy(16.dp),
             ) {
                 intents.forEach { intent ->
-                    rangeSliders(
+                    RangeSliders(
                         intent = intent,
                         rounded = false,
                     )
@@ -126,7 +126,7 @@ internal class SliderScreenshot {
                 verticalArrangement = spacedBy(16.dp),
             ) {
                 intents.forEach { intent ->
-                    rangeSliders(
+                    RangeSliders(
                         intent = intent,
                         rounded = true,
                     )
@@ -143,7 +143,7 @@ internal class SliderScreenshot {
                 verticalArrangement = spacedBy(16.dp),
             ) {
                 intents.forEach { intent ->
-                    rangeSliders(
+                    RangeSliders(
                         intent = intent,
                         enabled = false,
                         rounded = true,
@@ -155,7 +155,7 @@ internal class SliderScreenshot {
 
     @OptIn(ExperimentalSparkApi::class)
     @Composable
-    private fun sliders(
+    private fun Sliders(
         intent: SliderIntent,
         enabled: Boolean = true,
         rounded: Boolean,
@@ -200,7 +200,7 @@ internal class SliderScreenshot {
 
     @OptIn(ExperimentalSparkApi::class)
     @Composable
-    private fun rangeSliders(
+    private fun RangeSliders(
         intent: SliderIntent,
         enabled: Boolean = true,
         rounded: Boolean,
