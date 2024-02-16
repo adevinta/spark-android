@@ -158,7 +158,8 @@ private fun SliderSample() {
                         Text(
                             text = sliderSteps.toString(),
                             style = SparkTheme.typography.body2.copy(
-                                fontWeight = FontWeight.Bold, fontSize = 32.sp
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 32.sp,
                             ),
                         )
                     }

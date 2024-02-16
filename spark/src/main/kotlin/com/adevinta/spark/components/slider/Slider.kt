@@ -102,7 +102,7 @@ internal fun SparkSlider(
         }
     },
 
-    ) {
+) {
     MaterialSlider(
         value = value,
         onValueChange = onValueChange,
@@ -176,11 +176,10 @@ internal fun Handle(
                     .size(handleSize)
                     .hoverable(interactionSource = interactionSource),
 
-                )
+            )
         }
     }
 }
-
 
 private fun stepsToTickFractions(steps: Int): FloatArray {
     return if (steps == 0) floatArrayOf() else FloatArray(steps + 2) { it.toFloat() / (steps + 1) }
@@ -320,7 +319,6 @@ private fun DrawScope.drawTrack(
     }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun Track(
@@ -361,7 +359,6 @@ internal fun Track(
         )
     }
 }
-
 
 /**
  * Spark slider.
