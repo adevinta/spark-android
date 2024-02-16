@@ -44,13 +44,13 @@ import androidx.compose.material3.RangeSlider as MaterialRangeSlider
 @Composable
 internal fun SparkRangeSlider(
     value: ClosedFloatingPointRange<Float>,
+    intent: SliderIntent,
     onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     rounded: Boolean = false,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     onValueChangeFinished: (() -> Unit)? = null,
-    intent: SliderIntent,
     startInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     endInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     startHandle: @Composable (RangeSliderState) -> Unit = remember(startInteractionSource, enabled, intent) {
@@ -79,7 +79,6 @@ internal fun SparkRangeSlider(
             rangeSliderState = rangeSliderState,
         )
     },
-    /*@IntRange(from = 0)*/
     steps: Int = 0,
 ) {
     MaterialRangeSlider(
