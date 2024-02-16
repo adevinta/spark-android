@@ -77,6 +77,7 @@ public val SlidersConfigurator: Configurator = Configurator(
 private fun SliderSample() {
     val scrollState = rememberScrollState()
     var isEnabled by remember { mutableStateOf(true) }
+    var isRounded by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
     var intent by remember { mutableStateOf(SliderIntent.Main) }
     val intents = SliderIntent.entries
@@ -121,7 +122,17 @@ private fun SliderSample() {
                 onCheckedChange = { isEnabled = it },
             ) {
                 Text(
-                    text = "Is Enabled",
+                    text = "Enabled",
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+
+            SwitchLabelled(
+                checked = isRounded,
+                onCheckedChange = { isRounded = it },
+            ) {
+                Text(
+                    text = "Rounded",
                     modifier = Modifier.fillMaxWidth(),
                 )
             }
@@ -146,7 +157,9 @@ private fun SliderSample() {
                     Box(modifier = Modifier.align(alignment = Alignment.CenterVertically)) {
                         Text(
                             text = sliderSteps.toString(),
-                            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold, fontSize = 32.sp),
+                            style = SparkTheme.typography.body2.copy(
+                                fontWeight = FontWeight.Bold, fontSize = 32.sp
+                            ),
                         )
                     }
 

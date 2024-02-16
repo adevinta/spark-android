@@ -23,7 +23,7 @@ package com.adevinta.spark.components.slider
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SliderPositions
+import androidx.compose.material3.RangeSliderState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,18 +43,17 @@ import androidx.compose.material3.RangeSlider as MaterialRangeSlider
 @InternalSparkApi
 @Composable
 internal fun SparkRangeSlider(
-    intent: SliderIntent,
     value: ClosedFloatingPointRange<Float>,
     onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
     modifier: Modifier = Modifier,
-    valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
-    /*@IntRange(from = 0)*/
-    steps: Int = 0,
-    onValueChangeFinished: (() -> Unit)? = null,
     enabled: Boolean = true,
+    rounded: Boolean = false,
+    valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
+    onValueChangeFinished: (() -> Unit)? = null,
+    intent: SliderIntent,
     startInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     endInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    startHandle: @Composable (SliderPositions) -> Unit = remember(startInteractionSource, enabled, intent) {
+    startHandle: @Composable (RangeSliderState) -> Unit = remember(startInteractionSource, enabled, intent) {
         {
             Handle(
                 interactionSource = startInteractionSource,
@@ -63,7 +62,7 @@ internal fun SparkRangeSlider(
             )
         }
     },
-    endHandle: @Composable (SliderPositions) -> Unit = remember(endInteractionSource, enabled, intent) {
+    endHandle: @Composable (RangeSliderState) -> Unit = remember(endInteractionSource, enabled, intent) {
         {
             Handle(
                 interactionSource = endInteractionSource,
@@ -72,7 +71,16 @@ internal fun SparkRangeSlider(
             )
         }
     },
-
+    track: @Composable (RangeSliderState) -> Unit = { rangeSliderState ->
+        Track(
+            intent = intent,
+            enabled = enabled,
+            rounded = rounded,
+            rangeSliderState = rangeSliderState,
+        )
+    },
+    /*@IntRange(from = 0)*/
+    steps: Int = 0,
 ) {
     MaterialRangeSlider(
         value = value,
@@ -86,13 +94,7 @@ internal fun SparkRangeSlider(
         endThumb = endHandle,
         startInteractionSource = startInteractionSource,
         endInteractionSource = endInteractionSource,
-        track = { sliderPositions ->
-            Track(
-                intent = intent,
-                enabled = enabled,
-                sliderPositions = sliderPositions,
-            )
-        },
+        track = track,
     )
 }
 
@@ -113,6 +115,7 @@ internal fun SparkRangeSlider(
  * This callback shouldn't be used to update the range slider values (use onValueChange for that),
  * but rather to know when the user has completed selecting a new value by ending a drag or a click.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 public fun RangeSlider(
@@ -121,6 +124,7 @@ public fun RangeSlider(
     modifier: Modifier = Modifier,
     intent: SliderIntent = SliderIntent.Basic,
     enabled: Boolean = true,
+    rounded: Boolean = false,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     /*@IntRange(from = 0)*/
     steps: Int = 0,
@@ -131,6 +135,7 @@ public fun RangeSlider(
         onValueChange = onValueChange,
         modifier = modifier,
         enabled = enabled,
+        rounded = rounded,
         valueRange = valueRange,
         steps = steps,
         intent = intent,

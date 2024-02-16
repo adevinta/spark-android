@@ -35,7 +35,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.SliderPositions
+import androidx.compose.material3.RangeSliderState
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -49,8 +51,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.lerp
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.DpSize
@@ -76,10 +78,11 @@ internal fun SparkSlider(
     onValueChange: (Float) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    rounded: Boolean = false,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     onValueChangeFinished: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    handle: @Composable (SliderPositions) -> Unit = remember(interactionSource, enabled, intent, steps) {
+    handle: @Composable (SliderState) -> Unit = remember(interactionSource, enabled, intent, steps) {
         {
             Handle(
                 interactionSource = interactionSource,
@@ -88,17 +91,18 @@ internal fun SparkSlider(
             )
         }
     },
-    track: @Composable (SliderPositions) -> Unit = remember(interactionSource, enabled, intent, steps) {
+    track: @Composable (SliderState) -> Unit = remember(interactionSource, enabled, intent, steps) {
         {
             Track(
                 intent = intent,
                 enabled = enabled,
-                sliderPositions = it,
+                rounded = rounded,
+                sliderState = it,
             )
         }
     },
 
-) {
+    ) {
     MaterialSlider(
         value = value,
         onValueChange = onValueChange,
@@ -172,19 +176,51 @@ internal fun Handle(
                     .size(handleSize)
                     .hoverable(interactionSource = interactionSource),
 
-            )
+                )
         }
     }
+}
+
+
+private fun stepsToTickFractions(steps: Int): FloatArray {
+    return if (steps == 0) floatArrayOf() else FloatArray(steps + 2) { it.toFloat() / (steps + 1) }
 }
 
 internal val TrackHeight = 4.dp
 private val TickSize = 2.dp
 
+// Calculate the 0..1 fraction that `pos` value represents between `a` and `b`
+internal fun calcFraction(a: Float, b: Float, pos: Float) =
+    (if (b - a == 0f) 0f else (pos - a) / (b - a)).coerceIn(0f, 1f)
+
+internal fun getCoercedValueAsFraction(valueRange: ClosedFloatingPointRange<Float>, value: Float): Float = calcFraction(
+    valueRange.start,
+    valueRange.endInclusive,
+    value.coerceIn(valueRange.start, valueRange.endInclusive),
+)
+
+internal fun getCoercedActiveRangeStartAsFraction(
+    valueRange: ClosedFloatingPointRange<Float>,
+    activeRangeStart: Float,
+): Float = calcFraction(
+    valueRange.start,
+    valueRange.endInclusive,
+    activeRangeStart,
+)
+
+internal fun getCoercedActiveRangeEndAsFraction(
+    valueRange: ClosedFloatingPointRange<Float>,
+    activeRangeEnd: Float,
+): Float = calcFraction(
+    valueRange.start,
+    valueRange.endInclusive,
+    activeRangeEnd,
+)
+
 /**
- * The Default track for [Slider] and [RangeSlider]
+ * The Default track for [Slider] & [RangeSlider]
  *
- * @param sliderPositions [SliderPositions] which is used to obtain the current active track
- * and the tick positions if the slider is discrete.
+ * @param sliderState [SliderState] which is used to obtain the current active track.
  * @param modifier the [Modifier] to be applied to the track.
  * @param intent The intent color for the Track.
  * @param enabled controls the enabled state of this slider. When `false`, this component will
@@ -192,11 +228,13 @@ private val TickSize = 2.dp
  * accessibility services.
  */
 @Composable
+@ExperimentalMaterial3Api
 internal fun Track(
-    sliderPositions: SliderPositions,
+    sliderState: SliderState,
     modifier: Modifier = Modifier,
     intent: SliderIntent = SliderIntent.Accent,
     enabled: Boolean = true,
+    rounded: Boolean = false,
 ) {
     val indicatorColor = rememberUpdatedState(
         if (enabled) {
@@ -210,56 +248,120 @@ internal fun Track(
 
     val stepActiveColor = intent.colors().onColor
     val stepInactiveColor = intent.colors().color
+    val tickFractions = stepsToTickFractions(sliderState.steps)
 
     Canvas(
         modifier
             .fillMaxWidth()
             .height(TrackHeight),
     ) {
-        val isRtl = layoutDirection == LayoutDirection.Rtl
-        val sliderLeft = Offset(0f, center.y)
-        val sliderRight = Offset(size.width, center.y)
-        val sliderStart = if (isRtl) sliderRight else sliderLeft
-        val sliderEnd = if (isRtl) sliderLeft else sliderRight
-        val tickSize = TickSize.toPx()
-        val trackStrokeWidth = TrackHeight.toPx()
-        drawLine(
+        drawTrack(
+            tickFractions,
+            0f,
+            getCoercedValueAsFraction(sliderState.valueRange, sliderState.value),
             trackColor,
-            sliderStart,
-            sliderEnd,
-            trackStrokeWidth,
-            StrokeCap.Round,
-        )
-        val sliderValueEnd = Offset(
-            sliderStart.x + (sliderEnd.x - sliderStart.x) * sliderPositions.activeRange.endInclusive,
-            center.y,
-        )
-
-        val sliderValueStart = Offset(
-            sliderStart.x + (sliderEnd.x - sliderStart.x) * sliderPositions.activeRange.start,
-            center.y,
-        )
-
-        drawLine(
             indicatorColor,
-            sliderValueStart,
-            sliderValueEnd,
-            trackStrokeWidth,
-            StrokeCap.Round,
+            stepInactiveColor,
+            stepActiveColor,
+            rounded = rounded,
         )
-        sliderPositions.tickFractions.groupBy {
-            it > sliderPositions.activeRange.endInclusive || it < sliderPositions.activeRange.start
-        }.forEach { (outsideFraction, list) ->
-            drawPoints(
-                list.map { Offset(lerp(sliderStart, sliderEnd, it).x, center.y) },
-                PointMode.Points,
-                (if (outsideFraction) stepInactiveColor else stepActiveColor),
-                tickSize,
-                StrokeCap.Round,
-            )
-        }
     }
 }
+
+private fun DrawScope.drawTrack(
+    tickFractions: FloatArray,
+    activeRangeStart: Float,
+    activeRangeEnd: Float,
+    inactiveTrackColor: Color,
+    activeTrackColor: Color,
+    inactiveTickColor: Color,
+    activeTickColor: Color,
+    rounded: Boolean,
+) {
+    val isRtl = layoutDirection == LayoutDirection.Rtl
+    val sliderLeft = Offset(0f, center.y)
+    val sliderRight = Offset(size.width, center.y)
+    val sliderStart = if (isRtl) sliderRight else sliderLeft
+    val sliderEnd = if (isRtl) sliderLeft else sliderRight
+    val tickSize = TickSize.toPx()
+    val trackStrokeWidth = TrackHeight.toPx()
+    drawLine(
+        inactiveTrackColor,
+        sliderStart,
+        sliderEnd,
+        trackStrokeWidth,
+        if (rounded) StrokeCap.Round else StrokeCap.Square,
+    )
+    val sliderValueEnd = Offset(
+        sliderStart.x + (sliderEnd.x - sliderStart.x) * activeRangeEnd,
+        center.y,
+    )
+
+    val sliderValueStart = Offset(
+        sliderStart.x + (sliderEnd.x - sliderStart.x) * activeRangeStart,
+        center.y,
+    )
+
+    drawLine(
+        activeTrackColor,
+        sliderValueStart,
+        sliderValueEnd,
+        trackStrokeWidth,
+        if (rounded) StrokeCap.Round else StrokeCap.Square,
+    )
+
+    for (tick in tickFractions) {
+        val outsideFraction = tick > activeRangeEnd || tick < activeRangeStart
+        drawCircle(
+            color = if (outsideFraction) inactiveTickColor else activeTickColor,
+            center = Offset(lerp(sliderStart, sliderEnd, tick).x, center.y),
+            radius = tickSize / 2f,
+        )
+    }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun Track(
+    rangeSliderState: RangeSliderState,
+    modifier: Modifier = Modifier,
+    intent: SliderIntent = SliderIntent.Accent,
+    enabled: Boolean = true,
+    rounded: Boolean = false,
+) {
+    val indicatorColor = rememberUpdatedState(
+        if (enabled) {
+            intent.colors().color
+        } else {
+            intent.colors().color.dim3
+        },
+    ).value
+
+    val trackColor = SparkTheme.colors.onBackground.dim4
+
+    val stepActiveColor = intent.colors().onColor
+    val stepInactiveColor = intent.colors().color
+    val tickFractions = stepsToTickFractions(rangeSliderState.steps)
+
+    Canvas(
+        modifier
+            .fillMaxWidth()
+            .height(TrackHeight),
+    ) {
+        drawTrack(
+            tickFractions,
+            getCoercedActiveRangeStartAsFraction(rangeSliderState.valueRange, rangeSliderState.activeRangeStart),
+            getCoercedActiveRangeEndAsFraction(rangeSliderState.valueRange, rangeSliderState.activeRangeEnd),
+            trackColor,
+            indicatorColor,
+            stepInactiveColor,
+            stepActiveColor,
+            rounded = rounded,
+        )
+    }
+}
+
 
 /**
  * Spark slider.
@@ -283,6 +385,7 @@ internal fun Track(
  * You can create and pass in your own remembered instance to observe Interactions
  * and customize the appearance / behavior of this slider in different states.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 public fun Slider(
@@ -292,6 +395,7 @@ public fun Slider(
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     onValueChangeFinished: (() -> Unit)? = null,
     enabled: Boolean = true,
+    rounded: Boolean = false,
     steps: Int = 0,
     intent: SliderIntent = SliderIntent.Basic,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -302,6 +406,7 @@ public fun Slider(
         modifier = modifier,
         intent = intent,
         enabled = enabled,
+        rounded = rounded,
         valueRange = valueRange,
         onValueChangeFinished = onValueChangeFinished,
         steps = steps,
