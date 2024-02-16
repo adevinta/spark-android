@@ -79,7 +79,7 @@ private fun TextLinkSample() {
     var iconSide by remember { mutableStateOf(IconSide.START) }
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
-    var intent by remember { mutableStateOf(ButtonIntent.Main) }
+    var intent by remember { mutableStateOf(ButtonIntent.Basic) }
     val intents = ButtonIntent.entries
     var expanded by remember { mutableStateOf(false) }
 
