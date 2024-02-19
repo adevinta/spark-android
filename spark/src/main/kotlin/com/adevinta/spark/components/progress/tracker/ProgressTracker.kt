@@ -22,6 +22,7 @@
 package com.adevinta.spark.components.progress.tracker
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.LocalIndication
@@ -32,7 +33,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.LocalContentColor
@@ -52,7 +52,9 @@ import androidx.compose.ui.layout.MultiContentMeasurePolicy
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEachIndexed
@@ -73,6 +75,7 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tokens.highlight
+import com.adevinta.spark.tools.modifiers.ifTrue
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -81,6 +84,7 @@ internal fun ProgressTrackerRow(
     items: ImmutableList<ProgressStep>,
     modifier: Modifier = Modifier,
     intent: BadgeIntent = BadgeIntent.Main,
+    size: ProgressSizes = ProgressSizes.Large,
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
 ) {
@@ -89,6 +93,7 @@ internal fun ProgressTrackerRow(
         orientation = Horizontal,
         modifier = modifier,
         intent = intent,
+        size = size,
         onStepClick = onStepClick,
         selectedStep = selectedStep,
     )
@@ -99,6 +104,7 @@ internal fun ProgressTrackerColumn(
     items: ImmutableList<ProgressStep>,
     modifier: Modifier = Modifier,
     intent: BadgeIntent = BadgeIntent.Main,
+    size: ProgressSizes = ProgressSizes.Large,
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
 ) {
@@ -107,6 +113,7 @@ internal fun ProgressTrackerColumn(
         orientation = Vertical,
         modifier = modifier,
         intent = intent,
+        size = size,
         onStepClick = onStepClick,
         selectedStep = selectedStep,
     )
@@ -118,6 +125,7 @@ private fun ProgressTracker(
     orientation: LayoutOrientation,
     modifier: Modifier = Modifier,
     intent: BadgeIntent = BadgeIntent.Basic,
+    size: ProgressSizes = ProgressSizes.Large,
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
 ) {
@@ -137,6 +145,7 @@ private fun ProgressTracker(
                 label = progressStep.label,
                 enabled = progressStep.enabled,
                 orientation = orientation,
+                size = size,
                 selected = index == selectedStep,
                 interactionSource = interactionSources[index],
                 onClick = { onStepClick?.invoke(index) },
@@ -148,6 +157,7 @@ private fun ProgressTracker(
             val isDone = index < selectedStep
             StepIndicator(
                 colors = colors,
+                size = size,
                 index = index,
                 enabled = progressStep.enabled,
                 selected = index == selectedStep,
@@ -159,7 +169,7 @@ private fun ProgressTracker(
             )
         }
     }
-    val measurePolicy = progressTrackerMeasurePolicy(orientation)
+    val measurePolicy = progressTrackerMeasurePolicy(orientation, size.size)
     ProvideTextStyle(value = SparkTheme.typography.body2.highlight) {
         Layout(
             modifier = modifier.selectableGroup(),
@@ -174,33 +184,44 @@ private fun ProgressTracker(
  */
 internal enum class LayoutOrientation {
     Horizontal,
-    Vertical
+    Vertical,
 }
 
 private val DefaultRowMeasurePolicy: MultiContentMeasurePolicy = ProgressTrackerMeasurePolicy(
     orientation = Horizontal,
     arrangementSpacing = 8.dp,
+    indicatorSize = ProgressSizes.Large.size,
 )
 
 private val DefaultColumnMeasurePolicy: MultiContentMeasurePolicy = ProgressTrackerMeasurePolicy(
     orientation = Vertical,
     arrangementSpacing = 8.dp,
+    indicatorSize = ProgressSizes.Large.size,
 )
 
 @Composable
 internal fun progressTrackerMeasurePolicy(
     orientation: LayoutOrientation,
-): MultiContentMeasurePolicy =
-    if (orientation == Horizontal) {
+    indicatorSize: Dp,
+): MultiContentMeasurePolicy {
+    return if (indicatorSize == ProgressSizes.Large.size && orientation == Horizontal) {
         DefaultRowMeasurePolicy
-    } else {
+    } else if (indicatorSize == ProgressSizes.Large.size && orientation == Vertical) {
         DefaultColumnMeasurePolicy
+    } else {
+        ProgressTrackerMeasurePolicy(
+            orientation = orientation,
+            arrangementSpacing = 8.dp,
+            indicatorSize = indicatorSize,
+        )
     }
+}
 
 @Composable
 private fun StepLabel(
     onClick: () -> Unit,
     orientation: LayoutOrientation,
+    size: ProgressSizes,
     modifier: Modifier = Modifier,
     label: CharSequence = "",
     selected: Boolean = false,
@@ -215,13 +236,15 @@ private fun StepLabel(
         val labelModifier = modifier
             .layoutId(LabelId)
             .paddingFromBaseline(top = 16.dp)
-            .selectable(
-                selected = selected,
-                interactionSource = interactionSource,
-                indication = LocalIndication.current,
-                enabled = enabled,
-            ) {
-                onClick()
+            .ifTrue(size == ProgressSizes.Small) {
+                selectable(
+                    selected = selected,
+                    interactionSource = interactionSource,
+                    indication = LocalIndication.current,
+                    enabled = enabled,
+                ) {
+                    onClick()
+                }
             }
         val textAlign = if (orientation == Horizontal) TextAlign.Center else TextAlign.Start
         when (label) {
@@ -261,6 +284,7 @@ private fun ProgressTrack(
 @Composable
 private fun StepIndicator(
     colors: IntentColor,
+    size: ProgressSizes,
     index: Int,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -281,34 +305,39 @@ private fun StepIndicator(
 
     Surface(
         shape = SparkTheme.shapes.full,
-        modifier = modifier.graphicsLayer {
-            alpha = indicatorAlpha
-        },
+        modifier = modifier
+            .graphicsLayer {
+                alpha = indicatorAlpha
+            }
+            .size(size.size),
         color = indicatorColor,
         elevation = elevation,
-        enabled = enabled,
+        enabled = enabled && size == ProgressSizes.Large,
         onClick = { onClick?.invoke() },
+        interactionSource = interactionSource,
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
-        ) {
-            AnimatedContent(
-                targetState = done,
+        AnimatedVisibility(visible = size != ProgressSizes.Small) {
+            Box(
                 contentAlignment = Alignment.Center,
-                label = "Step status indicator",
-            ) { isStepDone ->
-                if (isStepDone) {
-                    Icon(
-                        sparkIcon = SparkIcons.Check,
-                        modifier = Modifier.size(16.dp),
-                        contentDescription = null, // content description is handle on the Layout
-                    )
-                } else {
-                    val stepPosition = index + 1
-                    Text(
-                        text = "$stepPosition",
-                        style = SparkTheme.typography.body2.highlight.copy(lineHeight = 16.sp),
-                    )
+            ) {
+                AnimatedContent(
+                    targetState = done,
+                    contentAlignment = Alignment.Center,
+                    label = "Step status indicator",
+                ) { isStepDone ->
+                    if (isStepDone) {
+                        Icon(
+                            sparkIcon = SparkIcons.Check,
+                            modifier = Modifier.size(16.dp),
+                            contentDescription = null, // content description is handle on the Layout
+                        )
+                    } else {
+                        val stepPosition = index + 1
+                        Text(
+                            text = "$stepPosition",
+                            style = SparkTheme.typography.body2.highlight.copy(lineHeight = 16.sp),
+                        )
+                    }
                 }
             }
         }
@@ -320,31 +349,71 @@ private fun StepIndicator(
 private fun PreviewProgressStep() {
     PreviewTheme(padding = PaddingValues(0.dp)) {
         var selectedStep by remember { mutableIntStateOf(0) }
+        val size = ProgressSizes.Medium
         ProgressTrackerRow(
-            modifier = Modifier.width(260.dp),
             items = persistentListOf(
                 ProgressStep("Lorem ipsume", true),
                 ProgressStep("Lorem ipsume dolar sit amet", true),
                 ProgressStep("Lorem ipsume", false),
             ),
+            size = size,
             onStepClick = {
                 selectedStep = it
             },
             selectedStep = selectedStep,
         )
         ProgressTrackerColumn(
-            modifier = Modifier.width(300.dp),
             items = persistentListOf(
                 ProgressStep(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
+                        "ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
                     true,
                 ),
                 ProgressStep(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
+                        "ut labore et dolore magna aliqua.",
                     true,
                 ),
                 ProgressStep("Lorem ipsume dolar sit amet", true),
             ),
+            size = size,
+            onStepClick = {
+                selectedStep = it
+            },
+            selectedStep = selectedStep,
+        )
+    }
+}
+
+@Composable
+@Preview
+private fun PreviewProgressSizes() {
+    PreviewTheme(padding = PaddingValues(0.dp)) {
+        var selectedStep by remember { mutableIntStateOf(1) }
+        val items = persistentListOf(
+            ProgressStep("Lorem ipsume", true),
+            ProgressStep("Lorem ipsume dolar sit amet", true),
+            ProgressStep("Lorem ipsume", false),
+        )
+        ProgressTrackerRow(
+            items = items,
+            size = ProgressSizes.Large,
+            onStepClick = {
+                selectedStep = it
+            },
+            selectedStep = selectedStep,
+        )
+        ProgressTrackerRow(
+            items = items,
+            size = ProgressSizes.Medium,
+            onStepClick = {
+                selectedStep = it
+            },
+            selectedStep = selectedStep,
+        )
+        ProgressTrackerRow(
+            items = items,
+            size = ProgressSizes.Small,
             onStepClick = {
                 selectedStep = it
             },
