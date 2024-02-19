@@ -24,7 +24,9 @@ package com.adevinta.spark.components.progress.tracker
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -83,7 +85,8 @@ import kotlinx.collections.immutable.persistentListOf
 internal fun ProgressTrackerRow(
     items: ImmutableList<ProgressStep>,
     modifier: Modifier = Modifier,
-    intent: BadgeIntent = BadgeIntent.Main,
+    intent: BadgeIntent = BadgeIntent.Basic,
+    style: ProgressStyles = ProgressStyles.Outlined,
     size: ProgressSizes = ProgressSizes.Large,
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
@@ -93,6 +96,7 @@ internal fun ProgressTrackerRow(
         orientation = Horizontal,
         modifier = modifier,
         intent = intent,
+        style = style,
         size = size,
         onStepClick = onStepClick,
         selectedStep = selectedStep,
@@ -103,7 +107,8 @@ internal fun ProgressTrackerRow(
 internal fun ProgressTrackerColumn(
     items: ImmutableList<ProgressStep>,
     modifier: Modifier = Modifier,
-    intent: BadgeIntent = BadgeIntent.Main,
+    intent: BadgeIntent = BadgeIntent.Basic,
+    style: ProgressStyles = ProgressStyles.Outlined,
     size: ProgressSizes = ProgressSizes.Large,
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
@@ -113,6 +118,7 @@ internal fun ProgressTrackerColumn(
         orientation = Vertical,
         modifier = modifier,
         intent = intent,
+        style = style,
         size = size,
         onStepClick = onStepClick,
         selectedStep = selectedStep,
@@ -125,6 +131,7 @@ private fun ProgressTracker(
     orientation: LayoutOrientation,
     modifier: Modifier = Modifier,
     intent: BadgeIntent = BadgeIntent.Basic,
+    style: ProgressStyles = ProgressStyles.Outlined,
     size: ProgressSizes = ProgressSizes.Large,
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
@@ -158,6 +165,7 @@ private fun ProgressTracker(
             StepIndicator(
                 colors = colors,
                 size = size,
+                style = style,
                 index = index,
                 enabled = progressStep.enabled,
                 selected = index == selectedStep,
@@ -285,6 +293,7 @@ private fun ProgressTrack(
 private fun StepIndicator(
     colors: IntentColor,
     size: ProgressSizes,
+    style: ProgressStyles,
     index: Int,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -294,13 +303,22 @@ private fun StepIndicator(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val elevation = animateStepElevation(enabled, interactionSource).value
+    val isOutlined = style == ProgressStyles.Outlined
     val indicatorColor by animateColorAsState(
-        targetValue = if (selected) colors.color else colors.containerColor,
+        targetValue = if (selected) {
+            if (isOutlined) colors.containerColor else colors.color
+        } else {
+            if (isOutlined) Color.Transparent else colors.containerColor
+        },
         label = "Indicator color",
     )
     val indicatorAlpha by animateFloatAsState(
         targetValue = if (enabled) 1f else SparkTheme.colors.dim3,
         label = "Indicator color",
+    )
+    val borderSize by animateDpAsState(
+        targetValue = if (isOutlined) 1.dp else 0.dp,
+        label = "Border size",
     )
 
     Surface(
@@ -311,6 +329,11 @@ private fun StepIndicator(
             }
             .size(size.size),
         color = indicatorColor,
+        border = if (isOutlined) {
+            BorderStroke(borderSize, colors.color)
+        } else {
+            null
+        },
         elevation = elevation,
         enabled = enabled && size == ProgressSizes.Large,
         onClick = { onClick?.invoke() },
@@ -349,14 +372,12 @@ private fun StepIndicator(
 private fun PreviewProgressStep() {
     PreviewTheme(padding = PaddingValues(0.dp)) {
         var selectedStep by remember { mutableIntStateOf(0) }
-        val size = ProgressSizes.Medium
         ProgressTrackerRow(
             items = persistentListOf(
                 ProgressStep("Lorem ipsume", true),
                 ProgressStep("Lorem ipsume dolar sit amet", true),
                 ProgressStep("Lorem ipsume", false),
             ),
-            size = size,
             onStepClick = {
                 selectedStep = it
             },
@@ -376,7 +397,6 @@ private fun PreviewProgressStep() {
                 ),
                 ProgressStep("Lorem ipsume dolar sit amet", true),
             ),
-            size = size,
             onStepClick = {
                 selectedStep = it
             },
@@ -414,6 +434,46 @@ private fun PreviewProgressSizes() {
         ProgressTrackerRow(
             items = items,
             size = ProgressSizes.Small,
+            onStepClick = {
+                selectedStep = it
+            },
+            selectedStep = selectedStep,
+        )
+    }
+}
+
+@Composable
+@Preview
+private fun PreviewProgressStyles() {
+    PreviewTheme(padding = PaddingValues(0.dp)) {
+        var selectedStep by remember { mutableIntStateOf(1) }
+        val items = persistentListOf(
+            ProgressStep("Lorem ipsume", true),
+            ProgressStep("Lorem ipsume dolar sit amet", true),
+            ProgressStep("Lorem ipsume", false),
+        )
+        ProgressTrackerRow(
+            items = items,
+            size = ProgressSizes.Large,
+            style = ProgressStyles.Tinted,
+            onStepClick = {
+                selectedStep = it
+            },
+            selectedStep = selectedStep,
+        )
+        ProgressTrackerRow(
+            items = items,
+            size = ProgressSizes.Medium,
+            style = ProgressStyles.Tinted,
+            onStepClick = {
+                selectedStep = it
+            },
+            selectedStep = selectedStep,
+        )
+        ProgressTrackerRow(
+            items = items,
+            size = ProgressSizes.Small,
+            style = ProgressStyles.Tinted,
             onStepClick = {
                 selectedStep = it
             },
