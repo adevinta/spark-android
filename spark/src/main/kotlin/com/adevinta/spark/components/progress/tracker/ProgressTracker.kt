@@ -136,11 +136,27 @@ private fun ProgressTracker(
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
 ) {
+    require(items.size in 2..6) {
+        val baseMessage = if (items.size < 2) {
+            "At least two progress indicators should be displayed"
+        } else {
+            "If a process needs more than six steps, consider simplifying the process or breaking it up into multiple tasks"
+        }
+        baseMessage + " Found ${items.size} steps."
+    }
     val colors = intent.colors()
 
     val progressTracks = @Composable {
-        items.forEach {
-            ProgressTrack(enabled = it.enabled, color = colors.color, orientation = orientation)
+        items.fastForEachIndexed { index, progressStep ->
+            // Since the track is layouted after the step, we need to check the next step to know if the track
+            // should be enabled
+            val nextIndex = (index + 1).coerceAtMost(items.size - 1)
+            val nextStep = items[nextIndex]
+            ProgressTrack(
+                enabled = progressStep.enabled && nextStep.enabled,
+                color = colors.color,
+                orientation = orientation,
+            )
         }
     }
 
@@ -369,13 +385,15 @@ private fun StepIndicator(
 
 @PreviewLightDark
 @Composable
-private fun PreviewProgressStep() {
+private fun PreviewProgressTracker() {
     PreviewTheme(padding = PaddingValues(0.dp)) {
         var selectedStep by remember { mutableIntStateOf(0) }
         ProgressTrackerRow(
             items = persistentListOf(
-                ProgressStep("Lorem ipsume", true),
+                ProgressStep("Lorem ipsume", false),
                 ProgressStep("Lorem ipsume dolar sit amet", true),
+                ProgressStep("Lorem ipsume", false),
+                ProgressStep("Lorem ipsume", true),
                 ProgressStep("Lorem ipsume", false),
             ),
             onStepClick = {
