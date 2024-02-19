@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -85,8 +85,8 @@ internal fun animateStepElevation(
         0.dp
     } else {
         when (interaction) {
-            is PressInteraction.Press -> ElevationTokens.Level1
-            is HoverInteraction.Enter -> ElevationTokens.Level1
+            is PressInteraction.Press -> ElevationTokens.Level2
+            is HoverInteraction.Enter -> ElevationTokens.Level2
             is FocusInteraction.Focus -> ElevationTokens.Level2
             else -> ElevationTokens.Level0
         }
