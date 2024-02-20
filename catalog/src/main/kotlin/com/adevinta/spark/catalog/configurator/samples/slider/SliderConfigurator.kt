@@ -50,12 +50,9 @@ import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
 import com.adevinta.spark.components.menu.DropdownMenuItem
-import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.slider.RangeSlider
 import com.adevinta.spark.components.slider.Slider
 import com.adevinta.spark.components.slider.SliderIntent
-import com.adevinta.spark.components.snackbars.SnackbarHost
-import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
@@ -78,126 +75,119 @@ private fun SliderSample() {
     val scrollState = rememberScrollState()
     var enabled by remember { mutableStateOf(true) }
     var rounded by remember { mutableStateOf(true) }
-    val snackbarHostState = remember { SnackbarHostState() }
-    var intent by remember { mutableStateOf(SliderIntent.Main) }
+    var intent by remember { mutableStateOf(SliderIntent.Basic) }
     val intents = SliderIntent.entries
     var expanded by remember { mutableStateOf(false) }
     var progress by remember { mutableFloatStateOf(0.75f) }
     var rangeProgress by remember { mutableStateOf(0.1f..0.5f) }
-    var sliderSteps by remember { mutableIntStateOf(5) }
+    var sliderSteps by remember { mutableIntStateOf(0) }
 
-    Scaffold(
-        snackbarHost = {
-            SnackbarHost(snackbarHostState)
-        },
+    Column(
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier.verticalScroll(scrollState),
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.verticalScroll(scrollState),
+        Text(text = "Slider", style = SparkTheme.typography.headline1)
+
+        Slider(
+            value = progress,
+            intent = intent,
+            onValueChange = { progress = it },
+            enabled = enabled,
+            rounded = rounded,
+            valueRange = 0f..1f,
+            steps = sliderSteps,
+        )
+
+        VerticalSpacer(8.dp)
+        Text(text = "Range Slider", style = SparkTheme.typography.headline1)
+
+        RangeSlider(
+            intent = intent,
+            value = rangeProgress,
+            onValueChange = { rangeProgress = it },
+            enabled = enabled,
+            rounded = rounded,
+            steps = sliderSteps,
+        )
+
+        SwitchLabelled(
+            checked = enabled,
+            onCheckedChange = { enabled = it },
         ) {
-            Text(text = "Slider", style = SparkTheme.typography.headline1)
-
-            Slider(
-                value = progress,
-                intent = intent,
-                onValueChange = { progress = it },
-                enabled = enabled,
-                rounded = rounded,
-                valueRange = 0f..1f,
-                steps = sliderSteps,
+            Text(
+                text = "Enabled",
+                modifier = Modifier.fillMaxWidth(),
             )
+        }
 
-            VerticalSpacer(8.dp)
-            Text(text = "Range Slider", style = SparkTheme.typography.headline1)
-
-            RangeSlider(
-                intent = intent,
-                value = rangeProgress,
-                onValueChange = { rangeProgress = it },
-                enabled = enabled,
-                rounded = rounded,
-                steps = sliderSteps,
+        SwitchLabelled(
+            checked = rounded,
+            onCheckedChange = { rounded = it },
+        ) {
+            Text(
+                text = "Rounded",
+                modifier = Modifier.fillMaxWidth(),
             )
+        }
 
-            SwitchLabelled(
-                checked = enabled,
-                onCheckedChange = { enabled = it },
-            ) {
-                Text(
-                    text = "Enabled",
-                    modifier = Modifier.fillMaxWidth(),
+        Column {
+            Text(
+                text = "Number of Slider Steps",
+                modifier = Modifier.padding(bottom = 8.dp),
+                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            )
+            Row {
+                Spacer(modifier = Modifier.padding(start = 16.dp))
+                IconButtonFilled(
+                    icon = SparkIcons.Minus,
+                    onClick = {
+                        if (sliderSteps > 0) {
+                            sliderSteps--
+                        }
+                    },
                 )
-            }
-
-            SwitchLabelled(
-                checked = rounded,
-                onCheckedChange = { rounded = it },
-            ) {
-                Text(
-                    text = "Rounded",
-                    modifier = Modifier.fillMaxWidth(),
-                )
-            }
-
-            Column {
-                Text(
-                    text = "Number of Slider Steps",
-                    modifier = Modifier.padding(bottom = 8.dp),
-                    style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-                )
-                Row {
-                    Spacer(modifier = Modifier.padding(start = 16.dp))
-                    IconButtonFilled(
-                        icon = SparkIcons.Minus,
-                        onClick = {
-                            if (sliderSteps > 0) {
-                                sliderSteps--
-                            }
-                        },
+                Spacer(modifier = Modifier.padding(start = 16.dp))
+                Box(modifier = Modifier.align(alignment = Alignment.CenterVertically)) {
+                    Text(
+                        text = sliderSteps.toString(),
+                        style = SparkTheme.typography.body2.copy(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 32.sp,
+                        ),
                     )
-                    Spacer(modifier = Modifier.padding(start = 16.dp))
-                    Box(modifier = Modifier.align(alignment = Alignment.CenterVertically)) {
-                        Text(
-                            text = sliderSteps.toString(),
-                            style = SparkTheme.typography.body2.copy(
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 32.sp,
-                            ),
-                        )
-                    }
+                }
 
-                    Spacer(modifier = Modifier.padding(start = 16.dp))
+                Spacer(modifier = Modifier.padding(start = 16.dp))
 
-                    IconButtonFilled(
-                        icon = SparkIcons.Plus,
+                IconButtonFilled(
+                    icon = SparkIcons.Plus,
+                    onClick = {
+                        sliderSteps++
+                    },
+                )
+            }
+        }
+
+        SelectTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = intent.name,
+            onValueChange = {},
+            readOnly = true,
+            label = stringResource(id = R.string.configurator_component_screen_intent_label),
+            expanded = expanded,
+            onExpandedChange = { expanded = !expanded },
+            onDismissRequest = { expanded = false },
+            dropdownContent = {
+                intents.forEach {
+                    DropdownMenuItem(
+                        text = { Text(it.name) },
                         onClick = {
-                            sliderSteps++
+                            intent = it
+                            expanded = false
                         },
                     )
                 }
-            }
-
-            SelectTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = intent.name,
-                onValueChange = {},
-                readOnly = true,
-                label = stringResource(id = R.string.configurator_component_screen_intent_label),
-                expanded = expanded,
-                onExpandedChange = { expanded = !expanded },
-                onDismissRequest = { expanded = false },
-                dropdownContent = {
-                    intents.forEach {
-                        DropdownMenuItem(
-                            text = { Text(it.name) },
-                            onClick = {
-                                intent = it
-                                expanded = false
-                            },
-                        )
-                    }
-                },
-            )
-        }
+            },
+        )
     }
 }

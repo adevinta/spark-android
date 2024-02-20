@@ -124,7 +124,7 @@ private val DefaultHandleSize = DpSize(DefaultHandleSizeWidth, DefaultHandleSize
 
 @Composable
 internal fun Handle(
-    intent: SliderIntent = remember { SliderIntent.Accent },
+    intent: SliderIntent = remember { SliderIntent.Basic },
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     enabled: Boolean = true,
     handleSize: DpSize = DefaultHandleSize,
@@ -230,7 +230,7 @@ internal fun getCoercedActiveRangeEndAsFraction(
 internal fun Track(
     sliderState: SliderState,
     modifier: Modifier = Modifier,
-    intent: SliderIntent = SliderIntent.Accent,
+    intent: SliderIntent = SliderIntent.Basic,
     enabled: Boolean = true,
     rounded: Boolean = false,
 ) {
@@ -321,7 +321,7 @@ private fun DrawScope.drawTrack(
 internal fun Track(
     rangeSliderState: RangeSliderState,
     modifier: Modifier = Modifier,
-    intent: SliderIntent = SliderIntent.Accent,
+    intent: SliderIntent = SliderIntent.Basic,
     enabled: Boolean = true,
     rounded: Boolean = false,
 ) {
