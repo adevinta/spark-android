@@ -148,7 +148,8 @@ private fun ProgressTracker(
         val baseMessage = if (items.size < 2) {
             "At least two progress indicators should be displayed"
         } else {
-            "If a process needs more than six steps, consider simplifying the process or breaking it up into multiple tasks"
+            "If a process needs more than six steps, consider simplifying the process or breaking it up " +
+                "into multiple tasks"
         }
         baseMessage + " Found ${items.size} steps."
     }
@@ -419,54 +420,17 @@ private fun PreviewProgressTracker() {
             items = persistentListOf(
                 ProgressStep(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
-                            "ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
+                        "ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
                     true,
                 ),
                 ProgressStep(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
-                            "ut labore et dolore magna aliqua.",
+                        "ut labore et dolore magna aliqua.",
                     true,
                 ),
                 ProgressStep("Lorem ipsume dolar sit amet", true),
             ),
             size = size,
-            onStepClick = {
-                selectedStep = it
-            },
-            selectedStep = selectedStep,
-        )
-    }
-}
-
-@Composable
-@Preview
-private fun PreviewProgressSizes() {
-    PreviewTheme(padding = PaddingValues(0.dp)) {
-        var selectedStep by remember { mutableIntStateOf(1) }
-        val items = persistentListOf(
-            ProgressStep("Lorem ipsume", true),
-            ProgressStep("Lorem ipsume dolar sit amet", true),
-            ProgressStep("Lorem ipsume", false),
-        )
-        ProgressTrackerRow(
-            items = items,
-            size = ProgressSizes.Large,
-            onStepClick = {
-                selectedStep = it
-            },
-            selectedStep = selectedStep,
-        )
-        ProgressTrackerRow(
-            items = items,
-            size = ProgressSizes.Medium,
-            onStepClick = {
-                selectedStep = it
-            },
-            selectedStep = selectedStep,
-        )
-        ProgressTrackerRow(
-            items = items,
-            size = ProgressSizes.Small,
             onStepClick = {
                 selectedStep = it
             },

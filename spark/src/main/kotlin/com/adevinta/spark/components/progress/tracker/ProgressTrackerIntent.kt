@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,17 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.adevinta.spark.components.progress.tracker;
+package com.adevinta.spark.components.progress.tracker
 
 /**
  * BadgeIntent is used to define the intent of the badge.
  */
 
-import androidx.compose.runtime.Composable;
-
-import com.adevinta.spark.components.IntentColor;
-import com.adevinta.spark.components.IntentColors;
+import androidx.compose.runtime.Composable
+import com.adevinta.spark.components.IntentColor
+import com.adevinta.spark.components.IntentColors
 
 public enum class ProgressTrackerIntent {
     /**
@@ -64,7 +62,6 @@ public enum class ProgressTrackerIntent {
         override fun colors(): IntentColor = IntentColors.Neutral.colors()
     },
 
-
     /**
      * Used for feedbacks that are positive.
      */
@@ -72,7 +69,6 @@ public enum class ProgressTrackerIntent {
         @Composable
         override fun colors(): IntentColor = IntentColors.Success.colors()
     },
-
 
     /**
      * Used to give information with no emphasis

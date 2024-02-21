@@ -235,7 +235,7 @@ private fun ProgressTrackerSample() {
                     modifier = Modifier
                         .padding(16.dp),
                     verticalAlignment = CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     TextField(
                         modifier = Modifier.weight(1f, false),
