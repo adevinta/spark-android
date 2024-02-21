@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,37 +19,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.progress.tracker
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.layout.Measurable
 import androidx.compose.ui.layout.MeasureResult
 import androidx.compose.ui.layout.MeasureScope
 import androidx.compose.ui.layout.MultiContentMeasurePolicy
 import androidx.compose.ui.layout.Placeable
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEachIndexed
 import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMapIndexed
 import androidx.compose.ui.util.fastMaxOfOrNull
 import androidx.compose.ui.util.fastSumBy
-import com.adevinta.spark.PreviewTheme
-import kotlinx.collections.immutable.persistentListOf
 
 internal data class ProgressTrackerMeasurePolicy(
     private val orientation: LayoutOrientation,
     private val arrangementSpacing: Dp,
+    private val indicatorSize: Dp,
 ) : MultiContentMeasurePolicy {
 
     override fun MeasureScope.measure(
@@ -60,7 +50,7 @@ internal data class ProgressTrackerMeasurePolicy(
 
         val stepsCount = indicatorMeasurables.size
         // Each indicator  have a fixed size coming from the size object
-        val indicatorSize = 32.dp.roundToPx()
+        val indicatorSize = indicatorSize.roundToPx()
         // Calculate the width of each step, taking into account the padding between steps
         val stepsWidth = (constraints.maxWidth / stepsCount)
         // Measure each label to fit within the calculated step width
@@ -90,9 +80,9 @@ internal data class ProgressTrackerMeasurePolicy(
             } else {
                 val extraSizeOfLabelBaseline = 4.sp.roundToPx()
                 val trackHeight = labelPlaceables[index].height +
-                        extraSizeOfLabelBaseline -
-                        (arrangementSpacing.roundToPx() / 2) -
-                        indicatorSize
+                    extraSizeOfLabelBaseline -
+                    (arrangementSpacing.roundToPx() / 2) -
+                    indicatorSize
                 constraints.copy(maxHeight = trackHeight, minHeight = trackHeight)
             }
             trackMeasurable.measure(trackConstraint)
@@ -192,10 +182,10 @@ internal data class ProgressTrackerMeasurePolicy(
                 labelPlaceable.placeRelative(
                     x = indicatorPlaceable.width + arrangementSpacing.roundToPx(),
                     y = previousLabelY + (
-                            indicatorPlaceable.height / 2 -
-                                    labelFirstBaseline +
-                                    5.sp.roundToPx() // Magic number to center the text to the indicator text baseline
-                            ),
+                        indicatorPlaceable.height / 2 -
+                            labelFirstBaseline +
+                            5.sp.roundToPx() // Magic number to center the text to the indicator text baseline
+                        ),
                 )
                 indicatorPlaceable.placeRelative(
                     x = 0,
@@ -210,53 +200,5 @@ internal data class ProgressTrackerMeasurePolicy(
                 previousLabelY += labelPlaceable.height + arrangementSpacing.roundToPx()
             }
         }
-    }
-}
-
-@PreviewLightDark
-@Composable
-private fun PreviewProgressStep() {
-    PreviewTheme(padding = PaddingValues(0.dp)) {
-        var selectedStep by remember { mutableIntStateOf(0) }
-        ProgressTrackerRow(
-            items = persistentListOf(
-                ProgressStep("Lorem ipsume", true),
-                ProgressStep("Lorem ipsume dolar sit amet", true),
-                ProgressStep("Lorem ipsume", false),
-            ),
-            onStepClick = {
-                selectedStep = it
-            },
-            selectedStep = selectedStep,
-        )
-        ProgressTrackerColumn(
-            items = persistentListOf(
-                ProgressStep(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
-                    true,
-                ),
-                ProgressStep(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    true,
-                ),
-                ProgressStep(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    true,
-                ),
-                ProgressStep(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    true,
-                ),
-                ProgressStep(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    true,
-                ),
-                ProgressStep("Lorem ipsume dolar sit amet", true),
-            ),
-            onStepClick = {
-                selectedStep = it
-            },
-            selectedStep = selectedStep,
-        )
     }
 }
