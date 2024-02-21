@@ -400,6 +400,7 @@ private fun StepIndicator(
 private fun PreviewProgressTracker() {
     PreviewTheme(padding = PaddingValues(0.dp)) {
         var selectedStep by remember { mutableIntStateOf(0) }
+        val size = ProgressSizes.Medium
         ProgressTrackerRow(
             items = persistentListOf(
                 ProgressStep("Lorem ipsume", false),
@@ -408,6 +409,7 @@ private fun PreviewProgressTracker() {
                 ProgressStep("Lorem ipsume", true),
                 ProgressStep("Lorem ipsume", false),
             ),
+            size = size,
             onStepClick = {
                 selectedStep = it
             },
@@ -427,6 +429,44 @@ private fun PreviewProgressTracker() {
                 ),
                 ProgressStep("Lorem ipsume dolar sit amet", true),
             ),
+            size = size,
+            onStepClick = {
+                selectedStep = it
+            },
+            selectedStep = selectedStep,
+        )
+    }
+}
+
+@Composable
+@Preview
+private fun PreviewProgressSizes() {
+    PreviewTheme(padding = PaddingValues(0.dp)) {
+        var selectedStep by remember { mutableIntStateOf(1) }
+        val items = persistentListOf(
+            ProgressStep("Lorem ipsume", true),
+            ProgressStep("Lorem ipsume dolar sit amet", true),
+            ProgressStep("Lorem ipsume", false),
+        )
+        ProgressTrackerRow(
+            items = items,
+            size = ProgressSizes.Large,
+            onStepClick = {
+                selectedStep = it
+            },
+            selectedStep = selectedStep,
+        )
+        ProgressTrackerRow(
+            items = items,
+            size = ProgressSizes.Medium,
+            onStepClick = {
+                selectedStep = it
+            },
+            selectedStep = selectedStep,
+        )
+        ProgressTrackerRow(
+            items = items,
+            size = ProgressSizes.Small,
             onStepClick = {
                 selectedStep = it
             },
