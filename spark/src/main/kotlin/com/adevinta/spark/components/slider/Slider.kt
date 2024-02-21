@@ -144,7 +144,7 @@ internal fun Handle(
     }
 
     val handleColor = if (enabled) intent.colors().color else intent.colors().color.dim3
-    val handleColorBg = if (interactions.isNotEmpty()) SparkTheme.colors.basicContainer else Color.Unspecified
+    val handleColorBg = if (interactions.isNotEmpty()) intent.colors().containerColor else Color.Unspecified
     val handleColorBorder = if (interactions.isNotEmpty()) intent.colors().color else Color.Unspecified
 
     Box(contentAlignment = Alignment.Center) {
