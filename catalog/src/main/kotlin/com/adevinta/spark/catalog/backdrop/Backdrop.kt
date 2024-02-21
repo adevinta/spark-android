@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,7 +34,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -363,7 +362,7 @@ public fun BackdropScaffold(
                     .offset { IntOffset(0, scaffoldState.offset.value.roundToInt()) }
                     .then(swipeable),
                 shape = frontLayerShape,
-                tonalElevation = frontLayerElevation,
+                elevation = frontLayerElevation,
                 color = frontLayerBackgroundColor,
                 contentColor = frontLayerContentColor,
             ) {

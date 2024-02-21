@@ -60,10 +60,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEachIndexed
+import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
-import com.adevinta.spark.components.badge.BadgeIntent
 import com.adevinta.spark.components.divider.Divider
 import com.adevinta.spark.components.divider.VerticalDivider
 import com.adevinta.spark.components.icons.Icon
@@ -78,16 +78,19 @@ import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tokens.highlight
 import com.adevinta.spark.tools.modifiers.ifTrue
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
 @Composable
-internal fun ProgressTrackerRow(
+@ExperimentalSparkApi
+public fun ProgressTrackerRow(
     items: ImmutableList<ProgressStep>,
     modifier: Modifier = Modifier,
-    intent: BadgeIntent = BadgeIntent.Basic,
+    intent: ProgressTrackerIntent = ProgressTrackerIntent.Basic,
     style: ProgressStyles = ProgressStyles.Outlined,
     size: ProgressSizes = ProgressSizes.Large,
+    hasIndicatorContent: Boolean = true,
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
 ) {
@@ -98,18 +101,21 @@ internal fun ProgressTrackerRow(
         intent = intent,
         style = style,
         size = size,
+        hasIndicatorContent = hasIndicatorContent,
         onStepClick = onStepClick,
         selectedStep = selectedStep,
     )
 }
 
 @Composable
-internal fun ProgressTrackerColumn(
+@ExperimentalSparkApi
+public fun ProgressTrackerColumn(
     items: ImmutableList<ProgressStep>,
     modifier: Modifier = Modifier,
-    intent: BadgeIntent = BadgeIntent.Basic,
+    intent: ProgressTrackerIntent = ProgressTrackerIntent.Basic,
     style: ProgressStyles = ProgressStyles.Outlined,
     size: ProgressSizes = ProgressSizes.Large,
+    hasIndicatorContent: Boolean = true,
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
 ) {
@@ -120,6 +126,7 @@ internal fun ProgressTrackerColumn(
         intent = intent,
         style = style,
         size = size,
+        hasIndicatorContent = hasIndicatorContent,
         onStepClick = onStepClick,
         selectedStep = selectedStep,
     )
@@ -130,9 +137,10 @@ private fun ProgressTracker(
     items: ImmutableList<ProgressStep>,
     orientation: LayoutOrientation,
     modifier: Modifier = Modifier,
-    intent: BadgeIntent = BadgeIntent.Basic,
+    intent: ProgressTrackerIntent = ProgressTrackerIntent.Basic,
     style: ProgressStyles = ProgressStyles.Outlined,
     size: ProgressSizes = ProgressSizes.Large,
+    hasIndicatorContent: Boolean = true,
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
 ) {
@@ -160,7 +168,7 @@ private fun ProgressTracker(
         }
     }
 
-    val interactionSources = remember { items.map { MutableInteractionSource() } }
+    val interactionSources = remember(items.size) { items.map { MutableInteractionSource() } }
 
     val stepLabels = @Composable {
         items.fastForEachIndexed { index, progressStep ->
@@ -186,6 +194,7 @@ private fun ProgressTracker(
                 enabled = progressStep.enabled,
                 selected = index == selectedStep,
                 done = isDone,
+                hasIndicatorContent = hasIndicatorContent,
                 onClick = onStepClick?.let {
                     { onStepClick.invoke(index) }
                 },
@@ -196,7 +205,9 @@ private fun ProgressTracker(
     val measurePolicy = progressTrackerMeasurePolicy(orientation, size.size)
     ProvideTextStyle(value = SparkTheme.typography.body2.highlight) {
         Layout(
-            modifier = modifier.selectableGroup(),
+            modifier = modifier
+                .selectableGroup()
+                .sparkUsageOverlay(),
             measurePolicy = measurePolicy,
             contents = listOf(progressTracks, stepLabels, stepIndicators),
         )
@@ -260,7 +271,7 @@ private fun StepLabel(
         val labelModifier = modifier
             .layoutId(LabelId)
             .paddingFromBaseline(top = 16.dp)
-            .ifTrue(size == ProgressSizes.Small) {
+            .ifTrue(size == ProgressSizes.Large) {
                 selectable(
                     selected = selected,
                     interactionSource = interactionSource,
@@ -315,10 +326,11 @@ private fun StepIndicator(
     enabled: Boolean = true,
     selected: Boolean = true,
     done: Boolean = false,
+    hasIndicatorContent: Boolean = true,
     onClick: (() -> Unit)? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val elevation = animateStepElevation(enabled, interactionSource).value
+    val elevation = animateStepElevation(enabled, style, interactionSource).value
     val isOutlined = style == ProgressStyles.Outlined
     val indicatorColor by animateColorAsState(
         targetValue = if (selected) {
@@ -355,7 +367,7 @@ private fun StepIndicator(
         onClick = { onClick?.invoke() },
         interactionSource = interactionSource,
     ) {
-        AnimatedVisibility(visible = size != ProgressSizes.Small) {
+        AnimatedVisibility(visible = size != ProgressSizes.Small && hasIndicatorContent) {
             Box(
                 contentAlignment = Alignment.Center,
             ) {
@@ -405,12 +417,12 @@ private fun PreviewProgressTracker() {
             items = persistentListOf(
                 ProgressStep(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
-                        "ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
+                            "ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
                     true,
                 ),
                 ProgressStep(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
-                        "ut labore et dolore magna aliqua.",
+                            "ut labore et dolore magna aliqua.",
                     true,
                 ),
                 ProgressStep("Lorem ipsume dolar sit amet", true),

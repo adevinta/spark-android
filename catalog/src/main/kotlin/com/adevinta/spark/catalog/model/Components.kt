@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurat
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
-import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
+import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressTrackerConfigurator
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
@@ -218,7 +218,20 @@ private val Progressbars = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progressbar/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progressbar/Progressbar.kt",
     examples = ProgressbarExamples,
-    configurator = ProgressbarConfigurator,
+    configurator = ProgressTrackerConfigurator,
+)
+
+private val ProgressTracker = Component(
+    id = nextId(),
+    name = "Progress Tracker",
+    description = R.string.component_progresstracker_description,
+    illustration = R.drawable.ic_progressbar,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/549af2-progress-tracker/b/207b6b",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progress.tracker/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progress/tracker/ProgressbarTracker.kt",
+    examples = ProgressbarExamples,
+    configurator = ProgressTrackerConfigurator,
 )
 
 private val TextLinks = Component(
@@ -267,12 +280,13 @@ public val Components: List<Component> = listOf(
     IconButtons,
     IconToggleButtons,
     Popovers,
+    Progressbars,
+    ProgressTracker,
     RadioButtons,
     Rating,
     Switches,
     Tabs,
     Tags,
     TextLinks,
-    Progressbars,
     TextFields,
 )
