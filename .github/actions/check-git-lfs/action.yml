@@ -20,6 +20,7 @@ runs:
       shell: bash
       run: |
         ( \
+          set -e ; \
           echo -e "🚨 Git LFS violations detected! Please re-commit these files with \`git-lfs\`." ; \
           echo -e "" ; \
           echo -e "\`\`\`" ; \
