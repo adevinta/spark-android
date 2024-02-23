@@ -19,8 +19,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          lfs: true
       - uses: ./.github/actions/check-git-lfs
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
