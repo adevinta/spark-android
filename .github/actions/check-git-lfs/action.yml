@@ -20,7 +20,7 @@ runs:
       shell: bash
       run: |
         ( \
-          echo -e "🚨 Some files are not correctly tracked by \`git-lfs\`!" ; \
+          echo -e "🚨 Git LFS violations detected! Please re-commit these files with \`git-lfs\`." ; \
           echo -e "" ; \
           echo -e "\`\`\`" ; \
           git lfs fsck --pointers ; \
@@ -29,3 +29,4 @@ runs:
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
         PR_NUMBER: ${{ inputs.pr-number }}
+      continue-on-error: true
