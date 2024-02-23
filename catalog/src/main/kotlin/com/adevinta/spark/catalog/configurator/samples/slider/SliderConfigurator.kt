@@ -136,8 +136,11 @@ private fun SliderSample() {
                 modifier = Modifier.padding(bottom = 8.dp),
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
-            Row {
-                Spacer(modifier = Modifier.padding(start = 16.dp))
+            Row(
+            	modifier = Modifier.padding(horizontal = 16.dp)
+            	verticalAlignment = Alignment.CenterVertically,
+            	horizontalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
                 IconButtonFilled(
                     icon = SparkIcons.Minus,
                     onClick = {
@@ -146,8 +149,6 @@ private fun SliderSample() {
                         }
                     },
                 )
-                Spacer(modifier = Modifier.padding(start = 16.dp))
-                Box(modifier = Modifier.align(alignment = Alignment.CenterVertically)) {
                     Text(
                         text = sliderSteps.toString(),
                         style = SparkTheme.typography.body2.copy(
@@ -155,9 +156,6 @@ private fun SliderSample() {
                             fontSize = 32.sp,
                         ),
                     )
-                }
-
-                Spacer(modifier = Modifier.padding(start = 16.dp))
 
                 IconButtonFilled(
                     icon = SparkIcons.Plus,
