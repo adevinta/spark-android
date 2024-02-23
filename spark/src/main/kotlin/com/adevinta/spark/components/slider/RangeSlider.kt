@@ -149,7 +149,7 @@ public fun RangeSlider(
     name = "RangeSlider",
 )
 @Composable
-internal fun RangeSliderPreview(
+private fun RangeSliderPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     var progress by remember { mutableStateOf(0.1f..0.5f) }
