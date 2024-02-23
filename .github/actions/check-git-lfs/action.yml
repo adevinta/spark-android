@@ -1,0 +1,31 @@
+name: '📦 Check git-lfs files'
+description: 'Check git-lfs files'
+
+inputs:
+  github-token:
+    description: 'GitHub token'
+    required: true
+  pr-number:
+    description: 'PR number'
+    required: false
+    type: number
+
+runs:
+  using: composite
+  steps:
+    - run: git lfs fsck --pointers >> $GITHUB_STEP_SUMMARY
+      shell: bash
+      id: fsck
+    - if:  ${{ failure() && steps.fsck.conclusion == 'failure' && inputs.pr-number != '' }}
+      shell: bash
+      run: |
+        ( \
+          echo -e "🚨 Some files are not correctly tracked by \`git-lfs\`!" ; \
+          echo -e "" ; \
+          echo -e "\`\`\`" ; \
+          git lfs fsck --pointers ; \
+          echo -e "\`\`\`" ; \
+        ) | gh pr comment "$PR_NUMBER" --body-file -
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+        PR_NUMBER: ${{ inputs.pr-number }}
