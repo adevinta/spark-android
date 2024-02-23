@@ -280,7 +280,7 @@ public object BottomSheetDefaults {
 
     /** The default shape for a bottom sheets in [PartiallyExpanded] and [Expanded] states. */
     public val ExpandedShape: Shape
-        @Composable get() = SparkTheme.shapes.extraLarge.copy(
+        @Composable get() = SparkTheme.shapes.small.copy(
             bottomStart = CornerSize(0.dp),
             bottomEnd = CornerSize(0.dp),
         )
