@@ -1,4 +1,4 @@
-# Package com.adevinta.spark.components.buttons
+# package com.adevinta.spark.components.slider
 
 [Sliders](https://spark.adevinta.com/1186e1705/p/25cceb-slider/b/03f6fc)
 A slider is an interactive component that allows users to set values by moving a handle within a

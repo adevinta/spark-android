@@ -130,6 +130,7 @@ internal fun Handle(
     handleSize: DpSize = DefaultHandleSize,
 ) {
     val interactions = remember { mutableStateListOf<Interaction>() }
+    val intentColor = intent.colors()
     LaunchedEffect(interactionSource) {
         interactionSource.interactions.collect { interaction ->
             when (interaction) {
@@ -143,40 +144,38 @@ internal fun Handle(
         }
     }
 
-    val handleColor = if (enabled) intent.colors().color else intent.colors().color.dim3
-    val handleColorBg = if (interactions.isNotEmpty()) intent.colors().containerColor else Color.Unspecified
-    val handleColorBorder = if (interactions.isNotEmpty()) intent.colors().color else Color.Unspecified
+    val handleColor = if (enabled) intentColor.color else intentColor.color.dim3
+    val handleColorBg = if (interactions.isNotEmpty()) intentColor.containerColor else Color.Unspecified
+    val handleColorBorder = if (interactions.isNotEmpty()) intentColor.color else Color.Unspecified
 
-    Box(contentAlignment = Alignment.Center) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .size(DefaultHandleSizeWidth)
+            .background(handleColorBg, CircleShape)
+            .border(
+                width = HandleDefaultOutline,
+                color = handleColorBorder,
+                shape = CircleShape,
+            ),
+    ) {
         Box(
-            contentAlignment = Alignment.Center,
             modifier = Modifier
-                .size(DefaultHandleSizeWidth)
-                .background(handleColorBg, CircleShape)
-                .border(
-                    width = HandleDefaultOutline,
-                    color = handleColorBorder,
-                    shape = CircleShape,
-                ),
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(DefaultHandleSizeInnerWidth)
-                    .background(SparkTheme.colors.basicContainer, CircleShape),
-            )
-            Box(
-                modifier = Modifier
-                    .size(DefaultHandleSizeInnerWidth)
-                    .background(handleColor, CircleShape)
-                    .hoverable(interactionSource = interactionSource),
-            )
-            Box(
-                Modifier
-                    .size(handleSize)
-                    .hoverable(interactionSource = interactionSource),
+                .size(DefaultHandleSizeInnerWidth)
+                .background(SparkTheme.colors.basicContainer, CircleShape),
+        )
+        Box(
+            modifier = Modifier
+                .size(DefaultHandleSizeInnerWidth)
+                .background(handleColor, CircleShape)
+                .hoverable(interactionSource = interactionSource),
+        )
+        Box(
+            Modifier
+                .size(handleSize)
+                .hoverable(interactionSource = interactionSource),
 
-            )
-        }
+        )
     }
 }
 

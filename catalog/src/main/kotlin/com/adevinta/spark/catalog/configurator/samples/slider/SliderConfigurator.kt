@@ -22,10 +22,8 @@
 package com.adevinta.spark.catalog.configurator.samples.slider
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -137,9 +135,9 @@ private fun SliderSample() {
                 style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
             )
             Row(
-            	modifier = Modifier.padding(horizontal = 16.dp)
-            	verticalAlignment = Alignment.CenterVertically,
-            	horizontalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.padding(horizontal = 16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 IconButtonFilled(
                     icon = SparkIcons.Minus,
@@ -149,13 +147,13 @@ private fun SliderSample() {
                         }
                     },
                 )
-                    Text(
-                        text = sliderSteps.toString(),
-                        style = SparkTheme.typography.body2.copy(
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 32.sp,
-                        ),
-                    )
+                Text(
+                    text = sliderSteps.toString(),
+                    style = SparkTheme.typography.body2.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 32.sp,
+                    ),
+                )
 
                 IconButtonFilled(
                     icon = SparkIcons.Plus,

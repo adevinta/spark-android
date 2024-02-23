@@ -21,9 +21,13 @@
  */
 package com.adevinta.spark.slider
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumn
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -33,6 +37,7 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.components.slider.RangeSlider
 import com.adevinta.spark.components.slider.Slider
 import com.adevinta.spark.components.slider.SliderIntent
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams.RenderingMode.SHRINK
@@ -50,49 +55,63 @@ internal class SliderScreenshot {
     )
 
     @Test
-    fun sliderSquare() {
+    fun testSliders() {
         paparazzi.sparkSnapshot {
             Column(
                 modifier = Modifier.padding(8.dp),
                 verticalArrangement = spacedBy(16.dp),
             ) {
-                intents.forEach { intent ->
+                Row {
+                    Text(text = "Square Shape")
                     Sliders(
-                        intent = intent,
+                        intent = SliderIntent.Accent,
                         rounded = false,
                     )
                 }
-            }
-        }
-    }
-
-    @Test
-    fun sliderRounded() {
-        paparazzi.sparkSnapshot {
-            Column(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = spacedBy(16.dp),
-            ) {
-                intents.forEach { intent ->
+                Row {
+                    Text(text = "Rounded Shape")
                     Sliders(
-                        intent = intent,
+                        intent = SliderIntent.Support,
                         rounded = true,
+                    )
+                }
+                Row {
+                    Text(text = "Disabled")
+                    Sliders(
+                        intent = SliderIntent.Support,
+                        enabled = false,
                     )
                 }
             }
         }
     }
 
+    @OptIn(ExperimentalLayoutApi::class)
     @Test
-    fun sliderRoundedDisabled() {
+    fun testRangeSliders() {
         paparazzi.sparkSnapshot {
-            Column(
+            FlowColumn(
                 modifier = Modifier.padding(8.dp),
                 verticalArrangement = spacedBy(16.dp),
             ) {
-                intents.forEach { intent ->
-                    Sliders(
-                        intent = intent,
+                Row {
+                    Text(text = "Square Shape")
+                    RangeSliders(
+                        intent = SliderIntent.Basic,
+                        rounded = false,
+                    )
+                }
+                Row {
+                    Text(text = "Rounded Shape")
+                    RangeSliders(
+                        intent = SliderIntent.Error,
+                        rounded = true,
+                    )
+                }
+                Row {
+                    Text(text = "Disabled")
+                    RangeSliders(
+                        intent = SliderIntent.Error,
                         enabled = false,
                         rounded = true,
                     )
@@ -101,66 +120,15 @@ internal class SliderScreenshot {
         }
     }
 
-    @Test
-    fun rangeSliderSquare() {
-        paparazzi.sparkSnapshot {
-            Column(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = spacedBy(16.dp),
-            ) {
-                intents.forEach { intent ->
-                    RangeSliders(
-                        intent = intent,
-                        rounded = false,
-                    )
-                }
-            }
-        }
-    }
-
-    @Test
-    fun rangeSliderRounded() {
-        paparazzi.sparkSnapshot {
-            Column(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = spacedBy(16.dp),
-            ) {
-                intents.forEach { intent ->
-                    RangeSliders(
-                        intent = intent,
-                        rounded = true,
-                    )
-                }
-            }
-        }
-    }
-
-    @Test
-    fun rangeSliderRoundedDisabled() {
-        paparazzi.sparkSnapshot {
-            Column(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = spacedBy(16.dp),
-            ) {
-                intents.forEach { intent ->
-                    RangeSliders(
-                        intent = intent,
-                        enabled = false,
-                        rounded = true,
-                    )
-                }
-            }
-        }
-    }
-
-    @OptIn(ExperimentalSparkApi::class)
+    @SuppressLint("ComposableNaming")
+    @OptIn(ExperimentalSparkApi::class, ExperimentalLayoutApi::class)
     @Composable
     private fun Sliders(
         intent: SliderIntent,
         enabled: Boolean = true,
-        rounded: Boolean,
+        rounded: Boolean = true,
     ) {
-        Column(
+        FlowColumn(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Slider(
@@ -203,7 +171,7 @@ internal class SliderScreenshot {
     private fun RangeSliders(
         intent: SliderIntent,
         enabled: Boolean = true,
-        rounded: Boolean,
+        rounded: Boolean = true,
     ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
