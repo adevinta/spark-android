@@ -96,6 +96,37 @@ import kotlinx.coroutines.launch
 import kotlin.math.max
 
 /**
+ *
+ * Modal bottom sheets are used as an alternative to inline menus or simple dialogs on mobile,
+ * especially when offering a long list of action items, or when items require longer descriptions
+ * and icons. Like dialogs, modal bottom sheets appear in front of app content, disabling all other
+ * app functionality when they appear, and remaining on screen until confirmed, dismissed, or a
+ * required action has been taken.
+ *
+ *
+ * @param onDismissRequest Executes when the user clicks outside of the bottom sheet, after sheet
+ * animates to [Hidden].
+ * @param modifier Optional [Modifier] for the bottom sheet.
+ * @param sheetState The state of the bottom sheet.
+ * @param content The content to be displayed inside the bottom sheet.
+ */
+@Composable
+@ExperimentalMaterial3Api
+public fun ModalBottomSheet(
+    onDismissRequest: () -> Unit,
+    modifier: Modifier = Modifier,
+    sheetState: SheetState = rememberModalBottomSheetState(),
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    SparkModalBottomSheet(
+        onDismissRequest = onDismissRequest,
+        modifier = modifier,
+        sheetState = sheetState,
+        content = content,
+    )
+}
+
+/**
  * <a href="https://m3.material.io/components/bottom-sheets/overview" class="external" target="_blank">Material Design modal bottom sheet</a>.
  *
  * Modal bottom sheets are used as an alternative to inline menus or simple dialogs on mobile,
@@ -124,9 +155,10 @@ import kotlin.math.max
  * @param dragHandle Optional visual marker to swipe the bottom sheet.
  * @param content The content to be displayed inside the bottom sheet.
  */
+
 @Composable
 @ExperimentalMaterial3Api
-public fun ModalBottomSheet(
+internal fun SparkModalBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberModalBottomSheetState(),
@@ -242,8 +274,8 @@ public fun ModalBottomSheet(
                                             }
                                         } else if (hasPartiallyExpandedState) {
                                             collapse {
-                                                val confirmPartial = swipeableState
-                                                    .confirmValueChange(SheetValue.PartiallyExpanded)
+                                                val confirmPartial =
+                                                    swipeableState.confirmValueChange(SheetValue.PartiallyExpanded)
                                                 if (confirmPartial) {
                                                     scope.launch { partialExpand() }
                                                 }
@@ -329,27 +361,26 @@ private fun Modifier.modalBottomSheetSwipeable(
     enabled = sheetState.isVisible,
     startDragImmediately = sheetState.swipeableState.isAnimationRunning,
     onDragStopped = onDragStopped,
-)
-    .swipeAnchors(
-        state = sheetState.swipeableState,
-        anchorChangeHandler = anchorChangeHandler,
-        possibleValues = setOf(Hidden, SheetValue.PartiallyExpanded, Expanded),
-    ) { value, sheetSize ->
-        when (value) {
-            Hidden -> screenHeight + bottomPadding
-            SheetValue.PartiallyExpanded -> when {
-                sheetSize.height < screenHeight / 2 -> null
-                sheetState.skipPartiallyExpanded -> null
-                else -> screenHeight / 2f
-            }
+).swipeAnchors(
+    state = sheetState.swipeableState,
+    anchorChangeHandler = anchorChangeHandler,
+    possibleValues = setOf(Hidden, SheetValue.PartiallyExpanded, Expanded),
+) { value, sheetSize ->
+    when (value) {
+        Hidden -> screenHeight + bottomPadding
+        SheetValue.PartiallyExpanded -> when {
+            sheetSize.height < screenHeight / 2 -> null
+            sheetState.skipPartiallyExpanded -> null
+            else -> screenHeight / 2f
+        }
 
-            Expanded -> if (sheetSize.height != 0) {
-                max(0f, screenHeight - sheetSize.height)
-            } else {
-                null
-            }
+        Expanded -> if (sheetSize.height != 0) {
+            max(0f, screenHeight - sheetSize.height)
+        } else {
+            null
         }
     }
+}
 
 @ExperimentalMaterial3Api
 @Suppress("ktlint:standard:function-naming")
