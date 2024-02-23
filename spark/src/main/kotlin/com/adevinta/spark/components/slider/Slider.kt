@@ -411,7 +411,7 @@ public fun Slider(
     name = "Slider",
 )
 @Composable
-internal fun SliderPreview(
+private fun SliderPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     var progress by remember { mutableFloatStateOf(0.75f) }
