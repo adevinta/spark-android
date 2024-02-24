@@ -121,7 +121,7 @@ private fun rememberColorTokens(colors: SparkColors): List<List<KProperty1<Spark
  */
 private fun KProperty1<SparkColors, Color>.asColorProperty(): KProperty1<SparkColors, Color> =
     object : KProperty1<SparkColors, Color> by this {
-        @Suppress("KotlinConstantConditions")
+        @Suppress("USELESS_IS_CHECK")
         override fun get(receiver: SparkColors): Color = when (val any: Any = this@asColorProperty.get(receiver)) {
             is Color -> any // in debug builds
             is Long -> Color(any.toULong()) // in release builds
