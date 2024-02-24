@@ -40,6 +40,7 @@ import com.adevinta.spark.components.text.TextLink
 import com.adevinta.spark.components.text.TextLinkButton
 import com.adevinta.spark.icons.Link
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.res.annotatedStringResource
 import kotlinx.coroutines.launch
 
 private const val TextLinksExampleSourceUrl = "$SampleSourceUrl/TextLinkExamples.kt"
@@ -65,7 +66,7 @@ public val TextLinksExamples: List<Example> = listOf(
 
                 TextLink(
                     style = SparkTheme.typography.subhead,
-                    text = R.string.spark_text_link_short_example_,
+                    text = annotatedStringResource(id = R.string.spark_text_link_short_example_),
                     lineHeight = 40.sp,
                     onClickLabel = "https://kotlinlang.org",
                     onClick = {
@@ -101,7 +102,7 @@ public val TextLinksExamples: List<Example> = listOf(
 
                 TextLink(
                     style = SparkTheme.typography.subhead,
-                    text = R.string.spark_text_link_paragraph_example_,
+                    text = annotatedStringResource(id = R.string.spark_text_link_paragraph_example_),
                     onClickLabel = "textLink",
                     onClick = {
                         scope.launch {

@@ -59,6 +59,7 @@ import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.res.annotatedStringResource
 import kotlinx.coroutines.launch
 
 public val TextLinksConfigurator: Configurator = Configurator(
@@ -78,7 +79,7 @@ private fun TextLinkSample() {
     var iconSide by remember { mutableStateOf(IconSide.START) }
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
-    var intent by remember { mutableStateOf(ButtonIntent.Main) }
+    var intent by remember { mutableStateOf(ButtonIntent.Basic) }
     val intents = ButtonIntent.entries
     var expanded by remember { mutableStateOf(false) }
 
@@ -94,7 +95,7 @@ private fun TextLinkSample() {
             Text(text = "Text Link Component", style = SparkTheme.typography.headline1)
 
             TextLink(
-                text = R.string.spark_text_link_paragraph_example_,
+                text = annotatedStringResource(id = R.string.spark_text_link_paragraph_example_),
                 style = SparkTheme.typography.subhead,
                 onClickLabel = "Privacy & Policy",
                 onClick = {

@@ -4,6 +4,32 @@
 
 ## [Unreleased]
 
+## [0.7.0]
+
+_2024-02-15_
+
+### Spark
+
+* 🆕 Add slots api to `Buttons` and `Tags`
+* 🆕 Add new `TextLink` Component
+* 🆕 Add Large `UserAvatarStyle` Component
+* 🐛 Add `Info` as `IconButton` intent color
+* 🐛 Fix `ConstraintLayout` Constraint not being applied to `IconButtons` & `IconToggleButton`
+* 🐛 Fix `annotatedStringResource` with args don't render annotation style
+* 🐛 Remove unexpected Compose tooling dependency on runtime classpath
+* 🐛 Attempt to reduce letter spacing on callout typo
+* 🚀 Update modifiers impl to use Node api
+
+
+### Catalog App
+
+* 💄 Theme settings are now saved between sessions
+* 🎨 Add Configurator for `Popover`
+* 🎨 Add Configurator for `Progressbar`
+* 📝 We can now specify a group to whom the app is distributed
+* 📝 A message can be specified when publishing the app
+
+
 ## [0.6.1]
 
 _2023-12-21_
@@ -172,7 +198,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.6.1...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.7.0...HEAD
+
+[0.7.0]: https://github.com/adevinta/spark-android/releases/tag/0.7.0
 
 [0.6.1]: https://github.com/adevinta/spark-android/releases/tag/0.6.1
 

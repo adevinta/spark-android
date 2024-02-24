@@ -22,12 +22,11 @@
 package com.adevinta.spark.components.text
 
 import android.annotation.SuppressLint
-import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.ButtonDefaults
@@ -38,8 +37,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,6 +57,7 @@ import com.adevinta.spark.components.buttons.BaseSparkButton
 import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.IconSide
+import com.adevinta.spark.components.buttons.SparkButtonDefaults
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
@@ -105,37 +111,50 @@ import kotlinx.coroutines.launch
 
 @Composable
 public fun TextLink(
-    @StringRes text: Int,
+    text: AnnotatedString,
     onClickLabel: String,
     modifier: Modifier = Modifier,
-    style: TextStyle = LocalTextStyle.current,
+    color: Color = Color.Unspecified,
+    fontSize: TextUnit = TextUnit.Unspecified,
+    fontStyle: FontStyle? = null,
+    fontWeight: FontWeight? = null,
+    fontFamily: FontFamily? = null,
+    letterSpacing: TextUnit = TextUnit.Unspecified,
+    textDecoration: TextDecoration? = null,
+    textAlign: TextAlign = TextAlign.Unspecified,
+    lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
-    lineHeight: TextUnit = TextUnit.Unspecified,
     inlineContent: ImmutableMap<String, InlineTextContent> = persistentMapOf(),
     onTextLayout: (TextLayoutResult) -> Unit = {},
+    style: TextStyle = LocalTextStyle.current,
     onClick: () -> Unit,
 ) {
-    Row(
-        modifier = modifier.clickable(onClickLabel = onClickLabel) { onClick() },
-    ) {
-        SparkText(
-            text = annotatedStringResource(text),
-            modifier = Modifier
-                .weight(1F, false)
-                .alignByBaseline(),
-            style = style,
-            overflow = overflow,
-            softWrap = softWrap,
-            lineHeight = lineHeight,
-            maxLines = maxLines,
-            minLines = minLines,
-            inlineContent = inlineContent,
-            onTextLayout = { onTextLayout(it) },
-        )
-    }
+    SparkText(
+        text = text,
+        modifier = modifier.clickable(
+            onClickLabel = onClickLabel,
+            onClick = onClick,
+        ),
+        style = style,
+        overflow = overflow,
+        softWrap = softWrap,
+        lineHeight = lineHeight,
+        maxLines = maxLines,
+        minLines = minLines,
+        inlineContent = inlineContent,
+        color = color,
+        fontSize = fontSize,
+        fontStyle = fontStyle,
+        fontWeight = fontWeight,
+        fontFamily = fontFamily,
+        letterSpacing = letterSpacing,
+        textDecoration = textDecoration,
+        textAlign = textAlign,
+        onTextLayout = { onTextLayout(it) },
+    )
 }
 
 /**
@@ -162,7 +181,7 @@ public fun TextLinkButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Danger,
+    intent: ButtonIntent = ButtonIntent.Basic,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
@@ -181,12 +200,62 @@ public fun TextLinkButton(
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
+        contentPadding = SparkButtonDefaults.textlinkButtonContentPadding(size),
         interactionSource = interactionSource,
     ) {
         Text(
             text = text,
-            style = SparkTheme.typography.callout.copy(textDecoration = TextDecoration.Underline),
+            style = LocalTextStyle.current.copy(textDecoration = TextDecoration.Underline),
         )
+    }
+}
+
+/**
+ * Component that displays an underlined text link Button
+ * @param onClick callback when textLink button is clicked.
+ * @param modifier the [Modifier] to be applied to this layout node
+ * @param size The size of the button
+ * @param intent The intent color for the button.
+ * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
+ * @param icon The optional icon to be displayed at the start or the end of the button container.
+ * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
+ * or end of the button
+ * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
+ * loading state
+ * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
+ * for this button. You can create and pass in your own `remember`ed instance to observe
+ * [Interaction]s and customize the appearance / behavior of this button in different states.
+ */
+@SuppressLint("VisibleForTests")
+@Composable
+public fun TextLinkButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    size: ButtonSize = ButtonSize.Medium,
+    intent: ButtonIntent = ButtonIntent.Danger,
+    enabled: Boolean = true,
+    icon: SparkIcon? = null,
+    iconSide: IconSide = IconSide.START,
+    isLoading: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    content: @Composable RowScope.() -> Unit,
+) {
+    val colors = ButtonDefaults.textButtonColors(contentColor = intent.colors().color)
+
+    BaseSparkButton(
+        onClick = onClick,
+        modifier = modifier,
+        size = size,
+        enabled = enabled,
+        elevation = ButtonDefaults.buttonElevation(),
+        colors = colors,
+        icon = icon,
+        iconSide = iconSide,
+        isLoading = isLoading,
+        contentPadding = SparkButtonDefaults.textlinkButtonContentPadding(size),
+        interactionSource = interactionSource,
+    ) {
+        content()
     }
 }
 
@@ -215,7 +284,7 @@ private fun SparkTextLinkPreview(
                 Column {
                     TextLink(
                         style = SparkTheme.typography.subhead,
-                        text = R.string.spark_annotatedStringResource_test_args,
+                        text = annotatedStringResource(id = R.string.spark_annotatedStringResource_test_args),
                         onClickLabel = "Privacy & Policy",
                         onClick = {
                             scope.launch {
