@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,21 +27,16 @@ import kotlin.reflect.KClass
 
 public class SparkPreviewParamProvider : CollectionPreviewParameterProvider<SparkPreviewParam>(
     listOf(
-        SparkPreviewParam(ThemeVariant.Light, UserType.Part, isLegacy = false),
-        SparkPreviewParam(ThemeVariant.Light, UserType.Pro, isLegacy = false),
-        SparkPreviewParam(ThemeVariant.Dark, UserType.Part, isLegacy = false),
-        SparkPreviewParam(ThemeVariant.Dark, UserType.Pro, isLegacy = false),
-        SparkPreviewParam(ThemeVariant.Light, UserType.Part, isLegacy = true),
-        SparkPreviewParam(ThemeVariant.Light, UserType.Pro, isLegacy = true),
-        SparkPreviewParam(ThemeVariant.Dark, UserType.Part, isLegacy = true),
-        SparkPreviewParam(ThemeVariant.Dark, UserType.Pro, isLegacy = true),
+        SparkPreviewParam(ThemeVariant.Light, UserType.Part),
+        SparkPreviewParam(ThemeVariant.Light, UserType.Pro),
+        SparkPreviewParam(ThemeVariant.Dark, UserType.Part),
+        SparkPreviewParam(ThemeVariant.Dark, UserType.Pro),
     ),
 )
 
 public data class SparkPreviewParam(
     val theme: ThemeVariant,
     val userType: UserType,
-    val isLegacy: Boolean,
 )
 
 /**

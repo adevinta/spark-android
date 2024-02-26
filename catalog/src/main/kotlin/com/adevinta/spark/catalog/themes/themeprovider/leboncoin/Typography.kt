@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -104,111 +104,6 @@ private val calloutType = TextStyle(
     fontWeight = FontWeight.Bold,
 )
 
-private val tile1Type = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 24.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 28.sp,
-    letterSpacing = 0.sp,
-)
-
-private val title2Type = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 20.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 26.sp,
-    letterSpacing = 0.15.sp,
-)
-
-private val title3Type = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 18.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 18.sp,
-    letterSpacing = 0.15.sp,
-)
-
-private val largeImportantType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 16.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 16.sp,
-    letterSpacing = 0.15.sp,
-)
-
-private val largeType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 16.sp,
-    fontWeight = FontWeight.Normal,
-    lineHeight = 16.sp,
-    letterSpacing = 0.5.sp,
-)
-
-private val bodyImportantType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 14.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 20.sp,
-    letterSpacing = 0.1.sp,
-)
-
-private val bodyType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 14.sp,
-    fontWeight = FontWeight.Normal,
-    lineHeight = 20.sp,
-    letterSpacing = 0.25.sp,
-)
-
-private val smallImportantType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 12.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 16.sp,
-)
-
-private val smallLegacyType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 12.sp,
-    fontWeight = FontWeight.Normal,
-    lineHeight = 16.sp,
-)
-
-private val extraSmallImportantType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 10.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 10.sp,
-)
-
-private val extraSmallType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 10.sp,
-    fontWeight = FontWeight.Normal,
-    lineHeight = 10.sp,
-)
-
-private val buttonType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 14.sp,
-    fontWeight = FontWeight.SemiBold,
-    letterSpacing = 1.25.sp,
-)
-
-internal val LeboncoinLegacyTypo: SparkTypography = sparkTypography(
-    display1 = display1Type,
-    display2 = display2Type,
-    display3 = tile1Type,
-    headline1 = title2Type,
-    headline2 = title3Type,
-    subhead = subheadType,
-    body1 = largeType,
-    body2 = bodyType,
-    caption = smallLegacyType,
-    small = extraSmallType,
-    callout = buttonType,
-)
-
 internal val LeboncoinTypo: SparkTypography = sparkTypography(
     display1 = display1Type,
     display2 = display2Type,
@@ -224,18 +119,17 @@ internal val LeboncoinTypo: SparkTypography = sparkTypography(
 )
 
 public fun brandTypography(
-    isLegacy: Boolean,
     display1: TextStyle = display1Type,
     display2: TextStyle = display2Type,
-    display3: TextStyle = (if (isLegacy) tile1Type else display3Type),
-    headline1: TextStyle = (if (isLegacy) title2Type else headline1Type),
-    headline2: TextStyle = (if (isLegacy) title3Type else headline2Type),
+    display3: TextStyle = display3Type,
+    headline1: TextStyle = headline1Type,
+    headline2: TextStyle = headline2Type,
     subhead: TextStyle = subheadType,
-    body1: TextStyle = (if (isLegacy) largeType else body1Type),
-    body2: TextStyle = (if (isLegacy) bodyType else body2Type),
-    caption: TextStyle = (if (isLegacy) smallLegacyType else captionType),
-    small: TextStyle = (if (isLegacy) extraSmallType else smallType),
-    callout: TextStyle = (if (isLegacy) buttonType else calloutType),
+    body1: TextStyle = body1Type,
+    body2: TextStyle = body2Type,
+    caption: TextStyle = captionType,
+    small: TextStyle = smallType,
+    callout: TextStyle = calloutType,
 ): SparkTypography = sparkTypography(
     display1 = display1,
     display2 = display2,

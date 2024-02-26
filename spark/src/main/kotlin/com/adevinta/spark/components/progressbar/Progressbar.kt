@@ -77,41 +77,6 @@ internal fun SparkProgressbar(
  * @param isRounded Controls the border shape of the progressbar. When `true`,
  * this progressbar will have rounded border shape, & the default is rounded
  */
-@Deprecated(
-    message = "Use the overload that takes `progress` as a lambda",
-    replaceWith = ReplaceWith(
-        "Progressbar(\n" + "progress = { progress },\n" + "modifier = modifier,\n" +
-            "intent = intent,\n" + "isRounded = isRounded,\n" + ")",
-    ),
-)
-@Composable
-public fun Progressbar(
-    progress: Float,
-    intent: ProgressbarIntent,
-    modifier: Modifier = Modifier,
-    isRounded: Boolean = true,
-) {
-    SparkProgressbar(
-        progress = { progress },
-        isIndeterminate = false,
-        intent = intent,
-        modifier = modifier,
-        isRounded = isRounded,
-    )
-}
-
-/**
- * Determinate Progressbar
- *
- * Progressbar express a specified progress.
- *
- * @param progress the progress of this progress indicator, where 0.0 represents no progress and 1.0
- * represents full progress. Values outside of this range are coerced into the range.
- * @param intent The intent color for the Progressbar.
- * @param modifier Modifier to be applied to the Progressbar
- * @param isRounded Controls the border shape of the progressbar. When `true`,
- * this progressbar will have rounded border shape, & the default is rounded
- */
 
 @Composable
 public fun Progressbar(

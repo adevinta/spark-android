@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
-import com.adevinta.spark.LocalLegacyStyle
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.SparkButtonTags.TAG_PROGRESS_INDICATOR
@@ -88,7 +87,7 @@ internal fun BaseSparkButton(
             .sparkUsageOverlay(),
         enabled = enabled,
         elevation = elevation,
-        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else shape,
+        shape = shape,
         border = border,
         colors = colors,
         interactionSource = interactionSource,

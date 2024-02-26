@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -69,7 +69,6 @@ internal fun SparkTenantTheme(
     useDarkColors: Boolean = isSystemInDarkTheme(),
     useSparkTokensHighlighter: Boolean = false,
     useSparkComponentsHighlighter: Boolean = false,
-    useLegacyStyle: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val colors = if (useDarkColors) {
@@ -83,7 +82,6 @@ internal fun SparkTenantTheme(
         typography = sparkTypography(),
         useSparkTokensHighlighter = useSparkTokensHighlighter,
         useSparkComponentsHighlighter = useSparkComponentsHighlighter,
-        useLegacyStyle = useLegacyStyle,
         content = content,
     )
 }

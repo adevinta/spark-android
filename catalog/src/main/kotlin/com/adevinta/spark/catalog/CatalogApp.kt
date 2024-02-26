@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -90,7 +90,6 @@ import com.adevinta.spark.catalog.themes.ThemeMode
 import com.adevinta.spark.catalog.themes.ThemePicker
 import com.adevinta.spark.catalog.themes.UserMode
 import com.adevinta.spark.catalog.themes.themeprovider.ThemeProvider
-import com.adevinta.spark.catalog.themes.themeprovider.adevinta.AdevintaTheme
 import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.KleinanzeigenTheme
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
 import com.adevinta.spark.catalog.themes.themeprovider.milanuncios.MilanunciosTheme
@@ -101,7 +100,6 @@ import kotlinx.coroutines.launch
 
 @OptIn(
     ExperimentalFoundationApi::class,
-    ExperimentalComposeUiApi::class,
 )
 @Composable
 internal fun ComponentActivity.CatalogApp(
@@ -112,7 +110,6 @@ internal fun ComponentActivity.CatalogApp(
     showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
     val themeProvider: ThemeProvider = when (theme.brandMode) {
-        BrandMode.Adevinta -> AdevintaTheme
         BrandMode.Leboncoin -> LeboncoinTheme
         BrandMode.Subito -> SubitoTheme
         BrandMode.Kleinanzeigen -> KleinanzeigenTheme
@@ -122,15 +119,14 @@ internal fun ComponentActivity.CatalogApp(
     val useDark = (theme.themeMode == ThemeMode.System && isSystemInDarkTheme()) || theme.themeMode == ThemeMode.Dark
 
     val colors =
-        themeProvider.colors(useDarkColors = useDark, isPro = theme.userMode == UserMode.Pro, isLegacy = false)
-    val shapes = themeProvider.shapes(isLegacy = false)
-    val typography = themeProvider.typography(isLegacy = false)
+        themeProvider.colors(useDarkColors = useDark, isPro = theme.userMode == UserMode.Pro)
+    val shapes = themeProvider.shapes()
+    val typography = themeProvider.typography()
 
     SparkTheme(
         colors = colors,
         shapes = shapes,
         typography = typography,
-        useLegacyStyle = false,
     ) {
         CompositionLocalProvider(LocalRippleTheme provides SparkRippleTheme) {
             val layoutDirection = when (theme.textDirection) {

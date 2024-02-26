@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -102,97 +102,6 @@ private val calloutType = TextStyle(
     fontFamily = FontFamily.Default,
     fontSize = 14.sp,
     fontWeight = FontWeight.Bold,
-)
-
-private val tile1Type = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 24.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 28.sp,
-    letterSpacing = 0.sp,
-)
-
-private val title2Type = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 20.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 26.sp,
-    letterSpacing = 0.15.sp,
-)
-
-private val title3Type = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 18.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 18.sp,
-    letterSpacing = 0.15.sp,
-)
-
-private val largeImportantType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 16.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 16.sp,
-    letterSpacing = 0.15.sp,
-)
-
-private val largeType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 16.sp,
-    fontWeight = FontWeight.Normal,
-    lineHeight = 16.sp,
-    letterSpacing = 0.5.sp,
-)
-
-private val bodyImportantType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 14.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 20.sp,
-    letterSpacing = 0.1.sp,
-)
-
-private val bodyType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 14.sp,
-    fontWeight = FontWeight.Normal,
-    lineHeight = 20.sp,
-    letterSpacing = 0.25.sp,
-)
-
-private val smallImportantType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 12.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 16.sp,
-)
-
-private val smallLegacyType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 12.sp,
-    fontWeight = FontWeight.Normal,
-    lineHeight = 16.sp,
-)
-
-private val extraSmallImportantType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 10.sp,
-    fontWeight = FontWeight.SemiBold,
-    lineHeight = 10.sp,
-)
-
-private val extraSmallType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 10.sp,
-    fontWeight = FontWeight.Normal,
-    lineHeight = 10.sp,
-)
-
-private val buttonType = TextStyle(
-    fontFamily = FontFamily.Default,
-    fontSize = 14.sp,
-    fontWeight = FontWeight.SemiBold,
-    letterSpacing = 1.25.sp,
 )
 
 internal val KleinanzeigenTypo: SparkTypography = sparkTypography(

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,6 @@ internal fun Paparazzi.sparkSnapshot(
     // Behave like in Android Studio Preview renderer
     CompositionLocalProvider(LocalInspectionMode provides true) {
         SparkTheme(
-            useLegacyStyle = false,
             colors = if (isDark) darkSparkColors() else lightSparkColors(),
         ) {
             // The first box acts as a shield from ComposeView which forces the first layout node

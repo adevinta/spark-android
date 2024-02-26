@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Copyright (c) 2023 Adevinta
+  Copyright (c) 2023-2024 Adevinta
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 <lint>
     <issue id="ComposeCompositionLocalGetter" severity="warning">
         <option name="allowed-composition-locals"
-            value="LocalSparkColors,LocalSparkShapes,LocalSparkTypography,LocalHighlightToken,LocalHighlightComponents,LocalLegacyStyle,LocalElevationOverlay,LocalWindowSizeClass" />
+            value="LocalSparkColors,LocalSparkShapes,LocalSparkTypography,LocalHighlightToken,LocalHighlightComponents,LocalElevationOverlay,LocalWindowSizeClass" />
     </issue>
     <issue id="AutoboxingStateCreation" severity="warning"/>
     <!--
