@@ -254,54 +254,6 @@ public fun Tab(
     )
 }
 
-/**
- * Spark tab.
- *
- * Tabs organize content across different screens, data sets, and other interactions.
- * Generic Tab overload that is not opinionated about content / color.
- * See the other overload for a Tab that has specific slots for text and / or an icon,
- * as well as providing the correct colors for selected / unselected states.
- *
- * @param selected whether this tab is selected or not
- * @param onClick called when this tab is clicked
- * @param modifier the Modifier to be applied to this tab
- * @param enabled controls the enabled state of this tab. When false, this component will not respond to user input,
- * and it will appear visually disabled and disabled to accessibility services.
- * @param interactionSource the MutableInteractionSource representing the stream of Interactions for this tab.
- * You can create and pass in your own remembered instance to observe Interactions
- * and customize the appearance / behavior of this tab in different states.
- * @param content the content of this tab
- *
- **/
-@ExperimentalSparkApi
-@Composable
-@Deprecated(
-    message = "This component is no longer compliant with Spark specs",
-    replaceWith = ReplaceWith(
-        "Tab(selected, onClick, modifier, text, icon, contentDescription, enabled, intent, size, " +
-            "interactionSource, trailingContent)",
-    ),
-)
-public fun Tab(
-    selected: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    content: @Composable ColumnScope.() -> Unit,
-) {
-    MaterialTab(
-        selected = selected,
-        onClick = onClick,
-        modifier = modifier.heightIn(min = 48.dp),
-        enabled = enabled,
-        selectedContentColor = LocalContentColor.current,
-        unselectedContentColor = LocalContentColor.current,
-        interactionSource = interactionSource,
-        content = content,
-    )
-}
-
 @Preview(
     group = "Tabs",
     name = "Tab",

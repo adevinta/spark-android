@@ -243,68 +243,6 @@ public fun ButtonGhost(
     )
 }
 
-/**
- * The text button is the button for non important actions. The mandatory icon help to indicate that it's a
- * clickable text
- *
- * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
- * after a click action for example.
- *
- * @param onClick Will be called when the user clicks the button
- * @param modifier Modifier to be applied to the button
- * @param enabled Controls the enabled state of the button. When `false`, this button will not
- * be clickable
- * @param icon The icon to be displayed at the start or the end of the button container. If null, then will display
- * the text with a underline.
- * @param iconSide If an icon is added, you can configure the side at the start or end of the button
- * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
- * loading state
- * @param isDanger The danger button should only be used once per view(screen) (not including a modal dialog),
- * these buttons have the most emphasis.
- */
-@Deprecated(
-    "Use ButtonGhost instead",
-    ReplaceWith(
-        "ButtonGhost(onClick, text, modifier, size, intent, enabled, icon, iconSide, isLoading, interactionSource)",
-    ),
-)
-@Composable
-public fun TextButton(
-    onClick: () -> Unit,
-    icon: SparkIcon?,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    iconSide: IconSide = IconSide.START,
-    isLoading: Boolean = false,
-    isDanger: Boolean = false,
-    content: @Composable (RowScope.() -> Unit),
-) {
-    BaseSparkButton(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        elevation = null,
-        colors = if (LocalSparkFeatureFlag.current.useSparkTokensHighlighter) {
-            ButtonDefaults.filledTonalButtonColors()
-        } else {
-            ButtonDefaults.textButtonColors(
-                contentColor = if (isDanger) SparkTheme.colors.error else SparkTheme.colors.onSurface,
-            )
-        },
-        icon = icon,
-        iconSide = iconSide,
-        isLoading = isLoading,
-    ) {
-        if (icon == null) {
-            ProvideTextStyle(value = TextStyle(textDecoration = TextDecoration.Underline)) {
-                content()
-            }
-        } else {
-            content()
-        }
-    }
-}
-
 @Preview(
     group = "Buttons",
     name = "Button Ghost",

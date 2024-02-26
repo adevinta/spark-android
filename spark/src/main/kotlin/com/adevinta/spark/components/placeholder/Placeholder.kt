@@ -43,12 +43,6 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
-@Deprecated(
-    message = "Use the placeholder modifier instead",
-    replaceWith = ReplaceWith("placeholder(visible)"),
-)
-public fun Modifier.defaultPlaceholder(visible: Boolean): Modifier = this then placeholder(visible = visible)
-
 /**
  * Draws some skeleton UI which is typically used whilst content is 'loading'.
  *

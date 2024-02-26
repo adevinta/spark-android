@@ -105,81 +105,6 @@ import com.adevinta.spark.tools.preview.DevicePreviews
  * The scaffold provides different layouts for phone portrait, phone landscape, and other
  * devices (e.g., tablets or foldables) where it'll show a modal instead.
  *
- * @param onClose callback that will be invoked when the modal is dismissed
- * @param snackbarHost Component to host Snackbars that are pushed to be shown
- * @param modifier applied to the root Scaffold
- * @param illustration whether the modal display a close icon, and its corresponding action
- * @param mainButton the main actions for this modal (should be a [ButtonFilled])
- * @param supportButton the support or alternative actions for this modal (should any other button than [ButtonFilled])
- * @param reverseButtonOrder inverse the order of the buttons, so the [mainButton] button is shown at the top in
- * portrait mode
- * @param content the center custom Composable for modal content
- */
-@Deprecated(
-    message = "Use ModalScaffold instead",
-    replaceWith = ReplaceWith(
-        expression = "ModalScaffold(" +
-            "onClose = onClose," +
-            "modifier = modifier," +
-            "snackbarHost = snackbarHost," +
-            "mainButton = mainButton," +
-            "supportButton = supportButton," +
-            "content = content," +
-            ")",
-        imports = ["com.adevinta.spark.components.dialog.ModalScaffold"],
-    ),
-)
-@Composable
-public fun ModalFullScreenScaffold(
-    onClose: () -> Unit,
-    modifier: Modifier = Modifier,
-    snackbarHost: @Composable () -> Unit = {},
-    @DrawableRes illustration: Int? = null,
-    mainButton: (@Composable (Modifier) -> Unit)? = {},
-    supportButton: (@Composable (Modifier) -> Unit)? = {},
-    reverseButtonOrder: Boolean = false,
-    illustrationContentScale: ContentScale = ContentScale.Fit,
-    content: @Composable (PaddingValues) -> Unit,
-) {
-    ModalScaffold(
-        onClose = onClose,
-        modifier = modifier,
-        snackbarHost = snackbarHost,
-        mainButton = if (!reverseButtonOrder) mainButton else mainButton,
-        supportButton = if (!reverseButtonOrder) supportButton else supportButton,
-    ) { innerPadding ->
-        Column {
-            illustration?.let {
-                Illustration(
-                    drawableRes = it,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxHeight(.4f)
-                        .fillMaxWidth(.8f)
-                        .align(Alignment.CenterHorizontally)
-                        .padding(top = innerPadding.calculateTopPadding(), bottom = 24.dp),
-                    contentScale = illustrationContentScale,
-                )
-            }
-            content(
-                PaddingValues(
-                    start = innerPadding.calculateLeftPadding(LocalLayoutDirection.current),
-                    end = innerPadding.calculateRightPadding(LocalLayoutDirection.current),
-                    top = if (illustration == null) innerPadding.calculateTopPadding() else 0.dp,
-                    bottom = innerPadding.calculateBottomPadding(),
-                ),
-            )
-        }
-    }
-}
-
-/**
- * A composable function that creates a full-screen modal scaffold, adapting its layout based on the device's screen
- * size and orientation.
- *
- * The scaffold provides different layouts for phone portrait, phone landscape, and other
- * devices (e.g., tablets or foldables) where it'll show a modal instead.
- *
  * IF you don't want the Bottom App Bar to appear then provide null to both [mainButton] & [supportButton]
  *
  * @param onClose callback that will be invoked when the modal is dismissed
@@ -625,51 +550,6 @@ private fun ModalPreview() {
                 Icon(sparkIcon = SparkIcons.ImageFill, contentDescription = "")
                 Icon(sparkIcon = SparkIcons.MoreMenuVertical, contentDescription = "")
             },
-        ) { innerPadding ->
-            Text(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .verticalScroll(rememberScrollState()),
-                text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
-                    "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
-                    "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
-                    "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
-                    "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
-                    "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
-                    "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
-                    "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
-                    " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
-                    "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
-                    "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
-                    "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
-                    "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
-                    "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
-                    "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
-                    "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
-                    "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
-            )
-        }
-    }
-}
-
-@Suppress("DEPRECATION")
-@Preview
-@Composable
-private fun DeprecatedModalPreview() {
-    PreviewTheme(
-        padding = PaddingValues(),
-    ) {
-        ModalFullScreenScaffold(
-            onClose = { /*TODO*/ },
-            illustration = SparkIcons.BicycleType.drawableId,
-            mainButton = {
-                ButtonFilled(modifier = it, onClick = { /*TODO*/ }, text = "Main Action")
-            },
-            supportButton = {
-                ButtonOutlined(modifier = it, onClick = { /*TODO*/ }, text = "Alternative Action")
-            },
-            reverseButtonOrder = true,
-            illustrationContentScale = ContentScale.FillWidth,
         ) { innerPadding ->
             Text(
                 modifier = Modifier

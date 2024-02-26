@@ -26,7 +26,7 @@ import androidx.compose.runtime.saveable.Saver
 public data class Theme(
     val themeMode: ThemeMode = ThemeMode.System,
     val colorMode: ColorMode = ColorMode.Baseline,
-    val brandMode: BrandMode = BrandMode.Adevinta,
+    val brandMode: BrandMode = BrandMode.Leboncoin,
     val userMode: UserMode = UserMode.Part,
     val fontScale: Float = 1.0f,
     val fontScaleMode: FontScaleMode = FontScaleMode.System,
@@ -92,7 +92,6 @@ public enum class ThemeMode {
 
 public enum class BrandMode(public val label: String) {
     Leboncoin("Leboncoin (New Ui)"),
-    Adevinta("Adevinta"),
     Kleinanzeigen("Kleinanzeigen"),
     Milanuncios("Milanuncios"),
     Subito("Subito"),
@@ -108,7 +107,6 @@ public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
         mapOf(
             ThemeModeKey to theme.themeMode.ordinal,
             ColorModeKey to theme.colorMode.ordinal,
-            BrandModeKey to theme.brandMode.ordinal,
             UserModeKey to theme.userMode.ordinal,
             FontScaleKey to theme.fontScale.toInt(),
             TextDirectionKey to theme.textDirection.ordinal,
@@ -121,7 +119,6 @@ public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
         Theme(
             themeMode = ThemeMode.entries[map.getValue(ThemeModeKey)],
             colorMode = ColorMode.entries[map.getValue(ColorModeKey)],
-            brandMode = BrandMode.entries[map.getValue(BrandModeKey)],
             userMode = UserMode.entries[map.getValue(UserModeKey)],
             fontScale = map.getValue(FontScaleKey).toFloat(),
             textDirection = TextDirection.entries[map.getValue(TextDirectionKey)],
