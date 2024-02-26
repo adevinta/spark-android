@@ -73,39 +73,6 @@ internal fun SparkLinearProgressIndicator(
  * represents full progress. Values outside of this range are coerced into the range.
  * @param modifier the [Modifier] to be applied to this progress indicator
  */
-@Deprecated(
-    message = "Use the overload that takes `progress` as a lambda",
-    replaceWith = ReplaceWith(
-        "LinearProgressIndicator(\n" +
-            "progress = { progress },\n" +
-            "modifier = modifier,\n" +
-            ")",
-    ),
-)
-@Composable
-public fun LinearProgressIndicator(
-    @FloatRange(from = 0.0, to = 1.0)
-    progress: Float,
-    modifier: Modifier = Modifier,
-) {
-    SparkLinearProgressIndicator(
-        progress = { progress },
-        isIndeterminate = false,
-        modifier = modifier,
-    )
-}
-
-/**
- * Progress indicators express an unspecified wait time or display the duration of a process.
- *
- * By default there is no animation between [progress] values. You can use
- * [ProgressIndicatorDefaults.ProgressAnimationSpec] as the default recommended [AnimationSpec] when
- * animating progress
- *
- * @param progress the progress of this progress indicator, where 0.0 represents no progress and 1.0
- * represents full progress. Values outside of this range are coerced into the range.
- * @param modifier the [Modifier] to be applied to this progress indicator
- */
 @Composable
 public fun LinearProgressIndicator(
     progress: () -> Float,

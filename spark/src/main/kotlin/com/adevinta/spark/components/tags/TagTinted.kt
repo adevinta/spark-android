@@ -19,8 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("DEPRECATION")
-
 package com.adevinta.spark.components.tags
 
 import androidx.compose.foundation.layout.RowScope
@@ -108,67 +106,6 @@ public fun TagTinted(
         leadingIcon = leadingIcon,
         tint = tint,
         text = text,
-    )
-}
-
-@Deprecated(
-    "Use TagTinted instead",
-    ReplaceWith("TagTinted"),
-)
-@Composable
-public fun TagTonal(
-    modifier: Modifier = Modifier,
-    intent: TagIntent = TagIntent.Basic,
-    leadingIcon: SparkIcon? = null,
-    tint: Color? = null,
-    content: @Composable RowScope.() -> Unit,
-) {
-    BaseSparkTag(
-        colors = TagDefaults.tintedColors(intent),
-        modifier = modifier,
-        leadingIcon = leadingIcon,
-        tint = tint,
-        content = content,
-    )
-}
-
-@Deprecated(
-    "Use TagTinted instead with neutral intent",
-    ReplaceWith("TagTinted"),
-)
-@Composable
-public fun TagCriteria(
-    modifier: Modifier = Modifier,
-    leadingIcon: SparkIcon? = null,
-    tint: Color? = null,
-    content: @Composable RowScope.() -> Unit,
-) {
-    TagTonal(
-        modifier = modifier,
-        intent = TagIntent.Neutral,
-        leadingIcon = leadingIcon,
-        tint = tint,
-        content = content,
-    )
-}
-
-@Deprecated(
-    "Use TagTinted instead with main intent",
-    ReplaceWith("TagTinted"),
-)
-@Composable
-public fun TagService(
-    modifier: Modifier = Modifier,
-    leadingIcon: SparkIcon? = null,
-    tint: Color? = null,
-    content: @Composable RowScope.() -> Unit,
-) {
-    TagTonal(
-        modifier = modifier,
-        intent = TagIntent.Main,
-        leadingIcon = leadingIcon,
-        tint = tint,
-        content = content,
     )
 }
 

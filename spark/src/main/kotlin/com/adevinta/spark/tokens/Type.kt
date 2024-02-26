@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -251,117 +251,7 @@ public data class SparkTypography(
      * Call to actions
      */
     val callout: TextStyle,
-) {
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "display3",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val title1: TextStyle = display3
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "headline1",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val title2: TextStyle = headline1
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "headline2",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val title3: TextStyle = headline2
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "body1.highlight",
-            "com.adevinta.spark.tokens.highlight",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val largeImportant: TextStyle = body1.highlight
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "body1",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val large: TextStyle = body1
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "body2.highlight",
-            "com.adevinta.spark.tokens.highlight",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val bodyImportant: TextStyle = body2.highlight
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "body2",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val body: TextStyle = body2
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "caption.highlight",
-            "com.adevinta.spark.tokens.highlight",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val smallImportantLegacy: TextStyle = caption.highlight
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "caption",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val smallLegacy: TextStyle = caption
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "small.highlight",
-            "com.adevinta.spark.tokens.highlight",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val extraSmallImportant: TextStyle = small.highlight
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(
-            expression = "small",
-        ),
-        level = DeprecationLevel.WARNING,
-    )
-    val extraSmall: TextStyle = small
-
-    @Deprecated(
-        "This property will be removed as it is not part of Spark Token",
-        replaceWith = ReplaceWith(expression = "callout"),
-        level = DeprecationLevel.WARNING,
-    )
-    val button: TextStyle = callout
-}
+)
 
 @Suppress("CompositionLocalAllowlist") // We need it to get access to our typo like Material
 internal val LocalSparkTypography = staticCompositionLocalOf { sparkTypography() }

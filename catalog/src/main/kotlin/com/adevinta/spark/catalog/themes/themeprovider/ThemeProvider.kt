@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,11 +28,11 @@ import com.adevinta.spark.tokens.SparkTypography
 
 public interface ThemeProvider {
     @Composable
-    public fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors
+    public fun colors(useDarkColors: Boolean, isPro: Boolean): SparkColors
 
     @Composable
-    public fun shapes(isLegacy: Boolean): SparkShapes
+    public fun shapes(): SparkShapes
 
     @Composable
-    public fun typography(isLegacy: Boolean): SparkTypography
+    public fun typography(): SparkTypography
 }

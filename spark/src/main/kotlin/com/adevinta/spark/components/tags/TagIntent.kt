@@ -100,24 +100,6 @@ public enum class TagIntent {
         @Composable
         override fun colors(): IntentColor = IntentColors.Neutral.colors()
     },
-
-    @Deprecated(
-        "Primary is replaced with Main Intent",
-        replaceWith = ReplaceWith("Main"),
-    )
-    Primary {
-        @Composable
-        override fun colors(): IntentColor = IntentColors.Main.colors()
-    },
-
-    @Deprecated(
-        "Secondary is replaced with Support Intent",
-        replaceWith = ReplaceWith("Support"),
-    )
-    Secondary {
-        @Composable
-        override fun colors(): IntentColor = IntentColors.Support.colors()
-    },
     ;
 
     @Composable

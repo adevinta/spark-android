@@ -147,42 +147,6 @@ internal fun formattedRatingValue(locale: Locale, value: Float): String = rememb
  * @param value the rating value included between [1..5]
  * @param modifier to be applied to this rating
  * @param commentCount number of collected ratings
- */
-@Composable
-@Deprecated(
-    message = "Use RatingSimple instead",
-    replaceWith = ReplaceWith(
-        expression = "RatingSimple(value = value, modifier = modifier, commentCount = commentCount," +
-            " locale = locale, labelSide = LabelSide.End)",
-        imports = [
-            "com.adevinta.spark.components.rating.RatingSimple",
-            "com.adevinta.spark.components.rating.LabelSide",
-        ],
-    ),
-)
-public fun RatingSmall(
-    @FloatRange(from = 0.0, to = 5.0)
-    value: Float,
-    modifier: Modifier = Modifier,
-    commentCount: Int? = null,
-    locale: Locale = firstLocale(),
-) {
-    SparkRatingSmall(
-        value = value,
-        modifier = modifier,
-        commentCount = commentCount,
-        locale = locale,
-        labelSide = RatingDefault.LabelSide,
-        size = RatingSize.Medium,
-    )
-}
-
-/**
- * Component that displays a compressed version of user rating
- *
- * @param value the rating value included between [1..5]
- * @param modifier to be applied to this rating
- * @param commentCount number of collected ratings
  * @param locale the locale to use to format the rating value
  * @param labelSide the side of the label
  */

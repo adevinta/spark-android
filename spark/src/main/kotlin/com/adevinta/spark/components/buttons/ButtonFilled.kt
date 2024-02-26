@@ -242,61 +242,6 @@ public fun ButtonFilled(
     )
 }
 
-/**
- * The main button should only be used once per view (not including a modal dialog),
- * these buttons have the most emphasis.
- *
- * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
- * after a click action for example.
- *
- * @param onClick Will be called when the user clicks the button
- * @param modifier Modifier to be applied to the button
- * @param enabled Controls the enabled state of the button. When `false`, this button will not
- * be clickable
- * @param icon The optional icon to be displayed at the start or the end of the button container, you can
- * use [SparkButtonDefaults.IconSize] as a good default icon size.
- * @param iconSide If an icon is added, you can configure the side at the start or end of the button
- * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
- * loading state
- * @param isDanger The danger button should only be used once per view(screen) (not including a modal dialog),
- * these buttons have the most emphasis.
- */
-@Deprecated(
-    "Use ButtonFilled instead with Main intent",
-    ReplaceWith("ButtonFilled(onClick, text, modifier, intent, enabled, icon, iconSide, isLoading)"),
-)
-@Composable
-public fun PrimaryButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    icon: SparkIcon? = null,
-    iconSide: IconSide = IconSide.START,
-    isLoading: Boolean = false,
-    isDanger: Boolean = false,
-    content: @Composable RowScope.() -> Unit,
-) {
-    val colors = if (isDanger) {
-        ButtonDefaults.buttonColors(
-            containerColor = SparkTheme.colors.error,
-            contentColor = SparkTheme.colors.onError,
-        )
-    } else {
-        ButtonDefaults.buttonColors()
-    }
-    BaseSparkButton(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        elevation = ButtonDefaults.buttonElevation(),
-        colors = colors,
-        icon = icon,
-        iconSide = iconSide,
-        isLoading = isLoading,
-        content = content,
-    )
-}
-
 @Preview(
     group = "Buttons",
     name = "Button Filled",

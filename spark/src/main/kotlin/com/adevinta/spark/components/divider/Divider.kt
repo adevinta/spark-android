@@ -71,28 +71,6 @@ public enum class LabelVerticalAlignment {
 }
 
 /**
- * A deprecated Divider Component.
- *
- * @param modifier The modifier to be applied to the divider.
- * @param color The color of the divider.
- */
-@Deprecated(
-    "Divider is deprecated and HorizontalDivider is its new alternative",
-    ReplaceWith("HorizontalDivider(modifier = modifier)"),
-)
-@Composable
-public fun Divider(
-    modifier: Modifier = Modifier,
-    color: Color = SparkTheme.colors.onSurface.dim3,
-) {
-    MaterialHorizontalDivider(
-        modifier = modifier,
-        thickness = DividerDefaults.Thickness,
-        color = color,
-    )
-}
-
-/**
  * HorizontalDivider Component.
  * A divider is a thin line that groups content in lists and layouts.
  *

@@ -223,66 +223,6 @@ public fun ButtonOutlined(
     )
 }
 
-/**
- * The support button is the standard button for most use cases. The outlined styling
- * places less emphasis on these buttons
- *
- * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
- * after a click action for example.
- *
- * @param onClick Will be called when the user clicks the button
- * @param modifier Modifier to be applied to the button
- * @param enabled Controls the enabled state of the button. When `false`, this button will not
- * be clickable
- * @param icon The optional icon to be displayed at the start or the end of the button container, you
- * can use [SparkButtonDefaults.IconSize] as a good default icon size.
- * @param iconSide If an icon is added, you can configure the side at the start or end of the button
- * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
- * loading state
- * @param isDanger The danger button should only be used once per view(screen) (not including a modal dialog),
- * these buttons have the most emphasis.
- */
-@Deprecated(
-    "Use ButtonOutlined instead with support intent",
-    ReplaceWith(
-        "ButtonOutlined(onClick, text, modifier, ButtonIntent.Support, enabled, icon, iconSide, isLoading)",
-        "com.adevinta.spark.components.buttons.ButtonIntent",
-    ),
-)
-@Composable
-public fun SecondaryButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    icon: SparkIcon? = null,
-    iconSide: IconSide = IconSide.START,
-    isLoading: Boolean = false,
-    isDanger: Boolean = false,
-    content: @Composable RowScope.() -> Unit,
-) {
-    val color by animateColorAsState(
-        targetValue = if (isDanger) {
-            SparkTheme.colors.error
-        } else {
-            SparkTheme.colors.onSurface
-        },
-        label = "button color",
-    )
-
-    BaseSparkButton(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        elevation = null,
-        border = SparkButtonDefaults.outlinedBorder(color),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = color),
-        icon = icon,
-        iconSide = iconSide,
-        isLoading = isLoading,
-        content = content,
-    )
-}
-
 @Preview(
     group = "Buttons",
     name = "Button Outlined",
