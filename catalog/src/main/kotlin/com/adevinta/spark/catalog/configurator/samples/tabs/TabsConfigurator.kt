@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +21,13 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.tabs
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -39,7 +37,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
@@ -70,142 +67,132 @@ public val TabsConfigurator: Configurator = Configurator(
     TabSample()
 }
 
-@Preview(
-    showBackground = true,
-)
 @Composable
-private fun TabSample() {
-    val scrollState = rememberScrollState()
+private fun ColumnScope.TabSample() {
+    var isEnabled by remember { mutableStateOf(true) }
+    var isTabsSpacedEvenely by remember { mutableStateOf(true) }
+    var tabSize by remember { mutableStateOf(TabSize.Medium) }
+    var intent by remember { mutableStateOf(TabIntent.Main) }
+    var selectedIndex by remember { mutableIntStateOf(0) }
+    val tabs =
+        remember { mutableStateListOf(Pair("Home", null) to 0, Pair("Message", SparkIcons.MessageOutline) to 120) }
 
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.verticalScroll(scrollState),
+    TabGroup(
+        spacedEvenly = isTabsSpacedEvenely,
+        modifier = Modifier.bodyWidth(),
+        selectedTabIndex = selectedIndex,
+        intent = intent,
     ) {
-        var isEnabled by remember { mutableStateOf(true) }
-        var isTabsSpacedEvenely by remember { mutableStateOf(true) }
-        var tabSize by remember { mutableStateOf(TabSize.Medium) }
-        var intent by remember { mutableStateOf(TabIntent.Main) }
-        var selectedIndex by remember { mutableIntStateOf(0) }
-        val tabs =
-            remember { mutableStateListOf(Pair("Home", null) to 0, Pair("Message", SparkIcons.MessageOutline) to 120) }
-
-        TabGroup(
-            spacedEvenly = isTabsSpacedEvenely,
-            modifier = Modifier.bodyWidth(),
-            selectedTabIndex = selectedIndex,
-            intent = intent,
-        ) {
-            tabs.forEachIndexed { index, (tab, unread) ->
-                Tab(
-                    intent = intent,
-                    text = tab.first,
-                    icon = tab.second,
-                    selected = selectedIndex == index,
-                    onClick = { selectedIndex = index },
-                    enabled = isEnabled,
-                    size = tabSize,
-                    trailingContent = {
-                        if (unread > 0) {
-                            Badge(count = unread)
-                        } else {
-                            Unit
-                        }
-                    },
-                )
-            }
-        }
-
-        SwitchLabelled(
-            checked = isEnabled,
-            onCheckedChange = { isEnabled = it },
-        ) {
-            Text(
-                text = "Enabled",
-                modifier = Modifier.fillMaxWidth(),
+        tabs.forEachIndexed { index, (tab, unread) ->
+            Tab(
+                intent = intent,
+                text = tab.first,
+                icon = tab.second,
+                selected = selectedIndex == index,
+                onClick = { selectedIndex = index },
+                enabled = isEnabled,
+                size = tabSize,
+                trailingContent = {
+                    if (unread > 0) {
+                        Badge(count = unread)
+                    } else {
+                        Unit
+                    }
+                },
             )
         }
+    }
 
-        SwitchLabelled(
-            checked = isTabsSpacedEvenely,
-            onCheckedChange = { isTabsSpacedEvenely = it },
-        ) {
-            Text(
-                text = "Spaced Evenly",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        val intents = TabIntent.entries.toTypedArray()
-        var expanded by remember { mutableStateOf(false) }
-        SelectTextField(
+    SwitchLabelled(
+        checked = isEnabled,
+        onCheckedChange = { isEnabled = it },
+    ) {
+        Text(
+            text = "Enabled",
             modifier = Modifier.fillMaxWidth(),
-            value = intent.name,
-            onValueChange = {},
-            readOnly = true,
-            label = "Intent",
-            expanded = expanded,
-            onExpandedChange = {
-                expanded = !expanded
-            },
-            onDismissRequest = {
-                expanded = false
-            },
-            dropdownContent = {
-                intents.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it.name) },
-                        onClick = {
-                            intent = it
-                            expanded = false
-                        },
-                    )
-                }
-            },
         )
+    }
 
-        Column {
-            Text(
-                text = "Tab size",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-            )
-            val sizes = TabSize.entries.toTypedArray()
-            val sizesLabel = sizes.map { it.name }
-            SegmentedButton(
-                options = sizesLabel,
-                selectedOption = tabSize.name,
-                onOptionSelect = { tabSize = TabSize.valueOf(it) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-            )
-        }
-        Column {
-            Text(
-                text = "Number of tabs",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-            )
-            Row {
-                Spacer(modifier = Modifier.padding(start = 16.dp))
-                IconButtonFilled(
-                    icon = SparkIcons.Minus,
-                    onClick = {
-                        if (tabs.size > 1) {
-                            tabs.removeLast()
-                        }
-                    },
-                )
-                Spacer(modifier = Modifier.padding(start = 16.dp))
+    SwitchLabelled(
+        checked = isTabsSpacedEvenely,
+        onCheckedChange = { isTabsSpacedEvenely = it },
+    ) {
+        Text(
+            text = "Spaced Evenly",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 
-                IconButtonFilled(
-                    icon = SparkIcons.Plus,
+    val intents = TabIntent.entries.toTypedArray()
+    var expanded by remember { mutableStateOf(false) }
+    SelectTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = intent.name,
+        onValueChange = {},
+        readOnly = true,
+        label = "Intent",
+        expanded = expanded,
+        onExpandedChange = {
+            expanded = !expanded
+        },
+        onDismissRequest = {
+            expanded = false
+        },
+        dropdownContent = {
+            intents.forEach {
+                DropdownMenuItem(
+                    text = { Text(it.name) },
                     onClick = {
-                        val randomString = ('A'..'z').map { it }.shuffled().subList(0, 5).joinToString("")
-                        tabs.add(Pair(randomString, null) to Random.nextInt(3))
+                        intent = it
+                        expanded = false
                     },
                 )
             }
+        },
+    )
+
+    Column {
+        Text(
+            text = "Tab size",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+        )
+        val sizes = TabSize.entries.toTypedArray()
+        val sizesLabel = sizes.map { it.name }
+        SegmentedButton(
+            options = sizesLabel,
+            selectedOption = tabSize.name,
+            onOptionSelect = { tabSize = TabSize.valueOf(it) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+        )
+    }
+    Column {
+        Text(
+            text = "Number of tabs",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+        )
+        Row {
+            Spacer(modifier = Modifier.padding(start = 16.dp))
+            IconButtonFilled(
+                icon = SparkIcons.Minus,
+                onClick = {
+                    if (tabs.size > 1) {
+                        tabs.removeLast()
+                    }
+                },
+            )
+            Spacer(modifier = Modifier.padding(start = 16.dp))
+
+            IconButtonFilled(
+                icon = SparkIcons.Plus,
+                onClick = {
+                    val randomString = ('A'..'z').map { it }.shuffled().subList(0, 5).joinToString("")
+                    tabs.add(Pair(randomString, null) to Random.nextInt(3))
+                },
+            )
         }
     }
 }

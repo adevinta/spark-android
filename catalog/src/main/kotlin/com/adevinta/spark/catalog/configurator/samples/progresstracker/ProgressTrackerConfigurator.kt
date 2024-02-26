@@ -23,11 +23,10 @@ package com.adevinta.spark.catalog.configurator.samples.progresstracker
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -75,186 +74,177 @@ public val ProgressTrackerConfigurator: Configurator = Configurator(
     showBackground = true,
 )
 @Composable
-private fun ProgressTrackerSample() {
-    val scrollState = rememberScrollState()
-
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier
-            .verticalScroll(scrollState)
-            .padding(bottom = 16.dp),
-    ) {
-        var intent by remember { mutableStateOf(ProgressTrackerIntent.Basic) }
-        var size by remember { mutableStateOf(ProgressSizes.Large) }
-        var style by remember { mutableStateOf(ProgressStyles.Outlined) }
-        var expanded by remember { mutableStateOf(false) }
-        var hasIndicatorContent by remember { mutableStateOf(true) }
-        var selectedStep by remember { mutableIntStateOf(1) }
-        var items by remember {
-            mutableStateOf(
-                persistentListOf(
-                    ProgressStep("Lorem ipsume", true),
-                    ProgressStep("Lorem ipsume dolar sit amet", true),
-                    ProgressStep("Lorem ipsume", false),
-                ),
-            )
-        }
-
-        Text(
-            text = "Horizontal Progress Tracker",
-            style = SparkTheme.typography.headline2,
+private fun ColumnScope.ProgressTrackerSample() {
+    var intent by remember { mutableStateOf(ProgressTrackerIntent.Basic) }
+    var size by remember { mutableStateOf(ProgressSizes.Large) }
+    var style by remember { mutableStateOf(ProgressStyles.Outlined) }
+    var expanded by remember { mutableStateOf(false) }
+    var hasIndicatorContent by remember { mutableStateOf(true) }
+    var selectedStep by remember { mutableIntStateOf(1) }
+    var items by remember {
+        mutableStateOf(
+            persistentListOf(
+                ProgressStep("Lorem ipsume", true),
+                ProgressStep("Lorem ipsume dolar sit amet", true),
+                ProgressStep("Lorem ipsume", false),
+            ),
         )
+    }
 
-        ProgressTrackerRow(
-            items = items,
-            size = size,
-            intent = intent,
-            style = style,
-            hasIndicatorContent = hasIndicatorContent,
-            onStepClick = {
-                selectedStep = it
-            },
-            selectedStep = selectedStep,
-        )
+    Text(
+        text = "Horizontal Progress Tracker",
+        style = SparkTheme.typography.headline2,
+    )
 
-        Text(
-            text = "Vertical Progress Tracker",
-            style = SparkTheme.typography.headline2,
-        )
+    ProgressTrackerRow(
+        items = items,
+        size = size,
+        intent = intent,
+        style = style,
+        hasIndicatorContent = hasIndicatorContent,
+        onStepClick = {
+            selectedStep = it
+        },
+        selectedStep = selectedStep,
+    )
 
-        ProgressTrackerColumn(
-            items = items,
-            size = size,
-            intent = intent,
-            style = style,
-            hasIndicatorContent = hasIndicatorContent,
-            onStepClick = {
-                selectedStep = it
-            },
-            selectedStep = selectedStep,
-        )
+    Text(
+        text = "Vertical Progress Tracker",
+        style = SparkTheme.typography.headline2,
+    )
 
-        val intents = ProgressTrackerIntent.entries
+    ProgressTrackerColumn(
+        items = items,
+        size = size,
+        intent = intent,
+        style = style,
+        hasIndicatorContent = hasIndicatorContent,
+        onStepClick = {
+            selectedStep = it
+        },
+        selectedStep = selectedStep,
+    )
 
-        SelectTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = intent.name,
-            onValueChange = {},
-            readOnly = true,
-            label = stringResource(id = R.string.configurator_component_screen_intent_label),
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded },
-            onDismissRequest = { expanded = false },
-            dropdownContent = {
-                intents.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it.name) },
-                        onClick = {
-                            intent = it
-                            expanded = false
-                        },
-                    )
-                }
-            },
-        )
+    val intents = ProgressTrackerIntent.entries
 
-        SwitchLabelled(
-            checked = hasIndicatorContent,
-            onCheckedChange = { hasIndicatorContent = it },
-        ) {
-            Text(
-                text = "Indicator content",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        Column {
-            Text(
-                text = "Style",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.highlight,
-            )
-            val progressStylesLabel = ProgressStyles.entries.map(ProgressStyles::name)
-            SegmentedButton(
-                options = progressStylesLabel,
-                selectedOption = style.name,
-                onOptionSelect = { style = ProgressStyles.valueOf(it) },
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        Column {
-            Text(
-                text = "Sizes",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.highlight,
-            )
-            val progressSizesLabel = ProgressSizes.entries.map(ProgressSizes::name)
-            SegmentedButton(
-                options = progressSizesLabel,
-                selectedOption = size.name,
-                onOptionSelect = { size = ProgressSizes.valueOf(it) },
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        Column {
-            Text(
-                text = "Steps",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.highlight,
-            )
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                ButtonTinted(
-                    text = "Remove Step",
-                    intent = ButtonIntent.Danger,
+    SelectTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = intent.name,
+        onValueChange = {},
+        readOnly = true,
+        label = stringResource(id = R.string.configurator_component_screen_intent_label),
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+        onDismissRequest = { expanded = false },
+        dropdownContent = {
+            intents.forEach {
+                DropdownMenuItem(
+                    text = { Text(it.name) },
                     onClick = {
-                        if (items.size > 2) {
-                            items = items.dropLast(1).toPersistentList()
-                        }
+                        intent = it
+                        expanded = false
                     },
-                    modifier = Modifier.weight(1f),
-                )
-                ButtonTinted(
-                    text = "Add Step",
-                    onClick = {
-                        if (items.size < 6) {
-                            items = items.add(ProgressStep("New Step", true))
-                        }
-                    },
-                    modifier = Modifier.weight(1f),
                 )
             }
-        }
+        },
+    )
 
-        items.forEachIndexed { index, progressStep ->
-            ElevatedCard {
-                Row(
-                    modifier = Modifier
-                        .padding(16.dp),
-                    verticalAlignment = CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                ) {
-                    TextField(
-                        modifier = Modifier.weight(1f, false),
-                        value = progressStep.label.toString(),
-                        label = "Step $index",
-                        onValueChange = {
-                            items = items.set(index, progressStep.copy(label = it))
-                        },
-                    )
-                    Switch(
-                        checked = progressStep.enabled,
-                        onCheckedChange = {
-                            items = items.set(
-                                index,
-                                progressStep.copy(enabled = it),
-                            )
-                        },
-                    )
-                }
+    SwitchLabelled(
+        checked = hasIndicatorContent,
+        onCheckedChange = { hasIndicatorContent = it },
+    ) {
+        Text(
+            text = "Indicator content",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    Column {
+        Text(
+            text = "Style",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.highlight,
+        )
+        val progressStylesLabel = ProgressStyles.entries.map(ProgressStyles::name)
+        SegmentedButton(
+            options = progressStylesLabel,
+            selectedOption = style.name,
+            onOptionSelect = { style = ProgressStyles.valueOf(it) },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    Column {
+        Text(
+            text = "Sizes",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.highlight,
+        )
+        val progressSizesLabel = ProgressSizes.entries.map(ProgressSizes::name)
+        SegmentedButton(
+            options = progressSizesLabel,
+            selectedOption = size.name,
+            onOptionSelect = { size = ProgressSizes.valueOf(it) },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    Column {
+        Text(
+            text = "Steps",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.highlight,
+        )
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            ButtonTinted(
+                text = "Remove Step",
+                intent = ButtonIntent.Danger,
+                onClick = {
+                    if (items.size > 2) {
+                        items = items.dropLast(1).toPersistentList()
+                    }
+                },
+                modifier = Modifier.weight(1f),
+            )
+            ButtonTinted(
+                text = "Add Step",
+                onClick = {
+                    if (items.size < 6) {
+                        items = items.add(ProgressStep("New Step", true))
+                    }
+                },
+                modifier = Modifier.weight(1f),
+            )
+        }
+    }
+
+    items.forEachIndexed { index, progressStep ->
+        ElevatedCard {
+            Row(
+                modifier = Modifier
+                    .padding(16.dp),
+                verticalAlignment = CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                TextField(
+                    modifier = Modifier.weight(1f, false),
+                    value = progressStep.label.toString(),
+                    label = "Step $index",
+                    onValueChange = {
+                        items = items.set(index, progressStep.copy(label = it))
+                    },
+                )
+                Switch(
+                    checked = progressStep.enabled,
+                    onCheckedChange = {
+                        items = items.set(
+                            index,
+                            progressStep.copy(enabled = it),
+                        )
+                    },
+                )
             }
         }
     }

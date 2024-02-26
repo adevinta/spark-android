@@ -28,6 +28,7 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurat
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
+import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressTrackerConfigurator
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.slider.SlidersConfigurator
@@ -43,6 +44,7 @@ import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
 import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.progressbar.ProgressbarExamples
+import com.adevinta.spark.catalog.examples.samples.progresstracker.ProgressTrackerExamples
 import com.adevinta.spark.catalog.examples.samples.rating.RatingExamples
 import com.adevinta.spark.catalog.examples.samples.slider.SlidersExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
@@ -165,6 +167,8 @@ private val RadioButtons = Component(
 private val Rating = Component(
     id = nextId(),
     name = "Ratings",
+    illustration = R.drawable.illu_component_rating,
+    tintIcon = false,
     description = R.string.component_ratingdisplay_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/63e136-rating/b/51f5d8",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.rating/index.html",
@@ -220,19 +224,19 @@ private val Progressbars = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progressbar/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progressbar/Progressbar.kt",
     examples = ProgressbarExamples,
-    configurator = ProgressTrackerConfigurator,
+    configurator = ProgressbarConfigurator,
 )
 
 private val ProgressTracker = Component(
     id = nextId(),
     name = "Progress Tracker",
     description = R.string.component_progresstracker_description,
-    illustration = R.drawable.ic_progressbar,
+    illustration = R.drawable.illu_component_progresstracker,
     tintIcon = false,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/549af2-progress-tracker/b/207b6b",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progress.tracker/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progress/tracker/ProgressbarTracker.kt",
-    examples = ProgressbarExamples,
+    examples = ProgressTrackerExamples,
     configurator = ProgressTrackerConfigurator,
 )
 

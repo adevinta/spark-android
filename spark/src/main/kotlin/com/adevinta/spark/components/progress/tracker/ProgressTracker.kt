@@ -33,6 +33,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
@@ -264,6 +265,7 @@ private fun StepLabel(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
+    if (label.isBlank()) return Spacer(modifier = Modifier.size(0.dp))
     val labelColor by animateColorAsState(
         targetValue = if (enabled) SparkTheme.colors.onSurface else SparkTheme.colors.onSurface.dim1,
         label = "Label color",
@@ -420,12 +422,12 @@ private fun PreviewProgressTracker() {
             items = persistentListOf(
                 ProgressStep(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
-                            "ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
+                        "ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
                     true,
                 ),
                 ProgressStep(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
-                            "ut labore et dolore magna aliqua.",
+                        "ut labore et dolore magna aliqua.",
                     true,
                 ),
                 ProgressStep("Lorem ipsume dolar sit amet", true),

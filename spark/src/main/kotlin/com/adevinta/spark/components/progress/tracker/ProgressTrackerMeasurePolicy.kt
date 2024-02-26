@@ -35,6 +35,7 @@ import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMapIndexed
 import androidx.compose.ui.util.fastMaxOfOrNull
 import androidx.compose.ui.util.fastSumBy
+import com.adevinta.spark.components.textfields.heightOrZero
 
 internal data class ProgressTrackerMeasurePolicy(
     private val orientation: LayoutOrientation,
@@ -62,7 +63,11 @@ internal data class ProgressTrackerMeasurePolicy(
                 constraints.copy(
                     minHeight = indicatorWithSpacing,
                     minWidth = (constraints.minWidth - indicatorWithSpacing).coerceAtLeast(0),
-                    maxWidth = constraints.maxWidth - indicatorWithSpacing,
+                    maxWidth = if (constraints.hasBoundedWidth) {
+                        constraints.maxWidth - indicatorWithSpacing
+                    } else {
+                        Constraints.Infinity
+                    },
                 )
             }
             it.measure(labelConstraint)
@@ -79,7 +84,7 @@ internal data class ProgressTrackerMeasurePolicy(
                 constraints.copy(minWidth = trackWidth, maxWidth = trackWidth)
             } else {
                 val extraSizeOfLabelBaseline = 4.sp.roundToPx()
-                val trackHeight = labelPlaceables[index].height +
+                val trackHeight = heightOrZero(labelPlaceables.getOrNull(index)) +
                     extraSizeOfLabelBaseline -
                     (arrangementSpacing.roundToPx() / 2) -
                     indicatorSize
@@ -97,16 +102,14 @@ internal data class ProgressTrackerMeasurePolicy(
             layoutWidth = labelPlaceables.fastSumBy(Placeable::width)
             // Calculate height of the layout by taking into account the height maximum height of all labels, indicator
             // and padding
-            layoutHeight = labelPlaceables.fastMaxOfOrNull(Placeable::height)
-                ?.plus(arrangementSpacing.roundToPx())
-                ?.plus(indicatorPlaceables.first().width) ?: 0
+            layoutHeight = (labelPlaceables.fastMaxOfOrNull(Placeable::height) ?: 0) +
+                arrangementSpacing.roundToPx() +
+                indicatorPlaceables.first().width
         } else {
-            layoutWidth = minOf(
+            layoutWidth = (
                 labelPlaceables.minByOrNull(Placeable::width)?.width
-                    ?.plus(arrangementSpacing.roundToPx())
-                    ?.plus(indicatorPlaceables.first().width) ?: 0,
-                constraints.minWidth,
-            )
+                    ?: 0
+                ) + arrangementSpacing.roundToPx() + indicatorPlaceables.first().width
             layoutHeight = labelPlaceables.fastSumBy {
                 maxOf(it.height, indicatorPlaceables.first().width) + arrangementSpacing.roundToPx()
             }
