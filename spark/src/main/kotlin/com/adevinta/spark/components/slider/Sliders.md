@@ -4,11 +4,6 @@
 A slider is an interactive component that allows users to set values by moving a handle within a
 defined range.
 
-|       | Slider                                                                                            | Range Slider                                                                                                |
-|-------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
-| Light | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_slider_slider_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_rangeslider_rangeslider_light.png) |
-| Dark  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_slider_slider_dark.png)  | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_rangeslider_rangeslider_dark.png)  |
-
 ### Variants
 
 2 Variants:
@@ -25,10 +20,9 @@ Slider(
 )
 ```
 
-|          | Slider                                                                         |
-|----------|--------------------------------------------------------------------------------|
-| Enabled  | ![](../../images/com.adevinta.spark.slider_SliderScreenshot_sliderRounded.png) |
-| Disabled | ![](../../images/com.adevinta.spark.slider_SliderScreenshot_sliderRounded.png) |
+|          | Slider                                                                       |
+|----------|------------------------------------------------------------------------------|
+| Variants | ![](../../images/com.adevinta.spark.slider_SliderScreenshot_testSliders.png) |
 
 #### Range Slider
 
@@ -42,7 +36,6 @@ RangeSlider(
 )
 ```
 
-|          | Range Slider                                                                                |
-|----------|---------------------------------------------------------------------------------------------|
-| Enabled  | ![](../../images/com.adevinta.spark.slider_SliderScreenshot_rangeSliderRounded.png)         |
-| Disabled | ![](../../images/com.adevinta.spark.slider_SliderScreenshot_rangeSliderRoundedDisabled.png) |
+|          | Range Slider                                                                      |
+|----------|-----------------------------------------------------------------------------------|
+| Variants | ![](../../images/com.adevinta.spark.slider_SliderScreenshot_testRangeSliders.png) |
