@@ -118,7 +118,7 @@ internal fun BaseSparkButton(
         }
         ProvideTextStyle(value = SparkTheme.typography.callout) {
             Row(
-                modifier = Modifier.weight(1f, false),
+                modifier = Modifier.weight(weight = 1f, fill = false),
                 content = content,
             )
         }
