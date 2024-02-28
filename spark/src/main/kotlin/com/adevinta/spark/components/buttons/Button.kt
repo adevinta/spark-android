@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -117,7 +117,10 @@ internal fun BaseSparkButton(
             Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
         }
         ProvideTextStyle(value = SparkTheme.typography.callout) {
-            content()
+            Row(
+                modifier = Modifier.weight(1f, false),
+                content = content,
+            )
         }
         if (icon != null && iconSide == IconSide.END) {
             Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
@@ -265,7 +268,7 @@ private fun SparkButtonPreview() {
     ) {
         ButtonSize.entries.forEach { size ->
             SparkButton(
-                text = "Button",
+                text = "ButtonButton",
                 onClick = { },
                 colors = ButtonDefaults.buttonColors(),
                 size = size,
