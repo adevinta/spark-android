@@ -4,7 +4,7 @@ inputs:
   diffuse-version:
     description: 'Diffuse version'
     required: true
-    default: '0.1.0'
+    default: '0.3.0'
 runs:
   using: composite
   steps:
@@ -16,27 +16,28 @@ runs:
     - uses: actions/cache@v4
       id: cache
       with:
-        key: ${{ runner.os }}-diffuse-${{ inputs.diffuse-version }}-jar
-        path: ~/.spark/diffuse-jar
+        key: ${{ runner.os }}-diffuse-${{ inputs.diffuse-version }}-zip
+        path: ~/.spark/diffuse
     - name: 'Installing diffuse v${{ inputs.diffuse-version }}…'
       if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
-        wget "$DIFFUSE_URL" && chmod +x "$DIFFUSE_JAR"
-        mkdir --parents ~/.spark/diffuse-jar && mv "$DIFFUSE_JAR" "$HOME/.spark/diffuse-jar/"
+        wget "$DIFFUSE_URL" && unzip "$DIFFUSE_ZIP" && rm "$DIFFUSE_ZIP"
+        mkdir --parents ~/.spark/diffuse && mv "$DIFFUSE_DIR" "$HOME/.spark/diffuse/"
       env:
-        DIFFUSE_URL: https://github.com/JakeWharton/diffuse/releases/download/${{ inputs.diffuse-version }}/diffuse-${{ inputs.diffuse-version }}-binary.jar
-        DIFFUSE_JAR: diffuse-${{ inputs.diffuse-version }}-binary.jar
+        DIFFUSE_URL: https://github.com/JakeWharton/diffuse/releases/download/${{ inputs.diffuse-version }}/diffuse-${{ inputs.diffuse-version }}.zip
+        DIFFUSE_ZIP: diffuse-${{ inputs.diffuse-version }}.zip
+        DIFFUSE_DIR: diffuse-${{ inputs.diffuse-version }}
     - shell: bash
       run: |
         tee $GITHUB_STEP_SUMMARY << EOF || true
         <details><summary>📢 Diffuse reports…</summary>
 
         \`\`\`
-        $(find . -path "*/build/outputs/aar/*-release.aar" -exec java -jar "$HOME/.spark/diffuse-jar/$DIFFUSE_JAR" info --aar {} \;)
+        $(find . -path "*/build/outputs/aar/*-release.aar" -exec "$HOME/.spark/diffuse/$DIFFUSE_BIN" info --aar {} \;)
         \`\`\`
 
         </details>
         EOF
       env:
-        DIFFUSE_JAR: diffuse-${{ inputs.diffuse-version }}-binary.jar
+        DIFFUSE_BIN: diffuse-${{ inputs.diffuse-version }}/bin/diffuse
