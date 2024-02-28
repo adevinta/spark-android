@@ -23,6 +23,7 @@ package com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen
 
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
 
 // Brand Palette
@@ -147,7 +148,7 @@ internal val KleinanzeigenLight: SparkColors = lightSparkColors(
     outlineHigh = Neutral400,
 )
 
-internal val KleinanzeigenDark: SparkColors = lightSparkColors(
+internal val KleinanzeigenDark: SparkColors = darkSparkColors(
     accent = Purple100,
     onAccent = Neutral900,
     accentContainer = Purple800,
