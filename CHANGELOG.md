@@ -4,6 +4,22 @@
 
 ## [Unreleased]
 
+## [0.8.0]
+
+_2024-02-28_
+
+### Spark
+
+* 🆕 Create the base custom layout for horizontal progress tracker
+* 🆕 Add `Slider` component
+* 🐛 Fix the `Button` end icon being squished when content is too long
+
+### Catalog App
+
+* 🎨 Update `TextLink` configurator colors
+* 🎨 Add Configurator for `Progressbar`
+* 🚀 Replace deprecated actionsdesk/lfs-warning with composite action
+
 ## [0.7.0]
 
 _2024-02-15_
@@ -198,7 +214,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.7.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.8.0...HEAD
+
+[0.8.0]: https://github.com/adevinta/spark-android/releases/tag/0.8.0
 
 [0.7.0]: https://github.com/adevinta/spark-android/releases/tag/0.7.0
 
