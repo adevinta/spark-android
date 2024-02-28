@@ -30,6 +30,7 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtons
 import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.slider.SlidersConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.text.TextLinksConfigurator
@@ -43,6 +44,7 @@ import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
 import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.progressbar.ProgressbarExamples
 import com.adevinta.spark.catalog.examples.samples.rating.RatingExamples
+import com.adevinta.spark.catalog.examples.samples.slider.SlidersExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
 import com.adevinta.spark.catalog.examples.samples.text.TextLinksExamples
@@ -234,6 +236,19 @@ private val TextLinks = Component(
     configurator = TextLinksConfigurator,
 )
 
+private val Sliders = Component(
+    id = nextId(),
+    name = "Slider",
+    description = R.string.component_slider_description,
+    illustration = R.drawable.illu_component_placeholder,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/25cceb-slider/b/",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.slider/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/slider/Slider.kt",
+    examples = SlidersExamples,
+    configurator = SlidersConfigurator,
+)
+
 private val TextFields = Component(
     id = nextId(),
     name = "TextFields",
@@ -273,6 +288,7 @@ public val Components: List<Component> = listOf(
     Tabs,
     Tags,
     TextLinks,
+    Sliders,
     Progressbars,
     TextFields,
 )
