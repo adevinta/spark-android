@@ -21,8 +21,14 @@
  */
 package com.adevinta.spark.components.slider
 
-import androidx.compose.material3.SliderColors
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.RangeSliderState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -33,18 +39,49 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.RangeSlider as MaterialRangeSlider
 
+@OptIn(ExperimentalMaterial3Api::class)
 @InternalSparkApi
 @Composable
 internal fun SparkRangeSlider(
     value: ClosedFloatingPointRange<Float>,
+    intent: SliderIntent,
     onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    rounded: Boolean = false,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
-    /*@IntRange(from = 0)*/
-    steps: Int = 0,
     onValueChangeFinished: (() -> Unit)? = null,
-    colors: SliderColors = SliderDefaults.colors(),
+    startInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    endInteractionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    startHandle: @Composable (RangeSliderState) -> Unit = remember(startInteractionSource, enabled, intent) {
+        {
+            Handle(
+                interactionSource = startInteractionSource,
+                intent = intent,
+                enabled = enabled,
+            )
+        }
+    },
+    endHandle: @Composable (RangeSliderState) -> Unit = remember(endInteractionSource, enabled, intent) {
+        {
+            Handle(
+                interactionSource = endInteractionSource,
+                intent = intent,
+                enabled = enabled,
+            )
+        }
+    },
+    track: @Composable (RangeSliderState) -> Unit = remember(enabled, rounded, intent) {
+        { rangeSliderState ->
+            Track(
+                intent = intent,
+                enabled = enabled,
+                rounded = rounded,
+                rangeSliderState = rangeSliderState,
+            )
+        }
+    },
+    steps: Int = 0,
 ) {
     MaterialRangeSlider(
         value = value,
@@ -54,7 +91,11 @@ internal fun SparkRangeSlider(
         valueRange = valueRange,
         steps = steps,
         onValueChangeFinished = onValueChangeFinished,
-        colors = colors,
+        startThumb = startHandle,
+        endThumb = endHandle,
+        startInteractionSource = startInteractionSource,
+        endInteractionSource = endInteractionSource,
+        track = track,
     )
 }
 
@@ -66,6 +107,7 @@ internal fun SparkRangeSlider(
  * @param value current values of the RangeSlider. If either value is outside of valueRange provided, it will be coerced to this range.
  * @param onValueChange lambda in which values should be updated
  * @param modifier modifiers for the Range Slider layout
+ * @param intent The intent color for the Slider.
  * @param enabled whether or not component is enabled and can we interacted with or not
  * @param valueRange range of values that Range Slider values can take. Passed value will be coerced to this range
  * @param steps if greater than 0, specifies the amounts of discrete values, evenly distributed between across the whole value range.
@@ -74,13 +116,16 @@ internal fun SparkRangeSlider(
  * This callback shouldn't be used to update the range slider values (use onValueChange for that),
  * but rather to know when the user has completed selecting a new value by ending a drag or a click.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @ExperimentalSparkApi
 @Composable
 public fun RangeSlider(
     value: ClosedFloatingPointRange<Float>,
     onValueChange: (ClosedFloatingPointRange<Float>) -> Unit,
     modifier: Modifier = Modifier,
+    intent: SliderIntent = SliderIntent.Basic,
     enabled: Boolean = true,
+    rounded: Boolean = false,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f,
     /*@IntRange(from = 0)*/
     steps: Int = 0,
@@ -91,8 +136,10 @@ public fun RangeSlider(
         onValueChange = onValueChange,
         modifier = modifier,
         enabled = enabled,
+        rounded = rounded,
         valueRange = valueRange,
         steps = steps,
+        intent = intent,
         onValueChangeFinished = onValueChangeFinished,
     )
 }
@@ -102,13 +149,15 @@ public fun RangeSlider(
     name = "RangeSlider",
 )
 @Composable
-internal fun RangeSliderPreview(
+private fun RangeSliderPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
+    var progress by remember { mutableStateOf(0.1f..0.5f) }
+
     PreviewTheme(theme) {
         RangeSlider(
-            value = 0.1f..0.5f,
-            onValueChange = {},
+            value = progress,
+            onValueChange = { progress = it },
             enabled = true,
             steps = 3,
         )

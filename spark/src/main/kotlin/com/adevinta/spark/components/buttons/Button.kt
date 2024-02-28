@@ -117,7 +117,10 @@ internal fun BaseSparkButton(
             Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
         }
         ProvideTextStyle(value = SparkTheme.typography.callout) {
-            content()
+            Row(
+                modifier = Modifier.weight(weight = 1f, fill = false),
+                content = content,
+            )
         }
         if (icon != null && iconSide == IconSide.END) {
             Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
@@ -265,7 +268,7 @@ private fun SparkButtonPreview() {
     ) {
         ButtonSize.entries.forEach { size ->
             SparkButton(
-                text = "Button",
+                text = "ButtonButton",
                 onClick = { },
                 colors = ButtonDefaults.buttonColors(),
                 size = size,
