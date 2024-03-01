@@ -51,7 +51,7 @@ import com.adevinta.spark.components.slider.Slider
 import com.adevinta.spark.components.slider.SliderIntent
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.Minus
 import com.adevinta.spark.icons.Plus
@@ -160,11 +160,9 @@ private fun SliderSample() {
             }
         }
 
-        SelectTextField(
+        Dropdown(
             modifier = Modifier.fillMaxWidth(),
             value = intent.name,
-            onValueChange = {},
-            readOnly = true,
             label = stringResource(id = R.string.configurator_component_screen_intent_label),
             expanded = expanded,
             onExpandedChange = { expanded = !expanded },

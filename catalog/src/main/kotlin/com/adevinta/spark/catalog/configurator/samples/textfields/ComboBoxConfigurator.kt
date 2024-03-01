@@ -83,6 +83,7 @@ private fun ColumnScope.ComboBoxSample() {
         )
     }
 
+    @Suppress("DEPRECATION")
     SelectTextField(
         modifier = Modifier.fillMaxWidth(),
         value = valueText,
