@@ -310,10 +310,7 @@ private fun TextFieldWithDropdownPreview() {
                                 drawRect(color = Color.Red, topLeft = Offset(24.dp.toPx() / 3 * 2, 0f))
                             }
                             Text(text = "FR", style = SparkTheme.typography.body1)
-                            SparkSelectTrailingIcon(
-                                expanded = expanded,
-                                enabled = false,
-                            )
+                            SparkSelectTrailingIcon(expanded = expanded)
                         },
                     ) {
                         repeat(4) {

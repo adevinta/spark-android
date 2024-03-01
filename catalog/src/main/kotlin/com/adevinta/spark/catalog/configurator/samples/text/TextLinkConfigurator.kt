@@ -50,7 +50,7 @@ import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.text.TextLink
 import com.adevinta.spark.components.text.TextLinkButton
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
@@ -141,11 +141,9 @@ private fun ColumnScope.TextLinkSample(snackbarHostState: SnackbarHostState) {
         )
     }
 
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = intent.name,
-        onValueChange = {},
-        readOnly = true,
         label = stringResource(id = R.string.configurator_component_screen_intent_label),
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },

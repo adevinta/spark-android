@@ -48,6 +48,7 @@ import com.adevinta.spark.components.snackbars.SnackbarIntent
 import com.adevinta.spark.components.snackbars.SnackbarSparkVisuals
 import com.adevinta.spark.components.snackbars.SnackbarStyle
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.toggles.SwitchLabelled
@@ -77,11 +78,9 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
 
     val intents = SnackbarIntent.entries
 
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = intent.name,
-        onValueChange = {},
-        readOnly = true,
         label = stringResource(id = R.string.configurator_component_screen_intent_label),
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },

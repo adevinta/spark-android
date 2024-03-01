@@ -61,7 +61,7 @@ import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.text.TextLinkButton
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
@@ -116,11 +116,9 @@ private fun ColumnScope.BottomSheetSample() {
 
     val contentExamples = BottomSheetContentExamples.entries.toTypedArray()
     var expanded by remember { mutableStateOf(false) }
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = bottomSheetContentExample.name,
-        onValueChange = {},
-        readOnly = true,
         label = "BottomSheet Content Example",
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
