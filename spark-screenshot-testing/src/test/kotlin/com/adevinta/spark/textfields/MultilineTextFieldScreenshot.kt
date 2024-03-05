@@ -176,15 +176,12 @@ internal class MultilineTextFieldScreenshot {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 icons.forEach { icon ->
-                    helpers.forEach { helper ->
-                        TextFields(
-                            modifier = Modifier.widthIn(max = 400.dp),
-                            icon = icon,
-                            value = stubBody,
-                            enabled = true,
-                            helper = helper,
-                        )
-                    }
+                    TextFields(
+                        modifier = Modifier.widthIn(max = 400.dp),
+                        icon = icon,
+                        value = stubBody,
+                        enabled = true,
+                    )
                 }
             }
         }
@@ -263,7 +260,7 @@ internal class MultilineTextFieldScreenshot {
         icon: SparkIcon?,
         value: String = "",
         enabled: Boolean,
-        helper: String?,
+        helper: String? = null,
     ) {
         val leadingContent: (@Composable AddonScope.() -> Unit)? = icon?.let {
             @Composable {
@@ -334,7 +331,7 @@ internal class MultilineTextFieldScreenshot {
     companion object {
         private const val stubShortBody = "Lorem ipsum"
         private const val stubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
-            "pulvinar eu nulla sit amet, iaculis interdum."
+                "pulvinar eu nulla sit amet, iaculis interdum."
     }
 
     internal abstract class DefaultMutableInteractionSource : MutableInteractionSource {
