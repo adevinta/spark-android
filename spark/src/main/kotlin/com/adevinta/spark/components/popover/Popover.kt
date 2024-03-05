@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.RichTooltip
 import androidx.compose.material3.RichTooltipColors
 import androidx.compose.material3.TooltipDefaults
 import androidx.compose.material3.TooltipState
@@ -71,37 +72,46 @@ import kotlinx.coroutines.launch
  * Popover that is invoked when the anchor is pressed/long pressed:
  *
  * Params:
- * @param popoverContent the composable that will be used to populate the Popover's content.
+ * @param popover the composable that will be used to populate the Popover's content.
  * @param isDismissButtonEnabled [Boolean] that determines if we show a dismiss iconbutton on the Popover,
  * @param popoverState handles the state of the Popover's visibility.
- * @param anchorContent the composable that the Popover will anchor to.
+ * @param focusable [Boolean] that determines if the tooltip is focusable. When true,
+ * the tooltip will consume touch events while it's shown and will have accessibility
+ * focus move to the first element of the component. When false, the tooltip
+ * won't consume touch events while it's shown but assistive-tech users will need
+ * to swipe or drag to get to the first element of the component.
+ * @param enableUserInput [Boolean] which determines if this TooltipBox will handle
+ * long press and mouse hover to trigger the tooltip through the state provided.
+ * @param content the composable that the Popover will anchor to.
  */
 
 @ExperimentalSparkApi
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 public fun Popover(
-    popoverContent: @Composable () -> Unit,
-    modifier: Modifier = Modifier, // ignored
+    popover: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    intent: PopoverIntent = PopoverIntent.Surface,
     isDismissButtonEnabled: Boolean = false,
     popoverState: TooltipState = rememberTooltipState(isPersistent = true),
-    anchorContent: @Composable () -> Unit,
+    focusable: Boolean = true,
+    enableUserInput: Boolean = true,
+    content: @Composable () -> Unit,
 ) {
     val shape: Shape = TooltipDefaults.richTooltipContainerShape
-    /**
-     * ComposeLint lib currently doesn't catch suppress "ComposeModifierMissing"
-     * and throws a lint error
-     * TODO: remove unnecessary @modifier parameter when they fix it in a later version
-     */
-    modifier.hashCode()
 
     TooltipBox(
+        modifier = modifier,
         positionProvider = TooltipDefaults.rememberRichTooltipPositionProvider(),
+        focusable = focusable,
+        enableUserInput = enableUserInput,
         tooltip = {
-            val colors: RichTooltipColors = TooltipDefaults.richTooltipColors()
+            val colors: RichTooltipColors = TooltipDefaults.richTooltipColors(
+                containerColor = intent.containerColor(),
+            )
             Surface(
                 modifier = Modifier
-                    .sizeIn(minWidth = PopoverMinWidth, minHeight = PopoverMinHeight)
+                    .sizeIn(minWidth = PopoverMinWidth, maxWidth = 320.dp, minHeight = PopoverMinHeight)
                     .padding(bottom = PopoverAnchorPadding),
                 shape = shape,
                 elevation = ElevationTokens.Level2,
@@ -113,7 +123,7 @@ public fun Popover(
                             .padding(all = PopoverContentPadding),
                     ) {
                         CompositionLocalProvider(
-                            content = popoverContent,
+                            content = popover,
                         )
                     }
                     if (isDismissButtonEnabled) {
@@ -132,7 +142,7 @@ public fun Popover(
             }
         },
         state = popoverState,
-        content = anchorContent,
+        content = content,
     )
 }
 
@@ -155,7 +165,7 @@ private fun PopoverPreview(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Popover(
-                popoverContent = {
+                popover = {
                     Column {
                         Text(
                             text = "Title",
