@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,31 +21,38 @@
  */
 package com.adevinta.spark.catalog.examples.example
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.consumeWindowInsets
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.tokens.Layout
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 public fun Example(
     example: Example,
-    contentPadding: PaddingValues,
 ) {
-    Box(
+    val scrollState = rememberScrollState()
+
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .consumeWindowInsets(contentPadding)
-            .padding(horizontal = Layout.bodyMargin),
-        contentAlignment = Alignment.Center,
+            .verticalScroll(scrollState)
+            .windowInsetsPadding(WindowInsets.navigationBars)
+            .padding(top = 32.dp)
+            .padding(horizontal = Layout.bodyMargin)
+            .imePadding(),
     ) {
-        example.content(contentPadding)
+        with(example) {
+            this@Column.content()
+        }
     }
 }
