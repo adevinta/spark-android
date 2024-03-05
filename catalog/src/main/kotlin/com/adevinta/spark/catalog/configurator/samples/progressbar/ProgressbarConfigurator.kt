@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,9 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.progressbar
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -36,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
@@ -61,104 +57,94 @@ public val ProgressbarConfigurator: Configurator = Configurator(
     ProgressbarSample()
 }
 
-@Preview(
-    showBackground = true,
-)
 @Composable
-private fun ProgressbarSample() {
-    val scrollState = rememberScrollState()
+private fun ColumnScope.ProgressbarSample() {
+    var isRounded by remember { mutableStateOf(false) }
+    var intent by remember { mutableStateOf(ProgressbarIntent.Main) }
+    var progress by remember { mutableFloatStateOf(0.5f) }
+    val state: TextFieldState? by remember { mutableStateOf(null) }
+    val stateMessageText by remember { mutableStateOf("State Message") }
+    var expanded by remember { mutableStateOf(false) }
 
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.verticalScroll(scrollState),
+    Text(text = "Progressbar")
+
+    Progressbar(
+        progress = { progress },
+        modifier = Modifier.fillMaxWidth(),
+        intent = intent,
+        isRounded = isRounded,
+    )
+
+    Text(text = "ProgressbarIndeterminate")
+
+    ProgressbarIndeterminate(
+        intent = intent,
+        modifier = Modifier.fillMaxWidth(),
+        isRounded = isRounded,
+    )
+
+    val intents = ProgressbarIntent.entries
+    VerticalSpacer(8.dp)
+
+    SelectTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = intent.name,
+        onValueChange = {},
+        readOnly = true,
+        label = stringResource(id = R.string.configurator_component_screen_intent_label),
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+        onDismissRequest = { expanded = false },
+        dropdownContent = {
+            intents.forEach {
+                DropdownMenuItem(
+                    text = { Text(it.name) },
+                    onClick = {
+                        intent = it
+                        expanded = false
+                    },
+                )
+            }
+        },
+    )
+    VerticalSpacer(8.dp)
+
+    SwitchLabelled(
+        checked = isRounded,
+        onCheckedChange = {
+            isRounded = it
+        },
     ) {
-        var isRounded by remember { mutableStateOf(false) }
-        var intent by remember { mutableStateOf(ProgressbarIntent.Main) }
-        var progress by remember { mutableFloatStateOf(0.5f) }
-        val state: TextFieldState? by remember { mutableStateOf(null) }
-        val stateMessageText by remember { mutableStateOf("State Message") }
-        var expanded by remember { mutableStateOf(false) }
-
-        Text(text = "Progressbar")
-
-        Progressbar(
-            progress = { progress },
-            modifier = Modifier.fillMaxWidth(),
-            intent = intent,
-            isRounded = isRounded,
-        )
-
-        Text(text = "ProgressbarIndeterminate")
-
-        ProgressbarIndeterminate(
-            intent = intent,
-            modifier = Modifier.fillMaxWidth(),
-            isRounded = isRounded,
-        )
-
-        val intents = ProgressbarIntent.entries
-        VerticalSpacer(8.dp)
-
-        SelectTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = intent.name,
-            onValueChange = {},
-            readOnly = true,
-            label = stringResource(id = R.string.configurator_component_screen_intent_label),
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded },
-            onDismissRequest = { expanded = false },
-            dropdownContent = {
-                intents.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it.name) },
-                        onClick = {
-                            intent = it
-                            expanded = false
-                        },
-                    )
-                }
-            },
-        )
-        VerticalSpacer(8.dp)
-
-        SwitchLabelled(
-            checked = isRounded,
-            onCheckedChange = {
-                isRounded = it
-            },
-        ) {
-            Text(
-                text = stringResource(id = R.string.configurator_component_screen_rounded_label),
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-        VerticalSpacer(8.dp)
-
-        TextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = progress.toString(),
-            onValueChange = { progress = it.toFloat() },
-            label = "Change progress",
-            helper = "Type to change progress",
-            state = state,
-            keyboardOptions = KeyboardOptions().copy(keyboardType = KeyboardType.Number),
-            stateMessage = stateMessageText,
-        )
-
-        VerticalSpacer(8.dp)
         Text(
-            text = "Slide to change progress",
+            text = stringResource(id = R.string.configurator_component_screen_rounded_label),
             modifier = Modifier.fillMaxWidth(),
-        )
-
-        Slider(
-            value = progress,
-            onValueChange = { value ->
-                progress = value
-            },
-            enabled = true,
-            steps = 7,
         )
     }
+    VerticalSpacer(8.dp)
+
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = progress.toString(),
+        onValueChange = { progress = it.toFloat() },
+        label = "Change progress",
+        helper = "Type to change progress",
+        state = state,
+        keyboardOptions = KeyboardOptions().copy(keyboardType = KeyboardType.Number),
+        stateMessage = stateMessageText,
+    )
+
+    VerticalSpacer(8.dp)
+    Text(
+        text = "Slide to change progress",
+        modifier = Modifier.fillMaxWidth(),
+    )
+
+    Slider(
+        value = progress,
+        onValueChange = { value ->
+            progress = value
+        },
+        enabled = true,
+        steps = 7,
+    )
 }
