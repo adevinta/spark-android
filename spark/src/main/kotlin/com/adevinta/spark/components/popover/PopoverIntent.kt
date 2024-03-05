@@ -19,8 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.adevinta.spark.components.popover;
+package com.adevinta.spark.components.popover
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -70,7 +69,6 @@ public enum class PopoverIntent {
         @Composable
         override fun containerColor(): Color = SparkTheme.colors.basicContainer
     },
-
 
     /**
      * Used for feedbacks that are positive.

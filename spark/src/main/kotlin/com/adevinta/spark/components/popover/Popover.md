@@ -28,4 +28,3 @@ Popover(
 ```
 
 The popover can also have intents as it's background color, you can fin the list [here](https://spark.adevinta.com/1186e1705/p/88a08c-popover/t/60da0b).
-
