@@ -1,0 +1,24 @@
+name: '📦 Check git-lfs files'
+description: 'Check git-lfs files'
+
+runs:
+  using: composite
+  steps:
+    - run: git lfs fsck --pointers >> $GITHUB_STEP_SUMMARY
+      shell: bash
+      id: fsck
+    - if:  ${{ failure() && steps.fsck.conclusion == 'failure' && github.event_name == 'pull_request' }}
+      shell: bash
+      run: |
+        ( \
+          set +e ; \
+          echo -e "🚨 Git LFS violations detected! Please re-commit these files with \`git-lfs\`:" ; \
+          echo -e "" ; \
+          echo -e "\`\`\`" ; \
+          git lfs fsck --pointers ; \
+          echo -e "\`\`\`" ; \
+        ) | gh pr comment "$PR_NUMBER" --body-file -
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+      continue-on-error: true

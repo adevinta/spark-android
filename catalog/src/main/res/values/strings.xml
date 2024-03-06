@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  Copyright (c) 2023 Adevinta
+  Copyright (c) 2023-2024 Adevinta
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
@@ -71,7 +71,12 @@
     <string name="component_progressbar_description">The progress bar component is used to display the length and your progression inside the process or to express a waiting time. This waiting time can be either determinate or indeterminate..</string>
     <string name="component_tag_description">Tags are used to label content and help users quickly recognize info about them: Categories, Status… Can be applied with different colors and designs that are associated with a content due to its characteristics: new content, unvisited content, featured content… Users can’t interact with Tags.</string>
 
+    <!-- Progress Tracker   -->
+    <string name="component_progresstracker_description">A progress tracker component is a visual navigation element typically used to display progress or guide user through a multi-step process.</string>
+
     <string name="component_textlink_description">A TextLink is a reference to a resource. It can be external (e.g. a different web page) or internal (e.g. a specific element in the current page).</string>
+
+    <string name="component_slider_description">A slider is an interactive component that allows users to set values by moving a handle within a defined range.</string>
 
     <string name="configurator_component_screen_title">Components configurations</string>
     <string name="configurator_component_screen_description">The Configurator allows to visualize a component in every possible state available by customizing every property for each component.</string>

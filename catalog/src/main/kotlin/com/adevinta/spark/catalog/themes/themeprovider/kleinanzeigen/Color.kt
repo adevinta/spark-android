@@ -23,6 +23,7 @@ package com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen
 
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
 
 // Brand Palette
@@ -102,7 +103,7 @@ internal val KleinanzeigenLight: SparkColors = lightSparkColors(
     basic = Green700,
     onBasic = White,
     basicContainer = Green200,
-    onBasicContainer = Green700,
+    onBasicContainer = Green800,
     main = Green300,
     onMain = Green700,
     mainContainer = Green100,
@@ -112,7 +113,7 @@ internal val KleinanzeigenLight: SparkColors = lightSparkColors(
     support = Green700,
     onSupport = White,
     supportContainer = Green200,
-    onSupportContainer = Green700,
+    onSupportContainer = Green800,
     supportVariant = Green800,
     onSupportVariant = White,
     success = Green600,
@@ -147,7 +148,7 @@ internal val KleinanzeigenLight: SparkColors = lightSparkColors(
     outlineHigh = Neutral400,
 )
 
-internal val KleinanzeigenDark: SparkColors = lightSparkColors(
+internal val KleinanzeigenDark: SparkColors = darkSparkColors(
     accent = Purple100,
     onAccent = Neutral900,
     accentContainer = Purple800,
@@ -190,7 +191,7 @@ internal val KleinanzeigenDark: SparkColors = lightSparkColors(
     onNeutral = Neutral900,
     neutralContainer = Neutral600,
     onNeutralContainer = Neutral100,
-    background = Neutral900,
+    background = Neutral800,
     onBackground = White,
     backgroundVariant = Neutral700,
     onBackgroundVariant = White,
@@ -198,6 +199,6 @@ internal val KleinanzeigenDark: SparkColors = lightSparkColors(
     onSurface = White,
     surfaceInverse = White,
     onSurfaceInverse = Neutral900,
-    outline = Neutral700,
+    outline = Neutral600,
     outlineHigh = Neutral500,
 )

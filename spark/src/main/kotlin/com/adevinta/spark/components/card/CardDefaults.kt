@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ import com.adevinta.spark.tokens.surfaceColorAtElevation
 public object CardDefaults {
     @Composable
     public fun cardColors(
-        containerColor: Color = SparkTheme.colors.neutralContainer,
+        containerColor: Color = SparkTheme.colors.backgroundVariant,
         disabledContainerColor: Color = SparkTheme.colors.neutralContainer
             .copy(alpha = DisabledAlpha)
             .compositeOver(SparkTheme.colors.surface),
@@ -55,7 +55,7 @@ public object CardDefaults {
 
     @Composable
     public fun elevatedCardColors(
-        containerColor: Color = SparkTheme.colors.neutralContainer,
+        containerColor: Color = SparkTheme.colors.backgroundVariant,
         contentColor: Color = SparkTheme.colors.contentColorFor(containerColor),
         disabledContainerColor: Color =
             SparkTheme.colors.surface
@@ -74,7 +74,7 @@ public object CardDefaults {
 
     @Composable
     public fun outlinedCardColors(
-        containerColor: Color = SparkTheme.colors.neutralContainer,
+        containerColor: Color = SparkTheme.colors.backgroundVariant,
         contentColor: Color = SparkTheme.colors.contentColorFor(containerColor),
         disabledContainerColor: Color = containerColor,
         disabledContentColor: Color = contentColor.copy(DisabledAlpha),

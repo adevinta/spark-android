@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +21,18 @@
  */
 package com.adevinta.spark.catalog.configurator.component
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Code
@@ -44,6 +47,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.model.Components
@@ -65,14 +69,17 @@ import com.adevinta.spark.tokens.Layout
 public fun ConfiguratorComponentScreen(
     component: Component,
     configurator: Configurator,
-    contentPadding: PaddingValues,
 ) {
+    val scrollState = rememberScrollState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .consumeWindowInsets(WindowInsets.safeDrawing)
-            .padding(contentPadding)
-            .padding(horizontal = Layout.bodyMargin),
+            .verticalScroll(scrollState)
+            .windowInsetsPadding(WindowInsets.navigationBars)
+            .padding(horizontal = Layout.bodyMargin)
+            .imePadding(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Box(
             modifier = Modifier.align(Alignment.End),
@@ -91,7 +98,9 @@ public fun ConfiguratorComponentScreen(
             )
         }
 
-        configurator.content()
+        with(configurator) {
+            this@Column.content()
+        }
     }
 }
 

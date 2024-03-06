@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,12 +24,11 @@ package com.adevinta.spark.catalog.configurator.samples.tags
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,7 +37,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
@@ -68,109 +66,100 @@ public val TagsConfigurator: Configurator = Configurator(
 }
 
 @Suppress("DEPRECATION")
-@Preview(
-    showBackground = true,
-)
 @Composable
-private fun TagSample() {
-    val scrollState = rememberScrollState()
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.verticalScroll(scrollState),
+private fun ColumnScope.TagSample() {
+    var icon: SparkIcon? by remember { mutableStateOf(null) }
+    var style by remember { mutableStateOf(TagStyle.Filled) }
+    var intent by remember { mutableStateOf(TagIntent.Main) }
+    var buttonText by remember { mutableStateOf("Filled Tag") }
+
+    ConfigedTag(
+        modifier = Modifier.align(Alignment.CenterHorizontally),
+        style = style,
+        tagText = buttonText,
+        intent = intent,
+        icon = icon,
+    )
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Absolute.spacedBy(8.dp),
     ) {
-        var icon: SparkIcon? by remember { mutableStateOf(null) }
-        var style by remember { mutableStateOf(TagStyle.Filled) }
-        var intent by remember { mutableStateOf(TagIntent.Main) }
-        var buttonText by remember { mutableStateOf("Filled Tag") }
-
-        ConfigedTag(
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            style = style,
-            tagText = buttonText,
-            intent = intent,
-            icon = icon,
+        Text(
+            text = "With Icon",
+            modifier = Modifier
+                .weight(1f)
+                .padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
         )
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Absolute.spacedBy(8.dp),
+        FilledTonalIconToggleButton(
+            checked = icon != null,
+            onCheckedChange = {
+                icon = if (it) SparkIcons.LikeFill else null
+            },
         ) {
-            Text(
-                text = "With Icon",
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-            )
-            FilledTonalIconToggleButton(
-                checked = icon != null,
-                onCheckedChange = {
-                    icon = if (it) SparkIcons.LikeFill else null
-                },
-            ) {
-                Icon(
-                    sparkIcon = SparkIcons.LikeFill,
-                    contentDescription = null,
-                )
-            }
-        }
-
-        Column {
-            Text(
-                text = "Style",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-            )
-            val tagStyles = TagStyle.entries
-            val tagStylesLabel = tagStyles.map { it.name }
-            SegmentedButton(
-                options = tagStylesLabel,
-                selectedOption = style.name,
-                onOptionSelect = { style = TagStyle.valueOf(it) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
+            Icon(
+                sparkIcon = SparkIcons.LikeFill,
+                contentDescription = null,
             )
         }
+    }
 
-        val intents = TagIntent.entries
-        var expanded by remember { mutableStateOf(false) }
-        SelectTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = intent.name,
-            onValueChange = {},
-            readOnly = true,
-            label = "Intent",
-            expanded = expanded,
-            onExpandedChange = {
-                expanded = !expanded
-            },
-            onDismissRequest = {
-                expanded = false
-            },
-            dropdownContent = {
-                intents.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it.name) },
-                        onClick = {
-                            intent = it
-                            expanded = false
-                        },
-                    )
-                }
-            },
+    Column {
+        Text(
+            text = "Style",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
         )
-
-        TextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = buttonText,
-            onValueChange = {
-                buttonText = it
-            },
-            label = "Tag text",
-            placeholder = "Vérifier les Disponibilité",
+        val tagStyles = TagStyle.entries
+        val tagStylesLabel = tagStyles.map { it.name }
+        SegmentedButton(
+            options = tagStylesLabel,
+            selectedOption = style.name,
+            onOptionSelect = { style = TagStyle.valueOf(it) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
         )
     }
+
+    val intents = TagIntent.entries
+    var expanded by remember { mutableStateOf(false) }
+    SelectTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = intent.name,
+        onValueChange = {},
+        readOnly = true,
+        label = "Intent",
+        expanded = expanded,
+        onExpandedChange = {
+            expanded = !expanded
+        },
+        onDismissRequest = {
+            expanded = false
+        },
+        dropdownContent = {
+            intents.forEach {
+                DropdownMenuItem(
+                    text = { Text(it.name) },
+                    onClick = {
+                        intent = it
+                        expanded = false
+                    },
+                )
+            }
+        },
+    )
+
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = buttonText,
+        onValueChange = {
+            buttonText = it
+        },
+        label = "Tag text",
+        placeholder = "Vérifier les Disponibilité",
+    )
 }
 
 @Composable

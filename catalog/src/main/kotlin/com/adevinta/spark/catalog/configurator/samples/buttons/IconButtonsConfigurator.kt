@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,14 +22,12 @@
 package com.adevinta.spark.catalog.configurator.samples.buttons
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,7 +36,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
@@ -70,145 +67,136 @@ public val IconButtonsConfigurator: Configurator = Configurator(
     IconButtonSample()
 }
 
-@Preview(
-    showBackground = true,
-)
 @Composable
-private fun IconButtonSample() {
-    val scrollState = rememberScrollState()
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.verticalScroll(scrollState),
+private fun ColumnScope.IconButtonSample() {
+    var style by remember { mutableStateOf(IconButtonStyle.Filled) }
+    val icon: SparkIcon by remember { mutableStateOf(SparkIcons.LikeFill) }
+    var isLoading by remember { mutableStateOf(false) }
+    var isEnabled by remember { mutableStateOf(true) }
+    var shape by remember { mutableStateOf(ButtonShape.Pill) }
+    var size by remember { mutableStateOf(IconButtonSize.Medium) }
+    var intent by remember { mutableStateOf(IconButtonIntent.Main) }
+    var contentDescription by remember { mutableStateOf("Content Description") }
+
+    ConfiguredIconButton(
+        style = style,
+        shape = shape,
+        contentDescription = contentDescription,
+        onClick = { },
+        size = size,
+        intent = intent,
+        isEnabled = isEnabled,
+        isLoading = isLoading,
+        icon = icon,
+    )
+
+    SwitchLabelled(
+        checked = isLoading,
+        onCheckedChange = { isLoading = it },
     ) {
-        var style by remember { mutableStateOf(IconButtonStyle.Filled) }
-        val icon: SparkIcon by remember { mutableStateOf(SparkIcons.LikeFill) }
-        var isLoading by remember { mutableStateOf(false) }
-        var isEnabled by remember { mutableStateOf(true) }
-        var shape by remember { mutableStateOf(ButtonShape.Pill) }
-        var size by remember { mutableStateOf(IconButtonSize.Medium) }
-        var intent by remember { mutableStateOf(IconButtonIntent.Main) }
-        var contentDescription by remember { mutableStateOf("Content Description") }
-
-        ConfiguredIconButton(
-            style = style,
-            shape = shape,
-            contentDescription = contentDescription,
-            onClick = { },
-            size = size,
-            intent = intent,
-            isEnabled = isEnabled,
-            isLoading = isLoading,
-            icon = icon,
-        )
-
-        SwitchLabelled(
-            checked = isLoading,
-            onCheckedChange = { isLoading = it },
-        ) {
-            Text(
-                text = "Loading",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        SwitchLabelled(
-            checked = isEnabled,
-            onCheckedChange = { isEnabled = it },
-        ) {
-            Text(
-                text = "Enabled",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        Column {
-            Text(
-                text = "Style",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-            )
-            val buttonStylesLabel = IconButtonStyle.entries.map(IconButtonStyle::name)
-            SegmentedButton(
-                options = buttonStylesLabel,
-                selectedOption = style.name,
-                onOptionSelect = { style = IconButtonStyle.valueOf(it) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-            )
-        }
-
-        val intents = IconButtonIntent.values()
-        var expanded by remember { mutableStateOf(false) }
-        SelectTextField(
+        Text(
+            text = "Loading",
             modifier = Modifier.fillMaxWidth(),
-            value = intent.name,
-            onValueChange = {},
-            readOnly = true,
-            label = "Intent",
-            expanded = expanded,
-            onExpandedChange = {
-                expanded = !expanded
-            },
-            onDismissRequest = {
-                expanded = false
-            },
-            dropdownContent = {
-                intents.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it.name) },
-                        onClick = {
-                            intent = it
-                            expanded = false
-                        },
-                    )
-                }
-            },
-        )
-
-        Column {
-            Text(
-                text = "Shape",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-            )
-            val buttonShapesLabel = ButtonShape.entries.map(ButtonShape::name)
-            SegmentedButton(
-                options = buttonShapesLabel,
-                selectedOption = shape.name,
-                onOptionSelect = { shape = ButtonShape.valueOf(it) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-            )
-        }
-        Column {
-            Text(
-                text = "Size",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-            )
-            val buttonSizesLabel = IconButtonSize.entries.map(IconButtonSize::name)
-            SegmentedButton(
-                options = buttonSizesLabel,
-                selectedOption = size.name,
-                onOptionSelect = { size = IconButtonSize.valueOf(it) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-            )
-        }
-
-        TextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = contentDescription,
-            onValueChange = {
-                contentDescription = it
-            },
-            label = "Content Description",
-            placeholder = "Content Description",
         )
     }
+
+    SwitchLabelled(
+        checked = isEnabled,
+        onCheckedChange = { isEnabled = it },
+    ) {
+        Text(
+            text = "Enabled",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    Column {
+        Text(
+            text = "Style",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+        )
+        val buttonStylesLabel = IconButtonStyle.entries.map(IconButtonStyle::name)
+        SegmentedButton(
+            options = buttonStylesLabel,
+            selectedOption = style.name,
+            onOptionSelect = { style = IconButtonStyle.valueOf(it) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+        )
+    }
+
+    val intents = IconButtonIntent.values()
+    var expanded by remember { mutableStateOf(false) }
+    SelectTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = intent.name,
+        onValueChange = {},
+        readOnly = true,
+        label = "Intent",
+        expanded = expanded,
+        onExpandedChange = {
+            expanded = !expanded
+        },
+        onDismissRequest = {
+            expanded = false
+        },
+        dropdownContent = {
+            intents.forEach {
+                DropdownMenuItem(
+                    text = { Text(it.name) },
+                    onClick = {
+                        intent = it
+                        expanded = false
+                    },
+                )
+            }
+        },
+    )
+
+    Column {
+        Text(
+            text = "Shape",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+        )
+        val buttonShapesLabel = ButtonShape.entries.map(ButtonShape::name)
+        SegmentedButton(
+            options = buttonShapesLabel,
+            selectedOption = shape.name,
+            onOptionSelect = { shape = ButtonShape.valueOf(it) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+        )
+    }
+    Column {
+        Text(
+            text = "Size",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+        )
+        val buttonSizesLabel = IconButtonSize.entries.map(IconButtonSize::name)
+        SegmentedButton(
+            options = buttonSizesLabel,
+            selectedOption = size.name,
+            onOptionSelect = { size = IconButtonSize.valueOf(it) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+        )
+    }
+
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = contentDescription,
+        onValueChange = {
+            contentDescription = it
+        },
+        label = "Content Description",
+        placeholder = "Content Description",
+    )
 }
 
 @Composable
