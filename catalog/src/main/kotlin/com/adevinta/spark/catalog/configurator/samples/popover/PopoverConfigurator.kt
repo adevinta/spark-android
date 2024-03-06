@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,16 +21,14 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.popover
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TooltipState
 import androidx.compose.material3.rememberTooltipState
@@ -45,7 +43,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
@@ -76,81 +73,72 @@ public val PopoverConfigurator: Configurator = Configurator(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(
-    showBackground = true,
-)
 @Composable
-private fun PopoverSample() {
-    val scrollState = rememberScrollState()
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.verticalScroll(scrollState),
+private fun ColumnScope.PopoverSample() {
+    var isDismissButtonEnabled by remember { mutableStateOf(true) }
+    var popoverContentExample by remember { mutableStateOf(PopoverContentExamples.TextList) }
+    var popoverTriggerExample by remember { mutableStateOf(PopoverTriggerExamples.Button) }
+    val popoverState = rememberTooltipState(isPersistent = true)
+    val scope = rememberCoroutineScope()
+
+    SwitchLabelled(
+        checked = isDismissButtonEnabled,
+        onCheckedChange = {
+            isDismissButtonEnabled = it
+        },
     ) {
-        var isDismissButtonEnabled by remember { mutableStateOf(true) }
-        var popoverContentExample by remember { mutableStateOf(PopoverContentExamples.TextList) }
-        var popoverTriggerExample by remember { mutableStateOf(PopoverTriggerExamples.Button) }
-        val popoverState = rememberTooltipState(isPersistent = true)
-        val scope = rememberCoroutineScope()
-
-        SwitchLabelled(
-            checked = isDismissButtonEnabled,
-            onCheckedChange = {
-                isDismissButtonEnabled = it
-            },
-        ) {
-            Text(
-                text = "Show dismiss icon",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        val contentExamples = PopoverContentExamples.entries.toTypedArray()
-        var expanded by remember { mutableStateOf(false) }
-        SelectTextField(
+        Text(
+            text = "Show dismiss icon",
             modifier = Modifier.fillMaxWidth(),
-            value = popoverContentExample.name,
-            onValueChange = {},
-            readOnly = true,
-            label = "Popover Content Example",
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded },
-            onDismissRequest = { expanded = false },
-            dropdownContent = {
-                contentExamples.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it.name) },
-                        onClick = {
-                            popoverContentExample = it
-                            expanded = false
-                        },
-                    )
-                }
-            },
         )
-        Column {
-            Text(
-                text = "Popover Anchor",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-            )
-            val triggerExamples = PopoverTriggerExamples.entries.toTypedArray()
-            val contentSidesLabel = triggerExamples.map { it.name }
-            SegmentedButton(
-                options = contentSidesLabel,
-                selectedOption = popoverTriggerExample.name,
-                onOptionSelect = {
-                    popoverTriggerExample = PopoverTriggerExamples.valueOf(it)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-            )
-        }
-
-        VerticalSpacer(40.dp)
-
-        ConfiguredPopover(scope, popoverState, isDismissButtonEnabled, popoverContentExample, popoverTriggerExample)
     }
+
+    val contentExamples = PopoverContentExamples.entries.toTypedArray()
+    var expanded by remember { mutableStateOf(false) }
+    SelectTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = popoverContentExample.name,
+        onValueChange = {},
+        readOnly = true,
+        label = "Popover Content Example",
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+        onDismissRequest = { expanded = false },
+        dropdownContent = {
+            contentExamples.forEach {
+                DropdownMenuItem(
+                    text = { Text(it.name) },
+                    onClick = {
+                        popoverContentExample = it
+                        expanded = false
+                    },
+                )
+            }
+        },
+    )
+    Column {
+        Text(
+            text = "Popover Anchor",
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+        )
+        val triggerExamples = PopoverTriggerExamples.entries.toTypedArray()
+        val contentSidesLabel = triggerExamples.map { it.name }
+        SegmentedButton(
+            options = contentSidesLabel,
+            selectedOption = popoverTriggerExample.name,
+            onOptionSelect = {
+                popoverTriggerExample = PopoverTriggerExamples.valueOf(it)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(48.dp),
+        )
+    }
+
+    VerticalSpacer(40.dp)
+
+    ConfiguredPopover(scope, popoverState, isDismissButtonEnabled, popoverContentExample, popoverTriggerExample)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -19,16 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("COMPOSABLE_FUNCTION_REFERENCE")
+package com.adevinta.spark.components.progress.tracker
 
-package com.adevinta.spark.catalog.model
+/**
+ * Defines the different sizes of the progress indicator
+ */
+public enum class ProgressStyles {
+    /**
+     * Small size won't display content inside it and won't be interactive.
+     */
+    Tinted,
 
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.runtime.Composable
-
-public data class Configurator(
-    val name: String,
-    val description: String,
-    val sourceUrl: String,
-    val content: @Composable ColumnScope.() -> Unit,
-)
+    /**
+     * Medium size will display content inside it but won't be interactive.
+     */
+    Outlined,
+}
