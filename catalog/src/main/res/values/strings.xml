@@ -72,7 +72,6 @@
     <string name="component_tag_description">Tags are used to label content and help users quickly recognize info about them: Categories, Status… Can be applied with different colors and designs that are associated with a content due to its characteristics: new content, unvisited content, featured content… Users can’t interact with Tags.</string>
 
     <!-- Progress Tracker   -->
-    <string name="component_progresstracker_title" translatable="false">Progress Tracker</string>
     <string name="component_progresstracker_description">A progress tracker component is a visual navigation element typically used to display progress or guide user through a multi-step process.</string>
 
     <string name="component_textlink_description">A TextLink is a reference to a resource. It can be external (e.g. a different web page) or internal (e.g. a specific element in the current page).</string>
