@@ -263,7 +263,7 @@ private fun ImageContent() {
             modifier = Modifier
                 .height(500.dp)
                 .fillMaxWidth(),
-            model = R.drawable.flower,
+            model = "https://upload.wikimedia.org/wikipedia/commons/f/fd/Pink_flower.jpg",
             contentScale = ContentScale.Crop,
             contentDescription = null,
         )
