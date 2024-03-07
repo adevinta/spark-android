@@ -109,6 +109,8 @@ import kotlin.math.max
  * animates to [Hidden].
  * @param modifier Optional [Modifier] for the bottom sheet.
  * @param showHandle Optional [Boolean] to show / hide handle, if handle is hidden it will fill all screen.
+ * If DragHandle is visible, you need to provide an extra top padding on your content
+ * so it doesn't overlap with the handle. my suggestion is 24.dp
  * @param sheetState The state of the bottom sheet.
  * @param content The content to be displayed inside the bottom sheet.
  */
