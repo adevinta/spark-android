@@ -40,6 +40,7 @@ import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConf
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
+import com.adevinta.spark.catalog.examples.samples.bottomsheet.BottomSheetExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
@@ -161,7 +162,7 @@ private val BottomSheets = Component(
     guidelinesUrl = "$ComponentGuidelinesUrl/p/67d41e-bottom-sheet/b/02056b",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.bottom-sheet/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/bottomsheet/modal/ModalBottomSheet.kt",
-    examples = PopoverExamples,
+    examples = BottomSheetExamples,
     configurator = BottomSheetConfigurator,
 )
 
