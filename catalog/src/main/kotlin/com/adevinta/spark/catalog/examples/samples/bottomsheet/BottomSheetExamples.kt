@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Adevinta
+ * Copyright (c) 2023 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,16 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.configurator.samples.bottomsheet
+package com.adevinta.spark.catalog.examples.samples.bottomsheet
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -38,7 +36,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -51,8 +48,9 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
-import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.catalog.configurator.samples.bottomsheet.BottomSheetContentExamples
+import com.adevinta.spark.catalog.model.Example
+import com.adevinta.spark.catalog.util.SparkSampleSourceUrl
 import com.adevinta.spark.components.bottomsheet.SheetState
 import com.adevinta.spark.components.bottomsheet.SheetValue
 import com.adevinta.spark.components.bottomsheet.modal.ModalBottomSheet
@@ -62,90 +60,29 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.image.Image
 import com.adevinta.spark.components.list.ListItem
-import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.SelectTextField
-import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Store
 import kotlinx.coroutines.launch
 
-public val BottomSheetConfigurator: Configurator = Configurator(
-    name = "BottomSheet",
-    description = "BottomSheet configuration",
-    sourceUrl = "$SampleSourceUrl/BottomSheetSamples.kt",
-) {
-    BottomSheetSample()
-}
+private const val BottomSheetExampleSourceUrl = "$SparkSampleSourceUrl/bottomsheet/BottomSheetExamples.kt"
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
-@Composable
-private fun ColumnScope.BottomSheetSample() {
-    var isDragHandlerEnabled by remember { mutableStateOf(true) }
-    var openBottomSheet by rememberSaveable { mutableStateOf(false) }
-    var skipPartiallyExpanded by remember { mutableStateOf(false) }
-    var bottomSheetContentExample by remember { mutableStateOf(BottomSheetContentExamples.Text) }
-
-    val bottomSheetState = rememberModalBottomSheetState(
-        skipPartiallyExpanded = skipPartiallyExpanded,
-        initialValue = SheetValue.Hidden,
-    )
-    val scope = rememberCoroutineScope()
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+@OptIn(ExperimentalMaterial3Api::class)
+public val BottomSheetExamples: List<Example> = listOf(
+    Example(
+        name = "BottomSheet List Content",
+        description = "BottomSheet List Content",
+        sourceUrl = BottomSheetExampleSourceUrl,
     ) {
-        SwitchLabelled(
-            checked = isDragHandlerEnabled,
-            onCheckedChange = {
-                isDragHandlerEnabled = it
-            },
-        ) {
-            Text(
-                text = "Show Drag Handle",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
+        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
 
-        SwitchLabelled(
-            checked = skipPartiallyExpanded,
-            onCheckedChange = {
-                skipPartiallyExpanded = it
-            },
-        ) {
-            Text(
-                text = "Skip Partially Expanded",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        val contentExamples = BottomSheetContentExamples.entries.toTypedArray()
-        var expanded by remember { mutableStateOf(false) }
-        SelectTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = bottomSheetContentExample.name,
-            onValueChange = {},
-            readOnly = true,
-            label = "BottomSheet Content Example",
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded },
-            onDismissRequest = { expanded = false },
-            dropdownContent = {
-                contentExamples.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it.name) },
-                        onClick = {
-                            bottomSheetContentExample = it
-                            expanded = false
-                        },
-                    )
-                }
-            },
+        val bottomSheetState = rememberModalBottomSheetState(
+            skipPartiallyExpanded = false,
+            initialValue = SheetValue.Hidden,
         )
+        val scope = rememberCoroutineScope()
 
         VerticalSpacer(24.dp)
 
@@ -153,23 +90,163 @@ private fun ColumnScope.BottomSheetSample() {
             text = "Show BottomSheet",
             onClick = { openBottomSheet = !openBottomSheet },
         )
-    }
 
-    ConfiguredBottomSheet(
-        bottomSheetContentExample,
-        openBottomSheet,
-        isDragHandlerEnabled,
-        { openBottomSheet = false },
-        {
-            scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
-                if (!bottomSheetState.isVisible) {
-                    openBottomSheet = false
+        ConfiguredBottomSheet(
+            BottomSheetContentExamples.List,
+            openBottomSheet,
+            true,
+            { openBottomSheet = false },
+            {
+                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
+                    if (!bottomSheetState.isVisible) {
+                        openBottomSheet = false
+                    }
                 }
-            }
-        },
-        bottomSheetState,
-    )
-}
+            },
+            bottomSheetState,
+        )
+    },
+    Example(
+        name = "BottomSheet List Content",
+        description = "BottomSheet List Content, no drag handle",
+        sourceUrl = BottomSheetExampleSourceUrl,
+    ) {
+        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
+
+        val bottomSheetState = rememberModalBottomSheetState(
+            skipPartiallyExpanded = false,
+            initialValue = SheetValue.Hidden,
+        )
+        val scope = rememberCoroutineScope()
+
+        VerticalSpacer(24.dp)
+
+        ButtonFilled(
+            text = "Show BottomSheet",
+            onClick = { openBottomSheet = !openBottomSheet },
+        )
+
+        ConfiguredBottomSheet(
+            BottomSheetContentExamples.List,
+            openBottomSheet,
+            false,
+            { openBottomSheet = false },
+            {
+                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
+                    if (!bottomSheetState.isVisible) {
+                        openBottomSheet = false
+                    }
+                }
+            },
+            bottomSheetState,
+        )
+    },
+    Example(
+        name = "BottomSheet List Content",
+        description = "BottomSheet List Content fully expanded",
+        sourceUrl = BottomSheetExampleSourceUrl,
+    ) {
+        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
+
+        val bottomSheetState = rememberModalBottomSheetState(
+            skipPartiallyExpanded = true,
+            initialValue = SheetValue.Hidden,
+        )
+        val scope = rememberCoroutineScope()
+
+        VerticalSpacer(24.dp)
+
+        ButtonFilled(
+            text = "Show BottomSheet",
+            onClick = { openBottomSheet = !openBottomSheet },
+        )
+
+        ConfiguredBottomSheet(
+            BottomSheetContentExamples.List,
+            openBottomSheet,
+            true,
+            { openBottomSheet = false },
+            {
+                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
+                    if (!bottomSheetState.isVisible) {
+                        openBottomSheet = false
+                    }
+                }
+            },
+            bottomSheetState,
+        )
+    },
+    Example(
+        name = "BottomSheet Text Content",
+        description = "BottomSheet Text Content",
+        sourceUrl = BottomSheetExampleSourceUrl,
+    ) {
+        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
+
+        val bottomSheetState = rememberModalBottomSheetState(
+            skipPartiallyExpanded = false,
+            initialValue = SheetValue.Hidden,
+        )
+        val scope = rememberCoroutineScope()
+
+        VerticalSpacer(24.dp)
+
+        ButtonFilled(
+            text = "Show BottomSheet",
+            onClick = { openBottomSheet = !openBottomSheet },
+        )
+
+        ConfiguredBottomSheet(
+            BottomSheetContentExamples.Text,
+            openBottomSheet,
+            true,
+            { openBottomSheet = false },
+            {
+                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
+                    if (!bottomSheetState.isVisible) {
+                        openBottomSheet = false
+                    }
+                }
+            },
+            bottomSheetState,
+        )
+    },
+    Example(
+        name = "BottomSheet Image Content",
+        description = "BottomSheet Image Content",
+        sourceUrl = BottomSheetExampleSourceUrl,
+    ) {
+        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
+
+        val bottomSheetState = rememberModalBottomSheetState(
+            skipPartiallyExpanded = false,
+            initialValue = SheetValue.Hidden,
+        )
+        val scope = rememberCoroutineScope()
+
+        VerticalSpacer(24.dp)
+
+        ButtonFilled(
+            text = "Show BottomSheet",
+            onClick = { openBottomSheet = !openBottomSheet },
+        )
+
+        ConfiguredBottomSheet(
+            BottomSheetContentExamples.Image,
+            openBottomSheet,
+            true,
+            { openBottomSheet = false },
+            {
+                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
+                    if (!bottomSheetState.isVisible) {
+                        openBottomSheet = false
+                    }
+                }
+            },
+            bottomSheetState,
+        )
+    },
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
