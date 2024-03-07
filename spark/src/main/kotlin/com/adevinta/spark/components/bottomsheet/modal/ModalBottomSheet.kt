@@ -105,7 +105,6 @@ import kotlin.math.max
  * app functionality when they appear, and remaining on screen until confirmed, dismissed, or a
  * required action has been taken.
  *
- *
  * @param onDismissRequest Executes when the user clicks outside of the bottom sheet, after sheet
  * animates to [Hidden].
  * @param modifier Optional [Modifier] for the bottom sheet.
@@ -283,7 +282,7 @@ internal fun SparkModalBottomSheet(
                                         } else if (hasPartiallyExpandedState) {
                                             collapse {
                                                 val confirmPartial =
-                                                    swipeableState.confirmValueChange(SheetValue.PartiallyExpanded)
+                                                    swipeableState.confirmValueChange(PartiallyExpanded)
                                                 if (confirmPartial) {
                                                     scope.launch { partialExpand() }
                                                 }
@@ -373,11 +372,11 @@ private fun Modifier.modalBottomSheetSwipeable(
 ).swipeAnchors(
     state = sheetState.swipeableState,
     anchorChangeHandler = anchorChangeHandler,
-    possibleValues = setOf(Hidden, SheetValue.PartiallyExpanded, Expanded),
+    possibleValues = setOf(Hidden, PartiallyExpanded, Expanded),
 ) { value, sheetSize ->
     when (value) {
         Hidden -> screenHeight + bottomPadding
-        SheetValue.PartiallyExpanded -> when {
+        PartiallyExpanded -> when {
             sheetSize.height < screenHeight / 2 -> null
             sheetState.skipPartiallyExpanded -> null
             else -> screenHeight / 2f
@@ -401,10 +400,10 @@ private fun modalBottomSheetAnchorChangeHandler(
     val previousTargetOffset = previousAnchors[previousTarget]
     val newTarget = when (previousTarget) {
         Hidden -> Hidden
-        SheetValue.PartiallyExpanded, Expanded -> {
-            val hasPartiallyExpandedState = newAnchors.containsKey(SheetValue.PartiallyExpanded)
+        PartiallyExpanded, Expanded -> {
+            val hasPartiallyExpandedState = newAnchors.containsKey(PartiallyExpanded)
             val newTarget = if (hasPartiallyExpandedState) {
-                SheetValue.PartiallyExpanded
+                PartiallyExpanded
             } else if (newAnchors.containsKey(Expanded)) {
                 Expanded
             } else {
