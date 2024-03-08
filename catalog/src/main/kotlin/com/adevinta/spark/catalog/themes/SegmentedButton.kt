@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
@@ -85,6 +86,7 @@ internal fun SegmentedButton(
     )
     Layout(
         modifier = modifier
+            .sizeIn(minWidth = 48.dp, minHeight = 48.dp)
             .clip(
                 shape = SparkTheme.shapes.full,
             )
@@ -143,7 +145,7 @@ internal fun SegmentedButton(
         val optionWidth = constraints.maxWidth / options.size
         val optionConstraints = Constraints.fixed(
             width = optionWidth,
-            height = constraints.maxHeight,
+            height = constraints.minHeight,
         )
         val optionPlaceables = measurables
             .filter { measurable -> measurable.layoutId == MultiSelectorOption.Option }
@@ -153,7 +155,7 @@ internal fun SegmentedButton(
             .measure(optionConstraints)
         layout(
             width = constraints.maxWidth,
-            height = constraints.maxHeight,
+            height = constraints.minHeight,
         ) {
             backgroundPlaceable.placeRelative(
                 x = (backgroundProgress * optionWidth).toInt(),
