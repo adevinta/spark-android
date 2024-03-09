@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -479,7 +479,7 @@ private fun surfaceColorAtElevation(
     elevationOverlay: ElevationOverlay?,
     absoluteElevation: Dp,
 ): Color {
-    return if (color == SparkTheme.colors.surface && elevationOverlay != null) {
+    return if (elevationOverlay != null) {
         elevationOverlay.apply(color, absoluteElevation)
     } else {
         color

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,12 +23,12 @@
 
 package com.adevinta.spark.catalog.model
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
 
 public data class Example(
     val name: String,
     val description: String,
     val sourceUrl: String,
-    val content: @Composable (paddingValues: PaddingValues) -> Unit,
+    val content: @Composable ColumnScope.() -> Unit,
 )

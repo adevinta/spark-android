@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
@@ -163,7 +164,7 @@ public fun TextLink(
  * @param onClick callback when textLink button is clicked.
  * @param modifier the [Modifier] to be applied to this layout node
  * @param size The size of the button
- * @param intent The intent color for the button.
+ * @param intent The intent color for the button. Note that [ButtonIntent.Surface] will use the the [LocalContentColor].
  * @param enabled Controls the enabled state of the button. When `false`, this button will not be clickable
  * @param icon The optional icon to be displayed at the start or the end of the button container.
  * @param iconSide If an icon is added, you can configure the side where is should be displayed, at the start
@@ -181,14 +182,16 @@ public fun TextLinkButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Basic,
+    intent: ButtonIntent = ButtonIntent.Surface,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val colors = ButtonDefaults.textButtonColors(contentColor = intent.colors().color)
+    val colors = ButtonDefaults.textButtonColors(
+        contentColor = if (intent != ButtonIntent.Surface) intent.colors().color else LocalContentColor.current,
+    )
 
     BaseSparkButton(
         onClick = onClick,

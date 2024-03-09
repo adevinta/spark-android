@@ -23,6 +23,7 @@ package com.adevinta.spark.catalog.themes.themeprovider.subito
 
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
 
 // Brand Palette
@@ -150,7 +151,7 @@ internal val SubitoLight: SparkColors = lightSparkColors(
     outlineHigh = Neutral700,
 )
 
-internal val SubitoDark: SparkColors = lightSparkColors(
+internal val SubitoDark: SparkColors = darkSparkColors(
     main = RedHot300,
     onMain = Black,
     mainContainer = RedHot800,
@@ -193,8 +194,8 @@ internal val SubitoDark: SparkColors = lightSparkColors(
     onNeutral = Black,
     neutralContainer = Neutral900,
     onNeutralContainer = Neutral200,
-    background = White,
-    onBackground = Black,
+    background = Black,
+    onBackground = White,
     backgroundVariant = Neutral200,
     onBackgroundVariant = Neutral900,
     surface = Black,

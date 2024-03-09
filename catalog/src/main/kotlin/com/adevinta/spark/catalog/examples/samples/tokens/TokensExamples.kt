@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,6 @@ public val TokensExamples: List<Example> = listOf(
         description = "Showcase the color tokens with their container and on color variants",
         sourceUrl = TokensExampleSourceUrl,
     ) {
-        ColorSample(it)
+        ColorSample()
     },
 )
