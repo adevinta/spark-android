@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.popover
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -41,7 +42,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
@@ -77,33 +78,21 @@ public val PopoverConfigurator: Configurator = Configurator(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ColumnScope.PopoverSample() {
-    val scrollState = rememberScrollState()
-    Column(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.verticalScroll(scrollState),
+    var isDismissButtonEnabled by remember { mutableStateOf(true) }
+    var popoverContentExample by remember { mutableStateOf(PopoverContentExamples.TextList) }
+    var popoverTriggerExample by remember { mutableStateOf(PopoverTriggerExamples.Button) }
+    var intent by remember { mutableStateOf(PopoverIntent.Surface) }
+    val popoverState = rememberTooltipState(isPersistent = true)
+    val scope = rememberCoroutineScope()
+
+    SwitchLabelled(
+        checked = isDismissButtonEnabled,
+        onCheckedChange = {
+            isDismissButtonEnabled = it
+        },
     ) {
-        var isDismissButtonEnabled by remember { mutableStateOf(true) }
-        var popoverContentExample by remember { mutableStateOf(PopoverContentExamples.TextList) }
-        var popoverTriggerExample by remember { mutableStateOf(PopoverTriggerExamples.Button) }
-        var intent by remember { mutableStateOf(PopoverIntent.Surface) }
-        val popoverState = rememberTooltipState(isPersistent = true)
-        val scope = rememberCoroutineScope()
-
-        SwitchLabelled(
-            checked = isDismissButtonEnabled,
-            onCheckedChange = {
-                isDismissButtonEnabled = it
-            },
-        ) {
-            Text(
-                text = "Show dismiss icon",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        val contentExamples = PopoverContentExamples.entries
-        var expanded by remember { mutableStateOf(false) }
-        SelectTextField(
+        Text(
+            text = "Show dismiss icon",
             modifier = Modifier.fillMaxWidth(),
         )
     }
@@ -173,29 +162,10 @@ private fun ColumnScope.PopoverSample() {
                 }
             },
         )
-        Column {
-            Text(
-                text = "Popover Anchor",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.highlight,
-            )
-            val triggerExamples = PopoverTriggerExamples.entries
-            val contentSidesLabel = triggerExamples.map { it.name }
-            SegmentedButton(
-                options = contentSidesLabel,
-                selectedOption = popoverTriggerExample.name,
-                onOptionSelect = {
-                    popoverTriggerExample = PopoverTriggerExamples.valueOf(it)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-            )
-        }
+        VerticalSpacer(40.dp)
 
-    VerticalSpacer(40.dp)
-
-    ConfiguredPopover(scope, popoverState, isDismissButtonEnabled, popoverContentExample, popoverTriggerExample)
+        ConfiguredPopover(scope, popoverState, isDismissButtonEnabled, popoverContentExample, popoverTriggerExample)
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -276,6 +246,7 @@ private fun ConfiguredPopover(
         }
     }
 }
+
 
 private enum class PopoverContentExamples {
     TextList,
