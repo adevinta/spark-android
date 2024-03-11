@@ -26,8 +26,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -70,7 +68,6 @@ public val SlidersConfigurator: Configurator = Configurator(
 @Preview(showBackground = true)
 @Composable
 private fun SliderSample() {
-    val scrollState = rememberScrollState()
     var enabled by remember { mutableStateOf(true) }
     var rounded by remember { mutableStateOf(true) }
     var intent by remember { mutableStateOf(SliderIntent.Basic) }
@@ -82,7 +79,6 @@ private fun SliderSample() {
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.verticalScroll(scrollState),
     ) {
         Text(text = "Slider", style = SparkTheme.typography.headline1)
 
