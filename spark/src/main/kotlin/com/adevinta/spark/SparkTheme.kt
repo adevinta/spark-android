@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark
 
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,9 +29,13 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalRippleConfiguration
+import androidx.compose.material3.LocalUseFallbackRippleImplementation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.RippleConfiguration
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -50,6 +55,7 @@ import com.adevinta.spark.tokens.LocalSparkColors
 import com.adevinta.spark.tokens.LocalSparkShapes
 import com.adevinta.spark.tokens.LocalSparkTypography
 import com.adevinta.spark.tokens.LocalWindowSizeClass
+import com.adevinta.spark.tokens.RippleAlpha
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkFontFamily
 import com.adevinta.spark.tokens.SparkShapes
@@ -61,6 +67,7 @@ import com.adevinta.spark.tokens.calculateWindowSizeClass
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.debugColors
 import com.adevinta.spark.tokens.lightSparkColors
+import com.adevinta.spark.tokens.ripple
 import com.adevinta.spark.tokens.sparkFontFamily
 import com.adevinta.spark.tokens.sparkShapes
 import com.adevinta.spark.tokens.sparkTypography
@@ -90,7 +97,7 @@ import com.adevinta.spark.tokens.updateFontFamily
  * @param useSparkComponentsHighlighter flag to highlight the spark components with an overlay to recognize
  * which component is from spark or not.
  */
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalMaterial3Api::class)
 @Composable
 public fun SparkTheme(
     // We don't want to automatically support dark theme in the app but still want it in the previews
@@ -126,12 +133,16 @@ public fun SparkTheme(
 
     val typo = typography.updateFontFamily(fontFamily = fontFamily)
 
+    val rippleIndication = ripple()
+
     CompositionLocalProvider(
         LocalSparkColors provides rememberedColors,
         LocalSparkTypography provides typo,
         LocalSparkShapes provides internalShapes,
         LocalSparkFeatureFlag provides sparkFeatureFlag,
         LocalWindowSizeClass provides calculateWindowSizeClass(),
+        LocalUseFallbackRippleImplementation provides false,
+        LocalIndication provides rippleIndication,
     ) {
         MaterialTheme(
             colorScheme = rememberedColors.asMaterial3Colors(),
@@ -140,6 +151,7 @@ public fun SparkTheme(
         ) {
             CompositionLocalProvider(
                 LocalContentColor provides SparkTheme.colors.onSurface,
+                LocalRippleConfiguration provides RippleConfiguration(rippleAlpha = RippleAlpha)
             ) {
                 ProvideTextStyle(value = SparkTheme.typography.body2) {
                     content()

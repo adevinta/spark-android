@@ -21,10 +21,12 @@
  */
 package com.adevinta.spark.components.slider
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.hoverable
+import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -63,6 +65,8 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.dim4
+import com.adevinta.spark.tokens.ripple
+import com.adevinta.spark.tokens.transparent
 import androidx.compose.material3.Slider as MaterialSlider
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -142,13 +146,34 @@ internal fun Handle(
     }
 
     val handleColor = if (enabled) intentColor.color else intentColor.color.dim3
-    val handleColorBg = if (interactions.isNotEmpty()) intentColor.containerColor else Color.Unspecified
-    val handleColorBorder = if (interactions.isNotEmpty()) intentColor.color else Color.Unspecified
+    val handleColorBg by animateColorAsState(
+        label = "handleColorBg",
+        targetValue = if (interactions.isNotEmpty()) {
+            intentColor.containerColor
+        } else {
+            intentColor.containerColor.transparent
+        }
+    )
+    val handleColorBorder by animateColorAsState(
+        label = "handleBorder",
+        targetValue = if (interactions.isNotEmpty()) {
+            intentColor.color
+        } else {
+            intentColor.color.transparent
+        }
+    )
 
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .size(DefaultHandleSizeWidth)
+            .indication(
+                interactionSource = interactionSource,
+                indication = ripple(
+                    bounded = false,
+                    radius = 24.dp,
+                ),
+            )
             .background(handleColorBg, CircleShape)
             .border(
                 width = HandleDefaultOutline,

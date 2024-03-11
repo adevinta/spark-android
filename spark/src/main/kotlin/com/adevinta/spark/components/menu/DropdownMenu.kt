@@ -70,6 +70,7 @@ import com.adevinta.spark.tokens.EmphasizeDim1
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
 import com.adevinta.spark.tokens.dim1
+import com.adevinta.spark.tokens.ripple
 import androidx.compose.material3.DropdownMenu as MaterialDropdownMenu
 
 /**
@@ -170,7 +171,7 @@ public fun DropdownMenuItem(
                 enabled = enabled,
                 onClick = onClick,
                 interactionSource = interactionSource,
-                indication = rememberRipple(true),
+                indication = ripple(true),
             )
             .fillMaxWidth()
             // Preferred min and max width used during the intrinsic measurement.
