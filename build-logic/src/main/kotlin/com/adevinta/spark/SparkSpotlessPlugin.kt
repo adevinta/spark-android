@@ -40,14 +40,14 @@ internal class SparkSpotlessPlugin : Plugin<Project> {
                 }
                 kotlin {
                     target("src/**/*.kt")
-                    ktlint()
+                    ktlint(spark().versions.ktlint.toString())
                     trimTrailingWhitespace()
                     endWithNewline()
                     licenseHeaderFile(licenseHeader)
                     targetExclude("spotless/*.kt")
                 }
                 kotlinGradle {
-                    ktlint()
+                    ktlint(spark().versions.ktlint.toString())
                     trimTrailingWhitespace()
                     endWithNewline()
                     licenseHeaderFile(
