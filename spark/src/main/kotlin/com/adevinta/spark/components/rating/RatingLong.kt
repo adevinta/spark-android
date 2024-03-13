@@ -50,16 +50,15 @@ import java.util.Locale
  *  - ★★★★★ (5)
  *  - ★★★★★ 5 avis
  * @param value rating value as a float, should be between 1.0 and 5.0
- * @param label the nb of reviews to be displayed after the rating stars.
- * @param commentCount the nb of reviews to be displayed after the rating stars.
- * @param locale the local used to format the rating value.
- * @param modifier to apply
+ * @param label the number of reviews to be displayed after the rating stars.
+ * @param commentCount the number of reviews to be displayed after the rating stars.
+ * @param locale the local used to format the rating value, use the first available Locale by default.
+ * @param modifier to be applied to this rating
  */
 @InternalSparkApi
 @Composable
 internal fun SparkRating(
-    @FloatRange(from = 0.0, to = 5.0)
-    value: Float,
+    @FloatRange(from = 0.0, to = 5.0) value: Float,
     label: String?,
     commentCount: Int?,
     locale: Locale?,
@@ -130,10 +129,13 @@ internal fun SparkRating(
         ],
     ),
 )
+/**
+ * @param value rating value as a float, should be between 0.0 and 5.0
+ * @param modifier to be applied to this rating
+ */
 @Composable
 public fun RatingNaked(
-    @FloatRange(from = 0.0, to = 5.0)
-    value: Float,
+    @FloatRange(from = 0.0, to = 5.0) value: Float,
     modifier: Modifier = Modifier,
 ) {
     SparkRating(
@@ -163,9 +165,13 @@ public fun RatingNaked(
         ],
     ),
 )
+/**
+ * @param value rating value as a float, should be between 0.0 and 5.0
+ * @param commentCount the nb of reviews to be displayed after the rating stars.
+ * @param modifier to apply
+ */
 public fun RatingCompressed(
-    @FloatRange(from = 0.0, to = 5.0)
-    value: Float,
+    @FloatRange(from = 0.0, to = 5.0) value: Float,
     commentCount: Int,
     modifier: Modifier = Modifier,
 ) {
@@ -199,10 +205,14 @@ public fun RatingCompressed(
         ],
     ),
 )
+/**
+ * @param value rating value as a float, should be between 0.0 and 5.0
+ * @param commentCount the nb of reviews to be displayed after the rating stars.
+ * @param modifier to apply
+ */
 @Composable
 public fun RatingFull(
-    @FloatRange(from = 0.0, to = 5.0)
-    value: Float,
+    @FloatRange(from = 0.0, to = 5.0) value: Float,
     commentCount: Int,
     modifier: Modifier = Modifier,
 ) {
@@ -228,8 +238,7 @@ public fun RatingFull(
  */
 @Composable
 public fun RatingFull(
-    @FloatRange(from = 0.0, to = 5.0)
-    value: Float,
+    @FloatRange(from = 0.0, to = 5.0) value: Float,
     modifier: Modifier = Modifier,
     commentCount: Int? = null,
     label: String? = null,
@@ -293,13 +302,12 @@ internal fun RatingNakedPreview(
     PreviewTheme(theme) {
         RatingNaked(value = 1f)
         RatingNaked(value = 2.1f)
-        RatingFull(value = 3.999999f, locale = null)
+        RatingFull(value = 3.999999f, locale = Locale.US)
         RatingNaked(value = 4.2f)
         RatingNaked(value = 5f)
     }
 }
 
-@Suppress("DEPRECATION")
 @Composable
 @Preview(
     group = "Ratings",

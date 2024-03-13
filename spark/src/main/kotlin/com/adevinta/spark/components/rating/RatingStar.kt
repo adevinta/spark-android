@@ -44,56 +44,56 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.StarFill
 import com.adevinta.spark.icons.StarOutline
 import com.adevinta.spark.tokens.dim3
+import com.adevinta.spark.tokens.dim5
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * RatingStar is the atomic element of rating components
  * @param modifier to be applied
- * @param size of the star, can be any size but preferably
- * use [RatingDefault.StarSize] or [RatingDefault.SmallStarSize].
- * @param enabled whether the star should be colored
- */
-@Composable
-public fun RatingStar(
-    modifier: Modifier = Modifier,
-    size: Dp = RatingDefault.SmallStarSize,
-    enabled: Boolean = true,
-) {
-    RatingStar(modifier, size, RatingStarState(enabled))
-}
-
-/**
- * RatingStar is the atomic element of rating components
+ * @param enabled whether the star should be enabled or disabled
  * @param modifier to be applied
- * @param size of the star, can be any size but preferably
- * use [RatingDefault.StarSize] or [RatingDefault.SmallStarSize].
- * @param state
+ * @param size of the star, can be any size but preferably, use [RatingDefault.StarSize] or [RatingDefault.SmallStarSize].
+ * @param state of the star,
+ * can be [RatingStarState.Full], [RatingStarState.Empty] or [RatingStarState.Half]
+ * or RatingStarState(1) or RatingStarState(0.5) or RatingStarState(0.0)
  */
 @Composable
-public fun RatingStar(
+internal fun RatingStar(
+    enabled: Boolean,
     modifier: Modifier = Modifier,
     size: Dp = RatingDefault.SmallStarSize,
-    state: RatingStarState = RatingStarState(true),
+    state: RatingStarState = RatingStarState(1),
 ) {
-    val color by animateColorAsState(
-        targetValue = if (state == Full) {
-            SparkTheme.colors.mainVariant
-        } else {
-            SparkTheme.colors.onSurface.dim3
-        },
+    val filledStarColor by animateColorAsState(
+        targetValue = if (enabled) SparkTheme.colors.mainVariant else SparkTheme.colors.mainVariant.dim3,
         label = "star color",
     )
+
+    val outlinedStarColor by animateColorAsState(
+        targetValue = if (enabled) SparkTheme.colors.onSurface.dim3 else SparkTheme.colors.onSurface.dim5,
+        label = "star color",
+    )
+
     val icon = if (state == Full) SparkIcons.StarFill else SparkIcons.StarOutline
 
     when (state) {
         Full,
+        -> {
+            Icon(
+                modifier = modifier.size(size),
+                sparkIcon = icon,
+                tint = filledStarColor,
+                contentDescription = null,
+            )
+        }
+
         Empty,
         -> {
             Icon(
                 modifier = modifier.size(size),
                 sparkIcon = icon,
-                tint = color,
+                tint = outlinedStarColor,
                 contentDescription = null,
             )
         }
@@ -107,7 +107,7 @@ public fun RatingStar(
                             FractionalRectangleShape(startFraction = 0f, endFraction = 0.5f),
                         ),
                     sparkIcon = SparkIcons.StarFill,
-                    tint = SparkTheme.colors.mainVariant,
+                    tint = filledStarColor,
                     contentDescription = null,
                 )
                 Icon(
@@ -117,7 +117,7 @@ public fun RatingStar(
                             FractionalRectangleShape(startFraction = 0.5f, endFraction = 1f),
                         ),
                     sparkIcon = SparkIcons.StarOutline,
-                    tint = SparkTheme.colors.onSurface.dim3,
+                    tint = outlinedStarColor,
                     contentDescription = null,
                 )
             }
@@ -146,16 +146,8 @@ public enum class RatingStarState {
 }
 
 /**
- * Return corresponding RatingStarState based on a Boolean representation
- *
- * @param starValue whether the RatingStarState is full or empty
- */
-public fun RatingStarState(starValue: Boolean): RatingStarState = if (starValue) Full else Empty
-
-/**
  * Return corresponding RatingStarState based on a Int representation
- *
- * @param starValue whether the RatingStarState is full or empty
+ * @param starValue whether the RatingStarState is 1 (full) or 0 (empty)
  */
 public fun RatingStarState(@IntRange(0, 1) starValue: Int): RatingStarState {
     check(starValue in 0..1) { "RatingStarState value must be between 0 and 1" }
@@ -164,7 +156,6 @@ public fun RatingStarState(@IntRange(0, 1) starValue: Int): RatingStarState {
 
 /**
  * Return corresponding RatingStarState based on a Float representation
- *
  * @param starValue whether the RatingStarState is full, half or empty
  */
 public fun RatingStarState(@FloatRange(0.0, 1.0) starValue: Float): RatingStarState {
@@ -178,7 +169,6 @@ public fun RatingStarState(@FloatRange(0.0, 1.0) starValue: Float): RatingStarSt
 
 /**
  * Return corresponding RatingStarState based on a Double representation
- *
  * @param starValue whether the RatingStarState is full, half or empty
  */
 public fun RatingStarState(@FloatRange(0.0, 1.0) starValue: Double): RatingStarState {
@@ -202,11 +192,10 @@ private fun RatingStarPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        RatingStar(enabled = true)
-        RatingStar(enabled = false)
-        RatingStar(state = RatingStarState(0.1))
-        RatingStar(state = RatingStarState(0.3))
-        RatingStar(state = RatingStarState(0.6))
-        RatingStar(state = RatingStarState(0.8))
+        RatingStar(enabled = true, state = RatingStarState(1))
+        RatingStar(enabled = false, state = RatingStarState(0.1))
+        RatingStar(enabled = false, state = RatingStarState(0.3))
+        RatingStar(enabled = true, state = RatingStarState(0.6))
+        RatingStar(enabled = false, state = RatingStarState(0.8))
     }
 }
