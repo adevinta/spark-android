@@ -21,12 +21,13 @@ kotlinx-coroutines = "1.8.0"
 kotlinx-collections-immutable = "0.3.7"
 kotlinx-serialization-json = "1.6.3"
 ksp = "1.9.22-1.0.18"
+ktlint = "1.2.1"
 lint = "31.3.0"
 minCompileSdk = "24"
 paparazzi = "1.3.1"
 showkase = "1.0.2"
 slackLint = "1.3.1"
-spotless = "6.23.3"
+spotless = "6.25.0"
 targetSdk = "34"
 testParameterInjector = "1.15"
 
@@ -99,6 +100,8 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+
+ktlint-bom = { module = "com.pinterest.ktlint:ktlint-bom", version.ref = "ktlint" }
 
 lint = { module = "com.android.tools.lint:lint", version.ref = "lint" }
 lint-api = { module = "com.android.tools.lint:lint-api", version.ref = "lint" }

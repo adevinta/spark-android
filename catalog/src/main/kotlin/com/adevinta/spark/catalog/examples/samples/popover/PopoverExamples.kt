@@ -59,7 +59,7 @@ public val PopoverExamples: List<Example> = listOf(
                 val scope = rememberCoroutineScope()
 
                 Popover(
-                    popoverContent = {
+                    popover = {
                         Column {
                             Text(
                                 text = "Title",
