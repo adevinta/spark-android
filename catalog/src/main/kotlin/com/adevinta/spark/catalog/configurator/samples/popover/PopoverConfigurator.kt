@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.popover
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -42,7 +43,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
@@ -54,13 +54,16 @@ import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.image.Image
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.popover.Popover
+import com.adevinta.spark.components.popover.PopoverIntent
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.text.TextLinkButton
 import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.BurgerMenu
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Store
+import com.adevinta.spark.tokens.highlight
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -78,6 +81,7 @@ private fun ColumnScope.PopoverSample() {
     var isDismissButtonEnabled by remember { mutableStateOf(true) }
     var popoverContentExample by remember { mutableStateOf(PopoverContentExamples.TextList) }
     var popoverTriggerExample by remember { mutableStateOf(PopoverTriggerExamples.Button) }
+    var intent by remember { mutableStateOf(PopoverIntent.Surface) }
     val popoverState = rememberTooltipState(isPersistent = true)
     val scope = rememberCoroutineScope()
 
@@ -134,11 +138,34 @@ private fun ColumnScope.PopoverSample() {
                 .fillMaxWidth()
                 .height(48.dp),
         )
+
+        val intents = PopoverIntent.entries
+        var intentExpanded by remember { mutableStateOf(false) }
+        SelectTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = intent.name,
+            onValueChange = {},
+            readOnly = true,
+            label = "Popover Intent",
+            expanded = intentExpanded,
+            onExpandedChange = { intentExpanded = !intentExpanded },
+            onDismissRequest = { intentExpanded = false },
+            dropdownContent = {
+                intents.forEach {
+                    DropdownMenuItem(
+                        text = { Text(it.name) },
+                        onClick = {
+                            intent = it
+                            intentExpanded = false
+                        },
+                    )
+                }
+            },
+        )
+        VerticalSpacer(40.dp)
+
+        ConfiguredPopover(scope, popoverState, isDismissButtonEnabled, popoverContentExample, popoverTriggerExample)
     }
-
-    VerticalSpacer(40.dp)
-
-    ConfiguredPopover(scope, popoverState, isDismissButtonEnabled, popoverContentExample, popoverTriggerExample)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -152,32 +179,30 @@ private fun ConfiguredPopover(
 ) {
     Popover(
         popoverState = popoverState,
-        popoverContent = {
+        popover = {
             when (popoverContentExample) {
-                PopoverContentExamples.TextList -> LazyColumn {
+                PopoverContentExamples.TextList -> LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                ) {
                     items(5) { index ->
-                        Box(modifier = Modifier.padding(all = 4.dp)) {
-                            Text(text = "Text: $index")
-                        }
+                        Text(text = "Text: $index")
                     }
                 }
 
-                PopoverContentExamples.Text -> Column {
+                PopoverContentExamples.Text -> Column(
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                ) {
                     Text(
                         text = "Title",
-                        modifier = Modifier.padding(bottom = 16.dp),
-                        style = SparkTheme.typography.headline1.copy(fontWeight = FontWeight.Bold),
+                        style = SparkTheme.typography.headline1.highlight,
                     )
                     Text(
                         text = "Do you want to have this cookie now?",
-                        modifier = Modifier.padding(bottom = 16.dp),
-                        style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                        style = SparkTheme.typography.body2.highlight,
                     )
-                    Text(
+                    TextLinkButton(
                         text = "Text Link",
-                        textDecoration = TextDecoration.Underline,
-                        style = SparkTheme.typography.body1.copy(fontWeight = FontWeight.Bold)
-                            .copy(color = SparkTheme.colors.accent),
+                        onClick = {},
                     )
                 }
 
