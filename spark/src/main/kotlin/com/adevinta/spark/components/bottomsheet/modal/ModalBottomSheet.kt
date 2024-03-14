@@ -365,7 +365,11 @@ private fun ModalBottomSheetAnchorChangeHandler(
             val hasPartiallyExpandedState = newAnchors.containsKey(SheetValue.PartiallyExpanded)
             val newTarget = if (hasPartiallyExpandedState) {
                 SheetValue.PartiallyExpanded
-            } else if (newAnchors.containsKey(Expanded)) Expanded else Hidden
+            } else if (newAnchors.containsKey(Expanded)) {
+                Expanded
+            } else {
+                Hidden
+            }
             newTarget
         }
     }
