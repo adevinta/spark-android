@@ -247,7 +247,6 @@ private fun ConfiguredPopover(
     }
 }
 
-
 private enum class PopoverContentExamples {
     TextList,
     Image,
