@@ -59,6 +59,9 @@ import com.adevinta.spark.components.iconbuttons.IconButtonGhost
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.menu.DropdownMenu
 import com.adevinta.spark.components.menu.DropdownMenuItem
+import com.adevinta.spark.components.scaffold.Scaffold
+import com.adevinta.spark.components.snackbars.SnackbarHost
+import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.Computer
 import com.adevinta.spark.icons.Link
@@ -71,35 +74,39 @@ public fun ConfiguratorComponentScreen(
     configurator: Configurator,
 ) {
     val scrollState = rememberScrollState()
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-            .windowInsetsPadding(WindowInsets.navigationBars)
-            .padding(horizontal = Layout.bodyMargin)
-            .imePadding(),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+    val snackbarHostState = remember { SnackbarHostState() }
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) {
-        Box(
-            modifier = Modifier.align(Alignment.End),
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .windowInsetsPadding(WindowInsets.navigationBars)
+                .padding(horizontal = Layout.bodyMargin)
+                .imePadding(),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            var expanded by remember { mutableStateOf(false) }
-            IconButtonGhost(
-                icon = SparkIcons.Link,
-                onClick = { expanded = true },
-                contentDescription = "Localized description",
-            )
+            Box(
+                modifier = Modifier.align(Alignment.End),
+            ) {
+                var expanded by remember { mutableStateOf(false) }
+                IconButtonGhost(
+                    icon = SparkIcons.Link,
+                    onClick = { expanded = true },
+                    contentDescription = "Localized description",
+                )
 
-            ConfiguratorComponentMenu(
-                component = component,
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-            )
-        }
+                ConfiguratorComponentMenu(
+                    component = component,
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                )
+            }
 
-        with(configurator) {
-            this@Column.content()
+            with(configurator) {
+                this@Column.content(snackbarHostState)
+            }
         }
     }
 }
