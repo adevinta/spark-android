@@ -59,20 +59,20 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * or RatingStarState(1) or RatingStarState(0.5) or RatingStarState(0.0)
  */
 @Composable
-internal fun RatingStar(
-    enabled: Boolean,
+public fun RatingStar(
     modifier: Modifier = Modifier,
     size: Dp = RatingDefault.SmallStarSize,
     state: RatingStarState = RatingStarState(1),
+    enabled: Boolean = true,
 ) {
     val filledStarColor by animateColorAsState(
         targetValue = if (enabled) SparkTheme.colors.mainVariant else SparkTheme.colors.mainVariant.dim3,
-        label = "star color",
+        label = "filled star color",
     )
 
     val outlinedStarColor by animateColorAsState(
         targetValue = if (enabled) SparkTheme.colors.onSurface.dim3 else SparkTheme.colors.onSurface.dim5,
-        label = "star color",
+        label = "outlined star color",
     )
 
     val icon = if (state == Full) SparkIcons.StarFill else SparkIcons.StarOutline
@@ -144,6 +144,12 @@ public enum class RatingStarState {
      */
     Half,
 }
+
+/**
+ * Return corresponding RatingStarState based on a Boolean representation
+ * @param isFilled whether the RatingStarState is full or empty
+ */
+public fun RatingStarState(isFilled: Boolean): RatingStarState = if (isFilled) Full else Empty
 
 /**
  * Return corresponding RatingStarState based on a Int representation

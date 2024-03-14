@@ -39,6 +39,8 @@ import com.adevinta.spark.components.rating.RatingInput
 import com.adevinta.spark.components.rating.RatingLabelSide
 import com.adevinta.spark.components.rating.RatingSimple
 import com.adevinta.spark.components.rating.RatingSimpleLarge
+import com.adevinta.spark.components.rating.RatingStar
+import com.adevinta.spark.components.rating.RatingStarState
 import com.adevinta.spark.components.text.Text
 import java.util.Locale
 
@@ -79,6 +81,13 @@ public val RatingExamples: List<Example> = listOf(
         sourceUrl = "$SampleSourceUrl/RatingSmallSample.kt",
     ) {
         RatingSimpleSample()
+    },
+    Example(
+        name = "Rating Star",
+        description = "The star used for the rating component",
+        sourceUrl = "$SampleSourceUrl/RatingStarSample.kt",
+    ) {
+        RatingStarSample()
     },
 )
 
@@ -148,5 +157,27 @@ private fun RatingSimpleSample() {
         RatingSimple(value = 3.0f, locale = Locale.US, labelSide = RatingLabelSide.End)
         RatingSimple(value = 4.50f, commentCount = 12, locale = Locale.US, labelSide = RatingLabelSide.End)
         RatingSimpleLarge(value = 4.50f, locale = Locale.US, labelSide = RatingLabelSide.End)
+    }
+}
+
+@Composable
+private fun RatingStarSample() {
+    val smallSize = RatingDefault.SmallStarSize
+    val mediumSize = RatingDefault.StarSize
+    Column(
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        RatingStar(enabled = true, size = smallSize)
+        RatingStar(enabled = true, size = mediumSize)
+        RatingStar(enabled = false, size = smallSize)
+        RatingStar(enabled = false, size = mediumSize)
+        RatingStar(state = RatingStarState(0.1), size = smallSize)
+        RatingStar(state = RatingStarState(0.1), size = mediumSize)
+        RatingStar(state = RatingStarState(0.3), size = smallSize)
+        RatingStar(state = RatingStarState(0.3), size = mediumSize)
+        RatingStar(state = RatingStarState(0.6), size = smallSize)
+        RatingStar(state = RatingStarState(0.6), size = mediumSize)
+        RatingStar(state = RatingStarState(0.8), size = smallSize)
+        RatingStar(state = RatingStarState(0.8), size = mediumSize)
     }
 }

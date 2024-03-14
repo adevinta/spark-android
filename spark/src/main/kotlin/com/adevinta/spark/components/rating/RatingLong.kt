@@ -302,7 +302,7 @@ internal fun RatingNakedPreview(
     PreviewTheme(theme) {
         RatingNaked(value = 1f)
         RatingNaked(value = 2.1f)
-        RatingFull(value = 3.999999f, locale = Locale.US)
+        RatingFull(value = 3.999999f, locale = null)
         RatingNaked(value = 4.2f)
         RatingNaked(value = 5f)
     }
