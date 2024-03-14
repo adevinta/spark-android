@@ -41,7 +41,12 @@ internal class ThemePropertiesHandler(context: Context) {
         .map(ThemeProperties::toTheme)
         .catch { exception ->
             when (exception) {
-                is IOException -> emit(ThemeProperties.DEFAULT.toTheme())
+                is IOException -> emit(
+                    ThemeProperties.DEFAULT.copy(
+                        fontScale = context.resources.configuration.fontScale,
+                    ).toTheme(),
+                )
+
                 else -> throw exception
             }
         }
@@ -59,8 +64,10 @@ internal class ThemePropertiesHandler(context: Context) {
 }
 
 @Composable
-internal fun Flow<Theme>.collectAsStateWithDefault(): State<Theme> = collectAsState(
-    initial = ThemeProperties.DEFAULT.toTheme(),
+internal fun Flow<Theme>.collectAsStateWithDefault(context: Context): State<Theme> = collectAsState(
+    initial = ThemeProperties.DEFAULT.copy(
+        fontScale = context.resources.configuration.fontScale,
+    ).toTheme(),
 )
 
 private fun ThemeProperties.toTheme(): Theme = Theme(

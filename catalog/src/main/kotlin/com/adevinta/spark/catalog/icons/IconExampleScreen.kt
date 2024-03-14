@@ -35,7 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.components.buttons.ButtonFilled
-import com.adevinta.spark.components.chips.ChipFilled
+import com.adevinta.spark.components.chips.ChipTinted
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.tab.Tab
@@ -60,7 +60,7 @@ internal fun IconExampleScreen(icon: SparkIcon, name: String) {
         IconButtonFilled(icon = icon, contentDescription = name, onClick = {})
         ButtonFilled(onClick = {}, text = name, icon = icon)
         TagFilled(text = name, leadingIcon = icon)
-        ChipFilled {
+        ChipTinted {
             Text(text = name)
             Icon(sparkIcon = icon, contentDescription = name)
         }

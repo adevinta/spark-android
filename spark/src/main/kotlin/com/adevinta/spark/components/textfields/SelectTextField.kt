@@ -27,14 +27,19 @@ import androidx.compose.foundation.interaction.FocusInteraction
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -51,6 +56,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.icons.IconSize
@@ -58,6 +64,8 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.ArrowHorizontalDown
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.dim1
+import com.adevinta.spark.tokens.highlight
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.flow.flowOf
@@ -168,6 +176,32 @@ public fun SelectTextField(
             modifier = Modifier.exposedDropdownSize(),
             properties = properties,
             content = dropdownContent,
+        )
+    }
+}
+
+@Composable
+public fun SectionHeadline(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    ProvideTextStyle(value = SparkTheme.typography.body2) {
+        CompositionLocalProvider(LocalContentColor provides SparkTheme.colors.onSurface.dim1) {
+            Box(modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+                content()
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun SectionPrev() {
+    SectionHeadline {
+        Text(
+            "Section headline",
+            style = SparkTheme.typography.body1.highlight,
+            color = SparkTheme.colors.basic,
         )
     }
 }

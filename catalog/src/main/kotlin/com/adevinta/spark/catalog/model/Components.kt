@@ -27,6 +27,7 @@ import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.chips.ChipsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressTrackerConfigurator
@@ -41,6 +42,7 @@ import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfig
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
+import com.adevinta.spark.catalog.examples.samples.chips.ChipsExamples
 import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
 import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.progressbar.ProgressbarExamples
@@ -99,6 +101,18 @@ private val Checkboxes = Component(
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/CheckBox.kt",
     examples = CheckboxExamples,
     configurator = CheckboxConfigurator,
+)
+
+private val Chips = Component(
+    id = nextId(),
+    name = "Chips",
+    tintIcon = true,
+    description = R.string.component_chips_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/17568d-chip",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.chips/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/chips/Chips.kt",
+    examples = ChipsExamples,
+    configurator = ChipsConfigurator,
 )
 
 private val Dialogs = Component(
@@ -295,6 +309,7 @@ public val Components: List<Component> = listOf(
     Tokens,
     Buttons,
     Checkboxes,
+    Chips,
     Dialogs,
     IconButtons,
     IconToggleButtons,

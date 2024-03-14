@@ -38,6 +38,8 @@ android {
         }
     }
 
+    compileOptions.isCoreLibraryDesugaringEnabled = true
+
     kotlinOptions {
         freeCompilerArgs += listOf(
             "-opt-in=com.adevinta.spark.InternalSparkApi",
@@ -87,6 +89,8 @@ dependencies {
 
     implementation(libs.androidx.datastore)
     implementation(libs.kotlinx.serialization.json)
+
+    coreLibraryDesugaring(libs.desugarJdkLibs)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

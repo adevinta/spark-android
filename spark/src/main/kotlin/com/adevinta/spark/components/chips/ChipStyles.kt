@@ -27,6 +27,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.disabled
+import com.adevinta.spark.tokens.transparent
 
 public enum class ChipStyles {
     Outlined {
@@ -35,28 +36,14 @@ public enum class ChipStyles {
             val colors = intent.colors()
             val contentColor = colors.color
             return ChipColors(
-                backgroundColor = Color.Transparent,
+                backgroundColor = colors.containerColor.transparent,
                 contentColor = contentColor,
-                disabledBackgroundColor = Color.Transparent,
+                disabledBackgroundColor = colors.containerColor.transparent,
                 disabledContentColor = contentColor.disabled,
                 selectedBackgroundColor = colors.containerColor,
                 selectedContentColor = colors.onContainerColor,
-            )
-        }
-    },
-    Filled {
-        @Composable
-        override fun colors(intent: ChipIntent): ChipColors {
-            val colors = intent.colors()
-            val backgroundColor = colors.color
-            val contentColor = colors.onColor
-            return ChipColors(
-                backgroundColor = backgroundColor,
-                contentColor = contentColor,
-                disabledBackgroundColor = backgroundColor.disabled,
-                disabledContentColor = contentColor.disabled,
-                selectedBackgroundColor = colors.containerColor,
-                selectedContentColor = colors.onContainerColor,
+                disabledSelectedBackgroundColor = colors.containerColor.disabled,
+                disabledSelectedContentColor = colors.onContainerColor.disabled,
             )
         }
     },
@@ -73,6 +60,8 @@ public enum class ChipStyles {
                 disabledContentColor = contentColor.disabled,
                 selectedBackgroundColor = colors.color,
                 selectedContentColor = colors.onColor,
+                disabledSelectedBackgroundColor = colors.color.disabled,
+                disabledSelectedContentColor = colors.onColor.disabled,
             )
         }
     },
@@ -82,12 +71,14 @@ public enum class ChipStyles {
             val colors = intent.colors()
             val contentColor = colors.color
             return ChipColors(
-                backgroundColor = Color.Transparent,
+                backgroundColor = colors.containerColor.transparent,
                 contentColor = contentColor,
-                disabledBackgroundColor = Color.Transparent,
+                disabledBackgroundColor = colors.containerColor.transparent,
                 disabledContentColor = contentColor.dim3,
                 selectedBackgroundColor = colors.containerColor,
                 selectedContentColor = colors.onContainerColor,
+                disabledSelectedBackgroundColor = colors.containerColor.disabled,
+                disabledSelectedContentColor = colors.onContainerColor.disabled,
             )
         }
     },
@@ -105,6 +96,8 @@ internal data class ChipColors(
     val disabledContentColor: Color,
     val selectedBackgroundColor: Color,
     val selectedContentColor: Color,
+    val disabledSelectedBackgroundColor: Color,
+    val disabledSelectedContentColor: Color,
 )
 
 @Composable

@@ -28,15 +28,16 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.node.CompositionLocalConsumerModifierNode
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.node.currentValueOf
 import androidx.compose.ui.platform.InspectorInfo
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.LocalHighlightComponents
+import com.adevinta.spark.SparkTheme
 
 /**
  * A [Modifier.Element] that adds a draw layer to identify spark components easily.
@@ -75,13 +76,13 @@ private class SparkUsageOverlayElement(val overlayColor: Color) : ModifierNodeEl
  */
 @Composable
 internal fun SlotArea(
-    radius: Dp = 2.dp,
+    shape: Shape = SparkTheme.shapes.extraLarge,
     color: Color = Color.Red,
     content: @Composable BoxScope.() -> Unit,
 ) {
     Box(
         modifier = Modifier
-            .dashedBorder(1.dp, radius, color)
+            .dashedBorder(width = 1.dp, shape = shape, color = color)
             .drawWithContent { /* hide the content */ },
         content = content,
     )

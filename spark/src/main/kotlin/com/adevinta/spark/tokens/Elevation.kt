@@ -35,13 +35,16 @@ import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-internal object ElevationTokens {
-    val Level0 = 0.0.dp
-    val Level1 = 1.0.dp
-    val Level2 = 3.0.dp
-    val Level3 = 6.0.dp
-    val Level4 = 8.0.dp
-    val Level5 = 12.0.dp
+/**
+ * Contains predefined [Dp] values for elevation levels.
+ */
+public object ElevationTokens {
+    public val Level0: Dp = 0.0.dp
+    public val Level1: Dp = 1.0.dp
+    public val Level2: Dp = 3.0.dp
+    public val Level3: Dp = 6.0.dp
+    public val Level4: Dp = 8.0.dp
+    public val Level5: Dp = 12.0.dp
 }
 
 /**
