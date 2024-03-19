@@ -319,7 +319,7 @@ private fun TextContent() {
         Text(
             text = "Do you want to have this cookie now?",
             modifier = Modifier.padding(bottom = 16.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.body2.highlight,
         )
         TextlLinkButton(text = "Text Link")
     }
