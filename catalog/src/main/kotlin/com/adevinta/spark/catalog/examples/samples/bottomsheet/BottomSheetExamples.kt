@@ -321,12 +321,7 @@ private fun TextContent() {
             modifier = Modifier.padding(bottom = 16.dp),
             style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
         )
-        Text(
-            text = "Text Link",
-            textDecoration = TextDecoration.Underline,
-            style = SparkTheme.typography.body1.copy(fontWeight = FontWeight.Bold)
-                .copy(color = SparkTheme.colors.accent),
-        )
+        TextlLinkButton(text = "Text Link")
     }
 }
 
