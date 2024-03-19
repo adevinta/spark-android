@@ -314,7 +314,7 @@ private fun TextContent() {
         Text(
             text = "Title",
             modifier = Modifier.padding(bottom = 16.dp),
-            style = SparkTheme.typography.headline1.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.headline1.highlight,
         )
         Text(
             text = "Do you want to have this cookie now?",
