@@ -49,6 +49,8 @@ internal data class ProgressTrackerMeasurePolicy(
     ): MeasureResult {
         val (trackMeasurables, labelMeasurables, indicatorMeasurables) = measurables
 
+        val looseConstraints = constraints.copy(minWidth = 0, minHeight = 0)
+
         val stepsCount = indicatorMeasurables.size
         // Each indicator  have a fixed size coming from the size object
         val indicatorSize = indicatorSize.roundToPx()
@@ -60,11 +62,10 @@ internal data class ProgressTrackerMeasurePolicy(
                 constraints.copy(minWidth = stepsWidth, maxWidth = stepsWidth)
             } else {
                 val indicatorWithSpacing = indicatorSize + arrangementSpacing.roundToPx()
-                constraints.copy(
+                looseConstraints.copy(
                     minHeight = indicatorWithSpacing,
-                    minWidth = (constraints.minWidth - indicatorWithSpacing).coerceAtLeast(0),
                     maxWidth = if (constraints.hasBoundedWidth) {
-                        constraints.maxWidth - indicatorWithSpacing
+                        (constraints.maxWidth - indicatorWithSpacing).coerceAtLeast(0)
                     } else {
                         Constraints.Infinity
                     },
@@ -88,7 +89,7 @@ internal data class ProgressTrackerMeasurePolicy(
                     extraSizeOfLabelBaseline -
                     (arrangementSpacing.roundToPx() / 2) -
                     indicatorSize
-                constraints.copy(maxHeight = trackHeight, minHeight = trackHeight)
+                looseConstraints.copy(maxHeight = trackHeight.coerceAtLeast(arrangementSpacing.roundToPx() / 2))
             }
             trackMeasurable.measure(trackConstraint)
         }
