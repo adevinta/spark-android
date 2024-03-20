@@ -26,7 +26,6 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -58,13 +57,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.test.DarkMode
+import androidx.compose.ui.test.DeviceConfigurationOverride
+import androidx.compose.ui.test.FontScale
+import androidx.compose.ui.test.LayoutDirection
+import androidx.compose.ui.test.then
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -96,13 +98,8 @@ import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
 import com.adevinta.spark.catalog.themes.themeprovider.milanuncios.MilanunciosTheme
 import com.adevinta.spark.catalog.themes.themeprovider.subito.SubitoTheme
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
-import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
 
-@OptIn(
-    ExperimentalFoundationApi::class,
-    ExperimentalComposeUiApi::class,
-)
 @Composable
 internal fun ComponentActivity.CatalogApp(
     theme: Theme,
@@ -157,14 +154,14 @@ internal fun ComponentActivity.CatalogApp(
                 onDispose {}
             }
 
-            TestHarness(
-                darkMode = useDark,
-                layoutDirection = layoutDirection,
-                fontScale = if (theme.fontScaleMode == FontScaleMode.System) {
-                    LocalDensity.current.fontScale
-                } else {
-                    theme.fontScale
-                },
+            DeviceConfigurationOverride(
+                override = DeviceConfigurationOverride.DarkMode(useDark)
+                    then DeviceConfigurationOverride.LayoutDirection(layoutDirection)
+                    then DeviceConfigurationOverride.FontScale(
+                        theme.fontScale.takeUnless {
+                            theme.fontScaleMode == FontScaleMode.System
+                        } ?: LocalDensity.current.fontScale,
+                    ),
             ) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
