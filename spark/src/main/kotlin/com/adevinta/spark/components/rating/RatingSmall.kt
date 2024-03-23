@@ -207,12 +207,12 @@ public fun RatingSimple(
 }
 
 /**
- * Component that displays a compressed version of user rating
+ * This function displays a large simple version of user rating.
  *
- * @param value the rating value included between [1..5]
- * @param modifier to be applied to this rating
- * @param locale the locale to use to format the rating value
- * @param labelSide the side of the label
+ * @param value The rating value included between [1..5].
+ * @param modifier The modifier to be applied to this rating.
+ * @param locale The locale to use to format the rating value.
+ * @param labelSide The side of the label.
  */
 @Composable
 @ExperimentalSparkApi

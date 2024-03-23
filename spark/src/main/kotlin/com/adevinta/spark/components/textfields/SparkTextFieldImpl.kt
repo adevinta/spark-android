@@ -111,7 +111,7 @@ internal fun SparkDecorationBox(
     }
 
     val labelColor: @Composable (InputPhase) -> Color = {
-        colors.labelColor(enabled, state, interactionSource).value
+        colors.labelColor(enabled, interactionSource).value
     }
 
     val typography = SparkTheme.typography
@@ -183,14 +183,14 @@ internal fun SparkDecorationBox(
         // TODO-@soulcramer (01-30-2023): We should provide a semantic which tell the user the error state
         val decorationBoxModifier = Modifier
 
-        val leadingIconColor = colors.leadingIconColor(enabled, state, interactionSource).value
+        val leadingIconColor = colors.leadingIconColor(enabled, interactionSource).value
         val decoratedLeading: @Composable (() -> Unit)? = leadingIcon?.let {
             @Composable {
                 Decoration(contentColor = leadingIconColor, content = { AddonScopeInstance.it() })
             }
         }
 
-        val trailingIconColor = colors.trailingIconColor(enabled, state, interactionSource).value
+        val trailingIconColor = colors.trailingIconColor(enabled, interactionSource).value
         val decoratedTrailing: @Composable (() -> Unit)? = trailingIcon?.let {
             @Composable {
                 Decoration(contentColor = trailingIconColor, content = { AddonScopeInstance.it() })

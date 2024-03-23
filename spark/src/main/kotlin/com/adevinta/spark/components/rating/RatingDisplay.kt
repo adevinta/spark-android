@@ -38,6 +38,14 @@ import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
+/**
+ * A display for a rating value.
+ *
+ * @param value The rating value to display. Must be between 0 and 5.
+ * @param modifier The modifier to be applied to the layout.
+ * @param size The size of the stars. Default is [RatingDefault.SmallStarSize]
+
+ */
 @Composable
 public fun RatingDisplay(
     @FloatRange(from = 0.0, to = 5.0)
@@ -72,6 +80,7 @@ public fun RatingDisplay(
             }
 
             RatingStar(
+                enabled = true,
                 modifier = Modifier,
                 state = RatingStarState(starRating),
                 size = size,
