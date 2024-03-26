@@ -23,22 +23,36 @@
 
 package com.adevinta.spark.components.textfields
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.FocusInteraction
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.TooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -51,16 +65,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.components.icons.IconSize
+import com.adevinta.spark.components.popover.PlainTooltip
+import com.adevinta.spark.components.popover.TooltipBox
+import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.ArrowHorizontalDown
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.launch
 
 /**
  * Outlined text input to get an input value from a list of elements selectable through a dropdown by the user.
@@ -279,6 +299,105 @@ public fun SelectTextField(
 }
 
 /**
+ * Outlined text input to get an input value from a list of elements selectable through a dropdown by the user.
+ * @param value the input [TextFieldValue] to be shown in the text field
+ * @param expanded Whether Dropdown Menu should be expanded or not
+ * @param onClick Called when the user requests to expand the details (in a dropdown, BottomSheet or other container
+ * components).
+ * @param onClickLabel The label to be used for the [onClick] action. It is used by accessibility services to
+ * describe the action to the user. It should describe where the user will be taken to when the action is
+ * performed. For example, "Open check-in selection dates" or "Open category selection".
+ * @param modifier a [Modifier] for this text field
+ * @param enabled True controls the enabled state of the [TextField]. When `false`, the text field will
+ * be neither editable nor focusable, the input of the text field will not be selectable,
+ * visually text field will appear in the disabled UI state
+ * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory"
+ * but doesn't do anything else so it's up to the developer to handle the behavior.
+ * @param label the optional label to be displayed inside the text field container. The default
+ * text style for internal [Text] is [Typography.small] when the text field is in focus and
+ * [Typography.large] when the text field is not in focus
+ * @param placeholder the optional placeholder to be displayed when the text field is in focus and
+ * the input text is empty. The default text style for internal [Text] is [Typography.large]
+ * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
+ * informations about expected text
+ * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
+ * container
+ * @param state indicates the validation state of the text field. The label, outline, leading & trailing content are
+ * tinted by the state color.
+ * @param stateMessage the optional state text to be displayed at the helper position that give more information about
+ * the state, it's displayed only when [state] is not null.
+ * @param visualTransformation transforms the visual representation of the input [value]
+ * For example, you can use [PasswordVisualTransformation][androidx.compose.ui.text.input.PasswordVisualTransformation]
+ * to create a password text field. By default no visual transformation is applied
+ * @param interactionSource the [MutableInteractionSource] representing the stream of
+ * [Interaction]s for this TextField. You can create and pass in your own remembered
+ * [MutableInteractionSource] if you want to observe [Interaction]s and customize the
+ * appearance / behavior of this TextField in different [Interaction]s.
+ *
+ * @see TextField
+ * @see MultilineTextField
+ */
+@Composable
+public fun SelectTextField(
+    value: String,
+    expanded: Boolean,
+    onClick: () -> Unit,
+    onClickLabel: String,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    required: Boolean = false,
+    label: String? = null,
+    placeholder: String? = null,
+    helper: String? = null,
+    leadingContent: @Composable (AddonScope.() -> Unit)? = null,
+    state: TextFieldState? = null,
+    stateMessage: String? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+) {
+    Box(
+        modifier = modifier
+            .height(IntrinsicSize.Min)
+            .sparkUsageOverlay(),
+    ) {
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = value,
+            onValueChange = { },
+            enabled = enabled,
+            readOnly = true,
+            required = required,
+            label = label,
+            placeholder = placeholder,
+            helper = helper,
+            leadingContent = leadingContent,
+            trailingContent = {
+                SparkSelectTrailingIcon(
+                    expanded = expanded,
+                )
+            },
+            state = state,
+            stateMessage = stateMessage,
+            visualTransformation = visualTransformation,
+            interactionSource = interactionSource,
+        )
+        // Transparent clickable surface on top of TextField
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(SparkTheme.shapes.large)
+                .clickable(
+                    enabled = enabled,
+                    role = Role.Button,
+                    onClickLabel = onClickLabel,
+                    onClick = onClick,
+                ),
+            color = Color.Transparent,
+        ) { }
+    }
+}
+
+/**
  * trailing icon for Exposed Dropdown Menu.
  *
  * @param expanded Whether [ExposedDropdownMenuBoxScope.ExposedDropdownMenu]
@@ -329,6 +448,43 @@ private fun SelectTextFieldIntentPreview(
             state = null,
             stateMessage = "Helper text",
         )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Composable
+private fun SelectTextFieldTapPreview(
+) {
+    PreviewTheme() {
+        val tooltipState = remember { TooltipState() }
+        val coroutineScope = rememberCoroutineScope()
+        TooltipBox(
+            positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+            tooltip = {
+                PlainTooltip {
+                    Text("Tapped")
+                }
+            },
+            state = tooltipState,
+        ) {
+            SelectTextField(
+                value = "Input",
+                onClick = {
+                    coroutineScope.launch {
+                        tooltipState.show()
+                    }
+                },
+                onClickLabel = "Open Tooltip",
+                enabled = true,
+                required = true,
+                label = "Label",
+                placeholder = "Placeholder",
+                helper = "Helper text",
+                expanded = false,
+            )
+        }
+
     }
 }
 
