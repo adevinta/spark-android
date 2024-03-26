@@ -266,7 +266,13 @@ internal class SwipeableV2State<T>(
         if (distance > 1e-6f) {
             val progress = (this.requireOffset() - a) / (b - a)
             // If we are very close to 0f or 1f, we round to the closest
-            if (progress < 1e-6f) 0f else if (progress > 1 - 1e-6f) 1f else progress
+            if (progress < 1e-6f) {
+                0f
+            } else if (progress > 1 - 1e-6f) {
+                1f
+            } else {
+                progress
+            }
         } else {
             1f
         }
