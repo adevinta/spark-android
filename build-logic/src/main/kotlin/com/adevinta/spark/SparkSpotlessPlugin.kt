@@ -32,6 +32,7 @@ internal class SparkSpotlessPlugin : Plugin<Project> {
         with(target) {
             apply(plugin = "com.diffplug.spotless")
 
+            val ktlint = spark().versions.ktlint
             configure<SpotlessExtension> {
                 val licenseHeader = rootProject.file("spotless/spotless.kt")
                 format("misc") {
@@ -40,14 +41,14 @@ internal class SparkSpotlessPlugin : Plugin<Project> {
                 }
                 kotlin {
                     target("src/**/*.kt")
-                    ktlint()
+                    ktlint(ktlint.toString())
                     trimTrailingWhitespace()
                     endWithNewline()
                     licenseHeaderFile(licenseHeader)
                     targetExclude("spotless/*.kt")
                 }
                 kotlinGradle {
-                    ktlint()
+                    ktlint(ktlint.toString())
                     trimTrailingWhitespace()
                     endWithNewline()
                     licenseHeaderFile(

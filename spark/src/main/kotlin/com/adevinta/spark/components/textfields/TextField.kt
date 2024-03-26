@@ -250,7 +250,7 @@ private fun TextFieldIntentPreview(
 ) {
     PreviewTheme(theme) {
         PreviewTextFields(
-            state = null,
+            state = TextFieldState.Success,
             stateMessage = "Helper text",
         )
     }
