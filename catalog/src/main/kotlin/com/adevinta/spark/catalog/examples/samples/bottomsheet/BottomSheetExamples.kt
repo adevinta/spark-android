@@ -22,7 +22,6 @@
 package com.adevinta.spark.catalog.examples.samples.bottomsheet
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,6 +32,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,19 +42,13 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.configurator.samples.bottomsheet.BottomSheetContentExamples
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SparkSampleSourceUrl
-import com.adevinta.spark.components.bottomsheet.SheetState
-import com.adevinta.spark.components.bottomsheet.SheetValue
-import com.adevinta.spark.components.bottomsheet.modal.ModalBottomSheet
-import com.adevinta.spark.components.bottomsheet.modal.rememberModalBottomSheetState
+import com.adevinta.spark.components.bottomsheet.BottomSheet
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.image.Illustration
@@ -61,9 +56,11 @@ import com.adevinta.spark.components.image.Image
 import com.adevinta.spark.components.list.ListItem
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.text.TextLinkButton
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Store
+import com.adevinta.spark.tokens.highlight
 import kotlinx.coroutines.launch
 
 private const val BottomSheetExampleSourceUrl = "$SparkSampleSourceUrl/bottomsheet/BottomSheetExamples.kt"
@@ -75,34 +72,14 @@ public val BottomSheetExamples: List<Example> = listOf(
         description = "BottomSheet List Content",
         sourceUrl = BottomSheetExampleSourceUrl,
     ) {
-        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
-
         val bottomSheetState = rememberModalBottomSheetState(
             skipPartiallyExpanded = false,
-            initialValue = SheetValue.Hidden,
         )
-        val scope = rememberCoroutineScope()
-
         VerticalSpacer(24.dp)
-
-        ButtonFilled(
-            text = "Show BottomSheet",
-            onClick = { openBottomSheet = !openBottomSheet },
-        )
-
         ConfiguredBottomSheet(
-            BottomSheetContentExamples.List,
-            openBottomSheet,
-            true,
-            { openBottomSheet = false },
-            {
-                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
-                    if (!bottomSheetState.isVisible) {
-                        openBottomSheet = false
-                    }
-                }
-            },
-            bottomSheetState,
+            bottomSheetContentExample = BottomSheetContentExamples.List,
+            isDragHandlerEnabled = true,
+            bottomSheetState = bottomSheetState,
         )
     },
     Example(
@@ -110,34 +87,14 @@ public val BottomSheetExamples: List<Example> = listOf(
         description = "BottomSheet List Content, no drag handle",
         sourceUrl = BottomSheetExampleSourceUrl,
     ) {
-        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
-
         val bottomSheetState = rememberModalBottomSheetState(
             skipPartiallyExpanded = false,
-            initialValue = SheetValue.Hidden,
         )
-        val scope = rememberCoroutineScope()
-
         VerticalSpacer(24.dp)
-
-        ButtonFilled(
-            text = "Show BottomSheet",
-            onClick = { openBottomSheet = !openBottomSheet },
-        )
-
         ConfiguredBottomSheet(
-            BottomSheetContentExamples.List,
-            openBottomSheet,
-            false,
-            { openBottomSheet = false },
-            {
-                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
-                    if (!bottomSheetState.isVisible) {
-                        openBottomSheet = false
-                    }
-                }
-            },
-            bottomSheetState,
+            bottomSheetContentExample = BottomSheetContentExamples.List,
+            isDragHandlerEnabled = false,
+            bottomSheetState = bottomSheetState,
         )
     },
     Example(
@@ -145,34 +102,14 @@ public val BottomSheetExamples: List<Example> = listOf(
         description = "BottomSheet List Content fully expanded",
         sourceUrl = BottomSheetExampleSourceUrl,
     ) {
-        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
-
         val bottomSheetState = rememberModalBottomSheetState(
             skipPartiallyExpanded = true,
-            initialValue = SheetValue.Hidden,
         )
-        val scope = rememberCoroutineScope()
-
         VerticalSpacer(24.dp)
-
-        ButtonFilled(
-            text = "Show BottomSheet",
-            onClick = { openBottomSheet = !openBottomSheet },
-        )
-
         ConfiguredBottomSheet(
-            BottomSheetContentExamples.List,
-            openBottomSheet,
-            true,
-            { openBottomSheet = false },
-            {
-                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
-                    if (!bottomSheetState.isVisible) {
-                        openBottomSheet = false
-                    }
-                }
-            },
-            bottomSheetState,
+            bottomSheetContentExample = BottomSheetContentExamples.List,
+            isDragHandlerEnabled = true,
+            bottomSheetState = bottomSheetState,
         )
     },
     Example(
@@ -180,34 +117,14 @@ public val BottomSheetExamples: List<Example> = listOf(
         description = "BottomSheet Text Content",
         sourceUrl = BottomSheetExampleSourceUrl,
     ) {
-        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
-
         val bottomSheetState = rememberModalBottomSheetState(
             skipPartiallyExpanded = false,
-            initialValue = SheetValue.Hidden,
         )
-        val scope = rememberCoroutineScope()
-
         VerticalSpacer(24.dp)
-
-        ButtonFilled(
-            text = "Show BottomSheet",
-            onClick = { openBottomSheet = !openBottomSheet },
-        )
-
         ConfiguredBottomSheet(
-            BottomSheetContentExamples.Text,
-            openBottomSheet,
-            true,
-            { openBottomSheet = false },
-            {
-                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
-                    if (!bottomSheetState.isVisible) {
-                        openBottomSheet = false
-                    }
-                }
-            },
-            bottomSheetState,
+            bottomSheetContentExample = BottomSheetContentExamples.Text,
+            isDragHandlerEnabled = true,
+            bottomSheetState = bottomSheetState,
         )
     },
     Example(
@@ -215,34 +132,14 @@ public val BottomSheetExamples: List<Example> = listOf(
         description = "BottomSheet Image Content",
         sourceUrl = BottomSheetExampleSourceUrl,
     ) {
-        var openBottomSheet by rememberSaveable { mutableStateOf(false) }
-
         val bottomSheetState = rememberModalBottomSheetState(
             skipPartiallyExpanded = false,
-            initialValue = SheetValue.Hidden,
         )
-        val scope = rememberCoroutineScope()
-
         VerticalSpacer(24.dp)
-
-        ButtonFilled(
-            text = "Show BottomSheet",
-            onClick = { openBottomSheet = !openBottomSheet },
-        )
-
         ConfiguredBottomSheet(
-            BottomSheetContentExamples.Image,
-            openBottomSheet,
-            true,
-            { openBottomSheet = false },
-            {
-                scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
-                    if (!bottomSheetState.isVisible) {
-                        openBottomSheet = false
-                    }
-                }
-            },
-            bottomSheetState,
+            bottomSheetContentExample = BottomSheetContentExamples.Image,
+            isDragHandlerEnabled = true,
+            bottomSheetState = bottomSheetState,
         )
     },
 )
@@ -251,25 +148,46 @@ public val BottomSheetExamples: List<Example> = listOf(
 @Composable
 private fun ConfiguredBottomSheet(
     bottomSheetContentExample: BottomSheetContentExamples,
-    openBottomSheet: Boolean,
     isDragHandlerEnabled: Boolean,
-    onDismissRequest: () -> Unit,
-    onHideBottomSheetClicked: () -> Unit,
     bottomSheetState: SheetState,
 ) {
+    var openBottomSheet by rememberSaveable { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
+
+    val onDismissRequest: () -> Unit = { openBottomSheet = false }
+
+    val onHideBottomSheetClicked: () -> Unit = {
+        scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
+            if (!bottomSheetState.isVisible) {
+                openBottomSheet = false
+            }
+        }
+    }
+
+    ButtonFilled(
+        text = "Show BottomSheet",
+        onClick = { openBottomSheet = !openBottomSheet },
+    )
     if (openBottomSheet) {
-        ModalBottomSheet(
+        BottomSheet(
+            content = {
+                when (bottomSheetContentExample) {
+                    BottomSheetContentExamples.Text -> TextContent()
+                    BottomSheetContentExamples.Image -> ImageContent()
+                    BottomSheetContentExamples.Illustration -> IllustrationContent()
+                    BottomSheetContentExamples.List -> ListContent(onHideBottomSheetClicked)
+                }
+            },
+            contentTopPadding = when (bottomSheetContentExample) {
+                BottomSheetContentExamples.Text -> 32.dp
+                BottomSheetContentExamples.Image -> 0.dp
+                BottomSheetContentExamples.Illustration -> 24.dp
+                BottomSheetContentExamples.List -> 32.dp
+            },
             showHandle = isDragHandlerEnabled,
             onDismissRequest = onDismissRequest,
             sheetState = bottomSheetState,
-        ) {
-            when (bottomSheetContentExample) {
-                BottomSheetContentExamples.Text -> TextContent()
-                BottomSheetContentExamples.Image -> ImageContent()
-                BottomSheetContentExamples.Illustration -> IllustrationContent()
-                BottomSheetContentExamples.List -> ListContent(onHideBottomSheetClicked)
-            }
-        }
+        )
     }
 }
 
@@ -278,14 +196,7 @@ private fun ConfiguredBottomSheet(
 private fun ListContent(onHideBottomSheetClicked: () -> Unit) {
     LazyColumn {
         stickyHeader {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .background(Color.Green),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                // Note: If you provide logic outside of onDismissRequest to remove the sheet,
-                // you must additionally handle intended state cleanup, if any.
+            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
                 ButtonFilled(
                     modifier = Modifier.padding(24.dp),
                     text = "Hide Bottom Sheet",
@@ -310,7 +221,7 @@ private fun ListContent(onHideBottomSheetClicked: () -> Unit) {
 
 @Composable
 private fun TextContent() {
-    Column {
+    Column(modifier = Modifier.padding(16.dp)) {
         Text(
             text = "Title",
             modifier = Modifier.padding(bottom = 16.dp),
@@ -321,7 +232,7 @@ private fun TextContent() {
             modifier = Modifier.padding(bottom = 16.dp),
             style = SparkTheme.typography.body2.highlight,
         )
-        TextlLinkButton(text = "Text Link")
+        TextLinkButton(text = "Text Link", onClick = {})
     }
 }
 
