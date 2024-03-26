@@ -22,21 +22,23 @@
 package com.adevinta.spark.catalog.configurator.samples.bottomsheet
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -44,18 +46,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.util.SampleSourceUrl
-import com.adevinta.spark.components.bottomsheet.SheetState
-import com.adevinta.spark.components.bottomsheet.SheetValue
-import com.adevinta.spark.components.bottomsheet.modal.ModalBottomSheet
-import com.adevinta.spark.components.bottomsheet.modal.rememberModalBottomSheetState
+import com.adevinta.spark.components.bottomsheet.BottomSheet
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.image.Illustration
@@ -65,6 +65,8 @@ import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.TextField
+import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
@@ -79,94 +81,106 @@ public val BottomSheetConfigurator: Configurator = Configurator(
     BottomSheetSample()
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ColumnScope.BottomSheetSample() {
     var isDragHandlerEnabled by remember { mutableStateOf(true) }
     var openBottomSheet by rememberSaveable { mutableStateOf(false) }
     var skipPartiallyExpanded by remember { mutableStateOf(false) }
     var bottomSheetContentExample by remember { mutableStateOf(BottomSheetContentExamples.Text) }
+    val state: TextFieldState? by remember { mutableStateOf(null) }
+    var topPadding by remember { mutableIntStateOf(0) }
 
     val bottomSheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = skipPartiallyExpanded,
-        initialValue = SheetValue.Hidden,
     )
     val scope = rememberCoroutineScope()
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+    SwitchLabelled(
+        checked = isDragHandlerEnabled,
+        onCheckedChange = {
+            isDragHandlerEnabled = it
+        },
     ) {
-        SwitchLabelled(
-            checked = isDragHandlerEnabled,
-            onCheckedChange = {
-                isDragHandlerEnabled = it
-            },
-        ) {
-            Text(
-                text = "Show Drag Handle",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        SwitchLabelled(
-            checked = skipPartiallyExpanded,
-            onCheckedChange = {
-                skipPartiallyExpanded = it
-            },
-        ) {
-            Text(
-                text = "Skip Partially Expanded",
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-
-        val contentExamples = BottomSheetContentExamples.entries.toTypedArray()
-        var expanded by remember { mutableStateOf(false) }
-        SelectTextField(
+        Text(
+            text = "Show Drag Handle",
             modifier = Modifier.fillMaxWidth(),
-            value = bottomSheetContentExample.name,
-            onValueChange = {},
-            readOnly = true,
-            label = "BottomSheet Content Example",
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded },
-            onDismissRequest = { expanded = false },
-            dropdownContent = {
-                contentExamples.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it.name) },
-                        onClick = {
-                            bottomSheetContentExample = it
-                            expanded = false
-                        },
-                    )
-                }
-            },
-        )
-
-        VerticalSpacer(24.dp)
-
-        ButtonFilled(
-            text = "Show BottomSheet",
-            onClick = { openBottomSheet = !openBottomSheet },
         )
     }
 
+    SwitchLabelled(
+        checked = skipPartiallyExpanded,
+        onCheckedChange = {
+            skipPartiallyExpanded = it
+        },
+    ) {
+        Text(
+            text = "Skip Partially Expanded",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = topPadding.toString(),
+        onValueChange = {
+            topPadding = try {
+                it.toInt()
+            } catch (e: NumberFormatException) {
+                0
+            }
+        },
+        label = "Change Top Padding (Px)",
+        helper = "Type to change content top padding",
+        state = state,
+        keyboardOptions = KeyboardOptions().copy(keyboardType = KeyboardType.Number),
+    )
+
+    val contentExamples = BottomSheetContentExamples.entries.toTypedArray()
+    var expanded by remember { mutableStateOf(false) }
+    SelectTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = bottomSheetContentExample.name,
+        onValueChange = {},
+        readOnly = true,
+        label = "BottomSheet Content Example",
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded },
+        onDismissRequest = { expanded = false },
+        dropdownContent = {
+            contentExamples.forEach {
+                DropdownMenuItem(
+                    text = { Text(it.name) },
+                    onClick = {
+                        bottomSheetContentExample = it
+                        expanded = false
+                    },
+                )
+            }
+        },
+    )
+
+    VerticalSpacer(24.dp)
+
+    ButtonFilled(
+        text = "Show BottomSheet",
+        onClick = { openBottomSheet = !openBottomSheet },
+    )
+
     ConfiguredBottomSheet(
-        bottomSheetContentExample,
-        openBottomSheet,
-        isDragHandlerEnabled,
-        { openBottomSheet = false },
-        {
+        contentTopPadding = topPadding.dp,
+        bottomSheetContentExample = bottomSheetContentExample,
+        openBottomSheet = openBottomSheet,
+        isDragHandlerEnabled = isDragHandlerEnabled,
+        onDismissRequest = { openBottomSheet = false },
+        onHideBottomSheetClicked = {
             scope.launch { bottomSheetState.hide() }.invokeOnCompletion {
                 if (!bottomSheetState.isVisible) {
                     openBottomSheet = false
                 }
             }
         },
-        bottomSheetState,
+        bottomSheetState = bottomSheetState,
     )
 }
 
@@ -179,9 +193,11 @@ private fun ConfiguredBottomSheet(
     onDismissRequest: () -> Unit,
     onHideBottomSheetClicked: () -> Unit,
     bottomSheetState: SheetState,
+    contentTopPadding: Dp,
 ) {
     if (openBottomSheet) {
-        ModalBottomSheet(
+        BottomSheet(
+            contentTopPadding = contentTopPadding,
             showHandle = isDragHandlerEnabled,
             onDismissRequest = onDismissRequest,
             sheetState = bottomSheetState,
@@ -201,12 +217,7 @@ private fun ConfiguredBottomSheet(
 private fun ListContent(onHideBottomSheetClicked: () -> Unit) {
     LazyColumn {
         stickyHeader {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .background(Color.Green),
-                horizontalArrangement = Arrangement.Center,
-            ) {
+            Row(horizontalArrangement = Arrangement.Center) {
                 // Note: If you provide logic outside of onDismissRequest to remove the sheet,
                 // you must additionally handle intended state cleanup, if any.
                 ButtonFilled(
@@ -233,7 +244,7 @@ private fun ListContent(onHideBottomSheetClicked: () -> Unit) {
 
 @Composable
 private fun TextContent() {
-    Column {
+    Column(modifier = Modifier.padding(16.dp)) {
         Text(
             text = "Title",
             modifier = Modifier.padding(bottom = 16.dp),
