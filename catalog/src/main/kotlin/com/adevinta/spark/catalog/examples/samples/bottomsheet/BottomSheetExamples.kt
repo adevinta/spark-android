@@ -49,7 +49,9 @@ import com.adevinta.spark.catalog.configurator.samples.bottomsheet.BottomSheetCo
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SparkSampleSourceUrl
 import com.adevinta.spark.components.bottomsheet.BottomSheet
+import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults
 import com.adevinta.spark.components.buttons.ButtonFilled
+import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.image.Image
@@ -163,11 +165,13 @@ private fun ConfiguredBottomSheet(
             }
         }
     }
-
-    ButtonFilled(
-        text = "Show BottomSheet",
-        onClick = { openBottomSheet = !openBottomSheet },
-    )
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+        ButtonFilled(
+            size = ButtonSize.Large,
+            text = "Show BottomSheet",
+            onClick = { openBottomSheet = !openBottomSheet },
+        )
+    }
     if (openBottomSheet) {
         BottomSheet(
             content = {
@@ -179,10 +183,9 @@ private fun ConfiguredBottomSheet(
                 }
             },
             contentTopPadding = when (bottomSheetContentExample) {
-                BottomSheetContentExamples.Text -> 32.dp
                 BottomSheetContentExamples.Image -> 0.dp
-                BottomSheetContentExamples.Illustration -> 24.dp
-                BottomSheetContentExamples.List -> 32.dp
+                else -> if (isDragHandlerEnabled) BottomSheetDefaults.ContentTopPadding
+                else BottomSheetDefaults.ContentTopPaddingNoHandle
             },
             showHandle = isDragHandlerEnabled,
             onDismissRequest = onDismissRequest,
@@ -196,9 +199,8 @@ private fun ConfiguredBottomSheet(
 private fun ListContent(onHideBottomSheetClicked: () -> Unit) {
     LazyColumn {
         stickyHeader {
-            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 ButtonFilled(
-                    modifier = Modifier.padding(24.dp),
                     text = "Hide Bottom Sheet",
                     onClick = onHideBottomSheetClicked,
                 )
@@ -221,7 +223,7 @@ private fun ListContent(onHideBottomSheetClicked: () -> Unit) {
 
 @Composable
 private fun TextContent() {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier.padding(horizontal = 24.dp)) {
         Text(
             text = "Title",
             modifier = Modifier.padding(bottom = 16.dp),
@@ -262,8 +264,5 @@ private fun IllustrationContent() {
 }
 
 public enum class BottomSheetContentExamples {
-    Text,
-    Image,
-    Illustration,
-    List,
+    Text, Image, Illustration, List,
 }

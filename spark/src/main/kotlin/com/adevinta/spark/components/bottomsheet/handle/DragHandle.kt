@@ -28,19 +28,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.bottomsheet.DragHandleVerticalPadding
+import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.DragHandleHeight
+import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.DragHandleTopPadding
+import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.DragHandleWidth
 import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
@@ -50,23 +51,21 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 @Composable
 public fun DragHandle(
     modifier: Modifier = Modifier,
-    width: Dp = 32.dp,
-    height: Dp = 4.dp,
-    shape: Shape = MaterialTheme.shapes.extraLarge,
     color: Color = SparkTheme.colors.outline.copy(alpha = SparkTheme.colors.dim1),
 ) {
     val dragHandleDescription = stringResource(id = R.string.spark_drag_handle_a11y)
     Surface(
         modifier = modifier
-            .padding(vertical = DragHandleVerticalPadding)
-            .semantics { contentDescription = dragHandleDescription },
+            .padding(vertical = DragHandleTopPadding)
+            .semantics { contentDescription = dragHandleDescription }
+            .sparkUsageOverlay(),
         color = color,
-        shape = shape,
+        shape = MaterialTheme.shapes.extraLarge,
     ) {
         Box(
             Modifier.size(
-                width = width,
-                height = height,
+                width = DragHandleWidth,
+                height = DragHandleHeight,
             ),
         )
     }
