@@ -48,6 +48,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults
+import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.ContentTopPadding
+import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.ContentTopPaddingNoHandle
 import com.adevinta.spark.components.bottomsheet.handle.DragHandle
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.list.ListItem
@@ -82,12 +84,8 @@ public fun BottomSheetScaffold(
     modifier: Modifier = Modifier,
     scaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState(),
     showHandle: Boolean = true,
-    sheetContentTopPadding: Dp = if (showHandle) {
-        BottomSheetDefaults.ContentTopPadding
-    } else {
-        BottomSheetDefaults.ContentTopPaddingNoHandle
-    },
-    screenContentPadding: Dp = BottomSheetDefaults.ContentTopPadding,
+    sheetContentTopPadding: Dp = if (showHandle) ContentTopPadding else ContentTopPaddingNoHandle,
+    screenContentPadding: Dp = ContentTopPadding,
     sheetSwipeEnabled: Boolean = true,
     topBar: @Composable (() -> Unit)? = null,
     snackbarHost: @Composable (androidx.compose.material3.SnackbarHostState) -> Unit = {
@@ -103,9 +101,10 @@ public fun BottomSheetScaffold(
                 Box(modifier = Modifier.padding(top = sheetContentTopPadding)) {
                     sheetContent()
                 }
-
-                Box(contentAlignment = TopCenter, modifier = Modifier.fillMaxWidth()) {
-                    if (showHandle) DragHandle()
+                if (showHandle) {
+                    Box(contentAlignment = TopCenter, modifier = Modifier.fillMaxWidth()) {
+                        DragHandle()
+                    }
                 }
             }
         },

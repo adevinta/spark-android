@@ -54,7 +54,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
+import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.ContentTopPadding
+import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.ContentTopPaddingNoHandle
 import com.adevinta.spark.components.bottomsheet.handle.DragHandle
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.icons.Icon
@@ -73,8 +74,7 @@ import kotlinx.coroutines.launch
  * app functionality when they appear, and remaining on screen until confirmed, dismissed, or a
  * required action has been taken.
  *
- * @param onDismissRequest Executes when the user clicks outside of the bottom sheet, after sheet
- * animates to [Hidden].
+ * @param onDismissRequest
  * @param modifier Optional [Modifier] for the bottom sheet.
  * @param showHandle Optional [Boolean] to show / hide handle, if handle is hidden it will fill all screen.
  *
@@ -98,11 +98,7 @@ public fun BottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     showHandle: Boolean = true,
-    contentTopPadding: Dp = if (showHandle) {
-        BottomSheetDefaults.ContentTopPadding
-    } else {
-        BottomSheetDefaults.ContentTopPaddingNoHandle
-    },
+    contentTopPadding: Dp = if (showHandle) ContentTopPadding else ContentTopPaddingNoHandle,
     sheetState: SheetState = rememberModalBottomSheetState(),
     content: @Composable BoxScope.() -> Unit,
 ) {
@@ -126,7 +122,7 @@ public fun BottomSheet(
  * A simple example of a modal bottom sheet looks like this:
  * @param contentTopPadding The top padding for the content of the bottom sheet, does not apply to the handle.
  * @param onDismissRequest Executes when the user clicks outside of the bottom sheet, after sheet
- * animates to [Hidden].
+ * animates to [androidx.compose.material3.SheetValue.Hidden].
  * @param modifier Optional [Modifier] for the bottom sheet.
  * @param showHandle Optional [Boolean] to show / hide handle, if handle is hidden it will fill all screen.
  * @param sheetState The state of the bottom sheet.

@@ -21,62 +21,35 @@
  */
 package com.adevinta.spark.components.bottomsheet
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 
 /**
- * Possible values of [SheetState].
- */
-@ExperimentalMaterial3Api
-public enum class SheetValue {
-    /**
-     * The sheet is not visible.
-     */
-    Hidden,
-
-    /**
-     * The sheet is visible at full height.
-     */
-    Expanded,
-
-    /**
-     * The sheet is partially visible.
-     */
-    PartiallyExpanded,
-}
-
-/**
- * Contains the default values used by [ModalBottomSheet] and [BottomSheetScaffold].
+ * Contains the default values used by [BottomSheet]
+ * and [com.adevinta.spark.components.bottomsheet.scaffold.BottomSheetScaffold].
  */
 @Stable
-@ExperimentalMaterial3Api
 public object BottomSheetDefaults {
 
-    /** The default container color for a bottom sheet. */
+    /**
+     * the default color of the container for the bottom sheet.
+     */
     public val ContainerColor: Color
         @Composable get() = SparkTheme.colors.surface
 
-    /** The default top padding for the content of a bottom sheet. */
-    public val ContentTopPadding: Dp = 28.dp
-    public val ContentTopPaddingNoHandle: Dp = 0.dp
 
     /** The default color of the scrim overlay for background content. */
     public val ScrimColor: Color
         @Composable get() = SparkTheme.colors.scrim
 
-    /**
-     * The optional visual marker placed on top of a bottom sheet to indicate it may be dragged.
-     */
-    @Composable
-    public fun DragHandle(modifier: Modifier = Modifier) {
-        com.adevinta.spark.components.bottomsheet.handle.DragHandle(modifier)
-    }
-}
+    public val DragHandleHeight: Dp = 4.dp
+    public val DragHandleWidth: Dp = 32.dp
+    public val DragHandleTopPadding: Dp = 8.dp
 
-public val DragHandleVerticalPadding: Dp = 8.dp
+    public val ContentTopPadding: Dp = 24.dp
+    public val ContentTopPaddingNoHandle: Dp = 16.dp
+}
