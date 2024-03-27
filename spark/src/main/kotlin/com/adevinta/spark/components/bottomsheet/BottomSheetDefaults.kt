@@ -41,7 +41,6 @@ public object BottomSheetDefaults {
     public val ContainerColor: Color
         @Composable get() = SparkTheme.colors.surface
 
-
     /** The default color of the scrim overlay for background content. */
     public val ScrimColor: Color
         @Composable get() = SparkTheme.colors.scrim
