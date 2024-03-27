@@ -455,7 +455,8 @@ private fun Scrim(
             animationSpec = TweenSpec(),
         )
 
-        @Suppress("PrivateResource") val closeSheet = resources().getString(androidx.compose.ui.R.string.close_sheet)
+        @Suppress("PrivateResource")
+        val closeSheet = resources().getString(androidx.compose.ui.R.string.close_sheet)
         val dismissModifier = if (visible) {
             Modifier
                 .pointerInput(onDismiss) { detectTapGestures { onDismiss() } }

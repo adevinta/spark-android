@@ -184,8 +184,11 @@ private fun ConfiguredBottomSheet(
             },
             contentTopPadding = when (bottomSheetContentExample) {
                 BottomSheetContentExamples.Image -> 0.dp
-                else -> if (isDragHandlerEnabled) BottomSheetDefaults.ContentTopPadding
-                else BottomSheetDefaults.ContentTopPaddingNoHandle
+                else -> if (isDragHandlerEnabled) {
+                    BottomSheetDefaults.ContentTopPadding
+                } else {
+                    BottomSheetDefaults.ContentTopPaddingNoHandle
+                }
             },
             showHandle = isDragHandlerEnabled,
             onDismissRequest = onDismissRequest,
@@ -264,5 +267,8 @@ private fun IllustrationContent() {
 }
 
 public enum class BottomSheetContentExamples {
-    Text, Image, Illustration, List,
+    Text,
+    Image,
+    Illustration,
+    List,
 }
