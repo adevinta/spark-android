@@ -14,7 +14,12 @@ fun BottomSheet(
     showHandle: Boolean = true,
     contentTopPadding: Dp, ,
     sheetState: SheetState = rememberModalBottomSheetState(),
-    content: @Composable BoxScope.() -> Unit,
+    content = {
+        Text(
+            text = "BottomSheet Content",
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+        )
+    }
 )
 ```
 
@@ -27,14 +32,47 @@ fun BottomSheet(
 
 # BottomSheet content behind handle Example
 
+```kotlin
+fun BottomSheet(
+    onDismissRequest: () -> Unit,
+    modifier: Modifier = Modifier,
+    showHandle: Boolean = true,
+    contentTopPadding = 0.dp, 
+    sheetState: SheetState = rememberModalBottomSheetState(),
+    content = {
+        Box(
+            contentAlignment = Alignment.TopCenter,
+        ) {
+            Image(
+                modifier = Modifier
+                    .height(500.dp)
+                    .fillMaxWidth(),
+                model = "https://upload.wikimedia.org/wikipedia/commons/f/fd/Pink_flower.jpg",
+                contentScale = ContentScale.Crop,
+                contentDescription = null,
+            )
+        }
+    }
+)
+```
 ![](../../images/bottomsheet_content_behind_handle.png)
 
 #### BottomSheetScaffold
 
 ```kotlin
 fun BottomSheetScaffold(
-    sheetContent: @Composable BoxScope.() -> Unit,
-    content: @Composable (PaddingValues) -> Unit,
+    sheetContent = {
+    Text(
+        text = "Sheet Content",
+        modifier = Modifier.fillMaxWidth().padding(16.dp),
+    )
+},
+    content = {
+        Text(
+            text = "Screen Content",
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
+        )
+    },
     modifier: Modifier = Modifier,
     scaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState(),
     showHandle: Boolean = true,

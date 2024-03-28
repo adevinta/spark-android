@@ -54,8 +54,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.ContentTopPadding
-import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.ContentTopPaddingNoHandle
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPadding
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPaddingNoHandle
 import com.adevinta.spark.components.bottomsheet.handle.DragHandle
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.icons.Icon
@@ -81,12 +81,12 @@ import kotlinx.coroutines.launch
  *
  * @param contentTopPadding The top padding for the content of the bottom sheet, does not apply to the handle.
  *
- * By default if showHandle is [Boolean.true]. contentTopPadding = [BottomSheetDefaults.ContentTopPadding]
- * else contentTopPadding = [BottomSheetDefaults.ContentTopPaddingNoHandle]
+ * By default if showHandle is [Boolean.true]. contentTopPadding = [SheetDefaults.ContentTopPadding]
+ * else contentTopPadding = [SheetDefaults.ContentTopPaddingNoHandle]
  *
  * If you want to have immersive BottomSheet, you can set contentTopPadding = 0.dp,
  * Beware you need to set your content top padding yourself
- * to avoid content to be hidden by the handle at least [BottomSheetDefaults.ContentTopPadding]
+ * to avoid content to be hidden by the handle at least [SheetDefaults.ContentTopPadding]
  *
  *
  * @param sheetState the state of the bottom sheet.
@@ -148,10 +148,10 @@ internal fun SparkModalBottomSheet(
     showHandle: Boolean = true,
     sheetState: SheetState = rememberModalBottomSheetState(),
     shape: Shape = ExpandedShape,
-    containerColor: Color = BottomSheetDefaults.ContainerColor,
+    containerColor: Color = SheetDefaults.ContainerColor,
     contentColor: Color = contentColorFor(containerColor),
     tonalElevation: Dp = Elevation,
-    scrimColor: Color = BottomSheetDefaults.ScrimColor.copy(alpha = SparkTheme.colors.dim1),
+    scrimColor: Color = SheetDefaults.ScrimColor.copy(alpha = SparkTheme.colors.dim1),
     dragHandle: @Composable (() -> Unit)? = {
         if (showHandle) DragHandle()
     },

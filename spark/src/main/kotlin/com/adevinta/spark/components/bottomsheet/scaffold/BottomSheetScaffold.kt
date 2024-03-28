@@ -48,8 +48,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults
-import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.ContentTopPadding
-import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.ContentTopPaddingNoHandle
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPadding
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPaddingNoHandle
 import com.adevinta.spark.components.bottomsheet.handle.DragHandle
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.list.ListItem
