@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,36 +19,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.components.bottomsheet
+package com.adevinta.spark.components.bottomsheet.handle
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.R
+import com.adevinta.spark.SparkTheme.colors
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.DragHandleHeight
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.DragHandleTopPadding
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.DragHandleWidth
 import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
+/**
+ * The optional visual marker placed on top of a bottom sheet to indicate it may be dragged.
+ */
 @Composable
-public fun DragHandle(modifier: Modifier = Modifier) {
-    Box(
+public fun DragHandle(
+    modifier: Modifier = Modifier,
+    color: Color = colors.outline.dim1,
+) {
+    val dragHandleDescription = stringResource(id = R.string.spark_drag_handle_a11y)
+    Surface(
         modifier = modifier
-            .width(32.dp)
-            .height(4.dp)
-            .clip(SparkTheme.shapes.large)
-            .background(SparkTheme.colors.neutral.copy(0.4f))
+            .padding(vertical = DragHandleTopPadding)
+            .semantics { contentDescription = dragHandleDescription }
             .sparkUsageOverlay(),
-    )
+        color = color,
+        shape = MaterialTheme.shapes.extraLarge,
+    ) {
+        Box(
+            Modifier.size(
+                width = DragHandleWidth,
+                height = DragHandleHeight,
+            ),
+        )
+    }
 }
 
 @Preview
@@ -57,7 +78,7 @@ internal fun PreviewDragHandle(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        Surface(color = SparkTheme.colors.background) {
+        Surface(color = colors.background) {
             Box(modifier = Modifier.padding(4.dp)) {
                 DragHandle()
             }

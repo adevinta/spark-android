@@ -74,17 +74,14 @@ internal fun SparkProgressbar(
  * represents full progress. Values outside of this range are coerced into the range.
  * @param intent The intent color for the Progressbar.
  * @param modifier Modifier to be applied to the Progressbar
- * @param isRounded Controls the border shape of the progressbar. When `true`, this progressbar will have rounded border shape, & the default is rounded
+ * @param isRounded Controls the border shape of the progressbar. When `true`,
+ * this progressbar will have rounded border shape, & the default is rounded
  */
 @Deprecated(
     message = "Use the overload that takes `progress` as a lambda",
     replaceWith = ReplaceWith(
-        "Progressbar(\n" +
-            "progress = { progress },\n" +
-            "modifier = modifier,\n" +
-            "intent = intent,\n" +
-            "isRounded = isRounded,\n" +
-            ")",
+        "Progressbar(\n" + "progress = { progress },\n" + "modifier = modifier,\n" +
+            "intent = intent,\n" + "isRounded = isRounded,\n" + ")",
     ),
 )
 @Composable
@@ -112,7 +109,8 @@ public fun Progressbar(
  * represents full progress. Values outside of this range are coerced into the range.
  * @param intent The intent color for the Progressbar.
  * @param modifier Modifier to be applied to the Progressbar
- * @param isRounded Controls the border shape of the progressbar. When `true`, this progressbar will have rounded border shape, & the default is rounded
+ * @param isRounded Controls the border shape of the progressbar. When `true`,
+ * this progressbar will have rounded border shape, & the default is rounded
  */
 
 @Composable
@@ -138,7 +136,8 @@ public fun Progressbar(
  *
  * @param intent The intent color for the Progressbar.
  * @param modifier Modifier to be applied to the Progressbar
- * @param isRounded Controls the border shape of the progressbar. When `true`, this progressbar will have rounded border shape, & the default is rounded
+ * @param isRounded Controls the border shape of the progressbar. When `true`,
+ * this progressbar will have rounded border shape, & the default is rounded
  */
 
 @Composable

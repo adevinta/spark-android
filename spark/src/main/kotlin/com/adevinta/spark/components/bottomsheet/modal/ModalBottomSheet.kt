@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,18 +21,20 @@
  */
 package com.adevinta.spark.components.bottomsheet.modal
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -71,17 +73,17 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
-import com.adevinta.spark.components.bottomsheet.AnchorChangeHandler
 import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults
 import com.adevinta.spark.components.bottomsheet.BottomSheetMaxWidth
-import com.adevinta.spark.components.bottomsheet.ConsumeSwipeWithinBottomSheetBoundsNestedScrollConnection
 import com.adevinta.spark.components.bottomsheet.SheetState
 import com.adevinta.spark.components.bottomsheet.SheetValue
 import com.adevinta.spark.components.bottomsheet.SheetValue.Expanded
 import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
 import com.adevinta.spark.components.bottomsheet.SheetValue.PartiallyExpanded
+import com.adevinta.spark.components.bottomsheet.consumeSwipeWithinBottomSheetBoundsNestedScrollConnection
+import com.adevinta.spark.components.bottomsheet.layout.AnchorChangeHandler
+import com.adevinta.spark.components.bottomsheet.layout.swipeAnchors
 import com.adevinta.spark.components.bottomsheet.rememberSheetState
-import com.adevinta.spark.components.bottomsheet.swipeAnchors
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.list.ListItem
@@ -96,8 +98,45 @@ import kotlinx.coroutines.launch
 import kotlin.math.max
 
 /**
- * <a href="https://m3.material.io/components/bottom-sheets/overview" class="external" target="_blank">Material Design modal bottom sheet</a>.
  *
+ * Modal bottom sheets are used as an alternative to inline menus or simple dialogs on mobile,
+ * especially when offering a long list of action items, or when items require longer descriptions
+ * and icons. Like dialogs, modal bottom sheets appear in front of app content, disabling all other
+ * app functionality when they appear, and remaining on screen until confirmed, dismissed, or a
+ * required action has been taken.
+ *
+ * @param onDismissRequest Executes when the user clicks outside of the bottom sheet, after sheet
+ * animates to [Hidden].
+ * @param modifier Optional [Modifier] for the bottom sheet.
+ * @param showHandle Optional [Boolean] to show / hide handle, if handle is hidden it will fill all screen.
+ * If DragHandle is visible, you need to provide an extra top padding on your content
+ * so it doesn't overlap with the handle. my suggestion is 24.dp
+ * @param sheetState The state of the bottom sheet.
+ * @param content The content to be displayed inside the bottom sheet.
+ */
+@Composable
+@ExperimentalMaterial3Api
+@Deprecated(
+    message = "Use BottomSheet instead",
+    replaceWith = ReplaceWith("BottomSheet"),
+)
+public fun ModalBottomSheet(
+    onDismissRequest: () -> Unit,
+    modifier: Modifier = Modifier,
+    showHandle: Boolean = true,
+    sheetState: SheetState = rememberModalBottomSheetState(),
+    content: @Composable BoxScope.() -> Unit,
+) {
+    SparkModalBottomSheet(
+        onDismissRequest = onDismissRequest,
+        modifier = modifier,
+        sheetState = sheetState,
+        content = content,
+        showHandle = showHandle,
+    )
+}
+
+/**
  * Modal bottom sheets are used as an alternative to inline menus or simple dialogs on mobile,
  * especially when offering a long list of action items, or when items require longer descriptions
  * and icons. Like dialogs, modal bottom sheets appear in front of app content, disabling all other
@@ -107,8 +146,6 @@ import kotlin.math.max
  * ![Bottom sheet image](https://developer.android.com/images/reference/androidx/compose/material3/bottom_sheet.png)
  *
  * A simple example of a modal bottom sheet looks like this:
- *
- * @sample androidx.compose.material3.samples.ModalBottomSheetSample
  *
  * @param onDismissRequest Executes when the user clicks outside of the bottom sheet, after sheet
  * animates to [Hidden].
@@ -124,11 +161,14 @@ import kotlin.math.max
  * @param dragHandle Optional visual marker to swipe the bottom sheet.
  * @param content The content to be displayed inside the bottom sheet.
  */
+
 @Composable
 @ExperimentalMaterial3Api
-public fun ModalBottomSheet(
+@Suppress("deprecation")
+internal fun SparkModalBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
+    showHandle: Boolean = true,
     sheetState: SheetState = rememberModalBottomSheetState(),
     shape: Shape = BottomSheetDefaults.ExpandedShape,
     containerColor: Color = BottomSheetDefaults.ContainerColor,
@@ -136,9 +176,9 @@ public fun ModalBottomSheet(
     tonalElevation: Dp = BottomSheetDefaults.Elevation,
     scrimColor: Color = BottomSheetDefaults.ScrimColor,
     dragHandle: @Composable (() -> Unit)? = {
-        BottomSheetDefaults.DragHandle(Modifier.padding(vertical = 8.dp))
+        if (showHandle) BottomSheetDefaults.DragHandle(Modifier.padding(vertical = 8.dp))
     },
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable BoxScope.() -> Unit,
 ) {
     val scope = rememberCoroutineScope()
     val animateToDismiss: () -> Unit = {
@@ -158,7 +198,7 @@ public fun ModalBottomSheet(
 
     // Callback that is invoked when the anchors have changed.
     val anchorChangeHandler = remember(sheetState, scope) {
-        ModalBottomSheetAnchorChangeHandler(
+        modalBottomSheetAnchorChangeHandler(
             state = sheetState,
             animateTo = { target, velocity ->
                 scope.launch { sheetState.animateTo(target, velocity = velocity) }
@@ -199,7 +239,7 @@ public fun ModalBottomSheet(
                     }
                     .nestedScroll(
                         remember(sheetState) {
-                            ConsumeSwipeWithinBottomSheetBoundsNestedScrollConnection(
+                            consumeSwipeWithinBottomSheetBoundsNestedScrollConnection(
                                 sheetState = sheetState,
                                 orientation = Orientation.Vertical,
                                 onFling = settleToDismiss,
@@ -220,20 +260,26 @@ public fun ModalBottomSheet(
                 contentColor = contentColor,
                 elevation = tonalElevation,
             ) {
-                Column(Modifier.fillMaxWidth()) {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.TopCenter),
+                ) {
+                    content()
+
                     if (dragHandle != null) {
                         Box(
                             Modifier
-                                .align(Alignment.CenterHorizontally)
+                                .align(Alignment.TopCenter)
                                 .semantics(mergeDescendants = true) {
-                                    // Provides semantics to interact with the bottomsheet based on its
+                                    // Provides semantics to interact with the BottomSheet based on its
                                     // current value.
                                     with(sheetState) {
                                         dismiss {
                                             animateToDismiss()
                                             true
                                         }
-                                        if (currentValue == SheetValue.PartiallyExpanded) {
+                                        if (currentValue == PartiallyExpanded) {
                                             expand {
                                                 if (swipeableState.confirmValueChange(Expanded)) {
                                                     scope.launch { sheetState.expand() }
@@ -242,8 +288,8 @@ public fun ModalBottomSheet(
                                             }
                                         } else if (hasPartiallyExpandedState) {
                                             collapse {
-                                                val confirmPartial = swipeableState
-                                                    .confirmValueChange(SheetValue.PartiallyExpanded)
+                                                val confirmPartial =
+                                                    swipeableState.confirmValueChange(PartiallyExpanded)
                                                 if (confirmPartial) {
                                                     scope.launch { partialExpand() }
                                                 }
@@ -256,7 +302,6 @@ public fun ModalBottomSheet(
                             dragHandle()
                         }
                     }
-                    content()
                 }
             }
         }
@@ -294,6 +339,7 @@ private fun Scrim(
         val alpha by animateFloatAsState(
             targetValue = if (visible) 1f else 0f,
             animationSpec = TweenSpec(),
+            label = "scrimAlpha",
         )
         val dismissSheet = if (visible) {
             Modifier
@@ -316,6 +362,7 @@ private fun Scrim(
     }
 }
 
+@SuppressLint("ModifierFactoryUnreferencedReceiver")
 @ExperimentalMaterial3Api
 private fun Modifier.modalBottomSheetSwipeable(
     sheetState: SheetState,
@@ -329,31 +376,30 @@ private fun Modifier.modalBottomSheetSwipeable(
     enabled = sheetState.isVisible,
     startDragImmediately = sheetState.swipeableState.isAnimationRunning,
     onDragStopped = onDragStopped,
-)
-    .swipeAnchors(
-        state = sheetState.swipeableState,
-        anchorChangeHandler = anchorChangeHandler,
-        possibleValues = setOf(Hidden, SheetValue.PartiallyExpanded, Expanded),
-    ) { value, sheetSize ->
-        when (value) {
-            Hidden -> screenHeight + bottomPadding
-            SheetValue.PartiallyExpanded -> when {
-                sheetSize.height < screenHeight / 2 -> null
-                sheetState.skipPartiallyExpanded -> null
-                else -> screenHeight / 2f
-            }
+).swipeAnchors(
+    state = sheetState.swipeableState,
+    anchorChangeHandler = anchorChangeHandler,
+    possibleValues = setOf(Hidden, PartiallyExpanded, Expanded),
+) { value, sheetSize ->
+    when (value) {
+        Hidden -> screenHeight + bottomPadding
+        PartiallyExpanded -> when {
+            sheetSize.height < screenHeight / 2 -> null
+            sheetState.skipPartiallyExpanded -> null
+            else -> screenHeight / 2f
+        }
 
-            Expanded -> if (sheetSize.height != 0) {
-                max(0f, screenHeight - sheetSize.height)
-            } else {
-                null
-            }
+        Expanded -> if (sheetSize.height != 0) {
+            max(0f, screenHeight - sheetSize.height)
+        } else {
+            null
         }
     }
+}
 
 @ExperimentalMaterial3Api
-@Suppress("ktlint:standard:function-naming")
-private fun ModalBottomSheetAnchorChangeHandler(
+@Suppress("KtLint:standard:function-naming")
+private fun modalBottomSheetAnchorChangeHandler(
     state: SheetState,
     animateTo: (target: SheetValue, velocity: Float) -> Unit,
     snapTo: (target: SheetValue) -> Unit,
@@ -361,10 +407,10 @@ private fun ModalBottomSheetAnchorChangeHandler(
     val previousTargetOffset = previousAnchors[previousTarget]
     val newTarget = when (previousTarget) {
         Hidden -> Hidden
-        SheetValue.PartiallyExpanded, Expanded -> {
-            val hasPartiallyExpandedState = newAnchors.containsKey(SheetValue.PartiallyExpanded)
+        PartiallyExpanded, Expanded -> {
+            val hasPartiallyExpandedState = newAnchors.containsKey(PartiallyExpanded)
             val newTarget = if (hasPartiallyExpandedState) {
-                SheetValue.PartiallyExpanded
+                PartiallyExpanded
             } else if (newAnchors.containsKey(Expanded)) {
                 Expanded
             } else {
@@ -405,6 +451,7 @@ internal fun ModalBottomSheetPopup(
     name = "ModalBottomSheet",
 )
 @Composable
+@Suppress("deprecation")
 private fun ModalBottomSheetSample() {
     var openBottomSheet by rememberSaveable { mutableStateOf(false) }
     var skipPartiallyExpanded by remember { mutableStateOf(false) }
@@ -431,20 +478,39 @@ private fun ModalBottomSheetSample() {
             text = "Show Bottom Sheet",
             onClick = { openBottomSheet = !openBottomSheet },
         )
+
+        repeat(10) {
+            ListItem(
+                headlineContent = { Text("Item $it") },
+                leadingContent = {
+                    Icon(
+                        SparkIcons.LikeFill,
+                        contentDescription = "Localized description",
+                    )
+                },
+            )
+        }
     }
 
     // Sheet content
     if (openBottomSheet) {
         ModalBottomSheet(
+            showHandle = true,
             onDismissRequest = { openBottomSheet = false },
             sheetState = bottomSheetState,
         ) {
             LazyColumn {
                 stickyHeader {
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .background(Color.Green),
+                        horizontalArrangement = Arrangement.Center,
+                    ) {
                         // Note: If you provide logic outside of onDismissRequest to remove the sheet,
                         // you must additionally handle intended state cleanup, if any.
                         ButtonFilled(
+                            modifier = Modifier.padding(24.dp),
                             text = "Hide Bottom Sheet",
                             onClick = {
                                 scope.launch { bottomSheetState.hide() }.invokeOnCompletion {

@@ -56,6 +56,7 @@
     <string name="component_textfield_description">The input / text-field component allows users to write in the space provided for the content.</string>
     <string name="component_tokens_description">The tokens are the basis of this Design System and allow each brand to choose its colors, shapes, typos and icons.</string>
     <string name="component_popovers_description">Provides a descriptive message or Info for an Anchor.</string>
+    <string name="component_bottomsheets_description">A bottom sheet is a UI component commonly used in mobile applications to present additional content or options from the bottom of the screen.</string>
     <string name="showkase_home_warning_title">⚠️ Theming don’t work on these!</string>
     <string name="showkase_home_warning_description">These are the previews that the developers have when working on components. They are not exhaustive and are only meant to give you a quick idea of what the component looks like.</string>
     <!--Icon button example-->
