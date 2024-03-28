@@ -33,22 +33,22 @@ import com.adevinta.spark.SparkTheme
  * and [com.adevinta.spark.components.bottomsheet.scaffold.BottomSheetScaffold].
  */
 @Stable
-public object BottomSheetDefaults {
+internal object SheetDefaults {
 
     /**
      * the default color of the container for the bottom sheet.
      */
-    public val ContainerColor: Color
+    val ContainerColor: Color
         @Composable get() = SparkTheme.colors.surface
 
     /** The default color of the scrim overlay for background content. */
-    public val ScrimColor: Color
+    val ScrimColor: Color
         @Composable get() = SparkTheme.colors.scrim
 
-    public val DragHandleHeight: Dp = 4.dp
-    public val DragHandleWidth: Dp = 32.dp
-    public val DragHandleTopPadding: Dp = 8.dp
+    val DragHandleHeight: Dp = 4.dp
+    val DragHandleWidth: Dp = 32.dp
+    val DragHandleTopPadding: Dp = 8.dp
 
-    public val ContentTopPadding: Dp = 24.dp
-    public val ContentTopPaddingNoHandle: Dp = 16.dp
+    val ContentTopPadding: Dp = 24.dp
+    val ContentTopPaddingNoHandle: Dp = 16.dp
 }

@@ -36,11 +36,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
-import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.DragHandleHeight
-import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.DragHandleTopPadding
-import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults.DragHandleWidth
+import com.adevinta.spark.SparkTheme.colors
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.DragHandleHeight
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.DragHandleTopPadding
+import com.adevinta.spark.components.bottomsheet.SheetDefaults.DragHandleWidth
 import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -51,7 +52,7 @@ import com.adevinta.spark.tools.preview.ThemeVariant
 @Composable
 public fun DragHandle(
     modifier: Modifier = Modifier,
-    color: Color = SparkTheme.colors.outline.copy(alpha = SparkTheme.colors.dim1),
+    color: Color = colors.outline.dim1,
 ) {
     val dragHandleDescription = stringResource(id = R.string.spark_drag_handle_a11y)
     Surface(
@@ -77,7 +78,7 @@ internal fun PreviewDragHandle(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        Surface(color = SparkTheme.colors.background) {
+        Surface(color = colors.background) {
             Box(modifier = Modifier.padding(4.dp)) {
                 DragHandle()
             }
