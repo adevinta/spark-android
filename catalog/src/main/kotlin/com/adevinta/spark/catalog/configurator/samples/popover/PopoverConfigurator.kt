@@ -78,12 +78,16 @@ public val PopoverConfigurator: Configurator = Configurator(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ColumnScope.PopoverSample() {
-    var isDismissButtonEnabled by remember { mutableStateOf(true) }
+    var isDismissButtonEnabled by remember { mutableStateOf(false) }
     var popoverContentExample by remember { mutableStateOf(PopoverContentExamples.TextList) }
     var popoverTriggerExample by remember { mutableStateOf(PopoverTriggerExamples.Button) }
     var intent by remember { mutableStateOf(PopoverIntent.Surface) }
-    val popoverState = rememberTooltipState(isPersistent = true)
+    val popoverState = rememberTooltipState(isPersistent = false)
     val scope = rememberCoroutineScope()
+
+    ConfiguredPopover(scope, intent, popoverState, isDismissButtonEnabled, popoverContentExample, popoverTriggerExample)
+
+    VerticalSpacer(40.dp)
 
     SwitchLabelled(
         checked = isDismissButtonEnabled,
@@ -138,40 +142,38 @@ private fun ColumnScope.PopoverSample() {
                 .fillMaxWidth()
                 .height(48.dp),
         )
-
-        val intents = PopoverIntent.entries
-        var intentExpanded by remember { mutableStateOf(false) }
-        SelectTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = intent.name,
-            onValueChange = {},
-            readOnly = true,
-            label = "Popover Intent",
-            expanded = intentExpanded,
-            onExpandedChange = { intentExpanded = !intentExpanded },
-            onDismissRequest = { intentExpanded = false },
-            dropdownContent = {
-                intents.forEach {
-                    DropdownMenuItem(
-                        text = { Text(it.name) },
-                        onClick = {
-                            intent = it
-                            intentExpanded = false
-                        },
-                    )
-                }
-            },
-        )
-        VerticalSpacer(40.dp)
-
-        ConfiguredPopover(scope, popoverState, isDismissButtonEnabled, popoverContentExample, popoverTriggerExample)
     }
+
+    val intents = PopoverIntent.entries
+    var intentExpanded by remember { mutableStateOf(false) }
+    SelectTextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = intent.name,
+        onValueChange = {},
+        readOnly = true,
+        label = "Popover Intent",
+        expanded = intentExpanded,
+        onExpandedChange = { intentExpanded = !intentExpanded },
+        onDismissRequest = { intentExpanded = false },
+        dropdownContent = {
+            intents.forEach {
+                DropdownMenuItem(
+                    text = { Text(it.name) },
+                    onClick = {
+                        intent = it
+                        intentExpanded = false
+                    },
+                )
+            }
+        },
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ConfiguredPopover(
     scope: CoroutineScope,
+    intent: PopoverIntent,
     popoverState: TooltipState,
     isDismissButtonEnabled: Boolean,
     popoverContentExample: PopoverContentExamples,
@@ -179,6 +181,7 @@ private fun ConfiguredPopover(
 ) {
     Popover(
         popoverState = popoverState,
+        intent = intent,
         popover = {
             when (popoverContentExample) {
                 PopoverContentExamples.TextList -> LazyColumn(

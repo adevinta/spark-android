@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+### Spark
+
+* 🎨 Add a new intent param to the `Popover`
+
+### Catalog App
+
 ## [0.8.0]
 
 _2024-02-28_
