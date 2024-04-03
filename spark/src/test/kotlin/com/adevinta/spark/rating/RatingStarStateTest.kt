@@ -37,6 +37,12 @@ class RatingStarStateTest {
     }
 
     @Test
+    fun testIntInput() {
+        assertEquals(RatingStarState(1), Full)
+        assertEquals(RatingStarState(0), Empty)
+    }
+
+    @Test
     fun testFloatRangeInput() {
         assertEquals(RatingStarState(0.0f), Empty)
         assertEquals(RatingStarState(0.1f), Empty)
