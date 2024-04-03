@@ -109,7 +109,7 @@ lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "li
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 
 # https://github.com/robolectric/robolectric
-robolectric = { module = "org.robolectric:robolectric", version = "4.12" }
+robolectric = { module = "org.robolectric:robolectric", version = "4.12.1" }
 
 slack-lint-compose = { module = "com.slack.lint.compose:compose-lint-checks", version.ref = "slackLint" }
 
