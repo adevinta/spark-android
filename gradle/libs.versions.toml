@@ -3,7 +3,7 @@ accompanist = "0.34.0"
 android-gradlePlugin = "8.3.1"
 androidx-activity = "1.8.2"
 androidx-appCompat = "1.6.1"
-androidx-compose-bom = "2024.02.02"
+androidx-compose-bom = "2024.03.00"
 androidx-compose-compiler = "1.5.11"
 androidx-lifecycle = "2.7.0"
 androidx-navigation = "2.7.7"
@@ -109,7 +109,7 @@ lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "li
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 
 # https://github.com/robolectric/robolectric
-robolectric = { module = "org.robolectric:robolectric", version = "4.11.1" }
+robolectric = { module = "org.robolectric:robolectric", version = "4.12.1" }
 
 slack-lint-compose = { module = "com.slack.lint.compose:compose-lint-checks", version.ref = "slackLint" }
 
