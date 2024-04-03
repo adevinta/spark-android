@@ -29,12 +29,12 @@ import androidx.compose.ui.unit.dp
  */
 public enum class ProgressSizes(public val size: Dp) {
     /**
-     * Small size won't display content inside it and won't be interactive.
+     * Small size won't display content inside it but we don't recommend making it interactive.
      */
     Small(16.dp),
 
     /**
-     * Medium size will display content inside it but won't be interactive.
+     * Medium size will display content inside it but we don't recommend making it interactive.
      */
     Medium(24.dp),
 

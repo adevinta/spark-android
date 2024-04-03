@@ -83,6 +83,26 @@ import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
+/**
+ * [ProgressTrackerRow] is a visual navigation element typically used to display progress or guide user through a multi-step process.
+ * It displays a linear progress as steps, accepts between 2 and 6 steps maximum.
+ *
+ * For the vertical use [ProgressTrackerColumn] instead.
+ *
+ * Each step displays its label via stepLabel. Selection and click are handled.
+ * A step indicator is displayed via StepIndicator for each step. Its state is updated according to selection.
+ *
+ * @property items The list of steps to be displayed in the progress tracker.
+ * @property modifier The modifier to be applied to the progress tracker.
+ * @property intent The intent of the progress tracker, which determines its color scheme. Basic being the default.
+ * @property style The style of the progress tracker, either outlined (default) or tinted.
+ * @property size The size of the progress tracker, either large (default), medium, or small.
+ * @property hasIndicatorContent A boolean value indicating whether the step indicator should show the step index.
+ * @property onStepClick Callback with the step index selected.
+ * @property selectedStep The index of the currently selected step. All steps before this index will be marked as done.
+ *
+ * @see [ProgressTrackerColumn]
+ */
 @Composable
 @ExperimentalSparkApi
 public fun ProgressTrackerRow(
@@ -108,6 +128,26 @@ public fun ProgressTrackerRow(
     )
 }
 
+/**
+ * [ProgressTrackerColumn] is a visual navigation element typically used to display progress or guide user through a multi-step process.
+ * It displays a linear progress as steps, accepts between 2 and 6 steps maximum.
+ *
+ * For the horizontal use [ProgressTrackerColumn] instead.
+ *
+ * Each step displays its label via stepLabel. Selection and click are handled.
+ * A step indicator is displayed via StepIndicator for each step. Its state is updated according to selection.
+ *
+ * @property items The list of steps to be displayed in the progress tracker.
+ * @property modifier The modifier to be applied to the progress tracker.
+ * @property intent The intent of the progress tracker, which determines its color scheme. Basic being the default.
+ * @property style The style of the progress tracker, either outlined (default) or tinted.
+ * @property size The size of the progress tracker, either large (default), medium, or small.
+ * @property hasIndicatorContent A boolean value indicating whether the step indicator should show the step index.
+ * @property onStepClick Callback with the step index selected.
+ * @property selectedStep The index of the currently selected step. All steps before this index will be marked as done.
+ *
+ * @see [ProgressTrackerRow]
+ */
 @Composable
 @ExperimentalSparkApi
 public fun ProgressTrackerColumn(
