@@ -59,7 +59,6 @@ public val RatingsConfigurator: Configurator = Configurator(
     RatingSample()
 }
 
-@Suppress("DEPRECATION")
 @Composable
 private fun ColumnScope.RatingSample() {
     var value by remember { mutableFloatStateOf(3.5f) }
@@ -129,8 +128,7 @@ private enum class RatingSize(val size: Dp) {
 @Composable
 private fun ConfiguredRating(
     modifier: Modifier = Modifier,
-    @FloatRange(from = 0.5, to = 5.0)
-    value: Float,
+    @FloatRange(from = 0.5, to = 5.0) value: Float,
     onRatingChanged: (Int) -> Unit,
     size: Dp = RatingDefault.SmallStarSize,
     enabled: Boolean = true,

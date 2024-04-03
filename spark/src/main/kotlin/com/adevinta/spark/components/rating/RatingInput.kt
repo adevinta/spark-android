@@ -22,7 +22,6 @@
 package com.adevinta.spark.components.rating
 
 import androidx.annotation.IntRange
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
@@ -42,7 +41,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -56,13 +54,17 @@ import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
+ * A rating input component that allows the user to select a rating from 0 to 5.
  *
+ * @param value The current rating value [Int].
+ * @param onRatingChanged The callback that is called when the rating is changed.
+ * @param modifier The modifier to be applied to the layout.
+ * @param enabled Whether the rating input is enabled.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 public fun RatingInput(
-    @IntRange(from = 0, to = 5)
-    value: Int,
+    @IntRange(from = 0, to = 5) value: Int,
     onRatingChanged: (Int) -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -93,10 +95,6 @@ public fun RatingInput(
                 },
                 state = tooltipState,
             ) {
-                val starsAlpha by animateFloatAsState(
-                    targetValue = if (enabled) 1f else SparkTheme.colors.dim5,
-                    label = "Stars Alpha",
-                )
                 Box(
                     modifier = Modifier
                         .minimumInteractiveComponentSize()
@@ -113,12 +111,10 @@ public fun RatingInput(
                                 radius = 48.dp / 2,
                             ),
                         )
-                        .padding(4.dp)
-                        .graphicsLayer {
-                            alpha = starsAlpha
-                        },
+                        .padding(4.dp),
                 ) {
                     RatingStar(
+                        enabled = enabled,
                         state = RatingStarState(starRating),
                         size = 40.dp,
                     )
@@ -145,6 +141,7 @@ internal fun RatingInputPreview(
         RatingInput(value = 1, onRatingChanged = {})
         RatingInput(value = 2, onRatingChanged = {})
         RatingInput(value = 3, onRatingChanged = {})
+        RatingInput(value = 3, onRatingChanged = {}, enabled = false)
         RatingInput(value = 4, onRatingChanged = {})
         RatingInput(value = 5, onRatingChanged = {})
     }
