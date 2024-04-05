@@ -70,7 +70,6 @@ object DefaultTestDevices {
         softButtons = true,
         navigation = Navigation.NONAV,
         released = "October 28, 2021",
-        locale = "en-rXA",
     )
     val Foldable = DeviceConfig(
         screenHeight = 2480,
@@ -87,7 +86,6 @@ object DefaultTestDevices {
         softButtons = true,
         navigation = Navigation.NONAV,
         released = "October 31, 2013",
-        locale = "en-rXA",
     )
 
     /**
@@ -108,7 +106,6 @@ object DefaultTestDevices {
         softButtons = true,
         navigation = Navigation.NONAV,
         released = "December 8, 2015",
-        locale = "en-rXA",
     )
     internal val devices = listOf(Phone, Foldable, Tablet)
 }
