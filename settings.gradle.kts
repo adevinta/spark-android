@@ -25,6 +25,11 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+
+        maven("https://oss.sonatype.org/content/repositories/snapshots/") {
+            name = "maven-snapshots"
+            mavenContent { snapshotsOnly() }
+        }
     }
 }
 
@@ -41,6 +46,11 @@ dependencyResolutionManagement {
             content {
                 includeGroup("androidx.compose.compiler")
             }
+        }
+
+        maven("https://oss.sonatype.org/content/repositories/snapshots/") {
+            name = "maven-snapshots"
+            mavenContent { snapshotsOnly() }
         }
     }
 }

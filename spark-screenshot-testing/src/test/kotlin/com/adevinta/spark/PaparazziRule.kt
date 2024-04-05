@@ -24,7 +24,6 @@ package com.adevinta.spark
 import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import app.cash.paparazzi.RenderExtension
-import app.cash.paparazzi.detectEnvironment
 import com.android.ide.common.rendering.api.SessionParams
 import com.android.resources.Density
 import com.android.resources.Keyboard
@@ -40,7 +39,6 @@ fun paparazziRule(
     deviceConfig: DeviceConfig = DefaultTestDevices.Phone,
     renderExtensions: Set<RenderExtension> = setOf(),
 ) = Paparazzi(
-    environment = patchedEnvironment(),
     deviceConfig = deviceConfig,
     renderingMode = renderingMode,
     renderExtensions = renderExtensions,
@@ -61,7 +59,7 @@ object DefaultTestDevices {
         xdpi = 512,
         ydpi = 512,
         orientation = ScreenOrientation.PORTRAIT,
-        density = Density.DPI_560,
+        density = Density.create(560),
         ratio = ScreenRatio.LONG,
         size = ScreenSize.NORMAL,
         keyboard = Keyboard.NOKEY,
@@ -70,7 +68,6 @@ object DefaultTestDevices {
         softButtons = true,
         navigation = Navigation.NONAV,
         released = "October 28, 2021",
-        locale = "en-rXA",
     )
     val Foldable = DeviceConfig(
         screenHeight = 2480,
@@ -78,7 +75,7 @@ object DefaultTestDevices {
         xdpi = 420,
         ydpi = 420,
         orientation = ScreenOrientation.PORTRAIT,
-        density = Density.DPI_420,
+        density = Density.create(420),
         ratio = ScreenRatio.NOTLONG,
         size = ScreenSize.XLARGE,
         keyboard = Keyboard.NOKEY,
@@ -87,7 +84,6 @@ object DefaultTestDevices {
         softButtons = true,
         navigation = Navigation.NONAV,
         released = "October 31, 2013",
-        locale = "en-rXA",
     )
 
     /**
@@ -108,26 +104,11 @@ object DefaultTestDevices {
         softButtons = true,
         navigation = Navigation.NONAV,
         released = "December 8, 2015",
-        locale = "en-rXA",
     )
     internal val devices = listOf(Phone, Foldable, Tablet)
 }
 
 data class TestDeviceSpecs(val width: Int, val height: Int, val dpi: Int)
-
-/**
- * Lower the current Paparazzi Environment from API level 34 to 33 to work around new resource conflicts:
- *
- * ```
- * SEVERE: resources.format: Hexadecimal color expected, found Color State List for @android:color/system_bar_background_semi_transparent
- * java.lang.NumberFormatException: Color value '/usr/local/lib/android/sdk/platforms/android-34/data/res/color/system_bar_background_semi_transparent.xml' has wrong size. Format is either#AARRGGBB, #RRGGBB, #RGB, or #ARGB
- * ```
- *
- * GitHub issue: https://github.com/cashapp/paparazzi/issues/1025
- */
-internal fun patchedEnvironment() = with(detectEnvironment()) {
-    copy(compileSdkVersion = 33, platformDir = platformDir.replace("34", "33"))
-}
 
 internal const val MaxPercentDifference: Double = 0.01
 internal const val PaparazziTheme: String = "android:Theme.MaterialComponent.Light.NoActionBar"

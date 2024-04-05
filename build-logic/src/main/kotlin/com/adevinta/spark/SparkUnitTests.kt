@@ -97,6 +97,9 @@ internal object SparkUnitTests {
 
     private fun configureTestTasks(project: Project) {
         project.tasks.withType<Test>().configureEach {
+            // Bump max heap space for paparazzi
+            // https://github.com/cashapp/paparazzi/issues/915
+            maxHeapSize = "1g"
             testLogging {
                 showStandardStreams = true
                 showStackTraces = true
