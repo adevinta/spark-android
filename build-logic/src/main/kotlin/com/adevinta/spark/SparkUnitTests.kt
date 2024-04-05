@@ -25,7 +25,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskProvider
 import org.gradle.api.tasks.testing.Test
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat.SHORT
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 import org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED
 import org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED
@@ -100,8 +100,8 @@ internal object SparkUnitTests {
             testLogging {
                 showStandardStreams = true
                 showStackTraces = true
+                exceptionFormat = FULL
                 events(STARTED, PASSED, FAILED, SKIPPED)
-                setExceptionFormat(SHORT)
             }
         }
     }
