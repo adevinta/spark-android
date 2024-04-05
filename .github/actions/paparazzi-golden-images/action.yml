@@ -60,3 +60,4 @@ runs:
       shell: bash
       env:
         INPUT_PR_NUMBER: ${{ inputs.pr-number }}
+        GH_TOKEN: ${{ inputs.github-token }}
