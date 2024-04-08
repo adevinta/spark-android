@@ -70,12 +70,10 @@ dependencies {
     api(libs.androidx.compose.ui)
     api(libs.androidx.compose.ui.text)
     api(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.compose.ui.util)
     api(libs.coilCompose)
     api(libs.kotlinx.collections.immutable)
-
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    debugImplementation(libs.androidx.compose.ui.tooling)
 
     compileOnly(libs.airbnb.showkase)
     ksp(libs.airbnb.showkase.processor)

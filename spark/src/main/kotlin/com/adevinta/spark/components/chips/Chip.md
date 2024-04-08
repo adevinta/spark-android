@@ -14,7 +14,6 @@ Most commonly chip contains an optional `leadingIcon` and the text.
 
 The chip can have one of the [ChipStyles](ChipStyles.kt):
 - [Outlined](ChipOutlined.kt) - using a solid border stroke and no background
-- [Filled](ChipFilled.kt) - using a solid color for the background
 - [Tinted](ChipTinted.kt) - using one of the "containers" colors
 - [Dashed](ChipDashed.kt) - using a dashed border and no background
 
@@ -33,82 +32,97 @@ The color is set using one of the [ChipIntent](ChipIntent.kt)s:
 | Style    | Light                                                                                                        | Dark                                                                                                        |
 |----------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | Outlined | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_light.png) | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsoutlined_dark.png) |
-| Filled   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsfilled_dark.png)   |
 | Tinted   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipstinted_dark.png)   |
 | Dashed   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_light.png)   | ![](../../images/com.adevinta.spark_PreviewScreenshotTests_preview_tests_chips_chipsdashed_dark.png)   |
 
 
 To draw a chip with an optional leading icon and text.
 ```kotlin
-fun ChipOutlined(
-    text: String,
-    modifier: Modifier = Modifier,
-    intent: ChipIntent = ChipIntent.Basic,
-    enabled: Boolean = true,
-    leadingIcon: SparkIcon? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    onClick: () -> Unit = {},
-)
-```
-
-To draw a chip that only contains an icon:
-
-```kotlin
-fun ChipOutlined(
-    icon: SparkIcon,
-    intent: ChipIntent = ChipIntent.Basic,
-    contentDescription: String,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    onClick: () -> Unit = {},
+ChipOutlined(
+    text = "default chip",
+    leadingIcon = SparkIcons.CalendarOutline,
+    onClick = {},
 )
 ```
 
 To pass a custom content:
 
 ```kotlin
-fun ChipOutlined(
-    intent: ChipIntent = ChipIntent.Basic,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    onClick: () -> Unit = {},
-    content: @Composable RowScope.() -> Unit,
-)
+ChipSelectable(
+    onClick = {},
+) {
+    Text(text = "Animals")
+    Icon(
+        sparkIcon = SparkIcons.ArrowHorizontalUp,
+        modifier = Modifier.size(12.dp),
+        contentDescription = null,
+        tint = LocalContentColor.current,
+    )
+}
 ```
 
 ### Handling selection
-Chips in Spark don’t control the selected style when grouped.
-However, you can use a simple if-else to handle the selected state style:
+Chips support selection with the ChipSelectable Variant.
 
-```kotlin
-var selected by rememberSaveable {
-    mutableStateOf(false)
-}
-// 1st option
-if (selected.not())
-    ChipOutlined("Chip", intent) {
-        selected = !selected
-    }
-else
-    ChipFilled("Chip", intent, leadingIcon = SparkIcons.Check) {
-        selected = !selected
-    }
-// 2nd option
-Chip(
-    style = if (selected) ChipStyles.Filled else ChipStyles.Tinted,
-    intent = if (selected) ChipIntent.Success else ChipIntent.Danger,
-    onClick = { selected = !selected },
-    text = "Chip",
-    leadingIcon = if (selected) SparkIcons.Check else null
-)
-```
+#### Single selection
+You'll need to add the `selectableGroup` modifier to the parent container of the chips.
 
-To correctly handle selectable state, pass the following modifier to components 
+and specify the `Role.RadioButton` semantics for each chip to indicate that only one of the chip
+can be selected at a time.
  ```kotlin
 fun Modifier.semantics {
-    this.selected = selected
-    this.role = Role.Tab // TODO: choose a correct role relevant for your use case
+    this.role = Role.RadioButton
+}
+```
+```kotlin
+val filters by remember {
+    mutableStateOf(
+        persistentListOf("Fruit","Vegetable"),
+    )
+}
+var singleSelected by remember { mutableStateOf("Fruit") }
+FlowRow(
+    horizontalArrangement = spacedBy(8.dp),
+    modifier = Modifier.selectableGroup()
+) {
+    filters.forEach { filter ->
+        ChipSelectable(
+            modifier = Modifier.semantics {
+                role = Role.RadioButton
+            },
+            text = filter,
+            selected = singleSelected == filter,
+            onClick = { singleSelected = filter },
+        )
+    }
+}
+```
+
+#### Multiple selection
+```kotlin
+val filters by remember {
+    mutableStateOf(
+        persistentListOf("Animal","Flower","Tree")
+    )
+}
+var selectedFilters by remember { mutableStateOf(listOf("Animal", "Tree")) }
+FlowRow(
+    horizontalArrangement = spacedBy(8.dp),
+) {
+    filters.forEach { filter ->
+        val selected = filter in selectedFilters
+        ChipSelectable(
+            text = filter.name,
+            selected = selected,
+            leadingIcon = if (selected) SparkIcons.Check else null,
+            onClick = {
+                unionSelected = if (selected) {
+                    selectedFilters - filter
+                } else {
+                    selectedFilters + filter
+                }
+            },
+        )
+    }
 }
 ```

@@ -23,7 +23,7 @@ val options = listOf("Option 1", "Option 2", "Option 3", "Option 4", "Option 5")
 var expanded by remember { mutableStateOf(false) }
 var selectedOptionText by remember { mutableStateOf(options[0]) }
 SelectTextField(
-    value = selectedOptionText,
+    value = selectedOptionsText,
     label = "label",
     onValueChange = {},
     onDismissRequest = {
