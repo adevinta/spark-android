@@ -21,6 +21,16 @@
  */
 package com.adevinta.spark.components.progress.tracker
 
+import androidx.compose.ui.text.AnnotatedString
+
+/**
+ * Step in the [ProgressTrackerRow] & [ProgressTrackerColumn] component.
+ * Each step has a label and a enabled state.
+ *
+ * @property label The label of the step to be displayed in the progress tracker. [AnnotatedString]s will be styled but
+ * other class inheriting from [CharSequence] will be displayed as plain text.
+ * @property enabled Indicate whether the step is enabled or disabled. Disabled steps won't be interactive.
+ */
 public data class ProgressStep(
     public val label: CharSequence,
     public val enabled: Boolean,

@@ -22,16 +22,20 @@
 package com.adevinta.spark.components.progress.tracker
 
 /**
- * Defines the different sizes of the progress indicator
+ * Represents the different styles of the progress tracker component and determine the visual appearance.
+ * There are two possible styles: tinted with [Tinted] or outlined with [Outlined].
+ *
+ * @property Tinted This style represents a tinted progress tracker. It is typically used when the progress tracker needs to be more visually prominent.
+ * @property Outlined This style represents an outlined progress tracker. It is typically used when the progress tracker needs to be less visually prominent.
  */
 public enum class ProgressStyles {
     /**
-     * Small size won't display content inside it and won't be interactive.
+     * This style represents a tinted progress tracker. It is typically used when the progress tracker needs to be more visually prominent.
      */
     Tinted,
 
     /**
-     * Medium size will display content inside it but won't be interactive.
+     * This style represents an outlined progress tracker. It is typically used when the progress tracker needs to be less visually prominent.
      */
     Outlined,
 }

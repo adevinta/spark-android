@@ -111,3 +111,19 @@ jobs:
         with:
           name: dokka
           path: 'build/dokka'
+
+  lava-scan:
+    needs: validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: '🌋 Run Lava Vulnerability Scanner'
+        uses: adevinta/lava-action@f17aca18892d462a617c96f367567c914a3afbe9 # v0
+        with:
+          version: latest
+          config: lava.yaml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lava-metrics.json
+          path: metrics.json
