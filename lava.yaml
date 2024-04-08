@@ -1,0 +1,12 @@
+lava: v0.0.0
+checktypes:
+  - https://github.com/adevinta/lava-resources/releases/download/checktypes/v0/checktypes.json
+targets:
+  - identifier: .
+    type: GitRepository
+agent:
+  parallel: 4
+report:
+  severity: low
+  metrics: metrics.json
+log: warn
