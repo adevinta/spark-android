@@ -26,7 +26,7 @@
 
     <string name="spark_back_arrow_content_description">Zurück</string>
 
-    <!--Rating-->
+    <!--region Rating-->
     <plurals name="spark_rating_with_comments_a11y">
         <item quantity="one">%1$.1f Durchschnittsbewertung aus %2$d Bewertung</item>
         <item quantity="other">%1$.1f Durchschnittsbewertung aus %2$d Bewertungen</item>
@@ -36,19 +36,22 @@
         <item quantity="other">%d Bewertungen</item>
     </plurals>
     <string name="spark_rating_a11y">%1$.1f Durchschnittsbewertung</string>
+    <!--endregion-->
 
     <string name="spark_user_avatar_content_description">Profilfoto</string>
 
-    <!--Badge-->
+    <!--region Badge-->
     <string name="spark_exceed_max_badge_number_a11y">Mehr als %1$d neue Mitteilungen</string>
     <string name="spark_badge_numberless_a11y">Neue Mitteilung</string>
     <plurals name="spark_badge_a11y">
         <item quantity="one">%d neue Mitteilung</item>
         <item quantity="other">%d neue Mitteilungen</item>
     </plurals>
+    <!--endregion-->
 
-    <!--TextField-->
+    <!--region TextField-->
     <string name="spark_textfield_content_description">Pflichtfeld</string>
     <string name="spark_textfield_delete_a11y">Löschen</string>
+    <!--endregion-->
 
 </resources>
