@@ -21,7 +21,7 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
   -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:locale="en">
     <string name="app_name">Spark</string>
     <string name="showkase_browser_show_documentation">Show Documentation</string>
     <string name="showkase_browser_hide_documentation">Hide Documentation</string>
@@ -42,17 +42,23 @@
     <string name="examples_component_screen_title">Components examples</string>
     <string name="examples_component_screen_description">These are the examples that can be found in the samples in the javadoc or the README.md files. They show usages of the components with the default params in different scenarios that should represent real use cases.</string>
     <string name="component_button_description">Buttons help people initiate actions, like sending an email, sharing a document,or liking a post.</string>
-    <!--Toggle example-->
+    <!--region Toggle-->
     <string name="component_toggle_vertical_group_title">Toggle grouping with vertical alignment</string>
     <string name="component_toggle_horizontal_group_title">Toggle grouping with horizontal alignment</string>
-    <!--Checkbox example-->
+    <string name="configurator_component_checkbox_toggleable_state_label">Toggleable State</string>
+    <string name="configurator_component_toggle_content_side_label">Content Side</string>
+    <string name="configurator_component_toggle_placeholder_label">Toggle label</string>
+    <!--endregion-->
+    <!--region Checkbox-->
     <string name="component_checkbox_description">Checkboxes are used when there are multiple items to select in a list. Users can select zero, one, or any number of items.</string>
     <string name="component_checkbox_content_side_example_label">This is an example of a multi-line text which is very long and in which the user should read all the information.</string>
     <string name="component_checkbox_group_example_group_label">Notifications and emails</string>
     <string name="component_checkbox_group_example_option1_label">Notifications</string>
     <string name="component_checkbox_group_example_option2_label">Email</string>
+    <!--endregion-->
     <!--Chips example-->
     <string name="component_chips_description">Chips help users quickly recognize an important information that has been entered by them, trigger actions, make selections, or filter content.</string>
+    <!--endregion-->
 
     <string name="component_dialog_description">A dialog is a modal window that appears in front of content to provide critical information or ask for a decision.</string>
     <string name="component_tab_description">Tabs are used to group different but related content, allowing users to navigate views without leaving the page. They always contain at least two items and one tab is active at a time.</string>
@@ -61,21 +67,27 @@
     <string name="component_popovers_description">Provides a descriptive message or Info for an Anchor.</string>
     <string name="showkase_home_warning_title">⚠️ Theming don’t work on these!</string>
     <string name="showkase_home_warning_description">These are the previews that the developers have when working on components. They are not exhaustive and are only meant to give you a quick idea of what the component looks like.</string>
-    <!--Icon button example-->
+    <!--region Icon button-->
     <string name="component_iconbutton_description">Icon buttons help people take supplementary actions with a single tap. They’re used when a compact button is required, such as in a toolbar or image list.</string>
-    <!--Icon Toggle button example-->
+    <!--endregion-->
+    <!--region Icon Toggle button-->
     <string name="component_icontogglebutton_description">Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a compact button is required, such as in a toolbar or image list.</string>
-    <!--Radio button example-->
+    <!--endregion-->
+    <!--region Radio button-->
     <string name="component_radiobutton_description">Component used when only one choice may be selected in a series of options.</string>
-    <!--rating example-->
+    <!--endregion-->
+    <!--region rating-->
     <string name="component_ratingdisplay_description">Ratings let users see and/or set a star rating for a user or experience.</string>
-    <!--Switch example-->
+    <!--endregion-->
+    <!--region Switch-->
     <string name="component_switch_description">Switch component allows the user to activate or deactivate the state of an element or concept. It is also used to control binary options (On/Off or True/False).</string>
+    <!--endregion-->
     <string name="component_progressbar_description">The progress bar component is used to display the length and your progression inside the process or to express a waiting time. This waiting time can be either determinate or indeterminate..</string>
     <string name="component_tag_description">Tags are used to label content and help users quickly recognize info about them: Categories, Status… Can be applied with different colors and designs that are associated with a content due to its characteristics: new content, unvisited content, featured content… Users can’t interact with Tags.</string>
 
-    <!-- Progress Tracker   -->
+    <!--region Progress Tracker-->
     <string name="component_progresstracker_description">A progress tracker component is a visual navigation element typically used to display progress or guide user through a multi-step process.</string>
+    <!--endregion-->
 
     <string name="component_textlink_description">A TextLink is a reference to a resource. It can be external (e.g. a different web page) or internal (e.g. a specific element in the current page).</string>
 
@@ -87,10 +99,6 @@
     <string name="configurator_component_screen_rounded_label">Rounded Corners</string>
     <string name="configurator_component_screen_textfield_label">Label</string>
     <string name="configurator_component_screen_intent_label">Intent</string>
-    <!--Toggle configurator-->
-    <string name="configurator_component_checkbox_toggleable_state_label">Toggleable State</string>
-    <string name="configurator_component_toggle_content_side_label">Content Side</string>
-    <string name="configurator_component_toggle_placeholder_label">Toggle label</string>
 
     <string name="component_menu_guidlines">View design guidelines</string>
     <string name="component_menu_dev_docs">View developer docs</string>

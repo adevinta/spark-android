@@ -26,7 +26,7 @@
 
     <string name="spark_back_arrow_content_description">Go back</string>
 
-    <!--Rating-->
+    <!--region Rating-->
     <string name="spark_rating_label" translatable="false">(%d)</string>
     <plurals name="spark_rating_with_comments_a11y">
         <item quantity="one">Rating of %1$.1f based on %2$d review</item>
@@ -37,22 +37,25 @@
         <item quantity="other">%d reviews</item>
     </plurals>
     <string name="spark_rating_a11y">Rating of %1$.1f</string>
+    <!--endregion-->
 
     <string name="spark_user_avatar_content_description">Profile photo</string>
 
-    <!--Badge-->
+    <!--region Badge-->
     <string name="spark_exceed_max_badge_number_a11y" tools:ignore="PluralsCandidate" description="Plural form content description for when the number of new notifications exceeds a maximum count[CHAR_LIMIT=NONE]">More than <xliff:g example="999" id="maximum number">%1$d</xliff:g> new notifications</string>
     <string name="spark_badge_numberless_a11y" description="Content description for new notification (no number count) [CHAR_LIMIT=NONE]">New notification</string>
     <plurals name="spark_badge_a11y" description="Plural form content description for number of new notifications [CHAR_LIMIT=NONE]">
         <item quantity="one"><xliff:g id="count">%d</xliff:g> new notification</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> new notifications</item>
     </plurals>
+    <!--endregion-->
 
     <string name="spark_annotatedStringResource_test"><b>Best</b> <annotation typography="large">practices</annotation> <p dir="rtl">for text on</p> <i><annotation color="main">Android</annotation></i></string>
     <string name="spark_annotatedStringResource_test_args">Hello, <b><annotation color="main" typography="large" variable="who">who</annotation></b>!</string>
 
-    <!--Rating-->
+    <!--region Rating-->
     <string name="spark_textfield_content_description">Mandatory</string>
     <string name="spark_textfield_delete_a11y">Cancel</string>
+    <!--endregion-->
 
 </resources>
