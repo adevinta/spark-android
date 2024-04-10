@@ -151,7 +151,7 @@ internal fun SparkImage(
  * into the destination. The default is [FilterQuality.Low] which scales using a bilinear
  * sampling algorithm
  * @param loadingPlaceholder Placeholder used when the image is loading. You can use a different one in special cases
-like when the image is displayed in fullscreen for example.
+ * like when the image is displayed in fullscreen for example.
  */
 @Composable
 public fun Image(
