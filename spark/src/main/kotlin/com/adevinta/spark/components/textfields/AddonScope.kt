@@ -54,6 +54,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.ExperimentalSparkApi
@@ -330,7 +331,7 @@ private fun TextFieldWithDropdownPreview() {
     }
 }
 
-@Preview
+@PreviewFontScale
 @Composable
 private fun TextFieldWithButtonPreview() {
     var isLoading by remember { mutableStateOf(false) }

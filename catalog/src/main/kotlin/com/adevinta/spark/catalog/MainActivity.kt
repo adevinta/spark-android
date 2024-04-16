@@ -51,7 +51,7 @@ public class MainActivity : AppCompatActivity() {
             val propertiesHandler = ThemePropertiesHandler(context = this@MainActivity)
             val theme by propertiesHandler
                 .properties
-                .collectAsStateWithDefault()
+                .collectAsStateWithDefault(this@MainActivity)
 
             if (groupedComponentsList.isNotEmpty()) {
                 CatalogApp(
