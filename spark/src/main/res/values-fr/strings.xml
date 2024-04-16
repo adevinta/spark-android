@@ -29,7 +29,7 @@
 
     <string name="spark_back_arrow_content_description">Retour en arrière</string>
 
-    <!--Rating-->
+    <!--region Rating-->
     <plurals name="spark_rating_with_comments_a11y" tools:ignore="UnusedQuantity">
         <item quantity="one">Note de %1$.1f pour %2$d avis</item>
         <item quantity="other">Note de %1$.1f pour %2$d avis</item>
@@ -41,10 +41,11 @@
         <item quantity="many">%d d’avis</item>
     </plurals>
     <string name="spark_rating_a11y">Note de %1$.1f</string>
+    <!--endregion-->
 
     <string name="spark_user_avatar_content_description">Photo de profil</string>
 
-    <!--Badge-->
+    <!--region Badge-->
     <string name="spark_exceed_max_badge_number_a11y">Plus de %1$d nouvelles notifications</string>
     <string name="spark_badge_numberless_a11y">Nouvelle notification</string>
     <plurals name="spark_badge_a11y" tools:ignore="UnusedQuantity">
@@ -52,13 +53,15 @@
         <item quantity="other">%d nouvelles notifications</item>
         <item quantity="many">%d de nouvelles notifications</item>
     </plurals>
+    <!--endregion-->
 
     <string name="spark_annotatedStringResource_test">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> pour les textes sur <i><annotation color="main">Android</annotation></i></string>
     <string name="spark_annotatedStringResource_test_args">Salut, <b><annotation variable="who" typography="large" color="main">who</annotation></b>!</string>
 
-    <!--Rating-->
+    <!--region Rating-->
     <string name="spark_textfield_content_description">Obligatoire</string>
     <string name="spark_textfield_delete_a11y">Tout supprimer</string>
     <string name="spark_drag_handle_a11y">Poignée de déplacement</string>
+    <!--endregion-->
 
 </resources>
