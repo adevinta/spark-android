@@ -46,7 +46,7 @@ jobs:
 
       - name: '👷 Build'
         id: build
-        run: ./gradlew assembleRelease -Pksp.useKSP2=${{ matrix.useKSP2 }} -Pandroid.lint.useK2Uast=${{ matrix.useK2Uast }} -Pandroid.experimental.lint.version=8.5.0-alpha02
+        run: ./gradlew assembleRelease -Pksp.useKSP2=${{ matrix.useKSP2 }} -Pandroid.lint.useK2Uast=${{ matrix.useK2Uast }} -Pandroid.experimental.lint.version=8.5.0-alpha05
       - name: '📦 Archive APKs'
         uses: actions/upload-artifact@v4
         with:
@@ -63,7 +63,7 @@ jobs:
 
       - name: '🧑‍🔬 Test'
         id: test
-        run: ./gradlew globalCiUnitTest verifyPaparazziRelease -Pksp.useKSP2=${{ matrix.useKSP2 }} -Pandroid.lint.useK2Uast=${{ matrix.useK2Uast }} -Pandroid.experimental.lint.version=8.5.0-alpha02
+        run: ./gradlew globalCiUnitTest verifyPaparazziRelease -Pksp.useKSP2=${{ matrix.useKSP2 }} -Pandroid.lint.useK2Uast=${{ matrix.useK2Uast }} -Pandroid.experimental.lint.version=8.5.0-alpha05
       - name: '📦 Archive JUnit reports'
         if: ${{ false }}
         uses: ./.github/actions/archive-junit-reports
@@ -83,7 +83,7 @@ jobs:
 
       - name: '🕵️ Lint'
         id: lint
-        run: ./gradlew lintRelease -Pksp.useKSP2=${{ matrix.useKSP2 }} -Pandroid.lint.useK2Uast=${{ matrix.useK2Uast }} -Pandroid.experimental.lint.version=8.5.0-alpha02
+        run: ./gradlew lintRelease -Pksp.useKSP2=${{ matrix.useKSP2 }} -Pandroid.lint.useK2Uast=${{ matrix.useK2Uast }} -Pandroid.experimental.lint.version=8.5.0-alpha05
       - name: '📦 Archive Lint reports'
         if: ${{ false }}
         uses: ./.github/actions/archive-lint-reports
