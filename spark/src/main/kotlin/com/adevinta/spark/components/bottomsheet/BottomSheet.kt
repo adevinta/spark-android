@@ -25,20 +25,22 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.BottomSheetDefaults.Elevation
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.BottomSheetDefaults.ExpandedShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ModalBottomSheetDefaults
+import androidx.compose.material3.ModalBottomSheetProperties
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,12 +53,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPadding
 import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPaddingNoHandle
-import com.adevinta.spark.components.bottomsheet.handle.DragHandle
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.list.ListItem
@@ -97,18 +96,18 @@ import kotlinx.coroutines.launch
 public fun BottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-    showHandle: Boolean = true,
-    contentTopPadding: Dp = if (showHandle) ContentTopPadding else ContentTopPaddingNoHandle,
     sheetState: SheetState = rememberModalBottomSheetState(),
-    content: @Composable BoxScope.() -> Unit,
+    dragHandle: @Composable (() -> Unit)? = {
+        DragHandle()
+    },
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     SparkModalBottomSheet(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
         sheetState = sheetState,
         content = content,
-        contentTopPadding = contentTopPadding,
-        showHandle = showHandle,
+        dragHandle = dragHandle,
     )
 }
 
@@ -142,20 +141,18 @@ public fun BottomSheet(
 @Composable
 @ExperimentalMaterial3Api
 internal fun SparkModalBottomSheet(
-    contentTopPadding: Dp,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-    showHandle: Boolean = true,
     sheetState: SheetState = rememberModalBottomSheetState(),
     shape: Shape = ExpandedShape,
     containerColor: Color = SheetDefaults.ContainerColor,
     contentColor: Color = contentColorFor(containerColor),
-    tonalElevation: Dp = Elevation,
-    scrimColor: Color = SheetDefaults.ScrimColor.copy(alpha = SparkTheme.colors.dim1),
     dragHandle: @Composable (() -> Unit)? = {
-        if (showHandle) DragHandle()
+        DragHandle()
     },
-    content: @Composable BoxScope.() -> Unit,
+    windowInsets: WindowInsets = BottomSheetDefaults.windowInsets,
+    properties: ModalBottomSheetProperties = ModalBottomSheetDefaults.properties(),
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     androidx.compose.material3.ModalBottomSheet(
         onDismissRequest = onDismissRequest,
@@ -164,25 +161,23 @@ internal fun SparkModalBottomSheet(
         shape = shape,
         containerColor = containerColor,
         contentColor = contentColor,
-        tonalElevation = tonalElevation,
-        scrimColor = scrimColor,
+        windowInsets = windowInsets,
+        properties = properties,
         dragHandle = null,
     ) {
         Box {
-            Box(modifier = Modifier.padding(top = contentTopPadding)) {
+            Column(
+                modifier = Modifier.padding(
+                    top = if (dragHandle != null) ContentTopPadding else ContentTopPaddingNoHandle,
+                ),
+            ) {
                 content()
             }
-            Box(contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxWidth()) {
-                if (dragHandle != null) {
+            if (dragHandle != null) {
+                Box(contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxWidth()) {
                     dragHandle()
                 }
             }
-        }
-    }
-
-    if (sheetState.hasExpandedState) {
-        LaunchedEffect(sheetState) {
-            sheetState.show()
         }
     }
 }
@@ -221,7 +216,6 @@ private fun ModalBottomSheetSample() {
 
     if (openBottomSheet) {
         BottomSheet(
-            showHandle = true,
             onDismissRequest = { openBottomSheet = false },
             sheetState = bottomSheetState,
         ) {

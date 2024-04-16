@@ -64,10 +64,10 @@ import androidx.compose.ui.zIndex
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.backdrop.BackdropValue.Concealed
 import com.adevinta.spark.catalog.backdrop.BackdropValue.Revealed
-import com.adevinta.spark.components.bottomsheet.layout.PreUpPostDownNestedScrollConnection
-import com.adevinta.spark.components.bottomsheet.layout.SwipeableDefaults
-import com.adevinta.spark.components.bottomsheet.layout.SwipeableState
-import com.adevinta.spark.components.bottomsheet.layout.swipeable
+import com.adevinta.spark.components.bottomsheet.PreUpPostDownNestedScrollConnection
+import com.adevinta.spark.components.bottomsheet.SwipeableDefaults
+import com.adevinta.spark.components.bottomsheet.SwipeableState
+import com.adevinta.spark.components.bottomsheet.swipeable
 import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.surface.Surface

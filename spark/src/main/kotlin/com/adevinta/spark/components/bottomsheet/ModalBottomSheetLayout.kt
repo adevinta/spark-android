@@ -63,11 +63,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.bottomsheet.handle.DragHandle
-import com.adevinta.spark.components.bottomsheet.layout.PreUpPostDownNestedScrollConnection
-import com.adevinta.spark.components.bottomsheet.layout.SwipeableDefaults
-import com.adevinta.spark.components.bottomsheet.layout.SwipeableState
-import com.adevinta.spark.components.bottomsheet.layout.swipeable
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.res.resources
 import com.adevinta.spark.tokens.contentColorFor
@@ -82,9 +77,9 @@ import kotlin.math.roundToInt
  */
 @ExperimentalMaterial3Api
 @Deprecated(
-    message = "Use [SheetState] instead.",
+    message = "Use [SheetValue] instead.",
     level = DeprecationLevel.WARNING,
-    replaceWith = ReplaceWith("SheetState", "androidx.compose.material3.SheetState"),
+    replaceWith = ReplaceWith("SheetValue", "androidx.compose.material3.SheetValue"),
 )
 public enum class ModalBottomSheetValue {
     /**
@@ -208,7 +203,7 @@ public class ModalBottomSheetState(
         /**
          * The default [Saver] implementation for [ModalBottomSheetState].
          */
-        @Suppress("ktlint:standard:function-naming", "DEPRECATION")
+        @Suppress("ktlint:standard:function-naming")
         public fun Saver(
             animationSpec: AnimationSpec<Float>,
             skipHalfExpanded: Boolean,
@@ -242,6 +237,13 @@ public class ModalBottomSheetState(
  */
 @Composable
 @ExperimentalMaterial3Api
+@Deprecated(
+    message = "Use one of the options: [BottomSheet] , [BottomSheetScaffold]",
+    replaceWith = ReplaceWith(
+        "rememberModalBottomSheetState(initialValue,skipHalfExpanded,confirmStateChange)",
+        "androidx.compose.material3.rememberModalBottomSheetState",
+    ),
+)
 @Suppress("DEPRECATION")
 public fun rememberModalBottomSheetState(
     initialValue: ModalBottomSheetValue,

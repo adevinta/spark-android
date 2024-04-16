@@ -49,6 +49,7 @@ import com.adevinta.spark.catalog.configurator.samples.bottomsheet.BottomSheetCo
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SparkSampleSourceUrl
 import com.adevinta.spark.components.bottomsheet.BottomSheet
+import com.adevinta.spark.components.bottomsheet.DragHandle
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.icons.Icon
@@ -181,11 +182,11 @@ private fun ConfiguredBottomSheet(
                     BottomSheetContentExamples.List -> ListContent(onHideBottomSheetClicked)
                 }
             },
-            contentTopPadding = when (bottomSheetContentExample) {
-                BottomSheetContentExamples.Image -> 0.dp
-                else -> if (isDragHandlerEnabled) 24.dp else 16.dp
+            dragHandle = if (isDragHandlerEnabled) {
+                { DragHandle() }
+            } else {
+                null
             },
-            showHandle = isDragHandlerEnabled,
             onDismissRequest = onDismissRequest,
             sheetState = bottomSheetState,
         )

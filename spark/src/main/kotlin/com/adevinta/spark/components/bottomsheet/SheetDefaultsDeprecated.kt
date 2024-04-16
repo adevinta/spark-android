@@ -41,8 +41,6 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.bottomsheet.SheetValue.Expanded
 import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
 import com.adevinta.spark.components.bottomsheet.SheetValue.PartiallyExpanded
-import com.adevinta.spark.components.bottomsheet.layout.SwipeableV2Defaults
-import com.adevinta.spark.components.bottomsheet.layout.SwipeableV2State
 import kotlinx.coroutines.CancellationException
 
 /**
@@ -314,7 +312,7 @@ public object BottomSheetDefaults {
         ),
     )
     public fun DragHandle(modifier: Modifier = Modifier) {
-        com.adevinta.spark.components.bottomsheet.handle.DragHandle(modifier)
+        com.adevinta.spark.components.bottomsheet.DragHandle(modifier)
     }
 }
 

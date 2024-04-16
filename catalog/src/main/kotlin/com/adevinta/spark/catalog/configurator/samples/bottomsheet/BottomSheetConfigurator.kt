@@ -32,13 +32,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -47,16 +45,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.bottomsheet.BottomSheet
+import com.adevinta.spark.components.bottomsheet.DragHandle
 import com.adevinta.spark.components.buttons.ButtonFilled
+import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.image.Image
@@ -64,13 +60,13 @@ import com.adevinta.spark.components.list.ListItem
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.text.TextLinkButton
 import com.adevinta.spark.components.textfields.SelectTextField
-import com.adevinta.spark.components.textfields.TextField
-import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Store
+import com.adevinta.spark.tokens.highlight
 import kotlinx.coroutines.launch
 
 public val BottomSheetConfigurator: Configurator = Configurator(
@@ -88,8 +84,6 @@ private fun ColumnScope.BottomSheetSample() {
     var openBottomSheet by rememberSaveable { mutableStateOf(false) }
     var skipPartiallyExpanded by remember { mutableStateOf(false) }
     var bottomSheetContentExample by remember { mutableStateOf(BottomSheetContentExamples.Text) }
-    val state: TextFieldState? by remember { mutableStateOf(null) }
-    var topPadding by remember { mutableIntStateOf(0) }
 
     val bottomSheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = skipPartiallyExpanded,
@@ -120,21 +114,17 @@ private fun ColumnScope.BottomSheetSample() {
         )
     }
 
-    TextField(
-        modifier = Modifier.fillMaxWidth(),
-        value = topPadding.toString(),
-        onValueChange = {
-            topPadding = try {
-                it.toInt()
-            } catch (e: NumberFormatException) {
-                0
-            }
+    SwitchLabelled(
+        checked = skipPartiallyExpanded,
+        onCheckedChange = {
+            skipPartiallyExpanded = it
         },
-        label = "Change Top Padding (Px)",
-        helper = "Type to change content top padding",
-        state = state,
-        keyboardOptions = KeyboardOptions().copy(keyboardType = KeyboardType.Number),
-    )
+    ) {
+        Text(
+            text = "Skip Partially Expanded",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
 
     val contentExamples = BottomSheetContentExamples.entries.toTypedArray()
     var expanded by remember { mutableStateOf(false) }
@@ -168,7 +158,6 @@ private fun ColumnScope.BottomSheetSample() {
     )
 
     ConfiguredBottomSheet(
-        contentTopPadding = topPadding.dp,
         bottomSheetContentExample = bottomSheetContentExample,
         openBottomSheet = openBottomSheet,
         isDragHandlerEnabled = isDragHandlerEnabled,
@@ -193,12 +182,14 @@ private fun ConfiguredBottomSheet(
     onDismissRequest: () -> Unit,
     onHideBottomSheetClicked: () -> Unit,
     bottomSheetState: SheetState,
-    contentTopPadding: Dp,
 ) {
     if (openBottomSheet) {
         BottomSheet(
-            contentTopPadding = contentTopPadding,
-            showHandle = isDragHandlerEnabled,
+            dragHandle = if (isDragHandlerEnabled) {
+                { DragHandle() }
+            } else {
+                null
+            },
             onDismissRequest = onDismissRequest,
             sheetState = bottomSheetState,
         ) {
@@ -248,18 +239,17 @@ private fun TextContent() {
         Text(
             text = "Title",
             modifier = Modifier.padding(bottom = 16.dp),
-            style = SparkTheme.typography.headline1.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.headline1.highlight,
         )
         Text(
             text = "Do you want to have this cookie now?",
             modifier = Modifier.padding(bottom = 16.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.body2.highlight,
         )
-        Text(
+        TextLinkButton(
             text = "Text Link",
-            textDecoration = TextDecoration.Underline,
-            style = SparkTheme.typography.body1.copy(fontWeight = FontWeight.Bold)
-                .copy(color = SparkTheme.colors.accent),
+            onClick = {},
+            intent = ButtonIntent.Alert,
         )
     }
 }

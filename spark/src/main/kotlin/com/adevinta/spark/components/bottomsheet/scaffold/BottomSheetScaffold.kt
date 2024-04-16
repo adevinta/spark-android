@@ -33,8 +33,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.BottomSheetDefaults.ContainerColor
-import androidx.compose.material3.BottomSheetDefaults.SheetPeekHeight
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
@@ -44,19 +42,16 @@ import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults
+import com.adevinta.spark.components.bottomsheet.DragHandle
 import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPadding
 import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPaddingNoHandle
-import com.adevinta.spark.components.bottomsheet.handle.DragHandle
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.list.ListItem
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tokens.contentColorFor
 
 /**
  *  BottomSheetScaffold is a composable that implements a scaffold with a bottom sheet.
@@ -83,25 +78,25 @@ public fun BottomSheetScaffold(
     sheetContent: @Composable BoxScope.() -> Unit,
     modifier: Modifier = Modifier,
     scaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState(),
-    showHandle: Boolean = true,
-    sheetContentTopPadding: Dp = if (showHandle) ContentTopPadding else ContentTopPaddingNoHandle,
-    screenContentPadding: Dp = ContentTopPadding,
     sheetSwipeEnabled: Boolean = true,
+    sheetDragHandle: @Composable (() -> Unit)? = { DragHandle() },
     topBar: @Composable (() -> Unit)? = null,
     snackbarHost: @Composable (androidx.compose.material3.SnackbarHostState) -> Unit = {
-        androidx.compose.material3.SnackbarHost(
-            it,
-        )
+        androidx.compose.material3.SnackbarHost(it)
     },
     content: @Composable (PaddingValues) -> Unit,
 ) {
     androidx.compose.material3.BottomSheetScaffold(
         sheetContent = {
             Box {
-                Box(modifier = Modifier.padding(top = sheetContentTopPadding)) {
+                Box(
+                    modifier = Modifier.padding(
+                        top = if (sheetDragHandle != null) ContentTopPadding else ContentTopPaddingNoHandle,
+                    ),
+                ) {
                     sheetContent()
                 }
-                if (showHandle) {
+                if (sheetDragHandle != null) {
                     Box(contentAlignment = TopCenter, modifier = Modifier.fillMaxWidth()) {
                         DragHandle()
                     }
@@ -110,17 +105,12 @@ public fun BottomSheetScaffold(
         },
         modifier = modifier,
         scaffoldState = scaffoldState,
-        sheetPeekHeight = SheetPeekHeight,
-        sheetContainerColor = BottomSheetDefaults.ContainerColor,
-        sheetContentColor = contentColorFor(ContainerColor),
         sheetDragHandle = null,
         sheetSwipeEnabled = sheetSwipeEnabled,
         topBar = topBar,
         snackbarHost = snackbarHost,
-        containerColor = BottomSheetDefaults.ContainerColor,
-        contentColor = contentColorFor(BottomSheetDefaults.ContainerColor),
     ) {
-        content(PaddingValues(screenContentPadding))
+        content(it)
     }
 }
 
