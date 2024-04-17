@@ -80,7 +80,7 @@ public fun Modifier.dashedBorder(width: Dp, color: Color, shape: Shape = Rectang
  */
 @Deprecated(
     message = "Use dashedBorder(width: Dp, color: Color, shape: Shape) instead since it know allow you to specify " +
-            "a shape from Spark",
+        "a shape from Spark",
     replaceWith = ReplaceWith("dashedBorder(width, color, shape)"),
 )
 public fun Modifier.dashedBorder(width: Dp, radius: Dp, color: Color): Modifier =
