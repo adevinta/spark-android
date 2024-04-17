@@ -43,6 +43,10 @@ or install it directly from **Android Studio**:
 
 Here is a list of Gradle tasks commonly used in this project:
 
+- Code formatting: run spotless formatter
+  ```bash
+  ./gradlew spotlessApply
+  ```
 - Building: assemble all modules in release mode
   ```bash
   ./gradlew assembleRelease
@@ -58,10 +62,6 @@ Here is a list of Gradle tasks commonly used in this project:
 - Linting: run Lint analysis
   ```bash
   ./gradlew lintRelease
-  ```
-- Code formatting: run spotless formatter
-  ```bash
-  ./gradlew spotlessApply
   ```
 - Deploying: publish all Maven publications to the local Maven cache `~/.m2`.
   ```bash
