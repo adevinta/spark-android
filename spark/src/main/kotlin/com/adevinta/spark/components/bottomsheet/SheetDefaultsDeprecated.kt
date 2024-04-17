@@ -41,6 +41,8 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.bottomsheet.SheetValue.Expanded
 import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
 import com.adevinta.spark.components.bottomsheet.SheetValue.PartiallyExpanded
+import com.adevinta.spark.components.bottomsheet.layout.SwipeableV2Defaults
+import com.adevinta.spark.components.bottomsheet.layout.SwipeableV2State
 import kotlinx.coroutines.CancellationException
 
 /**

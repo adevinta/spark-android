@@ -63,6 +63,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.bottomsheet.layout.PreUpPostDownNestedScrollConnection
+import com.adevinta.spark.components.bottomsheet.layout.SwipeableDefaults
+import com.adevinta.spark.components.bottomsheet.layout.SwipeableState
+import com.adevinta.spark.components.bottomsheet.layout.swipeable
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.res.resources
 import com.adevinta.spark.tokens.contentColorFor

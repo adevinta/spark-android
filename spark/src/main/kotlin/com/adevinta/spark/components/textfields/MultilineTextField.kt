@@ -304,10 +304,8 @@ public fun MultilineTextField(
     name = "MultilineTextField intents",
 )
 @Composable
-private fun MultilineTextFieldIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun MultilineTextFieldIntentPreview() {
+    PreviewTheme() {
         PreviewTextFields(
             state = null,
             stateMessage = "Helper text",
@@ -342,7 +340,7 @@ private fun ColumnScope.PreviewTextFields(
         placeholder = "Placeholder",
         counter = TextFieldCharacterCounter(12, 24),
         maxLines = 3,
-        helper = "Helper text",
+        helper = null,
         leadingContent = icon,
     )
 

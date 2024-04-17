@@ -70,7 +70,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
-import com.adevinta.spark.components.bottomsheet.AnchorChangeHandler
 import com.adevinta.spark.components.bottomsheet.BottomSheetDefaults
 import com.adevinta.spark.components.bottomsheet.BottomSheetMaxWidth
 import com.adevinta.spark.components.bottomsheet.DragHandle
@@ -80,8 +79,9 @@ import com.adevinta.spark.components.bottomsheet.SheetValue.Expanded
 import com.adevinta.spark.components.bottomsheet.SheetValue.Hidden
 import com.adevinta.spark.components.bottomsheet.SheetValue.PartiallyExpanded
 import com.adevinta.spark.components.bottomsheet.consumeSwipeWithinBottomSheetBoundsNestedScrollConnection
+import com.adevinta.spark.components.bottomsheet.layout.AnchorChangeHandler
+import com.adevinta.spark.components.bottomsheet.layout.swipeAnchors
 import com.adevinta.spark.components.bottomsheet.rememberSheetState
-import com.adevinta.spark.components.bottomsheet.swipeAnchors
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.list.ListItem

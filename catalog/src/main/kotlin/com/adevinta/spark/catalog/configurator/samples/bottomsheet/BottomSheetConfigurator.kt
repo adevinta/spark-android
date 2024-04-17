@@ -114,18 +114,6 @@ private fun ColumnScope.BottomSheetSample() {
         )
     }
 
-    SwitchLabelled(
-        checked = skipPartiallyExpanded,
-        onCheckedChange = {
-            skipPartiallyExpanded = it
-        },
-    ) {
-        Text(
-            text = "Skip Partially Expanded",
-            modifier = Modifier.fillMaxWidth(),
-        )
-    }
-
     val contentExamples = BottomSheetContentExamples.entries.toTypedArray()
     var expanded by remember { mutableStateOf(false) }
     SelectTextField(
