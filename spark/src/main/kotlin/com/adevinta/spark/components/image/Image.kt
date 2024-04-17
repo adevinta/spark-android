@@ -138,6 +138,8 @@ internal fun SparkImage(
  * @param modifier Modifier used to adjust the layout algorithm or draw decoration content (ex.
  * background)
  * @param onState A callback function that is called when the state of the image changes.
+ * @param emptyIcon Placeholder used when the image loading has not started yet.
+ * @param errorIcon Placeholder used when the image loading failed.
  * @param alignment Optional alignment parameter used to place the image in the given
  * bounds defined by the width and height
  * @param contentScale Optional scale parameter used to determine the aspect ratio scaling to be used
@@ -157,6 +159,8 @@ public fun Image(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     onState: ((State) -> Unit)? = null,
+    emptyIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.NoPhoto) },
+    errorIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.ErrorPhoto) },
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Fit,
     alpha: Float = DefaultAlpha,
@@ -169,6 +173,8 @@ public fun Image(
         contentDescription = contentDescription,
         modifier = modifier,
         onState = onState,
+        emptyIcon = emptyIcon,
+        errorIcon = errorIcon,
         alignment = alignment,
         contentScale = contentScale,
         alpha = alpha,
