@@ -80,7 +80,7 @@ internal fun SparkBadge(
 
     Row(
         modifier = modifier
-            .ifTrue(hasStroke) { border(2.dp, colors.onColor, shape).padding(2.dp) }
+            .ifTrue(hasStroke) { border(2.dp, SparkTheme.colors.surface, shape).padding(2.dp) }
             .defaultMinSize(minWidth = size, minHeight = size)
             .background(
                 color = colors.color,

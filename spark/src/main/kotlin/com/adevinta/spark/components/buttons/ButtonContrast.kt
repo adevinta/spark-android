@@ -41,6 +41,7 @@ import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.Link
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -90,7 +91,7 @@ public fun ButtonContrast(
     val buttonColors = ButtonDefaults.buttonColors(
         containerColor = containerColor,
         contentColor = contentColor,
-        disabledContainerColor = containerColor.disabled,
+        disabledContainerColor = containerColor.dim3,
         disabledContentColor = contentColor.disabled,
     )
     BaseSparkButton(
@@ -155,7 +156,7 @@ public fun ButtonContrast(
     val buttonColors = ButtonDefaults.buttonColors(
         containerColor = containerColor,
         contentColor = contentColor,
-        disabledContainerColor = containerColor.disabled,
+        disabledContainerColor = containerColor.dim3,
         disabledContentColor = contentColor.disabled,
     )
     SparkButton(
@@ -209,17 +210,18 @@ public fun ButtonContrast(
     isLoading: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val backgroundColor by animateColorAsState(
-        targetValue = intent.colors().color,
-        label = "background color",
-    )
+    val containerColor = SparkTheme.colors.surface
+    val colors = intent.colors()
     val contentColor by animateColorAsState(
-        targetValue = intent.colors().onColor,
+        targetValue = if (colors.color == containerColor) colors.onColor else colors.color,
         label = "content color",
     )
-    val colors = ButtonDefaults.buttonColors(
-        containerColor = backgroundColor,
+
+    val buttonColors = ButtonDefaults.buttonColors(
+        containerColor = containerColor,
         contentColor = contentColor,
+        disabledContainerColor = containerColor.dim3,
+        disabledContentColor = contentColor.disabled,
     )
     SparkButton(
         onClick = onClick,
@@ -228,7 +230,7 @@ public fun ButtonContrast(
         size = size,
         enabled = enabled,
         elevation = ButtonDefaults.buttonElevation(),
-        colors = colors,
+        colors = buttonColors,
         icon = icon,
         iconSide = iconSide,
         isLoading = isLoading,
