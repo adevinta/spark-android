@@ -43,7 +43,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.components.icons.Icon
@@ -54,8 +53,6 @@ import com.adevinta.spark.icons.DeleteOutline
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.SparkTypography
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.flow.flowOf
 
 /**
@@ -304,10 +301,8 @@ public fun MultilineTextField(
     name = "MultilineTextField intents",
 )
 @Composable
-private fun MultilineTextFieldIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun MultilineTextFieldIntentPreview() {
+    PreviewTheme {
         PreviewTextFields(
             state = null,
             stateMessage = "Helper text",
@@ -342,7 +337,7 @@ private fun ColumnScope.PreviewTextFields(
         placeholder = "Placeholder",
         counter = TextFieldCharacterCounter(12, 24),
         maxLines = 3,
-        helper = "Helper text",
+        helper = null,
         leadingContent = icon,
     )
 

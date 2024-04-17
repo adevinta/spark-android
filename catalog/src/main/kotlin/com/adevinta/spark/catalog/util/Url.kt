@@ -40,7 +40,7 @@ public const val DocsUrl: String = "https://adevinta.github.io/spark-android"
 public const val SourceUrl: String = "https://github.com/adevinta/spark-android"
 public const val SparkSourceUrl: String = "https://github.com/adevinta/spark-android/tree/main/spark/src/main"
 
-// Use the real sample url from spark once we have our first ones
+public const val SparkSampleSourceUrl: String = "https://github.com/adevinta/spark-android/blob/main/catalog/src/main/kotlin/com/adevinta/spark/catalog/examples/samples"
 public const val SampleSourceUrl: String = "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/samples/src/main/java/androidx/compose/material3/samples"
 public const val PackageSummaryUrl: String = "https://adevinta.github.io/spark-android/spark"
 

@@ -24,6 +24,7 @@ package com.adevinta.spark.catalog.model
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.adevinta.spark.catalog.R
+import com.adevinta.spark.catalog.configurator.samples.bottomsheet.BottomSheetConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
@@ -40,6 +41,7 @@ import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConf
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
+import com.adevinta.spark.catalog.examples.samples.bottomsheet.BottomSheetExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.chips.ChipsExamples
@@ -160,9 +162,22 @@ private val Popovers = Component(
     description = R.string.component_popovers_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/88a08c-popover/b/904ceb",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.popover/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/popover/Color.kt",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/popover/Popover.kt",
     examples = PopoverExamples,
     configurator = PopoverConfigurator,
+)
+
+private val BottomSheets = Component(
+    id = nextId(),
+    name = "BottomSheets",
+    illustration = R.drawable.bottomsheet,
+    tintIcon = false,
+    description = R.string.component_bottomsheets_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/67d41e-bottom-sheet/b/02056b",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.bottom-sheet/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/bottomsheet/modal/ModalBottomSheet.kt",
+    examples = BottomSheetExamples,
+    configurator = BottomSheetConfigurator,
 )
 
 private val RadioButtons = Component(
@@ -314,6 +329,7 @@ public val Components: List<Component> = listOf(
     IconButtons,
     IconToggleButtons,
     Popovers,
+    BottomSheets,
     Progressbars,
     ProgressTracker,
     RadioButtons,

@@ -175,7 +175,6 @@ public fun TextLink(
  * for this button. You can create and pass in your own `remember`ed instance to observe
  * [Interaction]s and customize the appearance / behavior of this button in different states.
  */
-@SuppressLint("VisibleForTests")
 @Composable
 public fun TextLinkButton(
     text: String,
