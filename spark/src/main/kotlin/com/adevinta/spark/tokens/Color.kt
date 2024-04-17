@@ -161,7 +161,6 @@ public fun lightSparkColors(
     onSurface: Color = BlackAdevinta900,
     surfaceInverse: Color = BlackAdevinta800,
     onSurfaceInverse: Color = White,
-//    surfaceTint: Color = main,
     inversePrimary: Color = Color.Magenta,
     outline: Color = BlackAdevinta100,
     outlineHigh: Color = BlackAdevinta900,
