@@ -4,11 +4,54 @@
 
 ## [Unreleased]
 
+## [0.9.0]
+
+_2024-04-23_
+
 ### Spark
 
-* 🎨 Add a new intent param to the `Popover`
+#### 🆕 Chips can now be selectable and closed
+> [!CAUTION]
+> The `Filled` style has been removed and may break your build if used. You need to see with your ui to know which styles to use instead of this one
+
+> [!WARNING]
+> The styles for chips have been deprecated you now need to use either the `Chip` or the `ChipSelectable` components for your need and provide the style in argument
+
+If you want to make your Chip closable then you will need to add a callback action in the new `onClose` parameter.
+
+---
+
+#### 🆕 BottomSheet now use the spark specs
+> [!CAUTION]
+> This change will most likely break your build since most of the api has changed.
+> We now use the M3 `BottomSheet` instead of a fork from a alpha version of it we did when it was only available in M2.
+
+> [!WARNING]
+> The `BottomSheet` currently only accept M3 snackbars, you won't be able to display a SparkSnackbar
+
+--- 
+
+- 🆕 ProgressTracker is now available! it still has a few minor visual bugs but it can be tested by squads on their scope don't hesitate to give us feedbacks!
+- 🆕 `TextLinkButton` will now use `LocalContentColor` when using the Surface intent. This will allow you to have a `onSurface` `TextLink` when needed
+- 🆕 `Popover` can now take an intent for its surface color
+- 🆕 `Image` has its `emptyIcon` and `errorIcon` parameters open now for special cases
+- 💬 A11y have been translated to german
+- 💄 `Rating` will now have a lisible color when disabled
+- 💄 Badge now use surface instead of onColor for its border color
+- 🐛 Filled and Contrast `Button` now have a clear disabled state when their content color is dark
+- 💄 New icons have been added
 
 ### Catalog App
+
+- 🎨 Brand colors has been updated to their latest values
+- 🔧 All Configurators are now scrollable
+
+### CI
+
+- 🔧 Decorrelated spotless and ktlint
+- 🆕 Added Paparazzi as a manual workflow
+- 🆕 Ran Lava Vulnerability Scanner on CI workflow
+- 🔧 Moved code formatting tasks first in the contributing list
 
 ## [0.8.0]
 
@@ -220,7 +263,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.8.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.9.0...HEAD
+
+[0.9.0]: https://github.com/adevinta/spark-android/releases/tag/0.9.0
 
 [0.8.0]: https://github.com/adevinta/spark-android/releases/tag/0.8.0
 
