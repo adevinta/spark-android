@@ -24,7 +24,6 @@ package com.adevinta.spark.catalog.examples.samples.text
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.SnackbarDuration
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,9 +32,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
-import com.adevinta.spark.components.scaffold.Scaffold
-import com.adevinta.spark.components.snackbars.SnackbarHost
-import com.adevinta.spark.components.snackbars.SnackbarHostState
+import com.adevinta.spark.components.snackbars.SnackbarColors
 import com.adevinta.spark.components.text.TextLink
 import com.adevinta.spark.components.text.TextLinkButton
 import com.adevinta.spark.icons.Link
@@ -50,138 +47,107 @@ public val TextLinksExamples: List<Example> = listOf(
         name = "Link inside title",
         description = "Link inside title no icon",
         sourceUrl = TextLinksExampleSourceUrl,
-    ) {
-        val snackbarHostState = remember { SnackbarHostState() }
+    ) { snackbarHostState ->
         val scope = rememberCoroutineScope()
-        Scaffold(
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize(),
-            snackbarHost = {
-                SnackbarHost(snackbarHostState)
-            },
         ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize(),
-            ) {
 
-                TextLink(
-                    style = SparkTheme.typography.subhead,
-                    text = annotatedStringResource(id = R.string.spark_text_link_short_example_),
-                    lineHeight = 40.sp,
-                    onClickLabel = "https://kotlinlang.org",
-                    onClick = {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = "https://kotlinlang.org",
-                                actionLabel = "Action",
-                                duration = SnackbarDuration.Short,
-                            )
-                        }
-                    },
-                )
-            }
+            TextLink(
+                style = SparkTheme.typography.subhead,
+                text = annotatedStringResource(id = R.string.spark_text_link_short_example_),
+                lineHeight = 40.sp,
+                onClickLabel = "https://kotlinlang.org",
+                onClick = {
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "https://kotlinlang.org",
+                            actionLabel = "Action",
+                            duration = SnackbarDuration.Short,
+                            colors = SnackbarColors.Default,
+                        )
+                    }
+                },
+            )
         }
     },
     Example(
         name = "Link inside paragraph",
         description = "Link inside paragraph no icon",
         sourceUrl = TextLinksExampleSourceUrl,
-    ) {
-        val snackbarHostState = remember { SnackbarHostState() }
+    ) { snackbarHostState ->
         val scope = rememberCoroutineScope()
-        Scaffold(
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize(),
-            snackbarHost = {
-                SnackbarHost(snackbarHostState)
-            },
         ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize(),
-            ) {
 
-                TextLink(
-                    style = SparkTheme.typography.subhead,
-                    text = annotatedStringResource(id = R.string.spark_text_link_paragraph_example_),
-                    onClickLabel = "textLink",
-                    onClick = {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = "Link Clicked",
-                                actionLabel = "Action",
-                                duration = SnackbarDuration.Short,
-                            )
-                        }
-                    },
-                )
-            }
+            TextLink(
+                style = SparkTheme.typography.subhead,
+                text = annotatedStringResource(id = R.string.spark_text_link_paragraph_example_),
+                onClickLabel = "textLink",
+                onClick = {
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "Link Clicked",
+                            actionLabel = "Action",
+                            duration = SnackbarDuration.Short,
+                        )
+                    }
+                },
+            )
         }
     },
     Example(
         name = "Entire text as link no icon",
         description = "Entire text as link no icon using Text Link Button",
         sourceUrl = TextLinksExampleSourceUrl,
-    ) {
-        val snackbarHostState = remember { SnackbarHostState() }
+    ) { snackbarHostState ->
         val scope = rememberCoroutineScope()
-        Scaffold(
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize(),
-            snackbarHost = {
-                SnackbarHost(snackbarHostState)
-            },
         ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize(),
-            ) {
 
-                TextLinkButton(
-                    text = "Try out Android Development",
-                    onClick = {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = "Try out Android Development Clicked",
-                                actionLabel = "Action",
-                                duration = SnackbarDuration.Short,
-                            )
-                        }
-                    },
-                )
-            }
+            TextLinkButton(
+                text = "Try out Android Development",
+                onClick = {
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "Try out Android Development Clicked",
+                            actionLabel = "Action",
+                            duration = SnackbarDuration.Short,
+                        )
+                    }
+                },
+            )
         }
     },
     Example(
         name = "Entire text as link with icon",
         description = "Entire text as link with icon using Text Link Button",
         sourceUrl = TextLinksExampleSourceUrl,
-    ) {
-        val snackbarHostState = remember { SnackbarHostState() }
+    ) { snackbarHostState ->
         val scope = rememberCoroutineScope()
-        Scaffold(
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize(),
-            snackbarHost = {
-                SnackbarHost(snackbarHostState)
-            },
         ) {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize(),
-            ) {
 
-                TextLinkButton(
-                    text = "Try out Android Development",
-                    icon = SparkIcons.Link,
-                    onClick = {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = "Try out Android Development Clicked",
-                                actionLabel = "Action",
-                                duration = SnackbarDuration.Short,
-                            )
-                        }
-                    },
-                )
-            }
+            TextLinkButton(
+                text = "Try out Android Development",
+                icon = SparkIcons.Link,
+                onClick = {
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = "Try out Android Development Clicked",
+                            actionLabel = "Action",
+                            duration = SnackbarDuration.Short,
+                        )
+                    }
+                },
+            )
         }
     },
 )
