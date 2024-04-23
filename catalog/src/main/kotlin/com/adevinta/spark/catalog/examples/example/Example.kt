@@ -31,9 +31,13 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
+import com.adevinta.spark.components.scaffold.Scaffold
+import com.adevinta.spark.components.snackbars.SnackbarHost
+import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.tokens.Layout
 
 @Composable
@@ -41,18 +45,22 @@ public fun Example(
     example: Example,
 ) {
     val scrollState = rememberScrollState()
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
-            .windowInsetsPadding(WindowInsets.navigationBars)
-            .padding(top = 32.dp)
-            .padding(horizontal = Layout.bodyMargin)
-            .imePadding(),
+    val snackbarHostState = remember { SnackbarHostState() }
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) {
-        with(example) {
-            this@Column.content()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+                .windowInsetsPadding(WindowInsets.navigationBars)
+                .padding(top = 32.dp)
+                .padding(horizontal = Layout.bodyMargin)
+                .imePadding(),
+        ) {
+            with(example) {
+                this@Column.content(snackbarHostState)
+            }
         }
     }
 }

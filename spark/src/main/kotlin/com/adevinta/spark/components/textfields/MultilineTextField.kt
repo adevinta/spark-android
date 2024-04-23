@@ -335,9 +335,9 @@ private fun ColumnScope.PreviewTextFields(
         required = true,
         label = "Label",
         placeholder = "Placeholder",
-        counter = TextFieldCharacterCounter(12, 24),
+        counter = TextFieldCharacterCounter(242424242, 242424242),
         maxLines = 3,
-        helper = null,
+        helper = "Placeholder Placeholder Placeholder Placeholder",
         leadingContent = icon,
     )
 

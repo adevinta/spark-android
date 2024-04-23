@@ -379,7 +379,9 @@ internal fun SparkTextFieldLayout(
 }
 
 internal fun widthOrZero(placeable: Placeable?) = placeable?.width ?: 0
+internal fun Placeable?.hasWidthThenDefault(default: Int) = this?.width?.takeIf { it > 0 }?.let { default } ?: 0
 internal fun heightOrZero(placeable: Placeable?) = placeable?.height ?: 0
+internal fun Placeable?.hasHeightThenDefault(default: Int) = this?.height?.takeIf { it > 0 }?.let { default } ?: 0
 
 internal fun Modifier.outlineCutout(labelSize: Size, leftPadding: Dp) =
     this.drawWithContent {

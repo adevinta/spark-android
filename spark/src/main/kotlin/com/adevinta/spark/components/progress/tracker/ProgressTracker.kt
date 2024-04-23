@@ -78,7 +78,7 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tokens.highlight
-import com.adevinta.spark.tools.modifiers.ifTrue
+import com.adevinta.spark.tokens.transparent
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -160,6 +160,11 @@ public fun ProgressTrackerColumn(
     onStepClick: ((index: Int) -> Unit)? = null,
     selectedStep: Int = 0,
 ) {
+    require(items.all { it.label.isNotBlank() }) {
+        "All steps in the vertical layout should have a label otherwise it'll have render issues." +
+            "This is a known bug, if you need to make this layout please report it there" +
+            " https://github.com/adevinta/spark-android/issues/1080"
+    }
     ProgressTracker(
         items = items,
         orientation = Vertical,
@@ -218,7 +223,6 @@ private fun ProgressTracker(
                 label = progressStep.label,
                 enabled = progressStep.enabled,
                 orientation = orientation,
-                size = size,
                 selected = index == selectedStep,
                 interactionSource = interactionSources[index],
                 onClick = { onStepClick?.invoke(index) },
@@ -238,7 +242,7 @@ private fun ProgressTracker(
                 done = isDone,
                 hasIndicatorContent = hasIndicatorContent,
                 onClick = onStepClick?.let {
-                    { onStepClick.invoke(index) }
+                    { onStepClick(index) }
                 },
                 interactionSource = interactionSources[index],
             )
@@ -298,7 +302,6 @@ internal fun progressTrackerMeasurePolicy(
 private fun StepLabel(
     onClick: () -> Unit,
     orientation: LayoutOrientation,
-    size: ProgressSizes,
     modifier: Modifier = Modifier,
     label: CharSequence = "",
     selected: Boolean = false,
@@ -314,15 +317,13 @@ private fun StepLabel(
         val labelModifier = modifier
             .layoutId(LabelId)
             .paddingFromBaseline(top = 16.dp)
-            .ifTrue(size == ProgressSizes.Large) {
-                selectable(
-                    selected = selected,
-                    interactionSource = interactionSource,
-                    indication = LocalIndication.current,
-                    enabled = enabled,
-                ) {
-                    onClick()
-                }
+            .selectable(
+                selected = selected,
+                interactionSource = interactionSource,
+                indication = LocalIndication.current,
+                enabled = enabled,
+            ) {
+                onClick()
             }
         val textAlign = if (orientation == Horizontal) TextAlign.Center else TextAlign.Start
         when (label) {
@@ -379,7 +380,16 @@ private fun StepIndicator(
         targetValue = if (selected) {
             if (isOutlined) colors.containerColor else colors.color
         } else {
-            if (isOutlined) Color.Transparent else colors.containerColor
+            if (isOutlined) colors.containerColor.transparent else colors.containerColor
+        },
+        label = "Indicator color",
+    )
+
+    val indicatorContentColor by animateColorAsState(
+        targetValue = if (selected) {
+            if (isOutlined) colors.onContainerColor else colors.onColor
+        } else {
+            if (isOutlined) SparkTheme.colors.onSurface else colors.onContainerColor
         },
         label = "Indicator color",
     )
@@ -400,16 +410,18 @@ private fun StepIndicator(
             }
             .size(size.size),
         color = indicatorColor,
+        contentColor = indicatorContentColor,
         border = if (isOutlined) {
             BorderStroke(borderSize, colors.color)
         } else {
             null
         },
         elevation = elevation,
-        enabled = enabled && size == ProgressSizes.Large,
+        enabled = enabled,
         onClick = { onClick?.invoke() },
         interactionSource = interactionSource,
     ) {
+        onClick?.invoke()
         AnimatedVisibility(visible = size != ProgressSizes.Small && hasIndicatorContent) {
             Box(
                 contentAlignment = Alignment.Center,
@@ -555,5 +567,68 @@ private fun PreviewProgressStyles() {
             },
             selectedStep = selectedStep,
         )
+    }
+}
+
+@Composable
+@Preview
+private fun PreviewProgressWithNoLabel() {
+    PreviewTheme(padding = PaddingValues(0.dp), contentPadding = 0.dp) {
+        val selectedStep by remember { mutableIntStateOf(1) }
+        val items = persistentListOf(
+            ProgressStep("", true),
+            ProgressStep("", true),
+            ProgressStep("", false),
+        )
+        for (size in ProgressSizes.entries) {
+            ProgressTrackerRow(
+                items = items,
+                size = size,
+                selectedStep = selectedStep,
+            )
+        }
+        Row {
+            for (size in ProgressSizes.entries) {
+                ProgressTrackerColumn(
+                    items = persistentListOf(
+                        ProgressStep("", false),
+                        ProgressStep("", false),
+                        ProgressStep("", false),
+                    ),
+                    size = size,
+                    selectedStep = selectedStep,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+@Preview(
+    group = "ProgressIndicator",
+)
+private fun PreviewProgressIndicator() {
+    PreviewTheme {
+        val selectedStep by remember { mutableIntStateOf(1) }
+        val items = persistentListOf(
+            ProgressStep("", true),
+            ProgressStep("", true),
+            ProgressStep("", false),
+        )
+        items.forEachIndexed { index, progressStep ->
+            val isDone = index < selectedStep
+            StepIndicator(
+                colors = ProgressTrackerIntent.Basic.colors(),
+                size = ProgressSizes.Large,
+                style = ProgressStyles.Outlined,
+                index = index,
+                enabled = progressStep.enabled,
+                selected = index == selectedStep,
+                done = isDone,
+                hasIndicatorContent = true,
+                onClick = {},
+                interactionSource = MutableInteractionSource(),
+            )
+        }
     }
 }

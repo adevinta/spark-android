@@ -21,17 +21,13 @@
  */
 package com.adevinta.spark.catalog.examples.samples.progresstracker
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.adevinta.spark.catalog.model.Example
@@ -235,17 +231,13 @@ private fun ColumnScope.ProgressTrackerSizes() {
             selectedStep = selectedStep,
         )
     }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .horizontalScroll(rememberScrollState()),
-    ) {
+    Row {
         for (size in ProgressSizes.entries) {
             ProgressTrackerColumn(
                 items = persistentListOf(
-                    ProgressStep("", true),
-                    ProgressStep("", true),
-                    ProgressStep("", false),
+                    ProgressStep("a", true),
+                    ProgressStep("a", true),
+                    ProgressStep("a", false),
                 ),
                 size = size,
                 selectedStep = selectedStep,
@@ -270,11 +262,7 @@ private fun ColumnScope.ProgressTrackerColors() {
             selectedStep = selectedStep,
         )
     }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .horizontalScroll(rememberScrollState()),
-    ) {
+    Row {
         for (intent in ProgressTrackerIntent.entries) {
             ProgressTrackerColumn(
                 items = persistentListOf(
@@ -305,11 +293,7 @@ private fun ColumnScope.ProgressTrackerStyles() {
             selectedStep = selectedStep,
         )
     }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .horizontalScroll(rememberScrollState()),
-    ) {
+    Row {
         for (style in ProgressStyles.entries) {
             ProgressTrackerColumn(
                 items = persistentListOf(

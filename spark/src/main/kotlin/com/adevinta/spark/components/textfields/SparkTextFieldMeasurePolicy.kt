@@ -136,7 +136,7 @@ internal class SparkTextFieldMeasurePolicy(
             it.width + CounterPadding.roundToPx() + paddingValues.calculateEndPadding(layoutDirection).roundToPx()
         } ?: 0
         val supportingMaxWidth =
-            width - paddingValues.calculateLeftPadding(layoutDirection).roundToPx() - counterOccupiedWidth
+            maxOf(width - paddingValues.calculateLeftPadding(layoutDirection).roundToPx() - counterOccupiedWidth, 0)
 
         // measure supporting text
         val supportingConstraints = relaxedConstraints.offset(

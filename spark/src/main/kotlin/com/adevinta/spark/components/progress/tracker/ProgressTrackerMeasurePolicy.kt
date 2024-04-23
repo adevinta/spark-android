@@ -35,6 +35,7 @@ import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMapIndexed
 import androidx.compose.ui.util.fastMaxOfOrNull
 import androidx.compose.ui.util.fastSumBy
+import com.adevinta.spark.components.textfields.hasWidthThenDefault
 import com.adevinta.spark.components.textfields.heightOrZero
 
 internal data class ProgressTrackerMeasurePolicy(
@@ -103,16 +104,23 @@ internal data class ProgressTrackerMeasurePolicy(
             layoutWidth = labelPlaceables.fastSumBy(Placeable::width)
             // Calculate height of the layout by taking into account the height maximum height of all labels, indicator
             // and padding
-            layoutHeight = (labelPlaceables.fastMaxOfOrNull(Placeable::height) ?: 0) +
-                arrangementSpacing.roundToPx() +
-                indicatorPlaceables.first().width
+            val maxLabelHeight = labelPlaceables.fastMaxOfOrNull(Placeable::height) ?: 0
+            val maxLabelHeightWithPadding = maxLabelHeight.takeIf {
+                it > 0 // Don't add the padding if there are no labels
+            }?.let {
+                it + arrangementSpacing.roundToPx()
+            } ?: 0
+            layoutHeight = indicatorPlaceables.first().height + maxLabelHeightWithPadding
         } else {
-            layoutWidth = (
-                labelPlaceables.minByOrNull(Placeable::width)?.width
-                    ?: 0
-                ) + arrangementSpacing.roundToPx() + indicatorPlaceables.first().width
+            val maxLabelWidth = labelPlaceables.maxByOrNull(Placeable::width)?.width ?: 0
+            val maxLabelWidthWithPadding = maxLabelWidth.takeIf {
+                it > 0 // Don't add the padding if there are no labels
+            }?.let {
+                it + arrangementSpacing.roundToPx()
+            } ?: 0
+            layoutWidth = indicatorPlaceables.first().width + maxLabelWidthWithPadding
             layoutHeight = labelPlaceables.fastSumBy {
-                maxOf(it.height, indicatorPlaceables.first().width) + arrangementSpacing.roundToPx()
+                maxOf(it.height, indicatorPlaceables.first().height) + arrangementSpacing.roundToPx()
             }
         }
 
@@ -179,29 +187,29 @@ internal data class ProgressTrackerMeasurePolicy(
         with(measureScope) {
             var previousLabelY = 0
 
-            labelPlaceables.fastForEachIndexed { index, labelPlaceable ->
-                val indicatorPlaceable = indicatorPlaceables[index]
+            indicatorPlaceables.fastForEachIndexed { index, indicatorPlaceable ->
+                val labelPlaceable = labelPlaceables[index]
                 val labelFirstBaseline = labelPlaceable[FirstBaseline]
 
                 labelPlaceable.placeRelative(
-                    x = indicatorPlaceable.width + arrangementSpacing.roundToPx(),
+                    x = indicatorPlaceable.width + labelPlaceable.hasWidthThenDefault(arrangementSpacing.roundToPx()),
                     y = previousLabelY + (
                         indicatorPlaceable.height / 2 -
                             labelFirstBaseline +
                             5.sp.roundToPx() // Magic number to center the text to the indicator text baseline
                         ),
                 )
-                indicatorPlaceable.placeRelative(
-                    x = 0,
-                    y = previousLabelY,
-                )
+                indicatorPlaceable.placeRelative(x = 0, y = previousLabelY)
                 if (index < indicatorPlaceables.size - 1) {
                     trackPlaceables[index].placeRelative(
                         x = indicatorPlaceable.width / 2,
                         y = previousLabelY + indicatorPlaceable.height + arrangementSpacing.roundToPx() / 2,
                     )
                 }
-                previousLabelY += labelPlaceable.height + arrangementSpacing.roundToPx()
+                previousLabelY += maxOf(
+                    labelPlaceable.height,
+                    indicatorSize.roundToPx(),
+                ) + arrangementSpacing.roundToPx()
             }
         }
     }
