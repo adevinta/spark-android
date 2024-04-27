@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.components.bottomsheet
+package com.adevinta.spark.components.bottomsheet.layout
 
 /*
  * Copyright 2021 The Android Open Source Project
@@ -72,10 +72,10 @@ import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.lerp
 import com.adevinta.spark.InternalSparkApi
-import com.adevinta.spark.components.bottomsheet.SwipeableDefaults.AnimationSpec
-import com.adevinta.spark.components.bottomsheet.SwipeableDefaults.StandardResistanceFactor
-import com.adevinta.spark.components.bottomsheet.SwipeableDefaults.VelocityThreshold
-import com.adevinta.spark.components.bottomsheet.SwipeableDefaults.resistanceConfig
+import com.adevinta.spark.components.bottomsheet.layout.SwipeableDefaults.AnimationSpec
+import com.adevinta.spark.components.bottomsheet.layout.SwipeableDefaults.StandardResistanceFactor
+import com.adevinta.spark.components.bottomsheet.layout.SwipeableDefaults.VelocityThreshold
+import com.adevinta.spark.components.bottomsheet.layout.SwipeableDefaults.resistanceConfig
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filter
