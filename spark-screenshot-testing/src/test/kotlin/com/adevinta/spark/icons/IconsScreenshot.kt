@@ -25,7 +25,7 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.paparazziRule
 import com.google.testing.junit.testparameterinjector.TestParameter
-import com.google.testing.junit.testparameterinjector.TestParameter.TestParameterValuesProvider
+import com.google.testing.junit.testparameterinjector.TestParameterValuesProvider
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.junit.Rule
 import org.junit.Test
