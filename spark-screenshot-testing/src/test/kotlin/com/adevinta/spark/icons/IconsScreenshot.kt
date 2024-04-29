@@ -37,8 +37,8 @@ internal class IconsScreenshot {
     @get:Rule
     val paparazzi = paparazziRule()
 
-    internal object SparkIconProvider : TestParameterValuesProvider {
-        override fun provideValues() = Class.forName("com.adevinta.spark.icons.SparkIconsKt")
+    internal object SparkIconProvider : TestParameterValuesProvider() {
+        override fun provideValues(context: Context) = Class.forName("com.adevinta.spark.icons.SparkIconsKt")
             .methods
             .filter { SparkIcon::class.java.isAssignableFrom(it.returnType) }
             .map { value(it.invoke(null, SparkIcons) as SparkIcon).withName(it.name.removePrefix("get")) }
