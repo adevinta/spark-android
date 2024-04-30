@@ -50,11 +50,11 @@ androidx.vectordrawable:vectordrawable-animated:1.1.0
 androidx.vectordrawable:vectordrawable:1.1.0
 androidx.versionedparcelable:versionedparcelable:1.1.1
 com.google.guava:listenablefuture:1.0
-org.jetbrains.kotlin:kotlin-bom:2.0.0-RC1
-org.jetbrains.kotlin:kotlin-stdlib-common:2.0.0-RC1
-org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.0.0-RC1
-org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0-RC1
-org.jetbrains.kotlin:kotlin-stdlib:2.0.0-RC1
+org.jetbrains.kotlin:kotlin-bom:2.0.0-RC2
+org.jetbrains.kotlin:kotlin-stdlib-common:2.0.0-RC2
+org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.0.0-RC2
+org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0-RC2
+org.jetbrains.kotlin:kotlin-stdlib:2.0.0-RC2
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1
 org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.7.1
 org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.1
