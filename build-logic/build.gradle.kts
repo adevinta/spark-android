@@ -50,6 +50,7 @@ dependencies {
     compileOnly(libs.gradlePlugins.android)
     compileOnly(libs.gradlePlugins.kotlin)
     compileOnly(libs.gradlePlugins.ksp)
+    compileOnly(libs.gradlePlugins.compose)
     compileOnly(libs.gradlePlugins.dependencyGuard)
     compileOnly(libs.gradlePlugins.dokka)
     compileOnly(libs.gradlePlugins.spotless)
