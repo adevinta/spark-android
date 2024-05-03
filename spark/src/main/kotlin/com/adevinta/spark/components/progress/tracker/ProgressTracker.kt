@@ -405,10 +405,10 @@ private fun StepIndicator(
     Surface(
         shape = SparkTheme.shapes.full,
         modifier = modifier
+            .size(size.size)
             .graphicsLayer {
                 alpha = indicatorAlpha
-            }
-            .size(size.size),
+            },
         color = indicatorColor,
         contentColor = indicatorContentColor,
         border = if (isOutlined) {
