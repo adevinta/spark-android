@@ -25,8 +25,8 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.paparazziRule
 import com.google.testing.junit.testparameterinjector.TestParameter
-import com.google.testing.junit.testparameterinjector.TestParameter.TestParameterValuesProvider
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
+import com.google.testing.junit.testparameterinjector.TestParameterValuesProvider
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,8 +37,8 @@ internal class IconsScreenshot {
     @get:Rule
     val paparazzi = paparazziRule()
 
-    internal object SparkIconProvider : TestParameterValuesProvider {
-        override fun provideValues() = Class.forName("com.adevinta.spark.icons.SparkIconsKt")
+    internal object SparkIconProvider : TestParameterValuesProvider() {
+        override fun provideValues(context: Context) = Class.forName("com.adevinta.spark.icons.SparkIconsKt")
             .methods
             .filter { SparkIcon::class.java.isAssignableFrom(it.returnType) }
             .map { value(it.invoke(null, SparkIcons) as SparkIcon).withName(it.name.removePrefix("get")) }
