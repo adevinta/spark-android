@@ -122,7 +122,7 @@ private fun CheckboxSample() {
         dropdownContent = {
             ToggleIntent.entries.forEach { availableIntent ->
                 DropdownMenuItem(
-                    text = { Text(intent.name) },
+                    text = { Text(availableIntent.name) },
                     onClick = {
                         intent = availableIntent
                         expanded = false
