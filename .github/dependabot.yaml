@@ -2,15 +2,10 @@
 version: 2
 updates:
   - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "github-actions"
-    directory: "/.github/actions/setup-gradle"
-    schedule:
-      interval: "daily"
-  - package-ecosystem: "github-actions"
-    directory: "/.github/actions/setup-java"
+    directories:
+      - "/"
+      - "/.github/actions/setup-gradle"
+      - "/.github/actions/setup-java"
     schedule:
       interval: "daily"
   - package-ecosystem: "gradle"

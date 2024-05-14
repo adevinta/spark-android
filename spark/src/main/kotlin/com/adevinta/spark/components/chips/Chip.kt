@@ -63,7 +63,6 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.SparkTheme.colors
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.surface.Surface
-import com.adevinta.spark.components.tags.TagDefaults
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.DeleteOutline
 import com.adevinta.spark.icons.OfferOutline
@@ -251,7 +250,7 @@ public fun Chip(
                 Icon(
                     sparkIcon = SparkIcons.DeleteOutline,
                     modifier = Modifier
-                        .size(TagDefaults.LeadingIconSize)
+                        .size(ChipDefaults.LeadingIconSize)
                         .clickable(
                             onClick = onClose ?: {},
                             enabled = enabled,
@@ -344,7 +343,7 @@ public fun ChipSelectable(
                 Icon(
                     sparkIcon = SparkIcons.DeleteOutline,
                     modifier = Modifier
-                        .size(TagDefaults.LeadingIconSize)
+                        .size(ChipDefaults.LeadingIconSize)
                         .clickable(
                             onClick = onClose ?: {},
                             enabled = enabled,
@@ -421,7 +420,7 @@ public fun Chip(
         if (leadingIcon != null) {
             Icon(
                 sparkIcon = leadingIcon,
-                modifier = Modifier.size(TagDefaults.LeadingIconSize),
+                modifier = Modifier.size(ChipDefaults.LeadingIconSize),
                 contentDescription = contentDescription,
                 tint = LocalContentColor.current,
             )
@@ -483,7 +482,7 @@ public fun ChipSelectable(
         if (leadingIcon != null) {
             Icon(
                 sparkIcon = leadingIcon,
-                modifier = Modifier.size(TagDefaults.LeadingIconSize),
+                modifier = Modifier.size(ChipDefaults.LeadingIconSize),
                 contentDescription = contentDescription,
                 tint = LocalContentColor.current,
             )

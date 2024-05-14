@@ -31,6 +31,11 @@ public object ChipDefaults {
     private val HorizontalElementsPadding = 8.dp
 
     /**
+     * The size of the leading icon in the chip.
+     */
+    internal val LeadingIconSize = 16.dp
+
+    /**
      * Returns the [PaddingValues] for the assist chip.
      */
     internal val ChipPadding = PaddingValues(horizontal = HorizontalElementsPadding)
