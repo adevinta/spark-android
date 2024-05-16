@@ -33,6 +33,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.rememberBottomSheetScaffoldState
@@ -42,6 +43,7 @@ import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.bottomsheet.DragHandle
@@ -77,6 +79,7 @@ import com.adevinta.spark.icons.SparkIcons
 public fun BottomSheetScaffold(
     sheetContent: @Composable BoxScope.() -> Unit,
     modifier: Modifier = Modifier,
+    sheetPeekHeight: Dp = BottomSheetDefaults.SheetPeekHeight,
     scaffoldState: BottomSheetScaffoldState = rememberBottomSheetScaffoldState(),
     sheetSwipeEnabled: Boolean = true,
     sheetDragHandle: @Composable (() -> Unit)? = { DragHandle() },
@@ -87,6 +90,7 @@ public fun BottomSheetScaffold(
     content: @Composable (PaddingValues) -> Unit,
 ) {
     androidx.compose.material3.BottomSheetScaffold(
+        sheetPeekHeight = sheetPeekHeight,
         sheetContent = {
             Box {
                 Box(
