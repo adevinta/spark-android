@@ -12,6 +12,7 @@ _2024-05-16_
 - 🆕 `BottomSheetScaffold` now has a new sheetPeekHeight parameter
 - 💄 `Chip` Change chip icon default size to be bigger
 - 💄 `TextField` Change TextField Icon color from onSurface to neutral
+- 💄 `Icons` Update some icons
 - 🐛 `ProgressTracker` Fix clipped ProgressTracker indicator
 
 ### Catalog App
