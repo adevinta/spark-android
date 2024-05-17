@@ -13,7 +13,6 @@ _2024-05-16_
 - 💄 `Chip` Change chip icon default size to be bigger
 - 💄 `TextField` Change TextField Icon color from onSurface to neutral
 - 🐛 `ProgressTracker` Fix clipped ProgressTracker indicator
-- 🔧 Updates versions to various dependencies
 
 ### Catalog App
 - 🐛 `Checkbox` Fix intents in CheckboxConfigurator
