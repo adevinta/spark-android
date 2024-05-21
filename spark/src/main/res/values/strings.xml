@@ -58,6 +58,11 @@
     <string name="spark_textfield_delete_a11y">Cancel</string>
     <!--endregion-->
 
+    <!--region Snackbar-->
+    <!-- Spoken description of a snackbar dismiss action -->
+    <string name="spark_snackbar_dismiss_a11y">Dismiss</string>
+    <!--endregion-->
+
     <!--DragHandle-->
     <string name="spark_drag_handle_a11y">Drag handle</string>
 

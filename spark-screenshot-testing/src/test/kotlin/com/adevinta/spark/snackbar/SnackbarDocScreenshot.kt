@@ -23,7 +23,7 @@ package com.adevinta.spark.snackbar
 
 import androidx.compose.foundation.layout.Column
 import com.adevinta.spark.components.snackbars.Snackbar
-import com.adevinta.spark.components.snackbars.SnackbarColors
+import com.adevinta.spark.components.snackbars.SnackbarIntent
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshotNightMode
@@ -39,7 +39,7 @@ internal class SnackbarDocScreenshot {
     fun snackbarColorsShowcase() {
         paparazzi.sparkSnapshotNightMode {
             Column {
-                SnackbarColors.entries.forEach {
+                SnackbarIntent.entries.forEach {
                     Snackbar(
                         colors = it,
                         actionLabel = "Action",

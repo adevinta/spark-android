@@ -29,7 +29,7 @@ import androidx.compose.ui.Modifier
 import com.adevinta.spark.DefaultTestDevices
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.snackbars.Snackbar
-import com.adevinta.spark.components.snackbars.SnackbarColors
+import com.adevinta.spark.components.snackbars.SnackbarIntent
 import com.adevinta.spark.components.snackbars.SnackbarSparkVisuals
 import com.adevinta.spark.icons.AlarmOnOutline
 import com.adevinta.spark.icons.SparkIcons
@@ -87,7 +87,7 @@ class SnackbarScreenshot {
     fun snackBar() {
         paparazzi.sparkSnapshotNightMode {
             Row {
-                SnackbarColors.entries.forEach { color ->
+                SnackbarIntent.entries.forEach { color ->
                     Column(
                         modifier = Modifier.weight(1f),
                     ) {

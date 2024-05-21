@@ -30,6 +30,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarData
+import androidx.compose.material3.SnackbarDefaults
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.SnackbarVisuals
@@ -52,6 +53,10 @@ import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.dismiss
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.util.fastFilterNotNull
+import androidx.compose.ui.util.fastForEach
+import androidx.compose.ui.util.fastMap
+import androidx.compose.ui.util.fastMapTo
 import com.adevinta.spark.components.snackbars.SnackbarHostState.SnackbarDataSpark
 import com.adevinta.spark.icons.SparkIcon
 import kotlinx.coroutines.CancellableContinuation
@@ -145,16 +150,15 @@ public class SnackbarHostState {
     public suspend fun showSnackbar(
         message: String,
         actionLabel: String? = null,
-        title: String? = null,
         icon: SparkIcon? = null,
-        colors: SnackbarColors = SnackbarColors.Default,
+        colors: SnackbarIntent = SnackbarDefaults.intent,
+        style: SnackbarStyle = SnackbarDefaults.style,
         withDismissAction: Boolean = false,
         duration: SnackbarDuration =
             if (actionLabel == null) SnackbarDuration.Short else SnackbarDuration.Indefinite,
     ): SnackbarResult = showSnackbar(
         SnackbarSparkVisuals(
             message = message,
-            title = title,
             icon = icon,
             colors = colors,
             actionLabel = actionLabel,
@@ -252,17 +256,21 @@ private fun FadeInFadeOutWithScale(
     val state = remember { FadeInFadeOutState<SnackbarData?>() }
     if (current != state.current) {
         state.current = current
-        val keys = state.items.map { it.key }.toMutableList()
+        val keys = state.items.fastMap { it.key }.toMutableList()
         if (!keys.contains(current)) {
             keys.add(current)
         }
         state.items.clear()
-        keys.filterNotNull().mapTo(state.items) { key ->
+        keys.fastFilterNotNull().fastMapTo(state.items) { key ->
             FadeInFadeOutAnimationItem(key) { children ->
                 val isVisible = key == current
                 val duration = if (isVisible) SnackbarFadeInMillis else SnackbarFadeOutMillis
                 val delay = SnackbarFadeOutMillis + SnackbarInBetweenDelayMillis
-                val animationDelay = if (isVisible && keys.filterNotNull().size != 1) delay else 0
+                val animationDelay = if (isVisible && keys.fastFilterNotNull().size != 1) {
+                    delay
+                } else {
+                    0
+                }
                 val opacity = animatedOpacity(
                     animation = tween(
                         easing = LinearEasing,
@@ -308,7 +316,7 @@ private fun FadeInFadeOutWithScale(
     }
     Box(modifier) {
         state.scope = currentRecomposeScope
-        state.items.forEach { (item, opacity) ->
+        state.items.fastForEach { (item, opacity) ->
             key(item) {
                 opacity {
                     content(item!!)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,33 +21,7 @@
  */
 package com.adevinta.spark.components.snackbars
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import com.adevinta.spark.SparkTheme
-
-public enum class SnackbarColors {
-
-    Default {
-        override val baseColor: Color
-            @Composable get() {
-                return SparkTheme.colors.supportContainer
-            }
-    },
-
-    Error {
-        override val baseColor: Color
-            @Composable get() {
-                return SparkTheme.colors.errorContainer
-            }
-    },
-
-    Valid {
-        override val baseColor: Color
-            @Composable get() {
-                return SparkTheme.colors.successContainer
-            }
-    }, ;
-
-    @get:Composable
-    public abstract val baseColor: Color
+public enum class SnackbarStyle {
+    Filled,
+    Outlined;
 }

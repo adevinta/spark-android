@@ -54,4 +54,9 @@
     <string name="spark_textfield_delete_a11y">Löschen</string>
     <!--endregion-->
 
+    <!--region Snackbar-->
+    <!-- Spoken description of a snackbar dismiss action -->
+    <string name="spark_snackbar_dismiss_a11y">Schließen</string>
+    <!--endregion-->
+
 </resources>
