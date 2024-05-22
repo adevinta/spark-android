@@ -38,7 +38,6 @@ import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -47,11 +46,10 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.semantics.isContainer
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.core.view.ViewCompat.isOpaque
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.tokens.contentColorFor
@@ -132,7 +130,8 @@ public fun Surface(
                     elevation = with(LocalDensity.current) { elevation.toPx() },
                 )
                 .semantics(mergeDescendants = false) {
-                    isTraversalGroup = true
+                    @Suppress("DEPRECATION")
+                    isContainer = true
                 }
                 .pointerInput(Unit) {},
             propagateMinConstraints = true,
@@ -177,9 +176,8 @@ public fun Surface(
  * a `Modifier.semantics { onClick(label = "YOUR_LABEL", action = null) }` to the Surface.
  *
  * 6) Semantics for clicks. Just like with [Modifier.clickable], clickable version of Surface will
- * produce semantics to indicate that it is clicked. Also, by default, accessibility services will
- * describe the element as [Role.Button]. You may change this by passing a desired [Role] with a
- * [Modifier.semantics].
+ * produce semantics to indicate that it is clicked. No semantic role is set by default, you
+ * may specify one by passing a desired [Role] with a [Modifier.semantics].
  *
  * To manually retrieve the content color inside a surface, use [LocalContentColor].
  *
@@ -198,10 +196,10 @@ public fun Surface(
  * in a darker color in light theme and lighter color in dark theme.
  * @param shadowElevation The size of the shadow below the surface. Note that It will not affect z
  * index of the Surface. If you want to change the drawing order you can use `Modifier.zIndex`.
- * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
- * for this Surface. You can create and pass in your own remembered [MutableInteractionSource] if
- * you want to observe [Interaction]s and customize the appearance / behavior of this Surface in
- * different [Interaction]s.
+ * @param interactionSource an optional hoisted [MutableInteractionSource] for observing and
+ * emitting [Interaction]s for this surface. You can use this to change the surface's
+ * appearance or preview the surface in different states. Note that if `null` is provided,
+ * interactions will still happen internally.
  */
 @Composable
 @NonRestartableComposable
@@ -214,7 +212,7 @@ public fun Surface(
     contentColor: Color = contentColorFor(color),
     elevation: Dp = 0.dp,
     border: BorderStroke? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource? = null,
     content: @Composable () -> Unit,
 ) {
     val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
@@ -222,9 +220,6 @@ public fun Surface(
         LocalContentColor provides contentColor,
         LocalAbsoluteTonalElevation provides absoluteElevation,
     ) {
-        androidx.compose.material3.Surface {
-
-        }
         Box(
             modifier = modifier
                 .minimumTouchTargetSize()
@@ -285,9 +280,8 @@ public fun Surface(
  * that doesn't require [onClick] param.
  *
  * 6) Semantics for selection. Just like with [Modifier.selectable], selectable version of Surface
- * will produce semantics to indicate that it is selected. Also, by default, accessibility services
- * will describe the element as [Role.Tab]. You may change this by passing a desired [Role] with a
- * [Modifier.semantics].
+ * will produce semantics to indicate that it is selected. No semantic role is set by default, you
+ * may specify one by passing a desired [Role] with a [Modifier.semantics].
  *
  * To manually retrieve the content color inside a surface, use [LocalContentColor].
  *
@@ -307,10 +301,10 @@ public fun Surface(
  * in a darker color in light theme and lighter color in dark theme.
  * @param shadowElevation The size of the shadow below the surface. Note that It will not affect z
  * index of the Surface. If you want to change the drawing order you can use `Modifier.zIndex`.
- * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
- * for this Surface. You can create and pass in your own remembered [MutableInteractionSource] if
- * you want to observe [Interaction]s and customize the appearance / behavior of this Surface in
- * different [Interaction]s.
+ * @param interactionSource an optional hoisted [MutableInteractionSource] for observing and
+ * emitting [Interaction]s for this surface. You can use this to change the surface's
+ * appearance or preview the surface in different states. Note that if `null` is provided,
+ * interactions will still happen internally.
  */
 @Composable
 @NonRestartableComposable
@@ -324,7 +318,7 @@ public fun Surface(
     contentColor: Color = contentColorFor(color),
     elevation: Dp = 0.dp,
     border: BorderStroke? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource? = null,
     content: @Composable () -> Unit,
 ) {
     val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
@@ -393,9 +387,8 @@ public fun Surface(
  * handling, consider using a Surface function that doesn't require [onCheckedChange] param.
  *
  * 6) Semantics for toggle. Just like with [Modifier.toggleable], toggleable version of Surface
- * will produce semantics to indicate that it is checked.  Also, by default, accessibility services
- * will describe the element as [Role.Switch]. You may change this by passing a desired [Role] with
- * a [Modifier.semantics].
+ * will produce semantics to indicate that it is checked.  No semantic role is set by default, you
+ * may specify one by passing a desired [Role] with a [Modifier.semantics].
  *
  * To manually retrieve the content color inside a surface, use [LocalContentColor].
  *
@@ -415,10 +408,10 @@ public fun Surface(
  * in a darker color in light theme and lighter color in dark theme.
  * @param shadowElevation The size of the shadow below the surface. Note that It will not affect z
  * index of the Surface. If you want to change the drawing order you can use `Modifier.zIndex`.
- * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
- * for this Surface. You can create and pass in your own remembered [MutableInteractionSource] if
- * you want to observe [Interaction]s and customize the appearance / behavior of this Surface in
- * different [Interaction]s.
+ * @param interactionSource an optional hoisted [MutableInteractionSource] for observing and
+ * emitting [Interaction]s for this surface. You can use this to change the surface's
+ * appearance or preview the surface in different states. Note that if `null` is provided,
+ * interactions will still happen internally.
  */
 @Composable
 @NonRestartableComposable
@@ -432,7 +425,7 @@ public fun Surface(
     contentColor: Color = contentColorFor(color),
     elevation: Dp = 0.dp,
     border: BorderStroke? = null,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    interactionSource: MutableInteractionSource? = null,
     content: @Composable () -> Unit,
 ) {
     val absoluteElevation = LocalAbsoluteTonalElevation.current + elevation
@@ -473,11 +466,18 @@ private fun Modifier.surface(
     border: BorderStroke?,
     elevation: Float,
 ) = this
-    .graphicsLayer(
-        shadowElevation = elevation,
-        shape = shape,
-        clip = false,
+    .then(
+        if (elevation > 0f) {
+            Modifier.graphicsLayer(
+                shadowElevation = elevation,
+                shape = shape,
+                clip = false,
+            )
+        } else {
+            Modifier
+        },
     )
+
     .then(if (border != null) Modifier.border(border, shape) else Modifier)
     .background(color = backgroundColor, shape = shape)
     .clip(shape)

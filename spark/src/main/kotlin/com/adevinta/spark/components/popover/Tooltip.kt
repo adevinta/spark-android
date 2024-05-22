@@ -21,17 +21,17 @@
  */
 package com.adevinta.spark.components.popover
 
-import androidx.compose.material3.CaretProperties
-import androidx.compose.material3.CaretScope
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TooltipBox
 import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.TooltipScope
 import androidx.compose.material3.TooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupPositionProvider
 import androidx.compose.material3.PlainTooltip as MaterialPlainTooltip
@@ -63,7 +63,7 @@ import androidx.compose.material3.TooltipBox as MaterialTooltipBox
 @Composable
 public fun TooltipBox(
     positionProvider: PopupPositionProvider,
-    tooltip: @Composable CaretScope.() -> Unit,
+    tooltip: @Composable TooltipScope.() -> Unit,
     state: TooltipState,
     modifier: Modifier = Modifier,
     focusable: Boolean = true,
@@ -87,9 +87,9 @@ public fun TooltipBox(
  * Usually used with [TooltipBox].
  *
  * @param modifier the [Modifier] to be applied to the tooltip.
- * @param caretProperties [CaretProperties] for the caret of the tooltip, if a default
- * caret is desired with a specific dimension. Please see [TooltipDefaults.caretProperties] to
- * see the default dimensions. Pass in null for this parameter if no caret is desired.
+ * @param caretSize [DpSize] for the caret of the tooltip, if a default
+ *  * caret is desired with a specific dimension. Please see [TooltipDefaults.caretSize] to
+ *  * see the default dimensions. Pass in Dp.Unspecified for this parameter if no caret is desired.
  * @param shape the [Shape] that should be applied to the tooltip container.
  * @param contentColor [Color] that will be applied to the tooltip's content.
  * @param containerColor [Color] that will be applied to the tooltip's container.
@@ -101,9 +101,9 @@ public fun TooltipBox(
 @Suppress("ComposeUnstableReceiver") // We don't have access to this api however it's considered stable
 // by the compiler
 @ExperimentalMaterial3Api
-public fun CaretScope.PlainTooltip(
+public fun TooltipScope.PlainTooltip(
     modifier: Modifier = Modifier,
-    caretProperties: (CaretProperties)? = null,
+    caretSize: (DpSize) = DpSize.Unspecified,
     shape: Shape = TooltipDefaults.plainTooltipContainerShape,
     contentColor: Color = TooltipDefaults.plainTooltipContentColor,
     containerColor: Color = TooltipDefaults.plainTooltipContainerColor,
@@ -113,7 +113,7 @@ public fun CaretScope.PlainTooltip(
 ) {
     MaterialPlainTooltip(
         modifier = modifier,
-        caretProperties = caretProperties,
+        caretSize = caretSize,
         shape = shape,
         contentColor = contentColor,
         containerColor = containerColor,

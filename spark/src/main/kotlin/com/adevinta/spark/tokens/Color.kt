@@ -52,6 +52,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.ButtonFilled
@@ -1057,7 +1058,8 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
  * overlay corresponding to [elevation] applied. The overlay will only be applied to
  * [ColorScheme.surface].
  */
-internal fun SparkColors.applyTonalElevation(backgroundColor: Color, elevation: Dp): Color {
+@InternalSparkApi
+public fun SparkColors.applyTonalElevation(backgroundColor: Color, elevation: Dp): Color {
     return if (backgroundColor == surface) {
         surfaceColorAtElevation(elevation)
     } else {
@@ -1165,7 +1167,7 @@ public fun debugColors(
 @Preview(
     group = "Tokens",
     name = "Colors",
-    device = Devices.TABLET,
+    device = "spec:width=1280dp,height=800dp,dpi=240",
 )
 @Composable
 private fun ColorPreview() {

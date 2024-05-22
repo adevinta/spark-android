@@ -41,6 +41,7 @@ import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.IconToggleButtonColors
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -254,7 +255,7 @@ public abstract class AddonScope {
     ) {
         ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = onExpandedChange) {
             Surface(
-                modifier = modifier.menuAnchor(),
+                modifier = modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable),
                 onClick = {},
                 shape = SparkTheme.shapes.small,
             ) {
@@ -268,7 +269,7 @@ public abstract class AddonScope {
             DropdownMenu(
                 expanded = expanded,
                 onDismissRequest = onDismissRequest,
-                modifier = Modifier.exposedDropdownSize(false),
+                modifier = Modifier.exposedDropdownSize(true),
                 properties = properties,
                 content = popupDropdownContent,
             )

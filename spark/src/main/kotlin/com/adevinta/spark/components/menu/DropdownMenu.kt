@@ -35,7 +35,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MenuDefaults
@@ -66,10 +65,10 @@ import com.adevinta.spark.icons.MailOutline
 import com.adevinta.spark.icons.PenFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WheelOutline
+import com.adevinta.spark.tokens.ElevationTokens
 import com.adevinta.spark.tokens.EmphasizeDim1
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
-import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tokens.ripple
 import androidx.compose.material3.DropdownMenu as MaterialDropdownMenu
 
@@ -122,8 +121,13 @@ public fun DropdownMenu(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
         offset = offset,
-        properties = properties,
         scrollState = scrollState,
+        properties = properties,
+        shape = SparkTheme.shapes.small,
+        containerColor = SparkTheme.colors.surface,
+        tonalElevation = ElevationTokens.Level2,
+        shadowElevation = ElevationTokens.Level2,
+        border = null,
         content = content,
     )
 }
