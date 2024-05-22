@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import kotlin.reflect.KProperty
 
@@ -31,12 +32,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions.allWarningsAsErrors = true
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
-}
-
 kotlin {
+    compilerOptions {
+        allWarningsAsErrors = true
+        jvmTarget = JvmTarget.JVM_11
+    }
     explicitApi()
 }
 
