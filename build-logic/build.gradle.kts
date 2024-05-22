@@ -20,7 +20,6 @@
  * SOFTWARE.
  */
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import kotlin.reflect.KProperty
 
 plugins {
