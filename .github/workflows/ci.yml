@@ -27,15 +27,9 @@ jobs:
       - run: ./gradlew spotlessCheck :build-logic:spotlessCheck
 
   build-test-lint:
-    name: Build Test Lint [useKSP2=${{ matrix.useKSP2 }}, useK2Uast=${{ matrix.useK2Uast }}]
     needs: validation
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        useKSP2: [true, false]
-        useK2Uast: [true, false]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -46,16 +40,16 @@ jobs:
 
       - name: '👷 Build'
         id: build
-        run: ./gradlew assembleRelease -Pksp.useKSP2=${{ matrix.useKSP2 }} -Pandroid.lint.useK2Uast=${{ matrix.useK2Uast }} -Pandroid.experimental.lint.version=8.6.0-alpha01
+        run: ./gradlew assembleRelease
       - name: '📦 Archive APKs'
         uses: actions/upload-artifact@v4
         with:
-          name: apk-${{ matrix.useKSP2 }}-${{ matrix.useK2Uast }}
+          name: apk
           path: '**/build/outputs/apk/**/*.apk'
       - name: '📦 Archive AARs'
         uses: actions/upload-artifact@v4
         with:
-          name: aar-${{ matrix.useKSP2 }}-${{ matrix.useK2Uast }}
+          name: aar
           path: '**/build/outputs/aar'
       - name: '📢 Diffuse reports'
         if: ${{ always() && github.event_name == 'pull_request' && steps.build.outcome == 'success' }}
@@ -63,15 +57,15 @@ jobs:
 
       - name: '🧑‍🔬 Test'
         id: test
-        run: ./gradlew globalCiUnitTest verifyPaparazziRelease -Pksp.useKSP2=${{ matrix.useKSP2 }} -Pandroid.lint.useK2Uast=${{ matrix.useK2Uast }} -Pandroid.experimental.lint.version=8.6.0-alpha01
+        run: ./gradlew globalCiUnitTest verifyPaparazziRelease
       - name: '📦 Archive JUnit reports'
-        if: ${{ false }}
+        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-junit-reports
         with:
           html: '**/build/reports/tests/test*'
           xml: '**/build/test-results/test*/**.xml'
       - name: '📦 Archive Paparazzi reports'
-        if: ${{ false }}
+        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.test.outcome) }}
         uses: ./.github/actions/archive-paparazzi-reports
 
       - name: '📢 Paparazzi report'
@@ -83,9 +77,9 @@ jobs:
 
       - name: '🕵️ Lint'
         id: lint
-        run: ./gradlew lintRelease -Pksp.useKSP2=${{ matrix.useKSP2 }} -Pandroid.lint.useK2Uast=${{ matrix.useK2Uast }} -Pandroid.experimental.lint.version=8.6.0-alpha01
+        run: ./gradlew lintRelease
       - name: '📦 Archive Lint reports'
-        if: ${{ false }}
+        if: ${{ always() && contains(fromJSON('["success", "failure"]'), steps.lint.outcome) }}
         uses: ./.github/actions/archive-lint-reports
         with:
           analysis: './'

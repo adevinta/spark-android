@@ -30,6 +30,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
@@ -82,7 +83,6 @@ internal fun Project.getVersionsCatalog(): VersionCatalog = runCatching {
 }.getOrThrow()
 
 internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotlin(
-    allWarningsAsErrors: Boolean = true,
     crossinline configure: T.() -> Unit = {},
 ) {
     configure<JavaPluginExtension> {
@@ -90,17 +90,16 @@ internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotli
         targetCompatibility = JavaVersion.VERSION_11
     }
     configure<T> {
+        when (this) {
+            is KotlinAndroidProjectExtension -> compilerOptions
+            is KotlinJvmProjectExtension -> compilerOptions
+            else -> TODO("Unsupported project extension $this ${T::class}")
+        }.apply {
+            jvmTarget = JvmTarget.JVM_11
+            allWarningsAsErrors = true
+        }
         explicitApi()
         configure()
-    }
-
-    when (this) {
-        is KotlinAndroidProjectExtension -> compilerOptions
-        is KotlinJvmProjectExtension -> compilerOptions
-        else -> TODO("Unsupported project extension ${T::class}")
-    }.apply {
-        jvmTarget.set(JvmTarget.JVM_11)
-        this.allWarningsAsErrors.set(allWarningsAsErrors)
     }
 }
 
