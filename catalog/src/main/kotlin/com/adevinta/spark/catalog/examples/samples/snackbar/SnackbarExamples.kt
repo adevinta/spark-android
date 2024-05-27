@@ -27,14 +27,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.adevinta.spark.catalog.CatalogHomeScreen
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonIntent
@@ -44,7 +41,6 @@ import com.adevinta.spark.components.snackbars.SnackbarSparkVisuals
 import com.adevinta.spark.components.snackbars.SnackbarStyle
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.TextLinkButton
-import com.adevinta.spark.icons.FlashlightFill
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import kotlinx.coroutines.launch
@@ -59,17 +55,17 @@ public val SnackbarExamples: List<Example> = listOf(
     ) {
         Column {
 
-                Snackbar(
-                    intent = SnackbarIntent.Info,
-                    isDismissIconEnabled = true,
-                    isActionOnNewLine = true,
-                    style = SnackbarStyle.Filled,
-                    icon = SparkIcons.LikeFill,
-                    actionLabel = "Action",
-                ) {
-                    Text("Simple message!")
-                }
+            Snackbar(
+                intent = SnackbarIntent.Info,
+                isDismissIconEnabled = true,
+                isActionOnNewLine = true,
+                style = SnackbarStyle.Filled,
+                icon = SparkIcons.LikeFill,
+                actionLabel = "Action",
+            ) {
+                Text("Simple message!")
             }
+        }
     },
     Example(
         name = "Snackbar",
@@ -88,7 +84,6 @@ public val SnackbarExamples: List<Example> = listOf(
                 Text("Simple message!")
             }
             VerticalSpacer(8.dp)
-
         }
     },
     Example(

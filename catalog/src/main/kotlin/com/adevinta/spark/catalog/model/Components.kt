@@ -34,6 +34,7 @@ import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarCo
 import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressTrackerConfigurator
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.slider.SlidersConfigurator
+import com.adevinta.spark.catalog.configurator.samples.snackbar.SnackbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.text.TextLinksConfigurator
@@ -230,7 +231,7 @@ private val Snackbars = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.snackbars/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/snackbars/Snackbar.kt",
     examples = SnackbarExamples,
-    configurator = ProgressbarConfigurator,
+    configurator = SnackbarConfigurator,
 )
 
 private val Tabs = Component(
@@ -354,5 +355,5 @@ public val Components: List<Component> = listOf(
     TextLinks,
     Sliders,
     Snackbars,
-    TextFields
+    TextFields,
 )

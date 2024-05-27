@@ -34,14 +34,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.buttons.ButtonGhost
+import com.adevinta.spark.components.buttons.ButtonTinted
+import com.adevinta.spark.components.iconbuttons.IconButtonFilled
 import com.adevinta.spark.components.iconbuttons.IconButtonGhost
+import com.adevinta.spark.components.iconbuttons.IconButtonTinted
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.FlashlightFill
@@ -80,6 +82,7 @@ internal fun SparkSnackbar(
         contentColor = contentColor,
         dismissAction = getDismissIconComposable(
             intent = intent,
+            style = style,
             onClick = { onDismissIconClick?.invoke() },
             isDismissIconEnabled = isDismissIconEnabled,
         ),
@@ -87,6 +90,7 @@ internal fun SparkSnackbar(
             intent = intent,
             onClick = { onActionClick?.invoke() },
             actionLabel = actionLabel,
+            style = style,
             isActionOnNewLine = isActionOnNewLine,
         ),
     ) {
@@ -109,6 +113,7 @@ internal fun SparkSnackbar(
 @Composable
 private fun getDismissIconComposable(
     intent: SnackbarIntent,
+    style: SnackbarStyle,
     onClick: () -> Unit,
     isDismissIconEnabled: Boolean,
 ):
@@ -116,13 +121,30 @@ private fun getDismissIconComposable(
     (() -> Unit)? {
     val dismissIconComposable: (@Composable () -> Unit)? = isDismissIconEnabled.takeIf { it }?.let {
         {
-            IconButtonGhost(
-                intent = intent.toIconButtonIntent(),
-                modifier = Modifier.padding(end = 8.dp),
-                onClick = onClick,
-                contentDescription = stringResource(R.string.spark_snackbar_dismiss_a11y),
-                icon = SparkIcons.Close,
-            )
+            if (intent == SnackbarIntent.SurfaceInverse) {
+                IconButtonGhost(
+                    intent = intent.toIconButtonIntent(),
+                    modifier = Modifier.padding(end = 8.dp),
+                    onClick = { onClick.invoke() },
+                    icon = SparkIcons.Close,
+                )
+            } else {
+                when (style) {
+                    SnackbarStyle.Filled -> IconButtonFilled(
+                        intent = intent.toIconButtonIntent(),
+                        modifier = Modifier.padding(end = 8.dp),
+                        onClick = { onClick.invoke() },
+                        icon = SparkIcons.Close,
+                    )
+
+                    SnackbarStyle.Tinted -> IconButtonTinted(
+                        intent = intent.toIconButtonIntent(),
+                        modifier = Modifier.padding(end = 8.dp),
+                        onClick = { onClick.invoke() },
+                        icon = SparkIcons.Close,
+                    )
+                }
+            }
         }
     }
     return dismissIconComposable
@@ -132,6 +154,7 @@ private fun getDismissIconComposable(
 private fun getActionComposable(
     intent: SnackbarIntent,
     onClick: () -> Unit,
+    style: SnackbarStyle,
     actionLabel: String? = null,
     isActionOnNewLine: Boolean = false,
 ):
@@ -148,12 +171,30 @@ private fun getActionComposable(
                 else -> Modifier
             }
 
-            ButtonGhost(
-                intent = intent.toButtonIntent(),
-                modifier = buttonModifier,
-                onClick = { onClick.invoke() },
-                content = { Text(actionLabel) },
-            )
+            if (intent == SnackbarIntent.SurfaceInverse) {
+                ButtonGhost(
+                    intent = intent.toButtonIntent(),
+                    modifier = buttonModifier,
+                    onClick = { onClick.invoke() },
+                    content = { Text(actionLabel) },
+                )
+            } else {
+                when (style) {
+                    SnackbarStyle.Filled -> ButtonFilled(
+                        intent = intent.toButtonIntent(),
+                        modifier = buttonModifier,
+                        onClick = { onClick.invoke() },
+                        content = { Text(actionLabel) },
+                    )
+
+                    SnackbarStyle.Tinted -> ButtonTinted(
+                        modifier = buttonModifier,
+                        intent = intent.toButtonIntent(),
+                        content = { Text(actionLabel) },
+                        onClick = { onClick.invoke() },
+                    )
+                }
+            }
         }
     }
 
@@ -331,7 +372,7 @@ private fun BodyIconSnackbarPreview() {
 private fun BodyIconActionNewLineLongSnackbarPreview() {
     PreviewTheme {
         Snackbar(
-            intent = SnackbarIntent.SurfaceInverse,
+            intent = SnackbarIntent.Success,
             isDismissIconEnabled = true,
             isActionOnNewLine = true,
             style = SnackbarStyle.Filled,
