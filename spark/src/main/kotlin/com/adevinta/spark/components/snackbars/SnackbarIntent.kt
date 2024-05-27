@@ -49,7 +49,7 @@ public enum class SnackbarIntent {
             Basic -> SparkTheme.colors.basic
             Support -> SparkTheme.colors.support
             Accent -> SparkTheme.colors.accent
-            SurfaceInverse -> SparkTheme.colors.onSurfaceInverse
+            SurfaceInverse -> SparkTheme.colors.surfaceInverse
         }
 
     internal val tintedColor: Color
@@ -63,6 +63,6 @@ public enum class SnackbarIntent {
             Basic -> SparkTheme.colors.basicContainer
             Support -> SparkTheme.colors.supportContainer
             Accent -> SparkTheme.colors.accentContainer
-            SurfaceInverse -> SparkTheme.colors.onSurfaceInverse
+            SurfaceInverse -> SparkTheme.colors.surfaceInverse
         }
 }
