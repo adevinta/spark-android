@@ -206,15 +206,11 @@ public fun Snackbar(
  *
  * @param data The SnackbarData to display.
  * @param modifier Modifier to apply to the Snackbar.
- * @param isActionOnNewLine Whether the action is displayed on a new line.
- * @param isDismissIconEnabled Whether the dismiss icon is enabled.
  */
 @Composable
 public fun Snackbar(
     data: SnackbarData,
     modifier: Modifier = Modifier,
-    isActionOnNewLine: Boolean = false,
-    isDismissIconEnabled: Boolean = false,
 ) {
     val visuals = data.visuals
     val sparkVisuals = data.visuals as? SnackbarSparkVisuals
@@ -223,8 +219,8 @@ public fun Snackbar(
         intent = sparkVisuals?.intent ?: SnackbarDefaults.intent,
         style = sparkVisuals?.style ?: SnackbarDefaults.style,
         modifier = modifier,
-        isActionOnNewLine = isActionOnNewLine,
-        isDismissIconEnabled = isDismissIconEnabled,
+        isActionOnNewLine = sparkVisuals?.isActionOnNewLine ?: false,
+        isDismissIconEnabled = sparkVisuals?.isDismissIconEnabled ?: false,
         icon = sparkVisuals?.icon,
         actionLabel = visuals.actionLabel,
         onActionClick = { data.performAction() },
@@ -251,6 +247,7 @@ public class SnackbarSparkVisuals(
     public val style: SnackbarStyle = SnackbarDefaults.style,
     override val actionLabel: String? = null,
     public val isDismissIconEnabled: Boolean = false,
+    public val isActionOnNewLine: Boolean = false,
     override val duration: SnackbarDuration = SnackbarDuration.Short,
 ) : SnackbarVisuals {
     override val withDismissAction: Boolean

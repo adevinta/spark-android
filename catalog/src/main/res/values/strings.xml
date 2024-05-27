@@ -82,6 +82,7 @@
     <!--endregion-->
     <!--region Switch-->
     <string name="component_switch_description">Switch component allows the user to activate or deactivate the state of an element or concept. It is also used to control binary options (On/Off or True/False).</string>
+
     <!--endregion-->
     <string name="component_progressbar_description">The progress bar component is used to display the length and your progression inside the process or to express a waiting time. This waiting time can be either determinate or indeterminate..</string>
     <string name="component_tag_description">Tags are used to label content and help users quickly recognize info about them: Categories, Status… Can be applied with different colors and designs that are associated with a content due to its characteristics: new content, unvisited content, featured content… Users can’t interact with Tags.</string>
@@ -111,5 +112,7 @@
     <string name="spark_text_link_paragraph_example_"><annotation typography="body1" color="neutral">This is Adevinta </annotation><annotation typography="body1" color="main"><u><b>Privacy &amp; Policy</b></u></annotation><annotation typography="body1" color="neutral"> also lots of extra information you maybe interested in or should I inform you about that extra information. you might be not knowing it</annotation></string>
 
     <string name="spark_text_link_short_example_"><annotation typography="display2" color="neutral">Learn Kotlin Programming </annotation><annotation typography="display3" color="success"><u><b>https://kotlinlang.org</b></u></annotation></string>
+
+    <string name="component_snackbar_description">Snackbars provide brief messages about app processes at the bottom of the screen.</string>
 
 </resources>
