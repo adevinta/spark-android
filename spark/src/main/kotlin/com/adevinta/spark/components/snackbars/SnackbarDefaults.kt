@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,35 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.snackbar
+package com.adevinta.spark.components.snackbars
 
-import androidx.compose.foundation.layout.Column
-import com.adevinta.spark.components.snackbars.Snackbar
-import com.adevinta.spark.components.snackbars.SnackbarColors
-import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.paparazziRule
-import com.adevinta.spark.sparkSnapshotNightMode
-import org.junit.Rule
-import org.junit.Test
-
-internal class SnackbarDocScreenshot {
-
-    @get:Rule
-    val paparazzi = paparazziRule()
-
-    @Test
-    fun snackbarColorsShowcase() {
-        paparazzi.sparkSnapshotNightMode {
-            Column {
-                SnackbarColors.entries.forEach {
-                    Snackbar(
-                        colors = it,
-                        actionLabel = "Action",
-                    ) {
-                        Text("Lorem ipsum dolor sit amet")
-                    }
-                }
-            }
-        }
-    }
+public object SnackbarDefaults {
+    public val intent: SnackbarIntent = SnackbarIntent.Neutral
+    public val style: SnackbarStyle = SnackbarStyle.Tinted
+    internal const val SnackbarFadeInMillis = 150
+    internal const val SnackbarFadeOutMillis = 75
+    internal const val SnackbarInBetweenDelayMillis = 0
+    internal const val LONG_DURATION_MILLIS = 10000L
+    internal const val SHORT_DURATION_MILLIS = 4000L
 }

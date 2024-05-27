@@ -61,4 +61,7 @@
     <!--DragHandle-->
     <string name="spark_drag_handle_a11y">Drag handle</string>
 
+    <!--Snackbar-->
+    <string name="spark_snackbar_dismiss_a11y">Dismiss</string>
+
 </resources>
