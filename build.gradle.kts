@@ -38,3 +38,34 @@ plugins {
 allprojects {
     apply(plugin = "com.adevinta.spark.spotless")
 }
+
+// https://github.com/google/guava/issues/6801
+libs.versions.paparazzi.get().let {
+    if (it != "1.3.3") {
+        throw GradleException(
+            """
+            It seems like you've just updated Paparazzi to $it.
+            Please check if this version includes a fix for Guava's -jre published variant.
+            If this is the case, please remove this check and the workaround below, otherwise, update the version check above.
+            """.trimIndent(),
+        )
+    }
+    subprojects {
+        plugins.withId("app.cash.paparazzi") {
+            // Defer until afterEvaluate so that testImplementation is created by Android plugin.
+            afterEvaluate {
+                dependencies.constraints {
+                    add("testImplementation", "com.google.guava:guava") {
+                        attributes {
+                            attribute(
+                                TargetJvmEnvironment.TARGET_JVM_ENVIRONMENT_ATTRIBUTE,
+                                objects.named(TargetJvmEnvironment.STANDARD_JVM),
+                            )
+                        }
+                        because("LayoutLib and sdk-common depend on Guava's -jre published variant.")
+                    }
+                }
+            }
+        }
+    }
+}
