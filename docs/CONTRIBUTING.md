@@ -57,7 +57,7 @@ Here is a list of Gradle tasks commonly used in this project:
   ```
 - Screenshot testing: record golden images
   ```bash
-  ./gradlew recordPaparazziRelease
+  ./gradlew cleanRecordPaparazziRelease
   ```
 - Linting: run Lint analysis
   ```bash

@@ -10,7 +10,7 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value="recordPaparazziRelease" />
+          <option value="cleanRecordPaparazziRelease" />
         </list>
       </option>
       <option name="vmOptions" />
