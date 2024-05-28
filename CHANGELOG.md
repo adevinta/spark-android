@@ -4,6 +4,20 @@
 
 ## [Unreleased]
 
+## [0.10.0]
+
+_2024-05-16_
+
+### Spark
+- 🆕 `BottomSheetScaffold` now has a new sheetPeekHeight parameter
+- 💄 `Chip` Change chip icon default size to be bigger
+- 💄 `TextField` Change TextField Icon color from onSurface to neutral
+- 💄 `Icons` Update some icons
+- 🐛 `ProgressTracker` Fix clipped ProgressTracker indicator
+
+### Catalog App
+- 🐛 `Checkbox` Fix intents in CheckboxConfigurator
+
 ## [0.9.0]
 
 _2024-04-23_
@@ -263,7 +277,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.9.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.10.0...HEAD
+
+[0.10.0]: https://github.com/adevinta/spark-android/releases/tag/0.10.0
 
 [0.9.0]: https://github.com/adevinta/spark-android/releases/tag/0.9.0
 
