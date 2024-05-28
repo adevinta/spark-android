@@ -1,4 +1,4 @@
-package com.adevinta.spark.components.snackbars
+# Package com.adevinta.spark.components.snackbars
 
 [Snackbars](https://spark.adevinta.com/1186e1705/p/36d4af-snack-bar--toast/b/380770)
 
