@@ -40,7 +40,7 @@ fun paparazziRule(
     deviceConfig: DeviceConfig = DefaultTestDevices.Phone,
     renderExtensions: Set<RenderExtension> = setOf(),
 ) = Paparazzi(
-    environment = patchedEnvironment(),
+    environment = detectEnvironment(),
     deviceConfig = deviceConfig,
     renderingMode = renderingMode,
     renderExtensions = renderExtensions,
@@ -61,7 +61,7 @@ object DefaultTestDevices {
         xdpi = 512,
         ydpi = 512,
         orientation = ScreenOrientation.PORTRAIT,
-        density = Density.DPI_560,
+        density = Density.create(560),
         ratio = ScreenRatio.LONG,
         size = ScreenSize.NORMAL,
         keyboard = Keyboard.NOKEY,
@@ -77,7 +77,7 @@ object DefaultTestDevices {
         xdpi = 420,
         ydpi = 420,
         orientation = ScreenOrientation.PORTRAIT,
-        density = Density.DPI_420,
+        density = Density.create(420),
         ratio = ScreenRatio.NOTLONG,
         size = ScreenSize.XLARGE,
         keyboard = Keyboard.NOKEY,
@@ -111,20 +111,6 @@ object DefaultTestDevices {
 }
 
 data class TestDeviceSpecs(val width: Int, val height: Int, val dpi: Int)
-
-/**
- * Lower the current Paparazzi Environment from API level 34 to 33 to work around new resource conflicts:
- *
- * ```
- * SEVERE: resources.format: Hexadecimal color expected, found Color State List for @android:color/system_bar_background_semi_transparent
- * java.lang.NumberFormatException: Color value '/usr/local/lib/android/sdk/platforms/android-34/data/res/color/system_bar_background_semi_transparent.xml' has wrong size. Format is either#AARRGGBB, #RRGGBB, #RGB, or #ARGB
- * ```
- *
- * GitHub issue: https://github.com/cashapp/paparazzi/issues/1025
- */
-internal fun patchedEnvironment() = with(detectEnvironment()) {
-    copy(compileSdkVersion = 33, platformDir = platformDir.replace("34", "33"))
-}
 
 internal const val MaxPercentDifference: Double = 0.01
 internal const val PaparazziTheme: String = "android:Theme.MaterialComponent.Light.NoActionBar"
