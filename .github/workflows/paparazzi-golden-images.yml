@@ -2,12 +2,6 @@ name: '📸 Paparazzi Golden Images'
 
 on:
   workflow_dispatch:
-    inputs:
-      force:
-        description: 'Force rendering of all golden images'
-        required: true
-        default: false
-        type: boolean
 
 jobs:
   paparazzi-golden-images:
@@ -17,4 +11,3 @@ jobs:
       - uses: ./.github/actions/paparazzi-golden-images
         with:
           github-token: ${{ secrets.PAT_SPARK || secrets.GITHUB_TOKEN }}
-          force: ${{ inputs.force }}
