@@ -26,6 +26,7 @@ runs:
     - run: ./gradlew cleanRecordPaparazziRelease
       shell: bash
     - run: |
+        git status --porcelain
         git add -- '**/src/test/snapshots/**/*.png'
 
         if ! git diff --cached --quiet --exit-code -- '**/src/test/snapshots/**/*.png' ; then
