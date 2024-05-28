@@ -26,8 +26,8 @@ runs:
     - run: ./gradlew cleanRecordPaparazziRelease
       shell: bash
     - run: |
-        # Record all snapshots to the index, to be able to detect untracked ones
-        git add --intent-to-add -- '**/src/test/snapshots/**/*.png'
+        git status --porcelain
+        git add -- '**/src/test/snapshots/**/*.png'
 
         if ! git diff --cached --quiet --exit-code -- '**/src/test/snapshots/**/*.png' ; then
           git config user.name 'spark-ui-bot'
