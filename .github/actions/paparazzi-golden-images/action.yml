@@ -30,7 +30,7 @@ runs:
     - run: git rm -- **/src/test/snapshots/**/*.png
       shell: bash
       if: inputs.force == 'true'
-    - run: ./gradlew recordPaparazziRelease
+    - run: ./gradlew cleanRecordPaparazziRelease
       shell: bash
     - run: |
         # Record all snapshots to the index, to be able to detect untracked ones
