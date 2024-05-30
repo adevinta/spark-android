@@ -72,7 +72,7 @@ androidx.vectordrawable:vectordrawable-animated:1.1.0
 androidx.vectordrawable:vectordrawable:1.1.0
 androidx.versionedparcelable:versionedparcelable:1.1.1
 androidx.window.extensions.core:core:1.0.0
-androidx.window:window:1.2.0
+androidx.window:window:1.3.0
 com.google.accompanist:accompanist-drawablepainter:0.34.0
 com.google.guava:listenablefuture:1.0
 com.squareup.okhttp3:okhttp:4.12.0
