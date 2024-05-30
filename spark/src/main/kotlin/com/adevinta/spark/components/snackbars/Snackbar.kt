@@ -27,7 +27,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.SnackbarData
+import androidx.compose.material3.SnackbarDefaults
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.material3.Text
@@ -38,13 +41,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.buttons.ButtonFilled
-import com.adevinta.spark.components.buttons.ButtonGhost
-import com.adevinta.spark.components.buttons.ButtonTinted
-import com.adevinta.spark.components.iconbuttons.IconButtonFilled
-import com.adevinta.spark.components.iconbuttons.IconButtonGhost
-import com.adevinta.spark.components.iconbuttons.IconButtonTinted
+import com.adevinta.spark.components.buttons.BaseSparkButton
 import com.adevinta.spark.components.icons.Icon
+import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.FlashlightFill
 import com.adevinta.spark.icons.SparkIcon
@@ -52,6 +51,12 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import androidx.compose.material3.Snackbar as MaterialSnackBar
+
+public val SnackbarDefaults.style: SnackbarStyle
+    get() = SnackbarStyle.Tinted
+
+public val SnackbarDefaults.intent: SnackbarIntent
+    get() = SnackbarIntent.Neutral
 
 @Composable
 internal fun SparkSnackbar(
@@ -116,34 +121,24 @@ private fun getDismissIconComposable(
     style: SnackbarStyle,
     onClick: () -> Unit,
     isDismissIconEnabled: Boolean,
-):
-    @Composable()
-    (() -> Unit)? {
+): @Composable() (() -> Unit)? {
     val dismissIconComposable: (@Composable () -> Unit)? = isDismissIconEnabled.takeIf { it }?.let {
         {
-            if (intent == SnackbarIntent.SurfaceInverse) {
-                IconButtonGhost(
-                    intent = intent.toIconButtonIntent(),
-                    modifier = Modifier.padding(end = 8.dp),
-                    onClick = { onClick.invoke() },
-                    icon = SparkIcons.Close,
+            val colors = IconButtonDefaults.iconButtonColors(
+                contentColor = when (style) {
+                    SnackbarStyle.Filled -> contentColorFor(backgroundColor = intent.filledColor)
+                    SnackbarStyle.Tinted -> contentColorFor(backgroundColor = intent.tintedColor)
+                },
+            )
+            IconButton(
+                colors = colors,
+                modifier = Modifier.padding(end = 8.dp),
+                onClick = { onClick.invoke() },
+            ) {
+                Icon(
+                    sparkIcon = SparkIcons.Close,
+                    contentDescription = null, // this is a decorative icon)
                 )
-            } else {
-                when (style) {
-                    SnackbarStyle.Filled -> IconButtonFilled(
-                        intent = intent.toIconButtonIntent(),
-                        modifier = Modifier.padding(end = 8.dp),
-                        onClick = { onClick.invoke() },
-                        icon = SparkIcons.Close,
-                    )
-
-                    SnackbarStyle.Tinted -> IconButtonTinted(
-                        intent = intent.toIconButtonIntent(),
-                        modifier = Modifier.padding(end = 8.dp),
-                        onClick = { onClick.invoke() },
-                        icon = SparkIcons.Close,
-                    )
-                }
             }
         }
     }
@@ -157,44 +152,31 @@ private fun getActionComposable(
     style: SnackbarStyle,
     actionLabel: String? = null,
     isActionOnNewLine: Boolean = false,
-):
-    @Composable()
-    (() -> Unit)? {
+): @Composable() (() -> Unit)? {
     val actionComposable: (@Composable () -> Unit)? = actionLabel?.let {
         {
+            val colors = ButtonDefaults.textButtonColors(
+                contentColor = when (style) {
+                    SnackbarStyle.Filled -> contentColorFor(backgroundColor = intent.filledColor)
+                    SnackbarStyle.Tinted -> contentColorFor(backgroundColor = intent.tintedColor)
+                },
+            )
+
             val buttonModifier = when {
-                isActionOnNewLine ->
-                    Modifier
-                        .fillMaxWidth(0.8f)
-                        .wrapContentWidth(Alignment.End)
+                isActionOnNewLine -> Modifier
+                    .fillMaxWidth(0.8f)
+                    .wrapContentWidth(Alignment.End)
 
                 else -> Modifier
             }
 
-            if (intent == SnackbarIntent.SurfaceInverse) {
-                ButtonGhost(
-                    intent = intent.toButtonIntent(),
-                    modifier = buttonModifier,
-                    onClick = { onClick.invoke() },
-                    content = { Text(actionLabel) },
-                )
-            } else {
-                when (style) {
-                    SnackbarStyle.Filled -> ButtonFilled(
-                        intent = intent.toButtonIntent(),
-                        modifier = buttonModifier,
-                        onClick = { onClick.invoke() },
-                        content = { Text(actionLabel) },
-                    )
-
-                    SnackbarStyle.Tinted -> ButtonTinted(
-                        modifier = buttonModifier,
-                        intent = intent.toButtonIntent(),
-                        content = { Text(actionLabel) },
-                        onClick = { onClick.invoke() },
-                    )
-                }
-            }
+            BaseSparkButton(
+                modifier = buttonModifier,
+                colors = colors,
+                onClick = { onClick.invoke() },
+                elevation = null,
+                content = { Text(actionLabel) },
+            )
         }
     }
 
@@ -299,11 +281,8 @@ public class SnackbarSparkVisuals(
  * Preview
  */
 internal const val StubBodyShort = "Lorem ipsum dolor sit amet"
-internal const val StubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
-    "Morbi lacus dolorsnx -d"
-internal const val StubBodyLong =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
-        "pulvinar eu nulla sit amet, iaculis interdum."
+internal const val StubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+internal const val StubBodyLong = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, "
 internal const val StubAction = "Action"
 
 @Preview

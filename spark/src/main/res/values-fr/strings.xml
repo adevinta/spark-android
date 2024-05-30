@@ -64,6 +64,7 @@
     <string name="spark_drag_handle_a11y">Poignée de déplacement</string>
     <!--endregion-->
 
-    <!--Snackbar-->
+    <!--region Snackbar-->
     <string name="spark_snackbar_dismiss_a11y">Fermer</string>
+    <!--endregion-->
 </resources>

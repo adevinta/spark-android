@@ -1,59 +1,51 @@
 # Package com.adevinta.spark.components.snackbars
 
 [Snackbars](https://spark.adevinta.com/1186e1705/p/36d4af-snack-bar--toast/b/380770)
-
-/**
-* SparkSnackbar is a custom Snackbar component that supports various styles and intents.
-*
-* @param intent The intent of the Snackbar.
-* @param style The style of the Snackbar.
-* @param isActionOnNewLine Whether the action is displayed on a new line.
-* @param isDismissIconEnabled Whether the dismiss icon is enabled.
-* @param modifier Modifier to apply to the Snackbar.
-* @param icon Optional icon to display in the Snackbar.
-* @param actionLabel Label for the action button.
-* @param onActionClick Callback for action button click.
-* @param onDismissIconClick Callback for dismiss icon click.
-* @param content Content to display inside the Snackbar.
-  */
+inform users of a process that an app has performed or will perform
+They appear temporarily, towards the bottom of the screen.
+They should not interrupt the user experience, and they don’t require user input to disappear.
+Only one snackbar may be displayed at a time.
 
 ```kotlin
-  @Composable
-  @InternalSparkApi
-  public fun SparkSnackbar(
-  intent: SnackbarIntent,
-  style: SnackbarStyle,
-  isActionOnNewLine: Boolean,
-  isDismissIconEnabled: Boolean,
-  modifier: Modifier = Modifier,
-  icon: SparkIcon? = null,
-  actionLabel: String? = null,
-  onActionClick: (() -> Unit)? = null,
-  onDismissIconClick: (() -> Unit)? = null,
-  content: @Composable () -> Unit,
-  ) {}
+@Composable
+public fun Snackbar(
+    data: SnackbarData,
+    modifier: Modifier = Modifier,
+    isActionOnNewLine: Boolean = false,
+    isDismissIconEnabled: Boolean = false,
+    ){}
 ```
-/**
-* Snackbar component with support for various styles and intents.
-*
-* @param data The SnackbarData to display.
-* @param modifier Modifier to apply to the Snackbar.
-* @param isActionOnNewLine Whether the action is displayed on a new line.
-* @param isDismissIconEnabled Whether the dismiss icon is enabled.
-  */
 
 ```kotlin
-  @Composable
-  public fun Snackbar(
-  data: SnackbarData,
-  modifier: Modifier = Modifier,
-  isActionOnNewLine: Boolean = false,
-  isDismissIconEnabled: Boolean = false,
-  ) {
-  content {}
-  }
+@Composable
+public fun Snackbar(
+    modifier: Modifier = Modifier,
+    intent: SnackbarIntent = SnackbarDefaults.intent,
+    style: SnackbarStyle = SnackbarDefaults.style,
+    isActionOnNewLine: Boolean = false,
+    isDismissIconEnabled: Boolean = false,
+    icon: SparkIcon? = null,
+    actionLabel: String? = null,
+    onActionClick: (() -> Unit)? = null,
+    onDismissIconClick: (() -> Unit)? = null,
+    content: @Composable (() -> Unit),
+    ){}
 ```
 
+```kotlin
+private val snackbarHostState = remember { SnackbarHostState() }
+
+LaunchedEffect(conversationsState) { 
+    if (shouldShowSnackbar) { 
+        snackbarHostState.showSnackbar(
+            message = "Message", 
+            duration = SnackbarDuration.Short) 
+    }
+}
+Scaffold (
+    snackbarHost = { 
+        SnackbarHost(hostState = snackbarHostState) }) {}
+```
 
 | Light                                                                                                      | Dark                                                                                                       |
 |------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|

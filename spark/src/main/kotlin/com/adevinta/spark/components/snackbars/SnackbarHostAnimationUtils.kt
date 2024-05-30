@@ -47,11 +47,12 @@ import androidx.compose.ui.util.fastFilterNotNull
 import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMapTo
-import com.adevinta.spark.components.snackbars.SnackbarDefaults.LONG_DURATION_MILLIS
-import com.adevinta.spark.components.snackbars.SnackbarDefaults.SHORT_DURATION_MILLIS
-import com.adevinta.spark.components.snackbars.SnackbarDefaults.SnackbarFadeInMillis
-import com.adevinta.spark.components.snackbars.SnackbarDefaults.SnackbarFadeOutMillis
-import com.adevinta.spark.components.snackbars.SnackbarDefaults.SnackbarInBetweenDelayMillis
+
+internal const val SnackbarFadeInMillis = 150
+internal const val SnackbarFadeOutMillis = 75
+internal const val SnackbarInBetweenDelayMillis = 0
+internal const val LONG_DURATION_MILLIS = 10000L
+internal const val SHORT_DURATION_MILLIS = 4000L
 
 /**
  * Converts the SnackbarDuration to milliseconds based on the SnackbarDuration type.
