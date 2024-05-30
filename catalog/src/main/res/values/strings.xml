@@ -61,6 +61,10 @@
     <!--endregion-->
 
     <string name="component_dialog_description">A dialog is a modal window that appears in front of content to provide critical information or ask for a decision.</string>
+    <!--Dropdowns example-->
+    <string name="component_dropdowns_description">Dropdown is an interactive element that allows users to select an option from a list of choices presented in a collapsible menu. It saves space on the interface by concealing the options until the user interacts with the component.</string>
+    <!--endregion-->
+
     <string name="component_tab_description">Tabs are used to group different but related content, allowing users to navigate views without leaving the page. They always contain at least two items and one tab is active at a time.</string>
     <string name="component_textfield_description">The input / text-field component allows users to write in the space provided for the content.</string>
     <string name="component_tokens_description">The tokens are the basis of this Design System and allow each brand to choose its colors, shapes, typos and icons.</string>
