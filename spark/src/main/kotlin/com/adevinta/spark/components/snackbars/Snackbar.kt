@@ -44,6 +44,7 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.BaseSparkButton
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
+import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.FlashlightFill
 import com.adevinta.spark.icons.SparkIcon
@@ -136,6 +137,7 @@ private fun getDismissIconComposable(
                 onClick = { onClick.invoke() },
             ) {
                 Icon(
+                    size = IconSize.Small,
                     sparkIcon = SparkIcons.Close,
                     contentDescription = null, // this is a decorative icon)
                 )
@@ -351,10 +353,10 @@ private fun BodyIconSnackbarPreview() {
 private fun BodyIconActionNewLineLongSnackbarPreview() {
     PreviewTheme {
         Snackbar(
-            intent = SnackbarIntent.Success,
+            intent = SnackbarIntent.SurfaceInverse,
             isDismissIconEnabled = true,
             isActionOnNewLine = true,
-            style = SnackbarStyle.Filled,
+            style = SnackbarStyle.Tinted,
             icon = SparkIcons.FlashlightFill,
             actionLabel = StubBodyLong,
         ) {
