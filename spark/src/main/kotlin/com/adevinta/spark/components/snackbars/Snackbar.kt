@@ -122,7 +122,9 @@ private fun getDismissIconComposable(
     style: SnackbarStyle,
     onClick: () -> Unit,
     isDismissIconEnabled: Boolean,
-): @Composable() (() -> Unit)? {
+):
+    @Composable()
+    (() -> Unit)? {
     val dismissIconComposable: (@Composable () -> Unit)? = isDismissIconEnabled.takeIf { it }?.let {
         {
             val colors = IconButtonDefaults.iconButtonColors(
@@ -154,7 +156,9 @@ private fun getActionComposable(
     style: SnackbarStyle,
     actionLabel: String? = null,
     isActionOnNewLine: Boolean = false,
-): @Composable() (() -> Unit)? {
+):
+    @Composable()
+    (() -> Unit)? {
     val actionComposable: (@Composable () -> Unit)? = actionLabel?.let {
         {
             val colors = ButtonDefaults.textButtonColors(
@@ -165,9 +169,10 @@ private fun getActionComposable(
             )
 
             val buttonModifier = when {
-                isActionOnNewLine -> Modifier
-                    .fillMaxWidth(0.8f)
-                    .wrapContentWidth(Alignment.End)
+                isActionOnNewLine ->
+                    Modifier
+                        .fillMaxWidth(0.8f)
+                        .wrapContentWidth(Alignment.End)
 
                 else -> Modifier
             }

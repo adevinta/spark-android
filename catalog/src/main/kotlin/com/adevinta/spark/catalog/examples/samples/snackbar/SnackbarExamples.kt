@@ -22,7 +22,6 @@
 package com.adevinta.spark.catalog.examples.samples.snackbar
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.Text
@@ -53,18 +52,15 @@ public val SnackbarExamples: List<Example> = listOf(
         description = "Snackbar example filled ",
         sourceUrl = SnackbarExampleSourceUrl,
     ) {
-        Column {
-
-            Snackbar(
-                intent = SnackbarIntent.Info,
-                isDismissIconEnabled = true,
-                isActionOnNewLine = true,
-                style = SnackbarStyle.Filled,
-                icon = SparkIcons.LikeFill,
-                actionLabel = "Action",
-            ) {
-                Text("Simple message!")
-            }
+        Snackbar(
+            intent = SnackbarIntent.Info,
+            isDismissIconEnabled = true,
+            isActionOnNewLine = true,
+            style = SnackbarStyle.Filled,
+            icon = SparkIcons.LikeFill,
+            actionLabel = "Action",
+        ) {
+            Text("Simple message!")
         }
     },
     Example(
@@ -72,19 +68,17 @@ public val SnackbarExamples: List<Example> = listOf(
         description = "Snackbar example tinted ",
         sourceUrl = SnackbarExampleSourceUrl,
     ) {
-        Column {
-            Snackbar(
-                intent = SnackbarIntent.Alert,
-                isDismissIconEnabled = true,
-                isActionOnNewLine = false,
-                style = SnackbarStyle.Tinted,
-                icon = SparkIcons.LikeFill,
-                actionLabel = "Action",
-            ) {
-                Text("Simple message!")
-            }
-            VerticalSpacer(8.dp)
+        Snackbar(
+            intent = SnackbarIntent.Alert,
+            isDismissIconEnabled = true,
+            isActionOnNewLine = false,
+            style = SnackbarStyle.Tinted,
+            icon = SparkIcons.LikeFill,
+            actionLabel = "Action",
+        ) {
+            Text("Simple message!")
         }
+        VerticalSpacer(8.dp)
     },
     Example(
         name = "Snackbar host",

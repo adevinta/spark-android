@@ -43,7 +43,9 @@ package com.adevinta.spark.components.snackbars
  * SOFTWARE.
  */
 
-// SnackbarStyle is used to define the style of the Snackbar, which can be Filled or Tinted.
+/**
+ * SnackbarStyle is used to define the style of the Snackbar, which can be Filled or Tinted.
+ */
 public enum class SnackbarStyle {
     Filled,
     Tinted,

@@ -168,9 +168,10 @@ public class SnackbarHostState {
     }
 
     /**
-     * An internal class that represents the data of a Snackbar.
-     * @param visuals The visuals of the Snackbar.
-     * @param continuation The continuation of the Snackbar.
+     * An internal class that represents the data of a particular Snackbar.
+     * @param visuals Holds the visual representation for a particular [Snackbar]
+     * @param continuation handle the coroutine to give back the action resulting on the continuation
+     * of the coroutine where the Snackbar has been shown to either notify a action performed or a dismissed
      */
     internal class SnackbarDataImpl(
         override val visuals: SnackbarSparkVisuals,
@@ -186,6 +187,7 @@ public class SnackbarHostState {
 
         /**
          * Dismisses the Snackbar.
+         * Function to be called when Snackbar is dismissed either by timeout or by the user
          */
         override fun dismiss() {
             if (continuation.isActive) continuation.resume(SnackbarResult.Dismissed)

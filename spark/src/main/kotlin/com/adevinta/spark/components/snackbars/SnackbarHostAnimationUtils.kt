@@ -48,11 +48,11 @@ import androidx.compose.ui.util.fastForEach
 import androidx.compose.ui.util.fastMap
 import androidx.compose.ui.util.fastMapTo
 
-internal const val SnackbarFadeInMillis = 150
-internal const val SnackbarFadeOutMillis = 75
-internal const val SnackbarInBetweenDelayMillis = 0
-internal const val LONG_DURATION_MILLIS = 10000L
-internal const val SHORT_DURATION_MILLIS = 4000L
+private const val SnackbarFadeInMillis = 150
+private const val SnackbarFadeOutMillis = 75
+private const val SnackbarInBetweenDelayMillis = 0
+private const val LONG_DURATION_MILLIS = 10000L
+private const val SHORT_DURATION_MILLIS = 4000L
 
 /**
  * Converts the SnackbarDuration to milliseconds based on the SnackbarDuration type.
