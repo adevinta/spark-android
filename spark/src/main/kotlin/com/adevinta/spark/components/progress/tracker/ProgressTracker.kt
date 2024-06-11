@@ -38,6 +38,8 @@ import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
+import androidx.compose.material3.VerticalDivider as MaterialVerticalDivider
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
@@ -65,8 +67,6 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
-import com.adevinta.spark.components.divider.Divider
-import com.adevinta.spark.components.divider.VerticalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.progress.tracker.LayoutOrientation.Horizontal
 import com.adevinta.spark.components.progress.tracker.LayoutOrientation.Vertical
@@ -354,9 +354,9 @@ private fun ProgressTrack(
         label = "Track color",
     )
     if (orientation == Horizontal) {
-        Divider(modifier = modifier, color = trackColor)
+        MaterialHorizontalDivider(modifier = modifier, color = trackColor)
     } else {
-        VerticalDivider(modifier = modifier, color = trackColor)
+        MaterialVerticalDivider(modifier = modifier, color = trackColor)
     }
 }
 

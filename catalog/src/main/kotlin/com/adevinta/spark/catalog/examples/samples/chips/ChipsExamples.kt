@@ -70,7 +70,7 @@ import com.adevinta.spark.components.chips.ChipSelectable
 import com.adevinta.spark.components.chips.ChipStyles
 import com.adevinta.spark.components.chips.ChipStyles.Dashed
 import com.adevinta.spark.components.chips.ChipStyles.Tinted
-import com.adevinta.spark.components.divider.Divider
+import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.menu.DropdownMenu
 import com.adevinta.spark.components.menu.DropdownMenuItem
@@ -289,7 +289,7 @@ private fun ColumnScope.ChipAssist() {
                 }
             }
 
-            Divider(color = LocalContentColor.current)
+            MaterialHorizontalDivider(color = LocalContentColor.current)
             Column {
                 Text(
                     text = nowDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)),

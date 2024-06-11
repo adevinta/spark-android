@@ -50,7 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.divider.Divider
+import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.icons.MailOutline
@@ -210,7 +210,7 @@ internal fun DropdownMenuPreview(
                         )
                     },
                 )
-                Divider()
+                HorizontalDivider()
                 DropdownMenuItem(
                     text = { Text("Send Feedback") },
                     onClick = { /* Handle send feedback! */ },

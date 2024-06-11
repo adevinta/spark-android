@@ -49,7 +49,7 @@ import androidx.compose.ui.unit.Dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.badge.Badge
-import com.adevinta.spark.components.divider.SparkDivider
+import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.tab.TabGroupDefaults.tabIndicatorOffset
 import com.adevinta.spark.icons.AccountFill
@@ -99,7 +99,7 @@ internal fun SparkTabGroup(
         )
     },
     divider: @Composable () -> Unit = @Composable {
-        SparkDivider()
+        HorizontalDivider()
     },
     tabs: @Composable () -> Unit,
 ) {
