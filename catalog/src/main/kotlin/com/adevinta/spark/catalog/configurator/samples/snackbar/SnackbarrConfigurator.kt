@@ -39,7 +39,6 @@ import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
-import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.ButtonTinted
 import com.adevinta.spark.components.menu.DropdownMenuItem
@@ -48,7 +47,6 @@ import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.snackbars.SnackbarIntent
 import com.adevinta.spark.components.snackbars.SnackbarSparkVisuals
 import com.adevinta.spark.components.snackbars.SnackbarStyle
-import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.textfields.TextField
@@ -162,7 +160,7 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
         Text(contentText)
     }
 
-    ButtonTinted(modifier = Modifier.fillMaxWidth(), size = ButtonSize.Medium,onClick = {
+    ButtonTinted(modifier = Modifier.fillMaxWidth(), size = ButtonSize.Medium, onClick = {
         scope.launch {
             snackbarHostState.showSnackbar(
                 SnackbarSparkVisuals(
@@ -172,7 +170,7 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
                     style = style,
                     icon = if (isIconEnabled) SparkIcons.FlashlightFill else null,
                     actionLabel = actionText,
-                    message = contentText ,
+                    message = contentText,
                     duration = SnackbarDuration.Short,
                 ),
             )
