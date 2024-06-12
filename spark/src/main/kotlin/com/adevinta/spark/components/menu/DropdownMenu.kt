@@ -19,29 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("DEPRECATION")
-
 package com.adevinta.spark.components.menu
 
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.MenuItemColors
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -50,18 +58,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.divider.Divider
 import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.icons.IconButton
 import com.adevinta.spark.icons.MailOutline
-import com.adevinta.spark.icons.MoreMenuVertical
 import com.adevinta.spark.icons.PenFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WheelOutline
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.DropdownMenu as MaterialDropdownMenu
-import androidx.compose.material3.DropdownMenuItem as MaterialDropdownMenuItem
 
 /**
  * <a href="https://m3.material.io/components/menus/overview" class="external" target="_blank">Material Design dropdown menu</a>.
@@ -104,6 +110,7 @@ public fun DropdownMenu(
     modifier: Modifier = Modifier,
     offset: DpOffset = DpOffset(0.dp, 0.dp),
     properties: PopupProperties = PopupProperties(focusable = true),
+    scrollState: ScrollState = rememberScrollState(),
     content: @Composable ColumnScope.() -> Unit,
 ) {
     MaterialDropdownMenu(
@@ -112,6 +119,7 @@ public fun DropdownMenu(
         modifier = modifier,
         offset = offset,
         properties = properties,
+        scrollState = scrollState,
         content = content,
     )
 }
@@ -133,8 +141,6 @@ public fun DropdownMenu(
  * @param enabled controls the enabled state of this menu item. When `false`, this component will
  * not respond to user input, and it will appear visually disabled and disabled to accessibility
  * services.
- * @param colors [MenuItemColors] that will be used to resolve the colors used for this menu item in
- * different states. See [MenuDefaults.itemColors].
  * @param contentPadding the padding applied to the content of this menu item
  * @param interactionSource the [MutableInteractionSource] representing the stream of [Interaction]s
  * for this menu item. You can create and pass in your own `remember`ed instance to observe
@@ -148,81 +154,152 @@ public fun DropdownMenuItem(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     enabled: Boolean = true,
-    colors: MenuItemColors = MenuDefaults.itemColors(),
-    contentPadding: PaddingValues = MenuDefaults.DropdownMenuItemContentPadding,
+    contentPadding: PaddingValues = PaddingValues(
+        horizontal = 16.dp,
+        vertical = 8.dp,
+    ),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    MaterialDropdownMenuItem(
-        text = text,
-        onClick = onClick,
-        modifier = modifier,
-        leadingIcon = leadingIcon,
-        trailingIcon = trailingIcon,
-        enabled = enabled,
-        colors = colors,
-        contentPadding = contentPadding,
-        interactionSource = interactionSource,
-    )
+    val colors = MenuDefaults.itemColors()
+    Row(
+        modifier = modifier
+            .clickable(
+                enabled = enabled,
+                onClick = onClick,
+                interactionSource = interactionSource,
+                indication = rememberRipple(true),
+            )
+            .fillMaxWidth()
+            // Preferred min and max width used during the intrinsic measurement.
+            .sizeIn(
+                minWidth = 112.dp,
+                maxWidth = 280.dp,
+                minHeight = 48.dp,
+            )
+            .padding(contentPadding),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        ProvideTextStyle(SparkTheme.typography.body1) {
+            if (leadingIcon != null) {
+                CompositionLocalProvider(
+                    LocalContentColor provides colors.leadingIconColor(enabled),
+                ) {
+                    Box(Modifier.defaultMinSize(minWidth = 24.dp)) {
+                        leadingIcon()
+                    }
+                }
+            }
+            CompositionLocalProvider(LocalContentColor provides colors.textColor(enabled).value) {
+                Box(
+                    Modifier
+                        .weight(1f)
+                        .padding(
+                            start = if (leadingIcon != null) 8.dp else 0.dp,
+                            end = if (trailingIcon != null) 8.dp else 0.dp,
+                        ),
+                ) {
+                    text()
+                }
+            }
+            if (trailingIcon != null) {
+                CompositionLocalProvider(
+                    LocalContentColor provides colors.trailingIconColor(enabled),
+                ) {
+                    Box(Modifier.defaultMinSize(minWidth = 24.dp)) {
+                        trailingIcon()
+                    }
+                }
+            }
+        }
+    }
 }
+
+/**
+ * Represents the text color for a menu item, depending on its [enabled] state.
+ *
+ * @param enabled whether the menu item is enabled
+ */
+@Composable
+private fun MenuItemColors.textColor(enabled: Boolean): State<Color> {
+    return rememberUpdatedState(if (enabled) textColor else disabledTextColor)
+}
+
+/**
+ * Represents the leading icon color for a menu item, depending on its [enabled] state.
+ *
+ * @param enabled whether the menu item is enabled
+ */
+@Composable
+private fun MenuItemColors.leadingIconColor(enabled: Boolean): Color =
+    if (enabled) leadingIconColor else disabledLeadingIconColor
+
+/**
+ * Represents the trailing icon color for a menu item, depending on its [enabled] state.
+ *
+ * @param enabled whether the menu item is enabled
+ */
+@Composable
+private fun MenuItemColors.trailingIconColor(enabled: Boolean): Color =
+    if (enabled) trailingIconColor else disabledTrailingIconColor
 
 @Preview(
     group = "Menu",
     name = "DropdownMenu",
 )
 @Composable
-internal fun DropdownMenuPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+private fun DropdownMenuItemPreview(@PreviewParameter(ThemeProvider::class) theme: ThemeVariant) {
     PreviewTheme(
         themeVariant = theme,
+        padding = PaddingValues(0.dp),
+        contentPadding = 0.dp,
     ) {
-        var expanded by remember { mutableStateOf(true) }
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .wrapContentSize(Alignment.Center),
-        ) {
-            IconButton(onClick = { expanded = true }) {
-                Icon(SparkIcons.MoreMenuVertical, contentDescription = "Localized description")
-            }
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-            ) {
-                DropdownMenuItem(
-                    text = { Text("Edit") },
-                    onClick = { /* Handle edit! */ },
-                    leadingIcon = {
-                        Icon(
-                            SparkIcons.PenFill,
-                            contentDescription = null,
-                        )
-                    },
+        DropdownMenuItem(
+            text = { Text("Edit") },
+            onClick = { /* Handle edit! */ },
+            leadingIcon = {
+                Icon(
+                    SparkIcons.PenFill,
+                    contentDescription = null,
                 )
-                DropdownMenuItem(
-                    text = { Text("Settings") },
-                    onClick = { /* Handle settings! */ },
-                    leadingIcon = {
-                        Icon(
-                            SparkIcons.WheelOutline,
-                            contentDescription = null,
-                        )
-                    },
+            },
+        )
+        DropdownMenuItem(
+            text = { Text("Save") },
+            onClick = { /* Handle edit! */ },
+        )
+        DropdownMenuItem(
+            text = { Text("Settings") },
+            onClick = { /* Handle settings! */ },
+            enabled = false,
+            leadingIcon = {
+                Icon(
+                    SparkIcons.WheelOutline,
+                    contentDescription = null,
                 )
-                Divider()
-                DropdownMenuItem(
-                    text = { Text("Send Feedback") },
-                    onClick = { /* Handle send feedback! */ },
-                    leadingIcon = {
-                        Icon(
-                            SparkIcons.MailOutline,
-                            contentDescription = null,
-                        )
-                    },
-                    trailingIcon = { Text("F11", textAlign = TextAlign.Center) },
+            },
+        )
+        Divider()
+        DropdownMenuItem(
+            text = { Text("Send Feedback") },
+            onClick = { /* Handle send feedback! */ },
+            leadingIcon = {
+                Icon(
+                    SparkIcons.MailOutline,
+                    contentDescription = null,
                 )
-            }
-        }
+            },
+            trailingIcon = { Text("F11", textAlign = TextAlign.Center) },
+        )
+        DropdownMenuItem(
+            text = { Text("Send Feedback Send Feedback Send Feedback Send Feedback Send Feedback Send Feed") },
+            onClick = { /* Handle send feedback! */ },
+            leadingIcon = {
+                Icon(
+                    SparkIcons.MailOutline,
+                    contentDescription = null,
+                )
+            },
+            trailingIcon = { Text("F11", textAlign = TextAlign.Center) },
+        )
     }
 }
