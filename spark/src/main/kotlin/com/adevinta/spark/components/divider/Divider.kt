@@ -45,13 +45,16 @@ import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
 import androidx.compose.material3.VerticalDivider as MaterialVerticalDivider
 
 public enum class LabelHorizontalAlignment {
-    Start, Center, End
+    Start,
+    Center,
+    End,
 }
 
 public enum class LabelVerticalAlignment {
-    Top, Center, Bottom
+    Top,
+    Center,
+    Bottom,
 }
-
 
 @Deprecated(
     "Divider is deprecated",
@@ -151,7 +154,6 @@ public fun VerticalDivider(
     }
 }
 
-
 @Preview(
     group = "Dividers",
     name = "Divider",
@@ -214,7 +216,6 @@ internal fun DividerPreview(
                 label = "Label",
                 labelVerticalAlignment = LabelVerticalAlignment.Bottom,
             )
-
         }
     }
 }

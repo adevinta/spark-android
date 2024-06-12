@@ -38,8 +38,6 @@ import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
-import androidx.compose.material3.VerticalDivider as MaterialVerticalDivider
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
@@ -82,6 +80,8 @@ import com.adevinta.spark.tokens.transparent
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
+import androidx.compose.material3.VerticalDivider as MaterialVerticalDivider
 
 /**
  * [ProgressTrackerRow] is a visual navigation element typically used to display progress or guide user through a multi-step process.

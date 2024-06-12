@@ -70,7 +70,6 @@ import com.adevinta.spark.components.chips.ChipSelectable
 import com.adevinta.spark.components.chips.ChipStyles
 import com.adevinta.spark.components.chips.ChipStyles.Dashed
 import com.adevinta.spark.components.chips.ChipStyles.Tinted
-import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.menu.DropdownMenu
 import com.adevinta.spark.components.menu.DropdownMenuItem
@@ -89,6 +88,7 @@ import kotlinx.coroutines.delay
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
 
 private const val ChipsExampleSourceUrl = "$SampleSourceUrl/ChipsSamples.kt"
 
