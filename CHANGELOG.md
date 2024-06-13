@@ -4,6 +4,17 @@
 
 ## [Unreleased]
 
+### Spark
+
+- 🎨 The Avatar component was using the color icon without tinting it rendering them incompatible with the dark mode
+
+### Catalog App
+
+- 🎨 KA theme colors for outline has been changed in light mode and in dark mode it's the background + variants color.
+
+### CI
+
+
 ## [0.10.0]
 
 _2024-05-16_
