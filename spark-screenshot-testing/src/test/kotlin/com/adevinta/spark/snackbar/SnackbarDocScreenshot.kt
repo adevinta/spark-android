@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,21 +21,19 @@
  */
 package com.adevinta.spark.snackbar
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumn
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import app.cash.paparazzi.DeviceConfig
 import com.adevinta.spark.components.snackbars.Snackbar
-import com.adevinta.spark.components.snackbars.SnackbarIntent
-import com.adevinta.spark.components.snackbars.SnackbarStyle
-import com.adevinta.spark.icons.LikeFill
-import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshotNightMode
 import com.android.ide.common.rendering.api.SessionParams
 import org.junit.Rule
 import org.junit.Test
 
-internal class SnackbarScreenshot {
+internal class SnackbarDocScreenshot {
 
     @get:Rule
     val paparazzi = paparazziRule(
@@ -43,40 +41,21 @@ internal class SnackbarScreenshot {
         deviceConfig = DeviceConfig.PIXEL_C,
     )
 
+    @OptIn(ExperimentalLayoutApi::class)
     @Test
-    fun snackbarIntentsFilledShowcase() {
+    fun snackbarDocScreenshot() {
         paparazzi.sparkSnapshotNightMode {
-            Column {
-                SnackbarIntent.entries.forEach {
-                    Snackbar(
-                        style = SnackbarStyle.Filled,
-                        intent = it,
-                        isActionOnNewLine = true,
-                        isDismissIconEnabled = true,
-                        icon = SparkIcons.LikeFill,
-                        actionLabel = "Action",
-                    ) {
-                        Text("Lorem ipsum dolor sit amet")
-                    }
-                }
-            }
-        }
-    }
-
-    @Test
-    fun snackbarIntentsTintedShowcase() {
-        paparazzi.sparkSnapshotNightMode {
-            Column {
-                SnackbarIntent.entries.forEach {
-                    Snackbar(
-                        style = SnackbarStyle.Tinted,
-                        intent = it,
-                        isDismissIconEnabled = true,
-                        icon = SparkIcons.LikeFill,
-                        isActionOnNewLine = true,
-                        actionLabel = "Action",
-                    ) {
-                        Text("Lorem ipsum dolor sit amet")
+            FlowColumn {
+                data.forEach { visual ->
+                    Row {
+                        Snackbar(
+                            intent = visual.intent,
+                            style = visual.style,
+                            isActionOnNewLine = visual.message == stubBody,
+                            isDismissIconEnabled = visual.isDismissIconEnabled,
+                            icon = visual.icon,
+                            actionLabel = visual.actionLabel,
+                        ) { Text(visual.message) }
                     }
                 }
             }

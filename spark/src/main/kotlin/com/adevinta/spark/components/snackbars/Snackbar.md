@@ -6,6 +6,7 @@ They appear temporarily, towards the bottom of the screen.
 They should not interrupt the user experience, and they don’t require user input to disappear.
 Only one snackbar may be displayed at a time.
 
+
 ```kotlin
 @Composable
 public fun Snackbar(
@@ -36,6 +37,6 @@ Scaffold(
 }
 ```
 
-| Light                                                                                                      | Dark                                                                                                       |
-|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
-| ![](../../images/com.adevinta.spark.snackbar_SnackbarIntentsScreenshot_snackbarIntentsShowcase__light.png) | ![](../../images/com.adevinta.spark.snackbar_SnackbarIntentsScreenshot_snackbarIntentsShowcase__light.png) |
+| Light                                                                                                | Dark                                                                                             |
+|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.snackbar_SnackbarDocScreenshot_snackbarDocScreenshot__light.png) | ![](../../images/com.adevinta.spark.snackbar_SnackbarDocScreenshot_snackbarDocScreenshot__dark.png) |
