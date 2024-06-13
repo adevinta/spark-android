@@ -103,7 +103,7 @@ public class SnackbarHostState {
      * from display and/or the queue to be displayed.
      *
      * To change the Snackbar appearance, change it in 'snackbarHost'
-     * on the [androidx.compose.material3.Scaffold].
+     * on the [Scaffold].
      * @param message The message to display in the Snackbar.
      * @param icon The icon to display in the Snackbar.
      * @param intent The intent of the Snackbar.
@@ -144,7 +144,7 @@ public class SnackbarHostState {
 
     /**
      * Shows or queues to be shown a [Snackbar] at
-     * the bottom of the [androidx.compose.material3.Scaffold] to which this state
+     * the bottom of the [Scaffold] to which this state
      * is attached and suspends until the snackbar has disappeared.
      *
      * [SnackbarHostState] guarantees to show at most one snackbar at a time. If this function is

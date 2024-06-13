@@ -113,6 +113,6 @@
 
     <string name="spark_text_link_short_example_"><annotation typography="display2" color="neutral">Learn Kotlin Programming </annotation><annotation typography="display3" color="success"><u><b>https://kotlinlang.org</b></u></annotation></string>
 
-    <string name="component_snackbar_description">Snackbars provide brief messages about app processes at the bottom of the screen.</string>
+    <string name="component_snackbar_description">A snackbar component is a brief, non-intrusive notification that appears at the bottom of a screen, delivering concise feedback or information about user actions.</string>
 
 </resources>
