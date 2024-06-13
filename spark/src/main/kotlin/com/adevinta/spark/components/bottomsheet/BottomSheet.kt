@@ -54,6 +54,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPadding
 import com.adevinta.spark.components.bottomsheet.SheetDefaults.ContentTopPaddingNoHandle
 import com.adevinta.spark.components.buttons.ButtonFilled
@@ -145,7 +146,7 @@ internal fun SparkModalBottomSheet(
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberModalBottomSheetState(),
     shape: Shape = ExpandedShape,
-    containerColor: Color = SheetDefaults.ContainerColor,
+    containerColor: Color = SparkTheme.colors.surface,
     contentColor: Color = contentColorFor(containerColor),
     dragHandle: @Composable (() -> Unit)? = {
         DragHandle()

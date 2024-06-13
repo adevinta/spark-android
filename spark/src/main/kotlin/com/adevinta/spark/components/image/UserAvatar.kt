@@ -21,19 +21,20 @@
  */
 package com.adevinta.spark.components.image
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.clipPath
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,11 +46,12 @@ import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.icons.ProFill
 import com.adevinta.spark.icons.ProfileFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.icons.Store
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -63,69 +65,90 @@ internal fun SparkUserAvatar(
     style: UserAvatarStyle = UserAvatarStyle.SMALL,
     fillParentSize: Boolean = false,
     model: Any? = null,
+    color: Color = Color.Unspecified,
     isPro: Boolean = false,
     isOnline: Boolean = false,
 ) {
     val emptyIcon = @Composable {
         ImageIconState(
-            sparkIcon = if (isPro) SparkIcons.Store else SparkIcons.ProfileFill,
+            sparkIcon = if (isPro) SparkIcons.ProFill else SparkIcons.ProfileFill,
+            color = color,
         )
     }
-    Box(
+    val indicatorColor = SparkTheme.colors.success
+    SparkImage(
         modifier = (
             if (fillParentSize) {
                 modifier.fillMaxSize()
             } else {
                 modifier.size(style.imageSize)
             }
-            ).sparkUsageOverlay(),
-    ) {
-        SparkImage(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .clip(SparkTheme.shapes.full)
-                .aspectRatio(1f),
-            model = model,
-            transform = transform,
-            contentDescription = stringResource(id = R.string.spark_user_avatar_content_description),
-            contentScale = ContentScale.Crop,
-            emptyIcon = emptyIcon,
-            errorIcon = emptyIcon,
-        )
-
-        if (isOnline) {
-            PresenceIndicator(
-                modifier = Modifier
-                    .size(style.badgeSize)
-                    .align(Alignment.BottomEnd)
-                    .offset(x = 0.dp, y = style.badgeOffset),
             )
-        }
-    }
+            .sparkUsageOverlay()
+//                .clip(SparkTheme.shapes.full)
+            .aspectRatio(1f)
+            .graphicsLayer {
+                compositingStrategy = CompositingStrategy.Offscreen
+            }
+            .drawWithCache {
+                val path = Path()
+                path.addOval(
+                    Rect(
+                        topLeft = Offset.Zero,
+                        bottomRight = Offset(size.width, size.height),
+                    ),
+                )
+                onDrawWithContent {
+                    clipPath(path) {
+                        this@onDrawWithContent.drawContent()
+                    }
+                    if (isOnline) {
+                        val dotSize = style.badgeSize.toPx() / 2
+                        val offset = style.badgeOffset.toPx()
+                        // Clip a white border for the content
+                        drawCircle(
+                            Color.Black,
+                            radius = dotSize,
+                            center = Offset(
+                                x = size.width - dotSize,
+                                y = size.height - dotSize + offset,
+                            ),
+                            blendMode = BlendMode.Clear,
+                        )
+                        // draw the red circle indication
+                        drawCircle(
+                            indicatorColor,
+                            radius = dotSize - style.borderSize.toPx(),
+                            center = Offset(
+                                x = size.width - dotSize,
+                                y = size.height - dotSize + offset,
+                            ),
+                        )
+                    }
+                }
+            },
+        model = model,
+        transform = transform,
+        contentDescription = stringResource(id = R.string.spark_user_avatar_content_description),
+        contentScale = ContentScale.Fit,
+        emptyIcon = emptyIcon,
+        errorIcon = emptyIcon,
+    )
 }
 
 @Composable
-private fun ImageIconState(sparkIcon: SparkIcon) {
+private fun ImageIconState(
+    sparkIcon: SparkIcon,
+    color: Color,
+) {
     Surface(
-        color = SparkTheme.colors.neutralContainer,
+        color = color,
     ) {
-        Illustration(
+        Icon(
             sparkIcon = sparkIcon,
             contentDescription = null, // The SparkImage handle the content description
         )
     }
-}
-
-@Composable
-private fun PresenceIndicator(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .clip(CircleShape)
-            .border(1.dp, SparkTheme.colors.onSurfaceInverse, CircleShape)
-            .padding(1.dp)
-            .clip(CircleShape)
-            .background(SparkTheme.colors.success),
-    )
 }
 
 @Composable
@@ -134,6 +157,7 @@ public fun UserAvatar(
     style: UserAvatarStyle = UserAvatarStyle.SMALL,
     fillParentSize: Boolean = false,
     model: Any? = null,
+    color: Color = Color.Unspecified,
     isPro: Boolean = false,
     isOnline: Boolean = false,
 ) {
@@ -143,6 +167,7 @@ public fun UserAvatar(
         fillParentSize = fillParentSize,
         model = model,
         isPro = isPro,
+        color = color,
         isOnline = isOnline,
     )
 }
@@ -151,11 +176,18 @@ public fun UserAvatar(
  * @param imageSize size of the image in [Dp]
  * @param badgeSize size of online badge in [Dp]
  * @param badgeOffset size of the offset of the badge in [Dp]
+ * @param borderSize The indicator border size in [Dp], it needs to be defined since the border mechanisms is
+ * different than figma
  */
-public enum class UserAvatarStyle(public val imageSize: Dp, public val badgeSize: Dp, public val badgeOffset: Dp) {
-    SMALL(imageSize = 32.dp, badgeSize = 9.dp, badgeOffset = (-1).dp),
-    MEDIUM(imageSize = 40.dp, badgeSize = 9.dp, badgeOffset = (-1).dp),
-    LARGE(imageSize = 64.dp, badgeSize = 12.dp, badgeOffset = (-4).dp),
+public enum class UserAvatarStyle(
+    public val imageSize: Dp,
+    public val badgeSize: Dp,
+    public val badgeOffset: Dp,
+    public val borderSize: Dp,
+) {
+    SMALL(imageSize = 32.dp, badgeSize = 8.dp, badgeOffset = (-4).dp, borderSize = 1.dp),
+    MEDIUM(imageSize = 40.dp, badgeSize = 10.dp, badgeOffset = (-5).dp, borderSize = 1.5.dp),
+    LARGE(imageSize = 64.dp, badgeSize = 16.dp, badgeOffset = (-12).dp, borderSize = 2.dp),
 }
 
 @Preview(
@@ -192,21 +224,21 @@ internal fun UserAvatarPreview(
             style = UserAvatarStyle.LARGE,
             model = "",
             isPro = true,
-            isOnline = false,
+            isOnline = true,
             transform = { AsyncImagePainter.State.Empty },
         )
         SparkUserAvatar(
             style = UserAvatarStyle.MEDIUM,
             model = "",
             isPro = true,
-            isOnline = false,
+            isOnline = true,
             transform = { AsyncImagePainter.State.Empty },
         )
         SparkUserAvatar(
             style = UserAvatarStyle.SMALL,
             model = "",
             isPro = true,
-            isOnline = false,
+            isOnline = true,
             transform = { AsyncImagePainter.State.Empty },
         )
     }

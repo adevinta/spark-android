@@ -38,6 +38,7 @@ import com.adevinta.spark.catalog.configurator.samples.slider.SlidersConfigurato
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.text.TextLinksConfigurator
+import com.adevinta.spark.catalog.configurator.samples.textfields.DropdownsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
@@ -128,6 +129,17 @@ private val Dialogs = Component(
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/dialog/ModalScaffold.kt",
     examples = DialogsExamples,
     configurator = null,
+)
+
+private val Dropdowns = Component(
+    id = nextId(),
+    name = "Dropdowns",
+    description = R.string.component_dropdowns_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/1186e1705/p/323b83-dropdown",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.dropdown/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/textfields/Dropdown.kt",
+    examples = listOf(),
+    configurator = DropdownsConfigurator,
 )
 
 private val IconButtons = Component(
