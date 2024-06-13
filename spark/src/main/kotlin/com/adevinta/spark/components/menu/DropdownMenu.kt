@@ -58,8 +58,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.MailOutline
 import com.adevinta.spark.icons.PenFill
