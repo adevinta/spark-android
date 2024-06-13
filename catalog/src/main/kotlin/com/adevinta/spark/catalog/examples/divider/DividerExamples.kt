@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.catalog.examples.divider
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -61,7 +60,8 @@ public val DividerExamples: List<Example> = listOf(
                 VerticalSpacer(8.dp)
                 Text(
                     style = SparkTheme.typography.body1,
-                    text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill.",
+                    text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill.",
                     modifier = Modifier.padding(horizontal = 16.dp),
                 )
                 VerticalSpacer(16.dp)
@@ -90,7 +90,8 @@ public val DividerExamples: List<Example> = listOf(
 
             Text(
                 style = SparkTheme.typography.body1,
-                text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill.",
+                text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                    " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill.",
                 modifier = Modifier.padding(horizontal = 16.dp),
             )
             VerticalSpacer(16.dp)
@@ -111,9 +112,12 @@ public val DividerExamples: List<Example> = listOf(
                     Text(
                         style = SparkTheme.typography.body2.highlight,
                         textAlign = TextAlign.Justify,
-                        text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill."
-                                + " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill"
-                                + " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill",
+                        text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                            " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill." +
+                            " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                            " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill" +
+                            " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                            " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill",
                         modifier = Modifier
                             .padding(vertical = 16.dp)
                             .width(100.dp),
@@ -132,7 +136,7 @@ public val DividerExamples: List<Example> = listOf(
         },
     ),
     Example(
-        name = "VerticalDivider with Label",
+        name = "VerticalDivider No Label",
         description = DividerExampleDescription,
         sourceUrl = DividerExampleSourceUrl,
         rowContent = {
@@ -141,9 +145,12 @@ public val DividerExamples: List<Example> = listOf(
                 Text(
                     style = SparkTheme.typography.body2.highlight,
                     textAlign = TextAlign.Justify,
-                    text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill."
-                            + " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill"
-                            + " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill",
+                    text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill." +
+                        " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill" +
+                        " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill",
                     modifier = Modifier
                         .padding(vertical = 16.dp)
                         .width(100.dp),
@@ -155,18 +162,21 @@ public val DividerExamples: List<Example> = listOf(
                     intent = intent,
                 )
                 HorizontalSpacer(8.dp)
-
             }
             Text(
                 style = SparkTheme.typography.body2.highlight,
                 textAlign = TextAlign.Justify,
-                text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill." + " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill" + " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill",
+                text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                    " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill." +
+                    " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                    " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill" +
+                    " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+                    " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill",
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .width(100.dp),
             )
             HorizontalSpacer(8.dp)
-
         },
     ),
 )

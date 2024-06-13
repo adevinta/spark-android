@@ -29,6 +29,7 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.ButtonsConfigurat
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.chips.ChipsConfigurator
+import com.adevinta.spark.catalog.configurator.samples.divider.DividerConfigurator
 import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressTrackerConfigurator
@@ -41,6 +42,7 @@ import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConf
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
+import com.adevinta.spark.catalog.examples.divider.DividerExamples
 import com.adevinta.spark.catalog.examples.samples.bottomsheet.BottomSheetExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
@@ -256,6 +258,19 @@ private val Progressbars = Component(
     configurator = ProgressbarConfigurator,
 )
 
+private val Dividers = Component(
+    id = nextId(),
+    name = "Dividers",
+    description = R.string.component_divider_description,
+    illustration = R.drawable.illu_component_placeholder,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/867b47-divider",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.divider/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/divider/Divider.kt",
+    examples = DividerExamples,
+    configurator = DividerConfigurator,
+)
+
 private val ProgressTracker = Component(
     id = nextId(),
     name = "Progress Tracker",
@@ -321,23 +336,24 @@ private val Tokens = Component(
 
 /** Components for the catalog, ordered alphabetically by name. */
 public val Components: List<Component> = listOf(
-    Tokens,
+    BottomSheets,
     Buttons,
     Checkboxes,
     Chips,
     Dialogs,
+    Dividers,
     IconButtons,
     IconToggleButtons,
     Popovers,
-    BottomSheets,
     Progressbars,
     ProgressTracker,
     RadioButtons,
     Rating,
+    Sliders,
     Switches,
     Tabs,
     Tags,
-    TextLinks,
-    Sliders,
     TextFields,
+    TextLinks,
+    Tokens,
 )

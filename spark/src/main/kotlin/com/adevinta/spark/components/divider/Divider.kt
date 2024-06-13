@@ -22,6 +22,7 @@
 package com.adevinta.spark.components.divider
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
@@ -98,8 +100,9 @@ public fun HorizontalDivider(
             color = intent.color(),
         )
 
-        if (label != null) {
+        if (!label.isNullOrBlank()) {
             Text(
+                textAlign = TextAlign.Center,
                 style = SparkTheme.typography.body1,
                 text = label,
                 modifier = Modifier.padding(horizontal = 16.dp),
@@ -139,10 +142,11 @@ public fun VerticalDivider(
             color = intent.color(),
         )
 
-        if (label != null) {
+        if (!label.isNullOrBlank()) {
             Text(
-                style = SparkTheme.typography.body1,
                 text = label,
+                style = SparkTheme.typography.body1,
+                textAlign = TextAlign.Center,
                 modifier = Modifier.padding(vertical = 16.dp),
             )
         }
@@ -176,6 +180,7 @@ internal fun DividerPreview(
             label = "Label",
             labelHorizontalAlignment = LabelHorizontalAlignment.End,
         )
+
         Row {
             VerticalDivider(
                 intent = DividerIntent.OutlineHigh,
@@ -218,4 +223,13 @@ internal fun DividerPreview(
             )
         }
     }
+}
+
+@Composable
+public fun ColumnScope.Sample() {
+    VerticalDivider(
+        intent = DividerIntent.OutlineHigh,
+        label = "Label",
+        labelVerticalAlignment = LabelVerticalAlignment.Center,
+    )
 }

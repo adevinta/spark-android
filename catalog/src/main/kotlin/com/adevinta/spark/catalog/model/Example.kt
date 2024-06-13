@@ -32,6 +32,10 @@ public data class Example(
     val name: String,
     val description: String,
     val sourceUrl: String,
-    val rowContent: @Composable() (RowScope.(SnackbarHostState) -> Unit)? = null,
-    val columnContent: @Composable() (ColumnScope.(SnackbarHostState) -> Unit)? = null,
+    val rowContent:
+    @Composable()
+    (RowScope.(SnackbarHostState) -> Unit)? = null,
+    val columnContent:
+    @Composable()
+    (ColumnScope.(SnackbarHostState) -> Unit)? = null,
 )
