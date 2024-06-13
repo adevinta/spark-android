@@ -179,7 +179,7 @@ public class SnackbarHostState {
     ) : SnackbarData {
 
         /**
-         * Performs the action of the Snackbar.
+         *Function to be called when Snackbar action has been performed to notify the listeners
          */
         override fun performAction() {
             if (continuation.isActive) continuation.resume(SnackbarResult.ActionPerformed)
