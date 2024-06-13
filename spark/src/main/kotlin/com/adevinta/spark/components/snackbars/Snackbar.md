@@ -16,21 +16,6 @@ public fun Snackbar(
     ){}
 ```
 
-```kotlin
-@Composable
-public fun Snackbar(
-    modifier: Modifier = Modifier,
-    intent: SnackbarIntent = SnackbarDefaults.intent,
-    style: SnackbarStyle = SnackbarDefaults.style,
-    isActionOnNewLine: Boolean = false,
-    isDismissIconEnabled: Boolean = false,
-    icon: SparkIcon? = null,
-    actionLabel: String? = null,
-    onActionClick: (() -> Unit)? = null,
-    onDismissIconClick: (() -> Unit)? = null,
-    content: @Composable (() -> Unit),
-    ){}
-```
 
 ```kotlin
 private val snackbarHostState = remember { SnackbarHostState() }
@@ -42,9 +27,13 @@ LaunchedEffect(conversationsState) {
             duration = SnackbarDuration.Short) 
     }
 }
-Scaffold (
-    snackbarHost = { 
-        SnackbarHost(hostState = snackbarHostState) }) {}
+Scaffold(
+    snackbarHost = {
+        SnackbarHost(hostState = snackbarHostState)
+    },
+) { innerPadding ->
+    // Content
+}
 ```
 
 | Light                                                                                                      | Dark                                                                                                       |

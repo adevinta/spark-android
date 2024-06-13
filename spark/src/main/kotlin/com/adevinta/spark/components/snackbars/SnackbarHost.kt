@@ -42,10 +42,10 @@ import kotlinx.coroutines.sync.withLock
 import kotlin.coroutines.resume
 
 /**
- * Host for [Snackbar]s to be used in [androidx.compose.material3.Scaffold] to properly show, hide and dismiss items based
+ * Host for [Snackbar]s to be used in [Scaffold] to properly show, hide and dismiss items based
  * on Material specification and the [hostState].
  *
- * This component with default parameters comes build-in with [androidx.compose.material3.Scaffold], if you need to show a
+ * This component with default parameters comes build-in with [Scaffold], if you need to show a
  * default [Snackbar], use [SnackbarHostState.showSnackbar].
  *
  * @param hostState state of this component to read and show [Snackbar]s accordingly
@@ -83,7 +83,7 @@ public fun SnackbarHost(
  * inside the [SnackbarHost].
  *
  * This state is usually [remember]ed and used to provide a
- * [SnackbarHost] to a [androidx.compose.material3.Scaffold].
+ * [SnackbarHost] to a [Scaffold].
  */
 @Stable
 public class SnackbarHostState {
@@ -94,7 +94,7 @@ public class SnackbarHostState {
 
     /**
      * Shows or queues to be shown a [Snackbar] at the bottom of
-     * the [androidx.compose.material3.Scaffold] to which this state
+     * the [Scaffold] to which this state
      * is attached and suspends until the snackbar has disappeared.
      *
      * [SnackbarHostState] guarantees to show at most one snackbar at a time. If this function is
