@@ -46,9 +46,9 @@ public val DialogsExamples: List<Example> = listOf(
     Example(
         name = "Modal with no buttons",
         description = "Showcase the modal component with no main and support button. \n This will hide the Bottom " +
-                "App Bar and add a close button in the dialog layout",
+            "App Bar and add a close button in the dialog layout",
         sourceUrl = ModalsExampleSourceUrl,
     ) {
-        ModalSample(PaddingValues(0.dp))
+        ModalSample(withButtons = false)
     },
 )

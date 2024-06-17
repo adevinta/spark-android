@@ -121,13 +121,13 @@ import com.adevinta.spark.tools.preview.DevicePreviews
     message = "Use ModalScaffold instead",
     replaceWith = ReplaceWith(
         expression = "ModalScaffold(" +
-                "onClose = onClose," +
-                "modifier = modifier," +
-                "snackbarHost = snackbarHost," +
-                "mainButton = mainButton," +
-                "supportButton = supportButton," +
-                "content = content," +
-                ")",
+            "onClose = onClose," +
+            "modifier = modifier," +
+            "snackbarHost = snackbarHost," +
+            "mainButton = mainButton," +
+            "supportButton = supportButton," +
+            "content = content," +
+            ")",
         imports = ["com.adevinta.spark.components.dialog.ModalScaffold"],
     ),
 )
@@ -212,14 +212,14 @@ public fun ModalScaffold(
     val isPhoneLandscape = size.heightSizeClass == WindowHeightSizeClass.Compact
     val isPhonePortraitOrFoldable =
         (size.widthSizeClass == WindowWidthSizeClass.Compact || size.widthSizeClass == WindowWidthSizeClass.Medium) &&
-                (
-                        size.heightSizeClass == WindowHeightSizeClass.Medium ||
-                                size.heightSizeClass == WindowHeightSizeClass.Expanded
-                        )
+            (
+                size.heightSizeClass == WindowHeightSizeClass.Medium ||
+                    size.heightSizeClass == WindowHeightSizeClass.Expanded
+                )
     val activityWindow = getActivityWindow()
 
     val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
-            activityWindow?.navigationBarColor == Color.Transparent.toArgb()
+        activityWindow?.navigationBarColor == Color.Transparent.toArgb()
     val properties = DialogProperties(
         usePlatformDefaultWidth = isEdgeToEdge,
         decorFitsSystemWindows = false,
@@ -369,7 +369,7 @@ private fun PhonePortraitModalScaffold(
         val dialogWindow = getDialogWindow()
 
         val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
-                activityWindow?.navigationBarColor == Color.Transparent.toArgb()
+            activityWindow?.navigationBarColor == Color.Transparent.toArgb()
 
         SideEffect {
             if (
@@ -428,8 +428,12 @@ private fun PhonePortraitModalScaffold(
 @Composable
 private fun BottomBarPortrait(
     navigationBarPadding: PaddingValues,
-    mainButton: @Composable() ((Modifier) -> Unit)?,
-    supportButton: @Composable() ((Modifier) -> Unit)?,
+    mainButton:
+    @Composable()
+    ((Modifier) -> Unit)?,
+    supportButton:
+    @Composable()
+    ((Modifier) -> Unit)?,
 ) {
     if (supportButton == null && mainButton == null) return
     Surface {
@@ -487,7 +491,7 @@ private fun PhoneLandscapeModalScaffold(
 
         @Suppress("DEPRECATION")
         val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
-                activityWindow?.navigationBarColor == Color.Transparent.toArgb()
+            activityWindow?.navigationBarColor == Color.Transparent.toArgb()
 
         SideEffect {
             if (
@@ -594,10 +598,10 @@ private fun CloseIconButton(onClose: () -> Unit) {
  */
 private operator fun PaddingValues.plus(other: PaddingValues): PaddingValues = PaddingValues(
     start = this.calculateStartPadding(LayoutDirection.Ltr) +
-            other.calculateStartPadding(LayoutDirection.Ltr),
+        other.calculateStartPadding(LayoutDirection.Ltr),
     top = this.calculateTopPadding() + other.calculateTopPadding(),
     end = this.calculateEndPadding(LayoutDirection.Ltr) +
-            other.calculateEndPadding(LayoutDirection.Ltr),
+        other.calculateEndPadding(LayoutDirection.Ltr),
     bottom = this.calculateBottomPadding() + other.calculateBottomPadding(),
 )
 
@@ -629,22 +633,22 @@ private fun ModalPreview() {
                     .padding(innerPadding)
                     .verticalScroll(rememberScrollState()),
                 text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
-                        "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
-                        "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
-                        "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
-                        "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
-                        "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
-                        "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
-                        "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
-                        " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
-                        "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
-                        "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
-                        "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
-                        "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
-                        "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
-                        "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
-                        "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
-                        "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
+                    "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
+                    "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
+                    "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
+                    "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
+                    "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
+                    "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
+                    "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
+                    " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
+                    "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
+                    "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
+                    "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
+                    "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
+                    "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
+                    "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
+                    "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
+                    "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
             )
         }
     }
@@ -674,22 +678,22 @@ private fun DeprecatedModalPreview() {
                     .padding(innerPadding)
                     .verticalScroll(rememberScrollState()),
                 text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
-                        "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
-                        "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
-                        "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
-                        "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
-                        "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
-                        "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
-                        "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
-                        " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
-                        "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
-                        "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
-                        "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
-                        "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
-                        "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
-                        "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
-                        "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
-                        "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
+                    "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
+                    "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
+                    "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
+                    "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
+                    "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
+                    "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
+                    "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
+                    " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
+                    "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
+                    "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
+                    "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
+                    "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
+                    "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
+                    "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
+                    "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
+                    "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
             )
         }
     }
