@@ -29,13 +29,14 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.LocalContentColor
@@ -53,11 +54,12 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.MultiContentMeasurePolicy
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
-import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEachIndexed
@@ -162,8 +164,8 @@ public fun ProgressTrackerColumn(
 ) {
     require(items.all { it.label.isNotBlank() }) {
         "All steps in the vertical layout should have a label otherwise it'll have render issues." +
-            "This is a known bug, if you need to make this layout please report it there" +
-            " https://github.com/adevinta/spark-android/issues/1080"
+                "This is a known bug, if you need to make this layout please report it there" +
+                " https://github.com/adevinta/spark-android/issues/1080"
     }
     ProgressTracker(
         items = items,
@@ -195,7 +197,7 @@ private fun ProgressTracker(
             "At least two progress indicators should be displayed"
         } else {
             "If a process needs more than six steps, consider simplifying the process or breaking it up " +
-                "into multiple tasks"
+                    "into multiple tasks"
         }
         baseMessage + " Found ${items.size} steps."
     }
@@ -268,34 +270,19 @@ internal enum class LayoutOrientation {
     Vertical,
 }
 
-private val DefaultRowMeasurePolicy: MultiContentMeasurePolicy = ProgressTrackerMeasurePolicy(
-    orientation = Horizontal,
-    arrangementSpacing = 8.dp,
-    indicatorSize = ProgressSizes.Large.size,
-)
-
-private val DefaultColumnMeasurePolicy: MultiContentMeasurePolicy = ProgressTrackerMeasurePolicy(
-    orientation = Vertical,
-    arrangementSpacing = 8.dp,
-    indicatorSize = ProgressSizes.Large.size,
-)
-
 @Composable
 internal fun progressTrackerMeasurePolicy(
     orientation: LayoutOrientation,
-    indicatorSize: Dp,
+    indicatorSize: TextUnit,
 ): MultiContentMeasurePolicy {
-    return if (indicatorSize == ProgressSizes.Large.size && orientation == Horizontal) {
-        DefaultRowMeasurePolicy
-    } else if (indicatorSize == ProgressSizes.Large.size && orientation == Vertical) {
-        DefaultColumnMeasurePolicy
-    } else {
-        ProgressTrackerMeasurePolicy(
-            orientation = orientation,
-            arrangementSpacing = 8.dp,
-            indicatorSize = indicatorSize,
-        )
+    val size = with(LocalDensity.current) {
+        indicatorSize.toDp()
     }
+    return ProgressTrackerMeasurePolicy(
+        orientation = orientation,
+        arrangementSpacing = 8.dp,
+        indicatorSize = size,
+    )
 }
 
 @Composable
@@ -401,11 +388,16 @@ private fun StepIndicator(
         targetValue = if (isOutlined) 1.dp else 0.dp,
         label = "Border size",
     )
+    val indicatorSize = with(LocalDensity.current) {
+        size.size.toDp()
+    }
 
     Surface(
         shape = SparkTheme.shapes.full,
         modifier = modifier
-            .size(size.size)
+            .size(indicatorSize)
+            .wrapContentSize()
+            .aspectRatio(1f)
             .graphicsLayer {
                 alpha = indicatorAlpha
             },
@@ -421,29 +413,27 @@ private fun StepIndicator(
         onClick = { onClick?.invoke() },
         interactionSource = interactionSource,
     ) {
-        onClick?.invoke()
         AnimatedVisibility(visible = size != ProgressSizes.Small && hasIndicatorContent) {
-            Box(
+            AnimatedContent(
+                targetState = done,
                 contentAlignment = Alignment.Center,
-            ) {
-                AnimatedContent(
-                    targetState = done,
-                    contentAlignment = Alignment.Center,
-                    label = "Step status indicator",
-                ) { isStepDone ->
-                    if (isStepDone) {
-                        Icon(
-                            sparkIcon = SparkIcons.Check,
-                            modifier = Modifier.size(16.dp),
-                            contentDescription = null, // content description is handle on the Layout
-                        )
-                    } else {
-                        val stepPosition = index + 1
-                        Text(
-                            text = "$stepPosition",
-                            style = SparkTheme.typography.body2.highlight.copy(lineHeight = 16.sp),
-                        )
-                    }
+                label = "Step status indicator",
+            ) { isStepDone ->
+                if (isStepDone) {
+                    Icon(
+                        sparkIcon = SparkIcons.Check,
+                        modifier = Modifier
+                            .size(indicatorSize)
+                            .wrapContentSize(Alignment.Center),
+                        contentDescription = null, // content description is handle on the Layout
+                    )
+                } else {
+                    val stepPosition = index + 1
+                    Text(
+                        modifier = Modifier.wrapContentSize(Alignment.Center),
+                        text = "$stepPosition",
+                        style = SparkTheme.typography.body2.highlight.copy(lineHeight = 16.sp),
+                    )
                 }
             }
         }
@@ -474,12 +464,12 @@ private fun PreviewProgressTracker() {
             items = persistentListOf(
                 ProgressStep(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
-                        "ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
+                            "ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation.",
                     true,
                 ),
                 ProgressStep(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt " +
-                        "ut labore et dolore magna aliqua.",
+                            "ut labore et dolore magna aliqua.",
                     true,
                 ),
                 ProgressStep("Lorem ipsume dolar sit amet", true),
@@ -494,7 +484,9 @@ private fun PreviewProgressTracker() {
 }
 
 @Composable
-@Preview
+@Preview(
+    fontScale = 2f,
+)
 private fun PreviewProgressSizes() {
     PreviewTheme(padding = PaddingValues(0.dp)) {
         var selectedStep by remember { mutableIntStateOf(1) }
@@ -531,7 +523,6 @@ private fun PreviewProgressSizes() {
 }
 
 @Composable
-@Preview
 private fun PreviewProgressStyles() {
     PreviewTheme(padding = PaddingValues(0.dp)) {
         var selectedStep by remember { mutableIntStateOf(1) }
@@ -591,9 +582,9 @@ private fun PreviewProgressWithNoLabel() {
             for (size in ProgressSizes.entries) {
                 ProgressTrackerColumn(
                     items = persistentListOf(
-                        ProgressStep("", false),
-                        ProgressStep("", false),
-                        ProgressStep("", false),
+                        ProgressStep("qzd", false),
+                        ProgressStep("qzd", false),
+                        ProgressStep("zdq", false),
                     ),
                     size = size,
                     selectedStep = selectedStep,

@@ -22,24 +22,26 @@
 package com.adevinta.spark.components.progress.tracker
 
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 /**
  * Defines the different sizes of the progress indicator
  */
-public enum class ProgressSizes(public val size: Dp) {
+public enum class ProgressSizes(public val size: TextUnit) {
     /**
      * Small size won't display content inside it but we don't recommend making it interactive.
      */
-    Small(16.dp),
+    Small(16.sp),
 
     /**
      * Medium size will display content inside it but we don't recommend making it interactive.
      */
-    Medium(24.dp),
+    Medium(24.sp),
 
     /**
      * Large size has content and is interactive.
      */
-    Large(32.dp),
+    Large(32.sp),
 }
