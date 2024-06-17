@@ -396,7 +396,6 @@ private fun StepIndicator(
         shape = SparkTheme.shapes.full,
         modifier = modifier
             .size(indicatorSize)
-            .wrapContentSize()
             .aspectRatio(1f)
             .graphicsLayer {
                 alpha = indicatorAlpha
