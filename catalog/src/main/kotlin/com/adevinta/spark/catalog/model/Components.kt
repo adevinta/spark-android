@@ -54,6 +54,7 @@ import com.adevinta.spark.catalog.examples.samples.rating.RatingExamples
 import com.adevinta.spark.catalog.examples.samples.slider.SlidersExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
+import com.adevinta.spark.catalog.examples.samples.text.DropdownsExamples
 import com.adevinta.spark.catalog.examples.samples.text.TextLinksExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
@@ -136,7 +137,7 @@ private val Dropdowns = Component(
     guidelinesUrl = "$ComponentGuidelinesUrl/p/1186e1705/p/323b83-dropdown",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.dropdown/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/textfields/Dropdown.kt",
-    examples = listOf(),
+    examples = DropdownsExamples,
     configurator = DropdownsConfigurator,
 )
 
