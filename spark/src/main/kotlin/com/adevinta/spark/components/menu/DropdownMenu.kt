@@ -57,6 +57,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.divider.Divider
@@ -256,7 +257,8 @@ private fun MenuItemColors.trailingIconColor(enabled: Boolean): Color =
  * @param modifier The modifier to be applied to the Group.
  */
 @Composable
-internal fun DropdownMenuGroupItem(
+@ExperimentalSparkApi
+public fun DropdownMenuGroupItem(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
