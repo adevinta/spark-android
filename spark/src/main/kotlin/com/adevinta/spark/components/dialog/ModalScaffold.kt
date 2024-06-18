@@ -67,6 +67,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.paneTitle
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -224,9 +226,12 @@ public fun ModalScaffold(
     )
     val navigationBarPadding = WindowInsets.navigationBars.asPaddingValues()
 
+    val dialogPaneDescription = stringResource(R.string.spark_dialog_pane_a11y)
+    val dialogModifier = modifier.then(Modifier.semantics { paneTitle = dialogPaneDescription })
+
     when {
         isPhonePortraitOrFoldable -> PhonePortraitModalScaffold(
-            modifier = modifier,
+            modifier = dialogModifier,
             properties = properties,
             navigationBarPadding = navigationBarPadding,
             contentPadding = contentPadding,
@@ -240,7 +245,7 @@ public fun ModalScaffold(
         )
 
         isPhoneLandscape -> PhoneLandscapeModalScaffold(
-            modifier = modifier,
+            modifier = dialogModifier,
             properties = properties,
             navigationBarPadding = navigationBarPadding,
             contentPadding = contentPadding,
@@ -254,7 +259,7 @@ public fun ModalScaffold(
         )
 
         else -> DialogScaffold(
-            modifier = modifier,
+            modifier = dialogModifier,
             onClose = onClose,
             contentPadding = contentPadding,
             snackbarHost = snackbarHost,
@@ -285,14 +290,13 @@ private fun DialogScaffold(
     ) {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
         Surface(
-            modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            modifier = modifier
+                .sizeIn(minWidth = 280.dp, maxWidth = 560.dp)
+                .nestedScroll(scrollBehavior.nestedScrollConnection),
             elevation = 6.dp,
             shape = SparkTheme.shapes.large,
         ) {
-            Column(
-                modifier = Modifier
-                    .sizeIn(minWidth = MinWidth, maxWidth = MaxWidth),
-            ) {
+            Column {
                 TopAppBar(
                     navigationIcon = {
                         // As a fallback when to action button is displayed to easily close the dialog

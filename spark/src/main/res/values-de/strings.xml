@@ -49,6 +49,10 @@
     </plurals>
     <!--endregion-->
 
+    <!--region Dialog-->
+    <string name="spark_dialog_pane_a11y">Dialogfeld</string>
+    <!--endregion-->
+
     <!--region TextField-->
     <string name="spark_textfield_content_description">Pflichtfeld</string>
     <string name="spark_textfield_delete_a11y">Löschen</string>
