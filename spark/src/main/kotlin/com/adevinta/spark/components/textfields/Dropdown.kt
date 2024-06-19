@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.DropdownMenu
@@ -50,6 +51,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -295,7 +297,8 @@ public fun SelectTextField(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = onDismissRequest,
-            modifier = Modifier.exposedDropdownSize(),
+            modifier = Modifier.exposedDropdownSize()
+                .padding(16.dp),
             properties = properties,
             content = dropdownContent,
         )
@@ -386,7 +389,9 @@ public fun Dropdown(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = onDismissRequest,
-            modifier = Modifier.exposedDropdownSize(),
+            modifier = Modifier
+                .exposedDropdownSize()
+                .padding(16.dp),
             properties = properties,
             content = dropdownContent,
         )
