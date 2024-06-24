@@ -30,14 +30,14 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
-import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal val Project.isAndroidApplication: Boolean get() = pluginManager.hasPlugin("com.android.application")
 internal val Project.isAndroidLibrary: Boolean get() = pluginManager.hasPlugin("com.android.library")
@@ -83,7 +83,6 @@ internal fun Project.getVersionsCatalog(): VersionCatalog = runCatching {
 }.getOrThrow()
 
 internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotlin(
-    allWarningsAsErrors: Boolean = true,
     crossinline configure: T.() -> Unit = {},
 ) {
     configure<JavaPluginExtension> {
@@ -91,16 +90,16 @@ internal inline fun <reified T : KotlinTopLevelExtension> Project.configureKotli
         targetCompatibility = JavaVersion.VERSION_11
     }
     configure<T> {
+        when (this) {
+            is KotlinAndroidProjectExtension -> compilerOptions
+            is KotlinJvmProjectExtension -> compilerOptions
+            else -> TODO("Unsupported project extension $this ${T::class}")
+        }.apply {
+            jvmTarget = JvmTarget.JVM_11
+            allWarningsAsErrors = true
+        }
         explicitApi()
         configure()
-    }
-    tasks.withType<KotlinCompile>().configureEach {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-            // kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
-            this.allWarningsAsErrors.set(allWarningsAsErrors)
-            explicitApiMode.set(ExplicitApiMode.Strict)
-        }
     }
 }
 

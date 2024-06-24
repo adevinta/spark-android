@@ -23,6 +23,7 @@
 
 package com.adevinta.spark.tokens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -1220,30 +1221,35 @@ public fun contentColorFor(backgroundColor: Color): Color {
 /**
  * Extension property to get a [Color] with dim1(a medium emphasis to text) applied
  */
+@get:SuppressLint("ComposeUnstableReceiver") // https://github.com/slackhq/compose-lints/issues/326
 public val Color.dim1: Color
     @Composable get() = this.copy(alpha = SparkTheme.colors.dim1)
 
 /**
  * Extension property to get a [Color] with dim2(a medium emphasis to icons) applied
  */
+@get:SuppressLint("ComposeUnstableReceiver") // https://github.com/slackhq/compose-lints/issues/326
 public val Color.dim2: Color
     @Composable get() = this.copy(alpha = SparkTheme.colors.dim2)
 
 /**
  * Extension property to get a [Color] with dim3(disabled emphasis to all components) applied
  */
+@get:SuppressLint("ComposeUnstableReceiver") // https://github.com/slackhq/compose-lints/issues/326
 public val Color.dim3: Color
     @Composable get() = this.copy(alpha = SparkTheme.colors.dim3)
 
 /**
  * Extension property to get a [Color] with dim4(low element) applied
  */
+@get:SuppressLint("ComposeUnstableReceiver") // https://github.com/slackhq/compose-lints/issues/326
 public val Color.dim4: Color
     @Composable get() = this.copy(alpha = SparkTheme.colors.dim4)
 
 /**
  * Extension property to get a [Color] with dim5(pressed/ripple visual but should not be used on Android) applied
  */
+@get:SuppressLint("ComposeUnstableReceiver") // https://github.com/slackhq/compose-lints/issues/326
 public val Color.dim5: Color
     @Composable get() = this.copy(alpha = SparkTheme.colors.dim5)
 
@@ -1251,6 +1257,7 @@ public val Color.dim5: Color
  * Extension property to get a [Color] with dim3(disabled element) applied composite over SparkTheme.colors.surface
  * to prevent the color being transparent
  */
+@get:SuppressLint("ComposeUnstableReceiver") // https://github.com/slackhq/compose-lints/issues/326
 public val Color.disabled: Color
     @Composable get() = this.dim3.compositeOver(SparkTheme.colors.surface)
 
@@ -1259,6 +1266,7 @@ public val Color.disabled: Color
  * This is useful when you want to animate fro ma transparent color to a colored one
  * since using  [Color.Transparent] will start with a black background.
  */
+@get:SuppressLint("ComposeUnstableReceiver") // https://github.com/slackhq/compose-lints/issues/326
 public val Color.transparent: Color
     @Composable get() = this.copy(alpha = 0f)
 

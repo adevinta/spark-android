@@ -68,7 +68,7 @@ internal class PreviewScreenshotTests {
                 }
             }
         }
-        if (failure != null) throw failure as Throwable
+        if (failure != null) throw failure
     }
 }
 
