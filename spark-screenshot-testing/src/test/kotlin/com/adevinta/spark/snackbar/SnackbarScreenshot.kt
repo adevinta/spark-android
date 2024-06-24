@@ -31,7 +31,7 @@ import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshotNightMode
-import com.android.ide.common.rendering.api.SessionParams
+import com.android.ide.common.rendering.api.SessionParams.RenderingMode.V_SCROLL
 import org.junit.Rule
 import org.junit.Test
 
@@ -39,7 +39,7 @@ internal class SnackbarScreenshot {
 
     @get:Rule
     val paparazzi = paparazziRule(
-        renderingMode = SessionParams.RenderingMode.SHRINK,
+        renderingMode = V_SCROLL,
         deviceConfig = DeviceConfig.PIXEL_C,
     )
 
