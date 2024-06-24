@@ -414,6 +414,7 @@ public val SparkIcons.Shower: DrawableRes get() = DrawableRes(R.drawable.spark_i
 public val SparkIcons.Size: DrawableRes get() = DrawableRes(R.drawable.spark_icons_size)
 public val SparkIcons.Smoking: DrawableRes get() = DrawableRes(R.drawable.spark_icons_smoking)
 public val SparkIcons.Sort: DrawableRes get() = DrawableRes(R.drawable.spark_icons_sort)
+public val SparkIcons.SortFilled: DrawableRes get() = DrawableRes(R.drawable.spark_icons_sort_filled)
 public val SparkIcons.Spa: DrawableRes get() = DrawableRes(R.drawable.spark_icons_spa)
 public val SparkIcons.Speaker: DrawableRes get() = DrawableRes(R.drawable.spark_icons_speaker)
 public val SparkIcons.Speed: DrawableRes get() = DrawableRes(R.drawable.spark_icons_speed)
