@@ -27,6 +27,7 @@ import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.provideDelegate
@@ -96,22 +97,22 @@ internal class SparkPublishingPlugin : Plugin<Project> {
     }
 
     private fun MavenPublication.configurePom() = pom {
-        name.set("Spark")
-        description.set("Spark Design System")
-        url.set("https://github.com/adevinta/spark-android")
+        name = "Spark"
+        description = "Spark Design System"
+        url = "https://github.com/adevinta/spark-android"
         licenses {
             license {
-                name.set("MIT License")
-                url.set("https://opensource.org/licenses/MIT")
+                name = "MIT License"
+                url = "https://opensource.org/licenses/MIT"
             }
         }
         scm {
-            url.set("https://github.com/adevinta/spark-android")
+            url = "https://github.com/adevinta/spark-android"
         }
         developers {
             developer {
-                name.set("Adevinta Engineers")
-                email.set("engineers@adevinta.com")
+                name = "Adevinta Engineers"
+                email = "engineers@adevinta.com"
             }
         }
     }
