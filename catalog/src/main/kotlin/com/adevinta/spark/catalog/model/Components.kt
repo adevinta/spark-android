@@ -348,12 +348,14 @@ private val Tokens = Component(
 
 /** Components for the catalog, ordered alphabetically by name. */
 public val Components: List<Component> = listOf(
+    Tokens,
     BottomSheets,
     Buttons,
     Checkboxes,
     Chips,
     Dialogs,
     Dividers,
+    Dropdowns,
     IconButtons,
     IconToggleButtons,
     Popovers,
@@ -367,5 +369,4 @@ public val Components: List<Component> = listOf(
     Tags,
     TextFields,
     TextLinks,
-    Tokens,
 )

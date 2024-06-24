@@ -42,6 +42,16 @@ import com.adevinta.spark.tokens.highlight
 
 private const val DividerExampleDescription = "Divider examples"
 private const val DividerExampleSourceUrl = "$SampleSourceUrl/DividerSamples.kt"
+private const val TextExample =
+    "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill."
+private const val LongTextExample =
+    "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill." +
+        " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill" +
+        " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
+        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill"
 
 public val DividerExamples: List<Example> = listOf(
     Example(
@@ -60,15 +70,21 @@ public val DividerExamples: List<Example> = listOf(
                 VerticalSpacer(8.dp)
                 Text(
                     style = SparkTheme.typography.body1,
-                    text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill.",
+                    text = TextExample,
                     modifier = Modifier.padding(horizontal = 16.dp),
                 )
                 VerticalSpacer(16.dp)
 
                 HorizontalDivider(
                     intent = intent,
-                    label = intent.name,
+                    label = {
+                        Text(
+                            textAlign = TextAlign.Center,
+                            style = SparkTheme.typography.body1,
+                            text = intent.name,
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                        )
+                    },
                     labelHorizontalAlignment = alignment,
                 )
                 VerticalSpacer(16.dp)
@@ -90,8 +106,7 @@ public val DividerExamples: List<Example> = listOf(
 
             Text(
                 style = SparkTheme.typography.body1,
-                text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                    " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill.",
+                text = TextExample,
                 modifier = Modifier.padding(horizontal = 16.dp),
             )
             VerticalSpacer(16.dp)
@@ -112,12 +127,7 @@ public val DividerExamples: List<Example> = listOf(
                     Text(
                         style = SparkTheme.typography.body2.highlight,
                         textAlign = TextAlign.Justify,
-                        text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                            " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill." +
-                            " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                            " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill" +
-                            " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                            " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill",
+                        text = LongTextExample,
                         modifier = Modifier
                             .padding(vertical = 16.dp)
                             .width(100.dp),
@@ -127,7 +137,14 @@ public val DividerExamples: List<Example> = listOf(
                     VerticalDivider(
                         modifier = Modifier.fillMaxHeight(),
                         intent = intent,
-                        label = intent.name,
+                        label = {
+                            Text(
+                                textAlign = TextAlign.Center,
+                                style = SparkTheme.typography.body1,
+                                text = intent.name,
+                                modifier = Modifier.padding(horizontal = 16.dp),
+                            )
+                        },
                         labelVerticalAlignment = alignment,
                     )
                     HorizontalSpacer(8.dp)
@@ -145,12 +162,7 @@ public val DividerExamples: List<Example> = listOf(
                 Text(
                     style = SparkTheme.typography.body2.highlight,
                     textAlign = TextAlign.Justify,
-                    text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill." +
-                        " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill" +
-                        " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                        " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill",
+                    text = LongTextExample,
                     modifier = Modifier
                         .padding(vertical = 16.dp)
                         .width(100.dp),
@@ -166,12 +178,7 @@ public val DividerExamples: List<Example> = listOf(
             Text(
                 style = SparkTheme.typography.body2.highlight,
                 textAlign = TextAlign.Justify,
-                text = "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                    " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill." +
-                    " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                    " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill" +
-                    " Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi." +
-                    " Aliquam in hendrerit urna. Pellentesque sit amet sapien fringill",
+                text = LongTextExample,
                 modifier = Modifier
                     .padding(vertical = 16.dp)
                     .width(100.dp),

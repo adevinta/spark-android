@@ -27,13 +27,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.divider.DividerIntent
 import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.divider.LabelHorizontalAlignment
 import com.adevinta.spark.components.divider.LabelVerticalAlignment
 import com.adevinta.spark.components.divider.VerticalDivider
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshotNightMode
 import com.android.ide.common.rendering.api.SessionParams.RenderingMode.SHRINK
@@ -63,7 +66,7 @@ internal class DividerScreenshot {
     }
 
     @Composable
-    fun HorizontalDividers() {
+    private fun HorizontalDividers() {
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = spacedBy(16.dp),
@@ -78,7 +81,14 @@ internal class DividerScreenshot {
                     HorizontalDivider(
                         labelHorizontalAlignment = alignment,
                         intent = it,
-                        label = "Spark Label",
+                        label = {
+                            Text(
+                                textAlign = TextAlign.Center,
+                                style = SparkTheme.typography.body1,
+                                text = "Spark Label",
+                                modifier = Modifier.padding(horizontal = 16.dp),
+                            )
+                        },
                     )
                 }
             }
@@ -86,7 +96,7 @@ internal class DividerScreenshot {
     }
 
     @Composable
-    fun VerticalDividers() {
+    private fun VerticalDividers() {
         Row(
             modifier = Modifier.padding(16.dp),
             horizontalArrangement = spacedBy(16.dp),
@@ -101,7 +111,14 @@ internal class DividerScreenshot {
                     VerticalDivider(
                         labelVerticalAlignment = alignment,
                         intent = it,
-                        label = "Spark Label",
+                        label = {
+                            Text(
+                                textAlign = TextAlign.Center,
+                                style = SparkTheme.typography.body1,
+                                text = "Spark Label",
+                                modifier = Modifier.padding(horizontal = 16.dp),
+                            )
+                        },
                     )
                 }
             }

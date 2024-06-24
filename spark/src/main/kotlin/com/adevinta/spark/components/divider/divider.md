@@ -20,17 +20,19 @@ Dividers are typically placed throughout your UI in places like:
 #### Horizontal Divider
 ```kotlin
 Column {
+    Title()
     HorizontalDivider()
+    Description()
 }
 ```
 
 ## Horizontal Divider with Label
 ```kotlin
-    HorizontalDivider(
-        intent = DividerIntent.Outline,
-        label = "Label",
-        labelHorizontalAlignment = LabelHorizontalAlignment.Center
-    )
+HorizontalDivider(
+    intent = DividerIntent.Outline, 
+    label = "Label", 
+    labelHorizontalAlignment = LabelHorizontalAlignment.Center
+)
 ```
 
 #### Vertical Divider

@@ -26,7 +26,8 @@ import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.SparkTheme
 
 /**
- * DividerIntent is used to define the intent of the divider.
+ * Intent on the divider that will affect the background of the divider line.
+ * Use [OutlineHigh] to get a higher contrast if needed.
  */
 public enum class DividerIntent {
 
