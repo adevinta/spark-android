@@ -24,6 +24,7 @@ package com.adevinta.spark
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.withType
@@ -57,8 +58,8 @@ internal class SparkDokkaPlugin : Plugin<Project> {
     }
 
     private fun Project.configureRootProject() = tasks.named<DokkaMultiModuleTask>("dokkaHtmlMultiModule") {
-        moduleName.set("Spark")
-        outputDirectory.set(layout.buildDirectory.dir("dokka"))
+        moduleName = "Spark"
+        outputDirectory = layout.buildDirectory.dir("dokka")
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
             fun File.recursiveAssets() = walk().filter(File::isFile)
                 // https://github.com/Kotlin/dokka/issues/3400
@@ -91,9 +92,9 @@ internal class SparkDokkaPlugin : Plugin<Project> {
             // FIXME(android): https://github.com/Kotlin/dokka/issues/2876
             sourceLink {
                 val url = "https://github.com/Adevinta/spark-android/tree/main/${project.name}/src/main/kotlin"
-                localDirectory.set(projectDir.resolve("src"))
-                remoteUrl.set(URI(url).toURL())
-                remoteLineSuffix.set("#L")
+                localDirectory = projectDir.resolve("src")
+                remoteUrl = URI(url).toURL()
+                remoteLineSuffix = "#L"
             }
         }
         pluginConfiguration<DokkaBase, DokkaBaseConfiguration> { configureFooterMessage() }
