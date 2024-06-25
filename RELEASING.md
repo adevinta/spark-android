@@ -12,7 +12,7 @@ For example they could hook to it to make a bot post this changelog in their mon
 1. First create a draft release that by creating a `*.*.*-SNAPSHOT` version tag.
 2. Use this new tag to use the change log generation tool from GitHub.
 3. Remove logs from Dependabot except if they mention big version upgrade for libraries used by our consumers (like Compose or Kotlin version upgrade).
-5. 🪄 Format the logs to be close to the format we use for our [Release changelog style guide]().
+5. 🪄 Format the logs to be close to the format we use for our [CHANGELOG%20STYLE%20GUIDE](./docs/CHANGELOG%20STYLE%20GUIDE.md).
 6. If we’re satisfied with the draft now release it but as a ⚠️ **pre-release**.
 7. Wait at ==least 2 weeks== for feedback from consumers on the stability of he release.
 8. ???
