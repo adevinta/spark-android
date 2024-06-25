@@ -11,8 +11,8 @@ For example they could setup hooks to post the changelog in their monitoring sla
 
 1. [Create a draft release](https://github.com/adevinta/spark-android/releases/new?tag=X.Y.Z-SNAPSHOT&title=X.Y.Z-SNAPSHOT&prerelease=1) with a `*.*.*-SNAPSHOT` version tag.
 2. Click on `Generate release notes` to automatically add all the merged pull requests from this diff and contributors of this release.
-3. Remove logs from `@dependabot` except if they mention big version upgrades for libraries used by our consumers (like Compose or Kotlin).4. Reformat the changelog to be as close as possible to the format we describe in the [CHANGELOG STYLE GUIDE](./docs/CHANGELOG STYLE GUIDE.md). 
-4. Format the logs to be close to the format we use for our [CHANGELOG STYLE GUIDE](./docs/CHANGELOG STYLE GUIDE.md).
+3. Remove logs from `@dependabot` except if they mention big version upgrades for libraries used by our consumers (like Compose or Kotlin). 
+4. Reformat the changelog to be as close as possible to the format we describe in the [CHANGELOG STYLE GUIDE](./docs/CHANGELOG%20STYLE%20GUIDE.md).
 5. If we’re satisfied with the draft, release it but make sure **`⚠️ Set as a pre-release`** is checked.
 6. Wait **at least 2 weeks** for feedback from consumers on the stability of this release.
 7. If we need to create a fix from feedbacks then this cycle repeats.
