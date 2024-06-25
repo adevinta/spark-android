@@ -22,8 +22,8 @@ For example, they could set up hooks to post the changelog in their monitoring S
 
 1. Update the `version` in [gradle.properties](gradle.properties) to a non-`SNAPSHOT`.
 2. Update [CHANGELOG.md](CHANGELOG.md)
-- Add the new version section and move the *unreleased changes* into it.
-- Update the links at the end of the page.
+   - Add the new version section and move the *unreleased changes* into it.
+   - Update the links at the end of the page.
 3. Commit and push the changes to a new PR
    ```bash
    git commit -am "chore: prepare version X.Y.X"

@@ -107,7 +107,6 @@ _2024-06-24_
 
 If you want to make your Chip closable then you will need to add a callback action in the new `onClose` parameter.
 
----
 
 #### 🆕 BottomSheet now use the spark specs
 > [!CAUTION]
@@ -116,7 +115,6 @@ If you want to make your Chip closable then you will need to add a callback acti
 > [!WARNING]
 > The `BottomSheet` currently only accepts M3 snackbars; you won't be able to display a SparkSnackbar.
 
----
 
 - 🆕 ProgressTracker is now available! It still has a few minor visual bugs but it can be tested by squads on their scope. Don't hesitate to give us feedback!
 - 🆕 `TextLinkButton` will now use `LocalContentColor` when using the Surface intent. This will allow you to have an `onSurface` `TextLink` when needed.
