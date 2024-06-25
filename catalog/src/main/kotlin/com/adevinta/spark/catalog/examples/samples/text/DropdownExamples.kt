@@ -22,6 +22,7 @@
 package com.adevinta.spark.catalog.examples.samples.text
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -29,6 +30,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -211,7 +213,7 @@ private fun CustomItemsDropdown() {
         },
         onDismissRequest = {
             expanded = false
-        },
+                            },
         dropdownContent = {
             singleSelectionFilter.forEach { (groupName, books) ->
                 DropdownMenuGroupItem(
