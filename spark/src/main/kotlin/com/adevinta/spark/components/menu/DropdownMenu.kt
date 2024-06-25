@@ -65,6 +65,10 @@ import com.adevinta.spark.icons.MailOutline
 import com.adevinta.spark.icons.PenFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WheelOutline
+import com.adevinta.spark.tokens.EmphasizeDim1
+import com.adevinta.spark.tokens.SparkColors
+import com.adevinta.spark.tokens.SparkTypography
+import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.DropdownMenu as MaterialDropdownMenu
@@ -242,9 +246,43 @@ private fun MenuItemColors.leadingIconColor(enabled: Boolean): Color =
 private fun MenuItemColors.trailingIconColor(enabled: Boolean): Color =
     if (enabled) trailingIconColor else disabledTrailingIconColor
 
+/**
+ * A group of [DropdownMenuItem] with a [title] label to describe all items from this group.
+ *
+ *
+ * Like in [DropdownMenu] the items are stacks vertically.
+ *
+ * @param title The title label of the group, it's styled in [SparkTypography.body1] and colored in emphasis [SparkColors.dim1]
+ * @param modifier The modifier to be applied to the Group.
+ */
+@Composable
+internal fun DropdownMenuGroupItem(
+    title: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    Column(modifier = modifier) {
+        SectionHeadline {
+            title()
+        }
+        content(this)
+    }
+}
+
+@Composable
+private inline fun SectionHeadline(
+    crossinline content: @Composable () -> Unit,
+) {
+    ProvideTextStyle(value = SparkTheme.typography.body2) {
+        EmphasizeDim1 {
+            content()
+        }
+    }
+}
+
 @Preview(
     group = "Menu",
-    name = "DropdownMenu",
+    name = "DropdownMenuItem",
 )
 @Composable
 private fun DropdownMenuItemPreview(@PreviewParameter(ThemeProvider::class) theme: ThemeVariant) {
@@ -301,6 +339,63 @@ private fun DropdownMenuItemPreview(@PreviewParameter(ThemeProvider::class) them
                 )
             },
             trailingIcon = { Text("F11", textAlign = TextAlign.Center) },
+        )
+    }
+}
+
+@Preview(
+    group = "Menu",
+    name = "DropdownMenuGroupItem",
+)
+@Composable
+private fun DropdownMenuGroupItemPreview(@PreviewParameter(ThemeProvider::class) theme: ThemeVariant) {
+    PreviewTheme(
+        themeVariant = theme,
+        padding = PaddingValues(0.dp),
+        contentPadding = 0.dp,
+    ) {
+        DropdownMenuGroupItem(
+            title = { Text("Logiciel") },
+        ) {
+            DropdownMenuItem(
+                text = { Text("Edit") },
+                onClick = { /* Handle edit! */ },
+                leadingIcon = {
+                    Icon(
+                        SparkIcons.PenFill,
+                        contentDescription = null,
+                    )
+                },
+            )
+            DropdownMenuItem(
+                text = { Text("Save") },
+                onClick = { /* Handle edit! */ },
+            )
+            DropdownMenuItem(
+                text = { Text("Settings") },
+                onClick = { /* Handle settings! */ },
+                enabled = false,
+                leadingIcon = {
+                    Icon(
+                        SparkIcons.WheelOutline,
+                        contentDescription = null,
+                    )
+                },
+            )
+        }
+        DropdownMenuItem(
+            text = { Text("Edit") },
+            onClick = { /* Handle edit! */ },
+            leadingIcon = {
+                Icon(
+                    SparkIcons.PenFill,
+                    contentDescription = null,
+                )
+            },
+        )
+        DropdownMenuItem(
+            text = { Text("Save") },
+            onClick = { /* Handle edit! */ },
         )
     }
 }
