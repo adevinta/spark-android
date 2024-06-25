@@ -2,12 +2,12 @@
 
 ## Pre-release
 
-Before each release we will publish a Snapshot version of it and use it to create a pre release on [Github Release page](https://github.com/adevinta/spark-android/releases)
+Before each release, we will publish a Snapshot version of it and use it to create a pre-release on [Github Release page](https://github.com/adevinta/spark-android/releases)
 
-During a period of ~2 weeks consumers will be able to test it and report bugs that can be fixed before it’s considered stable.
+During a period of ~2 weeks, consumers will be able to test it and report bugs that can be fixed before it’s considered stable.
 
-Using Github pre-release feature will allow Spark users to be notified that a new release is being prepared and test against it.
-For example they could setup hooks to post the changelog in their monitoring slack channel or trigger a CI build to validates that this new release doesn’t break their build.
+Using the Github pre-release feature will allow Spark users to be notified that a new release is being prepared and test against it.
+For example, they could set up hooks to post the changelog in their monitoring Slack channel or trigger a CI build to validate that this new release doesn’t break their build.
 
 1. [Create a draft release](https://github.com/adevinta/spark-android/releases/new?tag=X.Y.Z-SNAPSHOT&title=X.Y.Z-SNAPSHOT&prerelease=1) with a `*.*.*-SNAPSHOT` version tag.
 2. Click on `Generate release notes` to automatically add all the merged pull requests from this diff and contributors of this release.
@@ -15,8 +15,8 @@ For example they could setup hooks to post the changelog in their monitoring sla
 4. Reformat the changelog to be as close as possible to the format we describe in the [CHANGELOG STYLE GUIDE](./docs/CHANGELOG%20STYLE%20GUIDE.md).
 5. If we’re satisfied with the draft, release it but make sure **`⚠️ Set as a pre-release`** is checked.
 6. Wait **at least 2 weeks** for feedback from consumers on the stability of this release.
-7. If we need to create a fix from feedbacks then this cycle repeats.
-8. Otherwise follow the [stable release process](./RELEASING.md#Release)
+7. If we need to create a fix from feedbacks, then this cycle repeats.
+8. Otherwise, follow the [stable release process](./RELEASING.md#Release)
 
 ## Release
 

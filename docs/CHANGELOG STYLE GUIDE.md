@@ -8,14 +8,14 @@ First, these entries are meant for our consumers from all levels so we need to k
 ### 1. Version Header:
 - Format: `## [version-number]`
 - Example: `## [0.11.0]`
-  This header indicate which version the log entry description concern and follows [Semantic Versioning](https://semver.org/), it’s also sorted from the newest to latest semantic version.
+  This header indicates which version the log entry description concern and follows [Semantic Versioning](https://semver.org/), it’s also sorted from the newest to latest semantic version.
 ### 2. Date:
 - Format: `_YYYY-MM-DD_`
 - Example: `_2024-06-24_`
   The date help to quickly get which version was available when and get the release timeline.
 ### 3. Section Headers:
 Sections represent a group of changes scoped to an artefact or section.
-For now we restrict them to the following one to have consistency and avoid ambiguity:
+For now, we restrict them to the following one to have consistency and avoid ambiguity:
 -  `### Spark`
 -  `### Catalog App`
 -  `### Icons`
@@ -30,7 +30,7 @@ Skip content that isn't important.
 Link each change to further information.
 
 > [!NOTE]
-> You can inspire your self from [gitmoji ](https://gitmoji.dev/)
+> You can inspire yourself from [gitmoji ](https://gitmoji.dev/)
 
 Use emojis and clear keywords to categorize changes:
 - 🆕 New Feature:
@@ -54,7 +54,7 @@ You can add reference to a commit, issue or pull request at the end of the same 
 ### 2.  Notice, Caution and Warning Notes:
 A release might have a separate upgrade guide or blog post that is considered essential reading.
 
-For these purposes a _notice_ must be used. This is a single-sentence paragraph with otherwise arbitrary Markdown content. Adding Markdown emphasis markers is recommended. For example (links omitted):
+For these purposes, a _notice_ must be used. This is a single-sentence paragraph with otherwise arbitrary Markdown content. Adding Markdown emphasis markers is recommended. For example (links omitted):
 ```markdown
 ## [2.0.0]
 
