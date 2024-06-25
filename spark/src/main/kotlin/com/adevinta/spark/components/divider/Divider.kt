@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.spacer.HorizontalSpacer
+import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -67,17 +68,16 @@ public enum class LabelVerticalAlignment {
     Bottom,
 }
 
-@Deprecated(
-    "Divider is deprecated",
-    ReplaceWith("HorizontalDivider()"),
-)
 /**
  * A deprecated Divider Component.
  *
  * @param modifier The modifier to be applied to the divider.
  * @param color The color of the divider.
  */
-
+@Deprecated(
+    "Divider is deprecated",
+    ReplaceWith("HorizontalDivider()"),
+)
 @Composable
 public fun Divider(
     modifier: Modifier = Modifier,
@@ -125,7 +125,11 @@ public fun HorizontalDivider(
             color = intent.color(),
         )
 
-        if (label != null) label()
+        if (label != null) {
+            HorizontalSpacer(space = 16.dp)
+            label()
+            HorizontalSpacer(space = 16.dp)
+        }
 
         MaterialHorizontalDivider(
             modifier = rightModifier,
@@ -169,7 +173,11 @@ public fun VerticalDivider(
             color = intent.color(),
         )
 
-        if (label != null) label()
+        if (label != null) {
+            VerticalSpacer(space = 16.dp)
+            label()
+            VerticalSpacer(space = 16.dp)
+        }
 
         MaterialVerticalDivider(
             modifier = bottomModifier,
@@ -248,11 +256,10 @@ internal fun DividerPreview(
 }
 
 @Composable
-internal fun TextComposable() {
+private fun TextComposable() {
     Text(
         textAlign = TextAlign.Center,
         style = SparkTheme.typography.body1,
         text = "Label",
-        modifier = Modifier.padding(horizontal = 16.dp),
     )
 }
