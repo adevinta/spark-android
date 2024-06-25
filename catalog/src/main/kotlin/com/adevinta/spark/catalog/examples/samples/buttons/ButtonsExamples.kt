@@ -22,12 +22,17 @@
 package com.adevinta.spark.catalog.examples.samples.buttons
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -134,7 +139,62 @@ public val ButtonsExamples: List<Example> = listOf(
             },
         )
     },
+    Example(
+        name = "Toggle Button",
+        description = "This is currently not a Spark component," +
+            "\nthis example shows that you can achieve" +
+            "\na toggle button easily by altering between a filled and outlined button.",
+        sourceUrl = ButtonsExampleSourceUrl,
+    ) {
+        ButtonSample(
+            button = { _, text, enabled, icon, iconSide, isLoading ->
+                ButtonToggle(
+                    modifier = Modifier.semantics {
+                        role = Role.Switch
+                    },
+                    text,
+                    enabled,
+                    icon,
+                    iconSide,
+                    isLoading,
+                )
+            },
+        )
+    },
 )
+
+@Composable
+private fun ButtonToggle(
+    modifier: Modifier,
+    text: String,
+    enabled: Boolean,
+    icon: SparkIcon?,
+    iconSide: IconSide,
+    isLoading: Boolean,
+) {
+    var isToggled by remember { mutableStateOf(false) }
+    Box(modifier = modifier) {
+        if (!isToggled) {
+            ButtonOutlined(
+                onClick = { isToggled = true },
+                text = text,
+                enabled = enabled,
+                icon = icon,
+                iconSide = iconSide,
+                isLoading = isLoading,
+            )
+        } else {
+            ButtonFilled(
+                onClick = { isToggled = false },
+                text = text,
+                enabled = enabled,
+                icon = icon,
+                iconSide = iconSide,
+                isLoading = isLoading,
+            )
+        }
+    }
+}
 
 @Composable
 private fun ButtonSample(
