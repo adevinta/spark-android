@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -54,7 +53,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewFontScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.ExperimentalSparkApi
@@ -285,50 +283,48 @@ internal object AddonScopeInstance : AddonScope()
 private fun TextFieldWithDropdownPreview() {
     var expanded by remember { mutableStateOf(false) }
     PreviewTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
-            TextField(
-                value = "+33 0123456789",
-                label = "Phone number",
-                onValueChange = {},
-                leadingContent = {
-                    Dropdown(
-                        modifier = Modifier,
-                        expanded = expanded,
-                        onExpandedChange = {
-                            expanded = !expanded
-                        },
-                        onDismissRequest = {
-                            expanded = false
-                        },
-                        properties = PopupProperties(),
-                        dropdownLabel = {
-                            Canvas(
-                                modifier = Modifier.size(width = 24.dp, height = 14.dp),
-                            ) {
-                                drawRect(color = Color.Blue)
-                                drawRect(color = Color.White, topLeft = Offset(24.dp.toPx() / 3, 0f))
-                                drawRect(color = Color.Red, topLeft = Offset(24.dp.toPx() / 3 * 2, 0f))
-                            }
-                            Text(text = "FR", style = SparkTheme.typography.body1)
-                            SparkSelectTrailingIcon(expanded = expanded)
-                        },
-                    ) {
-                        repeat(4) {
-                            DropdownMenuItem(
-                                onClick = {
-                                    expanded = false
-                                },
-                                text = { Text(text = "Dropdown") },
-                            )
+        TextField(
+            value = "+33 0123456789",
+            label = "Phone number",
+            onValueChange = {},
+            leadingContent = {
+                Dropdown(
+                    modifier = Modifier,
+                    expanded = expanded,
+                    onExpandedChange = {
+                        expanded = !expanded
+                    },
+                    onDismissRequest = {
+                        expanded = false
+                    },
+                    properties = PopupProperties(),
+                    dropdownLabel = {
+                        Canvas(
+                            modifier = Modifier.size(width = 24.dp, height = 14.dp),
+                        ) {
+                            drawRect(color = Color.Blue)
+                            drawRect(color = Color.White, topLeft = Offset(24.dp.toPx() / 3, 0f))
+                            drawRect(color = Color.Red, topLeft = Offset(24.dp.toPx() / 3 * 2, 0f))
                         }
+                        Text(text = "FR", style = SparkTheme.typography.body1)
+                        SparkSelectTrailingIcon(expanded = expanded)
+                    },
+                ) {
+                    repeat(4) {
+                        DropdownMenuItem(
+                            onClick = {
+                                expanded = false
+                            },
+                            text = { Text(text = "Dropdown") },
+                        )
                     }
-                },
-            )
-        }
+                }
+            },
+        )
     }
 }
 
-@PreviewFontScale
+@Preview
 @Composable
 private fun TextFieldWithButtonPreview() {
     var isLoading by remember { mutableStateOf(false) }
