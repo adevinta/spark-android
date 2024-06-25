@@ -4,24 +4,24 @@
 
 Before each release we will publish a Snapshot version of it and use it to create a pre release on [Github Release page](https://github.com/adevinta/spark-android/releases)
 
-During a period of ~2 weeks consumers will be able to test it for bugs that can be fixed before it’s considered stable.
+During a period of ~2 weeks consumers will be able to test it and report bugs that can be fixed before it’s considered stable.
 
-Using Github pre-release feature will allow Spark users to create a hook to notice that a new release has been made and test against it.
-For example they could hook to it to make a bot post this changelog in their monitoring slack channel or trigger a CI build to certify that this new release doesn’t break their build.
+Using Github pre-release feature will allow Spark users to be notified that a new release is being prepared and test against it.
+For example they could setup hooks to post the changelog in their monitoring slack channel or trigger a CI build to validates that this new release doesn’t break their build.
 
-1. First create a draft release that by creating a `*.*.*-SNAPSHOT` version tag.
-2. Use this new tag to use the change log generation tool from GitHub.
-3. Remove logs from Dependabot except if they mention big version upgrade for libraries used by our consumers (like Compose or Kotlin version upgrade).
-5. 🪄 Format the logs to be close to the format we use for our [CHANGELOG%20STYLE%20GUIDE](./docs/CHANGELOG%20STYLE%20GUIDE.md).
-6. If we’re satisfied with the draft now release it but as a ⚠️ **pre-release**.
-7. Wait at ==least 2 weeks== for feedback from consumers on the stability of he release.
-8. ???
-9. Profit! 💹
+1. [Create a draft release](https://github.com/adevinta/spark-android/releases/new?tag=X.Y.Z-SNAPSHOT&title=X.Y.Z-SNAPSHOT&prerelease=1) with a `*.*.*-SNAPSHOT` version tag.
+2. Click on `Generate release notes` to automatically add all the merged pull requests from this diff and contributors of this release.
+3. Remove logs from `@dependabot` except if they mention big version upgrades for libraries used by our consumers (like Compose or Kotlin).4. Reformat the changelog to be as close as possible to the format we describe in the [CHANGELOG STYLE GUIDE](./docs/CHANGELOG STYLE GUIDE.md). 
+4. Format the logs to be close to the format we use for our [CHANGELOG STYLE GUIDE](./docs/CHANGELOG STYLE GUIDE.md).
+5. If we’re satisfied with the draft, release it but make sure **`⚠️ Set as a pre-release`** is checked.
+6. Wait **at least 2 weeks** for feedback from consumers on the stability of this release.
+7. If we need to create a fix from feedbacks then this cycle repeats.
+8. Otherwise follow the [stable release process](./RELEASING.md#Release)
 
 ## Release
 
-1. Update the `version` in [gradle.properties](https://github.com/adevinta/spark-android/blob/main/gradle.properties) to a non-`SNAPSHOT`.
-2. Update [CHANGELOG.md](https://github.com/adevinta/spark-android/blob/main/CHANGELOG.md)
+1. Update the `version` in [gradle.properties](gradle.properties) to a non-`SNAPSHOT`.
+2. Update [CHANGELOG.md](CHANGELOG.md)
 - Add the new version section and move the *unreleased changes* into it.
 - Update the links at the end of the page.
 3. Commit and push the changes to a new PR
@@ -36,7 +36,7 @@ For example they could hook to it to make a bot post this changelog in their mon
    git push origin X.Y.Z
    ```
 5. Wait for the [publishing workflow](https://github.com/adevinta/spark-android/actions/workflows/publish.yml) to build and publish the release.
-6. Update the `version` in [gradle.properties](https://github.com/adevinta/spark-android/blob/main/gradle.properties) to the next `SNAPSHOT` version.
+6. Update the `version` in [gradle.properties](gradle.properties) to the next `SNAPSHOT` version.
 7. Commit and push the changes to a new PR
   ```bash
   git commit -am "chore: prepare next development version"
@@ -47,7 +47,7 @@ For example they could hook to it to make a bot post this changelog in their mon
     1. `close` then wait till it completes
     2. `release` the artifact
 9. Trigger the manual workflow [![📋 Publish Dokka to GitHub Pages](https://github.com/adevinta/spark-android/actions/workflows/dokka.yml/badge.svg)](https://github.com/adevinta/spark-android/actions/workflows/dokka.yml) with the version tag.
-10. Draft a [new release](https://github.com/adevinta/spark-android/releases/new) with the version tag, add the corresponding [CHANGELOG.md](https://github.com/adevinta/spark-android/blob/main/CHANGELOG.md) entries, and publish it when ready.
+10. Draft a [new release](https://github.com/adevinta/spark-android/releases/new) with the version tag, add the corresponding [CHANGELOG.md](CHANGELOG.md) entries, and publish it when ready.
 
 ---
 

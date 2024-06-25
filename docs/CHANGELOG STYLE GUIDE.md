@@ -33,17 +33,16 @@ Link each change to further information.
 > You can inspire your self from [gitmoji ](https://gitmoji.dev/)
 
 Use emojis and clear keywords to categorize changes:
-- 🆕 New Feature: `🆕`
-- 🎨 Improvement: `🎨`
-- 💄 UI Change: `💄`
-- 🐛 Bug Fix: `🐛`
-- 🔧 Maintenance: `🔧`
-- 🚀 Performance Improvement: `🚀`
-- 📝 Documentation: `📝`
-- ⬆️ Dependency Update: `⬆️`
-- 🗑️ Deprecation/Removal: `🗑️`
+- 🆕 New Feature:
+- 🎨 Improvement:
+- 💄 UI Change:
+- 🐛 Bug Fix:
+- 🔧 Maintenance:
+- 🚀 Performance Improvement:
+- 📝 Documentation:
+- ⬆️ Dependency Update:
+- 🗑️ Deprecation/Removal:
 
----
 ## Detailed Entries
 
 ### 1. Feature/Change Description:
@@ -71,7 +70,8 @@ _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
 Use `> [!CAUTION]` and `> [!WARNING]` for important notices that may impact users like breaking changes, being from compilation or ui.
 - Example:
 ```markdown
-> [!CAUTION] > The `Filled` style has been removed and may break your build if used.
+> [!CAUTION] 
+> The `Filled` style has been removed and may break your build if used.
 > 
 ```
 
@@ -88,8 +88,6 @@ However, changes such as the following must _not_ be excluded:
 - Changes to supported runtime environments (which may be reflected only in dotfiles).
 - Code style changes that use new language features.
 - New documentation (if a feature was previously undocumented).
-
----
 
 ## Example Entry
 
