@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import kotlin.reflect.KProperty
 
 plugins {
@@ -31,12 +31,11 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions.allWarningsAsErrors = true
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
-}
-
 kotlin {
+    compilerOptions {
+        allWarningsAsErrors = true
+        jvmTarget = JvmTarget.JVM_11
+    }
     explicitApi()
 }
 
@@ -50,6 +49,7 @@ dependencies {
     compileOnly(libs.gradlePlugins.android)
     compileOnly(libs.gradlePlugins.kotlin)
     compileOnly(libs.gradlePlugins.ksp)
+    compileOnly(libs.gradlePlugins.compose)
     compileOnly(libs.gradlePlugins.dependencyGuard)
     compileOnly(libs.gradlePlugins.dokka)
     compileOnly(libs.gradlePlugins.spotless)
