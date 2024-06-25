@@ -35,6 +35,7 @@ import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarCo
 import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressTrackerConfigurator
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.slider.SlidersConfigurator
+import com.adevinta.spark.catalog.configurator.samples.snackbar.SnackbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.text.TextLinksConfigurator
@@ -54,6 +55,7 @@ import com.adevinta.spark.catalog.examples.samples.progressbar.ProgressbarExampl
 import com.adevinta.spark.catalog.examples.samples.progresstracker.ProgressTrackerExamples
 import com.adevinta.spark.catalog.examples.samples.rating.RatingExamples
 import com.adevinta.spark.catalog.examples.samples.slider.SlidersExamples
+import com.adevinta.spark.catalog.examples.samples.snackbar.SnackbarExamples
 import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
 import com.adevinta.spark.catalog.examples.samples.text.TextLinksExamples
@@ -233,6 +235,19 @@ private val Switches = Component(
     configurator = SwitchConfigurator,
 )
 
+private val Snackbars = Component(
+    id = nextId(),
+    name = "Snackbars",
+    illustration = R.drawable.illu_component_placeholder,
+    tintIcon = false,
+    description = R.string.component_snackbar_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/36d4af-snackbar",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.snackbars/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/snackbars/Snackbar.kt",
+    examples = SnackbarExamples,
+    configurator = SnackbarConfigurator,
+)
+
 private val Tabs = Component(
     id = nextId(),
     name = "Tabs",
@@ -369,4 +384,6 @@ public val Components: List<Component> = listOf(
     Tags,
     TextFields,
     TextLinks,
+    Sliders,
+    Snackbars,
 )
