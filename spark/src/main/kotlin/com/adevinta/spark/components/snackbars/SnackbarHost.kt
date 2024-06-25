@@ -21,38 +21,18 @@
  */
 package com.adevinta.spark.components.snackbars
 
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.animation.core.FastOutSlowInEasing
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarData
+import androidx.compose.material3.SnackbarDefaults
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarResult
-import androidx.compose.material3.SnackbarVisuals
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.RecomposeScope
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.currentRecomposeScope
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.platform.AccessibilityManager
 import androidx.compose.ui.platform.LocalAccessibilityManager
-import androidx.compose.ui.semantics.LiveRegionMode
-import androidx.compose.ui.semantics.dismiss
-import androidx.compose.ui.semantics.liveRegion
-import androidx.compose.ui.semantics.semantics
-import com.adevinta.spark.components.snackbars.SnackbarHostState.SnackbarDataSpark
 import com.adevinta.spark.icons.SparkIcon
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.delay
@@ -71,13 +51,13 @@ import kotlin.coroutines.resume
  * @param hostState state of this component to read and show [Snackbar]s accordingly
  * @param modifier the [Modifier] to be applied to this component
  * @param snackbar the instance of the [Snackbar] to be shown at the appropriate time with
- * appearance based on the [SnackbarDataSpark] provided as a param
+ * appearance based on the [SnackbarData] provided as a param
  */
 @Composable
 public fun SnackbarHost(
     hostState: SnackbarHostState,
     modifier: Modifier = Modifier,
-    snackbar: @Composable (SnackbarData) -> Unit = { data -> Snackbar(data) },
+    snackbar: @Composable (SnackbarData) -> Unit = { Snackbar(it) },
 ) {
     val currentSnackbarData = hostState.currentSnackbarData
     val accessibilityManager = LocalAccessibilityManager.current
@@ -102,25 +82,19 @@ public fun SnackbarHost(
  * State of the [SnackbarHost], which controls the queue and the current [Snackbar] being shown
  * inside the [SnackbarHost].
  *
- * This state is usually [remember]ed and used to provide a [SnackbarHost] to a [Scaffold].
+ * This state is usually [remember]ed and used to provide a
+ * [SnackbarHost] to a [Scaffold].
  */
 @Stable
 public class SnackbarHostState {
-
-    /**
-     * Only one [Snackbar] can be shown at a time. Since a suspending Mutex is a fair queue, this
-     * manages our message queue and we don't have to maintain one.
-     */
     private val mutex = Mutex()
 
-    /**
-     * The current [SnackbarDataSpark] being shown by the [SnackbarHost], or `null` if none.
-     */
-    public var currentSnackbarData: SnackbarData? by mutableStateOf<SnackbarData?>(null)
+    public var currentSnackbarData: SnackbarData? by mutableStateOf(null)
         private set
 
     /**
-     * Shows or queues to be shown a [Snackbar] at the bottom of the [Scaffold] to which this state
+     * Shows or queues to be shown a [Snackbar] at the bottom of
+     * the [Scaffold] to which this state
      * is attached and suspends until the snackbar has disappeared.
      *
      * [SnackbarHostState] guarantees to show at most one snackbar at a time. If this function is
@@ -128,11 +102,14 @@ public class SnackbarHostState {
      * shown and subsequently addressed. If the caller is cancelled, the snackbar will be removed
      * from display and/or the queue to be displayed.
      *
-     * To change the Snackbar appearance, change it in 'snackbarHost' on the [Scaffold].
-     *
-     * @param message text to be shown in the Snackbar
+     * To change the Snackbar appearance, change it in 'snackbarHost'
+     * on the [Scaffold].
+     * @param message The message to display in the Snackbar.
+     * @param icon The icon to display in the Snackbar.
+     * @param intent The intent of the Snackbar.
+     * @param style The style of the Snackbar.
      * @param actionLabel optional action label to show as button in the Snackbar
-     * @param withDismissAction a boolean to show a dismiss action in the Snackbar. This is
+     * @param isDismissIconEnabled a boolean to show a dismiss action in the Snackbar. This is
      * recommended to be set to true for better accessibility when a Snackbar is set with a
      * [SnackbarDuration.Indefinite]
      * @param duration duration to control how long snackbar will be shown in [SnackbarHost], either
@@ -141,30 +118,33 @@ public class SnackbarHostState {
      * @return [SnackbarResult.ActionPerformed] if option action has been clicked or
      * [SnackbarResult.Dismissed] if snackbar has been dismissed via timeout or by the user
      */
-    @OptIn(ExperimentalMaterial3Api::class)
     public suspend fun showSnackbar(
         message: String,
         actionLabel: String? = null,
-        title: String? = null,
         icon: SparkIcon? = null,
-        colors: SnackbarColors = SnackbarColors.Default,
-        withDismissAction: Boolean = false,
-        duration: SnackbarDuration =
-            if (actionLabel == null) SnackbarDuration.Short else SnackbarDuration.Indefinite,
+        intent: SnackbarIntent = SnackbarDefaults.intent,
+        style: SnackbarStyle = SnackbarDefaults.style,
+        isDismissIconEnabled: Boolean = false,
+        duration: SnackbarDuration = if (actionLabel == null) {
+            SnackbarDuration.Short
+        } else {
+            SnackbarDuration.Indefinite
+        },
     ): SnackbarResult = showSnackbar(
         SnackbarSparkVisuals(
             message = message,
-            title = title,
             icon = icon,
-            colors = colors,
+            style = style,
+            intent = intent,
             actionLabel = actionLabel,
-            withDismissAction = withDismissAction,
+            isDismissIconEnabled = isDismissIconEnabled,
             duration = duration,
         ),
     )
 
     /**
-     * Shows or queues to be shown a [Snackbar] at the bottom of the [Scaffold] to which this state
+     * Shows or queues to be shown a [Snackbar] at
+     * the bottom of the [Scaffold] to which this state
      * is attached and suspends until the snackbar has disappeared.
      *
      * [SnackbarHostState] guarantees to show at most one snackbar at a time. If this function is
@@ -172,31 +152,43 @@ public class SnackbarHostState {
      * shown and subsequently addressed. If the caller is cancelled, the snackbar will be removed
      * from display and/or the queue to be displayed.
      *
-     * @param visuals [SnackbarVisuals] that are used to create a Snackbar
+     * @param visuals [SnackbarSparkVisuals] that are used to create a Snackbar
      *
      * @return [SnackbarResult.ActionPerformed] if option action has been clicked or
      * [SnackbarResult.Dismissed] if snackbar has been dismissed via timeout or by the user
      */
-    @ExperimentalMaterial3Api
     public suspend fun showSnackbar(visuals: SnackbarSparkVisuals): SnackbarResult = mutex.withLock {
         try {
             return suspendCancellableCoroutine { continuation ->
-                currentSnackbarData = SnackbarDataSpark(visuals, continuation)
+                currentSnackbarData = SnackbarDataImpl(visuals, continuation)
             }
         } finally {
             currentSnackbarData = null
         }
     }
 
-    public class SnackbarDataSpark(
+    /**
+     * An internal class that represents the data of a particular Snackbar.
+     * @param visuals Holds the visual representation for a particular [Snackbar]
+     * @param continuation handle the coroutine to give back the action resulting on the continuation
+     * of the coroutine where the Snackbar has been shown to either notify a action performed or a dismissed
+     */
+    internal class SnackbarDataImpl(
         override val visuals: SnackbarSparkVisuals,
         private val continuation: CancellableContinuation<SnackbarResult>,
     ) : SnackbarData {
 
+        /**
+         *Function to be called when Snackbar action has been performed to notify the listeners
+         */
         override fun performAction() {
             if (continuation.isActive) continuation.resume(SnackbarResult.ActionPerformed)
         }
 
+        /**
+         * Dismisses the Snackbar.
+         * Function to be called when Snackbar is dismissed either by timeout or by the user
+         */
         override fun dismiss() {
             if (continuation.isActive) continuation.resume(SnackbarResult.Dismissed)
         }
@@ -205,7 +197,7 @@ public class SnackbarHostState {
             if (this === other) return true
             if (other == null || this::class != other::class) return false
 
-            other as SnackbarDataSpark
+            other as SnackbarDataImpl
 
             if (visuals != other.visuals) return false
             if (continuation != other.continuation) return false
@@ -220,147 +212,3 @@ public class SnackbarHostState {
         }
     }
 }
-
-internal fun SnackbarDuration.toMillis(
-    hasAction: Boolean,
-    accessibilityManager: AccessibilityManager?,
-): Long {
-    val original = when (this) {
-        SnackbarDuration.Indefinite -> Long.MAX_VALUE
-        SnackbarDuration.Long -> 10000L
-        SnackbarDuration.Short -> 4000L
-    }
-    if (accessibilityManager == null) {
-        return original
-    }
-    return accessibilityManager.calculateRecommendedTimeoutMillis(
-        original,
-        containsIcons = true,
-        containsText = true,
-        containsControls = hasAction,
-    )
-}
-
-// TODO: to be replaced with the public customizable implementation
-// it's basically tweaked nullable version of Crossfade
-@Composable
-private fun FadeInFadeOutWithScale(
-    current: SnackbarData?,
-    modifier: Modifier = Modifier,
-    content: @Composable (SnackbarData) -> Unit,
-) {
-    val state = remember { FadeInFadeOutState<SnackbarData?>() }
-    if (current != state.current) {
-        state.current = current
-        val keys = state.items.map { it.key }.toMutableList()
-        if (!keys.contains(current)) {
-            keys.add(current)
-        }
-        state.items.clear()
-        keys.filterNotNull().mapTo(state.items) { key ->
-            FadeInFadeOutAnimationItem(key) { children ->
-                val isVisible = key == current
-                val duration = if (isVisible) SnackbarFadeInMillis else SnackbarFadeOutMillis
-                val delay = SnackbarFadeOutMillis + SnackbarInBetweenDelayMillis
-                val animationDelay = if (isVisible && keys.filterNotNull().size != 1) delay else 0
-                val opacity = animatedOpacity(
-                    animation = tween(
-                        easing = LinearEasing,
-                        delayMillis = animationDelay,
-                        durationMillis = duration,
-                    ),
-                    visible = isVisible,
-                    onAnimationFinish = {
-                        if (key != state.current) {
-                            // leave only the current in the list
-                            state.items.removeAll { it.key == key }
-                            state.scope?.invalidate()
-                        }
-                    },
-                )
-                val scale = animatedScale(
-                    animation = tween(
-                        easing = FastOutSlowInEasing,
-                        delayMillis = animationDelay,
-                        durationMillis = duration,
-                    ),
-                    visible = isVisible,
-                )
-                Box(
-                    Modifier
-                        .graphicsLayer(
-                            scaleX = scale.value,
-                            scaleY = scale.value,
-                            alpha = opacity.value,
-                        )
-                        .semantics {
-                            liveRegion = LiveRegionMode.Polite
-                            dismiss {
-                                key.dismiss()
-                                true
-                            }
-                        },
-                ) {
-                    children()
-                }
-            }
-        }
-    }
-    Box(modifier) {
-        state.scope = currentRecomposeScope
-        state.items.forEach { (item, opacity) ->
-            key(item) {
-                opacity {
-                    content(item!!)
-                }
-            }
-        }
-    }
-}
-
-private class FadeInFadeOutState<T> {
-    // we use Any here as something which will not be equals to the real initial value
-    var current: Any? = Any()
-    var items = mutableListOf<FadeInFadeOutAnimationItem<T>>()
-    var scope: RecomposeScope? = null
-}
-
-private data class FadeInFadeOutAnimationItem<T>(
-    val key: T,
-    val transition: FadeInFadeOutTransition,
-)
-
-private typealias FadeInFadeOutTransition = @Composable (content: @Composable () -> Unit) -> Unit
-
-@Composable
-private fun animatedOpacity(
-    animation: AnimationSpec<Float>,
-    visible: Boolean,
-    onAnimationFinish: () -> Unit = {},
-): State<Float> {
-    val alpha = remember { Animatable(if (!visible) 1f else 0f) }
-    LaunchedEffect(visible) {
-        alpha.animateTo(
-            if (visible) 1f else 0f,
-            animationSpec = animation,
-        )
-        onAnimationFinish()
-    }
-    return alpha.asState()
-}
-
-@Composable
-private fun animatedScale(animation: AnimationSpec<Float>, visible: Boolean): State<Float> {
-    val scale = remember { Animatable(if (!visible) 1f else 0.8f) }
-    LaunchedEffect(visible) {
-        scale.animateTo(
-            if (visible) 1f else 0.8f,
-            animationSpec = animation,
-        )
-    }
-    return scale.asState()
-}
-
-private const val SnackbarFadeInMillis = 150
-private const val SnackbarFadeOutMillis = 75
-private const val SnackbarInBetweenDelayMillis = 0

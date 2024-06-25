@@ -1,29 +1,31 @@
-# Package com.adevinta.spark.components.snackbar
+# Package com.adevinta.spark.components.snackbars
 
-[Snackbars](https://spark.adevinta.com/1186e1705/p/36d4af-snack-bar--toast/b/380770) 
+[Snackbars](https://spark.adevinta.com/1186e1705/p/36d4af-snack-bar--toast/b/380770)
 inform users of a process that an app has performed or will perform
 They appear temporarily, towards the bottom of the screen.
-They shouldn’t interrupt the user experience, and they don’t require user input to disappear.
-
+They should not interrupt the user experience, and they don’t require user input to disappear.
 Only one snackbar may be displayed at a time.
-
-## Usage
-
-### Snackbar
-
-| Light | Dark                                                                                                 |
-|-------|------------------------------------------------------------------------------------------------------|
-| ![](../../images/com.adevinta.spark.snackbar_SnackbarDocScreenshot_snackbarColorsShowcase__light.png) | ![](../../images/com.adevinta.spark.snackbar_SnackbarDocScreenshot_snackbarColorsShowcase__dark.png) |
 
 
 ```kotlin
-val snackbarHostState = remember { SnackbarHostState() }
-LaunchedEffect(conversationsState) {
-    if (shouldShowSnackbar) {
+@Composable
+public fun Snackbar(
+    data: SnackbarData,
+    modifier: Modifier = Modifier,
+    isActionOnNewLine: Boolean = false,
+    isDismissIconEnabled: Boolean = false,
+    ){}
+```
+
+
+```kotlin
+private val snackbarHostState = remember { SnackbarHostState() }
+
+LaunchedEffect(conversationsState) { 
+    if (shouldShowSnackbar) { 
         snackbarHostState.showSnackbar(
-            message = "Message",
-            duration = SnackbarDuration.Short,
-        )
+            message = "Message", 
+            duration = SnackbarDuration.Short) 
     }
 }
 Scaffold(
@@ -33,5 +35,8 @@ Scaffold(
 ) { innerPadding ->
     // Content
 }
-
 ```
+
+| Light                                                                                                | Dark                                                                                             |
+|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| ![](../../images/com.adevinta.spark.snackbar_SnackbarDocScreenshot_snackbarDocScreenshot__light.png) | ![](../../images/com.adevinta.spark.snackbar_SnackbarDocScreenshot_snackbarDocScreenshot__dark.png) |
