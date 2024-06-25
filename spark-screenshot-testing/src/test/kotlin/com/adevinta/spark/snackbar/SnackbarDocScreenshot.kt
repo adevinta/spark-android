@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,30 +21,41 @@
  */
 package com.adevinta.spark.snackbar
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowColumn
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Text
+import app.cash.paparazzi.DeviceConfig
 import com.adevinta.spark.components.snackbars.Snackbar
-import com.adevinta.spark.components.snackbars.SnackbarColors
-import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshotNightMode
+import com.android.ide.common.rendering.api.SessionParams
 import org.junit.Rule
 import org.junit.Test
 
 internal class SnackbarDocScreenshot {
 
     @get:Rule
-    val paparazzi = paparazziRule()
+    val paparazzi = paparazziRule(
+        renderingMode = SessionParams.RenderingMode.SHRINK,
+        deviceConfig = DeviceConfig.PIXEL_C,
+    )
 
+    @OptIn(ExperimentalLayoutApi::class)
     @Test
-    fun snackbarColorsShowcase() {
+    fun snackbarDocScreenshot() {
         paparazzi.sparkSnapshotNightMode {
-            Column {
-                SnackbarColors.entries.forEach {
-                    Snackbar(
-                        colors = it,
-                        actionLabel = "Action",
-                    ) {
-                        Text("Lorem ipsum dolor sit amet")
+            FlowColumn {
+                data.forEach { visual ->
+                    Row {
+                        Snackbar(
+                            intent = visual.intent,
+                            style = visual.style,
+                            isActionOnNewLine = visual.message == stubBody,
+                            isDismissIconEnabled = visual.isDismissIconEnabled,
+                            icon = visual.icon,
+                            actionLabel = visual.actionLabel,
+                        ) { Text(visual.message) }
                     }
                 }
             }
