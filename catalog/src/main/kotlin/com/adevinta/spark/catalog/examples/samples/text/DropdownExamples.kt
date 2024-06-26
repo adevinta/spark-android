@@ -100,7 +100,7 @@ public val DropdownsExamples: List<Example> = listOf(
     ) {
         val multiSelectionFilter by remember {
             mutableStateOf(DropdownStubData)
-        }
+                                        }
 
         var selectedItems by remember {
             mutableStateOf(
