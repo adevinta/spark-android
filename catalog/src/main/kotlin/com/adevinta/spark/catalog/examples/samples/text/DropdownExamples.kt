@@ -22,17 +22,20 @@
 package com.adevinta.spark.catalog.examples.samples.text
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.menu.DropdownMenuGroupItem
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.Dropdown
+import com.adevinta.spark.tokens.highlight
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -74,7 +77,7 @@ public val DropdownsExamples: List<Example> = listOf(
                     DropdownMenuGroupItem(
                         title = {
                             Text(group.name)
-                        }
+                        },
                     ) {
                         group.books.forEach { book ->
                             DropdownMenuItem(
@@ -82,7 +85,83 @@ public val DropdownsExamples: List<Example> = listOf(
                                 onClick = {
                                     singleSelected = book
                                     expanded = false
-                                }
+                                },
+                            )
+                        }
+                    }
+                }
+            },
+        )
+    },
+    Example(
+        name = "Multi selection",
+        description = "Link inside title no icon",
+        sourceUrl = DropdownsExampleSourceUrl,
+    ) {
+        val multiSelectionFilter by remember {
+            mutableStateOf(DropdownStubData)
+        }
+
+        var selectedItems by remember {
+            mutableStateOf(
+                listOf(
+                    "To Kill a Mockingbird",
+                    "War and Peace",
+                ),
+            )
+        }
+        val multiSelectedValues by remember(selectedItems.size) {
+            derivedStateOf {
+                val suffix = if (selectedItems.size > 1) ", +${selectedItems.size - 1}" else ""
+                selectedItems.firstOrNull().orEmpty() + suffix
+            }
+        }
+        var expanded by remember { mutableStateOf(false) }
+        Dropdown(
+            modifier = Modifier.fillMaxWidth(),
+            value = multiSelectedValues,
+            label = "Book",
+            placeholder = "Pick a Book",
+            expanded = expanded,
+            onExpandedChange = {
+                expanded = !expanded
+            },
+            onDismissRequest = {
+                expanded = false
+            },
+            dropdownContent = {
+                multiSelectionFilter.forEach { group ->
+                    DropdownMenuGroupItem(
+                        title = {
+                            Text(group.name)
+                        },
+                    ) {
+                        group.books.forEach { book ->
+                            // This should be part of your model otherwise it's a huge work that done on
+                            // each items but we're simplifying things since it's an example here.
+                            val isSelected = book in selectedItems
+                            DropdownMenuItem(
+                                text = {
+                                    Text(
+                                        text = book,
+                                        style = if(isSelected) {
+                                            SparkTheme.typography.body1.highlight
+                                        } else {
+                                            SparkTheme.typography.body1
+                                        }
+                                    )
+                                },
+                                onClick = {
+                                    selectedItems = if (book in selectedItems) {
+                                        selectedItems - book
+                                    } else {
+                                        selectedItems + book
+                                    }
+                                    // Here we want to have the dropdown to stay expanded when we multiSelect but
+                                    // you could use the line below if in the case you want to have the same behaviour
+                                    // as the single selection.
+                                    // expanded = false
+                                },
                             )
                         }
                     }
