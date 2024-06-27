@@ -7,12 +7,12 @@ on:
 
 env:
   GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
 
 jobs:
   clear-cache:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - run: gh extension install actions/gh-actions-cache
       - run: gh actions-cache list
       - name: Clear cache entries
