@@ -249,7 +249,6 @@ public fun Snackbar(
     data: SnackbarData,
     modifier: Modifier = Modifier,
 ) {
-    data.performAction()
     val visuals = data.visuals
     val sparkVisuals = data.visuals as? SnackbarSparkVisuals
 
