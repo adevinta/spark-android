@@ -82,7 +82,6 @@ public val DividerExamples: List<Example> = listOf(
                             textAlign = TextAlign.Center,
                             style = SparkTheme.typography.body1,
                             text = intent.name,
-                            modifier = Modifier.padding(horizontal = 16.dp),
                         )
                     },
                     labelHorizontalAlignment = alignment,
@@ -142,7 +141,6 @@ public val DividerExamples: List<Example> = listOf(
                                 textAlign = TextAlign.Center,
                                 style = SparkTheme.typography.body1,
                                 text = intent.name,
-                                modifier = Modifier.padding(horizontal = 16.dp),
                             )
                         },
                         labelVerticalAlignment = alignment,

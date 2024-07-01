@@ -74,7 +74,7 @@ public enum class LabelVerticalAlignment {
  * @param color The color of the divider.
  */
 @Deprecated(
-    "Divider is deprecated",
+    "Divider is deprecated and HorizontalDivider is its new alternative",
     ReplaceWith("HorizontalDivider()"),
 )
 @Composable
@@ -199,7 +199,6 @@ internal fun DividerPreview(
         HorizontalDivider(intent = DividerIntent.OutlineHigh, label = { TextComposable() })
         HorizontalDivider(
             intent = DividerIntent.Outline,
-            label = {},
             labelHorizontalAlignment = LabelHorizontalAlignment.Start,
         )
         HorizontalDivider(
