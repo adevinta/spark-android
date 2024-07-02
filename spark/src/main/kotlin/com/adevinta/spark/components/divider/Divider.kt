@@ -75,7 +75,7 @@ public enum class LabelVerticalAlignment {
  */
 @Deprecated(
     "Divider is deprecated and HorizontalDivider is its new alternative",
-    ReplaceWith("HorizontalDivider()"),
+    ReplaceWith("HorizontalDivider(modifier = modifier)"),
 )
 @Composable
 public fun Divider(
