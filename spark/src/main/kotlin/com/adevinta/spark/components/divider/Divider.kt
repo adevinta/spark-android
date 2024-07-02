@@ -21,53 +21,68 @@
  */
 package com.adevinta.spark.components.divider
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.Dp
-import com.adevinta.spark.ExperimentalSparkApi
+import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.spacer.HorizontalSpacer
+import com.adevinta.spark.components.spacer.VerticalSpacer
+import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
-import androidx.compose.material3.HorizontalDivider as MaterialDivider
+import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
 import androidx.compose.material3.VerticalDivider as MaterialVerticalDivider
 
-@ExperimentalSparkApi
-@Composable
-internal fun SparkDivider(
-    modifier: Modifier = Modifier,
-    color: Color = SparkTheme.colors.outline,
-    thickness: Dp = DividerDefaults.Thickness,
-) {
-    MaterialDivider(
-        modifier,
-        thickness,
-        color,
-    )
+/**
+ * LabelHorizontalAlignment is used to define the horizontal alignment of the label in the divider.
+ * Alignment can be visible when Label is activated
+ */
+public enum class LabelHorizontalAlignment {
+    Start,
+    Center,
+    End,
 }
 
 /**
- * Spark divider.
- *
- * A divider is a thin line that groups content in lists and layouts.
- *
- * ![Divider image](https://developer.android.com/images/reference/androidx/compose/material3/divider.png)
- *
- * @param modifier the [Modifier] to be applied to this divider line.
- * @param color the color of the divider, we recommend to use either outline or onSurface dim 3.
+ * LabelVerticalAlignment is used to define the vertical alignment of the label in the divider.
+ * Alignment can be visible when Label is activated
  */
-@ExperimentalSparkApi
+public enum class LabelVerticalAlignment {
+    Top,
+    Center,
+    Bottom,
+}
+
+/**
+ * A deprecated Divider Component.
+ *
+ * @param modifier The modifier to be applied to the divider.
+ * @param color The color of the divider.
+ */
+@Deprecated(
+    "Divider is deprecated and HorizontalDivider is its new alternative",
+    ReplaceWith("HorizontalDivider(modifier = modifier)"),
+)
 @Composable
 public fun Divider(
     modifier: Modifier = Modifier,
     color: Color = SparkTheme.colors.onSurface.dim3,
 ) {
-    SparkDivider(
+    MaterialHorizontalDivider(
         modifier = modifier,
         thickness = DividerDefaults.Thickness,
         color = color,
@@ -75,30 +90,103 @@ public fun Divider(
 }
 
 /**
- * Spark divider.
- *
+ * HorizontalDivider Component.
  * A divider is a thin line that groups content in lists and layouts.
  *
- * ![Divider image](https://developer.android.com/images/reference/androidx/compose/material3/divider.png)
- *
- * @param modifier the [Modifier] to be applied to this divider line.
- * @param color the color of the divider, we recommend to use either outline or onSurface dim 3.
+ * @param modifier The modifier to be applied to the divider.
+ * @param intent The intent defining the color of the divider.
+ * @param label The optional label to be displayed on the divider.
+ * @param labelHorizontalAlignment The horizontal alignment of the label.
  */
-@ExperimentalSparkApi
+@Composable
+public fun HorizontalDivider(
+    modifier: Modifier = Modifier,
+    intent: DividerIntent = DividerIntent.Outline,
+    labelHorizontalAlignment: LabelHorizontalAlignment = LabelHorizontalAlignment.Center,
+    label: @Composable (RowScope.() -> Unit)? = null,
+) {
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        val leftModifier = when (labelHorizontalAlignment) {
+            LabelHorizontalAlignment.Start -> Modifier.width(40.dp)
+            LabelHorizontalAlignment.Center, LabelHorizontalAlignment.End -> Modifier.weight(1f)
+        }
+
+        val rightModifier = when (labelHorizontalAlignment) {
+            LabelHorizontalAlignment.End -> Modifier.width(40.dp)
+            LabelHorizontalAlignment.Center, LabelHorizontalAlignment.Start -> Modifier.weight(1f)
+        }
+
+        MaterialHorizontalDivider(
+            modifier = leftModifier,
+            color = intent.color(),
+        )
+
+        if (label != null) {
+            HorizontalSpacer(space = 16.dp)
+            label()
+            HorizontalSpacer(space = 16.dp)
+        }
+
+        MaterialHorizontalDivider(
+            modifier = rightModifier,
+            color = intent.color(),
+        )
+    }
+}
+
+/**
+ * VerticalDivider Component.
+ * A divider is a thin line that groups content in lists and layouts.
+ *
+ * @param modifier The modifier to be applied to the divider.
+ * @param intent The intent defining the color of the divider.
+ * @param label The optional label to be displayed on the divider.
+ * @param labelVerticalAlignment The vertical alignment of the label.
+ */
 @Composable
 public fun VerticalDivider(
     modifier: Modifier = Modifier,
-    color: Color = SparkTheme.colors.onSurface.dim3,
+    intent: DividerIntent = DividerIntent.Outline,
+    labelVerticalAlignment: LabelVerticalAlignment = LabelVerticalAlignment.Center,
+    label: @Composable (ColumnScope.() -> Unit)? = null,
 ) {
-    MaterialVerticalDivider(
+    Column(
         modifier = modifier,
-        thickness = DividerDefaults.Thickness,
-        color = color,
-    )
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        val topModifier = when (labelVerticalAlignment) {
+            LabelVerticalAlignment.Top -> Modifier.height(40.dp)
+            LabelVerticalAlignment.Center, LabelVerticalAlignment.Bottom -> Modifier.weight(1f)
+        }
+
+        val bottomModifier = when (labelVerticalAlignment) {
+            LabelVerticalAlignment.Bottom -> Modifier.height(40.dp)
+            LabelVerticalAlignment.Center, LabelVerticalAlignment.Top -> Modifier.weight(1f)
+        }
+
+        MaterialVerticalDivider(
+            modifier = topModifier,
+            color = intent.color(),
+        )
+
+        if (label != null) {
+            VerticalSpacer(space = 16.dp)
+            label()
+            VerticalSpacer(space = 16.dp)
+        }
+
+        MaterialVerticalDivider(
+            modifier = bottomModifier,
+            color = intent.color(),
+        )
+    }
 }
 
 @Preview(
-    group = "Separator",
+    group = "Dividers",
     name = "Divider",
 )
 @Composable
@@ -106,7 +194,70 @@ internal fun DividerPreview(
     @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
 ) {
     PreviewTheme(theme) {
-        Divider()
-        Divider()
+        HorizontalDivider(intent = DividerIntent.Outline)
+        HorizontalDivider(intent = DividerIntent.OutlineHigh)
+        HorizontalDivider(intent = DividerIntent.OutlineHigh, label = { TextComposable() })
+        HorizontalDivider(
+            intent = DividerIntent.Outline,
+            labelHorizontalAlignment = LabelHorizontalAlignment.Start,
+        )
+        HorizontalDivider(
+            intent = DividerIntent.OutlineHigh,
+            label = { TextComposable() },
+            labelHorizontalAlignment = LabelHorizontalAlignment.End,
+        )
+
+        Row {
+            VerticalDivider(
+                intent = DividerIntent.OutlineHigh,
+                label = { TextComposable() },
+                labelVerticalAlignment = LabelVerticalAlignment.Top,
+            )
+            VerticalDivider(
+                intent = DividerIntent.OutlineHigh,
+                label = { TextComposable() },
+                labelVerticalAlignment = LabelVerticalAlignment.Center,
+            )
+            VerticalDivider(
+                intent = DividerIntent.OutlineHigh,
+                label = { TextComposable() },
+                labelVerticalAlignment = LabelVerticalAlignment.Bottom,
+            )
+            HorizontalSpacer(space = 16.dp)
+            VerticalDivider(
+                labelVerticalAlignment = LabelVerticalAlignment.Bottom,
+            )
+            HorizontalSpacer(space = 16.dp)
+
+            VerticalDivider(
+                intent = DividerIntent.OutlineHigh,
+                labelVerticalAlignment = LabelVerticalAlignment.Bottom,
+            )
+            HorizontalSpacer(space = 16.dp)
+
+            VerticalDivider(
+                label = { TextComposable() },
+                labelVerticalAlignment = LabelVerticalAlignment.Top,
+            )
+            VerticalDivider(
+                label = {
+                    TextComposable()
+                },
+                labelVerticalAlignment = LabelVerticalAlignment.Center,
+            )
+            VerticalDivider(
+                label = { TextComposable() },
+                labelVerticalAlignment = LabelVerticalAlignment.Bottom,
+            )
+        }
     }
+}
+
+@Composable
+private fun TextComposable() {
+    Text(
+        textAlign = TextAlign.Center,
+        style = SparkTheme.typography.body1,
+        text = "Label",
+    )
 }

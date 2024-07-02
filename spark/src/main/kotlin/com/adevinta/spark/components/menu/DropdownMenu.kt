@@ -59,7 +59,7 @@ import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.divider.Divider
+import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.MailOutline
 import com.adevinta.spark.icons.PenFill
@@ -314,16 +314,17 @@ private fun DropdownMenuItemPreview(@PreviewParameter(ThemeProvider::class) them
                     SparkIcons.WheelOutline,
                     contentDescription = null,
                 )
-            },
-        )
-        Divider()
-        DropdownMenuItem(
-            text = { Text("Send Feedback") },
-            onClick = { /* Handle send feedback! */ },
-            leadingIcon = {
-                Icon(
-                    SparkIcons.MailOutline,
-                    contentDescription = null,
+                HorizontalDivider()
+                DropdownMenuItem(
+                    text = { Text("Send Feedback") },
+                    onClick = { /* Handle send feedback! */ },
+                    leadingIcon = {
+                        Icon(
+                            SparkIcons.MailOutline,
+                            contentDescription = null,
+                        )
+                    },
+                    trailingIcon = { Text("F11", textAlign = TextAlign.Center) },
                 )
             },
             trailingIcon = { Text("F11", textAlign = TextAlign.Center) },
