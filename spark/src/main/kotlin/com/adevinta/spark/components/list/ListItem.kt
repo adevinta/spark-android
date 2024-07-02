@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.divider.Divider
+import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.FavoriteFill
 import com.adevinta.spark.icons.SparkIcons
@@ -130,7 +130,7 @@ internal fun OneLineListItemPreview(
                     )
                 },
             )
-            Divider()
+            HorizontalDivider()
         }
     }
 }
@@ -156,7 +156,7 @@ internal fun TwoLineListItemPreview(
                     )
                 },
             )
-            Divider()
+            HorizontalDivider()
         }
     }
 }
@@ -183,7 +183,7 @@ internal fun ThreeLineListItemPreview(
                 },
                 trailingContent = { Text("meta") },
             )
-            Divider()
+            HorizontalDivider()
         }
     }
 }
@@ -211,7 +211,7 @@ internal fun ThreeLineContentListItemPreview(
                 },
                 trailingContent = { Text("meta") },
             )
-            Divider()
+            HorizontalDivider()
         }
     }
 }
