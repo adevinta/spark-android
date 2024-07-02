@@ -69,29 +69,6 @@ internal class IconToggleButtonScreenshot {
 
     @OptIn(ExperimentalLayoutApi::class)
     @Test
-    fun shape() {
-        paparazzi.sparkSnapshot {
-            FlowColumn {
-                shapes.forEach { shape ->
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                    ) {
-                        sizes.forEach { size ->
-                            IconToggleButtons(
-                                checked = true,
-                                size = size,
-                                shape = shape,
-                                enabled = true,
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @OptIn(ExperimentalLayoutApi::class)
-    @Test
     fun enabled() {
         paparazzi.sparkSnapshot {
             FlowColumn {
@@ -140,6 +117,32 @@ internal class IconToggleButtonScreenshot {
                                 size = size,
                                 intent = intent,
                                 enabled = false,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalLayoutApi::class)
+    @Test
+    fun shape() {
+        paparazzi.unsafeUpdateConfig(
+            renderingMode = SessionParams.RenderingMode.SHRINK,
+        )
+        paparazzi.sparkSnapshot {
+            FlowColumn {
+                shapes.forEach { shape ->
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        sizes.forEach { size ->
+                            IconToggleButtons(
+                                checked = true,
+                                size = size,
+                                shape = shape,
+                                enabled = true,
                             )
                         }
                     }
