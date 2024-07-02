@@ -58,7 +58,7 @@ import com.adevinta.spark.components.popover.PopoverIntent
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.text.TextLinkButton
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.BurgerMenu
 import com.adevinta.spark.icons.SparkIcons
@@ -103,11 +103,9 @@ private fun ColumnScope.PopoverSample() {
 
     val contentExamples = PopoverContentExamples.entries.toTypedArray()
     var expanded by remember { mutableStateOf(false) }
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = popoverContentExample.name,
-        onValueChange = {},
-        readOnly = true,
         label = "Popover Content Example",
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
@@ -146,11 +144,9 @@ private fun ColumnScope.PopoverSample() {
 
     val intents = PopoverIntent.entries
     var intentExpanded by remember { mutableStateOf(false) }
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = intent.name,
-        onValueChange = {},
-        readOnly = true,
         label = "Popover Intent",
         expanded = intentExpanded,
         onExpandedChange = { intentExpanded = !intentExpanded },

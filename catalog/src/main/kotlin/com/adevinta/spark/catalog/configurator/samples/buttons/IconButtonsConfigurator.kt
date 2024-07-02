@@ -52,7 +52,7 @@ import com.adevinta.spark.components.iconbuttons.IconButtonTinted
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
@@ -127,13 +127,11 @@ private fun ColumnScope.IconButtonSample() {
         )
     }
 
-    val intents = IconButtonIntent.values()
+    val intents = IconButtonIntent.entries
     var expanded by remember { mutableStateOf(false) }
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = intent.name,
-        onValueChange = {},
-        readOnly = true,
         label = "Intent",
         expanded = expanded,
         onExpandedChange = {

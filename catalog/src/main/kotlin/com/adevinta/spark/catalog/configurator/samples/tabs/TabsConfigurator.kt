@@ -50,7 +50,7 @@ import com.adevinta.spark.components.tab.TabGroup
 import com.adevinta.spark.components.tab.TabIntent
 import com.adevinta.spark.components.tab.TabSize
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.MessageOutline
 import com.adevinta.spark.icons.Minus
@@ -125,11 +125,9 @@ private fun ColumnScope.TabSample() {
 
     val intents = TabIntent.entries.toTypedArray()
     var expanded by remember { mutableStateOf(false) }
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = intent.name,
-        onValueChange = {},
-        readOnly = true,
         label = "Intent",
         expanded = expanded,
         onExpandedChange = {
