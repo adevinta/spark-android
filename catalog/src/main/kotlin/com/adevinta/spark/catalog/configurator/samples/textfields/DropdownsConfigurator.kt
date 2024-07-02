@@ -118,7 +118,7 @@ private fun ColumnScope.DropdownSample() {
                         text = { Text(book) },
                         onClick = {
                             valueText = book
-                            if(hideOnSelect) expanded = false
+                            if (hideOnSelect) expanded = false
                         },
                     )
                 }
