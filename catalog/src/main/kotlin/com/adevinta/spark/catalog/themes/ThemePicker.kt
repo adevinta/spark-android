@@ -49,7 +49,7 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.slider.Slider
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.SparkIcons
@@ -121,14 +121,12 @@ public fun ThemePicker(
                 ) {
                     var expanded by remember { mutableStateOf(false) }
                     val selectedIcon = @Composable { Icon(SparkIcons.Check, contentDescription = null) }
-                    SelectTextField(
+                    Dropdown(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(ThemePickerPadding),
                         value = theme.brandMode.name,
                         label = stringResource(id = R.string.brand),
-                        readOnly = true,
-                        onValueChange = { onThemeChange(theme.copy(brandMode = BrandMode.valueOf(it))) },
                         onDismissRequest = {
                             expanded = false
                         },

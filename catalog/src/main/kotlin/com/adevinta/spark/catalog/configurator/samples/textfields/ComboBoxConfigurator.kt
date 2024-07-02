@@ -41,7 +41,7 @@ import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.AddonScope
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
@@ -83,15 +83,13 @@ private fun ColumnScope.ComboBoxSample() {
         )
     }
 
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = valueText,
-        onValueChange = {},
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
         onDismissRequest = { expanded = false },
         enabled = isEnabled,
-        readOnly = false,
         required = isRequired,
         label = labelText,
         placeholder = placeHolderText,
