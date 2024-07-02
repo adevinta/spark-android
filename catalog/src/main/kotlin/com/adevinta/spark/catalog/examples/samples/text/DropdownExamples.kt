@@ -144,11 +144,11 @@ public val DropdownsExamples: List<Example> = listOf(
                                 text = {
                                     Text(
                                         text = book,
-                                        style = if(isSelected) {
+                                        style = if (isSelected) {
                                             SparkTheme.typography.body1.highlight
                                         } else {
                                             SparkTheme.typography.body1
-                                        }
+                                        },
                                     )
                                 },
                                 onClick = {
