@@ -297,7 +297,8 @@ public fun SelectTextField(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = onDismissRequest,
-            modifier = Modifier.exposedDropdownSize()
+            modifier = Modifier
+                .exposedDropdownSize()
                 .padding(16.dp),
             properties = properties,
             content = dropdownContent,
@@ -362,7 +363,13 @@ public fun Dropdown(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     dropdownContent: @Composable ColumnScope.() -> Unit,
 ) {
-    ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = onExpandedChange) {
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = {
+            // Don't expand the menu when the Textfield is disabled
+            if (enabled) onExpandedChange(it)
+        },
+    ) {
         TextField(
             value = value,
             onValueChange = { },
