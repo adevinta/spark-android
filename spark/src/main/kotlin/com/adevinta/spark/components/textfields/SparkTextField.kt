@@ -21,10 +21,10 @@
  */
 package com.adevinta.spark.components.textfields
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -42,6 +42,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Label
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -55,7 +56,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithCache
+import androidx.compose.ui.graphics.ColorProducer
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.drawOutline
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -77,7 +83,6 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WarningOutline
 import com.adevinta.spark.tokens.EmphasizeDim3
 import com.adevinta.spark.tools.modifiers.SlotArea
-import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 // FIXME: Duplicate of Material OutlinedTextField while the counter is not supported on their end
@@ -108,18 +113,26 @@ internal fun SparkTextField(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val colors = sparkOutlinedTextFieldColors()
+    val density = LocalDensity.current
     CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
         @OptIn(ExperimentalMaterial3Api::class)
         BasicTextField(
             value = value,
             modifier = modifier
-                .ifNotNull(label) {
-                    // Merge semantics at the beginning of the modifier chain to ensure padding is
-                    // considered part of the text field.
-                    this
-                        .semantics(mergeDescendants = true) {}
-                        .padding(top = OutlinedTextFieldTopPadding)
-                }
+                .then(
+                    if (label != null) {
+                        Modifier
+                            // Merge semantics at the beginning of the modifier chain to ensure padding is
+                            // considered part of the text field.
+                            .semantics(mergeDescendants = true) {}
+                            .padding(top = with(density) { (SparkTheme.typography.body2.fontSize / 2).toDp() })
+                    } else {
+                        Modifier
+                    },
+                )
+//                .ifNotNull(label) {
+//
+//                }
                 .defaultMinSize(
                     minWidth = TextFieldDefaults.MinWidth,
                     minHeight = if (LocalLegacyStyle.current) TextFieldDefaults.MinHeight else TextFieldMinHeight,
@@ -310,12 +323,29 @@ private fun OutlinedBorderContainerBox(
         interactionSource,
         colors,
     )
+    val containerColor = animateColorAsState(
+        targetValue = colors.containerColor(enabled).value,
+        animationSpec = tween(durationMillis = AnimationDuration),
+    )
     Box(
         Modifier
             .border(borderStroke.value, shape)
-            .background(colors.containerColor(enabled).value, shape),
+            .textFieldBackground(containerColor::value, shape),
     )
 }
+
+/**
+ * Replacement for Modifier.background which takes color as a State to avoid recomposition while
+ * animating.
+ */
+internal fun Modifier.textFieldBackground(
+    color: ColorProducer,
+    shape: Shape,
+): Modifier =
+    this.drawWithCache {
+        val outline = shape.createOutline(size, layoutDirection, this)
+        onDrawBehind { drawOutline(outline, color = color()) }
+    }
 
 @Composable
 private fun animateBorderStrokeAsState(
@@ -352,7 +382,10 @@ public data class TextFieldCharacterCounter(
 private fun Label(text: String?, required: Boolean) {
     if (text != null) {
         Row(modifier = Modifier.semantics(mergeDescendants = true) {}) {
-            Text(text = text)
+            Text(
+                text = text,
+                modifier = Modifier.weight(weight = 1f, fill = false),
+            )
             if (required) {
                 val mandatoryDescription = stringResource(id = R.string.spark_textfield_content_description)
                 EmphasizeDim3 {

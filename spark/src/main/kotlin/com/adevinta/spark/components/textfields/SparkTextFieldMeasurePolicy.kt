@@ -38,6 +38,9 @@ import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.offset
+import androidx.compose.ui.util.fastFirst
+import androidx.compose.ui.util.fastFirstOrNull
+import androidx.compose.ui.util.lerp
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -59,36 +62,42 @@ internal class SparkTextFieldMeasurePolicy(
         // measure leading icon
         val relaxedConstraints = constraints.copy(minWidth = 0, minHeight = 0)
 
-        val leadingPlaceable = measurables.find {
+        val leadingPlaceable = measurables.fastFirstOrNull {
             it.layoutId == LeadingId
         }?.measure(relaxedConstraints)
         occupiedSpaceHorizontally += widthOrZero(leadingPlaceable)
         occupiedSpaceVertically = max(occupiedSpaceVertically, heightOrZero(leadingPlaceable))
 
         // measure trailing icon
-        val trailingPlaceable = measurables.find { it.layoutId == TrailingId }
+        val trailingPlaceable = measurables.fastFirstOrNull { it.layoutId == TrailingId }
             ?.measure(relaxedConstraints.offset(horizontal = -occupiedSpaceHorizontally))
         occupiedSpaceHorizontally += widthOrZero(trailingPlaceable)
         occupiedSpaceVertically = max(occupiedSpaceVertically, heightOrZero(trailingPlaceable))
 
         // measure label
-        val isLabelInMiddleSection = animationProgress < 1f
         val labelHorizontalPaddingOffset =
             paddingValues.calculateLeftPadding(layoutDirection).roundToPx() +
                 paddingValues.calculateRightPadding(layoutDirection).roundToPx()
         val labelConstraints = relaxedConstraints.offset(
-            horizontal = if (isLabelInMiddleSection) {
-                -occupiedSpaceHorizontally - labelHorizontalPaddingOffset
-            } else {
-                -labelHorizontalPaddingOffset
-            },
+            horizontal = lerp(
+                -occupiedSpaceHorizontally -
+                    labelHorizontalPaddingOffset, // label in middle
+                -labelHorizontalPaddingOffset, // label at top
+                animationProgress,
+            ),
             vertical = -bottomPadding,
         )
         val labelPlaceable =
-            measurables.find { it.layoutId == LabelId }?.measure(labelConstraints)
-        labelPlaceable?.let {
-            onLabelMeasured(Size(it.width.toFloat(), it.height.toFloat()))
-        }
+            measurables.fastFirstOrNull { it.layoutId == LabelId }?.measure(labelConstraints)
+        val labelSize = labelPlaceable?.let { Size(it.width.toFloat(), it.height.toFloat()) } ?: Size.Zero
+        onLabelMeasured(labelSize)
+
+        // supporting text must be measured after other elements, but we
+        // reserve space for it using its intrinsic height as a heuristic
+        val supportingMeasurable =
+            measurables.fastFirstOrNull { it.layoutId == SupportingId }
+        val supportingIntrinsicHeight =
+            supportingMeasurable?.minIntrinsicHeight(constraints.minWidth) ?: 0
 
         // measure text field
         // On top, we offset either by default padding or by label's half height if its too big.
@@ -100,23 +109,21 @@ internal class SparkTextFieldMeasurePolicy(
         )
         val textConstraints = constraints.offset(
             horizontal = -occupiedSpaceHorizontally,
-            vertical = -bottomPadding - topPadding,
+            vertical = -bottomPadding - topPadding - supportingIntrinsicHeight,
         ).copy(minHeight = 0)
         val textFieldPlaceable =
-            measurables.first { it.layoutId == TextFieldId }.measure(textConstraints)
+            measurables.fastFirst { it.layoutId == TextFieldId }.measure(textConstraints)
 
         // measure placeholder
         val placeholderConstraints = textConstraints.copy(minWidth = 0)
         val placeholderPlaceable =
-            measurables.find { it.layoutId == PlaceholderId }?.measure(placeholderConstraints)
+            measurables.fastFirstOrNull { it.layoutId == PlaceholderId }?.measure(placeholderConstraints)
 
         occupiedSpaceVertically = max(
             occupiedSpaceVertically,
-            max(
-                heightOrZero(textFieldPlaceable),
-                heightOrZero(placeholderPlaceable),
-            ) +
-                topPadding + bottomPadding,
+            max(heightOrZero(textFieldPlaceable), heightOrZero(placeholderPlaceable)) +
+                topPadding +
+                bottomPadding,
         )
 
         val width = calculateWidth(
@@ -125,13 +132,13 @@ internal class SparkTextFieldMeasurePolicy(
             textFieldPlaceableWidth = textFieldPlaceable.width,
             labelPlaceableWidth = widthOrZero(labelPlaceable),
             placeholderPlaceableWidth = widthOrZero(placeholderPlaceable),
-            isLabelInMiddleSection = isLabelInMiddleSection,
+            animationProgress = animationProgress,
             constraints = constraints,
             density = density,
             paddingValues = paddingValues,
         )
 
-        val counterPlaceable = measurables.find { it.layoutId == CounterId }?.measure(relaxedConstraints)
+        val counterPlaceable = measurables.fastFirstOrNull { it.layoutId == CounterId }?.measure(relaxedConstraints)
         val counterOccupiedWidth = counterPlaceable?.let {
             it.width + CounterPadding.roundToPx() + paddingValues.calculateEndPadding(layoutDirection).roundToPx()
         } ?: 0
@@ -141,51 +148,56 @@ internal class SparkTextFieldMeasurePolicy(
         // measure supporting text
         val supportingConstraints = relaxedConstraints.offset(
             vertical = -occupiedSpaceVertically,
-        ).copy(minHeight = 0)
+        ).copy(minHeight = 0, maxWidth = width)
+
         val supportingPlaceable =
-            measurables.find { it.layoutId == SupportingId }
-                ?.measure(supportingConstraints.copy(maxWidth = supportingMaxWidth))
+            supportingMeasurable?.measure(supportingConstraints.copy(maxWidth = supportingMaxWidth))
+        val supportingHeight = heightOrZero(supportingPlaceable)
 
         val totalHeight = calculateHeight(
             leadingPlaceableHeight = heightOrZero(leadingPlaceable),
             trailingPlaceableHeight = heightOrZero(trailingPlaceable),
             textFieldPlaceableHeight = textFieldPlaceable.height,
             labelPlaceableHeight = heightOrZero(labelPlaceable),
-            placeholderPlaceableHeight = heightOrZero(placeholderPlaceable),
+            placeholderPlaceableHeight = supportingHeight,
             supportingPlaceableHeight = heightOrZero(supportingPlaceable),
             counterPlaceableHeight = heightOrZero(counterPlaceable),
+            animationProgress = animationProgress,
             constraints = constraints,
             density = density,
             paddingValues = paddingValues,
         )
-        val counterHelperMaxHeight = max(heightOrZero(supportingPlaceable), heightOrZero(counterPlaceable))
+        val counterHelperMaxHeight = max(supportingHeight, heightOrZero(counterPlaceable))
         val height = totalHeight - counterHelperMaxHeight
 
-        val borderPlaceable = measurables.first { it.layoutId == ContainerId }.measure(
-            Constraints(
-                minWidth = if (width != Constraints.Infinity) width else 0,
-                maxWidth = width,
-                minHeight = if (height != Constraints.Infinity) height else 0,
-                maxHeight = height,
-            ),
-        )
+        val borderPlaceable =
+            measurables
+                .fastFirst { it.layoutId == ContainerId }
+                .measure(
+                    Constraints(
+                        minWidth = if (width != Constraints.Infinity) width else 0,
+                        maxWidth = width,
+                        minHeight = if (height != Constraints.Infinity) height else 0,
+                        maxHeight = height,
+                    ),
+                )
         return layout(width, totalHeight) {
             place(
-                totalHeight,
-                width,
-                leadingPlaceable,
-                trailingPlaceable,
-                textFieldPlaceable,
-                labelPlaceable,
-                placeholderPlaceable,
-                supportingPlaceable,
-                counterPlaceable,
-                borderPlaceable,
-                animationProgress,
-                singleLine,
-                density,
-                layoutDirection,
-                paddingValues,
+                totalHeight = totalHeight,
+                width = width,
+                leadingPlaceable = leadingPlaceable,
+                trailingPlaceable = trailingPlaceable,
+                textFieldPlaceable = textFieldPlaceable,
+                labelPlaceable = labelPlaceable,
+                placeholderPlaceable = placeholderPlaceable,
+                supportingPlaceable = supportingPlaceable,
+                counterPlaceable = counterPlaceable,
+                containerPlaceable = borderPlaceable,
+                animationProgress = animationProgress,
+                singleLine = singleLine,
+                density = density,
+                layoutDirection = layoutDirection,
+                paddingValues = paddingValues,
             )
         }
     }
@@ -232,26 +244,26 @@ internal class SparkTextFieldMeasurePolicy(
         intrinsicMeasurer: (IntrinsicMeasurable, Int) -> Int,
     ): Int {
         val textFieldWidth =
-            intrinsicMeasurer(measurables.first { it.layoutId == TextFieldId }, height)
-        val labelWidth = measurables.find { it.layoutId == LabelId }?.let {
-            intrinsicMeasurer(it, height)
-        } ?: 0
-        val trailingWidth = measurables.find { it.layoutId == TrailingId }?.let {
-            intrinsicMeasurer(it, height)
-        } ?: 0
-        val leadingWidth = measurables.find { it.layoutId == LeadingId }?.let {
-            intrinsicMeasurer(it, height)
-        } ?: 0
-        val placeholderWidth = measurables.find { it.layoutId == PlaceholderId }?.let {
-            intrinsicMeasurer(it, height)
-        } ?: 0
+            intrinsicMeasurer(measurables.fastFirst { it.layoutId == TextFieldId }, height)
+        val labelWidth =
+            measurables.fastFirstOrNull { it.layoutId == LabelId }
+                ?.let { intrinsicMeasurer(it, height) } ?: 0
+        val trailingWidth =
+            measurables.fastFirstOrNull { it.layoutId == TrailingId }
+                ?.let { intrinsicMeasurer(it, height) } ?: 0
+        val leadingWidth =
+            measurables.fastFirstOrNull { it.layoutId == LeadingId }
+                ?.let { intrinsicMeasurer(it, height) } ?: 0
+        val placeholderWidth =
+            measurables.fastFirstOrNull { it.layoutId == PlaceholderId }
+                ?.let { intrinsicMeasurer(it, height) } ?: 0
         return calculateWidth(
             leadingPlaceableWidth = leadingWidth,
             trailingPlaceableWidth = trailingWidth,
             textFieldPlaceableWidth = textFieldWidth,
             labelPlaceableWidth = labelWidth,
             placeholderPlaceableWidth = placeholderWidth,
-            isLabelInMiddleSection = animationProgress < 1f,
+            animationProgress = animationProgress,
             constraints = ZeroConstraints,
             density = density,
             paddingValues = paddingValues,
@@ -263,26 +275,51 @@ internal class SparkTextFieldMeasurePolicy(
         width: Int,
         intrinsicMeasurer: (IntrinsicMeasurable, Int) -> Int,
     ): Int {
+        var remainingWidth = width
+        val leadingHeight =
+            measurables
+                .fastFirstOrNull { it.layoutId == LeadingId }
+                ?.let {
+                    remainingWidth =
+                        remainingWidth.substractConstraintSafely(
+                            it.maxIntrinsicWidth(Constraints.Infinity),
+                        )
+                    intrinsicMeasurer(it, width)
+                } ?: 0
+
+        val trailingHeight =
+            measurables
+                .fastFirstOrNull { it.layoutId == TrailingId }
+                ?.let {
+                    remainingWidth =
+                        remainingWidth.substractConstraintSafely(
+                            it.maxIntrinsicWidth(Constraints.Infinity),
+                        )
+                    intrinsicMeasurer(it, width)
+                } ?: 0
+
+        val labelHeight =
+            measurables
+                .fastFirstOrNull { it.layoutId == LabelId }
+                ?.let { intrinsicMeasurer(it, lerp(remainingWidth, width, animationProgress)) } ?: 0
         val textFieldHeight =
-            intrinsicMeasurer(measurables.first { it.layoutId == TextFieldId }, width)
-        val labelHeight = measurables.find { it.layoutId == LabelId }?.let {
-            intrinsicMeasurer(it, width)
-        } ?: 0
-        val trailingHeight = measurables.find { it.layoutId == TrailingId }?.let {
-            intrinsicMeasurer(it, width)
-        } ?: 0
-        val leadingHeight = measurables.find { it.layoutId == LeadingId }?.let {
-            intrinsicMeasurer(it, width)
-        } ?: 0
-        val placeholderHeight = measurables.find { it.layoutId == PlaceholderId }?.let {
-            intrinsicMeasurer(it, width)
-        } ?: 0
-        val supportingHeight = measurables.find { it.layoutId == SupportingId }?.let {
-            intrinsicMeasurer(it, width)
-        } ?: 0
-        val counterHeight = measurables.find { it.layoutId == CounterId }?.let {
-            intrinsicMeasurer(it, width)
-        } ?: 0
+            intrinsicMeasurer(measurables.fastFirst { it.layoutId == TextFieldId }, remainingWidth)
+
+        val placeholderHeight =
+            measurables
+                .fastFirstOrNull { it.layoutId == PlaceholderId }
+                ?.let { intrinsicMeasurer(it, remainingWidth) } ?: 0
+
+        val supportingHeight =
+            measurables
+                .fastFirstOrNull { it.layoutId == SupportingId }
+                ?.let { intrinsicMeasurer(it, width) } ?: 0
+
+        val counterHeight =
+            measurables
+                .fastFirstOrNull { it.layoutId == CounterId }
+                ?.let { intrinsicMeasurer(it, width) } ?: 0
+
         return calculateHeight(
             leadingPlaceableHeight = leadingHeight,
             trailingPlaceableHeight = trailingHeight,
@@ -291,11 +328,19 @@ internal class SparkTextFieldMeasurePolicy(
             placeholderPlaceableHeight = placeholderHeight,
             supportingPlaceableHeight = supportingHeight,
             counterPlaceableHeight = counterHeight,
+            animationProgress = animationProgress,
             constraints = ZeroConstraints,
             density = density,
             paddingValues = paddingValues,
         )
     }
+}
+
+private fun Int.substractConstraintSafely(from: Int): Int {
+    if (this == Constraints.Infinity) {
+        return this
+    }
+    return this - from
 }
 
 /**
@@ -308,35 +353,32 @@ private fun calculateWidth(
     textFieldPlaceableWidth: Int,
     labelPlaceableWidth: Int,
     placeholderPlaceableWidth: Int,
-    isLabelInMiddleSection: Boolean,
+    animationProgress: Float,
     constraints: Constraints,
     density: Float,
     paddingValues: PaddingValues,
 ): Int {
     val middleSection = maxOf(
         textFieldPlaceableWidth,
-        if (isLabelInMiddleSection) labelPlaceableWidth else 0,
+        lerp(labelPlaceableWidth, 0, animationProgress),
         placeholderPlaceableWidth,
     )
-    val wrappedWidth =
-        leadingPlaceableWidth + middleSection + trailingPlaceableWidth
+    val wrappedWidth = leadingPlaceableWidth + middleSection + trailingPlaceableWidth
+
+    // Actual LayoutDirection doesn't matter; we only need the sum
+    val labelHorizontalPadding =
+        (
+            paddingValues.calculateLeftPadding(LayoutDirection.Ltr) +
+                paddingValues.calculateRightPadding(LayoutDirection.Ltr)
+            )
+            .value * density
     val focusedLabelWidth =
-        if (!isLabelInMiddleSection) {
-            // Actual LayoutDirection doesn't matter; we only need the sum
-            val labelHorizontalPadding = (
-                paddingValues.calculateLeftPadding(LayoutDirection.Ltr) +
-                    paddingValues.calculateRightPadding(LayoutDirection.Ltr)
-                ).value * density
-            labelPlaceableWidth + labelHorizontalPadding.roundToInt()
-        } else {
-            0
-        }
+        ((labelPlaceableWidth + labelHorizontalPadding) * animationProgress).roundToInt()
     return maxOf(wrappedWidth, focusedLabelWidth, constraints.minWidth)
 }
 
 /**
- * Calculate the height of the [SparkTextField] given all elements that should be
- * placed inside.
+ * Calculate the height of the [SparkTextField] given all elements that should be placed inside.
  * This includes the supporting text, if it exists, even though this element is not "visually"
  * inside the text field.
  */
@@ -348,6 +390,7 @@ private fun calculateHeight(
     placeholderPlaceableHeight: Int,
     supportingPlaceableHeight: Int,
     counterPlaceableHeight: Int,
+    animationProgress: Float,
     constraints: Constraints,
     density: Float,
     paddingValues: PaddingValues,
@@ -355,15 +398,17 @@ private fun calculateHeight(
     // middle section is defined as a height of the text field or placeholder ( whichever is
     // taller) plus 16.dp or half height of the label if it is taller, given that the label
     // is vertically centered to the top edge of the resulting text field's container
-    val inputFieldHeight = maxOf(
-        textFieldPlaceableHeight,
-        placeholderPlaceableHeight,
-    )
+    val inputFieldHeight =
+        maxOf(
+            textFieldPlaceableHeight,
+            placeholderPlaceableHeight,
+            lerp(labelPlaceableHeight, 0, animationProgress),
+        )
     val topPadding = paddingValues.calculateTopPadding().value * density
+    val actualTopPadding = lerp(topPadding, max(topPadding, labelPlaceableHeight / 2f), animationProgress)
     val bottomPadding = paddingValues.calculateBottomPadding().value * density
-    val middleSectionHeight = inputFieldHeight +
-        bottomPadding +
-        max(topPadding, labelPlaceableHeight / 2f)
+    val middleSectionHeight = inputFieldHeight + bottomPadding + actualTopPadding
+
     return max(
         constraints.minHeight,
         maxOf(
@@ -405,67 +450,63 @@ private fun Placeable.PlacementScope.place(
     val startPadding =
         (paddingValues.calculateStartPadding(layoutDirection).value * density).roundToInt()
 
+    // Single line text fields have text components centered vertically.
+    // Multiline text fields have text components aligned to top with padding.
+    fun calculateVerticalPosition(placeable: Placeable): Int =
+        max(
+            if (singleLine) {
+                Alignment.CenterVertically.align(placeable.height, height)
+            } else {
+                topPadding
+            },
+            heightOrZero(labelPlaceable) / 2,
+        )
+
     // placed center vertically and to the start edge horizontally
     leadingPlaceable?.placeRelative(
         0,
-        if (singleLine) {
-            Alignment.CenterVertically.align(leadingPlaceable.height, height)
-        } else {
-            topPadding
-        },
+        calculateVerticalPosition(leadingPlaceable),
     )
 
     // placed center vertically and to the end edge horizontally
     trailingPlaceable?.placeRelative(
         width - trailingPlaceable.width,
-        if (singleLine) {
-            Alignment.CenterVertically.align(trailingPlaceable.height, height)
-        } else {
-            topPadding
-        },
+        calculateVerticalPosition(trailingPlaceable),
     )
 
     // label position is animated
     // in single line text field label is centered vertically before animation starts
     labelPlaceable?.let {
-        val startPositionY = if (singleLine) {
-            Alignment.CenterVertically.align(it.height, height)
-        } else {
-            topPadding
-        }
-        val positionY =
-            startPositionY * (1 - animationProgress) - (it.height / 2) * animationProgress
-        val positionX = (
-            if (leadingPlaceable == null) {
-                0f
+        val startPositionY =
+            if (singleLine) {
+                Alignment.CenterVertically.align(it.height, height)
             } else {
-                (widthOrZero(leadingPlaceable) - startPadding) * (1 - animationProgress) + startPadding
+                topPadding
             }
-            ).roundToInt() + startPadding
-        it.placeRelative(positionX, positionY.roundToInt())
+        val positionY = lerp(startPositionY, -(it.height / 2), animationProgress)
+        val positionX =
+            (
+                if (leadingPlaceable == null) {
+                    0f
+                } else {
+                    (widthOrZero(leadingPlaceable) - startPadding) * (1 - animationProgress) + startPadding
+                }
+                ).roundToInt() + startPadding
+        it.placeRelative(positionX, positionY)
     }
 
-    // placed center vertically and after the leading icon horizontally if single line text field
-    // placed to the top with padding for multi line text field
-    val textVerticalPosition = max(
-        if (singleLine) {
-            Alignment.CenterVertically.align(textFieldPlaceable.height, height)
-        } else {
-            topPadding
-        },
-        heightOrZero(labelPlaceable) / 2,
+    val textHorizontalPosition = widthOrZero(leadingPlaceable)
+
+    textFieldPlaceable.placeRelative(
+        textHorizontalPosition,
+        calculateVerticalPosition(textFieldPlaceable),
     )
-    textFieldPlaceable.placeRelative(widthOrZero(leadingPlaceable), textVerticalPosition)
 
     // placed similar to the input text above
-    placeholderPlaceable?.let {
-        val placeholderVerticalPosition = if (singleLine) {
-            Alignment.CenterVertically.align(it.height, height)
-        } else {
-            topPadding
-        }
-        it.placeRelative(widthOrZero(leadingPlaceable), placeholderVerticalPosition)
-    }
+    placeholderPlaceable?.placeRelative(
+        textHorizontalPosition,
+        calculateVerticalPosition(placeholderPlaceable),
+    )
 
     supportingPlaceable?.placeRelative(
         x = 0,
