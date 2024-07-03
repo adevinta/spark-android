@@ -379,7 +379,6 @@ public val Components: List<Component> = listOf(
     ProgressTracker,
     RadioButtons,
     Rating,
-    Sliders,
     Switches,
     Tabs,
     Tags,
