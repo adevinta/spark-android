@@ -223,9 +223,9 @@ private fun ColumnScope.ProgressTrackerDisabled() {
 private fun ColumnScope.ProgressTrackerSizes() {
     val selectedStep by remember { mutableIntStateOf(1) }
     val items = persistentListOf(
-        ProgressStep("a", true),
-        ProgressStep("a", true),
-        ProgressStep("a", false),
+        ProgressStep("", true),
+        ProgressStep("", true),
+        ProgressStep("", false),
     )
     for (size in ProgressSizes.entries) {
         ProgressTrackerRow(
@@ -256,9 +256,9 @@ private fun ColumnScope.ProgressTrackerColors() {
 
     val selectedStep by remember { mutableIntStateOf(1) }
     val items = persistentListOf(
-        ProgressStep("Step 1", true),
-        ProgressStep("Step 2", true),
-        ProgressStep("Step 3", false),
+        ProgressStep("", true),
+        ProgressStep("", true),
+        ProgressStep("", false),
     )
     for (intent in ProgressTrackerIntent.entries) {
         ProgressTrackerRow(
