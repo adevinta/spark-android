@@ -34,12 +34,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.DefaultTestDevices
+import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.AddonScope
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.MultilineTextField
-import com.adevinta.spark.components.textfields.SelectTextField
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldCharacterCounter
 import com.adevinta.spark.components.textfields.TextFieldState
@@ -278,6 +279,7 @@ internal class TextFieldDocScreenshot {
         }
     }
 
+    @OptIn(ExperimentalSparkApi::class)
     @Composable
     private fun SelectTextfields(
         state: TextFieldState?,
@@ -297,9 +299,8 @@ internal class TextFieldDocScreenshot {
 
             Text("Unfocused with value")
 
-            SelectTextField(
+            Dropdown(
                 value = "Input",
-                onValueChange = {},
                 expanded = false,
                 onExpandedChange = {},
                 onDismissRequest = {},
@@ -316,9 +317,8 @@ internal class TextFieldDocScreenshot {
 
             Text("Focused without value")
 
-            SelectTextField(
+            Dropdown(
                 value = "",
-                onValueChange = {},
                 expanded = false,
                 onExpandedChange = {},
                 onDismissRequest = {},
@@ -339,9 +339,8 @@ internal class TextFieldDocScreenshot {
 
             Text("Unfocused without value")
 
-            SelectTextField(
+            Dropdown(
                 value = "",
-                onValueChange = {},
                 expanded = false,
                 onExpandedChange = {},
                 onDismissRequest = {},

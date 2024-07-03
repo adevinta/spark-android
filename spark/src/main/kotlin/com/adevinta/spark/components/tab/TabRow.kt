@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.divider.Divider
+import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tools.preview.ThemeProvider
 import com.adevinta.spark.tools.preview.ThemeVariant
@@ -57,7 +57,7 @@ internal fun SparkTabRow(
             Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
         )
     },
-    divider: @Composable () -> Unit = @Composable { Divider() },
+    divider: @Composable () -> Unit = @Composable { HorizontalDivider() },
     tabs: @Composable () -> Unit,
 ) {
     MaterialTabRow(
@@ -161,7 +161,7 @@ public fun ScrollableTabRow(
         )
     },
     divider: @Composable () -> Unit = @Composable {
-        Divider()
+        HorizontalDivider()
     },
     tabs: @Composable () -> Unit,
 ) {

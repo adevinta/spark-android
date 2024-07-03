@@ -21,7 +21,9 @@
  */
 package com.adevinta.spark.catalog.examples.example
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.imePadding
@@ -40,26 +42,41 @@ import com.adevinta.spark.components.snackbars.SnackbarHost
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.tokens.Layout
 
+/**
+ * Displays an example content based on the provided [Example] data model.
+ *
+ * @param example The [Example] data model containing the content to be displayed.
+ */
 @Composable
-public fun Example(
-    example: Example,
-) {
+public fun Example(example: Example) {
     val scrollState = rememberScrollState()
     val snackbarHostState = remember { SnackbarHostState() }
+
+    val commonModifier = Modifier
+        .fillMaxSize()
+        .windowInsetsPadding(WindowInsets.navigationBars)
+        .padding(top = 32.dp)
+        .padding(horizontal = Layout.bodyMargin)
+        .imePadding()
+
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(scrollState)
-                .windowInsetsPadding(WindowInsets.navigationBars)
-                .padding(top = 32.dp)
-                .padding(horizontal = Layout.bodyMargin)
-                .imePadding(),
-        ) {
-            with(example) {
-                this@Column.content(snackbarHostState)
+        if (example.rowContent != null) {
+            Row(
+                modifier = commonModifier.horizontalScroll(scrollState),
+            ) {
+                with(example) {
+                    rowContent?.let { content -> this@Row.content(snackbarHostState) }
+                }
+            }
+        } else {
+            Column(
+                modifier = commonModifier.verticalScroll(scrollState),
+            ) {
+                with(example) {
+                    columnContent?.let { content -> this@Column.content(snackbarHostState) }
+                }
             }
         }
     }

@@ -51,7 +51,7 @@ import com.adevinta.spark.components.tags.TagIntent
 import com.adevinta.spark.components.tags.TagOutlined
 import com.adevinta.spark.components.tags.TagTinted
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcon
@@ -125,11 +125,9 @@ private fun ColumnScope.TagSample() {
 
     val intents = TagIntent.entries
     var expanded by remember { mutableStateOf(false) }
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = intent.name,
-        onValueChange = {},
-        readOnly = true,
         label = "Intent",
         expanded = expanded,
         onExpandedChange = {
