@@ -90,13 +90,17 @@ private fun DividerSample() {
 
         HorizontalDivider(
             intent = intent,
-            label = {
-                Text(
-                    textAlign = TextAlign.Center,
-                    style = SparkTheme.typography.body1,
-                    text = labelText,
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                )
+            label = if (labelText.isEmpty()) {
+                null
+            } else {
+                {
+                    Text(
+                        textAlign = TextAlign.Center,
+                        style = SparkTheme.typography.body1,
+                        text = labelText,
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                    )
+                }
             },
             labelHorizontalAlignment = hLabelAlignments,
         )
@@ -112,13 +116,17 @@ private fun DividerSample() {
                 .height(200.dp)
                 .fillMaxWidth(),
             intent = intent,
-            label = {
-                Text(
-                    textAlign = TextAlign.Center,
-                    style = SparkTheme.typography.body1,
-                    text = labelText,
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                )
+            label = if (labelText.isEmpty()) {
+                null
+            } else {
+                {
+                    Text(
+                        textAlign = TextAlign.Center,
+                        style = SparkTheme.typography.body1,
+                        text = labelText,
+                        modifier = Modifier.padding(horizontal = 16.dp),
+                    )
+                }
             },
             labelVerticalAlignment = vLabelAlignments,
         )
