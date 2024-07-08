@@ -24,6 +24,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:locale="de">
     <string name="spark_a11y_modal_fullscreen_close">Fenster schließen</string>
 
+    <string name="spark_a11y_snackbar_close">schließen</string>
+
     <string name="spark_back_arrow_content_description">Zurück</string>
 
     <!--region Rating-->
