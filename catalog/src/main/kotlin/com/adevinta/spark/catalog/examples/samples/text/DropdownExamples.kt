@@ -70,8 +70,8 @@ public val DropdownsExamples: List<Example> = listOf(
     },
     Example(
         name = "Custom Item",
-        description = "The Dropdown takes a slot for the menu content, you can use a different item than DropdownItem " +
-                "if you need a different layout than the classic one.",
+        description = "The Dropdown takes a slot for the menu content, you can use a different item than " +
+                "DropdownItem if you need a different layout than the classic one.",
         sourceUrl = DropdownsExampleSourceUrl,
     ) {
         CustomItemsDropdown()

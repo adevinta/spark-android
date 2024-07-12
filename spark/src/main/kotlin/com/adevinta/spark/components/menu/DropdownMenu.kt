@@ -277,7 +277,7 @@ private inline fun SectionHeadline(
     crossinline content: @Composable () -> Unit,
 ) {
     ProvideTextStyle(
-        value = SparkTheme.typography.body2.copy(fontStyle = FontStyle.Italic)
+        value = SparkTheme.typography.body2.copy(fontStyle = FontStyle.Italic),
     ) {
         EmphasizeDim1 {
             content()
