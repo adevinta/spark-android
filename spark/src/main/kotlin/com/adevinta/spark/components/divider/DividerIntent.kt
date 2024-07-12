@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Adevinta
+ * Copyright (c) 2023 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,23 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("COMPOSABLE_FUNCTION_REFERENCE")
+package com.adevinta.spark.components.divider
 
-package com.adevinta.spark.catalog.model
-
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.runtime.Composable
-import com.adevinta.spark.components.snackbars.SnackbarHostState
+import androidx.compose.ui.graphics.Color
+import com.adevinta.spark.SparkTheme
 
-public data class Example(
-    val name: String,
-    val description: String,
-    val sourceUrl: String,
-    val rowContent:
-    @Composable()
-    (RowScope.(SnackbarHostState) -> Unit)? = null,
-    val columnContent:
-    @Composable()
-    (ColumnScope.(SnackbarHostState) -> Unit)? = null,
-)
+/**
+ * Intent on the divider that will affect the background of the divider line.
+ * Use [OutlineHigh] to get a higher contrast if needed.
+ */
+public enum class DividerIntent {
+
+    Outline {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.outline
+    },
+
+    OutlineHigh {
+        @Composable
+        override fun color(): Color = SparkTheme.colors.outlineHigh
+    },
+    ;
+
+    @Composable
+    internal abstract fun color(): Color
+}

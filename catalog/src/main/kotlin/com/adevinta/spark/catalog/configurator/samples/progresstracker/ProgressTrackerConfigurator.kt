@@ -54,7 +54,7 @@ import com.adevinta.spark.components.progress.tracker.ProgressTrackerColumn
 import com.adevinta.spark.components.progress.tracker.ProgressTrackerIntent
 import com.adevinta.spark.components.progress.tracker.ProgressTrackerRow
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.toggles.Switch
 import com.adevinta.spark.components.toggles.SwitchLabelled
@@ -127,11 +127,9 @@ private fun ColumnScope.ProgressTrackerSample() {
 
     val intents = ProgressTrackerIntent.entries
 
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = intent.name,
-        onValueChange = {},
-        readOnly = true,
         label = stringResource(id = R.string.configurator_component_screen_intent_label),
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },

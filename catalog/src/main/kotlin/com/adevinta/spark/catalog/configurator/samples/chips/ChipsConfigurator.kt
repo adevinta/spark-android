@@ -47,7 +47,7 @@ import com.adevinta.spark.components.icons.FilledTonalIconToggleButton
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.LikeFill
@@ -130,11 +130,9 @@ private fun ColumnScope.ChipSample() {
 
     val intents = ChipIntent.entries
     var expanded by remember { mutableStateOf(false) }
-    SelectTextField(
+    Dropdown(
         modifier = Modifier.fillMaxWidth(),
         value = intent.name,
-        onValueChange = {},
-        readOnly = true,
         label = "Intent",
         expanded = expanded,
         onExpandedChange = {

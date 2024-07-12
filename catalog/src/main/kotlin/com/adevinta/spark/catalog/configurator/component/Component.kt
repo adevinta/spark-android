@@ -54,7 +54,7 @@ import com.adevinta.spark.catalog.model.Components
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.util.IssueUrl
 import com.adevinta.spark.catalog.util.openUrl
-import com.adevinta.spark.components.divider.Divider
+import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.iconbuttons.IconButtonGhost
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.menu.DropdownMenu
@@ -153,7 +153,7 @@ private fun ConfiguratorComponentMenu(
                 )
             },
         )
-        Divider()
+        HorizontalDivider()
         DropdownMenuItem(
             text = { Text(stringResource(R.string.component_menu_issue)) },
             onClick = { context.openUrl(IssueUrl) },

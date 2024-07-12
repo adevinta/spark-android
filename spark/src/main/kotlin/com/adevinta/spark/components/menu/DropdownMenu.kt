@@ -57,9 +57,10 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupProperties
+import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.components.divider.Divider
+import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.MailOutline
 import com.adevinta.spark.icons.PenFill
@@ -256,7 +257,8 @@ private fun MenuItemColors.trailingIconColor(enabled: Boolean): Color =
  * @param modifier The modifier to be applied to the Group.
  */
 @Composable
-internal fun DropdownMenuGroupItem(
+@ExperimentalSparkApi
+public fun DropdownMenuGroupItem(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
@@ -314,16 +316,17 @@ private fun DropdownMenuItemPreview(@PreviewParameter(ThemeProvider::class) them
                     SparkIcons.WheelOutline,
                     contentDescription = null,
                 )
-            },
-        )
-        Divider()
-        DropdownMenuItem(
-            text = { Text("Send Feedback") },
-            onClick = { /* Handle send feedback! */ },
-            leadingIcon = {
-                Icon(
-                    SparkIcons.MailOutline,
-                    contentDescription = null,
+                HorizontalDivider()
+                DropdownMenuItem(
+                    text = { Text("Send Feedback") },
+                    onClick = { /* Handle send feedback! */ },
+                    leadingIcon = {
+                        Icon(
+                            SparkIcons.MailOutline,
+                            contentDescription = null,
+                        )
+                    },
+                    trailingIcon = { Text("F11", textAlign = TextAlign.Center) },
                 )
             },
             trailingIcon = { Text("F11", textAlign = TextAlign.Center) },

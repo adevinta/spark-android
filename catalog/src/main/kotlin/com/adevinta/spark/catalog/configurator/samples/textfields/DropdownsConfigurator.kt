@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.textfields
 
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
@@ -41,7 +43,7 @@ import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.AddonScope
-import com.adevinta.spark.components.textfields.SelectTextField
+import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
@@ -83,15 +85,13 @@ private fun ColumnScope.DropdownSample() {
         )
     }
 
-    SelectTextField(
-        modifier = Modifier.fillMaxWidth(),
+    Dropdown(
         value = valueText,
-        onValueChange = {},
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
         onDismissRequest = { expanded = false },
+        modifier = Modifier.fillMaxWidth(),
         enabled = isEnabled,
-        readOnly = true,
         required = isRequired,
         label = labelText,
         placeholder = placeHolderText,
@@ -99,6 +99,8 @@ private fun ColumnScope.DropdownSample() {
         leadingContent = leadingContent,
         state = state,
         stateMessage = stateMessageText,
+        visualTransformation = VisualTransformation.None,
+        interactionSource = remember { MutableInteractionSource() },
     ) {
         repeat(5) {
             DropdownMenuItem(

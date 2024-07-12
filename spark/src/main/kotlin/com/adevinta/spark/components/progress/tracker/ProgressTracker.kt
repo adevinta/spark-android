@@ -67,8 +67,6 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.IntentColor
-import com.adevinta.spark.components.divider.Divider
-import com.adevinta.spark.components.divider.VerticalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.progress.tracker.LayoutOrientation.Horizontal
 import com.adevinta.spark.components.progress.tracker.LayoutOrientation.Vertical
@@ -84,6 +82,8 @@ import com.adevinta.spark.tokens.transparent
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
+import androidx.compose.material3.VerticalDivider as MaterialVerticalDivider
 
 /**
  * [ProgressTrackerRow] is a visual navigation element typically used to display progress or guide user through a multi-step process.
@@ -341,9 +341,9 @@ private fun ProgressTrack(
         label = "Track color",
     )
     if (orientation == Horizontal) {
-        Divider(modifier = modifier, color = trackColor)
+        MaterialHorizontalDivider(modifier = modifier, color = trackColor)
     } else {
-        VerticalDivider(modifier = modifier, color = trackColor)
+        MaterialVerticalDivider(modifier = modifier, color = trackColor)
     }
 }
 

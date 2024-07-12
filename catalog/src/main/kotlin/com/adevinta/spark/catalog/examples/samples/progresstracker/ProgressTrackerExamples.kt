@@ -21,13 +21,16 @@
  */
 package com.adevinta.spark.catalog.examples.samples.progresstracker
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.adevinta.spark.catalog.model.Example
@@ -249,6 +252,8 @@ private fun ColumnScope.ProgressTrackerSizes() {
 @Composable
 @Preview
 private fun ColumnScope.ProgressTrackerColors() {
+    val hScrollState = rememberScrollState()
+
     val selectedStep by remember { mutableIntStateOf(1) }
     val items = persistentListOf(
         ProgressStep("", true),
@@ -262,13 +267,15 @@ private fun ColumnScope.ProgressTrackerColors() {
             selectedStep = selectedStep,
         )
     }
-    Row {
+    Row(
+        modifier = Modifier.horizontalScroll(hScrollState),
+    ) {
         for (intent in ProgressTrackerIntent.entries) {
             ProgressTrackerColumn(
                 items = persistentListOf(
-                    ProgressStep("", true),
-                    ProgressStep("", true),
-                    ProgressStep("", false),
+                    ProgressStep("Step 1", true),
+                    ProgressStep("Step 2", true),
+                    ProgressStep("Step 3", false),
                 ),
                 intent = intent,
                 selectedStep = selectedStep,
