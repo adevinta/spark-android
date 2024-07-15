@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.SnackbarData
 import androidx.compose.material3.SnackbarDefaults
 import androidx.compose.material3.SnackbarDuration
@@ -37,14 +36,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.BaseSparkButton
+import com.adevinta.spark.components.iconbuttons.IconButtonDefaults.ghostIconButtonColorsForSnackbar
+import com.adevinta.spark.components.iconbuttons.IconButtonSize
+import com.adevinta.spark.components.iconbuttons.SparkIconButton
 import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.icons.IconButton
-import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.FlashlightFill
 import com.adevinta.spark.icons.SparkIcon
@@ -82,7 +84,7 @@ internal fun SparkSnackbar(
         modifier = modifier
             .padding(16.dp)
             .sparkUsageOverlay(),
-        shape = SparkTheme.shapes.medium,
+        shape = SparkTheme.shapes.small,
         actionOnNewLine = isActionOnNewLine,
         containerColor = backgroundColor,
         contentColor = contentColor,
@@ -128,23 +130,15 @@ private fun DismissIcon(
     isDismissIconEnabled: Boolean,
 ) {
     if (!isDismissIconEnabled) return
-    val colors = IconButtonDefaults.iconButtonColors(
-        contentColor = when (style) {
-            SnackbarStyle.Filled -> contentColorFor(backgroundColor = intent.filledColor)
-            SnackbarStyle.Tinted -> contentColorFor(backgroundColor = intent.tintedColor)
-        },
-    )
-    IconButton(
-        colors = colors,
-        modifier = Modifier.padding(end = 8.dp),
+
+    SparkIconButton(
+        icon = SparkIcons.Close,
         onClick = { onClick.invoke() },
-    ) {
-        Icon(
-            size = IconSize.Small,
-            sparkIcon = SparkIcons.Close,
-            contentDescription = null, // this is a decorative icon)
-        )
-    }
+        size = IconButtonSize.Small,
+        modifier = Modifier.padding(end = 8.dp),
+        colors = ghostIconButtonColorsForSnackbar(style, intent),
+        contentDescription = stringResource(id = R.string.spark_a11y_snackbar_close),
+    )
 }
 
 @Composable
@@ -179,27 +173,27 @@ private fun SnackbarAction(
 }
 
 /**
-* Snackbars inform users of a process that an app has performed or will perform. They appear
-* temporarily, towards the bottom of the screen. They shouldn’t interrupt the user experience,
-* and they don’t require user input to disappear.
-*
-* A Snackbar can contain a single action. Because Snackbar disappears automatically, the action
-* shouldn't be "Dismiss" or "Cancel".
-*
-* If you want to customize appearance of the [Snackbar], you can pass your own version as a child
-* of the [SnackbarHost] to the [Scaffold]
-*
-* @param modifier modifiers for the Snackbar layout
-* @param intent The intent of the Snackbar.
-* @param style The style of the Snackbar.
-* @param isDismissIconEnabled Whether the dismiss icon is enabled.
-* @param isActionOnNewLine whether or not action should be put on the separate line. Recommended
-* for action with long action text
-* @param icon icon to be shown on the start side of the content when there's no title.
-* @param actionLabel action to add as an action to the snackbar.
-* @param onActionClick callback when the action is clicked.
-* @param onDismissIconClick Callback for dismiss icon click.
-*/
+ * Snackbars inform users of a process that an app has performed or will perform. They appear
+ * temporarily, towards the bottom of the screen. They shouldn’t interrupt the user experience,
+ * and they don’t require user input to disappear.
+ *
+ * A Snackbar can contain a single action. Because Snackbar disappears automatically, the action
+ * shouldn't be "Dismiss" or "Cancel".
+ *
+ * If you want to customize appearance of the [Snackbar], you can pass your own version as a child
+ * of the [SnackbarHost] to the [Scaffold]
+ *
+ * @param modifier modifiers for the Snackbar layout
+ * @param intent The intent of the Snackbar.
+ * @param style The style of the Snackbar.
+ * @param isDismissIconEnabled Whether the dismiss icon is enabled.
+ * @param isActionOnNewLine whether or not action should be put on the separate line. Recommended
+ * for action with long action text
+ * @param icon icon to be shown on the start side of the content when there's no title.
+ * @param actionLabel action to add as an action to the snackbar.
+ * @param onActionClick callback when the action is clicked.
+ * @param onDismissIconClick Callback for dismiss icon click.
+ */
 @Composable
 public fun Snackbar(
     modifier: Modifier = Modifier,
@@ -243,7 +237,7 @@ public fun Snackbar(
  * @param modifier modifiers for the Snackbar layout
  * @param data data class that contains the necessary information of a particular [Snackbar]
  * have a look at [SnackbarSparkVisuals] , [SnackbarData]
-*/
+ */
 @Composable
 public fun Snackbar(
     data: SnackbarData,
