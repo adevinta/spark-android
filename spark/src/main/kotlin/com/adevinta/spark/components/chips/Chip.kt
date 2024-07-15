@@ -237,7 +237,6 @@ public fun Chip(
                     )
                 }
                 .defaultMinSize(minHeight = ChipDefaults.MinHeight)
-                .sizeIn(maxWidth = ChipDefaults.MaxWidth)
                 .padding(ChipDefaults.ChipPadding),
             horizontalArrangement = Arrangement.spacedBy(
                 ChipDefaults.LeadingIconEndSpacing,
@@ -329,7 +328,6 @@ public fun ChipSelectable(
                     )
                 }
                 .defaultMinSize(minHeight = ChipDefaults.MinHeight)
-                .sizeIn(maxWidth = ChipDefaults.MaxWidth)
                 .animateContentSize()
                 .padding(ChipDefaults.ChipPadding),
             horizontalArrangement = Arrangement.spacedBy(

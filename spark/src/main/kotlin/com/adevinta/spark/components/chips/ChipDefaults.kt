@@ -59,9 +59,4 @@ public object ChipDefaults {
      * The chip's default height
      */
     internal val MinHeight = 32.dp
-
-    /**
-     * The chip's max width
-     */
-    internal val MaxWidth = 240.dp
 }
