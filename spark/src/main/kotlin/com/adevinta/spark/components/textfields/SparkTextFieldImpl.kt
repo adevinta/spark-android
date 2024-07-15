@@ -34,17 +34,21 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposableOpenTarget
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -65,10 +69,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.lerp
 import androidx.compose.ui.unit.Constraints
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
+import androidx.compose.ui.unit.lerp as lerpDp
 
 /**
  * Implementation of the [TextField]
@@ -146,12 +150,20 @@ internal fun SparkDecorationBox(
             }
         }
 
+        // Transparent components interfere with Talkback (b/261061240), so if any components below
+        // have alpha == 0, we set the component to null instead.
+
+        val placeholderColor = colors.placeholderColor(enabled).value
+        val showPlaceholder by remember {
+            derivedStateOf(structuralEqualityPolicy()) { placeholderAlphaProgress > 0f }
+        }
+
         val decoratedPlaceholder: @Composable ((Modifier) -> Unit)? =
-            if (placeholder != null && transformedText.isEmpty()) {
+            if (placeholder != null && transformedText.isEmpty() && showPlaceholder) {
                 @Composable { modifier ->
                     Box(modifier.alpha(placeholderAlphaProgress)) {
                         Decoration(
-                            contentColor = colors.placeholderColor(enabled).value,
+                            contentColor = placeholderColor,
                             typography = SparkTheme.typography.body1,
                             content = placeholder,
                         )
@@ -203,7 +215,7 @@ internal fun SparkDecorationBox(
             Box(
                 Modifier
                     .layoutId(ContainerId)
-                    .outlineCutout(labelSize.value, 16.dp),
+                    .outlineCutout(labelSize::value, contentPadding),
                 propagateMinConstraints = true,
             ) {
                 border?.invoke()
@@ -332,10 +344,15 @@ internal fun SparkTextFieldLayout(
 
             val startTextFieldPadding = paddingValues.calculateStartPadding(layoutDirection)
             val endTextFieldPadding = paddingValues.calculateEndPadding(layoutDirection)
-            val padding = Modifier.padding(
-                start = startTextFieldPadding,
-                end = endTextFieldPadding,
-            )
+            val padding =
+                Modifier
+                    .heightIn(min = MinTextLineHeight)
+                    .wrapContentHeight()
+                    .padding(
+                        start = startTextFieldPadding,
+                        end = endTextFieldPadding,
+                    )
+
             if (placeholder != null) {
                 placeholder(
                     Modifier
@@ -354,12 +371,26 @@ internal fun SparkTextFieldLayout(
             }
 
             if (label != null) {
-                Box(modifier = Modifier.layoutId(LabelId)) { label() }
+                Box(
+                    modifier = Modifier
+                        .heightIn(
+                            min =
+                            lerpDp(
+                                MinTextLineHeight,
+                                MinFocusedLabelLineHeight,
+                                animationProgress,
+                            ),
+                        )
+                        .wrapContentHeight()
+                        .layoutId(LabelId),
+                ) { label() }
             }
 
             if (supporting != null) {
                 val helperModifier = Modifier
                     .layoutId(SupportingId)
+                    .heightIn(min = MinSupportingTextLineHeight)
+                    .wrapContentHeight()
                     .paddingFromBaseline(top = 16.dp)
                 Box(modifier = helperModifier) {
                     supporting()
@@ -368,6 +399,8 @@ internal fun SparkTextFieldLayout(
             if (counter != null) {
                 val helperModifier = Modifier
                     .layoutId(CounterId)
+                    .heightIn(min = MinSupportingTextLineHeight)
+                    .wrapContentHeight()
                     .paddingFromBaseline(top = 16.dp)
                 Box(modifier = helperModifier) {
                     counter()
@@ -383,12 +416,13 @@ internal fun Placeable?.hasWidthThenDefault(default: Int) = this?.width?.takeIf 
 internal fun heightOrZero(placeable: Placeable?) = placeable?.height ?: 0
 internal fun Placeable?.hasHeightThenDefault(default: Int) = this?.height?.takeIf { it > 0 }?.let { default } ?: 0
 
-internal fun Modifier.outlineCutout(labelSize: Size, leftPadding: Dp) =
+internal fun Modifier.outlineCutout(labelSize: () -> Size, paddingValues: PaddingValues) =
     this.drawWithContent {
-        val labelWidth = labelSize.width
+        val labelSizeValue = labelSize()
+        val labelWidth = labelSizeValue.width
         if (labelWidth > 0f) {
             val innerPadding = OutlinedTextFieldInnerPadding.toPx()
-            val leftLtr = leftPadding.toPx() - innerPadding
+            val leftLtr = paddingValues.calculateLeftPadding(layoutDirection).toPx() - innerPadding
             val rightLtr = leftLtr + labelWidth + 2 * innerPadding
             val left = when (layoutDirection) {
                 LayoutDirection.Rtl -> size.width - rightLtr
@@ -398,7 +432,7 @@ internal fun Modifier.outlineCutout(labelSize: Size, leftPadding: Dp) =
                 LayoutDirection.Rtl -> size.width - leftLtr.coerceAtLeast(0f)
                 else -> rightLtr
             }
-            val labelHeight = labelSize.height
+            val labelHeight = labelSizeValue.height
             // using label height as a cutout area to make sure that no hairline artifacts are
             // left when we clip the border
             clipRect(left, -labelHeight / 2, right, labelHeight / 2, ClipOp.Difference) {
@@ -527,6 +561,9 @@ private const val PlaceholderAnimationDelayOrDuration = 67
 internal val CounterPadding = 8.dp
 internal val HorizontalIconPadding = 16.dp
 internal val VerticalContentPadding = 12.dp
+internal val MinTextLineHeight = 24.dp
+internal val MinFocusedLabelLineHeight = 16.dp
+internal val MinSupportingTextLineHeight = 16.dp
 
 internal val IconDefaultSizeModifier = Modifier.defaultMinSize(24.dp, 24.dp)
 
