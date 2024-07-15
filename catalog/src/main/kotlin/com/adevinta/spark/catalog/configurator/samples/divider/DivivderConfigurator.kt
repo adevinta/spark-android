@@ -94,7 +94,7 @@ private fun DividerSample() {
             label = if (labelText.isEmpty()) {
                 null
             } else {
-                {  TextComposable(label = labelText) }
+                { TextComposable(label = labelText) }
             },
             labelHorizontalAlignment = hLabelAlignments,
         )
@@ -162,7 +162,6 @@ private fun DividerSample() {
         )
     }
 }
-
 
 @Composable
 private fun TextComposable(label: String = "label") {

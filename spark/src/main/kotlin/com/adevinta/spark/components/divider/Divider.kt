@@ -128,8 +128,7 @@ public fun HorizontalDivider(
                 }
             },
 
-            )
-
+        )
 
         if (label != null) {
             Box(
@@ -149,7 +148,7 @@ public fun HorizontalDivider(
             modifier = Modifier.constrainAs(lineRight) {
                 start.linkTo(labelBox.end)
                 end.linkTo(parent.end)
-                centerVerticallyTo(parent)  // Align vertically to the center of the parent
+                centerVerticallyTo(parent) // Align vertically to the center of the parent
                 width = if (labelHorizontalAlignment == LabelHorizontalAlignment.End) {
                     Dimension.value(40.dp)
                 } else {
@@ -157,10 +156,9 @@ public fun HorizontalDivider(
                 }
             },
 
-            )
+        )
     }
 }
-
 
 /**
  * VerticalDivider Component.
@@ -190,7 +188,7 @@ public fun VerticalDivider(
             modifier = Modifier.constrainAs(lineTop) {
                 top.linkTo(parent.top)
                 bottom.linkTo(labelBox.top)
-                centerHorizontallyTo(parent)  // Align horizontally to the center of the parent
+                centerHorizontallyTo(parent) // Align horizontally to the center of the parent
                 height = if (labelVerticalAlignment == LabelVerticalAlignment.Top) {
                     Dimension.value(40.dp)
                 } else {
