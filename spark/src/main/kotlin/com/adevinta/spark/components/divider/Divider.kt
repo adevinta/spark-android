@@ -21,25 +21,28 @@
  */
 package com.adevinta.spark.components.divider
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ChainStyle
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
+import androidx.constraintlayout.compose.atLeast
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.spacer.HorizontalSpacer
-import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tools.preview.ThemeProvider
@@ -103,39 +106,61 @@ public fun HorizontalDivider(
     modifier: Modifier = Modifier,
     intent: DividerIntent = DividerIntent.Outline,
     labelHorizontalAlignment: LabelHorizontalAlignment = LabelHorizontalAlignment.Center,
-    label: @Composable (RowScope.() -> Unit)? = null,
+    label: @Composable (BoxScope.() -> Unit)? = null,
 ) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
+    ConstraintLayout(
+        modifier = modifier.fillMaxWidth(),
     ) {
-        val leftModifier = when (labelHorizontalAlignment) {
-            LabelHorizontalAlignment.Start -> Modifier.width(40.dp)
-            LabelHorizontalAlignment.Center, LabelHorizontalAlignment.End -> Modifier.weight(1f)
-        }
+        val (lineLeft, labelBox, lineRight) = createRefs()
 
-        val rightModifier = when (labelHorizontalAlignment) {
-            LabelHorizontalAlignment.End -> Modifier.width(40.dp)
-            LabelHorizontalAlignment.Center, LabelHorizontalAlignment.Start -> Modifier.weight(1f)
-        }
+        createHorizontalChain(lineLeft, labelBox, lineRight, chainStyle = ChainStyle.SpreadInside)
 
         MaterialHorizontalDivider(
-            modifier = leftModifier,
             color = intent.color(),
-        )
+            modifier = Modifier.constrainAs(lineLeft) {
+                start.linkTo(parent.start)
+                end.linkTo(labelBox.start)
+                centerVerticallyTo(parent)
+                width = if (labelHorizontalAlignment == LabelHorizontalAlignment.Start) {
+                    Dimension.value(40.dp)
+                } else {
+                    Dimension.fillToConstraints.atLeast(40.dp)
+                }
+            },
+
+            )
+
 
         if (label != null) {
-            HorizontalSpacer(space = 16.dp)
-            label()
-            HorizontalSpacer(space = 16.dp)
+            Box(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .constrainAs(labelBox) {
+                        start.linkTo(lineLeft.end)
+                        end.linkTo(lineRight.start)
+                        centerVerticallyTo(parent)
+                        width = Dimension.preferredWrapContent
+                    },
+            ) { label() }
         }
 
         MaterialHorizontalDivider(
-            modifier = rightModifier,
             color = intent.color(),
-        )
+            modifier = Modifier.constrainAs(lineRight) {
+                start.linkTo(labelBox.end)
+                end.linkTo(parent.end)
+                centerVerticallyTo(parent)  // Align vertically to the center of the parent
+                width = if (labelHorizontalAlignment == LabelHorizontalAlignment.End) {
+                    Dimension.value(40.dp)
+                } else {
+                    Dimension.fillToConstraints.atLeast(40.dp)
+                }
+            },
+
+            )
     }
 }
+
 
 /**
  * VerticalDivider Component.
@@ -151,36 +176,55 @@ public fun VerticalDivider(
     modifier: Modifier = Modifier,
     intent: DividerIntent = DividerIntent.Outline,
     labelVerticalAlignment: LabelVerticalAlignment = LabelVerticalAlignment.Center,
-    label: @Composable (ColumnScope.() -> Unit)? = null,
+    label: @Composable (BoxScope.() -> Unit)? = null,
 ) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
+    ConstraintLayout(
+        modifier = modifier.fillMaxHeight(),
     ) {
-        val topModifier = when (labelVerticalAlignment) {
-            LabelVerticalAlignment.Top -> Modifier.height(40.dp)
-            LabelVerticalAlignment.Center, LabelVerticalAlignment.Bottom -> Modifier.weight(1f)
-        }
+        val (lineTop, labelBox, lineBottom) = createRefs()
 
-        val bottomModifier = when (labelVerticalAlignment) {
-            LabelVerticalAlignment.Bottom -> Modifier.height(40.dp)
-            LabelVerticalAlignment.Center, LabelVerticalAlignment.Top -> Modifier.weight(1f)
-        }
+        createVerticalChain(lineTop, labelBox, lineBottom, chainStyle = ChainStyle.SpreadInside)
 
         MaterialVerticalDivider(
-            modifier = topModifier,
             color = intent.color(),
+            modifier = Modifier.constrainAs(lineTop) {
+                top.linkTo(parent.top)
+                bottom.linkTo(labelBox.top)
+                centerHorizontallyTo(parent)  // Align horizontally to the center of the parent
+                height = if (labelVerticalAlignment == LabelVerticalAlignment.Top) {
+                    Dimension.value(40.dp)
+                } else {
+                    Dimension.fillToConstraints.atLeast(40.dp)
+                }
+            },
         )
 
         if (label != null) {
-            VerticalSpacer(space = 16.dp)
-            label()
-            VerticalSpacer(space = 16.dp)
+            Box(
+                modifier = Modifier
+                    .padding(vertical = 16.dp)
+                    .constrainAs(labelBox) {
+                        top.linkTo(lineTop.bottom)
+                        bottom.linkTo(lineBottom.top)
+                        centerHorizontallyTo(parent)
+                        height = Dimension.preferredWrapContent
+                    },
+            ) { label() }
         }
 
-        MaterialVerticalDivider(
-            modifier = bottomModifier,
+        // Bottom Divider
+        androidx.compose.material3.VerticalDivider(
             color = intent.color(),
+            modifier = Modifier.constrainAs(lineBottom) {
+                top.linkTo(labelBox.bottom)
+                bottom.linkTo(parent.bottom)
+                centerHorizontallyTo(parent)
+                height = if (labelVerticalAlignment == LabelVerticalAlignment.Bottom) {
+                    Dimension.value(40.dp)
+                } else {
+                    Dimension.fillToConstraints.atLeast(40.dp)
+                }
+            },
         )
     }
 }
@@ -196,7 +240,10 @@ internal fun DividerPreview(
     PreviewTheme(theme) {
         HorizontalDivider(intent = DividerIntent.Outline)
         HorizontalDivider(intent = DividerIntent.OutlineHigh)
-        HorizontalDivider(intent = DividerIntent.OutlineHigh, label = { TextComposable() })
+        HorizontalDivider(
+            intent = DividerIntent.OutlineHigh,
+            label = { TextComposable() },
+        )
         HorizontalDivider(
             intent = DividerIntent.Outline,
             labelHorizontalAlignment = LabelHorizontalAlignment.Start,
@@ -205,6 +252,11 @@ internal fun DividerPreview(
             intent = DividerIntent.OutlineHigh,
             label = { TextComposable() },
             labelHorizontalAlignment = LabelHorizontalAlignment.End,
+        )
+        HorizontalDivider(
+            intent = DividerIntent.OutlineHigh,
+            label = { TextComposable() },
+            labelHorizontalAlignment = LabelHorizontalAlignment.Start,
         )
 
         Row {
@@ -240,9 +292,7 @@ internal fun DividerPreview(
                 labelVerticalAlignment = LabelVerticalAlignment.Top,
             )
             VerticalDivider(
-                label = {
-                    TextComposable()
-                },
+                label = { TextComposable() },
                 labelVerticalAlignment = LabelVerticalAlignment.Center,
             )
             VerticalDivider(
@@ -254,10 +304,12 @@ internal fun DividerPreview(
 }
 
 @Composable
-private fun TextComposable() {
+private fun TextComposable(textOverflow: TextOverflow = TextOverflow.Ellipsis) {
     Text(
         textAlign = TextAlign.Center,
+        overflow = textOverflow,
         style = SparkTheme.typography.body1,
-        text = "Label",
+        //  text = "jdkdkskjdkkklnljxcljcxlcjvxxcljljxcsdksj\n\ndljjjcdljcjdljcljdsljfdld\nlkjkjisd\nsdsksjddsk\njdksdjslds",
+        text = "label",
     )
 }
