@@ -26,6 +26,7 @@
     <!-- as an error for french whereas it should be present on the idea only 2023.1.1  -->
     <!-- https://github.com/WeblateOrg/weblate/issues/7520#issuecomment-1184107919  -->
     <string name="spark_a11y_modal_fullscreen_close">Fermer la Boîte de dialogue</string>
+    <string name="spark_a11y_snackbar_close">Fermer</string>
 
     <string name="spark_back_arrow_content_description">Retour en arrière</string>
 
