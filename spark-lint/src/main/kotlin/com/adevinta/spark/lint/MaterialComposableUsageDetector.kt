@@ -42,7 +42,9 @@ import java.util.EnumSet
 /**
  * Checks if a Composable has a Spark replacement.
  */
-public class MaterialComposableUsageDetector : Detector(), SourceCodeScanner {
+public class MaterialComposableUsageDetector :
+    Detector(),
+    SourceCodeScanner {
 
     override fun getApplicableMethodNames(): List<String> = METHOD_NAMES
 
@@ -97,8 +99,10 @@ public class MaterialComposableUsageDetector : Detector(), SourceCodeScanner {
             "androidx.compose.material3.RadioButton" to "com.adevinta.spark.components.toggles.RadioButton",
             "androidx.compose.material3.Switch" to "com.adevinta.spark.components.toggles.Switch",
             "androidx.compose.material3.Snackbar" to "com.adevinta.spark.components.snackbars.Snackbar",
-            "androidx.compose.material3.LinearProgressIndicator" to "com.adevinta.spark.components.progress.LinearProgressIndicator",
-            "androidx.compose.material3.CircularProgressIndicator" to "com.adevinta.spark.components.progress.CircularProgressIndicator",
+            "androidx.compose.material3.LinearProgressIndicator" to
+                "com.adevinta.spark.components.progress.LinearProgressIndicator",
+            "androidx.compose.material3.CircularProgressIndicator" to
+                "com.adevinta.spark.components.progress.CircularProgressIndicator",
             "androidx.compose.material3.MaterialTheme" to "com.adevinta.spark.SparkTheme",
             //endregion
             //region Foundation

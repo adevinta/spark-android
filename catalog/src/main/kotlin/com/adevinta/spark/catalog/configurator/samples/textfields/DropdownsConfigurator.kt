@@ -33,13 +33,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.menu.DropdownMenuGroupItem
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.AddonScope
@@ -47,6 +47,9 @@ import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
+import com.adevinta.spark.tokens.highlight
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 public val DropdownsConfigurator: Configurator = Configurator(
     name = "Dropdowns",
@@ -59,11 +62,12 @@ public val DropdownsConfigurator: Configurator = Configurator(
 @Composable
 private fun ColumnScope.DropdownSample() {
     var isEnabled by remember { mutableStateOf(true) }
+    var hideOnSelect by remember { mutableStateOf(true) }
     var expanded by remember { mutableStateOf(false) }
     var isRequired by remember { mutableStateOf(true) }
     var state: TextFieldState? by remember { mutableStateOf(null) }
     var labelText by remember { mutableStateOf("Label") }
-    var valueText by remember { mutableStateOf("Value") }
+    var valueText by remember { mutableStateOf("") }
     var placeHolderText by remember { mutableStateOf("Placeholder") }
     var helperText by remember { mutableStateOf("Helper message") }
     var stateMessageText by remember { mutableStateOf("State Message") }
@@ -102,14 +106,34 @@ private fun ColumnScope.DropdownSample() {
         visualTransformation = VisualTransformation.None,
         interactionSource = remember { MutableInteractionSource() },
     ) {
-        repeat(5) {
-            DropdownMenuItem(
-                text = { Text("Item $it") },
-                onClick = { expanded = false },
-            )
+        DropdownStubData.forEach { (groupName, books) ->
+            DropdownMenuGroupItem(
+                title = {
+                    Text(groupName)
+                },
+            ) {
+                books.forEach { book ->
+                    DropdownMenuItem(
+                        text = { Text(book) },
+                        onClick = {
+                            valueText = book
+                            if (hideOnSelect) expanded = false
+                        },
+                    )
+                }
+            }
         }
     }
 
+    SwitchLabelled(
+        checked = hideOnSelect,
+        onCheckedChange = { hideOnSelect = it },
+    ) {
+        Text(
+            text = "Hide the menu on selection",
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
     SwitchLabelled(
         checked = isRequired,
         onCheckedChange = { isRequired = it },
@@ -133,7 +157,7 @@ private fun ColumnScope.DropdownSample() {
         Text(
             text = "State",
             modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.body2.highlight,
         )
         val textFieldStates: MutableSet<TextFieldState?> =
             TextFieldState.entries.toMutableSet<TextFieldState?>().apply { add(null) }
@@ -194,3 +218,10 @@ private fun ColumnScope.DropdownSample() {
         placeholder = "State message of the Dropdown",
     )
 }
+
+private data class DropdownExampleGroup(val name: String, val books: ImmutableList<String>)
+
+private val DropdownStubData = persistentListOf(
+    DropdownExampleGroup("Best Sellers", persistentListOf("To Kill a Mockingbird", "War and Peace", "The Idiot")),
+    DropdownExampleGroup("Novelties", persistentListOf("A Picture of Dorian Gray", "1984", "Pride and Prejudice")),
+)

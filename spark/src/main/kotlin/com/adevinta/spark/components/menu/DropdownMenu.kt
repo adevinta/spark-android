@@ -50,6 +50,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
@@ -275,7 +276,9 @@ public fun DropdownMenuGroupItem(
 private inline fun SectionHeadline(
     crossinline content: @Composable () -> Unit,
 ) {
-    ProvideTextStyle(value = SparkTheme.typography.body2) {
+    ProvideTextStyle(
+        value = SparkTheme.typography.body2.copy(fontStyle = FontStyle.Italic),
+    ) {
         EmphasizeDim1 {
             content()
         }
