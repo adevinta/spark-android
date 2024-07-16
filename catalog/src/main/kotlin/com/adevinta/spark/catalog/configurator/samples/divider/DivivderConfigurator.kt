@@ -32,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
@@ -90,13 +91,10 @@ private fun DividerSample() {
 
         HorizontalDivider(
             intent = intent,
-            label = {
-                Text(
-                    textAlign = TextAlign.Center,
-                    style = SparkTheme.typography.body1,
-                    text = labelText,
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                )
+            label = if (labelText.isEmpty()) {
+                null
+            } else {
+                { TextComposable(label = labelText) }
             },
             labelHorizontalAlignment = hLabelAlignments,
         )
@@ -112,13 +110,12 @@ private fun DividerSample() {
                 .height(200.dp)
                 .fillMaxWidth(),
             intent = intent,
-            label = {
-                Text(
-                    textAlign = TextAlign.Center,
-                    style = SparkTheme.typography.body1,
-                    text = labelText,
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                )
+            label = if (labelText.isEmpty()) {
+                null
+            } else {
+                {
+                    TextComposable(label = labelText)
+                }
             },
             labelVerticalAlignment = vLabelAlignments,
         )
@@ -164,4 +161,15 @@ private fun DividerSample() {
             helper = "Divider label",
         )
     }
+}
+
+@Composable
+private fun TextComposable(label: String = "label") {
+    Text(
+        modifier = Modifier,
+        textAlign = TextAlign.Center,
+        overflow = TextOverflow.Ellipsis,
+        style = SparkTheme.typography.body1,
+        text = label,
+    )
 }
