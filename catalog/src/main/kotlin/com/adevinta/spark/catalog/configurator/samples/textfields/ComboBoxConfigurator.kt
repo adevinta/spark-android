@@ -32,7 +32,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
@@ -45,6 +44,7 @@ import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
+import com.adevinta.spark.tokens.highlight
 
 public val ComboBoxConfigurator: Configurator = Configurator(
     name = "ComboBox",
@@ -129,7 +129,7 @@ private fun ColumnScope.ComboBoxSample() {
         Text(
             text = "State",
             modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.body2.highlight,
         )
         val textFieldStates: MutableSet<TextFieldState?> =
             TextFieldState.entries.toMutableSet<TextFieldState?>().apply { add(null) }
