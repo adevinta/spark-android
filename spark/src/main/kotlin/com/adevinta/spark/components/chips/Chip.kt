@@ -36,7 +36,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.LocalContentColor
@@ -237,7 +236,6 @@ public fun Chip(
                     )
                 }
                 .defaultMinSize(minHeight = ChipDefaults.MinHeight)
-                .sizeIn(maxWidth = ChipDefaults.MaxWidth)
                 .padding(ChipDefaults.ChipPadding),
             horizontalArrangement = Arrangement.spacedBy(
                 ChipDefaults.LeadingIconEndSpacing,
@@ -329,7 +327,6 @@ public fun ChipSelectable(
                     )
                 }
                 .defaultMinSize(minHeight = ChipDefaults.MinHeight)
-                .sizeIn(maxWidth = ChipDefaults.MaxWidth)
                 .animateContentSize()
                 .padding(ChipDefaults.ChipPadding),
             horizontalArrangement = Arrangement.spacedBy(
