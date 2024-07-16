@@ -48,6 +48,14 @@ internal class DividerScreenshot {
     private val intents = DividerIntent.entries
     private val labelHorizontalAlignments = LabelHorizontalAlignment.entries
     private val labelVerticalAlignments = LabelVerticalAlignment.entries
+    private val hLabelsList = listOf(
+        "Spark Label",
+        "SparkSparkSparkSparkSparkSparkSparkSparkSparkSparkSpark",
+    )
+    private val vLabelsList = listOf(
+        "Spark Label",
+        "Spark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark",
+    )
 
     @get:Rule
     val paparazzi = paparazziRule(
@@ -57,16 +65,20 @@ internal class DividerScreenshot {
 
     @Test
     fun horizontal() {
-        paparazzi.sparkSnapshotNightMode { HorizontalDividers() }
+        hLabelsList.forEachIndexed { index, label ->
+            paparazzi.sparkSnapshotNightMode(name = index.toString()) { HorizontalDividers(label) }
+        }
     }
 
     @Test
     fun vertical() {
-        paparazzi.sparkSnapshotNightMode { VerticalDividers() }
+        vLabelsList.forEachIndexed { index, label ->
+            paparazzi.sparkSnapshotNightMode(name = index.toString()) { VerticalDividers(label) }
+        }
     }
 
     @Composable
-    private fun HorizontalDividers() {
+    private fun HorizontalDividers(label: String) {
         Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = spacedBy(16.dp),
@@ -85,7 +97,7 @@ internal class DividerScreenshot {
                             Text(
                                 textAlign = TextAlign.Center,
                                 style = SparkTheme.typography.body1,
-                                text = "Spark Label",
+                                text = label,
                                 modifier = Modifier.padding(horizontal = 16.dp),
                             )
                         },
@@ -96,7 +108,7 @@ internal class DividerScreenshot {
     }
 
     @Composable
-    private fun VerticalDividers() {
+    private fun VerticalDividers(label: String) {
         Row(
             modifier = Modifier.padding(16.dp),
             horizontalArrangement = spacedBy(16.dp),
@@ -115,7 +127,7 @@ internal class DividerScreenshot {
                             Text(
                                 textAlign = TextAlign.Center,
                                 style = SparkTheme.typography.body1,
-                                text = "Spark Label",
+                                text = label,
                                 modifier = Modifier.padding(horizontal = 16.dp),
                             )
                         },
