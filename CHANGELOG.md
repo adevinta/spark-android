@@ -14,7 +14,17 @@
 
 ### CI
 
+## [0.10.1]
 
+_2024-06-18_
+
+### Spark
+- 🐛 `ModalScaffold` can now take no actions and will hide the Bottom app Bar.
+- 🐛 `ModalScaffold` in dialog layout was not respecting the correct min and max width.
+
+### Catalog App
+- `ModalScaffold` Added an example that will show the modal with no actions.
+ 
 ## [0.10.0]
 
 _2024-05-16_
@@ -288,7 +298,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.10.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.10.1...HEAD
+
+[0.10.1]: https://github.com/adevinta/spark-android/releases/tag/0.10.1
 
 [0.10.0]: https://github.com/adevinta/spark-android/releases/tag/0.10.0
 

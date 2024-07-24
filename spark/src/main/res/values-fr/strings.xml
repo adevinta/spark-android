@@ -56,6 +56,10 @@
     </plurals>
     <!--endregion-->
 
+    <!--region Dialog-->
+    <string name="spark_dialog_pane_a11y">Boîte de dialogue</string>
+    <!--endregion-->
+
     <string name="spark_annotatedStringResource_test">Les <b>Meilleures</b> <annotation typography="large">pratiques</annotation> pour les textes sur <i><annotation color="main">Android</annotation></i></string>
     <string name="spark_annotatedStringResource_test_args">Salut, <b><annotation variable="who" typography="large" color="main">who</annotation></b>!</string>
 
