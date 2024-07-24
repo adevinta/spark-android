@@ -65,13 +65,13 @@ public val SnackbarDefaults.intent: SnackbarIntent
 internal fun SparkSnackbar(
     intent: SnackbarIntent,
     style: SnackbarStyle,
-    isActionOnNewLine: Boolean,
-    isDismissIconEnabled: Boolean,
+    actionOnNewLine: Boolean,
+    withDismissAction: Boolean,
     modifier: Modifier = Modifier,
     icon: SparkIcon? = null,
     actionLabel: String? = null,
     onActionClick: (() -> Unit)? = null,
-    onDismissIconClick: (() -> Unit)? = null,
+    onDismissClick: (() -> Unit)? = null,
     content: @Composable () -> Unit,
 ) {
     val backgroundColor = when (style) {
@@ -85,15 +85,15 @@ internal fun SparkSnackbar(
             .padding(16.dp)
             .sparkUsageOverlay(),
         shape = SparkTheme.shapes.small,
-        actionOnNewLine = isActionOnNewLine,
+        actionOnNewLine = actionOnNewLine,
         containerColor = backgroundColor,
         contentColor = contentColor,
         dismissAction = {
             DismissIcon(
                 intent = intent,
                 style = style,
-                onClick = { onDismissIconClick?.invoke() },
-                isDismissIconEnabled = isDismissIconEnabled,
+                onClick = { onDismissClick?.invoke() },
+                withDismissAction = withDismissAction,
             )
         },
         action = {
@@ -102,7 +102,7 @@ internal fun SparkSnackbar(
                 onClick = { onActionClick?.invoke() },
                 actionLabel = actionLabel,
                 style = style,
-                isActionOnNewLine = isActionOnNewLine,
+                actionOnNewLine = actionOnNewLine,
             )
         },
     ) {
@@ -127,9 +127,9 @@ private fun DismissIcon(
     intent: SnackbarIntent,
     style: SnackbarStyle,
     onClick: () -> Unit,
-    isDismissIconEnabled: Boolean,
+    withDismissAction: Boolean,
 ) {
-    if (!isDismissIconEnabled) return
+    if (!withDismissAction) return
 
     SparkIconButton(
         icon = SparkIcons.Close,
@@ -147,7 +147,7 @@ private fun SnackbarAction(
     onClick: () -> Unit,
     style: SnackbarStyle,
     actionLabel: String? = null,
-    isActionOnNewLine: Boolean = false,
+    actionOnNewLine: Boolean = false,
 ) {
     actionLabel ?: return
     val colors = ButtonDefaults.textButtonColors(
@@ -157,7 +157,7 @@ private fun SnackbarAction(
         },
     )
     val buttonModifier = when {
-        isActionOnNewLine ->
+        actionOnNewLine ->
             Modifier
                 .fillMaxWidth(0.8f)
                 .wrapContentWidth(Alignment.End)
@@ -186,37 +186,37 @@ private fun SnackbarAction(
  * @param modifier modifiers for the Snackbar layout
  * @param intent The intent of the Snackbar.
  * @param style The style of the Snackbar.
- * @param isDismissIconEnabled Whether the dismiss icon is enabled.
- * @param isActionOnNewLine whether or not action should be put on the separate line. Recommended
+ * @param withDismissAction Whether the dismiss icon is enabled.
+ * @param actionOnNewLine whether or not action should be put on the separate line. Recommended
  * for action with long action text
  * @param icon icon to be shown on the start side of the content when there's no title.
  * @param actionLabel action to add as an action to the snackbar.
  * @param onActionClick callback when the action is clicked.
- * @param onDismissIconClick Callback for dismiss icon click.
+ * @param onDismissClick Callback for dismiss icon click.
  */
 @Composable
 public fun Snackbar(
     modifier: Modifier = Modifier,
     intent: SnackbarIntent = SnackbarDefaults.intent,
     style: SnackbarStyle = SnackbarDefaults.style,
-    isActionOnNewLine: Boolean = false,
-    isDismissIconEnabled: Boolean = false,
+    actionOnNewLine: Boolean = false,
+    withDismissAction: Boolean = false,
     icon: SparkIcon? = null,
     actionLabel: String? = null,
     onActionClick: (() -> Unit)? = null,
-    onDismissIconClick: (() -> Unit)? = null,
+    onDismissClick: (() -> Unit)? = null,
     content: @Composable (() -> Unit),
 ) {
     SparkSnackbar(
         intent = intent,
         style = style,
         modifier = modifier,
-        isActionOnNewLine = isActionOnNewLine,
-        isDismissIconEnabled = isDismissIconEnabled,
+        actionOnNewLine = actionOnNewLine,
+        withDismissAction = withDismissAction,
         icon = icon,
         actionLabel = actionLabel,
         onActionClick = onActionClick,
-        onDismissIconClick = onDismissIconClick,
+        onDismissClick = onDismissClick,
         content = content,
     )
 }
@@ -250,12 +250,12 @@ public fun Snackbar(
         intent = sparkVisuals?.intent ?: SnackbarDefaults.intent,
         style = sparkVisuals?.style ?: SnackbarDefaults.style,
         modifier = modifier,
-        isActionOnNewLine = sparkVisuals?.isActionOnNewLine ?: false,
-        isDismissIconEnabled = sparkVisuals?.isDismissIconEnabled ?: false,
+        actionOnNewLine = sparkVisuals?.actionOnNewLine ?: false,
+        withDismissAction = sparkVisuals?.withDismissAction ?: false,
         icon = sparkVisuals?.icon,
         actionLabel = visuals.actionLabel,
         onActionClick = { data.performAction() },
-        onDismissIconClick = { data.dismiss() },
+        onDismissClick = { data.dismiss() },
     ) { Text(visuals.message) }
 }
 
@@ -270,7 +270,7 @@ public fun Snackbar(
  * @param intent background color, note that the surfaceInverse one is not available with the Tinted style
  * @param style style of the Snackbar, Tinted as a lower emphasis than the Filled style
  * @param actionLabel action label to show as button in the Snackbar
- * @param isDismissIconEnabled a boolean to show a dismiss action in the Snackbar. This is
+ * @param withDismissAction a boolean to show a dismiss action in the Snackbar. This is
  * recommended to be set to true better accessibility when a Snackbar is set with a
  * [SnackbarDuration.Indefinite]
  * @param duration shown duration of the Snackbar, will adapt for a11y context
@@ -281,13 +281,10 @@ public class SnackbarSparkVisuals(
     public val intent: SnackbarIntent = SnackbarDefaults.intent,
     public val style: SnackbarStyle = SnackbarDefaults.style,
     override val actionLabel: String? = null,
-    public val isDismissIconEnabled: Boolean = false,
-    public val isActionOnNewLine: Boolean = false,
+    override val withDismissAction: Boolean = false,
+    public val actionOnNewLine: Boolean = false,
     override val duration: SnackbarDuration = SnackbarDuration.Short,
-) : SnackbarVisuals {
-    override val withDismissAction: Boolean
-        get() = isDismissIconEnabled
-}
+) : SnackbarVisuals
 
 /***
  * Preview
@@ -350,7 +347,7 @@ private fun BodyIconSnackbarPreview() {
     PreviewTheme {
         Snackbar(
             intent = SnackbarIntent.Error,
-            isDismissIconEnabled = true,
+            withDismissAction = true,
             icon = SparkIcons.FlashlightFill,
         ) {
             Text(StubBodyShort)
@@ -364,8 +361,8 @@ private fun BodyIconActionNewLineLongSnackbarPreview() {
     PreviewTheme {
         Snackbar(
             intent = SnackbarIntent.SurfaceInverse,
-            isDismissIconEnabled = true,
-            isActionOnNewLine = true,
+            withDismissAction = true,
+            actionOnNewLine = true,
             style = SnackbarStyle.Tinted,
             icon = SparkIcons.FlashlightFill,
             actionLabel = StubBodyLong,

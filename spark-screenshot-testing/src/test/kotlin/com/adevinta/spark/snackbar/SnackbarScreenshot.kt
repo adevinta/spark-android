@@ -51,8 +51,8 @@ internal class SnackbarScreenshot {
                     Snackbar(
                         style = SnackbarStyle.Filled,
                         intent = it,
-                        isActionOnNewLine = true,
-                        isDismissIconEnabled = true,
+                        actionOnNewLine = true,
+                        withDismissAction = true,
                         icon = SparkIcons.LikeFill,
                         actionLabel = "Action",
                     ) {
@@ -71,9 +71,9 @@ internal class SnackbarScreenshot {
                     Snackbar(
                         style = SnackbarStyle.Tinted,
                         intent = it,
-                        isDismissIconEnabled = true,
+                        withDismissAction = true,
                         icon = SparkIcons.LikeFill,
-                        isActionOnNewLine = true,
+                        actionOnNewLine = true,
                         actionLabel = "Action",
                     ) {
                         Text("Lorem ipsum dolor sit amet")

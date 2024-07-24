@@ -42,14 +42,14 @@ internal val BodyIconSnackbar = SnackbarSparkVisuals(stubShortBody, icon = Spark
 internal val BodyIconActionNewLineSnackbar = SnackbarSparkVisuals(
     stubBody,
     actionLabel = stubAction,
-    isDismissIconEnabled = true,
+    withDismissAction = true,
     icon = SparkIcons.AlarmOnOutline,
 )
 internal val BodyTitleSnackbar = SnackbarSparkVisuals(stubBody)
 internal val BodyTitleActionSnackbar = SnackbarSparkVisuals(
     stubBody,
     actionLabel = stubAction,
-    isDismissIconEnabled = false,
+    withDismissAction = false,
 )
 
 internal val data = listOf(
