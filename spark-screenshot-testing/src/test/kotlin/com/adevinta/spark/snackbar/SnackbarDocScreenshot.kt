@@ -51,8 +51,8 @@ internal class SnackbarDocScreenshot {
                         Snackbar(
                             intent = visual.intent,
                             style = visual.style,
-                            isActionOnNewLine = visual.message == stubBody,
-                            isDismissIconEnabled = visual.isDismissIconEnabled,
+                            actionOnNewLine = visual.message == stubBody,
+                            withDismissAction = visual.withDismissAction,
                             icon = visual.icon,
                             actionLabel = visual.actionLabel,
                         ) { Text(visual.message) }

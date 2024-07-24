@@ -12,8 +12,8 @@ Only one snackbar may be displayed at a time.
 public fun Snackbar(
     data: SnackbarData,
     modifier: Modifier = Modifier,
-    isActionOnNewLine: Boolean = false,
-    isDismissIconEnabled: Boolean = false,
+    actionOnNewLine: Boolean = false,
+    withDismissAction: Boolean = false,
     ){}
 ```
 

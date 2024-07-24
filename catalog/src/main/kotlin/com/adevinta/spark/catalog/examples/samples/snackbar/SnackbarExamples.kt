@@ -54,8 +54,8 @@ public val SnackbarExamples: List<Example> = listOf(
     ) {
         Snackbar(
             intent = SnackbarIntent.Info,
-            isDismissIconEnabled = true,
-            isActionOnNewLine = true,
+            withDismissAction = true,
+            actionOnNewLine = true,
             style = SnackbarStyle.Filled,
             icon = SparkIcons.LikeFill,
             actionLabel = "Action",
@@ -70,8 +70,8 @@ public val SnackbarExamples: List<Example> = listOf(
     ) {
         Snackbar(
             intent = SnackbarIntent.Alert,
-            isDismissIconEnabled = true,
-            isActionOnNewLine = false,
+            withDismissAction = true,
+            actionOnNewLine = false,
             style = SnackbarStyle.Tinted,
             icon = SparkIcons.LikeFill,
             actionLabel = "Action",

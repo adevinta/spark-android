@@ -65,10 +65,10 @@ public val SnackbarConfigurator: Configurator = Configurator(
 
 @Composable
 private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
-    var isDismissIconEnabled by remember { mutableStateOf(false) }
+    var withDismissAction by remember { mutableStateOf(false) }
     var isIconEnabled by remember { mutableStateOf(false) }
     var style by remember { mutableStateOf(SnackbarStyle.Filled) }
-    var isActionOnNewLine by remember { mutableStateOf(false) }
+    var actionOnNewLine by remember { mutableStateOf(false) }
     var expanded by remember { mutableStateOf(false) }
     var intent by remember { mutableStateOf(SnackbarIntent.Basic) }
     var actionText by remember { mutableStateOf("Action") }
@@ -98,9 +98,9 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
     )
 
     SwitchLabelled(
-        checked = isActionOnNewLine,
+        checked = actionOnNewLine,
         onCheckedChange = {
-            isActionOnNewLine = it
+            actionOnNewLine = it
         },
     ) {
         Text(
@@ -110,9 +110,9 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
     }
 
     SwitchLabelled(
-        checked = isDismissIconEnabled,
+        checked = withDismissAction,
         onCheckedChange = {
-            isDismissIconEnabled = it
+            withDismissAction = it
         },
     ) {
         Text(
@@ -149,8 +149,8 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
     }
     Snackbar(
         intent = intent,
-        isDismissIconEnabled = isDismissIconEnabled,
-        isActionOnNewLine = isActionOnNewLine,
+        withDismissAction = withDismissAction,
+        actionOnNewLine = actionOnNewLine,
         style = style,
         icon = if (isIconEnabled) SparkIcons.FlashlightFill else null,
         actionLabel = actionText,
@@ -163,8 +163,8 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
             snackbarHostState.showSnackbar(
                 SnackbarSparkVisuals(
                     intent = intent,
-                    isDismissIconEnabled = isDismissIconEnabled,
-                    isActionOnNewLine = isActionOnNewLine,
+                    withDismissAction = withDismissAction,
+                    actionOnNewLine = actionOnNewLine,
                     style = style,
                     icon = if (isIconEnabled) SparkIcons.FlashlightFill else null,
                     actionLabel = actionText,
