@@ -38,11 +38,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.buttons.ButtonFilled
@@ -57,12 +57,13 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.ImageFill
 import com.adevinta.spark.icons.MoreMenuVertical
 import com.adevinta.spark.icons.SparkIcons
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun ModalSample(
     paddingValues: PaddingValues = ModalDefault.DialogPadding,
+    withButtons: Boolean = true,
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -84,33 +85,15 @@ internal fun ModalSample(
             ModalScaffold(
                 onClose = { showDialog = false },
                 contentPadding = paddingValues,
-                mainButton = {
-                    ButtonFilled(
-                        modifier = it,
-                        onClick = {
-                            coroutineScope.launch {
-                                snackbarHostState.showSnackbar(
-                                    message = "Snackbar",
-                                    actionLabel = "Action",
-                                    duration = SnackbarDuration.Short,
-                                )
-                            }
-                        },
-                        text = "Main Action",
-                    )
+                mainButton = if (withButtons) {
+                    { MainButton(it, coroutineScope, snackbarHostState) }
+                } else {
+                    null
                 },
-                snackbarHost = {
-                    SnackbarHost(snackbarHostState)
-                },
-                supportButton = {
-                    ButtonOutlined(
-                        modifier = it,
-                        onClick = {
-                            focusRequester.requestFocus()
-                            controller?.show()
-                        },
-                        text = "Alternative Action",
-                    )
+                supportButton = if (withButtons) {
+                    { SupportButton(it, focusRequester, controller) }
+                } else {
+                    null
                 },
                 title = {
                     Text(text = "Title")
@@ -125,6 +108,9 @@ internal fun ModalSample(
                     IconButton(onClick = { /*TODO*/ }) {
                         Icon(sparkIcon = SparkIcons.MoreMenuVertical, contentDescription = "")
                     }
+                },
+                snackbarHost = {
+                    SnackbarHost(snackbarHostState)
                 },
             ) { innerPadding ->
                 Column(
@@ -142,6 +128,43 @@ internal fun ModalSample(
             }
         }
     }
+}
+
+@Composable
+private fun SupportButton(
+    modifier: Modifier,
+    focusRequester: FocusRequester,
+    controller: SoftwareKeyboardController?,
+) {
+    ButtonOutlined(
+        modifier = modifier,
+        onClick = {
+            focusRequester.requestFocus()
+            controller?.show()
+        },
+        text = "Alternative Action",
+    )
+}
+
+@Composable
+private fun MainButton(
+    modifier: Modifier,
+    coroutineScope: CoroutineScope,
+    snackbarHostState: SnackbarHostState,
+) {
+    ButtonFilled(
+        modifier = modifier,
+        onClick = {
+            coroutineScope.launch {
+                snackbarHostState.showSnackbar(
+                    message = "Snackbar",
+                    actionLabel = "Action",
+                    duration = SnackbarDuration.Short,
+                )
+            }
+        },
+        text = "Main Action",
+    )
 }
 
 private val exampleContent = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula " +
