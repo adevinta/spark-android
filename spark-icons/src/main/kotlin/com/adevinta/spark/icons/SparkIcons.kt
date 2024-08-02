@@ -27,6 +27,7 @@ import com.adevinta.spark.icons.SparkIcon.DrawableRes
 
 public object SparkIcons
 
+public val SparkIcons.360: DrawableRes get() = DrawableRes(R.drawable.spark_icons_360)
 public val SparkIcons.Accessories: DrawableRes get() = DrawableRes(R.drawable.spark_icons_accessories)
 public val SparkIcons.AccountFill: DrawableRes get() = DrawableRes(R.drawable.spark_icons_account_fill)
 public val SparkIcons.AccountOutline: DrawableRes get() = DrawableRes(R.drawable.spark_icons_account_outline)
