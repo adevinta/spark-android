@@ -340,6 +340,7 @@ public val SparkIcons.PetAccessory: DrawableRes get() = DrawableRes(R.drawable.s
 public val SparkIcons.Pets: DrawableRes get() = DrawableRes(R.drawable.spark_icons_pets)
 public val SparkIcons.PhoneFill: DrawableRes get() = DrawableRes(R.drawable.spark_icons_phone_fill)
 public val SparkIcons.PhoneOutline: DrawableRes get() = DrawableRes(R.drawable.spark_icons_phone_outline)
+public val SparkIcons.PhotoPack: DrawableRes get() = DrawableRes(R.drawable.spark_icons_photo_pack)
 public val SparkIcons.Pieces: DrawableRes get() = DrawableRes(R.drawable.spark_icons_pieces)
 public val SparkIcons.PiggyBankFill: DrawableRes get() = DrawableRes(R.drawable.spark_icons_piggy_bank_fill)
 public val SparkIcons.PiggyBankOutline: DrawableRes get() = DrawableRes(R.drawable.spark_icons_piggy_bank_outline)
