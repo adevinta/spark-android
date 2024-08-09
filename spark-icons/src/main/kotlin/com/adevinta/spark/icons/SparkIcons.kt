@@ -264,6 +264,7 @@ public val SparkIcons.KeyOutline: DrawableRes get() = DrawableRes(R.drawable.spa
 public val SparkIcons.KeylessAccess: DrawableRes get() = DrawableRes(R.drawable.spark_icons_keyless_access)
 public val SparkIcons.Land: DrawableRes get() = DrawableRes(R.drawable.spark_icons_land)
 public val SparkIcons.LastFloor: DrawableRes get() = DrawableRes(R.drawable.spark_icons_last_floor)
+public val SparkIcons.Lens: DrawableRes get() = DrawableRes(R.drawable.spark_icons_lens)
 public val SparkIcons.License: DrawableRes get() = DrawableRes(R.drawable.spark_icons_license)
 public val SparkIcons.Lift: DrawableRes get() = DrawableRes(R.drawable.spark_icons_lift)
 public val SparkIcons.Light: DrawableRes get() = DrawableRes(R.drawable.spark_icons_light)
