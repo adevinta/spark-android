@@ -71,12 +71,12 @@ private fun ColumnScope.TagSample() {
     var icon: SparkIcon? by remember { mutableStateOf(null) }
     var style by remember { mutableStateOf(TagStyle.Filled) }
     var intent by remember { mutableStateOf(TagIntent.Main) }
-    var buttonText by remember { mutableStateOf("Filled Tag") }
+    var tagText by remember { mutableStateOf("Filled Tag") }
 
     ConfigedTag(
         modifier = Modifier.align(Alignment.CenterHorizontally),
         style = style,
-        tagText = buttonText,
+        tagText = tagText,
         intent = intent,
         icon = icon,
     )
@@ -151,10 +151,8 @@ private fun ColumnScope.TagSample() {
 
     TextField(
         modifier = Modifier.fillMaxWidth(),
-        value = buttonText,
-        onValueChange = {
-            buttonText = it
-        },
+        value = tagText,
+        onValueChange = { tagText = it },
         label = "Tag text",
         placeholder = "Vérifier les Disponibilité",
     )
