@@ -235,7 +235,7 @@ public object TagDefaults {
     ): TagColors {
         val contentColor = intent.colors().color
         return TagColors(
-            backgroundColor = Color.Transparent,
+            backgroundColor = SparkTheme.colors.surface,
             contentColor = contentColor,
         )
     }
