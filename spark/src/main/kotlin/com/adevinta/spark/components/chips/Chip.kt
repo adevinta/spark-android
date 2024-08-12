@@ -241,8 +241,8 @@ public fun Chip(
                         color = contentColor,
                     )
                 }
-                // Fix to prevent chip from having a width of zero when used
-//                // in a scroll container
+                // FIXME-scott.rayapoulle (12-08-2024):Fix to prevent chip from having a width of zero when used
+                // in a scroll container #1238
                 .widthIn(max = 9000.dp)
                 .defaultMinSize(minHeight = ChipDefaults.MinHeight)
                 .padding(ChipDefaults.ChipPadding),
@@ -335,8 +335,8 @@ public fun ChipSelectable(
                         color = contentColor,
                     )
                 }
-//                // Fix to prevent chip from having a width of zero when used
-//                // in a scroll container
+                // FIXME-scott.rayapoulle (12-08-2024):Fix to prevent chip from having a width of zero when used
+                // in a scroll container #1238
                 .widthIn(max = 9000.dp)
                 .defaultMinSize(minHeight = ChipDefaults.MinHeight)
                 .animateContentSize()
