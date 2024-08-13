@@ -6,13 +6,48 @@
 
 ### Spark
 
-- 🎨 The Avatar component was using the color icon without tinting it rendering them incompatible with the dark mode
+### Catalog App
+
+### CI
+
+## 0.11.0
+
+_2024-08-13_
+
+### Spark
+
+#### 🆕 Divider
+> [!WARNING]
+> The Divider Component has been deprecated to use the `HorizontalDivider`
+
+The divider component now has 2 fixed colors, `outline` and `outlineHigh`. I now accept a slot has a label indicator if you need to place a decorative text when separating your sections.
+
+#### 🆕 New Dropdown specs
+> [!WARNING]
+> The previous SelectTextField Api has been deprecated but should still be used in Combobox usecases.
+
+The Dropdown replace the existing SelectTextfield in readonly mode. It adds new api to handle item groupings with a proper title and remove the necessity to provide the `onValueChange` callback.
+
+#### 🆕 Snackbar
+> [!CAUTION]
+> `SnackbarColors` & every colored Snackbar override have been deprecated as error as their api is not compatible with the new one. You'll need to migrate them to use this version.
+
+The new Snackbar loses its title and icon slot to accept only a `SparkIcon`.
+It has 2 styles, intents and the new dismiss action that are also available on the `showSnackbar` function.
+
+
+- ⬆️ Spark now use Kotlin 2.0
+- ⬆️ Compose BOM has been increased from 2024.05.00 to 2024.06.00
+- 🐛 The Avatar component was using the color icon without tinting it rendering them incompatible with the dark mode
+- 🐛 Chip doesn't have a max width anymore.
+- 🐛 Textfield doesn't have a max width anymore.
+- 🐛 Progress Tracker Indicator size now follow the font scaling
+- 🐛 Textfield now correctly show the required indicator when the label fold in multiples lines
 
 ### Catalog App
 
-- 🎨 KA theme colors for outline has been changed in light mode and in dark mode it's the background + variants color.
-
-### CI
+- 🎨 KA theme colors for outline has been changed in light mode and in dark mode it's the background + variants color
+- 🆕 Examples on how to make a Button Toggle has been added
 
 ## [0.10.1]
 
@@ -298,7 +333,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.10.1...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.11.0...HEAD
+
+[0.11.0]: https://github.com/adevinta/spark-android/releases/tag/0.11.0
 
 [0.10.1]: https://github.com/adevinta/spark-android/releases/tag/0.10.1
 
