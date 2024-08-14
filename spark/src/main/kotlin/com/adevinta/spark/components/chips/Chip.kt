@@ -26,6 +26,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -36,6 +37,8 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.LocalContentColor
@@ -50,14 +53,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.SparkTheme.colors
 import com.adevinta.spark.components.icons.Icon
@@ -235,6 +241,9 @@ public fun Chip(
                         color = contentColor,
                     )
                 }
+                // FIXME-scott.rayapoulle (12-08-2024):Fix to prevent chip from having a width of zero when used
+                // in a scroll container #1238
+                .widthIn(max = 9000.dp)
                 .defaultMinSize(minHeight = ChipDefaults.MinHeight)
                 .padding(ChipDefaults.ChipPadding),
             horizontalArrangement = Arrangement.spacedBy(
@@ -326,6 +335,9 @@ public fun ChipSelectable(
                         color = contentColor,
                     )
                 }
+                // FIXME-scott.rayapoulle (12-08-2024):Fix to prevent chip from having a width of zero when used
+                // in a scroll container #1238
+                .widthIn(max = 9000.dp)
                 .defaultMinSize(minHeight = ChipDefaults.MinHeight)
                 .animateContentSize()
                 .padding(ChipDefaults.ChipPadding),
@@ -573,7 +585,10 @@ private fun SelectableChipPreview(
                 leadingIcon = leadingIcon,
             )
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(
+            modifier = Modifier.horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
             ChipSelectable(
                 selected,
                 onClick = { selected = !selected },
@@ -598,7 +613,34 @@ private fun SelectableChipPreview(
                 leadingIcon = leadingIcon,
                 enabled = false,
             )
+
+            ChipSelectable(
+                content = {
+                    ChipContent(stringResource(R.string.spark_textfield_content_description))
+                },
+                onClick = { },
+                enabled = true,
+                selected = true,
+            )
         }
+    }
+}
+
+@Composable
+private fun RowScope.ChipContent(
+    label: String,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+) {
+    leadingIcon?.let { leadingIcon() }
+    Text(
+        text = label,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+        modifier = Modifier.weight(weight = 1f, fill = false),
+    )
+    trailingIcon?.let {
+        trailingIcon()
     }
 }
 
