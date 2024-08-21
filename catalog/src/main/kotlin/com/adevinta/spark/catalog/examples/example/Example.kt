@@ -22,6 +22,7 @@
 package com.adevinta.spark.catalog.examples.example
 
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -73,6 +74,7 @@ public fun Example(example: Example) {
         } else {
             Column(
                 modifier = commonModifier.verticalScroll(scrollState),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 with(example) {
                     columnContent?.let { content -> this@Column.content(snackbarHostState) }
