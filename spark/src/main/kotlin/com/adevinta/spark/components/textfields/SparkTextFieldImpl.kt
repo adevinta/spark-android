@@ -69,6 +69,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.lerp
 import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
@@ -215,7 +216,7 @@ internal fun SparkDecorationBox(
             Box(
                 Modifier
                     .layoutId(ContainerId)
-                    .outlineCutout(labelSize::value, contentPadding),
+                    .outlineCutout(labelSize::value, 16.dp),
                 propagateMinConstraints = true,
             ) {
                 border?.invoke()
@@ -416,13 +417,13 @@ internal fun Placeable?.hasWidthThenDefault(default: Int) = this?.width?.takeIf 
 internal fun heightOrZero(placeable: Placeable?) = placeable?.height ?: 0
 internal fun Placeable?.hasHeightThenDefault(default: Int) = this?.height?.takeIf { it > 0 }?.let { default } ?: 0
 
-internal fun Modifier.outlineCutout(labelSize: () -> Size, paddingValues: PaddingValues) =
+internal fun Modifier.outlineCutout(labelSize: () -> Size, leftPadding: Dp) =
     this.drawWithContent {
         val labelSizeValue = labelSize()
         val labelWidth = labelSizeValue.width
         if (labelWidth > 0f) {
             val innerPadding = OutlinedTextFieldInnerPadding.toPx()
-            val leftLtr = paddingValues.calculateLeftPadding(layoutDirection).toPx() - innerPadding
+            val leftLtr = leftPadding.toPx() - innerPadding
             val rightLtr = leftLtr + labelWidth + 2 * innerPadding
             val left = when (layoutDirection) {
                 LayoutDirection.Rtl -> size.width - rightLtr
