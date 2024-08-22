@@ -27,7 +27,6 @@ import com.adevinta.spark.icons.SparkIcon.DrawableRes
 
 public object SparkIcons
 
-public val SparkIcons.360: DrawableRes get() = DrawableRes(R.drawable.spark_icons_360)
 public val SparkIcons.Accessories: DrawableRes get() = DrawableRes(R.drawable.spark_icons_accessories)
 public val SparkIcons.AccountFill: DrawableRes get() = DrawableRes(R.drawable.spark_icons_account_fill)
 public val SparkIcons.AccountOutline: DrawableRes get() = DrawableRes(R.drawable.spark_icons_account_outline)
@@ -445,6 +444,7 @@ public val SparkIcons.TargetFill: DrawableRes get() = DrawableRes(R.drawable.spa
 public val SparkIcons.TargetOutline: DrawableRes get() = DrawableRes(R.drawable.spark_icons_target_outline)
 public val SparkIcons.Tattoo: DrawableRes get() = DrawableRes(R.drawable.spark_icons_tattoo)
 public val SparkIcons.Terrace: DrawableRes get() = DrawableRes(R.drawable.spark_icons_terrace)
+public val SparkIcons.ThreeD: DrawableRes get() = DrawableRes(R.drawable.spark_icons_three_d)
 public val SparkIcons.ThreeSixty: DrawableRes get() = DrawableRes(R.drawable.spark_icons_three_sixty)
 public val SparkIcons.Time: DrawableRes get() = DrawableRes(R.drawable.spark_icons_time)
 public val SparkIcons.Tools: DrawableRes get() = DrawableRes(R.drawable.spark_icons_tools)
