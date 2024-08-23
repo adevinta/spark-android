@@ -60,6 +60,7 @@ import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
 import com.adevinta.spark.catalog.examples.samples.text.DropdownsExamples
 import com.adevinta.spark.catalog.examples.samples.text.TextLinksExamples
+import com.adevinta.spark.catalog.examples.samples.textfields.TextFieldsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
@@ -312,19 +313,6 @@ private val ProgressTracker = Component(
     configurator = ProgressTrackerConfigurator,
 )
 
-private val TextLinks = Component(
-    id = nextId(),
-    name = "TextLinks",
-    description = R.string.component_textlink_description,
-    illustration = R.drawable.icon_textlink,
-    tintIcon = false,
-    guidelinesUrl = "$ComponentGuidelinesUrl/p/75ed11-textlink/b/403107",
-    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/text/TextLink.kt",
-    examples = TextLinksExamples,
-    configurator = TextLinksConfigurator,
-)
-
 private val Sliders = Component(
     id = nextId(),
     name = "Slider",
@@ -345,8 +333,21 @@ private val TextFields = Component(
     guidelinesUrl = "$ComponentGuidelinesUrl/p/773c60-input--text-field/b/0658e2",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.textfields/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/textfields/TextField.kt",
-    examples = emptyList(),
+    examples = TextFieldsExamples,
     configurator = TextFieldsConfigurator,
+)
+
+private val TextLinks = Component(
+    id = nextId(),
+    name = "TextLinks",
+    description = R.string.component_textlink_description,
+    illustration = R.drawable.icon_textlink,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/75ed11-textlink/b/403107",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/text/TextLink.kt",
+    examples = TextLinksExamples,
+    configurator = TextLinksConfigurator,
 )
 
 private val Tokens = Component(
