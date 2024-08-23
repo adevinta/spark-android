@@ -10,6 +10,16 @@
 
 ### CI
 
+## [0.11.1]
+
+_2024-08-23_
+
+### Spark
+- 🐛 TextField Addons now are correctly vertically centered when they are interactable.
+
+### Catalog App
+- Add new example to showcase the premade Addons for the TextField.
+
 ## 0.11.0
 
 _2024-08-13_
@@ -333,9 +343,11 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.11.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.11.1...HEAD
 
 [0.11.0]: https://github.com/adevinta/spark-android/releases/tag/0.11.0
+
+[0.11.1]: https://github.com/adevinta/spark-android/releases/tag/0.11.1
 
 [0.10.1]: https://github.com/adevinta/spark-android/releases/tag/0.10.1
 
