@@ -113,7 +113,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: '🌋 Run Lava Vulnerability Scanner'
-        uses: adevinta/lava-action@9bfefe8e57b0bc9f90528edf385a01b6ecbed761 # v0.3.3
+        uses: adevinta/lava-action@ddeeddd8ccf45b403741359471a5627644a0c5f6 # v0.3.4
         with:
           version: latest
           config: lava.yaml
