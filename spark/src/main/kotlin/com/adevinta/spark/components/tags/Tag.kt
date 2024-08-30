@@ -44,7 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
-import com.adevinta.spark.LocalLegacyStyle
+import com.adevinta.spark.LocalSparkFeatureFlag
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
@@ -74,7 +74,11 @@ internal fun BaseSparkTag(
         modifier = modifier
             .semantics(mergeDescendants = true) {}
             .sparkUsageOverlay(),
-        shape = if (LocalLegacyStyle.current) SparkTheme.shapes.extraSmall else SparkTheme.shapes.full,
+        shape = if (LocalSparkFeatureFlag.current.useLegacyStyle) {
+            SparkTheme.shapes.extraSmall
+        } else {
+            SparkTheme.shapes.full
+        },
         color = colors.backgroundColor,
         contentColor = colors.contentColor.copy(1.0f),
         border = border,
