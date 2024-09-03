@@ -159,8 +159,8 @@ internal class SparkTextFieldMeasurePolicy(
             trailingPlaceableHeight = heightOrZero(trailingPlaceable),
             textFieldPlaceableHeight = textFieldPlaceable.height,
             labelPlaceableHeight = heightOrZero(labelPlaceable),
-            placeholderPlaceableHeight = supportingHeight,
-            supportingPlaceableHeight = heightOrZero(supportingPlaceable),
+            placeholderPlaceableHeight = heightOrZero(placeholderPlaceable),
+            supportingPlaceableHeight = supportingHeight,
             counterPlaceableHeight = heightOrZero(counterPlaceable),
             animationProgress = animationProgress,
             constraints = constraints,
@@ -511,10 +511,14 @@ private fun Placeable.PlacementScope.place(
     )
 
     // placed similar to the input text above
-    placeholderPlaceable?.placeRelative(
-        textHorizontalPosition,
-        calculateVerticalPosition(placeholderPlaceable),
-    )
+    placeholderPlaceable?.let {
+        val placeholderVerticalPosition = if (singleLine) {
+            Alignment.CenterVertically.align(it.height, height)
+        } else {
+            topPadding
+        }
+        it.placeRelative(widthOrZero(leadingPlaceable), placeholderVerticalPosition)
+    }
 
     supportingPlaceable?.placeRelative(
         x = 0,
