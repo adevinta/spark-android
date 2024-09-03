@@ -80,11 +80,13 @@ private fun ColumnScope.Addons() {
 @Composable
 private fun TextFieldWithDropdown() {
     var expanded by remember { mutableStateOf(false) }
+    var valueText by remember { mutableStateOf("+33 0123456789") }
+
     TextField(
         modifier = Modifier.fillMaxWidth(),
-        value = "+33 0123456789",
+        value = valueText,
         label = "Phone number - Dropdown addon",
-        onValueChange = {},
+        onValueChange = { valueText = it },
         leadingContent = {
             Dropdown(
                 modifier = Modifier,
@@ -124,11 +126,13 @@ private fun TextFieldWithDropdown() {
 @Composable
 private fun TextFieldWithButton() {
     var isLoading by remember { mutableStateOf(false) }
+    var valueText by remember { mutableStateOf("AA-123-BB") }
+
     TextField(
         modifier = Modifier.fillMaxWidth(),
-        value = "AA-123-BB",
+        value = valueText,
         label = "Button addon",
-        onValueChange = {},
+        onValueChange = { valueText = it },
         trailingContent = {
             Button(
                 text = "Validate",
@@ -142,11 +146,13 @@ private fun TextFieldWithButton() {
 
 @Composable
 private fun TextFieldWithIcon() {
+    var valueText by remember { mutableStateOf("AA-123-BB") }
+
     TextField(
         modifier = Modifier.fillMaxWidth(),
-        value = "AA-123-BB",
+        value = valueText,
         label = "Icon addon",
-        onValueChange = {},
+        onValueChange = { valueText = it },
         trailingContent = {
             TextFieldIcon(
                 icon = SparkIcons.QuestionOutline,
@@ -166,7 +172,7 @@ private fun TextFieldWithIconButton() {
         modifier = Modifier.fillMaxWidth(),
         value = value,
         label = "Icon button addon",
-        onValueChange = {},
+        onValueChange = { value = it },
         trailingContent = {
             TextFieldIconButton(
                 modifier = Modifier,
@@ -183,11 +189,13 @@ private fun TextFieldWithIconToggleButton() {
     var checked by remember {
         mutableStateOf(false)
     }
+    var valueText by remember { mutableStateOf("AA-123-BB") }
+
     TextField(
         modifier = Modifier.fillMaxWidth(),
-        value = "AA-123-BB",
+        value = valueText,
         label = "Icon toggle button addon",
-        onValueChange = {},
+        onValueChange = { valueText = it },
         trailingContent = {
             TextFieldIconToggleButton(
                 modifier = Modifier,
@@ -203,20 +211,18 @@ private fun TextFieldWithIconToggleButton() {
 
 @Composable
 private fun TextFieldWithPrefixSuffixButton() {
+    var valueText by remember { mutableStateOf("www.adevinta.com") }
+
     TextField(
         modifier = Modifier.fillMaxWidth(),
-        value = "www.adevinta.com",
+        value = valueText,
         label = "Url - Prefix/Suffix addon",
-        onValueChange = {},
+        onValueChange = { valueText = it },
         leadingContent = {
-            TextFieldText(
-                text = "https://",
-            )
+            TextFieldText(text = "https://")
         },
         trailingContent = {
-            TextFieldText(
-                text = ".com",
-            )
+            TextFieldText(text = ".com")
         },
     )
 }

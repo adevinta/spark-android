@@ -38,19 +38,19 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.dim1
+import com.adevinta.spark.tokens.dim2
 import com.adevinta.spark.tokens.dim3
-import com.adevinta.spark.tokens.dim5
 
 @Composable
 internal fun sparkOutlinedTextFieldColors(
     textColor: Color = SparkTheme.colors.onSurface,
     disabledTextColor: Color = textColor.dim3,
     containerColor: Color = Color.Transparent,
-    disabledContainerColor: Color = SparkTheme.colors.onSurface.dim5,
+    disabledContainerColor: Color = Color.Transparent,
     cursorColor: Color = SparkTheme.colors.onSurface,
     selectionColors: TextSelectionColors = LocalTextSelectionColors.current,
-    focusedBorderColor: Color = SparkTheme.colors.onSurface,
-    unfocusedBorderColor: Color = SparkTheme.colors.outline,
+    focusedBorderColor: Color = SparkTheme.colors.outlineHigh,
+    unfocusedBorderColor: Color = SparkTheme.colors.outlineHigh.dim2,
     disabledBorderColor: Color = SparkTheme.colors.outline,
     focusedLeadingContentColor: Color = SparkTheme.colors.neutral,
     unfocusedLeadingContentColor: Color = focusedLeadingContentColor,
@@ -61,7 +61,7 @@ internal fun sparkOutlinedTextFieldColors(
     focusedLabelColor: Color = SparkTheme.colors.onSurface,
     unfocusedLabelColor: Color = focusedLabelColor.dim1,
     disabledLabelColor: Color = focusedLabelColor.dim3,
-    placeholderColor: Color = SparkTheme.colors.neutral,
+    placeholderColor: Color = SparkTheme.colors.onSurface.dim1,
     disabledPlaceholderColor: Color = SparkTheme.colors.onSurface.dim3,
     focusedSupportingTextColor: Color = SparkTheme.colors.onSurface.dim1,
     unfocusedSupportingTextColor: Color = focusedSupportingTextColor,
