@@ -23,7 +23,6 @@ package com.adevinta.spark.components.tab
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -43,10 +42,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
-import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
@@ -59,8 +56,6 @@ import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifNull
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.Tab as MaterialTab
 
 /**
@@ -182,10 +177,12 @@ private fun TabLayout(
     trailingContent: @Composable (() -> Unit)?,
 ) {
     Row(
-        modifier = Modifier.padding(
-            horizontal = TabDefaults.HorizontalContentPadding,
-            vertical = TabDefaults.VerticalContentPadding,
-        ).heightIn(min = 32.dp),
+        modifier = Modifier
+            .padding(
+                horizontal = TabDefaults.HorizontalContentPadding,
+                vertical = TabDefaults.VerticalContentPadding,
+            )
+            .heightIn(min = 32.dp),
         horizontalArrangement = Arrangement.spacedBy(TabDefaults.HorizontalArrangementSpace),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -259,10 +256,8 @@ public fun Tab(
     name = "Tab",
 )
 @Composable
-private fun TabPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun TabPreview() {
+    PreviewTheme {
         Tab(
             selected = false,
             onClick = {},

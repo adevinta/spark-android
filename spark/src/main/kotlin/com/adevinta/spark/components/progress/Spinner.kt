@@ -27,14 +27,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.IntentColor
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * Spinners provide a visual clue that an action is processing awaiting a course of change or a result.
@@ -81,10 +78,8 @@ public fun Spinner(
     name = "Spinner Medium",
 )
 @Composable
-internal fun PreviewSpinnerMedium(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun PreviewSpinnerMedium() {
+    PreviewTheme {
         SpinnerPreview(size = SpinnerSize.Medium)
     }
 }
@@ -94,10 +89,8 @@ internal fun PreviewSpinnerMedium(
     name = "Spinner Small",
 )
 @Composable
-internal fun PreviewSpinnerSmall(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun PreviewSpinnerSmall() {
+    PreviewTheme {
         SpinnerPreview(size = SpinnerSize.Small)
     }
 }

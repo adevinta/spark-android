@@ -31,12 +31,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.sp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 internal val display1Type = TextStyle(
     fontFamily = FontFamily.Default,
@@ -285,10 +282,8 @@ public val TextStyle.highlight: TextStyle
     name = "Spark Typography",
 )
 @Composable
-private fun TextPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun TextPreview() {
+    PreviewTheme {
         Text(
             text = "This is font family text display1",
             style = SparkTheme.typography.display1,

@@ -26,7 +26,6 @@ import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,10 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.LocalHighlightToken
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
@@ -46,8 +42,6 @@ import com.adevinta.spark.icons.Link
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.disabled
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * The ghost button is the button for non important actions. The mandatory icon help to indicate that it's a
@@ -248,10 +242,8 @@ public fun ButtonGhost(
     name = "Button Ghost",
 )
 @Composable
-internal fun ButtonGhostPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun ButtonGhostPreview() {
+    PreviewTheme {
         val icon = SparkIcons.Link
         var isLoading by remember { mutableStateOf(false) }
         val buttonText = "Main Button"
@@ -286,11 +278,8 @@ internal fun ButtonGhostPreview(
     name = "Button Ghost Intents",
 )
 @Composable
-internal fun ButtonGhostIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun ButtonGhostIntentPreview() {
     PreviewTheme(
-        themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline

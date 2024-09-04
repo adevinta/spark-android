@@ -27,14 +27,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DividerDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -44,9 +41,6 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.spacer.HorizontalSpacer
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.tokens.dim3
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
 import androidx.compose.material3.VerticalDivider as MaterialVerticalDivider
 
@@ -210,10 +204,8 @@ public fun VerticalDivider(
     name = "Divider",
 )
 @Composable
-internal fun DividerPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun DividerPreview() {
+    PreviewTheme {
         HorizontalDivider(intent = DividerIntent.Outline)
         HorizontalDivider(intent = DividerIntent.OutlineHigh)
         HorizontalDivider(

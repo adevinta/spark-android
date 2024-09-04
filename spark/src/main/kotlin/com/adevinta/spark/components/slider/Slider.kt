@@ -54,7 +54,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -64,8 +63,6 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.dim4
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.Slider as MaterialSlider
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -410,12 +407,10 @@ public fun Slider(
     name = "Slider",
 )
 @Composable
-private fun SliderPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+private fun SliderPreview() {
     var progress by remember { mutableFloatStateOf(0.75f) }
 
-    PreviewTheme(theme) {
+    PreviewTheme {
         Slider(
             value = progress,
             intent = SliderIntent.Error,

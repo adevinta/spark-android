@@ -21,20 +21,16 @@
  */
 package com.adevinta.spark.components.progress
 
-import androidx.annotation.FloatRange
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.LinearProgressIndicator as MaterialLinearProgressIndicator
 
 @InternalSparkApi
@@ -106,10 +102,8 @@ public fun LinearProgressIndicatorIndeterminate(
     name = "LinearProgressIndicator",
 )
 @Composable
-internal fun PreviewLinearProgressIndicator(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun PreviewLinearProgressIndicator() {
+    PreviewTheme {
         LinearProgressIndicator(
             progress = { 0f },
             modifier = Modifier.fillMaxWidth(),
@@ -130,10 +124,8 @@ internal fun PreviewLinearProgressIndicator(
     name = "LinearProgressIndicatorIndeterminate",
 )
 @Composable
-internal fun PreviewLinearProgressIndicatorIndeterminate(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun PreviewLinearProgressIndicatorIndeterminate() {
+    PreviewTheme {
         LinearProgressIndicatorIndeterminate(modifier = Modifier.fillMaxWidth())
     }
 }

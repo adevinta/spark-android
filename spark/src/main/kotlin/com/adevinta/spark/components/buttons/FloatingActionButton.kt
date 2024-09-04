@@ -40,15 +40,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.PenOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.ExtendedFloatingActionButton as MaterialExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButton as MaterialFloatingActionButton
 import androidx.compose.material3.LargeFloatingActionButton as MaterialLargeFloatingActionButton
@@ -343,12 +340,8 @@ public fun ExtendedFloatingActionButton(
     name = "DropdownMenu",
 )
 @Composable
-internal fun DropdownMenuPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(
-        themeVariant = theme,
-    ) {
+internal fun DropdownMenuPreview() {
+    PreviewTheme {
         Text("Large Floating Action button")
 
         LargeFloatingActionButton(

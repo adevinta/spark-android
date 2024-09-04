@@ -37,7 +37,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
 import coil.compose.SubcomposeAsyncImage
@@ -62,8 +61,6 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Tattoo
 import com.adevinta.spark.tokens.EmphasizeDim2
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @InternalSparkApi
 @Composable
@@ -247,10 +244,8 @@ private fun AsyncImagePainter.State.asImageState(): State {
     name = "Image",
 )
 @Composable
-internal fun ImagePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(themeVariant = theme) {
+internal fun ImagePreview() {
+    PreviewTheme {
         val painter = rememberSparkIconPainter(sparkIcon = SparkIcons.Tattoo)
         val drawable =
             AppCompatResources.getDrawable(LocalContext.current, SparkIcons.Tattoo.drawableId)!!

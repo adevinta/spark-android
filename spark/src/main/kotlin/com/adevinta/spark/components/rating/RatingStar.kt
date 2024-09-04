@@ -31,7 +31,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
@@ -45,8 +44,6 @@ import com.adevinta.spark.icons.StarFill
 import com.adevinta.spark.icons.StarOutline
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.dim5
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * RatingStar is the atomic element of rating components
@@ -194,10 +191,8 @@ public object RatingDefault {
 
 @Composable
 @Preview
-private fun RatingStarPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun RatingStarPreview() {
+    PreviewTheme {
         RatingStar(enabled = true, state = RatingStarState(1))
         RatingStar(enabled = false, state = RatingStarState(0.1))
         RatingStar(enabled = false, state = RatingStarState(0.3))

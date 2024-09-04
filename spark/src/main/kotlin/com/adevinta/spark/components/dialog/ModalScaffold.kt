@@ -63,12 +63,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -80,7 +78,6 @@ import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.buttons.ButtonFilled
-import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.dialog.ModalDefault.DialogPadding
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
@@ -88,7 +85,6 @@ import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.scaffold.Scaffold
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.icons.BicycleType
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.ImageFill
 import com.adevinta.spark.icons.MoreMenuVertical

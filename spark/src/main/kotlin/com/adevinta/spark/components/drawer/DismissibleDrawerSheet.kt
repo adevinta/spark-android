@@ -45,15 +45,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.contentColorFor
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @ExperimentalSparkApi
 @Composable
@@ -118,11 +115,8 @@ public fun DismissibleDrawerSheet(
     name = "DismissibleDrawerSheet",
 )
 @Composable
-internal fun DismissibleDrawerSheetPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun DismissibleDrawerSheetPreview() {
     PreviewTheme(
-        theme,
         padding = PaddingValues(0.dp),
     ) {
         // icons to mimic drawer destinations
