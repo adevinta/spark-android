@@ -10,6 +10,14 @@
 
 ### CI
 
+## [0.11.2]
+
+_2024-09-04_
+
+### Spark
+- 🐛 TextField no longer grow in height when the helper message grows.
+- ⬆️ Upgrade Kotlin version from 2.0.0 to 2.0.20 to resolve infinite recomposition.
+
 ## [0.11.1]
 
 _2024-08-23_
@@ -345,9 +353,11 @@ _2023-03-29_
 
 [Unreleased]: https://github.com/adevinta/spark-android/compare/0.11.1...HEAD
 
-[0.11.0]: https://github.com/adevinta/spark-android/releases/tag/0.11.0
+[0.11.2]: https://github.com/adevinta/spark-android/releases/tag/0.11.2
 
 [0.11.1]: https://github.com/adevinta/spark-android/releases/tag/0.11.1
+
+[0.11.0]: https://github.com/adevinta/spark-android/releases/tag/0.11.0
 
 [0.10.1]: https://github.com/adevinta/spark-android/releases/tag/0.10.1
 
