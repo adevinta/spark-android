@@ -42,7 +42,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
@@ -50,8 +49,6 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.SparkShapes
 import com.adevinta.spark.tokens.contentColorFor
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @ExperimentalSparkApi
 @Composable
@@ -115,31 +112,26 @@ public fun ModalDrawerSheet(
     name = "ModalDrawerSheet",
 )
 @Composable
-internal fun ModalDrawerSheetPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        PreviewTheme(
-            theme,
-            padding = PaddingValues(0.dp),
-        ) {
-            // icons to mimic drawer destinations
-            val items = listOf(Icons.Default.Favorite, Icons.Default.Face, Icons.Default.Email)
-            val selectedItem = remember { mutableStateOf(items[0]) }
+internal fun ModalDrawerSheetPreview() {
+    PreviewTheme(
+        padding = PaddingValues(0.dp),
+    ) {
+        // icons to mimic drawer destinations
+        val items = listOf(Icons.Default.Favorite, Icons.Default.Face, Icons.Default.Email)
+        val selectedItem = remember { mutableStateOf(items[0]) }
 
-            ModalDrawerSheet {
-                Spacer(Modifier.height(12.dp))
-                items.forEach { item ->
-                    NavigationDrawerItem(
-                        icon = { Icon(item, contentDescription = null) },
-                        label = { Text(item.name) },
-                        selected = item == selectedItem.value,
-                        onClick = {
-                            selectedItem.value = item
-                        },
-                        modifier = Modifier.padding(horizontal = 12.dp),
-                    )
-                }
+        ModalDrawerSheet {
+            Spacer(Modifier.height(12.dp))
+            items.forEach { item ->
+                NavigationDrawerItem(
+                    icon = { Icon(item, contentDescription = null) },
+                    label = { Text(item.name) },
+                    selected = item == selectedItem.value,
+                    onClick = {
+                        selectedItem.value = item
+                    },
+                    modifier = Modifier.padding(horizontal = 12.dp),
+                )
             }
         }
     }

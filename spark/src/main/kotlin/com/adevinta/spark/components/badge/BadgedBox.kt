@@ -34,7 +34,6 @@ import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
@@ -45,8 +44,6 @@ import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.MessageOutline
 import com.adevinta.spark.icons.Search
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 internal val SmallBadgeWithContentOffset = 4.dp
 internal val MediumBadgeWithContentOffset = 8.dp
@@ -146,10 +143,8 @@ public fun BadgedBox(
     name = "BadgedBox No Stroke",
 )
 @Composable
-internal fun BadgedBoxNoStrokePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun BadgedBoxNoStrokePreview() {
+    PreviewTheme {
         BadgeIntent.values().forEach { intent ->
             BadgeStyle.values().forEach { style ->
                 BadgedBoxIntentPreview(
@@ -167,10 +162,8 @@ internal fun BadgedBoxNoStrokePreview(
     name = "BadgedBox With Stroke",
 )
 @Composable
-internal fun BadgedBoxWithStrokePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun BadgedBoxWithStrokePreview() {
+    PreviewTheme {
         BadgeIntent.values().forEach { intent ->
             BadgeStyle.values().forEach { style ->
                 BadgedBoxIntentPreview(

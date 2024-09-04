@@ -34,7 +34,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.IdentityOutline
@@ -43,8 +42,6 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.disabled
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * Ghost buttons are used for the lowest priority actions, especially when presenting multiple options.
@@ -243,11 +240,8 @@ public fun ButtonContrast(
     name = "Button Contrast",
 )
 @Composable
-internal fun ButtonContrastPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun ButtonContrastPreview() {
     PreviewTheme(
-        themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.Link
@@ -284,11 +278,8 @@ internal fun ButtonContrastPreview(
     name = "Button Contrast Intents",
 )
 @Composable
-internal fun ButtonContrastIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun ButtonContrastIntentPreview() {
     PreviewTheme(
-        themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline

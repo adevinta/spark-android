@@ -30,7 +30,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -39,8 +38,6 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.spacer.HorizontalSpacer
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * This function is used to set the current value of [LocalContentColor] to onSurface. Any [Text], Icons, other
@@ -146,10 +143,8 @@ public fun EmphasizeDim5(content: @Composable () -> Unit) {
     group = "Tokens",
     name = "Emphasis",
 )
-internal fun EmphasePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun EmphasePreview() {
+    PreviewTheme {
         Text("Uses default alpha")
         EmphasizeHigh {
             Text("This Text uses the high value")
@@ -169,10 +164,8 @@ internal fun EmphasePreview(
     group = "Tokens",
     name = "Dim",
 )
-internal fun DimPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun DimPreview() {
+    PreviewTheme {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier.size(24.dp),

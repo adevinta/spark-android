@@ -42,7 +42,6 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
@@ -56,8 +55,6 @@ import com.adevinta.spark.icons.AccountFill
 import com.adevinta.spark.icons.MessageOutline
 import com.adevinta.spark.icons.Search
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -342,9 +339,7 @@ public fun TabGroup(
     name = "Scrollable TabGroup",
 )
 @Composable
-private fun TabGroupPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+private fun TabGroupPreview() {
     val tabs = mutableListOf(
         Pair("Home", null) to 0,
         Pair("Search", SparkIcons.Search) to 0,
@@ -352,7 +347,7 @@ private fun TabGroupPreview(
         Pair(null, SparkIcons.AccountFill) to 0,
     )
     var selectedIndex by remember { mutableIntStateOf(0) }
-    PreviewTheme(theme) {
+    PreviewTheme {
         TabGroup(
             selectedTabIndex = selectedIndex,
         ) {
@@ -382,15 +377,13 @@ private fun TabGroupPreview(
     name = "Fixed Size TabGroup",
 )
 @Composable
-private fun TabGroupFixedSizePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+private fun TabGroupFixedSizePreview() {
     val tabs = mutableListOf(
         Pair("Home", null) to 0,
         Pair("Message", SparkIcons.MessageOutline) to 1,
     )
     var selectedIndex by remember { mutableIntStateOf(0) }
-    PreviewTheme(theme) {
+    PreviewTheme {
         TabGroup(
             selectedTabIndex = selectedIndex,
         ) {

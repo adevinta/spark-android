@@ -36,7 +36,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.Check
@@ -45,8 +44,6 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.compose.material3.Icon as MaterialIcon
 
@@ -193,10 +190,8 @@ public fun rememberSparkIconPainter(sparkIcon: SparkIcon): Painter = when (spark
 }
 
 @Composable
-private fun IconPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun IconPreview() {
+    PreviewTheme {
         IconSize.entries.map { it to IconIntent.entries.toTypedArray() }.forEach { (size, intents) ->
             LazyRow {
                 items(

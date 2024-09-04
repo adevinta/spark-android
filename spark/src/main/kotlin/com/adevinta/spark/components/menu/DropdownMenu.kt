@@ -53,7 +53,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
@@ -71,8 +70,6 @@ import com.adevinta.spark.tokens.EmphasizeDim1
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
 import com.adevinta.spark.tokens.dim1
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.DropdownMenu as MaterialDropdownMenu
 
 /**
@@ -290,9 +287,8 @@ private inline fun SectionHeadline(
     name = "DropdownMenuItem",
 )
 @Composable
-private fun DropdownMenuItemPreview(@PreviewParameter(ThemeProvider::class) theme: ThemeVariant) {
+private fun DropdownMenuItemPreview() {
     PreviewTheme(
-        themeVariant = theme,
         padding = PaddingValues(0.dp),
         contentPadding = 0.dp,
     ) {
@@ -353,9 +349,8 @@ private fun DropdownMenuItemPreview(@PreviewParameter(ThemeProvider::class) them
     name = "DropdownMenuGroupItem",
 )
 @Composable
-private fun DropdownMenuGroupItemPreview(@PreviewParameter(ThemeProvider::class) theme: ThemeVariant) {
+private fun DropdownMenuGroupItemPreview() {
     PreviewTheme(
-        themeVariant = theme,
         padding = PaddingValues(0.dp),
         contentPadding = 0.dp,
     ) {

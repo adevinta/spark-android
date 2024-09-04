@@ -28,7 +28,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -36,8 +35,6 @@ import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.icons.FavoriteFill
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.ListItem as MaterialListItem
 
 @ExperimentalSparkApi
@@ -116,10 +113,8 @@ public fun ListItem(
     name = "One Line",
 )
 @Composable
-internal fun OneLineListItemPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun OneLineListItemPreview() {
+    PreviewTheme {
         Column {
             ListItem(
                 headlineContent = { Text("One line list item with 24x24 icon") },
@@ -140,10 +135,8 @@ internal fun OneLineListItemPreview(
     name = "Two Line",
 )
 @Composable
-internal fun TwoLineListItemPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun TwoLineListItemPreview() {
+    PreviewTheme {
         Column {
             ListItem(
                 headlineContent = { Text("Two line list item with trailing") },
@@ -166,10 +159,8 @@ internal fun TwoLineListItemPreview(
     name = "Three Line",
 )
 @Composable
-internal fun ThreeLineListItemPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun ThreeLineListItemPreview() {
+    PreviewTheme {
         Column {
             ListItem(
                 headlineContent = { Text("Three line list item") },
@@ -193,10 +184,8 @@ internal fun ThreeLineListItemPreview(
     name = "Three Line Extended Content",
 )
 @Composable
-internal fun ThreeLineContentListItemPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun ThreeLineContentListItemPreview() {
+    PreviewTheme {
         Column {
             ListItem(
                 headlineContent = { Text("Three line list item") },

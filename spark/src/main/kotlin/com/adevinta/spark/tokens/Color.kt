@@ -50,7 +50,6 @@ import androidx.compose.ui.graphics.takeOrElse
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
@@ -104,8 +103,6 @@ import com.adevinta.spark.tokens.PaletteTokens.Plum300
 import com.adevinta.spark.tokens.PaletteTokens.Plum500
 import com.adevinta.spark.tokens.PaletteTokens.Plum700
 import com.adevinta.spark.tokens.PaletteTokens.Plum800
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlin.math.ln
 import kotlin.reflect.KProperty0
 
@@ -1171,10 +1168,8 @@ public fun debugColors(
     device = Devices.TABLET,
 )
 @Composable
-private fun ColorPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun ColorPreview() {
+    PreviewTheme {
         Colors()
     }
 }
@@ -1220,8 +1215,7 @@ private fun ColorItem(color: KProperty0<Color>) {
 }
 
 private val previewColors
-    @Composable
-    get() = with(SparkTheme.colors) {
+    @Composable get() = with(SparkTheme.colors) {
         listOf(
             listOf(
                 listOf(::main, ::mainContainer, ::mainVariant),

@@ -31,7 +31,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
@@ -45,8 +44,6 @@ import com.adevinta.spark.icons.Search
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.highlight
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.NavigationRailItem as MaterialNavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults as MaterialNavigationRailItemDefaults
 
@@ -155,10 +152,8 @@ public object NavigationRailItemDefaults {
     name = "NavigationRailItem",
 )
 @Composable
-internal fun NavigationRailItemPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun NavigationRailItemPreview() {
+    PreviewTheme {
         val items = mutableListOf(
             Pair("Home", SparkIcons.House),
             Pair("Search", SparkIcons.Search),

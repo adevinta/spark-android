@@ -34,15 +34,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.disabled
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * Tinted buttons are medium-emphasis buttons that is an alternative middle ground between
@@ -234,10 +231,8 @@ public fun ButtonTinted(
     name = "Button Tinted",
 )
 @Composable
-internal fun ButtonTintedPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun ButtonTintedPreview() {
+    PreviewTheme {
         val icon = SparkIcons.IdentityOutline
         var isLoading by remember { mutableStateOf(false) }
         val buttonText = "Main Button"
@@ -272,11 +267,8 @@ internal fun ButtonTintedPreview(
     name = "Button Tinted Intents",
 )
 @Composable
-internal fun ButtonTintedIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun ButtonTintedIntentPreview() {
     PreviewTheme(
-        themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline

@@ -26,14 +26,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.dim4
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.LinearProgressIndicator as MaterialProgressbar
 
 @InternalSparkApi
@@ -125,10 +122,8 @@ public fun ProgressbarIndeterminate(
     name = "Progressbar",
 )
 @Composable
-private fun PreviewProgressbar(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun PreviewProgressbar() {
+    PreviewTheme {
         Progressbar(
             modifier = Modifier.fillMaxWidth(),
             progress = { 0.5f },

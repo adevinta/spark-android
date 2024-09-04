@@ -34,15 +34,12 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.highlight
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import java.util.Locale
 
 /**
@@ -147,10 +144,8 @@ public fun RatingFull(
     group = "Ratings",
     name = "RatingFull",
 )
-internal fun RatingFullPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun RatingFullPreview() {
+    PreviewTheme {
         RatingFull(value = 1.6f, commentCount = 1)
         RatingFull(
             value = 3.6f,
@@ -167,10 +162,8 @@ internal fun RatingFullPreview(
     group = "Ratings",
     name = "RatingCompressed",
 )
-internal fun RatingCompressedPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun RatingCompressedPreview() {
+    PreviewTheme {
         RatingFull(value = 2.8f, modifier = Modifier, commentCount = 23, locale = null)
     }
 }
@@ -180,10 +173,8 @@ internal fun RatingCompressedPreview(
     group = "Ratings",
     name = "RatingNaked",
 )
-internal fun RatingNakedPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun RatingNakedPreview() {
+    PreviewTheme {
         RatingFull(value = 3.999999f, locale = null)
     }
 }
@@ -193,10 +184,8 @@ internal fun RatingNakedPreview(
     group = "Ratings",
     name = "SparkRatingFull",
 )
-private fun SparkRatingFullPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun SparkRatingFullPreview() {
+    PreviewTheme {
         RatingFull(value = 1f, label = "Communication")
         RatingFull(value = 2.1f, label = "Communication", commentCount = 5)
         RatingFull(value = 3.999999f, commentCount = 5, locale = null)

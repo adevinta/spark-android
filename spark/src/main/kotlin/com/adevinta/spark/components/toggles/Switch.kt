@@ -35,7 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -48,8 +47,6 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.Switch as MaterialSwitch
 
 @Composable
@@ -200,10 +197,8 @@ public data class SwitchIcons(
     name = "Switch",
 )
 @Composable
-internal fun AllStatesSwitchPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun AllStatesSwitchPreview() {
+    PreviewTheme {
         ToggleIntent.values().forEach { intent ->
             Row {
                 Switch(checked = true, onCheckedChange = {}, enabled = true, intent = intent)
@@ -258,13 +253,11 @@ internal fun AllStatesSwitchPreview(
     name = "SwitchLabelled",
 )
 @Composable
-internal fun AllStatesSwitchLabelledPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun AllStatesSwitchLabelledPreview() {
     @Suppress("ktlint:standard:max-line-length")
     val text =
         "This is an example of a multi-line text which is very long and in which the user should read all the information."
-    PreviewTheme(theme) {
+    PreviewTheme {
         SwitchLabelled(
             enabled = true,
             checked = true,

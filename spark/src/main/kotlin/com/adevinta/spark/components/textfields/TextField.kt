@@ -38,7 +38,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
@@ -46,8 +45,6 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.SparkTypography
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.flow.flowOf
 
 /**
@@ -245,10 +242,8 @@ public fun TextField(
     name = "TextField intents",
 )
 @Composable
-private fun TextFieldIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun TextFieldIntentPreview() {
+    PreviewTheme {
         PreviewTextFields(
             state = TextFieldState.Success,
             stateMessage = "Helper text",
