@@ -102,11 +102,11 @@ io.coil-kt:coil-base:2.6.0
 io.coil-kt:coil-compose-base:2.6.0
 io.coil-kt:coil-compose:2.6.0
 io.coil-kt:coil:2.6.0
-org.jetbrains.kotlin:kotlin-bom:2.0.0
-org.jetbrains.kotlin:kotlin-stdlib-common:2.0.0
-org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.0.0
-org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0
-org.jetbrains.kotlin:kotlin-stdlib:2.0.0
+org.jetbrains.kotlin:kotlin-bom:2.0.20
+org.jetbrains.kotlin:kotlin-stdlib-common:2.0.20
+org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.0.20
+org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.20
+org.jetbrains.kotlin:kotlin-stdlib:2.0.20
 org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.3.7
 org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3
