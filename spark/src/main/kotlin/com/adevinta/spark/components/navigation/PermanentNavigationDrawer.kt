@@ -34,7 +34,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -43,8 +42,6 @@ import com.adevinta.spark.icons.Activity
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Store
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.PermanentNavigationDrawer as MaterialPermanentNavigationDrawer
 
 @Composable
@@ -91,11 +88,8 @@ public fun PermanentNavigationDrawer(
     name = "PermanentNavigationDrawer",
 )
 @Composable
-internal fun PermanentNavigationDrawerPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun PermanentNavigationDrawerPreview() {
     PreviewTheme(
-        theme,
         padding = PaddingValues(0.dp),
     ) {
         // icons to mimic drawer destinations

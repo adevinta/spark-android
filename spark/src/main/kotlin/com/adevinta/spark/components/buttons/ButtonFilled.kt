@@ -34,7 +34,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.IdentityOutline
@@ -42,8 +41,6 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.disabled
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * The filled button should only be used once per view (not including a modal dialog),
@@ -247,10 +244,8 @@ public fun ButtonFilled(
     name = "Button Filled",
 )
 @Composable
-internal fun MainButtonPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun MainButtonPreview() {
+    PreviewTheme {
         val icon = SparkIcons.IdentityOutline
         var isLoading by remember { mutableStateOf(false) }
         val buttonText = "Main Button"
@@ -285,11 +280,8 @@ internal fun MainButtonPreview(
     name = "Button Filled Intents",
 )
 @Composable
-internal fun ButtonFilledIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun ButtonFilledIntentPreview() {
     PreviewTheme(
-        themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline
@@ -310,11 +302,8 @@ internal fun ButtonFilledIntentPreview(
     name = "Button Sizes",
 )
 @Composable
-internal fun ButtonSizePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun ButtonSizePreview() {
     PreviewTheme(
-        themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline

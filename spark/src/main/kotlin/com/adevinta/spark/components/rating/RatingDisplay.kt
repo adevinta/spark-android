@@ -30,13 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * A display for a rating value.
@@ -94,10 +91,8 @@ public fun RatingDisplay(
     group = "Ratings",
     name = "RatingDisplay",
 )
-internal fun RatingDisplayPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun RatingDisplayPreview() {
+    PreviewTheme {
         RatingDisplay(value = 0.5f)
         RatingDisplay(value = 1f)
         RatingDisplay(value = 1.5f)

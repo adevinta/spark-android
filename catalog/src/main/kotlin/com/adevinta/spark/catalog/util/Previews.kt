@@ -35,16 +35,11 @@ import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
 import com.adevinta.spark.tokens.sparkShapes
 import com.adevinta.spark.tokens.sparkTypography
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
 @Composable
 internal fun PreviewTheme(
-    themeVariant: ThemeVariant = if (LocalInspectionMode.current && isSystemInDarkTheme()) {
-        ThemeVariant.Dark
-    } else {
-        ThemeVariant.Light
-    },
+    useDarkColors: Boolean = LocalInspectionMode.current && isSystemInDarkTheme(),
     padding: PaddingValues = PaddingValues(16.dp),
     contentPadding: Dp = 16.dp,
     color: @Composable () -> Color = { SparkTheme.colors.background },
@@ -52,7 +47,7 @@ internal fun PreviewTheme(
 ) {
     SparkTenantTheme(
         // We don't want to automatically support dark theme in the app but still want it in the previews
-        useDarkColors = themeVariant == ThemeVariant.Dark,
+        useDarkColors = useDarkColors,
     ) {
         PreviewWrapper(
             padding = padding,

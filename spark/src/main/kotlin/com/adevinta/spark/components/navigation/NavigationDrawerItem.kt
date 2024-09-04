@@ -35,7 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
@@ -50,8 +49,6 @@ import com.adevinta.spark.icons.House
 import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.NavigationDrawerItem as MaterialNavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemColors as MaterialNavigationDrawerItemColors
 import androidx.compose.material3.NavigationDrawerItemDefaults as MaterialNavigationDrawerItemDefaults
@@ -158,10 +155,8 @@ private object NavigationDrawerItemDefaults {
     name = "NavigationDrawerItem",
 )
 @Composable
-internal fun NavigationDrawerItemPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun NavigationDrawerItemPreview() {
+    PreviewTheme {
         val items = mutableListOf(
             Pair("Home", SparkIcons.House),
             Pair("Favourite", SparkIcons.LikeOutline),

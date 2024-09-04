@@ -52,15 +52,12 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.highlight
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @Composable
 internal fun SegmentedButton(
@@ -226,12 +223,8 @@ internal enum class MultiSelectorOption {
 
 @Preview(widthDp = 420)
 @Composable
-private fun PreviewMultiSelector(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(
-        themeVariant = theme,
-    ) {
+private fun PreviewMultiSelector() {
+    PreviewTheme {
         val options1 = listOf("Day", "Week", "Month")
         var selectedOption1 by remember {
             mutableStateOf(options1.first())

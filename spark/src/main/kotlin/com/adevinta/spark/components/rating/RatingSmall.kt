@@ -39,7 +39,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
@@ -47,8 +46,6 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.highlight
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import java.lang.String.format
 import java.util.Locale
 
@@ -218,12 +215,10 @@ internal fun firstLocale(): Locale {
     group = "Ratings",
     name = "RatingSmall",
 )
-internal fun RatingSmallPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun RatingSmallPreview() {
     val frenchLocale = Locale.FRANCE
     val germanLocale = Locale.GERMANY
-    PreviewTheme(theme) {
+    PreviewTheme {
         RatingSimple(value = 3.0f, locale = frenchLocale, labelSide = RatingLabelSide.End)
         RatingSimple(value = 4.50f, locale = frenchLocale, labelSide = RatingLabelSide.End)
 

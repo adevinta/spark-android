@@ -42,7 +42,6 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -61,8 +60,6 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.ElevationTokens
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.launch
 
 /**
@@ -151,10 +148,8 @@ public fun Popover(
     name = "Popovers",
 )
 @Composable
-private fun PopoverPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun PopoverPreview() {
+    PreviewTheme {
         val popoverState = rememberTooltipState(isPersistent = true)
         val scope = rememberCoroutineScope()
 

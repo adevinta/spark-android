@@ -33,7 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.window.DialogProperties
 import com.adevinta.spark.ExperimentalSparkApi
@@ -42,8 +41,6 @@ import com.adevinta.spark.components.buttons.ButtonGhost
 import com.adevinta.spark.components.buttons.IconSide
 import com.adevinta.spark.icons.CopyFill
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @ExperimentalSparkApi
 @Composable
@@ -144,12 +141,8 @@ public fun AlertDialog(
     name = "AlertDialog",
 )
 @Composable
-internal fun AlertDialogPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(
-        theme,
-    ) {
+internal fun AlertDialogPreview() {
+    PreviewTheme {
         AlertDialog(
             modifier = Modifier.fillMaxWidth(),
             onDismissRequest = {

@@ -49,7 +49,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.TextUnit
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
@@ -66,8 +65,6 @@ import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.res.annotatedStringResource
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.coroutines.launch
@@ -266,11 +263,8 @@ public fun TextLinkButton(
     name = "TextLink",
 )
 @Composable
-private fun SparkTextLinkPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+private fun SparkTextLinkPreview() {
     PreviewTheme(
-        themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val snackbarHostState = remember { SnackbarHostState() }

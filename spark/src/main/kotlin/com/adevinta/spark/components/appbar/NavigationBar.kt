@@ -43,7 +43,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
@@ -56,8 +55,6 @@ import com.adevinta.spark.icons.MoreMenuVertical
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @Composable
 internal fun SparkNavigationBar(
@@ -190,11 +187,8 @@ private val NavigationBarItemHorizontalPadding: Dp = 8.dp
     name = "NavigationBar",
 )
 @Composable
-internal fun PreviewNavigationBar(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun PreviewNavigationBar() {
     PreviewTheme(
-        themeVariant = theme,
         padding = PaddingValues(start = 0.dp, top = 16.dp, end = 0.dp, bottom = 0.dp),
     ) {
         var selectedItem by remember { mutableIntStateOf(0) }
