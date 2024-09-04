@@ -74,7 +74,7 @@ public fun Example(example: Example) {
         } else {
             Column(
                 modifier = commonModifier.verticalScroll(scrollState),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 with(example) {
                     columnContent?.let { content -> this@Column.content(snackbarHostState) }

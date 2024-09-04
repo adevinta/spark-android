@@ -94,7 +94,7 @@ internal fun ColumnScope.ElevationCustomSample() {
     Text(
         text = stringResource(
             id = R.string.example_tokens_elevation_label,
-            selectedElevation.value.roundToInt()
+            selectedElevation.value.roundToInt(),
         ),
         style = SparkTheme.typography.body2.highlight,
     )
@@ -105,7 +105,6 @@ internal fun ColumnScope.ElevationCustomSample() {
         onValueChange = { selectedElevation = Dp(it) },
         valueRange = 0f..24f,
     )
-
 
     ElevationItem(selectedElevation)
 }
