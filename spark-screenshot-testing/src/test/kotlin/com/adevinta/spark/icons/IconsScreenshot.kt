@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.icons
 
+import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.paparazziRule
@@ -54,6 +55,7 @@ internal class IconsScreenshot {
             sparkIcon = icon,
             contentDescription = icon.toString(),
             size = IconSize.ExtraLarge,
+            tint = Color.Black,
         )
     }
 }
