@@ -24,6 +24,7 @@ package com.adevinta.spark.icons
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.paparazziRule
+import com.adevinta.spark.sparkSnapshot
 import com.google.testing.junit.testparameterinjector.TestParameter
 import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import com.google.testing.junit.testparameterinjector.TestParameterValuesProvider
@@ -48,7 +49,7 @@ internal class IconsScreenshot {
     @Suppress("JUnitMalformedDeclaration")
     fun render(
         @TestParameter(valuesProvider = SparkIconProvider::class) icon: SparkIcon,
-    ) = paparazzi.snapshot {
+    ) = paparazzi.sparkSnapshot {
         Icon(
             sparkIcon = icon,
             contentDescription = icon.toString(),
