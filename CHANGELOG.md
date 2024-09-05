@@ -9,6 +9,7 @@
 ### Catalog App
 
 ### CI
+ - Icons screenshot are not bound to the theme colors anymore to reduce invalidation not related to the icons themselves.
 
 ## 0.11.0
 
