@@ -42,12 +42,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.DefaultTestDevices
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.ThemeVariant
+import com.adevinta.spark.ThemeVariant.Light
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.paparazziRule
-import com.adevinta.spark.sparkSnapshot
-import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.ThemeVariant.Light
+import com.adevinta.spark.sparkSnapshotNightMode
 import org.junit.Rule
 import org.junit.Test
 import kotlin.reflect.KProperty0
@@ -86,24 +86,14 @@ internal class ColorsScreenshot {
 
     @Test
     fun themesColors() {
-        ThemeVariant.values().forEach {
-            paparazzi.sparkSnapshot(name = it.name) {
-                CompositionLocalProvider(LocalInspectionMode provides true) {
-                    SparkTheme(
-                        colors = if (it == Light) lightSparkColors() else darkSparkColors(),
-                    ) {
-                        Surface {
-                            Colors()
-                        }
-                    }
-                }
-            }
+        paparazzi.sparkSnapshotNightMode {
+            Colors()
         }
     }
 
     @Test
     fun verifyColorsDoChangeOnThemeChange() {
-        ThemeVariant.values().forEach {
+        ThemeVariant.entries.forEach {
             paparazzi.snapshot(name = it.name) {
                 var debugColors by remember {
                     mutableStateOf(if (it == Light) lightSparkColors() else darkSparkColors())

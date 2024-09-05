@@ -50,8 +50,8 @@ import com.adevinta.spark.tags.TagsScreenshot.Style.Outlined
 import com.adevinta.spark.tags.TagsScreenshot.Style.Tinted
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
-import com.adevinta.spark.tools.preview.ThemeVariant
-import com.adevinta.spark.tools.preview.ThemeVariant.Light
+
+.Light
 import com.android.ide.common.rendering.api.SessionParams.RenderingMode.V_SCROLL
 import org.junit.Rule
 import org.junit.Test
