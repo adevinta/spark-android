@@ -46,8 +46,6 @@ import org.junit.Test
 
 internal class SliderScreenshot {
 
-    private val intents = SliderIntent.entries
-
     @get:Rule
     val paparazzi = paparazziRule(
         renderingMode = SHRINK,
