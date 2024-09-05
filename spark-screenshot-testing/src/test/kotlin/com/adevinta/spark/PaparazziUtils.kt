@@ -32,7 +32,6 @@ import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
 
-
 internal fun Paparazzi.sparkSnapshot(
     name: String? = null,
     drawBackground: Boolean = true,
