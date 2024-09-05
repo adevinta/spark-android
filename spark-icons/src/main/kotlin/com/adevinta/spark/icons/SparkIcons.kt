@@ -103,6 +103,7 @@ public val SparkIcons.CallOutline: DrawableRes get() = DrawableRes(R.drawable.sp
 public val SparkIcons.Calm: DrawableRes get() = DrawableRes(R.drawable.spark_icons_calm)
 public val SparkIcons.CameraFill: DrawableRes get() = DrawableRes(R.drawable.spark_icons_camera_fill)
 public val SparkIcons.CameraOutline: DrawableRes get() = DrawableRes(R.drawable.spark_icons_camera_outline)
+public val SparkIcons.CameraVideo: DrawableRes get() = DrawableRes(R.drawable.spark_icons_camera_video)
 public val SparkIcons.Capacity: DrawableRes get() = DrawableRes(R.drawable.spark_icons_capacity)
 public val SparkIcons.CarBrand: DrawableRes get() = DrawableRes(R.drawable.spark_icons_car_brand)
 public val SparkIcons.CarFill: DrawableRes get() = DrawableRes(R.drawable.spark_icons_car_fill)
