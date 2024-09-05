@@ -100,7 +100,6 @@ public fun SparkTheme(
     sparkFeatureFlag: SparkFeatureFlag = SparkFeatureFlag(),
     fontFamily: SparkFontFamily = sparkFontFamily(
         useSparkTokensHighlighter = sparkFeatureFlag.useSparkTokensHighlighter,
-        isLegacy = sparkFeatureFlag.useLegacyStyle,
     ),
     content: @Composable () -> Unit,
 ) {
