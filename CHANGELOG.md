@@ -10,6 +10,13 @@
 
 ### CI
 
+## [0.11.3]
+
+_2024-09-05_
+
+### Spark
+- 🐛 Specify explicitly the Kotlin BOM version otherwise consumers can't fetch it when using Spark.
+
 ## [0.11.2]
 
 _2024-09-04_
@@ -351,7 +358,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.11.1...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/0.11.3...HEAD
+
+[0.11.3]: https://github.com/adevinta/spark-android/releases/tag/0.11.3
 
 [0.11.2]: https://github.com/adevinta/spark-android/releases/tag/0.11.2
 
