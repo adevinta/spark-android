@@ -216,6 +216,48 @@ public fun ThemePicker(
                 )
             }
         }
+        item {
+            SwitchLabelled(
+                modifier = Modifier.padding(horizontal = ThemePickerPadding),
+                checked = theme.useLegacyTheme,
+                onCheckedChange = { checked ->
+                    onThemeChange(theme.copy(useLegacyTheme = checked))
+                },
+            ) {
+                Text(
+                    text = "Use LegacyTheme",
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+        }
+        item {
+            SwitchLabelled(
+                modifier = Modifier.padding(horizontal = ThemePickerPadding),
+                checked = theme.highlightSparkComponents,
+                onCheckedChange = { checked ->
+                    onThemeChange(theme.copy(highlightSparkComponents = checked))
+                },
+            ) {
+                Text(
+                    text = "Highlight Spark Components",
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+        }
+        item {
+            SwitchLabelled(
+                modifier = Modifier.padding(horizontal = ThemePickerPadding),
+                checked = theme.highlightSparkTokens,
+                onCheckedChange = { checked ->
+                    onThemeChange(theme.copy(highlightSparkTokens = checked))
+                },
+            ) {
+                Text(
+                    text = "Highlight Spark Tokens",
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+        }
     }
 }
 

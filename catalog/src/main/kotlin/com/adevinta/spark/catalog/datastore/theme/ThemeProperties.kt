@@ -38,6 +38,9 @@ internal data class ThemeProperties(
     val brandMode: BrandMode,
     val fontScaleMode: FontScaleMode,
     val textDirection: TextDirection,
+    val highlightSparkComponents: Boolean,
+    val highlightSparkTokens: Boolean,
+    val useLegacyTheme: Boolean,
 ) {
     companion object {
         val DEFAULT = ThemeProperties(
@@ -48,7 +51,9 @@ internal data class ThemeProperties(
             colorMode = ColorMode.Baseline,
             textDirection = TextDirection.System,
             fontScaleMode = FontScaleMode.System,
-
+            highlightSparkComponents = false,
+            highlightSparkTokens = false,
+            useLegacyTheme = false,
         )
     }
 }

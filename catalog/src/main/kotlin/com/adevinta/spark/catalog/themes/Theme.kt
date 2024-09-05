@@ -31,6 +31,9 @@ public data class Theme(
     val fontScale: Float = 1.0f,
     val fontScaleMode: FontScaleMode = FontScaleMode.System,
     val textDirection: TextDirection = TextDirection.System,
+    val highlightSparkComponents: Boolean = false,
+    val highlightSparkTokens: Boolean = false,
+    val useLegacyTheme: Boolean = false,
 )
 
 /**
@@ -109,6 +112,9 @@ public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
             UserModeKey to theme.userMode.ordinal,
             FontScaleKey to theme.fontScale.toInt(),
             TextDirectionKey to theme.textDirection.ordinal,
+            HighlightSparkComponentsKey to if (theme.highlightSparkComponents) 1 else 0,
+            HighlightSparkTokensKey to if (theme.highlightSparkTokens) 1 else 0,
+            UseLegacyThemeKey to if (theme.useLegacyTheme) 1 else 0,
         )
     },
     restore = { map ->
@@ -119,6 +125,9 @@ public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
             userMode = UserMode.entries[map.getValue(UserModeKey)],
             fontScale = map.getValue(FontScaleKey).toFloat(),
             textDirection = TextDirection.entries[map.getValue(TextDirectionKey)],
+            highlightSparkComponents = map.getValue(HighlightSparkComponentsKey) == 1,
+            highlightSparkTokens = map.getValue(HighlightSparkTokensKey) == 1,
+            useLegacyTheme = map.getValue(UseLegacyThemeKey) == 1,
         )
     },
 )
@@ -132,3 +141,6 @@ private const val BrandModeKey = "brandMode"
 private const val UserModeKey = "userMode"
 private const val FontScaleKey = "fontScale"
 private const val TextDirectionKey = "textDirection"
+private const val HighlightSparkComponentsKey = "highlightSparkComponents"
+private const val HighlightSparkTokensKey = "highlightSparkTokens"
+private const val UseLegacyThemeKey = "useLegacyTheme"

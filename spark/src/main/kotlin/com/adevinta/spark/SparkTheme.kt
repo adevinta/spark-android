@@ -34,6 +34,7 @@ import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -96,30 +97,28 @@ public fun SparkTheme(
     colors: SparkColors = SparkTheme.colors,
     shapes: SparkShapes = SparkTheme.shapes,
     typography: SparkTypography = SparkTheme.typography,
-    useSparkTokensHighlighter: Boolean = false,
-    useSparkComponentsHighlighter: Boolean = false,
-    useLegacyStyle: Boolean = false,
+    sparkFeatureFlag: SparkFeatureFlag = SparkFeatureFlag(),
     fontFamily: SparkFontFamily = sparkFontFamily(
-        useSparkTokensHighlighter = useSparkTokensHighlighter,
-        isLegacy = useLegacyStyle,
+        useSparkTokensHighlighter = sparkFeatureFlag.useSparkTokensHighlighter,
+        isLegacy = sparkFeatureFlag.useLegacyStyle,
     ),
     content: @Composable () -> Unit,
 ) {
-    val internalColors = if (useSparkTokensHighlighter) debugColors() else colors
+    val internalColors = if (sparkFeatureFlag.useSparkTokensHighlighter) debugColors() else colors
     val rememberedColors = remember {
         // Explicitly creating a new object here so we don't mutate the initial [colors]
         // provided, and overwrite the values set in it.
         internalColors.copy()
     }.apply { updateColorsFrom(internalColors) }
 
-    val internalShapes = if (useSparkTokensHighlighter) {
+    val internalShapes = if (sparkFeatureFlag.useSparkTokensHighlighter) {
         sparkShapes(
-            none = CutCornerShape(50),
-            extraSmall = CutCornerShape(50),
-            small = CutCornerShape(50),
-            medium = CutCornerShape(50),
-            large = CutCornerShape(50),
-            extraLarge = CutCornerShape(50),
+            none = CutCornerShape(10),
+            extraSmall = CutCornerShape(30),
+            small = CutCornerShape(30),
+            medium = CutCornerShape(30),
+            large = CutCornerShape(30),
+            extraLarge = CutCornerShape(10),
             full = CutCornerShape(50),
         )
     } else {
@@ -132,9 +131,7 @@ public fun SparkTheme(
         LocalSparkColors provides rememberedColors,
         LocalSparkTypography provides typo,
         LocalSparkShapes provides internalShapes,
-        LocalHighlightToken provides useSparkTokensHighlighter,
-        LocalHighlightComponents provides useSparkComponentsHighlighter,
-        LocalLegacyStyle provides useLegacyStyle,
+        LocalSparkFeatureFlag provides sparkFeatureFlag,
         LocalWindowSizeClass provides calculateWindowSizeClass(),
     ) {
         MaterialTheme(
@@ -203,9 +200,9 @@ internal fun PreviewTheme(
 internal fun SparkTenantTheme(
     // We don't want to automatically support dark theme in the app but still want it in the previews
     useDarkColors: Boolean = isSystemInDarkTheme(),
-    useSparkTokensHighlighter: Boolean = false,
-    useSparkComponentsHighlighter: Boolean = false,
-    useLegacyStyle: Boolean = false,
+//    useSparkTokensHighlighter: Boolean = false,
+//    useSparkComponentsHighlighter: Boolean = false,
+//    useLegacyStyle: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val colors = if (useDarkColors) {
@@ -217,9 +214,9 @@ internal fun SparkTenantTheme(
         colors = colors,
         shapes = sparkShapes(),
         typography = sparkTypography(),
-        useSparkTokensHighlighter = useSparkTokensHighlighter,
-        useSparkComponentsHighlighter = useSparkComponentsHighlighter,
-        useLegacyStyle = useLegacyStyle,
+//        useSparkTokensHighlighter = useSparkTokensHighlighter,
+//        useSparkComponentsHighlighter = useSparkComponentsHighlighter,
+//        useLegacyStyle = useLegacyStyle,
         content = content,
     )
 }
@@ -255,20 +252,22 @@ public object SparkTheme {
         get() = LocalSparkShapes.current
 }
 
-/**
- * CompositionLocal used to highlight visually where the spark tokens are used or not.
- * Setting it to true makes the text in cursive, colors in red/green/blue and shapes in full cut corners
- */
-internal val LocalHighlightToken = staticCompositionLocalOf { false }
+internal val LocalSparkFeatureFlag: ProvidableCompositionLocal<SparkFeatureFlag> = staticCompositionLocalOf {
+    error("SparkFeatureFlag not provided")
+}
 
 /**
- * CompositionLocal used to highlight visually with an overlay where the spark components are used or not.
- * Setting it to true show an overlay on spark components.
+ * Flags that will activate debugging features from Spark or features hidden to consumers.
+ *
+ * @property useSparkTokensHighlighter Highlight visually where the spark tokens are used or not. Setting it to true
+ * makes the text in cursive, colors in red/green/blue and shapes in full cut corners.
+ * @property useSparkComponentsHighlighter Highlight visually with an overlay where the spark components are used
+ * or not. Setting it to true show an overlay on spark components.
+ * @property useLegacyStyle Makes the components use the legacy style from the previous DS to make it easier for the
+ * Leboncoin teams to migrate their screens to spark.
  */
-internal val LocalHighlightComponents = staticCompositionLocalOf { false }
-
-/**
- * CompositionLocal that makes the components use the legacy style from the previous DS to make it easier for the
- * Adevinta Platform teams to migrate their screens to spark.
- */
-internal val LocalLegacyStyle = staticCompositionLocalOf { false }
+public data class SparkFeatureFlag(
+    val useSparkTokensHighlighter: Boolean = false,
+    val useSparkComponentsHighlighter: Boolean = false,
+    val useLegacyStyle: Boolean = false,
+)

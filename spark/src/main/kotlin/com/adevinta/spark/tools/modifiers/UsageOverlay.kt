@@ -36,7 +36,7 @@ import androidx.compose.ui.node.ModifierNodeElement
 import androidx.compose.ui.node.currentValueOf
 import androidx.compose.ui.platform.InspectorInfo
 import androidx.compose.ui.unit.dp
-import com.adevinta.spark.LocalHighlightComponents
+import com.adevinta.spark.LocalSparkFeatureFlag
 import com.adevinta.spark.SparkTheme
 
 /**
@@ -53,7 +53,7 @@ private class SparkUsageOverlay(
     CompositionLocalConsumerModifierNode {
     override fun ContentDrawScope.draw() {
         drawContent()
-        if (currentValueOf(LocalHighlightComponents)) {
+        if (currentValueOf(LocalSparkFeatureFlag).useSparkComponentsHighlighter) {
             drawRect(color = overlayColor, alpha = 0.5f)
         }
     }

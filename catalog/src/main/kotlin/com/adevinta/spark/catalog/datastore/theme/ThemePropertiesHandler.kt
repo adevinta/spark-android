@@ -78,6 +78,9 @@ private fun ThemeProperties.toTheme(): Theme = Theme(
     brandMode = brandMode,
     fontScaleMode = fontScaleMode,
     textDirection = textDirection,
+    highlightSparkComponents = highlightSparkComponents,
+    highlightSparkTokens = highlightSparkTokens,
+    useLegacyTheme = useLegacyTheme,
 )
 
 private fun Theme.toDataStoreThemeProperties(): ThemeProperties = ThemeProperties(
@@ -88,4 +91,7 @@ private fun Theme.toDataStoreThemeProperties(): ThemeProperties = ThemePropertie
     brandMode = brandMode,
     fontScaleMode = fontScaleMode,
     textDirection = textDirection,
+    highlightSparkComponents = highlightSparkComponents,
+    highlightSparkTokens = highlightSparkTokens,
+    useLegacyTheme = useLegacyTheme,
 )

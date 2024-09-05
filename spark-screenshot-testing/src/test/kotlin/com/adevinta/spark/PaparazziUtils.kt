@@ -42,7 +42,6 @@ internal fun Paparazzi.sparkSnapshot(
     // Behave like in Android Studio Preview renderer
     CompositionLocalProvider(LocalInspectionMode provides true) {
         SparkTheme(
-            useLegacyStyle = false,
             colors = if (isDark) darkSparkColors() else lightSparkColors(),
         ) {
             // The first box acts as a shield from ComposeView which forces the first layout node

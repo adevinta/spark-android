@@ -38,7 +38,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import com.adevinta.spark.LocalHighlightToken
+import com.adevinta.spark.LocalSparkFeatureFlag
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.IdentityOutline
@@ -89,7 +89,7 @@ public fun ButtonGhost(
         label = "content color",
     )
 
-    val colors = if (LocalHighlightToken.current) {
+    val colors = if (LocalSparkFeatureFlag.current.useSparkTokensHighlighter) {
         ButtonDefaults.filledTonalButtonColors()
     } else {
         ButtonDefaults.textButtonColors(
@@ -154,7 +154,7 @@ public fun ButtonGhost(
         label = "content color",
     )
 
-    val colors = if (LocalHighlightToken.current) {
+    val colors = if (LocalSparkFeatureFlag.current.useSparkTokensHighlighter) {
         ButtonDefaults.filledTonalButtonColors()
     } else {
         ButtonDefaults.textButtonColors(
@@ -219,7 +219,7 @@ public fun ButtonGhost(
         label = "content color",
     )
 
-    val colors = if (LocalHighlightToken.current) {
+    val colors = if (LocalSparkFeatureFlag.current.useSparkTokensHighlighter) {
         ButtonDefaults.filledTonalButtonColors()
     } else {
         ButtonDefaults.textButtonColors(
@@ -284,7 +284,7 @@ public fun TextButton(
         modifier = modifier,
         enabled = enabled,
         elevation = null,
-        colors = if (LocalHighlightToken.current) {
+        colors = if (LocalSparkFeatureFlag.current.useSparkTokensHighlighter) {
             ButtonDefaults.filledTonalButtonColors()
         } else {
             ButtonDefaults.textButtonColors(
