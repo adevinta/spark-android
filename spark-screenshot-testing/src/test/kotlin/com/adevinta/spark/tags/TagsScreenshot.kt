@@ -44,14 +44,10 @@ import com.adevinta.spark.icons.FireFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.paparazziRule
-import com.adevinta.spark.sparkSnapshot
+import com.adevinta.spark.sparkSnapshotNightMode
 import com.adevinta.spark.tags.TagsScreenshot.Style.Filled
 import com.adevinta.spark.tags.TagsScreenshot.Style.Outlined
 import com.adevinta.spark.tags.TagsScreenshot.Style.Tinted
-import com.adevinta.spark.tokens.darkSparkColors
-import com.adevinta.spark.tokens.lightSparkColors
-
-.Light
 import com.android.ide.common.rendering.api.SessionParams.RenderingMode.V_SCROLL
 import org.junit.Rule
 import org.junit.Test
@@ -75,18 +71,12 @@ internal class TagsScreenshot {
 
     @Test
     fun themesTags() {
-        ThemeVariant.entries.forEach {
-            paparazzi.sparkSnapshot(name = it.name) {
-                SparkTheme(
-                    colors = if (it == Light) lightSparkColors() else darkSparkColors(),
-                ) {
-                    Surface(
-                        color = SparkTheme.colors.backgroundVariant,
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Tags()
-                    }
-                }
+        paparazzi.sparkSnapshotNightMode {
+            Surface(
+                color = SparkTheme.colors.backgroundVariant,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Tags()
             }
         }
     }
