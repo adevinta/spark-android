@@ -50,16 +50,24 @@ public fun IconDemoScreen(
                 )
             }
             composable(
-                route = "$IconDemoRoute/{$IconIdArgName}/{$IconNameArgName}",
+                route = "$IconDemoRoute/{$IconIdArgName}/{$IconNameArgName}/{$IconAnimatedArgName}",
                 arguments = listOf(
                     navArgument(IconIdArgName) { type = NavType.IntType },
                     navArgument(IconNameArgName) { type = NavType.StringType },
+                    navArgument(IconAnimatedArgName) { type = NavType.BoolType },
                 ),
             ) { navBackStackEntry ->
                 val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
+                val isAnimated = arguments.getBoolean(IconAnimatedArgName)
+                val icon = if(isAnimated) {
+                    SparkIcon.AnimatedDrawableRes(arguments.getInt(IconIdArgName))
+                } else {
+                    SparkIcon.DrawableRes(arguments.getInt(IconIdArgName))
+                }
                 IconExampleScreen(
-                    icon = SparkIcon.DrawableRes(arguments.getInt(IconIdArgName)),
+                    icon = icon,
                     name = requireNotNull(arguments.getString(IconNameArgName)) { "No name provided for the Icon" },
+                    isAnimated = isAnimated,
                 )
             }
         },
@@ -70,3 +78,4 @@ internal const val IconsList = "icons"
 internal const val IconDemoRoute = "iconDemo"
 internal const val IconIdArgName = "iconId"
 internal const val IconNameArgName = "iconName"
+internal const val IconAnimatedArgName = "iconAnimated"

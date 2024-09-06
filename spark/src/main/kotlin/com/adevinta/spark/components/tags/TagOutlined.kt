@@ -46,6 +46,7 @@ public fun TagOutlined(
     intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
     content: @Composable RowScope.() -> Unit,
 ) {
     val colors = TagDefaults.outlinedColors(intent)
@@ -58,6 +59,7 @@ public fun TagOutlined(
         ),
         leadingIcon = leadingIcon,
         tint = tint,
+        atEnd = atEnd,
         content = content,
     )
 }
@@ -77,6 +79,7 @@ public fun TagOutlined(
     intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
 ) {
     val colors = TagDefaults.outlinedColors(intent)
     SparkTag(
@@ -89,6 +92,7 @@ public fun TagOutlined(
         ),
         leadingIcon = leadingIcon,
         tint = tint,
+        atEnd = atEnd
     )
 }
 
@@ -107,6 +111,7 @@ public fun TagOutlined(
     intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
 ) {
     val colors = TagDefaults.outlinedColors(intent)
     SparkTag(
@@ -119,6 +124,7 @@ public fun TagOutlined(
         ),
         leadingIcon = leadingIcon,
         tint = tint,
+        atEnd = atEnd
     )
 }
 

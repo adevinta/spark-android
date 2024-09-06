@@ -25,11 +25,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,9 +50,12 @@ import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.seconds
 
 @Composable
-internal fun IconExampleScreen(icon: SparkIcon, name: String) {
+internal fun IconExampleScreen(icon: SparkIcon, name: String, isAnimated: Boolean) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -57,19 +63,51 @@ internal fun IconExampleScreen(icon: SparkIcon, name: String) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
     ) {
-        IconButtonFilled(icon = icon, contentDescription = name, onClick = {})
-        ButtonFilled(onClick = {}, text = name, icon = icon)
-        TagFilled(text = name, leadingIcon = icon)
-        ChipTinted {
+        var atEnd by remember { mutableStateOf(false) }
+        var isRunning by remember { mutableStateOf(false) }
+
+        // This is necessary just if you want to run the animation when the
+        // component is displayed. Otherwise, you can remove it.
+        LaunchedEffect(icon, isRunning) {
+            while (isRunning) {
+                delay(3.seconds) // set here your delay between animations
+                atEnd = !atEnd
+            }
+        }
+        if (isAnimated) {
+            SwitchLabelled(
+                checked = isRunning,
+                onCheckedChange = { isRunning = !isRunning },
+            ) {
+                Text(text = "Animate indefinitely")
+            }
+        }
+
+        Icon(
+            sparkIcon = icon,
+            contentDescription = name,
+            modifier = Modifier.size(128.dp),
+            atEnd = atEnd,
+        )
+        IconButtonFilled(
+            icon = icon,
+            contentDescription = name,
+            onClick = {
+                atEnd = !atEnd
+            },
+            atEnd = atEnd,
+        )
+        ButtonFilled(onClick = { atEnd = !atEnd }, text = name, icon = icon, atEnd = atEnd)
+        TagFilled(text = name, leadingIcon = icon, atEnd = atEnd)
+        ChipTinted(
+            onClick = { atEnd = !atEnd }
+        ) {
             Text(text = name)
             Icon(sparkIcon = icon, contentDescription = name)
         }
-        var checked by remember {
-            mutableStateOf(true)
-        }
         SwitchLabelled(
-            checked = checked,
-            onCheckedChange = { checked = it },
+            checked = atEnd,
+            onCheckedChange = { atEnd = !atEnd },
             icons = SwitchIcons(checked = icon, unchecked = SparkIcons.Close),
         ) {
             Text(text = name)

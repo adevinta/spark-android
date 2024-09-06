@@ -66,6 +66,7 @@ internal fun BaseSparkTag(
     border: BorderStroke? = null,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
     content: @Composable RowScope.() -> Unit,
 ) {
     Surface(
@@ -97,6 +98,7 @@ internal fun BaseSparkTag(
                                 modifier = Modifier.size(LeadingIconSize),
                                 contentDescription = null, // The tag is associated with a mandatory label so it's okay
                                 tint = tint ?: LocalContentColor.current,
+                                atEnd = atEnd,
                             )
                         }
                     } else {
@@ -121,6 +123,7 @@ internal fun SparkTag(
     border: BorderStroke? = null,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
     content: @Composable RowScope.() -> Unit,
 ) {
     BaseSparkTag(
@@ -129,6 +132,7 @@ internal fun SparkTag(
         border = border,
         leadingIcon = leadingIcon,
         tint = tint,
+        atEnd = atEnd,
         content = content,
     )
 }
@@ -142,6 +146,7 @@ internal fun SparkTag(
     border: BorderStroke? = null,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
 ) {
     require(text.isNotBlank() || leadingIcon != null) {
         "text can be blank only when there is an icon"
@@ -152,6 +157,7 @@ internal fun SparkTag(
         border = border,
         leadingIcon = leadingIcon,
         tint = tint,
+        atEnd = atEnd,
     ) {
         if (text.isNotBlank()) {
             Text(text = text)
@@ -168,6 +174,7 @@ internal fun SparkTag(
     border: BorderStroke? = null,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
 ) {
     require(text.isNotBlank() || leadingIcon != null) {
         "text can be blank only when there is an icon"
@@ -178,6 +185,7 @@ internal fun SparkTag(
         border = border,
         leadingIcon = leadingIcon,
         tint = tint,
+        atEnd = atEnd,
     ) {
         if (text.isNotBlank()) {
             Text(text = text)
