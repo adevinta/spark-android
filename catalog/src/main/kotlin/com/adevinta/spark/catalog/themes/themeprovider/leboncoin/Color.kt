@@ -26,47 +26,6 @@ import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
 
-// region Misc. colors
-private val Red10 = Color(0xFF410001)
-private val Red20 = Color(0xFF690002)
-private val Red30 = Color(0xFF910909)
-private val Red60 = Color(0xFFDB4437)
-private val Red80 = Color(0xFFFA5A4B)
-private val Red90 = Color(0xFFFFDAD5)
-
-private val Green10 = Color(0xFF002205)
-private val Green20 = Color(0xFF00390C)
-private val Green30 = Color(0xFF005315)
-private val Green60 = Color(0xFF4E9850)
-private val Green80 = Color(0xFF8BD989)
-private val Green90 = Color(0xFFA6F5A2)
-// endregion
-
-// region Brikke Colors
-private val BrikkeGreyExtraLight = Color(0xFFF4F6F7) // Information / Disabled Surface
-private val BrikkeGreyLight = Color(0xFFE6EBEF) // Highlight Surface
-private val BrikkeGreyMedium = Color(0xFFCAD1D9) // Disabled Content
-private val BrikkeGrey = Color(0xFFA8B4C0) // Quarternary Content
-private val BrikkeGreyDark = Color(0xFF8191A0) // Tertiary Content
-private val BrikkeBlack = Color(0xFF1A1A1A) // Action Support / Main Content
-private val BrikkeWhite = Color(0xFFFFFFFF) // Support Content / Main Surface
-private val BrikkeOpacityBlack = Color(0xFF707070) // Dark Surface Hilight
-private val BrikkeRed = Color(0xFFDB4437) // Content Error
-private val BrikkeRedLight = Color(0xFFE2695F) // Content Error Light
-private val BrikkeRedDark = Color(0xFFAF362C) // Content Error Dark
-private val BrikkeRedSurface = Color(0xFFFBECEB) // Surface Error
-private val BrikkeGreen = Color(0xFF4E9850) // Content Valid
-private val BrikkeGreenLight = Color(0xFF71AC73) // Content Valid Light
-private val BrikkeGreenDark = Color(0xFF3E7940) // Content Valid Dark
-private val BrikkeGreenSurface = Color(0xFFEEF9EF) // Surface Valid
-private val BrikkeBlue = Color(0xFF4183D7) // Main Pro Action / Content / Surface
-private val BrikkeBlueDark = Color(0xFF336999) // Main Pro Action Dark
-private val BrikkeBlueSurface = Color(0xFFD9E6F7) // Main Action Light
-private val BrikkeOrange = Color(0xFFFF6E14) // Main Action / Content / Surface
-private val BrikkeOrangeDark = Color(0xFFCB570F) // Main Action Dark
-private val BrikkeOrangeSurface = Color(0xFFFEF0E9) // Main Action Light
-// endregion
-
 // region Clementin colors
 private val Clementin900 = Color(0xFF2F1305)
 private val Clementin800 = Color(0xFF5C250A)
@@ -160,166 +119,6 @@ private val NightShade100 = Color(0xFFF0F2F5)
 private val NightShade50 = Color(0xFFF6F8F9)
 // endregion
 
-// region Black & White colors
-private val AlmostWhite = Color(0xFFFAFAFA)
-private val AlmostBlack = Color(0xC7000000)
-private val Black = Color(0xFF121212)
-private val BlackLight = Color(0xFF474747)
-
-private val Grey0 = Color(0xFF000000)
-private val Grey10 = Color(0xFF1A1C1E)
-private val Grey20 = Color(0xFF2F3033)
-private val Grey30 = Color(0xFF46474A)
-private val Grey40 = Color(0xFF5E5E62)
-private val Grey50 = Color(0xFF76777A)
-private val Grey60 = Color(0xFF909094)
-private val Grey70 = Color(0xFFABABAE)
-private val Grey80 = Color(0xFFC7C6CA)
-private val Grey90 = Color(0xFFE3E2E6)
-private val Grey95 = Color(0xFFF1F0F4)
-private val Grey99 = Color(0xFFFDFBFF)
-private val Grey100 = Color(0xFFFFFFFF)
-
-private val GreyBlue10 = Color(0xFF0d1d29)
-private val GreyBlue20 = Color(0xFF23323f)
-private val GreyBlue30 = Color(0xFF394856)
-private val GreyBlue40 = Color(0xFF51606e)
-private val GreyBlue50 = Color(0xFF697987)
-private val GreyBlue60 = Color(0xFF8393a2)
-private val GreyBlue70 = Color(0xFF9dadbd)
-private val GreyBlue80 = Color(0xFFb8c8d8)
-private val GreyBlue90 = Color(0xFFd4e4f5)
-private val GreyBlue95 = Color(0xFFe6f2ff)
-private val GreyBlue99 = Color(0xFFfcfcff)
-
-internal val LeboncoinColorPartLightLegacy: SparkColors = lightSparkColors(
-    accent = BrikkeOrange,
-    onAccent = Color.White,
-    accentContainer = BrikkeOrangeSurface,
-    onAccentContainer = Clementin900,
-    accentVariant = BrikkeOrangeDark,
-    onAccentVariant = Color.White,
-    basic = BrikkeBlack,
-    onBasic = Color.White,
-    basicContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
-    onBasicContainer = Blueberry900,
-    main = BrikkeOrange,
-    onMain = Color.White,
-    mainContainer = BrikkeOrangeSurface,
-    onMainContainer = Clementin900,
-    mainVariant = BrikkeOrangeDark,
-    onMainVariant = Color.White,
-    support = BrikkeBlack,
-    onSupport = Color.White,
-    supportContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
-    onSupportContainer = Blueberry900,
-    supportVariant = BrikkeGreyDark, // tertiary => neutral / Dim 1
-    onSupportVariant = Grey10,
-    tertiary = BrikkeGrey,
-    onTertiary = GreyBlue99,
-    tertiaryContainer = BrikkeGreyExtraLight,
-    onTertiaryContainer = GreyBlue10,
-    success = BrikkeGreen,
-    onSuccess = Grey100,
-    successContainer = BrikkeGreenSurface,
-    onSuccessContainer = Green10,
-    alert = Banana500,
-    onAlert = NightShade900,
-    alertContainer = Banana100,
-    onAlertContainer = Banana700,
-    error = BrikkeRed,
-    onError = Grey100,
-    errorContainer = BrikkeRedSurface,
-    onErrorContainer = Red10,
-    info = Blueberry500,
-    onInfo = Color.White,
-    infoContainer = Blueberry100,
-    onInfoContainer = Blueberry700,
-    neutral = NightShade50,
-    onNeutral = Color.White,
-    neutralContainer = NightShade50, // == surface Highlight
-    onNeutralContainer = NightShade700,
-    background = Color.White,
-    onBackground = Blueberry900,
-    backgroundVariant = GreyBlue90, // == surface disabled
-    onBackgroundVariant = GreyBlue30,
-    surface = Color.White,
-    onSurface = Grey10,
-    surfaceInverse = Grey20,
-    onSurfaceInverse = Grey95,
-    outline = GreyBlue50,
-    outlineHigh = GreyBlue80,
-    dimContent1 = .72f,
-    dimContent2 = .56f,
-    dimContent3 = .40f,
-    dimContent4 = .16f,
-    dimContent5 = .08f,
-)
-
-internal val LeboncoinColorProLightLegacy: SparkColors = lightSparkColors(
-    accent = BrikkeBlue,
-    onAccent = Color.White,
-    accentContainer = BrikkeBlueSurface,
-    onAccentContainer = Blueberry900,
-    accentVariant = BrikkeBlueDark,
-    onAccentVariant = Color.White,
-    basic = BrikkeBlack,
-    onBasic = Color.White,
-    basicContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
-    onBasicContainer = Blueberry900,
-    main = BrikkeBlue,
-    onMain = Color.White,
-    mainContainer = BrikkeBlueSurface,
-    onMainContainer = Blueberry900,
-    mainVariant = BrikkeBlueDark,
-    onMainVariant = Color.White,
-    support = BrikkeBlack,
-    onSupport = Color.White,
-    supportContainer = BrikkeGreyLight, // Highlight Surface => backgroundVariant
-    onSupportContainer = Blueberry900,
-    supportVariant = BrikkeGreyDark, // tertiary => neutral / Dim 1
-    onSupportVariant = Grey10,
-    tertiary = BrikkeGrey,
-    onTertiary = GreyBlue99,
-    tertiaryContainer = BrikkeGreyExtraLight,
-    onTertiaryContainer = GreyBlue10,
-    success = BrikkeGreen,
-    onSuccess = Grey100,
-    successContainer = BrikkeGreenSurface,
-    onSuccessContainer = Green10,
-    alert = Banana500,
-    onAlert = NightShade900,
-    alertContainer = Banana100,
-    onAlertContainer = Banana700,
-    error = BrikkeRed,
-    onError = Grey100,
-    errorContainer = BrikkeRedSurface,
-    onErrorContainer = Red10,
-    info = Blueberry500,
-    onInfo = Color.White,
-    infoContainer = Blueberry100,
-    onInfoContainer = Blueberry700,
-    neutral = NightShade50,
-    onNeutral = Color.White,
-    neutralContainer = NightShade50, // == surface Highlight
-    onNeutralContainer = NightShade700,
-    background = Color.White,
-    onBackground = Blueberry900,
-    backgroundVariant = GreyBlue90, // == surface disabled
-    onBackgroundVariant = GreyBlue30,
-    surface = Color.White,
-    onSurface = Grey10,
-    surfaceInverse = Grey20,
-    onSurfaceInverse = Grey95,
-    outline = GreyBlue50,
-    outlineHigh = GreyBlue80,
-    dimContent1 = .72f,
-    dimContent2 = .56f,
-    dimContent3 = .40f,
-    dimContent4 = .16f,
-    dimContent5 = .08f,
-)
-
 internal val LeboncoinColorPartLight: SparkColors = lightSparkColors(
     accent = Plum500,
     onAccent = Color.White,
@@ -341,15 +140,11 @@ internal val LeboncoinColorPartLight: SparkColors = lightSparkColors(
     onSupport = Color.White,
     supportContainer = Blueberry100,
     onSupportContainer = Blueberry900,
-    supportVariant = Blueberry700, // tertiary => neutral / Dim 1
+    supportVariant = Blueberry700,
     onSupportVariant = Color.White,
-    tertiary = Color.Magenta,
-    onTertiary = Color.Blue,
-    tertiaryContainer = Color.Magenta,
-    onTertiaryContainer = Color.Blue,
     success = Avocado600,
     onSuccess = Color.White,
-    successContainer = Avocado100, // == surface disabled
+    successContainer = Avocado100,
     onSuccessContainer = Avocado700,
     alert = Banana500,
     onAlert = NightShade900,
@@ -400,15 +195,11 @@ internal val LeboncoinColorProLight: SparkColors = lightSparkColors(
     onSupport = Color.White,
     supportContainer = Blueberry100,
     onSupportContainer = Blueberry900,
-    supportVariant = Blueberry700, // tertiary => neutral / Dim 1
+    supportVariant = Blueberry700,
     onSupportVariant = Color.White,
-    tertiary = Color.Magenta,
-    onTertiary = Color.Blue,
-    tertiaryContainer = Color.Magenta,
-    onTertiaryContainer = Color.Blue,
     success = Avocado600,
     onSuccess = Color.White,
-    successContainer = Avocado100, // == surface disabled
+    successContainer = Avocado100,
     onSuccessContainer = Avocado700,
     alert = Banana500,
     onAlert = NightShade900,

@@ -23,7 +23,6 @@ package com.adevinta.spark.components.tab
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -43,10 +42,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
-import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
@@ -59,8 +56,6 @@ import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifNull
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.Tab as MaterialTab
 
 /**
@@ -182,10 +177,12 @@ private fun TabLayout(
     trailingContent: @Composable (() -> Unit)?,
 ) {
     Row(
-        modifier = Modifier.padding(
-            horizontal = TabDefaults.HorizontalContentPadding,
-            vertical = TabDefaults.VerticalContentPadding,
-        ).heightIn(min = 32.dp),
+        modifier = Modifier
+            .padding(
+                horizontal = TabDefaults.HorizontalContentPadding,
+                vertical = TabDefaults.VerticalContentPadding,
+            )
+            .heightIn(min = 32.dp),
         horizontalArrangement = Arrangement.spacedBy(TabDefaults.HorizontalArrangementSpace),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -254,63 +251,13 @@ public fun Tab(
     )
 }
 
-/**
- * Spark tab.
- *
- * Tabs organize content across different screens, data sets, and other interactions.
- * Generic Tab overload that is not opinionated about content / color.
- * See the other overload for a Tab that has specific slots for text and / or an icon,
- * as well as providing the correct colors for selected / unselected states.
- *
- * @param selected whether this tab is selected or not
- * @param onClick called when this tab is clicked
- * @param modifier the Modifier to be applied to this tab
- * @param enabled controls the enabled state of this tab. When false, this component will not respond to user input,
- * and it will appear visually disabled and disabled to accessibility services.
- * @param interactionSource the MutableInteractionSource representing the stream of Interactions for this tab.
- * You can create and pass in your own remembered instance to observe Interactions
- * and customize the appearance / behavior of this tab in different states.
- * @param content the content of this tab
- *
- **/
-@ExperimentalSparkApi
-@Composable
-@Deprecated(
-    message = "This component is no longer compliant with Spark specs",
-    replaceWith = ReplaceWith(
-        "Tab(selected, onClick, modifier, text, icon, contentDescription, enabled, intent, size, " +
-            "interactionSource, trailingContent)",
-    ),
-)
-public fun Tab(
-    selected: Boolean,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    content: @Composable ColumnScope.() -> Unit,
-) {
-    MaterialTab(
-        selected = selected,
-        onClick = onClick,
-        modifier = modifier.heightIn(min = 48.dp),
-        enabled = enabled,
-        selectedContentColor = LocalContentColor.current,
-        unselectedContentColor = LocalContentColor.current,
-        interactionSource = interactionSource,
-        content = content,
-    )
-}
-
 @Preview(
     group = "Tabs",
     name = "Tab",
 )
 @Composable
-private fun TabPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun TabPreview() {
+    PreviewTheme {
         Tab(
             selected = false,
             onClick = {},

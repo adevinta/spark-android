@@ -38,7 +38,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
@@ -53,8 +52,6 @@ import com.adevinta.spark.icons.ProfileFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @InternalSparkApi
 @Composable
@@ -195,10 +192,8 @@ public enum class UserAvatarStyle(
     name = "User Avatar",
 )
 @Composable
-internal fun UserAvatarPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun UserAvatarPreview() {
+    PreviewTheme {
         SparkUserAvatar(
             style = UserAvatarStyle.LARGE,
             model = "",

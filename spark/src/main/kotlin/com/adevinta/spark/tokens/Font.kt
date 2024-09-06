@@ -30,22 +30,17 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.adevinta.spark.R
-import kotlinx.coroutines.CoroutineExceptionHandler
 
 /**
  * Creates a [SparkFontFamily] with the given [fontFamily] and [useSparkTokensHighlighter].
  * @param fontFamily The [FontFamily] you want to use globally inside your app.
  * @param useSparkTokensHighlighter If true, the [FontFamily] will be replaced by [FontFamily.Cursive] when the
  * token highlighting is enabled in the SparkTheme.
- * @param isLegacy If true, the [FontFamily] will be replaced by [FontFamily.Default] as we still need to support the legacy UI.
- * @param fontHandler The [CoroutineExceptionHandler] you want to use to handle the font loading errors from the spark default [FontFamily.Resolver].
  */
 public fun sparkFontFamily(
     fontFamily: FontFamily = nunitoFontFamily,
     useSparkTokensHighlighter: Boolean = false,
-    isLegacy: Boolean = false,
 ): SparkFontFamily = SparkFontFamily(
-    isLegacy = isLegacy,
     useSparkTokensHighlighter = useSparkTokensHighlighter,
     fontFamily = fontFamily,
 )
@@ -55,7 +50,6 @@ public fun sparkFontFamily(
  */
 @Immutable
 public class SparkFontFamily(
-    private val isLegacy: Boolean,
     private val useSparkTokensHighlighter: Boolean,
     private val fontFamily: FontFamily,
 ) {
@@ -67,7 +61,6 @@ public class SparkFontFamily(
         get() = when {
             LocalInspectionMode.current -> fontFamily
             useSparkTokensHighlighter -> FontFamily.Cursive
-            isLegacy -> FontFamily.Default
             else -> fontFamily
         }
 }

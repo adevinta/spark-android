@@ -34,15 +34,12 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.highlight
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import java.util.Locale
 
 /**
@@ -115,117 +112,6 @@ internal fun SparkRating(
 }
 
 /**
- * Component that displays rating of an user with stars in the following form `*****`
- *
- * @param value rating value as a float, should be between 0.0 and 5.0
- * @param modifier to be applied to this rating
- */
-@Deprecated(
-    message = "Use RatingFull instead as the label is not the same anymore",
-    replaceWith = ReplaceWith(
-        expression = "RatingFull(value = value, modifier = modifier, locale = null)",
-        imports = [
-            "com.adevinta.spark.components.rating.RatingFull",
-        ],
-    ),
-)
-/**
- * @param value rating value as a float, should be between 0.0 and 5.0
- * @param modifier to be applied to this rating
- */
-@Composable
-public fun RatingNaked(
-    @FloatRange(from = 0.0, to = 5.0) value: Float,
-    modifier: Modifier = Modifier,
-) {
-    SparkRating(
-        modifier = modifier,
-        value = value,
-        label = null,
-        commentCount = null,
-        locale = null,
-    )
-}
-
-/**
- * Display the [value] rating of an user with stars followed by the [commentCount] in the following form `★★★★★ (5)`
- *
- * @param value rating value as a float, should be between 0.0 and 5.0
- * @param commentCount the nb of reviews to be displayed after the rating stars.
- * @param modifier to apply
- */
-@Composable
-@Deprecated(
-    message = "Use RatingFull instead as the label is not the same anymore",
-    replaceWith = ReplaceWith(
-        expression = "RatingFull(value = value, modifier = modifier, commentCount = commentCount, locale = null)",
-        imports = [
-            "com.adevinta.spark.components.rating.RatingFull",
-            "com.adevinta.spark.components.rating.firstLocale",
-        ],
-    ),
-)
-/**
- * @param value rating value as a float, should be between 0.0 and 5.0
- * @param commentCount the nb of reviews to be displayed after the rating stars.
- * @param modifier to apply
- */
-public fun RatingCompressed(
-    @FloatRange(from = 0.0, to = 5.0) value: Float,
-    commentCount: Int,
-    modifier: Modifier = Modifier,
-) {
-    SparkRating(
-        modifier = modifier,
-        value = value,
-        commentCount = commentCount,
-        label = null,
-        locale = null,
-    )
-}
-
-/**
- * Display the [value] rating of an user with stars followed by the [commentCount] in the following form `★★★★★ 5 avis`
- *
- * @param value rating value as a float, should be between 0.0 and 5.0
- * @param commentCount the nb of reviews to be displayed after the rating stars.
- * @param modifier to apply
- */
-@Deprecated(
-    message = "Use RatingFull instead as the label is not the same anymore",
-    replaceWith = ReplaceWith(
-        expression = "RatingFull(value = value, modifier = modifier, commentCount = null, locale = null," +
-            " label = pluralStringResource(R.plurals.spark_rating_with_comments_count_label," +
-            " commentCount, commentCount))",
-        imports = [
-            "com.adevinta.spark.components.rating.RatingFull",
-            "com.adevinta.spark.components.rating.firstLocale",
-            "androidx.compose.ui.res.pluralStringResource",
-            "com.adevinta.spark.R",
-        ],
-    ),
-)
-/**
- * @param value rating value as a float, should be between 0.0 and 5.0
- * @param commentCount the nb of reviews to be displayed after the rating stars.
- * @param modifier to apply
- */
-@Composable
-public fun RatingFull(
-    @FloatRange(from = 0.0, to = 5.0) value: Float,
-    commentCount: Int,
-    modifier: Modifier = Modifier,
-) {
-    SparkRating(
-        modifier = modifier,
-        value = value,
-        label = pluralStringResource(id = R.plurals.spark_rating_with_comments_count_label, commentCount, commentCount),
-        commentCount = null,
-        locale = null,
-    )
-}
-
-/**
  * Display the [value] rating of an user with stars optionally followed by a label and/or
  * [commentCount] in the following form **`3,4 ★★★☆☆ Communication (5)`**
  *
@@ -253,16 +139,13 @@ public fun RatingFull(
     )
 }
 
-@Suppress("DEPRECATION")
 @Composable
 @Preview(
     group = "Ratings",
     name = "RatingFull",
 )
-internal fun RatingFullPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun RatingFullPreview() {
+    PreviewTheme {
         RatingFull(value = 1.6f, commentCount = 1)
         RatingFull(
             value = 3.6f,
@@ -274,37 +157,25 @@ internal fun RatingFullPreview(
     }
 }
 
-@Suppress("DEPRECATION")
 @Composable
 @Preview(
     group = "Ratings",
     name = "RatingCompressed",
 )
-internal fun RatingCompressedPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        RatingCompressed(value = 1.6f, commentCount = 0)
+internal fun RatingCompressedPreview() {
+    PreviewTheme {
         RatingFull(value = 2.8f, modifier = Modifier, commentCount = 23, locale = null)
-        RatingCompressed(value = 4.2f, commentCount = 1000002)
     }
 }
 
-@Suppress("DEPRECATION")
 @Composable
 @Preview(
     group = "Ratings",
     name = "RatingNaked",
 )
-internal fun RatingNakedPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
-        RatingNaked(value = 1f)
-        RatingNaked(value = 2.1f)
+internal fun RatingNakedPreview() {
+    PreviewTheme {
         RatingFull(value = 3.999999f, locale = null)
-        RatingNaked(value = 4.2f)
-        RatingNaked(value = 5f)
     }
 }
 
@@ -313,10 +184,8 @@ internal fun RatingNakedPreview(
     group = "Ratings",
     name = "SparkRatingFull",
 )
-private fun SparkRatingFullPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun SparkRatingFullPreview() {
+    PreviewTheme {
         RatingFull(value = 1f, label = "Communication")
         RatingFull(value = 2.1f, label = "Communication", commentCount = 5)
         RatingFull(value = 3.999999f, commentCount = 5, locale = null)

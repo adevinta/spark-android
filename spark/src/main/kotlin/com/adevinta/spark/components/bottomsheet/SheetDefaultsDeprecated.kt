@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Adevinta
+ * Copyright (c) 2023 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -302,20 +301,6 @@ public object BottomSheetDefaults {
      * The default peek height used by [BottomSheetScaffold].
      */
     public val SheetPeekHeight: Dp = 56.dp
-
-    /**
-     * The optional visual marker placed on top of a bottom sheet to indicate it may be dragged.
-     */
-    @Composable
-    @Deprecated(
-        message = "Use DragHandle instead",
-        replaceWith = ReplaceWith(
-            "com.adevinta.spark.components.bottomsheet.handle.DragHandle()",
-        ),
-    )
-    public fun DragHandle(modifier: Modifier = Modifier) {
-        com.adevinta.spark.components.bottomsheet.DragHandle(modifier)
-    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

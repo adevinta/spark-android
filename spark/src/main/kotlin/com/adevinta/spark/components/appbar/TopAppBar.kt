@@ -80,7 +80,6 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.Velocity
@@ -100,8 +99,6 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.ElevationTokens
 import com.adevinta.spark.tokens.applyTonalElevation
 import com.adevinta.spark.tokens.contentColorFor
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -979,11 +976,8 @@ private val TopAppBarTitleInset = 16.dp - TopAppBarHorizontalPadding
     name = "TopAppBar",
 )
 @Composable
-internal fun PreviewTopAppBar(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun PreviewTopAppBar() {
     PreviewTheme(
-        themeVariant = theme,
         padding = PaddingValues(0.dp),
     ) {
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()

@@ -38,7 +38,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
@@ -49,8 +48,6 @@ import com.adevinta.spark.icons.Activity
 import com.adevinta.spark.icons.IdentityOutline
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Store
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.PermanentDrawerSheet as MaterialPermanentDrawerSheet
 
 @InternalSparkApi
@@ -104,11 +101,8 @@ public fun PermanentDrawerSheet(
     name = "PermanentDrawerSheet",
 )
 @Composable
-internal fun PermanentDrawerSheetPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun PermanentDrawerSheetPreview() {
     PreviewTheme(
-        theme,
         padding = PaddingValues(0.dp),
     ) {
         // icons to mimic drawer destinations

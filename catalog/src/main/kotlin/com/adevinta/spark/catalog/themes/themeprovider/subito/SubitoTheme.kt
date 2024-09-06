@@ -31,7 +31,7 @@ import com.adevinta.spark.tokens.sparkTypography
 
 public object SubitoTheme : ThemeProvider {
     @Composable
-    override fun colors(useDarkColors: Boolean, isPro: Boolean, isLegacy: Boolean): SparkColors {
+    override fun colors(useDarkColors: Boolean, isPro: Boolean): SparkColors {
         return when {
             useDarkColors || isSystemInDarkTheme() -> SubitoDark
             else -> SubitoLight
@@ -39,10 +39,10 @@ public object SubitoTheme : ThemeProvider {
     }
 
     @Composable
-    override fun shapes(isLegacy: Boolean): SparkShapes = SubitoShapes
+    override fun shapes(): SparkShapes = SubitoShapes
 
     @Composable
-    override fun typography(isLegacy: Boolean): SparkTypography {
+    override fun typography(): SparkTypography {
         return sparkTypography()
     }
 }

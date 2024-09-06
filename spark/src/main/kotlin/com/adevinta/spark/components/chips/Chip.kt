@@ -59,7 +59,6 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -77,8 +76,6 @@ import com.adevinta.spark.tools.modifiers.dashedBorder
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * Chips help users quickly recognize an important information that has been entered by them,
@@ -536,10 +533,8 @@ private fun contentColor(
 
 @Preview
 @Composable
-private fun ChipPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun ChipPreview() {
+    PreviewTheme {
         val leadingIcon = SparkIcons.OfferOutline
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             ChipOutlined("outlined", leadingIcon = leadingIcon)
@@ -556,10 +551,8 @@ private fun ChipPreview(
 
 @Preview
 @Composable
-private fun SelectableChipPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun SelectableChipPreview() {
+    PreviewTheme {
         var selected by remember { mutableStateOf(false) }
         val leadingIcon = SparkIcons.OfferOutline
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

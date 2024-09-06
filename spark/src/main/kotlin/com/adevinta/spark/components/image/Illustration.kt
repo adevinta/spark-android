@@ -39,7 +39,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
@@ -48,8 +47,6 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Store
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.compose.foundation.Image as FoundationImage
 
@@ -337,10 +334,8 @@ public fun Illustration(
     name = "Illustration",
 )
 @Composable
-internal fun IllustrationPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(themeVariant = theme) {
+internal fun IllustrationPreview() {
+    PreviewTheme {
         Illustration(
             sparkIcon = SparkIcons.Store,
             contentDescription = null,

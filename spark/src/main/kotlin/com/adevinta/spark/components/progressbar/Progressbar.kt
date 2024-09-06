@@ -26,14 +26,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.tokens.dim4
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.LinearProgressIndicator as MaterialProgressbar
 
 @InternalSparkApi
@@ -63,41 +60,6 @@ internal fun SparkProgressbar(
             strokeCap = if (isRounded) StrokeCap.Round else StrokeCap.Butt,
         )
     }
-}
-
-/**
- * Determinate Progressbar
- *
- * Progressbar express a specified progress.
- *
- * @param progress the progress of this progress indicator, where 0.0 represents no progress and 1.0
- * represents full progress. Values outside of this range are coerced into the range.
- * @param intent The intent color for the Progressbar.
- * @param modifier Modifier to be applied to the Progressbar
- * @param isRounded Controls the border shape of the progressbar. When `true`,
- * this progressbar will have rounded border shape, & the default is rounded
- */
-@Deprecated(
-    message = "Use the overload that takes `progress` as a lambda",
-    replaceWith = ReplaceWith(
-        "Progressbar(\n" + "progress = { progress },\n" + "modifier = modifier,\n" +
-            "intent = intent,\n" + "isRounded = isRounded,\n" + ")",
-    ),
-)
-@Composable
-public fun Progressbar(
-    progress: Float,
-    intent: ProgressbarIntent,
-    modifier: Modifier = Modifier,
-    isRounded: Boolean = true,
-) {
-    SparkProgressbar(
-        progress = { progress },
-        isIndeterminate = false,
-        intent = intent,
-        modifier = modifier,
-        isRounded = isRounded,
-    )
 }
 
 /**
@@ -160,10 +122,8 @@ public fun ProgressbarIndeterminate(
     name = "Progressbar",
 )
 @Composable
-private fun PreviewProgressbar(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun PreviewProgressbar() {
+    PreviewTheme {
         Progressbar(
             modifier = Modifier.fillMaxWidth(),
             progress = { 0.5f },

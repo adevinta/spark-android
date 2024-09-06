@@ -32,13 +32,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @Composable
 @InternalSparkApi
@@ -164,10 +161,8 @@ public fun CheckboxLabelled(
     name = "Checkbox",
 )
 @Composable
-internal fun AllStatesCheckboxPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun AllStatesCheckboxPreview() {
+    PreviewTheme {
         ToggleIntent.values().forEach { intent ->
             Row {
                 Checkbox(enabled = true, state = ToggleableState.On, onClick = {}, intent = intent)
@@ -186,10 +181,8 @@ internal fun AllStatesCheckboxPreview(
     name = "CheckboxLabelled",
 )
 @Composable
-internal fun AllStatesCheckBoxLabelledPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun AllStatesCheckBoxLabelledPreview() {
+    PreviewTheme {
         CheckboxLabelled(
             enabled = true,
             state = ToggleableState.On,

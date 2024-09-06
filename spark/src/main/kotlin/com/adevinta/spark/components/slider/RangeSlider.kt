@@ -31,12 +31,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.RangeSlider as MaterialRangeSlider
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -149,12 +146,10 @@ public fun RangeSlider(
     name = "RangeSlider",
 )
 @Composable
-private fun RangeSliderPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+private fun RangeSliderPreview() {
     var progress by remember { mutableStateOf(0.1f..0.5f) }
 
-    PreviewTheme(theme) {
+    PreviewTheme {
         RangeSlider(
             value = progress,
             onValueChange = { progress = it },

@@ -25,7 +25,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
@@ -69,22 +68,6 @@ public fun Modifier.dashedBorder(border: BorderStroke, shape: Shape = RectangleS
  */
 public fun Modifier.dashedBorder(width: Dp, color: Color, shape: Shape = RectangleShape): Modifier =
     dashedBorder(width = width, brush = SolidColor(color), shape = shape)
-
-/**
- * Returns a [Modifier] that adds border with appearance specified with [width], [color] and a
- * [radius], pads the content by the [width] and clips it.
- *
- * @param width width of the border. Use [Dp.Hairline] for a hairline border.
- * @param color color to paint the border with
- * @param radius shape of the border
- */
-@Deprecated(
-    message = "Use dashedBorder(width: Dp, color: Color, shape: Shape) instead since it know allow you to specify " +
-        "a shape from Spark",
-    replaceWith = ReplaceWith("dashedBorder(width, color, shape)"),
-)
-public fun Modifier.dashedBorder(width: Dp, radius: Dp, color: Color): Modifier =
-    dashedBorder(width = width, brush = SolidColor(color), shape = RoundedCornerShape(radius))
 
 /**
  * Add a dashed border on a Composable

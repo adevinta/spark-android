@@ -36,18 +36,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
-
-@Deprecated(
-    message = "Use the placeholder modifier instead",
-    replaceWith = ReplaceWith("placeholder(visible)"),
-)
-public fun Modifier.defaultPlaceholder(visible: Boolean): Modifier = this then placeholder(visible = visible)
 
 /**
  * Draws some skeleton UI which is typically used whilst content is 'loading'.
@@ -124,10 +115,8 @@ public fun Modifier.illustrationPlaceholder(
     name = "Placeholder",
 )
 @Composable
-internal fun PreviewPlaceHolder(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun PreviewPlaceHolder() {
+    PreviewTheme {
         Column(verticalArrangement = spacedBy(4.dp)) {
             Text("Text Placeholder")
             Text("Text Placeholder", modifier = Modifier.textPlaceholder(true))

@@ -34,7 +34,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.IdentityOutline
@@ -42,8 +41,6 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.disabled
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * The filled button should only be used once per view (not including a modal dialog),
@@ -242,70 +239,13 @@ public fun ButtonFilled(
     )
 }
 
-/**
- * The main button should only be used once per view (not including a modal dialog),
- * these buttons have the most emphasis.
- *
- * The minimal usage of the component is the text of the button but you can add an icon or indicate a loading state
- * after a click action for example.
- *
- * @param onClick Will be called when the user clicks the button
- * @param modifier Modifier to be applied to the button
- * @param enabled Controls the enabled state of the button. When `false`, this button will not
- * be clickable
- * @param icon The optional icon to be displayed at the start or the end of the button container, you can
- * use [SparkButtonDefaults.IconSize] as a good default icon size.
- * @param iconSide If an icon is added, you can configure the side at the start or end of the button
- * @param isLoading show or hide a CircularProgressIndicator at the start that push the content to indicate a
- * loading state
- * @param isDanger The danger button should only be used once per view(screen) (not including a modal dialog),
- * these buttons have the most emphasis.
- */
-@Deprecated(
-    "Use ButtonFilled instead with Main intent",
-    ReplaceWith("ButtonFilled(onClick, text, modifier, intent, enabled, icon, iconSide, isLoading)"),
-)
-@Composable
-public fun PrimaryButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    enabled: Boolean = true,
-    icon: SparkIcon? = null,
-    iconSide: IconSide = IconSide.START,
-    isLoading: Boolean = false,
-    isDanger: Boolean = false,
-    content: @Composable RowScope.() -> Unit,
-) {
-    val colors = if (isDanger) {
-        ButtonDefaults.buttonColors(
-            containerColor = SparkTheme.colors.error,
-            contentColor = SparkTheme.colors.onError,
-        )
-    } else {
-        ButtonDefaults.buttonColors()
-    }
-    BaseSparkButton(
-        onClick = onClick,
-        modifier = modifier,
-        enabled = enabled,
-        elevation = ButtonDefaults.buttonElevation(),
-        colors = colors,
-        icon = icon,
-        iconSide = iconSide,
-        isLoading = isLoading,
-        content = content,
-    )
-}
-
 @Preview(
     group = "Buttons",
     name = "Button Filled",
 )
 @Composable
-internal fun MainButtonPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun MainButtonPreview() {
+    PreviewTheme {
         val icon = SparkIcons.IdentityOutline
         var isLoading by remember { mutableStateOf(false) }
         val buttonText = "Main Button"
@@ -340,11 +280,8 @@ internal fun MainButtonPreview(
     name = "Button Filled Intents",
 )
 @Composable
-internal fun ButtonFilledIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun ButtonFilledIntentPreview() {
     PreviewTheme(
-        themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline
@@ -365,11 +302,8 @@ internal fun ButtonFilledIntentPreview(
     name = "Button Sizes",
 )
 @Composable
-internal fun ButtonSizePreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun ButtonSizePreview() {
     PreviewTheme(
-        themeVariant = theme,
         color = { SparkTheme.colors.backgroundVariant },
     ) {
         val icon = SparkIcons.IdentityOutline

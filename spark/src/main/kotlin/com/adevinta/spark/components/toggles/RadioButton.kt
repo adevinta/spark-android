@@ -32,13 +32,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 @Composable
 @InternalSparkApi
@@ -166,10 +163,8 @@ public fun RadioButtonLabelled(
     name = "RadioButton",
 )
 @Composable
-internal fun AllStatesRadioButtonPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun AllStatesRadioButtonPreview() {
+    PreviewTheme {
         ToggleIntent.values().forEach { intent ->
             Row {
                 RadioButton(enabled = true, selected = true, onClick = {}, intent = intent)
@@ -186,10 +181,8 @@ internal fun AllStatesRadioButtonPreview(
     name = "RadioButtonLabelled",
 )
 @Composable
-internal fun AllStatesRadioButtonLabelledPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun AllStatesRadioButtonLabelledPreview() {
+    PreviewTheme {
         RadioButtonLabelled(
             enabled = true,
             selected = true,

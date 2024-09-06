@@ -32,7 +32,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
@@ -42,8 +41,6 @@ import com.adevinta.spark.icons.OfferOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.ifTrue
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * A chip with lighter background and no border
@@ -162,10 +159,8 @@ public fun ChipTinted(
     name = "Chips Tinted",
 )
 @Composable
-internal fun ChipTintedPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme, contentPadding = 0.dp) {
+internal fun ChipTintedPreview() {
+    PreviewTheme(contentPadding = 0.dp) {
         ChipIntent.values().forEach { intent ->
             listOf(true, false).forEach { enabled ->
                 Row(

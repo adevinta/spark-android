@@ -19,8 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("DEPRECATION")
-
 package com.adevinta.spark.components.tags
 
 import androidx.compose.foundation.layout.RowScope
@@ -29,13 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.icons.Booster
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * Filled tag represent main information
@@ -111,36 +106,12 @@ public fun TagFilled(
     )
 }
 
-@Deprecated(
-    "Use TagFilled instead without `content` parameter",
-    ReplaceWith("TagFilled(text, modifier, intent, leadingIcon, tint)"),
-    level = DeprecationLevel.ERROR,
-)
-@Composable
-public fun TagFilled(
-    modifier: Modifier = Modifier,
-    colors: TagColors = TagDefaults.filledColors(TagIntent.Main),
-    leadingIcon: SparkIcon? = null,
-    tint: Color? = null,
-    content: @Composable RowScope.() -> Unit,
-) {
-    BaseSparkTag(
-        colors = colors,
-        modifier = modifier,
-        leadingIcon = leadingIcon,
-        tint = tint,
-        content = content,
-    )
-}
-
 @Preview(
     group = "Tags",
 )
 @Composable
-internal fun TagFilledPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun TagFilledPreview() {
+    PreviewTheme {
         val icon = SparkIcons.Booster
         TagFilled("", leadingIcon = icon)
         TagFilled("Tag Basic")

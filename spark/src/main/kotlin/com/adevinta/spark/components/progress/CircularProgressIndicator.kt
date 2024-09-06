@@ -29,14 +29,11 @@ import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.progress.ProgressIndicatorDefaults.CircularSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import androidx.compose.material3.CircularProgressIndicator as MaterialCircularProgressIndicator
 
 @InternalSparkApi
@@ -75,43 +72,6 @@ internal fun SparkCircularProgressIndicator(
  * represents full progress. Values outside of this range are coerced into the range.
  * @param modifier the [Modifier] to be applied to this progress indicator
  */
-@Deprecated(
-    message = "Use the overload that takes `progress` as a lambda",
-    replaceWith = ReplaceWith(
-        "CircularProgressIndicator(\n" +
-            "progress = { progress },\n" +
-            "modifier = modifier,\n" +
-            "color = color,\n" +
-            "strokeWidth = strokeWidth,\n" +
-            "trackColor = trackColor,\n" +
-            "strokeCap = strokeCap,\n" +
-            ")",
-    ),
-)
-@Composable
-public fun CircularProgressIndicator(
-    @FloatRange(from = 0.0, to = 1.0)
-    progress: Float,
-    modifier: Modifier = Modifier,
-) {
-    SparkCircularProgressIndicator(
-        progress = { progress },
-        isIndeterminate = false,
-        modifier = modifier,
-    )
-}
-
-/**
- * Progress indicators express an unspecified wait time or display the duration of a process.
- *
- * By default there is no animation between [progress] values. You can use
- * [ProgressIndicatorDefaults.ProgressAnimationSpec] as the default recommended [AnimationSpec] when
- * animating progress
- *
- * @param progress the progress of this progress indicator, where 0.0 represents no progress and 1.0
- * represents full progress. Values outside of this range are coerced into the range.
- * @param modifier the [Modifier] to be applied to this progress indicator
- */
 @Composable
 public fun CircularProgressIndicator(
     @FloatRange(from = 0.0, to = 1.0)
@@ -125,39 +85,13 @@ public fun CircularProgressIndicator(
     )
 }
 
-/**
- * Progress indicators express an unspecified wait time or display the duration of a process.
- *
- * @param modifier the [Modifier] to be applied to this progress indicator
- */
-@Composable
-@Deprecated(
-    message = "This component should be replaced with Spark Spinner",
-    replaceWith = ReplaceWith(
-        "Spinner(intent)",
-        imports = ["com.adevinta.spark.components.progress.Spinner"],
-    ),
-    level = DeprecationLevel.WARNING,
-)
-public fun CircularProgressIndicatorIndeterminate(
-    modifier: Modifier = Modifier,
-) {
-    SparkCircularProgressIndicator(
-        progress = { 0f },
-        isIndeterminate = true,
-        modifier = modifier,
-    )
-}
-
 @Preview(
     group = "ProgressIndicator",
     name = "CircularProgressIndicator",
 )
 @Composable
-internal fun PreviewCircularProgressIndicator(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun PreviewCircularProgressIndicator() {
+    PreviewTheme {
         CircularProgressIndicator(
             progress = { 0f },
             modifier = Modifier.size(48.dp),

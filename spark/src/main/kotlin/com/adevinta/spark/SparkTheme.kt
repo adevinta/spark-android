@@ -43,7 +43,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.surface.Surface
+import com.adevinta.spark.components.toggles.Checkbox
 import com.adevinta.spark.tokens.LocalSparkColors
 import com.adevinta.spark.tokens.LocalSparkShapes
 import com.adevinta.spark.tokens.LocalSparkTypography
@@ -64,13 +66,12 @@ import com.adevinta.spark.tokens.sparkShapes
 import com.adevinta.spark.tokens.sparkTypography
 import com.adevinta.spark.tokens.updateColorsFrom
 import com.adevinta.spark.tokens.updateFontFamily
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
- * Spark Theming refers to the customization of your Spark Design app to better reflect your
+ * **Spark Theming** refers to the customization of your Spark Design app to better reflect your
  * product’s brand.
  *
- * Spark components such as [Button] and [Checkbox] use values provided here when retrieving
+ * Spark components such as [ButtonFilled] and [Checkbox] use values provided here when retrieving
  * default values.
  *
  * All values may be set by providing this component with the [colors][SparkColors],
@@ -88,7 +89,6 @@ import com.adevinta.spark.tools.preview.ThemeVariant
  * which part of a screen is themed or not.
  * @param useSparkComponentsHighlighter flag to highlight the spark components with an overlay to recognize
  * which component is from spark or not.
- * @param useLegacyStyle enabling this will makes the components use the visual from the previous DS of LBC.
  */
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
@@ -100,7 +100,6 @@ public fun SparkTheme(
     sparkFeatureFlag: SparkFeatureFlag = SparkFeatureFlag(),
     fontFamily: SparkFontFamily = sparkFontFamily(
         useSparkTokensHighlighter = sparkFeatureFlag.useSparkTokensHighlighter,
-        isLegacy = sparkFeatureFlag.useLegacyStyle,
     ),
     content: @Composable () -> Unit,
 ) {
@@ -150,6 +149,16 @@ public fun SparkTheme(
     }
 }
 
+/**
+ * A wrapper composable that provides a consistent preview environment for other composables using Spark.
+ *
+ * This composable creates a Surface with a padding, and place the content inside a Column.
+ *
+ * @param padding The padding to be applied to the Surface.
+ * @param contentPadding The vertical spacing between the items in the Column.
+ * @param color A lambda that returns the color of the Surface.
+ * @param content The composable you want to showcase in the preview.
+ */
 @Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
 @Composable
 public fun PreviewWrapper(
@@ -173,11 +182,7 @@ public fun PreviewWrapper(
 @Suppress("ComposeModifierMissing") // It's okay since it’s a base theme
 @Composable
 internal fun PreviewTheme(
-    themeVariant: ThemeVariant = if (LocalInspectionMode.current && isSystemInDarkTheme()) {
-        ThemeVariant.Dark
-    } else {
-        ThemeVariant.Light
-    },
+    useDarkColors: Boolean = LocalInspectionMode.current && isSystemInDarkTheme(),
     padding: PaddingValues = PaddingValues(16.dp),
     contentPadding: Dp = 16.dp,
     color: @Composable () -> Color = { SparkTheme.colors.background },
@@ -185,7 +190,7 @@ internal fun PreviewTheme(
 ) {
     SparkTenantTheme(
         // We don't want to automatically support dark theme in the app but still want it in the previews
-        useDarkColors = themeVariant == ThemeVariant.Dark,
+        useDarkColors = useDarkColors,
     ) {
         PreviewWrapper(
             padding = padding,

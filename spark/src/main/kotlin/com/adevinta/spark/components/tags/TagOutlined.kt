@@ -19,8 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("DEPRECATION")
-
 package com.adevinta.spark.components.tags
 
 import androidx.compose.foundation.BorderStroke
@@ -30,14 +28,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.components.icons.IconDefaults.intent
 import com.adevinta.spark.icons.Booster
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * Outlined tag represent support information
@@ -128,62 +122,12 @@ public fun TagOutlined(
     )
 }
 
-@Deprecated(
-    "Use TagOutlined with neutral intent instead",
-    ReplaceWith("TagOutlined(text, modifier, intent, leadingIcon, tint)"),
-)
-@Composable
-public fun TagPromote(
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit,
-) {
-    TagOutlined(
-        modifier = modifier,
-        intent = TagIntent.Neutral,
-        content = content,
-    )
-}
-
-@Deprecated(
-    "Use TagOutlined with main intent instead",
-    ReplaceWith("TagOutlined(text, modifier, intent, leadingIcon, tint)"),
-)
-@Composable
-public fun TagUrgent(
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit,
-) {
-    TagOutlined(
-        modifier = modifier,
-        intent = TagIntent.Main,
-        content = content,
-    )
-}
-
-@Deprecated(
-    "Use TagOutlined with support intent instead",
-    ReplaceWith("TagOutlined(text, modifier, intent, leadingIcon, tint)"),
-)
-@Composable
-public fun TagPro(
-    modifier: Modifier = Modifier,
-    content: @Composable RowScope.() -> Unit,
-) {
-    TagOutlined(
-        modifier = modifier,
-        intent = TagIntent.Support,
-        content = content,
-    )
-}
-
 @Preview(
     group = "Tags",
 )
 @Composable
-internal fun TagOutlinedPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun TagOutlinedPreview() {
+    PreviewTheme {
         val icon = SparkIcons.Booster
         TagOutlined("", leadingIcon = icon)
         TagOutlined("Tag Basic")

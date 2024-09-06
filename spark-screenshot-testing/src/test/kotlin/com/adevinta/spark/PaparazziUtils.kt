@@ -31,7 +31,6 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 internal fun Paparazzi.sparkSnapshot(
     name: String? = null,
@@ -87,3 +86,5 @@ internal fun Paparazzi.sparkSnapshotNightMode(
         sparkSnapshot(name.orEmpty() + "_${it.name}", drawBackground, it == ThemeVariant.Dark, composable)
     }
 }
+
+enum class ThemeVariant { Light, Dark }

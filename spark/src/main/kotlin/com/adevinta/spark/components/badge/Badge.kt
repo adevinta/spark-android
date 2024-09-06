@@ -25,12 +25,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BadgeDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Text
@@ -39,26 +36,20 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tokens.contentColorFor
 import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
-import androidx.compose.material3.Badge as MaterialBadge
 
 internal val BadgeWithNoContentSize = 12.dp
 
@@ -189,47 +180,13 @@ public fun Badge(
     )
 }
 
-/**
- * Spark Badge.
- *
- * A badge represents dynamic information such as a number of pending requests in a navigation bar.
- *
- * ![Badge image](https://developer.android.com/images/reference/androidx/compose/material3/badge.png)
- *
- * @param modifier the Modifier to be applied to this badge
- * @param containerColor the color used for the background of this badge
- * @param contentColor the preferred color for content inside this badge. Defaults to either the matching content color for containerColor, or to the current LocalContentColor if containerColor is not a color from the theme.
- * @param content optional content to be rendered inside this badge
- **/
-@OptIn(ExperimentalMaterial3Api::class)
-@Deprecated(
-    "This component is no longer compliant with Spark specs",
-    replaceWith = ReplaceWith("Badge(modifier, badgeStyle, intent, hasStroke, contentDescription, content"),
-)
-@Composable
-public fun Badge(
-    modifier: Modifier = Modifier,
-    containerColor: Color = BadgeDefaults.containerColor,
-    contentColor: Color = contentColorFor(containerColor),
-    content: (@Composable RowScope.() -> Unit)? = null,
-) {
-    MaterialBadge(
-        modifier = modifier,
-        containerColor = containerColor,
-        contentColor = contentColor,
-        content = content,
-    )
-}
-
 @Preview(
     group = "Badge",
     name = "Badge no stroke",
 )
 @Composable
-internal fun BadgeNoStrokeIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun BadgeNoStrokeIntentPreview() {
+    PreviewTheme {
         BadgeIntent.values().forEach { intent ->
             BadgeIntentPreview(intent, hasStroke = false)
         }
@@ -241,10 +198,8 @@ internal fun BadgeNoStrokeIntentPreview(
     name = "Badge with stroke",
 )
 @Composable
-internal fun BadgeWithStrokeIntentPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+internal fun BadgeWithStrokeIntentPreview() {
+    PreviewTheme {
         BadgeIntent.values().forEach { intent ->
             BadgeIntentPreview(intent, hasStroke = true)
         }

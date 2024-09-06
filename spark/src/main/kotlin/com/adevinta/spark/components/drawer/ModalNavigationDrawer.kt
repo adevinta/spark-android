@@ -48,13 +48,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 import kotlinx.coroutines.launch
 
 @ExperimentalSparkApi
@@ -117,11 +114,8 @@ public fun ModalNavigationDrawer(
     name = "ModalNavigationDrawer",
 )
 @Composable
-internal fun ModalNavigationDrawerPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
+internal fun ModalNavigationDrawerPreview() {
     PreviewTheme(
-        theme,
         padding = PaddingValues(0.dp),
     ) {
         val drawerState = rememberDrawerState(DrawerValue.Closed)

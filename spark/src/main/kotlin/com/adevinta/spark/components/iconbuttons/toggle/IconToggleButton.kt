@@ -40,7 +40,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.buttons.ButtonShape
@@ -58,8 +57,6 @@ import com.adevinta.spark.icons.FavoriteOutline
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.minimumTouchTargetSize
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
-import com.adevinta.spark.tools.preview.ThemeProvider
-import com.adevinta.spark.tools.preview.ThemeVariant
 
 /**
  * Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a
@@ -147,10 +144,8 @@ internal fun SparkIconToggleButton(
     name = "IconToggleButtons",
 )
 @Composable
-private fun IconToggleButtonPreview(
-    @PreviewParameter(ThemeProvider::class) theme: ThemeVariant,
-) {
-    PreviewTheme(theme) {
+private fun IconToggleButtonPreview() {
+    PreviewTheme {
         val intent = IconButtonIntent.Basic
         var state by remember {
             mutableStateOf(false)

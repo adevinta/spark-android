@@ -24,7 +24,6 @@ package com.adevinta.spark.tools.preview
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.content.res.Configuration.UI_MODE_TYPE_NORMAL
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(
@@ -57,7 +56,7 @@ internal annotation class FontScalePreviews
     showBackground = true,
     showSystemUi = true,
     locale = "fr-rFR",
-    device = Devices.PHONE,
+    device = "spec:width=411dp,height=891dp",
 )
 @Preview(
     name = "foldable",
@@ -65,7 +64,7 @@ internal annotation class FontScalePreviews
     showBackground = true,
     showSystemUi = true,
     locale = "fr-rFR",
-    device = Devices.FOLDABLE,
+    device = "spec:width=673dp,height=841dp",
 )
 @Preview(
     name = "tablet",
@@ -73,7 +72,7 @@ internal annotation class FontScalePreviews
     showBackground = true,
     showSystemUi = true,
     locale = "fr-rFR",
-    device = Devices.TABLET,
+    device = "spec:width=1280dp,height=800dp,dpi=240",
 )
 @Preview(
     name = "tablet",
@@ -81,7 +80,7 @@ internal annotation class FontScalePreviews
     showBackground = true,
     showSystemUi = true,
     locale = "fr-rFR",
-    device = Devices.DESKTOP,
+    device = "spec:width=1920dp,height=1080dp,dpi=160",
 )
 internal annotation class DevicePreviews
 
