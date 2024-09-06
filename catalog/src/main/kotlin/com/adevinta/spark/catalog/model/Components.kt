@@ -50,6 +50,7 @@ import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.chips.ChipsExamples
 import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
+import com.adevinta.spark.catalog.examples.samples.icons.IconsExamples
 import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.progressbar.ProgressbarExamples
 import com.adevinta.spark.catalog.examples.samples.progresstracker.ProgressTrackerExamples
@@ -144,6 +145,19 @@ private val Dropdowns = Component(
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/textfields/Dropdown.kt",
     examples = DropdownsExamples,
     configurator = DropdownsConfigurator,
+)
+
+private val Icons = Component(
+    id = nextId(),
+    name = "Icons",
+    illustration = R.drawable.illu_component_iconbutton,
+    tintIcon = false,
+    description = R.string.component_iconbutton_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/2352e9-icon-button/b/32e1a2",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.iconbuttons/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/iconbuttons/IconButton.kt",
+    examples = IconsExamples,
+    configurator = null,
 )
 
 private val IconButtons = Component(
@@ -373,6 +387,7 @@ public val Components: List<Component> = listOf(
     Dialogs,
     Dividers,
     Dropdowns,
+    Icons,
     IconButtons,
     IconToggleButtons,
     Popovers,

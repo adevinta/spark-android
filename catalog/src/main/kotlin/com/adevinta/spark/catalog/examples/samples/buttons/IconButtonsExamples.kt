@@ -24,9 +24,11 @@ package com.adevinta.spark.catalog.examples.samples.buttons
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
@@ -36,9 +38,12 @@ import com.adevinta.spark.components.iconbuttons.IconButtonFilled
 import com.adevinta.spark.components.iconbuttons.IconButtonGhost
 import com.adevinta.spark.components.iconbuttons.IconButtonOutlined
 import com.adevinta.spark.components.iconbuttons.IconButtonTinted
-import com.adevinta.spark.icons.LikeFill
+import com.adevinta.spark.icons.BellShake
+import com.adevinta.spark.icons.SparkAnimatedIcons
 import com.adevinta.spark.icons.SparkIcon
-import com.adevinta.spark.icons.SparkIcons
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.seconds
 
 private const val IconButtonsExampleDescription = "Icon Button examples"
 private const val IconButtonsExampleSourceUrl = "$SampleSourceUrl/IconButtonSamples.kt"
@@ -56,6 +61,7 @@ public val IconButtonsExamples: List<Example> = listOf(
                     icon = icon,
                     contentDescription = contentDescription,
                     isLoading = isLoading,
+                    atEnd = false,
                 )
             },
         )
@@ -143,7 +149,7 @@ private fun IconButtonSample(
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        val icon = SparkIcons.LikeFill
+        val icon = SparkAnimatedIcons.BellShake
         val contentDescription = "Localized Content Description"
         val isLoading by remember { mutableStateOf(false) }
         button(

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,14 +19,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.adevinta.spark.icons
 
-import androidx.compose.runtime.Stable
-import androidx.compose.ui.graphics.vector.ImageVector
+import com.adevinta.spark.icons.SparkIcon.AnimatedDrawableRes
 
-@Stable
-public sealed class SparkIcon {
-    public data class DrawableRes(@androidx.annotation.DrawableRes val drawableId: Int) : SparkIcon()
-    public data class AnimatedDrawableRes(@androidx.annotation.DrawableRes val drawableId: Int) : SparkIcon()
-    public data class Vector(val imageVector: ImageVector) : SparkIcon()
-}
+public object SparkAnimatedIcons
+
+public val SparkAnimatedIcons.BellShake: AnimatedDrawableRes
+    get() = AnimatedDrawableRes(R.drawable.spark_icons_animated_bell_shake)
+
+public val SparkAnimatedIcons.SearchToOutline: AnimatedDrawableRes
+    get() = AnimatedDrawableRes(R.drawable.spark_icons_animated_search)
+
+public val SparkAnimatedIcons.LikeToFill: AnimatedDrawableRes
+    get() = AnimatedDrawableRes(R.drawable.spark_icons_animated_like)
+
+public val SparkAnimatedIcons.AddToFill: AnimatedDrawableRes
+    get() = AnimatedDrawableRes(R.drawable.spark_icons_animated_add)
+
+public val SparkAnimatedIcons.MessageToOutline: AnimatedDrawableRes
+    get() = AnimatedDrawableRes(R.drawable.spark_icons_animated_message)
+
+public val SparkAnimatedIcons.AccountToFill: AnimatedDrawableRes
+    get() = AnimatedDrawableRes(R.drawable.spark_icons_animated_account)
+
+public val SparkAnimatedIcons.AccountToFillAlt: AnimatedDrawableRes
+    get() = AnimatedDrawableRes(R.drawable.spark_icons_animated_account_alt)

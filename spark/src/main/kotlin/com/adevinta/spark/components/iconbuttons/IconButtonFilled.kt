@@ -68,6 +68,7 @@ public fun IconButtonFilled(
     size: IconButtonSize = IconButtonDefaults.DefaultSize,
     contentDescription: String? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    atEnd: Boolean = false,
 ) {
     val colors = IconButtonDefaults.filledIconButtonColors(intent.colors())
     SparkIconButton(
@@ -81,6 +82,7 @@ public fun IconButtonFilled(
         size = size,
         contentDescription = contentDescription,
         interactionSource = interactionSource,
+        atEnd = atEnd,
     )
 }
 
