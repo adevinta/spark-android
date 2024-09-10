@@ -148,16 +148,15 @@ public fun IconsScreen(
                 text = "Icon",
                 onClick = { showIcons = !showIcons },
                 style = ChipStyles.Tinted,
-                leadingIcon = if (showIcons) SparkIcons.Check else null
+                leadingIcon = if (showIcons) SparkIcons.Check else null,
             )
             ChipSelectable(
                 selected = showAnimatedIcons,
                 text = "Animated Icon",
                 onClick = { showAnimatedIcons = !showAnimatedIcons },
                 style = ChipStyles.Tinted,
-                leadingIcon = if (showAnimatedIcons) SparkIcons.Check else null
+                leadingIcon = if (showAnimatedIcons) SparkIcons.Check else null,
             )
-
         }
         LazyVerticalGrid(
             modifier = modifier

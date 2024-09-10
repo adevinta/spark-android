@@ -235,7 +235,6 @@ public fun RowScope.NavigationBarItem(
         animationSpec = tween(ItemAnimationDurationMillis),
     )
     val styledIcon = @Composable {
-
         // If there's a label, don't have a11y services repeat the icon description.
         val clearSemantics = label != null
         Box(modifier = if (clearSemantics) Modifier.clearAndSetSemantics {} else Modifier) {

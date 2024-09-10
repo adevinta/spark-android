@@ -32,7 +32,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,7 +50,6 @@ import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
 @Composable
@@ -100,7 +98,7 @@ internal fun IconExampleScreen(icon: SparkIcon, name: String, isAnimated: Boolea
         ButtonFilled(onClick = { atEnd = !atEnd }, text = name, icon = icon, atEnd = atEnd)
         TagFilled(text = name, leadingIcon = icon, atEnd = atEnd)
         ChipTinted(
-            onClick = { atEnd = !atEnd }
+            onClick = { atEnd = !atEnd },
         ) {
             Text(text = name)
             Icon(sparkIcon = icon, contentDescription = name)

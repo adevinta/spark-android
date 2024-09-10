@@ -92,7 +92,7 @@ public fun TagOutlined(
         ),
         leadingIcon = leadingIcon,
         tint = tint,
-        atEnd = atEnd
+        atEnd = atEnd,
     )
 }
 
@@ -124,7 +124,7 @@ public fun TagOutlined(
         ),
         leadingIcon = leadingIcon,
         tint = tint,
-        atEnd = atEnd
+        atEnd = atEnd,
     )
 }
 
