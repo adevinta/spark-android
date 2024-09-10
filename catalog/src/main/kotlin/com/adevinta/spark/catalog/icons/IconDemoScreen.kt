@@ -59,7 +59,7 @@ public fun IconDemoScreen(
             ) { navBackStackEntry ->
                 val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
                 val isAnimated = arguments.getBoolean(IconAnimatedArgName)
-                val icon = if(isAnimated) {
+                val icon = if (isAnimated) {
                     SparkIcon.AnimatedDrawableRes(arguments.getInt(IconIdArgName))
                 } else {
                     SparkIcon.DrawableRes(arguments.getInt(IconIdArgName))

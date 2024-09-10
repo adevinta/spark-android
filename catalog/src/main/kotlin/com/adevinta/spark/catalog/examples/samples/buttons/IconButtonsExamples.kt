@@ -24,11 +24,9 @@ package com.adevinta.spark.catalog.examples.samples.buttons
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
@@ -41,9 +39,6 @@ import com.adevinta.spark.components.iconbuttons.IconButtonTinted
 import com.adevinta.spark.icons.BellShake
 import com.adevinta.spark.icons.SparkAnimatedIcons
 import com.adevinta.spark.icons.SparkIcon
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlin.time.Duration.Companion.seconds
 
 private const val IconButtonsExampleDescription = "Icon Button examples"
 private const val IconButtonsExampleSourceUrl = "$SampleSourceUrl/IconButtonSamples.kt"
