@@ -141,6 +141,8 @@ public fun ChipTinted(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
     Chip(
@@ -150,6 +152,8 @@ public fun ChipTinted(
         modifier = modifier,
         enabled = enabled,
         interactionSource = interactionSource,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
         content = content,
     )
 }
@@ -170,9 +174,14 @@ internal fun ChipTintedPreview() {
                         },
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    ChipTinted(intent = intent, enabled = enabled) {
+                    ChipTinted(
+                        intent = intent,
+                        enabled = enabled,
+                        trailingIcon = {
+                            Badge(hasStroke = false, count = 1)
+                        },
+                    ) {
                         Text("Chip")
-                        Badge(hasStroke = false, count = 1)
                     }
                     ChipTinted(intent.name, intent = intent, leadingIcon = SparkIcons.OfferOutline, enabled = enabled)
                     ChipTinted(intent.name, intent = intent, enabled = enabled)
