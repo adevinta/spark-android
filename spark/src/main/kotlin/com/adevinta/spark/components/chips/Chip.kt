@@ -30,6 +30,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.Interaction
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
@@ -37,7 +38,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.ripple.rememberRipple
@@ -53,21 +53,25 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Placeable
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.offset
+import androidx.compose.ui.util.fastFirstOrNull
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.SparkTheme.colors
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.textfields.heightOrZero
+import com.adevinta.spark.components.textfields.widthOrZero
 import com.adevinta.spark.icons.DeleteOutline
 import com.adevinta.spark.icons.OfferOutline
 import com.adevinta.spark.icons.SparkIcon
@@ -172,11 +176,7 @@ private fun SparkChipSelectable(
         contentColor = contentColor,
         interactionSource = interactionSource,
     ) {
-        CompositionLocalProvider(
-            LocalTextStyle provides SparkTheme.typography.body2,
-        ) {
-            content()
-        }
+        content()
     }
 }
 
@@ -212,7 +212,9 @@ public fun Chip(
     style: ChipStyles = ChipStyles.Outlined,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    content: @Composable RowScope.() -> Unit,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    content: @Composable (RowScope.() -> Unit)?,
 ) {
     val containerColor by containerColor(intent, style, enabled, selected = false)
     val contentColor by contentColor(intent, style, enabled, selected = false)
@@ -229,47 +231,20 @@ public fun Chip(
         border = border,
         interactionSource = interactionSource,
     ) {
-        Row(
-            Modifier
-                .ifTrue(style == ChipStyles.Dashed) {
-                    dashedBorder(
-                        width = ChipDefaults.BorderStrokeWidth,
-                        shape = SparkTheme.shapes.small,
-                        color = contentColor,
-                    )
+        ChipContent(
+            label = content,
+            contentColor = contentColor,
+            leadingIcon = leadingIcon,
+            trailingIcon = when {
+                trailingIcon != null -> trailingIcon
+                onClose != null -> {
+                    { CloseIconButton(onClose, enabled, onCloseLabel) }
                 }
-                // FIXME-scott.rayapoulle (12-08-2024):Fix to prevent chip from having a width of zero when used
-                // in a scroll container #1238
-                .widthIn(max = 9000.dp)
-                .defaultMinSize(minHeight = ChipDefaults.MinHeight)
-                .padding(ChipDefaults.ChipPadding),
-            horizontalArrangement = Arrangement.spacedBy(
-                ChipDefaults.LeadingIconEndSpacing,
-                Alignment.CenterHorizontally,
-            ),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            content()
-            AnimatedVisibility(visible = onClose != null) {
-                Icon(
-                    sparkIcon = SparkIcons.DeleteOutline,
-                    modifier = Modifier
-                        .size(ChipDefaults.LeadingIconSize)
-                        .clickable(
-                            onClick = onClose ?: {},
-                            enabled = enabled,
-                            onClickLabel = onCloseLabel,
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(
-                                bounded = false,
-                                radius = 24.dp / 2,
-                            ),
-                        ),
-                    contentDescription = null,
-                    tint = LocalContentColor.current,
-                )
-            }
-        }
+
+                else -> null
+            },
+            style = style,
+        )
     }
 }
 
@@ -305,7 +280,9 @@ public fun ChipSelectable(
     style: ChipStyles = ChipStyles.Outlined,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    content: @Composable RowScope.() -> Unit,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
+    content: @Composable (RowScope.() -> Unit)?,
 ) {
     val containerColor by containerColor(intent, style, enabled, selected)
     val contentColor by contentColor(intent, style, enabled, selected)
@@ -323,48 +300,47 @@ public fun ChipSelectable(
         border = border,
         interactionSource = interactionSource,
     ) {
-        Row(
-            Modifier
-                .ifTrue(style == ChipStyles.Dashed) {
-                    dashedBorder(
-                        width = ChipDefaults.BorderStrokeWidth,
-                        shape = SparkTheme.shapes.small,
-                        color = contentColor,
-                    )
+        ChipContent(
+            label = content,
+            contentColor = contentColor,
+            leadingIcon = leadingIcon,
+            trailingIcon = when {
+                trailingIcon != null -> trailingIcon
+                onClose != null -> {
+                    { CloseIconButton(onClose, enabled, onCloseLabel) }
                 }
-                // FIXME-scott.rayapoulle (12-08-2024):Fix to prevent chip from having a width of zero when used
-                // in a scroll container #1238
-                .widthIn(max = 9000.dp)
-                .defaultMinSize(minHeight = ChipDefaults.MinHeight)
-                .animateContentSize()
-                .padding(ChipDefaults.ChipPadding),
-            horizontalArrangement = Arrangement.spacedBy(
-                ChipDefaults.LeadingIconEndSpacing,
-                Alignment.CenterHorizontally,
-            ),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            content()
-            AnimatedVisibility(visible = onClose != null) {
-                Icon(
-                    sparkIcon = SparkIcons.DeleteOutline,
-                    modifier = Modifier
-                        .size(ChipDefaults.LeadingIconSize)
-                        .clickable(
-                            onClick = onClose ?: {},
-                            enabled = enabled,
-                            onClickLabel = onCloseLabel,
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(
-                                bounded = false,
-                                radius = 24.dp / 2,
-                            ),
-                        ),
-                    contentDescription = null,
-                    tint = LocalContentColor.current,
-                )
-            }
-        }
+
+                else -> null
+            },
+            style = style,
+        )
+    }
+}
+
+@Composable
+private fun CloseIconButton(
+    onClose: (() -> Unit)?,
+    enabled: Boolean,
+    onCloseLabel: String?,
+) {
+    AnimatedVisibility(visible = onClose != null) {
+        Icon(
+            sparkIcon = SparkIcons.DeleteOutline,
+            modifier = Modifier
+                .size(ChipDefaults.LeadingIconSize)
+                .clickable(
+                    onClick = onClose ?: {},
+                    enabled = enabled,
+                    onClickLabel = onCloseLabel,
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple(
+                        bounded = false,
+                        radius = 24.dp / 2,
+                    ),
+                ),
+            contentDescription = null,
+            tint = LocalContentColor.current,
+        )
     }
 }
 
@@ -421,21 +397,19 @@ public fun Chip(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
+        leadingIcon = leadingIcon?.let {
+            {
+                Icon(
+                    sparkIcon = leadingIcon,
+                    modifier = Modifier.size(ChipDefaults.LeadingIconSize),
+                    contentDescription = contentDescription,
+                    tint = LocalContentColor.current,
+                )
+            }
+        },
         interactionSource = interactionSource,
-    ) {
-        if (leadingIcon != null) {
-            Icon(
-                sparkIcon = leadingIcon,
-                modifier = Modifier.size(ChipDefaults.LeadingIconSize),
-                contentDescription = contentDescription,
-                tint = LocalContentColor.current,
-            )
-        }
-
-        if (text != null) {
-            Text(text = text)
-        }
-    }
+        content = text?.let { { Text(text = text) } },
+    )
 }
 
 /**
@@ -483,18 +457,123 @@ public fun ChipSelectable(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
+        leadingIcon = leadingIcon?.let {
+            {
+                Icon(
+                    sparkIcon = leadingIcon,
+                    modifier = Modifier.size(ChipDefaults.LeadingIconSize),
+                    contentDescription = contentDescription,
+                    tint = LocalContentColor.current,
+                )
+            }
+        },
         interactionSource = interactionSource,
+        content = text?.let {
+            {
+                Text(text = text)
+            }
+        },
+    )
+}
+
+@Composable
+private fun ChipContent(
+    label: @Composable (RowScope.() -> Unit)?,
+    contentColor: Color,
+    leadingIcon: @Composable (() -> Unit)?,
+    trailingIcon: @Composable (() -> Unit)?,
+    style: ChipStyles = ChipStyles.Outlined,
+) {
+    CompositionLocalProvider(
+        LocalContentColor provides contentColor,
+        LocalTextStyle provides SparkTheme.typography.body2,
     ) {
-        if (leadingIcon != null) {
-            Icon(
-                sparkIcon = leadingIcon,
-                modifier = Modifier.size(ChipDefaults.LeadingIconSize),
-                contentDescription = contentDescription,
-                tint = LocalContentColor.current,
-            )
-        }
-        if (text != null) {
-            Text(text = text)
+        Layout(
+            modifier = Modifier
+                .ifTrue(style == ChipStyles.Dashed) {
+                    dashedBorder(
+                        width = ChipDefaults.BorderStrokeWidth,
+                        shape = SparkTheme.shapes.small,
+                        color = contentColor,
+                    )
+                }
+                .defaultMinSize(minHeight = ChipDefaults.MinHeight)
+                .animateContentSize()
+                .padding(ChipDefaults.ChipPadding),
+            content = {
+                if (leadingIcon != null) {
+                    Box(
+                        modifier = Modifier
+                            .layoutId(LeadingIconLayoutId),
+                        contentAlignment = Alignment.Center,
+                        content = {
+                            CompositionLocalProvider(
+                                LocalContentColor provides contentColor,
+                                content = leadingIcon,
+                            )
+                        },
+                    )
+                }
+                if (label != null) {
+                    Row(
+                        modifier = Modifier
+                            .layoutId(LabelLayoutId)
+                            .padding(
+                                start = if (leadingIcon != null) 4.dp else 0.dp,
+                                end = if (trailingIcon != null) 4.dp else 0.dp,
+                            ),
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically,
+                        content = { label() },
+                    )
+                }
+
+                if (trailingIcon != null) {
+                    Box(
+                        modifier = Modifier
+                            .layoutId(TrailingIconLayoutId),
+                        contentAlignment = Alignment.Center,
+                        content = {
+                            CompositionLocalProvider(
+                                LocalContentColor provides contentColor,
+                                content = trailingIcon,
+                            )
+                        },
+                    )
+                }
+            },
+        ) { measurables, constraints ->
+            val leadingIconPlaceable: Placeable? =
+                measurables.fastFirstOrNull { it.layoutId == LeadingIconLayoutId }
+                    ?.measure(constraints.copy(minWidth = 0, minHeight = 0))
+            val leadingIconWidth = widthOrZero(leadingIconPlaceable)
+            val leadingIconHeight = heightOrZero(leadingIconPlaceable)
+
+            val trailingIconPlaceable: Placeable? =
+                measurables.fastFirstOrNull { it.layoutId == TrailingIconLayoutId }
+                    ?.measure(constraints.copy(minWidth = 0, minHeight = 0))
+            val trailingIconWidth = widthOrZero(trailingIconPlaceable)
+            val trailingIconHeight = heightOrZero(trailingIconPlaceable)
+
+            val labelPlaceable = measurables.fastFirstOrNull { it.layoutId == LabelLayoutId }
+                ?.measure(
+                    constraints.offset(horizontal = -(leadingIconWidth + trailingIconWidth)),
+                )
+
+            val width = leadingIconWidth + widthOrZero(labelPlaceable) + trailingIconWidth
+            val height = maxOf(leadingIconHeight, heightOrZero(labelPlaceable), trailingIconHeight)
+
+            layout(width, height) {
+                leadingIconPlaceable?.placeRelative(
+                    0,
+                    Alignment.CenterVertically.align(leadingIconHeight, height),
+                )
+                labelPlaceable?.placeRelative(leadingIconWidth, 0)
+                trailingIconPlaceable?.placeRelative(
+                    leadingIconWidth + widthOrZero(labelPlaceable),
+                    Alignment.CenterVertically.align(trailingIconHeight, height),
+                )
+            }
         }
     }
 }
@@ -531,6 +610,10 @@ private fun contentColor(
     return animateColorAsState(target, label = "chip content color")
 }
 
+private const val LeadingIconLayoutId = "leadingIcon"
+private const val LabelLayoutId = "label"
+private const val TrailingIconLayoutId = "trailingIcon"
+
 @Preview
 @Composable
 private fun ChipPreview() {
@@ -545,6 +628,12 @@ private fun ChipPreview() {
             ChipOutlined("outlined", leadingIcon = leadingIcon, enabled = false)
             ChipTinted("tinted", leadingIcon = leadingIcon, enabled = false)
             ChipDashed("dashed", leadingIcon = leadingIcon, enabled = false)
+        }
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            ChipOutlined("leading", leadingIcon = leadingIcon, enabled = false)
+            ChipTinted("label", leadingIcon = leadingIcon, enabled = false)
+            ChipDashed("trailing", leadingIcon = leadingIcon, enabled = false)
+            ChipDashed("none", leadingIcon = leadingIcon, enabled = false)
         }
     }
 }
@@ -593,6 +682,33 @@ private fun SelectableChipPreview() {
             ChipSelectable(
                 selected,
                 onClick = { selected = !selected },
+                style = ChipStyles.Dashed,
+                text = "dashed",
+                onClose = {},
+                leadingIcon = leadingIcon,
+                enabled = false,
+            )
+            ChipSelectable(
+                selected,
+                onClick = { selected = !selected },
+                style = ChipStyles.Dashed,
+                text = null,
+//                onClose = {},
+                leadingIcon = leadingIcon,
+                enabled = false,
+            )
+            ChipSelectable(
+                selected,
+                onClick = { selected = !selected },
+                style = ChipStyles.Dashed,
+                text = null,
+                onClose = {},
+//                leadingIcon = leadingIcon,
+                enabled = false,
+            )
+            ChipSelectable(
+                selected,
+                onClick = { selected = !selected },
                 style = ChipStyles.Tinted,
                 text = "tinted",
                 leadingIcon = leadingIcon,
@@ -606,34 +722,7 @@ private fun SelectableChipPreview() {
                 leadingIcon = leadingIcon,
                 enabled = false,
             )
-
-            ChipSelectable(
-                content = {
-                    ChipContent(stringResource(R.string.spark_textfield_content_description))
-                },
-                onClick = { },
-                enabled = true,
-                selected = true,
-            )
         }
-    }
-}
-
-@Composable
-private fun RowScope.ChipContent(
-    label: String,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    trailingIcon: @Composable (() -> Unit)? = null,
-) {
-    leadingIcon?.let { leadingIcon() }
-    Text(
-        text = label,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-        modifier = Modifier.weight(weight = 1f, fill = false),
-    )
-    trailingIcon?.let {
-        trailingIcon()
     }
 }
 

@@ -63,6 +63,8 @@ public fun ChipDashed(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
     Chip(
@@ -72,6 +74,8 @@ public fun ChipDashed(
         modifier = modifier,
         enabled = enabled,
         interactionSource = interactionSource,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
         content = content,
     )
 }
@@ -170,9 +174,14 @@ internal fun ChipDashedPreview() {
                         },
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    ChipDashed(intent = intent, enabled = enabled) {
+                    ChipDashed(
+                        intent = intent,
+                        enabled = enabled,
+                        trailingIcon = {
+                            Badge(hasStroke = false, count = 1)
+                        },
+                    ) {
                         Text("Chip")
-                        Badge(hasStroke = false, count = 1)
                     }
                     ChipDashed(intent.name, intent = intent, leadingIcon = SparkIcons.OfferOutline, enabled = enabled)
                     ChipDashed(intent.name, intent = intent, enabled = enabled)

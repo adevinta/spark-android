@@ -141,6 +141,8 @@ public fun ChipOutlined(
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit = {},
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     content: @Composable RowScope.() -> Unit,
 ) {
     Chip(
@@ -150,6 +152,8 @@ public fun ChipOutlined(
         modifier = modifier,
         enabled = enabled,
         interactionSource = interactionSource,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
         content = content,
     )
 }
@@ -170,9 +174,14 @@ internal fun ChipOutlinedPreview() {
                         },
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
-                    ChipOutlined(intent = intent, enabled = enabled) {
+                    ChipOutlined(
+                        intent = intent,
+                        enabled = enabled,
+                        trailingIcon = {
+                            Badge(hasStroke = false, count = 1)
+                        },
+                    ) {
                         Text("Chip")
-                        Badge(hasStroke = false, count = 1)
                     }
                     ChipOutlined(
                         text = intent.name,
