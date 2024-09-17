@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.tokens
 
 import androidx.compose.foundation.Indication
@@ -83,7 +82,7 @@ import com.adevinta.spark.SparkTheme
 public fun ripple(
     bounded: Boolean = true,
     radius: Dp = Dp.Unspecified,
-    color: Color = Color.Unspecified
+    color: Color = Color.Unspecified,
 ): IndicationNodeFactory {
     return if (radius == Dp.Unspecified && color == Color.Unspecified) {
         if (bounded) return DefaultBoundedRipple else DefaultUnboundedRipple
@@ -130,7 +129,7 @@ public fun ripple(
 public fun ripple(
     color: ColorProducer,
     bounded: Boolean = true,
-    radius: Dp = Dp.Unspecified
+    radius: Dp = Dp.Unspecified,
 ): IndicationNodeFactory {
     return RippleNodeFactory(bounded, radius, color)
 }
@@ -140,18 +139,18 @@ private class RippleNodeFactory private constructor(
     private val bounded: Boolean,
     private val radius: Dp,
     private val colorProducer: ColorProducer?,
-    private val color: Color
+    private val color: Color,
 ) : IndicationNodeFactory {
     constructor(
         bounded: Boolean,
         radius: Dp,
-        colorProducer: ColorProducer
+        colorProducer: ColorProducer,
     ) : this(bounded, radius, colorProducer, Color.Unspecified)
 
     constructor(
         bounded: Boolean,
         radius: Dp,
-        color: Color
+        color: Color,
     ) : this(bounded, radius, null, color)
 
     override fun create(interactionSource: InteractionSource): DelegatableNode {
@@ -241,8 +240,8 @@ private class DelegatingThemeAwareRippleNode(
                 bounded,
                 radius,
                 calculateColor,
-                calculateRippleAlpha
-            )
+                calculateRippleAlpha,
+            ),
         )
     }
 
@@ -254,12 +253,12 @@ private class DelegatingThemeAwareRippleNode(
 private val DefaultBoundedRipple = RippleNodeFactory(
     bounded = true,
     radius = Dp.Unspecified,
-    color = Color.Unspecified
+    color = Color.Unspecified,
 )
 private val DefaultUnboundedRipple = RippleNodeFactory(
     bounded = false,
     radius = Dp.Unspecified,
-    color = Color.Unspecified
+    color = Color.Unspecified,
 )
 
 /**

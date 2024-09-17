@@ -151,7 +151,7 @@ public fun SparkTheme(
         ) {
             CompositionLocalProvider(
                 LocalContentColor provides SparkTheme.colors.onSurface,
-                LocalRippleConfiguration provides RippleConfiguration(rippleAlpha = RippleAlpha)
+                LocalRippleConfiguration provides RippleConfiguration(rippleAlpha = RippleAlpha),
             ) {
                 ProvideTextStyle(value = SparkTheme.typography.body2) {
                     content()

@@ -152,7 +152,7 @@ internal fun Handle(
             intentColor.containerColor
         } else {
             intentColor.containerColor.transparent
-        }
+        },
     )
     val handleColorBorder by animateColorAsState(
         label = "handleBorder",
@@ -160,7 +160,7 @@ internal fun Handle(
             intentColor.color
         } else {
             intentColor.color.transparent
-        }
+        },
     )
 
     Box(

@@ -477,7 +477,6 @@ private fun Modifier.surface(
             Modifier
         },
     )
-
     .then(if (border != null) Modifier.border(border, shape) else Modifier)
     .background(color = backgroundColor, shape = shape)
     .clip(shape)
