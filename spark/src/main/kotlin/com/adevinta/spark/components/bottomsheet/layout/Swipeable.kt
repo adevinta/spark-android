@@ -608,7 +608,7 @@ public fun <T> Modifier.swipeable(
     thresholds: (from: T, to: T) -> ThresholdConfig = { _, _ -> FixedThreshold(56.dp) },
     resistance: ResistanceConfig? = resistanceConfig(anchors.keys),
     velocityThreshold: Dp = VelocityThreshold,
-): Modifier = this then composed(
+): Modifier = composed(
     inspectorInfo = debugInspectorInfo {
         name = "swipeable"
         properties["state"] = state

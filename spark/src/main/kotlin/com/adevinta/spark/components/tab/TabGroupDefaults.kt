@@ -24,6 +24,7 @@ package com.adevinta.spark.components.tab
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -40,6 +41,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 
 /**
@@ -89,7 +91,7 @@ internal object TabGroupDefaults {
     @Suppress("ComposeModifierComposed") // Fork from M3 Tab that will be removed once the api is stable
     internal fun Modifier.tabIndicatorOffset(
         currentTabPosition: TabPosition,
-    ): Modifier = this then composed(
+    ): Modifier = composed(
         inspectorInfo = debugInspectorInfo {
             name = "tabIndicatorOffset"
             value = currentTabPosition
@@ -100,14 +102,14 @@ internal object TabGroupDefaults {
             animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
             label = "currentTabWidth",
         )
-        val indicatorOffset by animateDpAsState(
-            targetValue = currentTabPosition.left,
+        val indicatorOffset by animateIntOffsetAsState(
+            targetValue = IntOffset(x = currentTabPosition.left.value.toInt(), 0),
             animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
             label = "indicatorOffset",
         )
         fillMaxWidth()
             .wrapContentSize(Alignment.BottomStart)
-            .offset(x = indicatorOffset)
+            .offset { indicatorOffset }
             .width(currentTabWidth)
     }
 }

@@ -124,7 +124,7 @@ internal fun Modifier.placeholder(
         spring()
     },
     contentFadeTransitionSpec: @Composable Transition.Segment<Boolean>.() -> FiniteAnimationSpec<Float> = { spring() },
-): Modifier = this then composed(
+): Modifier = composed(
     inspectorInfo = debugInspectorInfo {
         name = "placeholder"
         value = visible
