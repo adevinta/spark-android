@@ -21,10 +21,9 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.divider
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,7 +36,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.divider.DividerIntent
 import com.adevinta.spark.components.divider.HorizontalDivider
@@ -47,7 +47,6 @@ import com.adevinta.spark.components.divider.VerticalDivider
 import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
-import com.adevinta.spark.tokens.highlight
 
 public val DividerConfigurator: Configurator = Configurator(
     name = "Divider",
@@ -57,109 +56,71 @@ public val DividerConfigurator: Configurator = Configurator(
     DividerSample()
 }
 
-@Preview(
-    showBackground = true,
-)
+
 @Composable
-private fun DividerSample() {
-    Column {
-        var intent by remember { mutableStateOf(DividerIntent.Outline) }
-        var hLabelAlignments by remember { mutableStateOf(LabelHorizontalAlignment.Center) }
-        var vLabelAlignments by remember { mutableStateOf(LabelVerticalAlignment.Center) }
-        var labelText by remember { mutableStateOf("label") }
+private fun ColumnScope.DividerSample() {
+    var intent by remember { mutableStateOf(DividerIntent.Outline) }
+    var hLabelAlignments by remember { mutableStateOf(LabelHorizontalAlignment.Center) }
+    var vLabelAlignments by remember { mutableStateOf(LabelVerticalAlignment.Center) }
+    var labelText by remember { mutableStateOf("label") }
 
-        Column {
-            Text(
-                text = "Divider Intent",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.highlight,
-            )
-            val dividerIntents = DividerIntent.entries.map(DividerIntent::name)
-            SegmentedButton(
-                options = dividerIntents,
-                selectedOption = intent.name,
-                onOptionSelect = { intent = DividerIntent.valueOf(it) },
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-        VerticalSpacer(8.dp)
+    ButtonGroup(
+        title = "Divider Intent",
+        selectedOption = intent,
+        onOptionSelect = { intent = it },
+    )
 
-        Text(
-            text = "HorizontalDivider",
-            style = SparkTheme.typography.headline2,
-        )
+    Text(
+        text = "HorizontalDivider",
+        style = SparkTheme.typography.headline2,
+    )
 
-        HorizontalDivider(
-            intent = intent,
-            label = if (labelText.isEmpty()) {
-                null
-            } else {
-                { TextComposable(label = labelText) }
-            },
-            labelHorizontalAlignment = hLabelAlignments,
-        )
-        VerticalSpacer(8.dp)
+    HorizontalDivider(
+        intent = intent,
+        label = labelText.takeUnless { it.isBlank() }?.let { { TextComposable(label = it) } },
+        labelHorizontalAlignment = hLabelAlignments,
+    )
 
-        Text(
-            text = "VerticalDivider",
-            style = SparkTheme.typography.headline2,
-        )
+    Text(
+        text = "VerticalDivider",
+        style = SparkTheme.typography.headline2,
+    )
 
-        VerticalDivider(
-            modifier = Modifier
-                .height(200.dp)
-                .fillMaxWidth(),
-            intent = intent,
-            label = if (labelText.isEmpty()) {
-                null
-            } else {
-                {
-                    TextComposable(label = labelText)
-                }
-            },
-            labelVerticalAlignment = vLabelAlignments,
-        )
+    VerticalDivider(
+        modifier = Modifier
+            .height(200.dp)
+            .fillMaxWidth(),
+        intent = intent,
+        label = labelText.takeUnless { it.isBlank() }?.let { { TextComposable(label = it) } },
+        labelVerticalAlignment = vLabelAlignments,
+    )
 
-        Column {
-            Text(
-                text = "HorizontalDivider Label Alignment",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.highlight,
-            )
-            val labelAlignments = LabelHorizontalAlignment.entries.map(LabelHorizontalAlignment::name)
-            SegmentedButton(
-                options = labelAlignments,
-                selectedOption = hLabelAlignments.name,
-                onOptionSelect = { hLabelAlignments = LabelHorizontalAlignment.valueOf(it) },
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
-        VerticalSpacer(8.dp)
+    ButtonGroup(
+        title = "HorizontalDivider Label Alignment",
+        selectedOption = hLabelAlignments,
+        onOptionSelect = { hLabelAlignments = it },
+    )
 
-        Column {
-            Text(
-                text = "VerticalDivider Label Alignment",
-                modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.highlight,
-            )
-            val labelAlignments = LabelVerticalAlignment.entries.map(LabelVerticalAlignment::name)
-            SegmentedButton(
-                options = labelAlignments,
-                selectedOption = vLabelAlignments.name,
-                onOptionSelect = { vLabelAlignments = LabelVerticalAlignment.valueOf(it) },
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
+    ButtonGroup(
+        title = "VerticalDivider Label Alignment",
+        selectedOption = vLabelAlignments,
+        onOptionSelect = { vLabelAlignments = it },
+    )
 
-        VerticalSpacer(8.dp)
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = labelText,
+        onValueChange = { labelText = it },
+        label = "Change label",
+        helper = "Divider label",
+    )
+}
 
-        TextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = labelText,
-            onValueChange = { labelText = it },
-            label = "Change label",
-            helper = "Divider label",
-        )
+@Composable
+@Preview
+private fun DividerSamplePreview() {
+    PreviewTheme {
+        DividerSample()
     }
 }
 
