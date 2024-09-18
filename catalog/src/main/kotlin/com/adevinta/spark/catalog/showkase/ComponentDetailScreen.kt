@@ -157,7 +157,7 @@ private fun getCollabsableTextAndIcon(showDocumentation: Boolean) = if (showDocu
     stringResource(R.string.showkase_browser_show_documentation) to SparkIcons.ArrowHorizontalDown
 }
 
-internal fun Modifier.generateComposableModifier(metadata: ShowkaseBrowserComponent) = this then composed {
+internal fun Modifier.generateComposableModifier(metadata: ShowkaseBrowserComponent) = composed {
     val baseModifier = sizeIn(maxHeight = Dp(LocalConfiguration.current.screenHeightDp.toFloat()))
     when {
         metadata.heightDp != null && metadata.widthDp != null -> baseModifier.size(

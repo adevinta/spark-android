@@ -608,7 +608,7 @@ public fun <T> Modifier.swipeable(
     thresholds: (from: T, to: T) -> ThresholdConfig = { _, _ -> FixedThreshold(56.dp) },
     resistance: ResistanceConfig? = resistanceConfig(anchors.keys),
     velocityThreshold: Dp = VelocityThreshold,
-): Modifier = this then composed(
+): Modifier = composed(
     inspectorInfo = debugInspectorInfo {
         name = "swipeable"
         properties["state"] = state
@@ -899,7 +899,7 @@ public val <T> SwipeableState<T>.PreUpPostDownNestedScrollConnection: NestedScro
     get() = object : NestedScrollConnection {
         override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
             val delta = available.toFloat()
-            return if (delta < 0 && source == NestedScrollSource.Drag) {
+            return if (delta < 0 && source == NestedScrollSource.UserInput) {
                 performDrag(delta).toOffset()
             } else {
                 Offset.Zero
@@ -911,7 +911,7 @@ public val <T> SwipeableState<T>.PreUpPostDownNestedScrollConnection: NestedScro
             available: Offset,
             source: NestedScrollSource,
         ): Offset {
-            return if (source == NestedScrollSource.Drag) {
+            return if (source == NestedScrollSource.UserInput) {
                 performDrag(available.toFloat()).toOffset()
             } else {
                 Offset.Zero

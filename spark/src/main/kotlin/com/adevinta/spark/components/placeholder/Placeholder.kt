@@ -56,7 +56,7 @@ import com.adevinta.spark.SparkTheme
  *
  * @param visible whether the placeholder should be visible or not.
  */
-public fun Modifier.placeholder(visible: Boolean): Modifier = this then basePlaceholder(visible = visible)
+public fun Modifier.placeholder(visible: Boolean): Modifier = basePlaceholder(visible = visible)
 
 /**
  * Draws some skeleton UI which is typically used whilst content is 'loading'.
@@ -74,7 +74,7 @@ public fun Modifier.placeholder(visible: Boolean): Modifier = this then basePlac
  *
  * @param visible whether the placeholder should be visible or not.
  */
-public fun Modifier.textPlaceholder(visible: Boolean): Modifier = this then composed {
+public fun Modifier.textPlaceholder(visible: Boolean): Modifier = composed {
     basePlaceholder(
         visible = visible,
         shape = SparkTheme.shapes.full,
@@ -102,7 +102,7 @@ public fun Modifier.textPlaceholder(visible: Boolean): Modifier = this then comp
 public fun Modifier.illustrationPlaceholder(
     visible: Boolean,
     shape: Shape,
-): Modifier = this then composed {
+): Modifier = composed {
     basePlaceholder(
         visible = visible,
         highlight = PlaceholderHighlight.shimmer(),

@@ -43,14 +43,8 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.ripple.LocalRippleTheme
-import androidx.compose.material.ripple.RippleAlpha
-import androidx.compose.material.ripple.RippleTheme
-import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -130,142 +124,124 @@ internal fun ComponentActivity.CatalogApp(
             useSparkComponentsHighlighter = theme.highlightSparkComponents,
         ),
     ) {
-        CompositionLocalProvider(LocalRippleTheme provides SparkRippleTheme) {
-            val layoutDirection = when (theme.textDirection) {
-                TextDirection.LTR -> LayoutDirection.Ltr
-                TextDirection.RTL -> LayoutDirection.Rtl
-                TextDirection.System -> LocalLayoutDirection.current
-            }
+        val layoutDirection = when (theme.textDirection) {
+            TextDirection.LTR -> LayoutDirection.Ltr
+            TextDirection.RTL -> LayoutDirection.Rtl
+            TextDirection.System -> LocalLayoutDirection.current
+        }
 
-            // Update the edge to edge configuration to match the theme
-            // This is the same parameters as the default enableEdgeToEdge call, but we manually
-            // resolve whether or not to show dark theme using uiState, since it can be different
-            // than the configuration's dark theme value based on the user preference.
-            DisposableEffect(useDark) {
-                enableEdgeToEdge(
-                    statusBarStyle = SystemBarStyle.auto(
-                        android.graphics.Color.TRANSPARENT,
-                        android.graphics.Color.TRANSPARENT,
-                    ) { useDark },
-                    navigationBarStyle = SystemBarStyle.auto(
-                        lightScrim,
-                        darkScrim,
-                    ) { useDark },
-                )
-                onDispose {}
-            }
+        // Update the edge to edge configuration to match the theme
+        // This is the same parameters as the default enableEdgeToEdge call, but we manually
+        // resolve whether or not to show dark theme using uiState, since it can be different
+        // than the configuration's dark theme value based on the user preference.
+        DisposableEffect(useDark) {
+            enableEdgeToEdge(
+                statusBarStyle = SystemBarStyle.auto(
+                    android.graphics.Color.TRANSPARENT,
+                    android.graphics.Color.TRANSPARENT,
+                ) { useDark },
+                navigationBarStyle = SystemBarStyle.auto(
+                    lightScrim,
+                    darkScrim,
+                ) { useDark },
+            )
+            onDispose {}
+        }
 
-            TestHarness(
-                darkMode = useDark,
-                layoutDirection = layoutDirection,
-                fontScale = if (theme.fontScaleMode == FontScaleMode.System) {
-                    LocalDensity.current.fontScale
-                } else {
-                    theme.fontScale
-                },
+        TestHarness(
+            darkMode = useDark,
+            layoutDirection = layoutDirection,
+            fontScale = if (theme.fontScaleMode == FontScaleMode.System) {
+                LocalDensity.current.fontScale
+            } else {
+                theme.fontScale
+            },
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
             ) {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    val coroutineScope = rememberCoroutineScope()
-                    val homeScreenValues = CatalogHomeScreen.entries
-                    val pagerState = rememberPagerState(
-                        initialPage = CatalogHomeScreen.Examples.ordinal,
-                        pageCount = { homeScreenValues.size },
-                    )
+                val coroutineScope = rememberCoroutineScope()
+                val homeScreenValues = CatalogHomeScreen.entries
+                val pagerState = rememberPagerState(
+                    initialPage = CatalogHomeScreen.Examples.ordinal,
+                    pageCount = { homeScreenValues.size },
+                )
 
-                    BackdropScaffold(
-                        scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
-                        frontLayerScrimColor = Color.Unspecified,
-                        headerHeight = BackdropScaffoldDefaults.HeaderHeight +
-                            WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
-                        peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
-                            .calculateTopPadding(),
-                        backLayerBackgroundColor = SparkTheme.colors.mainContainer,
-                        appBar = {
-                            HomeTabBar(
-                                modifier = Modifier.statusBarsPadding(),
-                                tabSelected = homeScreenValues[pagerState.currentPage],
-                                onTabSelected = {
-                                    coroutineScope.launch {
-                                        pagerState.animateScrollToPage(
-                                            it.ordinal,
-                                            animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
-                                        )
-                                    }
-                                },
-                            )
-                        },
-                        backLayerContent = {
-                            ThemePicker(
-                                theme = theme,
-                                onThemeChange = { theme ->
-                                    coroutineScope.launch {
-                                        onThemeChange(theme)
-                                    }
-                                },
-                            )
-                        },
-                        frontLayerContent = {
-                            val insetsPadding = WindowInsets.navigationBars.asPaddingValues()
-                            val innerPadding = PaddingValues(
-                                top = 16.dp + insetsPadding.calculateTopPadding(),
-                                end = insetsPadding.calculateEndPadding(LocalLayoutDirection.current),
-                                bottom = insetsPadding.calculateBottomPadding(),
-                                start = insetsPadding.calculateStartPadding(LocalLayoutDirection.current),
-                            )
-                            HorizontalPager(
-                                state = pagerState,
-                                flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
-                            ) {
-                                when (homeScreenValues[it]) {
-                                    CatalogHomeScreen.Examples -> ComponentsScreen(
-                                        components = components,
-                                        contentPadding = innerPadding,
-                                    )
-
-                                    CatalogHomeScreen.Showkase -> {
-                                        BodyContent(
-                                            contentPadding = innerPadding,
-                                            groupedComponentMap = groupedComponentMap,
-                                            showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
-                                        )
-                                    }
-
-                                    CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
-                                        components = components,
-                                        contentPadding = innerPadding,
-                                    )
-
-                                    CatalogHomeScreen.Icons -> IconDemoScreen(
-                                        contentPadding = innerPadding,
+                BackdropScaffold(
+                    scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
+                    frontLayerScrimColor = Color.Unspecified,
+                    headerHeight = BackdropScaffoldDefaults.HeaderHeight +
+                        WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
+                    peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
+                        .calculateTopPadding(),
+                    backLayerBackgroundColor = SparkTheme.colors.mainContainer,
+                    appBar = {
+                        HomeTabBar(
+                            modifier = Modifier.statusBarsPadding(),
+                            tabSelected = homeScreenValues[pagerState.currentPage],
+                            onTabSelected = {
+                                coroutineScope.launch {
+                                    pagerState.animateScrollToPage(
+                                        it.ordinal,
+                                        animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
                                     )
                                 }
+                            },
+                        )
+                    },
+                    backLayerContent = {
+                        ThemePicker(
+                            theme = theme,
+                            onThemeChange = { theme ->
+                                coroutineScope.launch {
+                                    onThemeChange(theme)
+                                }
+                            },
+                        )
+                    },
+                    frontLayerContent = {
+                        val insetsPadding = WindowInsets.navigationBars.asPaddingValues()
+                        val innerPadding = PaddingValues(
+                            top = 16.dp + insetsPadding.calculateTopPadding(),
+                            end = insetsPadding.calculateEndPadding(LocalLayoutDirection.current),
+                            bottom = insetsPadding.calculateBottomPadding(),
+                            start = insetsPadding.calculateStartPadding(LocalLayoutDirection.current),
+                        )
+                        HorizontalPager(
+                            state = pagerState,
+                            flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
+                        ) {
+                            when (homeScreenValues[it]) {
+                                CatalogHomeScreen.Examples -> ComponentsScreen(
+                                    components = components,
+                                    contentPadding = innerPadding,
+                                )
+
+                                CatalogHomeScreen.Showkase -> {
+                                    BodyContent(
+                                        contentPadding = innerPadding,
+                                        groupedComponentMap = groupedComponentMap,
+                                        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
+                                    )
+                                }
+
+                                CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
+                                    components = components,
+                                    contentPadding = innerPadding,
+                                )
+
+                                CatalogHomeScreen.Icons -> IconDemoScreen(
+                                    contentPadding = innerPadding,
+                                )
                             }
-                        },
-                    )
-                }
+                        }
+                    },
+                )
             }
         }
     }
 }
-
-@Immutable
-private object SparkRippleTheme : RippleTheme {
-    @Composable
-    override fun defaultColor() = LocalContentColor.current
-
-    @Composable
-    override fun rippleAlpha() = DefaultRippleAlpha
-}
-
-private val DefaultRippleAlpha = RippleAlpha(
-    pressedAlpha = 0.36f,
-    focusedAlpha = 0.24f,
-    draggedAlpha = 0.16f,
-    hoveredAlpha = 0.24f,
-)
 
 @Composable
 private fun HomeTabBar(

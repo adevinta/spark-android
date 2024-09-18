@@ -93,6 +93,7 @@
             <name>androidx.compose.material3.RangeSlider</name>
             <name>androidx.compose.material3.rememberDrawerState</name>
             <name>androidx.compose.material3.rememberTopAppBarState</name>
+            <name>androidx.compose.material3.ripple</name>
             <name>androidx.compose.material3.Scaffold</name>
             <name>androidx.compose.material3.ScrollableTabRow</name>
             <name>androidx.compose.material3.Slider</name>
