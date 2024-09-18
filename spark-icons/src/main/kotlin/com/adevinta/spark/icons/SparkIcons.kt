@@ -274,6 +274,7 @@ public val SparkIcons.LikeOutline: DrawableRes get() = DrawableRes(R.drawable.sp
 public val SparkIcons.LinensProduct: DrawableRes get() = DrawableRes(R.drawable.spark_icons_linens_product)
 public val SparkIcons.LinensType: DrawableRes get() = DrawableRes(R.drawable.spark_icons_linens_type)
 public val SparkIcons.Link: DrawableRes get() = DrawableRes(R.drawable.spark_icons_link)
+public val SparkIcons.Linkedin: DrawableRes get() = DrawableRes(R.drawable.spark_icons_linkedin)
 public val SparkIcons.Listing: DrawableRes get() = DrawableRes(R.drawable.spark_icons_listing)
 public val SparkIcons.Litter: DrawableRes get() = DrawableRes(R.drawable.spark_icons_litter)
 public val SparkIcons.Loader: DrawableRes get() = DrawableRes(R.drawable.spark_icons_loader)
