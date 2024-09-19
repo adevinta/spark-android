@@ -148,7 +148,8 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
     }
 
     ButtonTinted(
-        modifier = Modifier.fillMaxWidth(), size = ButtonSize.Medium,
+        modifier = Modifier.fillMaxWidth(),
+        size = ButtonSize.Medium,
         onClick = {
             scope.launch {
                 snackbarHostState.showSnackbar(

@@ -44,7 +44,6 @@ import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.divider.LabelHorizontalAlignment
 import com.adevinta.spark.components.divider.LabelVerticalAlignment
 import com.adevinta.spark.components.divider.VerticalDivider
-import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 
@@ -55,7 +54,6 @@ public val DividerConfigurator: Configurator = Configurator(
 ) {
     DividerSample()
 }
-
 
 @Composable
 private fun ColumnScope.DividerSample() {

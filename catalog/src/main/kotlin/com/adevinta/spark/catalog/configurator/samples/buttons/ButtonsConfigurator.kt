@@ -35,7 +35,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
@@ -154,7 +153,6 @@ private fun ColumnScope.ButtonSample() {
         selectedOption = shape,
         onOptionSelect = { shape = it },
     )
-
 
     val intents = ButtonIntent.entries.toTypedArray()
     var expanded by remember { mutableStateOf(false) }

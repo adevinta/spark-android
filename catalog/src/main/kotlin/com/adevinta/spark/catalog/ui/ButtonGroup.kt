@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.ui
 
 import androidx.compose.foundation.layout.Column
@@ -35,14 +34,13 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.highlight
 import kotlin.enums.enumEntries
 
-
 @Composable
 private fun ButtonGroupLayout(
     title: String,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    Column(modifier = modifier.semantics(mergeDescendants = true) {  }) {
+    Column(modifier = modifier.semantics(mergeDescendants = true) { }) {
         Text(
             text = title,
             modifier = Modifier.padding(bottom = 8.dp),
