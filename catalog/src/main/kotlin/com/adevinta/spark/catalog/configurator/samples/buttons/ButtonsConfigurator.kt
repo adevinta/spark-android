@@ -24,11 +24,9 @@ package com.adevinta.spark.catalog.configurator.samples.buttons
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,11 +35,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonContrast
 import com.adevinta.spark.components.buttons.ButtonFilled
@@ -64,6 +63,7 @@ import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.highlight
 
 public val ButtonsConfigurator: Configurator = Configurator(
     name = "Button",
@@ -105,10 +105,8 @@ private fun ColumnScope.ButtonSample() {
     ) {
         Text(
             text = "With Icon",
-            modifier = Modifier
-                .weight(1f)
-                .padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            modifier = Modifier.weight(1f),
+            style = SparkTheme.typography.body2.highlight,
         )
         IconToggleButtonFilled(
             checked = icon != null,
@@ -140,55 +138,21 @@ private fun ColumnScope.ButtonSample() {
         )
     }
 
-    Column {
-        Text(
-            text = "Icon side",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val iconsSidesLabel = IconSide.entries.map(IconSide::name)
-        SegmentedButton(
-            options = iconsSidesLabel,
-            selectedOption = iconSide.name,
-            onOptionSelect = { iconSide = IconSide.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
-    Column {
-        Text(
-            text = "Style",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val buttonStylesLabel = ButtonStyle.entries.map(ButtonStyle::name)
-        SegmentedButton(
-            options = buttonStylesLabel,
-            selectedOption = style.name,
-            onOptionSelect = { style = ButtonStyle.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
-
-    Column {
-        Text(
-            text = "Shape",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val buttonShapesLabel = ButtonShape.entries.map(ButtonShape::name)
-        SegmentedButton(
-            options = buttonShapesLabel,
-            selectedOption = shape.name,
-            onOptionSelect = { shape = ButtonShape.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Icon side",
+        selectedOption = iconSide,
+        onOptionSelect = { iconSide = it },
+    )
+    ButtonGroup(
+        title = "Style",
+        selectedOption = style,
+        onOptionSelect = { style = it },
+    )
+    ButtonGroup(
+        title = "Shape",
+        selectedOption = shape,
+        onOptionSelect = { shape = it },
+    )
 
     val intents = ButtonIntent.entries.toTypedArray()
     var expanded by remember { mutableStateOf(false) }
@@ -216,22 +180,11 @@ private fun ColumnScope.ButtonSample() {
         },
     )
 
-    Column {
-        Text(
-            text = "Button size",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val sizesLabel = ButtonSize.entries.map(ButtonSize::name)
-        SegmentedButton(
-            options = sizesLabel,
-            selectedOption = size.name,
-            onOptionSelect = { size = ButtonSize.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Button size",
+        selectedOption = size,
+        onOptionSelect = { size = it },
+    )
 
     TextField(
         modifier = Modifier.fillMaxWidth(),
@@ -242,6 +195,12 @@ private fun ColumnScope.ButtonSample() {
         label = "Button text",
         placeholder = "Vérifier les Disponibilité",
     )
+}
+
+@Preview
+@Composable
+private fun ButtonSamplePreview() {
+    PreviewTheme { ButtonSample() }
 }
 
 @Composable

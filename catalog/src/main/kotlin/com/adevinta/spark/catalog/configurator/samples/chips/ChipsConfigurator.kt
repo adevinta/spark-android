@@ -22,12 +22,9 @@
 package com.adevinta.spark.catalog.configurator.samples.chips
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,10 +32,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.chips.ChipIntent
 import com.adevinta.spark.components.chips.ChipSelectable
@@ -92,9 +91,7 @@ private fun ColumnScope.ChipSample() {
     ) {
         Text(
             text = "With Icon",
-            modifier = Modifier
-                .weight(1f)
-                .padding(bottom = 8.dp),
+            modifier = Modifier.weight(1f),
             style = SparkTheme.typography.body2.highlight,
         )
         FilledTonalIconToggleButton(
@@ -110,23 +107,11 @@ private fun ColumnScope.ChipSample() {
         }
     }
 
-    Column {
-        Text(
-            text = "Style",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.highlight,
-        )
-        val tagStyles = ChipStyles.entries
-        val tagStylesLabel = tagStyles.map { it.name }
-        SegmentedButton(
-            options = tagStylesLabel,
-            selectedOption = style.name,
-            onOptionSelect = { style = ChipStyles.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Style",
+        selectedOption = style,
+        onOptionSelect = { style = it },
+    )
 
     val intents = ChipIntent.entries
     var expanded by remember { mutableStateOf(false) }
@@ -177,6 +162,12 @@ private fun ColumnScope.ChipSample() {
         label = "Chip text",
         placeholder = "jane.doe@email.com",
     )
+}
+
+@Preview
+@Composable
+private fun ChipSamplePreview() {
+    PreviewTheme { ChipSample() }
 }
 
 @Composable

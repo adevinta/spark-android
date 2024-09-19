@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.backdrop
+package com.adevinta.spark.catalog.ui
 
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.TweenSpec
@@ -62,8 +62,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.offset
 import androidx.compose.ui.zIndex
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.catalog.backdrop.BackdropValue.Concealed
-import com.adevinta.spark.catalog.backdrop.BackdropValue.Revealed
+import com.adevinta.spark.catalog.ui.BackdropValue.Concealed
+import com.adevinta.spark.catalog.ui.BackdropValue.Revealed
 import com.adevinta.spark.components.bottomsheet.layout.PreUpPostDownNestedScrollConnection
 import com.adevinta.spark.components.bottomsheet.layout.SwipeableDefaults
 import com.adevinta.spark.components.bottomsheet.layout.SwipeableState

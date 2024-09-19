@@ -23,11 +23,9 @@ package com.adevinta.spark.catalog.configurator.samples.tags
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,11 +34,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.icons.FilledTonalIconToggleButton
 import com.adevinta.spark.components.icons.Icon
@@ -56,6 +55,7 @@ import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.highlight
 
 public val TagsConfigurator: Configurator = Configurator(
     name = "Tag",
@@ -87,10 +87,8 @@ private fun ColumnScope.TagSample() {
     ) {
         Text(
             text = "With Icon",
-            modifier = Modifier
-                .weight(1f)
-                .padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            modifier = Modifier.weight(1f),
+            style = SparkTheme.typography.body2.highlight,
         )
         FilledTonalIconToggleButton(
             checked = icon != null,
@@ -105,23 +103,11 @@ private fun ColumnScope.TagSample() {
         }
     }
 
-    Column {
-        Text(
-            text = "Style",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val tagStyles = TagStyle.entries
-        val tagStylesLabel = tagStyles.map { it.name }
-        SegmentedButton(
-            options = tagStylesLabel,
-            selectedOption = style.name,
-            onOptionSelect = { style = TagStyle.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Style",
+        selectedOption = style,
+        onOptionSelect = { style = it },
+    )
 
     val intents = TagIntent.entries
     var expanded by remember { mutableStateOf(false) }
@@ -156,6 +142,12 @@ private fun ColumnScope.TagSample() {
         label = "Tag text",
         placeholder = "Vérifier les Disponibilité",
     )
+}
+
+@Preview
+@Composable
+private fun TagSamplePreview() {
+    PreviewTheme { TagSample() }
 }
 
 @Composable

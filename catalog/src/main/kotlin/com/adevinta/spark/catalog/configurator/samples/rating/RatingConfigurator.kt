@@ -25,7 +25,6 @@ import androidx.annotation.FloatRange
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeGesturesPadding
 import androidx.compose.runtime.Composable
@@ -36,11 +35,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.rating.RatingDefault
 import com.adevinta.spark.components.rating.RatingDisplay
@@ -73,23 +74,11 @@ private fun ColumnScope.RatingSample() {
         enabled = enabled,
     )
 
-    Column {
-        Text(
-            text = "Size",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.highlight,
-        )
-        val ratingSizes = RatingSize.entries
-        val ratingSizesLabel = ratingSizes.map { it.name }
-        SegmentedButton(
-            options = ratingSizesLabel,
-            selectedOption = size.name,
-            onOptionSelect = { size = RatingSize.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Sizes",
+        selectedOption = size,
+        onOptionSelect = { size = it },
+    )
 
     SwitchLabelled(
         checked = enabled,
@@ -118,6 +107,12 @@ private fun ColumnScope.RatingSample() {
             valueRange = 0.5f..5f,
         )
     }
+}
+
+@Preview
+@Composable
+private fun RatingSamplePreview() {
+    PreviewTheme { RatingSample() }
 }
 
 private enum class RatingSize(val size: Dp) {

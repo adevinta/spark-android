@@ -26,7 +26,6 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -63,10 +62,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkFeatureFlag
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.catalog.backdrop.BackdropScaffold
-import com.adevinta.spark.catalog.backdrop.BackdropScaffoldDefaults
-import com.adevinta.spark.catalog.backdrop.BackdropValue
-import com.adevinta.spark.catalog.backdrop.rememberBackdropScaffoldState
 import com.adevinta.spark.catalog.configurator.ConfiguratorComponentsScreen
 import com.adevinta.spark.catalog.examples.ComponentsScreen
 import com.adevinta.spark.catalog.icons.IconDemoScreen
@@ -87,11 +82,14 @@ import com.adevinta.spark.catalog.themes.themeprovider.kleinanzeigen.Kleinanzeig
 import com.adevinta.spark.catalog.themes.themeprovider.leboncoin.LeboncoinTheme
 import com.adevinta.spark.catalog.themes.themeprovider.milanuncios.MilanunciosTheme
 import com.adevinta.spark.catalog.themes.themeprovider.subito.SubitoTheme
+import com.adevinta.spark.catalog.ui.BackdropScaffold
+import com.adevinta.spark.catalog.ui.BackdropScaffoldDefaults
+import com.adevinta.spark.catalog.ui.BackdropValue
+import com.adevinta.spark.catalog.ui.rememberBackdropScaffoldState
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ComponentActivity.CatalogApp(
     theme: Theme,
@@ -148,6 +146,7 @@ internal fun ComponentActivity.CatalogApp(
             onDispose {}
         }
 
+        @Suppress("DEPRECATION")
         TestHarness(
             darkMode = useDark,
             layoutDirection = layoutDirection,

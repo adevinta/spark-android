@@ -26,8 +26,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -42,11 +40,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
@@ -122,25 +121,11 @@ private fun ColumnScope.PopoverSample() {
             }
         },
     )
-    Column {
-        Text(
-            text = "Popover Anchor",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val triggerExamples = PopoverTriggerExamples.entries.toTypedArray()
-        val contentSidesLabel = triggerExamples.map { it.name }
-        SegmentedButton(
-            options = contentSidesLabel,
-            selectedOption = popoverTriggerExample.name,
-            onOptionSelect = {
-                popoverTriggerExample = PopoverTriggerExamples.valueOf(it)
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Popover Anchor",
+        selectedOption = popoverTriggerExample,
+        onOptionSelect = { popoverTriggerExample = it },
+    )
 
     val intents = PopoverIntent.entries
     var intentExpanded by remember { mutableStateOf(false) }
@@ -163,6 +148,12 @@ private fun ColumnScope.PopoverSample() {
             }
         },
     )
+}
+
+@Preview
+@Composable
+private fun PopOverSamplePreview() {
+    PreviewTheme { PopoverSample() }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
