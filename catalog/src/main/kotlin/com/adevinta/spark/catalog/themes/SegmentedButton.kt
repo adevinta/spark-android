@@ -51,7 +51,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
@@ -65,7 +65,7 @@ internal fun SegmentedButton(
     selectedOption: String,
     onOptionSelect: (String) -> Unit,
     modifier: Modifier = Modifier,
-    selectedColor: Color = SparkTheme.colors.onAccentContainer,
+    selectedColor: Color = SparkTheme.colors.onMainVariant,
     unSelectedColor: Color = LocalContentColor.current,
 ) {
     require(options.size >= 2) { "This composable requires at least 2 options" }
@@ -99,9 +99,17 @@ internal fun SegmentedButton(
                     targetValue = if (index == selectedIndex) selectedColor else unSelectedColor,
                 )
 
+                val shape = RoundedCornerShape(
+                    topStartPercent = if (0 == index) 50 else 15,
+                    bottomStartPercent = if (0 == index) 50 else 15,
+                    topEndPercent = if (options.lastIndex == index) 50 else 15,
+                    bottomEndPercent = if (options.lastIndex == index) 50 else 15,
+                )
+
                 Box(
                     modifier = Modifier
                         .layoutId(MultiSelectorOption.Option)
+                        .clip(shape)
                         .clickable { onOptionSelect(option) },
                     contentAlignment = Alignment.Center,
                 ) {
@@ -135,7 +143,7 @@ internal fun SegmentedButton(
                             bottomEndPercent = endCornerShape,
                         ),
                     )
-                    .background(SparkTheme.colors.accentContainer),
+                    .background(SparkTheme.colors.mainVariant),
             )
         },
     ) { measurables, constraints ->
@@ -221,7 +229,7 @@ internal enum class MultiSelectorOption {
     Background,
 }
 
-@Preview(widthDp = 420)
+@PreviewLightDark
 @Composable
 private fun PreviewMultiSelector() {
     PreviewTheme {

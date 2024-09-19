@@ -148,6 +148,7 @@ internal fun ComponentActivity.CatalogApp(
             onDispose {}
         }
 
+        @Suppress("DEPRECATION")
         TestHarness(
             darkMode = useDark,
             layoutDirection = layoutDirection,
