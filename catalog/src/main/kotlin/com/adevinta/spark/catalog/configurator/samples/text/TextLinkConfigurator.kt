@@ -21,11 +21,8 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.text
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,12 +32,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.buttons.IconSide
@@ -123,23 +121,11 @@ private fun ColumnScope.TextLinkSample(snackbarHostState: SnackbarHostState) {
         )
     }
 
-    Column {
-        Text(
-            text = "Icon Alignment",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val iconSides = IconSide.entries.toTypedArray()
-        val iconSideLabel = iconSides.map { it.name }
-        SegmentedButton(
-            options = iconSideLabel,
-            selectedOption = iconSide.name,
-            onOptionSelect = { iconSide = IconSide.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Icon side",
+        selectedOption = iconSide,
+        onOptionSelect = { iconSide = it },
+    )
 
     Dropdown(
         modifier = Modifier.fillMaxWidth(),
@@ -160,4 +146,10 @@ private fun ColumnScope.TextLinkSample(snackbarHostState: SnackbarHostState) {
             }
         },
     )
+}
+
+@Preview
+@Composable
+private fun TextLinkSamplePreview() {
+    PreviewTheme { TextLinkSample(SnackbarHostState()) }
 }

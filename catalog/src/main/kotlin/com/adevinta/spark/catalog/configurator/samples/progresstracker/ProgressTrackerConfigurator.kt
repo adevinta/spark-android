@@ -41,7 +41,8 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonIntent
 import com.adevinta.spark.components.buttons.ButtonTinted
@@ -70,9 +71,6 @@ public val ProgressTrackerConfigurator: Configurator = Configurator(
     ProgressTrackerSample()
 }
 
-@Preview(
-    showBackground = true,
-)
 @Composable
 private fun ColumnScope.ProgressTrackerSample() {
     var intent by remember { mutableStateOf(ProgressTrackerIntent.Basic) }
@@ -157,35 +155,17 @@ private fun ColumnScope.ProgressTrackerSample() {
         )
     }
 
-    Column {
-        Text(
-            text = "Style",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.highlight,
-        )
-        val progressStylesLabel = ProgressStyles.entries.map(ProgressStyles::name)
-        SegmentedButton(
-            options = progressStylesLabel,
-            selectedOption = style.name,
-            onOptionSelect = { style = ProgressStyles.valueOf(it) },
-            modifier = Modifier.fillMaxWidth(),
-        )
-    }
+    ButtonGroup(
+        title = "Style",
+        selectedOption = style,
+        onOptionSelect = { style = it },
+    )
 
-    Column {
-        Text(
-            text = "Sizes",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.highlight,
-        )
-        val progressSizesLabel = ProgressSizes.entries.map(ProgressSizes::name)
-        SegmentedButton(
-            options = progressSizesLabel,
-            selectedOption = size.name,
-            onOptionSelect = { size = ProgressSizes.valueOf(it) },
-            modifier = Modifier.fillMaxWidth(),
-        )
-    }
+    ButtonGroup(
+        title = "Sizes",
+        selectedOption = size,
+        onOptionSelect = { size = it },
+    )
 
     Column {
         Text(
@@ -246,4 +226,10 @@ private fun ColumnScope.ProgressTrackerSample() {
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun ProgressTrackerSamplePreview() {
+    PreviewTheme { ProgressTrackerSample() }
 }

@@ -22,11 +22,8 @@
 package com.adevinta.spark.catalog.configurator.samples.textfields
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,10 +31,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.unit.dp
-import com.adevinta.spark.SparkTheme
+import androidx.compose.ui.tooling.preview.Preview
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.menu.DropdownMenuGroupItem
 import com.adevinta.spark.components.menu.DropdownMenuItem
@@ -47,7 +44,6 @@ import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
-import com.adevinta.spark.tokens.highlight
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
@@ -153,24 +149,15 @@ private fun ColumnScope.DropdownSample() {
         )
     }
 
-    Column {
-        Text(
-            text = "State",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.highlight,
-        )
-        val textFieldStates: MutableSet<TextFieldState?> =
-            TextFieldState.entries.toMutableSet<TextFieldState?>().apply { add(null) }
-        val buttonStylesLabel = textFieldStates.map { it?.run { name } ?: "Default" }
-        SegmentedButton(
-            options = buttonStylesLabel,
-            selectedOption = state?.name ?: "Default",
-            onOptionSelect = { state = if (it == "Default") null else TextFieldState.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    val textFieldStates: MutableSet<TextFieldState?> =
+        TextFieldState.entries.toMutableSet<TextFieldState?>().apply { add(null) }
+    val buttonStylesLabel = textFieldStates.map { it?.run { name } ?: "Default" }
+    ButtonGroup(
+        title = "State",
+        selectedOption = state?.name ?: "Default",
+        onOptionSelect = { state = if (it == "Default") null else TextFieldState.valueOf(it) },
+        options = buttonStylesLabel,
+    )
 
     TextField(
         modifier = Modifier.fillMaxWidth(),
@@ -217,6 +204,12 @@ private fun ColumnScope.DropdownSample() {
         label = "Prefix",
         placeholder = "State message of the Dropdown",
     )
+}
+
+@Preview
+@Composable
+private fun DropdownSamplePreview() {
+    PreviewTheme { DropdownSample() }
 }
 
 private data class DropdownExampleGroup(val name: String, val books: ImmutableList<String>)

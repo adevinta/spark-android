@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.sp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
 import com.adevinta.spark.components.menu.DropdownMenuItem
@@ -56,6 +57,7 @@ import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.Minus
 import com.adevinta.spark.icons.Plus
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.highlight
 
 public val SlidersConfigurator: Configurator = Configurator(
     name = "Slider",
@@ -65,7 +67,6 @@ public val SlidersConfigurator: Configurator = Configurator(
     SliderSample()
 }
 
-@Preview(showBackground = true)
 @Composable
 private fun SliderSample() {
     var enabled by remember { mutableStateOf(true) }
@@ -128,7 +129,7 @@ private fun SliderSample() {
             Text(
                 text = "Number of Slider Steps",
                 modifier = Modifier.padding(bottom = 8.dp),
-                style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                style = SparkTheme.typography.body2.highlight,
             )
             Row(
                 modifier = Modifier.padding(horizontal = 16.dp),
@@ -180,4 +181,10 @@ private fun SliderSample() {
             },
         )
     }
+}
+
+@Preview
+@Composable
+private fun SliderSamplePreview() {
+    PreviewTheme { SliderSample() }
 }
