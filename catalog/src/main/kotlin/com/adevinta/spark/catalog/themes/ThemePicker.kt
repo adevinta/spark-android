@@ -29,7 +29,6 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -40,11 +39,15 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.slider.Slider
@@ -78,53 +81,37 @@ public fun ThemePicker(
         verticalArrangement = Arrangement.spacedBy(ThemePickerPadding),
     ) {
         item {
-            Column {
-                Text(
-                    text = stringResource(id = R.string.theme_picker_mode_title),
-                    style = SparkTheme.typography.body2.highlight,
-                    modifier = Modifier.padding(vertical = 8.dp),
-                )
-                val themeModes = ThemeMode.entries.toTypedArray()
-                val themeModesLabel = themeModes.map { it.name }
-                SegmentedButton(
-                    options = themeModesLabel,
-                    selectedOption = theme.themeMode.name,
-                    onOptionSelect = { onThemeChange(theme.copy(themeMode = ThemeMode.valueOf(it))) },
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .fillMaxWidth()
-                        .height(48.dp),
-                )
-            }
+            val themeModes = ThemeMode.entries
+            val themeModesLabel = themeModes.map { it.name }
+            ButtonGroup(
+                title = stringResource(id = R.string.theme_picker_mode_title),
+                selectedOption = theme.themeMode.name,
+                onOptionSelect = { onThemeChange(theme.copy(themeMode = ThemeMode.valueOf(it))) },
+                options = themeModesLabel,
+            )
         }
         item {
             Column {
-                Text(
-                    text = stringResource(id = R.string.theme_picker_theme_title),
-                    style = SparkTheme.typography.body2.highlight,
-                    modifier = Modifier.padding(vertical = 8.dp),
-                )
-                val colorModes = ColorMode.entries.toTypedArray()
+                val colorModes = ColorMode.entries
                 val colorModesLabel = colorModes.map { it.name }
-                SegmentedButton(
-                    options = colorModesLabel,
+                ButtonGroup(
+                    title = stringResource(id = R.string.theme_picker_theme_title),
                     selectedOption = theme.colorMode.name,
                     onOptionSelect = { onThemeChange(theme.copy(colorMode = ColorMode.valueOf(it))) },
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .fillMaxWidth()
-                        .height(48.dp),
+                    options = colorModesLabel,
                 )
                 AnimatedVisibility(
                     visible = theme.colorMode == ColorMode.Brand,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .fillMaxWidth(),
                 ) {
                     var expanded by remember { mutableStateOf(false) }
                     val selectedIcon = @Composable { Icon(SparkIcons.Check, contentDescription = null) }
                     Dropdown(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(ThemePickerPadding),
+                            .padding(vertical = ThemePickerPadding),
                         value = theme.brandMode.name,
                         label = stringResource(id = R.string.brand),
                         onDismissRequest = {
@@ -149,9 +136,11 @@ public fun ThemePicker(
                         }
                     }
                 }
-                AnimatedVisibility(visible = theme.colorMode == ColorMode.Brand) {
+                AnimatedVisibility(
+                    visible = theme.colorMode == ColorMode.Brand,
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                ) {
                     SwitchLabelled(
-                        modifier = Modifier.padding(ThemePickerPadding),
                         checked = theme.userMode == UserMode.Pro,
                         onCheckedChange = { checked ->
                             onThemeChange(theme.copy(userMode = if (checked) UserMode.Pro else UserMode.Part))
@@ -167,58 +156,42 @@ public fun ThemePicker(
         }
 
         item {
-            Column {
-                Text(
-                    text = stringResource(id = R.string.theme_picker_text_direction_title),
-                    style = SparkTheme.typography.body2.highlight,
-                    modifier = Modifier.padding(vertical = 8.dp),
-                )
-                val textDirections = TextDirection.entries.toTypedArray()
-                val textDirectionsLabel = textDirections.map { it.name }
-                SegmentedButton(
-                    options = textDirectionsLabel,
-                    selectedOption = theme.textDirection.name,
-                    onOptionSelect = { onThemeChange(theme.copy(textDirection = TextDirection.valueOf(it))) },
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .fillMaxWidth()
-                        .height(48.dp),
-                )
-            }
+            val textDirections = TextDirection.entries
+            val textDirectionsLabel = textDirections.map { it.name }
+            ButtonGroup(
+                title = stringResource(id = R.string.theme_picker_text_direction_title),
+                selectedOption = theme.textDirection.name,
+                onOptionSelect = { onThemeChange(theme.copy(textDirection = TextDirection.valueOf(it))) },
+                options = textDirectionsLabel,
+            )
         }
         item {
             Column {
-                Text(
-                    text = stringResource(id = R.string.theme_picker_font_scale_title),
-                    style = SparkTheme.typography.body2.highlight,
-                    modifier = Modifier.padding(vertical = 8.dp),
-                )
-                val fontScaleModes = FontScaleMode.entries.toTypedArray()
-                val colorModesLabel = fontScaleModes.map { it.name }
-                SegmentedButton(
-                    options = colorModesLabel,
+                val fontScaleModes = FontScaleMode.entries
+                val fontModesLabel = fontScaleModes.map { it.name }
+                ButtonGroup(
+                    title = stringResource(id = R.string.theme_picker_font_scale_title),
                     selectedOption = theme.fontScaleMode.name,
                     onOptionSelect = { onThemeChange(theme.copy(fontScaleMode = FontScaleMode.valueOf(it))) },
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .fillMaxWidth()
-                        .height(48.dp),
+                    options = fontModesLabel,
                 )
-            }
-            var fontScale by remember { mutableFloatStateOf(theme.fontScale) }
-            AnimatedVisibility(visible = theme.fontScaleMode == FontScaleMode.Custom) {
-                FontScaleItem(
-                    modifier = Modifier.fillMaxWidth(),
-                    enabled = theme.fontScaleMode == FontScaleMode.Custom,
-                    fontScale = fontScale,
-                    onValueChange = { fontScale = it },
-                    onValueChangeFinished = { onThemeChange(theme.copy(fontScale = fontScale)) },
-                )
+                var fontScale by remember { mutableFloatStateOf(theme.fontScale) }
+                AnimatedVisibility(
+                    visible = theme.fontScaleMode == FontScaleMode.Custom,
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                ) {
+                    FontScaleItem(
+                        modifier = Modifier.fillMaxWidth(),
+                        enabled = theme.fontScaleMode == FontScaleMode.Custom,
+                        fontScale = fontScale,
+                        onValueChange = { fontScale = it },
+                        onValueChangeFinished = { onThemeChange(theme.copy(fontScale = fontScale)) },
+                    )
+                }
             }
         }
         item {
             SwitchLabelled(
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
                 checked = theme.useLegacyTheme,
                 onCheckedChange = { checked ->
                     onThemeChange(theme.copy(useLegacyTheme = checked))
@@ -232,7 +205,6 @@ public fun ThemePicker(
         }
         item {
             SwitchLabelled(
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
                 checked = theme.highlightSparkComponents,
                 onCheckedChange = { checked ->
                     onThemeChange(theme.copy(highlightSparkComponents = checked))
@@ -246,7 +218,6 @@ public fun ThemePicker(
         }
         item {
             SwitchLabelled(
-                modifier = Modifier.padding(horizontal = ThemePickerPadding),
                 checked = theme.highlightSparkTokens,
                 onCheckedChange = { checked ->
                     onThemeChange(theme.copy(highlightSparkTokens = checked))
@@ -283,6 +254,17 @@ private fun FontScaleItem(
         Text(
             text = stringResource(id = R.string.scale, fontScale),
             style = SparkTheme.typography.body2.highlight,
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun ThemePickerPreview() {
+    PreviewTheme {
+        ThemePicker(
+            theme = Theme(),
+            onThemeChange = {},
         )
     }
 }

@@ -91,7 +91,6 @@ import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun ComponentActivity.CatalogApp(
     theme: Theme,

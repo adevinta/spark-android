@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -37,10 +36,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.badge.Badge
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
@@ -57,6 +58,7 @@ import com.adevinta.spark.icons.Minus
 import com.adevinta.spark.icons.Plus
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.bodyWidth
+import com.adevinta.spark.tokens.highlight
 import kotlin.random.Random
 
 public val TabsConfigurator: Configurator = Configurator(
@@ -149,28 +151,16 @@ private fun ColumnScope.TabSample() {
         },
     )
 
-    Column {
-        Text(
-            text = "Tab size",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val sizes = TabSize.entries.toTypedArray()
-        val sizesLabel = sizes.map { it.name }
-        SegmentedButton(
-            options = sizesLabel,
-            selectedOption = tabSize.name,
-            onOptionSelect = { tabSize = TabSize.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Sizes",
+        selectedOption = tabSize,
+        onOptionSelect = { tabSize = it },
+    )
     Column {
         Text(
             text = "Number of tabs",
             modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            style = SparkTheme.typography.body2.highlight,
         )
         Row {
             Spacer(modifier = Modifier.padding(start = 16.dp))
@@ -178,7 +168,7 @@ private fun ColumnScope.TabSample() {
                 icon = SparkIcons.Minus,
                 onClick = {
                     if (tabs.size > 1) {
-                        tabs.removeLast()
+                        tabs.removeAt(tabs.lastIndex)
                     }
                 },
             )
@@ -193,4 +183,10 @@ private fun ColumnScope.TabSample() {
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun TabSamplePreview() {
+    PreviewTheme { TabSample() }
 }

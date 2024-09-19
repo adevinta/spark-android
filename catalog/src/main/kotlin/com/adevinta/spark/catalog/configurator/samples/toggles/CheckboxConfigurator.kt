@@ -21,10 +21,7 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.toggles
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,12 +30,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.state.ToggleableState
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import com.adevinta.spark.SparkTheme
+import androidx.compose.ui.tooling.preview.Preview
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
@@ -91,24 +87,11 @@ private fun CheckboxSample() {
             modifier = Modifier.fillMaxWidth(),
         )
     }
-    Column {
-        Text(
-            text = stringResource(id = R.string.configurator_component_checkbox_toggleable_state_label),
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val toggleStateLabel = ToggleableState.entries.map(ToggleableState::name)
-        SegmentedButton(
-            options = toggleStateLabel,
-            selectedOption = state.name,
-            onOptionSelect = {
-                state = ToggleableState.valueOf(it)
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = stringResource(id = R.string.configurator_component_checkbox_toggleable_state_label),
+        selectedOption = state,
+        onOptionSelect = { state = it },
+    )
     var expanded by remember { mutableStateOf(false) }
     Dropdown(
         modifier = Modifier.fillMaxWidth(),
@@ -129,24 +112,11 @@ private fun CheckboxSample() {
             }
         },
     )
-    Column {
-        Text(
-            text = stringResource(id = R.string.configurator_component_toggle_content_side_label),
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val contentSidesLabel = ContentSide.entries.map(ContentSide::name)
-        SegmentedButton(
-            options = contentSidesLabel,
-            selectedOption = contentSide.name,
-            onOptionSelect = {
-                contentSide = ContentSide.valueOf(it)
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = stringResource(id = R.string.configurator_component_toggle_content_side_label),
+        selectedOption = contentSide,
+        onOptionSelect = { contentSide = it },
+    )
     TextField(
         modifier = Modifier.fillMaxWidth(),
         value = label.orEmpty(),
@@ -156,6 +126,12 @@ private fun CheckboxSample() {
         label = stringResource(id = R.string.configurator_component_screen_textfield_label),
         placeholder = stringResource(id = R.string.configurator_component_toggle_placeholder_label),
     )
+}
+
+@Preview
+@Composable
+private fun CheckboxSamplePreview() {
+    PreviewTheme { CheckboxSample() }
 }
 
 @Composable

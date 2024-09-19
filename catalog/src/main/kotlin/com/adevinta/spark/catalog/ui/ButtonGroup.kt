@@ -27,12 +27,30 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.themes.SegmentedButton
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.highlight
 import kotlin.enums.enumEntries
+
+
+@Composable
+private fun ButtonGroupLayout(
+    title: String,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    Column(modifier = modifier.semantics(mergeDescendants = true) {  }) {
+        Text(
+            text = title,
+            modifier = Modifier.padding(bottom = 8.dp),
+            style = SparkTheme.typography.body2.highlight,
+        )
+        content()
+    }
+}
 
 @Composable
 internal inline fun <reified T : Enum<T>> ButtonGroup(
@@ -41,16 +59,35 @@ internal inline fun <reified T : Enum<T>> ButtonGroup(
     crossinline onOptionSelect: (T) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(modifier = modifier) {
-        Text(
-            text = title,
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.highlight,
-        )
+    ButtonGroupLayout(
+        title = title,
+        modifier = modifier,
+    ) {
         SegmentedButton(
             options = enumEntries<T>().map { it.name },
             selectedOption = selectedOption.name,
             onOptionSelect = { onOptionSelect(enumValueOf<T>(it)) },
+            modifier = Modifier.fillMaxWidth(),
+        )
+    }
+}
+
+@Composable
+internal fun ButtonGroup(
+    title: String,
+    selectedOption: String,
+    onOptionSelect: (String) -> Unit,
+    options: List<String>,
+    modifier: Modifier = Modifier,
+) {
+    ButtonGroupLayout(
+        title = title,
+        modifier = modifier,
+    ) {
+        SegmentedButton(
+            options = options,
+            selectedOption = selectedOption,
+            onOptionSelect = onOptionSelect,
             modifier = Modifier.fillMaxWidth(),
         )
     }

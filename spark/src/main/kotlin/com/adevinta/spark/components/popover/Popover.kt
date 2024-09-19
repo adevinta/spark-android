@@ -60,6 +60,7 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.ElevationTokens
+import com.adevinta.spark.tokens.highlight
 import kotlinx.coroutines.launch
 
 /**
@@ -164,17 +165,17 @@ private fun PopoverPreview() {
                         Text(
                             text = "Title",
                             modifier = Modifier.padding(bottom = 16.dp),
-                            style = SparkTheme.typography.headline1.copy(fontWeight = FontWeight.Bold),
+                            style = SparkTheme.typography.headline1.highlight,
                         )
                         Text(
                             text = "Do you want to have this cookie now?",
                             modifier = Modifier.padding(bottom = 16.dp),
-                            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+                            style = SparkTheme.typography.body2.highlight,
                         )
                         Text(
                             text = "Text Link",
                             textDecoration = TextDecoration.Underline,
-                            style = SparkTheme.typography.body1.copy(fontWeight = FontWeight.Bold)
+                            style = SparkTheme.typography.body1.highlight
                                 .copy(color = colors.accent),
                         )
                     }

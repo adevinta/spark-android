@@ -21,10 +21,8 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.snackbar
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,10 +32,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonSize
 import com.adevinta.spark.components.buttons.ButtonTinted
@@ -131,22 +130,12 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
             modifier = Modifier.fillMaxWidth(),
         )
     }
-    Text(
-        text = "Snackbar Style",
-        modifier = Modifier.fillMaxWidth(),
-    )
 
-    Column {
-        val snackBarStyle = SnackbarStyle.entries.map(SnackbarStyle::name)
-        SegmentedButton(
-            options = snackBarStyle,
-            selectedOption = style.name,
-            onOptionSelect = { style = SnackbarStyle.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Style",
+        selectedOption = style,
+        onOptionSelect = { style = it },
+    )
     Snackbar(
         intent = intent,
         withDismissAction = withDismissAction,
@@ -158,22 +147,25 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
         Text(contentText)
     }
 
-    ButtonTinted(modifier = Modifier.fillMaxWidth(), size = ButtonSize.Medium, onClick = {
-        scope.launch {
-            snackbarHostState.showSnackbar(
-                SnackbarSparkVisuals(
-                    intent = intent,
-                    withDismissAction = withDismissAction,
-                    actionOnNewLine = actionOnNewLine,
-                    style = style,
-                    icon = if (isIconEnabled) SparkIcons.FlashlightFill else null,
-                    actionLabel = actionText,
-                    message = contentText,
-                    duration = SnackbarDuration.Short,
-                ),
-            )
-        }
-    }) {
+    ButtonTinted(
+        modifier = Modifier.fillMaxWidth(), size = ButtonSize.Medium,
+        onClick = {
+            scope.launch {
+                snackbarHostState.showSnackbar(
+                    SnackbarSparkVisuals(
+                        intent = intent,
+                        withDismissAction = withDismissAction,
+                        actionOnNewLine = actionOnNewLine,
+                        style = style,
+                        icon = if (isIconEnabled) SparkIcons.FlashlightFill else null,
+                        actionLabel = actionText,
+                        message = contentText,
+                        duration = SnackbarDuration.Short,
+                    ),
+                )
+            }
+        },
+    ) {
         Text("Launch Snackbar")
     }
 
@@ -191,4 +183,10 @@ private fun ColumnScope.SnackbarSample(snackbarHostState: SnackbarHostState) {
         label = "Change Text Content",
         stateMessage = contentText,
     )
+}
+
+@Preview
+@Composable
+private fun SnackbarSamplePreview() {
+    PreviewTheme { SnackbarSample(SnackbarHostState()) }
 }

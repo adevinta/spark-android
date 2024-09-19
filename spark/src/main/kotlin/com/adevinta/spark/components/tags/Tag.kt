@@ -106,7 +106,7 @@ internal fun BaseSparkTag(
                     }
                 }
 
-                ProvideTextStyle(value = SparkTheme.typography.caption.copy(fontWeight = FontWeight.Bold)) {
+                ProvideTextStyle(value = SparkTheme.typography.caption.highlight) {
                     content()
                 }
             }

@@ -22,12 +22,9 @@
 package com.adevinta.spark.catalog.configurator.samples.textfields
 
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,10 +33,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
@@ -52,6 +51,7 @@ import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.LikeOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.highlight
 
 public val TextFieldsConfigurator: Configurator = Configurator(
     name = "TextFields",
@@ -97,10 +97,8 @@ private fun ColumnScope.TextFieldSample() {
     ) {
         Text(
             text = "With Icon",
-            modifier = Modifier
-                .weight(1f)
-                .padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
+            modifier = Modifier.weight(1f),
+            style = SparkTheme.typography.body2.highlight,
         )
         IconToggleButtonFilled(
             checked = icon != null,
@@ -141,24 +139,15 @@ private fun ColumnScope.TextFieldSample() {
         )
     }
 
-    Column {
-        Text(
-            text = "State",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val textFieldStates: MutableSet<TextFieldState?> =
-            TextFieldState.entries.toMutableSet<TextFieldState?>().apply { add(null) }
-        val buttonStylesLabel = textFieldStates.map { it?.run { name } ?: "Default" }
-        SegmentedButton(
-            options = buttonStylesLabel,
-            selectedOption = state?.name ?: "Default",
-            onOptionSelect = { state = if (it == "Default") null else TextFieldState.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    val textFieldStates: MutableSet<TextFieldState?> =
+        TextFieldState.entries.toMutableSet<TextFieldState?>().apply { add(null) }
+    val buttonStylesLabel = textFieldStates.map { it?.run { name } ?: "Default" }
+    ButtonGroup(
+        title = "State",
+        selectedOption = state?.name ?: "Default",
+        onOptionSelect = { state = if (it == "Default") null else TextFieldState.valueOf(it) },
+        options = buttonStylesLabel,
+    )
 
     TextField(
         modifier = Modifier.fillMaxWidth(),
@@ -205,4 +194,10 @@ private fun ColumnScope.TextFieldSample() {
         label = "Prefix",
         placeholder = "State message of the TextField",
     )
+}
+
+@Preview
+@Composable
+private fun TextFieldSamplePreview() {
+    PreviewTheme { TextFieldSample() }
 }

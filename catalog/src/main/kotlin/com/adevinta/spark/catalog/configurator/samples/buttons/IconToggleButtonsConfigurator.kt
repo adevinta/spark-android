@@ -23,10 +23,8 @@ package com.adevinta.spark.catalog.configurator.samples.buttons
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,11 +33,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
-import com.adevinta.spark.catalog.themes.SegmentedButton
+import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonShape
 import com.adevinta.spark.components.iconbuttons.IconButtonIntent
@@ -101,22 +100,11 @@ private fun ColumnScope.IconToggleButtonSample() {
         )
     }
 
-    Column {
-        Text(
-            text = "Style",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val buttonStylesLabel = IconToggleButtonStyle.entries.map { it.name }
-        SegmentedButton(
-            options = buttonStylesLabel,
-            selectedOption = style.name,
-            onOptionSelect = { style = IconToggleButtonStyle.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Style",
+        selectedOption = style,
+        onOptionSelect = { style = it },
+    )
 
     var expanded by remember { mutableStateOf(false) }
     Dropdown(
@@ -143,38 +131,16 @@ private fun ColumnScope.IconToggleButtonSample() {
         },
     )
 
-    Column {
-        Text(
-            text = "Shape",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val buttonShapesLabel = ButtonShape.entries.map { it.name }
-        SegmentedButton(
-            options = buttonShapesLabel,
-            selectedOption = shape.name,
-            onOptionSelect = { shape = ButtonShape.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
-    Column {
-        Text(
-            text = "Size",
-            modifier = Modifier.padding(bottom = 8.dp),
-            style = SparkTheme.typography.body2.copy(fontWeight = FontWeight.Bold),
-        )
-        val buttonSizesLabel = IconButtonSize.entries.map { it.name }
-        SegmentedButton(
-            options = buttonSizesLabel,
-            selectedOption = size.name,
-            onOptionSelect = { size = IconButtonSize.valueOf(it) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(48.dp),
-        )
-    }
+    ButtonGroup(
+        title = "Shape",
+        selectedOption = shape,
+        onOptionSelect = { shape = it },
+    )
+    ButtonGroup(
+        title = "Size",
+        selectedOption = size,
+        onOptionSelect = { size = it },
+    )
 
     TextField(
         modifier = Modifier.fillMaxWidth(),
@@ -185,6 +151,12 @@ private fun ColumnScope.IconToggleButtonSample() {
         label = "Content Description",
         placeholder = "Content Description",
     )
+}
+
+@Preview
+@Composable
+private fun IconToggleButtonSamplePreview() {
+    PreviewTheme { IconToggleButtonSample() }
 }
 
 @Composable
