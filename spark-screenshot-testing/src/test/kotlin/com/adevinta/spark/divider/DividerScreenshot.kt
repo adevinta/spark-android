@@ -21,13 +21,12 @@
  */
 package com.adevinta.spark.divider
 
-import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import app.cash.paparazzi.DeviceConfig
 import com.adevinta.spark.SparkTheme
@@ -36,26 +35,15 @@ import com.adevinta.spark.components.divider.HorizontalDivider
 import com.adevinta.spark.components.divider.LabelHorizontalAlignment
 import com.adevinta.spark.components.divider.LabelVerticalAlignment
 import com.adevinta.spark.components.divider.VerticalDivider
+import com.adevinta.spark.components.spacer.HorizontalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.paparazziRule
-import com.adevinta.spark.sparkSnapshotNightMode
+import com.adevinta.spark.sparkSnapshot
 import com.android.ide.common.rendering.api.SessionParams.RenderingMode.SHRINK
 import org.junit.Rule
 import org.junit.Test
 
 internal class DividerScreenshot {
-
-    private val intents = DividerIntent.entries
-    private val labelHorizontalAlignments = LabelHorizontalAlignment.entries
-    private val labelVerticalAlignments = LabelVerticalAlignment.entries
-    private val hLabelsList = listOf(
-        "Spark Label",
-        "SparkSparkSparkSparkSparkSparkSparkSparkSparkSparkSpark",
-    )
-    private val vLabelsList = listOf(
-        "Spark Label",
-        "Spark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark\nSpark",
-    )
 
     @get:Rule
     val paparazzi = paparazziRule(
@@ -64,76 +52,63 @@ internal class DividerScreenshot {
     )
 
     @Test
-    fun horizontal() {
-        hLabelsList.forEachIndexed { index, label ->
-            paparazzi.sparkSnapshotNightMode(name = index.toString()) { HorizontalDividers(label) }
-        }
-    }
-
-    @Test
-    fun vertical() {
-        vLabelsList.forEachIndexed { index, label ->
-            paparazzi.sparkSnapshotNightMode(name = index.toString()) { VerticalDividers(label) }
-        }
-    }
-
-    @Composable
-    private fun HorizontalDividers(label: String) {
-        Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = spacedBy(16.dp),
-        ) {
-            // Without label
+    fun divider() {
+        paparazzi.sparkSnapshot {
             HorizontalDivider(intent = DividerIntent.Outline)
             HorizontalDivider(intent = DividerIntent.OutlineHigh)
+            HorizontalDivider(
+                label = { TextComposable() },
+            )
+            HorizontalDivider(
+                label = { TextComposable() },
+                labelHorizontalAlignment = LabelHorizontalAlignment.End,
+            )
+            HorizontalDivider(
+                label = { TextComposable() },
+                labelHorizontalAlignment = LabelHorizontalAlignment.Start,
+            )
 
-            // With label
-            labelHorizontalAlignments.forEach { alignment ->
-                intents.forEach {
-                    HorizontalDivider(
-                        labelHorizontalAlignment = alignment,
-                        intent = it,
-                        label = {
-                            Text(
-                                textAlign = TextAlign.Center,
-                                style = SparkTheme.typography.body1,
-                                text = label,
-                                modifier = Modifier.padding(horizontal = 16.dp),
-                            )
-                        },
-                    )
-                }
+            Row {
+                VerticalDivider(
+                    label = { TextComposable() },
+                    labelVerticalAlignment = LabelVerticalAlignment.Top,
+                )
+                VerticalDivider(
+                    label = { TextComposable() },
+                    labelVerticalAlignment = LabelVerticalAlignment.Center,
+                )
+                VerticalDivider(
+                    label = { TextComposable() },
+                    labelVerticalAlignment = LabelVerticalAlignment.Bottom,
+                )
+                HorizontalSpacer(space = 16.dp)
+                VerticalDivider(
+                    modifier = Modifier.height(24.dp),
+                    labelVerticalAlignment = LabelVerticalAlignment.Top,
+                )
+                HorizontalSpacer(space = 16.dp)
+                VerticalDivider(modifier = Modifier.height(24.dp))
+                HorizontalSpacer(space = 16.dp)
+                VerticalDivider(
+                    modifier = Modifier.height(24.dp),
+                    labelVerticalAlignment = LabelVerticalAlignment.Bottom,
+                )
+                HorizontalSpacer(space = 16.dp)
+
+                VerticalDivider(
+                    labelVerticalAlignment = LabelVerticalAlignment.Bottom,
+                )
             }
         }
     }
+}
 
-    @Composable
-    private fun VerticalDividers(label: String) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            horizontalArrangement = spacedBy(16.dp),
-        ) {
-            // Without label
-            VerticalDivider(intent = DividerIntent.Outline)
-            VerticalDivider(intent = DividerIntent.OutlineHigh)
-
-            // With label
-            labelVerticalAlignments.forEach { alignment ->
-                intents.forEach {
-                    VerticalDivider(
-                        labelVerticalAlignment = alignment,
-                        intent = it,
-                        label = {
-                            Text(
-                                textAlign = TextAlign.Center,
-                                style = SparkTheme.typography.body1,
-                                text = label,
-                                modifier = Modifier.padding(horizontal = 16.dp),
-                            )
-                        },
-                    )
-                }
-            }
-        }
-    }
+@Composable
+private fun TextComposable(textOverflow: TextOverflow = TextOverflow.Ellipsis) {
+    Text(
+        textAlign = TextAlign.Center,
+        overflow = textOverflow,
+        style = SparkTheme.typography.body1,
+        text = "label",
+    )
 }

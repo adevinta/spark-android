@@ -21,14 +21,18 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.divider
 
+import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -73,10 +77,17 @@ private fun ColumnScope.DividerSample() {
         style = SparkTheme.typography.headline2,
     )
 
+    HorizontalDivider(intent = intent)
     HorizontalDivider(
         intent = intent,
         label = labelText.takeUnless { it.isBlank() }?.let { { TextComposable(label = it) } },
         labelHorizontalAlignment = hLabelAlignments,
+    )
+    HorizontalDivider(
+        modifier = Modifier
+            .width(24.dp)
+            .align(Alignment.CenterHorizontally),
+        intent = intent,
     )
 
     Text(
@@ -84,14 +95,28 @@ private fun ColumnScope.DividerSample() {
         style = SparkTheme.typography.headline2,
     )
 
-    VerticalDivider(
-        modifier = Modifier
-            .height(200.dp)
-            .fillMaxWidth(),
-        intent = intent,
-        label = labelText.takeUnless { it.isBlank() }?.let { { TextComposable(label = it) } },
-        labelVerticalAlignment = vLabelAlignments,
-    )
+    Row(
+        modifier = Modifier.align(Alignment.CenterHorizontally),
+        horizontalArrangement = spacedBy(16.dp),
+    ) {
+        VerticalDivider(
+            modifier = Modifier.height(200.dp),
+            intent = intent,
+        )
+        VerticalDivider(
+            modifier = Modifier
+                .height(200.dp),
+            intent = intent,
+            label = labelText.takeUnless { it.isBlank() }?.let { { TextComposable(label = it) } },
+            labelVerticalAlignment = vLabelAlignments,
+        )
+        VerticalDivider(
+            modifier = Modifier
+                .height(24.dp)
+                .align(Alignment.CenterVertically),
+            intent = intent,
+        )
+    }
 
     ButtonGroup(
         title = "HorizontalDivider Label Alignment",
