@@ -852,6 +852,13 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
     outline = outline,
     outlineVariant = outlineHigh,
     scrim = scrim,
+    surfaceBright = surface,
+    surfaceDim = surface,
+    surfaceContainer = surface,
+    surfaceContainerHigh = surface,
+    surfaceContainerHighest = surface,
+    surfaceContainerLow = surface,
+    surfaceContainerLowest = surface,
 )
 
 /**
