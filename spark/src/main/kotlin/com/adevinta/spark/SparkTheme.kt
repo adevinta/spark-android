@@ -217,9 +217,6 @@ internal fun PreviewTheme(
 internal fun SparkTenantTheme(
     // We don't want to automatically support dark theme in the app but still want it in the previews
     useDarkColors: Boolean = isSystemInDarkTheme(),
-//    useSparkTokensHighlighter: Boolean = false,
-//    useSparkComponentsHighlighter: Boolean = false,
-//    useLegacyStyle: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val colors = if (useDarkColors) {
@@ -231,9 +228,6 @@ internal fun SparkTenantTheme(
         colors = colors,
         shapes = sparkShapes(),
         typography = sparkTypography(),
-//        useSparkTokensHighlighter = useSparkTokensHighlighter,
-//        useSparkComponentsHighlighter = useSparkComponentsHighlighter,
-//        useLegacyStyle = useLegacyStyle,
         content = content,
     )
 }
