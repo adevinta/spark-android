@@ -243,6 +243,7 @@ private fun DialogScaffold(
                         .heightIn(min = 76.dp)
                         .padding(vertical = 16.dp, horizontal = 24.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.End),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     supportButton?.invoke(Modifier)
                     mainButton?.invoke(Modifier)
