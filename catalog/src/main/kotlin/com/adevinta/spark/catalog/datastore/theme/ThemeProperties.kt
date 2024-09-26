@@ -27,6 +27,7 @@ import com.adevinta.spark.catalog.themes.FontScaleMode
 import com.adevinta.spark.catalog.themes.TextDirection
 import com.adevinta.spark.catalog.themes.ThemeMode
 import com.adevinta.spark.catalog.themes.UserMode
+import com.adevinta.spark.catalog.ui.shaders.colorblindness.ColorBlindNessType
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -37,10 +38,11 @@ internal data class ThemeProperties(
     val colorMode: ColorMode,
     val brandMode: BrandMode,
     val fontScaleMode: FontScaleMode,
+    val colorBlindNessType: ColorBlindNessType,
+    val colorBlindNessSeverity: Float,
     val textDirection: TextDirection,
     val highlightSparkComponents: Boolean,
     val highlightSparkTokens: Boolean,
-    val useLegacyTheme: Boolean,
 ) {
     companion object {
         val DEFAULT = ThemeProperties(
@@ -51,9 +53,10 @@ internal data class ThemeProperties(
             colorMode = ColorMode.Baseline,
             textDirection = TextDirection.System,
             fontScaleMode = FontScaleMode.System,
+            colorBlindNessType = ColorBlindNessType.None,
+            colorBlindNessSeverity = 0.5f,
             highlightSparkComponents = false,
             highlightSparkTokens = false,
-            useLegacyTheme = false,
         )
     }
 }

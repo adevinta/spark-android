@@ -60,7 +60,9 @@ public class MainActivity : AppCompatActivity() {
                     groupedComponentMap = groupedComponentsList.groupBy { it.group },
                     showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
                     onThemeChange = {
-                        coroutineScope.launch { propertiesHandler.updateProperties(it) }
+                        coroutineScope.launch {
+                            propertiesHandler.updateProperties(it)
+                        }
                     },
                 )
             }

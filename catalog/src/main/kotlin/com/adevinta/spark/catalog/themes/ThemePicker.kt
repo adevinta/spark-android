@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.catalog.themes
 
+import android.os.Build
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -47,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.ui.shaders.colorblindness.ColorBlindSetting
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.menu.DropdownMenuItem
@@ -186,6 +188,20 @@ public fun ThemePicker(
                         fontScale = fontScale,
                         onValueChange = { fontScale = it },
                         onValueChangeFinished = { onThemeChange(theme.copy(fontScale = fontScale)) },
+                    )
+                }
+            }
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            item {
+                Column {
+                    ColorBlindSetting(
+                        colorBlindNessType = theme.colorBlindNessType,
+                        severity = theme.colorBlindNessSeverity,
+                        onTypeChange = {
+                            onThemeChange(theme.copy(colorBlindNessType = it))
+                        },
+                        onSeverityChange = { onThemeChange(theme.copy(colorBlindNessSeverity = it)) },
                     )
                 }
             }

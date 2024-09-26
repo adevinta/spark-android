@@ -21,6 +21,9 @@
  */
 package com.adevinta.spark.catalog
 
+import android.graphics.RenderEffect
+import android.graphics.RuntimeShader
+import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
@@ -54,6 +57,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asComposeRenderEffect
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
@@ -86,6 +91,8 @@ import com.adevinta.spark.catalog.ui.BackdropScaffold
 import com.adevinta.spark.catalog.ui.BackdropScaffoldDefaults
 import com.adevinta.spark.catalog.ui.BackdropValue
 import com.adevinta.spark.catalog.ui.rememberBackdropScaffoldState
+import com.adevinta.spark.catalog.ui.shaders.colorblindness.ColorBlindNessType
+import com.adevinta.spark.catalog.ui.shaders.colorblindness.shader
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
@@ -145,6 +152,21 @@ internal fun ComponentActivity.CatalogApp(
             )
             onDispose {}
         }
+        // Shader for colorblindness demo
+        val runtimeShader = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            RuntimeShader(shader)
+        } else {
+            null
+        }
+
+        val colorBlindNessType = theme.colorBlindNessType
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            runtimeShader?.setFloatUniform("severity", theme.colorBlindNessSeverity)
+            runtimeShader?.setIntUniform(
+                "colorblindType",
+                colorBlindNessType.ordinal,
+            )
+        }
 
         @Suppress("DEPRECATION")
         TestHarness(
@@ -157,7 +179,26 @@ internal fun ComponentActivity.CatalogApp(
             },
         ) {
             Box(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .then(
+                        if (
+                            Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                            colorBlindNessType != ColorBlindNessType.None
+                        ) {
+                            Modifier.graphicsLayer {
+                                clip = true
+                                renderEffect = RenderEffect
+                                    .createRuntimeShaderEffect(
+                                        /* shader = */ runtimeShader!!,
+                                        /* uniformShaderName = */ "composable",
+                                    )
+                                    .asComposeRenderEffect()
+                            }
+                        } else {
+                            Modifier
+                        },
+                    ),
                 contentAlignment = Alignment.Center,
             ) {
                 val coroutineScope = rememberCoroutineScope()
