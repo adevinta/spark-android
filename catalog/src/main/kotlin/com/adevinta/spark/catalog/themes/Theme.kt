@@ -22,6 +22,7 @@
 package com.adevinta.spark.catalog.themes
 
 import androidx.compose.runtime.saveable.Saver
+import com.adevinta.spark.catalog.ui.shaders.colorblindness.ColorBlindNessType
 
 public data class Theme(
     val themeMode: ThemeMode = ThemeMode.System,
@@ -31,6 +32,8 @@ public data class Theme(
     val fontScale: Float = 1.0f,
     val fontScaleMode: FontScaleMode = FontScaleMode.System,
     val textDirection: TextDirection = TextDirection.System,
+    val colorBlindNessType: ColorBlindNessType = ColorBlindNessType.None,
+    val colorBlindNessSeverity: Float = 0.5f,
     val highlightSparkComponents: Boolean = false,
     val highlightSparkTokens: Boolean = false,
     val useLegacyTheme: Boolean = false,
@@ -107,8 +110,11 @@ public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
         mapOf(
             ThemeModeKey to theme.themeMode.ordinal,
             ColorModeKey to theme.colorMode.ordinal,
+            BrandModeKey to theme.brandMode.ordinal,
             UserModeKey to theme.userMode.ordinal,
             FontScaleKey to theme.fontScale.toInt(),
+            ColorBlindTypeKey to theme.colorBlindNessType.ordinal,
+            ColorBlindTypeSeverityKey to theme.colorBlindNessSeverity.toInt(),
             TextDirectionKey to theme.textDirection.ordinal,
             HighlightSparkComponentsKey to if (theme.highlightSparkComponents) 1 else 0,
             HighlightSparkTokensKey to if (theme.highlightSparkTokens) 1 else 0,
@@ -119,8 +125,11 @@ public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(
         Theme(
             themeMode = ThemeMode.entries[map.getValue(ThemeModeKey)],
             colorMode = ColorMode.entries[map.getValue(ColorModeKey)],
+            brandMode = BrandMode.entries[map.getValue(BrandModeKey)],
             userMode = UserMode.entries[map.getValue(UserModeKey)],
             fontScale = map.getValue(FontScaleKey).toFloat(),
+            colorBlindNessType = ColorBlindNessType.entries[map.getValue(ColorBlindTypeKey)],
+            colorBlindNessSeverity = map.getValue(ColorBlindTypeSeverityKey).toFloat(),
             textDirection = TextDirection.entries[map.getValue(TextDirectionKey)],
             highlightSparkComponents = map.getValue(HighlightSparkComponentsKey) == 1,
             highlightSparkTokens = map.getValue(HighlightSparkTokensKey) == 1,
@@ -137,6 +146,8 @@ private const val ColorModeKey = "colorMode"
 private const val BrandModeKey = "brandMode"
 private const val UserModeKey = "userMode"
 private const val FontScaleKey = "fontScale"
+private const val ColorBlindTypeKey = "colorBlindType"
+private const val ColorBlindTypeSeverityKey = "colorBlindTypeSeverity"
 private const val TextDirectionKey = "textDirection"
 private const val HighlightSparkComponentsKey = "highlightSparkComponents"
 private const val HighlightSparkTokensKey = "highlightSparkTokens"
