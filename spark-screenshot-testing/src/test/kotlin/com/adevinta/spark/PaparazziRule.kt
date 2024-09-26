@@ -46,6 +46,7 @@ fun paparazziRule(
     renderExtensions = renderExtensions,
     maxPercentDifference = MaxPercentDifference,
     theme = PaparazziTheme,
+    useDeviceResolution = true,
 )
 
 /**
