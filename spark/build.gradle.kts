@@ -86,13 +86,13 @@ dependencies {
     testImplementation(libs.androidx.test.runner)
     testImplementation(libs.testParameterInjector)
     testImplementation(libs.robolectric)
-    testImplementation(libs.androidx.compose.ui.test)
+    testImplementation(libs.androidx.compose.ui.testJUnit)
     testImplementation(libs.androidx.compose.ui.testManifest)
 
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.test.truth)
     androidTestImplementation(libs.androidx.test.runner)
-    androidTestImplementation(libs.androidx.compose.ui.test)
+    androidTestImplementation(libs.androidx.compose.ui.testJUnit)
     androidTestImplementation(libs.androidx.compose.ui.testManifest)
 }

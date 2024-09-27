@@ -61,6 +61,11 @@ import androidx.compose.ui.graphics.asComposeRenderEffect
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.test.DarkMode
+import androidx.compose.ui.test.DeviceConfigurationOverride
+import androidx.compose.ui.test.FontScale
+import androidx.compose.ui.test.LayoutDirection
+import androidx.compose.ui.test.then
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -94,7 +99,6 @@ import com.adevinta.spark.catalog.ui.rememberBackdropScaffoldState
 import com.adevinta.spark.catalog.ui.shaders.colorblindness.ColorBlindNessType
 import com.adevinta.spark.catalog.ui.shaders.colorblindness.shader
 import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
-import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
 
 @Composable
@@ -168,15 +172,14 @@ internal fun ComponentActivity.CatalogApp(
             )
         }
 
-        @Suppress("DEPRECATION")
-        TestHarness(
-            darkMode = useDark,
-            layoutDirection = layoutDirection,
-            fontScale = if (theme.fontScaleMode == FontScaleMode.System) {
-                LocalDensity.current.fontScale
-            } else {
-                theme.fontScale
-            },
+        DeviceConfigurationOverride(
+            override = DeviceConfigurationOverride.DarkMode(useDark)
+                then DeviceConfigurationOverride.LayoutDirection(layoutDirection)
+                then DeviceConfigurationOverride.FontScale(
+                    theme.fontScale.takeUnless {
+                        theme.fontScaleMode == FontScaleMode.System
+                    } ?: LocalDensity.current.fontScale,
+                ),
         ) {
             Box(
                 modifier = Modifier
