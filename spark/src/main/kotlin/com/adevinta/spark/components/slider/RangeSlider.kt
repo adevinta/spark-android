@@ -34,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import androidx.compose.material3.RangeSlider as MaterialRangeSlider
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,7 +84,7 @@ internal fun SparkRangeSlider(
     MaterialRangeSlider(
         value = value,
         onValueChange = onValueChange,
-        modifier = modifier,
+        modifier = modifier.sparkUsageOverlay(),
         enabled = enabled,
         valueRange = valueRange,
         steps = steps,

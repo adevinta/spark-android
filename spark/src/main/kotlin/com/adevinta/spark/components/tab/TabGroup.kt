@@ -29,6 +29,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material3.ScrollableTabRow
+import androidx.compose.material3.TabRow
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.getValue
@@ -149,6 +150,7 @@ internal fun SparkTabGroup(
                 val maxEqualTabWidth = (tabRowWidth - oversizedTabs.sum()) / (tabCount - oversizedTabs.size)
                 tabWidthList = tabWidthList.map { maxOf(maxEqualTabWidth, it) }
             }
+            val tabContentWidths = mutableListOf<Dp>()
             val tabPlaceables = tabMeasurables.mapIndexed { i, tab ->
                 tab.measure(
                     if (scrollable) {

@@ -41,7 +41,6 @@ import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonIcons
-import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
@@ -85,7 +84,7 @@ private fun ColumnScope.TextFieldSample() {
         placeholder = placeHolderText,
         helper = helperText,
         leadingContent = addonText?.let { { Text(it) } },
-        trailingContent = icon?.let { { Icon(it, contentDescription = null) } },
+        trailingContent = icon?.let { { TextFieldIconButton(onClick = {}, icon = it, contentDescription = null) } },
         state = state,
         stateMessage = stateMessageText,
     )
