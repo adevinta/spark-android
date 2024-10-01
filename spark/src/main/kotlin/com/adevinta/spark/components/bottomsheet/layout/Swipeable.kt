@@ -757,7 +757,8 @@ public class ResistanceConfig(
         return result
     }
 
-    override fun toString() = "ResistanceConfig(basis=$basis, factorAtMin=$factorAtMin, factorAtMax=$factorAtMax)"
+    override fun toString(): String =
+        "ResistanceConfig(basis=$basis, factorAtMin=$factorAtMin, factorAtMax=$factorAtMax)"
 }
 
 /**
