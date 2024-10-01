@@ -695,8 +695,7 @@ public data class FixedThreshold(
  */
 @Immutable
 @ExperimentalMaterial3Api
-internal data class FractionalThreshold(
-    /*@FloatRange(from = 0.0, to = 1.0)*/private val fraction: Float,) :
+internal data class FractionalThreshold(/*@FloatRange(from = 0.0, to = 1.0)*/private val fraction: Float) :
     ThresholdConfig {
     override fun Density.computeThreshold(fromValue: Float, toValue: Float): Float = lerp(fromValue, toValue, fraction)
 }
