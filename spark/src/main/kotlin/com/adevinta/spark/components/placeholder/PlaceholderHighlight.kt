@@ -103,10 +103,8 @@ public fun PlaceholderHighlight.Companion.shimmer(
     progressForMaxAlpha = progressForMaxAlpha,
 )
 
-private data class Fade(
-    private val highlightColor: Color,
-    override val animationSpec: InfiniteRepeatableSpec<Float>,
-) : PlaceholderHighlight {
+private data class Fade(private val highlightColor: Color, override val animationSpec: InfiniteRepeatableSpec<Float>) :
+    PlaceholderHighlight {
     private val brush = SolidColor(highlightColor)
 
     override fun brush(progress: Float, size: Size): Brush = brush

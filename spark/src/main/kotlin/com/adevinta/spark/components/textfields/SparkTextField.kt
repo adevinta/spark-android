@@ -369,10 +369,7 @@ private fun animateBorderStrokeAsState(
 }
 
 @Stable
-public data class TextFieldCharacterCounter(
-    val count: Int,
-    val maxCharacter: Int,
-)
+public data class TextFieldCharacterCounter(val count: Int, val maxCharacter: Int)
 
 @Composable
 private fun Label(text: String?, required: Boolean) {

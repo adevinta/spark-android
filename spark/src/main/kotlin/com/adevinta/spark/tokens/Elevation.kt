@@ -94,14 +94,12 @@ private object ElevationDefaults {
      *
      * @param interaction the [Interaction] that is being animated to
      */
-    fun incomingAnimationSpecForInteraction(interaction: Interaction): AnimationSpec<Dp>? {
-        return when (interaction) {
-            is PressInteraction.Press -> DefaultIncomingSpec
-            is DragInteraction.Start -> DefaultIncomingSpec
-            is HoverInteraction.Enter -> DefaultIncomingSpec
-            is FocusInteraction.Focus -> DefaultIncomingSpec
-            else -> null
-        }
+    fun incomingAnimationSpecForInteraction(interaction: Interaction): AnimationSpec<Dp>? = when (interaction) {
+        is PressInteraction.Press -> DefaultIncomingSpec
+        is DragInteraction.Start -> DefaultIncomingSpec
+        is HoverInteraction.Enter -> DefaultIncomingSpec
+        is FocusInteraction.Focus -> DefaultIncomingSpec
+        else -> null
     }
 
     /**
@@ -110,14 +108,12 @@ private object ElevationDefaults {
      *
      * @param interaction the [Interaction] that is being animated away from
      */
-    fun outgoingAnimationSpecForInteraction(interaction: Interaction): AnimationSpec<Dp>? {
-        return when (interaction) {
-            is PressInteraction.Press -> DefaultOutgoingSpec
-            is DragInteraction.Start -> DefaultOutgoingSpec
-            is HoverInteraction.Enter -> HoveredOutgoingSpec
-            is FocusInteraction.Focus -> DefaultOutgoingSpec
-            else -> null
-        }
+    fun outgoingAnimationSpecForInteraction(interaction: Interaction): AnimationSpec<Dp>? = when (interaction) {
+        is PressInteraction.Press -> DefaultOutgoingSpec
+        is DragInteraction.Start -> DefaultOutgoingSpec
+        is HoverInteraction.Enter -> HoveredOutgoingSpec
+        is FocusInteraction.Focus -> DefaultOutgoingSpec
+        else -> null
     }
 }
 

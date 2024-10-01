@@ -227,9 +227,9 @@ internal fun Resources.getQuantityText(@PluralsRes id: Int, quantity: Int, varar
  * Convert a [Spanned] to a [String] without the `<p dir="ltr">` and `</p>` tags that are added by `toHtml()` which
  * added a padding at the end of the text.
  */
-private fun Spanned.toHtmlWithoutParagraphs(): String {
-    return toHtml().substringAfter("<p dir=\"ltr\">").substringBeforeLast("</p>")
-}
+private fun Spanned.toHtmlWithoutParagraphs(): String = toHtml()
+    .substringAfter("<p dir=\"ltr\">")
+    .substringBeforeLast("</p>")
 
 private fun CharSequence.asAnnotatedString(
     density: Density,

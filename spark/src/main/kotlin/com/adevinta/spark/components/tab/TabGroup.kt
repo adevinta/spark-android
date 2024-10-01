@@ -208,10 +208,7 @@ private enum class TabSlots {
 /**
  * Class holding onto state needed for [ScrollableTabRow]
  */
-private class ScrollableTabData(
-    private val scrollState: ScrollState,
-    private val coroutineScope: CoroutineScope,
-) {
+private class ScrollableTabData(private val scrollState: ScrollState, private val coroutineScope: CoroutineScope) {
     private var selectedTab: Int? = null
 
     fun onLaidOut(
@@ -291,9 +288,7 @@ internal class TabPosition internal constructor(val left: Dp, val width: Dp) {
         return result
     }
 
-    override fun toString(): String {
-        return "TabPosition(left=$left, right=$right, width=$width)"
-    }
+    override fun toString(): String = "TabPosition(left=$left, right=$right, width=$width)"
 }
 
 /**

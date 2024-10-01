@@ -39,14 +39,12 @@ internal class FractionalRectangleShape(
         size: Size,
         layoutDirection: LayoutDirection,
         density: Density,
-    ): Outline {
-        return Outline.Rectangle(
-            Rect(
-                left = (startFraction * size.width).coerceAtMost(size.width - 1f),
-                top = 0f,
-                right = (endFraction * size.width).coerceAtLeast(1f),
-                bottom = size.height,
-            ),
-        )
-    }
+    ): Outline = Outline.Rectangle(
+        Rect(
+            left = (startFraction * size.width).coerceAtMost(size.width - 1f),
+            top = 0f,
+            right = (endFraction * size.width).coerceAtLeast(1f),
+            bottom = size.height,
+        ),
+    )
 }

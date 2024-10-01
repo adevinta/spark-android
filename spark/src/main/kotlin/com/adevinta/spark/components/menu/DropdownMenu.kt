@@ -228,9 +228,9 @@ public fun DropdownMenuItem(
  * @param enabled whether the menu item is enabled
  */
 @Composable
-private fun MenuItemColors.textColor(enabled: Boolean): State<Color> {
-    return rememberUpdatedState(if (enabled) textColor else disabledTextColor)
-}
+private fun MenuItemColors.textColor(
+    enabled: Boolean,
+): State<Color> = rememberUpdatedState(if (enabled) textColor else disabledTextColor)
 
 /**
  * Represents the leading icon color for a menu item, depending on its [enabled] state.

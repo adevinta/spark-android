@@ -29,9 +29,7 @@ import org.junit.Test
 
 internal class PreviewScreenshotTests {
 
-    enum class BaseDeviceConfig(
-        val deviceConfig: DeviceConfig,
-    ) {
+    enum class BaseDeviceConfig(val deviceConfig: DeviceConfig) {
         PIXEL_5(
             DeviceConfig.PIXEL_5.copy(
                 softButtons = false,
@@ -74,6 +72,6 @@ internal class PreviewScreenshotTests {
 
 private val partPro = listOf("_part_light", "_pro_light", "_part_dark", "_pro_dark")
 private val lightDark = listOf("_light", "_dark")
-private fun previewFullName(preview: ShowkaseBrowserComponent): String {
-    return (preview.group + "_" + preview.componentName).replace(" ", "")
-}
+private fun previewFullName(
+    preview: ShowkaseBrowserComponent,
+): String = (preview.group + "_" + preview.componentName).replace(" ", "")

@@ -186,10 +186,7 @@ internal fun SparkTag(
 }
 
 @Immutable
-public data class TagColors(
-    val backgroundColor: Color,
-    val contentColor: Color,
-)
+public data class TagColors(val backgroundColor: Color, val contentColor: Color)
 
 public object TagDefaults {
     internal val MinHeight = 20.dp

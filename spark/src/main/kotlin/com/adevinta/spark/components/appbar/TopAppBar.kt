@@ -322,13 +322,11 @@ public class TopAppBarColors internal constructor(
      * percentage
      */
     @Composable
-    internal fun containerColor(colorTransitionFraction: Float): Color {
-        return lerp(
-            containerColor,
-            scrolledContainerColor,
-            FastOutLinearInEasing.transform(colorTransitionFraction),
-        )
-    }
+    internal fun containerColor(colorTransitionFraction: Float): Color = lerp(
+        containerColor,
+        scrolledContainerColor,
+        FastOutLinearInEasing.transform(colorTransitionFraction),
+    )
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -950,13 +948,11 @@ private fun TopAppBarLayout(
  * @param elevationTransitionFraction a `0.0` to `1.0` value that represents a color transition percentage
  */
 @Composable
-private fun containerElevation(elevationTransitionFraction: Float): Dp {
-    return lerp(
-        ElevationTokens.Level0,
-        ElevationTokens.Level2,
-        FastOutLinearInEasing.transform(elevationTransitionFraction),
-    )
-}
+private fun containerElevation(elevationTransitionFraction: Float): Dp = lerp(
+    ElevationTokens.Level0,
+    ElevationTokens.Level2,
+    FastOutLinearInEasing.transform(elevationTransitionFraction),
+)
 
 // An easing function used to compute the alpha value that is applied to the top title part of a
 // Medium or Large app bar.
