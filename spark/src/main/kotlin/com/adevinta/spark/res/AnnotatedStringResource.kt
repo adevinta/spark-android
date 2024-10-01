@@ -72,9 +72,23 @@ import kotlinx.collections.immutable.PersistentMap
 import kotlinx.collections.immutable.persistentMapOf
 
 /**
- * Load a annotated string resource with formatting.
+ * Load an annotated string resource with formatting.
  *
- * Be aware that using this method you'll loose the annotations support.
+ * ```xml
+ * <string name="hello">Hello, <annotation variable="who" color="main">.</annotation>!</string>
+ * ```
+ *
+ * ```kotlin
+ * annotatedStringResource(
+ *     id = R.string.hello,
+ *     formatArgs = persistentMapOf("who" to "Bob"),
+ * )
+ * ```
+ *
+ * Beware, when using annotations with a `variable` mapping (`<annotation variable="...">`):
+ * - The annotation content must not be empty, otherwise it will be stripped by AAPT. You can use a space, a dot, or anything else.
+ * - The entire annotation content will be replaced by the provided argument mapping.
+ * - If the argument mapping is not found, a [NoSuchElementException] will be thrown!
  *
  * @param id the resource identifier
  * @param formatArgs the format arguments
@@ -135,6 +149,7 @@ public fun annotatedStringResource(@StringRes id: Int): AnnotatedString {
  * @param id the resource identifier
  * @param count the count
  * @return the pluralized string data associated with the resource
+ * @see annotatedStringResource for more details
  */
 @Composable
 public fun annotatedPluralStringResource(
