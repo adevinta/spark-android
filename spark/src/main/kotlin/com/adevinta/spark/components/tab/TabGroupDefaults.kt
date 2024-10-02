@@ -103,15 +103,15 @@ internal object TabGroupDefaults {
             },
         ) {
             val currentTabWidth by
-            animateDpAsState(
-                targetValue = currentTabPosition.width,
-                animationSpec = TabRowIndicatorSpec,
-            )
+                animateDpAsState(
+                    targetValue = currentTabPosition.width,
+                    animationSpec = TabRowIndicatorSpec,
+                )
             val indicatorOffset by
-            animateDpAsState(
-                targetValue = currentTabPosition.left,
-                animationSpec = TabRowIndicatorSpec,
-            )
+                animateDpAsState(
+                    targetValue = currentTabPosition.left,
+                    animationSpec = TabRowIndicatorSpec,
+                )
             fillMaxWidth()
                 .wrapContentSize(Alignment.BottomStart)
                 .offset { IntOffset(x = indicatorOffset.roundToPx(), y = 0) }

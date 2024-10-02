@@ -166,7 +166,7 @@ internal fun SparkTabGroup(
                 /* Tabs */
                 var left = 0
                 val tabPositions = mutableListOf<TabPosition>()
-                tabPlaceables.fastForEachIndexed {index, placeable ->
+                tabPlaceables.fastForEachIndexed { index, placeable ->
                     placeable.placeRelative(left, 0)
                     tabPositions.add(
                         TabPosition(
