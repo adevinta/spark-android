@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.DefaultTestDevices
+import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.textfields.AddonScope
 import com.adevinta.spark.components.textfields.TextField
@@ -147,6 +148,7 @@ internal class TextFieldScreenshot {
         }
     }
 
+    @OptIn(ExperimentalSparkApi::class)
     @Composable
     private fun TextFields(
         modifier: Modifier = Modifier,
@@ -157,7 +159,7 @@ internal class TextFieldScreenshot {
     ) {
         val leadingContent: (@Composable AddonScope.() -> Unit)? = icon?.let {
             @Composable {
-                Icon(icon, contentDescription = null)
+                TextFieldIconButton(icon = icon, contentDescription = null, onClick = {})
             }
         }
         val trailingContent: (@Composable AddonScope.() -> Unit)? = icon?.let {
