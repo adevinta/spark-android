@@ -73,6 +73,7 @@ import com.adevinta.spark.icons.SearchToOutline
 import com.adevinta.spark.icons.SparkAnimatedIcons
 import com.adevinta.spark.tokens.disabled
 import com.adevinta.spark.tokens.highlight
+import com.adevinta.spark.tokens.ripple
 import kotlin.math.roundToInt
 
 private const val IconsExampleSourceUrl = "$SampleSourceUrl/IconsSamples.kt"
@@ -257,7 +258,7 @@ public fun RowScope.NavigationBarItem(
     // The color of the Ripple should always the selected color, as we want to show the color
     // before the item is considered selected, and hence before the new contentColor is
     // provided by BottomNavigationTransition.
-    val ripple = rememberRipple(bounded = false, color = SparkTheme.colors.neutral)
+    val ripple = ripple(bounded = false, color = SparkTheme.colors.neutral)
 
     Box(
         modifier

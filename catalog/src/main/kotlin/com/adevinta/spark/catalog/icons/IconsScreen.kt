@@ -194,7 +194,7 @@ public fun IconsScreen(
                             },
                         )
                         .padding(8.dp)
-                        .animateItemPlacement(),
+                        .animateItem(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
