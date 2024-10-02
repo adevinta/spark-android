@@ -212,7 +212,7 @@ internal fun ComponentActivity.CatalogApp(
                     scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
                     frontLayerScrimColor = Color.Unspecified,
                     headerHeight = BackdropScaffoldDefaults.HeaderHeight +
-                            WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
+                        WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
                     peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
                         .calculateTopPadding(),
                     backLayerBackgroundColor = SparkTheme.colors.mainContainer,
