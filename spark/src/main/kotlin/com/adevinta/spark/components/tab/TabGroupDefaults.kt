@@ -24,7 +24,6 @@ package com.adevinta.spark.components.tab
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateIntOffsetAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -81,6 +80,10 @@ internal object TabGroupDefaults {
         easing = FastOutSlowInEasing,
     )
 
+    /** [AnimationSpec] used when an indicator is updating width and/or offset. */
+    internal val TabRowIndicatorSpec: AnimationSpec<Dp> =
+        tween(durationMillis = 250, easing = FastOutSlowInEasing)
+
     /**
      * [Modifier] that takes up all the available width inside the [TabRow], and then animates
      * the offset of the indicator it is applied to, depending on the [currentTabPosition].
@@ -91,25 +94,27 @@ internal object TabGroupDefaults {
     @Suppress("ComposeModifierComposed") // Fork from M3 Tab that will be removed once the api is stable
     internal fun Modifier.tabIndicatorOffset(
         currentTabPosition: TabPosition,
-    ): Modifier = composed(
-        inspectorInfo = debugInspectorInfo {
-            name = "tabIndicatorOffset"
-            value = currentTabPosition
-        },
-    ) {
-        val currentTabWidth by animateDpAsState(
-            targetValue = currentTabPosition.width,
-            animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
-            label = "currentTabWidth",
-        )
-        val indicatorOffset by animateIntOffsetAsState(
-            targetValue = IntOffset(x = currentTabPosition.left.value.toInt(), 0),
-            animationSpec = tween(durationMillis = 250, easing = FastOutSlowInEasing),
-            label = "indicatorOffset",
-        )
-        fillMaxWidth()
-            .wrapContentSize(Alignment.BottomStart)
-            .offset { indicatorOffset }
-            .width(currentTabWidth)
-    }
+    ): Modifier =
+        composed(
+            inspectorInfo =
+            debugInspectorInfo {
+                name = "tabIndicatorOffset"
+                value = currentTabPosition
+            },
+        ) {
+            val currentTabWidth by
+            animateDpAsState(
+                targetValue = currentTabPosition.width,
+                animationSpec = TabRowIndicatorSpec,
+            )
+            val indicatorOffset by
+            animateDpAsState(
+                targetValue = currentTabPosition.left,
+                animationSpec = TabRowIndicatorSpec,
+            )
+            fillMaxWidth()
+                .wrapContentSize(Alignment.BottomStart)
+                .offset { IntOffset(x = indicatorOffset.roundToPx(), y = 0) }
+                .width(currentTabWidth)
+        }
 }

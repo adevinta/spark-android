@@ -45,6 +45,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.util.fastForEach
+import androidx.compose.ui.util.fastForEachIndexed
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.components.badge.Badge
@@ -160,14 +162,19 @@ internal fun SparkTabGroup(
                 )
             }
 
-            val tabPositions: MutableList<TabPosition> = mutableListOf()
             layout(if (scrollable) layoutWidth else tabRowWidth, layoutHeight) {
                 /* Tabs */
                 var left = 0
-                tabPlaceables.forEach {
-                    it.placeRelative(left, 0)
-                    tabPositions.add(TabPosition(left = left.toDp(), width = it.width.toDp()))
-                    left += it.width
+                val tabPositions = mutableListOf<TabPosition>()
+                tabPlaceables.fastForEachIndexed {index, placeable ->
+                    placeable.placeRelative(left, 0)
+                    tabPositions.add(
+                        TabPosition(
+                            left = left.toDp(),
+                            width = placeable.width.toDp(),
+                        ),
+                    )
+                    left += placeable.width
                 }
                 /* Divider */
                 subcompose(TabSlots.Divider, divider).forEach {
@@ -181,12 +188,11 @@ internal fun SparkTabGroup(
                     placeable.placeRelative(0, layoutHeight - placeable.height)
                 }
                 /* Indicator */
-                subcompose(TabSlots.Indicator) {
-                    indicator(tabPositions)
-                }.forEach {
-                    it.measure(Constraints.fixed(if (scrollable) layoutWidth else tabRowWidth, layoutHeight))
-                        .placeRelative(0, 0)
-                }
+                subcompose(TabSlots.Indicator) { indicator(tabPositions) }
+                    .fastForEach {
+                        it.measure(Constraints.fixed(if (scrollable) layoutWidth else tabRowWidth, layoutHeight))
+                            .placeRelative(0, 0)
+                    }
 
                 scrollableTabData.onLaidOut(
                     density = this@SubcomposeLayout,
@@ -382,7 +388,7 @@ private fun TabGroupFixedSizePreview() {
         Pair("Home", null) to 0,
         Pair("Message", SparkIcons.MessageOutline) to 1,
     )
-    var selectedIndex by remember { mutableIntStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(1) }
     PreviewTheme {
         TabGroup(
             selectedTabIndex = selectedIndex,
