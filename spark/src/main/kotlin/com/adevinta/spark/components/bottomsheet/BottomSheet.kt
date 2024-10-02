@@ -65,6 +65,7 @@ import com.adevinta.spark.components.toggles.CheckboxLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.coroutines.launch
 
 /**
@@ -105,7 +106,7 @@ public fun BottomSheet(
 ) {
     SparkModalBottomSheet(
         onDismissRequest = onDismissRequest,
-        modifier = modifier,
+        modifier = modifier.sparkUsageOverlay(),
         sheetState = sheetState,
         content = content,
         dragHandle = dragHandle,

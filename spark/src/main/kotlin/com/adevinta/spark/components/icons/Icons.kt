@@ -36,6 +36,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.icons.Check
@@ -43,7 +44,6 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.ifTrue
-import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 import androidx.compose.material3.Icon as MaterialIcon
 
@@ -73,7 +73,6 @@ public fun Icon(
         painter = rememberSparkIconPainter(sparkIcon),
         contentDescription = contentDescription,
         modifier = modifier
-            .sparkUsageOverlay()
             .ifNotNull(size) {
                 size(it.size)
             },
@@ -107,7 +106,6 @@ public fun Icon(
         imageVector = imageVector,
         contentDescription = contentDescription,
         modifier = modifier
-            .sparkUsageOverlay()
             .ifNotNull(size) {
                 size(it.size)
             },
@@ -141,7 +139,6 @@ public fun Icon(
         bitmap = bitmap,
         contentDescription = contentDescription,
         modifier = modifier
-            .sparkUsageOverlay()
             .ifNotNull(size) {
                 size(it.size)
             },
@@ -175,7 +172,6 @@ public fun Icon(
         painter = painter,
         contentDescription = contentDescription,
         modifier = modifier
-            .sparkUsageOverlay()
             .ifNotNull(size) {
                 size(it.size)
             },
@@ -189,6 +185,7 @@ public fun rememberSparkIconPainter(sparkIcon: SparkIcon): Painter = when (spark
     is SparkIcon.DrawableRes -> rememberDrawablePainter(getDrawable(LocalContext.current, sparkIcon.drawableId))
 }
 
+@PreviewLightDark
 @Composable
 private fun IconPreview() {
     PreviewTheme {

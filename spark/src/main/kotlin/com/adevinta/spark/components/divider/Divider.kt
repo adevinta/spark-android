@@ -42,6 +42,7 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.spacer.HorizontalSpacer
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import androidx.compose.material3.HorizontalDivider as MaterialHorizontalDivider
 import androidx.compose.material3.VerticalDivider as MaterialVerticalDivider
 
@@ -84,11 +85,15 @@ public fun HorizontalDivider(
     if (label == null) {
         MaterialHorizontalDivider(
             color = intent.color(),
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .sparkUsageOverlay()
+                .fillMaxWidth(),
         )
     } else {
         ConstraintLayout(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .sparkUsageOverlay()
+                .fillMaxWidth(),
         ) {
             val (lineLeft, labelBox, lineRight) = createRefs()
 
@@ -148,11 +153,15 @@ public fun VerticalDivider(
     if (label == null) {
         MaterialVerticalDivider(
             color = intent.color(),
-            modifier = modifier.fillMaxHeight(),
+            modifier = modifier
+                .sparkUsageOverlay()
+                .fillMaxHeight(),
         )
     } else {
         ConstraintLayout(
-            modifier = modifier.fillMaxHeight(),
+            modifier = modifier
+                .sparkUsageOverlay()
+                .fillMaxHeight(),
         ) {
             val (lineTop, labelBox, lineBottom) = createRefs()
 

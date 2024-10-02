@@ -60,6 +60,7 @@ import com.adevinta.spark.icons.Close
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.ElevationTokens
 import com.adevinta.spark.tokens.highlight
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.coroutines.launch
 
 /**
@@ -108,7 +109,8 @@ public fun Popover(
             Surface(
                 modifier = Modifier
                     .sizeIn(minWidth = PopoverMinWidth, maxWidth = 320.dp, minHeight = PopoverMinHeight)
-                    .padding(bottom = PopoverAnchorPadding),
+                    .padding(bottom = PopoverAnchorPadding)
+                    .sparkUsageOverlay(),
                 shape = shape,
                 elevation = ElevationTokens.Level2,
                 color = colors.containerColor,

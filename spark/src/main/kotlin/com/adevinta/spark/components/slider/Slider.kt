@@ -67,6 +67,7 @@ import com.adevinta.spark.tokens.dim3
 import com.adevinta.spark.tokens.dim4
 import com.adevinta.spark.tokens.ripple
 import com.adevinta.spark.tokens.transparent
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import androidx.compose.material3.Slider as MaterialSlider
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -107,7 +108,7 @@ internal fun SparkSlider(
     MaterialSlider(
         value = value,
         onValueChange = onValueChange,
-        modifier = modifier,
+        modifier = modifier.sparkUsageOverlay(),
         enabled = enabled,
         valueRange = valueRange,
         steps = steps,
