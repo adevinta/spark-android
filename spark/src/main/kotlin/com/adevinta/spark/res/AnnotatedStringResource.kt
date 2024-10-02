@@ -105,6 +105,31 @@ public fun annotatedStringResource(@StringRes id: Int, formatArgs: PersistentMap
     }
 }
 
+/**
+ * Load a annotated string resource with formatting.
+ *
+ * Be aware that using this method you'll loose the annotations support.
+ *
+ * @param id the resource identifier
+ * @param formatArgs the format arguments
+ * @return the [AnnotatedString] data associated with the resource
+ */
+@Deprecated(
+    message = "Use the annotatedStringResource with PersistentMap overload instead",
+    replaceWith = ReplaceWith("annotatedStringResource(id, persistentMapOf(formatArgs))"),
+)
+@Composable
+public fun annotatedStringResource(@StringRes id: Int, vararg formatArgs: Any): AnnotatedString {
+    val resources = resources()
+    val density = LocalDensity.current
+    val colors = SparkTheme.colors
+    val typography = SparkTheme.typography
+    return remember(id, formatArgs) {
+        val text = resources.getText(id, *formatArgs)
+        text.asAnnotatedString(density, colors, typography)
+    }
+}
+
 private fun Resources.buildSpannedStringWithArgs(
     @StringRes id: Int,
     args: PersistentMap<String, String>,
@@ -186,6 +211,34 @@ public fun annotatedPluralStringResource(
     val typography = SparkTheme.typography
     return remember(id) {
         val text = resources.buildSpannedStringWithArgs(id, count, formatArgs)
+        text.asAnnotatedString(density, colors, typography)
+    }
+}
+
+/**
+ * Load a styled plurals resource with provided format arguments.
+ *
+ * @param id the resource identifier
+ * @param count the count
+ * @param formatArgs arguments used in the format string
+ * @return the pluralized string data associated with the resource
+ */
+@Deprecated(
+    message = "Use the annotatedPluralStringResource with PersistentMap overload instead",
+    replaceWith = ReplaceWith("annotatedPluralStringResource(id, count, persistentMapOf(formatArgs))"),
+)
+@Composable
+public fun annotatedPluralStringResource(
+    @PluralsRes id: Int,
+    count: Int,
+    vararg formatArgs: Any,
+): AnnotatedString {
+    val resources = resources()
+    val density = LocalDensity.current
+    val colors = SparkTheme.colors
+    val typography = SparkTheme.typography
+    return remember(id) {
+        val text = resources.getQuantityText(id, count, *formatArgs)
         text.asAnnotatedString(density, colors, typography)
     }
 }
