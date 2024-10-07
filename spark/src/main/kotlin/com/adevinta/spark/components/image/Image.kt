@@ -26,6 +26,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.movableContentOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -80,6 +82,7 @@ internal fun SparkImage(
     colorFilter: ColorFilter? = null,
     filterQuality: FilterQuality = DrawScope.DefaultFilterQuality,
 ) {
+    val emptyStateIcon = remember(emptyIcon) { movableContentOf(emptyIcon) }
     SubcomposeAsyncImage(
         model = model,
         contentDescription = contentDescription,
@@ -93,7 +96,7 @@ internal fun SparkImage(
         filterQuality = filterQuality,
     ) {
         when (painter.state) {
-            AsyncImagePainter.State.Empty -> emptyIcon()
+            AsyncImagePainter.State.Empty -> emptyStateIcon()
             is AsyncImagePainter.State.Loading -> loadingPlaceholder()
 
             is AsyncImagePainter.State.Error -> {
@@ -108,7 +111,7 @@ internal fun SparkImage(
                 }
 
                 if (showEmptyIcon) {
-                    emptyIcon()
+                    emptyStateIcon()
                 } else {
                     errorIcon()
                 }
