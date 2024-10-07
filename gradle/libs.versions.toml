@@ -41,9 +41,6 @@ accompanist-permissions = { module = "com.google.accompanist:accompanist-permiss
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-testharness = { module = "com.google.accompanist:accompanist-testharness", version.ref = "accompanist" }
 
-airbnb-showkase = { module = "com.airbnb.android:showkase", version.ref = "showkase" }
-airbnb-showkase-processor = { module = "com.airbnb.android:showkase-processor", version.ref = "showkase" }
-
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 # https://androidx.tech/artifacts/appcompat/appcompat-resources/
