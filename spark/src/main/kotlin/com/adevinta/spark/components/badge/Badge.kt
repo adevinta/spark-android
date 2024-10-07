@@ -57,7 +57,6 @@ private const val BADGE_MAX_COUNT = 99
 
 @InternalSparkApi
 @Composable
-@Suppress("DEPRECATION")
 internal fun SparkBadge(
     badgeStyle: BadgeStyle,
     modifier: Modifier = Modifier,
@@ -78,9 +77,7 @@ internal fun SparkBadge(
                 shape = shape,
             )
             .clip(shape)
-            .then(
-                Modifier.ifNotNull(content) { padding(horizontal = badgeStyle.contentPadding) },
-            ),
+            .ifNotNull(content) { padding(horizontal = badgeStyle.contentPadding) },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
     ) {
@@ -187,7 +184,7 @@ public fun Badge(
 @Composable
 internal fun BadgeNoStrokeIntentPreview() {
     PreviewTheme {
-        BadgeIntent.values().forEach { intent ->
+        BadgeIntent.entries.forEach { intent ->
             BadgeIntentPreview(intent, hasStroke = false)
         }
     }
@@ -200,7 +197,7 @@ internal fun BadgeNoStrokeIntentPreview() {
 @Composable
 internal fun BadgeWithStrokeIntentPreview() {
     PreviewTheme {
-        BadgeIntent.values().forEach { intent ->
+        BadgeIntent.entries.forEach { intent ->
             BadgeIntentPreview(intent, hasStroke = true)
         }
     }
@@ -208,7 +205,7 @@ internal fun BadgeWithStrokeIntentPreview() {
 
 @Composable
 private fun BadgeIntentPreview(intent: BadgeIntent, hasStroke: Boolean) {
-    BadgeStyle.values().forEach {
+    BadgeStyle.entries.forEach {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
