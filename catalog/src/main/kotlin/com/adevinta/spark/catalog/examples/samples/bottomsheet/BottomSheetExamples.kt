@@ -182,6 +182,7 @@ private fun ConfiguredBottomSheet(
                     BottomSheetContentExamples.List -> ListContent(onHideBottomSheetClicked)
                 }
             },
+            applyTempStatusBarPadding = true,
             dragHandle = if (isDragHandlerEnabled) {
                 { DragHandle() }
             } else {
