@@ -105,8 +105,15 @@ internal fun ComponentActivity.CatalogApp(
 
     val useDark = (theme.themeMode == ThemeMode.System && isSystemInDarkTheme()) || theme.themeMode == ThemeMode.Dark
 
-    val colors =
+    val colors = if (theme.colorMode == ColorMode.Dynamic && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (useDark) {
+            dynamicDarkColorScheme(LocalContext.current)
+        } else {
+            dynamicLightColorScheme(LocalContext.current)
+        }.asSparkColors(useDark = true)
+    } else {
         themeProvider.colors(useDarkColors = useDark, isPro = theme.userMode == UserMode.Pro)
+    }
     val shapes = themeProvider.shapes()
     val typography = themeProvider.typography()
 
@@ -291,10 +298,6 @@ private fun HomeTabBar(
         )
     }
 }
-
-private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
-
-internal const val HomeRoute = "home"
 
 public enum class CatalogHomeScreen { Examples, Configurator, Icons }
 

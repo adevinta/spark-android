@@ -19,8 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("DEPRECATION")
-
 package com.adevinta.spark.tokens
 
 import android.annotation.SuppressLint
@@ -47,10 +45,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.takeOrElse
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.graphics.ColorUtils
 import com.adevinta.spark.InternalSparkApi
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
@@ -860,6 +860,95 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
     surfaceContainerLow = surface,
     surfaceContainerLowest = surface,
 )
+
+public fun ColorScheme.asSparkColors(useDark: Boolean): SparkColors = if (useDark) {
+    darkSparkColors(
+        main = primary,
+        onMain = onPrimary,
+        mainContainer = primaryContainer,
+        onMainContainer = onPrimaryContainer,
+        mainVariant = primary.adjustColorToMaterialTone(90f),
+        onMainVariant = primary.adjustColorToMaterialTone(10f),
+        accent = secondary,
+        onAccent = onSecondary,
+        accentContainer = secondaryContainer,
+        onAccentContainer = onSecondaryContainer,
+        accentVariant = secondary.adjustColorToMaterialTone(90f),
+        onAccentVariant = secondary.adjustColorToMaterialTone(10f),
+        support = tertiary,
+        onSupport = onTertiary,
+        supportContainer = tertiaryContainer,
+        onSupportContainer = onTertiaryContainer,
+        supportVariant = tertiary.adjustColorToMaterialTone(90f),
+        onSupportVariant = tertiary.adjustColorToMaterialTone(10f),
+        basic = tertiary,
+        onBasic = onTertiary,
+        basicContainer = tertiaryContainer,
+        onBasicContainer = onTertiaryContainer,
+        background = background,
+        onBackground = onBackground,
+        surface = surface,
+        onSurface = onSurface,
+        backgroundVariant = surfaceVariant,
+        onBackgroundVariant = onSurfaceVariant,
+        surfaceTint = surfaceTint,
+        surfaceInverse = inverseSurface,
+        onSurfaceInverse = inverseOnSurface,
+        error = error,
+        onError = onError,
+        errorContainer = errorContainer,
+        onErrorContainer = onErrorContainer,
+        outline = outline,
+        outlineHigh = outlineVariant,
+        scrim = scrim,
+    )
+} else {
+    lightSparkColors(
+        main = primary,
+        onMain = onPrimary,
+        mainContainer = primaryContainer,
+        onMainContainer = onPrimaryContainer,
+        mainVariant = primary.adjustColorToMaterialTone(10f),
+        onMainVariant = primary.adjustColorToMaterialTone(99f),
+        accent = secondary,
+        onAccent = onSecondary,
+        accentContainer = secondaryContainer,
+        onAccentContainer = onSecondaryContainer,
+        accentVariant = secondary.adjustColorToMaterialTone(10f),
+        onAccentVariant = secondary.adjustColorToMaterialTone(99f),
+        support = tertiary,
+        onSupport = onTertiary,
+        supportContainer = tertiaryContainer,
+        onSupportContainer = onTertiaryContainer,
+        supportVariant = tertiary.adjustColorToMaterialTone(10f),
+        onSupportVariant = tertiary.adjustColorToMaterialTone(99f),
+        basic = tertiary,
+        onBasic = onTertiary,
+        basicContainer = tertiaryContainer,
+        onBasicContainer = onTertiaryContainer,
+        background = background,
+        onBackground = onBackground,
+        surface = surface,
+        onSurface = onSurface,
+        backgroundVariant = surfaceVariant,
+        onBackgroundVariant = onSurfaceVariant,
+        surfaceInverse = inverseSurface,
+        onSurfaceInverse = inverseOnSurface,
+        error = error,
+        onError = onError,
+        errorContainer = errorContainer,
+        onErrorContainer = onErrorContainer,
+        outline = outline,
+        outlineHigh = outlineVariant,
+        scrim = scrim,
+    )
+}
+
+private fun Color.adjustColorToMaterialTone(tone: Float): Color {
+    val m3HCT = FloatArray(3)
+    ColorUtils.colorToM3HCT(this.toArgb(), m3HCT)
+    return Color(ColorUtils.M3HCTToColor(m3HCT[0], m3HCT[1], tone))
+}
 
 /**
  * The Material color system contains pairs of colors that are typically used for the background
