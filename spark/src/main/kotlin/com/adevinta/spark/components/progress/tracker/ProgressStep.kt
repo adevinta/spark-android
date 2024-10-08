@@ -31,7 +31,4 @@ import androidx.compose.ui.text.AnnotatedString
  * other class inheriting from [CharSequence] will be displayed as plain text.
  * @property enabled Indicate whether the step is enabled or disabled. Disabled steps won't be interactive.
  */
-public data class ProgressStep(
-    public val label: CharSequence,
-    public val enabled: Boolean,
-)
+public data class ProgressStep(public val label: CharSequence, public val enabled: Boolean)

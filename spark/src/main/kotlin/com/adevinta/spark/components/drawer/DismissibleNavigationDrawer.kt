@@ -107,12 +107,10 @@ public fun DismissibleNavigationDrawer(
 public fun rememberDrawerState(
     initialValue: DrawerValue,
     confirmStateChange: (DrawerValue) -> Boolean = { true },
-): DrawerState {
-    return rememberMaterialDrawerState(
-        initialValue = initialValue,
-        confirmStateChange = confirmStateChange,
-    )
-}
+): DrawerState = rememberMaterialDrawerState(
+    initialValue = initialValue,
+    confirmStateChange = confirmStateChange,
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(

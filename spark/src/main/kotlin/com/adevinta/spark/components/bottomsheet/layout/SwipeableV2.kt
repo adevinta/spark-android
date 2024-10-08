@@ -539,26 +539,24 @@ internal fun <T : Any> rememberSwipeableV2State(
     initialValue: T,
     animationSpec: AnimationSpec<Float> = SwipeableV2Defaults.AnimationSpec,
     confirmValueChange: (newValue: T) -> Boolean = { true },
-): SwipeableV2State<T> {
-    return rememberSaveable(
-        initialValue,
-        animationSpec,
-        confirmValueChange,
-        saver = SwipeableV2State.Saver(
-            animationSpec = animationSpec,
-            confirmValueChange = confirmValueChange,
-            positionalThreshold = SwipeableV2Defaults.PositionalThreshold,
-            velocityThreshold = SwipeableV2Defaults.VelocityThreshold,
-        ),
-    ) {
-        SwipeableV2State(
-            initialValue = initialValue,
-            animationSpec = animationSpec,
-            confirmValueChange = confirmValueChange,
-            positionalThreshold = SwipeableV2Defaults.PositionalThreshold,
-            velocityThreshold = SwipeableV2Defaults.VelocityThreshold,
-        )
-    }
+): SwipeableV2State<T> = rememberSaveable(
+    initialValue,
+    animationSpec,
+    confirmValueChange,
+    saver = SwipeableV2State.Saver(
+        animationSpec = animationSpec,
+        confirmValueChange = confirmValueChange,
+        positionalThreshold = SwipeableV2Defaults.PositionalThreshold,
+        velocityThreshold = SwipeableV2Defaults.VelocityThreshold,
+    ),
+) {
+    SwipeableV2State(
+        initialValue = initialValue,
+        animationSpec = animationSpec,
+        confirmValueChange = confirmValueChange,
+        positionalThreshold = SwipeableV2Defaults.PositionalThreshold,
+        velocityThreshold = SwipeableV2Defaults.VelocityThreshold,
+    )
 }
 
 /**
@@ -673,7 +671,9 @@ private class SwipeAnchorsModifier(
     private val onDensityChanged: (density: Density) -> Unit,
     private val onSizeChanged: (layoutSize: IntSize) -> Unit,
     inspectorInfo: InspectorInfo.() -> Unit,
-) : LayoutModifier, OnRemeasuredModifier, InspectorValueInfo(inspectorInfo) {
+) : InspectorValueInfo(inspectorInfo),
+    LayoutModifier,
+    OnRemeasuredModifier {
 
     private var lastDensity: Float = -1f
     private var lastFontScale: Float = -1f

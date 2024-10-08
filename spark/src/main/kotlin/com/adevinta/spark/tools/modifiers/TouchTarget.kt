@@ -64,7 +64,9 @@ private class MinimumTouchTargetModifier : ModifierNodeElement<MinimumTouchTarge
     }
 }
 
-private class MinimumTouchTargetModifierNode : Modifier.Node(), LayoutModifierNode {
+private class MinimumTouchTargetModifierNode :
+    Modifier.Node(),
+    LayoutModifierNode {
 
     override fun MeasureScope.measure(
         measurable: Measurable,

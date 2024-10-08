@@ -46,9 +46,8 @@ import com.adevinta.spark.SparkTheme
 internal fun Modifier.sparkUsageOverlay(overlayColor: Color = Color.Red): Modifier =
     this then SparkUsageOverlayElement(overlayColor)
 
-private class SparkUsageOverlay(
-    var overlayColor: Color = Color.Red,
-) : Modifier.Node(),
+private class SparkUsageOverlay(var overlayColor: Color = Color.Red) :
+    Modifier.Node(),
     DrawModifierNode,
     CompositionLocalConsumerModifierNode {
     override fun ContentDrawScope.draw() {

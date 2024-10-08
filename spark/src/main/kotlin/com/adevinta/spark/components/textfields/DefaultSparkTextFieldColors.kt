@@ -207,12 +207,10 @@ internal data class DefaultSparkTextFieldColors(
      * Represents the container color for this text field.
      */
     @Composable
-    internal fun containerColor(enabled: Boolean): State<Color> {
-        return if (enabled) {
-            animateColorAsState(containerColor, tween(durationMillis = 150), label = "Container Color")
-        } else {
-            rememberUpdatedState(disabledContainerColor)
-        }
+    internal fun containerColor(enabled: Boolean): State<Color> = if (enabled) {
+        animateColorAsState(containerColor, tween(durationMillis = 150), label = "Container Color")
+    } else {
+        rememberUpdatedState(disabledContainerColor)
     }
 
     /**
@@ -221,9 +219,9 @@ internal data class DefaultSparkTextFieldColors(
      * @param enabled whether the text field is enabled
      */
     @Composable
-    internal fun placeholderColor(enabled: Boolean): State<Color> {
-        return rememberUpdatedState(if (enabled) placeholderColor else disabledPlaceholderColor)
-    }
+    internal fun placeholderColor(
+        enabled: Boolean,
+    ): State<Color> = rememberUpdatedState(if (enabled) placeholderColor else disabledPlaceholderColor)
 
     /**
      * Represents the color used for the label of this text field.
@@ -248,9 +246,9 @@ internal data class DefaultSparkTextFieldColors(
     }
 
     @Composable
-    internal fun textColor(enabled: Boolean): State<Color> {
-        return rememberUpdatedState(if (enabled) textColor else disabledTextColor)
-    }
+    internal fun textColor(
+        enabled: Boolean,
+    ): State<Color> = rememberUpdatedState(if (enabled) textColor else disabledTextColor)
 
     @Composable
     internal fun supportingTextColor(
@@ -276,9 +274,7 @@ internal data class DefaultSparkTextFieldColors(
      * @param state whether the text field's current value is in error, success or alert
      */
     @Composable
-    internal fun cursorColor(state: TextFieldState?): State<Color> {
-        return rememberUpdatedState(state?.color() ?: cursorColor)
-    }
+    internal fun cursorColor(state: TextFieldState?): State<Color> = rememberUpdatedState(state?.color() ?: cursorColor)
 
     /**
      * Represents the colors used for text selection in this text field.

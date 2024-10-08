@@ -230,13 +230,11 @@ public sealed class State {
     public data class Error(override val painter: Painter?) : State()
 }
 
-private fun AsyncImagePainter.State.asImageState(): State {
-    return when (this) {
-        AsyncImagePainter.State.Empty -> State.Empty
-        is AsyncImagePainter.State.Error -> State.Error(painter)
-        is AsyncImagePainter.State.Loading -> State.Loading(painter)
-        is AsyncImagePainter.State.Success -> State.Success(painter)
-    }
+private fun AsyncImagePainter.State.asImageState(): State = when (this) {
+    AsyncImagePainter.State.Empty -> State.Empty
+    is AsyncImagePainter.State.Error -> State.Error(painter)
+    is AsyncImagePainter.State.Loading -> State.Loading(painter)
+    is AsyncImagePainter.State.Success -> State.Success(painter)
 }
 
 @Preview(

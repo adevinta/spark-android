@@ -205,37 +205,29 @@ internal class SparkTextFieldMeasurePolicy(
     override fun IntrinsicMeasureScope.maxIntrinsicHeight(
         measurables: List<IntrinsicMeasurable>,
         width: Int,
-    ): Int {
-        return intrinsicHeight(measurables, width) { intrinsicMeasurable, w ->
-            intrinsicMeasurable.maxIntrinsicHeight(w)
-        }
+    ): Int = intrinsicHeight(measurables, width) { intrinsicMeasurable, w ->
+        intrinsicMeasurable.maxIntrinsicHeight(w)
     }
 
     override fun IntrinsicMeasureScope.minIntrinsicHeight(
         measurables: List<IntrinsicMeasurable>,
         width: Int,
-    ): Int {
-        return intrinsicHeight(measurables, width) { intrinsicMeasurable, w ->
-            intrinsicMeasurable.minIntrinsicHeight(w)
-        }
+    ): Int = intrinsicHeight(measurables, width) { intrinsicMeasurable, w ->
+        intrinsicMeasurable.minIntrinsicHeight(w)
     }
 
     override fun IntrinsicMeasureScope.maxIntrinsicWidth(
         measurables: List<IntrinsicMeasurable>,
         height: Int,
-    ): Int {
-        return intrinsicWidth(measurables, height) { intrinsicMeasurable, h ->
-            intrinsicMeasurable.maxIntrinsicWidth(h)
-        }
+    ): Int = intrinsicWidth(measurables, height) { intrinsicMeasurable, h ->
+        intrinsicMeasurable.maxIntrinsicWidth(h)
     }
 
     override fun IntrinsicMeasureScope.minIntrinsicWidth(
         measurables: List<IntrinsicMeasurable>,
         height: Int,
-    ): Int {
-        return intrinsicWidth(measurables, height) { intrinsicMeasurable, h ->
-            intrinsicMeasurable.minIntrinsicWidth(h)
-        }
+    ): Int = intrinsicWidth(measurables, height) { intrinsicMeasurable, h ->
+        intrinsicMeasurable.minIntrinsicWidth(h)
     }
 
     private fun IntrinsicMeasureScope.intrinsicWidth(

@@ -337,6 +337,4 @@ public fun PlaceholderDefaults.fadeHighlightColor(
 public fun PlaceholderDefaults.shimmerHighlightColor(
     backgroundColor: Color = SparkTheme.colors.surface,
     alpha: Float = 0.3f,
-): Color {
-    return backgroundColor.copy(alpha = alpha)
-}
+): Color = backgroundColor.copy(alpha = alpha)

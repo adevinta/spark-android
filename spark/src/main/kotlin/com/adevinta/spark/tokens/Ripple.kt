@@ -130,9 +130,7 @@ public fun ripple(
     color: ColorProducer,
     bounded: Boolean = true,
     radius: Dp = Dp.Unspecified,
-): IndicationNodeFactory {
-    return RippleNodeFactory(bounded, radius, color)
-}
+): IndicationNodeFactory = RippleNodeFactory(bounded, radius, color)
 
 @Stable
 private class RippleNodeFactory private constructor(
@@ -183,7 +181,9 @@ private class DelegatingThemeAwareRippleNode(
     private val bounded: Boolean,
     private val radius: Dp,
     private val color: ColorProducer,
-) : DelegatingNode(), CompositionLocalConsumerModifierNode, ObserverModifierNode {
+) : DelegatingNode(),
+    CompositionLocalConsumerModifierNode,
+    ObserverModifierNode {
     private var rippleNode: DelegatableNode? = null
 
     override fun onAttach() {

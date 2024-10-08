@@ -185,10 +185,7 @@ internal interface MultiSelectorState {
 }
 
 @Stable
-internal class MultiSelectorStateImpl(
-    options: List<String>,
-    selectedOption: String,
-) : MultiSelectorState {
+internal class MultiSelectorStateImpl(options: List<String>, selectedOption: String) : MultiSelectorState {
 
     override val selectedIndex: Int
         get() = _selectedIndex
@@ -208,9 +205,7 @@ internal class MultiSelectorStateImpl(
         return _selectedIndex == other._selectedIndex
     }
 
-    override fun hashCode(): Int {
-        return _selectedIndex.hashCode()
-    }
+    override fun hashCode(): Int = _selectedIndex.hashCode()
 }
 
 @Composable

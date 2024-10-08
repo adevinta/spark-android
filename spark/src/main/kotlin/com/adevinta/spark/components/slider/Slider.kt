@@ -202,8 +202,12 @@ internal fun Handle(
     }
 }
 
-private fun stepsToTickFractions(steps: Int): FloatArray {
-    return if (steps == 0) floatArrayOf() else FloatArray(steps + 2) { it.toFloat() / (steps + 1) }
+private fun stepsToTickFractions(steps: Int): FloatArray = if (steps == 0) {
+    floatArrayOf()
+} else {
+    FloatArray(steps + 2) {
+        it.toFloat() / (steps + 1)
+    }
 }
 
 internal val TrackHeight = 4.dp

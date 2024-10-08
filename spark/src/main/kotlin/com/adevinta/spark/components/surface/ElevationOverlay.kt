@@ -74,13 +74,14 @@ public fun interface ElevationOverlay {
 private object DefaultElevationOverlay : ElevationOverlay {
     @ReadOnlyComposable
     @Composable
-    override fun apply(color: Color, elevation: Dp): Color {
-        return if (elevation > 0.dp && SparkTheme.colors.surface.luminance() <= 0.5) {
-            val foregroundColor = calculateForegroundColor(elevation)
-            foregroundColor.compositeOver(color)
-        } else {
-            color
-        }
+    override fun apply(
+        color: Color,
+        elevation: Dp,
+    ): Color = if (elevation > 0.dp && SparkTheme.colors.surface.luminance() <= 0.5) {
+        val foregroundColor = calculateForegroundColor(elevation)
+        foregroundColor.compositeOver(color)
+    } else {
+        color
     }
 }
 

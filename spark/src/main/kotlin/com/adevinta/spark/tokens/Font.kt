@@ -49,10 +49,7 @@ public fun sparkFontFamily(
  * Utility class to handle the change of font family for the SparkTheme.
  */
 @Immutable
-public class SparkFontFamily(
-    private val useSparkTokensHighlighter: Boolean,
-    private val fontFamily: FontFamily,
-) {
+public class SparkFontFamily(private val useSparkTokensHighlighter: Boolean, private val fontFamily: FontFamily) {
     /**
      * The [FontFamily] used globally inside the app.
      */

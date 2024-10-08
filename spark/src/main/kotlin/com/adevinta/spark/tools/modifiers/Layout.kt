@@ -49,9 +49,8 @@ import kotlinx.collections.immutable.ImmutableList
 public fun Modifier.ignoreParentHorizontalPadding(horizontalPadding: Dp): Modifier =
     this then IgnoreParentHorizontalPaddingModifier(horizontalPadding)
 
-private data class IgnoreParentHorizontalPaddingModifier(
-    private val horizontalPadding: Dp,
-) : ModifierNodeElement<IgnoreParentHorizontalPaddingModifierNode>() {
+private data class IgnoreParentHorizontalPaddingModifier(private val horizontalPadding: Dp) :
+    ModifierNodeElement<IgnoreParentHorizontalPaddingModifierNode>() {
 
     override fun create() = IgnoreParentHorizontalPaddingModifierNode(horizontalPadding)
 
@@ -65,9 +64,8 @@ private data class IgnoreParentHorizontalPaddingModifier(
     }
 }
 
-private class IgnoreParentHorizontalPaddingModifierNode(
-    var horizontalPadding: Dp,
-) : Modifier.Node(),
+private class IgnoreParentHorizontalPaddingModifierNode(var horizontalPadding: Dp) :
+    Modifier.Node(),
     LayoutModifierNode {
     override fun MeasureScope.measure(
         measurable: Measurable,

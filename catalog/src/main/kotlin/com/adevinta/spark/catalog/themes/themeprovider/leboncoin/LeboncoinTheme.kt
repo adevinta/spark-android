@@ -31,19 +31,15 @@ import com.adevinta.spark.tokens.lightSparkColors
 
 public object LeboncoinTheme : ThemeProvider {
     @Composable
-    override fun colors(useDarkColors: Boolean, isPro: Boolean): SparkColors {
-        return if (useDarkColors) {
-            if (isPro) LeboncoinColorProDark else darkSparkColors()
-        } else {
-            if (isPro) LeboncoinColorProLight else lightSparkColors()
-        }
+    override fun colors(useDarkColors: Boolean, isPro: Boolean): SparkColors = if (useDarkColors) {
+        if (isPro) LeboncoinColorProDark else darkSparkColors()
+    } else {
+        if (isPro) LeboncoinColorProLight else lightSparkColors()
     }
 
     @Composable
     override fun shapes(): SparkShapes = LeboncoinShapes
 
     @Composable
-    override fun typography(): SparkTypography {
-        return LeboncoinTypo
-    }
+    override fun typography(): SparkTypography = LeboncoinTypo
 }

@@ -167,10 +167,7 @@ public fun IconsScreen(
     }
 }
 
-private data class NamedIcon(
-    @DrawableRes val drawableRes: Int,
-    val name: String,
-)
+private data class NamedIcon(@DrawableRes val drawableRes: Int, val name: String)
 
 private suspend fun getAllIconsRes(context: Context) = withContext(Default) {
     IconR.drawable::class.java.declaredFields.mapNotNull { field ->

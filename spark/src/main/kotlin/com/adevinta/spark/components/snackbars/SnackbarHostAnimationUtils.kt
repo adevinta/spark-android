@@ -80,10 +80,7 @@ internal fun SnackbarDuration.toMillis(
 /**
  * Represents an animation item with a key and a transition.
  */
-internal data class FadeInFadeOutAnimationItem<T>(
-    val key: T,
-    val transition: FadeInFadeOutTransition,
-)
+internal data class FadeInFadeOutAnimationItem<T>(val key: T, val transition: FadeInFadeOutTransition)
 
 /**
  * Represents a transition for the FadeInFadeOut animation.

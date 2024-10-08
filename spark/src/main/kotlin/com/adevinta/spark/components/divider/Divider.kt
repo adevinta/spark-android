@@ -205,23 +205,19 @@ public fun VerticalDivider(
 private fun calculateLineHeight(
     dividerPosition: LabelVerticalAlignment,
     labelVerticalAlignment: LabelVerticalAlignment,
-): Dimension {
-    return if (dividerPosition == labelVerticalAlignment) {
-        Dimension.value(40.dp)
-    } else {
-        Dimension.fillToConstraints.atLeast(40.dp)
-    }
+): Dimension = if (dividerPosition == labelVerticalAlignment) {
+    Dimension.value(40.dp)
+} else {
+    Dimension.fillToConstraints.atLeast(40.dp)
 }
 
 private fun calculateLineWidth(
     dividerPosition: LabelHorizontalAlignment,
     labelVerticalAlignment: LabelHorizontalAlignment,
-): Dimension {
-    return if (dividerPosition == labelVerticalAlignment) {
-        Dimension.value(40.dp)
-    } else {
-        Dimension.fillToConstraints.atLeast(40.dp)
-    }
+): Dimension = if (dividerPosition == labelVerticalAlignment) {
+    Dimension.value(40.dp)
+} else {
+    Dimension.fillToConstraints.atLeast(40.dp)
 }
 
 @Preview(

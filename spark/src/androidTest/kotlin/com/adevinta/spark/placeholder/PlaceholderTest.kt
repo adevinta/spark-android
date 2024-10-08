@@ -321,7 +321,5 @@ internal class Solid(
 ) : PlaceholderHighlight {
     override fun alpha(progress: Float): Float = 1f
 
-    override fun brush(progress: Float, size: Size): Brush {
-        return SolidColor(color)
-    }
+    override fun brush(progress: Float, size: Size): Brush = SolidColor(color)
 }
