@@ -26,6 +26,7 @@
         <option name="allowed-composition-locals"
             value="LocalSparkColors,LocalSparkShapes,LocalSparkTypography,LocalSparkFeatureFlag,LocalElevationOverlay,LocalWindowSizeClass" />
     </issue>
+    <issue id="AutoboxingStateCreation" severity="warning"/>
     <!--
      This seems to be an issue with Lint itself, where it's impossible to suppress with annotations.
      https://github.com/slackhq/compose-lints/issues/57
