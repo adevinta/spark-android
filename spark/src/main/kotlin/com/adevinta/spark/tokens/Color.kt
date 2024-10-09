@@ -822,6 +822,18 @@ public class SparkColors(
     }
 }
 
+/**
+ * Converts a [SparkColors] instance to a Material 3 [ColorScheme].
+ *
+ * This function maps the Spark color properties to their corresponding Material 3 color roles.
+ * Note: Some Material 3 color roles might not have a direct equivalent in SparkColors and are
+ * mapped to the closest available Spark color. For example, [ColorScheme.tertiary] colors
+ * are mapped to [SparkColors.support] colors, and various surface container colors are mapped
+ * to the base surface color.
+ *
+ * @return A [ColorScheme] representing the Material 3 color scheme derived from the
+ * [SparkColors] instance.
+ */
 public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
     primary = main,
     onPrimary = onMain,
@@ -861,6 +873,22 @@ public fun SparkColors.asMaterial3Colors(): ColorScheme = ColorScheme(
     surfaceContainerLowest = surface,
 )
 
+/**
+ * Converts a Material [ColorScheme] to a [SparkColors] instance.
+ *
+ * This function adapts the color values from a Material Design ColorScheme
+ * to the structure and naming conventions used by SparkColors.
+ * The following tokens [SparkColors.mainVariant], [SparkColors.accentVariant],
+ * [SparkColors.supportVariant] and their on counterparts have no equivalent in Material so
+ * their are juste derivative of their principal token with a different tone that needs to
+ * be different for each (90/10 or 10/99).
+ * It handles both light and dark themes by adjusting the color tones accordingly.
+ *
+ * @param useDark Whether to generate colors for a dark theme as the tone used for
+ * variants is different in a dark theme
+ *
+ * @return A [SparkColors] populated with color values derived from the provided [ColorScheme].
+ */
 public fun ColorScheme.asSparkColors(useDark: Boolean): SparkColors = if (useDark) {
     darkSparkColors(
         main = primary,
