@@ -77,9 +77,6 @@ dependencies {
     api(libs.coilCompose)
     api(libs.kotlinx.collections.immutable)
 
-    compileOnly(libs.airbnb.showkase)
-    ksp(libs.airbnb.showkase.processor)
-
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
     testImplementation(libs.androidx.test.truth)

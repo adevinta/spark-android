@@ -39,19 +39,15 @@ import androidx.compose.material3.TabPosition
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
@@ -60,7 +56,6 @@ import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.components.image.Illustration
 import com.adevinta.spark.components.text.Text
-import com.airbnb.android.showkase.ui.SemanticsUtils.lineCountVal
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 @Composable
@@ -149,26 +144,6 @@ private fun CatalogTab(
     }
 }
 
-@Composable
-public fun ToolbarTitle(
-    string: String,
-    modifier: Modifier,
-) {
-    var lineCount by remember { mutableIntStateOf(0) }
-
-    Text(
-        text = string,
-        modifier = modifier.semantics {
-            lineCountVal = lineCount
-        },
-        maxLines = 3,
-        overflow = TextOverflow.Ellipsis,
-        onTextLayout = {
-            lineCount = it.lineCount
-        },
-    )
-}
-
 @Preview
 @Composable
 private fun CatalogTabBarPreview() {
@@ -182,8 +157,8 @@ private fun CatalogTabBarPreview() {
         ) { tabBarModifier ->
             CatalogTabs(
                 modifier = tabBarModifier,
-                titles = CatalogHomeScreen.values().map { it.name },
-                tabSelected = CatalogHomeScreen.Showkase,
+                titles = CatalogHomeScreen.entries.map { it.name },
+                tabSelected = CatalogHomeScreen.Examples,
                 onTabSelected = { },
             )
         }
