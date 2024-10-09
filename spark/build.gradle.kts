@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.savedstate)
     implementation(libs.androidx.window)
 
+    api(libs.androidx.compose.animation.graphics)
     api(libs.androidx.compose.foundation)
     api(libs.androidx.compose.material3)
     api(libs.androidx.compose.material3.windowSizeClass)

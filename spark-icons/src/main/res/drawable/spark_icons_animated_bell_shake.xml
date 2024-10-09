@@ -1,0 +1,114 @@
+
+<!--
+  Copyright (c) 2024 Adevinta
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+  -->
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="24dp"
+            android:height="24dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <group
+                android:name="group"
+                android:pivotX="12"
+                android:pivotY="12">
+                <path
+                    android:name="path"
+                    android:pathData="M 14.1 4.03 C 15.509 4.479 16.739 5.366 17.609 6.562 C 18.48 7.758 18.946 9.201 18.94 10.68 C 18.94 13.48 19.41 15.03 19.9 15.93 C 20.29 16.65 20.48 17.53 20.16 18.32 C 19.8 19.2 18.95 19.62 18.01 19.62 L 15.07 19.62 C 14.887 20.297 14.487 20.895 13.93 21.322 C 13.373 21.748 12.691 21.98 11.99 21.98 C 11.289 21.98 10.607 21.748 10.05 21.322 C 9.493 20.895 9.093 20.297 8.91 19.62 C 8.91 19.62 5.97 19.62 5.97 19.62 C 5.02 19.62 4.18 19.2 3.82 18.32 C 3.685 17.927 3.639 17.509 3.684 17.096 C 3.729 16.683 3.864 16.285 4.08 15.93 C 4.57 15.03 5.04 13.49 5.04 10.68 C 5.042 9.203 5.511 7.763 6.38 6.569 C 7.25 5.375 8.475 4.486 9.88 4.03 C 9.88 3.473 10.101 2.939 10.495 2.545 C 10.889 2.151 11.423 1.93 11.98 1.93 C 12.537 1.93 13.071 2.151 13.465 2.545 C 13.859 2.939 14.08 3.473 14.08 4.03 Z M 12 5.72 C 13.31 5.72 14.56 6.24 15.48 7.17 C 16.402 8.101 16.919 9.36 16.92 10.67 C 16.92 13.69 17.43 15.6 18.13 16.88 C 18.35 17.29 18.3 17.51 18.29 17.54 C 18.28 17.57 18.2 17.59 18.01 17.59 L 5.98 17.59 C 5.8 17.59 5.72 17.55 5.7 17.54 C 5.68 17.53 5.64 17.29 5.86 16.88 C 6.56 15.59 7.07 13.68 7.07 10.66 C 7.061 9.792 7.283 8.937 7.713 8.183 C 8.143 7.429 8.766 6.803 9.517 6.368 C 10.268 5.934 11.122 5.706 11.99 5.71 Z"
+                    android:fillColor="#FF000000"
+                    android:fillType="evenOdd"/>
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="group">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:duration="100"
+                    android:valueFrom="0"
+                    android:valueTo="10"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:startOffset="100"
+                    android:duration="100"
+                    android:valueFrom="10"
+                    android:valueTo="-10"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:startOffset="200"
+                    android:duration="100"
+                    android:valueFrom="-10"
+                    android:valueTo="8"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:startOffset="300"
+                    android:duration="100"
+                    android:valueFrom="8"
+                    android:valueTo="-8"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:startOffset="400"
+                    android:duration="100"
+                    android:valueFrom="-8"
+                    android:valueTo="4"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:startOffset="500"
+                    android:duration="100"
+                    android:valueFrom="4"
+                    android:valueTo="-4"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:startOffset="600"
+                    android:duration="100"
+                    android:valueFrom="-4"
+                    android:valueTo="2"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:startOffset="700"
+                    android:duration="100"
+                    android:valueFrom="2"
+                    android:valueTo="0"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
