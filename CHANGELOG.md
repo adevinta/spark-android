@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Spark
+
+- 🎨 Add a new function to convert a Material Theme colors to a Spark Theme colors.
+
 ## [1.0.0]
 
 _2024-10-07_
