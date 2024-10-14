@@ -192,12 +192,12 @@ public data class TagColors(
 )
 
 public object TagDefaults {
-    internal val MinHeight = 20.dp
+    internal val MinHeight = 40.dp
 
     /**
      * The outlined tag's border size
      */
-    internal val OutlinedBorderSize = 1.dp
+    internal val OutlinedBorderSize = 2.dp
 
     /**
      * The size of a tag's leading icon
