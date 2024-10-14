@@ -2,6 +2,11 @@ name: '📸 Paparazzi Golden Images'
 
 on:
   workflow_dispatch:
+    inputs:
+      ref:
+        description: 'PR number, branch, or url'
+        required: false
+        type: string
 
 jobs:
   paparazzi-golden-images:
@@ -11,3 +16,4 @@ jobs:
       - uses: ./.github/actions/paparazzi-golden-images
         with:
           github-token: ${{ secrets.PAT_SPARK || secrets.GITHUB_TOKEN }}
+          pr-number: ${{ inputs.ref }}
