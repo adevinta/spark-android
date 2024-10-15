@@ -112,7 +112,7 @@ internal fun SparkUserAvatar(
                             ),
                             blendMode = BlendMode.Clear,
                         )
-                        // draw the red circle indication
+                        // draw the colored circle indication
                         drawCircle(
                             indicatorColor,
                             radius = dotSize - style.borderSize.toPx(),
