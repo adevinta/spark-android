@@ -25,6 +25,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -89,6 +90,7 @@ public fun ColumnScope.ColorBlindSetting(
         modifier = Modifier.padding(bottom = 8.dp),
     )
     Slider(
+        modifier = Modifier.systemGestureExclusion(),
         value = severity,
         valueRange = 0f..1f,
         steps = 9,

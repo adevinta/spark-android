@@ -30,6 +30,7 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfig
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.chips.ChipsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.divider.DividerConfigurator
+import com.adevinta.spark.catalog.configurator.samples.modal.ModalConfigurator
 import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressTrackerConfigurator
@@ -132,7 +133,7 @@ private val Dialogs = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.dialog/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/dialog/ModalScaffold.kt",
     examples = DialogsExamples,
-    configurator = null,
+    configurator = ModalConfigurator,
 )
 
 private val Dropdowns = Component(
