@@ -19,7 +19,6 @@ kotlin = "2.0.20"
 kotlinx-coroutines = "1.9.0"
 kotlinx-collections-immutable = "0.3.8"
 kotlinx-serialization-json = "1.7.3"
-ksp = "2.0.20-1.0.25"
 ktlint = "1.2.1"
 lint = "31.7.1"
 minCompileSdk = "24"
@@ -90,7 +89,6 @@ gradlePlugins-compose = { module = "org.jetbrains.kotlin:compose-compiler-gradle
 gradlePlugins-dependencyGuard = { module = "com.dropbox.dependency-guard:com.dropbox.dependency-guard.gradle.plugin", version.ref = "dependencyGuard" }
 gradlePlugins-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 gradlePlugins-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-gradlePlugins-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 gradlePlugins-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -130,6 +128,5 @@ paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

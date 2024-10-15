@@ -14,11 +14,6 @@ updates:
     registries: "*"
     labels: [ ]
     groups:
-      kotlin-ksp:
-        patterns:
-          - "org.jetbrains.kotlin:*"
-          - "org.jetbrains.kotlin.jvm"
-          - "com.google.devtools.ksp"
       android-build-tools:
         patterns:
           - "com.android.tools.build:*"
