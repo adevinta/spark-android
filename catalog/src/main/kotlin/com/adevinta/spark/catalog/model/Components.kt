@@ -30,10 +30,10 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfig
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.chips.ChipsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.divider.DividerConfigurator
+import com.adevinta.spark.catalog.configurator.samples.modal.ModalConfigurator
 import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressTrackerConfigurator
-import com.adevinta.spark.catalog.configurator.samples.modal.ModalConfigurator
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.slider.SlidersConfigurator
 import com.adevinta.spark.catalog.configurator.samples.snackbar.SnackbarConfigurator

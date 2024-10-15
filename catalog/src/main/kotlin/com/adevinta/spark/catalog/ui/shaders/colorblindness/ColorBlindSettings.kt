@@ -25,7 +25,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeGesturesPadding
 import androidx.compose.foundation.systemGestureExclusion
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
