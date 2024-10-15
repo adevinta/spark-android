@@ -22,7 +22,6 @@
 plugins {
     id("com.adevinta.spark.android-library")
     id("com.adevinta.spark.android-compose")
-    id("com.adevinta.spark.ksp")
     alias(libs.plugins.paparazzi)
 }
 
