@@ -88,11 +88,12 @@ private fun ColumnScope.ImageSample() {
     var height by remember { mutableStateOf<Int?>(1) }
     var aspectRatio by remember { mutableStateOf(ImageAspectRatio.Custom) }
     var imageShape by remember { mutableStateOf(ImageShape.Wavy) }
-    val painter =
-        rememberDrawablePainter(getDrawable(LocalContext.current, R.drawable.notifications))
     val drawable = getDrawable(LocalContext.current, R.drawable.notifications)!!
-    val imageRequest =
-        ImageRequest.Builder(LocalContext.current).crossfade(true).data(state.ordinal).build()
+    val painter = rememberDrawablePainter(drawable)
+    val imageRequest = ImageRequest.Builder(LocalContext.current)
+        .crossfade(true)
+        .data(state.ordinal)
+        .build()
 
     val transform by rememberUpdatedState { _: AsyncImagePainter.State ->
         state.transformation(
