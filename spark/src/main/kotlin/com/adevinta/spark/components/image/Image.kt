@@ -66,7 +66,7 @@ import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi
 @Composable
-internal fun SparkImage(
+public fun SparkImage(
     model: Any?,
     contentDescription: String?,
     modifier: Modifier = Modifier,

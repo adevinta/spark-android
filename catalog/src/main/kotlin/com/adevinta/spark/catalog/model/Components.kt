@@ -30,6 +30,7 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfig
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.chips.ChipsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.divider.DividerConfigurator
+import com.adevinta.spark.catalog.configurator.samples.image.ImageConfigurator
 import com.adevinta.spark.catalog.configurator.samples.modal.ModalConfigurator
 import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
@@ -171,6 +172,18 @@ private val IconToggleButtons = Component(
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/iconTogglebuttons/IconToggleButton.kt",
     examples = IconToggleButtonsExamples,
     configurator = IconToggleButtonsConfigurator,
+)
+
+private val Image = Component(
+    id = nextId(),
+    name = "Image",
+    description = R.string.component_image_description,
+    tintIcon = true,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/096e9f-image",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.image/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/image/Image.kt",
+    examples = emptyList(),
+    configurator = ImageConfigurator,
 )
 
 private val Popovers = Component(
@@ -376,6 +389,7 @@ public val Components: List<Component> = listOf(
     Dropdowns,
     IconButtons,
     IconToggleButtons,
+    Image,
     Popovers,
     Progressbars,
     ProgressTracker,
