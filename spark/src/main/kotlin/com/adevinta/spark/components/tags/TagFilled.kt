@@ -45,6 +45,7 @@ public fun TagFilled(
     intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
     content: @Composable RowScope.() -> Unit,
 ) {
     SparkTag(
@@ -52,6 +53,7 @@ public fun TagFilled(
         modifier = modifier,
         leadingIcon = leadingIcon,
         tint = tint,
+        atEnd = atEnd,
         content = content,
     )
 }
@@ -71,6 +73,7 @@ public fun TagFilled(
     intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
 ) {
     SparkTag(
         colors = TagDefaults.filledColors(intent),
@@ -78,6 +81,7 @@ public fun TagFilled(
         modifier = modifier,
         leadingIcon = leadingIcon,
         tint = tint,
+        atEnd = atEnd,
     )
 }
 
@@ -96,6 +100,7 @@ public fun TagFilled(
     intent: TagIntent = TagIntent.Basic,
     leadingIcon: SparkIcon? = null,
     tint: Color? = null,
+    atEnd: Boolean = false,
 ) {
     SparkTag(
         colors = TagDefaults.filledColors(intent),
@@ -103,6 +108,7 @@ public fun TagFilled(
         modifier = modifier,
         leadingIcon = leadingIcon,
         tint = tint,
+        atEnd = atEnd,
     )
 }
 

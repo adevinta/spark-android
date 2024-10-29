@@ -22,6 +22,10 @@
 package com.adevinta.spark.components.icons
 
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
+import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -68,9 +72,10 @@ public fun Icon(
     modifier: Modifier = Modifier,
     tint: Color = IconDefaults.intent.color(),
     size: IconSize? = null,
+    atEnd: Boolean = false,
 ) {
     MaterialIcon(
-        painter = rememberSparkIconPainter(sparkIcon),
+        painter = rememberSparkIconPainter(sparkIcon, atEnd),
         contentDescription = contentDescription,
         modifier = modifier
             .ifNotNull(size) {
@@ -179,10 +184,15 @@ public fun Icon(
     )
 }
 
+@OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
-public fun rememberSparkIconPainter(sparkIcon: SparkIcon): Painter = when (sparkIcon) {
+public fun rememberSparkIconPainter(sparkIcon: SparkIcon, atEnd: Boolean = false): Painter = when (sparkIcon) {
     is SparkIcon.Vector -> rememberVectorPainter(sparkIcon.imageVector)
     is SparkIcon.DrawableRes -> rememberDrawablePainter(getDrawable(LocalContext.current, sparkIcon.drawableId))
+    is SparkIcon.AnimatedDrawableRes -> {
+        val icon = AnimatedImageVector.animatedVectorResource(sparkIcon.drawableId)
+        rememberAnimatedVectorPainter(icon, atEnd)
+    }
 }
 
 @PreviewLightDark
