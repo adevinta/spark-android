@@ -30,6 +30,7 @@ import com.adevinta.spark.catalog.configurator.samples.buttons.IconButtonsConfig
 import com.adevinta.spark.catalog.configurator.samples.buttons.IconToggleButtonsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.chips.ChipsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.divider.DividerConfigurator
+import com.adevinta.spark.catalog.configurator.samples.modal.ModalConfigurator
 import com.adevinta.spark.catalog.configurator.samples.popover.PopoverConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progressbar.ProgressbarConfigurator
 import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressTrackerConfigurator
@@ -60,6 +61,7 @@ import com.adevinta.spark.catalog.examples.samples.tabs.TabsExamples
 import com.adevinta.spark.catalog.examples.samples.tags.TagsExamples
 import com.adevinta.spark.catalog.examples.samples.text.DropdownsExamples
 import com.adevinta.spark.catalog.examples.samples.text.TextLinksExamples
+import com.adevinta.spark.catalog.examples.samples.textfields.TextFieldsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.CheckboxExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.IconToggleButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.toggles.RadioButtonExamples
@@ -131,7 +133,7 @@ private val Dialogs = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.dialog/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/dialog/ModalScaffold.kt",
     examples = DialogsExamples,
-    configurator = null,
+    configurator = ModalConfigurator,
 )
 
 private val Dropdowns = Component(
@@ -345,7 +347,7 @@ private val TextFields = Component(
     guidelinesUrl = "$ComponentGuidelinesUrl/p/773c60-input--text-field/b/0658e2",
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.textfields/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/textfields/TextField.kt",
-    examples = emptyList(),
+    examples = TextFieldsExamples,
     configurator = TextFieldsConfigurator,
 )
 

@@ -6,7 +6,34 @@
 
 ### Spark
 
+- 🎨 Add a new function to convert a Material Theme colors to a Spark Theme colors.
+
+## [1.0.0]
+
+_2024-10-07_
+
+### Spark
+> [!CAUTION]
+> All the code that was legacy, coming from brikke and was deprecated has been removed from Spark.
+> This mean you build with break with this change
+
+> [!CAUTION]
+> Material 3 compose & Compose has been upgraded to version 1.3 and 1.7 which introduce compiling & visual breaking changes.
+> Be sure to verify your UIs when upgrading.
+
+- 🐛 Add statusBar size on the content padding on BottomSheet content.
+- 🐛 One of TextLinkButton overloads was using intent Danger instead of Surface.
+- 🐛 Dividers no longer have a minimum width/height of 40.dp.
+- 💄 ModalScaffold now has a padding between its buttons when they overflow and stack each others.
+- 🔧 Chips now have a leading/trailing icon slots to ensure these content are not hidden when the chip content is too big for the required width.
+- 🔧 Components were missing `sparkUsageOverlay` so it has been added to them and remove on Icons to reduce the confusions with the huge amount of icons used in apps and our components.
+- 🔧 `SparkTheme` now take a `SparkFeatureFlag` for the activation of the debug features.
+- 📝 Documentation for `annotatedStringResource` has been improved with usage examples
+
 ### Catalog App
+
+- ♿ A colorbliness filter has been added to improve testing of components for this disability.
+- 💄 New examples for the elevation tokens have been added.
 
 ### CI
  - Icons screenshot are not bound to the theme colors anymore to reduce invalidation not related to the icons themselves.
@@ -334,7 +361,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/0.11.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/1.0.0...HEAD
+
+[1.0.0]: https://github.com/adevinta/spark-android/releases/tag/1.0.0
 
 [0.11.0]: https://github.com/adevinta/spark-android/releases/tag/0.11.0
 

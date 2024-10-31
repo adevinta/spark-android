@@ -22,7 +22,6 @@
 plugins {
     id("com.adevinta.spark.android-library")
     id("com.adevinta.spark.android-compose")
-    id("com.adevinta.spark.ksp")
     id("com.adevinta.spark.dokka")
     id("com.adevinta.spark.publishing")
     id("com.adevinta.spark.dependencyGuard")
@@ -76,9 +75,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.util)
     api(libs.coilCompose)
     api(libs.kotlinx.collections.immutable)
-
-    compileOnly(libs.airbnb.showkase)
-    ksp(libs.airbnb.showkase.processor)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)

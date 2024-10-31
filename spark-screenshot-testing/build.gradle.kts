@@ -22,7 +22,6 @@
 plugins {
     id("com.adevinta.spark.android-library")
     id("com.adevinta.spark.android-compose")
-    id("com.adevinta.spark.ksp")
     alias(libs.plugins.paparazzi)
 }
 
@@ -37,9 +36,6 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
     implementation(libs.kotlinx.collections.immutable)
-
-    implementation(libs.airbnb.showkase)
-    ksp(libs.airbnb.showkase.processor)
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)

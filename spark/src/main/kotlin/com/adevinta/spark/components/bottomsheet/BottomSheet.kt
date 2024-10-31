@@ -29,9 +29,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.BottomSheetDefaults.ExpandedShape
@@ -65,6 +67,7 @@ import com.adevinta.spark.components.toggles.CheckboxLabelled
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.contentColorFor
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.coroutines.launch
 
 /**
@@ -101,13 +104,15 @@ public fun BottomSheet(
     dragHandle: @Composable (() -> Unit)? = {
         DragHandle()
     },
+    applyTempStatusBarPadding: Boolean = false,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     SparkModalBottomSheet(
         onDismissRequest = onDismissRequest,
-        modifier = modifier,
+        modifier = modifier.sparkUsageOverlay(),
         sheetState = sheetState,
         content = content,
+        applyTempStatusBarPadding = applyTempStatusBarPadding,
         dragHandle = dragHandle,
     )
 }
@@ -151,6 +156,7 @@ internal fun SparkModalBottomSheet(
     dragHandle: (@Composable () -> Unit)? = { DragHandle() },
     contentWindowInsets: @Composable () -> WindowInsets = { BottomSheetDefaults.windowInsets },
     properties: ModalBottomSheetProperties = ModalBottomSheetDefaults.properties,
+    applyTempStatusBarPadding: Boolean = false,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     androidx.compose.material3.ModalBottomSheet(
@@ -165,9 +171,15 @@ internal fun SparkModalBottomSheet(
         dragHandle = null,
     ) {
         Box {
+            val systemBarTopInsets = WindowInsets.systemBars.asPaddingValues().calculateTopPadding()
+            val additionalTopPadding = if (applyTempStatusBarPadding) systemBarTopInsets else 0.dp
             Column(
                 modifier = Modifier.padding(
-                    top = if (dragHandle != null) ContentTopPadding else ContentTopPaddingNoHandle,
+                    top = if (dragHandle != null) {
+                        ContentTopPadding + additionalTopPadding
+                    } else {
+                        ContentTopPaddingNoHandle + additionalTopPadding
+                    },
                 ),
             ) {
                 content()

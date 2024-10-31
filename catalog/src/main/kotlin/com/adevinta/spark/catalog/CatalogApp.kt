@@ -45,37 +45,35 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asComposeRenderEffect
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkFeatureFlag
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.configurator.ConfiguratorComponentsScreen
 import com.adevinta.spark.catalog.examples.ComponentsScreen
 import com.adevinta.spark.catalog.icons.IconDemoScreen
 import com.adevinta.spark.catalog.model.Component
-import com.adevinta.spark.catalog.showkase.ShowkaseBrowserScreenMetadata
-import com.adevinta.spark.catalog.showkase.navGraph
 import com.adevinta.spark.catalog.tabbar.CatalogTabBar
 import com.adevinta.spark.catalog.tabbar.CatalogTabs
 import com.adevinta.spark.catalog.themes.BrandMode
+import com.adevinta.spark.catalog.themes.ColorMode
 import com.adevinta.spark.catalog.themes.FontScaleMode
 import com.adevinta.spark.catalog.themes.TextDirection
 import com.adevinta.spark.catalog.themes.Theme
@@ -93,7 +91,7 @@ import com.adevinta.spark.catalog.ui.BackdropValue
 import com.adevinta.spark.catalog.ui.rememberBackdropScaffoldState
 import com.adevinta.spark.catalog.ui.shaders.colorblindness.ColorBlindNessType
 import com.adevinta.spark.catalog.ui.shaders.colorblindness.shader
-import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
+import com.adevinta.spark.tokens.asSparkColors
 import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
 
@@ -102,8 +100,6 @@ internal fun ComponentActivity.CatalogApp(
     theme: Theme,
     onThemeChange: (theme: Theme) -> Unit,
     components: List<Component>,
-    groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
-    showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
 ) {
     val themeProvider: ThemeProvider = when (theme.brandMode) {
         BrandMode.Leboncoin -> LeboncoinTheme
@@ -114,8 +110,15 @@ internal fun ComponentActivity.CatalogApp(
 
     val useDark = (theme.themeMode == ThemeMode.System && isSystemInDarkTheme()) || theme.themeMode == ThemeMode.Dark
 
-    val colors =
+    val colors = if (theme.colorMode == ColorMode.Dynamic && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        if (useDark) {
+            dynamicDarkColorScheme(LocalContext.current)
+        } else {
+            dynamicLightColorScheme(LocalContext.current)
+        }.asSparkColors(useDark = true)
+    } else {
         themeProvider.colors(useDarkColors = useDark, isPro = theme.userMode == UserMode.Pro)
+    }
     val shapes = themeProvider.shapes()
     val typography = themeProvider.typography()
 
@@ -258,14 +261,6 @@ internal fun ComponentActivity.CatalogApp(
                                     contentPadding = innerPadding,
                                 )
 
-                                CatalogHomeScreen.Showkase -> {
-                                    BodyContent(
-                                        contentPadding = innerPadding,
-                                        groupedComponentMap = groupedComponentMap,
-                                        showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
-                                    )
-                                }
-
                                 CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
                                     components = components,
                                     contentPadding = innerPadding,
@@ -309,37 +304,7 @@ private fun HomeTabBar(
     }
 }
 
-@Composable
-internal fun BodyContent(
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues,
-    groupedComponentMap: Map<String, List<ShowkaseBrowserComponent>>,
-    showkaseBrowserScreenMetadata: MutableState<ShowkaseBrowserScreenMetadata>,
-) {
-    val navController = rememberNavController()
-    val showkaseBrowserScreenMetadataState by rememberSaveable {
-        mutableStateOf(showkaseBrowserScreenMetadata)
-    }
-    NavHost(
-        modifier = modifier,
-        navController = navController,
-        startDestination = HomeRoute,
-        builder = {
-            navGraph(
-                navController = navController,
-                contentPadding = contentPadding,
-                showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadataState,
-                groupedComponentMap = groupedComponentMap,
-            )
-        },
-    )
-}
-
-private val SheetScrimColor = Color.Black.copy(alpha = 0.4f)
-
-internal const val HomeRoute = "home"
-
-public enum class CatalogHomeScreen { Examples, Showkase, Configurator, Icons }
+public enum class CatalogHomeScreen { Examples, Configurator, Icons }
 
 /**
  * The default light scrim, as defined by androidx and the platform:

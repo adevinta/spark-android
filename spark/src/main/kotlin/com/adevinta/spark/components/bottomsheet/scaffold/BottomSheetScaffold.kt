@@ -54,6 +54,7 @@ import com.adevinta.spark.components.list.ListItem
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 /**
  *  BottomSheetScaffold is a composable that implements a scaffold with a bottom sheet.
@@ -107,7 +108,7 @@ public fun BottomSheetScaffold(
                 }
             }
         },
-        modifier = modifier,
+        modifier = modifier.sparkUsageOverlay(),
         scaffoldState = scaffoldState,
         sheetDragHandle = null,
         sheetSwipeEnabled = sheetSwipeEnabled,

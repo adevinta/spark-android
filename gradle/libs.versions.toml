@@ -1,10 +1,10 @@
 [versions]
 accompanist = "0.36.0"
-android-gradlePlugin = "8.6.1"
-androidx-activity = "1.9.2"
+android-gradlePlugin = "8.7.1"
+androidx-activity = "1.9.3"
 androidx-appCompat = "1.7.0"
-androidx-compose-bom = "2024.09.02"
-androidx-lifecycle = "2.8.6"
+androidx-compose-bom = "2024.09.03"
+androidx-lifecycle = "2.8.7"
 androidx-navigation = "2.7.7"
 androidx-savedstate = "1.2.1"
 androidx-core = "1.13.1"
@@ -15,22 +15,20 @@ datastore = "1.1.1"
 dependencyGuard = "0.5.0"
 dokka = "1.9.20"
 junit = "4.13.2"
-kotlin = "2.0.20"
+kotlin = "2.0.21"
 kotlinx-coroutines = "1.9.0"
 kotlinx-collections-immutable = "0.3.8"
 kotlinx-serialization-json = "1.7.3"
-ksp = "2.0.20-1.0.25"
 ktlint = "1.3.1"
-lint = "31.6.1"
+lint = "31.7.1"
 minCompileSdk = "24"
 paparazzi = "1.3.4"
-showkase = "1.0.3"
-slackLint = "1.3.1"
+slackLint = "1.4.2"
 spotless = "6.25.0"
 targetSdk = "34"
-testParameterInjector = "1.17"
-constraintlayout = "2.1.4"
-constraintlayoutCompose = "1.0.1"
+testParameterInjector = "1.18"
+constraintlayout = "2.2.0"
+constraintlayoutCompose = "1.1.0"
 
 [libraries]
 
@@ -40,9 +38,6 @@ accompanist-pager = { module = "com.google.accompanist:accompanist-pager", versi
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-testharness = { module = "com.google.accompanist:accompanist-testharness", version.ref = "accompanist" }
-
-airbnb-showkase = { module = "com.airbnb.android:showkase", version.ref = "showkase" }
-airbnb-showkase-processor = { module = "com.airbnb.android:showkase-processor", version.ref = "showkase" }
 
 androidx-activity = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
@@ -94,7 +89,6 @@ gradlePlugins-compose = { module = "org.jetbrains.kotlin:compose-compiler-gradle
 gradlePlugins-dependencyGuard = { module = "com.dropbox.dependency-guard:com.dropbox.dependency-guard.gradle.plugin", version.ref = "dependencyGuard" }
 gradlePlugins-dokka = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version.ref = "dokka" }
 gradlePlugins-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-gradlePlugins-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 gradlePlugins-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
@@ -134,6 +128,5 @@ paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi" }
 dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

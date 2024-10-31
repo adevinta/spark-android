@@ -65,6 +65,7 @@ import com.adevinta.spark.icons.InfoOutline
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.res.annotatedStringResource
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.coroutines.launch
@@ -135,7 +136,7 @@ public fun TextLink(
         modifier = modifier.clickable(
             onClickLabel = onClickLabel,
             onClick = onClick,
-        ),
+        ).sparkUsageOverlay(),
         style = style,
         overflow = overflow,
         softWrap = softWrap,
@@ -231,7 +232,7 @@ public fun TextLinkButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     size: ButtonSize = ButtonSize.Medium,
-    intent: ButtonIntent = ButtonIntent.Danger,
+    intent: ButtonIntent = ButtonIntent.Surface,
     enabled: Boolean = true,
     icon: SparkIcon? = null,
     iconSide: IconSide = IconSide.START,

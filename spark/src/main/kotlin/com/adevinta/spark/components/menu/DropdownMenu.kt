@@ -70,6 +70,7 @@ import com.adevinta.spark.tokens.EmphasizeDim1
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
 import com.adevinta.spark.tokens.ripple
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import androidx.compose.material3.DropdownMenu as MaterialDropdownMenu
 
 /**
@@ -119,7 +120,7 @@ public fun DropdownMenu(
     MaterialDropdownMenu(
         expanded = expanded,
         onDismissRequest = onDismissRequest,
-        modifier = modifier,
+        modifier = modifier.sparkUsageOverlay(),
         offset = offset,
         scrollState = scrollState,
         properties = properties,
@@ -184,7 +185,8 @@ public fun DropdownMenuItem(
                 maxWidth = 280.dp,
                 minHeight = 48.dp,
             )
-            .padding(contentPadding),
+            .padding(contentPadding)
+            .sparkUsageOverlay(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         ProvideTextStyle(SparkTheme.typography.body1) {
@@ -266,7 +268,7 @@ public fun DropdownMenuGroupItem(
     modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.sparkUsageOverlay()) {
         SectionHeadline {
             title()
         }

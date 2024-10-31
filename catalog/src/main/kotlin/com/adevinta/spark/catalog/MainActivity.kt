@@ -26,15 +26,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.adevinta.spark.catalog.datastore.theme.ThemePropertiesHandler
 import com.adevinta.spark.catalog.datastore.theme.collectAsStateWithDefault
 import com.adevinta.spark.catalog.model.Components
-import com.adevinta.spark.catalog.showkase.ShowkaseBrowserScreenMetadata
-import com.airbnb.android.showkase.models.ShowkaseBrowserComponent
-import com.airbnb.android.showkase.models.ShowkaseProvider
 import kotlinx.coroutines.launch
 
 public class MainActivity : AppCompatActivity() {
@@ -46,37 +41,20 @@ public class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContent {
             val coroutineScope = rememberCoroutineScope()
-            val groupedComponentsList = getShowkaseProviderElements()
-            val showkaseBrowserScreenMetadata = remember { mutableStateOf(ShowkaseBrowserScreenMetadata()) }
             val propertiesHandler = ThemePropertiesHandler(context = this@MainActivity)
             val theme by propertiesHandler
                 .properties
                 .collectAsStateWithDefault(this@MainActivity)
 
-            if (groupedComponentsList.isNotEmpty()) {
-                CatalogApp(
-                    theme = theme,
-                    components = Components,
-                    groupedComponentMap = groupedComponentsList.groupBy { it.group },
-                    showkaseBrowserScreenMetadata = showkaseBrowserScreenMetadata,
-                    onThemeChange = {
-                        coroutineScope.launch {
-                            propertiesHandler.updateProperties(it)
-                        }
-                    },
-                )
-            }
+            CatalogApp(
+                theme = theme,
+                components = Components,
+                onThemeChange = {
+                    coroutineScope.launch {
+                        propertiesHandler.updateProperties(it)
+                    }
+                },
+            )
         }
-    }
-
-    private fun getShowkaseProviderElements(): List<ShowkaseBrowserComponent> = try {
-        val showkaseComponentProvider =
-            Class.forName("com.adevinta.spark.SparkShowkaseRootModuleCodegen").getDeclaredConstructor().newInstance()
-
-        val showkaseMetadata = (showkaseComponentProvider as ShowkaseProvider).metadata()
-
-        showkaseMetadata.componentList
-    } catch (exception: ClassNotFoundException) {
-        emptyList()
     }
 }
