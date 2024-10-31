@@ -486,6 +486,4 @@ private fun surfaceColorAtElevation(
     color: Color,
     elevationOverlay: ElevationOverlay?,
     absoluteElevation: Dp,
-): Color {
-    return elevationOverlay?.apply(color, absoluteElevation) ?: color
-}
+): Color = elevationOverlay?.apply(color, absoluteElevation) ?: color

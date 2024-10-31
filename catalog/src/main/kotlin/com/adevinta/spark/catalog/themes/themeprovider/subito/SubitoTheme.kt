@@ -31,18 +31,14 @@ import com.adevinta.spark.tokens.sparkTypography
 
 public object SubitoTheme : ThemeProvider {
     @Composable
-    override fun colors(useDarkColors: Boolean, isPro: Boolean): SparkColors {
-        return when {
-            useDarkColors || isSystemInDarkTheme() -> SubitoDark
-            else -> SubitoLight
-        }
+    override fun colors(useDarkColors: Boolean, isPro: Boolean): SparkColors = when {
+        useDarkColors || isSystemInDarkTheme() -> SubitoDark
+        else -> SubitoLight
     }
 
     @Composable
     override fun shapes(): SparkShapes = SubitoShapes
 
     @Composable
-    override fun typography(): SparkTypography {
-        return sparkTypography()
-    }
+    override fun typography(): SparkTypography = sparkTypography()
 }

@@ -1043,10 +1043,10 @@ public fun SparkColors.contentColorFor(backgroundColor: Color): Color = when (ba
  */
 @Composable
 @ReadOnlyComposable
-public fun contentColorFor(backgroundColor: Color): Color {
-    return SparkTheme.colors.contentColorFor(backgroundColor).takeOrElse {
-        LocalContentColor.current
-    }
+public fun contentColorFor(
+    backgroundColor: Color,
+): Color = SparkTheme.colors.contentColorFor(backgroundColor).takeOrElse {
+    LocalContentColor.current
 }
 
 /**
@@ -1182,12 +1182,13 @@ internal fun SparkColors.updateColorsFrom(other: SparkColors) {
  * [ColorScheme.surface].
  */
 @InternalSparkApi
-public fun SparkColors.applyTonalElevation(backgroundColor: Color, elevation: Dp): Color {
-    return if (backgroundColor == surface) {
-        surfaceColorAtElevation(elevation)
-    } else {
-        backgroundColor
-    }
+public fun SparkColors.applyTonalElevation(
+    backgroundColor: Color,
+    elevation: Dp,
+): Color = if (backgroundColor == surface) {
+    surfaceColorAtElevation(elevation)
+} else {
+    backgroundColor
 }
 
 /**

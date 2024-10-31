@@ -47,9 +47,9 @@ public class CardColors internal constructor(
      * @param enabled whether the card is enabled
      */
     @Composable
-    internal fun containerColor(enabled: Boolean): State<Color> {
-        return rememberUpdatedState(if (enabled) containerColor else disabledContainerColor)
-    }
+    internal fun containerColor(
+        enabled: Boolean,
+    ): State<Color> = rememberUpdatedState(if (enabled) containerColor else disabledContainerColor)
 
     /**
      * Represents the content color for this card, depending on [enabled].
@@ -57,9 +57,9 @@ public class CardColors internal constructor(
      * @param enabled whether the card is enabled
      */
     @Composable
-    internal fun contentColor(enabled: Boolean): State<Color> {
-        return rememberUpdatedState(if (enabled) contentColor else disabledContentColor)
-    }
+    internal fun contentColor(
+        enabled: Boolean,
+    ): State<Color> = rememberUpdatedState(if (enabled) contentColor else disabledContentColor)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

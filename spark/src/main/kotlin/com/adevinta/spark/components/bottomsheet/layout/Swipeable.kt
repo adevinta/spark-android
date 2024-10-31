@@ -483,9 +483,7 @@ public class SwipeProgress<T>(
         return result
     }
 
-    override fun toString(): String {
-        return "SwipeProgress(from=$from, to=$to, fraction=$fraction)"
-    }
+    override fun toString(): String = "SwipeProgress(from=$from, to=$to, fraction=$fraction)"
 }
 
 /**
@@ -504,19 +502,17 @@ public fun <T : Any> rememberSwipeableState(
     initialValue: T,
     animationSpec: AnimationSpec<Float> = AnimationSpec,
     confirmStateChange: (newValue: T) -> Boolean = { true },
-): SwipeableState<T> {
-    return rememberSaveable(
-        saver = SwipeableState.Saver(
-            animationSpec = animationSpec,
-            confirmStateChange = confirmStateChange,
-        ),
-    ) {
-        SwipeableState(
-            initialValue = initialValue,
-            animationSpec = animationSpec,
-            confirmStateChange = confirmStateChange,
-        )
-    }
+): SwipeableState<T> = rememberSaveable(
+    saver = SwipeableState.Saver(
+        animationSpec = animationSpec,
+        confirmStateChange = confirmStateChange,
+    ),
+) {
+    SwipeableState(
+        initialValue = initialValue,
+        animationSpec = animationSpec,
+        confirmStateChange = confirmStateChange,
+    )
 }
 
 /**
@@ -683,10 +679,13 @@ public interface ThresholdConfig {
 @InternalSparkApi
 // This is a copy from Material 3 Swipeable until b/163132293 is closed
 // Until this is fixed use it when you really cannot use a BottomSheetDialogFragment
-public data class FixedThreshold(private val offset: Dp) : ThresholdConfig {
-    override fun Density.computeThreshold(fromValue: Float, toValue: Float): Float {
-        return fromValue + offset.toPx() * sign(toValue - fromValue)
-    }
+public data class FixedThreshold(
+    private val offset: Dp,
+) : ThresholdConfig {
+    override fun Density.computeThreshold(
+        fromValue: Float,
+        toValue: Float,
+    ): Float = fromValue + offset.toPx() * sign(toValue - fromValue)
 }
 
 /**
@@ -696,13 +695,9 @@ public data class FixedThreshold(private val offset: Dp) : ThresholdConfig {
  */
 @Immutable
 @ExperimentalMaterial3Api
-internal data class FractionalThreshold(
-    /*@FloatRange(from = 0.0, to = 1.0)*/
-    private val fraction: Float,
-) : ThresholdConfig {
-    override fun Density.computeThreshold(fromValue: Float, toValue: Float): Float {
-        return lerp(fromValue, toValue, fraction)
-    }
+internal data class FractionalThreshold(/*@FloatRange(from = 0.0, to = 1.0)*/private val fraction: Float) :
+    ThresholdConfig {
+    override fun Density.computeThreshold(fromValue: Float, toValue: Float): Float = lerp(fromValue, toValue, fraction)
 }
 
 /**
@@ -762,9 +757,8 @@ public class ResistanceConfig(
         return result
     }
 
-    override fun toString(): String {
-        return "ResistanceConfig(basis=$basis, factorAtMin=$factorAtMin, factorAtMax=$factorAtMax)"
-    }
+    override fun toString(): String =
+        "ResistanceConfig(basis=$basis, factorAtMin=$factorAtMin, factorAtMax=$factorAtMax)"
 }
 
 /**
@@ -841,9 +835,7 @@ private fun computeTarget(
     }
 }
 
-private fun <T> Map<Float, T>.getOffset(state: T): Float? {
-    return entries.firstOrNull { it.value == state }?.key
-}
+private fun <T> Map<Float, T>.getOffset(state: T): Float? = entries.firstOrNull { it.value == state }?.key
 
 /**
  * Contains useful defaults for [swipeable] and [SwipeableState].
@@ -882,13 +874,11 @@ public object SwipeableDefaults {
         anchors: Set<Float>,
         factorAtMin: Float = StandardResistanceFactor,
         factorAtMax: Float = StandardResistanceFactor,
-    ): ResistanceConfig? {
-        return if (anchors.size <= 1) {
-            null
-        } else {
-            val basis = anchors.maxOrNull()!! - anchors.minOrNull()!!
-            ResistanceConfig(basis, factorAtMin, factorAtMax)
-        }
+    ): ResistanceConfig? = if (anchors.size <= 1) {
+        null
+    } else {
+        val basis = anchors.maxOrNull()!! - anchors.minOrNull()!!
+        ResistanceConfig(basis, factorAtMin, factorAtMax)
     }
 }
 
@@ -910,12 +900,10 @@ public val <T> SwipeableState<T>.PreUpPostDownNestedScrollConnection: NestedScro
             consumed: Offset,
             available: Offset,
             source: NestedScrollSource,
-        ): Offset {
-            return if (source == NestedScrollSource.UserInput) {
-                performDrag(available.toFloat()).toOffset()
-            } else {
-                Offset.Zero
-            }
+        ): Offset = if (source == NestedScrollSource.UserInput) {
+            performDrag(available.toFloat()).toOffset()
+        } else {
+            Offset.Zero
         }
 
         override suspend fun onPreFling(available: Velocity): Velocity {

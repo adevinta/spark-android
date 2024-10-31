@@ -185,24 +185,22 @@ public fun rememberBackdropScaffoldState(
     animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
     confirmStateChange: (BackdropValue) -> Boolean = { true },
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
-): BackdropScaffoldState {
-    return rememberSaveable(
-        animationSpec,
-        confirmStateChange,
-        snackbarHostState,
-        saver = BackdropScaffoldState.Saver(
-            animationSpec = animationSpec,
-            confirmStateChange = confirmStateChange,
-            snackbarHostState = snackbarHostState,
-        ),
-    ) {
-        BackdropScaffoldState(
-            initialValue = initialValue,
-            animationSpec = animationSpec,
-            confirmStateChange = confirmStateChange,
-            snackbarHostState = snackbarHostState,
-        )
-    }
+): BackdropScaffoldState = rememberSaveable(
+    animationSpec,
+    confirmStateChange,
+    snackbarHostState,
+    saver = BackdropScaffoldState.Saver(
+        animationSpec = animationSpec,
+        confirmStateChange = confirmStateChange,
+        snackbarHostState = snackbarHostState,
+    ),
+) {
+    BackdropScaffoldState(
+        initialValue = initialValue,
+        animationSpec = animationSpec,
+        confirmStateChange = confirmStateChange,
+        snackbarHostState = snackbarHostState,
+    )
 }
 
 /**

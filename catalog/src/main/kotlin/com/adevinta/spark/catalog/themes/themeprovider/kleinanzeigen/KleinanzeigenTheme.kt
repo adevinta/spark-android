@@ -30,18 +30,14 @@ import com.adevinta.spark.tokens.SparkTypography
 
 public object KleinanzeigenTheme : ThemeProvider {
     @Composable
-    override fun colors(useDarkColors: Boolean, isPro: Boolean): SparkColors {
-        return when {
-            useDarkColors || isSystemInDarkTheme() -> KleinanzeigenDark
-            else -> KleinanzeigenLight
-        }
+    override fun colors(useDarkColors: Boolean, isPro: Boolean): SparkColors = when {
+        useDarkColors || isSystemInDarkTheme() -> KleinanzeigenDark
+        else -> KleinanzeigenLight
     }
 
     @Composable
     override fun shapes(): SparkShapes = KleinanzeigenShapes
 
     @Composable
-    override fun typography(): SparkTypography {
-        return KleinanzeigenTypo
-    }
+    override fun typography(): SparkTypography = KleinanzeigenTypo
 }
