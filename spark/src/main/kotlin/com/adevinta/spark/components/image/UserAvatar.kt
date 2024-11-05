@@ -74,15 +74,12 @@ internal fun SparkUserAvatar(
     }
     val indicatorColor = SparkTheme.colors.success
     SparkImage(
-        modifier = (
-            if (fillParentSize) {
-                modifier.fillMaxSize()
-            } else {
-                modifier.size(style.imageSize)
-            }
-            )
+        modifier = (if (fillParentSize) {
+            modifier.fillMaxSize()
+        } else {
+            modifier.size(style.imageSize)
+        })
             .sparkUsageOverlay()
-//                .clip(SparkTheme.shapes.full)
             .aspectRatio(1f)
             .graphicsLayer {
                 compositingStrategy = CompositingStrategy.Offscreen
@@ -101,14 +98,15 @@ internal fun SparkUserAvatar(
                     }
                     if (isOnline) {
                         val dotSize = style.badgeSize.toPx() / 2
-                        val offset = style.badgeOffset.toPx()
+                        val xOffset = style.badgeXOffset.toPx()
+                        val yOffset = style.badgeYOffset.toPx()
                         // Clip a white border for the content
                         drawCircle(
                             Color.Black,
                             radius = dotSize,
                             center = Offset(
-                                x = size.width - dotSize,
-                                y = size.height - dotSize + offset,
+                                x = size.width - dotSize + xOffset,
+                                y = size.height - dotSize + yOffset,
                             ),
                             blendMode = BlendMode.Clear,
                         )
@@ -117,8 +115,8 @@ internal fun SparkUserAvatar(
                             indicatorColor,
                             radius = dotSize - style.borderSize.toPx(),
                             center = Offset(
-                                x = size.width - dotSize,
-                                y = size.height - dotSize + offset,
+                                x = size.width - dotSize + xOffset,
+                                y = size.height - dotSize + yOffset,
                             ),
                         )
                     }
@@ -172,19 +170,21 @@ public fun UserAvatar(
 /**
  * @param imageSize size of the image in [Dp]
  * @param badgeSize size of online badge in [Dp]
- * @param badgeOffset size of the offset of the badge in [Dp]
+ * @param badgeXOffset size of the x offset of the badge in [Dp]
+ * @param badgeYOffset size of the y offset of the badge in [Dp]
  * @param borderSize The indicator border size in [Dp], it needs to be defined since the border mechanisms is
  * different than figma
  */
 public enum class UserAvatarStyle(
     public val imageSize: Dp,
     public val badgeSize: Dp,
-    public val badgeOffset: Dp,
+    public val badgeXOffset: Dp,
+    public val badgeYOffset: Dp,
     public val borderSize: Dp,
 ) {
-    SMALL(imageSize = 32.dp, badgeSize = 8.dp, badgeOffset = (-4).dp, borderSize = 1.dp),
-    MEDIUM(imageSize = 40.dp, badgeSize = 10.dp, badgeOffset = (-5).dp, borderSize = 1.5.dp),
-    LARGE(imageSize = 64.dp, badgeSize = 16.dp, badgeOffset = (-12).dp, borderSize = 2.dp),
+    SMALL(imageSize = 32.dp, badgeSize = 8.dp, badgeXOffset = (-3).dp, badgeYOffset = (-3).dp, borderSize = 1.dp),
+    MEDIUM(imageSize = 40.dp, badgeSize = 12.dp, badgeXOffset = (-0).dp, badgeYOffset = (-4).dp, borderSize = 2.dp),
+    LARGE(imageSize = 64.dp, badgeSize = 16.dp, badgeXOffset = (-4).dp, badgeYOffset = (-6).dp, borderSize = 2.dp),
 }
 
 @Preview(
