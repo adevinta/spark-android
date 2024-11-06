@@ -74,11 +74,13 @@ internal fun SparkUserAvatar(
     }
     val indicatorColor = SparkTheme.colors.success
     SparkImage(
-        modifier = (if (fillParentSize) {
-            modifier.fillMaxSize()
-        } else {
-            modifier.size(style.imageSize)
-        })
+        modifier = (
+            if (fillParentSize) {
+                modifier.fillMaxSize()
+            } else {
+                modifier.size(style.imageSize)
+            }
+            )
             .sparkUsageOverlay()
             .aspectRatio(1f)
             .graphicsLayer {
