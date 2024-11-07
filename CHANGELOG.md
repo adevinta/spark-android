@@ -10,7 +10,7 @@ _2024-11-07_
 
 ### Spark
 
-- 🐛 User Avatar presence badge was incorrectly place, especially in big sizes.
+- 🐛 User Avatar presence badge was incorrectly placed, especially in big sizes.
 
 ## [1.0.0]
 
