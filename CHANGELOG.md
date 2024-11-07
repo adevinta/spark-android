@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [1.0.1]
+
+_2024-11-07_
+
+### Spark
+
+- 🐛 User Avatar presence badge was incorrectly place, especially in big sizes.
+
 ## [1.0.0]
 
 _2024-10-07_
@@ -357,7 +365,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/1.0.1...HEAD
+
+[1.0.1]: https://github.com/adevinta/spark-android/releases/tag/1.0.1
 
 [1.0.0]: https://github.com/adevinta/spark-android/releases/tag/1.0.0
 
