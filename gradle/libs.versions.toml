@@ -79,7 +79,7 @@ androidx-datastore = { module = "androidx.datastore:datastore" , version.ref = "
 
 # Docs: https://developer.android.com/studio/write/java8-support#library-desugaring
 # Changelog: https://github.com/google/desugar_jdk_libs/blob/master/CHANGELOG.md
-desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.2" }
+desugarJdkLibs = { module = "com.android.tools:desugar_jdk_libs", version = "2.1.3" }
 
 dokka-android-documentation-plugin = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "dokka" }
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
