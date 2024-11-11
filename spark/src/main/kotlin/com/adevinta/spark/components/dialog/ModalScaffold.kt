@@ -137,6 +137,7 @@ public fun ModalScaffold(
                 )
     val activityWindow = getActivityWindow()
 
+    @Suppress("DEPRECATION")
     val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
         activityWindow?.navigationBarColor == Color.Transparent.toArgb()
     val properties = DialogProperties(
@@ -290,6 +291,7 @@ private fun PhonePortraitModalScaffold(
         val activityWindow = getActivityWindow()
         val dialogWindow = getDialogWindow()
 
+        @Suppress("DEPRECATION")
         val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
             activityWindow?.navigationBarColor == Color.Transparent.toArgb()
 
