@@ -62,7 +62,6 @@ import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.util.splitCamelWithSpaces
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
-import com.adevinta.spark.components.spacer.VerticalSpacer
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.icons.DeleteFill
@@ -96,14 +95,12 @@ public fun IconsScreen(
         }
     }
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier = modifier.fillMaxSize(),
     ) {
         TextField(
             value = query,
             onValueChange = { query = it },
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(16.dp),
             placeholder = stringResource(id = R.string.icons_screen_search_helper),
             leadingContent = {
                 Icon(sparkIcon = SparkIcons.Search, contentDescription = null)
@@ -116,11 +113,11 @@ public fun IconsScreen(
                 )
             },
         )
-        VerticalSpacer(space = 16.dp)
         LazyVerticalGrid(
             modifier = modifier
                 .consumeWindowInsets(contentPadding)
                 .fillMaxSize()
+                .padding(horizontal = 16.dp)
                 .clickable(
                     // no ripple effect is needed as this onClick is just to clear the focus of the search field
                     indication = null,
