@@ -4,6 +4,7 @@ android-gradlePlugin = "8.7.2"
 androidx-activity = "1.9.3"
 androidx-appCompat = "1.7.0"
 androidx-compose-bom = "2024.10.01"
+androidx-graphics = "1.0.1"
 androidx-lifecycle = "2.8.7"
 androidx-navigation = "2.7.7"
 androidx-savedstate = "1.2.1"
@@ -63,6 +64,7 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-compose-ui-util = { module = "androidx.compose.ui:ui-util" }
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+androidx-graphics-shapes = { module = "androidx.graphics:graphics-shapes", version.ref = "androidx-graphics" }
 androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 androidx-savedstate = { module = "androidx.savedstate:savedstate-ktx", version.ref = "androidx-savedstate" }

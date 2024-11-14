@@ -75,6 +75,9 @@
     <!--region Icon Toggle button-->
     <string name="component_icontogglebutton_description">Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a compact button is required, such as in a toolbar or image list.</string>
     <!--endregion-->
+    <!--region image -->
+    <string name="component_image_description">The Image component is used to display images with support for fallback.</string>
+    <!--endregion-->
     <!--region Radio button-->
     <string name="component_radiobutton_description">Component used when only one choice may be selected in a series of options.</string>
     <!--endregion-->

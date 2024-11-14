@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.image
 
+import androidx.annotation.RestrictTo
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -65,8 +66,9 @@ import com.adevinta.spark.tokens.EmphasizeDim2
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP_PREFIX)
 @Composable
-internal fun SparkImage(
+public fun SparkImage(
     model: Any?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
