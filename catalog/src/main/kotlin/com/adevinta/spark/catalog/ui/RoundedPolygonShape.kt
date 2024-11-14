@@ -35,10 +35,7 @@ import androidx.graphics.shapes.toPath
 import kotlin.math.max
 
 public fun RoundedPolygon.getBounds(): Rect = calculateBounds().let { Rect(it[0], it[1], it[2], it[3]) }
-public class RoundedPolygonShape(
-    private val polygon: RoundedPolygon,
-    private var matrix: Matrix = Matrix(),
-) : Shape {
+public class RoundedPolygonShape(private val polygon: RoundedPolygon, private var matrix: Matrix = Matrix()) : Shape {
     private var path = Path()
     override fun createOutline(
         size: Size,

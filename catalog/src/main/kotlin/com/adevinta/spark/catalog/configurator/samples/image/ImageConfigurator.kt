@@ -202,42 +202,34 @@ private enum class ImageState {
             painter: Painter,
             drawable: Drawable,
             imageRequest: ImageRequest,
-        ): AsyncImagePainter.State {
-            return AsyncImagePainter.State.Loading(painter)
-        }
+        ): AsyncImagePainter.State = AsyncImagePainter.State.Loading(painter)
     },
     Empty {
         override fun transformation(
             painter: Painter,
             drawable: Drawable,
             imageRequest: ImageRequest,
-        ): AsyncImagePainter.State {
-            return AsyncImagePainter.State.Empty
-        }
+        ): AsyncImagePainter.State = AsyncImagePainter.State.Empty
     },
     Error {
         override fun transformation(
             painter: Painter,
             drawable: Drawable,
             imageRequest: ImageRequest,
-        ): AsyncImagePainter.State {
-            return AsyncImagePainter.State.Error(
-                painter,
-                ErrorResult(null, imageRequest, Throwable("")),
-            )
-        }
+        ): AsyncImagePainter.State = AsyncImagePainter.State.Error(
+            painter,
+            ErrorResult(null, imageRequest, Throwable("")),
+        )
     },
     Success {
         override fun transformation(
             painter: Painter,
             drawable: Drawable,
             imageRequest: ImageRequest,
-        ): AsyncImagePainter.State {
-            return AsyncImagePainter.State.Success(
-                painter,
-                SuccessResult(drawable, imageRequest, DataSource.DISK),
-            )
-        }
+        ): AsyncImagePainter.State = AsyncImagePainter.State.Success(
+            painter,
+            SuccessResult(drawable, imageRequest, DataSource.DISK),
+        )
     }, ;
 
     abstract fun transformation(
@@ -304,10 +296,7 @@ private enum class ImageShape {
     abstract val shape: Shape
 }
 
-private enum class ImageAspectRatio(
-    val label: String,
-    val ratio: Float,
-) {
+private enum class ImageAspectRatio(val label: String, val ratio: Float) {
     Custom(
         label = "Custom",
         ratio = 1f,
