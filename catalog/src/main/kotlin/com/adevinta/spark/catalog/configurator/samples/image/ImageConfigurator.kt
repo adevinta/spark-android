@@ -22,9 +22,11 @@
 package com.adevinta.spark.catalog.configurator.samples.image
 
 import android.graphics.drawable.Drawable
+import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -38,13 +40,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -64,12 +66,17 @@ import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.ui.RoundedPolygonShape
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.image.SparkImage
 import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.Dropdown
 import com.adevinta.spark.components.textfields.TextField
+import com.adevinta.spark.components.toggles.SwitchLabelled
+import com.adevinta.spark.icons.Check
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.LocalWindowSizeClass
+import com.adevinta.spark.tools.modifiers.ifTrue
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 public val ImageConfigurator: Configurator = Configurator(
@@ -83,19 +90,23 @@ public val ImageConfigurator: Configurator = Configurator(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ColumnScope.ImageSample() {
-    var state by remember { mutableStateOf(ImageState.Loading) }
+    var state by remember { mutableStateOf(ImageState.Success) }
     var width by remember { mutableStateOf<Int?>(1) }
     var height by remember { mutableStateOf<Int?>(1) }
+    var showBorder by remember { mutableStateOf(false) }
+    var blurEdges by remember { mutableStateOf(true) }
+    var contentScale by remember { mutableStateOf(ImageContentScale.Fit) }
     var aspectRatio by remember { mutableStateOf(ImageAspectRatio.Custom) }
-    var imageShape by remember { mutableStateOf(ImageShape.Wavy) }
-    val drawable = getDrawable(LocalContext.current, R.drawable.notifications)!!
+    var imageShape by remember { mutableStateOf(ImageShape.Medium) }
+    var selectedImage by remember { mutableStateOf(SelectedImage.Narrow) }
+    val drawable = getDrawable(LocalContext.current, selectedImage.res)!!
     val painter = rememberDrawablePainter(drawable)
     val imageRequest = ImageRequest.Builder(LocalContext.current)
         .crossfade(true)
         .data(state.ordinal)
         .build()
 
-    val transform by rememberUpdatedState { _: AsyncImagePainter.State ->
+    val transform = { _: AsyncImagePainter.State ->
         state.transformation(
             painter,
             drawable,
@@ -103,9 +114,9 @@ private fun ColumnScope.ImageSample() {
         )
     }
     val imageMaxWidth = when (LocalWindowSizeClass.current.widthSizeClass) {
-        WindowWidthSizeClass.Expanded -> 300.dp
-        WindowWidthSizeClass.Medium -> 200.dp
-        else -> 100.dp
+        WindowWidthSizeClass.Expanded -> 350.dp
+        WindowWidthSizeClass.Medium -> 250.dp
+        else -> 200.dp
     }
     SparkImage(
         model = state.ordinal,
@@ -120,10 +131,21 @@ private fun ColumnScope.ImageSample() {
                 },
                 matchHeightConstraintsFirst = true,
             )
+            .ifTrue(showBorder) {
+                border(1.dp, SparkTheme.colors.outlineHigh)
+            }
             .align(Alignment.CenterHorizontally)
             .clip(imageShape.shape)
             .animateContentSize(),
         transform = transform,
+        contentScale = contentScale.scale,
+        blurEdges = blurEdges,
+    )
+
+    ButtonGroup(
+        title = "Image type",
+        selectedOption = selectedImage,
+        onOptionSelect = { selectedImage = it },
     )
 
     ButtonGroup(
@@ -131,6 +153,21 @@ private fun ColumnScope.ImageSample() {
         selectedOption = state,
         onOptionSelect = { state = it },
     )
+
+    SwitchLabelled(
+        checked = showBorder,
+        onCheckedChange = { showBorder = it },
+    ) {
+        Text(text = "Show border", modifier = Modifier.fillMaxWidth())
+    }
+
+    SwitchLabelled(
+        checked = blurEdges,
+        onCheckedChange = { blurEdges = it },
+    ) {
+        Text(text = "Blur Edges", modifier = Modifier.fillMaxWidth())
+    }
+
     var expanded by remember { mutableStateOf(false) }
     Dropdown(
         modifier = Modifier.fillMaxWidth(),
@@ -150,6 +187,41 @@ private fun ColumnScope.ImageSample() {
                     onClick = {
                         imageShape = it
                         expanded = false
+                    },
+                    trailingIcon = if (imageShape == it) {
+                        { Icon(SparkIcons.Check, contentDescription = null) }
+                    } else {
+                        null
+                    },
+                )
+            }
+        },
+    )
+
+    var expandedScale by remember { mutableStateOf(false) }
+    Dropdown(
+        modifier = Modifier.fillMaxWidth(),
+        value = contentScale.name,
+        label = "Scale",
+        expanded = expandedScale,
+        onExpandedChange = {
+            expandedScale = !expandedScale
+        },
+        onDismissRequest = {
+            expandedScale = false
+        },
+        dropdownContent = {
+            ImageContentScale.entries.forEach {
+                DropdownMenuItem(
+                    text = { Text(it.name) },
+                    onClick = {
+                        contentScale = it
+                        expandedScale = false
+                    },
+                    trailingIcon = if (contentScale == it) {
+                        { Icon(SparkIcons.Check, contentDescription = null) }
+                    } else {
+                        null
                     },
                 )
             }
@@ -230,7 +302,8 @@ private enum class ImageState {
             painter,
             SuccessResult(drawable, imageRequest, DataSource.DISK),
         )
-    }, ;
+    },
+    ;
 
     abstract fun transformation(
         painter: Painter,
@@ -290,10 +363,50 @@ private enum class ImageShape {
                     rounding = CornerRounding(2f),
                 ),
             )
-    }, ;
+    },
+    ;
 
     @get:Composable
     abstract val shape: Shape
+}
+
+private enum class SelectedImage(@DrawableRes val res: Int) {
+    Wide(R.drawable.img_wide_image_configurator),
+    Narrow(R.drawable.img_narrow_image_configurator),
+}
+
+private enum class ImageContentScale {
+    Crop {
+        override val scale: ContentScale
+            get() = ContentScale.Crop
+    },
+    Fit {
+        override val scale: ContentScale
+            get() = ContentScale.Fit
+    },
+    FillHeight {
+        override val scale: ContentScale
+            get() = ContentScale.FillHeight
+    },
+    FillWidth {
+        override val scale: ContentScale
+            get() = ContentScale.FillWidth
+    },
+    Inside {
+        override val scale: ContentScale
+            get() = ContentScale.Inside
+    },
+    None {
+        override val scale: ContentScale
+            get() = ContentScale.None
+    },
+    FillBounds {
+        override val scale: ContentScale
+            get() = ContentScale.FillBounds
+    },
+    ;
+
+    abstract val scale: ContentScale
 }
 
 private enum class ImageAspectRatio(val label: String, val ratio: Float) {
