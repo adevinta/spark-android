@@ -138,7 +138,6 @@ public fun ModalScaffold(
                     size.heightSizeClass == WindowHeightSizeClass.Expanded
                 )
 
-            
     val properties = DialogProperties(
         usePlatformDefaultWidth = inEdgeToEdge,
         decorFitsSystemWindows = false,
@@ -294,7 +293,6 @@ private fun PhonePortraitModalScaffold(
         val activityWindow = getActivityWindow()
         val dialogWindow = getDialogWindow()
 
-        
         SideEffect {
             if (
                 activityWindow != null &&
