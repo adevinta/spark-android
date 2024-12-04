@@ -44,6 +44,11 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -69,6 +74,7 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.Tattoo
 import com.adevinta.spark.tokens.EmphasizeDim2
+import com.adevinta.spark.tools.modifiers.ifNotNull
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @InternalSparkApi
@@ -99,7 +105,14 @@ public fun SparkImage(
     blurEdges: Boolean = false,
 ) {
     BoxWithConstraints(
-        modifier = modifier.sparkUsageOverlay(),
+        modifier = modifier
+            .sparkUsageOverlay()
+            .ifNotNull(contentDescription) { description ->
+                clearAndSetSemantics {
+                    this.contentDescription = description
+                    this.role = Role.Image
+                }
+            },
         contentAlignment = Alignment.Center,
     ) {
         val iconSize = when {
