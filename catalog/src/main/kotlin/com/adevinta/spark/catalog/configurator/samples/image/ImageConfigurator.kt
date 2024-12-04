@@ -23,11 +23,13 @@ package com.adevinta.spark.catalog.configurator.samples.image
 
 import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -48,6 +50,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -75,6 +78,7 @@ import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.res.annotatedStringResource
 import com.adevinta.spark.tokens.LocalWindowSizeClass
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
@@ -120,7 +124,7 @@ private fun ColumnScope.ImageSample() {
     }
     SparkImage(
         model = state.ordinal,
-        contentDescription = null,
+        contentDescription = stringResource(selectedImage.contentDescription),
         modifier = Modifier
             .widthIn(max = imageMaxWidth)
             .aspectRatio(
@@ -213,7 +217,17 @@ private fun ColumnScope.ImageSample() {
         dropdownContent = {
             ImageContentScale.entries.forEach {
                 DropdownMenuItem(
-                    text = { Text(it.name) },
+                    text = {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(4.dp),
+                        ) {
+                            Text(it.name)
+                            Text(
+                                text = annotatedStringResource(it.descriptionRes),
+                                style = SparkTheme.typography.caption,
+                            )
+                        }
+                    },
                     onClick = {
                         contentScale = it
                         expandedScale = false
@@ -370,43 +384,34 @@ private enum class ImageShape {
     abstract val shape: Shape
 }
 
-private enum class SelectedImage(@DrawableRes val res: Int) {
-    Wide(R.drawable.img_wide_image_configurator),
-    Narrow(R.drawable.img_narrow_image_configurator),
+private enum class SelectedImage(@DrawableRes val res: Int, @StringRes val contentDescription: Int) {
+    Wide(
+        R.drawable.img_wide_image_configurator,
+        R.string.component_image_wide_description,
+    ),
+    Narrow(
+        R.drawable.img_narrow_image_configurator,
+        R.string.component_image_narrow_description,
+    ),
 }
 
-private enum class ImageContentScale {
-    Crop {
-        override val scale: ContentScale
-            get() = ContentScale.Crop
-    },
-    Fit {
-        override val scale: ContentScale
-            get() = ContentScale.Fit
-    },
-    FillHeight {
-        override val scale: ContentScale
-            get() = ContentScale.FillHeight
-    },
-    FillWidth {
-        override val scale: ContentScale
-            get() = ContentScale.FillWidth
-    },
-    Inside {
-        override val scale: ContentScale
-            get() = ContentScale.Inside
-    },
-    None {
-        override val scale: ContentScale
-            get() = ContentScale.None
-    },
-    FillBounds {
-        override val scale: ContentScale
-            get() = ContentScale.FillBounds
-    },
-    ;
-
-    abstract val scale: ContentScale
+private enum class ImageContentScale(val scale: ContentScale, @StringRes val descriptionRes: Int) {
+    Crop(scale = ContentScale.Crop, descriptionRes = R.string.component_image_content_scale_crop_description),
+    Fit(scale = ContentScale.Fit, descriptionRes = R.string.component_image_content_scale_fit_description),
+    FillHeight(
+        scale = ContentScale.FillHeight,
+        descriptionRes = R.string.component_image_content_scale_fill_height_description,
+    ),
+    FillWidth(
+        scale = ContentScale.FillWidth,
+        descriptionRes = R.string.component_image_content_scale_fill_width_description,
+    ),
+    Inside(scale = ContentScale.Inside, descriptionRes = R.string.component_image_content_scale_inside_description),
+    None(scale = ContentScale.None, descriptionRes = R.string.component_image_content_scale_none_description),
+    FillBounds(
+        scale = ContentScale.FillBounds,
+        descriptionRes = R.string.component_image_content_scale_fill_bounds_description,
+    ),
 }
 
 private enum class ImageAspectRatio(val label: String, val ratio: Float) {
