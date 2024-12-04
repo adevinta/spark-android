@@ -41,7 +41,7 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshot
-import com.android.ide.common.rendering.api.SessionParams.RenderingMode.SHRINK
+import com.android.ide.common.rendering.api.SessionParams.RenderingMode.H_SCROLL
 import org.junit.Rule
 import org.junit.Test
 
@@ -54,7 +54,7 @@ internal class TextFieldScreenshot {
     @get:Rule
     val paparazzi = paparazziRule(
         deviceConfig = DefaultTestDevices.Tablet,
-        renderingMode = SHRINK,
+        renderingMode = H_SCROLL,
     )
 
     @OptIn(ExperimentalLayoutApi::class)
