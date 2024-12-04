@@ -384,10 +384,7 @@ private enum class ImageShape {
     abstract val shape: Shape
 }
 
-private enum class SelectedImage(
-    @DrawableRes val res: Int,
-    @StringRes val contentDescription: Int,
-) {
+private enum class SelectedImage(@DrawableRes val res: Int, @StringRes val contentDescription: Int) {
     Wide(
         R.drawable.img_wide_image_configurator,
         R.string.component_image_wide_description,
@@ -398,10 +395,7 @@ private enum class SelectedImage(
     ),
 }
 
-private enum class ImageContentScale(
-    val scale: ContentScale,
-    @StringRes val descriptionRes: Int,
-) {
+private enum class ImageContentScale(val scale: ContentScale, @StringRes val descriptionRes: Int) {
     Crop(scale = ContentScale.Crop, descriptionRes = R.string.component_image_content_scale_crop_description),
     Fit(scale = ContentScale.Fit, descriptionRes = R.string.component_image_content_scale_fit_description),
     FillHeight(
@@ -418,7 +412,6 @@ private enum class ImageContentScale(
         scale = ContentScale.FillBounds,
         descriptionRes = R.string.component_image_content_scale_fill_bounds_description,
     ),
-    ;
 }
 
 private enum class ImageAspectRatio(val label: String, val ratio: Float) {
