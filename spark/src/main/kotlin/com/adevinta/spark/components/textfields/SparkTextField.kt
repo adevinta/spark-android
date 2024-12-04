@@ -230,7 +230,7 @@ internal fun SparkTextField(
                 modifier
             }
                 .defaultMinSize(
-                    minWidth = TextFieldDefaults.MinWidth,
+                    minWidth = 48.dp,
                     minHeight = TextFieldMinHeight,
                 )
                 .sparkUsageOverlay(),

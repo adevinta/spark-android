@@ -27,11 +27,8 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowColumn
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -49,9 +46,8 @@ import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.paparazziRule
-import com.adevinta.spark.sparkSnapshot
 import com.adevinta.spark.sparkSnapshotNightMode
-import com.android.ide.common.rendering.api.SessionParams.RenderingMode.SHRINK
+import com.android.ide.common.rendering.api.SessionParams.RenderingMode.H_SCROLL
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import org.junit.Test
@@ -65,7 +61,7 @@ internal class MultilineTextFieldScreenshot {
     @get:Rule
     val paparazzi = paparazziRule(
         deviceConfig = DefaultTestDevices.Tablet,
-        renderingMode = SHRINK,
+        renderingMode = H_SCROLL,
     )
 
     @Test
@@ -92,10 +88,39 @@ internal class MultilineTextFieldScreenshot {
         }
     }
 
+    @Test
+    fun showcase_disabled() {
+        paparazzi.sparkSnapshotNightMode {
+            Row {
+                ShowcasedMultilineTextfield(
+                    state = null,
+                    stateMessage = "Helper text",
+                    enabled = false,
+                )
+                ShowcasedMultilineTextfield(
+                    state = TextFieldState.Error,
+                    stateMessage = "Error text",
+                    enabled = false,
+                )
+                ShowcasedMultilineTextfield(
+                    state = TextFieldState.Alert,
+                    stateMessage = "Alert text",
+                    enabled = false,
+                )
+                ShowcasedMultilineTextfield(
+                    state = TextFieldState.Success,
+                    stateMessage = "Success text",
+                    enabled = false,
+                )
+            }
+        }
+    }
+
     @Composable
     private fun ShowcasedMultilineTextfield(
         state: TextFieldState?,
         stateMessage: String?,
+        enabled: Boolean = true,
     ) {
         Column(
             modifier = Modifier.padding(8.dp),
@@ -115,7 +140,7 @@ internal class MultilineTextFieldScreenshot {
                 value = "Input",
                 onValueChange = {},
                 onCancelClick = {},
-                enabled = true,
+                enabled = enabled,
                 state = state,
                 stateMessage = stateMessage,
                 required = true,
@@ -133,7 +158,7 @@ internal class MultilineTextFieldScreenshot {
                 value = "",
                 onValueChange = {},
                 onCancelClick = {},
-                enabled = true,
+                enabled = enabled,
                 state = state,
                 stateMessage = stateMessage,
                 required = true,
@@ -153,7 +178,7 @@ internal class MultilineTextFieldScreenshot {
                 value = "",
                 onValueChange = {},
                 onCancelClick = {},
-                enabled = true,
+                enabled = enabled,
                 state = state,
                 stateMessage = stateMessage,
                 required = true,
@@ -166,170 +191,7 @@ internal class MultilineTextFieldScreenshot {
         }
     }
 
-    @OptIn(ExperimentalLayoutApi::class)
-    @Test
-    fun bigValue() {
-        paparazzi.sparkSnapshot {
-            FlowColumn(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                icons.forEach { icon ->
-                    TextFields(
-                        modifier = Modifier.widthIn(max = 400.dp),
-                        icon = icon,
-                        value = stubBody,
-                        enabled = true,
-                    )
-                }
-            }
-        }
-    }
-
-    @OptIn(ExperimentalLayoutApi::class)
-    @Test
-    fun smallValue() {
-        paparazzi.sparkSnapshot {
-            FlowColumn(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                icons.forEach { icon ->
-                    helpers.forEach { helper ->
-                        TextFields(
-                            icon = icon,
-                            value = stubShortBody,
-                            enabled = true,
-                            helper = helper,
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    @OptIn(ExperimentalLayoutApi::class)
-    @Test
-    fun enabled() {
-        paparazzi.sparkSnapshot {
-            FlowColumn(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                icons.forEach { icon ->
-                    helpers.forEach { helper ->
-                        TextFields(
-                            icon = icon,
-                            enabled = true,
-                            helper = helper,
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    @OptIn(ExperimentalLayoutApi::class)
-    @Test
-    fun disabled() {
-        paparazzi.sparkSnapshot {
-            FlowColumn(
-                modifier = Modifier.padding(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                icons.forEach { icon ->
-                    helpers.forEach { helper ->
-                        TextFields(
-                            icon = icon,
-                            enabled = false,
-                            helper = helper,
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    @Composable
-    private fun TextFields(
-        modifier: Modifier = Modifier,
-        icon: SparkIcon?,
-        value: String = "",
-        enabled: Boolean,
-        helper: String? = null,
-    ) {
-        val leadingContent: (@Composable AddonScope.() -> Unit)? = icon?.let {
-            @Composable {
-                Icon(icon, contentDescription = null)
-            }
-        }
-        Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            MultilineTextField(
-                modifier = modifier,
-                value = value,
-                onValueChange = {},
-                onCancelClick = {},
-                label = "Label",
-                leadingContent = leadingContent,
-                required = true,
-                enabled = enabled,
-                stateMessage = "short state message for textfield",
-                helper = helper,
-                minLines = 2,
-            )
-            MultilineTextField(
-                modifier = modifier,
-                value = value,
-                onValueChange = {},
-                onCancelClick = {},
-                label = "Label",
-                leadingContent = leadingContent,
-                state = TextFieldState.Error,
-                required = true,
-                enabled = enabled,
-                stateMessage = "short state message for textfield",
-                helper = helper,
-                minLines = 2,
-            )
-            MultilineTextField(
-                modifier = modifier,
-                value = value,
-                onValueChange = {},
-                onCancelClick = {},
-                label = "Label",
-                leadingContent = leadingContent,
-                state = TextFieldState.Alert,
-                required = true,
-                enabled = enabled,
-                stateMessage = "short state message for textfield",
-                helper = helper,
-                minLines = 2,
-            )
-            MultilineTextField(
-                modifier = modifier,
-                value = value,
-                onValueChange = {},
-                onCancelClick = {},
-                label = "Label",
-                leadingContent = leadingContent,
-                state = TextFieldState.Success,
-                required = true,
-                enabled = enabled,
-                stateMessage = "short state message for textfield",
-                helper = helper,
-                minLines = 2,
-            )
-        }
-    }
-
     companion object {
-        private const val stubShortBody = "Lorem ipsum"
         private const val stubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
             "pulvinar eu nulla sit amet, iaculis interdum."
     }

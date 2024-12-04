@@ -75,6 +75,18 @@
     <!--region Icon Toggle button-->
     <string name="component_icontogglebutton_description">Icon toggle buttons help people take supplementary actions with a single tap. They’re used when a compact button is required, such as in a toolbar or image list.</string>
     <!--endregion-->
+    <!--region image -->
+    <string name="component_image_description">The Image component is used to display images with support for fallback.</string>
+    <string name="component_image_narrow_description">Street photography of a person walking in a paved alley after a rain with bright white/golden lights on the side and the center deep blue color with an umbrella</string>
+    <string name="component_image_wide_description">A huge portrait of the Unicorn Gundam fullscale statue at the Odaiba’s DiverCity Tokyo Plaza.</string>
+    <string name="component_image_content_scale_crop_description">Scale the image to fill 100% the bounds of the Image component but without changing its ratio</string>
+    <string name="component_image_content_scale_fit_description">Scale to make sure the image is not cropped and the image component bounds is filled on one at least direction</string>
+    <string name="component_image_content_scale_fill_height_description">Scale the Image to fill the height of its bounds keeping its aspect ratio but might fill the width or not with cropping</string>
+    <string name="component_image_content_scale_fill_width_description">Scale the Image to fill the width of its bounds keeping its aspect ratio but might fill the height or not with cropping</string>
+    <string name="component_image_content_scale_inside_description">Same as <b>Fit</b> however it’ll scale it only if it’s bigger than the image component otherwise it’ll stay <i>smaller</i> that the bounds</string>
+    <string name="component_image_content_scale_none_description">No scaling, the image stay at it’s original size</string>
+    <string name="component_image_content_scale_fill_bounds_description">Stretch the image to fill 100% of the image component bounds</string>
+    <!--endregion-->
     <!--region Radio button-->
     <string name="component_radiobutton_description">Component used when only one choice may be selected in a series of options.</string>
     <!--endregion-->
