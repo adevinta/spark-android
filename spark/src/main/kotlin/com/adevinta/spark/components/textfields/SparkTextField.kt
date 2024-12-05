@@ -29,9 +29,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.BasicTextField
@@ -42,7 +44,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Label
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -75,11 +76,6 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.icons.IconSize
-import com.adevinta.spark.icons.Check
-import com.adevinta.spark.icons.InfoOutline
-import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.icons.WarningOutline
 import com.adevinta.spark.tokens.EmphasizeDim3
 import com.adevinta.spark.tools.modifiers.SlotArea
 import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
@@ -147,17 +143,15 @@ internal fun SparkTextField(
             maxLines = maxLines,
             minLines = minLines,
             decorationBox = @Composable { innerTextField ->
-                val counterComposable: @Composable (() -> Unit)? = counter?.let {
-                    { Text(text = "${counter.count}/${counter.maxCharacter}") }
-                }
-                val supportingTextComposable: @Composable (() -> Unit)? =
-                    if (stateMessage != null && state != null) {
-                        { Text(text = stateMessage) }
-                    } else if (helper != null) {
-                        { Text(text = helper) }
-                    } else {
-                        null
-                    }
+                val counterComposable = counterText(counter)
+                val stateIcon = TextFieldDefault.getStateIcon(state = state)
+                val supportingTextComposable = supportText(
+                    helper = helper,
+                    state = state,
+                    stateMessage = stateMessage,
+                    counterComposable = counterComposable,
+                    stateIcon = stateIcon,
+                )
 
                 SparkDecorationBox(
                     value = value.text,
@@ -169,7 +163,6 @@ internal fun SparkTextField(
                     readOnly = readOnly,
                     placeholder = { PlaceHolder(text = placeholder) },
                     supportingText = supportingTextComposable,
-                    counter = counterComposable,
                     leadingIcon = leadingContent,
                     trailingIcon = trailingContent,
                     singleLine = singleLine,
@@ -247,17 +240,15 @@ internal fun SparkTextField(
             maxLines = maxLines,
             minLines = minLines,
             decorationBox = @Composable { innerTextField ->
-                val counterComposable: @Composable (() -> Unit)? = counter?.let {
-                    { Text(text = "${counter.count}/${counter.maxCharacter}") }
-                }
-                val supportingTextComposable: @Composable (() -> Unit)? =
-                    if (stateMessage != null && state != null) {
-                        { Text(text = stateMessage) }
-                    } else if (helper != null) {
-                        { Text(text = helper) }
-                    } else {
-                        null
-                    }
+                val counterComposable = counterText(counter)
+                val stateIcon = TextFieldDefault.getStateIcon(state = state)
+                val supportingTextComposable = supportText(
+                    helper = helper,
+                    state = state,
+                    stateMessage = stateMessage,
+                    counterComposable = counterComposable,
+                    stateIcon = stateIcon,
+                )
 
                 SparkDecorationBox(
                     value = value,
@@ -269,7 +260,6 @@ internal fun SparkTextField(
                     readOnly = readOnly,
                     placeholder = { PlaceHolder(text = placeholder) },
                     supportingText = supportingTextComposable,
-                    counter = counterComposable,
                     leadingIcon = leadingIcon,
                     trailingIcon = trailingIcon,
                     singleLine = singleLine,
@@ -328,6 +318,25 @@ private fun OutlinedBorderContainerBox(
             .border(borderStroke.value, shape)
             .textFieldBackground(containerColor::value, shape),
     )
+}
+
+@Composable
+private fun SupportingText(
+    text: String,
+    counterComposable: @Composable ((Modifier) -> Unit)?,
+    statusIcon: @Composable ((Modifier) -> Unit)?,
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        statusIcon?.invoke(Modifier.padding(end = 4.dp))
+        Text(
+            modifier = Modifier.weight(1f, fill = true),
+            text = text,
+        )
+        counterComposable?.invoke(Modifier.padding(start = 8.dp))
+    }
 }
 
 /**
@@ -405,28 +414,61 @@ private fun PlaceHolder(text: String?) {
     }
 }
 
-internal object TextFieldDefault {
-    @Composable
-    internal fun getTrailingContent(
-        state: TextFieldState?,
-        trailingIcon: (@Composable AddonScope.() -> Unit)?,
-    ): (@Composable AddonScope.() -> Unit)? = when {
-        state != null -> {
-            {
-                val icon = when (state) {
-                    TextFieldState.Error -> SparkIcons.InfoOutline
-                    TextFieldState.Alert -> SparkIcons.WarningOutline
-                    TextFieldState.Success -> SparkIcons.Check
-                }
-                Icon(
-                    sparkIcon = icon,
-                    contentDescription = null,
-                    size = IconSize.Medium,
-                )
-            }
-        }
+@Composable
+private fun counterText(
+    charCounter: TextFieldCharacterCounter?,
+): (@Composable (Modifier) -> Unit)? = charCounter?.let { counter ->
+    { modifier ->
+        Text(
+            modifier = modifier,
+            text = "${counter.count}/${counter.maxCharacter}",
+        )
+    }
+}
 
-        else -> trailingIcon
+@Composable
+private fun supportText(
+    helper: String?,
+    state: TextFieldState?,
+    stateMessage: String?,
+    counterComposable: @Composable ((Modifier) -> Unit)?,
+    stateIcon: @Composable ((Modifier) -> Unit)?,
+): (@Composable () -> Unit)? {
+    return if (stateMessage != null && state != null) {
+        {
+            SupportingText(
+                text = stateMessage,
+                counterComposable = counterComposable,
+                statusIcon = stateIcon,
+            )
+        }
+    } else if (helper != null) {
+        {
+            SupportingText(
+                text = helper,
+                counterComposable = counterComposable,
+                statusIcon = stateIcon,
+            )
+        }
+    } else {
+        null
+    }
+}
+
+
+internal object TextFieldDefault {
+
+    @Composable
+    internal fun getStateIcon(state: TextFieldState?): (@Composable (Modifier) -> Unit)? {
+        state ?: return null
+
+        return { modifier ->
+            Icon(
+                modifier = modifier.size(16.dp),
+                sparkIcon = state.icon,
+                contentDescription = null,
+            )
+        }
     }
 }
 
@@ -464,9 +506,10 @@ internal fun TextFieldSlotsPreview() {
             required = true,
             label = "Label",
             placeholder = "Placeholder",
-            helper = "helper helper",
+            helper = "Helper helper helper helper helper helper Helper helper helper helper helper helper helper helper helper helper helper",
+            state = TextFieldState.Success,
+            counter = TextFieldCharacterCounter(10, 20),
             leadingContent = icon,
-            trailingContent = icon,
         )
 
         TextField(
@@ -476,6 +519,9 @@ internal fun TextFieldSlotsPreview() {
             required = true,
             label = "Label",
             placeholder = "Placeholder",
+            helper = "Helper helper helper helper helper helper Helper helper helper helper helper helper helper helper helper helper helper",
+            counter = TextFieldCharacterCounter(10, 20),
+            state = TextFieldState.Success,
             leadingContent = icon,
             trailingContent = icon,
         )

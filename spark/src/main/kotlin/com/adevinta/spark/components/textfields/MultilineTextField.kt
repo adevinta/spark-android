@@ -48,7 +48,7 @@ import com.adevinta.spark.R
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.TextFieldDefault.getTrailingContent
+import com.adevinta.spark.components.textfields.TextFieldDefault.getStateIcon
 import com.adevinta.spark.icons.DeleteOutline
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons
@@ -130,26 +130,23 @@ public fun MultilineTextField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingIconComposable: (@Composable AddonScope.() -> Unit)? = getTrailingContent(
-        state = state,
-        trailingIcon = if (value.text.isNotBlank()) {
-            {
-                Icon(
-                    modifier = Modifier
-                        .clickable {
-                            onCancelClick()
-                        }
-                        .semantics {
-                            role = Role.Button
-                        },
-                    sparkIcon = SparkIcons.DeleteOutline,
-                    contentDescription = stringResource(R.string.spark_textfield_delete_a11y),
-                )
-            }
-        } else {
-            null
-        },
-    )
+    val trailingIcon: (@Composable AddonScope.() -> Unit)? = if (value.text.isNotBlank()) {
+        {
+            Icon(
+                modifier = Modifier
+                    .clickable {
+                        onCancelClick()
+                    }
+                    .semantics {
+                        role = Role.Button
+                    },
+                sparkIcon = SparkIcons.DeleteOutline,
+                contentDescription = stringResource(R.string.spark_textfield_delete_a11y),
+            )
+        }
+    } else {
+        null
+    }
 
     SparkTextField(
         value = value,
@@ -163,7 +160,7 @@ public fun MultilineTextField(
         helper = helper,
         counter = counter,
         leadingContent = leadingContent,
-        trailingContent = trailingIconComposable,
+        trailingContent = trailingIcon,
         state = state,
         stateMessage = stateMessage,
         visualTransformation = visualTransformation,
@@ -251,26 +248,22 @@ public fun MultilineTextField(
     minLines: Int = 1,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingIconComposable: (@Composable AddonScope.() -> Unit)? = getTrailingContent(
-        state = state,
-        trailingIcon = if (value.isNotBlank()) {
-            {
-                Icon(
-                    modifier = Modifier
-                        .clickable {
-                            onCancelClick()
-                        }
-                        .semantics {
-                            role = Role.Button
-                        },
-                    sparkIcon = SparkIcons.DeleteOutline,
-                    contentDescription = "Cancel",
-                )
-            }
-        } else {
-            null
-        },
-    )
+    val trailingIconComposable: (@Composable AddonScope.() -> Unit)? = if (value.isNotBlank()) {
+        {
+            Icon(
+                modifier = Modifier
+                    .clickable(onClick = onCancelClick)
+                    .semantics {
+                        role = Role.Button
+                    },
+                sparkIcon = SparkIcons.DeleteOutline,
+                contentDescription = stringResource(R.string.spark_textfield_delete_a11y),
+            )
+        }
+    } else {
+        null
+    }
+
     SparkTextField(
         value = value,
         onValueChange = onValueChange,

@@ -103,6 +103,7 @@ public fun TextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
+    counter: TextFieldCharacterCounter? = null,
     leadingContent: @Composable (AddonScope.() -> Unit)? = null,
     trailingContent: @Composable (AddonScope.() -> Unit)? = null,
     state: TextFieldState? = null,
@@ -112,10 +113,6 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingContentBasedOnState: (@Composable AddonScope.() -> Unit)? = TextFieldDefault.getTrailingContent(
-        state = state,
-        trailingIcon = trailingContent,
-    )
 
     SparkTextField(
         value = value,
@@ -127,9 +124,9 @@ public fun TextField(
         label = label,
         placeholder = placeholder,
         helper = helper,
-        counter = null, // Available only for MultilineTextField Variant
+        counter = counter,
         leadingContent = leadingContent,
-        trailingContent = trailingContentBasedOnState,
+        trailingContent = trailingContent,
         state = state,
         stateMessage = stateMessage,
         visualTransformation = visualTransformation,
@@ -198,6 +195,7 @@ public fun TextField(
     label: String? = null,
     placeholder: String? = null,
     helper: String? = null,
+    counter: TextFieldCharacterCounter? = null,
     leadingContent: @Composable (AddonScope.() -> Unit)? = null,
     trailingContent: @Composable (AddonScope.() -> Unit)? = null,
     state: TextFieldState? = null,
@@ -207,10 +205,6 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    val trailingContentBasedOnState: (@Composable AddonScope.() -> Unit)? = TextFieldDefault.getTrailingContent(
-        state = state,
-        trailingIcon = trailingContent,
-    )
 
     SparkTextField(
         value = value,
@@ -222,9 +216,9 @@ public fun TextField(
         label = label,
         placeholder = placeholder,
         helper = helper,
-        counter = null, // Available only for MultilineTextField Variant
+        counter = counter,
         leadingIcon = leadingContent,
-        trailingIcon = trailingContentBasedOnState,
+        trailingIcon = trailingContent,
         state = state,
         stateMessage = stateMessage,
         visualTransformation = visualTransformation,
