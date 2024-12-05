@@ -53,8 +53,8 @@ androidx.constraintlayout:constraintlayout-compose-android:1.1.0
 androidx.constraintlayout:constraintlayout-compose:1.1.0
 androidx.constraintlayout:constraintlayout-core:1.1.0
 androidx.constraintlayout:constraintlayout:2.2.0
-androidx.core:core-ktx:1.13.1
-androidx.core:core:1.13.1
+androidx.core:core-ktx:1.15.0
+androidx.core:core:1.15.0
 androidx.cursoradapter:cursoradapter:1.0.0
 androidx.customview:customview-poolingcontainer:1.0.0
 androidx.customview:customview:1.0.0
@@ -88,7 +88,7 @@ androidx.resourceinspection:resourceinspection-annotation:1.0.1
 androidx.savedstate:savedstate-ktx:1.2.1
 androidx.savedstate:savedstate:1.2.1
 androidx.startup:startup-runtime:1.1.1
-androidx.tracing:tracing:1.0.0
+androidx.tracing:tracing:1.2.0
 androidx.vectordrawable:vectordrawable-animated:1.1.0
 androidx.vectordrawable:vectordrawable:1.1.0
 androidx.versionedparcelable:versionedparcelable:1.1.1
