@@ -20,18 +20,27 @@
  * SOFTWARE.
  */
 package com.adevinta.spark.components.textfields
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.textfields.TextFieldState.Alert
+import com.adevinta.spark.components.textfields.TextFieldState.Error
+import com.adevinta.spark.components.textfields.TextFieldState.Success
+import com.adevinta.spark.icons.AlertOutline
+import com.adevinta.spark.icons.Check
+import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.WarningOutline
 
 /**
  *   State of a [TextField] that's used to change the highlight color to either [Success], [Alert] or [Error].
  */
-public enum class TextFieldState {
+public enum class TextFieldState(public val icon: SparkIcon) {
     /**
      * Used for feedbacks that are positive.
      */
-    Success {
+    Success(icon = SparkIcons.Check) {
         @Composable
         override fun color(): Color = SparkTheme.colors.success
     },
@@ -39,7 +48,7 @@ public enum class TextFieldState {
     /**
      * Used for feedbacks that are negative.
      */
-    Alert {
+    Alert(icon = SparkIcons.WarningOutline) {
         @Composable
         override fun color(): Color = SparkTheme.colors.alert
     },
@@ -47,7 +56,7 @@ public enum class TextFieldState {
     /**
      * Used for feedbacks that are negative and dangerous. (required field not filled or a wrong input)
      */
-    Error {
+    Error(icon = SparkIcons.AlertOutline) {
         @Composable
         override fun color(): Color = SparkTheme.colors.error
     },
