@@ -59,8 +59,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalView
@@ -78,6 +76,7 @@ import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.appbar.TopAppBar
 import com.adevinta.spark.components.buttons.ButtonFilled
+import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.dialog.ModalDefault.DialogPadding
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconButton
@@ -112,6 +111,8 @@ import com.adevinta.spark.tools.preview.DevicePreviews
  * @param title the title of the modal
  * @param actions the actions displayed at the end of the top app bar. This should typically be
  *  * [IconButton]s. The default layout here is a [Row], so icons inside will be placed horizontally.
+ * @param inEdgeToEdge tel the component that the activity where it's being displayed on is a edege to edge screen.
+ * This has to be explicitly specified as no api wan reliably tel us
  * @param content the center custom Composable for modal content
  */
 @ExperimentalSparkApi
@@ -125,6 +126,7 @@ public fun ModalScaffold(
     supportButton: (@Composable (Modifier) -> Unit)? = {},
     title: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
+    inEdgeToEdge: Boolean = true,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val size = LocalWindowSizeClass.current
@@ -135,12 +137,9 @@ public fun ModalScaffold(
                 size.heightSizeClass == WindowHeightSizeClass.Medium ||
                     size.heightSizeClass == WindowHeightSizeClass.Expanded
                 )
-    val activityWindow = getActivityWindow()
 
-    val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
-        activityWindow?.navigationBarColor == Color.Transparent.toArgb()
     val properties = DialogProperties(
-        usePlatformDefaultWidth = isEdgeToEdge,
+        usePlatformDefaultWidth = inEdgeToEdge,
         decorFitsSystemWindows = false,
     )
     val navigationBarPadding = WindowInsets.navigationBars.asPaddingValues()
@@ -160,6 +159,7 @@ public fun ModalScaffold(
             supportButton = supportButton,
             title = title,
             actions = actions,
+            inEdgeToEdge = inEdgeToEdge,
             content = content,
         )
 
@@ -174,6 +174,7 @@ public fun ModalScaffold(
             supportButton = supportButton,
             title = title,
             actions = actions,
+            inEdgeToEdge = inEdgeToEdge,
             content = content,
         )
 
@@ -279,6 +280,7 @@ private fun PhonePortraitModalScaffold(
     actions: @Composable RowScope.() -> Unit = {},
     mainButton: (@Composable (Modifier) -> Unit)? = {},
     supportButton: (@Composable (Modifier) -> Unit)? = {},
+    inEdgeToEdge: Boolean = false,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Dialog(
@@ -287,17 +289,15 @@ private fun PhonePortraitModalScaffold(
     ) {
         // Work around for b/246909281 as for now Dialog doesn't pass the drawing insets to its content
         val parentView = LocalView.current.parent as View
+
         val activityWindow = getActivityWindow()
         val dialogWindow = getDialogWindow()
-
-        val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
-            activityWindow?.navigationBarColor == Color.Transparent.toArgb()
 
         SideEffect {
             if (
                 activityWindow != null &&
                 dialogWindow != null &&
-                isEdgeToEdge
+                inEdgeToEdge
             ) {
                 val attributes = WindowManager.LayoutParams()
                 attributes.copyFrom(activityWindow.attributes)
@@ -350,12 +350,8 @@ private fun PhonePortraitModalScaffold(
 @Composable
 private fun BottomBarPortrait(
     navigationBarPadding: PaddingValues,
-    mainButton:
-    @Composable()
-    ((Modifier) -> Unit)?,
-    supportButton:
-    @Composable()
-    ((Modifier) -> Unit)?,
+    mainButton: @Composable ((Modifier) -> Unit)?,
+    supportButton: @Composable ((Modifier) -> Unit)?,
 ) {
     if (supportButton == null && mainButton == null) return
     Surface {
@@ -400,6 +396,7 @@ private fun PhoneLandscapeModalScaffold(
     title: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
     illustrationContentScale: ContentScale = ContentScale.Fit,
+    inEdgeToEdge: Boolean = false,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     Dialog(
@@ -411,15 +408,11 @@ private fun PhoneLandscapeModalScaffold(
         val activityWindow = getActivityWindow()
         val dialogWindow = getDialogWindow()
 
-        @Suppress("DEPRECATION")
-        val isEdgeToEdge = activityWindow?.statusBarColor == Color.Transparent.toArgb() ||
-            activityWindow?.navigationBarColor == Color.Transparent.toArgb()
-
         SideEffect {
             if (
                 activityWindow != null &&
                 dialogWindow != null &&
-                isEdgeToEdge
+                inEdgeToEdge
             ) {
                 val attributes = WindowManager.LayoutParams()
                 attributes.copyFrom(activityWindow.attributes)
@@ -535,41 +528,50 @@ private fun ModalPreview() {
     PreviewTheme(
         padding = PaddingValues(),
     ) {
-        ModalScaffold(
-            onClose = { /*TODO*/ },
-            mainButton = null,
-            supportButton = null,
-            title = {
-                Text(text = "Title")
-            },
-            actions = {
-                Icon(sparkIcon = SparkIcons.ImageFill, contentDescription = "")
-                Icon(sparkIcon = SparkIcons.ImageFill, contentDescription = "")
-                Icon(sparkIcon = SparkIcons.MoreMenuVertical, contentDescription = "")
-            },
-        ) { innerPadding ->
-            Text(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .verticalScroll(rememberScrollState()),
-                text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
-                    "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
-                    "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
-                    "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
-                    "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
-                    "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
-                    "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
-                    "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
-                    " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
-                    "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
-                    "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
-                    "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
-                    "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
-                    "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
-                    "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
-                    "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
-                    "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
-            )
+        Box(
+            Modifier.fillMaxSize(),
+        ) {
+            ModalScaffold(
+                onClose = { /*TODO*/ },
+                mainButton = {
+                    ButtonFilled(modifier = it, onClick = { /*TODO*/ }, text = "Main Action")
+                },
+                supportButton = {
+                    ButtonOutlined(modifier = it, onClick = { /*TODO*/ }, text = "Alternative Action")
+                },
+                title = {
+                    Text(text = "Title")
+                },
+                actions = {
+                    Icon(sparkIcon = SparkIcons.ImageFill, contentDescription = "")
+                    Icon(sparkIcon = SparkIcons.ImageFill, contentDescription = "")
+                    Icon(sparkIcon = SparkIcons.MoreMenuVertical, contentDescription = "")
+                },
+            ) { innerPadding ->
+                Text(
+                    modifier = Modifier
+                        .padding(innerPadding)
+                        .verticalScroll(rememberScrollState()),
+                    text =
+                    "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. " +
+                        "Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur " +
+                        "ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. " +
+                        "\n\nNulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, " +
+                        "vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. " +
+                        "Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. " +
+                        "Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. " +
+                        "\n\nAenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante," +
+                        " dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius " +
+                        "laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. " +
+                        "Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. " +
+                        "\n\nMaecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet " +
+                        "adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, " +
+                        "lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis " +
+                        "faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. " +
+                        "Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. " +
+                        "Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,",
+                )
+            }
         }
     }
 }
