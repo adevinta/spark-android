@@ -65,7 +65,7 @@ internal fun sparkOutlinedTextFieldColors(
     disabledPlaceholderColor: Color = SparkTheme.colors.onSurface.dim3,
     focusedSupportingTextColor: Color = SparkTheme.colors.onSurface.dim1,
     unfocusedSupportingTextColor: Color = focusedSupportingTextColor,
-    disabledSupportingTextColor: Color = focusedSupportingTextColor,
+    disabledSupportingTextColor: Color = focusedSupportingTextColor.dim3,
 ): DefaultSparkTextFieldColors = DefaultSparkTextFieldColors(
     textColor = textColor,
     disabledTextColor = disabledTextColor,
