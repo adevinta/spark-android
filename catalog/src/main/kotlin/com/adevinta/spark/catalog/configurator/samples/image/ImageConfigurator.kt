@@ -35,7 +35,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
@@ -126,7 +126,10 @@ private fun ColumnScope.ImageSample() {
         model = state.ordinal,
         contentDescription = stringResource(selectedImage.contentDescription),
         modifier = Modifier
-            .widthIn(max = imageMaxWidth)
+            .width(imageMaxWidth)
+            .ifTrue(showBorder) {
+                border(1.dp, SparkTheme.colors.outlineHigh)
+            }
             .aspectRatio(
                 ratio = if (aspectRatio == ImageAspectRatio.Custom) {
                     (width?.toFloat() ?: 1f) / (height?.toFloat() ?: 1f)
@@ -135,9 +138,6 @@ private fun ColumnScope.ImageSample() {
                 },
                 matchHeightConstraintsFirst = true,
             )
-            .ifTrue(showBorder) {
-                border(1.dp, SparkTheme.colors.outlineHigh)
-            }
             .align(Alignment.CenterHorizontally)
             .clip(imageShape.shape)
             .animateContentSize(),
