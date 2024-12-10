@@ -433,28 +433,25 @@ private fun supportText(
     stateMessage: String?,
     counterComposable: @Composable ((Modifier) -> Unit)?,
     stateIcon: @Composable ((Modifier) -> Unit)?,
-): (@Composable () -> Unit)? {
-    return if (stateMessage != null && state != null) {
-        {
-            SupportingText(
-                text = stateMessage,
-                counterComposable = counterComposable,
-                statusIcon = stateIcon,
-            )
-        }
-    } else if (helper != null) {
-        {
-            SupportingText(
-                text = helper,
-                counterComposable = counterComposable,
-                statusIcon = stateIcon,
-            )
-        }
-    } else {
-        null
+): (@Composable () -> Unit)? = if (stateMessage != null && state != null) {
+    {
+        SupportingText(
+            text = stateMessage,
+            counterComposable = counterComposable,
+            statusIcon = stateIcon,
+        )
     }
+} else if (helper != null) {
+    {
+        SupportingText(
+            text = helper,
+            counterComposable = counterComposable,
+            statusIcon = stateIcon,
+        )
+    }
+} else {
+    null
 }
-
 
 internal object TextFieldDefault {
 
@@ -506,7 +503,8 @@ internal fun TextFieldSlotsPreview() {
             required = true,
             label = "Label",
             placeholder = "Placeholder",
-            helper = "Helper helper helper helper helper helper Helper helper helper helper helper helper helper helper helper helper helper",
+            helper = "Helper helper helper helper helper helper Helper helper helper helper helper helper " +
+                "helper helper helper helper helper",
             state = TextFieldState.Success,
             counter = TextFieldCharacterCounter(10, 20),
             leadingContent = icon,
@@ -519,7 +517,8 @@ internal fun TextFieldSlotsPreview() {
             required = true,
             label = "Label",
             placeholder = "Placeholder",
-            helper = "Helper helper helper helper helper helper Helper helper helper helper helper helper helper helper helper helper helper",
+            helper = "Helper helper helper helper helper helper Helper helper helper helper helper helper " +
+                "helper helper helper helper helper",
             counter = TextFieldCharacterCounter(10, 20),
             state = TextFieldState.Success,
             leadingContent = icon,

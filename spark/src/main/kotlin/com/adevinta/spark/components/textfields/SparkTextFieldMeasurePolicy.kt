@@ -22,7 +22,6 @@
 package com.adevinta.spark.components.textfields
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.geometry.Size

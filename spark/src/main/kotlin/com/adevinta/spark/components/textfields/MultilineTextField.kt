@@ -48,7 +48,6 @@ import com.adevinta.spark.R
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.text.Text
-import com.adevinta.spark.components.textfields.TextFieldDefault.getStateIcon
 import com.adevinta.spark.icons.DeleteOutline
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcons

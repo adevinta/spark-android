@@ -113,7 +113,6 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-
     SparkTextField(
         value = value,
         onValueChange = onValueChange,
@@ -205,7 +204,6 @@ public fun TextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-
     SparkTextField(
         value = value,
         onValueChange = onValueChange,
