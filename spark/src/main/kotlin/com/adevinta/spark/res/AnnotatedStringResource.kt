@@ -48,7 +48,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.VerbatimTtsAnnotation
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -66,6 +68,7 @@ import androidx.core.text.toHtml
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.res.SparkStringAnnotations.toAccessibilitySpan
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
 import kotlinx.collections.immutable.PersistentMap
@@ -291,16 +294,23 @@ private fun CharSequence.asAnnotatedString(
 ): AnnotatedString {
     if (this !is Spanned) return AnnotatedString(this.toString())
     return buildAnnotatedString {
-        append(this@asAnnotatedString.toString())
+        val annotatedString = this@asAnnotatedString.toString()
+        append(annotatedString)
         getSpans(0, length, Any::class.java).forEach {
             val start = getSpanStart(it)
             val end = getSpanEnd(it)
-            buildWithSpan(it, start, end, density, colors, typography)
+            buildWithSpanStyle(it, start, end, density, colors, typography)
+
+            val textToFormat = annotatedString.substring(start, end)
+            buildWithAccessibilitySpan(it, textToFormat, start, end)
         }
     }
 }
 
-private fun AnnotatedString.Builder.buildWithSpan(
+/**
+ * Update the [AnnotatedString] from `start` to `end` with the provided [SpanStyle], [Density], [SparkColors] and [SparkTypography].
+ */
+private fun AnnotatedString.Builder.buildWithSpanStyle(
     it: Any,
     start: Int,
     end: Int,
@@ -330,6 +340,40 @@ private fun AnnotatedString.Builder.buildWithSpan(
         else -> return
     }
     addStyle(span, start, end)
+}
+
+/**
+ * Update the [AnnotatedString] format from `start` to `end` with the provided [SparkAccessiblitySpan].
+ */
+@OptIn(ExperimentalTextApi::class)
+private fun AnnotatedString.Builder.buildWithAccessibilitySpan(
+    it: Any,
+    textToFormat: String,
+    start: Int,
+    end: Int,
+) {
+    if (it !is Annotation) return
+    when(it.value.toAccessibilitySpan()) {
+        SparkAccessiblitySpan.CARDINAL -> { /*TODO*/ }
+        SparkAccessiblitySpan.DATE -> { /*TODO*/ }
+        SparkAccessiblitySpan.DECIMAL -> { /*TODO*/ }
+        SparkAccessiblitySpan.DIGITS -> { /*TODO*/ }
+        SparkAccessiblitySpan.ELECTRONIC -> { /*TODO*/ }
+        SparkAccessiblitySpan.FRACTION -> { /*TODO*/ }
+        SparkAccessiblitySpan.MEASURE -> { /*TODO*/ }
+        SparkAccessiblitySpan.MONEY -> { /*TODO*/ }
+        SparkAccessiblitySpan.ORDINAL -> { /*TODO*/ }
+        SparkAccessiblitySpan.TELEPHONE -> { /*TODO*/ }
+        SparkAccessiblitySpan.TEXT -> { /*TODO*/ }
+        SparkAccessiblitySpan.TIME -> { /*TODO*/ }
+        SparkAccessiblitySpan.VERBATIM -> {
+            addTtsAnnotation(
+                ttsAnnotation = VerbatimTtsAnnotation(textToFormat),
+                start = start,
+                end = end,
+            )
+        }
+    }
 }
 
 private fun StyleSpan.toSpanStyle(): SpanStyle? = when (style) {
