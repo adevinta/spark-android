@@ -34,6 +34,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFromBaseline
@@ -87,7 +88,6 @@ internal fun SparkDecorationBox(
     readOnly: Boolean,
     placeholder: @Composable (() -> Unit)? = null,
     supportingText: @Composable (() -> Unit)? = null,
-    counter: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (AddonScope.() -> Unit)? = null,
     trailingIcon: @Composable (AddonScope.() -> Unit)? = null,
     singleLine: Boolean = false,
@@ -167,22 +167,6 @@ internal fun SparkDecorationBox(
                 null
             }
 
-        val decoratedCounter: @Composable (() -> Unit)? = counter?.let {
-            @Composable {
-                Box {
-                    Decoration(
-                        contentColor = colors.supportingTextColor(
-                            enabled = enabled,
-                            state = state,
-                            interactionSource = interactionSource,
-                        ).value,
-                        typography = SparkTheme.typography.caption,
-                        content = counter,
-                    )
-                }
-            }
-        }
-
         // Developers need to handle invalid input manually. But since we don't provide error
         // message slot API, we can set the default error message in case developers forget about
         // it.
@@ -232,7 +216,6 @@ internal fun SparkDecorationBox(
             textField = innerTextField,
             placeholder = decoratedPlaceholder,
             label = decoratedLabel,
-            counter = decoratedCounter,
             leading = decoratedLeading,
             trailing = decoratedTrailing,
             singleLine = singleLine,
@@ -283,7 +266,6 @@ internal fun SparkTextFieldLayout(
     textField: @Composable () -> Unit,
     placeholder: @Composable ((Modifier) -> Unit)?,
     label: @Composable (() -> Unit)?,
-    counter: @Composable (() -> Unit)?,
     leading: @Composable (() -> Unit)?,
     trailing: @Composable (() -> Unit)?,
     singleLine: Boolean,
@@ -384,20 +366,11 @@ internal fun SparkTextFieldLayout(
                 val helperModifier = Modifier
                     .layoutId(SupportingId)
                     .heightIn(min = MinSupportingTextLineHeight)
+                    .fillMaxWidth()
                     .wrapContentHeight()
                     .paddingFromBaseline(top = 16.dp)
                 Box(modifier = helperModifier) {
                     supporting()
-                }
-            }
-            if (counter != null) {
-                val helperModifier = Modifier
-                    .layoutId(CounterId)
-                    .heightIn(min = MinSupportingTextLineHeight)
-                    .wrapContentHeight()
-                    .paddingFromBaseline(top = 16.dp)
-                Box(modifier = helperModifier) {
-                    counter()
                 }
             }
         },
@@ -544,7 +517,6 @@ internal const val LabelId = "Label"
 internal const val LeadingId = "Leading"
 internal const val TrailingId = "Trailing"
 internal const val SupportingId = "Supporting"
-internal const val CounterId = "Counter"
 
 internal val ZeroConstraints = Constraints(0, 0, 0, 0)
 
