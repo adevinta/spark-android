@@ -62,12 +62,13 @@ import kotlinx.coroutines.flow.flowOf
  * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory"
  * but doesn't do anything else so it's up to the developer to handle the behavior.
  * @param label the optional label to be displayed inside the text field container. The default
- * text style for internal [Text] is [SparkTypography.small] when the text field is in focus and
- * [SparkTypography.large] when the text field is not in focus
+ * text style for internal [Text] is [SparkTypography.body2] when the text field is in focus and
+ * [SparkTypography.body1] when the text field is not in focus
  * @param placeholder the optional placeholder to be displayed when the text field is in focus and
- * the input text is empty. The default text style for internal [Text] is [SparkTypography.large]
+ * the input text is empty. The default text style for internal [Text] is [SparkTypography.body1]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * information about expected text
+ * @param counter The optional counter to be displayed the the end bottom outside the text input container
  * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
  * container
  * @param trailingContent the optional trailing icon to be displayed at the end of the text field
@@ -153,12 +154,13 @@ public fun TextField(
  * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory"
  * but doesn't do anything else so it's up to the developer to handle the behavior.
  * @param label the optional label to be displayed inside the text field container. The default
- * text style for internal [Text] is [SparkTypography.small] when the text field is in focus and
- * [SparkTypography.large] when the text field is not in focus
+ * text style for internal [Text] is [SparkTypography.body2] when the text field is in focus and
+ * [SparkTypography.body1] when the text field is not in focus
  * @param placeholder the optional placeholder to be displayed when the text field is in focus and
- * the input text is empty. The default text style for internal [Text] is [SparkTypography.large]
+ * the input text is empty. The default text style for internal [Text] is [SparkTypography.body1]
  * @param helper The optional helper text to be displayed at the bottom outside the text input container that give some
  * information about expected text
+ * @param counter The optional counter to be displayed the the end bottom outside the text input container
  * @param leadingContent the optional leading icon to be displayed at the beginning of the text field
  * container, note that
  * @param trailingContent the optional trailing icon to be displayed at the end of the text field
