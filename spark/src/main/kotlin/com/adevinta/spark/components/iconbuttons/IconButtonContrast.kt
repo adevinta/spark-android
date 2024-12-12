@@ -69,7 +69,7 @@ public fun IconButtonContrast(
     contentDescription: String? = null,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     atEnd: Boolean = false,
-    ) {
+) {
     val colors = IconButtonDefaults.contrastIconButtonColors(intent.colors())
     SparkIconButton(
         icon = icon,

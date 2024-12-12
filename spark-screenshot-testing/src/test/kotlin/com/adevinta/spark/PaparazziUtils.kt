@@ -26,23 +26,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalInspectionMode
 import app.cash.paparazzi.Paparazzi
-import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.icons.IconSize
-import com.adevinta.spark.icons.BellShake
-import com.adevinta.spark.icons.SparkAnimatedIcons
 import com.adevinta.spark.tokens.darkSparkColors
 import com.adevinta.spark.tokens.lightSparkColors
-import kotlinx.coroutines.delay
 
 internal fun Paparazzi.sparkSnapshot(
     name: String? = null,
