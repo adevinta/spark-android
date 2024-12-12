@@ -22,69 +22,67 @@
 package com.adevinta.spark.catalog.examples
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
 import com.adevinta.spark.catalog.examples.component.Component
 import com.adevinta.spark.catalog.examples.example.Example
 import com.adevinta.spark.catalog.model.Component
+import kotlinx.serialization.Serializable
 
-internal fun NavGraphBuilder.navGraph(
+@Serializable
+public object ExamplesList
+
+@Serializable
+private data class ExampleSection(val componentId: Int)
+
+@Serializable
+private data class ExampleShowcase(val componentId: Int, val exampleIndex: Int)
+
+internal fun NavGraphBuilder.examplesDestination(
     navController: NavHostController,
     components: List<Component>,
     contentPadding: PaddingValues,
 ) {
-    composable(route = ComponentRoute) {
+    composable<ExamplesList> {
         ComponentsListScreen(
             components = components,
-            navController = navController,
             contentPadding = contentPadding,
+            onExampleSectionClick = {
+                navController.navigateToExampleSection(id = it)
+            },
         )
     }
 
-    composable(
-        route = "$ComponentRoute/" +
-            "{$ComponentIdArgName}",
-        arguments = listOf(
-            navArgument(ComponentIdArgName) { type = NavType.IntType },
-        ),
-    ) { navBackStackEntry ->
-        val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
-        val componentId = arguments.getInt(ComponentIdArgName)
+    composable<ExampleSection> { navBackStackEntry ->
+        val exampleSection = navBackStackEntry.toRoute<ExampleSection>()
+        val componentId = exampleSection.componentId
         val component = components.first { component -> component.id == componentId }
         Component(
             component = component,
             contentPadding = contentPadding,
             onExampleClick = { example ->
                 val exampleIndex = component.examples.indexOf(example)
-                val route = "$ExampleRoute/$componentId/$exampleIndex"
-                navController.navigate(route)
+                navController.navigateToExampleShowcase(id = componentId, index = exampleIndex)
             },
         )
     }
-    composable(
-        route = "$ExampleRoute/" +
-            "{$ComponentIdArgName}/" +
-            "{$ExampleIndexArgName}",
-        arguments = listOf(
-            navArgument(ComponentIdArgName) { type = NavType.IntType },
-            navArgument(ExampleIndexArgName) { type = NavType.IntType },
-        ),
-    ) { navBackStackEntry ->
-        val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
-        val componentId = arguments.getInt(ComponentIdArgName)
-        val exampleIndex = arguments.getInt(ExampleIndexArgName)
+    composable<ExampleShowcase> { navBackStackEntry ->
+        val exampleShowkase = navBackStackEntry.toRoute<ExampleShowcase>()
+        val componentId = exampleShowkase.componentId
+        val exampleIndex = exampleShowkase.exampleIndex
         val component = components.first { component -> component.id == componentId }
         val example = component.examples[exampleIndex]
-        Example(
-            example = example,
-        )
+        Example(example = example)
     }
 }
 
-internal const val ComponentRoute = "component"
-internal const val ExampleRoute = "example"
-internal const val ComponentIdArgName = "componentId"
-internal const val ExampleIndexArgName = "exampleIndex"
+private fun NavController.navigateToExampleSection(id: Int) {
+    navigate(route = ExampleSection(componentId = id))
+}
+
+private fun NavController.navigateToExampleShowcase(id: Int, index: Int) {
+    navigate(route = ExampleShowcase(componentId = id, exampleIndex = index))
+}

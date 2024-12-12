@@ -23,7 +23,6 @@ package com.adevinta.spark.catalog.examples
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -40,7 +39,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkTheme
@@ -61,9 +59,9 @@ public fun ComponentsScreen(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = ComponentRoute,
+        startDestination = ExamplesList,
         builder = {
-            navGraph(
+            examplesDestination(
                 navController = navController,
                 contentPadding = contentPadding,
                 components = components,
@@ -72,11 +70,10 @@ public fun ComponentsScreen(
     )
 }
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun ComponentsListScreen(
     components: List<Component>,
-    navController: NavController,
+    onExampleSectionClick: (Int) -> Unit,
     contentPadding: PaddingValues,
 ) {
     val examplesComponents by remember(components) {
@@ -131,8 +128,7 @@ internal fun ComponentsListScreen(
                     component = component,
                     onClick = {
                         val componentId = component.id
-                        val route = "$ComponentRoute/$componentId"
-                        navController.navigate(route)
+                        onExampleSectionClick(componentId)
                     },
                 )
             },

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2024 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.configurator
+package com.adevinta.spark.catalog.icons
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavController
@@ -27,37 +27,41 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.adevinta.spark.catalog.configurator.component.ConfiguratorComponentScreen
-import com.adevinta.spark.catalog.model.Component
+import com.adevinta.spark.icons.SparkIcon
 import kotlinx.serialization.Serializable
 
 @Serializable
-private data class ConfiguratorShowcase(val componentId: Int)
+private data class IconShowcase(val iconId: Int, val iconName: String, val isIconAnimated: Boolean)
 
-internal fun NavGraphBuilder.configuratorsDestination(
+internal fun NavGraphBuilder.iconsDemoDestination(
     navController: NavHostController,
-    components: List<Component>,
     contentPadding: PaddingValues,
 ) {
-    composable<ConfiguratorsList> {
-        ComponentsListScreen(
-            components = components,
+    composable<IconsList> {
+        IconsScreen(
             contentPadding = contentPadding,
-            onConfiguratorClick = navController::navigateToConfiguratorShowcase,
+            onIconClick = { id, name, isAnimated ->
+                navController.navigate(
+                    route = IconShowcase(iconId = id, iconName = name, isIconAnimated = isAnimated)
+                )
+            },
         )
     }
 
-    composable<ConfiguratorShowcase> { navBackStackEntry ->
-        val configuratorShowcase = navBackStackEntry.toRoute<ConfiguratorShowcase>()
-        val componentId = configuratorShowcase.componentId
-        val component = components.first { component -> component.configurator != null && component.id == componentId }
-        ConfiguratorComponentScreen(
-            component = component,
-            configurator = requireNotNull(component.configurator),
+    composable<IconShowcase> { navBackStackEntry ->
+        val iconShowcase = navBackStackEntry.toRoute<IconShowcase>()
+        val iconId = iconShowcase.iconId
+        val iconName = iconShowcase.iconName
+        val isIconAnimated = iconShowcase.isIconAnimated
+        val icon = if (isIconAnimated) {
+            SparkIcon.AnimatedDrawableRes(iconId)
+        } else {
+            SparkIcon.DrawableRes(iconId)
+        }
+        IconExampleScreen(
+            icon = icon,
+            name = iconName,
+            isAnimated = isIconAnimated,
         )
     }
-}
-
-private fun NavController.navigateToConfiguratorShowcase(id: Int) {
-    navigate(route = ConfiguratorShowcase(componentId = id))
 }
