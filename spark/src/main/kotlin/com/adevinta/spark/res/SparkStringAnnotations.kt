@@ -86,21 +86,21 @@ public object SparkStringAnnotations {
     }?.toSpanStyle()
 
     /**
-     * Given a string representing an annotation value of a accessibility span, returns the corresponding [SparkAccessiblitySpan].
+     * Given a string representing an annotation value of a accessibility span, returns the corresponding [SparkAccessibilitySpan].
      */
-    public fun String.toAccessibilitySpan(): SparkAccessiblitySpan = when (this.lowercase()) {
-        SparkAccessiblitySpan.CARDINAL.annotation -> SparkAccessiblitySpan.CARDINAL
-        SparkAccessiblitySpan.DATE.annotation -> SparkAccessiblitySpan.DATE
-        SparkAccessiblitySpan.DECIMAL.annotation -> SparkAccessiblitySpan.DECIMAL
-        SparkAccessiblitySpan.DIGITS.annotation -> SparkAccessiblitySpan.DIGITS
-        SparkAccessiblitySpan.ELECTRONIC.annotation -> SparkAccessiblitySpan.ELECTRONIC
-        SparkAccessiblitySpan.FRACTION.annotation -> SparkAccessiblitySpan.FRACTION
-        SparkAccessiblitySpan.MEASURE.annotation -> SparkAccessiblitySpan.MEASURE
-        SparkAccessiblitySpan.MONEY.annotation -> SparkAccessiblitySpan.MONEY
-        SparkAccessiblitySpan.ORDINAL.annotation -> SparkAccessiblitySpan.ORDINAL
-        SparkAccessiblitySpan.TELEPHONE.annotation -> SparkAccessiblitySpan.TELEPHONE
-        SparkAccessiblitySpan.TIME.annotation -> SparkAccessiblitySpan.TIME
-        SparkAccessiblitySpan.VERBATIM.annotation -> SparkAccessiblitySpan.VERBATIM
-        else -> SparkAccessiblitySpan.TEXT
+    public fun String.toAccessibilitySpan(): SparkAccessibilitySpan = when (this.lowercase()) {
+        SparkAccessibilitySpan.CARDINAL.annotation -> SparkAccessibilitySpan.CARDINAL
+        SparkAccessibilitySpan.DATE.annotation -> SparkAccessibilitySpan.DATE
+        SparkAccessibilitySpan.DECIMAL.annotation -> SparkAccessibilitySpan.DECIMAL
+        SparkAccessibilitySpan.DIGITS.annotation -> SparkAccessibilitySpan.DIGITS
+        SparkAccessibilitySpan.ELECTRONIC.annotation -> SparkAccessibilitySpan.ELECTRONIC
+        SparkAccessibilitySpan.FRACTION.annotation -> SparkAccessibilitySpan.FRACTION
+        SparkAccessibilitySpan.MEASURE.annotation -> SparkAccessibilitySpan.MEASURE
+        SparkAccessibilitySpan.MONEY.annotation -> SparkAccessibilitySpan.MONEY
+        SparkAccessibilitySpan.ORDINAL.annotation -> SparkAccessibilitySpan.ORDINAL
+        SparkAccessibilitySpan.TELEPHONE.annotation -> SparkAccessibilitySpan.TELEPHONE
+        SparkAccessibilitySpan.TIME.annotation -> SparkAccessibilitySpan.TIME
+        SparkAccessibilitySpan.VERBATIM.annotation -> SparkAccessibilitySpan.VERBATIM
+        else -> SparkAccessibilitySpan.TEXT
     }
 }

@@ -145,8 +145,8 @@
     <string name="accessibility_settings_fraction_input">18/12</string>
     <string name="accessibility_settings_fraction_result"><annotation tts="fraction">18/12</annotation></string>
     <string name="accessibility_settings_measure_type">measure</string>
-    <string name="accessibility_settings_measure_input">18m</string>
-    <string name="accessibility_settings_measure_result"><annotation tts="measure">18m</annotation></string>
+    <string name="accessibility_settings_measure_input">18kg 28L et 250km/h</string>
+    <string name="accessibility_settings_measure_result"><annotation tts="measure">18kg 28L et 250km/h</annotation></string>
     <string name="accessibility_settings_money_type">money</string>
     <string name="accessibility_settings_money_input">1 000 €</string>
     <string name="accessibility_settings_money_result"><annotation tts="money">1 000 €</annotation></string>
@@ -160,8 +160,8 @@
     <string name="accessibility_settings_text_input">This is a pretty text</string>
     <string name="accessibility_settings_text_result"><annotation tts="text">This is a pretty text</annotation></string>
     <string name="accessibility_settings_time_type">time</string>
-    <string name="accessibility_settings_time_input">18h 12min 30s</string>
-    <string name="accessibility_settings_time_result"><annotation tts="time">18h 12min 30s</annotation></string>
+    <string name="accessibility_settings_time_input">18:12</string>
+    <string name="accessibility_settings_time_result"><annotation tts="time">18:12</annotation></string>
     <string name="accessibility_settings_verbatim_type">verbatim</string>
     <string name="accessibility_settings_verbatim_input">L.G.T.M</string>
     <string name="accessibility_settings_verbatim_result"><annotation tts="verbatim">L.G.T.M</annotation></string>
