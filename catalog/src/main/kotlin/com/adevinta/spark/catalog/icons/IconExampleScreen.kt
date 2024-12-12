@@ -101,7 +101,7 @@ internal fun IconExampleScreen(icon: SparkIcon, name: String, isAnimated: Boolea
             onClick = { atEnd = !atEnd },
         ) {
             Text(text = name)
-            Icon(sparkIcon = icon, contentDescription = name)
+            Icon(sparkIcon = icon, contentDescription = name, atEnd = atEnd)
         }
         SwitchLabelled(
             checked = atEnd,

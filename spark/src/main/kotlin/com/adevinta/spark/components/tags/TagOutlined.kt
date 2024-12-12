@@ -39,6 +39,7 @@ import com.adevinta.spark.icons.SparkIcons
  * @param intent The [TagIntent] color to use
  * @param leadingIcon The spark icon shown at the start of the tag
  * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
+ * @param atEnd Whether the animated vector should be rendered at the end of all its animations.
  */
 @Composable
 public fun TagOutlined(
@@ -71,6 +72,7 @@ public fun TagOutlined(
  * @param intent The [TagIntent] color to use
  * @param leadingIcon The spark icon shown at the start of the tag
  * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
+ * @param atEnd Whether the animated vector should be rendered at the end of all its animations.
  */
 @Composable
 public fun TagOutlined(
@@ -103,6 +105,7 @@ public fun TagOutlined(
  * @param intent The [TagIntent] color to use
  * @param leadingIcon The spark icon shown at the start of the tag
  * @param tint The tint color for the icon. Use Color.Unspecified to not apply tint.
+ * @param atEnd Whether the animated vector should be rendered at the end of all its animations.
  */
 @Composable
 public fun TagOutlined(

@@ -64,6 +64,7 @@ import androidx.compose.material3.Icon as MaterialIcon
  * @param tint to be applied to [sparkIcon]. If no tint is provided, then a default is used.
  * @param size one of [IconSize] to be applied as size of the icon.
  * If no size is provided the default [IconSize.Medium] is used.
+ * @param atEnd Whether the animated vector should be rendered at the end of all its animations.
  */
 @Composable
 public fun Icon(
@@ -184,6 +185,12 @@ public fun Icon(
     )
 }
 
+/**
+ * A [Painter] that can be used to draw a [SparkIcon]. This will use the correct painter for whatever type the SparkIcon
+ * use.
+ * @param sparkIcon the icon to draw.
+ * @param atEnd Whether the animated vector should be rendered at the end of all its animations.
+ */
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
 public fun rememberSparkIconPainter(sparkIcon: SparkIcon, atEnd: Boolean = false): Painter = when (sparkIcon) {
