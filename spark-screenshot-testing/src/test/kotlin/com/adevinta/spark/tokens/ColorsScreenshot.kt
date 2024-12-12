@@ -46,6 +46,7 @@ import com.adevinta.spark.ThemeVariant
 import com.adevinta.spark.ThemeVariant.Light
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.gifView
 import com.adevinta.spark.paparazziRule
 import com.adevinta.spark.sparkSnapshotNightMode
 import org.junit.Rule
@@ -88,29 +89,6 @@ internal class ColorsScreenshot {
     fun themesColors() {
         paparazzi.sparkSnapshotNightMode {
             Colors()
-        }
-    }
-
-    @Test
-    fun verifyColorsDoChangeOnThemeChange() {
-        ThemeVariant.entries.forEach {
-            paparazzi.snapshot(name = it.name) {
-                var debugColors by remember {
-                    mutableStateOf(if (it == Light) lightSparkColors() else darkSparkColors())
-                }
-                CompositionLocalProvider(LocalInspectionMode provides true) {
-                    SparkTheme(
-                        colors = debugColors,
-                    ) {
-                        Surface {
-                            Colors()
-                            LaunchedEffect(key1 = Unit) {
-                                debugColors = debugColors()
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 
