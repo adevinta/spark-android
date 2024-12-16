@@ -42,37 +42,39 @@ public class StringResourceAnnotationDetector : ResourceXmlDetector() {
     override fun appliesTo(folderType: ResourceFolderType): Boolean = folderType == VALUES
     override fun getApplicableElements(): Collection<String> = listOf(TAG_ANNOTATION)
 
+    private class Entry(val context: XmlContext, val element: Element, val node: Node)
+
     override fun visitElement(context: XmlContext, element: Element) {
         element.attributes.forEach { attribute ->
-            ATTRIBUTE_HANDLERS.getValue(attribute.nodeName).invoke(context, attribute)
+            ATTRIBUTE_HANDLERS.getValue(attribute.nodeName).invoke(Entry(context, element, attribute))
         }
     }
 
     internal companion object {
         private const val TAG_ANNOTATION = "annotation"
 
-        private fun checkColor(context: XmlContext, node: Node) {
-            if (node.nodeValue in SUPPORTED_COLOR_VALUES) return
-            Incident(context)
+        private fun checkColor(it: Entry) {
+            if (it.node.nodeValue in SUPPORTED_COLOR_VALUES) return
+            Incident(it.context)
                 .issue(UNSUPPORTED_ANNOTATION_ATTRIBUTE_VALUE_ISSUE)
-                .at(node)
+                .at(it.node)
                 .message(
                     """
-                    ${node.nodeValue} is not a valid `color` value.
+                    ${it.node.nodeValue} is not a valid `color` value.
                     Supported values are $SUPPORTED_COLOR_VALUES.
                     """.trimIndent(),
                 )
                 .report()
         }
 
-        private fun checkTypography(context: XmlContext, node: Node) {
-            if (node.nodeValue in SUPPORTED_TYPOGRAPHY_VALUES) return
-            Incident(context)
+        private fun checkTypography(it: Entry) {
+            if (it.node.nodeValue in SUPPORTED_TYPOGRAPHY_VALUES) return
+            Incident(it.context)
                 .issue(UNSUPPORTED_ANNOTATION_ATTRIBUTE_VALUE_ISSUE)
-                .at(node)
+                .at(it.node)
                 .message(
                     """
-                    ${node.nodeValue} is not a valid `typography` value.
+                    ${it.node.nodeValue} is not a valid `typography` value.
                     Supported values are $SUPPORTED_TYPOGRAPHY_VALUES.
                 """,
                 )
@@ -80,15 +82,15 @@ public class StringResourceAnnotationDetector : ResourceXmlDetector() {
         }
 
         // TODO: Add detection for node emptiness
-        private fun checkVariable(context: XmlContext, node: Node) = Unit
+        private fun checkVariable(it: Entry) = Unit
 
-        private fun reportUnknown(context: XmlContext, node: Node) = Incident(context)
+        private fun reportUnknown(it: Entry) = Incident(it.context)
             .issue(UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE)
-            .at(node)
+            .at(it.node)
             .message(UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE.getBriefDescription(RAW))
             .report()
 
-        private val ATTRIBUTE_HANDLERS: Map<String, (XmlContext, Node) -> Unit> =
+        private val ATTRIBUTE_HANDLERS: Map<String, Entry.() -> Unit> =
             mapOf(
                 "color" to ::checkColor,
                 "typography" to ::checkTypography,
@@ -137,9 +139,9 @@ public class StringResourceAnnotationDetector : ResourceXmlDetector() {
             ),
         )
 
-        val UNKNOWN_ANNOTATION_ATTRIBUTE_VALUE_ISSUE = Issue.create(
-            id = "UnknownAnnotationAttributeValueDetector",
-            briefDescription = "Unknown annotation value",
+        val UNSUPPORTED_ANNOTATION_ATTRIBUTE_VALUE_ISSUE = Issue.create(
+            id = "UnsupportedAnnotationAttributeValueDetector",
+            briefDescription = "Unsupported annotation value",
             explanation = "This annotation attribute value is not supported and won't be parsed",
             category = CORRECTNESS,
             priority = 8,

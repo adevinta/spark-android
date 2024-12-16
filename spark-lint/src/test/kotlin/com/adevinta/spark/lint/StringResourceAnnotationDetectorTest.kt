@@ -22,7 +22,7 @@
 package com.adevinta.spark.lint
 
 import com.adevinta.spark.lint.StringResourceAnnotationDetector.Companion.UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE
-import com.adevinta.spark.lint.StringResourceAnnotationDetector.Companion.UNKNOWN_ANNOTATION_ATTRIBUTE_VALUE_ISSUE
+import com.adevinta.spark.lint.StringResourceAnnotationDetector.Companion.UNSUPPORTED_ANNOTATION_ATTRIBUTE_VALUE_ISSUE
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
 import com.android.tools.lint.checks.infrastructure.TestMode.Companion.SUPPRESSIBLE
 import com.android.tools.lint.detector.api.Detector
