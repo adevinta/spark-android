@@ -21,12 +21,16 @@
  */
 package com.adevinta.spark
 
+import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalInspectionMode
 import app.cash.paparazzi.Paparazzi
 import com.adevinta.spark.tokens.darkSparkColors
@@ -55,6 +59,34 @@ internal fun Paparazzi.sparkSnapshot(
             }
         }
     }
+}
+
+internal fun Paparazzi.gifView(
+    drawBackground: Boolean = true,
+    isDark: Boolean = false,
+    composable: @Composable () -> Unit,
+): View {
+    val view = ComposeView(context)
+    view.setContent {
+        // Behave like in Android Studio Preview renderer
+        CompositionLocalProvider(LocalInspectionMode provides true) {
+            SparkTheme(
+                colors = if (isDark) darkSparkColors() else lightSparkColors(),
+            ) {
+                // The first box acts as a shield from ComposeView which forces the first layout node
+                // to match it's size. This allows the content below to wrap as needed.
+                Box {
+                    // The second box adds a border and background so we can easily see layout bounds in screenshots
+                    Box(
+                        Modifier.background(if (drawBackground) SparkTheme.colors.surface else Color.Transparent),
+                    ) {
+                        composable()
+                    }
+                }
+            }
+        }
+    }
+    return view
 }
 
 /**
