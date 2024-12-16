@@ -22,7 +22,6 @@
 package com.adevinta.spark.catalog.examples
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -51,7 +50,7 @@ internal fun NavGraphBuilder.examplesDestination(
             components = components,
             contentPadding = contentPadding,
             onExampleSectionClick = {
-                navController.navigateToExampleSection(id = it)
+                navController.navigate(route = ExampleSection(componentId = id))
             },
         )
     }
@@ -65,7 +64,7 @@ internal fun NavGraphBuilder.examplesDestination(
             contentPadding = contentPadding,
             onExampleClick = { example ->
                 val exampleIndex = component.examples.indexOf(example)
-                navController.navigateToExampleShowcase(id = componentId, index = exampleIndex)
+                navController.navigate(route = ExampleShowcase(componentId = id, exampleIndex = exampleIndex))
             },
         )
     }
@@ -77,12 +76,4 @@ internal fun NavGraphBuilder.examplesDestination(
         val example = component.examples[exampleIndex]
         Example(example = example)
     }
-}
-
-private fun NavController.navigateToExampleSection(id: Int) {
-    navigate(route = ExampleSection(componentId = id))
-}
-
-private fun NavController.navigateToExampleShowcase(id: Int, index: Int) {
-    navigate(route = ExampleShowcase(componentId = id, exampleIndex = index))
 }

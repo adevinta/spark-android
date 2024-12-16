@@ -22,7 +22,6 @@
 package com.adevinta.spark.catalog.configurator
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -43,7 +42,9 @@ internal fun NavGraphBuilder.configuratorsDestination(
         ComponentsListScreen(
             components = components,
             contentPadding = contentPadding,
-            onConfiguratorClick = navController::navigateToConfiguratorShowcase,
+            onConfiguratorClick = { id ->
+                navController.navigate(route = ConfiguratorShowcase(componentId = id))
+            },
         )
     }
 
@@ -56,8 +57,4 @@ internal fun NavGraphBuilder.configuratorsDestination(
             configurator = requireNotNull(component.configurator),
         )
     }
-}
-
-private fun NavController.navigateToConfiguratorShowcase(id: Int) {
-    navigate(route = ConfiguratorShowcase(componentId = id))
 }

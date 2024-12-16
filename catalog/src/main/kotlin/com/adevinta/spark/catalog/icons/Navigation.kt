@@ -22,7 +22,6 @@
 package com.adevinta.spark.catalog.icons
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -42,7 +41,7 @@ internal fun NavGraphBuilder.iconsDemoDestination(
             contentPadding = contentPadding,
             onIconClick = { id, name, isAnimated ->
                 navController.navigate(
-                    route = IconShowcase(iconId = id, iconName = name, isIconAnimated = isAnimated)
+                    route = IconShowcase(iconId = id, iconName = name, isIconAnimated = isAnimated),
                 )
             },
         )
