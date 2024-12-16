@@ -19,11 +19,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@file:Suppress("UnstableApiUsage", "ktlint:standard:max-line-length")
-
 package com.adevinta.spark.lint
 
 import com.android.resources.ResourceFolderType
+import com.android.resources.ResourceFolderType.VALUES
 import com.android.tools.lint.detector.api.Category.Companion.CORRECTNESS
 import com.android.tools.lint.detector.api.Implementation
 import com.android.tools.lint.detector.api.Incident
@@ -31,67 +30,72 @@ import com.android.tools.lint.detector.api.Issue
 import com.android.tools.lint.detector.api.ResourceXmlDetector
 import com.android.tools.lint.detector.api.Scope
 import com.android.tools.lint.detector.api.Severity.ERROR
+import com.android.tools.lint.detector.api.Severity.WARNING
+import com.android.tools.lint.detector.api.TextFormat.RAW
 import com.android.tools.lint.detector.api.XmlContext
 import com.android.utils.forEach
 import org.w3c.dom.Element
 import org.w3c.dom.Node
 
-public class UnknownStringResourceAnnotationsDetector : ResourceXmlDetector() {
+public class StringResourceAnnotationDetector : ResourceXmlDetector() {
 
-    override fun appliesTo(folderType: ResourceFolderType): Boolean = folderType == ResourceFolderType.VALUES
-
+    override fun appliesTo(folderType: ResourceFolderType): Boolean = folderType == VALUES
     override fun getApplicableElements(): Collection<String> = listOf(TAG_ANNOTATION)
 
     override fun visitElement(context: XmlContext, element: Element) {
         element.attributes.forEach { attribute ->
-            when (attribute.nodeName) {
-                !in VALID_ANNOTATION_NAMES -> context.reportUnknownAnnotationNameIssue(attribute)
-                COLOR_ANNOTATION_NAME -> checkColorAnnotationValue(context, attribute)
-                TYPOGRAPHY_ANNOTATION_NAME -> checkTypographyAnnotationValue(context, attribute)
-            }
+            ATTRIBUTE_HANDLERS.getValue(attribute.nodeName).invoke(context, attribute)
         }
     }
-
-    private fun checkColorAnnotationValue(context: XmlContext, node: Node) {
-        if (node.nodeValue !in VALID_COLOR_ANNOTATION_VALUES) {
-            Incident(context)
-                .issue(UNKNOWN_ANNOTATION_VALUE_ISSUE)
-                .at(node)
-                .message(
-                    "${node.nodeValue} is not a valid value for annotation \"color\"" +
-                        "\nPossible values are $VALID_COLOR_ANNOTATION_VALUES",
-                )
-                .report()
-        }
-    }
-
-    private fun checkTypographyAnnotationValue(context: XmlContext, node: Node) {
-        if (node.nodeValue !in VALID_TYPOGRAPHY_ANNOTATION_VALUES) {
-            Incident(context)
-                .issue(UNKNOWN_ANNOTATION_VALUE_ISSUE)
-                .at(node)
-                .message(
-                    "${node.nodeValue} is not a valid value for annotation \"typography\"" +
-                        "\nPossible values are $VALID_TYPOGRAPHY_ANNOTATION_VALUES",
-                )
-                .report()
-        }
-    }
-
-    private fun XmlContext.reportUnknownAnnotationNameIssue(node: Node) =
-        Incident(this)
-            .issue(UNKNOWN_ANNOTATION_NAME_ISSUE)
-            .at(node)
-            .message("Unknown annotation name")
-            .report()
 
     internal companion object {
         private const val TAG_ANNOTATION = "annotation"
-        private const val COLOR_ANNOTATION_NAME = "color"
-        private const val TYPOGRAPHY_ANNOTATION_NAME = "typography"
 
-        private val VALID_ANNOTATION_NAMES = listOf(COLOR_ANNOTATION_NAME, TYPOGRAPHY_ANNOTATION_NAME)
-        private val VALID_COLOR_ANNOTATION_VALUES = listOf(
+        private fun checkColor(context: XmlContext, node: Node) {
+            if (node.nodeValue in SUPPORTED_COLOR_VALUES) return
+            Incident(context)
+                .issue(UNKNOWN_ANNOTATION_ATTRIBUTE_VALUE_ISSUE)
+                .at(node)
+                .message(
+                    """
+                    ${node.nodeValue} is not a valid `color` value.
+                    Supported values are $SUPPORTED_COLOR_VALUES.
+                    """.trimIndent(),
+                )
+                .report()
+        }
+
+        private fun checkTypography(context: XmlContext, node: Node) {
+            if (node.nodeValue in SUPPORTED_TYPOGRAPHY_VALUES) return
+            Incident(context)
+                .issue(UNKNOWN_ANNOTATION_ATTRIBUTE_VALUE_ISSUE)
+                .at(node)
+                .message(
+                    """
+                    ${node.nodeValue} is not a valid `typography` value.
+                    Supported values are $SUPPORTED_TYPOGRAPHY_VALUES.
+                """,
+                )
+                .report()
+        }
+
+        // TODO: Add detection for node emptiness
+        private fun checkVariable(context: XmlContext, node: Node) = Unit
+
+        private fun reportUnknown(context: XmlContext, node: Node) = Incident(context)
+            .issue(UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE)
+            .at(node)
+            .message(UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE.getBriefDescription(RAW))
+            .report()
+
+        private val ATTRIBUTE_HANDLERS: Map<String, (XmlContext, Node) -> Unit> =
+            mapOf(
+                "color" to ::checkColor,
+                "typography" to ::checkTypography,
+                "variable" to ::checkVariable,
+            ).withDefault { ::reportUnknown }
+
+        private val SUPPORTED_COLOR_VALUES = listOf(
             "main",
             "support",
             "success",
@@ -101,7 +105,8 @@ public class UnknownStringResourceAnnotationsDetector : ResourceXmlDetector() {
             "neutral",
             "accent",
         )
-        private val VALID_TYPOGRAPHY_ANNOTATION_VALUES = listOf(
+
+        private val SUPPORTED_TYPOGRAPHY_VALUES = listOf(
             "display1",
             "display2",
             "display3",
@@ -116,31 +121,31 @@ public class UnknownStringResourceAnnotationsDetector : ResourceXmlDetector() {
             "callout",
         )
 
-        val UNKNOWN_ANNOTATION_NAME_ISSUE = Issue.create(
-            id = "UnknownStringResourceAnnotationsDetector",
+        val UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE = Issue.create(
+            id = "UnknownAnnotationAttributeNameDetector",
             briefDescription = "Unknown annotation name",
-            explanation = "This annotation name is not supported and won't be parsed. " +
-                "Supported names are $VALID_ANNOTATION_NAMES",
+            explanation = """
+                This annotation attribute name is not supported and won't be parsed.
+                Supported names are ${ATTRIBUTE_HANDLERS.keys}.
+            """.trimIndent(),
             category = CORRECTNESS,
-            priority = 8,
-            severity = ERROR,
+            priority = 5,
+            severity = WARNING,
             implementation = Implementation(
-                UnknownStringResourceAnnotationsDetector::class.java,
-                Scope.ALL_RESOURCES_SCOPE,
+                StringResourceAnnotationDetector::class.java,
                 Scope.RESOURCE_FILE_SCOPE,
             ),
         )
 
-        val UNKNOWN_ANNOTATION_VALUE_ISSUE = Issue.create(
-            id = "UnknownStringResourceAnnotationsDetector",
+        val UNKNOWN_ANNOTATION_ATTRIBUTE_VALUE_ISSUE = Issue.create(
+            id = "UnknownAnnotationAttributeValueDetector",
             briefDescription = "Unknown annotation value",
-            explanation = "This annotation value is not supported and won't be parsed",
+            explanation = "This annotation attribute value is not supported and won't be parsed",
             category = CORRECTNESS,
             priority = 8,
             severity = ERROR,
             implementation = Implementation(
-                UnknownStringResourceAnnotationsDetector::class.java,
-                Scope.ALL_RESOURCES_SCOPE,
+                StringResourceAnnotationDetector::class.java,
                 Scope.RESOURCE_FILE_SCOPE,
             ),
         )
