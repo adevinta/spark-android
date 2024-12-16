@@ -103,6 +103,7 @@ public class StringResourceAnnotationDetector : ResourceXmlDetector() {
                 "variable" to ::checkVariable,
             ).withDefault { ::reportUnknown }
 
+        // NOTE: It would be great to have these values come from `:spark` directly (see SparkStringAnnotations), but we would need to add extra dependencies.
         private val SUPPORTED_COLOR_VALUES = listOf(
             "main",
             "support",
