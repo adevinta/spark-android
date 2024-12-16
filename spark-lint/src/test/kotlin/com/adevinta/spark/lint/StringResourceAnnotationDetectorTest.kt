@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.lint
 
+import com.adevinta.spark.lint.StringResourceAnnotationDetector.Companion.EMPTY_ANNOTATION_VARIABLE_ISSUE
 import com.adevinta.spark.lint.StringResourceAnnotationDetector.Companion.UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE
 import com.adevinta.spark.lint.StringResourceAnnotationDetector.Companion.UNSUPPORTED_ANNOTATION_ATTRIBUTE_VALUE_ISSUE
 import com.android.tools.lint.checks.infrastructure.LintDetectorTest
@@ -38,6 +39,7 @@ public class StringResourceAnnotationDetectorTest : LintDetectorTest() {
     override fun getIssues(): List<Issue> = listOf(
         UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE,
         UNSUPPORTED_ANNOTATION_ATTRIBUTE_VALUE_ISSUE,
+        EMPTY_ANNOTATION_VARIABLE_ISSUE,
     )
 
     @Test
@@ -120,5 +122,35 @@ public class StringResourceAnnotationDetectorTest : LintDetectorTest() {
         )
         .run()
         .expectClean()
+        .cleanup()
+
+    @Test
+    public fun `annotation must not be empty when a variable is used`() = lint()
+        .files(
+            xml(
+                "res/values/strings.xml",
+                """
+                    <resources>
+                        <string name="valid_space"><annotation variable="foo"> </annotation></string>
+                        <string name="valid_other"><annotation variable="foo">foo</annotation></string>
+                        <string name="invalid"><annotation variable="foo"></annotation></string>
+                        <string name="invalid_collapsed"><annotation variable="foo"/></string>
+                    </resources>
+                """,
+            ),
+        )
+        .skipTestModes(SUPPRESSIBLE)
+        .run()
+        .expect(
+            """
+            res/values/strings.xml:5: Error: Empty annotation variable [EmptyAnnotationValueDetector]
+                                    <string name="invalid"><annotation variable="foo"></annotation></string>
+                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            res/values/strings.xml:6: Error: Empty annotation variable [EmptyAnnotationValueDetector]
+                                    <string name="invalid_collapsed"><annotation variable="foo"/></string>
+                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            2 errors, 0 warnings
+            """.trimIndent(),
+        )
         .cleanup()
 }

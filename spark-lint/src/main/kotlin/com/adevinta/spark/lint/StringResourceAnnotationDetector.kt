@@ -81,8 +81,14 @@ public class StringResourceAnnotationDetector : ResourceXmlDetector() {
                 .report()
         }
 
-        // TODO: Add detection for node emptiness
-        private fun checkVariable(it: Entry) = Unit
+        private fun checkVariable(it: Entry) {
+            if (it.element.textContent.isNotEmpty()) return
+            Incident(it.context)
+                .issue(EMPTY_ANNOTATION_VARIABLE_ISSUE)
+                .at(it.element)
+                .message(EMPTY_ANNOTATION_VARIABLE_ISSUE.getBriefDescription(RAW))
+                .report()
+        }
 
         private fun reportUnknown(it: Entry) = Incident(it.context)
             .issue(UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE)
@@ -143,6 +149,23 @@ public class StringResourceAnnotationDetector : ResourceXmlDetector() {
             id = "UnsupportedAnnotationAttributeValueDetector",
             briefDescription = "Unsupported annotation value",
             explanation = "This annotation attribute value is not supported and won't be parsed",
+            category = CORRECTNESS,
+            priority = 8,
+            severity = ERROR,
+            implementation = Implementation(
+                StringResourceAnnotationDetector::class.java,
+                Scope.RESOURCE_FILE_SCOPE,
+            ),
+        )
+
+        val EMPTY_ANNOTATION_VARIABLE_ISSUE = Issue.create(
+            id = "EmptyAnnotationValueDetector",
+            briefDescription = "Empty annotation variable",
+            explanation =
+            """
+                Empty annotation variable will prevent the variable from being injected.
+                Some content (like a space character) needs to be added.
+            """.trimIndent(),
             category = CORRECTNESS,
             priority = 8,
             severity = ERROR,
