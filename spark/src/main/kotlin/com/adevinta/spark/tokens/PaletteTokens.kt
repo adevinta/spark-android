@@ -51,7 +51,6 @@ internal object PaletteTokens {
 // endregion
 
     // region Blueberry colors
-    internal val Blueberry1000 = Color(0xFF010509)
     internal val Blueberry900 = Color(0xFF152233)
     internal val Blueberry800 = Color(0xFF094171)
     internal val Blueberry700 = Color(0xFF0C5291)
@@ -65,16 +64,16 @@ internal object PaletteTokens {
 // endregion
 
     // region Avocado colors
-    internal val Avocado900 = Color(0xFF101E10)
-    internal val Avocado800 = Color(0xFF1F3D20)
-    internal val Avocado700 = Color(0xFF2F5B30)
-    internal val Avocado600 = Color(0xFF3E7A40)
-    internal val Avocado500 = Color(0xFF4E9850)
-    internal val Avocado400 = Color(0xFF71AD73)
-    internal val Avocado300 = Color(0xFF95C196)
-    internal val Avocado200 = Color(0xFFB8D6B9)
-    internal val Avocado100 = Color(0xFFDCEADC)
-    internal val Avocado50 = Color(0xFFEDF5EE)
+    internal val Avocado900 = Color(0xFF0C291B)
+    internal val Avocado800 = Color(0xFF14422B)
+    internal val Avocado700 = Color(0xFF1D6340)
+    internal val Avocado600 = Color(0xFF278456)
+    internal val Avocado500 = Color(0xFF31A56B)
+    internal val Avocado400 = Color(0xFF64BC90)
+    internal val Avocado300 = Color(0xFF8ECDAE)
+    internal val Avocado200 = Color(0xFFB7DFCB)
+    internal val Avocado100 = Color(0xFFE0F2E9)
+    internal val Avocado50 = Color(0xFFF5FBF8)
 // endregion
 
     // region Cherry colors

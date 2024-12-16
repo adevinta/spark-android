@@ -58,30 +58,29 @@ import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.PaletteTokens.Avocado100
-import com.adevinta.spark.tokens.PaletteTokens.Avocado400
+import com.adevinta.spark.tokens.PaletteTokens.Avocado300
 import com.adevinta.spark.tokens.PaletteTokens.Avocado50
-import com.adevinta.spark.tokens.PaletteTokens.Avocado600
 import com.adevinta.spark.tokens.PaletteTokens.Avocado700
-import com.adevinta.spark.tokens.PaletteTokens.Avocado800
+import com.adevinta.spark.tokens.PaletteTokens.Avocado900
 import com.adevinta.spark.tokens.PaletteTokens.Banana100
-import com.adevinta.spark.tokens.PaletteTokens.Banana400
+import com.adevinta.spark.tokens.PaletteTokens.Banana300
 import com.adevinta.spark.tokens.PaletteTokens.Banana50
 import com.adevinta.spark.tokens.PaletteTokens.Banana500
-import com.adevinta.spark.tokens.PaletteTokens.Banana700
 import com.adevinta.spark.tokens.PaletteTokens.Banana800
+import com.adevinta.spark.tokens.PaletteTokens.Banana900
 import com.adevinta.spark.tokens.PaletteTokens.Blueberry100
 import com.adevinta.spark.tokens.PaletteTokens.Blueberry200
+import com.adevinta.spark.tokens.PaletteTokens.Blueberry300
 import com.adevinta.spark.tokens.PaletteTokens.Blueberry50
-import com.adevinta.spark.tokens.PaletteTokens.Blueberry500
 import com.adevinta.spark.tokens.PaletteTokens.Blueberry700
 import com.adevinta.spark.tokens.PaletteTokens.Blueberry800
 import com.adevinta.spark.tokens.PaletteTokens.Blueberry900
 import com.adevinta.spark.tokens.PaletteTokens.Cherry100
-import com.adevinta.spark.tokens.PaletteTokens.Cherry400
+import com.adevinta.spark.tokens.PaletteTokens.Cherry300
 import com.adevinta.spark.tokens.PaletteTokens.Cherry50
-import com.adevinta.spark.tokens.PaletteTokens.Cherry500
+import com.adevinta.spark.tokens.PaletteTokens.Cherry600
 import com.adevinta.spark.tokens.PaletteTokens.Cherry700
-import com.adevinta.spark.tokens.PaletteTokens.Cherry800
+import com.adevinta.spark.tokens.PaletteTokens.Cherry900
 import com.adevinta.spark.tokens.PaletteTokens.Clementin100
 import com.adevinta.spark.tokens.PaletteTokens.Clementin300
 import com.adevinta.spark.tokens.PaletteTokens.Clementin400
@@ -89,20 +88,23 @@ import com.adevinta.spark.tokens.PaletteTokens.Clementin50
 import com.adevinta.spark.tokens.PaletteTokens.Clementin500
 import com.adevinta.spark.tokens.PaletteTokens.Clementin600
 import com.adevinta.spark.tokens.PaletteTokens.Clementin700
+import com.adevinta.spark.tokens.PaletteTokens.Clementin900
 import com.adevinta.spark.tokens.PaletteTokens.NightShade100
 import com.adevinta.spark.tokens.PaletteTokens.NightShade300
 import com.adevinta.spark.tokens.PaletteTokens.NightShade400
 import com.adevinta.spark.tokens.PaletteTokens.NightShade50
-import com.adevinta.spark.tokens.PaletteTokens.NightShade600
+import com.adevinta.spark.tokens.PaletteTokens.NightShade500
 import com.adevinta.spark.tokens.PaletteTokens.NightShade700
 import com.adevinta.spark.tokens.PaletteTokens.NightShade800
 import com.adevinta.spark.tokens.PaletteTokens.NightShade900
 import com.adevinta.spark.tokens.PaletteTokens.Plum100
 import com.adevinta.spark.tokens.PaletteTokens.Plum200
 import com.adevinta.spark.tokens.PaletteTokens.Plum300
+import com.adevinta.spark.tokens.PaletteTokens.Plum50
 import com.adevinta.spark.tokens.PaletteTokens.Plum500
 import com.adevinta.spark.tokens.PaletteTokens.Plum700
 import com.adevinta.spark.tokens.PaletteTokens.Plum800
+import com.adevinta.spark.tokens.PaletteTokens.Plum900
 import kotlin.math.ln
 import kotlin.reflect.KProperty0
 
@@ -129,23 +131,23 @@ public fun lightSparkColors(
     onSupportContainer: Color = Blueberry900,
     supportVariant: Color = Blueberry700,
     onSupportVariant: Color = Color.White,
-    success: Color = Avocado600,
+    success: Color = Avocado700,
     onSuccess: Color = Color.White,
     successContainer: Color = Avocado100,
     onSuccessContainer: Color = Avocado700,
     alert: Color = Banana500,
     onAlert: Color = NightShade900,
     alertContainer: Color = Banana100,
-    onAlertContainer: Color = Banana700,
-    error: Color = Cherry500,
+    onAlertContainer: Color = Banana800,
+    error: Color = Cherry600,
     onError: Color = Color.White,
     errorContainer: Color = Cherry100,
     onErrorContainer: Color = Cherry700,
-    info: Color = Blueberry500,
+    info: Color = Blueberry700,
     onInfo: Color = Color.White,
     infoContainer: Color = Blueberry200,
     onInfoContainer: Color = Blueberry700,
-    neutral: Color = NightShade600,
+    neutral: Color = NightShade700,
     onNeutral: Color = Color.White,
     neutralContainer: Color = NightShade100,
     onNeutralContainer: Color = NightShade700,
@@ -229,58 +231,58 @@ public fun lightSparkColors(
 
 public fun darkSparkColors(
     accent: Color = Plum200,
-    onAccent: Color = NightShade900,
+    onAccent: Color = Plum900,
     accentContainer: Color = Plum700,
-    onAccentContainer: Color = Color.White,
+    onAccentContainer: Color = Plum50,
     accentVariant: Color = Plum300,
-    onAccentVariant: Color = NightShade900,
-    basic: Color = Blueberry100,
-    onBasic: Color = NightShade900,
+    onAccentVariant: Color = Plum900,
+    basic: Color = Blueberry200,
+    onBasic: Color = Blueberry900,
     basicContainer: Color = Blueberry800,
     onBasicContainer: Color = Blueberry50,
     main: Color = Clementin400,
-    onMain: Color = NightShade900,
+    onMain: Color = Clementin900,
     mainContainer: Color = Clementin700,
     onMainContainer: Color = Clementin50,
     mainVariant: Color = Clementin300,
-    onMainVariant: Color = NightShade900,
-    support: Color = Blueberry100,
+    onMainVariant: Color = Clementin900,
+    support: Color = Blueberry200,
     onSupport: Color = Blueberry900,
     supportContainer: Color = Blueberry800,
     onSupportContainer: Color = Blueberry50,
-    supportVariant: Color = Blueberry50,
+    supportVariant: Color = Blueberry100,
     onSupportVariant: Color = Blueberry900,
-    success: Color = Avocado400,
-    onSuccess: Color = NightShade900,
-    successContainer: Color = Avocado800,
+    success: Color = Avocado300,
+    onSuccess: Color = Avocado900,
+    successContainer: Color = Avocado700,
     onSuccessContainer: Color = Avocado50,
-    alert: Color = Banana400,
-    onAlert: Color = NightShade900,
+    alert: Color = Banana300,
+    onAlert: Color = Banana900,
     alertContainer: Color = Banana800,
     onAlertContainer: Color = Banana50,
-    error: Color = Cherry400,
-    onError: Color = NightShade900,
-    errorContainer: Color = Cherry800,
+    error: Color = Cherry300,
+    onError: Color = Cherry900,
+    errorContainer: Color = Cherry700,
     onErrorContainer: Color = Cherry50,
-    info: Color = Blueberry200,
-    onInfo: Color = NightShade900,
-    infoContainer: Color = Blueberry800,
+    info: Color = Blueberry300,
+    onInfo: Color = Blueberry900,
+    infoContainer: Color = Blueberry700,
     onInfoContainer: Color = Blueberry50,
     neutral: Color = NightShade300,
     onNeutral: Color = NightShade900,
-    neutralContainer: Color = NightShade800,
+    neutralContainer: Color = NightShade700,
     onNeutralContainer: Color = NightShade50,
-    background: Color = Blueberry900,
-    onBackground: Color = Color.White,
-    backgroundVariant: Color = NightShade900,
-    onBackgroundVariant: Color = Color.White,
-    surface: Color = Blueberry900,
-    onSurface: Color = Color.White,
+    background: Color = NightShade900,
+    onBackground: Color = NightShade50,
+    backgroundVariant: Color = Color.Black,
+    onBackgroundVariant: Color = NightShade50,
+    surface: Color = NightShade900,
+    onSurface: Color = NightShade50,
     surfaceInverse: Color = NightShade50,
-    onSurfaceInverse: Color = NightShade700,
+    onSurfaceInverse: Color = NightShade800,
     surfaceTint: Color = Clementin400,
-    outline: Color = NightShade600,
-    outlineHigh: Color = NightShade50,
+    outline: Color = NightShade500,
+    outlineHigh: Color = NightShade100,
     scrim: Color = Color.Black,
     dimContent1: Float = .72f,
     dimContent2: Float = .56f,

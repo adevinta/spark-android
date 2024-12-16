@@ -26,8 +26,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
@@ -114,8 +112,23 @@ internal fun Paparazzi.sparkSnapshotNightMode(
     drawBackground: Boolean = true,
     composable: @Composable () -> Unit,
 ) {
+    var lightTextThrowable: Throwable? = null
     ThemeVariant.entries.forEach {
-        sparkSnapshot(name.orEmpty() + "_${it.name}", drawBackground, it == ThemeVariant.Dark, composable)
+        try {
+            sparkSnapshot(
+                name = name.orEmpty() + "_${it.name}",
+                drawBackground = drawBackground,
+                isDark = it == ThemeVariant.Dark,
+                composable = composable,
+            )
+        } catch (e: Throwable) {
+            // Prioritize the light exception over the dark one since we will still get the paparazzi delta image
+            // for the dark one
+            if (it == ThemeVariant.Dark) throw lightTextThrowable ?: e
+
+            // Skip light exception otherwise we loose the information that also the dark one has failed.
+            lightTextThrowable = e
+        }
     }
 }
 
