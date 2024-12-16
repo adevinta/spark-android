@@ -54,7 +54,7 @@ public class StringResourceAnnotationDetector : ResourceXmlDetector() {
         private fun checkColor(context: XmlContext, node: Node) {
             if (node.nodeValue in SUPPORTED_COLOR_VALUES) return
             Incident(context)
-                .issue(UNKNOWN_ANNOTATION_ATTRIBUTE_VALUE_ISSUE)
+                .issue(UNSUPPORTED_ANNOTATION_ATTRIBUTE_VALUE_ISSUE)
                 .at(node)
                 .message(
                     """
@@ -68,7 +68,7 @@ public class StringResourceAnnotationDetector : ResourceXmlDetector() {
         private fun checkTypography(context: XmlContext, node: Node) {
             if (node.nodeValue in SUPPORTED_TYPOGRAPHY_VALUES) return
             Incident(context)
-                .issue(UNKNOWN_ANNOTATION_ATTRIBUTE_VALUE_ISSUE)
+                .issue(UNSUPPORTED_ANNOTATION_ATTRIBUTE_VALUE_ISSUE)
                 .at(node)
                 .message(
                     """

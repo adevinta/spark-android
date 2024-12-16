@@ -37,7 +37,7 @@ public class StringResourceAnnotationDetectorTest : LintDetectorTest() {
     override fun getDetector(): Detector = StringResourceAnnotationDetector()
     override fun getIssues(): List<Issue> = listOf(
         UNKNOWN_ANNOTATION_ATTRIBUTE_NAME_ISSUE,
-        UNKNOWN_ANNOTATION_ATTRIBUTE_VALUE_ISSUE,
+        UNSUPPORTED_ANNOTATION_ATTRIBUTE_VALUE_ISSUE,
     )
 
     @Test
@@ -79,11 +79,11 @@ public class StringResourceAnnotationDetectorTest : LintDetectorTest() {
         .expect(
             """
                 res/values/strings.xml:3: Error: unknown is not a valid color value.
-                Supported values are [main, support, success, alert, error, info, neutral, accent]. [UnknownAnnotationAttributeValueDetector]
+                Supported values are [main, support, success, alert, error, info, neutral, accent]. [UnsupportedAnnotationAttributeValueDetector]
                                         <string name="example"><annotation color="unknown" typography="unknown">Example</annotation></string>
                                                                            ~~~~~~~~~~~~~~~
                 res/values/strings.xml:3: Error: unknown is not a valid typography value.
-                Supported values are [display1, display2, display3, headline1, headline2, subhead, large, body1, body2, caption, small, callout]. [UnknownAnnotationAttributeValueDetector]
+                Supported values are [display1, display2, display3, headline1, headline2, subhead, large, body1, body2, caption, small, callout]. [UnsupportedAnnotationAttributeValueDetector]
                                         <string name="example"><annotation color="unknown" typography="unknown">Example</annotation></string>
                                                                                            ~~~~~~~~~~~~~~~~~~~~
                 2 errors, 0 warnings
