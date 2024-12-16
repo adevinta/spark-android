@@ -78,6 +78,7 @@ internal fun BaseSparkButton(
     isLoading: Boolean = false,
     contentPadding: PaddingValues = SparkButtonDefaults.buttonContentPadding(size),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    atEnd: Boolean = false,
     content: @Composable RowScope.() -> Unit,
 ) {
     Button(
@@ -112,6 +113,7 @@ internal fun BaseSparkButton(
                     .size(SparkButtonDefaults.IconSize)
                     .testTag("buttonIcon"),
                 contentDescription = null, // button text should be enough for context
+                atEnd = atEnd,
             )
             Spacer(Modifier.width(SparkButtonDefaults.IconSpacing))
         }
@@ -129,6 +131,7 @@ internal fun BaseSparkButton(
                     .size(SparkButtonDefaults.IconSize)
                     .testTag("buttonIcon"),
                 contentDescription = null, // button text should be enough for context
+                atEnd = atEnd,
             )
         }
     }
@@ -150,6 +153,7 @@ internal fun SparkButton(
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    atEnd: Boolean = false,
 ) {
     BaseSparkButton(
         onClick = onClick,
@@ -164,6 +168,7 @@ internal fun SparkButton(
         iconSide = iconSide,
         isLoading = isLoading,
         interactionSource = interactionSource,
+        atEnd = atEnd,
     ) {
         Text(text = text)
     }
@@ -185,6 +190,7 @@ internal fun SparkButton(
     iconSide: IconSide = IconSide.START,
     isLoading: Boolean = false,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    atEnd: Boolean = false,
 ) {
     BaseSparkButton(
         onClick = onClick,
@@ -199,6 +205,7 @@ internal fun SparkButton(
         iconSide = iconSide,
         isLoading = isLoading,
         interactionSource = interactionSource,
+        atEnd = atEnd,
     ) {
         Text(text = text)
     }
