@@ -280,7 +280,7 @@ public fun darkSparkColors(
     onSurface: Color = NightShade50,
     surfaceInverse: Color = NightShade50,
     onSurfaceInverse: Color = NightShade800,
-    surfaceTint: Color = Clementin400,
+    surfaceTint: Color = Color.White,
     outline: Color = NightShade500,
     outlineHigh: Color = NightShade100,
     scrim: Color = Color.Black,
