@@ -61,7 +61,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
-import androidx.navigation.NavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.util.splitCamelWithSpaces
@@ -86,7 +85,7 @@ import com.adevinta.spark.icons.R as IconR
 public fun IconsScreen(
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
-    navController: NavController,
+    onIconClick: (id: Int, name: String, isAnimated: Boolean) -> Unit,
 ) {
     val context = LocalContext.current
     val focusManager = LocalFocusManager.current
@@ -189,9 +188,7 @@ public fun IconsScreen(
                         .combinedClickable(
                             onLongClick = { copyToClipboard(context, iconName) },
                             onClick = {
-                                navController.navigate(
-                                    route = "$IconDemoRoute/$drawableRes/$iconName/$isAnimated",
-                                )
+                                onIconClick(drawableRes, iconName, isAnimated)
                             },
                         )
                         .padding(8.dp)

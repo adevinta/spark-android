@@ -39,7 +39,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkTheme
@@ -48,6 +47,10 @@ import com.adevinta.spark.catalog.examples.component.ComponentItem
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
+import kotlinx.serialization.Serializable
+
+@Serializable
+public object ConfiguratorsList
 
 @Composable
 public fun ConfiguratorComponentsScreen(
@@ -60,9 +63,9 @@ public fun ConfiguratorComponentsScreen(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = ConfiguratorRoute,
+        startDestination = ConfiguratorsList,
         builder = {
-            navGraph(
+            configuratorsDestination(
                 navController = navController,
                 contentPadding = contentPadding,
                 components = components,
@@ -74,8 +77,8 @@ public fun ConfiguratorComponentsScreen(
 @Composable
 internal fun ComponentsListScreen(
     components: List<Component>,
-    navController: NavController,
     contentPadding: PaddingValues,
+    onConfiguratorClick: (Int) -> Unit,
 ) {
     val configuratorsComponents by remember(components) {
         mutableStateOf(components.filter { it.configurator != null })
@@ -130,8 +133,7 @@ internal fun ComponentsListScreen(
                     showExampleCount = false,
                     onClick = {
                         val componentId = component.id
-                        val route = "$ConfiguratorRoute/$componentId"
-                        navController.navigate(route)
+                        onConfiguratorClick(componentId)
                     },
                 )
             },
