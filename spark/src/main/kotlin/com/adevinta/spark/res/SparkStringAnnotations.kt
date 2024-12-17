@@ -84,4 +84,23 @@ public object SparkStringAnnotations {
             Log.d("StringResources", "Spark typography annotation : $this is not supported")
         }
     }?.toSpanStyle()
+
+    /**
+     * Given a string representing an annotation value of a accessibility span, returns the corresponding [SparkAccessibilitySpan].
+     */
+    public fun String.toAccessibilitySpan(): SparkAccessibilitySpan = when (this.lowercase()) {
+        SparkAccessibilitySpan.CARDINAL.annotation -> SparkAccessibilitySpan.CARDINAL
+        SparkAccessibilitySpan.DATE.annotation -> SparkAccessibilitySpan.DATE
+        SparkAccessibilitySpan.DECIMAL.annotation -> SparkAccessibilitySpan.DECIMAL
+        SparkAccessibilitySpan.DIGITS.annotation -> SparkAccessibilitySpan.DIGITS
+        SparkAccessibilitySpan.ELECTRONIC.annotation -> SparkAccessibilitySpan.ELECTRONIC
+        SparkAccessibilitySpan.FRACTION.annotation -> SparkAccessibilitySpan.FRACTION
+        SparkAccessibilitySpan.MEASURE.annotation -> SparkAccessibilitySpan.MEASURE
+        SparkAccessibilitySpan.MONEY.annotation -> SparkAccessibilitySpan.MONEY
+        SparkAccessibilitySpan.ORDINAL.annotation -> SparkAccessibilitySpan.ORDINAL
+        SparkAccessibilitySpan.TELEPHONE.annotation -> SparkAccessibilitySpan.TELEPHONE
+        SparkAccessibilitySpan.TIME.annotation -> SparkAccessibilitySpan.TIME
+        SparkAccessibilitySpan.VERBATIM.annotation -> SparkAccessibilitySpan.VERBATIM
+        else -> SparkAccessibilitySpan.TEXT
+    }
 }
