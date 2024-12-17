@@ -49,7 +49,7 @@ internal fun NavGraphBuilder.examplesDestination(
         ComponentsListScreen(
             components = components,
             contentPadding = contentPadding,
-            onExampleSectionClick = {
+            onExampleSectionClick = { id ->
                 navController.navigate(route = ExampleSection(componentId = id))
             },
         )
@@ -64,7 +64,7 @@ internal fun NavGraphBuilder.examplesDestination(
             contentPadding = contentPadding,
             onExampleClick = { example ->
                 val exampleIndex = component.examples.indexOf(example)
-                navController.navigate(route = ExampleShowcase(componentId = id, exampleIndex = exampleIndex))
+                navController.navigate(route = ExampleShowcase(componentId = componentId, exampleIndex = exampleIndex))
             },
         )
     }
