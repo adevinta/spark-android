@@ -24,12 +24,12 @@ package com.adevinta.spark.catalog.icons
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.adevinta.spark.icons.SparkIcon
+import kotlinx.serialization.Serializable
+
+@Serializable
+public object IconsList
 
 @Composable
 public fun IconDemoScreen(
@@ -43,39 +43,10 @@ public fun IconDemoScreen(
         navController = navController,
         startDestination = IconsList,
         builder = {
-            composable(route = IconsList) {
-                IconsScreen(
-                    navController = navController,
-                    contentPadding = contentPadding,
-                )
-            }
-            composable(
-                route = "$IconDemoRoute/{$IconIdArgName}/{$IconNameArgName}/{$IconAnimatedArgName}",
-                arguments = listOf(
-                    navArgument(IconIdArgName) { type = NavType.IntType },
-                    navArgument(IconNameArgName) { type = NavType.StringType },
-                    navArgument(IconAnimatedArgName) { type = NavType.BoolType },
-                ),
-            ) { navBackStackEntry ->
-                val arguments = requireNotNull(navBackStackEntry.arguments) { "No arguments" }
-                val isAnimated = arguments.getBoolean(IconAnimatedArgName)
-                val icon = if (isAnimated) {
-                    SparkIcon.AnimatedDrawableRes(arguments.getInt(IconIdArgName))
-                } else {
-                    SparkIcon.DrawableRes(arguments.getInt(IconIdArgName))
-                }
-                IconExampleScreen(
-                    icon = icon,
-                    name = requireNotNull(arguments.getString(IconNameArgName)) { "No name provided for the Icon" },
-                    isAnimated = isAnimated,
-                )
-            }
+            iconsDemoDestination(
+                navController = navController,
+                contentPadding = contentPadding,
+            )
         },
     )
 }
-
-internal const val IconsList = "icons"
-internal const val IconDemoRoute = "iconDemo"
-internal const val IconIdArgName = "iconId"
-internal const val IconNameArgName = "iconName"
-internal const val IconAnimatedArgName = "iconAnimated"

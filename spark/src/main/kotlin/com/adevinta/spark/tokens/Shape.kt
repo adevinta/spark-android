@@ -72,13 +72,13 @@ import androidx.compose.material3.Shapes as Material3Shapes
  */
 @Immutable
 public data class SparkShapes(
-    val none: CornerBasedShape = RoundedCornerShape(0.dp),
-    val extraSmall: CornerBasedShape = RoundedCornerShape(4.0.dp),
-    val small: CornerBasedShape = RoundedCornerShape(8.0.dp),
-    val medium: CornerBasedShape = RoundedCornerShape(12.0.dp),
-    val large: CornerBasedShape = RoundedCornerShape(16.0.dp),
-    val extraLarge: CornerBasedShape = RoundedCornerShape(28.0.dp),
-    val full: CornerBasedShape = CircleShape,
+    @Order(0) val none: CornerBasedShape = RoundedCornerShape(0.dp),
+    @Order(1) val extraSmall: CornerBasedShape = RoundedCornerShape(4.0.dp),
+    @Order(2) val small: CornerBasedShape = RoundedCornerShape(8.0.dp),
+    @Order(3) val medium: CornerBasedShape = RoundedCornerShape(12.0.dp),
+    @Order(4) val large: CornerBasedShape = RoundedCornerShape(16.0.dp),
+    @Order(5) val extraLarge: CornerBasedShape = RoundedCornerShape(28.0.dp),
+    @Order(6) val full: CornerBasedShape = CircleShape,
 )
 
 public fun sparkShapes(

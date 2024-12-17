@@ -24,6 +24,8 @@ package com.adevinta.spark.catalog.examples.samples.tokens
 import com.adevinta.spark.catalog.examples.samples.tokens.colors.ColorSample
 import com.adevinta.spark.catalog.examples.samples.tokens.elevation.ElevationCustomSample
 import com.adevinta.spark.catalog.examples.samples.tokens.elevation.ElevationSample
+import com.adevinta.spark.catalog.examples.samples.tokens.shapes.ShapeCustomSample
+import com.adevinta.spark.catalog.examples.samples.tokens.shapes.ShapeSample
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 
@@ -35,6 +37,20 @@ public val TokensExamples: List<Example> = listOf(
         sourceUrl = TokensExampleSourceUrl,
     ) {
         ColorSample()
+    },
+    Example(
+        name = "Shapes",
+        description = "Showcase the shape tokens",
+        sourceUrl = TokensExampleSourceUrl,
+    ) {
+        ShapeSample()
+    },
+    Example(
+        name = "Shapes showcase",
+        description = "Showcase the shape tokens",
+        sourceUrl = TokensExampleSourceUrl,
+    ) {
+        ShapeCustomSample()
     },
     Example(
         name = "Elevations",
