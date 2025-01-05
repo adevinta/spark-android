@@ -62,6 +62,11 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.test.DarkMode
+import androidx.compose.ui.test.DeviceConfigurationOverride
+import androidx.compose.ui.test.FontScale
+import androidx.compose.ui.test.LayoutDirection
+import androidx.compose.ui.test.then
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkFeatureFlag
@@ -74,7 +79,7 @@ import com.adevinta.spark.catalog.tabbar.CatalogTabBar
 import com.adevinta.spark.catalog.tabbar.CatalogTabs
 import com.adevinta.spark.catalog.themes.BrandMode
 import com.adevinta.spark.catalog.themes.ColorMode
-import com.adevinta.spark.catalog.themes.FontScaleMode
+import com.adevinta.spark.catalog.themes.FontScaleMode.System
 import com.adevinta.spark.catalog.themes.TextDirection
 import com.adevinta.spark.catalog.themes.Theme
 import com.adevinta.spark.catalog.themes.ThemeMode
@@ -92,7 +97,6 @@ import com.adevinta.spark.catalog.ui.rememberBackdropScaffoldState
 import com.adevinta.spark.catalog.ui.shaders.colorblindness.ColorBlindNessType
 import com.adevinta.spark.catalog.ui.shaders.colorblindness.shader
 import com.adevinta.spark.tokens.asSparkColors
-import com.google.accompanist.testharness.TestHarness
 import kotlinx.coroutines.launch
 
 @Composable
@@ -171,15 +175,12 @@ internal fun ComponentActivity.CatalogApp(
             )
         }
 
-        @Suppress("DEPRECATION")
-        TestHarness(
-            darkMode = useDark,
-            layoutDirection = layoutDirection,
-            fontScale = if (theme.fontScaleMode == FontScaleMode.System) {
-                LocalDensity.current.fontScale
-            } else {
-                theme.fontScale
-            },
+        DeviceConfigurationOverride(
+            override = DeviceConfigurationOverride.DarkMode(useDark)
+                then DeviceConfigurationOverride.LayoutDirection(layoutDirection)
+                then DeviceConfigurationOverride.FontScale(
+                    theme.takeUnless { it.fontScaleMode == System }?.fontScale ?: LocalDensity.current.fontScale,
+                ),
         ) {
             Box(
                 modifier = Modifier
