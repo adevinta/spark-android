@@ -4,9 +4,60 @@
 
 ## [Unreleased]
 
+## [1.1.0]
+
+_2025-01-06_
+
+### Animated Icons
+> [!CAUTION]
+> The api for `Icon`, `IconButton`, `IconToggleButton` , `Button`, `Tag` & `Chip` has their api modified to support animated vector icons
+
+Animated Icons can now be used with spark components!
+
+### Image
+> [!IMPORTANT]
+> Image component now has it's specs updated to the design ones! with new colors to its error state!
+
+### TextField
+> [!CAUTION]
+> The position of the TextField status icon has been moved from the trailing addon to the support message which might impact your screens!
+
+Now all textfields (not only the multi line one) can display a character count and their min width has been reduced to allow for side to side Textfield layout to be possible (previously it was too big to allow it)!
+
+### Spark
+- ✨ New icons available.
+- 🥳 Showkase is no longer used in the catalog app which means it'll also no longer bleed in your code!
+- 🎨 A new api allow you to convert a **Material Theme** to a **Spark theme** which could be used to support dynamic theming for ex.
+- 🐛 `UserAvatar` badge position is now correctly positioned.
+- ⬆️ The Compose BOM version has been upgraded from `2024.10.01` to `2024.12.01`.
+- ⬆️  Bump compileSdk & targetSdk to API level 35 (Android 15).
+- ⬆️  Bump kotlin from 2.0.21 to 2.1.0.
+- ✨ A lint rule to detect wrong string annotation usages has been added by @EliottLujan!
+- 🎨 Theme color has been updated.
+
+### Catalog App
+
+- 🥳 Showkase is no longer used to preview some of our caspule components.
+- ✨ A `Modal` configurator as been added.
+- 💄 IconScreen no longer has clipping with the search bar.
+- 🛠️ Migrated from uri to the new Typesafe routes for navigation.
+- ✨ New examples for the shape tokens has benn added by @EliottLujan!
+
+## [1.0.2]
+
+_2024-12-11_
+
 ### Spark
 
-- 🎨 Add a new function to convert a Material Theme colors to a Spark Theme colors.
+- ⬆️ Upgrade Compose BOM to `2024.11.00` since it only contains bugfixes changes.
+- 
+- ## [1.0.1]
+
+_2024-11-07_
+
+### Spark
+
+- 🐛 User Avatar presence badge was incorrectly placed, especially in big sizes.
 
 ## [1.0.0]
 
@@ -361,7 +412,13 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.0...HEAD
+
+[1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.0
+
+[1.0.2]: https://github.com/adevinta/spark-android/releases/tag/1.0.2
+
+[1.0.1]: https://github.com/adevinta/spark-android/releases/tag/1.0.1
 
 [1.0.0]: https://github.com/adevinta/spark-android/releases/tag/1.0.0
 
