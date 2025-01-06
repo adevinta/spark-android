@@ -4,9 +4,21 @@
 
 ## [Unreleased]
 
+## [1.0.2]
+
+_2024-12-11_
+
 ### Spark
 
-- 🎨 Add a new function to convert a Material Theme colors to a Spark Theme colors.
+- ⬆️ Upgrade Compose BOM to `2024.11.00` since it only contains bugfixes changes.
+- 
+- ## [1.0.1]
+
+_2024-11-07_
+
+### Spark
+
+- 🐛 User Avatar presence badge was incorrectly placed, especially in big sizes.
 
 ## [1.0.0]
 
@@ -361,7 +373,11 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/1.0.2...HEAD
+
+[1.0.2]: https://github.com/adevinta/spark-android/releases/tag/1.0.2
+
+[1.0.1]: https://github.com/adevinta/spark-android/releases/tag/1.0.1
 
 [1.0.0]: https://github.com/adevinta/spark-android/releases/tag/1.0.0
 
