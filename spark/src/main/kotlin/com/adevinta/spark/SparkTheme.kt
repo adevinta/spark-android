@@ -51,6 +51,9 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.toggles.Checkbox
+import com.adevinta.spark.icons.ErrorPhoto
+import com.adevinta.spark.icons.SparkIcon
+import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.LocalSparkColors
 import com.adevinta.spark.tokens.LocalSparkShapes
 import com.adevinta.spark.tokens.LocalSparkTypography
@@ -104,6 +107,9 @@ public fun SparkTheme(
     colors: SparkColors = SparkTheme.colors,
     shapes: SparkShapes = SparkTheme.shapes,
     typography: SparkTypography = SparkTheme.typography,
+    icons: SparkInternalIcons = SparkInternalIcons(
+        errorPhoto = SparkIcons.ErrorPhoto
+    ),
     sparkFeatureFlag: SparkFeatureFlag = SparkFeatureFlag(),
     fontFamily: SparkFontFamily = sparkFontFamily(
         useSparkTokensHighlighter = sparkFeatureFlag.useSparkTokensHighlighter,
@@ -139,6 +145,7 @@ public fun SparkTheme(
         LocalSparkColors provides rememberedColors,
         LocalSparkTypography provides typo,
         LocalSparkShapes provides internalShapes,
+        LocalSparkInternalIcons provides icons,
         LocalSparkFeatureFlag provides sparkFeatureFlag,
         LocalWindowSizeClass provides calculateWindowSizeClass(),
         LocalUseFallbackRippleImplementation provides false,
@@ -261,7 +268,25 @@ public object SparkTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalSparkShapes.current
+
+    /**
+     * Retrieves the current [SparkShapes] at the call site's position in the hierarchy.
+     */
+    internal val icons: SparkInternalIcons
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalSparkInternalIcons.current
 }
+
+/**
+ * CompositionLocal used to specify the default shapes for the surfaces.
+ */
+internal val LocalSparkInternalIcons = staticCompositionLocalOf { SparkInternalIcons() }
+
+
+public data class SparkInternalIcons(
+    val errorPhoto: SparkIcon,
+)
 
 internal val LocalSparkFeatureFlag: ProvidableCompositionLocal<SparkFeatureFlag> = staticCompositionLocalOf {
     error("SparkFeatureFlag not provided")
