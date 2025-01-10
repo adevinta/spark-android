@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.ui
 
 import androidx.compose.foundation.layout.Arrangement
@@ -54,7 +53,7 @@ public fun WipIllustration(
                 .widthIn(min = 120.dp)
                 .aspectRatio(1f),
             drawableRes = R.drawable.illu_wip,
-            contentDescription = null, //Decorative
+            contentDescription = null, // Decorative
         )
         Text(
             text = "Work In Progress",
