@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.ui.animations
 
 import androidx.compose.animation.core.Animatable
@@ -38,15 +37,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.components.buttons.ButtonIntent
-import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.buttons.ButtonTinted
 import kotlin.math.roundToInt
 
-
 @Composable
-public fun rememberShakeController(): ShakeController {
-    return remember { ShakeController() }
-}
+public fun rememberShakeController(): ShakeController = remember { ShakeController() }
 
 public class ShakeController {
     public var shakeConfig: ShakeConfig? by mutableStateOf(null)
