@@ -97,6 +97,10 @@
     <string name="component_switch_description">Switch component allows the user to activate or deactivate the state of an element or concept. It is also used to control binary options (On/Off or True/False).</string>
 
     <!--endregion-->
+    <!--region Stepper-->
+    <string name="component_stepper_description">The Stepper allow users to quickly specify a value within a given range.</string>
+
+    <!--endregion-->
     <string name="component_progressbar_description">The progress bar component is used to display the length and your progression inside the process or to express a waiting time. This waiting time can be either determinate or indeterminate..</string>
     <string name="component_tag_description">Tags are used to label content and help users quickly recognize info about them: Categories, Status… Can be applied with different colors and designs that are associated with a content due to its characteristics: new content, unvisited content, featured content… Users can’t interact with Tags.</string>
 
