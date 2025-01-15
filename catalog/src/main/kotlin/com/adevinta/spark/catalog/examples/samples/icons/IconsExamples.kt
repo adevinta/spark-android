@@ -40,6 +40,7 @@ import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -83,7 +84,7 @@ public val IconsExamples: List<Example> = listOf(
         description = "Show how a lbc animated nav bar could look like",
         sourceUrl = IconsExampleSourceUrl,
     ) {
-        var selected by remember { mutableStateOf(SparkAnimatedIcons.SearchToOutline.drawableId) }
+        var selected by remember { mutableIntStateOf(SparkAnimatedIcons.SearchToOutline.drawableId) }
         var icons by remember {
             mutableStateOf(
                 listOf(
