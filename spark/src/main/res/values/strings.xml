@@ -64,6 +64,13 @@
     <string name="spark_textfield_delete_a11y">Cancel</string>
     <!--endregion-->
 
+    <!--region Stepper-->
+    <string name="spark_stepper_add_button_description">Add</string>
+    <string name="spark_stepper_subtract_button_description">Subtract</string>
+
+    <string name="spark_stepper_accessibility_message">Quantity selected: %s</string>
+    <!--endregion-->
+
     <!--region DragHandle-->
     <string name="spark_drag_handle_a11y">Drag handle</string>
     <!--endregion-->

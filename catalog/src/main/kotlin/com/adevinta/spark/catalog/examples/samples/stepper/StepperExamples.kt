@@ -21,9 +21,14 @@
  */
 package com.adevinta.spark.catalog.examples.samples.stepper
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.ui.WipIllustration
 import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.stepper.Stepper
 
 public val StepperExamples: List<Example> = listOf(
     Example(
@@ -31,7 +36,22 @@ public val StepperExamples: List<Example> = listOf(
         description = "Base interactions on stepper.",
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",
     ) {
-        WipIllustration()
+        var value by rememberSaveable { mutableIntStateOf(0) }
+        Stepper(
+            value = value,
+            onValueChange = {
+                value = it
+            },
+        )
+        Stepper(
+            value = value,
+            onValueChange = {
+                value = it
+            },
+            label = "Label",
+            required = true,
+            helperText = "Exemple de message d'aide",
+        )
     },
     Example(
         name = "Stepper States",

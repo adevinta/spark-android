@@ -72,4 +72,11 @@
     <!--region Snackbar-->
     <string name="spark_snackbar_dismiss_a11y">Fermer</string>
     <!--endregion-->
+
+    <!--region Stepper-->
+    <string name="spark_stepper_add_button_description">Ajouter</string>
+    <string name="spark_stepper_subtract_button_description">Enlever</string>
+
+    <string name="spark_stepper_accessibility_message">Quantité selecté: %s</string>
+    <!--endregion-->
 </resources>

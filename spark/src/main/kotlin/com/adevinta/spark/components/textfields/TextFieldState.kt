@@ -33,9 +33,15 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WarningOutline
 
+public typealias FormFieldStatus = TextFieldState
+
 /**
  *   State of a [TextField] that's used to change the highlight color to either [Success], [Alert] or [Error].
  */
+//@Deprecated(
+//    "This name is now used by a Compose Api so we're renamming it to FormFieldStatus",
+//    ReplaceWith("FormFieldStatus"),
+//)
 public enum class TextFieldState(public val icon: SparkIcon) {
     /**
      * Used for feedbacks that are positive.

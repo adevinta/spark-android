@@ -40,7 +40,7 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.AddonScope
 import com.adevinta.spark.components.textfields.MultilineTextField
 import com.adevinta.spark.components.textfields.TextFieldCharacterCounter
-import com.adevinta.spark.components.textfields.TextFieldState
+import com.adevinta.spark.components.textfields.FormFieldStatus
 import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcon
@@ -73,15 +73,15 @@ internal class MultilineTextFieldScreenshot {
                     stateMessage = "Helper text",
                 )
                 ShowcasedMultilineTextfield(
-                    state = TextFieldState.Error,
+                    state = FormFieldStatus.Error,
                     stateMessage = "Error text",
                 )
                 ShowcasedMultilineTextfield(
-                    state = TextFieldState.Alert,
+                    state = FormFieldStatus.Alert,
                     stateMessage = "Alert text",
                 )
                 ShowcasedMultilineTextfield(
-                    state = TextFieldState.Success,
+                    state = FormFieldStatus.Success,
                     stateMessage = "Success text",
                 )
             }
@@ -98,17 +98,17 @@ internal class MultilineTextFieldScreenshot {
                     enabled = false,
                 )
                 ShowcasedMultilineTextfield(
-                    state = TextFieldState.Error,
+                    state = FormFieldStatus.Error,
                     stateMessage = "Error text",
                     enabled = false,
                 )
                 ShowcasedMultilineTextfield(
-                    state = TextFieldState.Alert,
+                    state = FormFieldStatus.Alert,
                     stateMessage = "Alert text",
                     enabled = false,
                 )
                 ShowcasedMultilineTextfield(
-                    state = TextFieldState.Success,
+                    state = FormFieldStatus.Success,
                     stateMessage = "Success text",
                     enabled = false,
                 )
