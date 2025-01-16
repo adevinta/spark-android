@@ -21,9 +21,7 @@
  */
 package com.adevinta.spark.tokens
 
-import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
+import androidx.activity.compose.LocalActivity
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
@@ -31,7 +29,6 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.toComposeRect
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.DpSize
@@ -54,16 +51,10 @@ internal fun calculateWindowSizeClass(): WindowSizeClass {
         val config = LocalConfiguration.current
         return WindowSizeClass.calculateFromSize(DpSize(config.screenWidthDp.dp, config.screenHeightDp.dp))
     }
-    val activity = LocalContext.current.findActivity()
+    val activity = requireNotNull(LocalActivity.current) { "Could not find activity in Context chain." }
     LocalConfiguration.current
     val density = LocalDensity.current
     val metrics = WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)
     val size = with(density) { metrics.bounds.toComposeRect().size.toDpSize() }
     return WindowSizeClass.calculateFromSize(size)
-}
-
-private tailrec fun Context.findActivity(): Activity = when (this) {
-    is Activity -> this
-    is ContextWrapper -> this.baseContext.findActivity()
-    else -> error("Could not find activity in Context chain.")
 }
