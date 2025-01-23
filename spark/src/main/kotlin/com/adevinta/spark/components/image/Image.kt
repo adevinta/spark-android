@@ -89,7 +89,7 @@ public fun SparkImage(
     emptyIcon: @Composable (iconSize: Dp) -> Unit = { ImageIconState(SparkIcons.NoPhoto, it) },
     errorIcon: @Composable (iconSize: Dp) -> Unit = {
         ImageIconState(
-            sparkIcon = SparkIcons.ErrorPhoto,
+            sparkIcon = SparkTheme.icons.errorPhoto,
             iconSize = it,
             color = SparkTheme.colors.errorContainer,
         )
