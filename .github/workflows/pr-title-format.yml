@@ -7,7 +7,7 @@ on:
     types: [ checks_requested ]
 
 permissions:
-  issues: write
+  pull-requests: write
 
 jobs:
   commitizen:
