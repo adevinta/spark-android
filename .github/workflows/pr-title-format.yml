@@ -6,6 +6,9 @@ on:
   merge_group:
     types: [ checks_requested ]
 
+permissions:
+  issues: write
+
 jobs:
   commitizen:
     runs-on: ubuntu-latest
