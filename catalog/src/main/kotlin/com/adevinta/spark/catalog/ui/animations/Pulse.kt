@@ -122,7 +122,7 @@ private fun Pulser() {
         val pulseColor = if (isValid) SparkTheme.colors.successContainer else SparkTheme.colors.errorContainer
         ButtonTinted(
             modifier = Modifier.pulse(
-                color = pulseColor,
+                color = Color.Blue,
                 shape = SparkTheme.shapes.large,
                 targetScale = 1.5f,
             ),
