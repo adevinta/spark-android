@@ -63,11 +63,11 @@ internal fun SparkUserAvatar(
     isPro: Boolean = false,
     isOnline: Boolean = false,
 ) {
-    val emptyIcon = @Composable { _: Dp ->
+    val emptyIcon = @Composable {
         ImageIconState(
             sparkIcon = if (isPro) SparkIcons.ProFill else SparkIcons.ProfileFill,
             color = color,
-            iconSize = Dp.Unspecified,
+            size = null,
         )
     }
     val indicatorColor = SparkTheme.colors.success

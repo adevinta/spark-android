@@ -23,18 +23,14 @@ package com.adevinta.spark.components.image
 
 import androidx.annotation.RestrictTo
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.BlurredEdgeTreatment
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
@@ -43,12 +39,14 @@ import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImagePainter
@@ -86,11 +84,10 @@ public fun SparkImage(
     // Useful to preview different states
     transform: (AsyncImagePainter.State) -> AsyncImagePainter.State = AsyncImagePainter.DefaultTransform,
     onState: ((State) -> Unit)? = null,
-    emptyIcon: @Composable (iconSize: Dp) -> Unit = { ImageIconState(SparkIcons.NoPhoto, it) },
-    errorIcon: @Composable (iconSize: Dp) -> Unit = {
+    emptyIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.NoPhoto) },
+    errorIcon: @Composable () -> Unit = {
         ImageIconState(
             sparkIcon = SparkIcons.ErrorPhoto,
-            iconSize = it,
             color = SparkTheme.colors.errorContainer,
         )
     },
@@ -103,7 +100,10 @@ public fun SparkImage(
     // Don't yet expose this api as it's still experimental with performance issues
     blurEdges: Boolean = false,
 ) {
-    BoxWithConstraints(
+    val emptyStateIcon = remember(emptyIcon) {
+        movableContentOf(emptyIcon)
+    }
+    SubcomposeAsyncImage(
         modifier = modifier
             .sparkUsageOverlay()
             .ifNotNull(contentDescription) { description ->
@@ -112,63 +112,40 @@ public fun SparkImage(
                     this.role = Role.Image
                 }
             },
-        contentAlignment = Alignment.Center,
+        model = model,
+        contentDescription = contentDescription,
+        transform = transform,
+        onState = { onState?.invoke(it.asImageState()) },
+        alignment = alignment,
+        contentScale = contentScale,
+        alpha = alpha,
+        colorFilter = colorFilter,
+        filterQuality = filterQuality,
     ) {
-        val iconSize = when {
-            maxWidth in 24.dp..63.dp && maxHeight >= 24.dp -> 16.dp
-            maxWidth in 64.dp..115.dp && maxHeight >= 64.dp -> 24.dp
-            maxWidth in 116.dp..327.dp && maxHeight >= 72.dp -> 40.dp
-            maxWidth >= 328.dp && maxHeight >= 80.dp -> 48.dp
-            else -> Dp.Unspecified
-        }
-        val emptyStateIcon = remember(emptyIcon, iconSize) {
-            movableContentOf(emptyIcon)
-        }
-        SubcomposeAsyncImage(
-            model = model,
-            contentDescription = contentDescription,
-            transform = transform,
-            onState = { onState?.invoke(it.asImageState()) },
-            alignment = alignment,
-            contentScale = contentScale,
-            alpha = alpha,
-            colorFilter = colorFilter,
-            filterQuality = filterQuality,
-        ) {
-            when (painter.state) {
-                AsyncImagePainter.State.Empty -> emptyStateIcon(iconSize)
-                is AsyncImagePainter.State.Loading -> loadingPlaceholder()
+        when (painter.state) {
+            AsyncImagePainter.State.Empty -> emptyStateIcon()
+            is AsyncImagePainter.State.Loading -> loadingPlaceholder()
 
-                is AsyncImagePainter.State.Error -> {
-                    // since model can be anything transformed in to a ImageRequest OR a ImageRequest we need to
-                    // handel both cases
-                    val requestData = painter.request.data
-                    val showEmptyIcon = when {
-                        (requestData is String) -> requestData.isBlank()
-                        requestData == NullRequestData -> true
-                        model == null -> true
-                        else -> false
-                    }
-
-                    if (showEmptyIcon) {
-                        emptyStateIcon(iconSize)
-                    } else {
-                        errorIcon(iconSize)
-                    }
+            is AsyncImagePainter.State.Error -> {
+                // since model can be anything transformed in to a ImageRequest OR a ImageRequest we need to
+                // handel both cases
+                val requestData = painter.request.data
+                val showEmptyIcon = when {
+                    (requestData is String) -> requestData.isBlank()
+                    requestData == NullRequestData -> true
+                    model == null -> true
+                    else -> false
                 }
 
-                is AsyncImagePainter.State.Success -> {
-                    if (blurEdges && contentScale != ContentScale.Crop) {
-                        SubcomposeAsyncImageContent(
-                            modifier = Modifier.blur(
-                                10.dp,
-                                BlurredEdgeTreatment.Rectangle,
-                            ),
-                            contentScale = ContentScale.Crop,
-                        )
-                    }
-                    SubcomposeAsyncImageContent()
+                if (showEmptyIcon) {
+                    emptyStateIcon()
+                } else {
+                    errorIcon()
                 }
+            }
+
+            is AsyncImagePainter.State.Success -> {
+                SubcomposeAsyncImageContent()
             }
         }
     }
@@ -211,11 +188,10 @@ public fun Image(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     onState: ((State) -> Unit)? = null,
-    emptyIcon: @Composable (iconSize: Dp) -> Unit = { ImageIconState(SparkIcons.NoPhoto, it) },
-    errorIcon: @Composable (iconSize: Dp) -> Unit = {
+    emptyIcon: @Composable () -> Unit = { ImageIconState(SparkIcons.NoPhoto) },
+    errorIcon: @Composable () -> Unit = {
         ImageIconState(
             sparkIcon = SparkIcons.ErrorPhoto,
-            iconSize = it,
             color = SparkTheme.colors.errorContainer,
         )
     },
@@ -258,8 +234,8 @@ public object ImageDefaults {
 @Composable
 internal fun ImageIconState(
     sparkIcon: SparkIcon,
-    iconSize: Dp,
     color: Color = SparkTheme.colors.neutralContainer,
+    size: ((maxWidth: Dp, maxHeight: Dp) -> Dp)? = iconSize,
 ) {
     Surface(
         color = color,
@@ -269,9 +245,61 @@ internal fun ImageIconState(
             Icon(
                 sparkIcon = sparkIcon,
                 contentDescription = null, // The SparkImage handle the content description
-                modifier = Modifier.requiredSize(iconSize),
+                modifier = Modifier.ifNotNull(size) {
+                    imageIconDynamicSize(it)
+                },
             )
         }
+    }
+}
+
+/**
+ * This modifier allow us to define the icon size without relying on subcomposition which would block
+ * some of our consumer usages
+ *
+ * @param dynamicSize
+ */
+private fun Modifier.imageIconDynamicSize(
+    dynamicSize: (maxWidth: Dp, maxHeight: Dp) -> Dp,
+): Modifier = layout { measurable, constraints ->
+    val maxWidth = constraints.maxWidth.toDp()
+    val maxHeight = constraints.maxHeight.toDp()
+    val iconSize = dynamicSize(maxWidth, maxHeight).roundToPx()
+
+    val childConstraints = Constraints.fixed(iconSize, iconSize)
+    val placeable = measurable.measure(childConstraints)
+
+    val width = if (constraints.hasBoundedWidth) {
+        // Claim all available space.
+        constraints.maxWidth
+    } else {
+        // We're in a scroller (or something similar), so centering is
+        // meaningless, and we'll just match the content size.
+        placeable.width
+    }
+    val height = if (constraints.hasBoundedHeight) {
+        // Claim all available space.
+        constraints.maxHeight
+    } else {
+        // We're in a scroller (or something similar), so centering is
+        // meaningless, and we'll just match the content size.
+        placeable.height
+    }
+
+    layout(constraints.maxWidth, constraints.maxHeight) {
+        val x = (width / 2) - (placeable.width / 2)
+        val y = (height / 2) - (placeable.height / 2)
+        placeable.place(x = x, y = y)
+    }
+}
+
+private val iconSize: (maxWidth: Dp, maxHeight: Dp) -> Dp = { maxWidth, maxHeight ->
+    when {
+        maxWidth in 24.dp..64.dp && maxHeight >= 24.dp -> 16.dp
+        maxWidth in 64.dp..116.dp && maxHeight >= 64.dp -> 24.dp
+        maxWidth in 116.dp..328.dp && maxHeight >= 72.dp -> 40.dp
+        maxWidth >= 328.dp && maxHeight >= 80.dp -> 48.dp
+        else -> Dp.Unspecified
     }
 }
 
@@ -305,12 +333,9 @@ private fun AsyncImagePainter.State.asImageState(): State = when (this) {
     is AsyncImagePainter.State.Success -> State.Success(painter)
 }
 
-@Preview(
-    group = "Images",
-    name = "Image",
-)
+@Preview
 @Composable
-internal fun ImagePreview() {
+private fun ImagePreview() {
     PreviewTheme {
         val painter = rememberSparkIconPainter(sparkIcon = SparkIcons.Tattoo)
         val drawable =
