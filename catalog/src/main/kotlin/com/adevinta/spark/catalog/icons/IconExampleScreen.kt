@@ -56,7 +56,6 @@ import com.adevinta.spark.icons.SparkIcons
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
-
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 internal fun IconExampleScreen(

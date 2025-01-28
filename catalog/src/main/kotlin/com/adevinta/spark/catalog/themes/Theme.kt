@@ -128,8 +128,7 @@ public enum class NavigationMode(
     public val popEnterTransition: EnterTransition = enterTransition,
     public val popExitTransition: ExitTransition = exitTransition,
     public val sizeTransform:
-    (@JvmSuppressWildcards
-    AnimatedContentTransitionScope<NavBackStackEntry>.() -> SizeTransform?)? =
+    (@JvmSuppressWildcards AnimatedContentTransitionScope<NavBackStackEntry>.() -> SizeTransform?)? =
         null,
 ) {
     Default,
@@ -154,8 +153,7 @@ public enum class NavigationMode(
     FadeThrough(
         enterTransition = materialFadeThroughIn(),
         exitTransition = materialFadeThroughOut(),
-    )
-
+    ),
 }
 
 public val ThemeSaver: Saver<Theme, Map<String, Int>> = Saver(

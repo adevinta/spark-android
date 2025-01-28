@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.catalog.ui.navigation
 
 import androidx.compose.runtime.Composable
@@ -32,7 +31,6 @@ import androidx.navigation.compose.NavHost
 import com.adevinta.spark.catalog.themes.NavigationMode
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
-
 
 @Composable
 public fun NavHostSpark(
