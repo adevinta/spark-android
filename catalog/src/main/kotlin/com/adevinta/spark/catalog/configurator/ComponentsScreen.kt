@@ -45,6 +45,8 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.examples.component.ComponentItem
 import com.adevinta.spark.catalog.model.Component
+import com.adevinta.spark.catalog.themes.NavigationMode
+import com.adevinta.spark.catalog.ui.navigation.NavHostSpark
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
 import kotlinx.serialization.Serializable
@@ -57,13 +59,15 @@ public fun ConfiguratorComponentsScreen(
     modifier: Modifier = Modifier,
     components: List<Component>,
     contentPadding: PaddingValues,
+    navigationMode: NavigationMode,
 ) {
     val navController = rememberNavController()
 
-    NavHost(
+    NavHostSpark(
         modifier = modifier,
         navController = navController,
         startDestination = ConfiguratorsList,
+        navigationMode = navigationMode,
         builder = {
             configuratorsDestination(
                 navController = navController,

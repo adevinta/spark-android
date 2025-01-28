@@ -85,6 +85,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appCompat)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.material.motion)
 
     implementation(libs.androidx.datastore)
     implementation(libs.kotlinx.serialization.json)

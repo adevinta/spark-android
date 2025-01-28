@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2025 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,42 +19,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.icons
 
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionLayout
-import androidx.compose.foundation.layout.PaddingValues
+package com.adevinta.spark.catalog.ui.navigation
+
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
 import com.adevinta.spark.catalog.themes.NavigationMode
-import com.adevinta.spark.catalog.ui.navigation.NavHostSpark
-import kotlinx.serialization.Serializable
+import kotlin.reflect.KClass
+import kotlin.reflect.KType
 
-@Serializable
-public object IconsList
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-public fun IconDemoScreen(
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues,
+public fun NavHostSpark(
+    navController: NavHostController,
+    startDestination: Any,
     navigationMode: NavigationMode,
+    modifier: Modifier = Modifier,
+    contentAlignment: Alignment = Alignment.Center,
+    route: KClass<*>? = null,
+    typeMap: Map<KType, @JvmSuppressWildcards NavType<*>> = emptyMap(),
+    builder: NavGraphBuilder.() -> Unit,
 ) {
-    SharedTransitionLayout {
-        val navController = rememberNavController()
-        NavHostSpark(
-            modifier = modifier,
-            navController = navController,
-            startDestination = IconsList,
-            navigationMode = navigationMode,
-            builder = {
-                iconsDemoDestination(
-                    navController = navController,
-                    contentPadding = contentPadding,
-                    this@SharedTransitionLayout,
-                )
-            },
-        )
-    }
+    NavHost(
+        modifier = modifier,
+        navController = navController,
+        startDestination = startDestination,
+        contentAlignment = contentAlignment,
+        route = route,
+        typeMap = typeMap,
+        enterTransition = { navigationMode.enterTransition },
+        exitTransition = { navigationMode.exitTransition },
+        popEnterTransition = { navigationMode.popEnterTransition },
+        popExitTransition = { navigationMode.popExitTransition },
+        sizeTransform = navigationMode.sizeTransform,
+        builder = builder,
+    )
 }

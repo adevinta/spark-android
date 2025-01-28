@@ -21,6 +21,9 @@
  */
 package com.adevinta.spark.catalog.icons
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -32,13 +35,17 @@ import kotlinx.serialization.Serializable
 @Serializable
 private data class IconShowcase(val iconId: Int, val iconName: String, val isIconAnimated: Boolean)
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 internal fun NavGraphBuilder.iconsDemoDestination(
     navController: NavHostController,
     contentPadding: PaddingValues,
+    sharedTransitionScope: SharedTransitionScope,
 ) {
     composable<IconsList> {
         IconsScreen(
             contentPadding = contentPadding,
+            sharedTransitionScope = sharedTransitionScope,
+            animatedContentScope = this@composable,
             onIconClick = { id, name, isAnimated ->
                 navController.navigate(
                     route = IconShowcase(iconId = id, iconName = name, isIconAnimated = isAnimated),
@@ -61,6 +68,8 @@ internal fun NavGraphBuilder.iconsDemoDestination(
             icon = icon,
             name = iconName,
             isAnimated = isIconAnimated,
+            sharedTransitionScope = sharedTransitionScope,
+            animatedContentScope = this@composable,
         )
     }
 }

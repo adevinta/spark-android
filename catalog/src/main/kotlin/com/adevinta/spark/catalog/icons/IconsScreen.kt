@@ -25,6 +25,9 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -39,6 +42,7 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -67,7 +71,6 @@ import com.adevinta.spark.catalog.util.splitCamelWithSpaces
 import com.adevinta.spark.components.chips.ChipSelectable
 import com.adevinta.spark.components.chips.ChipStyles
 import com.adevinta.spark.components.icons.Icon
-import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.icons.Check
@@ -80,10 +83,12 @@ import kotlinx.coroutines.withContext
 import java.util.Locale
 import com.adevinta.spark.icons.R as IconR
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
 public fun IconsScreen(
     contentPadding: PaddingValues,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
     modifier: Modifier = Modifier,
     onIconClick: (id: Int, name: String, isAnimated: Boolean) -> Unit,
 ) {
@@ -179,33 +184,40 @@ public fun IconsScreen(
                 key = { it.name },
                 contentType = { it is NamedAsset.Icon },
             ) { asset ->
-                val drawableRes = asset.drawableRes
-                val iconName = asset.name
-                val isAnimated = asset is NamedAsset.AnimatedIcon
-                Column(
-                    modifier = Modifier
-                        .clip(SparkTheme.shapes.small)
-                        .combinedClickable(
-                            onLongClick = { copyToClipboard(context, iconName) },
-                            onClick = {
-                                onIconClick(drawableRes, iconName, isAnimated)
-                            },
+                with(sharedTransitionScope) {
+                    val drawableRes = asset.drawableRes
+                    val iconName = asset.name
+                    val isAnimated = asset is NamedAsset.AnimatedIcon
+                    Column(
+                        modifier = Modifier
+                            .clip(SparkTheme.shapes.small)
+                            .combinedClickable(
+                                onLongClick = { copyToClipboard(context, iconName) },
+                                onClick = {
+                                    onIconClick(drawableRes, iconName, isAnimated)
+                                },
+                            )
+                            .padding(8.dp)
+                            .animateItem(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                    ) {
+                        Icon(
+                            sparkIcon = SparkIcon.DrawableRes(drawableRes),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .sharedElement(
+                                    state = sharedTransitionScope.rememberSharedContentState(key = "icon-$iconName"),
+                                    animatedVisibilityScope = animatedContentScope,
+                                )
+                                .size(40.dp),
                         )
-                        .padding(8.dp)
-                        .animateItem(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
-                ) {
-                    Icon(
-                        sparkIcon = SparkIcon.DrawableRes(drawableRes),
-                        contentDescription = null,
-                        size = IconSize.ExtraLarge,
-                    )
-                    Text(
-                        text = iconName.splitCamelWithSpaces(),
-                        style = SparkTheme.typography.caption,
-                        textAlign = TextAlign.Center,
-                    )
+                        Text(
+                            text = iconName.splitCamelWithSpaces(),
+                            style = SparkTheme.typography.caption,
+                            textAlign = TextAlign.Center,
+                        )
+                    }
                 }
             }
         }

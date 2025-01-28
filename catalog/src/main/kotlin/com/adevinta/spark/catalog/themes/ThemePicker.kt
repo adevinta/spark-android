@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.ui.ButtonGroup
+import com.adevinta.spark.catalog.ui.DropdownEnum
 import com.adevinta.spark.catalog.ui.shaders.colorblindness.ColorBlindSetting
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.components.icons.Icon
@@ -108,35 +109,14 @@ public fun ThemePicker(
                         .align(Alignment.CenterHorizontally)
                         .fillMaxWidth(),
                 ) {
-                    var expanded by remember { mutableStateOf(false) }
-                    val selectedIcon = @Composable { Icon(SparkIcons.Check, contentDescription = null) }
-                    Dropdown(
+                    DropdownEnum(
+                        title = stringResource(id = R.string.brand),
+                        selectedOption = theme.brandMode,
+                        onOptionSelect = { onThemeChange(theme.copy(brandMode = it)) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = ThemePickerPadding),
-                        value = theme.brandMode.name,
-                        label = stringResource(id = R.string.brand),
-                        onDismissRequest = {
-                            expanded = false
-                        },
-                        expanded = expanded,
-                        onExpandedChange = {
-                            expanded = !expanded
-                        },
-                    ) {
-                        BrandMode.entries.forEach { brand ->
-                            DropdownMenuItem(
-                                text = {
-                                    Text(text = brand.name)
-                                },
-                                trailingIcon = if (brand == theme.brandMode) selectedIcon else null,
-                                onClick = {
-                                    onThemeChange(theme.copy(brandMode = brand))
-                                    expanded = false
-                                },
-                            )
-                        }
-                    }
+                    )
                 }
                 AnimatedVisibility(
                     visible = theme.colorMode == ColorMode.Brand,
@@ -205,6 +185,16 @@ public fun ThemePicker(
                     )
                 }
             }
+        }
+        item {
+            DropdownEnum(
+                title = stringResource(id = R.string.themepicker_navigation_label),
+                selectedOption = theme.navigationMode,
+                onOptionSelect = { onThemeChange(theme.copy(navigationMode = it)) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = ThemePickerPadding),
+            )
         }
         item {
             SwitchLabelled(
