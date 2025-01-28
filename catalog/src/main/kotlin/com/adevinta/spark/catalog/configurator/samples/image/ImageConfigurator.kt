@@ -97,12 +97,12 @@ private fun ColumnScope.ImageSample() {
     var state by remember { mutableStateOf(ImageState.Success) }
     var width by remember { mutableStateOf<Int?>(1) }
     var height by remember { mutableStateOf<Int?>(1) }
-    var showBorder by remember { mutableStateOf(false) }
+    var showBorder by remember { mutableStateOf(true) }
     var blurEdges by remember { mutableStateOf(true) }
-    var contentScale by remember { mutableStateOf(ImageContentScale.Fit) }
+    var contentScale by remember { mutableStateOf(ImageContentScale.Crop) }
     var aspectRatio by remember { mutableStateOf(ImageAspectRatio.Custom) }
     var imageShape by remember { mutableStateOf(ImageShape.Medium) }
-    var selectedImage by remember { mutableStateOf(SelectedImage.Narrow) }
+    var selectedImage by remember { mutableStateOf(SelectedImage.Wide) }
     val drawable = getDrawable(LocalContext.current, selectedImage.res)!!
     val painter = rememberDrawablePainter(drawable)
     val imageRequest = ImageRequest.Builder(LocalContext.current)
@@ -138,7 +138,6 @@ private fun ColumnScope.ImageSample() {
                 },
                 matchHeightConstraintsFirst = true,
             )
-            .align(Alignment.CenterHorizontally)
             .clip(imageShape.shape)
             .animateContentSize(),
         transform = transform,
