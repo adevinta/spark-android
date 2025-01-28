@@ -307,6 +307,6 @@ internal class TextFieldScreenshot {
     companion object {
         private const val stubShortBody = "Lorem ipsum"
         private const val stubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
-                "pulvinar eu nulla sit amet, iaculis interdum."
+            "pulvinar eu nulla sit amet, iaculis interdum."
     }
 }

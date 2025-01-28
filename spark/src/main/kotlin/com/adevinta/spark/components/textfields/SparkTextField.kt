@@ -445,7 +445,9 @@ private fun supportText(
             statusIcon = stateIcon,
         )
     }
-} else null
+} else {
+    null
+}
 
 internal object TextFieldDefault {
 
@@ -498,7 +500,7 @@ internal fun TextFieldSlotsPreview() {
             label = "Label",
             placeholder = "Placeholder",
             helper = "Helper helper helper helper helper helper Helper helper helper helper helper helper " +
-                    "helper helper helper helper helper",
+                "helper helper helper helper helper",
             state = TextFieldState.Success,
             counter = TextFieldCharacterCounter(10, 20),
             leadingContent = icon,
@@ -512,7 +514,7 @@ internal fun TextFieldSlotsPreview() {
             label = "Label",
             placeholder = "Placeholder",
             helper = "Helper helper helper helper helper helper Helper helper helper helper helper helper " +
-                    "helper helper helper helper helper",
+                "helper helper helper helper helper",
             counter = TextFieldCharacterCounter(10, 20),
             state = TextFieldState.Success,
             leadingContent = icon,
