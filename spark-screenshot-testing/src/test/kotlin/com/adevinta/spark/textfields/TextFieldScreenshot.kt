@@ -35,6 +35,7 @@ import com.adevinta.spark.ExperimentalSparkApi
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.textfields.AddonScope
 import com.adevinta.spark.components.textfields.TextField
+import com.adevinta.spark.components.textfields.TextFieldCharacterCounter
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.SparkIcon
@@ -148,6 +149,85 @@ internal class TextFieldScreenshot {
         }
     }
 
+    @OptIn(ExperimentalLayoutApi::class)
+    @Test
+    fun helperMessage() {
+        paparazzi.sparkSnapshot {
+            FlowColumn(
+                modifier = Modifier.padding(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                // With no helper, status message or char counter
+                TextField(
+                    value = "value",
+                    onValueChange = {},
+                    label = "Label",
+                )
+                // With helper, but no status message or char counter
+                TextField(
+                    value = "value",
+                    onValueChange = {},
+                    label = "Label",
+                    helper = "helper",
+                )
+                // With helper, status message but no char counter
+                TextField(
+                    value = "value",
+                    onValueChange = {},
+                    label = "Label",
+                    helper = "helper",
+                    state = TextFieldState.Error,
+                    stateMessage = "state message",
+                )
+                // With helper, status message & char counter
+                TextField(
+                    value = "value",
+                    onValueChange = {},
+                    label = "Label",
+                    helper = "helper",
+                    state = TextFieldState.Error,
+                    stateMessage = "state message",
+                )
+                // With no helper, status message but with char counter
+                TextField(
+                    value = "value",
+                    onValueChange = {},
+                    label = "Label",
+                    counter = TextFieldCharacterCounter(10, 50),
+                )
+                // With helper, char counter but no status message
+                TextField(
+                    value = "value",
+                    onValueChange = {},
+                    label = "Label",
+                    helper = "helper",
+                    counter = TextFieldCharacterCounter(10, 50),
+                )
+                // With helper, status message but no char counter
+                TextField(
+                    value = "value",
+                    onValueChange = {},
+                    label = "Label",
+                    helper = "helper",
+                    state = TextFieldState.Error,
+                    stateMessage = "state message",
+                    counter = TextFieldCharacterCounter(10, 50),
+                )
+                // With helper, status message & char counter
+                TextField(
+                    value = "value",
+                    onValueChange = {},
+                    label = "Label",
+                    helper = "helper",
+                    state = TextFieldState.Error,
+                    stateMessage = "state message",
+                    counter = TextFieldCharacterCounter(10, 50),
+                )
+            }
+        }
+    }
+
     @OptIn(ExperimentalSparkApi::class)
     @Composable
     private fun TextFields(
@@ -227,6 +307,6 @@ internal class TextFieldScreenshot {
     companion object {
         private const val stubShortBody = "Lorem ipsum"
         private const val stubBody = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi lacus dolor, " +
-            "pulvinar eu nulla sit amet, iaculis interdum."
+                "pulvinar eu nulla sit amet, iaculis interdum."
     }
 }
