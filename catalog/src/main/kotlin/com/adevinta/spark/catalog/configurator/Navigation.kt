@@ -56,8 +56,8 @@ internal fun NavGraphBuilder.configuratorsDestination(
         val configuratorIndex = configuratorShowcase.configuratorIndex
         val component =
             components.first { component ->
-                component.configurators.firstOrNull() != null
-                        && component.id == componentId
+                component.configurators.firstOrNull() != null &&
+                    component.id == componentId
             }
         val configurator = component.configurators.get(configuratorIndex)
         ConfiguratorComponentScreen(
