@@ -342,6 +342,7 @@ private fun ColumnScope.PreviewTextFields(
         enabled = true,
         state = state,
         stateMessage = stateMessage,
+        counter = TextFieldCharacterCounter(0, 300),
         required = true,
         label = "Label",
         placeholder = "Placeholder",
