@@ -21,6 +21,10 @@
  */
 package com.adevinta.spark.catalog.icons
 
+import android.R.attr.key
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -52,80 +56,94 @@ import com.adevinta.spark.icons.SparkIcons
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.seconds
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-internal fun IconExampleScreen(icon: SparkIcon, name: String, isAnimated: Boolean) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
-    ) {
-        var atEnd by remember { mutableStateOf(false) }
-        var isRunning by remember { mutableStateOf(false) }
+internal fun IconExampleScreen(
+    icon: SparkIcon,
+    name: String,
+    isAnimated: Boolean,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope,
+) {
+    with(sharedTransitionScope) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically),
+        ) {
+            var atEnd by remember { mutableStateOf(false) }
+            var isRunning by remember { mutableStateOf(false) }
 
-        // This is necessary just if you want to run the animation when the
-        // component is displayed. Otherwise, you can remove it.
-        LaunchedEffect(icon, isRunning) {
-            while (isRunning) {
-                delay(3.seconds) // set here your delay between animations
-                atEnd = !atEnd
+            // This is necessary just if you want to run the animation when the
+            // component is displayed. Otherwise, you can remove it.
+            LaunchedEffect(icon, isRunning) {
+                while (isRunning) {
+                    delay(3.seconds) // set here your delay between animations
+                    atEnd = !atEnd
+                }
             }
-        }
-        if (isAnimated) {
-            SwitchLabelled(
-                checked = isRunning,
-                onCheckedChange = { isRunning = !isRunning },
+            if (isAnimated) {
+                SwitchLabelled(
+                    checked = isRunning,
+                    onCheckedChange = { isRunning = !isRunning },
+                ) {
+                    Text(text = "Animate indefinitely")
+                }
+            }
+
+            Icon(
+                sparkIcon = icon,
+                contentDescription = name,
+                modifier = Modifier
+                    .size(128.dp)
+                    .sharedElement(
+                        state = sharedTransitionScope.rememberSharedContentState(key = "icon-$name"),
+                        animatedVisibilityScope = animatedContentScope,
+                    ),
+                atEnd = atEnd,
+            )
+            IconButtonFilled(
+                icon = icon,
+                contentDescription = name,
+                onClick = {
+                    atEnd = !atEnd
+                },
+                atEnd = atEnd,
+            )
+            ButtonFilled(onClick = { atEnd = !atEnd }, text = name, icon = icon, atEnd = atEnd)
+            TagFilled(text = name, leadingIcon = icon, atEnd = atEnd)
+            ChipTinted(
+                onClick = { atEnd = !atEnd },
             ) {
-                Text(text = "Animate indefinitely")
+                Text(text = name)
+                Icon(sparkIcon = icon, contentDescription = name, atEnd = atEnd)
             }
-        }
+            SwitchLabelled(
+                checked = atEnd,
+                onCheckedChange = { atEnd = !atEnd },
+                icons = SwitchIcons(checked = icon, unchecked = SparkIcons.Close),
+            ) {
+                Text(text = name)
+            }
 
-        Icon(
-            sparkIcon = icon,
-            contentDescription = name,
-            modifier = Modifier.size(128.dp),
-            atEnd = atEnd,
-        )
-        IconButtonFilled(
-            icon = icon,
-            contentDescription = name,
-            onClick = {
-                atEnd = !atEnd
-            },
-            atEnd = atEnd,
-        )
-        ButtonFilled(onClick = { atEnd = !atEnd }, text = name, icon = icon, atEnd = atEnd)
-        TagFilled(text = name, leadingIcon = icon, atEnd = atEnd)
-        ChipTinted(
-            onClick = { atEnd = !atEnd },
-        ) {
-            Text(text = name)
-            Icon(sparkIcon = icon, contentDescription = name, atEnd = atEnd)
-        }
-        SwitchLabelled(
-            checked = atEnd,
-            onCheckedChange = { atEnd = !atEnd },
-            icons = SwitchIcons(checked = icon, unchecked = SparkIcons.Close),
-        ) {
-            Text(text = name)
-        }
-
-        val tabs = mutableListOf(
-            Pair("Home", null),
-            Pair(name, icon),
-        )
-        var selectedIndex by remember { mutableIntStateOf(1) }
-        TabGroup(
-            selectedTabIndex = selectedIndex,
-        ) {
-            tabs.forEachIndexed { index, pair ->
-                Tab(
-                    selected = selectedIndex == index,
-                    onClick = { selectedIndex = index },
-                    icon = pair.second,
-                    text = pair.first,
-                )
+            val tabs = mutableListOf(
+                Pair("Home", null),
+                Pair(name, icon),
+            )
+            var selectedIndex by remember { mutableIntStateOf(1) }
+            TabGroup(
+                selectedTabIndex = selectedIndex,
+            ) {
+                tabs.forEachIndexed { index, pair ->
+                    Tab(
+                        selected = selectedIndex == index,
+                        onClick = { selectedIndex = index },
+                        icon = pair.second,
+                        text = pair.first,
+                    )
+                }
             }
         }
     }

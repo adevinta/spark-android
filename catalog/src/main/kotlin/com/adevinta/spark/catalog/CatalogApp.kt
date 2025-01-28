@@ -260,15 +260,18 @@ internal fun ComponentActivity.CatalogApp(
                                 CatalogHomeScreen.Examples -> ComponentsScreen(
                                     components = components,
                                     contentPadding = innerPadding,
+                                    navigationMode = theme.navigationMode,
                                 )
 
                                 CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
                                     components = components,
                                     contentPadding = innerPadding,
+                                    navigationMode = theme.navigationMode,
                                 )
 
                                 CatalogHomeScreen.Icons -> IconDemoScreen(
                                     contentPadding = innerPadding,
+                                    navigationMode = theme.navigationMode,
                                 )
                             }
                         }
