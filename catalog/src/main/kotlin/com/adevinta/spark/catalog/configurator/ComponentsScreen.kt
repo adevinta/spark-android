@@ -78,10 +78,10 @@ public fun ConfiguratorComponentsScreen(
 internal fun ComponentsListScreen(
     components: List<Component>,
     contentPadding: PaddingValues,
-    onConfiguratorClick: (Int) -> Unit,
+    onConfiguratorSelected: (componentId: Int, index: Int) -> Unit,
 ) {
     val configuratorsComponents by remember(components) {
-        mutableStateOf(components.filter { it.configurator != null })
+        mutableStateOf(components.filter { it.configurators.firstOrNull() != null })
     }
     val columns = Layout.columns / 2
     LazyVerticalGrid(
@@ -128,12 +128,14 @@ internal fun ComponentsListScreen(
             span = { GridItemSpan(1) },
             contentType = { ComponentsItemType.Component },
             itemContent = { component ->
+                val configuratorCount = component.configurators.size
                 ComponentItem(
                     component = component,
-                    showExampleCount = false,
-                    onClick = {
-                        val componentId = component.id
-                        onConfiguratorClick(componentId)
+                    countIndicator = configuratorCount,
+                    configuratorCount = configuratorCount,
+                    onClick = { selectedComponent, index ->
+                        val componentId = selectedComponent.id
+                        onConfiguratorSelected(componentId, index)
                     },
                 )
             },

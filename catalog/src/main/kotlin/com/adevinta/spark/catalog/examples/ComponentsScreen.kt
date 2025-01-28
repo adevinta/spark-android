@@ -126,8 +126,9 @@ internal fun ComponentsListScreen(
             itemContent = { component ->
                 ComponentItem(
                     component = component,
-                    onClick = {
-                        val componentId = component.id
+                    countIndicator = component.examples.size,
+                    onClick = { selectedComponent, _ ->
+                        val componentId = selectedComponent.id
                         onExampleSectionClick(componentId)
                     },
                 )

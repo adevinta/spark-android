@@ -21,45 +21,69 @@
  */
 package com.adevinta.spark.catalog.examples.component
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.fastForEachIndexed
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Component
-import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.drawForegroundGradientScrim
+import com.adevinta.spark.components.badge.Badge
+import com.adevinta.spark.components.badge.BadgeIntent
+import com.adevinta.spark.components.badge.BadgeStyle
+import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.image.Image
+import com.adevinta.spark.components.menu.DropdownMenu
+import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.surface.Surface
-import com.adevinta.spark.components.tags.TagTinted
+import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.icons.WheelOutline
 import com.adevinta.spark.tokens.applyTonalElevation
 
 @Composable
 public fun ComponentItem(
     component: Component,
-    onClick: (component: Component) -> Unit,
-    showExampleCount: Boolean = true,
+    onClick: (component: Component, index: Int) -> Unit,
+    countIndicator: Int = 0,
+    configuratorCount: Int = -1,
 ) {
+    var expanded by remember { mutableStateOf(false) }
+    val singleContent = countIndicator == 1
+
     Surface(
-        onClick = { onClick(component) },
+        onClick = {
+            if (singleContent || configuratorCount != countIndicator) {
+                return@Surface onClick(component, 0)
+            } else {
+                // Show a menu for all other options
+                expanded = true
+            }
+        },
         modifier = Modifier
             .height(ComponentItemHeight)
             .padding(ComponentItemOuterPadding),
         shape = SparkTheme.shapes.medium,
-        border = BorderStroke(1.dp, SparkTheme.colors.outline),
+        elevation = 2.dp,
     ) {
-        Box {
+        Box(
+            modifier = Modifier.wrapContentSize(Alignment.TopStart),
+        ) {
             val tint = ColorFilter.tint(LocalContentColor.current).takeIf { component.tintIcon }
             Image(
                 modifier = Modifier
@@ -78,13 +102,30 @@ public fun ComponentItem(
                     .padding(ComponentItemInnerPadding),
                 style = SparkTheme.typography.body2,
             )
-            if (showExampleCount) {
-                TagTinted(
+            if (countIndicator > 1) {
+                Badge(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(ComponentItemInnerPadding),
-                    text = component.examples.count().toString(),
+                    count = countIndicator,
+                    intent = BadgeIntent.Basic,
+                    badgeStyle = BadgeStyle.Small,
                 )
+            }
+            DropdownMenu(
+                expanded = expanded,
+                onDismissRequest = { expanded = false },
+            ) {
+                component.configurators.fastForEachIndexed { i, configurator ->
+                    DropdownMenuItem(
+                        text = { Text(configurator.name) },
+                        onClick = {
+                            onClick(component, i)
+                            expanded = false
+                        },
+                        leadingIcon = { Icon(SparkIcons.WheelOutline, contentDescription = null) },
+                    )
+                }
             }
         }
     }
@@ -107,14 +148,10 @@ private fun ComponentItemPreview() {
                 docsUrl = "https://www.google.com/#q=dictas",
                 sourceUrl = "http://www.bing.com/search?q=inani",
                 examples = listOf(),
-                configurator = Configurator(
-                    name = "Ronny Bowman",
-                    description = "singulis",
-                    sourceUrl = "https://www.google.com/#q=tempor",
-                    content = {},
-                ),
+                configurators = emptyList(),
             ),
-            onClick = {},
+            countIndicator = 3,
+            onClick = { _, _ -> },
         )
         ComponentItem(
             component = Component(
@@ -127,14 +164,9 @@ private fun ComponentItemPreview() {
                 docsUrl = "https://www.google.com/#q=dictas",
                 sourceUrl = "http://www.bing.com/search?q=inani",
                 examples = listOf(),
-                configurator = Configurator(
-                    name = "Ronny Bowman",
-                    description = "singulis",
-                    sourceUrl = "https://www.google.com/#q=tempor",
-                    content = {},
-                ),
+                configurators = emptyList(),
             ),
-            onClick = {},
+            onClick = { _, _ -> },
         )
     }
 }
