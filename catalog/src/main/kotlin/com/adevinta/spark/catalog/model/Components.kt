@@ -85,7 +85,7 @@ public data class Component(
     val docsUrl: String,
     val sourceUrl: String,
     val examples: List<Example>,
-    val configurator: Configurator? = null,
+    val configurators: List<Configurator> = emptyList(),
 )
 
 private var nextId: Int = 1
@@ -101,7 +101,7 @@ private val Buttons = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.buttons/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/buttons/Button.kt",
     examples = ButtonsExamples,
-    configurator = ButtonsConfigurator,
+    configurators = ButtonsConfigurator,
 )
 
 private val Checkboxes = Component(
@@ -114,7 +114,7 @@ private val Checkboxes = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.toggles/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/CheckBox.kt",
     examples = CheckboxExamples,
-    configurator = CheckboxConfigurator,
+    configurators = listOf(CheckboxConfigurator),
 )
 
 private val Chips = Component(
@@ -125,7 +125,7 @@ private val Chips = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.chips/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/chips/Chips.kt",
     examples = ChipsExamples,
-    configurator = ChipsConfigurator,
+    configurators = listOf(ChipsConfigurator),
 )
 
 private val Dialogs = Component(
@@ -136,7 +136,7 @@ private val Dialogs = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.dialog/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/dialog/ModalScaffold.kt",
     examples = DialogsExamples,
-    configurator = ModalConfigurator,
+    configurators = listOf(ModalConfigurator),
 )
 
 private val Dropdowns = Component(
@@ -147,7 +147,7 @@ private val Dropdowns = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.dropdown/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/textfields/Dropdown.kt",
     examples = DropdownsExamples,
-    configurator = DropdownsConfigurator,
+    configurators = listOf(DropdownsConfigurator),
 )
 
 private val Icons = Component(
@@ -160,7 +160,7 @@ private val Icons = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.iconbuttons/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/iconbuttons/IconButton.kt",
     examples = IconsExamples,
-    configurator = null,
+    configurators = emptyList(),
 )
 
 private val IconButtons = Component(
@@ -173,7 +173,7 @@ private val IconButtons = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.iconbuttons/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/iconbuttons/IconButton.kt",
     examples = IconButtonsExamples,
-    configurator = IconButtonsConfigurator,
+    configurators = listOf(IconButtonsConfigurator),
 )
 
 private val IconToggleButtons = Component(
@@ -186,7 +186,7 @@ private val IconToggleButtons = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.iconbuttons/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/iconTogglebuttons/IconToggleButton.kt",
     examples = IconToggleButtonsExamples,
-    configurator = IconToggleButtonsConfigurator,
+    configurators = listOf(IconToggleButtonsConfigurator),
 )
 
 private val Image = Component(
@@ -197,7 +197,7 @@ private val Image = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.image/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/image/Image.kt",
     examples = emptyList(),
-    configurator = ImageConfigurator,
+    configurators = listOf(ImageConfigurator),
 )
 
 private val Popovers = Component(
@@ -210,7 +210,7 @@ private val Popovers = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.popover/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/popover/Popover.kt",
     examples = PopoverExamples,
-    configurator = PopoverConfigurator,
+    configurators = listOf(PopoverConfigurator),
 )
 
 private val BottomSheets = Component(
@@ -223,7 +223,7 @@ private val BottomSheets = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.bottom-sheet/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/bottomsheet/modal/ModalBottomSheet.kt",
     examples = BottomSheetExamples,
-    configurator = BottomSheetConfigurator,
+    configurators = listOf(BottomSheetConfigurator),
 )
 
 private val RadioButtons = Component(
@@ -236,7 +236,7 @@ private val RadioButtons = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.toggles/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/RadioButton.kt",
     examples = RadioButtonExamples,
-    configurator = RadioButtonConfigurator,
+    configurators = listOf(RadioButtonConfigurator),
 )
 
 private val Rating = Component(
@@ -249,7 +249,7 @@ private val Rating = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.rating/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/rating/RatingDisplay.kt",
     examples = RatingExamples,
-    configurator = RatingsConfigurator,
+    configurators = listOf(RatingsConfigurator),
 )
 
 private val Snackbars = Component(
@@ -260,7 +260,7 @@ private val Snackbars = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.snackbars/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/snackbars/Snackbar.kt",
     examples = SnackbarExamples,
-    configurator = SnackbarConfigurator,
+    configurators = listOf(SnackbarConfigurator),
 )
 
 private val Stepper = Component(
@@ -271,7 +271,7 @@ private val Stepper = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.stepper/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/stepper/Stepper.kt",
     examples = StepperExamples,
-    configurator = StepperConfigurator,
+    configurators = StepperConfigurators,
 )
 
 private val Switches = Component(
@@ -284,7 +284,7 @@ private val Switches = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.toggles/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/toggles/Switch.kt",
     examples = SwitchExamples,
-    configurator = SwitchConfigurator,
+    configurators = listOf(SwitchConfigurator),
 )
 
 private val Tabs = Component(
@@ -295,7 +295,7 @@ private val Tabs = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.tab/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tab/Tab.kt",
     examples = TabsExamples,
-    configurator = TabsConfigurator,
+    configurators = listOf(TabsConfigurator),
 )
 
 private val Tags = Component(
@@ -308,7 +308,7 @@ private val Tags = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.tags/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/tags/Tag.kt",
     examples = TagsExamples,
-    configurator = TagsConfigurator,
+    configurators = listOf(TagsConfigurator),
 )
 
 private val Progressbars = Component(
@@ -321,7 +321,7 @@ private val Progressbars = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progressbar/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progressbar/Progressbar.kt",
     examples = ProgressbarExamples,
-    configurator = ProgressbarConfigurator,
+    configurators = listOf(ProgressbarConfigurator),
 )
 
 private val Dividers = Component(
@@ -332,7 +332,7 @@ private val Dividers = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.divider/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/divider/Divider.kt",
     examples = DividerExamples,
-    configurator = DividerConfigurator,
+    configurators = listOf(DividerConfigurator),
 )
 
 private val ProgressTracker = Component(
@@ -345,7 +345,7 @@ private val ProgressTracker = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progress.tracker/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progress/tracker/ProgressbarTracker.kt",
     examples = ProgressTrackerExamples,
-    configurator = ProgressTrackerConfigurator,
+    configurators = listOf(ProgressTrackerConfigurator),
 )
 
 private val TextLinks = Component(
@@ -358,7 +358,7 @@ private val TextLinks = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/text/TextLink.kt",
     examples = TextLinksExamples,
-    configurator = TextLinksConfigurator,
+    configurators = listOf(TextLinksConfigurator),
 )
 
 private val Sliders = Component(
@@ -369,7 +369,7 @@ private val Sliders = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.slider/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/slider/Slider.kt",
     examples = SlidersExamples,
-    configurator = SlidersConfigurator,
+    configurators = listOf(SlidersConfigurator),
 )
 
 private val TextFields = Component(
@@ -380,7 +380,7 @@ private val TextFields = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.textfields/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/textfields/TextField.kt",
     examples = TextFieldsExamples,
-    configurator = TextFieldsConfigurator,
+    configurators = listOf(TextFieldsConfigurator),
 )
 
 private val Tokens = Component(
@@ -393,7 +393,7 @@ private val Tokens = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.tokens/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/tokens/Color.kt",
     examples = TokensExamples,
-    configurator = null,
+    configurators = emptyList(),
 )
 
 /** Components for the catalog, ordered alphabetically by name. */

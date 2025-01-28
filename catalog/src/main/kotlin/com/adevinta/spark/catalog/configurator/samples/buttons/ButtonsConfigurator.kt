@@ -65,13 +65,15 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.highlight
 
-public val ButtonsConfigurator: Configurator = Configurator(
-    name = "Button",
-    description = "Button configuration",
-    sourceUrl = "$SampleSourceUrl/ButtonSamples.kt",
-) {
-    ButtonSample()
-}
+public val ButtonsConfigurator: List<Configurator> = listOf(
+    Configurator(
+        name = "Button",
+        description = "Button configuration",
+        sourceUrl = "$SampleSourceUrl/ButtonSamples.kt",
+    ) {
+        ButtonSample()
+    },
+)
 
 @Composable
 private fun ColumnScope.ButtonSample() {
