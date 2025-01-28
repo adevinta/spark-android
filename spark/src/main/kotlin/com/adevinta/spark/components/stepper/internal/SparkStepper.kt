@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.stepper.internal
 
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -37,7 +36,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
-import androidx.compose.ui.semantics.invisibleToUser
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
@@ -148,7 +146,6 @@ internal fun Modifier.stepperSemantics(
     enabled: Boolean,
 ): Modifier =
     semantics(mergeDescendants = true) {
-
         // this is needed to use volume keys
         setProgress { targetValue ->
             // without this rounding the values will only decrease
@@ -176,12 +173,10 @@ internal fun Modifier.stepperSemantics(
         )
 
 @OptIn(ExperimentalComposeUiApi::class)
-private fun Modifier.generateStepperTestTag(testTag: String?, action: String): Modifier {
-    return testTag?.let {
-        semantics {
-            contentDescription = "" // handled by semantics modifier
-            stateDescription = "" // handled by semantics modifier
-            testTagsAsResourceId = true
-        }.testTag("${testTag}$action")
-    } ?: this
-}
+private fun Modifier.generateStepperTestTag(testTag: String?, action: String): Modifier = testTag?.let {
+    semantics {
+        contentDescription = "" // handled by semantics modifier
+        stateDescription = "" // handled by semantics modifier
+        testTagsAsResourceId = true
+    }.testTag("${testTag}$action")
+} ?: this

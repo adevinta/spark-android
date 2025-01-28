@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.stepper
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -34,7 +33,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.error
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
@@ -119,6 +117,18 @@ public fun Stepper(
                 }
             }
         }
+
+        SparkStepper(
+            value = value,
+            onValueChange = onValueChange,
+            range = range,
+            enabled = enabled,
+            isFlexible = isFlexible,
+            testTag = testTag,
+            status = status,
+            allowSemantics = false,
+        )
+
         helperText?.let {
             val stateIcon = TextFieldDefault.getStatusIcon(state = status)
             val color by colors.supportingTextColor(enabled, status, interactionSource)
@@ -135,19 +145,6 @@ public fun Stepper(
                 }
             }
         }
-
-        SparkStepper(
-            value = value,
-            onValueChange = onValueChange,
-            range = range,
-            enabled = enabled,
-            isFlexible = isFlexible,
-            testTag = testTag,
-            status = status,
-            allowSemantics = false,
-        )
-
-
     }
 }
 
@@ -175,7 +172,6 @@ public fun Stepper(
         allowSemantics = allowSemantics,
     )
 }
-
 
 @Preview
 @Composable
@@ -207,5 +203,4 @@ private fun StepperPreview() {
             helperText = "helper message",
         )
     }
-
 }

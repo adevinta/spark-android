@@ -26,9 +26,9 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import com.adevinta.spark.catalog.model.Example
-import com.adevinta.spark.catalog.ui.WipIllustration
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.stepper.Stepper
+import com.adevinta.spark.components.textfields.FormFieldStatus
 
 public val StepperExamples: List<Example> = listOf(
     Example(
@@ -55,23 +55,51 @@ public val StepperExamples: List<Example> = listOf(
     },
     Example(
         name = "Stepper States",
-        description = "Disabled, Readonly and all regular states available for the TestField.",
+        description = "Disabled and all regular states available for the TestField.",
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",
     ) {
-        WipIllustration()
+        Stepper(
+            value = 1,
+            onValueChange = {},
+            status = FormFieldStatus.Error,
+            label = "Label",
+            helperText = "helper message",
+            enabled = false,
+        )
+        Stepper(
+            value = 1,
+            onValueChange = {},
+            status = FormFieldStatus.Error,
+            label = "Label",
+            helperText = "helper message",
+        )
+        Stepper(
+            value = -1,
+            onValueChange = {},
+            status = FormFieldStatus.Alert,
+            label = "Label",
+            helperText = "helper message",
+        )
+        Stepper(
+            value = -1234,
+            onValueChange = {},
+            status = FormFieldStatus.Success,
+            label = "Label",
+            helperText = "helper message",
+        )
     },
-    Example(
-        name = "Stepper formats",
-        description = "Stepper can show a suffix like `%`, `€` or `person•s`.",
-        sourceUrl = "$SampleSourceUrl/RatingInputSample.kt",
-    ) {
-        WipIllustration()
-    },
-    Example(
-        name = "Stepper Custom Buttons",
-        description = "Custom implementation allow used defined button for de-increment.",
-        sourceUrl = "$SampleSourceUrl/RatingFullSample.kt",
-    ) {
-        WipIllustration()
-    },
+    // Example(
+    //       name = "Stepper formats",
+    //       description = "Stepper can show a suffix like `%`, `€` or `person•s`.",
+    //       sourceUrl = "$SampleSourceUrl/RatingInputSample.kt",
+    //   ) {
+    //       WipIllustration()
+    //  },
+    //  Example(
+    //     name = "Stepper Custom Buttons",
+    //     description = "Custom implementation allow used defined button for de-increment.",
+    //     sourceUrl = "$SampleSourceUrl/RatingFullSample.kt",
+    // ) {
+    //     WipIllustration()
+    // },
 )

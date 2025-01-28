@@ -38,9 +38,9 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.icons.IconSize
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.AddonScope
+import com.adevinta.spark.components.textfields.FormFieldStatus
 import com.adevinta.spark.components.textfields.MultilineTextField
 import com.adevinta.spark.components.textfields.TextFieldCharacterCounter
-import com.adevinta.spark.components.textfields.FormFieldStatus
 import com.adevinta.spark.icons.Check
 import com.adevinta.spark.icons.LikeFill
 import com.adevinta.spark.icons.SparkIcon

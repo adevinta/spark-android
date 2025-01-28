@@ -64,7 +64,7 @@
     <string name="spark_annotatedStringResource_test_args">Salut, <b><annotation variable="who" typography="large" color="main">who</annotation></b>!</string>
 
     <!--region Rating-->
-    <string name="spark_textfield_content_description">Obligatoire</string>
+    <string name="spark_textfield_content_description">Champs requis</string>
     <string name="spark_textfield_delete_a11y">Tout supprimer</string>
     <string name="spark_drag_handle_a11y">Poignée de déplacement</string>
     <!--endregion-->

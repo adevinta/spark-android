@@ -38,6 +38,7 @@ import com.adevinta.spark.catalog.configurator.samples.progresstracker.ProgressT
 import com.adevinta.spark.catalog.configurator.samples.rating.RatingsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.slider.SlidersConfigurator
 import com.adevinta.spark.catalog.configurator.samples.snackbar.SnackbarConfigurator
+import com.adevinta.spark.catalog.configurator.samples.stepper.StepperConfigurators
 import com.adevinta.spark.catalog.configurator.samples.tabs.TabsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.tags.TagsConfigurator
 import com.adevinta.spark.catalog.configurator.samples.text.TextLinksConfigurator
@@ -270,7 +271,7 @@ private val Stepper = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.stepper/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/stepper/Stepper.kt",
     examples = StepperExamples,
-    configurators = emptyList(),
+    configurators = StepperConfigurator,
 )
 
 private val Switches = Component(

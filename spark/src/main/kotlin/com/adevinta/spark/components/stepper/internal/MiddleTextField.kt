@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.stepper.internal
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -87,7 +86,6 @@ internal fun MiddleTextField(
         }
     }
 }
-
 
 @Preview
 @Composable
