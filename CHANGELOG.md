@@ -4,6 +4,32 @@
 
 ## [Unreleased]
 
+## [1.1.3]
+
+_2025-01-29_
+
+### Spark
+- 🛠 Use latest and simpler workaround to display a Dialog in fullscreen with support to edge-to-edge. 
+- 🛠️ Modal `inEdgeToEdge` parameter now default to false.
+
+## [1.1.2]
+
+_2025-01-29_
+
+### Spark
+- 🐛 Conditional modifiers were not working as expected since they returned an empty modifier instead of modifier chain if the condition was not met.
+
+
+## [1.1.1] 
+
+_2025-01-28_
+
+### Spark
+- 🐛 Conditional modifiers were not working as expected since they returned an empty.
+- 🐛 `Image` no longer use a `BoxWithConstraint`as its root component which forbid intrinsic sizes
+- 🐛 Revert `Image` behavior on sizing with empty/loading/error states.
+
+
 ## [1.1.0]
 
 _2025-01-06_
@@ -412,7 +438,13 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.3...HEAD
+
+[1.1.3]: https://github.com/adevinta/spark-android/releases/tag/1.1.3
+
+[1.1.2]: https://github.com/adevinta/spark-android/releases/tag/1.1.2
+
+[1.1.1]: https://github.com/adevinta/spark-android/releases/tag/1.1.1
 
 [1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.0
 
