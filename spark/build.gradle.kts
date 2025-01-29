@@ -73,6 +73,7 @@ dependencies {
     api(libs.androidx.compose.ui.text)
     api(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.constraintsExplorer)
     implementation(libs.androidx.compose.ui.util)
     api(libs.coilCompose)
     api(libs.kotlinx.collections.immutable)
