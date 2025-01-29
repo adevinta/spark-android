@@ -24,10 +24,11 @@ package com.adevinta.spark.components.dialog
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.os.Build
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
-import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -56,7 +57,6 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -126,7 +126,7 @@ public fun ModalScaffold(
     supportButton: (@Composable (Modifier) -> Unit)? = {},
     title: @Composable () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {},
-    inEdgeToEdge: Boolean = true,
+    inEdgeToEdge: Boolean = false,
     content: @Composable (PaddingValues) -> Unit,
 ) {
     val size = LocalWindowSizeClass.current
@@ -288,25 +288,7 @@ private fun PhonePortraitModalScaffold(
         properties = properties,
     ) {
         // Work around for b/246909281 as for now Dialog doesn't pass the drawing insets to its content
-        val parentView = LocalView.current.parent as View
-
-        val activityWindow = getActivityWindow()
-        val dialogWindow = getDialogWindow()
-
-        SideEffect {
-            if (
-                activityWindow != null &&
-                dialogWindow != null &&
-                inEdgeToEdge
-            ) {
-                val attributes = WindowManager.LayoutParams()
-                attributes.copyFrom(activityWindow.attributes)
-                attributes.type = dialogWindow.attributes.type
-                dialogWindow.attributes = attributes
-                parentView.layoutParams =
-                    FrameLayout.LayoutParams(activityWindow.decorView.width, activityWindow.decorView.height)
-            }
-        }
+        SetUpEdgeToEdgeDialog()
 
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -404,24 +386,7 @@ private fun PhoneLandscapeModalScaffold(
         properties = properties,
     ) {
         // Work around for b/246909281 as for now Dialog doesn't pass the drawing insets to its content
-        val parentView = LocalView.current.parent as View
-        val activityWindow = getActivityWindow()
-        val dialogWindow = getDialogWindow()
-
-        SideEffect {
-            if (
-                activityWindow != null &&
-                dialogWindow != null &&
-                inEdgeToEdge
-            ) {
-                val attributes = WindowManager.LayoutParams()
-                attributes.copyFrom(activityWindow.attributes)
-                attributes.type = dialogWindow.attributes.type
-                dialogWindow.attributes = attributes
-                parentView.layoutParams =
-                    FrameLayout.LayoutParams(activityWindow.decorView.width, activityWindow.decorView.height)
-            }
-        }
+        SetUpEdgeToEdgeDialog()
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
         Scaffold(
@@ -502,6 +467,20 @@ private fun CloseIconButton(onClose: () -> Unit) {
             modifier = Modifier.size(24.dp),
             contentDescription = stringResource(id = R.string.spark_a11y_modal_fullscreen_close),
         )
+    }
+}
+
+@Composable
+private fun SetUpEdgeToEdgeDialog() {
+    val parentView = LocalView.current.parent as View
+    val window = (parentView as DialogWindowProvider).window
+
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+
+    window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        window.attributes.fitInsetsTypes = 0
+        window.attributes.fitInsetsSides = 0
     }
 }
 
