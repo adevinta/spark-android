@@ -85,6 +85,7 @@ internal fun ModalSample(
             ModalScaffold(
                 onClose = { showDialog = false },
                 contentPadding = paddingValues,
+                inEdgeToEdge = true,
                 mainButton = if (withButtons) {
                     { MainButton(it, coroutineScope, snackbarHostState) }
                 } else {
