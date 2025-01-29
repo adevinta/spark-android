@@ -4,12 +4,20 @@
 
 ## [Unreleased]
 
-## [1.1.1]
+## [1.1.2]
+
+_2025-01-29_
+
+### Spark
+- 🐛 Conditional modifiers were not working as expected since they returned an empty modifier instead of modifier chain if the condition was not met.
+
+
+## [1.1.1] 
 
 _2025-01-28_
 
 ### Spark
-- 🐛 Fix character counter not displaying if no helper message is provided.
+- 🐛 Conditional modifiers were not working as expected since they returned an empty.
 - 🐛 `Image` no longer use a `BoxWithConstraint`as its root component which forbid intrinsic sizes
 - 🐛 Revert `Image` behavior on sizing with empty/loading/error states.
 
@@ -422,7 +430,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.1...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.2...HEAD
+
+[1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.2
 
 [1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.1
 
