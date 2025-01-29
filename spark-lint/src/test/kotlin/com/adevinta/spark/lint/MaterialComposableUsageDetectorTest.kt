@@ -83,49 +83,49 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 """
                 src/foo/test.kt:9: ${explanation("Button" to "ButtonFilled")}
                                     Button()
-                                    ~~~~~~~~
+                                    ~~~~~~
                 src/foo/test.kt:10: ${explanation("ElevatedButton" to "ButtonFilled")}
                                     ElevatedButton()
-                                    ~~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~~
                 src/foo/test.kt:11: ${explanation("FilledTonalButton" to "ButtonTinted")}
                                     FilledTonalButton()
-                                    ~~~~~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~~~~~
                 src/foo/test.kt:12: ${explanation("OutlinedButton" to "ButtonOutlined")}
                                     OutlinedButton()
-                                    ~~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~~
                 src/foo/test.kt:13: ${explanation("TextButton" to "ButtonGhost")}
                                     TextButton()
-                                    ~~~~~~~~~~~~
+                                    ~~~~~~~~~~
                 src/foo/test.kt:14: ${explanation("OutlinedTextField" to "TextField")}
                                     OutlinedTextField()
-                                    ~~~~~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~~~~~
                 src/foo/test.kt:15: ${explanation("FilledTextField" to "TextField")}
                                     FilledTextField()
-                                    ~~~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~~~
                 src/foo/test.kt:16: ${explanation("CheckBox" to "CheckBox")}
                                     CheckBox()
-                                    ~~~~~~~~~~
+                                    ~~~~~~~~
                 src/foo/test.kt:17: ${explanation("TriStateCheckbox" to "CheckBox")}
                                     TriStateCheckbox()
-                                    ~~~~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~~~~
                 src/foo/test.kt:18: ${explanation("RadioButton" to "RadioButton")}
                                     RadioButton()
-                                    ~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~
                 src/foo/test.kt:19: ${explanation("Switch" to "Switch")}
                                     Switch()
-                                    ~~~~~~~~
+                                    ~~~~~~
                 src/foo/test.kt:20: ${explanation("Snackbar" to "Snackbar")}
                                     Snackbar()
-                                    ~~~~~~~~~~
+                                    ~~~~~~~~
                 src/foo/test.kt:21: ${explanation("LinearProgressIndicator" to "LinearProgressIndicator")}
                                     LinearProgressIndicator()
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~~~~~~~~~~~
                 src/foo/test.kt:22: ${explanation("CircularProgressIndicator" to "CircularProgressIndicator")}
                                     CircularProgressIndicator()
-                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~
                 src/foo/test.kt:23: ${explanation("MaterialTheme" to "SparkTheme")}
                                     MaterialTheme()
-                                    ~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~
                 15 errors, 0 warnings
                 """.trimIndent(),
             )
@@ -231,7 +231,7 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 """
                 src/foo/test.kt:8: ${explanation("Image" to "Illustration")}
                                     Image()
-                                    ~~~~~~~
+                                    ~~~~~
                 1 errors, 0 warnings
                 """.trimIndent(),
             )
@@ -273,10 +273,10 @@ public class MaterialComposableUsageDetectorTest : LintDetectorTest() {
                 """
                 src/foo/test.kt:9: ${explanation("AsyncImage" to "Image")}
                                     AsyncImage()
-                                    ~~~~~~~~~~~~
+                                    ~~~~~~~~~~
                 src/foo/test.kt:10: ${explanation("SubcomposeAsyncImage" to "Image")}
                                     SubcomposeAsyncImage()
-                                    ~~~~~~~~~~~~~~~~~~~~~~
+                                    ~~~~~~~~~~~~~~~~~~~~
                 2 errors, 0 warnings
                 """.trimIndent(),
             )
