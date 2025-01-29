@@ -21,6 +21,9 @@
  */
 package com.adevinta.spark.components.stepper
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.VisibilityThreshold
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,6 +41,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.text
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
@@ -171,7 +175,6 @@ public fun Stepper(
         testTag = testTag,
         allowSemantics = allowSemantics,
     )
-    AssistChipDefaults
 }
 
 
@@ -181,6 +184,11 @@ public object StepperDefaults {
         unfocusedBorderColor = SparkTheme.colors.outline,
         containerColor = SparkTheme.colors.onSurface.transparent,
         disabledContainerColor = SparkTheme.colors.onSurface.dim5,
+    )
+
+    internal val textAnimationSpec = spring(
+        stiffness = Spring.StiffnessMedium,
+        visibilityThreshold = IntOffset.VisibilityThreshold,
     )
 }
 

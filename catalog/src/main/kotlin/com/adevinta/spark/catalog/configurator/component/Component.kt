@@ -104,7 +104,6 @@ public fun ConfiguratorComponentScreen(
                 )
             }
 
-            configurator.content()
             with(configurator) {
                 this@Column.content(snackbarHostState)
             }
