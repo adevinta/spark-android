@@ -322,7 +322,7 @@ private fun OutlinedBorderContainerBox(
 
 @Composable
 private fun SupportingText(
-    text: String,
+    text: String?,
     counterComposable: @Composable ((Modifier) -> Unit)?,
     statusIcon: @Composable ((Modifier) -> Unit)?,
 ) {
@@ -333,7 +333,7 @@ private fun SupportingText(
         statusIcon?.invoke(Modifier.padding(end = 4.dp))
         Text(
             modifier = Modifier.weight(1f, fill = true),
-            text = text,
+            text = text.orEmpty(),
         )
         counterComposable?.invoke(Modifier.padding(start = 8.dp))
     }
@@ -433,18 +433,14 @@ private fun supportText(
     stateMessage: String?,
     counterComposable: @Composable ((Modifier) -> Unit)?,
     stateIcon: @Composable ((Modifier) -> Unit)?,
-): (@Composable () -> Unit)? = if (stateMessage != null && state != null) {
+): (@Composable () -> Unit)? = if (
+    (stateMessage != null && state != null) || helper != null || counterComposable != null
+) {
     {
+        // Prioritize the state message if there's one and fallback to the helper otherwise
+        val message = state?.let { stateMessage } ?: helper
         SupportingText(
-            text = stateMessage,
-            counterComposable = counterComposable,
-            statusIcon = stateIcon,
-        )
-    }
-} else if (helper != null) {
-    {
-        SupportingText(
-            text = helper,
+            text = message,
             counterComposable = counterComposable,
             statusIcon = stateIcon,
         )
@@ -461,7 +457,7 @@ internal object TextFieldDefault {
 
         return { modifier ->
             Icon(
-                modifier = modifier.size(16.dp),
+                modifier = modifier.size(18.dp),
                 sparkIcon = state.icon,
                 contentDescription = null,
             )

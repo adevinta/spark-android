@@ -31,7 +31,7 @@ import com.adevinta.spark.catalog.model.Component
 import kotlinx.serialization.Serializable
 
 @Serializable
-private data class ConfiguratorShowcase(val componentId: Int)
+private data class ConfiguratorShowcase(val componentId: Int, val configuratorIndex: Int)
 
 internal fun NavGraphBuilder.configuratorsDestination(
     navController: NavHostController,
@@ -42,8 +42,10 @@ internal fun NavGraphBuilder.configuratorsDestination(
         ComponentsListScreen(
             components = components,
             contentPadding = contentPadding,
-            onConfiguratorClick = { id ->
-                navController.navigate(route = ConfiguratorShowcase(componentId = id))
+            onConfiguratorSelected = { id, index ->
+                navController.navigate(
+                    route = ConfiguratorShowcase(componentId = id, configuratorIndex = index),
+                )
             },
         )
     }
@@ -51,10 +53,16 @@ internal fun NavGraphBuilder.configuratorsDestination(
     composable<ConfiguratorShowcase> { navBackStackEntry ->
         val configuratorShowcase = navBackStackEntry.toRoute<ConfiguratorShowcase>()
         val componentId = configuratorShowcase.componentId
-        val component = components.first { component -> component.configurator != null && component.id == componentId }
+        val configuratorIndex = configuratorShowcase.configuratorIndex
+        val component =
+            components.first { component ->
+                component.configurators.firstOrNull() != null &&
+                    component.id == componentId
+            }
+        val configurator = component.configurators.get(configuratorIndex)
         ConfiguratorComponentScreen(
             component = component,
-            configurator = requireNotNull(component.configurator),
+            configurator = configurator,
         )
     }
 }

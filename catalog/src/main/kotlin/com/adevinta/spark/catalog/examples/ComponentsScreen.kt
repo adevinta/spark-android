@@ -39,12 +39,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.examples.component.ComponentItem
 import com.adevinta.spark.catalog.model.Component
+import com.adevinta.spark.catalog.themes.NavigationMode
+import com.adevinta.spark.catalog.ui.navigation.NavHostSpark
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
 
@@ -53,13 +54,15 @@ public fun ComponentsScreen(
     modifier: Modifier = Modifier,
     components: List<Component>,
     contentPadding: PaddingValues,
+    navigationMode: NavigationMode,
 ) {
     val navController = rememberNavController()
 
-    NavHost(
+    NavHostSpark(
         modifier = modifier,
         navController = navController,
         startDestination = ExamplesList,
+        navigationMode = navigationMode,
         builder = {
             examplesDestination(
                 navController = navController,
@@ -126,8 +129,9 @@ internal fun ComponentsListScreen(
             itemContent = { component ->
                 ComponentItem(
                     component = component,
-                    onClick = {
-                        val componentId = component.id
+                    countIndicator = component.examples.size,
+                    onClick = { selectedComponent, _ ->
+                        val componentId = selectedComponent.id
                         onExampleSectionClick(componentId)
                     },
                 )

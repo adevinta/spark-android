@@ -29,6 +29,7 @@
 
     <string name="scale">%.1f</string>
     <string name="example_tokens_elevation_label">Elevation value: %d</string>
+    <string name="themepicker_navigation_label">Navigation Motion</string>
 
     <string name="description">Description</string>
     <string name="examples">Examples</string>

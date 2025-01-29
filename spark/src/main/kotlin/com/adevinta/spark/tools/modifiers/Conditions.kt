@@ -36,7 +36,7 @@ import androidx.compose.ui.Modifier
  * @param builder the modifier(s) to apply when [predicate] is true
  */
 public inline fun Modifier.ifTrue(predicate: Boolean, builder: Modifier.() -> Modifier): Modifier =
-    then(if (predicate) this.builder() else Modifier)
+    then(if (predicate) this.builder() else this)
 
 /**
  * Modifier to make it easy to conditionally add a modifier based on [predicate]
@@ -51,7 +51,7 @@ public inline fun Modifier.ifTrue(predicate: Boolean, builder: Modifier.() -> Mo
  * @param builder the modifier(s) to apply when [predicate] is false
  */
 public inline fun Modifier.ifFalse(predicate: Boolean, builder: Modifier.() -> Modifier): Modifier =
-    then(if (!predicate) this.builder() else Modifier)
+    then(if (!predicate) this.builder() else this)
 
 /**
  * Modifier to make it easy to conditionally add a modifier based on [value] nullability
@@ -66,7 +66,7 @@ public inline fun Modifier.ifFalse(predicate: Boolean, builder: Modifier.() -> M
  * @param builder the modifier(s) to apply when [value] is not null
  */
 public inline fun <T : Any> Modifier.ifNotNull(value: T?, builder: Modifier.(T) -> Modifier): Modifier =
-    then(if (value != null) this.builder(value) else Modifier)
+    then(if (value != null) this.builder(value) else this)
 
 /**
  * Modifier to make it easy to conditionally add a modifier based on [value] nullability
@@ -81,4 +81,4 @@ public inline fun <T : Any> Modifier.ifNotNull(value: T?, builder: Modifier.(T) 
  * @param builder the modifier(s) to apply when [value] is null
  */
 public inline fun <T : Any> Modifier.ifNull(value: T?, builder: Modifier.() -> Modifier): Modifier =
-    then(if (value == null) this.builder() else Modifier)
+    then(if (value == null) this.builder() else this)
