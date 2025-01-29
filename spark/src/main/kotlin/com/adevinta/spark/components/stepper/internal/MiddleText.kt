@@ -21,31 +21,48 @@
  */
 package com.adevinta.spark.components.stepper.internal
 
+import android.R.attr.end
+import android.R.attr.endX
+import android.R.attr.strokeWidth
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SegmentedButtonDefaults.borderStroke
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.textfields.AnimationDuration
 import com.adevinta.spark.components.textfields.DefaultSparkTextFieldColors
 import com.adevinta.spark.components.textfields.FormFieldStatus
 import com.adevinta.spark.components.textfields.OutlinedBorderContainerBox
+import com.adevinta.spark.components.textfields.animateBorderStrokeAsState
 import com.adevinta.spark.components.textfields.sparkOutlinedTextFieldColors
+import com.adevinta.spark.components.textfields.textFieldBackground
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun MiddleTextField(
+internal fun MiddleText(
     value: Int,
     enabled: Boolean,
     colors: DefaultSparkTextFieldColors,
@@ -74,14 +91,38 @@ internal fun MiddleTextField(
                     color = colors.textColor(enabled).value,
                 )
             }
-            OutlinedBorderContainerBox(
-                modifier = Modifier.matchParentSize(),
-                enabled = enabled,
-                readOnly = false,
-                status = status,
-                interactionSource = interactionSource,
-                colors = colors,
-                shape = SparkTheme.shapes.none,
+            val borderStroke by animateBorderStrokeAsState(
+                enabled,
+                false,
+                status,
+                interactionSource,
+                colors,
+            )
+            val containerColor by animateColorAsState(
+                targetValue = colors.containerColor(enabled).value,
+                animationSpec = tween(durationMillis = AnimationDuration),
+            )
+            Box(
+                Modifier
+                    .matchParentSize()
+                    .drawBehind {
+                        val strokeWidth = borderStroke.width.toPx()
+                        val startX = 0f - 1f // Make sure that we don't get a 1px space band du to aliasing
+                        val endX = size.width + 1f
+                        drawLine(
+                            brush = borderStroke.brush,
+                            strokeWidth = strokeWidth,
+                            start = Offset(startX, strokeWidth / 2),
+                            end = Offset(endX, strokeWidth / 2),
+                        )
+                        drawLine(
+                            brush = borderStroke.brush,
+                            strokeWidth = strokeWidth,
+                            start = Offset(startX, size.height - strokeWidth / 2),
+                            end = Offset(endX, size.height - strokeWidth / 2),
+                        )
+                    }
+                    .textFieldBackground({ containerColor }, SparkTheme.shapes.none),
             )
         }
     }
@@ -91,7 +132,7 @@ internal fun MiddleTextField(
 @Composable
 private fun MiddleTextFieldPreview() {
     PreviewTheme {
-        MiddleTextField(
+        MiddleText(
             value = 1,
             status = null,
             enabled = true,

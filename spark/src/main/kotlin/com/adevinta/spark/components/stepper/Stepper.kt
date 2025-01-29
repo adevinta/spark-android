@@ -25,6 +25,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
@@ -41,7 +42,6 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
-import com.adevinta.spark.SparkTheme.colors
 import com.adevinta.spark.components.stepper.internal.SparkStepper
 import com.adevinta.spark.components.stepper.internal.stepperSemantics
 import com.adevinta.spark.components.stepper.internal.supportText
@@ -51,6 +51,8 @@ import com.adevinta.spark.components.textfields.TextFieldDefault
 import com.adevinta.spark.components.textfields.sparkOutlinedTextFieldColors
 import com.adevinta.spark.tokens.EmphasizeDim3
 import com.adevinta.spark.tokens.dim1
+import com.adevinta.spark.tokens.dim5
+import com.adevinta.spark.tokens.transparent
 import com.adevinta.spark.tools.modifiers.invisibleSemantic
 
 /**
@@ -84,9 +86,7 @@ public fun Stepper(
     isFlexible: Boolean = false,
     testTag: String? = null,
 ) {
-    val colors = sparkOutlinedTextFieldColors(
-        unfocusedBorderColor = SparkTheme.colors.outline,
-    )
+    val colors = StepperDefaults.stepperColors()
     val mandatoryDescription = if (required) stringResource(id = R.string.spark_textfield_content_description) else null
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -170,6 +170,17 @@ public fun Stepper(
         isFlexible = isFlexible,
         testTag = testTag,
         allowSemantics = allowSemantics,
+    )
+    AssistChipDefaults
+}
+
+
+public object StepperDefaults {
+    @Composable
+    internal fun stepperColors() = sparkOutlinedTextFieldColors(
+        unfocusedBorderColor = SparkTheme.colors.outline,
+        containerColor = SparkTheme.colors.onSurface.transparent,
+        disabledContainerColor = SparkTheme.colors.onSurface.dim5,
     )
 }
 

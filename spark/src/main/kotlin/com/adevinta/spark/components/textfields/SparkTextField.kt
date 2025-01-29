@@ -356,7 +356,7 @@ internal fun Modifier.textFieldBackground(
     }
 
 @Composable
-private fun animateBorderStrokeAsState(
+internal fun animateBorderStrokeAsState(
     enabled: Boolean,
     readOnly: Boolean,
     state: TextFieldState?,

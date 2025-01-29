@@ -75,15 +75,13 @@ public val StepperConfigurators: List<Configurator> = listOf(
 private fun ColumnScope.StepperSample(snackbarState: SnackbarHostState) {
     var isEnabled by remember { mutableStateOf(true) }
     var min by remember { mutableIntStateOf(-2) }
-    var max by remember { mutableIntStateOf(1000000000) }
-    var value by remember { mutableIntStateOf(10000000) }
+    var max by remember { mutableIntStateOf(100) }
+    var value by remember { mutableIntStateOf(99) }
     var isFlexible by remember { mutableStateOf(false) }
     var status: TextFieldState? by remember { mutableStateOf(null) }
     val coroutineScope = rememberCoroutineScope()
     Stepper(
-        modifier = Modifier
-            .align(Alignment.CenterHorizontally)
-            .animateContentSize(),
+        modifier = Modifier.align(Alignment.CenterHorizontally),
         value = value,
         onValueChange = {
             value = it

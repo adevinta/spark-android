@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CornerSize
@@ -41,14 +40,19 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.components.stepper.StepperDefaults
 import com.adevinta.spark.components.textfields.FormFieldStatus
 import com.adevinta.spark.components.textfields.sparkOutlinedTextFieldColors
 import com.adevinta.spark.icons.Minus
 import com.adevinta.spark.icons.Plus
 import com.adevinta.spark.icons.SparkIcons
+import com.adevinta.spark.tokens.dim5
+import com.adevinta.spark.tokens.transparent
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.invisibleSemantic
 import kotlin.math.roundToInt
@@ -65,9 +69,7 @@ internal fun SparkStepper(
     testTag: String? = null,
     allowSemantics: Boolean = true,
 ) {
-    val colors = sparkOutlinedTextFieldColors(
-        unfocusedBorderColor = SparkTheme.colors.outline,
-    )
+    val colors = StepperDefaults.stepperColors()
     val coerced = value.coerceIn(range)
     fun setValue(value: Int) =
         onValueChange(value.coerceIn(range))
@@ -88,13 +90,12 @@ internal fun SparkStepper(
         IconButton(
             modifier = Modifier
                 .fillMaxHeight()
-                .offset(x = 1.dp) // overlap with the MiddleTextField to have a 1.dp border
-                .zIndex(1f)
                 .generateStepperTestTag(testTag, "Decrement"),
             sparkIcon = SparkIcons.Minus,
             contentDescription = "", // handled by semantics modifier
             enabled = enabled && coerced > range.first,
             colors = colors,
+            status = status,
             shape = SparkTheme.shapes.large.copy(
                 topEnd = CornerSize(0.dp),
                 bottomEnd = CornerSize(0.dp),
@@ -102,7 +103,7 @@ internal fun SparkStepper(
             onClick = { setValue(coerced - 1) },
         )
 
-        MiddleTextField(
+        MiddleText(
             modifier = Modifier
                 .then(
                     if (isFlexible) {
@@ -111,7 +112,7 @@ internal fun SparkStepper(
                         modifier.widthIn(min = 56.dp)
                     },
                 )
-                .zIndex(2f) // Draw above the buttons otherwise the end border will be on top
+                .fillMaxHeight()
                 .invisibleSemantic(),
             value = coerced,
             status = status,
@@ -122,13 +123,12 @@ internal fun SparkStepper(
         IconButton(
             modifier = Modifier
                 .fillMaxHeight()
-                .offset(x = (-1).dp) // overlap with the MiddleTextField to have a 1.dp border
-                .zIndex(1f)
                 .generateStepperTestTag(testTag, "Increment"),
             sparkIcon = SparkIcons.Plus,
             contentDescription = "", // handled by semantics modifier
             enabled = enabled && coerced < range.last,
             colors = colors,
+            status = status,
             shape = SparkTheme.shapes.large.copy(
                 topStart = CornerSize(0.dp),
                 bottomStart = CornerSize(0.dp),
@@ -179,3 +179,19 @@ private fun Modifier.generateStepperTestTag(testTag: String?, action: String): M
         testTagsAsResourceId = true
     }.testTag("${testTag}$action")
 } ?: this
+
+@Preview
+@Composable
+private fun PreviewSparkStepper() {
+    PreviewTheme {
+        SparkStepper(
+            value = 1234,
+            onValueChange = {},
+        )
+        SparkStepper(
+            value = 1234,
+            onValueChange = {},
+            status = FormFieldStatus.Error
+        )
+    }
+}
