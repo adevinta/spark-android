@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [1.1.3]
+
+_2025-01-29_
+
+### Spark
+- 🛠 Use latest and simpler workaround to display a Dialog in fullscreen with support to edge-to-edge. 
+- 🛠️ Modal `inEdgeToEdge` parameter now default to false.
+
 ## [1.1.2]
 
 _2025-01-29_
@@ -430,11 +438,13 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.2...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.3...HEAD
 
-[1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.2
+[1.1.3]: https://github.com/adevinta/spark-android/releases/tag/1.1.3
 
-[1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.1
+[1.1.2]: https://github.com/adevinta/spark-android/releases/tag/1.1.2
+
+[1.1.1]: https://github.com/adevinta/spark-android/releases/tag/1.1.1
 
 [1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.0
 
