@@ -4,6 +4,16 @@
 
 ## [Unreleased]
 
+## [1.1.1]
+
+_2025-01-28_
+
+### Spark
+- 🐛 Fix character counter not displaying if no helper message is provided.
+- 🐛 `Image` no longer use a `BoxWithConstraint`as its root component which forbid intrinsic sizes
+- 🐛 Revert `Image` behavior on sizing with empty/loading/error states.
+
+
 ## [1.1.0]
 
 _2025-01-06_
@@ -412,7 +422,9 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.1...HEAD
+
+[1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.1
 
 [1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.0
 
