@@ -271,7 +271,7 @@ private val Stepper = Component(
     docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.stepper/index.html",
     sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/stepper/Stepper.kt",
     examples = StepperExamples,
-    configurators = StepperConfigurator,
+    configurators = StepperConfigurators,
 )
 
 private val Switches = Component(

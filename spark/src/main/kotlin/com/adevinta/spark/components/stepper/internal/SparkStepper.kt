@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.runtime.Composable
@@ -107,7 +108,7 @@ internal fun SparkStepper(
                     if (isFlexible) {
                         modifier.weight(1.0f)
                     } else {
-                        modifier.width(56.dp)
+                        modifier.widthIn(min = 56.dp)
                     },
                 )
                 .zIndex(2f) // Draw above the buttons otherwise the end border will be on top
@@ -144,33 +145,31 @@ internal fun Modifier.stepperSemantics(
     onValueChange: (Int) -> Unit,
     range: IntRange,
     enabled: Boolean,
-): Modifier =
-    semantics(mergeDescendants = true) {
-        // this is needed to use volume keys
-        setProgress { targetValue ->
-            // without this rounding the values will only decrease
-            val newValue = targetValue
-                .roundToInt()
-                .coerceIn(range)
-            if (newValue != value) {
-                onValueChange(newValue)
-                true
-            } else {
-                false
-            }
+): Modifier = semantics(mergeDescendants = true) {
+    // this is needed to use volume keys
+    setProgress { targetValue ->
+        // without this rounding the values will only decrease
+        val newValue = targetValue
+            .roundToInt()
+            .coerceIn(range)
+        if (newValue != value) {
+            onValueChange(newValue)
+            true
+        } else {
+            false
         }
-
-        // override describing percents
-        stateDescription = value.toString()
-
-        if (!enabled) disabled()
     }
-        .progressSemantics(
-            // this is needed to use volume keys
-            value = value.toFloat(),
-            valueRange = range.first.toFloat()..range.last.toFloat(),
-            steps = range.last - range.first,
-        )
+
+    // override describing percents
+    stateDescription = value.toString()
+
+    if (!enabled) disabled()
+}.progressSemantics(
+    // this is needed to use volume keys
+    value = value.toFloat(),
+    valueRange = range.first.toFloat()..range.last.toFloat(),
+    steps = range.last - range.first,
+)
 
 @OptIn(ExperimentalComposeUiApi::class)
 private fun Modifier.generateStepperTestTag(testTag: String?, action: String): Modifier = testTag?.let {
