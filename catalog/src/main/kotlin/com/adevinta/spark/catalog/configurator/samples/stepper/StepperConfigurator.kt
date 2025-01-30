@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.stepper
 
-import android.R.attr.label
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.ColumnScope
@@ -45,12 +44,12 @@ import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
-import com.adevinta.spark.components.image.ImageDefaults.placeholder
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.snackbars.SnackbarIntent
 import com.adevinta.spark.components.stepper.Stepper
 import com.adevinta.spark.components.stepper.StepperForm
 import com.adevinta.spark.components.text.Text
+import com.adevinta.spark.components.textfields.FormFieldStatus
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
@@ -80,6 +79,9 @@ private fun ColumnScope.StepperSample(snackbarState: SnackbarHostState) {
     var min by remember { mutableIntStateOf(-2) }
     var max by remember { mutableIntStateOf(100) }
     var value by remember { mutableIntStateOf(99) }
+    var step by remember { mutableIntStateOf(1) }
+    var stepFormStatus: TextFieldState? by remember { mutableStateOf(null) }
+    var stepStatusMessage: String? by remember { mutableStateOf(null) }
     var isFlexible by remember { mutableStateOf(false) }
     var suffix by remember { mutableStateOf("") }
     var status: TextFieldState? by remember { mutableStateOf(null) }
@@ -90,6 +92,7 @@ private fun ColumnScope.StepperSample(snackbarState: SnackbarHostState) {
         onValueChange = {
             value = it
         },
+        step = step,
         range = min..max,
         suffix = suffix,
         enabled = isEnabled,
@@ -194,17 +197,47 @@ private fun ColumnScope.StepperSample(snackbarState: SnackbarHostState) {
             placeholder = "15",
             helper = "Maximal range of the stepper",
         )
+        TextField(
+            modifier = Modifier.weight(1f),
+            value = suffix,
+            onValueChange = {
+                suffix = it
+            },
+            label = "Suffix",
+            placeholder = "%",
+            helper = "Suffix displayed after the value but is just decorative",
+        )
+        StepperForm(
+            value = step,
+            onValueChange = { newStep ->
+                when {
+                    max % newStep != 0 -> {
+                        stepFormStatus = FormFieldStatus.Error
+                        stepStatusMessage = "The max range must be a multiple of the step, but " +
+                            "has ${newStep % max} remaining"
+                    }
+
+                    min % newStep != 0 -> {
+                        stepFormStatus = FormFieldStatus.Error
+                        stepStatusMessage = "The min range must be a multiple of the step, but " +
+                            "has ${newStep % min} remaining"
+                    }
+
+                    else -> {
+                        stepFormStatus = null
+                        stepStatusMessage = null
+                        step = newStep
+                    }
+                }
+            },
+            range = 1..10,
+            label = "Step",
+            flexible = true,
+            status = stepFormStatus,
+            statusMessage = stepStatusMessage,
+            helper = "A step indicate by how much the stepper value is incremented or decremented",
+        )
     }
-    TextField(
-        modifier = Modifier.weight(1f),
-        value = suffix,
-        onValueChange = {
-            suffix = it
-        },
-        label = "Suffix",
-        placeholder = "%",
-        helper = "Suffix displayed after the value but is just decorative",
-    )
 }
 
 @OptIn(ExperimentalLayoutApi::class)

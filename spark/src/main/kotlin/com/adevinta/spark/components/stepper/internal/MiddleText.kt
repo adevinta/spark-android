@@ -130,7 +130,7 @@ internal fun MiddleText(
                         text = suffix,
                         textAlign = TextAlign.Center,
                         style = SparkTheme.typography.body1,
-                        modifier = Modifier.padding(start = 4.dp)
+                        modifier = Modifier.padding(start = 4.dp),
                     )
                 }
             }

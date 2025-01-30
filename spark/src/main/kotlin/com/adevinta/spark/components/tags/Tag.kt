@@ -23,7 +23,6 @@ package com.adevinta.spark.components.tags
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.slideOut
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ColumnScope
@@ -97,7 +96,7 @@ internal fun BaseSparkTag(
             ) {
                 AnimatedVisibility(
                     visible = leadingIcon != null,
-                    ) {
+                ) {
                     if (leadingIcon != null) {
                         CompositionLocalProvider(
                             LocalContentColor provides colors.contentColor,

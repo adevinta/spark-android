@@ -56,12 +56,20 @@ internal fun SparkStepper(
     modifier: Modifier = Modifier,
     range: IntRange = 0..10,
     suffix: String = "",
+    step: Int = 1,
     enabled: Boolean = true,
     status: FormFieldStatus? = null,
     flexible: Boolean = false,
     testTag: String? = null,
     allowSemantics: Boolean = true,
 ) {
+    require(step > 0) { "A step can only be a positive integer, but was $step" }
+    require(range.last % step == 0) {
+        "The max range must be a multiple of the step, but has ${step % range.last}  remaining"
+    }
+    require(range.first % step == 0) {
+        "The min range must be a multiple of the step, but has ${step % range.first}  remaining"
+    }
     val colors = StepperDefaults.stepperColors()
     val coerced = value.coerceIn(range)
     fun setValue(value: Int) =
@@ -93,7 +101,7 @@ internal fun SparkStepper(
                 topEnd = CornerSize(0.dp),
                 bottomEnd = CornerSize(0.dp),
             ),
-            onClick = { setValue(coerced - 1) },
+            onClick = { setValue(coerced - step) },
         )
 
         MiddleText(
@@ -128,7 +136,7 @@ internal fun SparkStepper(
                 bottomStart = CornerSize(0.dp),
             ),
             onClick = {
-                setValue(coerced + 1)
+                setValue(coerced + step)
             },
         )
     }

@@ -69,11 +69,14 @@ import kotlin.math.roundToInt
  * @param onValueChange The callback to be called when [value] has been incremented or decremented
  * @param modifier The [Modifier] to be applied to the component
  * @param range The min/max accepted value by the [Stepper] until it blocks increments and decrements
+ * @param suffix optional string displayed after [value]
+ * @param step the quantity to be increased/decreased on each increment/decrement
  * @param enabled True controls the enabled state of the [Stepper]. When `false`, the stepper will
  * be neither editable nor focusable, visually stepper will appear in the disabled UI state
  * @param status indicates the validation state of the stepper. The outline is tinted by the state color
  * @param flexible if true, component will fill max width, otherwise get default width
  * @param testTag A test tag to find the internal [Stepper] inside the [StepperForm] in a test
+ * @param allowSemantics dictate if the specific stepper semantics should be applied or not
  */
 @Composable
 public fun Stepper(
@@ -82,6 +85,7 @@ public fun Stepper(
     modifier: Modifier = Modifier,
     range: IntRange = 0..10,
     suffix: String = "",
+    step: Int = 1,
     enabled: Boolean = true,
     status: FormFieldStatus? = null,
     flexible: Boolean = false,
@@ -94,6 +98,7 @@ public fun Stepper(
         modifier = modifier,
         range = range,
         suffix = suffix,
+        step = step,
         enabled = enabled,
         status = status,
         flexible = flexible,
@@ -112,11 +117,15 @@ public fun Stepper(
  * information about expected text
  * @param range The min/max accepted value by the [Stepper] until it blocks increments and decrements
  * @param suffix optional string displayed after [value]
+ * @param step the quantity to be increased/decreased on each increment/decrement
  * @param enabled True controls the enabled state of the [Stepper]. When `false`, the stepper will
  * be neither editable nor focusable, visually stepper will appear in the disabled UI state
- * @param required add an asterisk to the label to indicate that this field is required and read it as "label mandatory field"
+ * @param required add an asterisk to the label to indicate that this field is required and read it as
+ * "label mandatory field"
  * but doesn't do anything else so it's up to the developer to handle the behavior
  * @param status indicates the validation state of the stepper. The outline is tinted by the state color
+ * @param statusMessage the optional state text to be displayed at the helper position that give more information about
+ * the status, it's displayed only when [status] is not null.
  * @param flexible if true, component will fill max width, otherwise get default width
  * @param testTag A test tag to find the internal [Stepper] inside the [StepperForm] in a test
  */
@@ -129,9 +138,11 @@ public fun StepperForm(
     modifier: Modifier = Modifier,
     range: IntRange = 0..10,
     suffix: String = "",
+    step: Int = 1,
     enabled: Boolean = true,
     required: Boolean = false,
     status: FormFieldStatus? = null,
+    statusMessage: String? = null,
     flexible: Boolean = false,
     testTag: String? = null,
 ) {
@@ -173,26 +184,25 @@ public fun StepperForm(
             range = range,
             enabled = enabled,
             suffix = suffix,
+            step = step,
             flexible = flexible,
             testTag = testTag,
             status = status,
             allowSemantics = false,
         )
 
-        helper?.let {
-            val stateIcon = TextFieldDefault.getStatusIcon(state = status)
-            val color by colors.supportingTextColor(enabled, status, interactionSource)
-            ProvideTextStyle(SparkTheme.typography.caption) {
-                CompositionLocalProvider(
-                    LocalContentColor provides color,
-                ) {
-                    supportText(
-                        helper = it,
-                        status = status,
-                        stateMessage = "TODO()",
-                        stateIcon = stateIcon,
-                    )?.invoke()
-                }
+        val stateIcon = TextFieldDefault.getStatusIcon(state = status)
+        val color by colors.supportingTextColor(enabled, status, interactionSource)
+        ProvideTextStyle(SparkTheme.typography.caption) {
+            CompositionLocalProvider(
+                LocalContentColor provides color,
+            ) {
+                supportText(
+                    helper = helper,
+                    status = status,
+                    stateMessage = statusMessage,
+                    stateIcon = stateIcon,
+                )?.invoke()
             }
         }
     }
@@ -270,7 +280,6 @@ public fun Modifier.stepperSemantics(
     valueRange = range.first.toFloat()..range.last.toFloat(),
     steps = range.last - range.first,
 )
-
 
 public object StepperDefaults {
     @Composable
