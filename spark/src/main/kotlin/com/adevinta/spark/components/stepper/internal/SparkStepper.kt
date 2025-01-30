@@ -25,9 +25,7 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,27 +33,21 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.setProgress
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.stepper.StepperDefaults
+import com.adevinta.spark.components.stepper.stepperSemantics
 import com.adevinta.spark.components.textfields.FormFieldStatus
-import com.adevinta.spark.components.textfields.sparkOutlinedTextFieldColors
 import com.adevinta.spark.icons.Minus
 import com.adevinta.spark.icons.Plus
 import com.adevinta.spark.icons.SparkIcons
-import com.adevinta.spark.tokens.dim5
-import com.adevinta.spark.tokens.transparent
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.invisibleSemantic
-import kotlin.math.roundToInt
 
 @Composable
 internal fun SparkStepper(
@@ -63,9 +55,10 @@ internal fun SparkStepper(
     onValueChange: (Int) -> Unit,
     modifier: Modifier = Modifier,
     range: IntRange = 0..10,
+    suffix: String = "",
     enabled: Boolean = true,
     status: FormFieldStatus? = null,
-    isFlexible: Boolean = false,
+    flexible: Boolean = false,
     testTag: String? = null,
     allowSemantics: Boolean = true,
 ) {
@@ -106,7 +99,7 @@ internal fun SparkStepper(
         MiddleText(
             modifier = Modifier
                 .then(
-                    if (isFlexible) {
+                    if (flexible) {
                         modifier.weight(1.0f)
                     } else {
                         modifier.widthIn(min = 56.dp)
@@ -115,6 +108,7 @@ internal fun SparkStepper(
                 .fillMaxHeight()
                 .invisibleSemantic(),
             value = coerced,
+            suffix = suffix,
             status = status,
             enabled = enabled,
             colors = colors,
@@ -140,37 +134,6 @@ internal fun SparkStepper(
     }
 }
 
-internal fun Modifier.stepperSemantics(
-    value: Int,
-    onValueChange: (Int) -> Unit,
-    range: IntRange,
-    enabled: Boolean,
-): Modifier = semantics(mergeDescendants = true) {
-    // this is needed to use volume keys
-    setProgress { targetValue ->
-        // without this rounding the values will only decrease
-        val newValue = targetValue
-            .roundToInt()
-            .coerceIn(range)
-        if (newValue != value) {
-            onValueChange(newValue)
-            true
-        } else {
-            false
-        }
-    }
-
-    // override describing percents
-    stateDescription = value.toString()
-
-    if (!enabled) disabled()
-}.progressSemantics(
-    // this is needed to use volume keys
-    value = value.toFloat(),
-    valueRange = range.first.toFloat()..range.last.toFloat(),
-    steps = range.last - range.first,
-)
-
 @OptIn(ExperimentalComposeUiApi::class)
 private fun Modifier.generateStepperTestTag(testTag: String?, action: String): Modifier = testTag?.let {
     semantics {
@@ -191,7 +154,7 @@ private fun PreviewSparkStepper() {
         SparkStepper(
             value = 1234,
             onValueChange = {},
-            status = FormFieldStatus.Error
+            status = FormFieldStatus.Error,
         )
     }
 }

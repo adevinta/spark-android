@@ -31,12 +31,15 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextFieldDefaults.DecorationBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -68,6 +71,7 @@ internal fun MiddleText(
     colors: DefaultSparkTextFieldColors,
     status: FormFieldStatus?,
     modifier: Modifier = Modifier,
+    suffix: String = "",
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
@@ -78,12 +82,12 @@ internal fun MiddleText(
             propagateMinConstraints = true,
             contentAlignment = Alignment.Center,
         ) {
-            Box(
+            Row(
                 modifier = Modifier.padding(
                     vertical = 12.dp,
                     horizontal = 8.dp,
                 ),
-                contentAlignment = Alignment.Center,
+                horizontalArrangement = Arrangement.Center,
             ) {
                 AnimatedContent(
                     targetState = value,
@@ -119,6 +123,14 @@ internal fun MiddleText(
                         style = SparkTheme.typography.body1,
                         maxLines = 1,
                         color = colors.textColor(enabled).value,
+                    )
+                }
+                if (suffix.isNotEmpty()) {
+                    Text(
+                        text = suffix,
+                        textAlign = TextAlign.Center,
+                        style = SparkTheme.typography.body1,
+                        modifier = Modifier.padding(start = 4.dp)
                     )
                 }
             }
@@ -177,6 +189,7 @@ private fun MiddleTextFieldPreview() {
             value = 1,
             status = null,
             enabled = true,
+            suffix = "€",
             colors = sparkOutlinedTextFieldColors(),
         )
     }

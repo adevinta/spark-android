@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.stepper.Stepper
+import com.adevinta.spark.components.stepper.StepperForm
 import com.adevinta.spark.components.textfields.FormFieldStatus
 
 public val StepperExamples: List<Example> = listOf(
@@ -43,14 +44,14 @@ public val StepperExamples: List<Example> = listOf(
                 value = it
             },
         )
-        Stepper(
+        StepperForm(
             value = value,
             onValueChange = {
                 value = it
             },
             label = "Label",
             required = true,
-            helperText = "Exemple de message d'aide",
+            helper = "Exemple de message d'aide",
         )
     },
     Example(
@@ -58,34 +59,34 @@ public val StepperExamples: List<Example> = listOf(
         description = "Disabled and all regular states available for the TestField.",
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",
     ) {
-        Stepper(
+        StepperForm(
             value = 1,
             onValueChange = {},
             status = FormFieldStatus.Error,
             label = "Label",
-            helperText = "helper message",
+            helper = "helper message",
             enabled = false,
         )
-        Stepper(
+        StepperForm(
             value = 1,
             onValueChange = {},
             status = FormFieldStatus.Error,
             label = "Label",
-            helperText = "helper message",
+            helper = "helper message",
         )
-        Stepper(
+        StepperForm(
             value = -1,
             onValueChange = {},
             status = FormFieldStatus.Alert,
             label = "Label",
-            helperText = "helper message",
+            helper = "helper message",
         )
-        Stepper(
+        StepperForm(
             value = -1234,
             onValueChange = {},
             status = FormFieldStatus.Success,
             label = "Label",
-            helperText = "helper message",
+            helper = "helper message",
         )
     },
     // Example(

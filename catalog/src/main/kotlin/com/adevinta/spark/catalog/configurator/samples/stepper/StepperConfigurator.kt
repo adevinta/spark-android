@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.catalog.configurator.samples.stepper
 
+import android.R.attr.label
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.layout.Arrangement.Absolute.spacedBy
 import androidx.compose.foundation.layout.ColumnScope
@@ -44,9 +45,11 @@ import com.adevinta.spark.catalog.model.Configurator
 import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.image.ImageDefaults.placeholder
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 import com.adevinta.spark.components.snackbars.SnackbarIntent
 import com.adevinta.spark.components.stepper.Stepper
+import com.adevinta.spark.components.stepper.StepperForm
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldState
@@ -78,6 +81,7 @@ private fun ColumnScope.StepperSample(snackbarState: SnackbarHostState) {
     var max by remember { mutableIntStateOf(100) }
     var value by remember { mutableIntStateOf(99) }
     var isFlexible by remember { mutableStateOf(false) }
+    var suffix by remember { mutableStateOf("") }
     var status: TextFieldState? by remember { mutableStateOf(null) }
     val coroutineScope = rememberCoroutineScope()
     Stepper(
@@ -87,8 +91,9 @@ private fun ColumnScope.StepperSample(snackbarState: SnackbarHostState) {
             value = it
         },
         range = min..max,
+        suffix = suffix,
         enabled = isEnabled,
-        isFlexible = isFlexible,
+        flexible = isFlexible,
         status = status,
     )
     SwitchLabelled(
@@ -190,6 +195,16 @@ private fun ColumnScope.StepperSample(snackbarState: SnackbarHostState) {
             helper = "Maximal range of the stepper",
         )
     }
+    TextField(
+        modifier = Modifier.weight(1f),
+        value = suffix,
+        onValueChange = {
+            suffix = it
+        },
+        label = "Suffix",
+        placeholder = "%",
+        helper = "Suffix displayed after the value but is just decorative",
+    )
 }
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -205,7 +220,7 @@ private fun ColumnScope.StepperFormSample(snackbarState: SnackbarHostState) {
     var labelText by remember { mutableStateOf("Label") }
     var helperText by remember { mutableStateOf("Helper message") }
     val coroutineScope = rememberCoroutineScope()
-    Stepper(
+    StepperForm(
         modifier = Modifier
             .align(Alignment.CenterHorizontally)
             .animateContentSize(),
@@ -216,10 +231,10 @@ private fun ColumnScope.StepperFormSample(snackbarState: SnackbarHostState) {
         required = isRequired,
         range = min..max,
         enabled = isEnabled,
-        isFlexible = isFlexible,
+        flexible = isFlexible,
         status = status,
         label = labelText,
-        helperText = helperText,
+        helper = helperText,
     )
     SwitchLabelled(
         checked = isEnabled,
