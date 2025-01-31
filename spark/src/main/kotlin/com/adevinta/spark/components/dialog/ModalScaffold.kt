@@ -288,7 +288,7 @@ private fun PhonePortraitModalScaffold(
         properties = properties,
     ) {
         // Work around for b/246909281 as for now Dialog doesn't pass the drawing insets to its content
-        SetUpEdgeToEdgeDialog()
+        if (inEdgeToEdge) SetUpEdgeToEdgeDialog()
 
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
@@ -386,7 +386,7 @@ private fun PhoneLandscapeModalScaffold(
         properties = properties,
     ) {
         // Work around for b/246909281 as for now Dialog doesn't pass the drawing insets to its content
-        SetUpEdgeToEdgeDialog()
+        if (inEdgeToEdge) SetUpEdgeToEdgeDialog()
         val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
         Scaffold(
