@@ -99,7 +99,7 @@ internal fun IconExampleScreen(
                 modifier = Modifier
                     .size(128.dp)
                     .sharedElement(
-                        state = sharedTransitionScope.rememberSharedContentState(key = "icon-$name"),
+                        sharedContentState = sharedTransitionScope.rememberSharedContentState(key = "icon-$name"),
                         animatedVisibilityScope = animatedContentScope,
                     ),
                 atEnd = atEnd,

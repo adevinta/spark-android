@@ -22,8 +22,8 @@
 package com.adevinta.spark.tools.modifiers
 
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 
 public fun Modifier.invisibleSemantic(): Modifier =
-    semantics { invisibleToUser() }
+    semantics { hideFromAccessibility() }
