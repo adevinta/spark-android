@@ -22,8 +22,10 @@
 package com.adevinta.spark.components.tags
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -35,6 +37,10 @@ import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -88,7 +94,9 @@ internal fun BaseSparkTag(
                 horizontalArrangement = Arrangement.spacedBy(LeadingIconEndSpacing, Alignment.Start),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                AnimatedVisibility(visible = leadingIcon != null) {
+                AnimatedVisibility(
+                    visible = leadingIcon != null,
+                ) {
                     if (leadingIcon != null) {
                         CompositionLocalProvider(
                             LocalContentColor provides colors.contentColor,
@@ -111,6 +119,46 @@ internal fun BaseSparkTag(
                     content()
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun <T> ColumnScope.AnimatedVisibility(
+    value: T?,
+    modifier: Modifier = Modifier,
+    content: @Composable AnimatedVisibilityScope.(T) -> Unit,
+) {
+    // null until non-null then never null again
+    var lastNonNullValueOrNull by remember { mutableStateOf(value) }
+    lastNonNullValueOrNull = value ?: lastNonNullValueOrNull
+
+    AnimatedVisibility(
+        visible = value != null,
+        modifier = modifier,
+    ) {
+        lastNonNullValueOrNull?.let {
+            content(it)
+        }
+    }
+}
+
+@Composable
+private fun <T> RowScope.AnimatedVisibility(
+    value: T?,
+    modifier: Modifier = Modifier,
+    content: @Composable AnimatedVisibilityScope.(T) -> Unit,
+) {
+    // null until non-null then never null again
+    var lastNonNullValueOrNull by remember { mutableStateOf(value) }
+    lastNonNullValueOrNull = value ?: lastNonNullValueOrNull
+
+    AnimatedVisibility(
+        visible = value != null,
+        modifier = modifier,
+    ) {
+        lastNonNullValueOrNull?.let {
+            content(it)
         }
     }
 }

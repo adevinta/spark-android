@@ -144,7 +144,7 @@ internal fun SparkTextField(
             minLines = minLines,
             decorationBox = @Composable { innerTextField ->
                 val counterComposable = counterText(counter)
-                val stateIcon = TextFieldDefault.getStateIcon(state = state)
+                val stateIcon = TextFieldDefault.getStatusIcon(state = state)
                 val supportingTextComposable = supportText(
                     helper = helper,
                     state = state,
@@ -175,6 +175,7 @@ internal fun SparkTextField(
                         state,
                         interactionSource,
                         colors,
+                        SparkTheme.shapes.large,
                     )
                 }
             },
@@ -241,7 +242,7 @@ internal fun SparkTextField(
             minLines = minLines,
             decorationBox = @Composable { innerTextField ->
                 val counterComposable = counterText(counter)
-                val stateIcon = TextFieldDefault.getStateIcon(state = state)
+                val stateIcon = TextFieldDefault.getStatusIcon(state = state)
                 val supportingTextComposable = supportText(
                     helper = helper,
                     state = state,
@@ -272,6 +273,7 @@ internal fun SparkTextField(
                         state,
                         interactionSource,
                         colors,
+                        SparkTheme.shapes.large,
                     )
                 }
             },
@@ -287,25 +289,26 @@ internal fun SparkTextField(
  *
  * @param enabled whether the text field is enabled
  * @param readOnly whether the text field's value can't be edited
- * @param state whether the text field's current value is in error, success or alert
+ * @param status whether the text field's current value is in error, success or alert
  * @param interactionSource the [InteractionSource] of this text field. Helps to determine if
  * the text field is in focus or not
  * @param colors [TextFieldColors] used to resolve colors of the text field
  */
 @ExperimentalMaterial3Api
 @Composable
-private fun OutlinedBorderContainerBox(
+internal fun OutlinedBorderContainerBox(
     enabled: Boolean,
     readOnly: Boolean,
-    state: TextFieldState?,
+    status: TextFieldState?,
     interactionSource: InteractionSource,
     colors: DefaultSparkTextFieldColors,
+    shape: Shape,
+    modifier: Modifier = Modifier,
 ) {
-    val shape = SparkTheme.shapes.large
     val borderStroke = animateBorderStrokeAsState(
         enabled,
         readOnly,
-        state,
+        status,
         interactionSource,
         colors,
     )
@@ -314,7 +317,7 @@ private fun OutlinedBorderContainerBox(
         animationSpec = tween(durationMillis = AnimationDuration),
     )
     Box(
-        Modifier
+        modifier
             .border(borderStroke.value, shape)
             .textFieldBackground(containerColor::value, shape),
     )
@@ -353,7 +356,7 @@ internal fun Modifier.textFieldBackground(
     }
 
 @Composable
-private fun animateBorderStrokeAsState(
+internal fun animateBorderStrokeAsState(
     enabled: Boolean,
     readOnly: Boolean,
     state: TextFieldState?,
@@ -452,7 +455,7 @@ private fun supportText(
 internal object TextFieldDefault {
 
     @Composable
-    internal fun getStateIcon(state: TextFieldState?): (@Composable (Modifier) -> Unit)? {
+    internal fun getStatusIcon(state: TextFieldState?): (@Composable (Modifier) -> Unit)? {
         state ?: return null
 
         return { modifier ->
@@ -473,7 +476,7 @@ need to add additional padding themselves
 internal val OutlinedTextFieldTopPadding = 8.dp
 
 // The default Material height is 56.dp with 16.dp vertical padding, since we want 12.dp for ours we subtract 8.dp
-private val TextFieldMinHeight = 44.dp
+internal val TextFieldMinHeight = 44.dp
 
 @Preview(
     group = "TextFields",

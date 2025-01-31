@@ -21,9 +21,15 @@
  */
 package com.adevinta.spark.catalog.examples.samples.stepper
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import com.adevinta.spark.catalog.model.Example
-import com.adevinta.spark.catalog.ui.WipIllustration
 import com.adevinta.spark.catalog.util.SampleSourceUrl
+import com.adevinta.spark.components.stepper.Stepper
+import com.adevinta.spark.components.stepper.StepperForm
+import com.adevinta.spark.components.textfields.FormFieldStatus
 
 public val StepperExamples: List<Example> = listOf(
     Example(
@@ -31,27 +37,70 @@ public val StepperExamples: List<Example> = listOf(
         description = "Base interactions on stepper.",
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",
     ) {
-        WipIllustration()
+        var value by rememberSaveable { mutableIntStateOf(0) }
+        Stepper(
+            value = value,
+            onValueChange = {
+                value = it
+            },
+        )
+        StepperForm(
+            value = value,
+            onValueChange = {
+                value = it
+            },
+            label = "Label",
+            required = true,
+            helper = "Exemple de message d'aide",
+        )
     },
     Example(
         name = "Stepper States",
-        description = "Disabled, Readonly and all regular states available for the TestField.",
+        description = "Disabled and all regular states available for the TestField.",
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",
     ) {
-        WipIllustration()
+        StepperForm(
+            value = 1,
+            onValueChange = {},
+            status = FormFieldStatus.Error,
+            label = "Label",
+            helper = "helper message",
+            enabled = false,
+        )
+        StepperForm(
+            value = 1,
+            onValueChange = {},
+            status = FormFieldStatus.Error,
+            label = "Label",
+            helper = "helper message",
+        )
+        StepperForm(
+            value = -1,
+            onValueChange = {},
+            status = FormFieldStatus.Alert,
+            label = "Label",
+            helper = "helper message",
+        )
+        StepperForm(
+            value = -1234,
+            onValueChange = {},
+            status = FormFieldStatus.Success,
+            label = "Label",
+            helper = "helper message",
+        )
     },
-    Example(
-        name = "Stepper formats",
-        description = "Stepper can show a suffix like `%`, `€` or `person•s`.",
-        sourceUrl = "$SampleSourceUrl/RatingInputSample.kt",
-    ) {
-        WipIllustration()
-    },
-    Example(
-        name = "Stepper Custom Buttons",
-        description = "Custom implementation allow used defined button for de-increment.",
-        sourceUrl = "$SampleSourceUrl/RatingFullSample.kt",
-    ) {
-        WipIllustration()
-    },
+    // Example(
+    //       name = "Stepper formats",
+    //       description = "Stepper can show a suffix like `%`, `€` or `person•s`.",
+    //       sourceUrl = "$SampleSourceUrl/RatingInputSample.kt",
+    //   ) {
+    //       WipIllustration()
+    //  },
+    //  Example(
+    //     name = "Stepper Custom Buttons",
+    //     description = "Custom implementation allow used defined button for de-increment.",
+    //     sourceUrl = "$SampleSourceUrl/RatingFullSample.kt",
+    // ) {
+    //     WipIllustration()
+    // },
 )
