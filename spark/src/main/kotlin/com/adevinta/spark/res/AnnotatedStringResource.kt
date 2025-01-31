@@ -23,6 +23,7 @@ package com.adevinta.spark.res
 
 import android.content.res.Resources
 import android.graphics.Typeface
+import android.telephony.PhoneNumberUtils
 import android.text.Annotation
 import android.text.Spanned
 import android.text.SpannedString
@@ -66,10 +67,15 @@ import androidx.core.text.toHtml
 import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.res.SparkStringAnnotations.toAccessibilitySpan
 import com.adevinta.spark.tokens.SparkColors
 import com.adevinta.spark.tokens.SparkTypography
 import kotlinx.collections.immutable.PersistentMap
 import kotlinx.collections.immutable.persistentMapOf
+import java.text.DecimalFormatSymbols
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 /**
  * Load an annotated string resource with formatting.
@@ -291,16 +297,25 @@ private fun CharSequence.asAnnotatedString(
 ): AnnotatedString {
     if (this !is Spanned) return AnnotatedString(this.toString())
     return buildAnnotatedString {
-        append(this@asAnnotatedString.toString())
+        var annotatedString = this@asAnnotatedString
         getSpans(0, length, Any::class.java).forEach {
             val start = getSpanStart(it)
             val end = getSpanEnd(it)
-            buildWithSpan(it, start, end, density, colors, typography)
+            annotatedString = annotatedString.buildWithAccessibilitySpan(it, start, end)
+        }
+        append(annotatedString)
+        getSpans(0, length, Any::class.java).forEach {
+            val start = getSpanStart(it)
+            val end = getSpanEnd(it)
+            buildWithSpanStyle(it, start, end, density, colors, typography)
         }
     }
 }
 
-private fun AnnotatedString.Builder.buildWithSpan(
+/**
+ * Update the [AnnotatedString] from `start` to `end` with the provided [SpanStyle], [Density], [SparkColors] and [SparkTypography].
+ */
+private fun AnnotatedString.Builder.buildWithSpanStyle(
     it: Any,
     start: Int,
     end: Int,

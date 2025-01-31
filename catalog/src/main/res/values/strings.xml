@@ -127,6 +127,50 @@
 
     <string name="icons_screen_search_helper">Search Spark Icon</string>
 
+    <string name="accessibility_settings_shortcut">Accessibility settings</string>
+    <string name="accessibility_settings_type_label">Accessibility Span Type:</string>
+    <string name="accessibility_settings_input_label">Input:</string>
+    <string name="accessibility_settings_result_label">Result:</string>
+    <string name="accessibility_settings_cardinal_type">cardinal</string>
+    <string name="accessibility_settings_cardinal_input">There are 3 apples</string>
+    <string name="accessibility_settings_cardinal_result">There are <annotation tts="cardinal">3</annotation> apples</string>
+    <string name="accessibility_settings_date_type">date</string>
+    <string name="accessibility_settings_date_input">11/12/2024</string>
+    <string name="accessibility_settings_date_result"><annotation tts="date">11/12/2024</annotation></string>
+    <string name="accessibility_settings_decimal_type">decimal</string>
+    <string name="accessibility_settings_decimal_input">18,12</string>
+    <string name="accessibility_settings_decimal_result"><annotation tts="decimal">18,12</annotation></string>
+    <string name="accessibility_settings_digits_type">digits</string>
+    <string name="accessibility_settings_digits_input">1234567890</string>
+    <string name="accessibility_settings_digits_result"><annotation tts="digits">1234567890</annotation></string>
+    <string name="accessibility_settings_electronic_type">electronic</string>
+    <string name="accessibility_settings_electronic_input">protocol://username:password@domain:port/path?query_string#fragment_id</string>
+    <string name="accessibility_settings_electronic_result"><annotation tts="electronic">protocol://username:password@domain:port/path?query_string#fragment_id</annotation></string>
+    <string name="accessibility_settings_fraction_type">fraction</string>
+    <string name="accessibility_settings_fraction_input">18/12</string>
+    <string name="accessibility_settings_fraction_result"><annotation tts="fraction">18/12</annotation></string>
+    <string name="accessibility_settings_measure_type">measure</string>
+    <string name="accessibility_settings_measure_input">18kg 28L et 250km/h</string>
+    <string name="accessibility_settings_measure_result"><annotation tts="measure">18kg 28L et 250km/h</annotation></string>
+    <string name="accessibility_settings_money_type">money</string>
+    <string name="accessibility_settings_money_input">1 000 €</string>
+    <string name="accessibility_settings_money_result"><annotation tts="money">1 000 €</annotation></string>
+    <string name="accessibility_settings_ordinal_type">ordinal</string>
+    <string name="accessibility_settings_ordinal_input">the 2nd best</string>
+    <string name="accessibility_settings_ordinal_result">the <annotation tts="ordinal">2nd</annotation> best</string>
+    <string name="accessibility_settings_telephone_type">telephone</string>
+    <string name="accessibility_settings_telephone_input">+33612345678</string>
+    <string name="accessibility_settings_telephone_result"><annotation tts="telephone">+33612345678</annotation></string>
+    <string name="accessibility_settings_text_type">text</string>
+    <string name="accessibility_settings_text_input">This is a pretty text</string>
+    <string name="accessibility_settings_text_result"><annotation tts="text">This is a pretty text</annotation></string>
+    <string name="accessibility_settings_time_type">time</string>
+    <string name="accessibility_settings_time_input">18:12</string>
+    <string name="accessibility_settings_time_result"><annotation tts="time">18:12</annotation></string>
+    <string name="accessibility_settings_verbatim_type">verbatim</string>
+    <string name="accessibility_settings_verbatim_input">L.G.T.M</string>
+    <string name="accessibility_settings_verbatim_result"><annotation tts="verbatim">L.G.T.M</annotation></string>
+
     <string name="spark_text_link_paragraph_example_"><annotation color="neutral" typography="body1">This is Adevinta </annotation><annotation color="main" typography="body1"><u><b>Privacy &amp; Policy</b></u></annotation><annotation color="neutral" typography="body1"> also lots of extra information you maybe interested in or should I inform you about that extra information. you might be not knowing it</annotation></string>
 
     <string name="spark_text_link_short_example_"><annotation color="neutral" typography="display2">Learn Kotlin Programming </annotation><annotation color="success" typography="display3"><u><b>https://kotlinlang.org</b></u></annotation></string>

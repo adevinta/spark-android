@@ -73,6 +73,7 @@ import com.adevinta.spark.SparkFeatureFlag
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.configurator.ConfiguratorComponentsScreen
 import com.adevinta.spark.catalog.examples.ComponentsScreen
+import com.adevinta.spark.catalog.accessibility.AccessibilityDemoScreen
 import com.adevinta.spark.catalog.icons.IconDemoScreen
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.tabbar.CatalogTabBar
@@ -273,6 +274,10 @@ internal fun ComponentActivity.CatalogApp(
                                     contentPadding = innerPadding,
                                     navigationMode = theme.navigationMode,
                                 )
+
+                                CatalogHomeScreen.Accessibility -> AccessibilityDemoScreen(
+                                    contentPadding = innerPadding,
+                                )
                             }
                         }
                     },
@@ -308,7 +313,7 @@ private fun HomeTabBar(
     }
 }
 
-public enum class CatalogHomeScreen { Examples, Configurator, Icons }
+public enum class CatalogHomeScreen { Examples, Configurator, Icons, Accessibility }
 
 /**
  * The default light scrim, as defined by androidx and the platform:
