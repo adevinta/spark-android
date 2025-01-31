@@ -36,12 +36,12 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.IconToggleButtonColors
 import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MenuAnchorType
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
@@ -255,7 +255,7 @@ public abstract class AddonScope {
     ) {
         ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = onExpandedChange) {
             Surface(
-                modifier = modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable),
+                modifier = modifier.menuAnchor(ExposedDropdownMenuAnchorType.PrimaryNotEditable),
                 onClick = {},
                 shape = SparkTheme.shapes.small,
             ) {
