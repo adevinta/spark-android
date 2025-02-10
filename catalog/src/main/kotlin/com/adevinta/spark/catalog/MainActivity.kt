@@ -22,6 +22,10 @@
 package com.adevinta.spark.catalog
 
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.KeyboardShortcutGroup
+import android.view.KeyboardShortcutInfo
+import android.view.Menu
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -55,6 +59,23 @@ public class MainActivity : AppCompatActivity() {
                     }
                 },
             )
+        }
+    }
+
+    override fun onProvideKeyboardShortcuts(
+        data: MutableList<KeyboardShortcutGroup>?,
+        menu: Menu?,
+        deviceId: Int,
+    ) {
+        if (data != null) {
+            val shortcutGroup = KeyboardShortcutGroup(
+                "Stepper",
+                listOf(
+                    KeyboardShortcutInfo("Increase", KeyEvent.KEYCODE_DPAD_UP, KeyEvent.META_SHIFT_ON),
+                    KeyboardShortcutInfo("Decrease", KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.META_SHIFT_ON),
+                ),
+            )
+            data.add(shortcutGroup)
         }
     }
 }
