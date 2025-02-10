@@ -184,10 +184,10 @@ internal fun SparkStepper(
 public fun stepperInputValidator(step: Int, range: IntRange) {
     require(step > 0) { "A step can only be a positive integer, but was $step" }
     require(range.last % step == 0) {
-        "The max range must be a multiple of the step, but has ${step % range.last}  remaining"
+        "The max range must be a multiple of the step, but has ${range.last % step}  remaining"
     }
     require(range.first % step == 0) {
-        "The min range must be a multiple of the step, but has ${step % range.first}  remaining"
+        "The min range must be a multiple of the step, but has ${range.first % step}  remaining"
     }
 }
 
