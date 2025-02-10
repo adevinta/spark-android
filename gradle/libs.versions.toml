@@ -10,7 +10,7 @@ androidx-navigation = "2.8.6"
 androidx-savedstate = "1.2.1"
 androidx-core = "1.15.0"
 androidx-window = "1.3.0"
-coil = "2.7.0"
+coil = "3.1.0"
 compileSdk = "35"
 datastore = "1.1.2"
 dependencyGuard = "0.5.0"
@@ -75,8 +75,8 @@ androidx-window = { module = "androidx.window:window", version.ref = "androidx-w
 androidx-test-runner = { module = "androidx.test:runner", version = "1.6.2" }
 androidx-test-truth = { module = "androidx.test.ext:truth", version = "1.6.0" }
 # https://coil-kt.github.io/coil/
-coil = { module = "io.coil-kt:coil", version.ref = "coil" }
-coilCompose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+coil = { module = "io.coil-kt.coil3:coil", version.ref = "coil" }
+coilCompose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 
 constraintsExplorer = "com.zachklipp:constraints-explorer:1.1.0"
 
