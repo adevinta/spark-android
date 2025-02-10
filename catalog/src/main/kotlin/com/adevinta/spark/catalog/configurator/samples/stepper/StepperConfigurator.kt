@@ -34,6 +34,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -75,16 +76,16 @@ public val StepperConfigurators: List<Configurator> = listOf(
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ColumnScope.StepperSample(snackbarState: SnackbarHostState) {
-    var isEnabled by remember { mutableStateOf(true) }
-    var min by remember { mutableIntStateOf(-2) }
-    var max by remember { mutableIntStateOf(100) }
-    var value by remember { mutableIntStateOf(99) }
-    var step by remember { mutableIntStateOf(1) }
-    var stepFormStatus: TextFieldState? by remember { mutableStateOf(null) }
-    var stepStatusMessage: String? by remember { mutableStateOf(null) }
-    var isFlexible by remember { mutableStateOf(false) }
-    var suffix by remember { mutableStateOf("") }
-    var status: TextFieldState? by remember { mutableStateOf(null) }
+    var isEnabled by rememberSaveable { mutableStateOf(true) }
+    var min by rememberSaveable { mutableIntStateOf(-2) }
+    var max by rememberSaveable { mutableIntStateOf(100) }
+    var value by rememberSaveable { mutableIntStateOf(99) }
+    var step by rememberSaveable { mutableIntStateOf(1) }
+    var stepFormStatus: TextFieldState? by rememberSaveable { mutableStateOf(null) }
+    var stepStatusMessage: String? by rememberSaveable { mutableStateOf(null) }
+    var isFlexible by rememberSaveable { mutableStateOf(false) }
+    var suffix by rememberSaveable { mutableStateOf("") }
+    var status: TextFieldState? by rememberSaveable { mutableStateOf(null) }
     val coroutineScope = rememberCoroutineScope()
     Stepper(
         modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -243,15 +244,15 @@ private fun ColumnScope.StepperSample(snackbarState: SnackbarHostState) {
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun ColumnScope.StepperFormSample(snackbarState: SnackbarHostState) {
-    var isEnabled by remember { mutableStateOf(true) }
-    var isRequired by remember { mutableStateOf(true) }
-    var isFlexible by remember { mutableStateOf(false) }
-    var min by remember { mutableIntStateOf(-2) }
-    var max by remember { mutableIntStateOf(10) }
-    var value by remember { mutableIntStateOf(0) }
-    var status: TextFieldState? by remember { mutableStateOf(null) }
-    var labelText by remember { mutableStateOf("Label") }
-    var helperText by remember { mutableStateOf("Helper message") }
+    var isEnabled by rememberSaveable { mutableStateOf(true) }
+    var isRequired by rememberSaveable { mutableStateOf(true) }
+    var isFlexible by rememberSaveable { mutableStateOf(false) }
+    var min by rememberSaveable { mutableIntStateOf(-2) }
+    var max by rememberSaveable { mutableIntStateOf(10) }
+    var value by rememberSaveable { mutableIntStateOf(0) }
+    var status: TextFieldState? by rememberSaveable { mutableStateOf(null) }
+    var labelText by rememberSaveable { mutableStateOf("Label") }
+    var helperText by rememberSaveable { mutableStateOf("Helper message") }
     val coroutineScope = rememberCoroutineScope()
     StepperForm(
         modifier = Modifier

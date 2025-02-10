@@ -21,11 +21,9 @@
  */
 package com.adevinta.spark.components.stepper.internal
 
-import android.R.attr.contentDescription
-import android.R.attr.enabled
-import android.R.attr.onClick
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.sizeIn
@@ -34,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -44,7 +43,6 @@ import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.components.textfields.AnimationDuration
 import com.adevinta.spark.components.textfields.DefaultSparkTextFieldColors
-import com.adevinta.spark.components.textfields.FormFieldStatus
 import com.adevinta.spark.components.textfields.animateBorderStrokeAsState
 import com.adevinta.spark.components.textfields.sparkOutlinedTextFieldColors
 import com.adevinta.spark.icons.Plus
@@ -57,7 +55,6 @@ internal fun IconButton(
     contentDescription: String,
     enabled: Boolean,
     colors: DefaultSparkTextFieldColors,
-    status: FormFieldStatus?,
     shape: CornerBasedShape,
     modifier: Modifier = Modifier,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -67,7 +64,7 @@ internal fun IconButton(
     val borderStroke by animateBorderStrokeAsState(
         enabled = true,
         readOnly = false,
-        state = status,
+        state = null,
         interactionSource = interactionSource,
         colors = colors,
     )
@@ -86,10 +83,10 @@ internal fun IconButton(
             hapticFeedback.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         },
         modifier = modifier
-            .sizeIn(minWidth = 44.dp, minHeight = 44.dp),
+            .sizeIn(minWidth = 44.dp, minHeight = 44.dp)
+            .focusProperties { canFocus = false }, // Focus is show by the parent
         enabled = enabled,
         shape = shape,
-        interactionSource = interactionSource,
         color = containerColor,
         contentColor = contentColor,
         border = borderStroke,
@@ -112,7 +109,6 @@ private fun PreviewIconButton() {
             enabled = true,
             shape = SparkTheme.shapes.large,
             onClick = { },
-            status = FormFieldStatus.Error,
             colors = sparkOutlinedTextFieldColors(),
         )
         IconButton(
@@ -121,7 +117,6 @@ private fun PreviewIconButton() {
             enabled = false,
             shape = SparkTheme.shapes.large,
             onClick = { },
-            status = FormFieldStatus.Error,
             colors = sparkOutlinedTextFieldColors(),
         )
     }

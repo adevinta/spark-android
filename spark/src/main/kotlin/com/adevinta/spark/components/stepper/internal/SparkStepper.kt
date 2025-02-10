@@ -21,13 +21,16 @@
  */
 package com.adevinta.spark.components.stepper.internal
 
+import androidx.annotation.OpenForTesting
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -42,12 +45,12 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.stepper.StepperDefaults
 import com.adevinta.spark.components.stepper.stepperSemantics
-import com.adevinta.spark.components.textfields.FormFieldStatus
 import com.adevinta.spark.icons.Minus
 import com.adevinta.spark.icons.Plus
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tools.modifiers.ifTrue
 import com.adevinta.spark.tools.modifiers.invisibleSemantic
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 
 @Composable
 internal fun SparkStepper(
@@ -58,34 +61,35 @@ internal fun SparkStepper(
     suffix: String = "",
     step: Int = 1,
     enabled: Boolean = true,
-    status: FormFieldStatus? = null,
     flexible: Boolean = false,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     testTag: String? = null,
     allowSemantics: Boolean = true,
 ) {
-    require(step > 0) { "A step can only be a positive integer, but was $step" }
-    require(range.last % step == 0) {
-        "The max range must be a multiple of the step, but has ${step % range.last}  remaining"
-    }
-    require(range.first % step == 0) {
-        "The min range must be a multiple of the step, but has ${step % range.first}  remaining"
-    }
+    stepperInputValidator(step, range)
     val colors = StepperDefaults.stepperColors()
     val coerced = value.coerceIn(range)
     fun setValue(value: Int) =
         onValueChange(value.coerceIn(range))
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .height(IntrinsicSize.Min)
             .ifTrue(allowSemantics) {
                 stepperSemantics(
-                    value = value,
+                    value = coerced,
                     onValueChange = ::setValue,
                     range = range,
+                    step = step,
+                    suffix = suffix,
                     enabled = enabled,
                 )
-            },
+            }
+            .focusable(
+                enabled = enabled,
+                interactionSource = interactionSource,
+            )
+            .sparkUsageOverlay(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         IconButton(
@@ -96,11 +100,8 @@ internal fun SparkStepper(
             contentDescription = "", // handled by semantics modifier
             enabled = enabled && coerced > range.first,
             colors = colors,
-            status = status,
-            shape = SparkTheme.shapes.large.copy(
-                topEnd = CornerSize(0.dp),
-                bottomEnd = CornerSize(0.dp),
-            ),
+            shape = SparkTheme.shapes.large,
+            interactionSource = interactionSource,
             onClick = { setValue(coerced - step) },
         )
 
@@ -110,14 +111,13 @@ internal fun SparkStepper(
                     if (flexible) {
                         modifier.weight(1.0f)
                     } else {
-                        modifier.widthIn(min = 56.dp)
+                        modifier.widthIn(min = 48.dp)
                     },
                 )
                 .fillMaxHeight()
                 .invisibleSemantic(),
             value = coerced,
             suffix = suffix,
-            status = status,
             enabled = enabled,
             colors = colors,
         )
@@ -130,15 +130,64 @@ internal fun SparkStepper(
             contentDescription = "", // handled by semantics modifier
             enabled = enabled && coerced < range.last,
             colors = colors,
-            status = status,
-            shape = SparkTheme.shapes.large.copy(
-                topStart = CornerSize(0.dp),
-                bottomStart = CornerSize(0.dp),
-            ),
+            shape = SparkTheme.shapes.large,
+            interactionSource = interactionSource,
             onClick = {
                 setValue(coerced + step)
             },
         )
+    }
+}
+
+/**
+ * Validates the input parameters for a stepper operation.
+ *
+ * This function ensures that the provided step value is positive and that both the start and end
+ * of the given range are multiples of the step. This is crucial for stepper operations where
+ * values are incremented or decremented by a fixed step size.
+ *
+ * @param step The step value used for incrementing or decrementing. Must be a positive integer.
+ * @param range The range of values allowed, represented as an [IntRange]. Both the start and
+ *              end of this range must be multiples of the step value.
+ * @throws IllegalArgumentException If the step is not positive, or if the start or end of the
+ *                                  range are not multiples of the step. The exception message will
+ *                                  indicate the specific violation.
+ *
+ * Example Usage:
+ * ```kotlin
+ * // Valid input: step of 2, range from 0 to 10 (both multiples of 2)
+ * stepperInputValidator(2, 0..10)
+ *
+ * // Invalid input: step of -1 (not positive)
+ * try {
+ *     stepperInputValidator(-1, 0..10)
+ * } catch (e: IllegalArgumentException) {
+ *     println(e.message) // Output: A step can only be a positive integer, but was -1
+ * }
+ *
+ * // Invalid input: range start 1 (not multiple of 2)
+ * try {
+ *     stepperInputValidator(2, 1..10)
+ * } catch (e: IllegalArgumentException) {
+ *      println(e.message) // Output: The min range must be a multiple of the step, but has 1  remaining
+ * }
+ *
+ * // Invalid input: range end 9 (not multiple of 2)
+ * try {
+ *     stepperInputValidator(2, 0..9)
+ * } catch (e: IllegalArgumentException) {
+ *      println(e.message) // Output: The max range must be a multiple of the step, but has 1  remaining
+ * }
+ * ```
+ */
+@OpenForTesting
+public fun stepperInputValidator(step: Int, range: IntRange) {
+    require(step > 0) { "A step can only be a positive integer, but was $step" }
+    require(range.last % step == 0) {
+        "The max range must be a multiple of the step, but has ${step % range.last}  remaining"
+    }
+    require(range.first % step == 0) {
+        "The min range must be a multiple of the step, but has ${step % range.first}  remaining"
     }
 }
 
@@ -162,7 +211,7 @@ private fun PreviewSparkStepper() {
         SparkStepper(
             value = 1234,
             onValueChange = {},
-            status = FormFieldStatus.Error,
+            enabled = false,
         )
     }
 }

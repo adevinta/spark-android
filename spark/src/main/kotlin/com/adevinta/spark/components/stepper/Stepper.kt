@@ -36,6 +36,16 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isAltPressed
+import androidx.compose.ui.input.key.isCtrlPressed
+import androidx.compose.ui.input.key.isMetaPressed
+import androidx.compose.ui.input.key.isShiftPressed
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.semantics
@@ -50,6 +60,7 @@ import com.adevinta.spark.PreviewTheme
 import com.adevinta.spark.R
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.stepper.internal.SparkStepper
+import com.adevinta.spark.components.stepper.internal.stepperInputValidator
 import com.adevinta.spark.components.stepper.internal.supportText
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.FormFieldStatus
@@ -60,6 +71,7 @@ import com.adevinta.spark.tokens.dim1
 import com.adevinta.spark.tokens.dim5
 import com.adevinta.spark.tokens.transparent
 import com.adevinta.spark.tools.modifiers.invisibleSemantic
+import com.adevinta.spark.tools.modifiers.sparkUsageOverlay
 import kotlin.math.roundToInt
 
 /**
@@ -100,7 +112,6 @@ public fun Stepper(
         suffix = suffix,
         step = step,
         enabled = enabled,
-        status = status,
         flexible = flexible,
         testTag = testTag,
         allowSemantics = allowSemantics,
@@ -152,12 +163,13 @@ public fun StepperForm(
 
     Column(
         modifier = modifier
+            .stepperSemantics(value, onValueChange, range, step, suffix, enabled)
             .semantics {
                 text = listOfNotNull(label, mandatoryDescription, helper)
                     .joinToString(separator = " ")
                     .let(::AnnotatedString)
             }
-            .stepperSemantics(value, onValueChange, range, enabled),
+            .sparkUsageOverlay(overlayColor = Color.Green),
     ) {
         Row(modifier = Modifier.invisibleSemantic()) {
             Text(
@@ -187,7 +199,6 @@ public fun StepperForm(
             step = step,
             flexible = flexible,
             testTag = testTag,
-            status = status,
             allowSemantics = false,
         )
 
@@ -254,8 +265,19 @@ public fun Modifier.stepperSemantics(
     value: Int,
     onValueChange: (Int) -> Unit,
     range: IntRange,
+    step: Int,
+    suffix: String?,
     enabled: Boolean,
 ): Modifier = semantics(mergeDescendants = true) {
+    require(step > 0) { "Step must be a positive integer, but was $step" }
+    require(range.last % step == 0) {
+        "The upper bound of the range ($range) must be a multiple of the step ($step), but has a remainder " +
+                "of ${range.last % step}"    }
+    require(range.first % step == 0) {
+        "The lower bound of the range ($range) must be a multiple of the step ($step), but has a remainder " +
+                "of ${range.first % step}"    }
+
+    stepperInputValidator(step = step, range = range)
     // this is needed to use volume keys or slide up / down
     setProgress { targetValue ->
         // without this rounding the values will only decrease
@@ -271,15 +293,35 @@ public fun Modifier.stepperSemantics(
     }
 
     // override describing percents
-    stateDescription = value.toString()
+    stateDescription = value.toString() + suffix
 
     if (!enabled) disabled()
-}.progressSemantics(
-    // this is needed to use volume keys or slide up / down
-    value = value.toFloat(),
-    valueRange = range.first.toFloat()..range.last.toFloat(),
-    steps = range.last - range.first,
-)
+}
+    .progressSemantics(
+        // this is needed to use volume keys or slide up / down
+        value = value.toFloat(),
+        valueRange = range.first.toFloat()..range.last.toFloat(),
+        steps = (range.last - range.first) / step,
+    )
+    .onKeyEvent {
+        // Should not be possible with Stepper & StepperForm but could happen with custom impl
+        if (!enabled) return@onKeyEvent false
+
+        val isUpKey = it.key == Key.DirectionUp
+        val isDownKey = it.key == Key.DirectionDown
+        val isShiftOnlyPressed = it.isShiftPressed && !it.isCtrlPressed && !it.isAltPressed && !it.isMetaPressed
+        if (it.type == KeyEventType.KeyDown && isShiftOnlyPressed) {
+            when {
+                isUpKey -> onValueChange((value + step).coerceIn(range))
+                isDownKey -> onValueChange((value - step).coerceIn(range))
+                else -> return@onKeyEvent false
+            }
+            true
+        } else {
+            false
+        }
+
+    }
 
 public object StepperDefaults {
     @Composable
