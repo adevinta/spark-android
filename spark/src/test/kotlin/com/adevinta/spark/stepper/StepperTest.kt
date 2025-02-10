@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.stepper
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -32,28 +31,20 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.SemanticsActions.SetProgress
 import androidx.compose.ui.semantics.SemanticsProperties
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assert
-import androidx.compose.ui.test.assertIsNotFocused
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.isNotFocusable
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.pressKey
-import androidx.compose.ui.test.printToString
 import androidx.compose.ui.test.requestFocus
 import androidx.compose.ui.test.withKeyDown
 import com.adevinta.spark.PreviewTheme
-import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.components.stepper.Stepper
-import com.adevinta.spark.components.tags.TagFilled
-import com.adevinta.spark.icons.Accessories
-import com.adevinta.spark.icons.SparkIcons
 import com.ibm.icu.impl.SimpleFormatterImpl.IterInternal.step
 import org.junit.Rule
 import org.junit.Test
@@ -170,7 +161,7 @@ class StepperTest {
             )
             .assertTextEquals("4", " €")
 
-        //Increment
+        // Increment
         composeTestRule.onNodeWithTag(stepperTestTag)
             .performSemanticsAction(SetProgress) { setProgress -> setProgress(6f) }
             .assert(
@@ -181,7 +172,7 @@ class StepperTest {
             )
             .assertTextEquals("6", " €")
 
-        //Decrement
+        // Decrement
         composeTestRule.onNodeWithTag(stepperTestTag)
             .performSemanticsAction(SetProgress) { setProgress -> setProgress(4f) }
             .performSemanticsAction(SetProgress) { setProgress -> setProgress(2f) }
@@ -360,6 +351,5 @@ class StepperTest {
                     ProgressBarRangeInfo(current = 2f, range = rangeFloat, steps),
                 ),
             )
-
     }
 }

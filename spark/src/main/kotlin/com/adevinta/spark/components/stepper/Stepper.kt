@@ -272,10 +272,12 @@ public fun Modifier.stepperSemantics(
     require(step > 0) { "Step must be a positive integer, but was $step" }
     require(range.last % step == 0) {
         "The upper bound of the range ($range) must be a multiple of the step ($step), but has a remainder " +
-                "of ${range.last % step}"    }
+            "of ${range.last % step}"
+    }
     require(range.first % step == 0) {
         "The lower bound of the range ($range) must be a multiple of the step ($step), but has a remainder " +
-                "of ${range.first % step}"    }
+            "of ${range.first % step}"
+    }
 
     stepperInputValidator(step = step, range = range)
     // this is needed to use volume keys or slide up / down
@@ -320,7 +322,6 @@ public fun Modifier.stepperSemantics(
         } else {
             false
         }
-
     }
 
 public object StepperDefaults {
