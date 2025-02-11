@@ -207,7 +207,9 @@ public fun IconsScreen(
                             contentDescription = null,
                             modifier = Modifier
                                 .sharedElement(
-                                    state = sharedTransitionScope.rememberSharedContentState(key = "icon-$iconName"),
+                                    sharedContentState = sharedTransitionScope.rememberSharedContentState(
+                                        key = "icon-$iconName",
+                                    ),
                                     animatedVisibilityScope = animatedContentScope,
                                 )
                                 .size(40.dp),
