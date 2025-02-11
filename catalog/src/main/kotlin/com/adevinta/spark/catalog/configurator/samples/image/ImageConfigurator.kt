@@ -56,11 +56,13 @@ import androidx.compose.ui.unit.dp
 import androidx.graphics.shapes.CornerRounding
 import androidx.graphics.shapes.RoundedPolygon
 import androidx.graphics.shapes.star
-import coil.compose.AsyncImagePainter
-import coil.decode.DataSource
-import coil.request.ErrorResult
-import coil.request.ImageRequest
-import coil.request.SuccessResult
+import coil3.asImage
+import coil3.compose.AsyncImagePainter
+import coil3.decode.DataSource
+import coil3.request.ErrorResult
+import coil3.request.ImageRequest
+import coil3.request.SuccessResult
+import coil3.request.crossfade
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
@@ -312,7 +314,7 @@ private enum class ImageState {
             imageRequest: ImageRequest,
         ): AsyncImagePainter.State = AsyncImagePainter.State.Success(
             painter,
-            SuccessResult(drawable, imageRequest, DataSource.DISK),
+            SuccessResult(drawable.asImage(), imageRequest, DataSource.DISK),
         )
     },
     ;
