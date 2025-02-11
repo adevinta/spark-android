@@ -44,6 +44,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.hideFromAccessibility
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
@@ -76,9 +77,7 @@ internal fun BaseSparkTag(
     content: @Composable RowScope.() -> Unit,
 ) {
     Surface(
-        modifier = modifier
-            .semantics(mergeDescendants = true) {}
-            .sparkUsageOverlay(),
+        modifier = modifier.sparkUsageOverlay(),
         shape = SparkTheme.shapes.full,
         color = colors.backgroundColor,
         contentColor = colors.contentColor.copy(1.0f),
@@ -95,6 +94,9 @@ internal fun BaseSparkTag(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 AnimatedVisibility(
+                    modifier = Modifier.semantics {
+                        hideFromAccessibility()
+                    },
                     visible = leadingIcon != null,
                 ) {
                     if (leadingIcon != null) {
