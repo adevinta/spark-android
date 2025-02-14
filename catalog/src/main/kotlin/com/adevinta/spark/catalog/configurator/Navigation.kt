@@ -25,7 +25,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
+import com.adevinta.spark.catalog.AppBasePath
 import com.adevinta.spark.catalog.configurator.component.ConfiguratorComponentScreen
 import com.adevinta.spark.catalog.model.Component
 import kotlinx.serialization.Serializable
@@ -38,7 +40,11 @@ internal fun NavGraphBuilder.configuratorsDestination(
     components: List<Component>,
     contentPadding: PaddingValues,
 ) {
-    composable<ConfiguratorsList> {
+    composable<ConfiguratorsList>(
+        deepLinks = listOf(
+            navDeepLink<ConfiguratorsList>(basePath = "$AppBasePath/configurator"),
+        ),
+    ) {
         ComponentsListScreen(
             components = components,
             contentPadding = contentPadding,
@@ -50,7 +56,11 @@ internal fun NavGraphBuilder.configuratorsDestination(
         )
     }
 
-    composable<ConfiguratorShowcase> { navBackStackEntry ->
+    composable<ConfiguratorShowcase>(
+        deepLinks = listOf(
+            navDeepLink<ConfiguratorShowcase>(basePath = "$AppBasePath/configurator/detail"),
+        ),
+    ) { navBackStackEntry ->
         val configuratorShowcase = navBackStackEntry.toRoute<ConfiguratorShowcase>()
         val componentId = configuratorShowcase.componentId
         val configuratorIndex = configuratorShowcase.configuratorIndex
