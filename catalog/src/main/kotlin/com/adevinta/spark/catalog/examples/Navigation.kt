@@ -25,7 +25,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
+import com.adevinta.spark.catalog.AppBasePath
 import com.adevinta.spark.catalog.examples.component.Component
 import com.adevinta.spark.catalog.examples.example.Example
 import com.adevinta.spark.catalog.model.Component
@@ -45,7 +47,11 @@ internal fun NavGraphBuilder.examplesDestination(
     components: List<Component>,
     contentPadding: PaddingValues,
 ) {
-    composable<ExamplesList> {
+    composable<ExamplesList>(
+        deepLinks = listOf(
+            navDeepLink<ExamplesList>(basePath = "$AppBasePath/examples"),
+        ),
+    ) {
         ComponentsListScreen(
             components = components,
             contentPadding = contentPadding,
@@ -55,7 +61,11 @@ internal fun NavGraphBuilder.examplesDestination(
         )
     }
 
-    composable<ExampleSection> { navBackStackEntry ->
+    composable<ExampleSection>(
+        deepLinks = listOf(
+            navDeepLink<ExampleSection>(basePath = "$AppBasePath/examples/component"),
+        ),
+    ) { navBackStackEntry ->
         val exampleSection = navBackStackEntry.toRoute<ExampleSection>()
         val componentId = exampleSection.componentId
         val component = components.first { component -> component.id == componentId }
@@ -68,7 +78,11 @@ internal fun NavGraphBuilder.examplesDestination(
             },
         )
     }
-    composable<ExampleShowcase> { navBackStackEntry ->
+    composable<ExampleShowcase>(
+        deepLinks = listOf(
+            navDeepLink<ExampleShowcase>(basePath = "$AppBasePath/examples/component/detail"),
+        ),
+    ) { navBackStackEntry ->
         val exampleShowkase = navBackStackEntry.toRoute<ExampleShowcase>()
         val componentId = exampleShowkase.componentId
         val exampleIndex = exampleShowkase.exampleIndex
