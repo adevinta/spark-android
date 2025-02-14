@@ -116,7 +116,7 @@ lint-checks = { module = "com.android.tools.lint:lint-checks", version.ref = "li
 lint-tests = { module = "com.android.tools.lint:lint-tests", version.ref = "lint" }
 
 material-motion = { module = "io.github.fornewid:material-motion-compose-core", version.ref = "material-motion" }
-
+materialKolor = "com.materialkolor:material-kolor:2.0.2"
 # https://github.com/robolectric/robolectric
 robolectric = { module = "org.robolectric:robolectric", version = "4.14.1" }
 

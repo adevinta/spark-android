@@ -76,6 +76,7 @@ dependencies {
     debugImplementation(libs.constraintsExplorer)
     implementation(libs.androidx.compose.ui.util)
     api(libs.coilCompose)
+    implementation(libs.materialKolor)
     api(libs.kotlinx.collections.immutable)
 
     testImplementation(libs.junit)
