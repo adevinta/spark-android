@@ -26,6 +26,7 @@ import android.graphics.RuntimeShader
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
+import androidx.activity.compose.LocalActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -207,8 +208,17 @@ internal fun ComponentActivity.CatalogApp(
             ) {
                 val coroutineScope = rememberCoroutineScope()
                 val homeScreenValues = CatalogHomeScreen.entries
+                val initialPage = LocalActivity.current?.intent?.data?.let {
+                    when {
+                        it.pathSegments.contains("examples") -> CatalogHomeScreen.Examples.ordinal
+                        it.pathSegments.contains("configurator") -> CatalogHomeScreen.Configurator.ordinal
+                        it.pathSegments.contains("icons") -> CatalogHomeScreen.Icons.ordinal
+                        else -> null
+                    }
+                } ?: CatalogHomeScreen.Examples.ordinal
+
                 val pagerState = rememberPagerState(
-                    initialPage = CatalogHomeScreen.Examples.ordinal,
+                    initialPage = initialPage,
                     pageCount = { homeScreenValues.size },
                 )
 
@@ -321,3 +331,5 @@ private val lightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
  * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=40-44;drc=27e7d52e8604a080133e8b842db10c89b4482598
  */
 private val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)
+
+internal val AppBasePath = "spark://catalog"
