@@ -448,7 +448,7 @@ _2023-03-29_
 
 [Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.4...HEAD
 
-[1.1.3]: https://github.com/adevinta/spark-android/releases/tag/1.1.4
+[1.1.4]: https://github.com/adevinta/spark-android/releases/tag/1.1.4
 
 [1.1.3]: https://github.com/adevinta/spark-android/releases/tag/1.1.3
 
