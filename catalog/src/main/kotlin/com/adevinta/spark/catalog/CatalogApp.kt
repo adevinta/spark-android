@@ -179,10 +179,10 @@ internal fun ComponentActivity.CatalogApp(
 
         DeviceConfigurationOverride(
             override = DeviceConfigurationOverride.DarkMode(useDark)
-                then DeviceConfigurationOverride.LayoutDirection(layoutDirection)
-                then DeviceConfigurationOverride.FontScale(
-                    theme.takeUnless { it.fontScaleMode == System }?.fontScale ?: LocalDensity.current.fontScale,
-                ),
+                    then DeviceConfigurationOverride.LayoutDirection(layoutDirection)
+                    then DeviceConfigurationOverride.FontScale(
+                theme.takeUnless { it.fontScaleMode == System }?.fontScale ?: LocalDensity.current.fontScale,
+            ),
         ) {
             Box(
                 modifier = Modifier
@@ -221,7 +221,7 @@ internal fun ComponentActivity.CatalogApp(
                     scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
                     frontLayerScrimColor = Color.Unspecified,
                     headerHeight = BackdropScaffoldDefaults.HeaderHeight +
-                        WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
+                            WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
                     peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
                         .calculateTopPadding(),
                     backLayerBackgroundColor = SparkTheme.colors.mainContainer,
@@ -260,22 +260,34 @@ internal fun ComponentActivity.CatalogApp(
                         HorizontalPager(
                             state = pagerState,
                             flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
+                            beyondViewportPageCount = 1,
+                            key = {
+                                when (it) {
+                                    0 -> CatalogHomeScreen.Examples
+                                    1 -> CatalogHomeScreen.Configurator
+                                    2 -> CatalogHomeScreen.Icons
+                                    else -> CatalogHomeScreen.Examples
+                                }.ordinal
+                            },
                         ) {
                             when (homeScreenValues[it]) {
                                 CatalogHomeScreen.Examples -> ComponentsScreen(
                                     components = components,
+                                    pagerState = pagerState,
                                     contentPadding = innerPadding,
                                     navigationMode = theme.navigationMode,
                                 )
 
                                 CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
                                     components = components,
+                                    pagerState = pagerState,
                                     contentPadding = innerPadding,
                                     navigationMode = theme.navigationMode,
                                 )
 
                                 CatalogHomeScreen.Icons -> IconDemoScreen(
                                     contentPadding = innerPadding,
+                                    pagerState = pagerState,
                                     navigationMode = theme.navigationMode,
                                 )
                             }

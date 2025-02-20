@@ -36,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
+
 import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -55,6 +56,7 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.highlight
 
 public val ChipsConfigurator: Configurator = Configurator(
+    id = "chip",
     name = "Chip",
     description = "Chip configuration",
     sourceUrl = "$SampleSourceUrl/ChipSamples.kt",

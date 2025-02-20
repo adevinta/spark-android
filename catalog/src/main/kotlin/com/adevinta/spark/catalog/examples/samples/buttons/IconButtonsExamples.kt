@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.iconbuttons.IconButtonContrast
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
@@ -44,6 +45,7 @@ private const val IconButtonsExampleDescription = "Icon Button examples"
 private const val IconButtonsExampleSourceUrl = "$SampleSourceUrl/IconButtonSamples.kt"
 public val IconButtonsExamples: List<Example> = listOf(
     Example(
+        id = "filled",
         name = "Filled Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,
@@ -62,6 +64,7 @@ public val IconButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "tinted",
         name = "Tinted Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,
@@ -79,6 +82,7 @@ public val IconButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "outlined",
         name = "Outlined Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,
@@ -96,6 +100,7 @@ public val IconButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "ghost",
         name = "Ghost Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,
@@ -113,6 +118,7 @@ public val IconButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "contrast",
         name = "Contrast Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,

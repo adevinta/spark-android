@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.examples.samples.dialog.modal.ModalSample
 import com.adevinta.spark.catalog.model.Configurator
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonFilled
 import com.adevinta.spark.components.buttons.ButtonOutlined
@@ -65,6 +66,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 public val ModalConfigurator: Configurator = Configurator(
+    id = "modal",
     name = "Modal",
     description = "Modal configuration",
     sourceUrl = "$SampleSourceUrl/ModalSample.kt",

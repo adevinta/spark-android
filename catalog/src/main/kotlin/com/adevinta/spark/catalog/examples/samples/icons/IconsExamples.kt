@@ -60,6 +60,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastFirst
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.surface.Surface
@@ -80,6 +81,7 @@ private const val IconsExampleSourceUrl = "$SampleSourceUrl/IconsSamples.kt"
 
 public val IconsExamples: List<Example> = listOf(
     Example(
+        id = "navigation-bar",
         name = "Animated Navigation bar",
         description = "Show how a lbc animated nav bar could look like",
         sourceUrl = IconsExampleSourceUrl,

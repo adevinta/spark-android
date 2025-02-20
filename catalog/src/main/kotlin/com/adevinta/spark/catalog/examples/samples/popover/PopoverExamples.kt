@@ -33,6 +33,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.buttons.ButtonOutlined
 import com.adevinta.spark.components.popover.Popover
@@ -49,6 +50,7 @@ private const val PopoverExampleSourceUrl = "$SampleSourceUrl/PopoverSamples.kt"
 @OptIn(ExperimentalMaterial3Api::class)
 public val PopoverExamples: List<Example> = listOf(
     Example(
+        id = "default",
         name = "Popover",
         description = PopoverExampleDescription,
         sourceUrl = PopoverExampleSourceUrl,

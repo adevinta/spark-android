@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Adevinta
+ * Copyright (c) 2023-2025 Adevinta
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.adevinta.spark.catalog.examples.divider
+package com.adevinta.spark.catalog.examples.samples.divider
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.divider.DividerIntent
 import com.adevinta.spark.components.divider.HorizontalDivider
@@ -55,6 +56,7 @@ private const val LongTextExample =
 
 public val DividerExamples: List<Example> = listOf(
     Example(
+        id = "horizontal-no-label",
         name = "HorizontalDivider With Label",
         description = DividerExampleDescription,
         sourceUrl = DividerExampleSourceUrl,
@@ -91,6 +93,7 @@ public val DividerExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "horizontal",
         name = "HorizontalDivider No Label",
         description = DividerExampleDescription,
         sourceUrl = DividerExampleSourceUrl,
@@ -116,6 +119,7 @@ public val DividerExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "vertical",
         name = "VerticalDivider with Label",
         description = DividerExampleDescription,
         sourceUrl = DividerExampleSourceUrl,
@@ -151,6 +155,7 @@ public val DividerExamples: List<Example> = listOf(
         },
     ),
     Example(
+        id = "vertical-no-label",
         name = "VerticalDivider No Label",
         description = DividerExampleDescription,
         sourceUrl = DividerExampleSourceUrl,

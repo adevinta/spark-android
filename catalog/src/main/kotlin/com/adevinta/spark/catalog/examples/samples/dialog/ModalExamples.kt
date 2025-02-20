@@ -25,11 +25,13 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.examples.samples.dialog.modal.ModalSample
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 
 private const val ModalsExampleSourceUrl = "$SampleSourceUrl/ModalExamples.kt"
 public val DialogsExamples: List<Example> = listOf(
     Example(
+        id = "modal",
         name = "Modal",
         description = "Showcase the modal component with different",
         sourceUrl = ModalsExampleSourceUrl,
@@ -37,6 +39,7 @@ public val DialogsExamples: List<Example> = listOf(
         ModalSample()
     },
     Example(
+        id = "no-padding",
         name = "Modal with no content padding",
         description = "Showcase the modal component with no start and end padding on the content placeholder",
         sourceUrl = ModalsExampleSourceUrl,
@@ -44,6 +47,7 @@ public val DialogsExamples: List<Example> = listOf(
         ModalSample(PaddingValues(0.dp))
     },
     Example(
+        id = "no-buttons",
         name = "Modal with no buttons",
         description = "Showcase the modal component with no main and support button. \n This will hide the Bottom " +
             "App Bar and add a close button in the dialog layout",

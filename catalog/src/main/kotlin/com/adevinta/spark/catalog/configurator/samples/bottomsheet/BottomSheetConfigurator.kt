@@ -48,6 +48,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.bottomsheet.BottomSheet
 import com.adevinta.spark.components.bottomsheet.DragHandle
@@ -70,6 +71,7 @@ import com.adevinta.spark.tokens.highlight
 import kotlinx.coroutines.launch
 
 public val BottomSheetConfigurator: Configurator = Configurator(
+    id = "bottomsheet",
     name = "BottomSheet",
     description = "BottomSheet configuration",
     sourceUrl = "$SampleSourceUrl/BottomSheetSamples.kt",

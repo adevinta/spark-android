@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
+
 import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -64,6 +65,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 
 public val ProgressTrackerConfigurator: Configurator = Configurator(
+    id = "progress-tracker",
     name = "Progress Tracker",
     description = "Progress Tracker configuration",
     sourceUrl = "$SampleSourceUrl/ProgressTrackerSamples.kt",

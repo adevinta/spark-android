@@ -27,11 +27,13 @@ import com.adevinta.spark.catalog.examples.samples.tokens.elevation.ElevationSam
 import com.adevinta.spark.catalog.examples.samples.tokens.shapes.ShapeCustomSample
 import com.adevinta.spark.catalog.examples.samples.tokens.shapes.ShapeSample
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 
 private const val TokensExampleSourceUrl = "$SampleSourceUrl/TokensExamples.kt"
 public val TokensExamples: List<Example> = listOf(
     Example(
+        id = "colors",
         name = "Colors",
         description = "Showcase the color tokens with their container and on color variants",
         sourceUrl = TokensExampleSourceUrl,
@@ -39,6 +41,7 @@ public val TokensExamples: List<Example> = listOf(
         ColorSample()
     },
     Example(
+        id = "shapes",
         name = "Shapes",
         description = "Showcase the shape tokens",
         sourceUrl = TokensExampleSourceUrl,
@@ -46,6 +49,7 @@ public val TokensExamples: List<Example> = listOf(
         ShapeSample()
     },
     Example(
+        id = "shapes-showcase",
         name = "Shapes showcase",
         description = "Showcase the shape tokens",
         sourceUrl = TokensExampleSourceUrl,
@@ -53,6 +57,7 @@ public val TokensExamples: List<Example> = listOf(
         ShapeCustomSample()
     },
     Example(
+        id = "elevation",
         name = "Elevations",
         description = "Showcase the elevation tokens",
         sourceUrl = TokensExampleSourceUrl,
@@ -60,6 +65,7 @@ public val TokensExamples: List<Example> = listOf(
         ElevationSample()
     },
     Example(
+        id = "elevation-showcase",
         name = "Elevation showcase",
         description = "Showcase the elevation tokens",
         sourceUrl = TokensExampleSourceUrl,

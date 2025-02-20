@@ -47,6 +47,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.configurator.samples.bottomsheet.BottomSheetContentExamples
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SparkSampleSourceUrl
 import com.adevinta.spark.components.bottomsheet.BottomSheet
 import com.adevinta.spark.components.bottomsheet.DragHandle
@@ -70,6 +71,7 @@ private const val BottomSheetExampleSourceUrl = "$SparkSampleSourceUrl/bottomshe
 @OptIn(ExperimentalMaterial3Api::class)
 public val BottomSheetExamples: List<Example> = listOf(
     Example(
+        id = "list-content",
         name = "BottomSheet List Content",
         description = "BottomSheet List Content",
         sourceUrl = BottomSheetExampleSourceUrl,
@@ -85,7 +87,8 @@ public val BottomSheetExamples: List<Example> = listOf(
         )
     },
     Example(
-        name = "BottomSheet List Content",
+        id = "list-content-no-handle",
+        name = "No Handle List Content",
         description = "BottomSheet List Content, no drag handle",
         sourceUrl = BottomSheetExampleSourceUrl,
     ) {
@@ -100,7 +103,8 @@ public val BottomSheetExamples: List<Example> = listOf(
         )
     },
     Example(
-        name = "BottomSheet List Content",
+        id = "list-content-expanded",
+        name = "Expanded List Content",
         description = "BottomSheet List Content fully expanded",
         sourceUrl = BottomSheetExampleSourceUrl,
     ) {
@@ -115,6 +119,7 @@ public val BottomSheetExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "text-content",
         name = "BottomSheet Text Content",
         description = "BottomSheet Text Content",
         sourceUrl = BottomSheetExampleSourceUrl,
@@ -130,6 +135,7 @@ public val BottomSheetExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "image-content",
         name = "BottomSheet Image Content",
         description = "BottomSheet Image Content",
         sourceUrl = BottomSheetExampleSourceUrl,

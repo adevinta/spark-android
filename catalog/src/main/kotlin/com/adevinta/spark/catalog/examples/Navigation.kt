@@ -34,13 +34,23 @@ import com.adevinta.spark.catalog.model.Component
 import kotlinx.serialization.Serializable
 
 @Serializable
-public object ExamplesList
+internal data class ExampleSection(val componentId: String) {
+    companion object {
+        val deepLinks = listOf(
+            navDeepLink<ExampleSection>(basePath = "${AppBasePath}examples/component"),
+        )
+    }
+}
 
 @Serializable
-private data class ExampleSection(val componentId: Int)
+internal data class ExampleShowcase(val componentId: String, val exampleId: String) {
 
-@Serializable
-private data class ExampleShowcase(val componentId: Int, val exampleIndex: Int)
+    companion object {
+        val deepLinks = listOf(
+            navDeepLink<ExampleShowcase>(basePath = "${AppBasePath}examples/component/detail"),
+        )
+    }
+}
 
 internal fun NavGraphBuilder.examplesDestination(
     navController: NavHostController,
@@ -48,9 +58,7 @@ internal fun NavGraphBuilder.examplesDestination(
     contentPadding: PaddingValues,
 ) {
     composable<ExamplesList>(
-        deepLinks = listOf(
-            navDeepLink<ExamplesList>(basePath = "$AppBasePath/examples"),
-        ),
+        deepLinks = ExamplesList.deepLinks,
     ) {
         ComponentsListScreen(
             components = components,
@@ -62,9 +70,7 @@ internal fun NavGraphBuilder.examplesDestination(
     }
 
     composable<ExampleSection>(
-        deepLinks = listOf(
-            navDeepLink<ExampleSection>(basePath = "$AppBasePath/examples/component"),
-        ),
+        deepLinks = ExampleSection.deepLinks,
     ) { navBackStackEntry ->
         val exampleSection = navBackStackEntry.toRoute<ExampleSection>()
         val componentId = exampleSection.componentId
@@ -72,22 +78,19 @@ internal fun NavGraphBuilder.examplesDestination(
         Component(
             component = component,
             contentPadding = contentPadding,
-            onExampleClick = { example ->
-                val exampleIndex = component.examples.indexOf(example)
-                navController.navigate(route = ExampleShowcase(componentId = componentId, exampleIndex = exampleIndex))
+            onExampleClick = { exampleId ->
+                navController.navigate(route = ExampleShowcase(componentId = componentId, exampleId = exampleId))
             },
         )
     }
     composable<ExampleShowcase>(
-        deepLinks = listOf(
-            navDeepLink<ExampleShowcase>(basePath = "$AppBasePath/examples/component/detail"),
-        ),
+        deepLinks = ExampleShowcase.deepLinks,
     ) { navBackStackEntry ->
         val exampleShowkase = navBackStackEntry.toRoute<ExampleShowcase>()
         val componentId = exampleShowkase.componentId
-        val exampleIndex = exampleShowkase.exampleIndex
+        val exampleId = exampleShowkase.exampleId
         val component = components.first { component -> component.id == componentId }
-        val example = component.examples[exampleIndex]
+        val example = component.examples.first { it.id == exampleId }
         Example(example = example)
     }
 }

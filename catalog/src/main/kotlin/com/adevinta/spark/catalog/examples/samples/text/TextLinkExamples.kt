@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.snackbars.SnackbarIntent
 import com.adevinta.spark.components.text.TextLink
@@ -44,6 +45,7 @@ private const val TextLinksExampleSourceUrl = "$SampleSourceUrl/TextLinkExamples
 
 public val TextLinksExamples: List<Example> = listOf(
     Example(
+        id = "filled",
         name = "Link inside title",
         description = "Link inside title no icon",
         sourceUrl = TextLinksExampleSourceUrl,
@@ -73,6 +75,7 @@ public val TextLinksExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "paragraph",
         name = "Link inside paragraph",
         description = "Link inside paragraph no icon",
         sourceUrl = TextLinksExampleSourceUrl,
@@ -100,6 +103,7 @@ public val TextLinksExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "button",
         name = "Entire text as link no icon",
         description = "Entire text as link no icon using Text Link Button",
         sourceUrl = TextLinksExampleSourceUrl,
@@ -125,6 +129,7 @@ public val TextLinksExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "button-icon",
         name = "Entire text as link with icon",
         description = "Entire text as link with icon using Text Link Button",
         sourceUrl = TextLinksExampleSourceUrl,

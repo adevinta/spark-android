@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.sp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
+
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.iconbuttons.IconButtonFilled
@@ -60,6 +61,7 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.highlight
 
 public val SlidersConfigurator: Configurator = Configurator(
+    id = "slider",
     name = "Slider",
     description = "Slider configuration",
     sourceUrl = "$SampleSourceUrl/SliderSamples.kt",

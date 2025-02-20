@@ -47,7 +47,7 @@ import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConf
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
-import com.adevinta.spark.catalog.examples.divider.DividerExamples
+import com.adevinta.spark.catalog.examples.samples.divider.DividerExamples
 import com.adevinta.spark.catalog.examples.samples.bottomsheet.BottomSheetExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
@@ -74,9 +74,10 @@ import com.adevinta.spark.catalog.examples.samples.tokens.TokensExamples
 import com.adevinta.spark.catalog.util.ComponentGuidelinesUrl
 import com.adevinta.spark.catalog.util.PackageSummaryUrl
 import com.adevinta.spark.catalog.util.SparkSourceUrl
+import kotlinx.serialization.Serializable
 
 public data class Component(
-    val id: Int,
+    val id: String,
     val name: String,
     @StringRes val description: Int,
     val tintIcon: Boolean = true,
@@ -88,11 +89,8 @@ public data class Component(
     val configurators: List<Configurator> = emptyList(),
 )
 
-private var nextId: Int = 1
-private fun nextId(): Int = nextId.also { nextId += 1 }
-
 private val Tokens = Component(
-    id = 1,
+    id = "tokens",
     name = "Tokens",
     illustration = R.drawable.illu_component_tokens,
     tintIcon = false,
@@ -105,7 +103,7 @@ private val Tokens = Component(
 )
 
 private val BottomSheets = Component(
-    id = 2,
+    id = "bottomsheets",
     name = "BottomSheets",
     illustration = R.drawable.bottomsheet,
     tintIcon = false,
@@ -118,7 +116,7 @@ private val BottomSheets = Component(
 )
 
 private val Buttons = Component(
-    id = 3,
+    id = "buttons",
     name = "Buttons",
     illustration = R.drawable.illu_component_button,
     tintIcon = false,
@@ -131,7 +129,7 @@ private val Buttons = Component(
 )
 
 private val Checkboxes = Component(
-    id = 4,
+    id = "checkboxes",
     name = "Checkboxes",
     illustration = R.drawable.illu_component_checkbox,
     tintIcon = false,
@@ -144,7 +142,7 @@ private val Checkboxes = Component(
 )
 
 private val Chips = Component(
-    id = 5,
+    id = "chips",
     name = "Chips",
     description = R.string.component_chips_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/17568d-chip",
@@ -155,7 +153,7 @@ private val Chips = Component(
 )
 
 private val Dialogs = Component(
-    id = 6,
+    id = "dialogs",
     name = "Dialogs",
     description = R.string.component_dialog_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/2427e1-modaldialog/b/02a6bc",
@@ -166,7 +164,7 @@ private val Dialogs = Component(
 )
 
 private val Dividers = Component(
-    id = 7,
+    id = "dividerss",
     name = "Dividers",
     description = R.string.component_divider_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/867b47-divider",
@@ -177,7 +175,7 @@ private val Dividers = Component(
 )
 
 private val Dropdowns = Component(
-    id = 8,
+    id = "dropdownss",
     name = "Dropdowns",
     description = R.string.component_dropdowns_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/1186e1705/p/323b83-dropdown",
@@ -188,7 +186,7 @@ private val Dropdowns = Component(
 )
 
 private val Icons = Component(
-    id = 9,
+    id = "iconss",
     name = "Icons",
     illustration = R.drawable.illu_component_iconbutton,
     tintIcon = false,
@@ -201,7 +199,7 @@ private val Icons = Component(
 )
 
 private val IconButtons = Component(
-    id = 10,
+    id = "icon-buttons",
     name = "IconButtons",
     illustration = R.drawable.illu_component_iconbutton,
     tintIcon = false,
@@ -214,7 +212,7 @@ private val IconButtons = Component(
 )
 
 private val IconToggleButtons = Component(
-    id = 11,
+    id = "icon-toggle-buttons",
     name = "IconToggleButtons",
     description = R.string.component_icontogglebutton_description,
     illustration = R.drawable.illu_component_icontogglebutton,
@@ -227,7 +225,7 @@ private val IconToggleButtons = Component(
 )
 
 private val Image = Component(
-    id = 12,
+    id = "image",
     name = "Image",
     description = R.string.component_image_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/096e9f-image",
@@ -238,7 +236,7 @@ private val Image = Component(
 )
 
 private val Popovers = Component(
-    id = 13,
+    id = "popovers",
     name = "Popovers",
     illustration = R.drawable.illustration_popover,
     tintIcon = false,
@@ -251,7 +249,7 @@ private val Popovers = Component(
 )
 
 private val Progressbars = Component(
-    id = 14,
+    id = "progressbars",
     name = "Progressbars",
     description = R.string.component_progressbar_description,
     illustration = R.drawable.ic_progressbar,
@@ -264,7 +262,7 @@ private val Progressbars = Component(
 )
 
 private val ProgressTracker = Component(
-    id = 15,
+    id = "progress-tracker",
     name = "Progress Tracker",
     description = R.string.component_progresstracker_description,
     illustration = R.drawable.illu_component_progresstracker,
@@ -277,7 +275,7 @@ private val ProgressTracker = Component(
 )
 
 private val RadioButtons = Component(
-    id = 16,
+    id = "radio-buttons",
     name = "Radio buttons",
     illustration = R.drawable.illu_component_radiobutton,
     tintIcon = false,
@@ -290,7 +288,7 @@ private val RadioButtons = Component(
 )
 
 private val Rating = Component(
-    id = 17,
+    id = "ratings",
     name = "Ratings",
     illustration = R.drawable.illu_component_rating,
     tintIcon = false,
@@ -303,7 +301,7 @@ private val Rating = Component(
 )
 
 private val Sliders = Component(
-    id = 18,
+    id = "slider",
     name = "Slider",
     description = R.string.component_slider_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/25cceb-slider/b/",
@@ -314,7 +312,7 @@ private val Sliders = Component(
 )
 
 private val Snackbars = Component(
-    id = 19,
+    id = "snackbars",
     name = "Snackbars",
     description = R.string.component_snackbar_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/36d4af-snackbar",
@@ -325,7 +323,7 @@ private val Snackbars = Component(
 )
 
 private val Stepper = Component(
-    id = 20,
+    id = "steppers",
     name = "Steppers",
     description = R.string.component_stepper_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/82fbf6-stepper",
@@ -336,7 +334,7 @@ private val Stepper = Component(
 )
 
 private val Switches = Component(
-    id = 21,
+    id = "switches",
     name = "Switches",
     illustration = R.drawable.illu_component_switch,
     tintIcon = false,
@@ -349,7 +347,7 @@ private val Switches = Component(
 )
 
 private val Tabs = Component(
-    id = 22,
+    id = "tabs",
     name = "Tabs",
     description = R.string.component_tab_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/7461a4-tabs/b/98915d",
@@ -360,7 +358,7 @@ private val Tabs = Component(
 )
 
 private val Tags = Component(
-    id = 23,
+    id = "tags",
     name = "Tags",
     description = R.string.component_tag_description,
     illustration = R.drawable.illu_component_tags,
@@ -373,7 +371,7 @@ private val Tags = Component(
 )
 
 private val TextFields = Component(
-    id = 24,
+    id = "textFields",
     name = "TextFields",
     description = R.string.component_textfield_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/773c60-input--text-field/b/0658e2",
@@ -384,7 +382,7 @@ private val TextFields = Component(
 )
 
 private val TextLinks = Component(
-    id = 25,
+    id = "textLinks",
     name = "TextLinks",
     description = R.string.component_textlink_description,
     illustration = R.drawable.icon_textlink,

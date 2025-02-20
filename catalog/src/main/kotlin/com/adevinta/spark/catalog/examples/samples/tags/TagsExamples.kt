@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.tags.TagFilled
 import com.adevinta.spark.components.tags.TagIntent
@@ -43,6 +44,7 @@ private const val TagsExampleSourceUrl = "$SampleSourceUrl/TagSamples.kt"
 @OptIn(ExperimentalLayoutApi::class)
 public val TagsExamples: List<Example> = listOf(
     Example(
+        id = "filled",
         name = "Filled Tag",
         description = TagsExampleDescription,
         sourceUrl = TagsExampleSourceUrl,
@@ -58,6 +60,7 @@ public val TagsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "tinted",
         name = "Tinted Tag",
         description = TagsExampleDescription,
         sourceUrl = TagsExampleSourceUrl,
@@ -73,6 +76,7 @@ public val TagsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "outlined",
         name = "Outlined Tag",
         description = TagsExampleDescription,
         sourceUrl = TagsExampleSourceUrl,
@@ -88,6 +92,7 @@ public val TagsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "layout",
         name = "Tag layouts",
         description = "Showcase how to layout tags sao that they don't clip on parent width but can go to a new " +
             "line if they don't fit",

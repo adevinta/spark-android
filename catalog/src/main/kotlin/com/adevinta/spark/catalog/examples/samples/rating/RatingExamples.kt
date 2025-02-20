@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.rating.RatingDefault
 import com.adevinta.spark.components.rating.RatingDisplay
@@ -46,6 +47,7 @@ import java.util.Locale
 
 public val RatingExamples: List<Example> = listOf(
     Example(
+        id = "display",
         name = "Rating Display",
         description = "Rating Display example that show every step value",
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",
@@ -53,6 +55,7 @@ public val RatingExamples: List<Example> = listOf(
         RatingDisplaySample()
     },
     Example(
+        id = "display-medium",
         name = "Rating Display Medium",
         description = "Rating Display example in medium size that show every step value",
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",
@@ -60,6 +63,7 @@ public val RatingExamples: List<Example> = listOf(
         RatingDisplaySample(starSize = RatingDefault.StarSize)
     },
     Example(
+        id = "input",
         name = "Rating Input",
         description = "Rating input example that le the user select a rating value",
         sourceUrl = "$SampleSourceUrl/RatingInputSample.kt",
@@ -67,6 +71,7 @@ public val RatingExamples: List<Example> = listOf(
         RatingInputSample()
     },
     Example(
+        id = "full",
         name = "Rating Full",
         description = "Rating Full for Polaris that highlight the different layout possible and the difference " +
             "in locale",
@@ -75,6 +80,7 @@ public val RatingExamples: List<Example> = listOf(
         RatingFull()
     },
     Example(
+        id = "simple",
         name = "Rating Simple",
         description = "Rating Simple for Polaris that highlight the different layout possible and the difference " +
             "in locale",
@@ -83,6 +89,7 @@ public val RatingExamples: List<Example> = listOf(
         RatingSimpleSample()
     },
     Example(
+        id = "star",
         name = "Rating Star",
         description = "The star used for the rating component",
         sourceUrl = "$SampleSourceUrl/RatingStarSample.kt",

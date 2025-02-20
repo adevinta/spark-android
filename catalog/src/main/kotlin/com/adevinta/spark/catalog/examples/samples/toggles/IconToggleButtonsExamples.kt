@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
+
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonContrast
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled
@@ -41,6 +42,7 @@ private const val IconToggleButtonsExampleDescription = "Icon Toggle Button exam
 private const val IconToggleButtonsExampleSourceUrl = "$SampleSourceUrl/IconToggleButtonSamples.kt"
 public val IconToggleButtonsExamples: List<Example> = listOf(
     Example(
+        id = "filled",
         name = "Filled Icon Toggle Button",
         description = IconToggleButtonsExampleDescription,
         sourceUrl = IconToggleButtonsExampleSourceUrl,
@@ -58,6 +60,7 @@ public val IconToggleButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "tinted",
         name = "Tinted Icon Toggle Button",
         description = IconToggleButtonsExampleDescription,
         sourceUrl = IconToggleButtonsExampleSourceUrl,
@@ -75,6 +78,7 @@ public val IconToggleButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "outlined",
         name = "Outlined Icon Toggle Button",
         description = IconToggleButtonsExampleDescription,
         sourceUrl = IconToggleButtonsExampleSourceUrl,
@@ -92,6 +96,7 @@ public val IconToggleButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "ghost",
         name = "Ghost Icon Toggle Button",
         description = IconToggleButtonsExampleDescription,
         sourceUrl = IconToggleButtonsExampleSourceUrl,
@@ -109,6 +114,7 @@ public val IconToggleButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "contrast",
         name = "Contrast Icon Toggle Button",
         description = IconToggleButtonsExampleDescription,
         sourceUrl = IconToggleButtonsExampleSourceUrl,

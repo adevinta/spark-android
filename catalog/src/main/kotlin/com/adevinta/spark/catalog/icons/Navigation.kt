@@ -34,7 +34,13 @@ import com.adevinta.spark.icons.SparkIcon
 import kotlinx.serialization.Serializable
 
 @Serializable
-private data class IconShowcase(val iconId: Int, val iconName: String, val isIconAnimated: Boolean)
+internal data class IconShowcase(val iconId: Int, val iconName: String, val isIconAnimated: Boolean) {
+    companion object {
+        val deepLinks = listOf(
+            navDeepLink<IconShowcase>(basePath = "${AppBasePath}icons/detail"),
+        )
+    }
+}
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 internal fun NavGraphBuilder.iconsDemoDestination(
@@ -43,9 +49,7 @@ internal fun NavGraphBuilder.iconsDemoDestination(
     sharedTransitionScope: SharedTransitionScope,
 ) {
     composable<IconsList>(
-        deepLinks = listOf(
-            navDeepLink<IconsList>(basePath = "$AppBasePath/icons"),
-        ),
+        deepLinks = IconsList.deepLinks,
     ) {
         IconsScreen(
             contentPadding = contentPadding,
@@ -60,9 +64,7 @@ internal fun NavGraphBuilder.iconsDemoDestination(
     }
 
     composable<IconShowcase>(
-        deepLinks = listOf(
-            navDeepLink<IconShowcase>(basePath = "$AppBasePath/icons/detail"),
-        ),
+        deepLinks = IconShowcase.deepLinks,
     ) { navBackStackEntry ->
         val iconShowcase = navBackStackEntry.toRoute<IconShowcase>()
         val iconId = iconShowcase.iconId

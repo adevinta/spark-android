@@ -37,6 +37,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
+
 import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -59,6 +60,7 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 
 public val IconButtonsConfigurator: Configurator = Configurator(
+    id = "icon-button",
     name = "IconButton",
     description = "IconButton configuration",
     sourceUrl = "$SampleSourceUrl/IconButtonSamples.kt",

@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
+
 import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -56,6 +57,7 @@ import com.adevinta.spark.res.annotatedStringResource
 import kotlinx.coroutines.launch
 
 public val TextLinksConfigurator: Configurator = Configurator(
+    id = "textlink",
     name = "TextLink",
     description = "TextLink configuration",
     sourceUrl = "$SampleSourceUrl/TextLinkSamples.kt",

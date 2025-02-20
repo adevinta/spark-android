@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
+
 import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -53,6 +54,7 @@ import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.tokens.highlight
 
 public val RatingsConfigurator: Configurator = Configurator(
+    id = "rating",
     name = "Rating Display",
     description = "Rating Display configuration",
     sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",

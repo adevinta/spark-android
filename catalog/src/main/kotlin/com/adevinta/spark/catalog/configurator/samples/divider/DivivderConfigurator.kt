@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Configurator
+
 import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.util.PreviewTheme
 import com.adevinta.spark.catalog.util.SampleSourceUrl
@@ -52,6 +53,7 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.TextField
 
 public val DividerConfigurator: Configurator = Configurator(
+    id = "divider",
     name = "Divider",
     description = "Divider configuration",
     sourceUrl = "$SampleSourceUrl/DividerSamples.kt",
