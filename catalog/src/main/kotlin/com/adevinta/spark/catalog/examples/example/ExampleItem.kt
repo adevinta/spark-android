@@ -33,7 +33,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Example
-
 import com.adevinta.spark.components.card.CardDefaults
 import com.adevinta.spark.components.card.ElevatedCard
 

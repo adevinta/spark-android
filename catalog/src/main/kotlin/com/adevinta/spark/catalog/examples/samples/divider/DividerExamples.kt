@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.model.Example
-
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.divider.DividerIntent
 import com.adevinta.spark.components.divider.HorizontalDivider

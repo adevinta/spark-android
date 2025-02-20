@@ -64,7 +64,6 @@ import coil.request.SuccessResult
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.model.Configurator
-
 import com.adevinta.spark.catalog.ui.ButtonGroup
 import com.adevinta.spark.catalog.ui.RoundedPolygonShape
 import com.adevinta.spark.catalog.util.PreviewTheme

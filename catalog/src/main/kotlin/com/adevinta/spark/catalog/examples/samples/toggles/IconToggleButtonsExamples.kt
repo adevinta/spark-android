@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.adevinta.spark.catalog.model.Example
-
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonContrast
 import com.adevinta.spark.components.iconbuttons.toggle.IconToggleButtonFilled

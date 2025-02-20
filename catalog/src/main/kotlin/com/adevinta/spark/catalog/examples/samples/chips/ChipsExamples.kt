@@ -62,7 +62,6 @@ import androidx.compose.ui.unit.dp
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.examples.samples.chips.filter.ChipFilter
 import com.adevinta.spark.catalog.model.Example
-
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 import com.adevinta.spark.components.chips.Chip
 import com.adevinta.spark.components.chips.ChipIntent

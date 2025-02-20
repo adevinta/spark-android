@@ -52,7 +52,6 @@ import com.adevinta.spark.catalog.ui.navigation.NavHostSpark
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
 
-
 @Composable
 public fun ConfiguratorComponentsScreen(
     modifier: Modifier = Modifier,

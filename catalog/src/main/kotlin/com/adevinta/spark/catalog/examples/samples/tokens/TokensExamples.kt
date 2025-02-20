@@ -27,7 +27,6 @@ import com.adevinta.spark.catalog.examples.samples.tokens.elevation.ElevationSam
 import com.adevinta.spark.catalog.examples.samples.tokens.shapes.ShapeCustomSample
 import com.adevinta.spark.catalog.examples.samples.tokens.shapes.ShapeSample
 import com.adevinta.spark.catalog.model.Example
-
 import com.adevinta.spark.catalog.util.SampleSourceUrl
 
 private const val TokensExampleSourceUrl = "$SampleSourceUrl/TokensExamples.kt"

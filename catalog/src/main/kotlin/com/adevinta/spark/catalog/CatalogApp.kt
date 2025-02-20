@@ -179,10 +179,10 @@ internal fun ComponentActivity.CatalogApp(
 
         DeviceConfigurationOverride(
             override = DeviceConfigurationOverride.DarkMode(useDark)
-                    then DeviceConfigurationOverride.LayoutDirection(layoutDirection)
-                    then DeviceConfigurationOverride.FontScale(
-                theme.takeUnless { it.fontScaleMode == System }?.fontScale ?: LocalDensity.current.fontScale,
-            ),
+                then DeviceConfigurationOverride.LayoutDirection(layoutDirection)
+                then DeviceConfigurationOverride.FontScale(
+                    theme.takeUnless { it.fontScaleMode == System }?.fontScale ?: LocalDensity.current.fontScale,
+                ),
         ) {
             Box(
                 modifier = Modifier
@@ -221,7 +221,7 @@ internal fun ComponentActivity.CatalogApp(
                     scaffoldState = rememberBackdropScaffoldState(BackdropValue.Concealed),
                     frontLayerScrimColor = Color.Unspecified,
                     headerHeight = BackdropScaffoldDefaults.HeaderHeight +
-                            WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
+                        WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding(),
                     peekHeight = BackdropScaffoldDefaults.PeekHeight + WindowInsets.statusBars.asPaddingValues()
                         .calculateTopPadding(),
                     backLayerBackgroundColor = SparkTheme.colors.mainContainer,

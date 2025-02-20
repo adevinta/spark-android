@@ -21,7 +21,6 @@
  */
 package com.adevinta.spark.catalog.icons
 
-import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.foundation.layout.PaddingValues
@@ -63,7 +62,6 @@ private fun MonitorPagerChanges(
             .collect { activity.activeNavController = navController }
     }
 }
-
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
