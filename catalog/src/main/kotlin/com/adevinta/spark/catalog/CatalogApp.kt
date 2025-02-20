@@ -23,6 +23,7 @@ package com.adevinta.spark.catalog
 
 import android.graphics.RenderEffect
 import android.graphics.RuntimeShader
+import android.net.Uri
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -208,17 +209,11 @@ internal fun ComponentActivity.CatalogApp(
             ) {
                 val coroutineScope = rememberCoroutineScope()
                 val homeScreenValues = CatalogHomeScreen.entries
-                val initialPage = LocalActivity.current?.intent?.data?.let {
-                    when {
-                        it.pathSegments.contains("examples") -> CatalogHomeScreen.Examples.ordinal
-                        it.pathSegments.contains("configurator") -> CatalogHomeScreen.Configurator.ordinal
-                        it.pathSegments.contains("icons") -> CatalogHomeScreen.Icons.ordinal
-                        else -> null
-                    }
-                } ?: CatalogHomeScreen.Examples.ordinal
+                val intent = LocalActivity.current?.intent
+                val initialPage = getInitialScreen(intent?.data)
 
                 val pagerState = rememberPagerState(
-                    initialPage = initialPage,
+                    initialPage = initialPage.ordinal,
                     pageCount = { homeScreenValues.size },
                 )
 
@@ -316,6 +311,20 @@ private fun HomeTabBar(
             onTabSelected = { newTab -> onTabSelected(catalogScreens[newTab.ordinal]) },
         )
     }
+}
+
+@Composable
+private fun getInitialScreen(uri: Uri?): CatalogHomeScreen {
+    val initialScreen = uri?.pathSegments?.let { segments ->
+        when {
+            "examples" in segments -> CatalogHomeScreen.Examples
+            "configurator" in segments -> CatalogHomeScreen.Configurator
+            "icons" in segments -> CatalogHomeScreen.Icons
+            else -> null
+        }
+    }
+
+    return initialScreen ?: CatalogHomeScreen.Examples
 }
 
 public enum class CatalogHomeScreen { Examples, Configurator, Icons }
