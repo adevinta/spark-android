@@ -51,7 +51,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="catalog"
                     android:scheme="spark" />
             </intent-filter>
         </activity>
