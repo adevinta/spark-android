@@ -38,7 +38,6 @@ import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.examples.example.ExampleItem
 import com.adevinta.spark.catalog.model.Component
-import com.adevinta.spark.catalog.model.Example
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
 
@@ -47,7 +46,7 @@ import com.adevinta.spark.tokens.Layout
 public fun Component(
     component: Component,
     contentPadding: PaddingValues,
-    onExampleClick: (example: Example) -> Unit,
+    onExampleClick: (exampleId: String) -> Unit,
 ) {
     val ltr = LocalLayoutDirection.current
     LazyColumn(

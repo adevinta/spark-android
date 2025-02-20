@@ -29,6 +29,7 @@ import androidx.compose.runtime.Composable
 import com.adevinta.spark.components.snackbars.SnackbarHostState
 
 public data class Example(
+    val id: String,
     val name: String,
     val description: String,
     val sourceUrl: String,

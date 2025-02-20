@@ -36,10 +36,10 @@ import com.adevinta.spark.icons.AlarmOnFill
 import com.adevinta.spark.icons.MessageOutline
 import com.adevinta.spark.icons.SparkIcons
 
-private const val TabsExampleDescription = "Tab examples"
 private const val TabsExampleSourceUrl = "$SampleSourceUrl/TabExamples.kt"
 public val TabsExamples: List<Example> = listOf(
     Example(
+        id = "simple",
         name = "Simple tabs",
         description = "2 tabs displayed on screen",
         sourceUrl = TabsExampleSourceUrl,
@@ -47,6 +47,7 @@ public val TabsExamples: List<Example> = listOf(
         TabSimpleSample()
     },
     Example(
+        id = "badge",
         name = "Tabs with badge",
         description = "3 tabs and the middle one contains a badge",
         sourceUrl = TabsExampleSourceUrl,
@@ -54,6 +55,7 @@ public val TabsExamples: List<Example> = listOf(
         TabWithBadgeSample()
     },
     Example(
+        id = "scrollable",
         name = "Scrollable tabs",
         description = "Display 3 tabs with a long one that overflows to showcase the scrolling",
         sourceUrl = TabsExampleSourceUrl,
@@ -61,6 +63,7 @@ public val TabsExamples: List<Example> = listOf(
         ScrollableTabsSample()
     },
     Example(
+        id = "icon",
         name = "Icons tabs",
         description = "Tabs with no label, only icons",
         sourceUrl = TabsExampleSourceUrl,

@@ -31,6 +31,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,24 +40,45 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDeepLink
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navDeepLink
 import com.adevinta.spark.SparkTheme
+import com.adevinta.spark.catalog.AppBasePath
+import com.adevinta.spark.catalog.CatalogHomeScreen
 import com.adevinta.spark.catalog.R
 import com.adevinta.spark.catalog.examples.component.ComponentItem
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.themes.NavigationMode
+import com.adevinta.spark.catalog.ui.navigation.ChangeSelectedNavControllerOnPageChange
 import com.adevinta.spark.catalog.ui.navigation.NavHostSpark
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.tokens.Layout
+import kotlinx.coroutines.flow.filter
+import kotlinx.serialization.Serializable
+
+@Serializable
+public object ExamplesList
+
+internal val ExamplesList.deepLinks: List<NavDeepLink>
+    get() = listOf(
+        navDeepLink<ExamplesList>(basePath = "${AppBasePath}examples"),
+    )
 
 @Composable
 public fun ComponentsScreen(
     modifier: Modifier = Modifier,
     components: List<Component>,
+    pagerState: PagerState,
     contentPadding: PaddingValues,
     navigationMode: NavigationMode,
 ) {
     val navController = rememberNavController()
+    ChangeSelectedNavControllerOnPageChange(
+        pagerState = pagerState,
+        catalogScreen = CatalogHomeScreen.Examples,
+        navController = navController,
+    )
 
     NavHostSpark(
         modifier = modifier,
@@ -76,7 +98,7 @@ public fun ComponentsScreen(
 @Composable
 internal fun ComponentsListScreen(
     components: List<Component>,
-    onExampleSectionClick: (Int) -> Unit,
+    onExampleSectionClick: (String) -> Unit,
     contentPadding: PaddingValues,
 ) {
     val examplesComponents by remember(components) {

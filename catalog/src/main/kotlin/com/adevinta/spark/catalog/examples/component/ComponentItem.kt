@@ -59,7 +59,7 @@ import com.adevinta.spark.tokens.applyTonalElevation
 @Composable
 public fun ComponentItem(
     component: Component,
-    onClick: (component: Component, index: Int) -> Unit,
+    onClick: (component: Component, configuratorId: String) -> Unit,
     countIndicator: Int = 0,
     configuratorCount: Int = -1,
 ) {
@@ -69,7 +69,8 @@ public fun ComponentItem(
     Surface(
         onClick = {
             if (singleContent || configuratorCount != countIndicator) {
-                return@Surface onClick(component, 0)
+                val firstConfiguratorId = component.configurators.first().id
+                return@Surface onClick(component, firstConfiguratorId)
             } else {
                 // Show a menu for all other options
                 expanded = true
@@ -120,7 +121,7 @@ public fun ComponentItem(
                     DropdownMenuItem(
                         text = { Text(configurator.name) },
                         onClick = {
-                            onClick(component, i)
+                            onClick(component, configurator.id)
                             expanded = false
                         },
                         leadingIcon = { Icon(SparkIcons.WheelOutline, contentDescription = null) },
@@ -141,7 +142,7 @@ private fun ComponentItemPreview() {
     PreviewTheme {
         ComponentItem(
             component = Component(
-                0,
+                id = "colors",
                 name = "Tokens",
                 description = R.string.component_tokens_description,
                 guidelinesUrl = "https://www.google.com/#q=constituto",
@@ -155,7 +156,7 @@ private fun ComponentItemPreview() {
         )
         ComponentItem(
             component = Component(
-                0,
+                id = "colors",
                 name = "Tokens",
                 description = R.string.component_tokens_description,
                 illustration = R.drawable.illu_component_tokens,

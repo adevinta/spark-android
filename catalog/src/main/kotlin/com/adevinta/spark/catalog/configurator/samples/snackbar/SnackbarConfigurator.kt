@@ -55,6 +55,7 @@ import com.adevinta.spark.icons.SparkIcons
 import kotlinx.coroutines.launch
 
 public val SnackbarConfigurator: Configurator = Configurator(
+    id = "snackbar",
     name = "Snackbar",
     description = "Snackbar configuration",
     sourceUrl = "$SampleSourceUrl/SnackbarSamples.kt",

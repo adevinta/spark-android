@@ -49,6 +49,7 @@ private const val PopoverExampleSourceUrl = "$SampleSourceUrl/PopoverSamples.kt"
 @OptIn(ExperimentalMaterial3Api::class)
 public val PopoverExamples: List<Example> = listOf(
     Example(
+        id = "default",
         name = "Popover",
         description = PopoverExampleDescription,
         sourceUrl = PopoverExampleSourceUrl,

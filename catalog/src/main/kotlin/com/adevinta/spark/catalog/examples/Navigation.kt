@@ -25,27 +25,41 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
+import com.adevinta.spark.catalog.AppBasePath
 import com.adevinta.spark.catalog.examples.component.Component
 import com.adevinta.spark.catalog.examples.example.Example
 import com.adevinta.spark.catalog.model.Component
 import kotlinx.serialization.Serializable
 
 @Serializable
-public object ExamplesList
+internal data class ExampleSection(val componentId: String) {
+    companion object {
+        val deepLinks = listOf(
+            navDeepLink<ExampleSection>(basePath = "${AppBasePath}examples/component"),
+        )
+    }
+}
 
 @Serializable
-private data class ExampleSection(val componentId: Int)
+internal data class ExampleShowcase(val componentId: String, val exampleId: String) {
 
-@Serializable
-private data class ExampleShowcase(val componentId: Int, val exampleIndex: Int)
+    companion object {
+        val deepLinks = listOf(
+            navDeepLink<ExampleShowcase>(basePath = "${AppBasePath}examples/component/detail"),
+        )
+    }
+}
 
 internal fun NavGraphBuilder.examplesDestination(
     navController: NavHostController,
     components: List<Component>,
     contentPadding: PaddingValues,
 ) {
-    composable<ExamplesList> {
+    composable<ExamplesList>(
+        deepLinks = ExamplesList.deepLinks,
+    ) {
         ComponentsListScreen(
             components = components,
             contentPadding = contentPadding,
@@ -55,25 +69,28 @@ internal fun NavGraphBuilder.examplesDestination(
         )
     }
 
-    composable<ExampleSection> { navBackStackEntry ->
+    composable<ExampleSection>(
+        deepLinks = ExampleSection.deepLinks,
+    ) { navBackStackEntry ->
         val exampleSection = navBackStackEntry.toRoute<ExampleSection>()
         val componentId = exampleSection.componentId
         val component = components.first { component -> component.id == componentId }
         Component(
             component = component,
             contentPadding = contentPadding,
-            onExampleClick = { example ->
-                val exampleIndex = component.examples.indexOf(example)
-                navController.navigate(route = ExampleShowcase(componentId = componentId, exampleIndex = exampleIndex))
+            onExampleClick = { exampleId ->
+                navController.navigate(route = ExampleShowcase(componentId = componentId, exampleId = exampleId))
             },
         )
     }
-    composable<ExampleShowcase> { navBackStackEntry ->
+    composable<ExampleShowcase>(
+        deepLinks = ExampleShowcase.deepLinks,
+    ) { navBackStackEntry ->
         val exampleShowkase = navBackStackEntry.toRoute<ExampleShowcase>()
         val componentId = exampleShowkase.componentId
-        val exampleIndex = exampleShowkase.exampleIndex
+        val exampleId = exampleShowkase.exampleId
         val component = components.first { component -> component.id == componentId }
-        val example = component.examples[exampleIndex]
+        val example = component.examples.first { it.id == exampleId }
         Example(example = example)
     }
 }

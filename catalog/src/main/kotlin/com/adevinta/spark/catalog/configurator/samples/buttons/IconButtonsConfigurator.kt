@@ -59,6 +59,7 @@ import com.adevinta.spark.icons.SparkIcon
 import com.adevinta.spark.icons.SparkIcons
 
 public val IconButtonsConfigurator: Configurator = Configurator(
+    id = "icon-button",
     name = "IconButton",
     description = "IconButton configuration",
     sourceUrl = "$SampleSourceUrl/IconButtonSamples.kt",

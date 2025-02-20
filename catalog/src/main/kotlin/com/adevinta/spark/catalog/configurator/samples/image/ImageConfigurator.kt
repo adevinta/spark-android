@@ -83,6 +83,7 @@ import com.adevinta.spark.tools.modifiers.ifTrue
 import com.google.accompanist.drawablepainter.rememberDrawablePainter
 
 public val ImageConfigurator: Configurator = Configurator(
+    id = "image",
     name = "Image",
     description = "Image configuration",
     sourceUrl = "$SampleSourceUrl/ImageSample.kt",

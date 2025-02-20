@@ -67,6 +67,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 public val PopoverConfigurator: Configurator = Configurator(
+    id = "popover",
     name = "Popover",
     description = "Popover configuration",
     sourceUrl = "$SampleSourceUrl/PopoverSamples.kt",

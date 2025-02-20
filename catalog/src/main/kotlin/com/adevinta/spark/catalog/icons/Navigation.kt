@@ -27,12 +27,20 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
+import com.adevinta.spark.catalog.AppBasePath
 import com.adevinta.spark.icons.SparkIcon
 import kotlinx.serialization.Serializable
 
 @Serializable
-private data class IconShowcase(val iconId: Int, val iconName: String, val isIconAnimated: Boolean)
+internal data class IconShowcase(val iconId: Int, val iconName: String, val isIconAnimated: Boolean) {
+    companion object {
+        val deepLinks = listOf(
+            navDeepLink<IconShowcase>(basePath = "${AppBasePath}icons/detail"),
+        )
+    }
+}
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 internal fun NavGraphBuilder.iconsDemoDestination(
@@ -40,7 +48,9 @@ internal fun NavGraphBuilder.iconsDemoDestination(
     contentPadding: PaddingValues,
     sharedTransitionScope: SharedTransitionScope,
 ) {
-    composable<IconsList> {
+    composable<IconsList>(
+        deepLinks = IconsList.deepLinks,
+    ) {
         IconsScreen(
             contentPadding = contentPadding,
             sharedTransitionScope = sharedTransitionScope,
@@ -53,7 +63,9 @@ internal fun NavGraphBuilder.iconsDemoDestination(
         )
     }
 
-    composable<IconShowcase> { navBackStackEntry ->
+    composable<IconShowcase>(
+        deepLinks = IconShowcase.deepLinks,
+    ) { navBackStackEntry ->
         val iconShowcase = navBackStackEntry.toRoute<IconShowcase>()
         val iconId = iconShowcase.iconId
         val iconName = iconShowcase.iconName

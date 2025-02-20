@@ -55,6 +55,7 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.highlight
 
 public val ChipsConfigurator: Configurator = Configurator(
+    id = "chip",
     name = "Chip",
     description = "Chip configuration",
     sourceUrl = "$SampleSourceUrl/ChipSamples.kt",

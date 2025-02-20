@@ -50,6 +50,7 @@ private const val CheckboxExampleDescription = "Checkbox examples"
 private const val CheckboxExampleSourceUrl = "$SampleSourceUrl/CheckboxSamples.kt"
 public val CheckboxExamples: List<Example> = listOf(
     Example(
+        id = "standalone",
         name = "Standalone checkbox",
         description = CheckboxExampleDescription,
         sourceUrl = CheckboxExampleSourceUrl,
@@ -71,6 +72,7 @@ public val CheckboxExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "labeled",
         name = "Labeled checkbox group",
         description = CheckboxExampleDescription,
         sourceUrl = CheckboxExampleSourceUrl,
@@ -78,6 +80,7 @@ public val CheckboxExamples: List<Example> = listOf(
         LabeledCheckboxGroupExample()
     },
     Example(
+        id = "labeled-sides",
         name = "Labeled checkbox content side",
         description = CheckboxExampleDescription,
         sourceUrl = CheckboxExampleSourceUrl,

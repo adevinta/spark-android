@@ -40,10 +40,10 @@ import com.adevinta.spark.components.card.ElevatedCard
 @Composable
 public fun ExampleItem(
     example: Example,
-    onClick: (example: Example) -> Unit,
+    onClick: (exampleId: String) -> Unit,
 ) {
     ElevatedCard(
-        onClick = { onClick(example) },
+        onClick = { onClick(example.id) },
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.elevatedCardColors(
             containerColor = SparkTheme.colors.surface,

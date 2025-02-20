@@ -70,6 +70,7 @@ private const val BottomSheetExampleSourceUrl = "$SparkSampleSourceUrl/bottomshe
 @OptIn(ExperimentalMaterial3Api::class)
 public val BottomSheetExamples: List<Example> = listOf(
     Example(
+        id = "list-content",
         name = "BottomSheet List Content",
         description = "BottomSheet List Content",
         sourceUrl = BottomSheetExampleSourceUrl,
@@ -85,7 +86,8 @@ public val BottomSheetExamples: List<Example> = listOf(
         )
     },
     Example(
-        name = "BottomSheet List Content",
+        id = "list-content-no-handle",
+        name = "No Handle List Content",
         description = "BottomSheet List Content, no drag handle",
         sourceUrl = BottomSheetExampleSourceUrl,
     ) {
@@ -100,7 +102,8 @@ public val BottomSheetExamples: List<Example> = listOf(
         )
     },
     Example(
-        name = "BottomSheet List Content",
+        id = "list-content-expanded",
+        name = "Expanded List Content",
         description = "BottomSheet List Content fully expanded",
         sourceUrl = BottomSheetExampleSourceUrl,
     ) {
@@ -115,6 +118,7 @@ public val BottomSheetExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "text-content",
         name = "BottomSheet Text Content",
         description = "BottomSheet Text Content",
         sourceUrl = BottomSheetExampleSourceUrl,
@@ -130,6 +134,7 @@ public val BottomSheetExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "image-content",
         name = "BottomSheet Image Content",
         description = "BottomSheet Image Content",
         sourceUrl = BottomSheetExampleSourceUrl,

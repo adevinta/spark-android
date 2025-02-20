@@ -47,6 +47,7 @@ import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.components.toggles.ToggleIntent
 
 public val CheckboxConfigurator: Configurator = Configurator(
+    id = "icon-button",
     name = "Checkbox",
     description = "Checkbox configuration",
     sourceUrl = "$SampleSourceUrl/CheckboxSamples.kt",

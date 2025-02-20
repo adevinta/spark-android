@@ -57,6 +57,7 @@ import kotlinx.coroutines.launch
 
 public val StepperConfigurators: List<Configurator> = listOf(
     Configurator(
+        id = "stepper",
         name = "Stepper",
         description = "Stepper configuration",
         sourceUrl = "$SampleSourceUrl/StepperSamples.kt",
@@ -64,6 +65,7 @@ public val StepperConfigurators: List<Configurator> = listOf(
         StepperSample(it)
     },
     Configurator(
+        id = "stepper-form",
         name = "Stepper Form",
         description = "Stepper Form configuration with helper and label",
         sourceUrl = "$SampleSourceUrl/StepperSamples.kt",

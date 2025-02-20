@@ -37,6 +37,7 @@ private const val ProgressbarExampleSourceUrl = "$SampleSourceUrl/ProgressbarSam
 
 public val ProgressbarExamples: List<Example> = listOf(
     Example(
+        id = "determinate",
         name = "Progressbar",
         description = ProgressbarExampleDescription,
         sourceUrl = ProgressbarExampleSourceUrl,
@@ -55,6 +56,7 @@ public val ProgressbarExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "indeterminate",
         name = "ProgressbarIndeterminate",
         description = ProgressbarExampleDescription,
         sourceUrl = ProgressbarExampleSourceUrl,

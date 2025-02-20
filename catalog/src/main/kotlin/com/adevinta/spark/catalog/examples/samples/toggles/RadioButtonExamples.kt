@@ -47,6 +47,7 @@ private const val RadioButtonExampleDescription = "RadioButton examples"
 private const val RadioButtonExampleSourceUrl = "$SampleSourceUrl/RadioButtonSamples.kt"
 public val RadioButtonExamples: List<Example> = listOf(
     Example(
+        id = "standalone",
         name = "Standalone radio button",
         description = RadioButtonExampleDescription,
         sourceUrl = RadioButtonExampleSourceUrl,
@@ -67,6 +68,7 @@ public val RadioButtonExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "labeled",
         name = "Labeled radio button content side",
         description = RadioButtonExampleDescription,
         sourceUrl = RadioButtonExampleSourceUrl,
@@ -74,6 +76,7 @@ public val RadioButtonExamples: List<Example> = listOf(
         RadioButtonContentSideExample()
     },
     Example(
+        id = "group",
         name = "Labeled radio button group",
         description = RadioButtonExampleDescription,
         sourceUrl = RadioButtonExampleSourceUrl,

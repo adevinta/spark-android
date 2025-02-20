@@ -52,6 +52,7 @@ import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
 
 public val ProgressbarConfigurator: Configurator = Configurator(
+    id = "progressbar",
     name = "Progressbar",
     description = "Progressbar configuration",
     sourceUrl = "$SampleSourceUrl/ProgressbarSamples.kt",

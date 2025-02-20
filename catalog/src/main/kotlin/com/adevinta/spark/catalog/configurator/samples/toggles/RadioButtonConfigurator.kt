@@ -47,6 +47,7 @@ import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.components.toggles.ToggleIntent
 
 public val RadioButtonConfigurator: Configurator = Configurator(
+    id = "radio-button",
     name = "RadioButton",
     description = "RadioButton configuration",
     sourceUrl = "$SampleSourceUrl/RadioButtonSamples.kt",

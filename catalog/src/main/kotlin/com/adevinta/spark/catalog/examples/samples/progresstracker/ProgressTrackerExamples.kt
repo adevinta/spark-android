@@ -47,6 +47,7 @@ private const val ProgressTrackerExampleSourceUrl = "$SampleSourceUrl/ProgressTr
 
 public val ProgressTrackerExamples: List<Example> = listOf(
     Example(
+        id = "default",
         name = "Default",
         description = "Step indicator content defaults to step index, or checkmark icon when completed.",
         sourceUrl = ProgressTrackerExampleSourceUrl,
@@ -54,6 +55,7 @@ public val ProgressTrackerExamples: List<Example> = listOf(
         ProgressTrackerDefault()
     },
     Example(
+        id = "controlled",
         name = "Controlled",
         description = "Use `onStepClick` param to control component's state.",
         sourceUrl = ProgressTrackerExampleSourceUrl,
@@ -61,6 +63,7 @@ public val ProgressTrackerExamples: List<Example> = listOf(
         ProgressTrackerControlled()
     },
     Example(
+        id = "disabled",
         name = "Disabled",
         description = "Use `enabled` param on a `Step` to disable it.",
         sourceUrl = ProgressTrackerExampleSourceUrl,
@@ -68,6 +71,7 @@ public val ProgressTrackerExamples: List<Example> = listOf(
         ProgressTrackerDisabled()
     },
     Example(
+        id = "sizes",
         name = "Sizes",
         description = "Use `size` param to set the size of the progress indicators. Only the large one is clickable.",
         sourceUrl = ProgressTrackerExampleSourceUrl,
@@ -75,6 +79,7 @@ public val ProgressTrackerExamples: List<Example> = listOf(
         ProgressTrackerSizes()
     },
     Example(
+        id = "intent",
         name = "Intent",
         description = "Use `intent` param to set the color of the progress indicators.",
         sourceUrl = ProgressTrackerExampleSourceUrl,
@@ -82,6 +87,7 @@ public val ProgressTrackerExamples: List<Example> = listOf(
         ProgressTrackerColors()
     },
     Example(
+        id = "styles",
         name = "Styles",
         description = "Use `style` param to set the look and feel.",
         sourceUrl = ProgressTrackerExampleSourceUrl,

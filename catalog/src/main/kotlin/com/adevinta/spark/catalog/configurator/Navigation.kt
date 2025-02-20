@@ -22,44 +22,65 @@
 package com.adevinta.spark.catalog.configurator
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
+import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
+import com.adevinta.spark.catalog.AppBasePath
 import com.adevinta.spark.catalog.configurator.component.ConfiguratorComponentScreen
 import com.adevinta.spark.catalog.model.Component
 import kotlinx.serialization.Serializable
 
 @Serializable
-private data class ConfiguratorShowcase(val componentId: Int, val configuratorIndex: Int)
+public object ConfiguratorsList
+
+internal val ConfiguratorsList.deepLinks: List<NavDeepLink>
+    get() = listOf(
+        navDeepLink<ConfiguratorsList>(basePath = "${AppBasePath}configurator"),
+    )
+
+@Serializable
+internal data class ConfiguratorShowcase(val componentId: String, val configuratorId: String) {
+    companion object {
+        val deepLinks = listOf(
+            navDeepLink<ConfiguratorShowcase>(basePath = "${AppBasePath}configurator/detail"),
+        )
+    }
+}
 
 internal fun NavGraphBuilder.configuratorsDestination(
     navController: NavHostController,
     components: List<Component>,
     contentPadding: PaddingValues,
 ) {
-    composable<ConfiguratorsList> {
+    composable<ConfiguratorsList>(
+        deepLinks = ConfiguratorsList.deepLinks,
+    ) {
         ComponentsListScreen(
             components = components,
             contentPadding = contentPadding,
             onConfiguratorSelected = { id, index ->
                 navController.navigate(
-                    route = ConfiguratorShowcase(componentId = id, configuratorIndex = index),
+                    route = ConfiguratorShowcase(componentId = id, configuratorId = index),
                 )
             },
         )
     }
 
-    composable<ConfiguratorShowcase> { navBackStackEntry ->
+    composable<ConfiguratorShowcase>(
+        deepLinks = ConfiguratorShowcase.deepLinks,
+    ) { navBackStackEntry ->
         val configuratorShowcase = navBackStackEntry.toRoute<ConfiguratorShowcase>()
         val componentId = configuratorShowcase.componentId
-        val configuratorIndex = configuratorShowcase.configuratorIndex
+        val configuratorId = configuratorShowcase.configuratorId
         val component =
             components.first { component ->
                 component.configurators.firstOrNull() != null &&
                     component.id == componentId
             }
-        val configurator = component.configurators.get(configuratorIndex)
+        val configurator = component.configurators.first { it.id == configuratorId }
         ConfiguratorComponentScreen(
             component = component,
             configurator = configurator,

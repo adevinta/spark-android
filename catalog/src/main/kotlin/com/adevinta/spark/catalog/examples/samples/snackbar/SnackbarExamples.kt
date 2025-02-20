@@ -48,6 +48,7 @@ private const val SnackbarExampleSourceUrl = "$SampleSourceUrl/SnackbarSamples.k
 
 public val SnackbarExamples: List<Example> = listOf(
     Example(
+        id = "filled",
         name = "Snackbar",
         description = "Snackbar example filled ",
         sourceUrl = SnackbarExampleSourceUrl,
@@ -64,6 +65,7 @@ public val SnackbarExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "tinted",
         name = "Snackbar",
         description = "Snackbar example tinted ",
         sourceUrl = SnackbarExampleSourceUrl,
@@ -81,6 +83,7 @@ public val SnackbarExamples: List<Example> = listOf(
         VerticalSpacer(8.dp)
     },
     Example(
+        id = "host",
         name = "Snackbar host",
         description = "Snackbar host with intent success",
         sourceUrl = SnackbarExampleSourceUrl,
@@ -108,6 +111,7 @@ public val SnackbarExamples: List<Example> = listOf(
     },
 
     Example(
+        id = "host-action-long",
         name = "Snackbar host",
         description = "Snackbar host with intent success with SnackbarVisuals, long duration, intent accent",
         sourceUrl = SnackbarExampleSourceUrl,

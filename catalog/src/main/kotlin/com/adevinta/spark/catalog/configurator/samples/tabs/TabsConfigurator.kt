@@ -61,6 +61,7 @@ import com.adevinta.spark.tokens.highlight
 import kotlin.random.Random
 
 public val TabsConfigurator: Configurator = Configurator(
+    id = "tab",
     name = "Tab",
     description = "Tab configuration",
     sourceUrl = "$SampleSourceUrl/TabSamples.kt",

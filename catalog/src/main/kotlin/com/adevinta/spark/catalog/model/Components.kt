@@ -47,12 +47,12 @@ import com.adevinta.spark.catalog.configurator.samples.textfields.TextFieldsConf
 import com.adevinta.spark.catalog.configurator.samples.toggles.CheckboxConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.RadioButtonConfigurator
 import com.adevinta.spark.catalog.configurator.samples.toggles.SwitchConfigurator
-import com.adevinta.spark.catalog.examples.divider.DividerExamples
 import com.adevinta.spark.catalog.examples.samples.bottomsheet.BottomSheetExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.ButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.buttons.IconButtonsExamples
 import com.adevinta.spark.catalog.examples.samples.chips.ChipsExamples
 import com.adevinta.spark.catalog.examples.samples.dialog.DialogsExamples
+import com.adevinta.spark.catalog.examples.samples.divider.DividerExamples
 import com.adevinta.spark.catalog.examples.samples.icons.IconsExamples
 import com.adevinta.spark.catalog.examples.samples.popover.PopoverExamples
 import com.adevinta.spark.catalog.examples.samples.progressbar.ProgressbarExamples
@@ -76,7 +76,7 @@ import com.adevinta.spark.catalog.util.PackageSummaryUrl
 import com.adevinta.spark.catalog.util.SparkSourceUrl
 
 public data class Component(
-    val id: Int,
+    val id: String,
     val name: String,
     @StringRes val description: Int,
     val tintIcon: Boolean = true,
@@ -88,11 +88,34 @@ public data class Component(
     val configurators: List<Configurator> = emptyList(),
 )
 
-private var nextId: Int = 1
-private fun nextId(): Int = nextId.also { nextId += 1 }
+private val Tokens = Component(
+    id = "tokens",
+    name = "Tokens",
+    illustration = R.drawable.illu_component_tokens,
+    tintIcon = false,
+    description = R.string.component_tokens_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/3075e9-foundations",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.tokens/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/tokens/Color.kt",
+    examples = TokensExamples,
+    configurators = emptyList(),
+)
+
+private val BottomSheets = Component(
+    id = "bottomsheets",
+    name = "BottomSheets",
+    illustration = R.drawable.bottomsheet,
+    tintIcon = false,
+    description = R.string.component_bottomsheets_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/67d41e-bottom-sheet/b/02056b",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.bottom-sheet/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/bottomsheet/modal/ModalBottomSheet.kt",
+    examples = BottomSheetExamples,
+    configurators = listOf(BottomSheetConfigurator),
+)
 
 private val Buttons = Component(
-    id = nextId(),
+    id = "buttons",
     name = "Buttons",
     illustration = R.drawable.illu_component_button,
     tintIcon = false,
@@ -105,7 +128,7 @@ private val Buttons = Component(
 )
 
 private val Checkboxes = Component(
-    id = nextId(),
+    id = "checkboxes",
     name = "Checkboxes",
     illustration = R.drawable.illu_component_checkbox,
     tintIcon = false,
@@ -118,7 +141,7 @@ private val Checkboxes = Component(
 )
 
 private val Chips = Component(
-    id = nextId(),
+    id = "chips",
     name = "Chips",
     description = R.string.component_chips_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/17568d-chip",
@@ -129,7 +152,7 @@ private val Chips = Component(
 )
 
 private val Dialogs = Component(
-    id = nextId(),
+    id = "dialogs",
     name = "Dialogs",
     description = R.string.component_dialog_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/2427e1-modaldialog/b/02a6bc",
@@ -139,8 +162,19 @@ private val Dialogs = Component(
     configurators = listOf(ModalConfigurator),
 )
 
+private val Dividers = Component(
+    id = "dividerss",
+    name = "Dividers",
+    description = R.string.component_divider_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/867b47-divider",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.divider/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/divider/Divider.kt",
+    examples = DividerExamples,
+    configurators = listOf(DividerConfigurator),
+)
+
 private val Dropdowns = Component(
-    id = nextId(),
+    id = "dropdownss",
     name = "Dropdowns",
     description = R.string.component_dropdowns_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/1186e1705/p/323b83-dropdown",
@@ -151,7 +185,7 @@ private val Dropdowns = Component(
 )
 
 private val Icons = Component(
-    id = nextId(),
+    id = "iconss",
     name = "Icons",
     illustration = R.drawable.illu_component_iconbutton,
     tintIcon = false,
@@ -164,7 +198,7 @@ private val Icons = Component(
 )
 
 private val IconButtons = Component(
-    id = nextId(),
+    id = "icon-buttons",
     name = "IconButtons",
     illustration = R.drawable.illu_component_iconbutton,
     tintIcon = false,
@@ -177,7 +211,7 @@ private val IconButtons = Component(
 )
 
 private val IconToggleButtons = Component(
-    id = nextId(),
+    id = "icon-toggle-buttons",
     name = "IconToggleButtons",
     description = R.string.component_icontogglebutton_description,
     illustration = R.drawable.illu_component_icontogglebutton,
@@ -190,7 +224,7 @@ private val IconToggleButtons = Component(
 )
 
 private val Image = Component(
-    id = nextId(),
+    id = "image",
     name = "Image",
     description = R.string.component_image_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/096e9f-image",
@@ -201,7 +235,7 @@ private val Image = Component(
 )
 
 private val Popovers = Component(
-    id = nextId(),
+    id = "popovers",
     name = "Popovers",
     illustration = R.drawable.illustration_popover,
     tintIcon = false,
@@ -213,21 +247,34 @@ private val Popovers = Component(
     configurators = listOf(PopoverConfigurator),
 )
 
-private val BottomSheets = Component(
-    id = nextId(),
-    name = "BottomSheets",
-    illustration = R.drawable.bottomsheet,
+private val Progressbars = Component(
+    id = "progressbars",
+    name = "Progressbars",
+    description = R.string.component_progressbar_description,
+    illustration = R.drawable.ic_progressbar,
     tintIcon = false,
-    description = R.string.component_bottomsheets_description,
-    guidelinesUrl = "$ComponentGuidelinesUrl/p/67d41e-bottom-sheet/b/02056b",
-    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.bottom-sheet/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/spark/components/bottomsheet/modal/ModalBottomSheet.kt",
-    examples = BottomSheetExamples,
-    configurators = listOf(BottomSheetConfigurator),
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/89544a-progress-bar/b/2873c8",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progressbar/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progressbar/Progressbar.kt",
+    examples = ProgressbarExamples,
+    configurators = listOf(ProgressbarConfigurator),
+)
+
+private val ProgressTracker = Component(
+    id = "progress-tracker",
+    name = "Progress Tracker",
+    description = R.string.component_progresstracker_description,
+    illustration = R.drawable.illu_component_progresstracker,
+    tintIcon = false,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/549af2-progress-tracker/b/207b6b",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progress.tracker/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progress/tracker/ProgressbarTracker.kt",
+    examples = ProgressTrackerExamples,
+    configurators = listOf(ProgressTrackerConfigurator),
 )
 
 private val RadioButtons = Component(
-    id = nextId(),
+    id = "radio-buttons",
     name = "Radio buttons",
     illustration = R.drawable.illu_component_radiobutton,
     tintIcon = false,
@@ -240,7 +287,7 @@ private val RadioButtons = Component(
 )
 
 private val Rating = Component(
-    id = nextId(),
+    id = "ratings",
     name = "Ratings",
     illustration = R.drawable.illu_component_rating,
     tintIcon = false,
@@ -252,8 +299,19 @@ private val Rating = Component(
     configurators = listOf(RatingsConfigurator),
 )
 
+private val Sliders = Component(
+    id = "slider",
+    name = "Slider",
+    description = R.string.component_slider_description,
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/25cceb-slider/b/",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.slider/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/slider/Slider.kt",
+    examples = SlidersExamples,
+    configurators = listOf(SlidersConfigurator),
+)
+
 private val Snackbars = Component(
-    id = nextId(),
+    id = "snackbars",
     name = "Snackbars",
     description = R.string.component_snackbar_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/36d4af-snackbar",
@@ -264,7 +322,7 @@ private val Snackbars = Component(
 )
 
 private val Stepper = Component(
-    id = nextId(),
+    id = "steppers",
     name = "Steppers",
     description = R.string.component_stepper_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/82fbf6-stepper",
@@ -275,7 +333,7 @@ private val Stepper = Component(
 )
 
 private val Switches = Component(
-    id = nextId(),
+    id = "switches",
     name = "Switches",
     illustration = R.drawable.illu_component_switch,
     tintIcon = false,
@@ -288,7 +346,7 @@ private val Switches = Component(
 )
 
 private val Tabs = Component(
-    id = nextId(),
+    id = "tabs",
     name = "Tabs",
     description = R.string.component_tab_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/7461a4-tabs/b/98915d",
@@ -299,7 +357,7 @@ private val Tabs = Component(
 )
 
 private val Tags = Component(
-    id = nextId(),
+    id = "tags",
     name = "Tags",
     description = R.string.component_tag_description,
     illustration = R.drawable.illu_component_tags,
@@ -311,69 +369,8 @@ private val Tags = Component(
     configurators = listOf(TagsConfigurator),
 )
 
-private val Progressbars = Component(
-    id = nextId(),
-    name = "Progressbars",
-    description = R.string.component_progressbar_description,
-    illustration = R.drawable.ic_progressbar,
-    tintIcon = false,
-    guidelinesUrl = "$ComponentGuidelinesUrl/p/89544a-progress-bar/b/2873c8",
-    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progressbar/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progressbar/Progressbar.kt",
-    examples = ProgressbarExamples,
-    configurators = listOf(ProgressbarConfigurator),
-)
-
-private val Dividers = Component(
-    id = nextId(),
-    name = "Dividers",
-    description = R.string.component_divider_description,
-    guidelinesUrl = "$ComponentGuidelinesUrl/p/867b47-divider",
-    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.divider/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/divider/Divider.kt",
-    examples = DividerExamples,
-    configurators = listOf(DividerConfigurator),
-)
-
-private val ProgressTracker = Component(
-    id = nextId(),
-    name = "Progress Tracker",
-    description = R.string.component_progresstracker_description,
-    illustration = R.drawable.illu_component_progresstracker,
-    tintIcon = false,
-    guidelinesUrl = "$ComponentGuidelinesUrl/p/549af2-progress-tracker/b/207b6b",
-    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.progress.tracker/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/progress/tracker/ProgressbarTracker.kt",
-    examples = ProgressTrackerExamples,
-    configurators = listOf(ProgressTrackerConfigurator),
-)
-
-private val TextLinks = Component(
-    id = nextId(),
-    name = "TextLinks",
-    description = R.string.component_textlink_description,
-    illustration = R.drawable.icon_textlink,
-    tintIcon = false,
-    guidelinesUrl = "$ComponentGuidelinesUrl/p/75ed11-textlink/b/403107",
-    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/text/TextLink.kt",
-    examples = TextLinksExamples,
-    configurators = listOf(TextLinksConfigurator),
-)
-
-private val Sliders = Component(
-    id = nextId(),
-    name = "Slider",
-    description = R.string.component_slider_description,
-    guidelinesUrl = "$ComponentGuidelinesUrl/p/25cceb-slider/b/",
-    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.slider/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/slider/Slider.kt",
-    examples = SlidersExamples,
-    configurators = listOf(SlidersConfigurator),
-)
-
 private val TextFields = Component(
-    id = nextId(),
+    id = "textFields",
     name = "TextFields",
     description = R.string.component_textfield_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/773c60-input--text-field/b/0658e2",
@@ -383,17 +380,17 @@ private val TextFields = Component(
     configurators = listOf(TextFieldsConfigurator),
 )
 
-private val Tokens = Component(
-    id = nextId(),
-    name = "Tokens",
-    illustration = R.drawable.illu_component_tokens,
+private val TextLinks = Component(
+    id = "textLinks",
+    name = "TextLinks",
+    description = R.string.component_textlink_description,
+    illustration = R.drawable.icon_textlink,
     tintIcon = false,
-    description = R.string.component_tokens_description,
-    guidelinesUrl = "$ComponentGuidelinesUrl/p/3075e9-foundations",
-    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.tokens/index.html",
-    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/tokens/Color.kt",
-    examples = TokensExamples,
-    configurators = emptyList(),
+    guidelinesUrl = "$ComponentGuidelinesUrl/p/75ed11-textlink/b/403107",
+    docsUrl = "$PackageSummaryUrl/com.adevinta.spark.components.text/index.html",
+    sourceUrl = "$SparkSourceUrl/kotlin/com/adevinta/components/text/TextLink.kt",
+    examples = TextLinksExamples,
+    configurators = listOf(TextLinksConfigurator),
 )
 
 /** Components for the catalog, ordered alphabetically by name. */
