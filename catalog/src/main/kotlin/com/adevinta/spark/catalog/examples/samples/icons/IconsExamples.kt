@@ -80,6 +80,7 @@ private const val IconsExampleSourceUrl = "$SampleSourceUrl/IconsSamples.kt"
 
 public val IconsExamples: List<Example> = listOf(
     Example(
+        id = "navigation-bar",
         name = "Animated Navigation bar",
         description = "Show how a lbc animated nav bar could look like",
         sourceUrl = IconsExampleSourceUrl,

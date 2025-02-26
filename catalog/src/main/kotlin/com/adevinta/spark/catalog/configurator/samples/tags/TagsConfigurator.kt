@@ -58,6 +58,7 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.highlight
 
 public val TagsConfigurator: Configurator = Configurator(
+    id = "tag",
     name = "Tag",
     description = "Tag configuration",
     sourceUrl = "$SampleSourceUrl/TagSamples.kt",

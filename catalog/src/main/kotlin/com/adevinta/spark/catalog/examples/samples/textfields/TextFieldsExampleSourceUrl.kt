@@ -55,6 +55,7 @@ private const val TextFieldsExampleSourceUrl = "$SampleSourceUrl/DropdownExample
 
 public val TextFieldsExamples: List<Example> = listOf(
     Example(
+        id = "addons",
         name = "Default Addons",
         description = "Sample of addons provided by Spark through the AddonScope api",
         sourceUrl = TextFieldsExampleSourceUrl,

@@ -33,6 +33,7 @@ import com.adevinta.spark.components.textfields.FormFieldStatus
 
 public val StepperExamples: List<Example> = listOf(
     Example(
+        id = "default",
         name = "Base Stepper Example",
         description = "Base interactions on stepper.",
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",
@@ -55,6 +56,7 @@ public val StepperExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "states",
         name = "Stepper States",
         description = "Disabled and all regular states available for the TestField.",
         sourceUrl = "$SampleSourceUrl/RatingDisplaySample.kt",

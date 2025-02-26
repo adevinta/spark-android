@@ -46,6 +46,7 @@ import com.adevinta.spark.components.toggles.SwitchLabelled
 import com.adevinta.spark.components.toggles.ToggleIntent
 
 public val SwitchConfigurator: Configurator = Configurator(
+    id = "switch",
     name = "Switch",
     description = "Switch configuration",
     sourceUrl = "$SampleSourceUrl/SwitchSamples.kt",

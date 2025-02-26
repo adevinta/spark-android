@@ -70,6 +70,7 @@ import com.adevinta.spark.tokens.highlight
 import kotlinx.coroutines.launch
 
 public val BottomSheetConfigurator: Configurator = Configurator(
+    id = "bottomsheet",
     name = "BottomSheet",
     description = "BottomSheet configuration",
     sourceUrl = "$SampleSourceUrl/BottomSheetSamples.kt",

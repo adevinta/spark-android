@@ -47,6 +47,7 @@ private const val SwitchExampleDescription = "Switch examples"
 private const val SwitchExampleSourceUrl = "$SampleSourceUrl/SwitchSamples.kt"
 public val SwitchExamples: List<Example> = listOf(
     Example(
+        id = "standalone",
         name = "Standalone switch",
         description = SwitchExampleDescription,
         sourceUrl = SwitchExampleSourceUrl,
@@ -74,6 +75,7 @@ public val SwitchExamples: List<Example> = listOf(
         }
     },
     Example(
+        id = "labeled",
         name = "Labeled switch content side End",
         description = SwitchExampleDescription,
         sourceUrl = SwitchExampleSourceUrl,
@@ -81,6 +83,7 @@ public val SwitchExamples: List<Example> = listOf(
         LabeledSwitchGroupExample(ContentSide.End)
     },
     Example(
+        id = "labeled-start",
         name = "Labeled switch content side Start",
         description = SwitchExampleDescription,
         sourceUrl = SwitchExampleSourceUrl,

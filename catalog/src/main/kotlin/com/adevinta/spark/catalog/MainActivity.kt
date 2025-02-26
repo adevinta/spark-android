@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.catalog
 
+import android.app.assist.AssistContent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.KeyboardShortcutGroup
@@ -31,12 +32,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.navigation.NavController
 import com.adevinta.spark.catalog.datastore.theme.ThemePropertiesHandler
 import com.adevinta.spark.catalog.datastore.theme.collectAsStateWithDefault
 import com.adevinta.spark.catalog.model.Components
+import com.adevinta.spark.catalog.ui.navigation.provideAssistContent
 import kotlinx.coroutines.launch
 
 public class MainActivity : AppCompatActivity() {
+
+    internal var activeNavController: NavController? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Turn off the decor fitting system windows, which allows us to handle insets,
@@ -77,5 +83,10 @@ public class MainActivity : AppCompatActivity() {
             )
             data.add(shortcutGroup)
         }
+    }
+
+    override fun onProvideAssistContent(outContent: AssistContent) {
+        super.onProvideAssistContent(outContent)
+        activeNavController?.provideAssistContent(outContent = outContent)
     }
 }

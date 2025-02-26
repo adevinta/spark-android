@@ -60,6 +60,7 @@ import com.adevinta.spark.icons.CarOutline
 import com.adevinta.spark.icons.SparkIcons
 
 public val IconToggleButtonsConfigurator: Configurator = Configurator(
+    id = "icon-toggle-button",
     name = "IconToggleButton",
     description = "IconToggleButton configuration",
     sourceUrl = "$SampleSourceUrl/IconToggleButtonSamples.kt",

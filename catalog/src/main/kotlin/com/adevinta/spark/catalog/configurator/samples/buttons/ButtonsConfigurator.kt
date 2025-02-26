@@ -67,6 +67,7 @@ import com.adevinta.spark.tokens.highlight
 
 public val ButtonsConfigurator: List<Configurator> = listOf(
     Configurator(
+        id = "button",
         name = "Button",
         description = "Button configuration",
         sourceUrl = "$SampleSourceUrl/ButtonSamples.kt",

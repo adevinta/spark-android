@@ -56,6 +56,7 @@ import com.adevinta.spark.res.annotatedStringResource
 import kotlinx.coroutines.launch
 
 public val TextLinksConfigurator: Configurator = Configurator(
+    id = "textlink",
     name = "TextLink",
     description = "TextLink configuration",
     sourceUrl = "$SampleSourceUrl/TextLinkSamples.kt",

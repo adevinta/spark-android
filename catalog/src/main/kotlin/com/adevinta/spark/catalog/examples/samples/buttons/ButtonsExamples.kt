@@ -50,6 +50,7 @@ private const val ButtonsExampleDescription = "Button examples"
 private const val ButtonsExampleSourceUrl = "$SampleSourceUrl/ButtonSamples.kt"
 public val ButtonsExamples: List<Example> = listOf(
     Example(
+        id = "filled",
         name = "Filled Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
@@ -68,6 +69,7 @@ public val ButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "tinted",
         name = "Tinted Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
@@ -86,6 +88,7 @@ public val ButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "outlined",
         name = "Outlined Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
@@ -104,6 +107,7 @@ public val ButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "ghost",
         name = "Ghost Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
@@ -122,6 +126,7 @@ public val ButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "contrast",
         name = "Contrast Button",
         description = ButtonsExampleDescription,
         sourceUrl = ButtonsExampleSourceUrl,
@@ -140,6 +145,7 @@ public val ButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "toggle",
         name = "Toggle Button",
         description = "This is currently not a Spark component," +
             "\nthis example shows that you can achieve" +

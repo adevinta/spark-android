@@ -43,6 +43,7 @@ import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.components.toggles.SwitchLabelled
 
 public val ComboBoxConfigurator: Configurator = Configurator(
+    id = "combobox",
     name = "ComboBox",
     description = "ComboBox configuration",
     sourceUrl = "$SampleSourceUrl/ComboBoxSamples.kt",

@@ -64,6 +64,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 
 public val ProgressTrackerConfigurator: Configurator = Configurator(
+    id = "progress-tracker",
     name = "Progress Tracker",
     description = "Progress Tracker configuration",
     sourceUrl = "$SampleSourceUrl/ProgressTrackerSamples.kt",

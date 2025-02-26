@@ -60,6 +60,7 @@ import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.tokens.highlight
 
 public val SlidersConfigurator: Configurator = Configurator(
+    id = "slider",
     name = "Slider",
     description = "Slider configuration",
     sourceUrl = "$SampleSourceUrl/SliderSamples.kt",

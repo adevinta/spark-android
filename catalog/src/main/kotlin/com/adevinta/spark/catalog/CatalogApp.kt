@@ -23,9 +23,11 @@ package com.adevinta.spark.catalog
 
 import android.graphics.RenderEffect
 import android.graphics.RuntimeShader
+import android.net.Uri
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
+import androidx.activity.compose.LocalActivity
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
@@ -207,8 +209,11 @@ internal fun ComponentActivity.CatalogApp(
             ) {
                 val coroutineScope = rememberCoroutineScope()
                 val homeScreenValues = CatalogHomeScreen.entries
+                val intent = LocalActivity.current?.intent
+                val initialPage = getInitialScreen(intent?.data)
+
                 val pagerState = rememberPagerState(
-                    initialPage = CatalogHomeScreen.Examples.ordinal,
+                    initialPage = initialPage.ordinal,
                     pageCount = { homeScreenValues.size },
                 )
 
@@ -255,22 +260,34 @@ internal fun ComponentActivity.CatalogApp(
                         HorizontalPager(
                             state = pagerState,
                             flingBehavior = PagerDefaults.flingBehavior(state = pagerState),
+                            beyondViewportPageCount = 1,
+                            key = {
+                                when (it) {
+                                    0 -> CatalogHomeScreen.Examples
+                                    1 -> CatalogHomeScreen.Configurator
+                                    2 -> CatalogHomeScreen.Icons
+                                    else -> CatalogHomeScreen.Examples
+                                }.ordinal
+                            },
                         ) {
                             when (homeScreenValues[it]) {
                                 CatalogHomeScreen.Examples -> ComponentsScreen(
                                     components = components,
+                                    pagerState = pagerState,
                                     contentPadding = innerPadding,
                                     navigationMode = theme.navigationMode,
                                 )
 
                                 CatalogHomeScreen.Configurator -> ConfiguratorComponentsScreen(
                                     components = components,
+                                    pagerState = pagerState,
                                     contentPadding = innerPadding,
                                     navigationMode = theme.navigationMode,
                                 )
 
                                 CatalogHomeScreen.Icons -> IconDemoScreen(
                                     contentPadding = innerPadding,
+                                    pagerState = pagerState,
                                     navigationMode = theme.navigationMode,
                                 )
                             }
@@ -308,6 +325,20 @@ private fun HomeTabBar(
     }
 }
 
+@Composable
+private fun getInitialScreen(uri: Uri?): CatalogHomeScreen {
+    val initialScreen = uri?.pathSegments?.let { segments ->
+        when {
+            "examples" in segments -> CatalogHomeScreen.Examples
+            "configurator" in segments -> CatalogHomeScreen.Configurator
+            "icons" in segments -> CatalogHomeScreen.Icons
+            else -> null
+        }
+    }
+
+    return initialScreen ?: CatalogHomeScreen.Examples
+}
+
 public enum class CatalogHomeScreen { Examples, Configurator, Icons }
 
 /**
@@ -321,3 +352,5 @@ private val lightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
  * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=40-44;drc=27e7d52e8604a080133e8b842db10c89b4482598
  */
 private val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)
+
+internal const val AppBasePath = "spark://"

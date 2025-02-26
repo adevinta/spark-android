@@ -44,6 +44,7 @@ private const val IconButtonsExampleDescription = "Icon Button examples"
 private const val IconButtonsExampleSourceUrl = "$SampleSourceUrl/IconButtonSamples.kt"
 public val IconButtonsExamples: List<Example> = listOf(
     Example(
+        id = "filled",
         name = "Filled Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,
@@ -62,6 +63,7 @@ public val IconButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "tinted",
         name = "Tinted Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,
@@ -79,6 +81,7 @@ public val IconButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "outlined",
         name = "Outlined Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,
@@ -96,6 +99,7 @@ public val IconButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "ghost",
         name = "Ghost Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,
@@ -113,6 +117,7 @@ public val IconButtonsExamples: List<Example> = listOf(
         )
     },
     Example(
+        id = "contrast",
         name = "Contrast Icon Button",
         description = IconButtonsExampleDescription,
         sourceUrl = IconButtonsExampleSourceUrl,
