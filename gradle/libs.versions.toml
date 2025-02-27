@@ -29,7 +29,7 @@ slackLint = "1.4.2"
 spotless = "7.0.2"
 targetSdk = "35"
 testParameterInjector = "1.18"
-constraintlayout = "2.2.0"
+constraintlayout = "2.2.1"
 constraintlayoutCompose = "1.1.0"
 
 [libraries]
