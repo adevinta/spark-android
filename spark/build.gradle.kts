@@ -50,7 +50,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.constraintlayoutCompose)
+    implementation(libs.androidx.constraintlayout.compose)
     lintPublish(projects.sparkLint)
     lintChecks(libs.slack.lint.compose)
 
@@ -75,7 +75,8 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.constraintsExplorer)
     implementation(libs.androidx.compose.ui.util)
-    api(libs.coilCompose)
+    api(platform(libs.coil.bom))
+    api(libs.coil.compose)
     api(libs.kotlinx.collections.immutable)
 
     testImplementation(libs.junit)
