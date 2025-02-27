@@ -87,7 +87,9 @@ private operator fun VersionCatalog.getValue(
     IllegalStateException("Missing catalog version ${property.name}")
 }
 
-val ktlint: VersionConstraint by extensions.getByType<VersionCatalogsExtension>().named("libs")
+val ktlint = extensions.getByType<VersionCatalogsExtension>()
+    .named("libs")
+    .findLibrary("ktlint-bom").orElseThrow()
 
 // This block is a copy of SparkSpotlessPlugin since this included build can't use it's own plugins...
 spotless {
@@ -98,13 +100,13 @@ spotless {
     }
     kotlin {
         target("src/**/*.kt")
-        ktlint(ktlint.toString())
+        ktlint(ktlint.get().version)
         trimTrailingWhitespace()
         endWithNewline()
         licenseHeaderFile(licenseHeader)
     }
     kotlinGradle {
-        ktlint(ktlint.toString())
+        ktlint(ktlint.get().version)
         trimTrailingWhitespace()
         endWithNewline()
         licenseHeaderFile(
