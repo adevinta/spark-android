@@ -30,7 +30,7 @@ spotless = "7.0.2"
 targetSdk = "35"
 testParameterInjector = "1.18"
 constraintlayout = "2.2.0"
-constraintlayoutCompose = "1.1.0"
+constraintlayoutCompose = "1.1.1"
 
 [libraries]
 
