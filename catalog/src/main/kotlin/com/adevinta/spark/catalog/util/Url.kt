@@ -28,7 +28,7 @@ import android.content.Intent
 import androidx.core.net.toUri
 
 public fun Context.openUrl(url: String) {
-    val intent = Intent(Intent.ACTION_VIEW, url.toUri(()
+    val intent = Intent(Intent.ACTION_VIEW, url.toUri())
     startActivity(intent)
 }
 
