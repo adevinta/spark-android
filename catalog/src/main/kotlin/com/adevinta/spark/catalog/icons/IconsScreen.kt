@@ -32,7 +32,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -62,6 +61,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.getSystemService
@@ -149,14 +149,14 @@ public fun IconsScreen(
         ) {
             ChipSelectable(
                 selected = showIcons,
-                text = "Icon",
+                text = stringResource(R.string.icons_filter_icon),
                 onClick = { showIcons = !showIcons },
                 style = ChipStyles.Tinted,
                 leadingIcon = if (showIcons) SparkIcons.Check else null,
             )
             ChipSelectable(
                 selected = showAnimatedIcons,
-                text = "Animated Icon",
+                text = stringResource(R.string.icons_filter_icon_animated),
                 onClick = { showAnimatedIcons = !showAnimatedIcons },
                 style = ChipStyles.Tinted,
                 leadingIcon = if (showAnimatedIcons) SparkIcons.Check else null,
@@ -166,14 +166,7 @@ public fun IconsScreen(
             modifier = modifier
                 .consumeWindowInsets(contentPadding)
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
-                .clickable(
-                    // no ripple effect is needed as this onClick is just to clear the focus of the search field
-                    indication = null,
-                    interactionSource = remember { MutableInteractionSource() },
-                ) {
-                    focusManager.clearFocus()
-                },
+                .padding(horizontal = 16.dp),
             contentPadding = contentPadding,
             columns = GridCells.Adaptive(minSize = 60.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -193,10 +186,13 @@ public fun IconsScreen(
                             .clip(SparkTheme.shapes.small)
                             .combinedClickable(
                                 onLongClick = { copyToClipboard(context, iconName) },
+                                onLongClickLabel = stringResource(R.string.icons_item_long_click_a11y),
                                 onClick = {
                                     onIconClick(drawableRes, iconName, isAnimated)
                                 },
+                                onClickLabel = stringResource(R.string.icons_item_click_a11y),
                             )
+                            .semantics(mergeDescendants = true) {}
                             .padding(8.dp)
                             .animateItem(),
                         horizontalAlignment = Alignment.CenterHorizontally,
