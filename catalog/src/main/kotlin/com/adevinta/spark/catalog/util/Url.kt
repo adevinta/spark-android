@@ -25,10 +25,10 @@ package com.adevinta.spark.catalog.util
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import androidx.core.net.toUri
 
 public fun Context.openUrl(url: String) {
-    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    val intent = Intent(Intent.ACTION_VIEW, url.toUri(()
     startActivity(intent)
 }
 
