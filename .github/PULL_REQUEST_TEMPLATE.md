@@ -1,6 +1,6 @@
 <!--
   Please remove sections wisely!
-  And checkout the contribution docs at https://github.com/adevinta/spark-android/blob/main/docs/contributing.md
+  And checkout the contribution docs at https://github.com/leboncoin/spark-android/blob/main/docs/contributing.md
 -->
 
 ## 📋 Changes

@@ -99,7 +99,7 @@ internal class SparkPublishingPlugin : Plugin<Project> {
     private fun MavenPublication.configurePom() = pom {
         name = "Spark"
         description = "Spark Design System"
-        url = "https://github.com/adevinta/spark-android"
+        url = "https://github.com/leboncoin/spark-android"
         licenses {
             license {
                 name = "MIT License"
@@ -107,7 +107,7 @@ internal class SparkPublishingPlugin : Plugin<Project> {
             }
         }
         scm {
-            url = "https://github.com/adevinta/spark-android"
+            url = "https://github.com/leboncoin/spark-android"
         }
         developers {
             developer {
