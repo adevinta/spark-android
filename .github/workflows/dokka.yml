@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.repository == 'adevinta/spark-android'
+    if: github.repository == 'leboncoin/spark-android'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

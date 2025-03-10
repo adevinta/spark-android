@@ -31,7 +31,7 @@ env:
 jobs:
 
   publish:
-    if: github.repository == 'adevinta/spark-android'
+    if: github.repository == 'leboncoin/spark-android'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

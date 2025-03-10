@@ -438,56 +438,56 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.3...HEAD
+[Unreleased]: https://github.com/leboncoin/spark-android/compare/1.1.3...HEAD
 
-[1.1.3]: https://github.com/adevinta/spark-android/releases/tag/1.1.3
+[1.1.3]: https://github.com/leboncoin/spark-android/releases/tag/1.1.3
 
-[1.1.2]: https://github.com/adevinta/spark-android/releases/tag/1.1.2
+[1.1.2]: https://github.com/leboncoin/spark-android/releases/tag/1.1.2
 
-[1.1.1]: https://github.com/adevinta/spark-android/releases/tag/1.1.1
+[1.1.1]: https://github.com/leboncoin/spark-android/releases/tag/1.1.1
 
-[1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.0
+[1.1.0]: https://github.com/leboncoin/spark-android/releases/tag/1.1.0
 
-[1.0.2]: https://github.com/adevinta/spark-android/releases/tag/1.0.2
+[1.0.2]: https://github.com/leboncoin/spark-android/releases/tag/1.0.2
 
-[1.0.1]: https://github.com/adevinta/spark-android/releases/tag/1.0.1
+[1.0.1]: https://github.com/leboncoin/spark-android/releases/tag/1.0.1
 
-[1.0.0]: https://github.com/adevinta/spark-android/releases/tag/1.0.0
+[1.0.0]: https://github.com/leboncoin/spark-android/releases/tag/1.0.0
 
-[0.11.0]: https://github.com/adevinta/spark-android/releases/tag/0.11.0
+[0.11.0]: https://github.com/leboncoin/spark-android/releases/tag/0.11.0
 
-[0.10.1]: https://github.com/adevinta/spark-android/releases/tag/0.10.1
+[0.10.1]: https://github.com/leboncoin/spark-android/releases/tag/0.10.1
 
-[0.10.0]: https://github.com/adevinta/spark-android/releases/tag/0.10.0
+[0.10.0]: https://github.com/leboncoin/spark-android/releases/tag/0.10.0
 
-[0.9.0]: https://github.com/adevinta/spark-android/releases/tag/0.9.0
+[0.9.0]: https://github.com/leboncoin/spark-android/releases/tag/0.9.0
 
-[0.8.0]: https://github.com/adevinta/spark-android/releases/tag/0.8.0
+[0.8.0]: https://github.com/leboncoin/spark-android/releases/tag/0.8.0
 
-[0.7.0]: https://github.com/adevinta/spark-android/releases/tag/0.7.0
+[0.7.0]: https://github.com/leboncoin/spark-android/releases/tag/0.7.0
 
-[0.6.1]: https://github.com/adevinta/spark-android/releases/tag/0.6.1
+[0.6.1]: https://github.com/leboncoin/spark-android/releases/tag/0.6.1
 
-[0.6.0]: https://github.com/adevinta/spark-android/releases/tag/0.6.0
+[0.6.0]: https://github.com/leboncoin/spark-android/releases/tag/0.6.0
 
-[0.5.0]: https://github.com/adevinta/spark-android/releases/tag/0.5.0
+[0.5.0]: https://github.com/leboncoin/spark-android/releases/tag/0.5.0
 
-[0.4.2]: https://github.com/adevinta/spark-android/releases/tag/0.4.2
+[0.4.2]: https://github.com/leboncoin/spark-android/releases/tag/0.4.2
 
-[0.4.1]: https://github.com/adevinta/spark-android/releases/tag/0.4.1
+[0.4.1]: https://github.com/leboncoin/spark-android/releases/tag/0.4.1
 
-[0.3.1]: https://github.com/adevinta/spark-android/releases/tag/0.3.1
+[0.3.1]: https://github.com/leboncoin/spark-android/releases/tag/0.3.1
 
-[0.3.0]: https://github.com/adevinta/spark-android/releases/tag/0.3.0
+[0.3.0]: https://github.com/leboncoin/spark-android/releases/tag/0.3.0
 
-[0.2.0]: https://github.com/adevinta/spark-android/releases/tag/0.2.0
+[0.2.0]: https://github.com/leboncoin/spark-android/releases/tag/0.2.0
 
-[0.1.1]: https://github.com/adevinta/spark-android/releases/tag/0.1.1
+[0.1.1]: https://github.com/leboncoin/spark-android/releases/tag/0.1.1
 
-[0.1.0]: https://github.com/adevinta/spark-android/releases/tag/0.1.0
+[0.1.0]: https://github.com/leboncoin/spark-android/releases/tag/0.1.0
 
-[0.0.3]: https://github.com/adevinta/spark-android/releases/tag/0.0.3
+[0.0.3]: https://github.com/leboncoin/spark-android/releases/tag/0.0.3
 
-[0.0.2]: https://github.com/adevinta/spark-android/releases/tag/0.0.2
+[0.0.2]: https://github.com/leboncoin/spark-android/releases/tag/0.0.2
 
-[0.0.1]: https://github.com/adevinta/spark-android/releases/tag/0.0.1
+[0.0.1]: https://github.com/leboncoin/spark-android/releases/tag/0.0.1
