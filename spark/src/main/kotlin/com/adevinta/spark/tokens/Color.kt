@@ -109,7 +109,7 @@ import kotlin.math.ln
 import kotlin.reflect.KProperty0
 
 public fun lightSparkColors(
-    accent: Color = Plum500,
+    accent: Color = Color.Red,
     onAccent: Color = Color.White,
     accentContainer: Color = Plum100,
     onAccentContainer: Color = Plum800,
