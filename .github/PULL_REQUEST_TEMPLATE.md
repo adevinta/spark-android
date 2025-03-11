@@ -18,7 +18,6 @@
 <!-- Feel free to add or remove entries -->
 - [ ] I have reviewed the submitted code.
 - [ ] I have tested on a phone device/emulator.
-- [ ] If it includes design changes, please ask for a review `spark-design` GitHub team.
 
 ## 📸 Screenshots
 

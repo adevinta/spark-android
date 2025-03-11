@@ -87,11 +87,8 @@ To make a pull request:
 3. Write code in your fork, on a branch if you plan to make multiple changes.
 4. [Create a pull request](https://help.github.com/articles/creating-a-pull-request/) to merge your
    branch’s contributions into the corresponding Spark repo by following the .
-5. The pull request will be triaged by a **#spark-dev** member and code reviewed by a
-   **#spark-contributors-android** member.
-6. If the pull request is accepted, the accepting **#spark-dev** member will merge the pull request
-   for
-   you.
+5. The pull request will be triaged and reviewed by a **[leboncoin/android](https://github.com/orgs/leboncoin/teams/android)** team member.
+6. If the pull request is accepted, the accepting member will merge the pull request for you.
 
 ### What if I already made a pull request but want to add more commits?
 
