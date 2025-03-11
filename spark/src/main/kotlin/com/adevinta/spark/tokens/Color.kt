@@ -101,7 +101,6 @@ import com.adevinta.spark.tokens.PaletteTokens.Plum100
 import com.adevinta.spark.tokens.PaletteTokens.Plum200
 import com.adevinta.spark.tokens.PaletteTokens.Plum300
 import com.adevinta.spark.tokens.PaletteTokens.Plum50
-import com.adevinta.spark.tokens.PaletteTokens.Plum500
 import com.adevinta.spark.tokens.PaletteTokens.Plum700
 import com.adevinta.spark.tokens.PaletteTokens.Plum800
 import com.adevinta.spark.tokens.PaletteTokens.Plum900
