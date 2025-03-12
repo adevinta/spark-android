@@ -3,7 +3,7 @@
 ### Issues, Bugs, Feature or Component Requests
 
 While we currently don't accept issues from people outside the Adevinta Platform to this repo, we
-welcome [discussions and questions here](https://github.com/adevinta/spark-android/discussions/categories/general)!
+welcome [discussions and questions here](https://github.com/leboncoin/spark-android/discussions/categories/general)!
 
 ## If you're part of the Adevinta Platform ⬇️
 
@@ -23,7 +23,7 @@ brew install git-lfs
 git lfs install
 ```
 
-#### [Java 17](https://github.com/adevinta/spark-android/issues/74)
+#### [Java 17](https://github.com/leboncoin/spark-android/issues/74)
 
 We currently use **AGP 8.1.0** which requires developers to use **JDK 17** on Gradle JDK.
 
@@ -82,16 +82,13 @@ should be ‘solutions’ to GitHub issues.
 To make a pull request:
 
 1. Make sure there’s a GitHub issue for the change you’re proposing.
-2. [Fork](https://github.com/adevinta/spark-android/fork) the repo for the platform your code works
+2. [Fork](https://github.com/leboncoin/spark-android/fork) the repo for the platform your code works
    in.
 3. Write code in your fork, on a branch if you plan to make multiple changes.
 4. [Create a pull request](https://help.github.com/articles/creating-a-pull-request/) to merge your
    branch’s contributions into the corresponding Spark repo by following the .
-5. The pull request will be triaged by a **#spark-dev** member and code reviewed by a
-   **#spark-contributors-android** member.
-6. If the pull request is accepted, the accepting **#spark-dev** member will merge the pull request
-   for
-   you.
+5. The pull request will be triaged and reviewed by a **[leboncoin/android](https://github.com/orgs/leboncoin/teams/android)** team member.
+6. If the pull request is accepted, the accepting member will merge the pull request for you.
 
 ### What if I already made a pull request but want to add more commits?
 

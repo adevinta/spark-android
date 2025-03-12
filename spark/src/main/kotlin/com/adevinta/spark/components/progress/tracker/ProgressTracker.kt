@@ -165,7 +165,7 @@ public fun ProgressTrackerColumn(
     require(items.all { it.label.isNotBlank() }) {
         "All steps in the vertical layout should have a label otherwise it'll have render issues." +
             "This is a known bug, if you need to make this layout please report it there" +
-            " https://github.com/adevinta/spark-android/issues/1080"
+            " https://github.com/leboncoin/spark-android/issues/1080"
     }
     ProgressTracker(
         items = items,
