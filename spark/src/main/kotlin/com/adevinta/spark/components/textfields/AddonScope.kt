@@ -476,7 +476,7 @@ private fun TextFieldWithCounterPreview() {
             counter = TextFieldCharacterCounter(
                 count = value.length,
                 maxCharacter = 20,
-            )
+            ),
         )
     }
 }
