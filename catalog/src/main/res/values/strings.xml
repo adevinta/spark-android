@@ -27,7 +27,7 @@
     <string name="brand">Select a brand</string>
     <string name="pro">Use the pro theme</string>
 
-    <string name="scale">%.1f</string>
+    <string name="scale" translatable="false">%.1f</string>
     <string name="example_tokens_elevation_label">Elevation value: %d</string>
     <string name="themepicker_navigation_label">Navigation Motion</string>
 
@@ -139,5 +139,9 @@
     <!--endregion-->
 
     <string name="component_snackbar_description">A snackbar component is a brief, non-intrusive notification that appears at the bottom of a screen, delivering concise feedback or information about user actions.</string>
+    <string name="icons_item_long_click_a11y">Copy to clipboard</string>
+    <string name="icons_item_click_a11y">Navigate to details</string>
+    <string name="icons_filter_icon_animated">Animated Icon</string>
+    <string name="icons_filter_icon">Icon</string>
 
 </resources>
