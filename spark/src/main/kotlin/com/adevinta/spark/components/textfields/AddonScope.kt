@@ -463,3 +463,20 @@ private fun TextFieldMandatoryWithHelperPreview() {
         )
     }
 }
+
+@Preview
+@Composable
+private fun TextFieldWithCounterPreview() {
+    PreviewTheme {
+        val value by remember { mutableStateOf("AA-123-BB") }
+        TextField(
+            value = value,
+            label = "Counter",
+            onValueChange = {},
+            counter = TextFieldCharacterCounter(
+                count = value.length,
+                maxCharacter = 20,
+            )
+        )
+    }
+}

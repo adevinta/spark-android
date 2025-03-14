@@ -61,6 +61,7 @@
 
     <!--region TextField-->
     <string name="spark_textfield_mandatory_content_description">Mandatory</string>
+    <string name="spark_textfield_counter_content_description">%1$d characters entered out of %2$d maximum</string>
     <string name="spark_textfield_content_description_break">:\u00A0</string>
     <string name="spark_textfield_delete_a11y">Cancel</string>
     <!--endregion-->

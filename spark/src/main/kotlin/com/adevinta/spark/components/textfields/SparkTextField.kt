@@ -426,8 +426,13 @@ private fun counterText(
     charCounter: TextFieldCharacterCounter?,
 ): (@Composable (Modifier) -> Unit)? = charCounter?.let { counter ->
     { modifier ->
+        val contentDescription = stringResource(
+            id = R.string.spark_textfield_counter_content_description,
+            counter.count,
+            counter.maxCharacter,
+        )
         Text(
-            modifier = modifier,
+            modifier = modifier.semantics { this.contentDescription = contentDescription },
             text = "${counter.count}/${counter.maxCharacter}",
         )
     }

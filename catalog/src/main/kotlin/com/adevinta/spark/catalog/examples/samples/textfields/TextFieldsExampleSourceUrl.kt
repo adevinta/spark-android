@@ -44,6 +44,7 @@ import com.adevinta.spark.components.menu.DropdownMenuItem
 import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SparkSelectTrailingIcon
 import com.adevinta.spark.components.textfields.TextField
+import com.adevinta.spark.components.textfields.TextFieldCharacterCounter
 import com.adevinta.spark.icons.Booster
 import com.adevinta.spark.icons.EyeFill
 import com.adevinta.spark.icons.EyeOffFill
@@ -76,6 +77,7 @@ private fun ColumnScope.Addons() {
         TextFieldWithIconToggleButton()
         TextFieldWithPrefixSuffixButton()
         TextFieldMandatoryWithHelper()
+        TextFieldWithCounter()
     }
 }
 
@@ -240,5 +242,21 @@ private fun TextFieldMandatoryWithHelper() {
         onValueChange = { valueText = it },
         required = true,
         helper = "Help me please, this is mandatory",
+    )
+}
+
+@Composable
+private fun TextFieldWithCounter() {
+    var valueText by remember { mutableStateOf("AA-123-BB") }
+
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = valueText,
+        label = "Counter addon",
+        onValueChange = { valueText = it },
+        counter = TextFieldCharacterCounter(
+            count = valueText.length,
+            maxCharacter = 20,
+        )
     )
 }
