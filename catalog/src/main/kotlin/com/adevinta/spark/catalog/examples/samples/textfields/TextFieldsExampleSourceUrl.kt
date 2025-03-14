@@ -260,7 +260,7 @@ private fun TextFieldWithCounter() {
         counter = TextFieldCharacterCounter(
             count = valueText.length,
             maxCharacter = 20,
-        )
+        ),
     )
 }
 
