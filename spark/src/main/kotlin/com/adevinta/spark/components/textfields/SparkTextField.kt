@@ -64,6 +64,7 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
@@ -109,6 +110,10 @@ internal fun SparkTextField(
 ) {
     val colors = sparkOutlinedTextFieldColors()
     val density = LocalDensity.current
+    val labelContentDescription = computeLabelContentDescription(
+        required = required,
+        label = label,
+    )
     CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
         @OptIn(ExperimentalMaterial3Api::class)
         BasicTextField(
@@ -119,7 +124,7 @@ internal fun SparkTextField(
                         Modifier
                             // Merge semantics at the beginning of the modifier chain to ensure padding is
                             // considered part of the text field.
-                            .semantics(mergeDescendants = true) {}
+                            .semantics(mergeDescendants = true) { this.contentDescription = labelContentDescription }
                             .padding(top = with(density) { (SparkTheme.typography.body2.fontSize / 2).toDp() })
                     } else {
                         Modifier
@@ -210,6 +215,10 @@ internal fun SparkTextField(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val colors = sparkOutlinedTextFieldColors()
+    val labelContentDescription = computeLabelContentDescription(
+        required = required,
+        label = label,
+    )
     CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
         @OptIn(ExperimentalMaterial3Api::class)
         BasicTextField(
@@ -218,7 +227,7 @@ internal fun SparkTextField(
                 // Merge semantics at the beginning of the modifier chain to ensure padding is
                 // considered part of the text field.
                 modifier
-                    .semantics(mergeDescendants = true) {}
+                    .semantics(mergeDescendants = true) { this.contentDescription = labelContentDescription }
                     .padding(top = OutlinedTextFieldTopPadding)
             } else {
                 modifier
@@ -386,21 +395,16 @@ public data class TextFieldCharacterCounter(val count: Int, val maxCharacter: In
 @Composable
 private fun Label(text: String?, required: Boolean) {
     if (text != null) {
-        Row(modifier = Modifier.semantics(mergeDescendants = true) {}) {
+        Row(modifier = Modifier.clearAndSetSemantics {}) {
             Text(
                 text = text,
                 modifier = Modifier.weight(weight = 1f, fill = false),
             )
             if (required) {
-                val mandatoryDescription = stringResource(id = R.string.spark_textfield_content_description)
                 EmphasizeDim3 {
                     Text(
                         text = "*",
-                        modifier = Modifier
-                            .semantics {
-                                contentDescription = mandatoryDescription
-                            }
-                            .padding(start = 4.dp),
+                        modifier = Modifier.padding(start = 4.dp),
                     )
                 }
             }
@@ -451,6 +455,20 @@ private fun supportText(
 } else {
     null
 }
+
+@Composable
+private fun computeLabelContentDescription(
+    required: Boolean,
+    label: String?,
+): String =
+    buildString {
+        if (label == null) return@buildString
+        append(label)
+        if (required) {
+            append(stringResource(id = R.string.spark_textfield_content_description_break))
+            append(stringResource(id = R.string.spark_textfield_mandatory_content_description))
+        }
+    }
 
 internal object TextFieldDefault {
 

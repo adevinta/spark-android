@@ -449,3 +449,17 @@ private fun TextFieldWithPrefixSuffixButtonPreview() {
         )
     }
 }
+
+@Preview
+@Composable
+private fun TextFieldMandatoryWithHelperPreview() {
+    PreviewTheme {
+        TextField(
+            value = "AA-123-BB",
+            label = "Helper",
+            onValueChange = {},
+            required = true,
+            helper = "Help me please, this is mandatory",
+        )
+    }
+}

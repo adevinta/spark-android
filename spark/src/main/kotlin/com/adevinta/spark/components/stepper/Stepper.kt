@@ -158,7 +158,7 @@ public fun StepperForm(
     testTag: String? = null,
 ) {
     val colors = StepperDefaults.stepperColors()
-    val mandatoryDescription = if (required) stringResource(id = R.string.spark_textfield_content_description) else null
+    val mandatoryDescription = if (required) stringResource(id = R.string.spark_textfield_mandatory_content_description) else null
     val interactionSource = remember { MutableInteractionSource() }
 
     Column(

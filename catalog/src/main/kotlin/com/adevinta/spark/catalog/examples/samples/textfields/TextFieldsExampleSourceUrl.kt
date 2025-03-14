@@ -75,6 +75,7 @@ private fun ColumnScope.Addons() {
         TextFieldWithIconButton()
         TextFieldWithIconToggleButton()
         TextFieldWithPrefixSuffixButton()
+        TextFieldMandatoryWithHelper()
     }
 }
 
@@ -225,5 +226,19 @@ private fun TextFieldWithPrefixSuffixButton() {
         trailingContent = {
             TextFieldText(text = ".com")
         },
+    )
+}
+
+@Composable
+private fun TextFieldMandatoryWithHelper() {
+    var valueText by remember { mutableStateOf("AA-123-BB") }
+
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = valueText,
+        label = "Helper addon",
+        onValueChange = { valueText = it },
+        required = true,
+        helper = "Help me please, this is mandatory",
     )
 }
