@@ -56,7 +56,8 @@
     <!--endregion-->
 
     <!--region TextField-->
-    <string name="spark_textfield_content_description">Pflichtfeld</string>
+    <string name="spark_textfield_mandatory_content_description">Pflichtfeld</string>
+    <string name="spark_textfield_content_description_break">:\u00A0</string>
     <string name="spark_textfield_delete_a11y">Löschen</string>
     <!--endregion-->
 

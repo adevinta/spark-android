@@ -170,7 +170,6 @@ internal fun SparkDecorationBox(
         // Developers need to handle invalid input manually. But since we don't provide error
         // message slot API, we can set the default error message in case developers forget about
         // it.
-        // TODO-@soulcramer (01-30-2023): We should provide a semantic which tell the user the error state
         val decorationBoxModifier = Modifier
 
         val leadingIconColor = colors.leadingIconColor(enabled, interactionSource).value

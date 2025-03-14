@@ -449,3 +449,49 @@ private fun TextFieldWithPrefixSuffixButtonPreview() {
         )
     }
 }
+
+@Preview
+@Composable
+private fun TextFieldMandatoryWithHelperPreview() {
+    PreviewTheme {
+        TextField(
+            value = "AA-123-BB",
+            label = "Helper",
+            onValueChange = {},
+            required = true,
+            helper = "Help me please, this is mandatory",
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun TextFieldWithCounterPreview() {
+    PreviewTheme {
+        val value by remember { mutableStateOf("AA-123-BB") }
+        TextField(
+            value = value,
+            label = "Counter",
+            onValueChange = {},
+            counter = TextFieldCharacterCounter(
+                count = value.length,
+                maxCharacter = 20,
+            ),
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun TextFieldWithStatePreview() {
+    PreviewTheme {
+        val value by remember { mutableStateOf("AA-123-BB") }
+        TextField(
+            value = value,
+            label = "State",
+            onValueChange = {},
+            state = TextFieldState.Success,
+            stateMessage = "This field should contain 9 characters",
+        )
+    }
+}
