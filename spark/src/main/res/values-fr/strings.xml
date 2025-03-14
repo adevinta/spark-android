@@ -66,6 +66,9 @@
     <!--region TextField-->
     <string name="spark_textfield_mandatory_content_description">Champs requis</string>
     <string name="spark_textfield_counter_content_description">%1$d caractères saisis sur %2$d maximum</string>
+    <string name="spark_textfield_state_success_content_description">Le champ est valide</string>
+    <string name="spark_textfield_state_alert_content_description">Le champ comporte une alerte</string>
+    <string name="spark_textfield_state_error_content_description">Le champ comporte une erreur</string>
     <string name="spark_textfield_content_description_break">\u00A0:\u00A0</string>
     <string name="spark_textfield_delete_a11y">Tout supprimer</string>
     <string name="spark_drag_handle_a11y">Poignée de déplacement</string>

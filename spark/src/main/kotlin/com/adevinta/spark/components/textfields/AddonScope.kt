@@ -480,3 +480,18 @@ private fun TextFieldWithCounterPreview() {
         )
     }
 }
+
+@Preview
+@Composable
+private fun TextFieldWithStatePreview() {
+    PreviewTheme {
+        val value by remember { mutableStateOf("AA-123-BB") }
+        TextField(
+            value = value,
+            label = "State",
+            onValueChange = {},
+            state = TextFieldState.Success,
+            stateMessage = "This field should contain 9 characters",
+        )
+    }
+}

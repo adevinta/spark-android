@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,6 +46,7 @@ import com.adevinta.spark.components.text.Text
 import com.adevinta.spark.components.textfields.SparkSelectTrailingIcon
 import com.adevinta.spark.components.textfields.TextField
 import com.adevinta.spark.components.textfields.TextFieldCharacterCounter
+import com.adevinta.spark.components.textfields.TextFieldState
 import com.adevinta.spark.icons.Booster
 import com.adevinta.spark.icons.EyeFill
 import com.adevinta.spark.icons.EyeOffFill
@@ -78,6 +80,7 @@ private fun ColumnScope.Addons() {
         TextFieldWithPrefixSuffixButton()
         TextFieldMandatoryWithHelper()
         TextFieldWithCounter()
+        TextFieldWithState()
     }
 }
 
@@ -258,5 +261,30 @@ private fun TextFieldWithCounter() {
             count = valueText.length,
             maxCharacter = 20,
         )
+    )
+}
+
+@Composable
+private fun TextFieldWithState() {
+    var valueText by remember { mutableStateOf("AA-123-BB") }
+    val state by remember {
+        derivedStateOf {
+            when (valueText.length) {
+                0 -> null
+                in 1..8 -> TextFieldState.Alert
+                9 -> TextFieldState.Success
+                else -> TextFieldState.Error
+            }
+        }
+    }
+
+    TextField(
+        modifier = Modifier.fillMaxWidth(),
+        value = valueText,
+        label = "State addon",
+        onValueChange = { valueText = it },
+        helper = "Enter something",
+        state = state,
+        stateMessage = "This field should contain 9 characters",
     )
 }

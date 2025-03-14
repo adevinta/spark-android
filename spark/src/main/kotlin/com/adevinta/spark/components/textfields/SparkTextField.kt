@@ -332,25 +332,6 @@ internal fun OutlinedBorderContainerBox(
     )
 }
 
-@Composable
-private fun SupportingText(
-    text: String?,
-    counterComposable: @Composable ((Modifier) -> Unit)?,
-    statusIcon: @Composable ((Modifier) -> Unit)?,
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        statusIcon?.invoke(Modifier.padding(end = 4.dp))
-        Text(
-            modifier = Modifier.weight(1f, fill = true),
-            text = text.orEmpty(),
-        )
-        counterComposable?.invoke(Modifier.padding(start = 8.dp))
-    }
-}
-
 /**
  * Replacement for Modifier.background which takes color as a State to avoid recomposition while
  * animating.
@@ -451,11 +432,28 @@ private fun supportText(
     {
         // Prioritize the state message if there's one and fallback to the helper otherwise
         val message = state?.let { stateMessage } ?: helper
-        SupportingText(
-            text = message,
-            counterComposable = counterComposable,
-            statusIcon = stateIcon,
-        )
+        val stateMessageContentDescriptionModifier = if (state != null) {
+            val stateMessageContentDescription = computeStateMessageContentDescription(
+                state = state,
+                stateMessage = stateMessage,
+            )
+            Modifier.semantics { contentDescription = stateMessageContentDescription }
+        } else {
+            Modifier
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            stateIcon?.invoke(Modifier.padding(end = 4.dp))
+            Text(
+                modifier = Modifier
+                    .weight(1f, fill = true)
+                    .then(other = stateMessageContentDescriptionModifier),
+                text = message.orEmpty(),
+            )
+            counterComposable?.invoke(Modifier.padding(start = 8.dp))
+        }
     }
 } else {
     null
@@ -472,6 +470,25 @@ private fun computeLabelContentDescription(
         if (required) {
             append(stringResource(id = R.string.spark_textfield_content_description_break))
             append(stringResource(id = R.string.spark_textfield_mandatory_content_description))
+        }
+    }
+
+@Composable
+private fun computeStateMessageContentDescription(
+    state: TextFieldState?,
+    stateMessage: String?,
+): String =
+    buildString {
+        if (state == null) return@buildString
+        val stateStatusContentDescription = when (state) {
+            TextFieldState.Success -> stringResource(id = R.string.spark_textfield_state_success_content_description)
+            TextFieldState.Alert -> stringResource(id = R.string.spark_textfield_state_alert_content_description)
+            TextFieldState.Error -> stringResource(id = R.string.spark_textfield_state_error_content_description)
+        }
+        append(stateStatusContentDescription)
+        if (stateMessage != null) {
+            append(stringResource(id = R.string.spark_textfield_content_description_break))
+            append(stateMessage)
         }
     }
 
