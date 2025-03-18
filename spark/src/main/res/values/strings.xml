@@ -61,7 +61,10 @@
 
     <!--region TextField-->
     <string name="spark_textfield_mandatory_content_description">Mandatory</string>
-    <string name="spark_textfield_counter_content_description">%1$d characters entered out of %2$d maximum</string>
+    <plurals name="spark_textfield_counter_content_description">
+        <item quantity="one">%1$d character entered out of %2$d maximum</item>
+        <item quantity="other">%1$d characters entered out of %2$d maximum</item>
+    </plurals>
     <string name="spark_textfield_state_success_content_description">The field is valid</string>
     <string name="spark_textfield_state_alert_content_description">The field has an alert</string>
     <string name="spark_textfield_state_error_content_description">The field has an error</string>

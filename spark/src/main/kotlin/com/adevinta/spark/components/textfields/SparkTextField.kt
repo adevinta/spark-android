@@ -63,6 +63,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -407,8 +408,9 @@ private fun counterText(
     charCounter: TextFieldCharacterCounter?,
 ): (@Composable (Modifier) -> Unit)? = charCounter?.let { counter ->
     { modifier ->
-        val contentDescription = stringResource(
-            id = R.string.spark_textfield_counter_content_description,
+        val contentDescription = pluralStringResource(
+            id = R.plurals.spark_textfield_counter_content_description,
+            count = counter.count,
             counter.count,
             counter.maxCharacter,
         )
