@@ -111,26 +111,25 @@ internal fun SparkTextField(
 ) {
     val colors = sparkOutlinedTextFieldColors()
     val density = LocalDensity.current
-    val labelContentDescription = computeLabelContentDescription(
-        required = required,
-        label = label,
-    )
+    val labelContentDescriptionModifier = if (label != null) {
+        val labelContentDescription = computeLabelContentDescription(
+            label = label,
+            required = required,
+        )
+        Modifier
+            // Merge semantics at the beginning of the modifier chain to ensure padding is
+            // considered part of the text field.
+            .semantics(mergeDescendants = true) { contentDescription = labelContentDescription }
+            .padding(top = with(density) { (SparkTheme.typography.body2.fontSize / 2).toDp() })
+    } else {
+        Modifier
+    }
     CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
         @OptIn(ExperimentalMaterial3Api::class)
         BasicTextField(
             value = value,
             modifier = modifier
-                .then(
-                    if (label != null) {
-                        Modifier
-                            // Merge semantics at the beginning of the modifier chain to ensure padding is
-                            // considered part of the text field.
-                            .semantics(mergeDescendants = true) { this.contentDescription = labelContentDescription }
-                            .padding(top = with(density) { (SparkTheme.typography.body2.fontSize / 2).toDp() })
-                    } else {
-                        Modifier
-                    },
-                )
+                .then(other = labelContentDescriptionModifier)
                 .defaultMinSize(
                     minWidth = TextFieldDefaults.MinWidth,
                     minHeight = TextFieldMinHeight,
@@ -216,23 +215,25 @@ internal fun SparkTextField(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val colors = sparkOutlinedTextFieldColors()
-    val labelContentDescription = computeLabelContentDescription(
-        required = required,
-        label = label,
-    )
+    val labelContentDescriptionModifier = if (label != null) {
+        val labelContentDescription = computeLabelContentDescription(
+            label = label,
+            required = required,
+        )
+        Modifier
+            // Merge semantics at the beginning of the modifier chain to ensure padding is
+            // considered part of the text field.
+            .semantics(mergeDescendants = true) { contentDescription = labelContentDescription }
+            .padding(top = OutlinedTextFieldTopPadding)
+    } else {
+        Modifier
+    }
     CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
         @OptIn(ExperimentalMaterial3Api::class)
         BasicTextField(
             value = value,
-            modifier = if (label != null) {
-                // Merge semantics at the beginning of the modifier chain to ensure padding is
-                // considered part of the text field.
-                modifier
-                    .semantics(mergeDescendants = true) { this.contentDescription = labelContentDescription }
-                    .padding(top = OutlinedTextFieldTopPadding)
-            } else {
-                modifier
-            }
+            modifier = modifier
+                .then(other = labelContentDescriptionModifier)
                 .defaultMinSize(
                     minWidth = 48.dp,
                     minHeight = TextFieldMinHeight,
@@ -432,22 +433,22 @@ private fun supportText(
     (stateMessage != null && state != null) || helper != null || counterComposable != null
 ) {
     {
-        // Prioritize the state message if there's one and fallback to the helper otherwise
-        val message = state?.let { stateMessage } ?: helper
-        val stateMessageContentDescriptionModifier = if (state != null) {
-            val stateMessageContentDescription = computeStateMessageContentDescription(
-                state = state,
-                stateMessage = stateMessage,
-            )
-            Modifier.semantics { contentDescription = stateMessageContentDescription }
-        } else {
-            Modifier
-        }
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             stateIcon?.invoke(Modifier.padding(end = 4.dp))
+            // Prioritize the state message if there's one and fallback to the helper otherwise
+            val message = state?.let { stateMessage } ?: helper
+            val stateMessageContentDescriptionModifier = if (state != null) {
+                val stateMessageContentDescription = computeStateMessageContentDescription(
+                    state = state,
+                    stateMessage = stateMessage,
+                )
+                Modifier.semantics { contentDescription = stateMessageContentDescription }
+            } else {
+                Modifier
+            }
             Text(
                 modifier = Modifier
                     .weight(1f, fill = true)
@@ -463,36 +464,32 @@ private fun supportText(
 
 @Composable
 private fun computeLabelContentDescription(
+    label: String,
     required: Boolean,
-    label: String?,
-): String =
-    buildString {
-        if (label == null) return@buildString
-        append(label)
-        if (required) {
-            append(stringResource(id = R.string.spark_textfield_content_description_break))
-            append(stringResource(id = R.string.spark_textfield_mandatory_content_description))
-        }
+): String = buildString {
+    append(label)
+    if (required) {
+        append("\n")
+        append(stringResource(id = R.string.spark_textfield_mandatory_content_description))
     }
+}
 
 @Composable
 private fun computeStateMessageContentDescription(
-    state: TextFieldState?,
+    state: TextFieldState,
     stateMessage: String?,
-): String =
-    buildString {
-        if (state == null) return@buildString
-        val stateStatusContentDescription = when (state) {
-            TextFieldState.Success -> stringResource(id = R.string.spark_textfield_state_success_content_description)
-            TextFieldState.Alert -> stringResource(id = R.string.spark_textfield_state_alert_content_description)
-            TextFieldState.Error -> stringResource(id = R.string.spark_textfield_state_error_content_description)
-        }
-        append(stateStatusContentDescription)
-        if (stateMessage != null) {
-            append(stringResource(id = R.string.spark_textfield_content_description_break))
-            append(stateMessage)
-        }
+): String = buildString {
+    val stateStatusContentDescription = when (state) {
+        TextFieldState.Success -> stringResource(id = R.string.spark_textfield_state_success_content_description)
+        TextFieldState.Alert -> stringResource(id = R.string.spark_textfield_state_alert_content_description)
+        TextFieldState.Error -> stringResource(id = R.string.spark_textfield_state_error_content_description)
     }
+    append(stateStatusContentDescription)
+    if (stateMessage != null) {
+        append("\n")
+        append(stateMessage)
+    }
+}
 
 internal object TextFieldDefault {
 
