@@ -475,7 +475,7 @@ _2023-03-29_
 
 [1.1.1]: https://github.com/adevinta/spark-android/releases/tag/1.1.1
 
-[1.1.0]: https://github.com/adevinta/spark-android/releases/tag/1.1.0
+[1.1.0]: https://github.com/leboncoin/spark-android/releases/tag/1.1.0
 
 [1.0.2]: https://github.com/adevinta/spark-android/releases/tag/1.0.2
 
