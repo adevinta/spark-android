@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [1.1.4]
+
+_2025-02-19_
+
+### Spark
+- 🛠️ Modal `inEdgeToEdge` parameter was applied even when set to false.
+- 🐛 Conditional modifiers were reapplying the chain instead of doing nothing when the predicate was false.
+
 ## [1.1.3]
 
 _2025-01-29_
@@ -438,9 +446,15 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/leboncoin/spark-android/compare/1.1.3...HEAD
+[Unreleased]: https://github.com/leboncoin/spark-android/compare/1.1.4...HEAD
+
+[1.1.4]: https://github.com/leboncoin/spark-android/releases/tag/1.1.4
 
 [1.1.3]: https://github.com/leboncoin/spark-android/releases/tag/1.1.3
+
+[1.1.2]: https://github.com/leboncoin/spark-android/releases/tag/1.1.2
+
+[1.1.1]: https://github.com/leboncoin/spark-android/releases/tag/1.1.1
 
 [1.1.2]: https://github.com/leboncoin/spark-android/releases/tag/1.1.2
 
