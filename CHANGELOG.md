@@ -20,7 +20,7 @@ _2025-03-19_
 * ✨ A component can now have more than 1 Configurator. This is to avoid configurators that are too complex and won't fit easily into one screen.
 * 🚀 Material transitions can now be tested in the catalog app to showcase & test their behaviour.
 * 🕶️ The screen reader navigation has been improved and we'll continue to improve it globally to meet the same standard as lbc
-* 
+
 ## [1.1.4]
 
 _2025-02-19_
@@ -463,7 +463,11 @@ _2023-03-29_
 
 <!-- Links -->
 
-[Unreleased]: https://github.com/adevinta/spark-android/compare/1.1.3...HEAD
+[Unreleased]: https://github.com/leboncoin/spark-android/compare/1.2.0...HEAD
+
+[1.2.0]: https://github.com/leboncoin/spark-android/releases/tag/1.2.0
+
+[1.1.4]: https://github.com/leboncoin/spark-android/releases/tag/1.1.4
 
 [1.1.3]: https://github.com/adevinta/spark-android/releases/tag/1.1.3
 
