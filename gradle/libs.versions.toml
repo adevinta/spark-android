@@ -80,6 +80,8 @@ coilCompose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 
 constraintsExplorer = "com.zachklipp:constraints-explorer:1.1.0"
 
+constraintsExplorer = "com.zachklipp:constraints-explorer:1.1.0"
+
 # https://developer.android.com/topic/libraries/architecture/datastore
 androidx-datastore = { module = "androidx.datastore:datastore" , version.ref = "datastore" }
 

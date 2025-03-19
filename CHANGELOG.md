@@ -4,6 +4,31 @@
 
 ## [Unreleased]
 
+## [1.2.0]
+
+_2025-03-19_
+
+### Spark
+* ✨ New `Stepper` Component
+* 🗑️ `includeFontPadding`  on Spark typographies is not removed since it's no longer needed since Compose 1.6
+
+### Catalog
+
+* 🔗 The catalog app now supports **deeplinks** to any pages! This allows us to redirect our user quickly to a component that has been introduced or changed.
+* ✨ Now when a component is being worked on you will see a Work in Progress illustration.
+* ✨ A new Catalog component has been created to simplify the uses & selection of enum for configuration.
+* ✨ A component can now have more than 1 Configurator. This is to avoid configurators that are too complex and won't fit easily into one screen.
+* 🚀 Material transitions can now be tested in the catalog app to showcase & test their behaviour.
+* 🕶️ The screen reader navigation has been improved and we'll continue to improve it globally to meet the same standard as lbc
+* 
+## [1.1.4]
+
+_2025-02-19_
+
+### Spark
+- 🛠️ Modal `inEdgeToEdge` parameter was applied even when set to false.
+- 🐛 Conditional modifiers were reapplying the chain instead of doing nothing when the predicate was false.
+
 ## [1.1.3]
 
 _2025-01-29_
