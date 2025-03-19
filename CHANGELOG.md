@@ -14,7 +14,7 @@ _2025-03-19_
 
 ### Catalog
 
-* 🔗 The catalog app now support **deeplinks** to any pages! This allows us to redirect our user quickly to a component that has been introduce or changed.
+* 🔗 The catalog app now supports **deeplinks** to any pages! This allows us to redirect our user quickly to a component that has been introduced or changed.
 * ✨ Now when a component is being worked on you will see a Work in Progress illustration.
 * ✨ A new Catalog component has been created to simplify the uses & selection of enum for configuration.
 * ✨ A component can now have more than 1 Configurator. This is to avoid configurators that are too complex and won't fit easily into one screen.
@@ -470,10 +470,6 @@ _2023-03-29_
 [1.1.4]: https://github.com/leboncoin/spark-android/releases/tag/1.1.4
 
 [1.1.3]: https://github.com/leboncoin/spark-android/releases/tag/1.1.3
-
-[1.1.2]: https://github.com/leboncoin/spark-android/releases/tag/1.1.2
-
-[1.1.1]: https://github.com/leboncoin/spark-android/releases/tag/1.1.1
 
 [1.1.2]: https://github.com/leboncoin/spark-android/releases/tag/1.1.2
 
