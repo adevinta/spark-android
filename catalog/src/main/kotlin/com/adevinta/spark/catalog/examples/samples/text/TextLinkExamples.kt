@@ -59,7 +59,7 @@ public val TextLinksExamples: List<Example> = listOf(
                 style = SparkTheme.typography.subhead,
                 text = annotatedStringResource(id = R.string.spark_text_link_short_example_),
                 lineHeight = 40.sp,
-                onClickLabel = "https://kotlinlang.org",
+                onClickLabel = "Aller au site web",
                 onClick = {
                     scope.launch {
                         snackbarHostState.showSnackbar(
@@ -88,7 +88,7 @@ public val TextLinksExamples: List<Example> = listOf(
             TextLink(
                 style = SparkTheme.typography.subhead,
                 text = annotatedStringResource(id = R.string.spark_text_link_paragraph_example_),
-                onClickLabel = "textLink",
+                onClickLabel = "Voir les conditions Conditions générales d’utilisation",
                 onClick = {
                     scope.launch {
                         snackbarHostState.showSnackbar(
@@ -119,7 +119,7 @@ public val TextLinksExamples: List<Example> = listOf(
                     scope.launch {
                         snackbarHostState.showSnackbar(
                             message = "Try out Android Development Clicked",
-                            actionLabel = "Action",
+                            actionLabel = "Accéder au site",
                             duration = SnackbarDuration.Short,
                         )
                     }

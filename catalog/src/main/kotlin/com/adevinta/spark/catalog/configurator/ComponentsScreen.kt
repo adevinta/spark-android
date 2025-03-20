@@ -44,7 +44,7 @@ import androidx.navigation.compose.rememberNavController
 import com.adevinta.spark.SparkTheme
 import com.adevinta.spark.catalog.CatalogHomeScreen
 import com.adevinta.spark.catalog.R
-import com.adevinta.spark.catalog.examples.component.ComponentItem
+import com.adevinta.spark.catalog.examples.component.ComponentConfiguratorItem
 import com.adevinta.spark.catalog.model.Component
 import com.adevinta.spark.catalog.themes.NavigationMode
 import com.adevinta.spark.catalog.ui.navigation.ChangeSelectedNavControllerOnPageChange
@@ -138,10 +138,9 @@ internal fun ComponentsListScreen(
             contentType = { ComponentsItemType.Component },
             itemContent = { component ->
                 val configuratorCount = component.configurators.size
-                ComponentItem(
+                ComponentConfiguratorItem(
                     component = component,
                     countIndicator = configuratorCount,
-                    configuratorCount = configuratorCount,
                     onClick = { selectedComponent, selectedConfigurator ->
                         val componentId = selectedComponent.id
                         onConfiguratorSelected(componentId, selectedConfigurator)
