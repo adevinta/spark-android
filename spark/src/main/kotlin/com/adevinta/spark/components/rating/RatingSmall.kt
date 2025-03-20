@@ -217,15 +217,12 @@ internal fun firstLocale(): Locale {
 )
 internal fun RatingSmallPreview() {
     val frenchLocale = Locale.FRANCE
-    val germanLocale = Locale.GERMANY
     PreviewTheme {
         RatingSimple(value = 3.0f, locale = frenchLocale, labelSide = RatingLabelSide.End)
         RatingSimple(value = 4.50f, locale = frenchLocale, labelSide = RatingLabelSide.End)
 
         RatingSimple(value = 3.0f, commentCount = 8, locale = frenchLocale, labelSide = RatingLabelSide.End)
         RatingSimple(value = 4.50f, commentCount = 12, locale = frenchLocale, labelSide = RatingLabelSide.End)
-        RatingSimple(value = 4.50f, commentCount = 12, locale = germanLocale, labelSide = RatingLabelSide.End)
-        RatingSimpleLarge(value = 4.50f, locale = germanLocale, labelSide = RatingLabelSide.End)
         RatingSimpleLarge(value = 4.50f, locale = Locale.US, labelSide = RatingLabelSide.End)
         RatingSimple(value = 4.50f, commentCount = 12, locale = Locale.US, labelSide = RatingLabelSide.End)
         RatingSimple(value = 4.51f, commentCount = 12, locale = Locale.US, labelSide = RatingLabelSide.End)

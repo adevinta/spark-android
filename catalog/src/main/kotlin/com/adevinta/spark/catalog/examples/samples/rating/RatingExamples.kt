@@ -154,11 +154,6 @@ private fun RatingSimpleSample() {
         RatingSimple(value = 4.50f, commentCount = 12, locale = frenchLocale, labelSide = RatingLabelSide.End)
         RatingSimpleLarge(value = 4.50f, locale = frenchLocale, labelSide = RatingLabelSide.End)
 
-        Text("German")
-        RatingSimple(value = 3.0f, locale = germanLocale, labelSide = RatingLabelSide.End)
-        RatingSimple(value = 4.50f, commentCount = 12, locale = germanLocale, labelSide = RatingLabelSide.End)
-        RatingSimpleLarge(value = 4.50f, locale = germanLocale, labelSide = RatingLabelSide.End)
-
         Text("US English")
         RatingSimple(value = 3.0f, locale = Locale.US, labelSide = RatingLabelSide.End)
         RatingSimple(value = 4.50f, commentCount = 12, locale = Locale.US, labelSide = RatingLabelSide.End)
