@@ -4,6 +4,9 @@
 
 ## [Unreleased]
 
+### Catalog
+* 💬🇫🇷 The catalog app can now be used with a french locale.
+
 ## [1.2.0]
 
 _2025-03-19_
