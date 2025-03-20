@@ -21,6 +21,7 @@
  */
 package com.adevinta.spark.components.badge
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -47,7 +48,10 @@ class BadgeScreenshot {
             BadgeStyle.entries.forEach { style ->
                 Row {
                     BadgeIntent.entries.forEach { intent ->
-                        Column(Modifier.padding(4.dp)) {
+                        Column(
+                            modifier = Modifier.padding(4.dp),
+                            verticalArrangement = Arrangement.spacedBy(4.dp),
+                        ) {
                             Badge(content = null, intent = intent, badgeStyle = style)
                             Badge(count = 1, intent = intent, badgeStyle = style)
                             Badge(count = 42, intent = intent, badgeStyle = style)
