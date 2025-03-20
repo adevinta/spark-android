@@ -62,6 +62,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.collapse
 import androidx.compose.ui.semantics.expand
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.traversalIndex
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
@@ -428,6 +429,7 @@ public fun BackdropScaffold(
                                 true
                             }
                         }
+                        traversalIndex = -1f
                     },
                 shape = frontLayerShape,
                 elevation = frontLayerElevation,

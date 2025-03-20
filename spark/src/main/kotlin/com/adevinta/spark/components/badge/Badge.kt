@@ -126,7 +126,7 @@ public fun Badge(
     SparkBadge(
         badgeStyle = badgeStyle,
         modifier = modifier
-            .semantics(mergeDescendants = true) {
+            .semantics {
                 contentDescription = contentA11y
             }
             .sparkUsageOverlay(),

@@ -161,22 +161,22 @@ private fun ScrollableTabsSample() {
 @Composable
 private fun IconsTabsSample() {
     val tabs = mutableListOf(
-        SparkIcons.AlarmOnFill to 0,
-        SparkIcons.MessageOutline to 1,
-        SparkIcons.AccountFill to 0,
+        Triple(SparkIcons.AlarmOnFill, 0, "notifications"),
+        Triple(SparkIcons.MessageOutline, 1, "messages"),
+        Triple(SparkIcons.AccountFill, 0, "compte"),
     )
     var selectedIndex by remember { mutableIntStateOf(0) }
     TabGroup(
         selectedTabIndex = selectedIndex,
     ) {
-        tabs.forEachIndexed { index, (tab, unread) ->
+        tabs.forEachIndexed { index, (tab, unread, contentDescription) ->
             Tab(
                 selected = selectedIndex == index,
                 onClick = { selectedIndex = index },
                 enabled = true,
                 icon = tab,
                 text = null,
-                contentDescription = "description",
+                contentDescription = contentDescription,
                 trailingContent = {
                     if (unread > 0) {
                         Badge(count = unread)
