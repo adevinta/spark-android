@@ -255,7 +255,7 @@ public abstract class AddonScope {
     ) {
         ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = onExpandedChange) {
             Surface(
-                modifier = modifier.menuAnchor(MenuAnchorType.PrimaryNotEditable),
+                modifier = modifier.menuAnchor(MenuAnchorType.SecondaryEditable),
                 onClick = {},
                 shape = SparkTheme.shapes.small,
             ) {

@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,6 +37,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.semantics.onClick
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEachIndexed
@@ -47,40 +50,85 @@ import com.adevinta.spark.catalog.util.drawForegroundGradientScrim
 import com.adevinta.spark.components.badge.Badge
 import com.adevinta.spark.components.badge.BadgeIntent
 import com.adevinta.spark.components.badge.BadgeStyle
+import com.adevinta.spark.components.card.CardDefaults
+import com.adevinta.spark.components.card.ElevatedCard
 import com.adevinta.spark.components.icons.Icon
 import com.adevinta.spark.components.image.Image
 import com.adevinta.spark.components.menu.DropdownMenu
 import com.adevinta.spark.components.menu.DropdownMenuItem
-import com.adevinta.spark.components.surface.Surface
 import com.adevinta.spark.icons.SparkIcons
 import com.adevinta.spark.icons.WheelOutline
 import com.adevinta.spark.tokens.applyTonalElevation
+import com.adevinta.spark.tools.modifiers.invisibleSemantic
 
 @Composable
-public fun ComponentItem(
+public fun ComponentConfiguratorItem(
     component: Component,
     onClick: (component: Component, configuratorId: String) -> Unit,
     countIndicator: Int = 0,
-    configuratorCount: Int = -1,
 ) {
     var expanded by remember { mutableStateOf(false) }
     val singleContent = countIndicator == 1
 
-    Surface(
-        onClick = {
-            if (singleContent || configuratorCount != countIndicator) {
-                val firstConfiguratorId = component.configurators.first().id
-                return@Surface onClick(component, firstConfiguratorId)
-            } else {
-                // Show a menu for all other options
-                expanded = true
+    Box {
+        ComponentItem(
+            modifier = Modifier.semantics {
+                onClick(
+                    label = if (singleContent) {
+                        "Aller au configurateur"
+                    } else {
+                        "Voir les configurateurs disponibles"
+                    },
+                    action = null,
+                )
+            },
+            component = component,
+            countIndicator = countIndicator,
+            onClick = {
+                if (singleContent) {
+                    val firstConfiguratorId = component.configurators.first().id
+                    onClick(component, firstConfiguratorId)
+                } else {
+                    // Show a menu for all other options
+                    expanded = true
+                }
+            },
+        )
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            component.configurators.fastForEachIndexed { i, configurator ->
+                DropdownMenuItem(
+                    modifier = Modifier.semantics { onClick("Aller au configurateur", null) },
+                    text = { Text(configurator.name) },
+                    onClick = {
+                        onClick(component, configurator.id)
+                        expanded = false
+                    },
+                    leadingIcon = { Icon(SparkIcons.WheelOutline, contentDescription = null) },
+                )
             }
-        },
-        modifier = Modifier
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+public fun ComponentItem(
+    modifier: Modifier = Modifier,
+    component: Component,
+    onClick: () -> Unit,
+    countIndicator: Int = 0,
+) {
+    ElevatedCard(
+        onClick = onClick,
+        modifier = modifier
+            .semantics(mergeDescendants = true) {}
             .height(ComponentItemHeight)
             .padding(ComponentItemOuterPadding),
         shape = SparkTheme.shapes.medium,
-        elevation = 2.dp,
+        colors = CardDefaults.elevatedCardColors(containerColor = SparkTheme.colors.surface),
     ) {
         Box(
             modifier = Modifier.wrapContentSize(Alignment.TopStart),
@@ -106,27 +154,13 @@ public fun ComponentItem(
             if (countIndicator > 1) {
                 Badge(
                     modifier = Modifier
+                        .invisibleSemantic()
                         .align(Alignment.BottomEnd)
                         .padding(ComponentItemInnerPadding),
                     count = countIndicator,
                     intent = BadgeIntent.Basic,
                     badgeStyle = BadgeStyle.Small,
                 )
-            }
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-            ) {
-                component.configurators.fastForEachIndexed { i, configurator ->
-                    DropdownMenuItem(
-                        text = { Text(configurator.name) },
-                        onClick = {
-                            onClick(component, configurator.id)
-                            expanded = false
-                        },
-                        leadingIcon = { Icon(SparkIcons.WheelOutline, contentDescription = null) },
-                    )
-                }
             }
         }
     }
@@ -152,7 +186,7 @@ private fun ComponentItemPreview() {
                 configurators = emptyList(),
             ),
             countIndicator = 3,
-            onClick = { _, _ -> },
+            onClick = {},
         )
         ComponentItem(
             component = Component(
@@ -167,7 +201,7 @@ private fun ComponentItemPreview() {
                 examples = listOf(),
                 configurators = emptyList(),
             ),
-            onClick = { _, _ -> },
+            onClick = {},
         )
     }
 }
