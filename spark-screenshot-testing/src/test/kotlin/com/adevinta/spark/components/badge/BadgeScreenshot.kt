@@ -19,7 +19,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package com.adevinta.spark.components.badge
 
 import androidx.compose.foundation.layout.Column
@@ -59,5 +58,4 @@ class BadgeScreenshot {
             }
         }
     }
-
 }
