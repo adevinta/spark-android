@@ -469,7 +469,7 @@ private fun computeLabelContentDescription(
 ): String = buildString {
     append(label)
     if (required) {
-        append("\n")
+        appendLine()
         append(stringResource(id = R.string.spark_textfield_mandatory_content_description))
     }
 }
@@ -486,7 +486,7 @@ private fun computeStateMessageContentDescription(
     }
     append(stateStatusContentDescription)
     if (stateMessage != null) {
-        append("\n")
+        appendLine()
         append(stateMessage)
     }
 }
