@@ -63,7 +63,9 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
@@ -109,22 +111,25 @@ internal fun SparkTextField(
 ) {
     val colors = sparkOutlinedTextFieldColors()
     val density = LocalDensity.current
+    val labelContentDescriptionModifier = if (label != null) {
+        val labelContentDescription = computeLabelContentDescription(
+            label = label,
+            required = required,
+        )
+        Modifier
+            // Merge semantics at the beginning of the modifier chain to ensure padding is
+            // considered part of the text field.
+            .semantics(mergeDescendants = true) { contentDescription = labelContentDescription }
+            .padding(top = with(density) { (SparkTheme.typography.body2.fontSize / 2).toDp() })
+    } else {
+        Modifier
+    }
     CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
         @OptIn(ExperimentalMaterial3Api::class)
         BasicTextField(
             value = value,
             modifier = modifier
-                .then(
-                    if (label != null) {
-                        Modifier
-                            // Merge semantics at the beginning of the modifier chain to ensure padding is
-                            // considered part of the text field.
-                            .semantics(mergeDescendants = true) {}
-                            .padding(top = with(density) { (SparkTheme.typography.body2.fontSize / 2).toDp() })
-                    } else {
-                        Modifier
-                    },
-                )
+                .then(other = labelContentDescriptionModifier)
                 .defaultMinSize(
                     minWidth = TextFieldDefaults.MinWidth,
                     minHeight = TextFieldMinHeight,
@@ -210,19 +215,25 @@ internal fun SparkTextField(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
     val colors = sparkOutlinedTextFieldColors()
+    val labelContentDescriptionModifier = if (label != null) {
+        val labelContentDescription = computeLabelContentDescription(
+            label = label,
+            required = required,
+        )
+        Modifier
+            // Merge semantics at the beginning of the modifier chain to ensure padding is
+            // considered part of the text field.
+            .semantics(mergeDescendants = true) { contentDescription = labelContentDescription }
+            .padding(top = OutlinedTextFieldTopPadding)
+    } else {
+        Modifier
+    }
     CompositionLocalProvider(LocalTextSelectionColors provides colors.selectionColors) {
         @OptIn(ExperimentalMaterial3Api::class)
         BasicTextField(
             value = value,
-            modifier = if (label != null) {
-                // Merge semantics at the beginning of the modifier chain to ensure padding is
-                // considered part of the text field.
-                modifier
-                    .semantics(mergeDescendants = true) {}
-                    .padding(top = OutlinedTextFieldTopPadding)
-            } else {
-                modifier
-            }
+            modifier = modifier
+                .then(other = labelContentDescriptionModifier)
                 .defaultMinSize(
                     minWidth = 48.dp,
                     minHeight = TextFieldMinHeight,
@@ -323,25 +334,6 @@ internal fun OutlinedBorderContainerBox(
     )
 }
 
-@Composable
-private fun SupportingText(
-    text: String?,
-    counterComposable: @Composable ((Modifier) -> Unit)?,
-    statusIcon: @Composable ((Modifier) -> Unit)?,
-) {
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        statusIcon?.invoke(Modifier.padding(end = 4.dp))
-        Text(
-            modifier = Modifier.weight(1f, fill = true),
-            text = text.orEmpty(),
-        )
-        counterComposable?.invoke(Modifier.padding(start = 8.dp))
-    }
-}
-
 /**
  * Replacement for Modifier.background which takes color as a State to avoid recomposition while
  * animating.
@@ -386,21 +378,16 @@ public data class TextFieldCharacterCounter(val count: Int, val maxCharacter: In
 @Composable
 private fun Label(text: String?, required: Boolean) {
     if (text != null) {
-        Row(modifier = Modifier.semantics(mergeDescendants = true) {}) {
+        Row(modifier = Modifier.clearAndSetSemantics {}) {
             Text(
                 text = text,
                 modifier = Modifier.weight(weight = 1f, fill = false),
             )
             if (required) {
-                val mandatoryDescription = stringResource(id = R.string.spark_textfield_content_description)
                 EmphasizeDim3 {
                     Text(
                         text = "*",
-                        modifier = Modifier
-                            .semantics {
-                                contentDescription = mandatoryDescription
-                            }
-                            .padding(start = 4.dp),
+                        modifier = Modifier.padding(start = 4.dp),
                     )
                 }
             }
@@ -422,8 +409,14 @@ private fun counterText(
     charCounter: TextFieldCharacterCounter?,
 ): (@Composable (Modifier) -> Unit)? = charCounter?.let { counter ->
     { modifier ->
+        val contentDescription = pluralStringResource(
+            id = R.plurals.spark_textfield_counter_content_description,
+            count = counter.count,
+            counter.count,
+            counter.maxCharacter,
+        )
         Text(
-            modifier = modifier,
+            modifier = modifier.semantics { this.contentDescription = contentDescription },
             text = "${counter.count}/${counter.maxCharacter}",
         )
     }
@@ -440,16 +433,62 @@ private fun supportText(
     (stateMessage != null && state != null) || helper != null || counterComposable != null
 ) {
     {
-        // Prioritize the state message if there's one and fallback to the helper otherwise
-        val message = state?.let { stateMessage } ?: helper
-        SupportingText(
-            text = message,
-            counterComposable = counterComposable,
-            statusIcon = stateIcon,
-        )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            stateIcon?.invoke(Modifier.padding(end = 4.dp))
+            // Prioritize the state message if there's one and fallback to the helper otherwise
+            val message = state?.let { stateMessage } ?: helper
+            val stateMessageContentDescriptionModifier = if (state != null) {
+                val stateMessageContentDescription = computeStateMessageContentDescription(
+                    state = state,
+                    stateMessage = stateMessage,
+                )
+                Modifier.semantics { contentDescription = stateMessageContentDescription }
+            } else {
+                Modifier
+            }
+            Text(
+                modifier = Modifier
+                    .weight(1f, fill = true)
+                    .then(other = stateMessageContentDescriptionModifier),
+                text = message.orEmpty(),
+            )
+            counterComposable?.invoke(Modifier.padding(start = 8.dp))
+        }
     }
 } else {
     null
+}
+
+@Composable
+private fun computeLabelContentDescription(
+    label: String,
+    required: Boolean,
+): String = buildString {
+    append(label)
+    if (required) {
+        appendLine()
+        append(stringResource(id = R.string.spark_textfield_mandatory_content_description))
+    }
+}
+
+@Composable
+private fun computeStateMessageContentDescription(
+    state: TextFieldState,
+    stateMessage: String?,
+): String = buildString {
+    val stateStatusContentDescription = when (state) {
+        TextFieldState.Success -> stringResource(id = R.string.spark_textfield_state_success_content_description)
+        TextFieldState.Alert -> stringResource(id = R.string.spark_textfield_state_alert_content_description)
+        TextFieldState.Error -> stringResource(id = R.string.spark_textfield_state_error_content_description)
+    }
+    append(stateStatusContentDescription)
+    if (stateMessage != null) {
+        appendLine()
+        append(stateMessage)
+    }
 }
 
 internal object TextFieldDefault {
