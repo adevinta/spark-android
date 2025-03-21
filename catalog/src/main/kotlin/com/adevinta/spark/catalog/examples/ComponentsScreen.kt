@@ -40,7 +40,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.onClick
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDeepLink
 import androidx.navigation.compose.rememberNavController
@@ -151,7 +150,7 @@ internal fun ComponentsListScreen(
             contentType = { ComponentsItemType.Component },
             itemContent = { component ->
                 ComponentItem(
-                    modifier = Modifier.semantics { onClick("Aller aux exemples", null) },
+                    // modifier = Modifier.semantics { onClick("Aller aux exemples", null) },
                     component = component,
                     countIndicator = component.examples.size,
                     onClick = {
