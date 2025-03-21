@@ -163,7 +163,7 @@ private val Dialogs = Component(
 )
 
 private val Dividers = Component(
-    id = "dividerss",
+    id = "dividers",
     name = "Dividers",
     description = R.string.component_divider_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/867b47-divider",
@@ -174,7 +174,7 @@ private val Dividers = Component(
 )
 
 private val Dropdowns = Component(
-    id = "dropdownss",
+    id = "dropdowns",
     name = "Dropdowns",
     description = R.string.component_dropdowns_description,
     guidelinesUrl = "$ComponentGuidelinesUrl/p/1186e1705/p/323b83-dropdown",
@@ -185,7 +185,7 @@ private val Dropdowns = Component(
 )
 
 private val Icons = Component(
-    id = "iconss",
+    id = "icons",
     name = "Icons",
     illustration = R.drawable.illu_component_iconbutton,
     tintIcon = false,
