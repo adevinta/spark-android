@@ -59,8 +59,6 @@ class ConditionsScreenshot {
     fun `test conditions`() = paparazzi.sparkSnapshot(drawBackground = true) {
         Column {
             Row {
-                IfTrueTestComposable(value = true)
-                IfTrueTestComposable(value = false)
                 IfTrueTestComposable(
                     value = true,
                     modifier = Modifier.rotate(90f),
@@ -72,8 +70,6 @@ class ConditionsScreenshot {
             }
 
             Row {
-                IfFalseTestComposable(value = false)
-                IfFalseTestComposable(value = true)
                 IfFalseTestComposable(
                     value = false,
                     modifier = Modifier.rotate(90f),
@@ -85,8 +81,6 @@ class ConditionsScreenshot {
             }
 
             Row {
-                IfNullTestComposable(value = null)
-                IfNullTestComposable(value = Unit)
                 IfNullTestComposable(
                     value = null,
                     modifier = Modifier.rotate(90f),
@@ -98,8 +92,6 @@ class ConditionsScreenshot {
             }
 
             Row {
-                IfNotNullTestComposable(value = Unit)
-                IfNotNullTestComposable(value = null)
                 IfNotNullTestComposable(
                     value = Unit,
                     modifier = Modifier.rotate(90f),
